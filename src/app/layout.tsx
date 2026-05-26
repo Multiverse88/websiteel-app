@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -16,6 +16,12 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
 export const metadata: Metadata = {
   title: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
   description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
@@ -29,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${dmSans.variable} ${jakarta.variable} h-full antialiased scroll-smooth`}
+      className={`${dmSans.variable} ${jakarta.variable} ${inter.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col pt-[72px] bg-white text-dark font-['DM_Sans',sans-serif]">
         <Navbar />
