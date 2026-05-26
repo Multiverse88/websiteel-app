@@ -29,15 +29,6 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
       return { success: false, error: "Belum ada subscriber aktif." };
     }
 
-    // Check if broadcast already sent for this article
-    const existingBroadcast = await prisma.newsletterBroadcast.findFirst({
-      where: { articleId: article.id },
-    });
-
-    if (existingBroadcast) {
-      return { success: false, error: `Broadcast untuk artikel ini sudah pernah dikirim pada ${new Date(existingBroadcast.sentAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}.` };
-    }
-
     // Create broadcast record first so we can link email logs to it
     const broadcast = await prisma.newsletterBroadcast.create({
       data: {
