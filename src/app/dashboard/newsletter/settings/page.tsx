@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft, Settings, ToggleRight, Mail, Users } from "lucide-react";
 import { getNewsletterSettings } from "./actions";
-import { SettingsForm } from "./client-components";
+import { SettingsForm, SmtpTestCard } from "./client-components";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -67,6 +67,9 @@ export default async function NewsletterSettingsPage() {
 
         {/* Right Column - Info / Stats Sidebar */}
         <div className="flex flex-col gap-6">
+          {/* SMTP Test Card */}
+          <SmtpTestCard />
+
           {/* Ringkasan Status Otomatisasi */}
           <div className="bg-white rounded-xl border border-gray-150 p-6 shadow-sm flex flex-col gap-4">
             <h3 className="font-bold text-gray-900 text-sm border-b border-gray-100 pb-2 flex items-center gap-1.5">

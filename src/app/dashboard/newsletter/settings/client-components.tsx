@@ -1,9 +1,92 @@
 "use client";
 
 import React, { useState } from "react";
-import { Save, Loader2, CheckCircle2, AlertCircle, HelpCircle, ArrowLeft, RefreshCw } from "lucide-react";
-import { updateNewsletterSettings, type NewsletterSettings } from "./actions";
+import { Save, Loader2, CheckCircle2, AlertCircle, HelpCircle, ArrowLeft, RefreshCw, Send } from "lucide-react";
+import { updateNewsletterSettings, testSmtpConnection, type NewsletterSettings } from "./actions";
 import Link from "next/link";
+
+export function SmtpTestCard() {
+  const [testEmail, setTestEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [feedback, setFeedback] = useState("");
+
+  const handleTest = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setFeedback("");
+
+    const result = await testSmtpConnection(testEmail);
+
+    if (result.success) {
+      setStatus("success");
+      setFeedback(result.message || "Email test berhasil dikirim!");
+    } else {
+      setStatus("error");
+      setFeedback(result.error || "Gagal mengirim email test.");
+    }
+
+    setTimeout(() => setStatus("idle"), 8000);
+  };
+
+  return (
+    <div className="bg-white rounded-xl border border-gray-150 p-6 shadow-sm flex flex-col gap-4">
+      <div className="flex flex-col gap-1 border-b border-gray-100 pb-3">
+        <h3 className="font-bold text-gray-900 text-sm flex items-center gap-1.5">
+          <Send className="w-4 h-4 text-[#990202]" />
+          Test Koneksi SMTP
+        </h3>
+        <p className="text-xs text-gray-500">
+          Kirim email test untuk memverifikasi bahwa pengaturan SMTP berfungsi dengan benar.
+        </p>
+      </div>
+
+      <form onSubmit={handleTest} className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold text-gray-700">Email Penerima</label>
+          <input
+            type="email"
+            value={testEmail}
+            onChange={(e) => setTestEmail(e.target.value)}
+            placeholder="contoh: nama@gmail.com"
+            required
+            className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#990202]/10 focus:border-[#990202] transition-colors"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={status === "loading" || status === "success"}
+          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold bg-white text-gray-700 hover:text-gray-900 border border-gray-200/80 hover:bg-gray-50 shadow-sm transition-all disabled:opacity-50"
+        >
+          {status === "loading" ? (
+            <>
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              Mengirim...
+            </>
+          ) : (
+            <>
+              <Send className="w-3.5 h-3.5" />
+              Kirim Email Test
+            </>
+          )}
+        </button>
+      </form>
+
+      {status === "success" && (
+        <div className="p-3 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-semibold flex items-center gap-2 border border-emerald-100">
+          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+          {feedback}
+        </div>
+      )}
+      {status === "error" && (
+        <div className="p-3 bg-red-50 text-red-700 rounded-lg text-xs font-semibold flex items-center gap-2 border border-red-100">
+          <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+          {feedback}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function SettingsForm({ initialSettings }: { initialSettings: NewsletterSettings }) {
   const [autoBroadcast, setAutoBroadcast] = useState(initialSettings.autoBroadcast);
