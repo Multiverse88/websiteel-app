@@ -138,9 +138,13 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/"
+              href="/artikel"
               onClick={handleLinkClick}
-              className="text-[14px] font-medium text-muted hover:text-dark transition-colors"
+              className={`text-[14px] font-medium transition-colors ${
+                pathname.startsWith("/artikel")
+                  ? "text-dark font-semibold"
+                  : "text-muted hover:text-dark"
+              }`}
             >
               Blog
             </Link>
@@ -209,23 +213,26 @@ export default function Navbar() {
               { name: "Home", href: "/" },
               { name: "Cek KBLI", href: "/" },
               { name: "Virtual Office", href: "/" },
-              { name: "Blog", href: "/" },
+              { name: "Blog", href: "/artikel" },
               { name: "Tentang Kami", href: "/tentang-kami" },
               { name: "Kontak", href: "/kontak" },
-            ].map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={handleLinkClick}
-                className={`block px-3 py-2.5 rounded-lg text-[15px] font-medium ${
-                  pathname === item.href
-                    ? "bg-primary-light text-primary font-semibold"
-                    : "text-muted hover:bg-bg-light hover:text-dark"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+            ].map((item) => {
+              const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={handleLinkClick}
+                  className={`block px-3 py-2.5 rounded-lg text-[15px] font-medium ${
+                    isActive
+                      ? "bg-primary-light text-primary font-semibold"
+                      : "text-muted hover:bg-bg-light hover:text-dark"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
 
             {/* Services accordion */}
             <div className="border-t border-border pt-2 mt-2">

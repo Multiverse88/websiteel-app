@@ -13,6 +13,7 @@ import {
   X,
   Send,
   Map,
+  Home,
 } from "lucide-react";
 
 export default function Kontak() {
@@ -88,91 +89,149 @@ export default function Kontak() {
   return (
     <div className="flex flex-col min-h-screen">
 
-      {/* ─── 1. HERO ─── */}
-      <section className="bg-white py-16 lg:py-24 border-b border-border/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ─── 1. HERO & CONTACT CHANNELS ─── */}
+      <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-20 border-b border-border/40 overflow-hidden relative">
+        {/* Subtle top-right radial glow for premium aesthetics */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-[13px] text-muted mb-6">
-            <Link href="/" className="hover:text-primary transition-colors">Beranda</Link>
-            <span className="text-border">/</span>
-            <span className="text-[13px] font-semibold text-dark">Kontak</span>
+          <nav className="flex items-center space-x-2 text-[13px] font-medium text-gray-500 mb-6">
+            <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
+              <Home className="w-3.5 h-3.5" />
+              <span>Beranda</span>
+            </Link>
+            <span className="text-gray-300 font-normal">&gt;</span>
+            <span className="text-[13px] font-bold text-gray-900">Kontak</span>
           </nav>
 
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center space-x-1.5 mb-4">
-              <span className="w-2 h-2 rounded-full bg-primary" />
-              <span className="text-[12.5px] font-semibold text-primary">Hubungi Kami</span>
+          {/* Title & Subtitle */}
+          <div className="max-w-3xl space-y-4">
+            {/* Pill Badge */}
+            <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
+              <span className="text-[12.5px] font-bold text-[#990202] tracking-wide">Hubungi Kami</span>
             </div>
-            <h1 className="text-[48px] font-extrabold text-dark leading-tight tracking-tight mb-5">
-              Mari bicarakan kebutuhan legal bisnis Anda.
+
+            <h1 className="font-inter text-[36px] sm:text-[44px] lg:text-[48px] font-extrabold text-gray-950 leading-tight tracking-tight mt-6">
+              Mari bicarakan kebutuhan{" "}
+              <span className="text-[#990202]">
+                legal bisnis Anda.
+              </span>
             </h1>
-            <p className="text-[17.5px] text-muted leading-relaxed max-w-2xl">
+            
+            <p className="text-[15.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
               Tim kami siap membantu — dari pertanyaan teknis sampai konsultasi mendalam. Pilih cara yang paling nyaman untuk Anda.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* ─── 2. CONTACT CHANNELS ─── */}
-      <section className="bg-bg-light py-14 border-b border-border/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Contact Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            
             {/* WhatsApp Card */}
-            <div className="bg-white rounded-2xl p-7 border border-border/60 hover:border-green-300 hover:shadow-md transition-all duration-200 flex flex-col">
-              <span className="text-[11px] font-bold text-dark uppercase tracking-wider mb-4">WhatsApp · Tercepat</span>
-              <div className="h-14 w-14 rounded-2xl bg-[#25D366]/10 flex items-center justify-center mb-4">
-                <MessageCircle className="w-7 h-7 text-[#25D366]" />
+            <div className="bg-white rounded-3xl p-6 border border-gray-250/70 shadow-[0_4px_20px_rgba(0,0,0,0.012)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                {/* Icon Container */}
+                <div className="h-14 w-14 rounded-2xl bg-[#25D366]/10 flex items-center justify-center mb-4 transition-transform group-hover:scale-105 duration-300 shadow-sm">
+                  <MessageCircle className="w-7 h-7 text-[#25D366]" />
+                </div>
+                
+                {/* Tag */}
+                <span className="text-[10px] font-extrabold text-gray-400 uppercase tracking-wider block">
+                  WhatsApp · Tercepat
+                </span>
+                
+                {/* Title */}
+                <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 mt-1 leading-snug">
+                  0811-2345-6789
+                </h3>
+                
+                {/* Subtext */}
+                <p className="text-[12.5px] text-gray-500 leading-relaxed mt-2.5">
+                  Respons rata-rata kurang dari 5 menit. Tersedia Senin–Sabtu, 08:00–20:00 WIB.
+                </p>
               </div>
-              <h3 className="text-[18px] font-black text-dark mb-2">0811-2345-6789</h3>
-              <p className="text-[13px] text-muted leading-relaxed flex-grow">
-                Respons rata-rata kurang dari 5 menit. Tersedia Senin–Sabtu, 08:00–20:00 WIB.
-              </p>
+
+              {/* Action Link */}
               <a
                 href="https://wa.me/6281123456789"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 pt-5 border-t border-border/60 inline-flex items-center text-[13px] font-bold text-[#25D366] hover:text-[#1EA760] transition-colors"
+                className="mt-6 pt-4 border-t border-gray-100 flex items-center text-[13px] font-bold text-[#990202] hover:text-[#800000] hover:translate-x-0.5 transition-all duration-200"
               >
                 Mulai chat →
               </a>
             </div>
 
             {/* Email Card */}
-            <div className="bg-white rounded-2xl p-7 border border-border/60 hover:border-blue-200 hover:shadow-md transition-all duration-200 flex flex-col">
-              <span className="text-[11px] font-bold text-dark uppercase tracking-wider mb-4">Email · Formal</span>
-              <div className="h-14 w-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
-                <Mail className="w-7 h-7 text-blue-500" />
+            <div className="bg-white rounded-3xl p-6 border border-gray-250/70 shadow-[0_4px_20px_rgba(0,0,0,0.012)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                {/* Icon Container */}
+                <div className="h-14 w-14 rounded-2xl bg-[#990202]/10 flex items-center justify-center mb-4 transition-transform group-hover:scale-105 duration-300 shadow-sm">
+                  <Mail className="w-7 h-7 text-[#990202]" />
+                </div>
+                
+                {/* Tag */}
+                <span className="text-[10px] font-extrabold text-gray-400 uppercase tracking-wider block">
+                  Email · Formal
+                </span>
+                
+                {/* Title */}
+                <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 mt-1 leading-snug">
+                  info@easylegal.id
+                </h3>
+                
+                {/* Subtext */}
+                <p className="text-[12.5px] text-gray-500 leading-relaxed mt-2.5">
+                  Untuk pertanyaan detail, dokumentasi, atau kerjasama. Dibalas dalam 24 jam kerja.
+                </p>
               </div>
-              <h3 className="text-[18px] font-black text-dark mb-2">info@easylegal.id</h3>
-              <p className="text-[13px] text-muted leading-relaxed flex-grow">
-                Untuk pertanyaan detail, dokumentasi, atau kerjasama. Dibalas dalam 24 jam kerja.
-              </p>
+
+              {/* Action Link */}
               <a
                 href="mailto:info@easylegal.id"
-                className="mt-6 pt-5 border-t border-border/60 inline-flex items-center text-[13px] font-bold text-primary hover:text-primary-hover transition-colors"
+                className="mt-6 pt-4 border-t border-gray-100 flex items-center text-[13px] font-bold text-[#990202] hover:text-[#800000] hover:translate-x-0.5 transition-all duration-200"
               >
                 Kirim email →
               </a>
             </div>
 
             {/* Telepon Card */}
-            <div className="bg-white rounded-2xl p-7 border border-border/60 hover:border-gray-300 hover:shadow-md transition-all duration-200 flex flex-col">
-              <span className="text-[11px] font-bold text-dark uppercase tracking-wider mb-4">Telepon · Kantor</span>
-              <div className="h-14 w-14 rounded-2xl bg-gray-100 flex items-center justify-center mb-4">
-                <Phone className="w-7 h-7 text-gray-500" />
+            <div className="bg-white rounded-3xl p-6 border border-gray-250/70 shadow-[0_4px_20px_rgba(0,0,0,0.012)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                {/* Icon Container */}
+                <div className="h-14 w-14 rounded-2xl bg-gray-950/10 flex items-center justify-center mb-4 transition-transform group-hover:scale-105 duration-300 shadow-sm">
+                  <Phone className="w-7 h-7 text-gray-950" />
+                </div>
+                
+                {/* Tag */}
+                <span className="text-[10px] font-extrabold text-gray-400 uppercase tracking-wider block">
+                  Telepon · Kantor
+                </span>
+                
+                {/* Title */}
+                <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 mt-1 leading-snug">
+                  (022) 1234-5678
+                </h3>
+                
+                {/* Subtext */}
+                <p className="text-[12.5px] text-gray-500 leading-relaxed mt-2.5">
+                  Hubungi kantor pusat Bandung. Tim operations siap menjawab di jam kerja.
+                </p>
               </div>
-              <h3 className="text-[18px] font-black text-dark mb-2">(022) 1234-5678</h3>
-              <p className="text-[13px] text-muted leading-relaxed flex-grow">
-                Hubungi kantor pusat Bandung. Tim operations siap menjawab di jam kerja.
-              </p>
+
+              {/* Action Link */}
               <a
                 href="tel:02212345678"
-                className="mt-6 pt-5 border-t border-border/60 inline-flex items-center text-[13px] font-bold text-primary hover:text-primary-hover transition-colors"
+                className="mt-6 pt-4 border-t border-gray-100 flex items-center text-[13px] font-bold text-[#990202] hover:text-[#800000] hover:translate-x-0.5 transition-all duration-200"
               >
                 Telepon kami →
               </a>
             </div>
+
           </div>
+
         </div>
       </section>
 
