@@ -38,8 +38,12 @@ export default async function NewsletterDashboardPage() {
     },
   });
 
-  // Get broadcast article IDs to mark which articles already have broadcasts
+  // Get broadcast article IDs and count per article
   const broadcastArticleIds = new Set(broadcasts.map((b) => b.articleId));
+  const broadcastCountMap = new Map<string, number>();
+  for (const b of broadcasts) {
+    broadcastCountMap.set(b.articleId, (broadcastCountMap.get(b.articleId) || 0) + 1);
+  }
 
   // Fetch recent email logs
   const emailLogs = await prisma.emailLog.findMany({
@@ -247,7 +251,7 @@ export default async function NewsletterDashboardPage() {
                               {alreadySent && (
                                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-200/50">
                                   <CheckCircle2 className="w-2.5 h-2.5" />
-                                  Terkirim
+                                  Terkirim {broadcastCountMap.get(article.id) || 0}x
                                 </span>
                               )}
                             </div>
@@ -265,9 +269,7 @@ export default async function NewsletterDashboardPage() {
                               </span>
                             </div>
                           </div>
-                          {!alreadySent && (
-                            <BroadcastButton articleId={article.id} articleTitle={article.title} />
-                          )}
+                          <BroadcastButton articleId={article.id} articleTitle={article.title} />
                         </div>
                       );
                     })}
