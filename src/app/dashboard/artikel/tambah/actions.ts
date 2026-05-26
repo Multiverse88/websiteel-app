@@ -169,6 +169,7 @@ export async function createArticle(prevState: any, formData: FormData) {
               articleSlug: newArticle.slug,
               introMessage,
               unsubscribeLink,
+              coverImage: newArticle.coverImage,
             });
 
             const textContent = `${introMessage}\n\nArtikel Baru: ${newArticle.title}\nKategori: ${newArticle.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${newArticle.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;

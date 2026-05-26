@@ -55,6 +55,7 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
         articleSlug: article.slug,
         introMessage,
         unsubscribeLink,
+        coverImage: article.coverImage,
       });
 
       const textContent = `${introMessage}\n\nArtikel Baru: ${article.title}\nKategori: ${article.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${article.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;

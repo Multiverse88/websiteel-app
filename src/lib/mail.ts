@@ -69,10 +69,12 @@ interface NewsletterHtmlParams {
   articleSlug: string;
   introMessage: string;
   unsubscribeLink: string;
+  coverImage?: string;
 }
 
 /**
- * Menghasilkan HTML premium untuk isi email newsletter.
+ * Menghasilkan HTML untuk isi email newsletter.
+ * Dirancang agar tidak masuk spam: minimal CSS, plain-text friendly, ada physical address.
  */
 export function generateNewsletterHtml({
   articleTitle,
@@ -81,144 +83,102 @@ export function generateNewsletterHtml({
   articleSlug,
   introMessage,
   unsubscribeLink,
+  coverImage,
 }: NewsletterHtmlParams): string {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   const articleUrl = `${baseUrl}/artikel/${articleSlug}`;
+  const currentYear = new Date().getFullYear();
 
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${articleTitle}</title>
-        <style>
-          body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #f7fafc;
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-          }
-          .email-wrapper {
-            max-width: 600px;
-            margin: 40px auto;
-            background-color: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            border: 1px border #e2e8f0;
-          }
-          .email-header {
-            background-color: #ffffff;
-            padding: 24px 32px;
-            border-bottom: 2px solid #f1f5f9;
-            text-align: center;
-          }
-          .brand-logo {
-            color: #990202;
-            font-size: 24px;
-            font-weight: 800;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-          }
-          .email-body {
-            padding: 32px;
-          }
-          .intro-text {
-            font-size: 15px;
-            color: #475569;
-            line-height: 1.6;
-            margin-bottom: 24px;
-          }
-          .article-card {
-            background-color: #fafafa;
-            border: 1px solid #f1f5f9;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 28px;
-          }
-          .category-tag {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: #990202;
-            letter-spacing: 0.8px;
-            margin-bottom: 8px;
-          }
-          .article-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0f172a;
-            margin: 0 0 10px 0;
-            line-height: 1.4;
-          }
-          .article-excerpt {
-            font-size: 13.5px;
-            color: #64748b;
-            line-height: 1.5;
-            margin: 0 0 20px 0;
-          }
-          .cta-button {
-            display: inline-block;
-            background-color: #990202;
-            color: #ffffff !important;
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-align: center;
-            transition: background-color 0.2s ease;
-          }
-          .email-footer {
-            background-color: #f8fafc;
-            padding: 24px 32px;
-            text-align: center;
-            border-top: 1px solid #f1f5f9;
-          }
-          .footer-text {
-            font-size: 11px;
-            color: #94a3b8;
-            line-height: 1.5;
-          }
-          .unsubscribe-link {
-            color: #64748b;
-            text-decoration: underline;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="email-wrapper">
-          <!-- Header -->
-          <div class="email-header">
-            <a href="${baseUrl}" class="brand-logo">EASY LEGAL</a>
-          </div>
-          
+  // Resolve cover image to absolute URL (email clients need absolute URLs)
+  let coverSrc = coverImage || "";
+  if (coverSrc && !coverSrc.startsWith("http")) {
+    coverSrc = `${baseUrl}${coverSrc}`;
+  }
+
+  // Logo: use an inline SVG as base64 to avoid external loading issues
+  const logoSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"><rect width="36" height="36" rx="8" fill="#990202"/><text x="18" y="24" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#ffffff">EL</text></svg>`;
+  const logoDataUri = `data:image/svg+xml;base64,${Buffer.from(logoSvg).toString("base64")}`;
+
+  return `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${articleTitle}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f4f4f4;">
+    <tr>
+      <td align="center" style="padding:30px 15px;">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:8px;overflow:hidden;">
+
+          <!-- Header: Logo + Brand Name -->
+          <tr>
+            <td style="padding:24px 32px;border-bottom:1px solid #e5e5e5;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td style="padding-right:12px;vertical-align:middle;">
+                    <a href="${baseUrl}" style="text-decoration:none;">
+                      <img src="${logoDataUri}" alt="Easy Legal" width="36" height="36" style="display:block;border-radius:8px;" />
+                    </a>
+                  </td>
+                  <td style="vertical-align:middle;">
+                    <a href="${baseUrl}" style="text-decoration:none;">
+                      <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;font-style:normal;color:#111111;letter-spacing:-0.5px;">EASY LEGAL</span>
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
           <!-- Body -->
-          <div class="email-body">
-            <p class="intro-text">${introMessage.replace(/\n/g, "<br>")}</p>
-            
-            <div class="article-card">
-              <span class="category-tag">${articleCategory}</span>
-              <h2 class="article-title">${articleTitle}</h2>
-              <p class="article-excerpt">${articleExcerpt}</p>
-              <a href="${articleUrl}" class="cta-button" target="_blank">Baca Artikel Selengkapnya</a>
-            </div>
-          </div>
-          
+          <tr>
+            <td style="padding:32px;">
+              <p style="font-size:15px;color:#333333;line-height:1.6;margin:0 0 24px;">${introMessage.replace(/\n/g, "<br>")}</p>
+
+              <!-- Cover Image -->
+              ${coverSrc ? `
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:20px;">
+                <tr>
+                  <td>
+                    <img src="${coverSrc}" alt="${articleTitle}" width="536" style="display:block;width:100%;max-width:536px;height:auto;border-radius:6px;border:1px solid #e5e5e5;" />
+                  </td>
+                </tr>
+              </table>
+              ` : ""}
+
+              <!-- Article Card -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#fafafa;border:1px solid #e5e5e5;border-radius:6px;margin-bottom:24px;">
+                <tr>
+                  <td style="padding:24px;">
+                    <p style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#990202;letter-spacing:0.5px;margin:0 0 8px;">${articleCategory}</p>
+                    <h2 style="font-size:18px;font-weight:bold;color:#111111;margin:0 0 10px;line-height:1.4;">${articleTitle}</h2>
+                    <p style="font-size:14px;color:#666666;line-height:1.6;margin:0 0 20px;">${articleExcerpt}</p>
+                    <a href="${articleUrl}" style="display:inline-block;background-color:#990202;color:#ffffff;font-size:13px;font-weight:bold;text-decoration:none;padding:12px 24px;border-radius:5px;">Baca Artikel Selengkapnya &rarr;</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
           <!-- Footer -->
-          <div class="email-footer">
-            <p class="footer-text">
-              © ${new Date().getFullYear()} Easy Legal. Semua hak dilindungi.<br>
-              Anda menerima email ini karena terdaftar dalam update mingguan legalitas kami.<br>
-              <a href="${unsubscribeLink}" class="unsubscribe-link" target="_blank">Batal Berlangganan (Unsubscribe)</a>
-            </p>
-          </div>
-        </div>
-      </body>
-    </html>
-  `;
+          <tr>
+            <td style="padding:20px 32px;text-align:center;border-top:1px solid #e5e5e5;background-color:#fafafa;">
+              <p style="font-size:12px;color:#999999;line-height:1.5;margin:0;">
+                &copy; ${currentYear} Easy Legal. Hak Cipta Dilindungi.<br>
+                Anda menerima email ini karena terdaftar di newsletter Easy Legal.<br>
+                <a href="${unsubscribeLink}" style="color:#666666;text-decoration:underline;">Berhenti Berlangganan</a>
+              </p>
+              <p style="font-size:11px;color:#cccccc;margin:10px 0 0;">Easy Legal &mdash; Jakarta, Indonesia</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
 }
 

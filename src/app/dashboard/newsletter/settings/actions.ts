@@ -111,19 +111,41 @@ export async function testSmtpConnection(testEmail: string) {
   try {
     const { sendEmail } = await import("@/lib/mail");
 
-    const html = `
-      <div style="font-family: 'DM Sans', Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 32px; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;">
-        <h2 style="font-size: 20px; font-weight: 800; color: #111827; margin: 0 0 12px;">Test Koneksi SMTP</h2>
-        <p style="font-size: 14px; color: #6b7280; line-height: 1.6; margin: 0 0 16px;">
-          Email ini dikirim otomatis untuk memverifikasi bahwa pengaturan SMTP EasyLegal sudah benar.
-        </p>
-        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px;">
-          <p style="font-size: 13px; color: #166534; font-weight: 600; margin: 0;">Koneksi SMTP berhasil!</p>
-        </div>
-        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;">
-        <p style="font-size: 12px; color: #9ca3af; margin: 0;">EasyLegal Newsletter System</p>
-      </div>
-    `;
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const html = `<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background-color:#f4f4f4;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f4f4f4;">
+    <tr>
+      <td align="center" style="padding:30px 15px;">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:8px;overflow:hidden;">
+          <tr>
+            <td style="padding:24px 32px;text-align:center;border-bottom:1px solid #e5e5e5;">
+              <a href="${baseUrl}" style="color:#990202;font-size:22px;font-weight:bold;text-decoration:none;">EASY LEGAL</a>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <h2 style="font-size:18px;font-weight:bold;color:#111111;margin:0 0 12px;">Test Koneksi SMTP</h2>
+              <p style="font-size:14px;color:#333333;line-height:1.6;margin:0 0 16px;">Email ini dikirim otomatis untuk memverifikasi bahwa pengaturan SMTP EasyLegal sudah benar.</p>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;margin-bottom:16px;">
+                <tr><td style="padding:12px 16px;"><p style="font-size:13px;color:#166534;font-weight:bold;margin:0;">Koneksi SMTP berhasil!</p></td></tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:20px 32px;text-align:center;border-top:1px solid #e5e5e5;background-color:#fafafa;">
+              <p style="font-size:12px;color:#999999;margin:0;">&copy; ${new Date().getFullYear()} Easy Legal. Hak Cipta Dilindungi.</p>
+              <p style="font-size:11px;color:#cccccc;margin:10px 0 0;">Easy Legal &mdash; Jakarta, Indonesia</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
 
     await sendEmail({
       to: testEmail,
