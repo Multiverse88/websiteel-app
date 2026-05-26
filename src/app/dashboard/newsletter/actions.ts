@@ -38,16 +38,25 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
       return { success: false, error: `Broadcast untuk artikel ini sudah pernah dikirim pada ${new Date(existingBroadcast.sentAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}.` };
     }
 
+    // Create broadcast record first so we can link email logs to it
+    const broadcast = await prisma.newsletterBroadcast.create({
+      data: {
+        articleId: article.id,
+        articleTitle: article.title,
+        totalSent: subscribers.length,
+      },
+    });
+
     const subject = customSubject || `Artikel Baru: ${article.title}`;
     const introMessage = customMessage || `Halo! Ada pembaruan legalitas baru menarik untuk kamu. Silakan baca selengkapnya di bawah ini.`;
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-    // Send emails to all active subscribers
-    const emailResults = [];
+    // Send emails to all active subscribers and log each one
+    let sentCount = 0;
     for (const subscriber of subscribers) {
       const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
-      
+
       const htmlContent = generateNewsletterHtml({
         articleTitle: article.title,
         articleExcerpt: article.excerpt,
@@ -59,35 +68,49 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
 
       const textContent = `${introMessage}\n\nArtikel Baru: ${article.title}\nKategori: ${article.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${article.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;
 
+      let status = "failed";
+      let errorMessage: string | null = null;
+
       try {
-        await sendEmail({
+        const result = await sendEmail({
           to: subscriber.email,
           subject,
           html: htmlContent,
           text: textContent,
         });
-        emailResults.push({ email: subscriber.email, status: "sent" });
-      } catch (err) {
+        status = result?.simulated ? "simulated" : "sent";
+        if (status === "sent") sentCount++;
+      } catch (err: any) {
+        errorMessage = err?.message || "Unknown error";
         console.error(`Gagal mengirim ke ${subscriber.email}:`, err);
-        emailResults.push({ email: subscriber.email, status: "failed" });
       }
-    }
 
-    // Record the broadcast
-    await prisma.newsletterBroadcast.create({
-      data: {
-        articleId: article.id,
-        articleTitle: article.title,
-        totalSent: subscribers.length,
-      },
-    });
+      // Log every email attempt
+      await prisma.emailLog.create({
+        data: {
+          recipient: subscriber.email,
+          subject,
+          status,
+          errorMessage,
+          broadcastId: broadcast.id,
+          source: "broadcast",
+        },
+      });
+    }
 
     revalidatePath("/dashboard/newsletter");
 
+    // Update totalSent to reflect actual successful sends
+    await prisma.newsletterBroadcast.update({
+      where: { id: broadcast.id },
+      data: { totalSent: sentCount },
+    });
+
     return {
       success: true,
-      message: `Broadcast berhasil dikirim ke ${subscribers.length} subscriber!`,
-      totalSent: subscribers.length,
+      message: `Broadcast berhasil dikirim ke ${sentCount} dari ${subscribers.length} subscriber!`,
+      totalSent: sentCount,
+      totalFailed: subscribers.length - sentCount,
     };
   } catch (error) {
     console.error("Broadcast error:", error);

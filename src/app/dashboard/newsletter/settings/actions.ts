@@ -16,7 +16,12 @@ export interface NewsletterSettings {
 export async function getNewsletterSettings(): Promise<NewsletterSettings> {
   const session = await getSession();
   if (!session) {
-    throw new Error("Akses ditolak! Silakan login.");
+    return {
+      autoBroadcast: true,
+      defaultSubject: "Artikel Baru: {{title}}",
+      defaultMessage:
+        "Halo! Kami baru saja mempublikasikan artikel legalitas terbaru yang sangat penting untuk perkembangan bisnis Anda. Mari baca pembahasan lengkap artikel kami di bawah ini.",
+    };
   }
   try {
     const settings = await prisma.systemSetting.findMany({

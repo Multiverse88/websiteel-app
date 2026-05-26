@@ -73,9 +73,11 @@ export async function updateProfile(prevState: any, formData: FormData) {
       await writeFile(path.join(uploadDir, filename), buffer);
 
       avatar = `/uploads/avatars/${filename}`;
-    } catch (uploadErr) {
-      console.error("Gagal mengunggah foto profil:", uploadErr);
-      return { error: "Gagal mengunggah foto profil. Silakan coba lagi." };
+    } catch {
+      // File upload gagal (kemungkinan di Vercel serverless), fallback ke URL
+      if (!avatar && avatarUrl) {
+        avatar = avatarUrl;
+      }
     }
   }
 

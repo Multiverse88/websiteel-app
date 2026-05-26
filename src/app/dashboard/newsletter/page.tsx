@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Mail, Users, Send, Calendar, Clock, FileText, CheckCircle2, Settings } from "lucide-react";
+import { ArrowLeft, Mail, Users, Send, Calendar, Clock, FileText, CheckCircle2, Settings, AlertCircle, XCircle } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { BroadcastButton, SubscriberActions } from "./client-components";
 import { getSession } from "@/lib/auth";
@@ -40,6 +40,21 @@ export default async function NewsletterDashboardPage() {
 
   // Get broadcast article IDs to mark which articles already have broadcasts
   const broadcastArticleIds = new Set(broadcasts.map((b) => b.articleId));
+
+  // Fetch recent email logs
+  const emailLogs = await prisma.emailLog.findMany({
+    orderBy: { sentAt: "desc" },
+    take: 50,
+    select: {
+      id: true,
+      recipient: true,
+      subject: true,
+      status: true,
+      errorMessage: true,
+      source: true,
+      sentAt: true,
+    },
+  });
 
   const activeCount = subscribers.filter((s) => s.isActive).length;
   const inactiveCount = subscribers.length - activeCount;
@@ -301,6 +316,98 @@ export default async function NewsletterDashboardPage() {
                           </span>
                         </div>
                       </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Email Delivery Logs */}
+              <h2 className="text-[18px] font-extrabold text-gray-900 mt-8 mb-5">
+                Log Pengiriman
+              </h2>
+              {emailLogs.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-200 p-6 text-center">
+                  <p className="text-[13px] text-gray-400">Belum ada log pengiriman email.</p>
+                </div>
+              ) : (
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  {/* Table Header */}
+                  <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[11px] font-extrabold text-gray-400 uppercase tracking-wider">
+                    <div className="col-span-4">Email</div>
+                    <div className="col-span-2 text-center">Status</div>
+                    <div className="col-span-2 text-center">Sumber</div>
+                    <div className="col-span-4">Tanggal</div>
+                  </div>
+
+                  {emailLogs.map((log, idx) => (
+                    <div
+                      key={log.id}
+                      className={`px-5 py-3.5 ${
+                        idx < emailLogs.length - 1 ? "border-b border-gray-50" : ""
+                      } hover:bg-gray-50/50 transition-colors`}
+                    >
+                      <div className="grid grid-cols-12 gap-3 items-center">
+                        {/* Email */}
+                        <div className="col-span-4">
+                          <span className="text-[13px] font-bold text-gray-900 truncate block">
+                            {log.recipient}
+                          </span>
+                        </div>
+
+                        {/* Status Badge */}
+                        <div className="col-span-2 flex justify-center">
+                          <span
+                            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold ${
+                              log.status === "sent"
+                                ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
+                                : log.status === "simulated"
+                                ? "bg-amber-50 text-amber-700 border border-amber-200/60"
+                                : "bg-red-50 text-red-700 border border-red-200/60"
+                            }`}
+                          >
+                            {log.status === "sent" ? (
+                              <CheckCircle2 className="w-2.5 h-2.5" />
+                            ) : log.status === "simulated" ? (
+                              <AlertCircle className="w-2.5 h-2.5" />
+                            ) : (
+                              <XCircle className="w-2.5 h-2.5" />
+                            )}
+                            {log.status === "sent" ? "Terkirim" : log.status === "simulated" ? "Simulasi" : "Gagal"}
+                          </span>
+                        </div>
+
+                        {/* Source */}
+                        <div className="col-span-2 flex justify-center">
+                          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-bold bg-gray-100 text-gray-600 border border-gray-200/60">
+                            {log.source === "broadcast" ? "Manual" : "Otomatis"}
+                          </span>
+                        </div>
+
+                        {/* Date */}
+                        <div className="col-span-4">
+                          <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+                            <Clock className="w-3 h-3 text-gray-400" />
+                            <span>
+                              {new Date(log.sentAt).toLocaleDateString("id-ID", {
+                                day: "numeric",
+                                month: "short",
+                                year: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Error message if failed */}
+                      {log.status === "failed" && log.errorMessage && (
+                        <div className="mt-2 ml-1 p-2 rounded-md bg-red-50 border border-red-100">
+                          <p className="text-[11px] text-red-600 font-medium">
+                            {log.errorMessage}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

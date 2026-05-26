@@ -58,6 +58,7 @@ export async function sendEmail({ to, subject, html, text }: SendEmailParams) {
     console.log(`📝 Subjek   : ${subject}`);
     console.log(`📄 Isi Teks : ${text}`);
     console.log(`==================================================`);
+    return { success: true, simulated: true };
   }
 }
 

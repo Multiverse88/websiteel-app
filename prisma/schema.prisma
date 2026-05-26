@@ -44,11 +44,24 @@ model NewsletterSubscriber {
 }
 
 model NewsletterBroadcast {
-  id          String   @id @default(cuid())
+  id          String      @id @default(cuid())
   articleId   String
   articleTitle String
-  totalSent   Int      @default(0)
-  sentAt      DateTime @default(now())
+  totalSent   Int         @default(0)
+  sentAt      DateTime    @default(now())
+  emailLogs   EmailLog[]
+}
+
+model EmailLog {
+  id           String   @id @default(cuid())
+  recipient    String
+  subject      String
+  status       String   // "sent" | "failed" | "simulated"
+  errorMessage String?
+  broadcastId  String?
+  broadcast    NewsletterBroadcast? @relation(fields: [broadcastId], references: [id])
+  source       String   // "broadcast" | "auto-broadcast"
+  sentAt       DateTime @default(now())
 }
 
 model SystemSetting {

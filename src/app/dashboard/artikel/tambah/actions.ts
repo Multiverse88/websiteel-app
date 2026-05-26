@@ -40,22 +40,33 @@ export async function createArticle(prevState: any, formData: FormData) {
       return { error: "Ukuran gambar maksimal 5MB!" };
     }
 
-    const bytes = await coverImageFile.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    try {
+      const bytes = await coverImageFile.arrayBuffer();
+      const buffer = Buffer.from(bytes);
 
-    // Generate unique filename
-    const ext = coverImageFile.name.split(".").pop() || "jpg";
-    const filename = `cover-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
-    const uploadDir = path.join(process.cwd(), "public", "uploads", "articles");
+      // Generate unique filename
+      const ext = coverImageFile.name.split(".").pop() || "jpg";
+      const filename = `cover-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+      const uploadDir = path.join(process.cwd(), "public", "uploads", "articles");
 
-    // Ensure directory exists
-    await mkdir(uploadDir, { recursive: true });
-    await writeFile(path.join(uploadDir, filename), buffer);
+      // Ensure directory exists
+      await mkdir(uploadDir, { recursive: true });
+      await writeFile(path.join(uploadDir, filename), buffer);
 
-    coverImage = `/uploads/articles/${filename}`;
-  } else if (coverImageUrl) {
+      coverImage = `/uploads/articles/${filename}`;
+    } catch {
+      // File upload gagal (kemungkinan di Vercel serverless), fallback ke URL
+      if (coverImageUrl) {
+        coverImage = coverImageUrl;
+      }
+    }
+  }
+
+  if (!coverImage && coverImageUrl) {
     coverImage = coverImageUrl;
-  } else {
+  }
+
+  if (!coverImage) {
     coverImage = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fit=crop&w=800&h=500&q=80";
   }
 
@@ -127,7 +138,7 @@ export async function createArticle(prevState: any, formData: FormData) {
 
         if (subscribers.length > 0) {
           const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-          
+
           const rawSubject = settingsMap.get("newsletter_default_subject") || "Artikel Baru: {{title}}";
           const rawMessage = settingsMap.get("newsletter_default_message") || "Halo! Kami baru saja mempublikasikan artikel legalitas terbaru yang sangat penting untuk perkembangan bisnis Anda. Mari baca pembahasan lengkap artikel kami di bawah ini.";
 
@@ -137,9 +148,20 @@ export async function createArticle(prevState: any, formData: FormData) {
             .replace("{{title}}", newArticle.title)
             .replace("{{category}}", newArticle.category);
 
+          // Create broadcast record first
+          const broadcast = await prisma.newsletterBroadcast.create({
+            data: {
+              articleId: newArticle.id,
+              articleTitle: newArticle.title,
+              totalSent: 0,
+            },
+          });
+
+          let sentCount = 0;
+
           for (const subscriber of subscribers) {
             const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
-            
+
             const htmlContent = generateNewsletterHtml({
               articleTitle: newArticle.title,
               articleExcerpt: newArticle.excerpt,
@@ -151,27 +173,43 @@ export async function createArticle(prevState: any, formData: FormData) {
 
             const textContent = `${introMessage}\n\nArtikel Baru: ${newArticle.title}\nKategori: ${newArticle.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${newArticle.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;
 
+            let status = "failed";
+            let errorMessage: string | null = null;
+
             try {
-              await sendEmail({
+              const result = await sendEmail({
                 to: subscriber.email,
                 subject,
                 html: htmlContent,
                 text: textContent,
               });
-            } catch (err) {
+              status = result?.simulated ? "simulated" : "sent";
+              if (status === "sent") sentCount++;
+            } catch (err: any) {
+              errorMessage = err?.message || "Unknown error";
               console.error(`Gagal mengirim email otomatis ke ${subscriber.email}:`, err);
             }
+
+            // Log every email attempt
+            await prisma.emailLog.create({
+              data: {
+                recipient: subscriber.email,
+                subject,
+                status,
+                errorMessage,
+                broadcastId: broadcast.id,
+                source: "auto-broadcast",
+              },
+            });
           }
 
-          await prisma.newsletterBroadcast.create({
-            data: {
-              articleId: newArticle.id,
-              articleTitle: newArticle.title,
-              totalSent: subscribers.length,
-            },
+          // Update totalSent to reflect actual successful sends
+          await prisma.newsletterBroadcast.update({
+            where: { id: broadcast.id },
+            data: { totalSent: sentCount },
           });
-          
-          console.log(`✅ Auto-broadcast terkirim secara otomatis ke ${subscribers.length} subscriber!`);
+
+          console.log(`✅ Auto-broadcast terkirim: ${sentCount} berhasil, ${subscribers.length - sentCount} gagal dari ${subscribers.length} subscriber.`);
         }
       } else {
         console.log("ℹ️ Otomatisasi newsletter dinonaktifkan (OFF) berdasarkan pengaturan sistem.");
