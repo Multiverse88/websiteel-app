@@ -132,6 +132,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
   // Fetch article from DB
   const article = await prisma.article.findUnique({
     where: { slug },
+    include: { author: true },
   });
 
   // If article not found, redirect to 404 handler
@@ -215,11 +216,21 @@ export default async function ArtikelDetailPage({ params }: Props) {
             <div className="flex flex-wrap items-center gap-4 pb-8 border-b border-gray-100">
               {/* Author */}
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[11px] font-black shadow-sm">
-                  EL
-                </div>
+                {article.author?.avatar ? (
+                  <img
+                    src={article.author.avatar}
+                    alt={article.author.name}
+                    className="w-10 h-10 rounded-full object-cover shadow-sm border border-gray-150"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[11px] font-black shadow-sm">
+                    EL
+                  </div>
+                )}
                 <div>
-                  <div className="text-[13.5px] font-bold text-gray-900">EasyLegal</div>
+                  <div className="text-[13.5px] font-bold text-gray-900">
+                    {article.author?.name || "EasyLegal"}
+                  </div>
                 </div>
               </div>
 
@@ -303,17 +314,38 @@ export default async function ArtikelDetailPage({ params }: Props) {
           </div>
 
           {/* ─── AUTHOR CARD ─── */}
-          <div className="bg-[#FAFAFA] rounded-2xl border border-gray-200/60 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 mb-10">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[13px] font-black shadow-sm">
-                EL
+          <div className="bg-[#FAFAFA] rounded-2xl border border-gray-200/60 p-6 flex flex-col gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+              <div className="flex items-center space-x-4">
+                {article.author?.avatar ? (
+                  <img
+                    src={article.author.avatar}
+                    alt={article.author.name}
+                    className="w-14 h-14 rounded-full object-cover shadow-sm border border-gray-150"
+                  />
+                ) : (
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[14px] font-black shadow-sm">
+                    EL
+                  </div>
+                )}
+                <div>
+                  <div className="text-[15px] font-extrabold text-gray-950">
+                    {article.author?.name || "Tim Penulis EasyLegal"}
+                  </div>
+                  <div className="text-[12px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">
+                    {article.author?.role || "Spesialis Konsultan Hukum & Legalitas Bisnis"}
+                  </div>
+                </div>
               </div>
-              <div>
-                <div className="text-[14.5px] font-extrabold text-gray-950">Tim Penulis EasyLegal</div>
-                <div className="text-[12.5px] text-gray-500 mt-0.5">Spesialis Konsultan Hukum & Legalitas Bisnis</div>
+              <div className="flex-shrink-0">
+                <ShareButton />
               </div>
             </div>
-            <ShareButton />
+            {article.author?.bio && (
+              <p className="text-[13.5px] leading-relaxed text-gray-500 font-normal">
+                {article.author.bio}
+              </p>
+            )}
           </div>
         </article>
 

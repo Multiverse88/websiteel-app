@@ -5,11 +5,17 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { sendEmail, generateNewsletterHtml } from "@/lib/mail";
+import { getSession } from "@/lib/auth";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
 export async function createArticle(prevState: any, formData: FormData) {
+  const session = await getSession();
+  if (!session) {
+    return { error: "Sesi tidak valid! Anda harus login terlebih dahulu." };
+  }
   const title = formData.get("title") as string;
   const category = formData.get("category") as string;
   const readTime = formData.get("readTime") as string;
@@ -79,6 +85,9 @@ export async function createArticle(prevState: any, formData: FormData) {
       counter++;
     }
 
+    const session = await getSession();
+    const authorId = session?.userId || null;
+
     // Insert article
     const newArticle = await prisma.article.create({
       data: {
@@ -89,27 +98,83 @@ export async function createArticle(prevState: any, formData: FormData) {
         coverImage,
         excerpt,
         content,
+        authorId,
       }
     });
 
     // Automatically send newsletter broadcast
     try {
-      const subscribers = await prisma.newsletterSubscriber.findMany({
-        where: { isActive: true },
-      });
-      if (subscribers.length > 0) {
-        for (const subscriber of subscribers) {
-          console.log(`📧 Automatically sending newsletter to: ${subscriber.email}`);
-          console.log(`   Subject: Artikel Baru: ${newArticle.title}`);
-          console.log(`   Link: /artikel/${newArticle.slug}`);
-        }
-        await prisma.newsletterBroadcast.create({
-          data: {
-            articleId: newArticle.id,
-            articleTitle: newArticle.title,
-            totalSent: subscribers.length,
+      // Get system settings for newsletter automation
+      const settings = await prisma.systemSetting.findMany({
+        where: {
+          key: {
+            in: [
+              "newsletter_auto_broadcast",
+              "newsletter_default_subject",
+              "newsletter_default_message",
+            ],
           },
+        },
+      });
+
+      const settingsMap = new Map(settings.map((s) => [s.key, s.value]));
+      const isAutoActive = settingsMap.get("newsletter_auto_broadcast") === "true";
+
+      if (isAutoActive) {
+        const subscribers = await prisma.newsletterSubscriber.findMany({
+          where: { isActive: true },
         });
+
+        if (subscribers.length > 0) {
+          const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+          
+          const rawSubject = settingsMap.get("newsletter_default_subject") || "Artikel Baru: {{title}}";
+          const rawMessage = settingsMap.get("newsletter_default_message") || "Halo! Kami baru saja mempublikasikan artikel legalitas terbaru yang sangat penting untuk perkembangan bisnis Anda. Mari baca pembahasan lengkap artikel kami di bawah ini.";
+
+          // Replace placeholders
+          const subject = rawSubject.replace("{{title}}", newArticle.title);
+          const introMessage = rawMessage
+            .replace("{{title}}", newArticle.title)
+            .replace("{{category}}", newArticle.category);
+
+          for (const subscriber of subscribers) {
+            const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
+            
+            const htmlContent = generateNewsletterHtml({
+              articleTitle: newArticle.title,
+              articleExcerpt: newArticle.excerpt,
+              articleCategory: newArticle.category,
+              articleSlug: newArticle.slug,
+              introMessage,
+              unsubscribeLink,
+            });
+
+            const textContent = `${introMessage}\n\nArtikel Baru: ${newArticle.title}\nKategori: ${newArticle.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${newArticle.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;
+
+            try {
+              await sendEmail({
+                to: subscriber.email,
+                subject,
+                html: htmlContent,
+                text: textContent,
+              });
+            } catch (err) {
+              console.error(`Gagal mengirim email otomatis ke ${subscriber.email}:`, err);
+            }
+          }
+
+          await prisma.newsletterBroadcast.create({
+            data: {
+              articleId: newArticle.id,
+              articleTitle: newArticle.title,
+              totalSent: subscribers.length,
+            },
+          });
+          
+          console.log(`✅ Auto-broadcast terkirim secara otomatis ke ${subscribers.length} subscriber!`);
+        }
+      } else {
+        console.log("ℹ️ Otomatisasi newsletter dinonaktifkan (OFF) berdasarkan pengaturan sistem.");
       }
     } catch (broadcastErr) {
       console.error("Gagal mengirim broadcast otomatis:", broadcastErr);

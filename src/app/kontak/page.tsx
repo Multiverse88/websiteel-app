@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Offices from "@/components/Offices";
+import FAQ from "@/components/FAQ";
+import CTA from "@/components/CTA";
 import {
   MessageCircle,
   Mail,
@@ -18,13 +21,14 @@ import {
 
 export default function Kontak() {
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(0); // first FAQ open by default
   const [formData, setFormData] = useState({
     name: "",
+    businessName: "",
+    email: "",
     whatsapp: "",
     topic: "",
     message: "",
-    consent: false,
+    consent: true,
   });
 
   const handleInputChange = (
@@ -46,18 +50,18 @@ export default function Kontak() {
 
   const closeToast = () => {
     setFormSubmitted(false);
-    setFormData({ name: "", whatsapp: "", topic: "", message: "", consent: false });
+    setFormData({
+      name: "",
+      businessName: "",
+      email: "",
+      whatsapp: "",
+      topic: "",
+      message: "",
+      consent: true,
+    });
   };
 
-  const toggleFaq = (idx: number) => {
-    setExpandedFaq((prev) => (prev === idx ? null : idx));
-  };
 
-  const offices = [
-    { city: "Bandung", tag: "Kantor Pusat", addr: "Jl. Asia Afrika No. 1, Sumur Bandung, Kota Bandung, Jawa Barat 40111", hours: "Sen–Sab · 08–17", tel: "022-1234-5678", map: "https://maps.google.com" },
-    { city: "Jakarta", tag: "Branch Office", addr: "Jl. Jenderal Sudirman Kav. 52-53, Setiabudi, Jakarta Selatan, DKI Jakarta 12190", hours: "Sen–Sab · 08–17", tel: "021-1234-5678", map: "https://maps.google.com" },
-    { city: "Bekasi", tag: "Branch Office", addr: "Jl. Ahmad Yani No. 10, Marga Jaya, Bekasi Selatan, Kota Bekasi, Jawa Barat 17141", hours: "Sen–Sab · 08–17", tel: "021-9876-5432", map: "https://maps.google.com" },
-  ];
 
   const faqs = [
     {
@@ -115,10 +119,7 @@ export default function Kontak() {
             </div>
 
             <h1 className="font-inter text-[36px] sm:text-[44px] lg:text-[48px] font-extrabold text-gray-950 leading-tight tracking-tight mt-6">
-              Mari bicarakan kebutuhan{" "}
-              <span className="text-[#990202]">
-                legal bisnis Anda.
-              </span>
+              Mari bicarakan kebutuhan <span className="text-[#990202]">legal bisnis</span> Anda.
             </h1>
             
             <p className="text-[15.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
@@ -130,25 +131,28 @@ export default function Kontak() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
             
             {/* WhatsApp Card */}
-            <div className="bg-white rounded-3xl p-6 border border-gray-250/70 shadow-[0_4px_20px_rgba(0,0,0,0.012)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div className="bg-white rounded-3xl p-8 border border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[320px]">
               <div>
                 {/* Icon Container */}
-                <div className="h-14 w-14 rounded-2xl bg-[#25D366]/10 flex items-center justify-center mb-4 transition-transform group-hover:scale-105 duration-300 shadow-sm">
-                  <MessageCircle className="w-7 h-7 text-[#25D366]" />
+                <div className="h-12 w-12 rounded-xl bg-[#25D366] flex items-center justify-center mb-6 transition-transform group-hover:scale-105 duration-300 shadow-sm">
+                  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current text-white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.717-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.451 5.436 0 9.86-4.42 9.863-9.855.001-2.63-1.024-5.101-2.887-6.968C16.38 1.916 13.9 .893 11.272.893c-5.44 0-9.866 4.418-9.87 9.853-.001 1.77.463 3.5 1.34 5.013l-.974 3.561 3.659-.96c1.507.82 3.193 1.258 4.63 1.257z" />
+                    <path d="M17.487 14.397c-.298-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m0 0" />
+                  </svg>
                 </div>
                 
                 {/* Tag */}
-                <span className="text-[10px] font-extrabold text-gray-400 uppercase tracking-wider block">
+                <span className="text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block">
                   WhatsApp · Tercepat
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 mt-1 leading-snug">
+                <h3 className="font-inter text-[20px] sm:text-[22px] font-extrabold text-gray-950 mt-2 leading-snug">
                   0811-2345-6789
                 </h3>
                 
                 {/* Subtext */}
-                <p className="text-[12.5px] text-gray-500 leading-relaxed mt-2.5">
+                <p className="text-[13px] text-gray-500 leading-relaxed mt-3">
                   Respons rata-rata kurang dari 5 menit. Tersedia Senin–Sabtu, 08:00–20:00 WIB.
                 </p>
               </div>
@@ -158,32 +162,32 @@ export default function Kontak() {
                 href="https://wa.me/6281123456789"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 pt-4 border-t border-gray-100 flex items-center text-[13px] font-bold text-[#990202] hover:text-[#800000] hover:translate-x-0.5 transition-all duration-200"
+                className="mt-6 flex items-center text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
               >
                 Mulai chat →
               </a>
             </div>
 
             {/* Email Card */}
-            <div className="bg-white rounded-3xl p-6 border border-gray-250/70 shadow-[0_4px_20px_rgba(0,0,0,0.012)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div className="bg-white rounded-3xl p-8 border border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[320px]">
               <div>
                 {/* Icon Container */}
-                <div className="h-14 w-14 rounded-2xl bg-[#990202]/10 flex items-center justify-center mb-4 transition-transform group-hover:scale-105 duration-300 shadow-sm">
-                  <Mail className="w-7 h-7 text-[#990202]" />
+                <div className="h-12 w-12 rounded-xl bg-[#990202] flex items-center justify-center mb-6 transition-transform group-hover:scale-105 duration-300 shadow-sm">
+                  <Mail className="w-5 h-5 text-white" />
                 </div>
                 
                 {/* Tag */}
-                <span className="text-[10px] font-extrabold text-gray-400 uppercase tracking-wider block">
+                <span className="text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block">
                   Email · Formal
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 mt-1 leading-snug">
+                <h3 className="font-inter text-[20px] sm:text-[22px] font-extrabold text-gray-950 mt-2 leading-snug">
                   info@easylegal.id
                 </h3>
                 
                 {/* Subtext */}
-                <p className="text-[12.5px] text-gray-500 leading-relaxed mt-2.5">
+                <p className="text-[13px] text-gray-500 leading-relaxed mt-3">
                   Untuk pertanyaan detail, dokumentasi, atau kerjasama. Dibalas dalam 24 jam kerja.
                 </p>
               </div>
@@ -191,32 +195,32 @@ export default function Kontak() {
               {/* Action Link */}
               <a
                 href="mailto:info@easylegal.id"
-                className="mt-6 pt-4 border-t border-gray-100 flex items-center text-[13px] font-bold text-[#990202] hover:text-[#800000] hover:translate-x-0.5 transition-all duration-200"
+                className="mt-6 flex items-center text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
               >
                 Kirim email →
               </a>
             </div>
 
             {/* Telepon Card */}
-            <div className="bg-white rounded-3xl p-6 border border-gray-250/70 shadow-[0_4px_20px_rgba(0,0,0,0.012)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div className="bg-white rounded-3xl p-8 border border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[320px]">
               <div>
                 {/* Icon Container */}
-                <div className="h-14 w-14 rounded-2xl bg-gray-950/10 flex items-center justify-center mb-4 transition-transform group-hover:scale-105 duration-300 shadow-sm">
-                  <Phone className="w-7 h-7 text-gray-950" />
+                <div className="h-12 w-12 rounded-xl bg-[#111827] flex items-center justify-center mb-6 transition-transform group-hover:scale-105 duration-300 shadow-sm">
+                  <Phone className="w-5 h-5 text-white" />
                 </div>
                 
                 {/* Tag */}
-                <span className="text-[10px] font-extrabold text-gray-400 uppercase tracking-wider block">
+                <span className="text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block">
                   Telepon · Kantor
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 mt-1 leading-snug">
+                <h3 className="font-inter text-[20px] sm:text-[22px] font-extrabold text-gray-950 mt-2 leading-snug">
                   (022) 1234-5678
                 </h3>
                 
                 {/* Subtext */}
-                <p className="text-[12.5px] text-gray-500 leading-relaxed mt-2.5">
+                <p className="text-[13px] text-gray-500 leading-relaxed mt-3">
                   Hubungi kantor pusat Bandung. Tim operations siap menjawab di jam kerja.
                 </p>
               </div>
@@ -224,7 +228,7 @@ export default function Kontak() {
               {/* Action Link */}
               <a
                 href="tel:02212345678"
-                className="mt-6 pt-4 border-t border-gray-100 flex items-center text-[13px] font-bold text-[#990202] hover:text-[#800000] hover:translate-x-0.5 transition-all duration-200"
+                className="mt-6 flex items-center text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
               >
                 Telepon kami →
               </a>
@@ -241,71 +245,104 @@ export default function Kontak() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
             {/* Form */}
-            <div className="lg:col-span-7 bg-white border border-border rounded-2xl relative overflow-hidden shadow-sm">
-              {/* Red top accent */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-primary" />
-
-              <div className="p-8 md:p-10">
-                <h2 className="text-[24px] font-black text-dark mb-1">Kirim pertanyaan Anda</h2>
-                <p className="text-[14px] text-muted mb-7">
+            <div className="lg:col-span-7 bg-white border border-gray-200/60 rounded-3xl shadow-sm p-8 md:p-10">
+              <div>
+                <h2 className="text-[24px] font-extrabold text-gray-950 mb-1 tracking-tight">Kirim pertanyaan Anda</h2>
+                <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
                   Isi form berikut dan tim kami akan menghubungi Anda kembali dalam 1×24 jam kerja.
                 </p>
+                
+                {/* Thin dividing line under header */}
+                <div className="border-b border-gray-100 my-6" />
 
-                <form onSubmit={handleFormSubmit} className="space-y-5">
-                  {/* Topik */}
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      Topik Konsultasi*
-                    </label>
-                    <select
-                      name="topic"
-                      required
-                      value={formData.topic}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-[14.5px] bg-bg-light/40 text-muted"
-                    >
-                      <option value="" disabled>Pilih Topik Konsultasi</option>
-                      <option value="Pendirian PT / CV">Pendirian PT / CV</option>
-                      <option value="Pendaftaran Merek & HAKI">Pendaftaran Merek & HAKI</option>
-                      <option value="NIB, OSS RBA & KBLI">NIB, OSS RBA & KBLI</option>
-                      <option value="Sertifikasi ISO">Sertifikasi ISO</option>
-                      <option value="Pengajuan PKP">Pengajuan PKP</option>
-                      <option value="Visa & KITAS">Visa & KITAS</option>
-                      <option value="Lainnya">Lainnya</option>
-                    </select>
-                  </div>
-
-                  {/* Nama + WA */}
+                <form onSubmit={handleFormSubmit} className="space-y-6">
+                  
+                  {/* Nama Lengkap + Nama Bisnis */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[13px] font-semibold text-dark mb-1.5">Nama Lengkap*</label>
+                      <label className="text-[13px] font-bold text-gray-900 mb-2 block">Nama Lengkap*</label>
                       <input
                         type="text"
                         name="name"
                         required
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Nama lengkap Anda"
-                        className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
+                        placeholder="Mis. Budi Santoso"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900"
                       />
                     </div>
                     <div>
-                      <label className="block text-[13px] font-semibold text-dark mb-1.5">Nomor WhatsApp*</label>
+                      <label className="text-[13px] font-bold text-gray-900 mb-2 block">Nama Bisnis / Perusahaan</label>
+                      <input
+                        type="text"
+                        name="businessName"
+                        value={formData.businessName}
+                        onChange={handleInputChange}
+                        placeholder="Mis. PT Maju Bersama"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email + WA */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[13px] font-bold text-gray-900 mb-2 block">Email*</label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="nama@email.com"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[13px] font-bold text-gray-900 mb-2 block">No. WhatsApp*</label>
                       <input
                         type="tel"
                         name="whatsapp"
                         required
                         value={formData.whatsapp}
                         onChange={handleInputChange}
-                        placeholder="08xxxxxxxxxx"
-                        className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
+                        placeholder="0812-3456-7890"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900"
                       />
+                    </div>
+                  </div>
+
+                  {/* Topik */}
+                  <div>
+                    <label className="text-[13px] font-bold text-gray-900 mb-2 block">
+                      Topik Konsultasi*
+                    </label>
+                    <div className="relative">
+                      <select
+                        name="topic"
+                        required
+                        value={formData.topic}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all appearance-none cursor-pointer text-gray-700"
+                      >
+                        <option value="" disabled>Pilih Topik Konsultasi</option>
+                        <option value="Pendirian PT / CV">Pendirian PT / CV</option>
+                        <option value="Pendaftaran Merek & HAKI">Pendaftaran Merek & HAKI</option>
+                        <option value="NIB, OSS RBA & KBLI">NIB, OSS RBA & KBLI</option>
+                        <option value="Sertifikasi ISO">Sertifikasi ISO</option>
+                        <option value="Pengajuan PKP">Pengajuan PKP</option>
+                        <option value="Visa & KITAS">Visa & KITAS</option>
+                        <option value="Lainnya">Lainnya</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-gray-400">
+                        <ChevronDown className="w-4 h-4" />
+                      </div>
                     </div>
                   </div>
 
                   {/* Pesan */}
                   <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">Pesan / Pertanyaan*</label>
+                    <label className="text-[13px] font-bold text-gray-900 mb-2 block">Pesan / Pertanyaan*</label>
                     <textarea
                       name="message"
                       required
@@ -313,80 +350,89 @@ export default function Kontak() {
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Ceritakan kebutuhan legalitas bisnis Anda — kami akan bantu rekomendasikan solusi yang sesuai."
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40 resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900 resize-none leading-relaxed"
                     />
                   </div>
 
-                  {/* Consent */}
-                  <div className="flex items-start space-x-3">
-                    <input
-                      type="checkbox"
-                      id="consent"
-                      name="consent"
-                      required
-                      checked={formData.consent}
-                      onChange={handleInputChange}
-                      className="mt-1 h-4 w-4 accent-primary border-border rounded"
-                    />
-                    <label htmlFor="consent" className="text-[13px] text-muted leading-snug">
-                      Saya setuju data yang saya kirim akan diproses sesuai{" "}
-                      <Link href="/" className="text-primary font-semibold hover:underline">Kebijakan Privasi</Link> EasyLegal.id.
-                    </label>
+                  {/* Consent Text Statement */}
+                  <div className="text-[13px] text-gray-500 leading-relaxed mt-6">
+                    Saya setuju data yang saya kirim akan diproses sesuai{" "}
+                    <Link href="/" className="text-[#990202] font-semibold underline hover:text-[#800000]">
+                      Kebijakan Privasi
+                    </Link>{" "}
+                    EasyLegal.id.
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-primary hover:bg-primary-hover text-white font-bold text-[15px] rounded-lg shadow hover:shadow-md transition-all duration-200 flex justify-center items-center space-x-2"
+                    className="w-full py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-sm hover:shadow transition-all duration-200 flex justify-center items-center gap-2 group cursor-pointer"
                   >
-                    <Send className="w-4 h-4" />
                     <span>Kirim Pertanyaan</span>
+                    <span className="transition-transform group-hover:translate-x-0.5">→</span>
                   </button>
                 </form>
               </div>
             </div>
 
             {/* Sidebar */}
-            <div className="lg:col-span-5 space-y-5">
-              {/* Respons cepat badge */}
-              <div className="bg-primary-light border border-primary/10 rounded-2xl p-5 flex items-center space-x-4">
-                <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0">
-                  <MessageCircle className="w-5 h-5 text-white" />
+            <div className="lg:col-span-5 space-y-6">
+              
+              {/* Respons cepat card */}
+              <div className="bg-[#EBF7EE] border border-[#D2ECD6] rounded-2xl p-5 flex items-center space-x-4">
+                <div className="h-10 w-10 rounded-full bg-[#0F763E] flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                  </svg>
                 </div>
                 <div>
-                  <div className="text-[14px] font-bold text-dark">Respons cepat</div>
-                  <div className="text-[12px] text-muted">Rata-rata kurang dari 5 menit via WhatsApp.</div>
+                  <div className="text-[14px] font-bold text-[#0F763E]">Respons cepat</div>
+                  <div className="text-[12px] text-[#1E5C39] font-medium mt-0.5">Rata-rata kurang dari 5 menit via WhatsApp.</div>
                 </div>
               </div>
 
-              {/* Info box */}
-              <div className="bg-white border border-border/60 rounded-2xl p-6 space-y-5">
-                {/* Jam Operasional */}
-                <div className="space-y-2 pb-5 border-b border-border/60">
-                  <div className="flex items-center space-x-2">
-                    <Clock className="w-4 h-4 text-primary" />
-                    <span className="text-[14px] font-bold text-dark">Jam Operasional</span>
-                  </div>
-                  <p className="text-[13.5px] text-muted pl-6">Senin – Sabtu · 08.00 – 20.00 WIB</p>
+              {/* Jam Operasional */}
+              <div className="bg-white border border-gray-200/60 rounded-2xl p-6">
+                <div className="flex items-center space-x-3 mb-5">
+                  <Clock className="w-5 h-5 text-[#990202]" />
+                  <span className="text-[15px] font-bold text-gray-900">Jam Operasional</span>
                 </div>
-
-                {/* Kantor Pusat */}
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="w-4 h-4 text-primary" />
-                    <span className="text-[14px] font-bold text-dark">Kantor Pusat</span>
+                
+                <div className="space-y-0 text-[13.5px] text-gray-600 font-medium">
+                  <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                    <span>Senin – Jumat</span>
+                    <span className="text-gray-900 font-semibold">08:00 – 20:00</span>
                   </div>
-                  <p className="text-[13.5px] text-muted pl-6">
-                    Jl. Asia Afrika No. 1, Sumur Bandung, Kota Bandung, Jawa Barat 40111
-                  </p>
+                  <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                    <span>Sabtu</span>
+                    <span className="text-gray-900 font-semibold">09:00 – 17:00</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3">
+                    <span>Minggu & Libur</span>
+                    <span className="text-[#990202] font-semibold">Tutup</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Kantor Pusat */}
+              <div className="bg-white border border-gray-200/60 rounded-2xl p-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <MapPin className="w-5 h-5 text-[#990202]" />
+                  <span className="text-[15px] font-bold text-gray-900">Kantor Pusat</span>
+                </div>
+                <p className="text-[13.5px] text-gray-500 leading-relaxed pl-8">
+                  Jl. Asia Afrika No. 1, Sumur Bandung, Kota Bandung, Jawa Barat 40111
+                </p>
+                <div className="mt-5 pl-8">
                   <Link
                     href="/tentang-kami"
-                    className="pl-6 inline-flex items-center text-[12.5px] font-bold text-primary hover:text-primary-hover space-x-1"
+                    className="inline-flex items-center text-[13px] font-extrabold text-[#990202] hover:text-[#800000] gap-1 group transition-all duration-200"
                   >
                     <span>Lihat semua kantor</span>
-                    <span>→</span>
+                    <span className="transition-transform group-hover:translate-x-0.5">→</span>
                   </Link>
                 </div>
               </div>
+
             </div>
 
           </div>
@@ -394,116 +440,17 @@ export default function Kontak() {
       </section>
 
       {/* ─── 4. KANTOR KAMI ─── */}
-      <section className="bg-bg-light py-20 border-b border-border/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-            <p className="text-[12.5px] font-bold text-primary uppercase tracking-wider">Kantor Kami</p>
-            <h2 className="text-[36px] font-extrabold text-dark leading-tight">
-              Kunjungi kami di 3 kota.
-            </h2>
-            <p className="text-[16px] text-muted leading-relaxed">
-              Walaupun proses 100% online, kantor fisik kami terbuka untuk konsultasi tatap muka.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {offices.map((office, idx) => (
-              <div key={idx} className="bg-white rounded-2xl border border-border/60 overflow-hidden hover:shadow-md transition-all duration-200">
-                {/* PLACEHOLDER: foto kantor */}
-                <div className="h-40 bg-gray-200 flex items-center justify-center">
-                  <div className="text-center text-gray-400 text-xs">
-                    <div className="text-3xl mb-1">🏢</div>
-                    <div>Foto Kantor {office.city}</div>
-                  </div>
-                </div>
-
-                <div className="p-6 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-[20px] font-extrabold text-dark">{office.city}</h3>
-                    <span className="text-[10px] font-bold text-primary bg-primary-light px-2.5 py-1 rounded-full uppercase tracking-wider">
-                      {office.tag}
-                    </span>
-                  </div>
-                  <div className="flex items-start space-x-2 text-[13.5px] text-muted">
-                    <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>{office.addr}</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-[12.5px] text-muted">
-                    <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>{office.hours}</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-[12.5px] text-muted">
-                    <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>{office.tel}</span>
-                  </div>
-                  <a
-                    href={office.map}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-[12.5px] font-bold text-primary hover:text-primary-hover space-x-1 pt-1"
-                  >
-                    <span>Buka di Google Maps</span>
-                    <Map className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Offices
+        title="Kantor Kami"
+        subtitle="Kunjungi kami di 3 kota."
+        description="Walaupun proses 100% online, kantor fisik kami terbuka untuk konsultasi tatap muka."
+      />
 
       {/* ─── 5. FAQ ACCORDION ─── */}
-      <section className="bg-white py-20">
-        <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 space-y-3">
-            <p className="text-[12.5px] font-bold text-primary uppercase tracking-wider">FAQ</p>
-            <h2 className="text-[36px] font-extrabold text-dark leading-tight">
-              Pertanyaan yang sering ditanyakan.
-            </h2>
-            <p className="text-[16px] text-muted leading-relaxed">
-              Sebelum hubungi kami, mungkin jawabannya sudah ada di sini.
-            </p>
-          </div>
+      <FAQ items={faqs} />
 
-          <div className="space-y-3">
-            {faqs.map((faq, idx) => {
-              const isExpanded = expandedFaq === idx;
-              return (
-                <div
-                  key={idx}
-                  className={`bg-white border rounded-xl overflow-hidden transition-all duration-200 ${
-                    isExpanded ? "border-primary/30 shadow-sm" : "border-border"
-                  }`}
-                >
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none"
-                  >
-                    <span className={`text-[16.5px] font-${isExpanded ? "bold" : "semibold"} ${isExpanded ? "text-dark" : "text-dark"} leading-snug`}>
-                      {faq.q}
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 flex-shrink-0 ml-4 transition-all duration-200 ${
-                        isExpanded ? "rotate-180 text-primary" : "text-muted"
-                      }`}
-                    />
-                  </button>
-
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      isExpanded ? "max-h-[300px]" : "max-h-0"
-                    }`}
-                  >
-                    <div className="px-6 pb-5 border-t border-border/60 pt-4">
-                      <p className="text-[14.5px] text-muted leading-relaxed">{faq.a}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* ─── 6. CTA BANNER ─── */}
+      <CTA />
 
       {/* Toast notification */}
       {formSubmitted && (

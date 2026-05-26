@@ -1,12 +1,19 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Mail, Users, Send, Calendar, Clock, FileText, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Mail, Users, Send, Calendar, Clock, FileText, CheckCircle2, Settings } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { BroadcastButton, SubscriberActions } from "./client-components";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 export default async function NewsletterDashboardPage() {
+  const session = await getSession();
+  if (!session) {
+    redirect("/login");
+  }
+
   // Fetch all subscribers
   const subscribers = await prisma.newsletterSubscriber.findMany({
     orderBy: { subscribedAt: "desc" },
@@ -51,7 +58,7 @@ export default async function NewsletterDashboardPage() {
               Dashboard
             </Link>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <div>
               <h1 className="font-inter text-[30px] sm:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 Newsletter
@@ -59,6 +66,15 @@ export default async function NewsletterDashboardPage() {
               <p className="text-[14px] text-gray-500 mt-1">
                 Kelola subscriber dan kirim broadcast artikel terbaru.
               </p>
+            </div>
+            <div>
+              <Link
+                href="/dashboard/newsletter/settings"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-white text-gray-700 hover:text-gray-900 border border-gray-200/80 hover:bg-gray-50 shadow-sm transition-all"
+              >
+                <Settings className="w-4 h-4 text-gray-500" />
+                Atur Otomatisasi
+              </Link>
             </div>
           </div>
 

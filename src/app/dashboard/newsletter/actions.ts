@@ -2,8 +2,14 @@
 
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { sendEmail, generateNewsletterHtml } from "@/lib/mail";
+import { getSession } from "@/lib/auth";
 
 export async function sendBroadcast(articleId: string, customSubject?: string, customMessage?: string) {
+  const session = await getSession();
+  if (!session) {
+    return { success: false, error: "Akses ditolak! Silakan login." };
+  }
   try {
     // Get article info
     const article = await prisma.article.findUnique({
@@ -35,23 +41,36 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
     const subject = customSubject || `Artikel Baru: ${article.title}`;
     const introMessage = customMessage || `Halo! Ada pembaruan legalitas baru menarik untuk kamu. Silakan baca selengkapnya di bawah ini.`;
 
-    // Simulate sending emails to all subscribers
-    // In production, integrate with email service (Resend, SendGrid, Mailgun, etc.)
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
+    // Send emails to all active subscribers
     const emailResults = [];
     for (const subscriber of subscribers) {
-      // Simulated email send
-      console.log(`========================================`);
-      console.log(`📧 Sending newsletter to: ${subscriber.email}`);
-      console.log(`   Subject: ${subject}`);
-      console.log(`   Intro Message: ${introMessage}`);
-      console.log(`   Article: ${article.title} (${article.category})`);
-      console.log(`   Link: /artikel/${article.slug}`);
-      console.log(`   Unsubscribe Link: /newsletter/unsubscribe?email=${subscriber.email}`);
-      console.log(`========================================`);
-      emailResults.push({
-        email: subscriber.email,
-        status: "sent",
+      const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
+      
+      const htmlContent = generateNewsletterHtml({
+        articleTitle: article.title,
+        articleExcerpt: article.excerpt,
+        articleCategory: article.category,
+        articleSlug: article.slug,
+        introMessage,
+        unsubscribeLink,
       });
+
+      const textContent = `${introMessage}\n\nArtikel Baru: ${article.title}\nKategori: ${article.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${article.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;
+
+      try {
+        await sendEmail({
+          to: subscriber.email,
+          subject,
+          html: htmlContent,
+          text: textContent,
+        });
+        emailResults.push({ email: subscriber.email, status: "sent" });
+      } catch (err) {
+        console.error(`Gagal mengirim ke ${subscriber.email}:`, err);
+        emailResults.push({ email: subscriber.email, status: "failed" });
+      }
     }
 
     // Record the broadcast
@@ -77,6 +96,10 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
 }
 
 export async function deleteSubscriber(id: string) {
+  const session = await getSession();
+  if (!session) {
+    return { success: false, error: "Akses ditolak! Silakan login." };
+  }
   try {
     await prisma.newsletterSubscriber.delete({
       where: { id },
@@ -89,6 +112,10 @@ export async function deleteSubscriber(id: string) {
 }
 
 export async function toggleSubscriber(id: string) {
+  const session = await getSession();
+  if (!session) {
+    return { success: false, error: "Akses ditolak! Silakan login." };
+  }
   try {
     const subscriber = await prisma.newsletterSubscriber.findUnique({
       where: { id },

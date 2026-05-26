@@ -1,13 +1,20 @@
 import React from "react";
 import Link from "next/link";
-import { FileText, ArrowRight, LogOut, ExternalLink, Calendar, Clock, Eye, Mail } from "lucide-react";
+import { FileText, ArrowRight, LogOut, ExternalLink, Calendar, Clock, Eye, Mail, User } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { logoutAction } from "./actions";
 import ArticleImage from "./article-image";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
+  const session = await getSession();
+  if (!session) {
+    redirect("/login");
+  }
+
   const articles = await prisma.article.findMany({
     orderBy: { createdAt: "desc" },
     select: {
@@ -40,6 +47,13 @@ export default async function DashboardPage() {
             </p>
           </div>
           <div className="flex items-center gap-3">
+            <Link
+              href="/dashboard/profile"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] border border-gray-200 hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
+            >
+              <User className="w-4 h-4 text-gray-500" />
+              <span>Edit Profil</span>
+            </Link>
             <Link
               href="/dashboard/newsletter"
               className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] border border-gray-200 hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"

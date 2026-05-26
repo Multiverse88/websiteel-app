@@ -1,18 +1,38 @@
 import React from "react";
 import Link from "next/link";
 
-export default function CTA() {
+interface CTAProps {
+  title?: React.ReactNode;
+  description?: string;
+  whatsappLink?: string;
+  whatsappText?: string;
+  contactLink?: string;
+  contactText?: string;
+}
+
+export default function CTA({
+  title,
+  description = "Konsultasikan kebutuhan Anda sekarang — gratis, tanpa komitmen. Tim kami akan menjelaskan syarat, timeline, dan biaya yang dibutuhkan.",
+  whatsappLink = "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20legalitas%20bisnis.",
+  whatsappText = "Konsultasi via WhatsApp",
+  contactLink = "/kontak",
+  contactText = "Hubungi Tim Kami",
+}: CTAProps) {
+  const defaultTitle = (
+    <h2 className="font-inter text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
+      Siap mulai urus legalitas bisnis Anda?
+    </h2>
+  );
+
   return (
     <section className="py-20 bg-white border-t border-gray-100 overflow-hidden relative">
       <div className="max-w-[1240px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-8">
         
         {/* Left Column: Heading & Description */}
         <div className="flex flex-col text-left max-w-xl">
-          <h2 className="font-inter text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
-            Siap mulai urus legalitas bisnis Anda?
-          </h2>
+          {title || defaultTitle}
           <p className="text-[14.5px] text-gray-500 leading-relaxed mt-4 max-w-[460px] font-normal">
-            Konsultasikan kebutuhan Anda sekarang — gratis, tanpa komitmen. Tim kami akan menjelaskan syarat, timeline, dan biaya yang dibutuhkan.
+            {description}
           </p>
         </div>
 
@@ -20,7 +40,7 @@ export default function CTA() {
         <div className="flex flex-col items-start w-full lg:w-[380px] flex-shrink-0">
           {/* WhatsApp Button */}
           <a
-            href="https://wa.me/6281123456789"
+            href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[14px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
@@ -28,15 +48,15 @@ export default function CTA() {
             <svg className="w-4.5 h-4.5 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.022-.079-.186-.208-.432-.332-.246-.123-1.455-.717-1.68-.8-.223-.082-.387-.122-.55.122-.165.245-.64.8-.787.969-.147.17-.294.19-.54.067-.244-.124-.992-.367-1.89-1.168-.698-.622-1.17-1.392-1.307-1.637-.136-.246-.015-.379.108-.501.112-.11.246-.287.37-.43.123-.14.164-.24.246-.4.082-.162.04-.303-.02-.427-.06-.124-.55-1.324-.752-1.815-.197-.474-.397-.41-.547-.418-.14-.008-.302-.008-.464-.008-.162 0-.427.06-.65.3-.224.24-.854.83-.854 2.03 0 1.201.874 2.36 1.996 3.86 1.123 1.5 2.617 2.29 4.193 2.97 1.573.68 2.36.545 3.208.435.85-.11 1.764-.72 2.012-1.417.25-.7.25-1.3.175-1.417-.075-.117-.24-.183-.34-.233zM12 22a9.96 9.96 0 01-5.066-1.378l-.363-.214-3.766.987 1.004-3.667-.235-.374A9.96 9.96 0 012 12c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10zm0-22C5.373 0 0 5.373 0 12a11.96 11.96 0 002.586 7.424L0 24l4.743-1.242A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
             </svg>
-            <span>Konsultasi via WhatsApp</span>
+            <span>{whatsappText}</span>
           </a>
 
           {/* Direct Contact Button */}
           <Link
-            href="/kontak"
+            href={contactLink}
             className="w-full mt-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold py-3.5 px-6 rounded-xl flex items-center justify-center gap-1.5 text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
           >
-            <span>Hubungi Tim Kami</span>
+            <span>{contactText}</span>
             <span className="text-[14px] ml-1">→</span>
           </Link>
 

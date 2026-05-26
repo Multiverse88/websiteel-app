@@ -34,8 +34,8 @@ const YtIcon = () => (
 
 export default function Footer() {
   const layananLinks = [
-    { name: "Pendirian PT", href: "/" },
-    { name: "Daftar Merek", href: "/" },
+    { name: "Pendirian Badan Usaha", href: "/layanan/pendirian-badan-usaha" },
+    { name: "Daftar Merek", href: "/layanan/merek-haki" },
     { name: "NIB & OSS", href: "/" },
     { name: "Pengajuan PKP", href: "/" },
     { name: "Sertifikasi ISO", href: "/" },

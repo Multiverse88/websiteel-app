@@ -22,8 +22,8 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const services = [
-    { name: "Pendirian PT", desc: "PT Biasa & PT Perorangan", href: "/" },
-    { name: "Daftar Merek", desc: "Pendaftaran Merek & HAKI DJKI", href: "/" },
+    { name: "Pendirian Badan Usaha", desc: "Pendirian PT, CV, Yayasan, dll", href: "/layanan/pendirian-badan-usaha" },
+    { name: "Daftar Merek", desc: "Pendaftaran Merek & HAKI DJKI", href: "/layanan/merek-haki" },
     { name: "NIB & OSS", desc: "NIB, OSS RBA & Perizinan Usaha", href: "/" },
     { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 27001 (Accredited)", href: "/" },
     { name: "Pengajuan PKP", desc: "Pengusaha Kena Pajak", href: "/" },
