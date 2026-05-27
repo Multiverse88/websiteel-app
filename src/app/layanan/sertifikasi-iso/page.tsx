@@ -406,28 +406,32 @@ export default function SertifikasiIso() {
 
   const faqs = [
     {
-      q: "Berapa lama proses sertifikasi ISO?",
+      q: "Apa itu UAF Accreditation dan kenapa penting?",
+      a: "UAF (United Accreditation Foundation) adalah badan akreditasi internasional yang merupakan member IAF (International Accreditation Forum). Sertifikat ISO yang diterbitkan oleh badan sertifikasi UAF accredited diakui & bisa diverifikasi di seluruh dunia. Tanpa akreditasi yang valid, sertifikat ISO Anda tidak akan dianggap oleh buyer internasional, tender pemerintah, atau audit pihak ketiga."
+    },
+    {
+      q: "Berapa lama proses total sertifikasi ISO?",
       a: "Proses standard berkisar antara <strong class=\"font-extrabold text-gray-950\">14 hingga 30 hari kerja</strong>, sangat bergantung pada kelengkapan administrasi awal dan kesiapan audit perusahaan Anda."
     },
     {
-      q: "Apakah biayanya sudah all-in?",
-      a: "Ya, harga kami bersifat <strong class=\"font-extrabold text-gray-950\">all-in</strong> tanpa ada biaya tambahan atau tersembunyi di tengah proses. Sudah mencakup fee pendampingan, training, penyusunan SOP, audit eksternal, hingga sertifikat fisik."
+      q: "Sertifikat ISO berlaku berapa lama?",
+      a: "Sertifikat ISO berlaku selama <strong class=\"font-extrabold text-gray-950\">3 tahun</strong> sejak tanggal diterbitkan. Selama masa berlaku tersebut, perusahaan wajib melakukan surveillance audit setiap tahun untuk memastikan implementasi sistem manajemen tetap konsisten."
     },
     {
-      q: "Apa perbedaan KAN vs IAS?",
-      a: "KAN (Komite Akreditasi Nasional) merupakan badan akreditasi milik pemerintah Indonesia, sedangkan IAS (International Accreditation Service) adalah badan akreditasi global asal Amerika Serikat. Keduanya terakreditasi resmi di bawah <strong class=\"font-extrabold text-gray-950\">IAF</strong> dan diakui secara internasional."
+      q: "Apa beda ISO 9001, 14001, 27001, dan lainnya?",
+      a: "Masing-masing standar mengatur fokus yang berbeda: <strong class=\"font-extrabold text-gray-950\">ISO 9001</strong> untuk Manajemen Mutu, <strong class=\"font-extrabold text-gray-950\">ISO 14001</strong> untuk Lingkungan, <strong class=\"font-extrabold text-gray-950\">ISO 27001</strong> untuk Keamanan Informasi, dan <strong class=\"font-extrabold text-gray-950\">ISO 45001</strong> untuk Keselamatan Kerja (K3)."
     },
     {
-      q: "Bagaimana jika tidak lolos audit?",
-      a: "EasyLegal memberikan <strong class=\"font-extrabold text-gray-950\">garansi kelulusan 100%</strong>. Jika ada temuan ketidaksesuaian saat audit (minor/major non-conformity), tim kami akan mendampingi penuh untuk melakukan perbaikan hingga dinyatakan lulus."
+      q: "Apakah sertifikat saya diakui internasional?",
+      a: "Ya, sertifikat yang diterbitkan oleh lembaga sertifikasi dengan akreditasi <strong class=\"font-extrabold text-gray-950\">UAF (anggota IAF)</strong> diakui sepenuhnya secara global dan memiliki derajat kepercayaan tinggi di mata buyer dan mitra internasional."
     },
     {
-      q: "Apakah bisa dicicil pembayarannya?",
-      a: "Ya, kami menawarkan skema pembayaran yang fleksibel dengan opsi DP (Down Payment) di awal untuk memulai proses penyusunan dokumen, dan pelunasan setelah proses audit selesai sebelum sertifikat diterbitkan."
+      q: "Bisa sertifikasi multi-standar sekaligus (integrated)?",
+      a: "Sangat bisa. Kami menyediakan paket <strong class=\"font-extrabold text-gray-950\">Integrated Management System (IMS)</strong> untuk mengintegrasikan beberapa ISO sekaligus (misal 9001 + 14001 + 45001) yang lebih efisien dari sisi biaya dan waktu implementasi."
     },
     {
-      q: "Bagaimana proses surveillance tahunan?",
-      a: "Sertifikat ISO berlaku 3 tahun. Di tahun ke-1 dan ke-2 setelah sertifikat terbit, perusahaan wajib melewati surveillance audit (audit tahunan) untuk memastikan sistem manajemen tetap konsisten berjalan. Tim EasyLegal siap membantu pendampingan kembali."
+      q: "Apa yang terjadi setelah sertifikat terbit?",
+      a: "Setelah sertifikat resmi terbit, perusahaan Anda berhak mempublikasikan status sertifikasi tersebut. Selanjutnya, tim Anda harus menjalankan sistem manajemen secara konsisten untuk menghadapi surveillance audit tahunan."
     }
   ];
 
@@ -1181,34 +1185,60 @@ export default function SertifikasiIso() {
       </section>
 
       {/* ─── 6. FAQ SECTION (6 Tanya-Jawab Mockup) ─── */}
-      <FAQ title="Pertanyaan seputar sertifikasi ISO." subtitle="Berikut beberapa tanya jawab umum seputar pengurusan sertifikat ISO." items={faqs} />
+      <FAQ title="Pertanyaan seputar sertifikasi ISO." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
 
-      {/* ─── 7. CTA BANNER (Mockup Red) ─── */}
-      <section className="bg-white py-16 border-t border-gray-100 overflow-hidden relative">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8 bg-[#990202] rounded-[32px] p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-8 text-white relative shadow-xl">
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[80px] pointer-events-none" />
+      {/* ─── 7. CTA BANNER (Mockup Clean White) ─── */}
+      <section className="bg-white py-24 border-t border-gray-100/60 relative">
+        <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
           
-          <div className="space-y-4 max-w-xl text-left">
-            <h2 className="font-inter text-[30px] sm:text-[36px] font-extrabold leading-tight tracking-tight text-white">
-              Siap naik kelas bersama EasyLegal?
+          {/* Left Column */}
+          <div className="space-y-4 max-w-2xl text-left">
+            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-955">
+              Siap dapatkan <span className="text-[#990202]">sertifikasi ISO UAF Accredited?</span>
             </h2>
-            <p className="text-[14.5px] text-red-100 leading-relaxed font-normal">
-              Dapatkan sertifikasi ISO resmi sekarang juga. Hubungi tim konsultan kami untuk penawaran khusus dan garansi kelulusan audit 100%.
+            <p className="text-[14.5px] text-gray-500 leading-relaxed font-medium">
+              Konsultasikan standar ISO yang sesuai industri & skala bisnis Anda — gratis, tanpa komitmen.
             </p>
           </div>
 
-          <div className="flex-shrink-0 w-full lg:w-auto">
+          {/* Right Column */}
+          <div className="w-full lg:w-auto flex flex-col gap-3.5 min-w-[340px] sm:min-w-[360px]">
+            {/* Button WhatsApp */}
             <a
               href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%20perusahaan.%20Boleh%20minta%20info%20penawaran%20khusus?"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full lg:w-auto items-center justify-center px-8 py-4 bg-white text-[#990202] hover:bg-red-50 font-extrabold text-[15px] rounded-xl shadow-md transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
-              <span>Konsultasi Sekarang</span>
+              <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.588 1.977 14.122.953 11.5.953c-5.439 0-9.859 4.37-9.864 9.8-.001 1.73.457 3.41 1.32 4.927l-.982 3.58 3.673-.956zm11.517-5.595c-.3-.15-1.774-.875-2.048-.975-.274-.1-.474-.15-.674.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.794-1.49-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.491-.508-.674-.518-.174-.01-.374-.012-.574-.012-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.22 5.116 4.52 1.228.531 2.186.848 2.93 1.083.755.238 1.44.205 1.984.124.606-.091 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
+              </svg>
+              <span>Konsultasi via WhatsApp</span>
             </a>
+
+            {/* Button Hubungi Tim Kami */}
+            <a
+              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%20perusahaan.%20Boleh%20minta%20info%20penawaran%2520khusus?"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+            >
+              <span>Hubungi Tim Kami</span>
+              <span className="text-[15px] font-normal">→</span>
+            </a>
+
+            {/* Fast Response Badge */}
+            <div className="flex items-center justify-center gap-1.5 text-[12px] text-gray-500 font-medium pt-0.5">
+              <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Respons dalam 5 menit · Senin–Sabtu 08:00–20:00</span>
+            </div>
           </div>
+
         </div>
       </section>
+
 
     </div>
   );

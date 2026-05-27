@@ -15,7 +15,7 @@ interface FAQProps {
 
 export default function FAQ({
   title = "Pertanyaan yang sering ditanyakan.",
-  subtitle = "Sebelum hubungi kami, mungkin jawabannya sudah ada di sini.",
+  subtitle = "Sebelum hubungi kami, mungkin jawabannya ada di sini.",
   items,
 }: FAQProps) {
   const [expandedIdx, setExpandedIdx] = useState<number | null>(0);
@@ -25,43 +25,45 @@ export default function FAQ({
   };
 
   return (
-    <section className="bg-white py-20 border-b border-gray-200/40">
-      <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-24 border-b border-gray-100">
+      <div className="max-w-[1000px] mx-auto px-6 sm:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-14 space-y-3">
-          <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">FAQ</p>
-          <h2 className="font-inter text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight">
+        <div className="text-center mb-16 space-y-3.5">
+          <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
+          <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
             {title}
           </h2>
-          <p className="text-[14.5px] text-gray-500 leading-relaxed font-normal">
+          <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
             {subtitle}
           </p>
         </div>
 
         {/* Accordion Divider List */}
-        <div className="divide-y divide-gray-150 border-t border-b border-gray-150">
+        <div className="border-t border-gray-100 divide-y divide-gray-100">
           {items.map((faq, idx) => {
             const isExpanded = expandedIdx === idx;
             return (
-              <div key={idx} className="py-5 transition-all duration-200">
+              <div key={idx} className="py-6 transition-all duration-200">
                 <button
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"
                 >
-                  <span className={`text-[16.5px] sm:text-[18px] font-bold leading-snug transition-colors duration-200 ${isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"}`}>
+                  <span className={`text-[16px] sm:text-[17.5px] font-extrabold leading-snug transition-colors duration-200 pr-4 ${isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"}`}>
                     {faq.q}
                   </span>
                   
                   {/* Circle icon container */}
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-4 transition-all duration-300 ${isExpanded ? "bg-[#990202] text-white" : "bg-[#F3F4F6] text-gray-500 hover:bg-gray-200"}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isExpanded ? "bg-[#990202] text-white rotate-0 shadow-sm" : "bg-[#F3F4F6] text-gray-900 hover:bg-gray-200"}`}>
                     {isExpanded ? (
-                      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                      // Clean white 'X' icon
+                      <svg className="w-3.5 h-3.5 fill-current stroke-current" viewBox="0 0 24 24" strokeWidth="1.5" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     ) : (
-                      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                      // Clean bold '+' icon
+                      <svg className="w-3.5 h-3.5 fill-current stroke-current" viewBox="0 0 24 24" strokeWidth="2.5" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                       </svg>
                     )}
                   </div>
@@ -69,11 +71,11 @@ export default function FAQ({
 
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isExpanded ? "max-h-[300px] mt-4" : "max-h-0"
+                    isExpanded ? "max-h-[500px] mt-4" : "max-h-0"
                   }`}
                 >
                   <p 
-                    className="text-[14.5px] text-gray-500 leading-relaxed font-normal"
+                    className="text-[14.5px] text-gray-500 leading-relaxed font-medium pr-12"
                     dangerouslySetInnerHTML={{ __html: faq.a }}
                   />
                 </div>
@@ -86,3 +88,4 @@ export default function FAQ({
     </section>
   );
 }
+
