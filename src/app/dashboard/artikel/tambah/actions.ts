@@ -228,5 +228,5 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
   revalidatePath("/artikel");
 
   // Perform redirect outside of try-catch block to avoid catching redirect exceptions
-  redirect("/artikel");
+  redirect("/dashboard");
 }
