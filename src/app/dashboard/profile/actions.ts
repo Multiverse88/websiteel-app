@@ -32,7 +32,7 @@ export async function getCurrentUser() {
   }
 }
 
-export async function updateProfile(prevState: any, formData: FormData) {
+export async function updateProfile(prevState: { error?: string; success?: string } | null, formData: FormData) {
   const session = await getSession();
   if (!session) {
     return { error: "Sesi tidak valid. Silakan login kembali." };
@@ -97,7 +97,7 @@ export async function updateProfile(prevState: any, formData: FormData) {
     revalidatePath("/artikel");
 
     return { success: "Profil berhasil diperbarui!" };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Gagal memperbarui profil:", err);
     return { error: "Terjadi kesalahan internal. Silakan coba lagi." };
   }

@@ -169,14 +169,14 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
             <>
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold">Otomatisasi Aktif:</span> Setiap artikel baru yang Anda simpan di menu <b>"Tulis Baru"</b> akan langsung memicu pengiriman newsletter ke kotak masuk seluruh subscriber aktif secara otomatis.
+                <span className="font-bold">Otomatisasi Aktif:</span> Setiap artikel baru yang Anda simpan di menu <b>&quot;Tulis Baru&quot;</b> akan langsung memicu pengiriman newsletter ke kotak masuk seluruh subscriber aktif secara otomatis.
               </div>
             </>
           ) : (
             <>
               <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold">Otomatisasi Mati:</span> Artikel baru yang dipublikasikan tidak akan mengirimkan email apa pun secara otomatis. Anda harus mengirimkannya secara manual via tombol **"Broadcast"** di dashboard utama newsletter.
+                <span className="font-bold">Otomatisasi Mati:</span> Artikel baru yang dipublikasikan tidak akan mengirimkan email apa pun secara otomatis. Anda harus mengirimkannya secara manual via tombol &quot;Broadcast&quot; di dashboard utama newsletter.
               </div>
             </>
           )}

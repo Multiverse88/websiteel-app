@@ -72,9 +72,10 @@ export default function FAQ({
                     isExpanded ? "max-h-[300px] mt-4" : "max-h-0"
                   }`}
                 >
-                  <p className="text-[14.5px] text-gray-500 leading-relaxed font-normal">
-                    {faq.a}
-                  </p>
+                  <p 
+                    className="text-[14.5px] text-gray-500 leading-relaxed font-normal"
+                    dangerouslySetInnerHTML={{ __html: faq.a }}
+                  />
                 </div>
               </div>
             );

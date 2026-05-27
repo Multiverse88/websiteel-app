@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Mail, Users, Send, Calendar, Clock, FileText, CheckCircle2, Settings, AlertCircle, XCircle } from "lucide-react";
+import { ArrowLeft, Mail, Users, Send, Calendar, Clock, CheckCircle2, Settings, AlertCircle, XCircle } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { BroadcastButton, SubscriberActions } from "./client-components";
 import { getSession } from "@/lib/auth";

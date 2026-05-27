@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   Clock,
@@ -9,7 +9,6 @@ import {
   Building,
   ShieldCheck,
   Check,
-  X,
   Home,
   ArrowRight,
   Star,
@@ -19,6 +18,7 @@ import {
 } from "lucide-react";
 import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
+import Pricing, { PricingPackage } from "@/components/Pricing";
 
 export default function PendirianBadanUsaha() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -28,6 +28,214 @@ export default function PendirianBadanUsaha() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const pricingPackages: PricingPackage[] = [
+    {
+      title: "PAKET BASIC",
+      price: "Rp 2.999.000",
+      strikePrice: "Rp 6.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Basic",
+      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Basic%20Pembuatan%20PT.",
+      groups: [
+        {
+          title: "LAMA PROSES",
+          items: [
+            { text: "Dokumen Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+            { text: "Dokumen Lainnya <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 }
+          ]
+        },
+        {
+          title: "FASILITAS",
+          items: [
+            { text: "Pengecekan & Pemesanan Nama PT", checked: true },
+            { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true }
+          ]
+        },
+        {
+          title: "DOKUMEN PENDIRIAN",
+          items: [
+            { text: "Akta Notaris", checked: true },
+            { text: "SK Kemenkumham", checked: true }
+          ]
+        },
+        {
+          title: "DOKUMEN LAINNYA",
+          items: [
+            { text: "SKT Pajak & NPWP Badan", checked: true },
+            { text: "NIB & Akun OSS RBA", checked: false },
+            { text: "K3L/SPUMKTTR & SPPL", checked: false },
+            { text: "Sertifikat Standar", checked: false, footnoteIndex: 3 },
+            { text: "Angka Pengenal Impor", checked: false, footnoteIndex: 4 }
+          ]
+        },
+        {
+          title: "BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Layanan Personal Legal Assistant", checked: true },
+            { text: "Undian iPhone", boldText: "1 Kupon", checked: true },
+            { text: "Pembukaan Rekening Bank", checked: false, footnoteIndex: "*" },
+            { text: "Gratis Ongkir Pulau Jawa", checked: false }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+            { text: "Voucher EasyLegal <strong>Rp 50.000</strong>", checked: true },
+            { text: "Dokumen SOP Karyawan", checked: false },
+            { text: "Dokumen SOP Perusahaan", checked: false },
+            { text: "Dokumen Kontrak Bisnis", checked: false },
+            { text: "Stempel Perusahaan 1 Warna", checked: false }
+          ]
+        }
+      ]
+    },
+    {
+      title: "PAKET COMPLETE",
+      price: "Rp 3.999.000",
+      strikePrice: "Rp 8.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      isPopular: true,
+      buttonText: "Pilih Paket Complete",
+      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Complete%20Pembuatan%20PT.",
+      groups: [
+        {
+          title: "LAMA PROSES",
+          items: [
+            { text: "Dokumen Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+            { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 }
+          ]
+        },
+        {
+          title: "FASILITAS",
+          items: [
+            { text: "Pengecekan & Pemesanan Nama PT", checked: true },
+            { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true }
+          ]
+        },
+        {
+          title: "DOKUMEN PENDIRIAN",
+          items: [
+            { text: "Akta Notaris", checked: true },
+            { text: "SK Kemenkumham", checked: true }
+          ]
+        },
+        {
+          title: "DOKUMEN LAINNYA",
+          items: [
+            { text: "SKT Pajak & NPWP Badan", checked: true },
+            { text: "NIB & Akun OSS RBA", checked: true },
+            { text: "K3L/SPUMKTTR & SPPL", checked: true },
+            { text: "Sertifikat Standar", checked: true, footnoteIndex: 3 },
+            { text: "Angka Pengenal Impor", checked: true, footnoteIndex: 4 }
+          ]
+        },
+        {
+          title: "BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Layanan Personal Legal Assistant", checked: true },
+            { text: "Undian iPhone", boldText: "1 Kupon", checked: true },
+            { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+            { text: "Gratis Ongkir Pulau Jawa", checked: true }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+            { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
+            { text: "Dokumen SOP Karyawan", checked: true },
+            { text: "Dokumen SOP Perusahaan", checked: true },
+            { text: "Dokumen Kontrak Bisnis", checked: true },
+            { text: "Stempel Perusahaan 1 Warna", checked: true }
+          ]
+        }
+      ]
+    },
+    {
+      title: "PAKET EXPRESS",
+      price: "Rp 5.499.000",
+      strikePrice: "Rp 11.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Express",
+      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Express%20Pembuatan%20PT.",
+      customHeaderOverlay: (
+        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
+          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+        </div>
+      ),
+      groups: [
+        {
+          title: "LAMA PROSES",
+          items: [
+            { text: "Dokumen Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+            { text: "Dokumen Lainnya <strong>4 Hari Kerja</strong>", checked: true, footnoteIndex: 2 }
+          ]
+        },
+        {
+          title: "FASILITAS",
+          items: [
+            { text: "Pengecekan & Pemesanan Nama PT", checked: true },
+            { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true }
+          ]
+        },
+        {
+          title: "DOKUMEN PENDIRIAN",
+          items: [
+            { text: "Akta Notaris", checked: true },
+            { text: "SK Kemenkumham", checked: true }
+          ]
+        },
+        {
+          title: "DOKUMEN LAINNYA",
+          items: [
+            { text: "SKT Pajak & NPWP Badan", checked: true },
+            { text: "NIB & Akun OSS RBA", checked: true },
+            { text: "K3L/SPUMKTTR & SPPL", checked: true },
+            { text: "Sertifikat Standar", checked: true, footnoteIndex: 3 },
+            { text: "Angka Pengenal Impor", checked: true, footnoteIndex: 4 }
+          ]
+        },
+        {
+          title: "BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Layanan Personal Legal Assistant", checked: true },
+            { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+            { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+            { text: "Gratis Ongkir <strong>Seluruh Indonesia</strong>", checked: true }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+            { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+            { text: "Dokumen SOP Karyawan", checked: true },
+            { text: "Dokumen SOP Perusahaan", checked: true },
+            { text: "Dokumen Kontrak Bisnis", checked: true },
+            { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true }
+          ]
+        }
+      ]
+    }
+  ];
+
+  const pricingFootnotes = [
+    { text: "Setelah penandatanganan Minuta Akta &amp; tidak terdapat kendala pada sistem AHU." },
+    { text: "Jika tidak terdapat kendala pada sistem Coretax, Amdalnet &amp; OSS." },
+    { text: "Risiko menengah rendah." },
+    { text: "Opsional." },
+    { text: "Persetujuan &amp; pengesahan PKP sepenuhnya berada di bawah kewenangan KPP setempat." },
+    { label: "*", text: "Syarat &amp; ketentuan berlaku." }
+  ];
 
   const steps = [
     {
@@ -419,508 +627,13 @@ export default function PendirianBadanUsaha() {
       </section>
 
       {/* ─── 4. PAKET PRICING ─── */}
-      <section id="paket-harga" className="bg-white py-20 border-b border-gray-200/40 scroll-mt-[90px]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">BIAYA JASA PEMBUATAN PT</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              Pilih paket sesuai kebutuhan bisnis Anda.
-            </h2>
-            <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium">
-              Harga sudah include semua biaya — notaris, AHU Kemenkumham, NPWP, dan jasa kami.
-            </p>
-            <p className="text-[14px] sm:text-[15px] font-black text-gray-950">
-              Tidak ada tambahan biaya apapun <span className="text-gray-400 font-normal">di tengah proses.</span>
-            </p>
-          </div>
-
-          {/* Pricing Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 items-stretch">
-            
-            {/* 1. PAKET BASIC */}
-            <div className="border border-gray-200 rounded-3xl overflow-hidden bg-white shadow-sm flex flex-col justify-between hover:shadow-md transition-all duration-300">
-              {/* Header */}
-              <div className="bg-[#1A1A1A] text-white pt-7 pb-6 px-4 text-center">
-                <span className="block text-[11px] font-extrabold uppercase tracking-widest text-gray-400 mb-1">PAKET BASIC</span>
-                <span className="block text-[13px] text-gray-400 line-through font-medium opacity-85">Rp 6.000.000</span>
-                <span className="block text-[32px] font-black text-white mt-0.5 leading-none">
-                  <span className="text-[16px] font-black text-white mr-0.5 align-super">Rp</span>2.999.000
-                </span>
-                <span className="block text-[8.5px] font-black tracking-widest text-gray-300 mt-2">TANPA TAMBAHAN BIAYA APAPUN</span>
-              </div>
-
-              {/* Content Body */}
-              <div className="p-6 sm:p-7 space-y-6 flex-grow">
-                {/* Lama Proses */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">LAMA PROSES</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Pendirian <strong className="font-extrabold text-gray-900 ml-1">2 Hari Kerja <sup className="text-[9px] text-[#990202] font-semibold">(1)</sup></strong></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Lainnya <strong className="font-extrabold text-gray-900 ml-1">2–3 Hari Kerja <sup className="text-[9px] text-[#990202] font-semibold">(2)</sup></strong></span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Fasilitas */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">FASILITAS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Pengecekan & Pemesanan Nama PT</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900">20 KBLI</strong> Bidang Usaha</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Dokumen Pendirian */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">DOKUMEN PENDIRIAN</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Akta Notaris</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>SK Kemenkumham</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Dokumen Lainnya */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">DOKUMEN LAINNYA</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>SKT Pajak & NPWP Badan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">NIB & Akun OSS RBA</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">K3L/SPUMKTTR & SPPL</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">Sertifikat Standar <sup className="text-[9px] text-red-400 font-semibold">(3)</sup></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">Angka Pengenal Impor <sup className="text-[9px] text-red-400 font-semibold">(4)</sup></span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Bonus Box */}
-                <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-4.5 space-y-3 shadow-[0_2px_8px_rgba(0,0,0,0.01)]">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">BONUS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Layanan Personal Legal Assistant</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900 mr-1">1 Kupon</strong> Undian iPhone</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">Pembukaan Rekening Bank <sup className="text-[9px] text-red-400 font-semibold">(*)</sup></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">Gratis Ongkir Pulau Jawa</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Extra Bonus Box */}
-                <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-4.5 space-y-3 shadow-[0_2px_8px_rgba(0,0,0,0.01)]">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">EXTRA BONUS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900 mr-1">1 Buah</strong> Logam Mulia Emas 24K</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900 ml-1">Rp 50.000</strong></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">Dokumen SOP Karyawan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">Dokumen SOP Perusahaan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">Dokumen Kontrak Bisnis</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-400">
-                      <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span className="line-through">Stempel Perusahaan 1 Warna</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="px-6 pb-8 pt-2">
-                <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Basic%20Pembuatan%20PT."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 rounded-xl border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 font-bold text-[14px] text-center transition-all duration-200 cursor-pointer shadow-sm"
-                >
-                  Pilih Paket Basic
-                </a>
-              </div>
-            </div>
-
-            {/* 2. PAKET COMPLETE (Rekomendasi Utama) */}
-            <div className="border-2 border-[#990202] rounded-3xl overflow-hidden bg-white shadow-[0_20px_50px_rgba(153,2,2,0.1)] flex flex-col justify-between scale-[1.03] relative z-10 lg:-translate-y-2.5 transition-all duration-300">
-              {/* Header */}
-              <div className="bg-[#990202] text-white pt-7 pb-6 px-4 text-center">
-                <span className="block text-[11px] font-extrabold uppercase tracking-widest text-red-200 mb-1">PAKET COMPLETE</span>
-                <span className="block text-[13px] text-red-200 line-through font-medium opacity-85">Rp 8.000.000</span>
-                <span className="block text-[32px] font-black text-white mt-0.5 leading-none">
-                  <span className="text-[16px] font-black text-white mr-0.5 align-super">Rp</span>3.999.000
-                </span>
-                <span className="block text-[8.5px] font-black tracking-widest text-red-100 mt-2">TANPA TAMBAHAN BIAYA APAPUN</span>
-              </div>
-
-              {/* Content Body */}
-              <div className="p-6 sm:p-7 space-y-6 flex-grow">
-                {/* Lama Proses */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">LAMA PROSES</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Pendirian <strong className="font-extrabold text-gray-900 ml-1">2 Hari Kerja <sup className="text-[9px] text-[#990202] font-semibold">(1)</sup></strong></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Lainnya <strong className="font-extrabold text-gray-900 ml-1">5–10 Hari Kerja <sup className="text-[9px] text-[#990202] font-semibold">(2)</sup></strong></span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Fasilitas */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">FASILITAS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Pengecekan & Pemesanan Nama PT</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900">20 KBLI</strong> Bidang Usaha</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Dokumen Pendirian */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">DOKUMEN PENDIRIAN</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Akta Notaris</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>SK Kemenkumham</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Dokumen Lainnya */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">DOKUMEN LAINNYA</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>SKT Pajak & NPWP Badan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>NIB & Akun OSS RBA</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>K3L/SPUMKTTR & SPPL</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Sertifikat Standar <sup className="text-[9px] text-[#990202] font-semibold">(3)</sup></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Angka Pengenal Impor <sup className="text-[9px] text-[#990202] font-semibold">(4)</sup></span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Bonus Box */}
-                <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-4.5 space-y-3 shadow-[0_2px_8px_rgba(0,0,0,0.01)]">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">BONUS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Layanan Personal Legal Assistant</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900 mr-1">1 Kupon</strong> Undian iPhone</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Pembukaan Rekening Bank <sup className="text-[9px] text-[#990202] font-semibold">(*)</sup></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Gratis Ongkir Pulau Jawa</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Extra Bonus Box */}
-                <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-4.5 space-y-3 shadow-[0_2px_8px_rgba(0,0,0,0.01)]">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">EXTRA BONUS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900 mr-1">1 Buah</strong> Logam Mulia Emas 24K</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900 ml-1">Rp 250.000</strong></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Karyawan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Perusahaan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Kontrak Bisnis</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Stempel Perusahaan 1 Warna</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="px-6 pb-8 pt-2">
-                <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Complete%20Pembuatan%20PT."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 rounded-xl bg-[#990202] text-white hover:bg-[#800000] font-bold text-[14px] text-center transition-all duration-200 cursor-pointer shadow-md hover:shadow-lg"
-                >
-                  Pilih Paket Complete
-                </a>
-              </div>
-            </div>
-
-            {/* 3. PAKET EXPRESS */}
-            <div className="border border-gray-200 rounded-3xl overflow-hidden bg-white shadow-sm flex flex-col justify-between hover:shadow-md transition-all duration-300">
-              {/* Header */}
-              <div className="bg-[#1A1A1A] text-white pt-7 pb-6 px-4 text-center relative">
-                <span className="block text-[11px] font-extrabold uppercase tracking-widest text-gray-400 mb-1">PAKET EXPRESS</span>
-                <span className="block text-[13px] text-gray-400 line-through font-medium opacity-85">Rp 11.000.000</span>
-                <span className="block text-[32px] font-black text-white mt-0.5 leading-none">
-                  <span className="text-[16px] font-black text-white mr-0.5 align-super">Rp</span>5.499.000
-                </span>
-                <span className="block text-[8.5px] font-black tracking-widest text-gray-300 mt-2">TANPA TAMBAHAN BIAYA APAPUN</span>
-                
-                {/* Fast Track Gold Badge */}
-                <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-                  <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-                  <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
-                </div>
-              </div>
-
-              {/* Content Body */}
-              <div className="p-6 sm:p-7 space-y-6 flex-grow">
-                {/* Lama Proses */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">LAMA PROSES</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Pendirian <strong className="font-extrabold text-gray-900 ml-1">1 Hari Kerja <sup className="text-[9px] text-[#990202] font-semibold">(1)</sup></strong></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Lainnya <strong className="font-extrabold text-gray-900 ml-1">4 Hari Kerja <sup className="text-[9px] text-[#990202] font-semibold">(2)</sup></strong></span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Fasilitas */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">FASILITAS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Pengecekan & Pemesanan Nama PT</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900">20 KBLI</strong> Bidang Usaha</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Dokumen Pendirian */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">DOKUMEN PENDIRIAN</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Akta Notaris</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>SK Kemenkumham</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Dokumen Lainnya */}
-                <div className="space-y-2.5">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase">DOKUMEN LAINNYA</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>SKT Pajak & NPWP Badan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>NIB & Akun OSS RBA</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>K3L/SPUMKTTR & SPPL</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Sertifikat Standar <sup className="text-[9px] text-[#990202] font-semibold">(3)</sup></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Angka Pengenal Impor <sup className="text-[9px] text-[#990202] font-semibold">(4)</sup></span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Bonus Box */}
-                <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-4.5 space-y-3 shadow-[0_2px_8px_rgba(0,0,0,0.01)]">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">BONUS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Layanan Personal Legal Assistant</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900 mr-1">2 Kupon</strong> Undian iPhone</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Pembukaan Rekening Bank <sup className="text-[9px] text-[#990202] font-semibold">(*)</sup></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Gratis Ongkir <strong className="font-extrabold text-gray-900">Seluruh Indonesia</strong></span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Extra Bonus Box */}
-                <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-4.5 space-y-3 shadow-[0_2px_8px_rgba(0,0,0,0.01)]">
-                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">EXTRA BONUS</h5>
-                  <ul className="space-y-2">
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900 mr-1">2 Buah</strong> Logam Mulia Emas 24K</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900 ml-1">Rp 500.000</strong></span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Karyawan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Perusahaan</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Kontrak Bisnis</span>
-                    </li>
-                    <li className="flex items-start text-[13px] font-medium text-gray-700">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Stempel Perusahaan <strong className="font-extrabold text-gray-900">1-3 Warna</strong></span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="px-6 pb-8 pt-2">
-                <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Express%20Pembuatan%20PT."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 rounded-xl border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 font-bold text-[14px] text-center transition-all duration-200 cursor-pointer shadow-sm"
-                >
-                  Pilih Paket Express
-                </a>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Footnotes / Keterangan */}
-          <div className="mt-12 bg-gray-50 border border-gray-150/40 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed max-w-full font-medium">
-            <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
-            <strong className="font-extrabold text-gray-800">(1)</strong> Setelah penandatanganan Minuta Akta &amp; tidak terdapat kendala pada sistem AHU.{" "}
-            <strong className="font-extrabold text-gray-800 ml-1.5">(2)</strong> Jika tidak terdapat kendala pada sistem Coretax, Amdalnet &amp; OSS.{" "}
-            <strong className="font-extrabold text-gray-800 ml-1.5">(3)</strong> Risiko menengah rendah.{" "}
-            <strong className="font-extrabold text-gray-800 ml-1.5">(4)</strong> Opsional.{" "}
-            <strong className="font-extrabold text-gray-800 ml-1.5">(5)</strong> Persetujuan &amp; pengesahan PKP sepenuhnya berada di bawah kewenangan KPP setempat.{" "}
-            <strong className="font-extrabold text-gray-800 ml-1.5">(*)</strong> Syarat &amp; ketentuan berlaku.
-          </div>
-        </div>
-      </section>
+      <Pricing
+        sectionTitleTag="BIAYA JASA PEMBUATAN PT"
+        sectionTitle="Pilih paket sesuai kebutuhan bisnis Anda."
+        sectionSubtitle="Harga sudah include semua biaya — notaris, AHU Kemenkumham, NPWP, dan jasa kami. Tidak ada tambahan biaya apapun di tengah proses."
+        packages={pricingPackages}
+        footnotes={pricingFootnotes}
+      />
 
       {/* ─── 5. PROSES PEMBUATAN PT ─── */}
       <section className="bg-[#F9FAFB] py-20 border-b border-gray-200/40">

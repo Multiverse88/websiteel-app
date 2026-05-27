@@ -6,7 +6,6 @@ import Offices from "@/components/Offices";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import {
-  MessageCircle,
   Mail,
   Phone,
   Clock,
@@ -14,8 +13,6 @@ import {
   CheckCircle,
   ChevronDown,
   X,
-  Send,
-  Map,
   Home,
 } from "lucide-react";
 

@@ -7,7 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowRight,
-  ArrowRightIcon,
   Check,
   Star,
   Building2,
@@ -16,7 +15,6 @@ import {
   Scale,
   FileCheck,
   ShieldCheck,
-  Briefcase,
   Globe,
   FileText,
   Users,
@@ -1696,7 +1694,7 @@ export default function Home() {
                     </div>
                     {/* Review Text */}
                     <p className="text-[13px] text-gray-700 font-medium leading-relaxed mb-5">
-                      "{item.text}"
+                      &quot;{item.text}&quot;
                     </p>
                   </div>
 
@@ -1766,7 +1764,7 @@ export default function Home() {
                     </div>
                     {/* Review Text */}
                     <p className="text-[13px] text-gray-700 font-medium leading-relaxed mb-5">
-                      "{item.text}"
+                      &quot;{item.text}&quot;
                     </p>
                   </div>
 
@@ -1841,7 +1839,7 @@ export default function Home() {
                     </div>
                     {/* Review Text */}
                     <p className="text-[13px] text-gray-700 font-medium leading-relaxed mb-5">
-                      "{item.text}"
+                      &quot;{item.text}&quot;
                     </p>
                   </div>
 
@@ -1911,7 +1909,7 @@ export default function Home() {
                     </div>
                     {/* Review Text */}
                     <p className="text-[13px] text-gray-700 font-medium leading-relaxed mb-5">
-                      "{item.text}"
+                      &quot;{item.text}&quot;
                     </p>
                   </div>
 

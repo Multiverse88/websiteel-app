@@ -9,7 +9,6 @@ import {
   MessageCircle,
   X,
   FileText,
-  Check,
 } from "lucide-react";
 
 export default function CekNama() {

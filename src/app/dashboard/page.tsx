@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FileText, ArrowRight, LogOut, ExternalLink, Calendar, Clock, Eye, Mail, User } from "lucide-react";
+import { FileText, LogOut, ExternalLink, Calendar, Clock, Eye, Mail, User } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { logoutAction } from "./actions";
 import ArticleImage from "./article-image";
@@ -13,6 +13,11 @@ export default async function DashboardPage() {
   const session = await getSession();
   if (!session) {
     redirect("/login");
+  }
+
+  // Check if 2FA is set up
+  if (!session.twoFactorEnabled) {
+    redirect("/login/setup-2fa");
   }
 
   const articles = await prisma.article.findMany({

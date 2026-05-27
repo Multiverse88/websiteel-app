@@ -72,8 +72,8 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
         });
         status = result?.simulated ? "simulated" : "sent";
         if (status === "sent") sentCount++;
-      } catch (err: any) {
-        errorMessage = err?.message || "Unknown error";
+      } catch (err: unknown) {
+        errorMessage = err instanceof Error ? err.message : "Unknown error";
         console.error(`Gagal mengirim ke ${subscriber.email}:`, err);
       }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useActionState, useEffect } from "react";
+import React, { useState, useActionState } from "react";
 import { Save, Loader2, Camera, AlertCircle, CheckCircle2, User, ArrowLeft } from "lucide-react";
 import { updateProfile } from "./actions";
 import Link from "next/link";

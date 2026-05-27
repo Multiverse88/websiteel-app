@@ -155,8 +155,9 @@ export async function testSmtpConnection(testEmail: string) {
     });
 
     return { success: true, message: `Email test berhasil dikirim ke ${testEmail}! Cek inbox (atau spam folder) untuk memverifikasi.` };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("SMTP test error:", error);
-    return { success: false, error: `Gagal mengirim email test: ${error?.message || "Unknown error"}` };
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return { success: false, error: `Gagal mengirim email test: ${message}` };
   }
 }

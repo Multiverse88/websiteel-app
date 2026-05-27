@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
-import { Calendar, Clock, ArrowLeft, Home, Tag, Eye, ChevronRight, ArrowRight } from "lucide-react";
+import { Calendar, Clock, Home, Tag, ChevronRight, ArrowRight } from "lucide-react";
 import ShareButton from "@/components/ShareButton";
 import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";

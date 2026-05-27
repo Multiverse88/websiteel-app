@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# 2FA QR codes (local only)
+public/uploads/2fa/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

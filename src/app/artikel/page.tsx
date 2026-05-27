@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
-import { Article } from "@prisma/client";
 import { Calendar, Clock, ArrowRight, BookOpen, Home } from "lucide-react";
 
 // Mock Data for Auto-Seeding

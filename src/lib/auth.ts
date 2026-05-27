@@ -9,6 +9,7 @@ const COOKIE_NAME = "admin_token";
 export interface SessionPayload extends JWTPayload {
   userId: string;
   email: string;
+  twoFactorEnabled?: boolean;
 }
 
 export async function createSession(payload: SessionPayload) {
@@ -55,4 +56,19 @@ export async function login(email: string, password: string) {
   if (!isValid) return null;
 
   return { userId: user.id, email: user.email, name: user.name };
+}
+
+export async function loginWithPassword(email: string, password: string) {
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) return null;
+
+  const isValid = await bcrypt.compare(password, user.password);
+  if (!isValid) return null;
+
+  return {
+    userId: user.id,
+    email: user.email,
+    name: user.name,
+    twoFactorEnabled: user.twoFactorEnabled,
+  };
 }

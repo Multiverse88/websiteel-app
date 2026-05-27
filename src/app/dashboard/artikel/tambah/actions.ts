@@ -11,7 +11,7 @@ import { getSession } from "@/lib/auth";
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
-export async function createArticle(prevState: any, formData: FormData) {
+export async function createArticle(prevState: Record<string, unknown> | null, formData: FormData) {
   const session = await getSession();
   if (!session) {
     return { error: "Sesi tidak valid! Anda harus login terlebih dahulu." };
@@ -186,8 +186,8 @@ export async function createArticle(prevState: any, formData: FormData) {
               });
               status = result?.simulated ? "simulated" : "sent";
               if (status === "sent") sentCount++;
-            } catch (err: any) {
-              errorMessage = err?.message || "Unknown error";
+            } catch (err: unknown) {
+              errorMessage = err instanceof Error ? err.message : "Unknown error";
               console.error(`Gagal mengirim email otomatis ke ${subscriber.email}:`, err);
             }
 
@@ -219,7 +219,7 @@ export async function createArticle(prevState: any, formData: FormData) {
       console.error("Gagal mengirim broadcast otomatis:", broadcastErr);
     }
 
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Gagal menambahkan artikel:", err);
     return { error: "Terjadi kesalahan internal. Silakan coba lagi." };
   }

@@ -38,7 +38,7 @@ export default function Footer() {
     { name: "Daftar Merek", href: "/layanan/merek-haki" },
     { name: "NIB & OSS", href: "/" },
     { name: "Pengajuan PKP", href: "/" },
-    { name: "Sertifikasi ISO", href: "/" },
+    { name: "Sertifikasi ISO", href: "/layanan/sertifikasi-iso" },
     { name: "Visa & KITAS", href: "/" },
     { name: "Press Release", href: "/" },
   ];
