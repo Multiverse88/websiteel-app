@@ -25,6 +25,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build Next.js (skip prisma migrate deploy - hanya jalan saat container start)
+# Set dummy DATABASE_URL agar pre-render halaman tidak error
+ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
 RUN npx next build
 
 # ============================================
@@ -51,4 +53,5 @@ RUN mkdir -p public/uploads/articles public/uploads/avatars
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npx prisma migrate deploy && node server.js"]
+CMD ["sh", "-c", "npx prisma@6.19.3 migrate deploy && node server.js"]
+
