@@ -34,16 +34,45 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
       data: {
         articleId: article.id,
         articleTitle: article.title,
-        totalSent: subscribers.length,
+        totalSent: 0,
       },
     });
 
     const subject = customSubject || `Artikel Baru: ${article.title}`;
     const introMessage = customMessage || `Halo! Ada pembaruan legalitas baru menarik untuk kamu. Silakan baca selengkapnya di bawah ini.`;
 
+    // Trigger broadcast asynchronously in background
+    runManualBroadcastInBackground(broadcast.id, article.id, subscribers, subject, introMessage).catch((err) => {
+      console.error("Gagal menstarter background manual broadcast:", err);
+    });
+
+    revalidatePath("/dashboard/newsletter");
+
+    return {
+      success: true,
+      message: `Broadcast sedang diproses di background untuk ${subscribers.length} subscriber!`,
+    };
+  } catch (error) {
+    console.error("Broadcast error:", error);
+    return { success: false, error: "Gagal mengirim broadcast. Silakan coba lagi." };
+  }
+}
+
+async function runManualBroadcastInBackground(
+  broadcastId: string,
+  articleId: string,
+  subscribers: Array<{ email: string }>,
+  subject: string,
+  introMessage: string
+) {
+  try {
+    const article = await prisma.article.findUnique({
+      where: { id: articleId },
+    });
+    if (!article) return;
+
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-    // Send emails to all active subscribers and log each one
     let sentCount = 0;
     for (const subscriber of subscribers) {
       const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
@@ -84,29 +113,21 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
           subject,
           status,
           errorMessage,
-          broadcastId: broadcast.id,
+          broadcastId,
           source: "broadcast",
         },
       });
     }
 
-    revalidatePath("/dashboard/newsletter");
-
     // Update totalSent to reflect actual successful sends
     await prisma.newsletterBroadcast.update({
-      where: { id: broadcast.id },
+      where: { id: broadcastId },
       data: { totalSent: sentCount },
     });
 
-    return {
-      success: true,
-      message: `Broadcast berhasil dikirim ke ${sentCount} dari ${subscribers.length} subscriber!`,
-      totalSent: sentCount,
-      totalFailed: subscribers.length - sentCount,
-    };
-  } catch (error) {
-    console.error("Broadcast error:", error);
-    return { success: false, error: "Gagal mengirim broadcast. Silakan coba lagi." };
+    console.log(`✅ Manual broadcast terkirim: ${sentCount} berhasil dari ${subscribers.length} subscriber.`);
+  } catch (err) {
+    console.error("Gagal melakukan manual broadcast di background:", err);
   }
 }
 
