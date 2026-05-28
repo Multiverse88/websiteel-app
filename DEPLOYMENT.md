@@ -19,7 +19,7 @@
         ↓
    [Next.js 16]         ← app container (Node 20)
         ↓
-   [PostgreSQL 16]      ← db container (postgres:16-alpine)
+   [PostgreSQL 16]      ← host VPS (system service)
 ```
 
 ## Stack di VPS
@@ -37,7 +37,7 @@
 | File | Fungsi |
 |------|--------|
 | `Dockerfile` | Multi-stage build (deps → builder → runner) |
-| `docker-compose.yml` | 3 services: app, db, nginx |
+| `docker-compose.yml` | 2 services: app, nginx (PostgreSQL di host) |
 | `.dockerignore` | Exclude files dari Docker build |
 | `.env.example` | Template environment variables |
 | `nginx/nginx.conf` | Reverse proxy + SSL + security headers |
@@ -80,9 +80,9 @@ nano .env.production
 Isikan value production:
 
 ```env
-# DATABASE (PostgreSQL lokal di Docker)
-DATABASE_URL="postgresql://easylegal:<password}@db:5432/easylegal?schema=public"
-DIRECT_URL="postgresql://easylegal:<password>@db:5432/easylegal?schema=public"
+# DATABASE (PostgreSQL di host VPS)
+DATABASE_URL="postgresql://easylegal:<password>@host.docker.internal:5432/easylegal?schema=public"
+DIRECT_URL="postgresql://easylegal:<password>@host.docker.internal:5432/easylegal?schema=public"
 
 # JWT
 JWT_SECRET="<generate-with-openssl-rand-base64-32>"
@@ -97,9 +97,6 @@ SMTP_FROM='"Easy Legal" <newsletter@easylegal.id>'
 # APP URL
 NEXT_PUBLIC_APP_URL="https://easylegal.id"
 ```
-
-> **Note:** `DB_PASSWORD` di docker-compose.yml default: `easylegal_secret_2026`
-> Jika ingin ganti, tambahkan `DB_PASSWORD=<your-password>` di `.env.production`
 
 Generate random JWT_SECRET:
 ```bash
@@ -227,11 +224,11 @@ git pull → docker compose build → rebuild image Next.js
 
 ### Manual Backup
 ```bash
-# Backup
-docker compose exec -T db pg_dump -U postgres easylegal | gzip > backup_$(date +%Y%m%d).sql.gz
+# Backup (PostgreSQL on host)
+pg_dump -U easylegal easylegal | gzip > backup_$(date +%Y%m%d).sql.gz
 
 # Restore
-docker compose exec -T db psql -U postgres easylegal < backup_20260528.sql
+gunzip -c backup_20260528.sql.gz | psql -U easylegal easylegal
 ```
 
 ### Pakai Script Backup
@@ -268,14 +265,14 @@ dig easylegal.id
 
 ### Database connection error
 ```bash
-# Cek apakah DB running
-docker compose ps db
+# Cek apakah PostgreSQL running
+sudo systemctl status postgresql
 
 # Test connection
-docker compose exec db psql -U easylegal -d easylegal -c "SELECT 1;"
+psql -U easylegal -d easylegal -h localhost -c "SELECT 1;"
 
-# Lihat log DB
-docker compose logs db
+# Lihat log PostgreSQL
+sudo journalctl -u postgresql --since "1 hour ago"
 ```
 
 ### Build gagal

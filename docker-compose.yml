@@ -10,32 +10,10 @@ services:
     restart: unless-stopped
     env_file:
       - .env.production
-    depends_on:
-      db:
-        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - uploads:/app/public/uploads
-    networks:
-      - easylegal
-
-  # ============================================
-  # PostgreSQL Database
-  # ============================================
-  db:
-    image: postgres:16-alpine
-    container_name: easylegal-db
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: easylegal
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-easylegal_secret_2026}
-      POSTGRES_DB: easylegal
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U easylegal -d easylegal"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - easylegal
 
@@ -59,7 +37,6 @@ services:
       - easylegal
 
 volumes:
-  postgres_data:
   uploads:
   uploads_static:
 

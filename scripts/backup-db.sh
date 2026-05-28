@@ -3,6 +3,7 @@ set -e
 
 # ============================================
 # EasyLegal Database Backup Script
+# PostgreSQL runs on host VPS
 # Usage: bash scripts/backup-db.sh
 # ============================================
 
@@ -15,8 +16,8 @@ echo "Backing up database..."
 # Create backup directory if not exists
 mkdir -p $BACKUP_DIR
 
-# Backup
-docker compose exec -T db pg_dump -U postgres easylegal | gzip > $BACKUP_FILE
+# Backup (PostgreSQL on host)
+pg_dump -U easylegal easylegal | gzip > $BACKUP_FILE
 
 # Show result
 if [ -f "$BACKUP_FILE" ]; then
