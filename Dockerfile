@@ -24,8 +24,8 @@ RUN apk add --no-cache openssl
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build Next.js (prisma generate sudah jalan di deps stage via postinstall)
-RUN npm run build
+# Build Next.js (skip prisma migrate deploy - hanya jalan saat container start)
+RUN npx next build
 
 # ============================================
 # Stage 3: Production
