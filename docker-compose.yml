@@ -1,0 +1,68 @@
+services:
+  # ============================================
+  # Next.js Application
+  # ============================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: easylegal-app
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - uploads:/app/public/uploads
+    networks:
+      - easylegal
+
+  # ============================================
+  # PostgreSQL Database
+  # ============================================
+  db:
+    image: postgres:16-alpine
+    container_name: easylegal-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: easylegal
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-easylegal_secret_2026}
+      POSTGRES_DB: easylegal
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U easylegal -d easylegal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - easylegal
+
+  # ============================================
+  # Nginx Reverse Proxy
+  # ============================================
+  nginx:
+    image: nginx:alpine
+    container_name: easylegal-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+      - uploads_static:/app/public/uploads:ro
+    depends_on:
+      - app
+    networks:
+      - easylegal
+
+volumes:
+  postgres_data:
+  uploads:
+  uploads_static:
+
+networks:
+  easylegal:
+    driver: bridge
