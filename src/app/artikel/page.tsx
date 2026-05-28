@@ -3,6 +3,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { Calendar, Clock, ArrowRight, BookOpen, Home } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 // Mock Data for Auto-Seeding
 const seedArticles = [
   {

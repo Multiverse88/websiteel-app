@@ -7,6 +7,8 @@ import ShareButton from "@/components/ShareButton";
 import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
