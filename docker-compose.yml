@@ -30,7 +30,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       # - /etc/letsencrypt:/etc/letsencrypt:ro # Uncomment if using domain + SSL
-      - uploads_static:/app/public/uploads:ro
+      - uploads:/app/public/uploads:ro
     depends_on:
       - app
     networks:
@@ -38,7 +38,6 @@ services:
 
 volumes:
   uploads:
-  uploads_static:
 
 networks:
   easylegal:
