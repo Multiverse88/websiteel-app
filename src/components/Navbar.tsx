@@ -49,7 +49,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-[72px]">
           {/* Logo */}
           <Link
-            href="/"
+            href="/home-gads"
             onClick={handleLinkClick}
             className="flex items-center space-x-2 group flex-shrink-0"
           >
@@ -66,10 +66,10 @@ export default function Navbar() {
           {/* Desktop Navigation - Center */}
           <div className="hidden lg:flex items-center space-x-8">
             <Link
-              href="/"
+              href="/home-gads"
               onClick={handleLinkClick}
               className={`text-[14px] font-medium transition-colors ${
-                pathname === "/"
+                pathname === "/" || pathname === "/home-gads"
                   ? "text-dark font-semibold"
                   : "text-muted hover:text-dark"
               }`}
@@ -209,14 +209,17 @@ export default function Navbar() {
         <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg z-40 animate-slide-down max-h-[85vh] overflow-y-auto">
           <div className="px-4 pt-2 pb-6 space-y-1">
             {[
-              { name: "Home", href: "/" },
+              { name: "Home", href: "/home-gads" },
               { name: "Cek KBLI", href: "/" },
               { name: "Virtual Office", href: "/" },
               { name: "Blog", href: "/artikel" },
               { name: "Tentang Kami", href: "/tentang-kami" },
               { name: "Kontak", href: "/kontak" },
             ].map((item) => {
-              const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              const isActive =
+                item.href === "/home-gads"
+                  ? (pathname === "/" || pathname === "/home-gads")
+                  : (item.href === "/" ? pathname === "/" : pathname.startsWith(item.href));
               return (
                 <Link
                   key={item.name}

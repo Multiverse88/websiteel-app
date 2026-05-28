@@ -71,7 +71,7 @@ export default function Footer() {
           <div className="lg:col-span-5 flex flex-col space-y-6">
             
             {/* Stacking Brand Logo exactly like screenshot */}
-            <Link href="/" className="inline-flex flex-col items-start gap-1 group w-fit">
+            <Link href="/home-gads" className="inline-flex flex-col items-start gap-1 group w-fit">
               {/* Red Logo Box */}
               <div className="w-[46px] h-[40px] bg-[#D62828] rounded-[10px] flex items-center justify-center relative shadow-sm transition-transform duration-300 group-hover:scale-[1.02]">
                 {/* SVG for the stylized cursive eL logo mark */}
