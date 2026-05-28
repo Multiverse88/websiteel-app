@@ -8,13 +8,18 @@
 | RAM | 6GB |
 | OS | Ubuntu |
 | Domain | easylegal.id |
+| Repo | https://github.com/Multiverse88/websiteel-app |
 
 ## Arsitektur
 
 ```
-[Domain: easylegal.id] → [Nginx (SSL/HTTPS)] → [PM2/Next.js] → [PostgreSQL]
-                                    ↓
-                            [File uploads di disk VPS]
+[Domain: easylegal.id]
+        ↓
+   [Nginx (SSL/HTTPS)]  ← nginx:alpine container
+        ↓
+   [Next.js 16]         ← app container (Node 20)
+        ↓
+   [PostgreSQL 16]      ← db container (postgres:16-alpine)
 ```
 
 ## Stack di VPS
@@ -23,48 +28,45 @@
 |----------|--------|
 | **Docker Compose** | Orchestrate semua services |
 | **Nginx** | Reverse proxy, SSL termination, static file caching |
-| **Next.js 16** | Application server |
-| **PostgreSQL** | Database lokal (migrasi dari Prisma Postgres) |
+| **Next.js 16** | Application server (standalone mode) |
+| **PostgreSQL 16** | Database lokal |
 | **Let's Encrypt** | SSL certificate gratis |
 
 ## File Konfigurasi
 
 | File | Fungsi |
 |------|--------|
-| `Dockerfile` | Multi-stage build Next.js |
-| `docker-compose.yml` | Orchestrate app + db + nginx |
-| `nginx/easylegal.conf` | Konfigurasi Nginx reverse proxy + SSL |
-| `.env.production` | Environment variables untuk VPS |
-| `scripts/deploy-setup.sh` | Setup awal VPS |
-| `scripts/deploy.sh` | Script update deployment |
-| `scripts/backup-db.sh` | Backup database |
+| `Dockerfile` | Multi-stage build (deps → builder → runner) |
+| `docker-compose.yml` | 3 services: app, db, nginx |
+| `.dockerignore` | Exclude files dari Docker build |
+| `.env.example` | Template environment variables |
+| `nginx/nginx.conf` | Reverse proxy + SSL + security headers |
+| `scripts/deploy-setup.sh` | Setup awal VPS (Docker, firewall, certbot) |
+| `scripts/deploy.sh` | Update deployment (pull → build → restart) |
+| `scripts/backup-db.sh` | Backup database ke `/opt/backups/` |
+| `DEPLOYMENT.md` | Dokumentasi ini |
 
 ## Setup Awal VPS
 
-### 1. Install Docker & Docker Compose
+### 1. Jalankan Setup Script
 
 ```bash
-# Update system
-sudo apt update && sudo apt upgrade -y
+# SSH ke VPS
+ssh root@<vps-ip>
 
-# Install Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
+# Jalankan setup (install Docker, Certbot, firewall)
+bash scripts/deploy-setup.sh
 
-# Add user to docker group (agar tidak perlu sudo)
-sudo usermod -aG docker $USER
-newgrp docker
-
-# Verifikasi
-docker --version
-docker compose version
+# Logout & login lagi (agar docker group aktif)
+exit
+ssh <user>@<vps-ip>
 ```
 
 ### 2. Clone Project
 
 ```bash
 cd /opt
-git clone <repository-url> easylegal
+git clone https://github.com/Multiverse88/websiteel-app.git easylegal
 cd easylegal/websiteel-app
 ```
 
@@ -79,13 +81,13 @@ Isikan value production:
 
 ```env
 # DATABASE (PostgreSQL lokal di Docker)
-DATABASE_URL="postgresql://easylegal:password@db:5432/easylegal?schema=public"
-DIRECT_URL="postgresql://easylegal:password@db:5432/easylegal?schema=public"
+DATABASE_URL="postgresql://easylegal:<password}@db:5432/easylegal?schema=public"
+DIRECT_URL="postgresql://easylegal:<password>@db:5432/easylegal?schema=public"
 
 # JWT
-JWT_SECRET="<generate-strong-random-secret>"
+JWT_SECRET="<generate-with-openssl-rand-base64-32>"
 
-# EMAIL (tetap pakai Hostinger SMTP)
+# EMAIL (Hostinger SMTP)
 SMTP_HOST="smtp.hostinger.com"
 SMTP_PORT=465
 SMTP_USER="newsletter@easylegal.id"
@@ -95,6 +97,9 @@ SMTP_FROM='"Easy Legal" <newsletter@easylegal.id>'
 # APP URL
 NEXT_PUBLIC_APP_URL="https://easylegal.id"
 ```
+
+> **Note:** `DB_PASSWORD` di docker-compose.yml default: `easylegal_secret_2026`
+> Jika ingin ganti, tambahkan `DB_PASSWORD=<your-password>` di `.env.production`
 
 Generate random JWT_SECRET:
 ```bash
@@ -117,13 +122,18 @@ docker compose ps
 docker compose logs -f app
 ```
 
-### 5. Setup SSL dengan Let's Encrypt
+### 5. Seed Database
 
 ```bash
-# Install Certbot
-sudo apt install certbot -y
+docker compose exec app npx prisma db seed
+```
 
-# Stop nginx sementara
+Default admin: `admin@easylegal.id` / `admin123`
+
+### 6. Setup SSL dengan Let's Encrypt
+
+```bash
+# Stop nginx sementara (port 80 harus free untuk certbot)
 docker compose stop nginx
 
 # Generate certificate
@@ -133,94 +143,108 @@ sudo certbot certonly --standalone -d easylegal.id -d www.easylegal.id
 mkdir -p nginx/certs
 sudo cp /etc/letsencrypt/live/easylegal.id/fullchain.pem nginx/certs/
 sudo cp /etc/letsencrypt/live/easylegal.id/privkey.pem nginx/certs/
+sudo chown -R $USER:$USER nginx/certs/
 
-# Restart nginx
+# Start nginx lagi
 docker compose start nginx
 
 # Setup auto-renewal (cron)
-echo "0 12 * * * cd /opt/easylegal/websiteel-app && sudo certbot renew --quiet && sudo cp /etc/letsencrypt/live/easylegal.id/fullchain.pem nginx/certs/ && sudo cp /etc/letsencrypt/live/easylegal.id/privkey.pem nginx/certs/ && docker compose restart nginx" | sudo crontab -
+echo "0 12 * * * cd /opt/easylegal/websiteel-app && sudo certbot renew --quiet && sudo cp /etc/letsencrypt/live/easylegal.id/fullchain.pem nginx/certs/ && sudo cp /etc/letsencrypt/live/easylegal.id/privkey.pem nginx/certs/ && docker compose restart nginx" | crontab -
 ```
 
-### 6. Seed Database
+### 7. Verifikasi
 
 ```bash
-# Jalankan seed untuk buat admin pertama
-docker compose exec app npx prisma db seed
-```
+# Cek semua container jalan
+docker compose ps
 
-Default admin: `admin@easylegal.id` / `admin123`
+# Cek website
+curl -I https://easylegal.id
+
+# Cek dashboard
+curl -I https://easylegal.id/dashboard
+```
 
 ## Update Project (Saat Ada Perubahan)
 
 ### Di Lokal (Development)
 ```bash
 # 1. Develop fitur baru
-# 2. Commit
+# 2. Commit & push
 git add .
 git commit -m "feat: tambah halaman baru"
-
-# 3. Push
 git push origin main
 ```
 
-### Di VPS (Deployment)
+### Di VPS (Deployment) - Manual
 ```bash
 cd /opt/easylegal/websiteel-app
 
-# 1. Pull code terbaru
+# Pull code terbaru
 git pull origin main
 
-# 2. Build ulang & restart
+# Build ulang & restart
 docker compose build --no-cache
 docker compose up -d
-
-# Done. Website updated.
 ```
+
+### Di VPS (Deployment) - Pakai Script
+```bash
+cd /opt/easylegal/websiteel-app
+bash scripts/deploy.sh
+```
+
+Script akan otomatis: pull → build → restart → cek status
 
 ### Yang terjadi di balik layar:
 ```
 git pull → docker compose build → rebuild image Next.js
-        → docker compose up -d → restart container
-        → prisma migrate deploy (otomatis jalan saat build)
+        → docker compose down → stop container lama
+        → docker compose up -d → start container baru
+        → CMD: prisma migrate deploy && node server.js
 ```
 
 ## Perintah Umum
 
 | Aksi | Command |
 |------|---------|
-| **Update code** | `git pull && docker compose build --no-cache && docker compose up -d` |
+| **Update code** | `bash scripts/deploy.sh` |
+| **Update manual** | `git pull && docker compose build --no-cache && docker compose up -d` |
 | **Restart saja** | `docker compose restart` |
+| **Restart app only** | `docker compose restart app` |
 | **Lihat log app** | `docker compose logs -f app` |
 | **Lihat log semua** | `docker compose logs -f` |
 | **Stop semua** | `docker compose down` |
 | **Start semua** | `docker compose up -d` |
+| **Cek status** | `docker compose ps` |
 | **Masuk ke container** | `docker compose exec app sh` |
 | **Jalankan prisma** | `docker compose exec app npx prisma <command>` |
+| **Backup database** | `bash scripts/backup-db.sh` |
+| **Cek disk usage** | `docker system df` |
+| **Cleanup Docker** | `docker system prune -af` |
 
 ## Backup & Restore Database
 
-### Backup
+### Manual Backup
 ```bash
-# Manual backup
-docker compose exec db pg_dump -U postgres easylegal > backup_$(date +%Y%m%d).sql
+# Backup
+docker compose exec -T db pg_dump -U postgres easylegal | gzip > backup_$(date +%Y%m%d).sql.gz
 
-# Backup ke file dengan timestamp
-docker compose exec db pg_dump -U postgres easylegal | gzip > backup_$(date +%Y%m%d_%H%M%S).sql.gz
-```
-
-### Restore
-```bash
-# Restore dari backup
+# Restore
 docker compose exec -T db psql -U postgres easylegal < backup_20260528.sql
-
-# Restore dari compressed backup
-docker compose exec -T db psql -U postgres easylegal < backup_20260528_120000.sql.gz
 ```
+
+### Pakai Script Backup
+```bash
+bash scripts/backup-db.sh
+```
+
+Simpan ke `/opt/backups/easylegal_YYYYMMDD_HHMMSS.sql.gz` (auto-cleanup 7 hari)
 
 ### Auto Backup (Cron)
 ```bash
 # Backup harian jam 2 malam
-echo "0 2 * * * cd /opt/easylegal/websiteel-app && docker compose exec -T db pg_dump -U postgres easylegal | gzip > /opt/backups/easylegal_\$(date +\%Y\%m\%d).sql.gz" | crontab -
+echo "0 2 * * * cd /opt/easylegal/websiteel-app && bash scripts/backup-db.sh" | crontab -
 ```
 
 ## Troubleshooting
@@ -234,9 +258,12 @@ docker compose ps
 docker compose logs app
 docker compose logs nginx
 
-# Cek apakah port terbuka
+# Cek port terbuka
 sudo ufw status
 sudo netstat -tlnp | grep -E '(80|443|3000)'
+
+# Cek DNS
+dig easylegal.id
 ```
 
 ### Database connection error
@@ -245,10 +272,23 @@ sudo netstat -tlnp | grep -E '(80|443|3000)'
 docker compose ps db
 
 # Test connection
-docker compose exec db psql -U postgres -d easylegal -c "SELECT 1;"
+docker compose exec db psql -U easylegal -d easylegal -c "SELECT 1;"
 
 # Lihat log DB
 docker compose logs db
+```
+
+### Build gagal
+```bash
+# Lihat log build
+docker compose build 2>&1
+
+# Clean build
+docker compose build --no-cache
+
+# Jika masalah Prisma
+docker compose exec app npx prisma generate
+docker compose exec app npx prisma migrate deploy
 ```
 
 ### SSL certificate expired
@@ -266,26 +306,41 @@ docker compose restart nginx
 
 ### File upload tidak tersimpan
 ```bash
-# Cek volume permissions
+# Cek volume
 docker compose exec app ls -la /app/public/uploads/
 
 # Fix permissions
 docker compose exec app chmod -R 755 /app/public/uploads/
+
+# Cek volume Docker
+docker volume ls
 ```
 
 ### Out of memory
 ```bash
 # Cek penggunaan RAM
-docker stats
+docker stats --no-stream
 
-# Restart container jika perlu
+# Restart container
 docker compose restart app
+```
+
+### Database penuh
+```bash
+# Cek ukuran DB
+docker compose exec db psql -U easylegal -d easylegal -c "SELECT pg_size_pretty(pg_database_size('easylegal'));"
+
+# Backup & cleanup
+bash scripts/backup-db.sh
+docker compose exec db psql -U easylegal -d easylegal -c "VACUUM FULL;"
 ```
 
 ## Catatan Penting
 
 1. **Jangan commit `.env.production`** ke Git — sudah ada di `.gitignore`
 2. **Backup database sebelum update besar**
-3. **Prisma migrate otomatis jalan** saat `docker compose build` (karena build script = `prisma migrate deploy && next build`)
-4. **File uploads tersimpan di volume Docker** — pastikan backup juga
+3. **Prisma migrate otomatis jalan** saat container start (CMD = `prisma migrate deploy && node server.js`)
+4. **File uploads tersimpan di Docker volume `uploads`** — backup juga jika perlu
 5. **JWT_SECRET harus berbeda** antara development dan production
+6. **`output: "standalone"`** sudah dikonfigurasi di `next.config.ts` untuk Docker
+7. **GitHub Repo**: https://github.com/Multiverse88/websiteel-app
