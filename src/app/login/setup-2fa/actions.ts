@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { createSession } from "@/lib/auth";
 import { setupTwoFactor, verifyTwoFactorSetup } from "../actions-2fa";
 
-export async function initiateSetup(): Promise<{ manualEntryKey?: string; message?: string; error?: string }> {
+export async function initiateSetup(): Promise<{ manualEntryKey?: string; qrCodeDataUrl?: string; message?: string; error?: string }> {
   const cookieStore = await cookies();
   const pendingUser = cookieStore.get("pending_2fa_user")?.value;
   if (!pendingUser) {

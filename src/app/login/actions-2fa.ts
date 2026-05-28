@@ -14,6 +14,7 @@ export async function setupTwoFactor(userId: string, email: string) {
 
   return {
     manualEntryKey: setup.manualEntryKey,
+    qrCodeDataUrl: setup.qrCodeDataUrl,
     message: "Simpan kode ini di Google Authenticator app Anda",
   };
 }

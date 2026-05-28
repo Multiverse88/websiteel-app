@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useTransition } from "react";
-import { ShieldCheck, Loader2, KeyRound } from "lucide-react";
+import { ShieldCheck, Loader2 } from "lucide-react";
 import { initiateSetup, completeSetup } from "./actions";
 import Link from "next/link";
 
 export default function Setup2FAPage() {
-  const [manualEntryKey, setManualEntryKey] = useState<string | null>(null);
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string | null>(null);
   const [loadingKey, setLoadingKey] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [setupError, setSetupError] = useState<string | null>(null);
@@ -17,8 +17,10 @@ export default function Setup2FAPage() {
       const result = await initiateSetup();
       if ("error" in result && result.error) {
         setError(result.error);
-      } else if ("manualEntryKey" in result && result.manualEntryKey) {
-        setManualEntryKey(result.manualEntryKey);
+      } else {
+        if ("qrCodeDataUrl" in result && result.qrCodeDataUrl) {
+          setQrCodeDataUrl(result.qrCodeDataUrl);
+        }
       }
       setLoadingKey(false);
     };
@@ -96,25 +98,24 @@ export default function Setup2FAPage() {
             <ol className="text-[13px] text-amber-700 space-y-1.5 list-decimal list-inside">
               <li>Buka aplikasi Google Authenticator</li>
               <li>Pilih &quot;Tambah akun&quot; atau &quot;+&quot;</li>
-              <li>Pilih &quot;Masukkan kode manual&quot;</li>
-              <li>Masukkan kode berikut:</li>
+              <li>Pilih &quot;Pindai kode QR&quot; (Scan QR Code)</li>
+              <li>Arahkan kamera ke QR Code di bawah</li>
             </ol>
           </div>
 
-          {/* Manual Entry Key */}
-          {manualEntryKey && (
-            <div className="mb-6">
-              <label className="text-[13.5px] font-extrabold text-gray-900 flex items-center gap-1.5 mb-2">
-                <KeyRound className="w-3.5 h-3.5" />
-                Kode Manual Entry
-              </label>
-              <div className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3">
-                <p className="text-[18px] font-mono font-bold text-gray-950 tracking-[0.15em] text-center select-all">
-                  {manualEntryKey}
-                </p>
+          {/* QR Code */}
+          {qrCodeDataUrl && (
+            <div className="mb-6 flex flex-col items-center justify-center">
+              <div className="bg-white p-3 border border-gray-200 rounded-2xl shadow-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={qrCodeDataUrl}
+                  alt="2FA QR Code"
+                  className="w-48 h-48"
+                />
               </div>
-              <p className="text-[12px] text-gray-400 mt-1.5 text-center">
-                Klik untuk memilih, lalu salin ke Google Authenticator
+              <p className="text-[12px] text-gray-400 mt-2 text-center">
+                Scan QR Code ini menggunakan Google Authenticator
               </p>
             </div>
           )}

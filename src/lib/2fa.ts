@@ -9,11 +9,19 @@ export interface TwoFactorSetup {
   secret: string;
   otpauthUrl: string;
   manualEntryKey: string;
+  qrCodeDataUrl: string;
 }
 
 export async function generateTwoFactorSecret(email: string): Promise<TwoFactorSetup> {
   const secret = generateSecret();
   const otpauthUrl = generateURI({ issuer: APP_NAME, label: email, secret });
+  let qrCodeDataUrl = "";
+
+  try {
+    qrCodeDataUrl = await QRCode.toDataURL(otpauthUrl);
+  } catch {
+    // Failed to generate base64 QR code
+  }
 
   // Save QR code as PNG file locally (only admin has access)
   // Wrapped in try-catch: file write fails silently on Vercel serverless (ephemeral filesystem)
@@ -32,6 +40,7 @@ export async function generateTwoFactorSecret(email: string): Promise<TwoFactorS
     secret,
     otpauthUrl,
     manualEntryKey: secret,
+    qrCodeDataUrl,
   };
 }
 
