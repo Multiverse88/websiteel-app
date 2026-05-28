@@ -1,0 +1,781 @@
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import {
+  Briefcase,
+  Check,
+  Globe,
+  Home,
+  ShieldCheck,
+  FileText,
+  Award,
+  Clock,
+  ArrowRight,
+  ChevronDown,
+  User,
+  Star,
+  Activity,
+  Download,
+  AlertCircle,
+  MapPin,
+  Compass,
+  TrendingUp,
+  HelpCircle,
+  ChevronUp
+} from "lucide-react";
+
+export default function VisaKitas() {
+  // State for interactive Pricing filter tabs
+  const [activeCategory, setActiveCategory] = useState<"visa" | "investor" | "tka">("visa");
+  
+  // State for FAQ expanded accordions (default: index 0 expanded)
+  const [expandedFaqIdx, setExpandedFaqIdx] = useState<number | null>(0);
+
+  const toggleFaq = (idx: number) => {
+    setExpandedFaqIdx((prev) => (prev === idx ? null : idx));
+  };
+
+  const scrollToPricing = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById("paket-harga");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Pricing packages matching the user's mockup exactly
+  const pricingData = {
+    visa: [
+      {
+        title: "SEKALI MASUK · SINGLE ENTRY",
+        subtitle: "Untuk kunjungan bisnis & rapat singkat",
+        originalPrice: "IDR 10.300.000",
+        price: "5.149.000",
+        isPopular: true,
+        labelBtn: "Pilih Single Entry",
+        lamaProses: "7-10 hari kerja",
+        yangDiperoleh: "Visa Bisnis Sekali Masuk (Berlaku 60 hari)",
+        waText: "Halo EasyLegal, saya ingin memesan Paket Visa Bisnis Sekali Masuk (Single Entry)."
+      },
+      {
+        title: "BERKALI-KALI · MULTIPLE ENTRY",
+        subtitle: "Untuk perjalanan bisnis berulang",
+        originalPrice: "IDR 15.400.000",
+        price: "7.699.000",
+        isPopular: false,
+        labelBtn: "Pilih Multiple Entry",
+        lamaProses: "7-10 hari kerja",
+        yangDiperoleh: "Visa Bisnis Berkali-Kali Masuk (Berlaku 60 hari)",
+        waText: "Halo EasyLegal, saya ingin memesan Paket Visa Bisnis Berkali-Kali Masuk (Multiple Entry)."
+      }
+    ],
+    investor: [
+      {
+        title: "KITAS INVESTOR 1 TAHUN (C313)",
+        subtitle: "Untuk penanam modal asing jangka pendek",
+        originalPrice: "IDR 20.000.000",
+        price: "12.500.000",
+        isPopular: true,
+        labelBtn: "Pilih KITAS 1 Tahun",
+        lamaProses: "14-21 hari kerja",
+        yangDiperoleh: "E-KITAS Investor 1 Tahun & Izin Kerja Terkait",
+        waText: "Halo EasyLegal, saya ingin memesan Paket KITAS Investor 1 Tahun."
+      },
+      {
+        title: "KITAS INVESTOR 2 TAHUN (C314)",
+        subtitle: "Masa tinggal terpanjang untuk penanam modal",
+        originalPrice: "IDR 30.000.000",
+        price: "15.500.000",
+        isPopular: false,
+        labelBtn: "Pilih KITAS 2 Tahun",
+        lamaProses: "14-21 hari kerja",
+        yangDiperoleh: "E-KITAS Investor 2 Tahun & Izin Kerja Terkait",
+        waText: "Halo EasyLegal, saya ingin memesan Paket KITAS Investor 2 Tahun."
+      }
+    ],
+    tka: [
+      {
+        title: "KITAS TKA 6 BULAN (C312)",
+        subtitle: "Untuk pekerja asing jangka pendek",
+        originalPrice: "IDR 18.000.000",
+        price: "11.500.000",
+        isPopular: true,
+        labelBtn: "Pilih KITAS TKA 6 Bulan",
+        lamaProses: "14-21 hari kerja",
+        yangDiperoleh: "RPTKA, Notifikasi, E-Visa & E-KITAS 6 Bulan",
+        waText: "Halo EasyLegal, saya ingin memesan Paket KITAS TKA 6 Bulan."
+      },
+      {
+        title: "KITAS TKA 12 BULAN (C312)",
+        subtitle: "Untuk pekerja ahli jangka panjang",
+        originalPrice: "IDR 24.000.000",
+        price: "14.500.000",
+        isPopular: false,
+        labelBtn: "Pilih KITAS TKA 12 Bulan",
+        lamaProses: "14-21 hari kerja",
+        yangDiperoleh: "RPTKA, Notifikasi, E-Visa & E-KITAS 12 Bulan",
+        waText: "Halo EasyLegal, saya ingin memesan Paket KITAS TKA 12 Bulan."
+      }
+    ]
+  };
+
+  const faqItems = [
+    {
+      q: "Apa beda Visa Bisnis dengan KITAS?",
+      a: "<strong>Visa Bisnis</strong> adalah izin kunjungan jangka pendek (60 hari) untuk kegiatan bisnis seperti meeting, audit, & kunjungan klien — <strong>tidak boleh untuk bekerja</strong>. <strong>KITAS</strong> adalah izin tinggal jangka menengah (6–24 bulan) untuk WNA yang ingin tinggal & beraktivitas resmi di Indonesia (investor, tenaga kerja, pelajar, pasangan WNI). KITAS lebih kompleks & membutuhkan sponsor (perusahaan/keluarga WNI)."
+    },
+    {
+      q: "Berapa lama proses pengurusan Visa & KITAS?",
+      a: "Untuk <strong>Visa Bisnis B211A</strong>, proses normal memakan waktu <strong>7 hingga 10 hari kerja</strong>. Sedangkan untuk <strong>KITAS (Kerja/Investor)</strong>, proses lengkap berkisar antara <strong>14 hingga 21 hari kerja</strong> sejak dokumen persyaratan lengkap diunggah dan diverifikasi."
+    },
+    {
+      q: "Apa itu MERP & kenapa penting?",
+      a: "<strong>MERP (Multiple Exit Re-entry Permit)</strong> adalah izin khusus bagi pemegang KITAS untuk keluar-masuk Indonesia berkali-kali tanpa membatalkan status tinggal KITAS mereka. Semua paket KITAS kami sudah menyertakan MERP secara otomatis."
+    },
+    {
+      q: "Apa syarat dapat KITAS Investor?",
+      a: "Syarat utama KITAS Investor adalah WNA harus tercatat sebagai pemegang saham di perusahaan PT PMA di Indonesia dengan nilai saham minimal <strong>Rp 10 Miliar</strong>, serta memiliki jabatan formal sebagai Direktur atau Komisaris di akta perusahaan."
+    },
+    {
+      q: "Apa itu RPTKA & IMTA?",
+      a: "<strong>RPTKA (Rencana Penggunaan Tenaga Kerja Asing)</strong> adalah izin kelayakan jabatan yang harus dimiliki oleh perusahaan penjamin sebelum merekrut WNA. <strong>IMTA (Notifikasi Kerja Kemenaker)</strong> adalah izin kerja personal WNA tersebut. Keduanya merupakan prasyarat wajib untuk pengurusan KITAS Kerja."
+    },
+    {
+      q: "Apa itu DPKK & siapa yang bayar?",
+      a: "<strong>DPKK (Dana Kompensasi Penggunaan Tenaga Kerja Asing)</strong> adalah iuran wajib sebesar <strong>USD 100 per bulan</strong> (dibayarkan ke kas negara) yang wajib dibayarkan oleh perusahaan sponsor (penjamin) sebagai kontribusi pengembangan keahlian lokal atas mempekerjakan TKA."
+    },
+    {
+      q: "Apakah perlu datang untuk biometrik?",
+      a: "Ya. Untuk pengurusan KITAS baru maupun perpanjangan, WNA wajib datang satu kali ke Kantor Imigrasi setempat di Indonesia untuk proses pengambilan data biometrik (foto wajah dan sidik jari). Tim EasyLegal siap mendampingi penuh di lokasi."
+    },
+    {
+      q: "Bisa konversi Visa Bisnis ke KITAS tanpa keluar Indonesia?",
+      a: "<strong>Sangat bisa.</strong> Regulasi keimigrasian terbaru memungkinkan konversi Visa Kunjungan atau Visa Bisnis (B211A) menjadi KITAS Kerja atau Investor secara langsung di dalam negeri tanpa mengharuskan WNA keluar dari Indonesia."
+    },
+    {
+      q: "Berapa lama paspor harus valid untuk apply Visa/KITAS?",
+      a: "Untuk pengajuan Visa Bisnis B211A, paspor minimal harus berlaku selama <strong>6 bulan</strong>. Sedangkan untuk pengurusan KITAS (1 atau 2 Tahun), paspor WNA wajib valid minimal selama <strong>18 bulan</strong>."
+    }
+  ];
+
+  return (
+    <div className="flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
+      
+      {/* ─── 1. HERO SECTION ─── */}
+      <section className="bg-white pt-8 lg:pt-16 pb-16 lg:pb-24 border-b border-gray-200/50 overflow-hidden relative">
+        {/* Glow detail */}
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-red-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Column */}
+            <div className="lg:col-span-7 space-y-6">
+              
+              {/* Breadcrumb */}
+              <nav className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-500">
+                <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
+                  <Home className="w-3.5 h-3.5" />
+                  <span>Beranda</span>
+                </Link>
+                <span className="text-gray-300 font-normal">&gt;</span>
+                <span className="text-gray-500 font-medium">Layanan</span>
+                <span className="text-gray-300 font-normal">&gt;</span>
+                <span className="text-[12.5px] font-bold text-gray-900">Visa &amp; KITAS</span>
+              </nav>
+
+              {/* Pill Badge */}
+              <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
+                <span className="text-[12.5px] font-bold text-[#990202] tracking-wide">Imigrasi - WNA</span>
+              </div>
+
+              {/* Headline */}
+              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-955 leading-[1.1] tracking-tight">
+                Visa Bisnis &amp; <span className="text-[#990202]">KITAS</span> <br />
+                resmi untuk WNA di <br className="hidden sm:block" /> Indonesia.
+              </h1>
+
+              {/* Description */}
+              <p className="text-[15.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
+                Bantuan pengurusan visa bisnis, KITAS investor &amp; KITAS Tenaga Kerja Asing — proses cepat, dokumentasi lengkap, &amp; sesuai regulasi Direktorat Jenderal Imigrasi.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <a
+                  href="#paket-harga"
+                  onClick={scrollToPricing}
+                  className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-extrabold text-[15px] rounded-xl hover:bg-[#800000] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
+                >
+                  Lihat Paket Visa &amp; KITAS
+                </a>
+                <a
+                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20berkonsultasi%20mengenai%20pembuatan%20Visa%20atau%20KITAS."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-150 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                >
+                  Konsultasi Gratis
+                </a>
+              </div>
+
+              {/* Checkpoints Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-gray-150 max-w-[620px]">
+                {/* Checkpoint 1 */}
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                  <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
+                  </div>
+                  <div>
+                    <div className="text-[13.5px] font-black text-gray-955">3-10 Hari</div>
+                    <div className="text-[10.5px] text-gray-500 font-semibold">Proses cepat</div>
+                  </div>
+                </div>
+
+                {/* Checkpoint 2 */}
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                  <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-4 h-4 text-[#990202]" strokeWidth={3} />
+                  </div>
+                  <div>
+                    <div className="text-[13.5px] font-black text-gray-955">3 Kategori</div>
+                    <div className="text-[10.5px] text-gray-500 font-semibold">Bisnis - Investor - TKA</div>
+                  </div>
+                </div>
+
+                {/* Checkpoint 3 */}
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                  <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
+                    <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
+                  </div>
+                  <div>
+                    <div className="text-[13.5px] font-black text-gray-955">100% Resmi</div>
+                    <div className="text-[10.5px] text-gray-500 font-semibold">Sesuai Ditjen Imigrasi</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column */}
+            <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-12 lg:mt-0">
+              <div className="relative w-full max-w-[460px] aspect-[1.05] sm:aspect-square lg:aspect-[1.05]">
+                
+                {/* Main Dark Backdrop Graphic */}
+                <div className="w-full h-full rounded-[36px] bg-gradient-to-br from-[#121E36] via-[#0C1221] to-[#600C0F] p-7 shadow-2xl relative border border-gray-800 flex flex-col justify-between overflow-hidden">
+                  
+                  {/* Glowing detail */}
+                  <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#990202]/30 rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+                  
+                  {/* Mockup Header bar */}
+                  <div className="flex items-center justify-between border-b border-gray-850 pb-4">
+                    <div className="flex space-x-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                    </div>
+                    <span className="text-[10px] font-extrabold text-gray-500 tracking-wider uppercase">INDONESIA E-VISA</span>
+                  </div>
+
+                  {/* Mockup Body Content - Business KITAS Card */}
+                  <div className="my-6 bg-black/40 backdrop-blur-md rounded-2xl p-6 border border-gray-800/60 shadow-inner space-y-4 text-left">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="text-[9px] font-extrabold text-[#F59E0B] tracking-widest uppercase bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">REPUBLIK INDONESIA</span>
+                        <p className="text-[9px] font-bold text-gray-400 mt-2.5 uppercase tracking-wide">VISA TYPE</p>
+                        <h4 className="text-[18px] font-black text-white leading-tight">Business / KITAS</h4>
+                      </div>
+                      <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[#F59E0B] flex items-center justify-center">
+                        <User className="w-4.5 h-4.5" />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4 border-t border-gray-800/50 pt-4">
+                      <div>
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">ISSUED</p>
+                        <p className="text-[13px] font-extrabold text-white mt-0.5">Jakarta</p>
+                      </div>
+                      <div>
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">VALID UNTIL</p>
+                        <p className="text-[13px] font-extrabold text-white mt-0.5">2 Tahun</p>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <div className="w-full py-2.5 bg-amber-500/10 rounded-xl border border-amber-500/20 text-center text-[12px] font-bold text-[#F59E0B] flex items-center justify-center space-x-1.5">
+                        <span>✓ Approved · Ditjen Imigrasi</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mockup footer data */}
+                  <div className="flex justify-between items-center text-[9px] text-gray-500 font-bold border-t border-gray-800/50 pt-4">
+                    <span>SISTEM IMIGRASI ONLINE</span>
+                    <span className="flex items-center gap-1.5 text-emerald-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Sistem Aktif
+                    </span>
+                  </div>
+
+                </div>
+
+                {/* Floating Badge 1: Top Right */}
+                <div className="absolute -top-6 -right-6 sm:-right-8 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                  <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                    <Check className="w-4.5 h-4.5" strokeWidth={3} />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[12.5px] font-black text-gray-950 leading-none">e-Visa Digital</div>
+                    <div className="text-[9.5px] text-gray-500 font-semibold mt-1">Tanpa antri di kedutaan</div>
+                  </div>
+                </div>
+
+                {/* Floating Badge 2: Bottom Left */}
+                <div className="absolute -bottom-6 -left-4 sm:-left-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3 w-[220px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                  <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                    <Home className="w-4.5 h-4.5" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[12.5px] font-black text-gray-955 leading-none">Untuk Bisnis &amp; PMA</div>
+                    <div className="text-[9.5px] text-gray-500 font-semibold mt-1">PT PMA, investor, ekspat</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 2. PERBEDAAN SECTION ─── */}
+      <section className="bg-white py-24 border-b border-gray-200/50">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+              Visa &amp; KITAS — apa bedanya?
+            </h2>
+            <p className="text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+              Penting untuk memilih jenis izin yang tepat sesuai tujuan &amp; lama tinggal WNA di Indonesia.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: KATEGORI VISA & KITAS */}
+            <div className="lg:col-span-5 space-y-4 text-left">
+              <h3 className="text-[12px] font-black text-[#990202] tracking-widest uppercase mb-4 pl-1">KATEGORI VISA &amp; KITAS</h3>
+              
+              {/* Item 1 */}
+              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 border border-gray-150 shadow-sm flex items-center space-x-3.5">
+                <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-5 h-5 text-[#990202]" />
+                </div>
+                <div>
+                  <h4 className="text-[14px] font-black text-gray-955">Visa Bisnis</h4>
+                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Kunjungan bisnis 60 hari - single/multiple entry</p>
+                </div>
+              </div>
+
+              {/* Item 2 */}
+              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 border border-gray-150 shadow-sm flex items-center space-x-3.5">
+                <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-5 h-5 text-[#990202]" />
+                </div>
+                <div>
+                  <h4 className="text-[14px] font-black text-gray-955">KITAS Investor</h4>
+                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Penanam modal PT PMA · 1-2 tahun</p>
+                </div>
+              </div>
+
+              {/* Item 3 */}
+              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 border border-gray-150 shadow-sm flex items-center space-x-3.5">
+                <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <User className="w-5 h-5 text-[#990202]" />
+                </div>
+                <div>
+                  <h4 className="text-[14px] font-black text-gray-955">KITAS Tenaga Kerja Asing</h4>
+                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">WNA bekerja di Indonesia · 6-24 bulan</p>
+                </div>
+              </div>
+
+              {/* Item 4 */}
+              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 border border-gray-150 shadow-sm flex items-center space-x-3.5">
+                <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <Compass className="w-5 h-5 text-[#990202]" />
+                </div>
+                <div>
+                  <h4 className="text-[14px] font-black text-gray-955">MERP Re-Entry Permit</h4>
+                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Bebas keluar-masuk Indonesia selama KITAS aktif</p>
+                </div>
+              </div>
+
+              {/* Bottom active black card */}
+              <div className="bg-gray-950 text-white rounded-2xl p-5 border border-gray-850 shadow-md flex items-start space-x-3.5 mt-6">
+                <div className="w-8 h-8 rounded-full bg-[#990202] text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4.5 h-4.5 text-white" strokeWidth={3.5} />
+                </div>
+                <div className="text-left">
+                  <h4 className="text-[13px] font-black text-white">Layanan Imigrasi EasyLegal</h4>
+                  <p className="text-[11px] text-gray-400 font-semibold mt-0.5">
+                    Dasar Hukum: UU No. 6/2011 tentang Keimigrasian
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column: Descriptions */}
+            <div className="lg:col-span-7 space-y-5 text-left">
+              
+              {/* Box 1: VISA */}
+              <div className="bg-white border border-gray-150 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+                <div className="flex items-center space-x-3 text-[#990202]">
+                  <FileText className="w-5 h-5" />
+                  <h4 className="text-[14.5px] font-black tracking-wider uppercase">VISA</h4>
+                </div>
+                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                  Visa adalah <strong className="font-extrabold text-gray-900">izin masuk &amp; tinggal sementara</strong> bagi WNA di Indonesia untuk tujuan bisnis atau wisata. Visa bisnis berlaku <strong className="font-extrabold text-gray-900">60 hari</strong> per kunjungan &amp; <strong className="font-extrabold text-gray-900">tidak memberikan izin bekerja</strong>. Bisa diperpanjang atau dikonversi ke KITAS jika ingin tinggal lebih lama.
+                </p>
+              </div>
+
+              {/* Box 2: KITAS / ITAS */}
+              <div className="bg-white border border-gray-150 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+                <div className="flex items-center space-x-3 text-[#990202]">
+                  <Check className="w-5 h-5" strokeWidth={3} />
+                  <h4 className="text-[14.5px] font-black tracking-wider uppercase">KITAS / ITAS</h4>
+                </div>
+                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                  <strong className="font-extrabold text-gray-900">KITAS (Kartu Izin Tinggal Terbatas)</strong> atau ITAS adalah izin tinggal jangka menengah untuk WNA di Indonesia. Berlaku <strong className="font-extrabold text-gray-900">6–24 bulan</strong> tergantung kategori — investor, tenaga kerja asing, pelajar, atau pasangan WNI. Pemegang KITAS bisa <strong className="font-extrabold text-gray-900">tinggal &amp; beraktivitas resmi</strong> sesuai izin.
+                </p>
+              </div>
+
+              {/* Box 3: YANG DIURUS EASYLEGAL */}
+              <div className="bg-white border border-gray-150 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+                <div className="flex items-center space-x-3 text-[#990202]">
+                  <Clock className="w-5 h-5" />
+                  <h4 className="text-[14.5px] font-black tracking-wider uppercase">YANG DIURUS EASYLEGAL</h4>
+                </div>
+                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                  Kami handle end-to-end: <strong className="font-bold text-gray-950">Visa Bisnis</strong> (single &amp; multiple entry), <strong className="font-bold text-gray-950">KITAS Investor</strong> (1–2 tahun untuk pemegang saham PT PMA), &amp; <strong className="font-bold text-gray-950">KITAS TKA</strong> (untuk WNA bekerja di perusahaan Indonesia, termasuk RPTKA &amp; IMTA). Plus MERP, biometrik, &amp; surat keterangan tempat tinggal.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 3. PRICING SECTION ─── */}
+      <section id="paket-harga" className="bg-[#FAF9F7] py-24 border-b border-gray-200/50 scroll-mt-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PENGURUSAN</p>
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+              Pilih kategori sesuai kebutuhan.
+            </h2>
+            <p className="text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+              Harga sudah include biaya negara (PNBP), pendampingan dokumen, &amp; konsultasi penuh sampai izin terbit.
+            </p>
+          </div>
+
+          {/* Interactive Toggle Tabs */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex p-1.5 bg-gray-200/50 rounded-2xl border border-gray-200/40">
+              <button
+                onClick={() => setActiveCategory("visa")}
+                className={`px-5 py-2.5 rounded-xl text-[13px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                  activeCategory === "visa"
+                    ? "bg-[#990202] text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                }`}
+              >
+                {activeCategory === "visa" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
+                <span>Visa Bisnis</span>
+              </button>
+              <button
+                onClick={() => setActiveCategory("investor")}
+                className={`px-5 py-2.5 rounded-xl text-[13px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                  activeCategory === "investor"
+                    ? "bg-[#990202] text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                }`}
+              >
+                {activeCategory === "investor" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
+                <span>KITAS Investor</span>
+              </button>
+              <button
+                onClick={() => setActiveCategory("tka")}
+                className={`px-5 py-2.5 rounded-xl text-[13px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                  activeCategory === "tka"
+                    ? "bg-[#990202] text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                }`}
+              >
+                {activeCategory === "tka" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
+                <span>KITAS TKA</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Packages Display Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto items-stretch">
+            {pricingData[activeCategory].map((pkg, idx) => {
+              const isFirst = idx === 0;
+              return (
+                <div
+                  key={idx}
+                  className={`bg-white rounded-[24px] overflow-hidden border shadow-lg flex flex-col justify-between transition-all duration-300 hover:shadow-xl ${
+                    isFirst ? "border-[#990202]" : "border-gray-200"
+                  }`}
+                >
+                  <div>
+                    {/* Header */}
+                    <div className={`px-6 py-7 text-center text-white relative ${isFirst ? "bg-[#990202]" : "bg-[#1A1A1A]"}`}>
+                      {isFirst && (
+                        <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[9px] font-black tracking-widest uppercase py-1 shadow-sm">
+                          PALING POPULER
+                        </div>
+                      )}
+                      <h4 className="text-[12px] font-black tracking-widest uppercase opacity-90 mt-2">
+                        {pkg.title}
+                      </h4>
+                      <div className="mt-4 text-[13px] text-white/50 line-through font-bold">
+                        {pkg.originalPrice}
+                      </div>
+                      <div className="mt-0.5 text-[28px] sm:text-[32px] font-black tracking-tight flex items-start justify-center gap-0.5">
+                        <span className="text-[15px] mt-1.5 font-extrabold">IDR</span>
+                        <span>{pkg.price}</span>
+                      </div>
+                      <p className="text-[9.5px] font-black text-white/70 tracking-widest uppercase mt-2">
+                        TANPA TAMBAHAN BIAYA APAPUN
+                      </p>
+                    </div>
+
+                    {/* Features Detail */}
+                    <div className="p-7 space-y-6 text-left">
+                      
+                      {/* Lama Proses */}
+                      <div className="space-y-1">
+                        <h4 className="text-[11.5px] font-black text-red-800 tracking-wider uppercase">
+                          LAMA PROSES
+                        </h4>
+                        <p className="flex items-center text-[13.5px] font-bold text-gray-700">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3} />
+                          <span>{pkg.lamaProses}</span>
+                        </p>
+                      </div>
+
+                      {/* Yang Diperoleh */}
+                      <div className="space-y-1 border-t border-gray-100 pt-4">
+                        <h4 className="text-[11.5px] font-black text-red-800 tracking-wider uppercase">
+                          YANG DIPEROLEH
+                        </h4>
+                        <p className="flex items-start text-[13.5px] font-bold text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                          <span>{pkg.yangDiperoleh}</span>
+                        </p>
+                      </div>
+
+                      {/* Bonus */}
+                      <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 border border-gray-150">
+                        <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
+                          BONUS
+                        </h4>
+                        <ul className="space-y-1.5">
+                          <li className="flex items-start text-[12.5px] font-bold text-gray-700">
+                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                            <span>Layanan Personal Legal Assistance</span>
+                          </li>
+                          <li className="flex items-start text-[12.5px] font-bold text-gray-700">
+                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                            <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Extra Bonus */}
+                      <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 border border-gray-150">
+                        <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
+                          EXTRA BONUS
+                        </h4>
+                        <ul className="space-y-2">
+                          <li className="flex items-start text-[12px] font-bold text-gray-700">
+                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                            <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
+                          </li>
+                          <li className="flex items-start text-[12px] font-bold text-gray-700">
+                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                            <span>Dokumen SOP Karyawan</span>
+                          </li>
+                          <li className="flex items-start text-[12px] font-bold text-gray-700">
+                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                            <span>Dokumen SOP Perusahaan</span>
+                          </li>
+                          <li className="flex items-start text-[12px] font-bold text-gray-700">
+                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                            <span>Dokumen Kontrak Bisnis</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Order Button */}
+                  <div className="p-7 pt-0">
+                    <a
+                      href={`https://wa.me/6281123456789?text=${encodeURIComponent(pkg.waText)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`block w-full py-4.5 text-center font-black text-[13.5px] rounded-xl transition-all duration-250 cursor-pointer ${
+                        isFirst
+                          ? "text-white bg-[#990202] hover:bg-[#800000] shadow-md shadow-red-900/10"
+                          : "text-gray-800 bg-white hover:bg-gray-50 border-2 border-gray-150 hover:border-gray-250"
+                      }`}
+                    >
+                      {pkg.labelBtn}
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Pricing Bottom Warning Alert */}
+          <div className="max-w-[960px] mx-auto bg-white rounded-2xl p-5 border border-gray-200 mt-12 flex items-start gap-3.5 shadow-sm text-left">
+            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <p className="text-[13px] text-gray-600 font-semibold leading-relaxed">
+              <strong className="font-extrabold text-[#990202]">Visa Bisnis</strong> hanya untuk kegiatan bisnis (meeting, audit, kunjungan klien) dan <strong className="font-extrabold text-gray-950">tidak memberikan izin bekerja</strong> di Indonesia. Untuk bekerja, perlu KITAS TKA. Berlaku 60 hari per kunjungan, bisa diperpanjang.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── 4. FAQ SECTION ─── */}
+      <section className="bg-white py-24 border-b border-gray-200/50">
+        <div className="max-w-[1000px] mx-auto px-6 sm:px-8 text-center">
+          
+          {/* Section Header */}
+          <div className="mb-16 space-y-4">
+            <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+              Pertanyaan seputar Visa &amp; KITAS.
+            </h2>
+            <p className="text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+              Belum yakin? Mungkin jawabannya ada di sini.
+            </p>
+          </div>
+
+          {/* Custom Accordion FAQ List */}
+          <div className="border-t border-gray-150 divide-y divide-gray-150 max-w-[840px] mx-auto">
+            {faqItems.map((faq, idx) => {
+              const isExpanded = expandedFaqIdx === idx;
+              return (
+                <div key={idx} className="py-5 text-left transition-all duration-300">
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"
+                  >
+                    <span className={`text-[15.5px] sm:text-[16.5px] font-black leading-snug transition-colors duration-200 pr-4 ${
+                      isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"
+                    }`}>
+                      {faq.q}
+                    </span>
+                    
+                    {/* Circle icon container */}
+                    <div className={`w-7.5 h-7.5 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                      isExpanded ? "bg-[#990202] text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}>
+                      {isExpanded ? (
+                        <svg className="w-3 h-3 fill-current stroke-current" viewBox="0 0 24 24" strokeWidth="3" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
+                        </svg>
+                      ) : (
+                        <svg className="w-3 h-3 fill-current stroke-current" viewBox="0 0 24 24" strokeWidth="3" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                      )}
+                    </div>
+                  </button>
+
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isExpanded ? "max-h-[500px] mt-4 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <p
+                      className="text-[14px] text-gray-500 leading-relaxed font-medium pr-8 pt-1"
+                      dangerouslySetInnerHTML={{ __html: faq.a }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── 5. CTA SECTION ─── */}
+      <section className="bg-white py-20 relative overflow-hidden border-t border-gray-100">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
+          
+          <div className="space-y-4 max-w-2xl">
+            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-955">
+              Butuh konsultasi <span className="text-[#990202]">Visa atau KITAS?</span>
+            </h2>
+            <p className="text-[14.5px] sm:text-[15.5px] text-gray-500 leading-relaxed font-semibold">
+              Konsultasi gratis untuk pilih jenis izin yang tepat &amp; cek kelayakan dokumen WNA Anda — tanpa komitmen.
+            </p>
+          </div>
+
+          <div className="w-full md:w-auto flex flex-col gap-3 min-w-[320px] sm:min-w-[360px]">
+            {/* WhatsApp action */}
+            <a
+              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20berkonsultasi%20mengenai%20pembuatan%20Visa%20atau%20KITAS."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+            >
+              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.588 1.977 14.122.953 11.5.953c-5.439 0-9.859 4.37-9.864 9.8-.001 1.73.457 3.41 1.32 4.927l-.982 3.58 3.673-.956zm11.517-5.595c-.3-.15-1.774-.875-2.048-.975-.274-.1-.474-.15-.674.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.794-1.49-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.491-.508-.674-.518-.174-.01-.374-.012-.574-.012-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.22 5.116 4.52 1.228.531 2.186.848 2.93 1.083.755.238 1.44.205 1.984.124.606-.091 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
+              </svg>
+              <span>Konsultasi via WhatsApp</span>
+            </a>
+
+            <a
+              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%2520keimigrasian."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-150 hover:border-gray-250 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
+            >
+              <span>Hubungi Tim Kami</span>
+              <span className="text-[16px] font-normal">→</span>
+            </a>
+
+            <div className="flex items-center gap-1.5 text-[12px] text-gray-500 font-semibold pt-1 px-1">
+              <span className="text-emerald-500">✓</span>
+              <span>Respons dalam 5 menit · Senin–Sabtu 08:00–20:00</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  );
+}

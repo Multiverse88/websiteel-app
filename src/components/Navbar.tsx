@@ -25,11 +25,10 @@ export default function Navbar() {
     { name: "Pendirian Badan Usaha", desc: "Pendirian PT, CV, Yayasan, dll", href: "/layanan/pendirian-badan-usaha" },
     { name: "Merek & HAKI", desc: "Pendaftaran Merek & HAKI DJKI", href: "/layanan/merek-haki" },
     { name: "NIB & OSS", desc: "NIB, OSS RBA & Perizinan Usaha", href: "/layanan/nib-oss" },
-    { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 27001 (Accredited)", href: "/layanan/sertifikasi-iso" },
     { name: "Pengajuan PKP", desc: "Pengusaha Kena Pajak", href: "/layanan/pengajuan-pkp" },
-    { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/" },
-    { name: "Press Release", desc: "Publikasi Media Online", href: "/" },
-    { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/" },
+    { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/layanan/visa-kitas" },
+    { name: "Press Release", desc: "Publikasi Media Online", href: "/layanan/press-release" },
+    { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/layanan/perjanjian-perkawinan" },
     { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/" },
   ];
 
