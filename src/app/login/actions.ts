@@ -21,7 +21,7 @@ export async function loginAction(prevState: Record<string, unknown> | null, for
   const cookieStore = await cookies();
   cookieStore.set("pending_2fa_user", JSON.stringify({ userId: user.userId, email: user.email }), {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production" && process.env.DISABLE_SECURE_COOKIES !== "true",
     sameSite: "lax",
     maxAge: 300, // 5 minutes
     path: "/",
