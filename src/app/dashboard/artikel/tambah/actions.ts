@@ -113,7 +113,9 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
       }
     });
 
-    // Automatically send newsletter broadcast in background (Non-blocking to avoid server action timeout)
+    let broadcastError: string | null = null;
+
+    // Automatically send newsletter broadcast synchronously (so admin gets immediate error feedback)
     try {
       // Get system settings for newsletter automation
       const settings = await prisma.systemSetting.findMany({
@@ -137,16 +139,93 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
         });
 
         if (subscribers.length > 0) {
-          // Trigger broadcast asynchronously in background
-          runAutoBroadcastInBackground(newArticle.id, subscribers, settingsMap).catch((err) => {
-            console.error("Gagal menstarter background broadcast:", err);
+          const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+          const rawSubject = settingsMap.get("newsletter_default_subject") || "Artikel Baru: {{title}}";
+          const rawMessage = settingsMap.get("newsletter_default_message") || "Halo! Kami baru saja mempublikasikan artikel legalitas terbaru yang sangat penting untuk perkembangan bisnis Anda. Mari baca pembahasan lengkap artikel kami di bawah ini.";
+
+          // Replace placeholders
+          const subject = rawSubject.replace("{{title}}", newArticle.title);
+          const introMessage = rawMessage
+            .replace("{{title}}", newArticle.title)
+            .replace("{{category}}", newArticle.category);
+
+          // Create broadcast record first
+          const broadcast = await prisma.newsletterBroadcast.create({
+            data: {
+              articleId: newArticle.id,
+              articleTitle: newArticle.title,
+              totalSent: 0,
+            },
           });
+
+          let sentCount = 0;
+
+          for (const subscriber of subscribers) {
+            const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
+
+            const htmlContent = generateNewsletterHtml({
+              articleTitle: newArticle.title,
+              articleExcerpt: newArticle.excerpt,
+              articleCategory: newArticle.category,
+              articleSlug: newArticle.slug,
+              introMessage,
+              unsubscribeLink,
+              coverImage: newArticle.coverImage,
+            });
+
+            const textContent = `${introMessage}\n\nArtikel Baru: ${newArticle.title}\nKategori: ${newArticle.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${newArticle.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;
+
+            let status = "failed";
+            let errorMessage: string | null = null;
+
+            try {
+              const result = await sendEmail({
+                to: subscriber.email,
+                subject,
+                html: htmlContent,
+                text: textContent,
+              });
+              status = result?.simulated ? "simulated" : "sent";
+              if (status === "sent" || status === "simulated") sentCount++;
+            } catch (err: unknown) {
+              errorMessage = err instanceof Error ? err.message : "Unknown error";
+              if (!broadcastError) {
+                broadcastError = errorMessage;
+              }
+              console.error(`Gagal mengirim email otomatis ke ${subscriber.email}:`, err);
+            }
+
+            // Log every email attempt
+            await prisma.emailLog.create({
+              data: {
+                recipient: subscriber.email,
+                subject,
+                status,
+                errorMessage,
+                broadcastId: broadcast.id,
+                source: "auto-broadcast",
+              },
+            });
+          }
+
+          // Update totalSent to reflect actual successful sends
+          await prisma.newsletterBroadcast.update({
+            where: { id: broadcast.id },
+            data: { totalSent: sentCount },
+          });
+
+          console.log(`✅ Auto-broadcast selesai: ${sentCount} berhasil dari ${subscribers.length} subscriber.`);
         }
-      } else {
-        console.log("ℹ️ Otomatisasi newsletter dinonaktifkan (OFF) berdasarkan pengaturan sistem.");
       }
     } catch (broadcastErr) {
-      console.error("Gagal memicu broadcast otomatis:", broadcastErr);
+      console.error("Gagal memproses broadcast otomatis:", broadcastErr);
+      broadcastError = broadcastErr instanceof Error ? broadcastErr.message : "Unknown broadcast error";
+    }
+
+    if (broadcastError) {
+      return {
+        error: `Artikel berhasil disimpan, namun Gagal mengirim broadcast email otomatis: ${broadcastError}. Silakan cek konfigurasi SMTP Anda.`
+      };
     }
 
   } catch (err: unknown) {
@@ -159,93 +238,4 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
 
   // Perform redirect outside of try-catch block to avoid catching redirect exceptions
   redirect("/dashboard");
-}
-
-async function runAutoBroadcastInBackground(
-  articleId: string,
-  subscribers: Array<{ email: string }>,
-  settingsMap: Map<string, string>
-) {
-  try {
-    const newArticle = await prisma.article.findUnique({
-      where: { id: articleId },
-    });
-    if (!newArticle) return;
-
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-    const rawSubject = settingsMap.get("newsletter_default_subject") || "Artikel Baru: {{title}}";
-    const rawMessage = settingsMap.get("newsletter_default_message") || "Halo! Kami baru saja mempublikasikan artikel legalitas terbaru yang sangat penting untuk perkembangan bisnis Anda. Mari baca pembahasan lengkap artikel kami di bawah ini.";
-
-    // Replace placeholders
-    const subject = rawSubject.replace("{{title}}", newArticle.title);
-    const introMessage = rawMessage
-      .replace("{{title}}", newArticle.title)
-      .replace("{{category}}", newArticle.category);
-
-    // Create broadcast record first
-    const broadcast = await prisma.newsletterBroadcast.create({
-      data: {
-        articleId: newArticle.id,
-        articleTitle: newArticle.title,
-        totalSent: 0,
-      },
-    });
-
-    let sentCount = 0;
-
-    for (const subscriber of subscribers) {
-      const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
-
-      const htmlContent = generateNewsletterHtml({
-        articleTitle: newArticle.title,
-        articleExcerpt: newArticle.excerpt,
-        articleCategory: newArticle.category,
-        articleSlug: newArticle.slug,
-        introMessage,
-        unsubscribeLink,
-        coverImage: newArticle.coverImage,
-      });
-
-      const textContent = `${introMessage}\n\nArtikel Baru: ${newArticle.title}\nKategori: ${newArticle.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${newArticle.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;
-
-      let status = "failed";
-      let errorMessage: string | null = null;
-
-      try {
-        const result = await sendEmail({
-          to: subscriber.email,
-          subject,
-          html: htmlContent,
-          text: textContent,
-        });
-        status = result?.simulated ? "simulated" : "sent";
-        if (status === "sent") sentCount++;
-      } catch (err: unknown) {
-        errorMessage = err instanceof Error ? err.message : "Unknown error";
-        console.error(`Gagal mengirim email otomatis ke ${subscriber.email}:`, err);
-      }
-
-      // Log every email attempt
-      await prisma.emailLog.create({
-        data: {
-          recipient: subscriber.email,
-          subject,
-          status,
-          errorMessage,
-          broadcastId: broadcast.id,
-          source: "auto-broadcast",
-        },
-      });
-    }
-
-    // Update totalSent to reflect actual successful sends
-    await prisma.newsletterBroadcast.update({
-      where: { id: broadcast.id },
-      data: { totalSent: sentCount },
-    });
-
-    console.log(`✅ Auto-broadcast terkirim: ${sentCount} berhasil, ${subscribers.length - sentCount} gagal dari ${subscribers.length} subscriber.`);
-  } catch (broadcastErr) {
-    console.error("Gagal memproses auto-broadcast di background:", broadcastErr);
-  }
 }

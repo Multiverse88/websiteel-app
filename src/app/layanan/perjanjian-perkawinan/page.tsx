@@ -125,36 +125,40 @@ export default function PerjanjianPerkawinan() {
 
   const faqItems = [
     {
-      q: "Apa itu Perjanjian Perkawinan (Prenup/Postnup)?",
-      a: "<strong>Perjanjian Perkawinan</strong> adalah ikatan kesepakatan tertulis yang dibuat oleh pasangan sebelum pernikahan berlangsung (<em>Prenuptial Agreement</em>) maupun setelah pernikahan berlangsung (<em>Postnuptial Agreement</em>) untuk mengatur pemisahan harta kekayaan pribadi masing-masing serta kewajiban finansial dalam rumah tangga."
+      q: "Apa beda Prenup dengan Postnup?",
+      a: "<strong>Prenup (Prenuptial Agreement)</strong> dibuat <strong>sebelum menikah</strong> & berlaku sejak hari pernikahan. <strong>Postnup (Postnuptial Agreement)</strong> dibuat <strong>setelah menikah</strong> berdasarkan putusan Mahkamah Konstitusi No. 69/PUU-XIII/2015 yang mengakui keabsahannya. Keduanya sama sah secara hukum — bedanya cuma <strong>timing pembuatan</strong>."
     },
     {
-      q: "Apakah boleh membuat perjanjian pisah harta setelah resmi menikah?",
-      a: "Ya, sangat boleh. Berdasarkan <strong>Putusan Mahkamah Konstitusi No. 69/PUU-13/2015</strong>, pasangan suami istri yang sudah terlanjur menikah secara sah kini diperbolehkan untuk membuat <strong>Perjanjian Perkawinan Pasca-Nikah (Postnuptial Agreement)</strong> kapan saja selama ikatan perkawinan tersebut masih berlangsung."
+      q: "Apa yang bisa diatur dalam perjanjian pisah harta?",
+      a: "Perjanjian ini dapat mengatur <strong>pemisahan aset pribadi</strong> (bawaan maupun yang diperoleh selama pernikahan), pembagian tanggung jawab terhadap <strong>utang bisnis/pribadi</strong>, kontribusi nafkah rumah tangga, kepemilikan properti, hingga pengelolaan waris/hibah keluarga agar tidak bercampur."
     },
     {
-      q: "Mengapa pelaku Kawin Campur (WNI & WNA) sangat memerlukan perjanjian ini?",
-      a: "Di Indonesia, WNA dilarang memiliki properti dengan status Hak Milik (SHM). Jika pasangan kawin campur tidak memiliki perjanjian pisah harta, seluruh harta yang dibeli setelah menikah dianggap sebagai harta bersama, sehingga pasangan WNI otomatis kehilangan hak membeli properti Hak Milik. Dengan <strong>perjanjian pemisahan harta</strong>, hak WNI untuk memiliki properti Hak Milik di Indonesia tetap terlindungi 100% secara hukum."
+      q: "Apakah semua pasangan perlu perjanjian pisah harta?",
+      a: "Tidak semua, namun sangat direkomendasikan jika Anda: (1) Menikah dengan WNA (Kawin Campur) agar WNI tetap bisa membeli properti Hak Milik, (2) Memiliki atau berencana mendirikan bisnis/usaha sendiri, (3) Memiliki utang/kewajiban finansial yang besar, atau (4) Membawa aset bawaan bernilai tinggi."
     },
     {
-      q: "Bagaimana jika salah satu pasangan memiliki utang bisnis atau kredit macet?",
-      a: "Apabila terjadi pemisahan harta melalui akta perjanjian resmi yang terdaftar, maka <strong>segala risiko hutang, pailit, atau tuntutan hukum pihak ketiga dari bisnis salah satu pasangan sepenuhnya menjadi tanggung jawab pribadi pasangan tersebut</strong>, dan tidak akan berimbas pada harta kekayaan pasangan lainnya maupun aset rumah tangga."
+      q: "Kalau WNI menikah dengan WNA, apa pengaruhnya?",
+      a: "Tanpa perjanjian pisah harta, seluruh properti yang dibeli setelah menikah otomatis dianggap milik bersama (WNA ikut memiliki). Karena hukum Indonesia melarang WNA memiliki properti Hak Milik (SHM), maka pasangan WNI otomatis kehilangan hak membeli properti SHM. Dengan <strong>perjanjian pemisahan harta</strong>, hak WNI tetap terlindungi penuh untuk membeli properti SHM atas namanya sendiri."
     },
     {
-      q: "Berapa lama proses pembuatan akta dan pendaftarannya?",
-      a: "Proses penyusunan draf perjanjian memakan waktu <strong>1 hingga 2 hari kerja</strong>. Setelah draf disetujui, penandatanganan akta di hadapan Notaris dilakukan dalam <strong>1 hari kerja</strong>. Selanjutnya, proses registrasi resmi di KUA (bagi Muslim) atau Disdukcapil (bagi Non-Muslim) memakan waktu <strong>3 hingga 5 hari kerja</strong> hingga dokumen legalitas fisik Anda terbit secara resmi."
+      q: "Apakah perjanjian bisa diubah setelah dibuat?",
+      a: "Ya, perjanjian perkawinan (baik prenup maupun postnup) <strong>dapat diubah atau dicabut</strong> di kemudian hari. Perubahan harus didasarkan pada kesepakatan sukarela dari suami dan istri, dituangkan kembali ke dalam akta notaris resmi, dan didaftarkan ulang ke instansi terkait."
     },
     {
-      q: "Apakah Perjanjian Perkawinan ini bersifat permanen atau bisa dibatalkan?",
-      a: "Perjanjian ini berlaku secara permanen sepanjang perkawinan berlangsung. Namun, hukum Indonesia memperbolehkan dilakukannya <strong>perubahan atau pencabutan kesepakatan</strong> di kemudian hari, asalkan perubahan tersebut disetujui secara sukarela oleh kedua belah pihak dan kembali dituangkan serta didaftarkan lewat akta notaris resmi."
+      q: "Apa beda registrasi di KUA vs Dukcapil?",
+      a: "Pelaporan disesuaikan dengan tempat pernikahan dicatatkan. Bagi pasangan Muslim yang menikah di bawah hukum Islam dan memegang Buku Nikah, registrasi dilakukan di <strong>Kantor Urusan Agama (KUA)</strong>. Sedangkan bagi pasangan Non-Muslim, registrasi dilakukan di <strong>Dinas Kependudukan dan Pencatatan Sipil (Dukcapil)</strong>."
     },
     {
-      q: "Apakah EasyLegal menjamin pendaftaran dokumen ini hingga sah?",
-      a: "Ya, tentu saja. Layanan kami adalah <strong>paket lengkap end-to-end</strong>. Kami tidak hanya membuatkan draf, tetapi juga mengurus proses penandatanganan akta notaris berlisensi resmi, hingga pendaftaran fisik ke KUA atau Dinas Kependudukan dan Catatan Sipil (Disdukcapil) untuk menjamin akta tersebut sah dan berkekuatan hukum penuh."
+      q: "Apakah notaris bisa di domisili kami atau harus di Bandung?",
+      a: "Penandatanganan akta notaris <strong>bisa dilakukan di wilayah domisili Anda</strong>. Notaris partner resmi kami tersebar luas di seluruh Indonesia. Tim legal kami akan menjadwalkan tanda tangan di hadapan Notaris partner terdekat di kota Anda, sehingga Anda tidak perlu datang ke kantor pusat kami di Bandung."
     },
     {
-      q: "Apa perbedaan registrasi di KUA dengan di kantor Dukcapil?",
-      a: "Pelaporan resmi dilakukan di instansi tempat pernikahan Anda tercatat. Bagi pasangan yang menikah secara Islam, registrasi dilakukan di <strong>Kantor Urusan Agama (KUA)</strong>. Sedangkan bagi pasangan Non-Muslim, pelaporan dilakukan di <strong>Dinas Kependudukan dan Pencatatan Sipil (Disdukcapil)</strong>."
+      q: "Apakah harus didaftarkan ke KUA/Dukcapil juga?",
+      a: "Ya, pendaftaran itu <strong>sangat wajib</strong>. Akta notaris saja hanya mengikat secara internal antara suami dan istri. Agar perjanjian tersebut diakui secara sah dan mengikat pihak ketiga (seperti bank, kreditor, atau BPN saat transaksi properti), akta tersebut harus didaftarkan resmi ke KUA atau Dukcapil."
+    },
+    {
+      q: "Berapa lama prosesnya total?",
+      a: "Proses lengkap biasanya memakan waktu <strong>7 hingga 14 hari kerja</strong>. Penyusunan draf awal selesai dalam 1-2 hari kerja. Penandatanganan akta notaris dilakukan dalam 1 hari kerja. Proses pendaftaran resmi ke KUA atau Dukcapil memakan waktu sekitar 5 hingga 10 hari kerja."
     }
   ];
 
@@ -953,29 +957,29 @@ export default function PerjanjianPerkawinan() {
       </section>
 
       {/* ─── 8. CTA SECTION ─── */}
-      <section className="bg-white py-20 border-t border-gray-100">
+      <section className="bg-white py-20 border-t border-gray-150/60">
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
 
           {/* Left Column */}
-          <div className="space-y-3 max-w-2xl">
-            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-900">
-              Siap <span className="text-[#990202]">lindungi</span> aset &amp; keluarga?
+          <div className="space-y-3.5 max-w-2xl">
+            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-[#141414]">
+              Siap lindungi <span className="text-[#990202]">aset pribadi?</span>
             </h2>
-            <p className="text-[14px] sm:text-[14.5px] text-gray-500 leading-relaxed font-normal">
-              Konsultasi gratis secara tatap muka atau online bersama ahli hukum keluarga kami — aman, privat, &amp; profesional.
+            <p className="text-[15px] sm:text-[15.5px] text-[#5E5E5E] leading-relaxed font-normal">
+              Konsultasi gratis dengan tim hukum keluarga — pilih paket yang sesuai &amp; mulai proses tanpa komitmen.
             </p>
           </div>
 
           {/* Right Column */}
-          <div className="w-full md:w-auto flex flex-col gap-3 min-w-[320px] sm:min-w-[360px] max-w-[400px]">
+          <div className="w-full md:w-auto flex flex-col gap-3.5 min-w-[320px] sm:min-w-[360px] max-w-[400px]">
             {/* WhatsApp Action */}
             <a
               href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20layanan%20Perjanjian%20Perkawinan."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
+              className="inline-flex w-full items-center justify-center gap-2.5 px-6 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl transition-all duration-200 cursor-pointer shadow-md shadow-red-950/5"
             >
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.588 1.977 14.122.953 11.5.953c-5.439 0-9.859 4.37-9.864 9.8-.001 1.73.457 3.41 1.32 4.927l-.982 3.58 3.673-.956zm11.517-5.595c-.3-.15-1.774-.875-2.048-.975-.274-.1-.474-.15-.674.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.794-1.49-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.491-.508-.674-.518-.174-.01-.374-.012-.574-.012-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.22 5.116 4.52 1.228.531 2.186.848 2.93 1.083.755.238 1.44.205 1.984.124.606-.091 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z" />
               </svg>
               <span>Konsultasi via WhatsApp</span>
@@ -986,16 +990,16 @@ export default function PerjanjianPerkawinan() {
               href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20menghubungi%20tim%20spesialis%20hukum%20perjanjian."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-55 text-gray-900 border border-gray-200 hover:border-gray-300 font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
+              className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-55 text-gray-900 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl transition-all duration-200 cursor-pointer shadow-sm"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[15px] font-bold">→</span>
             </a>
 
             {/* Response Info */}
-            <div className="flex items-center justify-center gap-1.5 text-[11px] sm:text-[11.5px] text-gray-500 font-medium pt-1 px-1">
+            <div className="flex items-center justify-center gap-1.5 text-[12px] sm:text-[12.5px] text-[#5E5E5E] font-medium pt-1 px-1">
               <span className="text-emerald-500 font-bold">✓</span>
-              <span>Respons dalam 5 menit · Senin–Sabtu 08:00–20:00</span>
+              <span>Konsultasi rahasia · Senin–Sabtu 08:00–20:00</span>
             </div>
           </div>
 
