@@ -26,10 +26,11 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-      # - "443:443" # Uncomment if using domain + SSL
+      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      # - /etc/letsencrypt:/etc/letsencrypt:ro # Uncomment if using domain + SSL
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/www/certbot:/var/www/certbot:ro
       - uploads:/app/public/uploads:ro
     depends_on:
       - app
