@@ -1,407 +1,425 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  CheckCircle,
-  Database,
-  Clock,
-  Lock,
-  MessageCircle,
-  X,
-  FileText,
-} from "lucide-react";
+import { Building2, Search, MessageCircle, Check } from "lucide-react";
 
 export default function CekNama() {
   const [activeTab, setActiveTab] = useState<"pt" | "merek">("pt");
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    whatsapp: "",
-    bidangUsaha: "",
     alt1: "",
     alt2: "",
     alt3: "",
+    bidangUsaha: "",
     merekName: "",
     merekClass: "",
+    merekDesc: "",
+    namaAnda: "",
+    whatsapp: "",
   });
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    
+    // Construct message based on active tab
+    let message = "";
+    if (activeTab === "pt") {
+      message = `Halo EasyLegal, saya ingin cek ketersediaan nama PT:\n\n` +
+                `- Alternatif 1: ${formData.alt1 || "-"}\n` +
+                `- Alternatif 2: ${formData.alt2 || "-"}\n` +
+                `- Alternatif 3: ${formData.alt3 || "-"}\n` +
+                `- Bidang Usaha: ${formData.bidangUsaha || "-"}\n\n` +
+                `Data Kontak:\n` +
+                `- Nama: ${formData.namaAnda || "-"}\n` +
+                `- WhatsApp: ${formData.whatsapp || "-"}`;
+    } else {
+      message = `Halo EasyLegal, saya ingin cek ketersediaan nama Merek:\n\n` +
+                `- Nama Merek: ${formData.merekName || "-"}\n` +
+                `- Jenis Barang/Jasa: ${formData.merekClass || "-"}\n` +
+                `- Deskripsi: ${formData.merekDesc || "-"}\n\n` +
+                `Data Kontak:\n` +
+                `- Nama: ${formData.namaAnda || "-"}\n` +
+                `- WhatsApp: ${formData.whatsapp || "-"}`;
+    }
+
+    const encodedMessage = encodeURIComponent(message);
+    const waUrl = `https://wa.me/6281123456789?text=${encodedMessage}`;
+    window.open(waUrl, "_blank");
   };
-
-  const closeSuccessModal = () => {
-    setIsSubmitted(false);
-    setFormData({
-      name: "",
-      whatsapp: "",
-      bidangUsaha: "",
-      alt1: "",
-      alt2: "",
-      alt3: "",
-      merekName: "",
-      merekClass: "",
-    });
-  };
-
-  const trustBadges = [
-    {
-      Icon: Database,
-      label: "Database",
-      sub: "resmi AHU & DJKI",
-    },
-    {
-      Icon: Clock,
-      label: "Hasil",
-      sub: "10 menit",
-    },
-    {
-      Icon: Lock,
-      label: "Data Anda",
-      sub: "aman",
-    },
-  ];
-
-  const caraKerja = [
-    {
-      num: "1",
-      title: "Isi Form",
-      desc: "Tulis nama yang ingin dicek & kontak WhatsApp Anda.",
-    },
-    {
-      num: "2",
-      title: "Tim Cek Database",
-      desc: "Tim cek di sistem AHU (untuk PT) atau DJKI (untuk merek).",
-    },
-    {
-      num: "3",
-      title: "Hasil via WhatsApp",
-      desc: "Hasil cek + rekomendasi langsung dikirim ke WhatsApp Anda.",
-    },
-  ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative min-h-screen bg-[#FFFDFB] overflow-hidden flex flex-col items-center pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      {/* Ambient background glows */}
+      <div className="absolute left-[-200px] top-[15%] w-[550px] h-[550px] rounded-full bg-[#F5C2C4]/35 blur-[110px] pointer-events-none animate-pulse-subtle" />
+      <div className="absolute right-[-250px] bottom-[-100px] w-[700px] h-[700px] rounded-full bg-[#FEEDDC]/40 blur-[130px] pointer-events-none animate-pulse-subtle" />
 
-      {/* ─── 1. HERO ─── */}
-      <section className="bg-bg-light py-16 lg:py-20 border-b border-border/40">
-        <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center space-x-1.5 mb-4">
-            <span className="w-2 h-2 rounded-full bg-primary" />
-            <span className="text-[12.5px] font-semibold text-primary">Tools Gratis</span>
-          </div>
-          <h1 className="text-[48px] sm:text-[52px] font-black text-dark tracking-tight leading-none mb-5">
-            Cek nama PT & Merek
-          </h1>
-          <p className="text-[17px] text-muted leading-relaxed max-w-xl mx-auto">
-            Cek ketersediaan nama di database resmi AHU & DJKI. Hasil dikirim langsung ke WhatsApp kamu dalam 10 menit.
-          </p>
+      {/* ─── HEADER ─── */}
+      <div className="text-center max-w-[800px] mx-auto z-10 mb-10 flex flex-col items-center">
+        {/* Tools Gratis Badge */}
+        <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)] mb-6 text-[12.5px] font-semibold text-[#B91C1C]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#B91C1C]" />
+          Tools Gratis
         </div>
-      </section>
 
-      {/* ─── 2. TAB + FORM ─── */}
-      <section className="bg-white py-12 relative">
-        <div className="max-w-[640px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <h1 className="text-[44px] sm:text-[52px] font-black text-[#111111] tracking-tight leading-tight mb-4">
+          Cek nama PT & Merek
+        </h1>
 
-          {/* Tab Pills */}
-          <div className="flex bg-bg-light rounded-xl p-1 mb-8 border border-border/60">
-            <button
-              onClick={() => setActiveTab("pt")}
-              className={`flex-1 py-2.5 text-[14.5px] font-bold rounded-lg transition-all duration-200 ${
-                activeTab === "pt"
-                  ? "bg-white text-dark shadow-sm"
-                  : "text-muted hover:text-dark"
-              }`}
-            >
-              Cek Nama PT
-            </button>
-            <button
-              onClick={() => setActiveTab("merek")}
-              className={`flex-1 py-2.5 text-[14.5px] font-bold rounded-lg transition-all duration-200 ${
-                activeTab === "merek"
-                  ? "bg-white text-dark shadow-sm"
-                  : "text-muted hover:text-dark"
-              }`}
-            >
-              Cek Nama Merek
-            </button>
-          </div>
+        {/* Subtitle */}
+        <p className="text-[15.5px] text-[#666666] leading-relaxed max-w-[580px] mx-auto">
+          Cek ketersediaan nama di database resmi AHU & DJKI. Hasil dikirim langsung ke WhatsApp kamu dalam 10 menit.
+        </p>
+      </div>
 
-          {/* Form card */}
-          <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-sm relative">
-            {/* Red accent */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-primary" />
+      {/* ─── MAIN CARD CONTAINER ─── */}
+      <div className="w-full max-w-[760px] bg-white rounded-[32px] border border-gray-100 shadow-[0_15px_60px_rgba(0,0,0,0.04)] overflow-hidden z-10 mb-8">
+        
+        {/* Tab Switcher Header */}
+        <div className="bg-[#F5F4F0]/50 border-b border-gray-100 p-2 flex gap-2">
+          {/* Cek Nama PT Tab */}
+          <button
+            onClick={() => setActiveTab("pt")}
+            className={`flex-1 flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl text-[14.5px] font-extrabold transition-all duration-200 ${
+              activeTab === "pt"
+                ? "bg-white text-[#B91C1C] shadow-[0_4px_16px_rgba(0,0,0,0.03)]"
+                : "text-[#666666] hover:text-[#111111]"
+            }`}
+          >
+            <Building2 className="w-4 h-4" />
+            Cek Nama PT
+          </button>
 
-            <div className="p-7 md:p-8">
-              {activeTab === "pt" ? (
-                <div className="space-y-5 animate-fade-in">
-                  <div>
-                    <h2 className="text-[22px] font-extrabold text-dark">Cek Ketersediaan Nama PT</h2>
-                    <p className="text-[13.5px] text-muted mt-1 leading-relaxed">
-                      Nama PT wajib minimal 3 suku kata & belum dipakai. Berikan 3 alternatif untuk peluang persetujuan maksimal.
-                    </p>
-                  </div>
+          {/* Cek Nama Merek Tab */}
+          <button
+            onClick={() => setActiveTab("merek")}
+            className={`flex-1 flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl text-[14.5px] font-extrabold transition-all duration-200 ${
+              activeTab === "merek"
+                ? "bg-white text-[#B91C1C] shadow-[0_4px_16px_rgba(0,0,0,0.03)]"
+                : "text-[#666666] hover:text-[#111111]"
+            }`}
+          >
+            <Search className="w-4 h-4" />
+            Cek Nama Merek
+          </button>
+        </div>
 
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      Nama Alternatif 1 <span className="text-primary">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="alt1"
-                      required
-                      value={formData.alt1}
-                      onChange={handleInputChange}
-                      placeholder="Contoh: Maju Jaya Bersama"
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      Nama Alternatif 2 <span className="text-muted font-normal">(opsional)</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="alt2"
-                      value={formData.alt2}
-                      onChange={handleInputChange}
-                      placeholder="Contoh: Sinergi Jaya Abadi"
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      Nama Alternatif 3 <span className="text-muted font-normal">(opsional)</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="alt3"
-                      value={formData.alt3}
-                      onChange={handleInputChange}
-                      placeholder="Contoh: Cipta Solusi Nusantara"
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      Bidang Usaha <span className="text-muted font-normal">(opsional)</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="bidangUsaha"
-                      value={formData.bidangUsaha}
-                      onChange={handleInputChange}
-                      placeholder="Contoh: Jasa konsultasi digital"
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-5 animate-fade-in">
-                  <div>
-                    <h2 className="text-[22px] font-extrabold text-dark">Cek Ketersediaan Nama Merek</h2>
-                    <p className="text-[13.5px] text-muted mt-1 leading-relaxed">
-                      Merek dagang dilindungi berdasarkan kelas barang/jasa. Tuliskan nama merek dan jenis produk Anda.
-                    </p>
-                  </div>
-
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      Nama Merek / Brand <span className="text-primary">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="merekName"
-                      required
-                      value={formData.merekName}
-                      onChange={handleInputChange}
-                      placeholder="Contoh: Kopiku Mantap"
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      Jenis Barang & Jasa <span className="text-primary">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="merekClass"
-                      required
-                      value={formData.merekClass}
-                      onChange={handleInputChange}
-                      placeholder="Contoh: Kedai kopi, biji kopi kemasan"
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Shared: Kontak */}
-              <div className="mt-5 pt-5 border-t border-border/60 space-y-4">
-                <p className="text-[13px] font-extrabold text-dark uppercase tracking-wider">Kontak Anda</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      Nama <span className="text-primary">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Nama Anda"
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-semibold text-dark mb-1.5">
-                      WhatsApp <span className="text-primary">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      name="whatsapp"
-                      required
-                      value={formData.whatsapp}
-                      onChange={handleInputChange}
-                      placeholder="08xxxxxxxxxx"
-                      className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary text-sm bg-bg-light/40"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="mt-6">
-                <button
-                  onClick={handleSubmit}
-                  className="w-full py-4 bg-[#25D366] hover:bg-[#1EA760] text-white font-bold text-[17px] rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex justify-center items-center space-x-2"
-                >
-                  <MessageCircle className="w-5 h-5 fill-white text-[#25D366]" />
-                  <span>Cek via WhatsApp</span>
-                </button>
-                <p className="text-center text-[11.5px] text-muted mt-3 font-semibold">
-                  ✓ 100% Gratis · Hasil dalam 10 menit · Senin–Sabtu 08:00–20:00
+        {/* Card Content Form */}
+        <form onSubmit={handleWhatsAppSubmit} className="p-8 sm:p-10">
+          
+          {activeTab === "pt" ? (
+            /* ─── PT FORM SECTION ─── */
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-[22px] font-extrabold text-[#111111]">Cek Ketersediaan Nama PT</h2>
+                <p className="text-[13.5px] text-[#666666] mt-1 leading-relaxed">
+                  Nama PT wajib minimal <b>3 suku kata</b> & belum dipakai. Berikan 3 alternatif untuk peluang persetujuan maksimal.
                 </p>
               </div>
+
+              {/* Alt Name #1 */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <label className="text-[13.5px] font-bold text-[#111111]">
+                    Alternatif Nama PT #1
+                  </label>
+                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[9.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                    Wajib
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="alt1"
+                  required
+                  value={formData.alt1}
+                  onChange={handleInputChange}
+                  placeholder="PT Nama Utama Bersama"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+              </div>
+
+              {/* Alt Name #2 */}
+              <div>
+                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                  Alternatif Nama PT #2
+                </label>
+                <input
+                  type="text"
+                  name="alt2"
+                  value={formData.alt2}
+                  onChange={handleInputChange}
+                  placeholder="PT Nama Alternatif Kedua"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+              </div>
+
+              {/* Alt Name #3 */}
+              <div>
+                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                  Alternatif Nama PT #3
+                </label>
+                <input
+                  type="text"
+                  name="alt3"
+                  value={formData.alt3}
+                  onChange={handleInputChange}
+                  placeholder="PT Nama Alternatif Ketiga"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+                <span className="block text-[11.5px] text-[#666666] mt-2 font-medium">
+                  Rekomendasi: minimal 3 alternatif agar cepat dapat yang lolos.
+                </span>
+              </div>
+
+              {/* Bidang Usaha */}
+              <div>
+                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                  Bidang Usaha
+                </label>
+                <input
+                  type="text"
+                  name="bidangUsaha"
+                  value={formData.bidangUsaha}
+                  onChange={handleInputChange}
+                  placeholder="Misal: konsultan IT, F&B, properti, dll"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+              </div>
+            </div>
+          ) : (
+            /* ─── MEREK FORM SECTION ─── */
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-[22px] font-extrabold text-[#111111]">Cek Ketersediaan Nama Merek</h2>
+                <p className="text-[13.5px] text-[#666666] mt-1 leading-relaxed">
+                  Merek dagang dilindungi berdasarkan kelas barang/jasa. Tuliskan nama merek dan jenis produk Anda.
+                </p>
+              </div>
+
+              {/* Brand Name */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <label className="text-[13.5px] font-bold text-[#111111]">
+                    Nama Merek / Brand
+                  </label>
+                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[9.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                    Wajib
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="merekName"
+                  required
+                  value={formData.merekName}
+                  onChange={handleInputChange}
+                  placeholder="Contoh: Kopiku Mantap"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+              </div>
+
+              {/* Jenis Barang/Jasa */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <label className="text-[13.5px] font-bold text-[#111111]">
+                    Jenis Barang & Jasa
+                  </label>
+                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[9.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                    Wajib
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="merekClass"
+                  required
+                  value={formData.merekClass}
+                  onChange={handleInputChange}
+                  placeholder="Contoh: Kedai kopi, biji kopi kemasan, dll"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+              </div>
+
+              {/* Deskripsi */}
+              <div>
+                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                  Deskripsi Bisnis (opsional)
+                </label>
+                <input
+                  type="text"
+                  name="merekDesc"
+                  value={formData.merekDesc}
+                  onChange={handleInputChange}
+                  placeholder="Misal: kedai kopi susu kekinian dengan konsep booth modern"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* ─── SHARED KONTAK SECTION ─── */}
+          <div className="mt-8 pt-8 border-t border-gray-100/70">
+            <h3 className="text-[12px] font-black text-[#B91C1C] tracking-widest uppercase mb-4">
+              Kontak Anda
+            </h3>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Nama */}
+              <div>
+                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                  Nama Anda <span className="text-[#B91C1C]">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="namaAnda"
+                  required
+                  value={formData.namaAnda}
+                  onChange={handleInputChange}
+                  placeholder="Nama lengkap"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+              </div>
+
+              {/* WhatsApp */}
+              <div>
+                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                  WhatsApp <span className="text-[#B91C1C]">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="whatsapp"
+                  required
+                  value={formData.whatsapp}
+                  onChange={handleInputChange}
+                  placeholder="0812xxxxxxxx"
+                  className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
+                />
+              </div>
             </div>
           </div>
 
-          {/* Trust Badges */}
-          <div className="grid grid-cols-3 gap-3 mt-8">
-            {trustBadges.map(({ Icon, label, sub }, idx) => (
-              <div key={idx} className="bg-white rounded-xl p-4 border border-border/60 flex flex-col items-center text-center space-y-1.5 shadow-sm">
-                <Icon className="w-5 h-5 text-primary" />
-                <div className="text-[12px] font-bold text-dark">{label}</div>
-                <div className="text-[11px] text-muted font-semibold">{sub}</div>
-              </div>
-            ))}
+          {/* ─── BUTTON AND BOTTOM LEGAL SUBTITLE ─── */}
+          <div className="mt-8 flex flex-col items-center">
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#25D366] hover:bg-[#1EA760] text-white font-extrabold text-[16px] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.99]"
+            >
+              <MessageCircle className="w-5 h-5 fill-white" />
+              Cek via WhatsApp
+            </button>
+
+            <span className="block text-[12.5px] text-[#666666] font-medium mt-4">
+              ✓ <b>100% Gratis</b> · Hasil dalam 10 menit · Senin–Sabtu 08:00–20:00
+            </span>
           </div>
+
+        </form>
+      </div>      {/* ─── TRUST BADGES BELOW CARD ─── */}
+      <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 z-10 mb-20">
+        {/* Badge 1 */}
+        <div className="bg-white rounded-full border border-gray-150/70 px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
+          <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">
+            <Check className="w-2.5 h-2.5 stroke-[3px]" />
+          </div>
+          <span>
+            <b>Database</b> resmi AHU & DJKI
+          </span>
         </div>
-      </section>
 
-      {/* ─── 3. CARA KERJA ─── */}
-      <section className="bg-bg-light py-16 border-t border-border/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-[12.5px] font-bold text-primary uppercase tracking-wider mb-3">Cara Kerja</p>
-            <h2 className="text-[34px] font-extrabold text-dark leading-tight">
-              3 langkah, hasil 10 menit.
-            </h2>
+        {/* Badge 2 */}
+        <div className="bg-white rounded-full border border-gray-150/70 px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
+          <div className="w-4 h-4 rounded-full bg-[#FFF0F0] text-[#B91C1C] flex items-center justify-center flex-shrink-0 text-[10px]">
+            🕒
           </div>
+          <span>
+            Hasil <b>10 menit</b>
+          </span>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            {caraKerja.map((step, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl border border-border/60 p-7 relative shadow-sm flex flex-col items-center text-center"
-              >
-                {/* Step number */}
-                <div className="h-12 w-12 rounded-full bg-primary text-white font-black text-[22px] flex items-center justify-center mb-5">
+        {/* Badge 3 */}
+        <div className="bg-white rounded-full border border-gray-150/70 px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
+          <div className="w-4 h-4 rounded-full bg-[#EBF5FF] text-blue-600 flex items-center justify-center flex-shrink-0 text-[10px]">
+            🛡️
+          </div>
+          <span>
+            Data Anda <b>aman</b>
+          </span>
+        </div>
+      </div>
+
+      {/* ─── CARA KERJA SECTION ─── */}
+      <section className="w-full max-w-[1040px] mx-auto px-4 z-10 mt-10 mb-12">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <p className="text-[12px] font-black text-[#B91C1C] tracking-[0.2em] uppercase mb-4">
+            Cara Kerja
+          </p>
+          <h2 className="text-[34px] sm:text-[40px] font-black text-[#111111] leading-tight">
+            3 langkah, <span className="text-[#B91C1C]">hasil 10 menit.</span>
+          </h2>
+        </div>
+
+        {/* Steps Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch relative">
+          {[
+            {
+              num: "1",
+              title: "Isi Form",
+              desc: "Tulis nama yang ingin dicek & kontak WhatsApp Anda.",
+            },
+            {
+              num: "2",
+              title: "Tim Cek Database",
+              desc: "Tim cek di sistem AHU (untuk PT) atau DJKI (untuk merek).",
+            },
+            {
+              num: "3",
+              title: "Hasil via WhatsApp",
+              desc: "Hasil cek + rekomendasi langsung dikirim ke WhatsApp Anda.",
+            },
+          ].map((step, idx) => (
+            <div key={idx} className="relative flex flex-col items-center">
+              {/* Card Container */}
+              <div className="w-full h-full bg-white rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.02)] border border-gray-100/60 p-8 sm:p-10 flex flex-col items-center text-center">
+                {/* Red Circle Number */}
+                <div className="w-12 h-12 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[17px] font-black shadow-[0_4px_16px_rgba(185,28,28,0.25)] mb-6">
                   {step.num}
                 </div>
-                <h3 className="text-[17px] font-extrabold text-dark mb-2">{step.title}</h3>
-                <p className="text-[13.5px] text-muted leading-relaxed">{step.desc}</p>
-
-                {/* Connector arrow (not on last) */}
-                {idx < 2 && (
-                  <div className="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-muted text-xl">
-                    →
-                  </div>
-                )}
+                
+                {/* Step Title */}
+                <h3 className="text-[17px] font-bold text-[#111111] mb-3">
+                  {step.title}
+                </h3>
+                
+                {/* Step Description */}
+                <p className="text-[13.5px] text-[#666666] leading-relaxed max-w-[240px]">
+                  {step.desc}
+                </p>
               </div>
-            ))}
-          </div>
+
+              {/* Arrow Connector (Hidden on Mobile) */}
+              {idx < 2 && (
+                <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -right-[18px] lg:-right-[22px] z-20 items-center justify-center pointer-events-none">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-5 h-5 text-gray-300"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </section>
-
-      {/* ─── SUCCESS MODAL ─── */}
-      {isSubmitted && (
-        <div className="fixed inset-0 bg-dark/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-white border border-border rounded-2xl max-w-md w-full p-8 text-center space-y-5 relative shadow-2xl animate-slide-down">
-            <button
-              onClick={closeSuccessModal}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-bg-light text-muted"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="h-16 w-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle className="w-9 h-9 text-green-500" />
-            </div>
-
-            <div>
-              <h2 className="text-[22px] font-black text-dark mb-2">Permintaan Dikirim!</h2>
-              <p className="text-[13.5px] text-muted leading-relaxed">
-                Terima kasih <strong className="text-dark">{formData.name}</strong>, tim legal EasyLegal akan mengirim hasil cek ke WhatsApp Anda dalam 10 menit.
-              </p>
-            </div>
-
-            <div className="bg-bg-light rounded-xl p-4 border border-border/60 text-left space-y-2">
-              <div className="flex items-center space-x-2 text-[12px] font-bold text-dark">
-                <FileText className="w-4 h-4 text-primary" />
-                <span>Detail Permintaan:</span>
-              </div>
-              <div className="text-[12px] text-muted space-y-1 pl-6">
-                {activeTab === "pt" ? (
-                  <>
-                    {formData.alt1 && <div>· Alt 1: <span className="text-dark font-semibold">{formData.alt1}</span></div>}
-                    {formData.alt2 && <div>· Alt 2: <span className="text-dark font-semibold">{formData.alt2}</span></div>}
-                    {formData.alt3 && <div>· Alt 3: <span className="text-dark font-semibold">{formData.alt3}</span></div>}
-                  </>
-                ) : (
-                  <>
-                    <div>· Merek: <span className="text-dark font-semibold">{formData.merekName}</span></div>
-                    <div>· Produk: <span className="text-dark font-semibold">{formData.merekClass}</span></div>
-                  </>
-                )}
-                <div>· WhatsApp: <span className="text-dark font-semibold">{formData.whatsapp}</span></div>
-              </div>
-            </div>
-
-            <p className="text-[12px] font-bold text-primary">✓ Hasil dikirim ke WhatsApp dalam 10 menit!</p>
-
-            <button
-              onClick={closeSuccessModal}
-              className="w-full py-3 bg-primary text-white font-bold text-sm rounded-lg hover:bg-primary-hover transition-colors"
-            >
-              Kembali ke Halaman
-            </button>
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }

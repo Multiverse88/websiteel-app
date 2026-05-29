@@ -47,15 +47,15 @@ export default function Footer() {
     { name: "Tentang Kami", href: "/tentang-kami" },
     { name: "Blog & Artikel", href: "/" },
     { name: "Testimoni", href: "/" },
-    { name: "Program Reseller", href: "/" },
-    { name: "Kerjasama", href: "/" },
+    { name: "Referral dan Reseller", href: "/referral-reseller" },
+    { name: "Kerjasama", href: "/kerjasama" },
     { name: "Karier", href: "/" },
   ];
 
   const toolsLinks = [
     { name: "Cek Nama PT", href: "/cek-nama" },
     { name: "Cek Nama Merek", href: "/cek-nama" },
-    { name: "Cek Kode KBLI", href: "/cek-nama" },
+    { name: "Cek Kode KBLI", href: "/cek-kbli" },
     { name: "FAQ", href: "/kontak" },
     { name: "Kebijakan Privasi", href: "/" },
     { name: "Syarat & Ketentuan", href: "/" },

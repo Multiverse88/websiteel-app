@@ -29,7 +29,7 @@ export default function Navbar() {
     { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/layanan/visa-kitas" },
     { name: "Press Release", desc: "Publikasi Media Online", href: "/layanan/press-release" },
     { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/layanan/perjanjian-perkawinan" },
-    { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/" },
+    { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/layanan/pelaporan-lkpm" },
   ];
 
   const handleLinkClick = () => {
@@ -121,7 +121,7 @@ export default function Navbar() {
             </div>
 
             <Link
-              href="/"
+              href="/cek-kbli"
               onClick={handleLinkClick}
               className="text-[14px] font-medium text-muted hover:text-dark transition-colors"
             >
@@ -210,7 +210,7 @@ export default function Navbar() {
           <div className="px-4 pt-2 pb-6 space-y-1">
             {[
               { name: "Home", href: "/home-gads" },
-              { name: "Cek KBLI", href: "/" },
+              { name: "Cek KBLI", href: "/cek-kbli" },
               { name: "Virtual Office", href: "/" },
               { name: "Blog", href: "/artikel" },
               { name: "Tentang Kami", href: "/tentang-kami" },
