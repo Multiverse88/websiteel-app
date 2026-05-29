@@ -35,7 +35,7 @@ const LinkedinIcon = () => (
 
 export default function TentangKami() {
   const stats = [
-    { value: "8.000+", label: "Bisnis terlayani" },
+    { value: "11.000+", label: "Bisnis terlayani" },
     { value: "15+", label: "Jenis layanan legal" },
     { value: "5 thn", label: "Pengalaman melayani" },
     { value: "3 kota", label: "Office presence" },
@@ -126,7 +126,7 @@ export default function TentangKami() {
 
               {/* Description */}
               <p className="text-[16px] sm:text-[18px] text-gray-600 leading-relaxed max-w-2xl font-normal">
-                EasyLegal hadir karena kami percaya legalitas bisnis tidak harus mahal, lama, atau ribet. Sejak 2020, kami sudah membantu lebih dari 8.000 UMKM mengurus PT, perizinan, sampai sertifikasi ISO.
+                EasyLegal hadir karena kami percaya legalitas bisnis tidak harus mahal, lama, atau ribet. Sejak 2020, kami sudah membantu lebih dari 11.000 UMKM mengurus PT, perizinan, sampai sertifikasi ISO.
               </p>
 
               {/* Action Buttons */}
@@ -168,13 +168,13 @@ export default function TentangKami() {
                   </div>
                 </div>
 
-                {/* Floating Badge 1: 8.000+ Bisnis Terlayani */}
+                {/* Floating Badge 1: 11.000+ Bisnis Terlayani */}
                 <div className="absolute -top-6 -left-2 sm:-left-6 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center space-x-3.5 w-[210px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-11 h-11 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                     <User className="w-5.5 h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[20px] font-black text-[#990202] leading-none">8.000+</div>
+                    <div className="text-[20px] font-black text-[#990202] leading-none">11.000+</div>
                     <div className="text-[12px] text-[#990202]/85 font-bold mt-1">Bisnis terlayani</div>
                   </div>
                 </div>

@@ -44,7 +44,7 @@ const heroSlides = [
       { text: "prosesnya" },
       { text: "cepat & beres.", red: true },
     ],
-    desc: "Dari konsultasi sampai akta di tangan Anda. Tim legal berpengalaman telah membantu lebih dari 8.000 pengusaha. Mulai dari Rp2,5jt.",
+    desc: "Dari konsultasi sampai akta di tangan Anda. Tim legal berpengalaman telah membantu lebih dari 11.000 pengusaha. Mulai dari Rp2,5jt.",
     cta: "Konsultasi Gratis",
     ctaLink: "/kontak",
     cta2: "Lihat Paket PT",
@@ -150,7 +150,7 @@ const whyChoose = [
   {
     icon: Users,
     title: "Tim Berpengalaman",
-    desc: "Lebih dari 8.000 pengusaha mempercayai kami untuk urusan legalitas bisnis mereka.",
+    desc: "Lebih dari 11.000 pengusaha mempercayai kami untuk urusan legalitas bisnis mereka.",
   },
   {
     icon: Lock,
@@ -499,7 +499,7 @@ function CaraKerjaSection() {
                       <img className="inline-block h-5.5 w-5.5 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" alt="User 3" />
                     </div>
                     <div className="leading-tight">
-                      <div className="text-[9.5px] font-black text-gray-800">8.000+</div>
+                      <div className="text-[9.5px] font-black text-gray-800">11.000+</div>
                       <div className="text-[7.5px] font-bold text-gray-400">bisnis terbantu</div>
                     </div>
                   </div>
@@ -1022,13 +1022,13 @@ export default function Home() {
               </div>
             ))}
 
-            {/* Floating badge: 8.000+ Bisnis Terlayani */}
+            {/* Floating badge: 11.000+ Bisnis Terlayani */}
             <div className="absolute top-8 right-8 bg-white rounded-2xl px-5 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-3.5 z-20 animate-float-slow">
               <div className="w-[38px] h-[38px] bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0 text-[#D62828]">
                 <Users className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-[16px] font-black text-[#1A1A1A] leading-tight">8.000+</div>
+                <div className="text-[16px] font-black text-[#1A1A1A] leading-tight">11.000+</div>
                 <div className="text-[10px] text-[#6B7280] font-bold mt-0.5">Bisnis terlayani</div>
               </div>
             </div>
@@ -1555,7 +1555,7 @@ export default function Home() {
                 {/* Metric 1 */}
                 <div className="text-left">
                   <div className="text-[28px] font-black text-[#B91C1C] leading-none">
-                    8.000+
+                    11.000+
                   </div>
                   <div className="text-[11px] text-gray-400 font-bold mt-2.5">
                     Bisnis terlayani
