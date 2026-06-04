@@ -40,9 +40,33 @@ nginx/certs/
 # vercel
 .vercel
 
-# 2FA QR codes (local only)
-public/uploads/2fa/
+# Uploads and 2FA QR codes (local only, keep folder structure via .gitkeep)
+public/uploads/*
+!public/uploads/**/.gitkeep
+
+# scripts (ignore local stress test scripts and any custom scripts)
+scripts/stress-test.js
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDEs and editors
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.code-workspace
+
+# OS and system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs and temp files
+*.log
+logs/
+.eslintcache
+
