@@ -23,13 +23,17 @@ export default function Navbar() {
 
   const services = [
     { name: "Pendirian Badan Usaha", desc: "Pendirian PT, CV, Yayasan, dll", href: "/layanan/pendirian-badan-usaha" },
+    { name: "Pendirian Yayasan", desc: "Pendirian Yayasan Sosial & Keagamaan", href: "/layanan/pendirian-yayasan" },
     { name: "Merek & HAKI", desc: "Pendaftaran Merek & HAKI DJKI", href: "/layanan/merek-haki" },
     { name: "NIB & OSS", desc: "NIB, OSS RBA & Perizinan Usaha", href: "/layanan/nib-oss" },
     { name: "Pengajuan PKP", desc: "Pengusaha Kena Pajak", href: "/layanan/pengajuan-pkp" },
     { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/layanan/visa-kitas" },
-    { name: "Press Release", desc: "Publikasi Media Online", href: "/layanan/press-release" },
+    { name: "PR & Media", desc: "Publikasi Media Online", href: "/layanan/pr-media" },
     { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/layanan/perjanjian-perkawinan" },
     { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/layanan/pelaporan-lkpm" },
+    { name: "Virtual Office", desc: "Alamat Bisnis Strategis & Legal", href: "/layanan/virtual-office" },
+    { name: "Referral & Reseller", desc: "Program Kemitraan & Komisi", href: "/referral-reseller" },
+    { name: "Cek Nama PT", desc: "Cek Ketersediaan Nama PT", href: "/cek-nama" },
   ];
 
   const handleLinkClick = () => {
@@ -53,13 +57,18 @@ export default function Navbar() {
             onClick={handleLinkClick}
             className="flex items-center space-x-2 group flex-shrink-0"
           >
-            {/* EL Logo Icon - placeholder matching Figma red rounded square */}
-            <div className="w-[38px] h-[38px] bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white text-[11px] font-black leading-none tracking-tight">EL</span>
+            {/* Red rounded square icon cropped from Logo EL.png */}
+            <div className="w-[38px] h-[32px] overflow-hidden rounded-[8px] relative flex items-center justify-center">
+              <img 
+                src="/Logo EL.png" 
+                alt="EL Icon" 
+                className="absolute w-[160%] h-[160%] max-w-none object-cover" 
+                style={{ objectPosition: "center 22%" }}
+              />
             </div>
             <div className="flex items-baseline">
-              <span className="text-[11.3px] font-normal text-primary">easy</span>
-              <span className="text-[11.3px] font-normal text-dark">legal</span>
+              <span className="text-[14.5px] font-black text-[#D62828] tracking-tight">easy</span>
+              <span className="text-[14.5px] font-black text-[#111827] tracking-tight">legal</span>
             </div>
           </Link>
 
@@ -129,7 +138,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/"
+              href="/layanan/virtual-office"
               onClick={handleLinkClick}
               className="text-[14px] font-medium text-muted hover:text-dark transition-colors"
             >
@@ -211,7 +220,7 @@ export default function Navbar() {
             {[
               { name: "Home", href: "/home-gads" },
               { name: "Cek KBLI", href: "/cek-kbli" },
-              { name: "Virtual Office", href: "/" },
+              { name: "Virtual Office", href: "/layanan/virtual-office" },
               { name: "Blog", href: "/artikel" },
               { name: "Tentang Kami", href: "/tentang-kami" },
               { name: "Kontak", href: "/kontak" },
@@ -219,7 +228,7 @@ export default function Navbar() {
               const isActive =
                 item.href === "/home-gads"
                   ? (pathname === "/" || pathname === "/home-gads")
-                  : (item.href === "/" ? pathname === "/" : pathname.startsWith(item.href));
+                  : pathname.startsWith(item.href);
               return (
                 <Link
                   key={item.name}

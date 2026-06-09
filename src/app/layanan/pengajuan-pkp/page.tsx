@@ -44,15 +44,15 @@ export default function PengajuanPkp() {
     },
     {
       q: "Berapa lama proses pendaftaran PKP?",
-      a: "Proses verifikasi berkisar antara <strong class=\"font-extrabold text-gray-955\">3 hingga 7 hari kerja</strong> setelah seluruh berkas persyaratan perpajakan diserahkan secara lengkap ke Kantor Pelayanan Pajak (KPP) terkait."
+      a: "Proses verifikasi berkisar antara <strong class=\"font-extrabold text-gray-950\">3 hingga 7 hari kerja</strong> setelah seluruh berkas persyaratan perpajakan diserahkan secara lengkap ke Kantor Pelayanan Pajak (KPP) terkait."
     },
     {
       q: "Apa beda PKP vs Non-PKP?",
-      a: "Perbedaan utama adalah pada <strong class=\"font-extrabold text-gray-955\">pemungutan PPN</strong>. Perusahaan PKP wajib memungut PPN dari pembeli dan menerbitkan e-Faktur, serta dapat mengkreditkan PPN masukan dari supplier. Sedangkan Non-PKP tidak boleh memungut PPN dan tidak bisa menerbitkan e-Faktur."
+      a: "Perbedaan utama adalah pada <strong class=\"font-extrabold text-gray-950\">pemungutan PPN</strong>. Perusahaan PKP wajib memungut PPN dari pembeli dan menerbitkan e-Faktur, serta dapat mengkreditkan PPN masukan dari supplier. Sedangkan Non-PKP tidak boleh memungut PPN dan tidak bisa menerbitkan e-Faktur."
     },
     {
       q: "Apa itu survei PKP & kenapa harus dilakukan?",
-      a: "Survei PKP adalah verifikasi lapangan oleh petugas pajak (KPP) ke alamat domisili usaha. Tujuannya untuk memastikan <strong class=\"font-extrabold text-gray-955\">kebenaran keberadaan usaha</strong> dan melihat apakah alamat serta aktivitas usaha sesuai dengan dokumen yang diajukan sebelum aktivasi e-Faktur disetujui."
+      a: "Survei PKP adalah verifikasi lapangan oleh petugas pajak (KPP) ke alamat domisili usaha. Tujuannya untuk memastikan <strong class=\"font-extrabold text-gray-950\">kebenaran keberadaan usaha</strong> dan melihat apakah alamat serta aktivitas usaha sesuai dengan dokumen yang diajukan sebelum aktivasi e-Faktur disetujui."
     },
     {
       q: "Apakah usaha online (e-commerce) bisa daftar PKP?",
@@ -64,7 +64,7 @@ export default function PengajuanPkp() {
     },
     {
       q: "Apakah pengajuan saya pasti disetujui DJP?",
-      a: "Persetujuan sepenuhnya merupakan kewenangan KPP setempat berdasarkan kelengkapan berkas fisik dan hasil survei lapangan. Namun, dengan layanan EasyLegal, kami memastikan seluruh <strong class=\"font-extrabold text-gray-955\">dokumen dan persyaratan valid</strong> sebelum diajukan, sehingga persentase keberhasilan sangat tinggi."
+      a: "Persetujuan sepenuhnya merupakan kewenangan KPP setempat berdasarkan kelengkapan berkas fisik dan hasil survei lapangan. Namun, dengan layanan EasyLegal, kami memastikan seluruh <strong class=\"font-extrabold text-gray-950\">dokumen dan persyaratan valid</strong> sebelum diajukan, sehingga persentase keberhasilan sangat tinggi."
     }
   ];
 
@@ -101,7 +101,7 @@ export default function PengajuanPkp() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-955 leading-[1.12] tracking-tight">
+              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Pengurusan PKP resmi,<br />
                 <span className="text-[#990202]">cepat & bergaransi.</span>
               </h1>
@@ -140,7 +140,7 @@ export default function PengajuanPkp() {
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[13.5px] font-black text-gray-955 leading-tight">3-7 hari</p>
+                    <p className="text-[13.5px] font-black text-gray-950 leading-tight">3-7 hari</p>
                     <p className="text-[11px] font-bold text-gray-400">Lama proses</p>
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function PengajuanPkp() {
                     <span className="text-[16px] font-black leading-none">%</span>
                   </div>
                   <div>
-                    <p className="text-[13.5px] font-black text-gray-955 leading-tight">Faktur Pajak</p>
+                    <p className="text-[13.5px] font-black text-gray-950 leading-tight">Faktur Pajak</p>
                     <p className="text-[11px] font-bold text-gray-400">Siap terbitkan</p>
                   </div>
                 </div>
@@ -164,7 +164,7 @@ export default function PengajuanPkp() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[13.5px] font-black text-gray-955 leading-tight">100% Lolos</p>
+                    <p className="text-[13.5px] font-black text-gray-950 leading-tight">100% Lolos</p>
                     <p className="text-[11px] font-bold text-gray-400">Survey KPP pajak</p>
                   </div>
                 </div>
@@ -195,7 +195,7 @@ export default function PengajuanPkp() {
                     </svg>
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[12.5px] font-black text-gray-955">SPPKP Terbit</p>
+                    <p className="text-[12.5px] font-black text-gray-950">SPPKP Terbit</p>
                     <p className="text-[10px] font-bold text-gray-400">Resmi Ditjen Pajak</p>
                   </div>
                 </div>
@@ -208,7 +208,7 @@ export default function PengajuanPkp() {
                     </svg>
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[12.5px] font-black text-gray-955">e-Faktur Aktif</p>
+                    <p className="text-[12.5px] font-black text-gray-950">e-Faktur Aktif</p>
                     <p className="text-[10px] font-bold text-gray-400">Siap transaksi</p>
                   </div>
                 </div>
@@ -313,7 +313,7 @@ export default function PengajuanPkp() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">KAPAN DAFTAR PKP?</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-955 leading-tight">
+            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Wajib vs Sukarela.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -334,7 +334,7 @@ export default function PengajuanPkp() {
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-[20px] sm:text-[22px] font-black text-gray-955">Omset &gt; Rp 4,8 Miliar/Tahun</h3>
+                  <h3 className="text-[20px] sm:text-[22px] font-black text-gray-950">Omset &gt; Rp 4,8 Miliar/Tahun</h3>
                   <p className="text-[13.5px] text-gray-500 leading-relaxed font-medium">
                     Sesuai PMK 197/2013, pengusaha dengan omset bruto melebihi <strong className="font-extrabold text-gray-900">Rp 4,8 Miliar dalam 1 tahun pajak</strong> wajib didaftarkan sebagai PKP.
                   </p>
@@ -366,7 +366,7 @@ export default function PengajuanPkp() {
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-[20px] sm:text-[22px] font-black text-gray-955">Omset di Bawah Rp 4,8 Miliar</h3>
+                  <h3 className="text-[20px] sm:text-[22px] font-black text-gray-950">Omset di Bawah Rp 4,8 Miliar</h3>
                   <p className="text-[13.5px] text-gray-500 leading-relaxed font-medium">
                     Pengusaha kecil bisa <strong className="font-extrabold text-gray-900">daftar sukarela</strong> agar bisa keluarkan e-Faktur &amp; klaim PPN masukan — strategi bagus jika klien Anda adalah PKP juga.
                   </p>
@@ -399,7 +399,7 @@ export default function PengajuanPkp() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">MANFAAT JADI PKP</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-955 leading-tight">
+            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Kenapa daftar PKP penting untuk bisnis Anda?
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -473,7 +473,7 @@ export default function PengajuanPkp() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DOKUMEN PERSYARATAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-955 leading-tight">
+            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Yang perlu Anda siapkan.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -607,7 +607,7 @@ export default function PengajuanPkp() {
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA JASA DAFTAR PKP</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-955 leading-tight">
+            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               2 paket sesuai lokasi kantor Anda.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed">
@@ -618,185 +618,195 @@ export default function PengajuanPkp() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[860px] mx-auto items-stretch">
             
             {/* Paket 1: PKP PULAU JAWA */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#990202] shadow-lg flex flex-col justify-between">
-              <div>
-                {/* Header */}
-                <div className="bg-[#990202] px-6 py-8 text-center text-white relative">
-                  <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[9px] font-bold tracking-widest uppercase px-4 py-1.5 flex justify-center w-full">
-                    PALING POPULER
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[16px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] transition-all duration-300">
+                <div>
+                  {/* Header */}
+                  <div className="bg-[#990202] px-6 py-8 text-center text-white relative">
+                    <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[9px] font-bold tracking-widest uppercase px-4 py-1.5 flex justify-center w-full">
+                      PALING POPULER
+                    </div>
+                    <h3 className="text-[14px] font-black tracking-widest text-white/90 mt-4 uppercase">PKP PULAU JAWA</h3>
+                    <div className="mt-4 text-[12px] text-white/60 line-through">Rp 3.000.000</div>
+                    <div className="mt-0.5 text-[32px] font-black flex items-start justify-center gap-1">
+                      <span className="text-[16px] mt-2">Rp</span>
+                      <span>1.499.000</span>
+                    </div>
+                    <p className="text-[10px] font-bold text-white/70 uppercase mt-2 tracking-widest">TANPA TAMBAHAN BIAYA APAPUN</p>
                   </div>
-                  <h3 className="text-[14px] font-black tracking-widest text-white/90 mt-4 uppercase">PKP PULAU JAWA</h3>
-                  <div className="mt-4 text-[12px] text-white/60 line-through">Rp 3.000.000</div>
-                  <div className="mt-0.5 text-[32px] font-black flex items-start justify-center gap-1">
-                    <span className="text-[16px] mt-2">Rp</span>
-                    <span>1.499.000</span>
-                  </div>
-                  <p className="text-[10px] font-bold text-white/70 uppercase mt-2 tracking-widest">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
 
-                {/* Body Content */}
-                <div className="p-8 space-y-6">
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-4 text-left">
-                    <h4 className="text-[12px] font-black text-[#990202] tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-3">
-                      {[
-                        "Konsultasi tentang PKP / PPN",
-                        "Pengecekan status wajib pajak",
-                        "Pendaftaran PKP ke DJP",
-                        "Persiapan & korespondensi survei PKP",
-                        "Pendampingan sertifikat elektronik",
-                        "Aktivasi e-Faktur"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[13.5px] font-medium text-gray-700 leading-relaxed">
+                  {/* Body Content */}
+                  <div className="p-8 space-y-6">
+                    {/* Yang Diperoleh */}
+                    <div className="space-y-4 text-left">
+                      <h4 className="text-[12px] font-black text-[#990202] tracking-wider uppercase">YANG DIPEROLEH</h4>
+                      <ul className="space-y-3">
+                        {[
+                          "Konsultasi tentang PKP / PPN",
+                          "Pengecekan status wajib pajak",
+                          "Pendaftaran PKP ke DJP",
+                          "Persiapan & korespondensi survei PKP",
+                          "Pendampingan sertifikat elektronik",
+                          "Aktivasi e-Faktur"
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-start text-[13.5px] font-medium text-gray-700 leading-relaxed">
+                            <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Bonus */}
+                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
+                      <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">BONUS</h4>
+                      <ul className="space-y-2.5">
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
                           <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                          <span>{item}</span>
+                          <span>Layanan Personal Legal Assistance</span>
                         </li>
-                      ))}
-                    </ul>
-                  </div>
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span><strong className="font-bold text-gray-900">1 Kupon</strong> Undian iPhone</span>
+                        </li>
+                      </ul>
+                    </div>
 
-                  {/* Bonus */}
-                  <div className="bg-gray-50/80 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
-                    <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-2.5">
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Layanan Personal Legal Assistance</span>
-                      </li>
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span><strong className="font-bold text-gray-900">1 Kupon</strong> Undian iPhone</span>
-                      </li>
-                    </ul>
-                  </div>
+                    {/* Extra Bonus */}
+                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
+                      <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">EXTRA BONUS</h4>
+                      <ul className="space-y-2.5">
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>Voucher EasyLegal <strong className="font-bold text-gray-900">Rp 250.000</strong></span>
+                        </li>
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>Dokumen SOP Karyawan</span>
+                        </li>
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>Dokumen SOP Perusahaan</span>
+                        </li>
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>Dokumen Kontrak Bisnis</span>
+                        </li>
+                      </ul>
+                    </div>
 
-                  {/* Extra Bonus */}
-                  <div className="bg-gray-50/80 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
-                    <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-2.5">
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Voucher EasyLegal <strong className="font-bold text-gray-900">Rp 250.000</strong></span>
-                      </li>
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Dokumen SOP Karyawan</span>
-                      </li>
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Dokumen SOP Perusahaan</span>
-                      </li>
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Dokumen Kontrak Bisnis</span>
-                      </li>
-                    </ul>
                   </div>
-
                 </div>
-              </div>
 
-              {/* Footer Button */}
-              <div className="p-8 pt-0">
-                <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20PKP%20Pulau%20Jawa."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-bold text-[14px] text-white bg-[#990202] hover:bg-[#800000] rounded-xl transition-all duration-200 shadow-sm"
-                >
-                  Pilih PKP Pulau Jawa
-                </a>
+                {/* Footer Button */}
+                <div className="p-8 pt-0">
+                  <a
+                    href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20PKP%20Pulau%20Jawa."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full py-4 text-center font-bold text-[14px] text-white bg-[#990202] hover:bg-[#800000] rounded-xl transition-all duration-200 shadow-sm"
+                  >
+                    Pilih PKP Pulau Jawa
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Paket 2: PKP LUAR JAWA */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-md flex flex-col justify-between">
-              <div>
-                {/* Header */}
-                <div className="bg-[#1A1A1A] px-6 py-8 text-center text-white relative">
-                  <h3 className="text-[14px] font-black tracking-widest text-white/90 mt-4 uppercase">PKP LUAR JAWA</h3>
-                  <div className="mt-4 text-[12px] text-white/60 line-through">Rp 4.000.000</div>
-                  <div className="mt-0.5 text-[32px] font-black flex items-start justify-center gap-1">
-                    <span className="text-[16px] mt-2">Rp</span>
-                    <span>1.999.000</span>
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[16px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+                <div>
+                  {/* Header */}
+                  <div className="bg-[#1A1A1A] px-6 py-8 text-center text-white relative">
+                    <h3 className="text-[14px] font-black tracking-widest text-white/90 mt-4 uppercase">PKP LUAR JAWA</h3>
+                    <div className="mt-4 text-[12px] text-white/60 line-through">Rp 4.000.000</div>
+                    <div className="mt-0.5 text-[32px] font-black flex items-start justify-center gap-1">
+                      <span className="text-[16px] mt-2">Rp</span>
+                      <span>1.999.000</span>
+                    </div>
+                    <p className="text-[10px] font-bold text-white/70 uppercase mt-2 tracking-widest">TANPA TAMBAHAN BIAYA APAPUN</p>
                   </div>
-                  <p className="text-[10px] font-bold text-white/70 uppercase mt-2 tracking-widest">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
 
-                {/* Body Content */}
-                <div className="p-8 space-y-6">
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-4 text-left">
-                    <h4 className="text-[12px] font-black text-[#990202] tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-3">
-                      {[
-                        "Konsultasi tentang PKP / PPN",
-                        "Pengecekan status wajib pajak",
-                        "Pendaftaran PKP ke DJP",
-                        "Persiapan & korespondensi survei PKP",
-                        "Pendampingan sertifikat elektronik",
-                        "Aktivasi e-Faktur"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[13.5px] font-medium text-gray-700 leading-relaxed">
+                  {/* Body Content */}
+                  <div className="p-8 space-y-6">
+                    {/* Yang Diperoleh */}
+                    <div className="space-y-4 text-left">
+                      <h4 className="text-[12px] font-black text-[#990202] tracking-wider uppercase">YANG DIPEROLEH</h4>
+                      <ul className="space-y-3">
+                        {[
+                          "Konsultasi tentang PKP / PPN",
+                          "Pengecekan status wajib pajak",
+                          "Pendaftaran PKP ke DJP",
+                          "Persiapan & korespondensi survei PKP",
+                          "Pendampingan sertifikat elektronik",
+                          "Aktivasi e-Faktur"
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-start text-[13.5px] font-medium text-gray-700 leading-relaxed">
+                            <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Bonus */}
+                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
+                      <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">BONUS</h4>
+                      <ul className="space-y-2.5">
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
                           <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                          <span>{item}</span>
+                          <span>Layanan Personal Legal Assistance</span>
                         </li>
-                      ))}
-                    </ul>
-                  </div>
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span><strong className="font-bold text-gray-900">1 Kupon</strong> Undian iPhone</span>
+                        </li>
+                      </ul>
+                    </div>
 
-                  {/* Bonus */}
-                  <div className="bg-gray-50/80 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
-                    <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-2.5">
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Layanan Personal Legal Assistance</span>
-                      </li>
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span><strong className="font-bold text-gray-900">1 Kupon</strong> Undian iPhone</span>
-                      </li>
-                    </ul>
-                  </div>
+                    {/* Extra Bonus */}
+                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
+                      <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">EXTRA BONUS</h4>
+                      <ul className="space-y-2.5">
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>Voucher EasyLegal <strong className="font-bold text-gray-900">Rp 250.000</strong></span>
+                        </li>
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>Dokumen SOP Karyawan</span>
+                        </li>
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>Dokumen SOP Perusahaan</span>
+                        </li>
+                        <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>Dokumen Kontrak Bisnis</span>
+                        </li>
+                      </ul>
+                    </div>
 
-                  {/* Extra Bonus */}
-                  <div className="bg-gray-50/80 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
-                    <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-2.5">
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Voucher EasyLegal <strong className="font-bold text-gray-900">Rp 250.000</strong></span>
-                      </li>
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Dokumen SOP Karyawan</span>
-                      </li>
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Dokumen SOP Perusahaan</span>
-                      </li>
-                      <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" />
-                        <span>Dokumen Kontrak Bisnis</span>
-                      </li>
-                    </ul>
                   </div>
-
                 </div>
-              </div>
 
-              {/* Footer Button */}
-              <div className="p-8 pt-0">
-                <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20PKP%20Luar%20Jawa."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-bold text-[14px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
-                >
-                  Pilih PKP Luar Jawa
-                </a>
+                {/* Footer Button */}
+                <div className="p-8 pt-0">
+                  <a
+                    href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20PKP%20Luar%20Jawa."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full py-4 text-center font-bold text-[14px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
+                  >
+                    Pilih PKP Luar Jawa
+                  </a>
+                </div>
               </div>
             </div>
 

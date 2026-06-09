@@ -158,7 +158,7 @@ export default function PelaporanLKPM() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-955 leading-[1.15] tracking-tight">
+              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.15] tracking-tight">
                 Lapor LKPM tepat waktu, <span className="text-[#990202]">hindari sanksi BKPM.</span>
               </h1>
 
@@ -346,7 +346,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PENGERTIAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu LKPM &amp; kenapa wajib lapor?
             </h2>
             <p className="text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -497,7 +497,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PERIODE &amp; BATAS WAKTU</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Kapan harus lapor LKPM?
             </h2>
             <p className="text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -625,7 +625,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DATA YANG DILAPORKAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa saja isi laporan LKPM?
             </h2>
             <p className="text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -702,7 +702,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SANKSI JIKA TIDAK LAPOR</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Konsekuensi telat / tidak lapor LKPM.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -780,7 +780,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA JASA PELAPORAN LKPM</p>
-            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               2 paket sesuai skala usaha Anda.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -792,206 +792,216 @@ export default function PelaporanLKPM() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[920px] mx-auto items-stretch">
             
             {/* Left Card: UMK Mikro Kecil */}
-            <div className="bg-white rounded-[24px] overflow-hidden border-2 border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.06)] flex flex-col justify-between transition-all duration-300 hover:shadow-[0_16px_48px_rgba(153,2,2,0.1)]">
-              <div>
-                {/* Header (Crimson) */}
-                <div className="bg-[#990202] px-6 pt-7 pb-6 text-center text-white relative flex flex-col items-center">
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFC1C1]/90">
-                    PALING POPULER
-                  </span>
-                  <h4 className="text-[17px] font-black tracking-widest uppercase mt-3">
-                    MIKRO KECIL
-                  </h4>
-                  <div className="mt-2 text-[12.5px] text-[#FFC1C1]/60 line-through font-bold">
-                    Rp 3.000.000
-                  </div>
-                  <div className="mt-1.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
-                    <span className="text-[18px] mt-1.5 font-extrabold mr-0.5">Rp</span>
-                    <span>1.499.000</span>
-                  </div>
-                  <p className="text-[9.5px] font-bold text-[#FFC1C1]/80 tracking-widest uppercase mt-2.5">
-                    TANPA TAMBAHAN BIAYA APAPUN
-                  </p>
-                </div>
-
-                {/* Features Detail */}
-                <div className="p-6 sm:p-7.5 space-y-6 text-left">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase">
-                      LAMA PROSES
-                    </h5>
-                    <div className="flex items-center text-[13.5px] font-bold text-gray-900">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
-                      <span>1-3 hari kerja</span>
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] transition-all duration-300">
+                <div>
+                  {/* Header (Crimson) */}
+                  <div className="bg-[#990202] px-6 pt-7 pb-6 text-center text-white relative flex flex-col items-center">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFC1C1]/90">
+                      PALING POPULER
+                    </span>
+                    <h4 className="text-[17px] font-black tracking-widest uppercase mt-3">
+                      MIKRO KECIL
+                    </h4>
+                    <div className="mt-2 text-[12.5px] text-[#FFC1C1]/60 line-through font-bold">
+                      Rp 3.000.000
                     </div>
+                    <div className="mt-1.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
+                      <span className="text-[18px] mt-1.5 font-extrabold mr-0.5">Rp</span>
+                      <span>1.499.000</span>
+                    </div>
+                    <p className="text-[9.5px] font-bold text-[#FFC1C1]/80 tracking-widest uppercase mt-2.5">
+                      TANPA TAMBAHAN BIAYA APAPUN
+                    </p>
                   </div>
 
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase">
-                      YANG DIPEROLEH
-                    </h5>
-                    <div className="flex items-start text-[13px] sm:text-[13.5px] text-gray-600 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>
-                        <strong className="font-extrabold text-gray-900">Tanda Terima Pelaporan LKPM</strong> dari sistem OSS BKPM
+                  {/* Features Detail */}
+                  <div className="p-6 sm:p-7.5 space-y-6 text-left">
+                    {/* Lama Proses */}
+                    <div className="space-y-2">
+                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase">
+                        LAMA PROSES
+                      </h5>
+                      <div className="flex items-center text-[13.5px] font-bold text-gray-900">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
+                        <span>1-3 hari kerja</span>
+                      </div>
+                    </div>
+
+                    {/* Yang Diperoleh */}
+                    <div className="space-y-2.5 border-t border-gray-100 pt-5">
+                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase">
+                        YANG DIPEROLEH
+                      </h5>
+                      <div className="flex items-start text-[13px] sm:text-[13.5px] text-gray-600 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>
+                          <strong className="font-extrabold text-gray-900">Tanda Terima Pelaporan LKPM</strong> dari sistem OSS BKPM
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Bonus */}
+                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
+                      <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
+                        BONUS
                       </span>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Layanan Personal Legal Assistance</span>
+                      </div>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Bonus */}
-                  <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
-                    <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
-                      BONUS
-                    </span>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Layanan Personal Legal Assistance</span>
-                    </div>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
-                    </div>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
-                    <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
-                      EXTRA BONUS
-                    </span>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
-                    </div>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Karyawan</span>
-                    </div>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Perusahaan</span>
-                    </div>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Kontrak Bisnis</span>
+                    {/* Extra Bonus */}
+                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
+                      <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
+                        EXTRA BONUS
+                      </span>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
+                      </div>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen SOP Karyawan</span>
+                      </div>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen SOP Perusahaan</span>
+                      </div>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen Kontrak Bisnis</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Action Button */}
-              <div className="p-6 sm:p-7.5 pt-0">
-                <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20LKPM%20Mikro%20Kecil%20seharga%20Rp%201.499.000."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] transition-colors duration-200 cursor-pointer shadow-md shadow-red-900/10"
-                >
-                  Pilih LKPM Mikro Kecil
-                </a>
+                {/* Action Button */}
+                <div className="p-6 sm:p-7.5 pt-0">
+                  <a
+                    href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20LKPM%20Mikro%20Kecil%20seharga%20Rp%201.499.000."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full py-3.5 text-center font-extrabold text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] transition-colors duration-200 cursor-pointer shadow-md shadow-red-900/10"
+                  >
+                    Pilih LKPM Mikro Kecil
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Right Card: Menengah Besar */}
-            <div className="bg-white rounded-[24px] overflow-hidden border border-gray-200/80 shadow-[0_12px_40px_rgba(0,0,0,0.02)] flex flex-col justify-between transition-all duration-300 hover:shadow-[0_16px_48px_rgba(0,0,0,0.05)]">
-              <div>
-                {/* Header (Dark) */}
-                <div className="bg-[#151515] px-6 pt-7 pb-6 text-center text-white relative flex flex-col items-center">
-                  <span className="text-[11px] font-bold uppercase tracking-widest opacity-0 select-none pointer-events-none">
-                    SPACER
-                  </span>
-                  <h4 className="text-[17px] font-black tracking-widest uppercase mt-3">
-                    MENENGAH BESAR
-                  </h4>
-                  <div className="mt-2 text-[12.5px] text-white/40 line-through font-bold">
-                    Rp 5.000.000
-                  </div>
-                  <div className="mt-1.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
-                    <span className="text-[18px] mt-1.5 font-extrabold mr-0.5">Rp</span>
-                    <span>2.499.000</span>
-                  </div>
-                  <p className="text-[9.5px] font-bold text-white/50 tracking-widest uppercase mt-2.5">
-                    TANPA TAMBAHAN BIAYA APAPUN
-                  </p>
-                </div>
-
-                {/* Features Detail */}
-                <div className="p-6 sm:p-7.5 space-y-6 text-left">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase">
-                      LAMA PROSES
-                    </h5>
-                    <div className="flex items-center text-[13.5px] font-bold text-gray-900">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
-                      <span>1-3 hari kerja</span>
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+                <div>
+                  {/* Header (Dark) */}
+                  <div className="bg-[#151515] px-6 pt-7 pb-6 text-center text-white relative flex flex-col items-center">
+                    <span className="text-[11px] font-bold uppercase tracking-widest opacity-0 select-none pointer-events-none">
+                      SPACER
+                    </span>
+                    <h4 className="text-[17px] font-black tracking-widest uppercase mt-3">
+                      MENENGAH BESAR
+                    </h4>
+                    <div className="mt-2 text-[12.5px] text-white/40 line-through font-bold">
+                      Rp 5.000.000
                     </div>
+                    <div className="mt-1.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
+                      <span className="text-[18px] mt-1.5 font-extrabold mr-0.5">Rp</span>
+                      <span>2.499.000</span>
+                    </div>
+                    <p className="text-[9.5px] font-bold text-white/50 tracking-widest uppercase mt-2.5">
+                      TANPA TAMBAHAN BIAYA APAPUN
+                    </p>
                   </div>
 
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase">
-                      YANG DIPEROLEH
-                    </h5>
-                    <div className="flex items-start text-[13px] sm:text-[13.5px] text-gray-600 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>
-                        <strong className="font-extrabold text-gray-900">Tanda Terima Pelaporan LKPM</strong> dari sistem OSS BKPM
+                  {/* Features Detail */}
+                  <div className="p-6 sm:p-7.5 space-y-6 text-left">
+                    {/* Lama Proses */}
+                    <div className="space-y-2">
+                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase">
+                        LAMA PROSES
+                      </h5>
+                      <div className="flex items-center text-[13.5px] font-bold text-gray-900">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
+                        <span>1-3 hari kerja</span>
+                      </div>
+                    </div>
+
+                    {/* Yang Diperoleh */}
+                    <div className="space-y-2.5 border-t border-gray-100 pt-5">
+                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase">
+                        YANG DIPEROLEH
+                      </h5>
+                      <div className="flex items-start text-[13px] sm:text-[13.5px] text-gray-600 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>
+                          <strong className="font-extrabold text-gray-900">Tanda Terima Pelaporan LKPM</strong> dari sistem OSS BKPM
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Bonus */}
+                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
+                      <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
+                        BONUS
                       </span>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Layanan Personal Legal Assistance</span>
+                      </div>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Bonus */}
-                  <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
-                    <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
-                      BONUS
-                    </span>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-gray-650 font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Layanan Personal Legal Assistance</span>
-                    </div>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
-                    </div>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-[#e5e7eb] space-y-2 mt-4">
-                    <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
-                      EXTRA BONUS
-                    </span>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
-                    </div>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Karyawan</span>
-                    </div>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Perusahaan</span>
-                    </div>
-                    <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
-                      <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Kontrak Bisnis</span>
+                    {/* Extra Bonus */}
+                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-[#e5e7eb] space-y-2 mt-4">
+                      <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
+                        EXTRA BONUS
+                      </span>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
+                      </div>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen SOP Karyawan</span>
+                      </div>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen SOP Perusahaan</span>
+                      </div>
+                      <div className="flex items-start text-[12px] sm:text-[12.5px] text-[#6b7280] font-semibold leading-relaxed">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen Kontrak Bisnis</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Action Button */}
-              <div className="p-6 sm:p-7.5 pt-0">
-                <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20LKPM%20Menengah%20Besar%20seharga%20Rp%202.499.000."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[14px] rounded-xl text-gray-800 bg-white border border-gray-200 hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-sm"
-                >
-                  Pilih LKPM Menengah Besar
-                </a>
+                {/* Action Button */}
+                <div className="p-6 sm:p-7.5 pt-0">
+                  <a
+                    href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20LKPM%20Menengah%20Besar%20seharga%20Rp%202.499.000."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full py-3.5 text-center font-extrabold text-[14px] rounded-xl text-gray-800 bg-white border border-gray-200 hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-sm"
+                  >
+                    Pilih LKPM Menengah Besar
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -1006,7 +1016,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12.5px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">ALUR PELAPORAN DI OSS RBA</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               5 langkah submit laporan LKPM.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -1103,7 +1113,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12.5px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">FAQ</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Pertanyaan seputar Pelaporan LKPM.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">

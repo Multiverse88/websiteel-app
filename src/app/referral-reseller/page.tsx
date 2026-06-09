@@ -93,32 +93,22 @@ export default function ReferralResellerPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
-
       {/* ─── 1. HERO SECTION ─── */}
       <section className="bg-white pt-12 pb-20 lg:pt-16 lg:pb-24 relative overflow-hidden">
-        {/* Soft Pink/Rose Radial Gradient Background — kiri pekat, kanan putih */}
-        {/* Blob utama: pink/rose besar di kiri-tengah */}
+        {/* Soft Pink/Rose Radial Gradient Background on the left */}
         <div
-          className="absolute -left-[200px] top-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] aspect-square rounded-full pointer-events-none z-0"
+          className="absolute -left-[200px] top-1/4 w-[700px] sm:w-[900px] aspect-square rounded-full pointer-events-none z-0"
           style={{
-            background: "radial-gradient(circle, rgba(253, 180, 196, 0.55) 0%, rgba(253, 218, 222, 0.3) 40%, rgba(253, 218, 222, 0) 70%)",
-            filter: "blur(55px)",
+            background: "radial-gradient(circle, rgba(253, 180, 196, 0.45) 0%, rgba(253, 218, 222, 0.25) 45%, rgba(253, 218, 222, 0) 70%)",
+            filter: "blur(60px)",
           }}
         />
-        {/* Blob kedua: pink sangat lembut di kiri-atas untuk kesan foto referensi */}
+        {/* Soft Peach/Orange Radial Gradient Background on the right */}
         <div
-          className="absolute -left-[100px] -top-[100px] w-[500px] sm:w-[650px] aspect-square rounded-full pointer-events-none z-0"
+          className="absolute -right-[200px] bottom-0 w-[700px] sm:w-[950px] aspect-square rounded-full pointer-events-none z-0"
           style={{
-            background: "radial-gradient(circle, rgba(253, 200, 215, 0.45) 0%, rgba(253, 218, 222, 0) 65%)",
-            filter: "blur(50px)",
-          }}
-        />
-        {/* Kanan bawah: sangat transparan agar sisi kanan tetap putih bersih */}
-        <div
-          className="absolute right-0 bottom-0 w-[350px] sm:w-[500px] aspect-square rounded-full pointer-events-none z-0"
-          style={{
-            background: "radial-gradient(circle, rgba(255, 240, 245, 0.25) 0%, rgba(255, 255, 255, 0) 70%)",
-            filter: "blur(40px)",
+            background: "radial-gradient(circle, rgba(254, 215, 170, 0.35) 0%, rgba(254, 215, 170, 0.1) 45%, rgba(255, 255, 255, 0) 70%)",
+            filter: "blur(60px)",
           }}
         />
 
@@ -128,9 +118,9 @@ export default function ReferralResellerPage() {
             {/* Left Column (col-span-7) */}
             <div className="lg:col-span-7 flex flex-col space-y-6 text-left">
               {/* Badge Pill */}
-              <div className="inline-flex items-center space-x-2 bg-white py-1.5 px-3.5 rounded-full border border-gray-150 shadow-[0_2px_12px_rgba(0,0,0,0.015)] w-fit">
+              <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-[0_2px_12px_rgba(0,0,0,0.015)] w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[11.5px] font-bold text-gray-800 tracking-wider">Program Referral & Reseller</span>
+                <span className="text-[11.5px] font-bold text-[#990202] tracking-wider">Program Referral &amp; Reseller</span>
               </div>
 
               {/* Headline */}
@@ -140,7 +130,7 @@ export default function ReferralResellerPage() {
 
               {/* Subtitle */}
               <p className="text-[15px] sm:text-[16px] text-gray-500 leading-relaxed max-w-xl font-normal">
-                Rekomendasikan layanan legalitas EasyLegal ke kontakmu — terima komisi langsung tiap transaksi closing. Cocok untuk freelancer, konsultan, agen properti, & siapa saja yang punya jaringan bisnis.
+                Rekomendasikan layanan legalitas EasyLegal ke kontakmu — terima komisi langsung tiap transaksi closing. Cocok untuk freelancer, konsultan, agen properti, &amp; siapa saja yang punya jaringan bisnis.
               </p>
 
               {/* Action buttons */}
@@ -149,7 +139,7 @@ export default function ReferralResellerPage() {
                   href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20mendaftar%20Program%20Referral%20%26%20Reseller%20tanpa%20modal."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-center cursor-pointer space-x-2 shrink-0"
+                  className="inline-flex items-center justify-center px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-center space-x-2 shrink-0"
                 >
                   {/* WhatsApp SVG Icon */}
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -165,61 +155,17 @@ export default function ReferralResellerPage() {
                   Pelajari Cara Kerja
                 </a>
               </div>
-
-              {/* Checkpoints Row */}
-              <div className="border-t border-gray-150 pt-8 mt-10 grid grid-cols-3 gap-4">
-                {/* Checkpoint 1 */}
-                <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
-                    <ShieldCheck className="w-5 h-5 text-[#990202]" />
-                  </div>
-                  <div>
-                    <div className="font-extrabold text-[14px] sm:text-[15px] text-gray-900 leading-tight">6.500+</div>
-                    <div className="text-[11px] sm:text-[12px] text-gray-500 font-semibold mt-0.5">Klien terlayani</div>
-                  </div>
-                </div>
-                {/* Checkpoint 2 */}
-                <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
-                    <Check className="w-5 h-5 text-[#990202]" strokeWidth={3.5} />
-                  </div>
-                  <div>
-                    <div className="font-extrabold text-[14px] sm:text-[15px] text-gray-900 leading-tight">90+ Layanan</div>
-                    <div className="text-[11px] sm:text-[12px] text-gray-500 font-semibold mt-0.5">Satu kode komisi</div>
-                  </div>
-                </div>
-                {/* Checkpoint 3 */}
-                <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
-                    <Award className="w-5 h-5 text-[#990202]" />
-                  </div>
-                  <div>
-                    <div className="font-extrabold text-[14px] sm:text-[15px] text-gray-900 leading-tight">ISO Certified</div>
-                    <div className="text-[11px] sm:text-[12px] text-gray-500 font-semibold mt-0.5">9001 & 27001</div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Right Column (col-span-5) */}
             <div className="lg:col-span-5 relative flex justify-center items-center py-12 lg:py-0">
-
-              {/* Backglow element specific to this mockup card */}
-              <div
-                className="absolute w-[120%] h-[120%] -left-[10%] -top-[10%] rounded-full pointer-events-none z-0"
-                style={{
-                  background: "radial-gradient(circle, rgba(153, 2, 2, 0.065) 0%, rgba(153, 2, 2, 0) 70%)",
-                  filter: "blur(40px)",
-                }}
-              />
-
               <div className="relative w-full max-w-[390px] z-10">
                 {/* 1. Main Commission Card */}
                 <div className="bg-white rounded-[24px] p-6 sm:p-8 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_20px_50px_rgba(0,0,0,0.035)] relative">
 
                   {/* Floating badge centered on the top card border */}
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#990202] text-white text-[9.5px] font-black tracking-widest px-4.5 py-1.5 rounded-full uppercase border border-[#990202] shadow-md z-20 whitespace-nowrap">
-                    CONTOH KOMISI · 1 KLIEN
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#8A0000] text-white text-[9.5px] font-black tracking-widest px-4.5 py-1.5 rounded-full uppercase border border-[#8A0000] shadow-md z-20 whitespace-nowrap">
+                    CONTOH KOMISI • 1 KLIEN
                   </div>
 
                   <div className="text-center mt-4">
@@ -227,10 +173,10 @@ export default function ReferralResellerPage() {
                       TOTAL KOMISI POTENSIAL
                     </span>
                     <div className="flex items-start justify-center text-[#990202] font-black leading-none mb-1 font-sans">
-                      <span className="text-[20px] sm:text-[24px] mt-2 sm:mt-2.5 mr-0.5">Rp</span>
+                      <span className="text-[20px] sm:text-[24px] mt-2 sm:mt-2.5 mr-0.5 font-extrabold">Rp</span>
                       <span className="text-[48px] sm:text-[56px] tracking-tight">850.000</span>
                     </div>
-                    <span className="text-gray-400 text-[9.5px] font-bold tracking-wider block mb-6">
+                    <span className="text-gray-450 text-[9.5px] font-bold tracking-wider block mb-6">
                       DARI 1 PAKET LAYANAN KLIEN
                     </span>
                   </div>
@@ -283,8 +229,8 @@ export default function ReferralResellerPage() {
                   </div>
 
                   {/* Total per Klien */}
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-gray-500 font-extrabold text-[12px] sm:text-[12.5px] tracking-wide">
+                  <div className="flex items-center justify-between pt-1 border-t border-gray-100">
+                    <span className="text-gray-900 font-extrabold text-[12.5px] sm:text-[13px] tracking-wide">
                       TOTAL PER KLIEN
                     </span>
                     <span className="text-[#990202] font-black text-[14.5px] sm:text-[15.5px]">
@@ -294,8 +240,8 @@ export default function ReferralResellerPage() {
 
                 </div>
 
-                {/* 2. Floating Badge: Transfer 3 Hari (Top Right, overlapping slightly) */}
-                <div className="absolute -top-20 -right-4 sm:-right-8 bg-white rounded-2xl p-3 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_15px_35px_rgba(0,0,0,0.04)] flex items-center space-x-3 max-w-[190px] z-20 hover:scale-[1.02] transition-transform duration-300">
+                {/* 2. Floating Badge: Transfer 3 Hari (Centered on Top Right corner) */}
+                <div className="absolute -top-8 -right-16 sm:-right-24 bg-white rounded-2xl p-3 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_15px_35px_rgba(0,0,0,0.04)] flex items-center space-x-3 max-w-[190px] z-20 hover:scale-[1.02] transition-transform duration-300">
                   <div className="w-9 h-9 bg-[#990202] rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm">
                     <Check className="w-5 h-5 text-white" strokeWidth={3.5} />
                   </div>
@@ -305,8 +251,8 @@ export default function ReferralResellerPage() {
                   </div>
                 </div>
 
-                {/* 3. Floating Badge: Unlimited Income (Bottom Left, overlapping slightly) */}
-                <div className="absolute -bottom-6 -left-4 sm:-left-8 bg-white rounded-2xl p-3 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_15px_35px_rgba(0,0,0,0.04)] flex items-center space-x-3 max-w-[190px] z-20 hover:scale-[1.02] transition-transform duration-300">
+                {/* 3. Floating Badge: Unlimited Income (Centered on Bottom Left corner) */}
+                <div className="absolute -bottom-8 -left-16 sm:-left-24 bg-white rounded-2xl p-3 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_15px_35px_rgba(0,0,0,0.04)] flex items-center space-x-3 max-w-[190px] z-20 hover:scale-[1.02] transition-transform duration-300">
                   <div className="w-9 h-9 bg-[#990202] rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm">
                     <svg className="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                       <line x1="18" y1="20" x2="18" y2="10" />
@@ -319,12 +265,45 @@ export default function ReferralResellerPage() {
                     <div className="text-[10px] text-gray-450 font-semibold mt-0.5">Tidak ada batas komisi</div>
                   </div>
                 </div>
-
               </div>
-
             </div>
 
           </div>
+
+          {/* Checkpoints Row (Spans across the bottom below grid) */}
+          <div className="border-t border-gray-150 pt-8 mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 max-w-[850px] mr-auto">
+            {/* Checkpoint 1 */}
+            <div className="flex items-start space-x-3">
+              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
+                <ShieldCheck className="w-5 h-5 text-[#990202]" />
+              </div>
+              <div>
+                <div className="font-extrabold text-[15px] text-gray-900 leading-tight">6.500+</div>
+                <div className="text-[12px] text-gray-500 font-semibold mt-0.5">Klien terlayani</div>
+              </div>
+            </div>
+            {/* Checkpoint 2 */}
+            <div className="flex items-start space-x-3">
+              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
+                <Check className="w-5 h-5 text-[#990202]" strokeWidth={3.5} />
+              </div>
+              <div>
+                <div className="font-extrabold text-[15px] text-gray-900 leading-tight">90+ Layanan</div>
+                <div className="text-[12px] text-gray-500 font-semibold mt-0.5">Satu kode komisi</div>
+              </div>
+            </div>
+            {/* Checkpoint 3 */}
+            <div className="flex items-start space-x-3">
+              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
+                <Award className="w-5 h-5 text-[#990202]" />
+              </div>
+              <div>
+                <div className="font-extrabold text-[15px] text-gray-900 leading-tight">ISO Certified</div>
+                <div className="text-[12px] text-gray-500 font-semibold mt-0.5">9001 &amp; 27001</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 

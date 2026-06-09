@@ -66,7 +66,7 @@ export default function CekNama() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-[44px] sm:text-[52px] font-black text-[#111111] tracking-tight leading-tight mb-4">
+        <h1 className="text-[32px] xs:text-[38px] sm:text-[52px] font-black text-[#111111] tracking-tight leading-tight mb-4">
           Cek nama PT & Merek
         </h1>
 
@@ -109,7 +109,7 @@ export default function CekNama() {
         </div>
 
         {/* Card Content Form */}
-        <form onSubmit={handleWhatsAppSubmit} className="p-8 sm:p-10">
+        <form onSubmit={handleWhatsAppSubmit} className="p-5 sm:p-10">
           
           {activeTab === "pt" ? (
             /* ─── PT FORM SECTION ─── */

@@ -314,7 +314,7 @@ export default function CekKBLI() {
             Database KBLI 2020
           </div>
 
-          <h1 className="text-[44px] sm:text-[54px] lg:text-[60px] font-black text-[#111111] tracking-tight leading-[1.08] mb-6">
+          <h1 className="text-[32px] xs:text-[40px] sm:text-[54px] lg:text-[60px] font-black text-[#111111] tracking-tight leading-[1.08] mb-6">
             Klasifikasi Baku<br />Lapangan Usaha<br />Indonesia.
           </h1>
 
@@ -341,7 +341,7 @@ export default function CekKBLI() {
           </div>
         </div>
 
-        <div className="lg:col-span-6 relative w-full flex items-center justify-center">
+        <div className="lg:col-span-6 relative w-full flex items-center justify-center scale-[0.82] xs:scale-[0.9] sm:scale-100 origin-center transition-all duration-300">
           <div className="absolute inset-0 bg-gradient-to-tr from-[#FEEDDC]/70 to-[#FCE7E6]/70 rounded-[40px] opacity-80 blur-[4px] transform rotate-3 scale-95 pointer-events-none" />
 
           <div className="relative bg-white rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-white/50 w-[90%] sm:w-[85%] overflow-hidden flex flex-col p-5 z-10">
@@ -681,7 +681,7 @@ export default function CekKBLI() {
       {/* ─── INTERACTIVE DETAIL MODAL ─── */}
       {selectedKBLI && (
         <div className="fixed inset-0 bg-dark/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-white rounded-[28px] max-w-lg w-full p-8 text-left space-y-6 relative shadow-2xl animate-slide-down border border-gray-100">
+          <div className="bg-white rounded-[20px] sm:rounded-[28px] max-w-lg w-full p-5 sm:p-8 text-left space-y-5 sm:space-y-6 relative shadow-2xl animate-slide-down border border-gray-100">
             {/* Close Button */}
             <button
               onClick={() => setSelectedKBLI(null)}

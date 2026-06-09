@@ -195,7 +195,7 @@ export default function PerjanjianPerkawinan() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-955 leading-[1.15] tracking-tight">
+              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.15] tracking-tight">
                 Lindungi aset pribadi dengan <span className="text-[#990202]">Perjanjian Pisah Harta</span> resmi.
               </h1>
 
@@ -231,7 +231,7 @@ export default function PerjanjianPerkawinan() {
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13px] font-black text-gray-955">7–14 Hari</div>
+                    <div className="text-[13px] font-black text-gray-950">7–14 Hari</div>
                     <div className="text-[10px] text-gray-500 font-semibold">Proses lengkap</div>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function PerjanjianPerkawinan() {
                     <FileText className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13px] font-black text-gray-955">Akta Notaris</div>
+                    <div className="text-[13px] font-black text-gray-950">Akta Notaris</div>
                     <div className="text-[10px] text-gray-500 font-semibold">Resmi &amp; legal</div>
                   </div>
                 </div>
@@ -253,7 +253,7 @@ export default function PerjanjianPerkawinan() {
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13px] font-black text-gray-955">KUA/Dukcapil</div>
+                    <div className="text-[13px] font-black text-gray-950">KUA/Dukcapil</div>
                     <div className="text-[10px] text-gray-500 font-semibold">Terdaftar resmi</div>
                   </div>
                 </div>
@@ -594,7 +594,7 @@ export default function PerjanjianPerkawinan() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA PERJANJIAN PERKAWINAN</p>
-            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               2 layanan — bisa pilih salah satu atau kombinasi.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -606,218 +606,228 @@ export default function PerjanjianPerkawinan() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto items-stretch">
 
             {/* Left Card: Pembuatan Perjanjian */}
-            <div className="bg-white rounded-[28px] overflow-hidden border border-red-200/60 shadow-[0_12px_40px_rgba(153,2,2,0.06)] flex flex-col justify-between transition-all duration-300 hover:shadow-[0_16px_48px_rgba(153,2,2,0.1)]">
-              <div>
-                {/* Header Container (Crimson) */}
-                <div className="bg-[#990202] px-6 py-9 text-center text-white relative flex flex-col items-center">
-                  {/* Paling Populer Badge */}
-                  <div className="bg-[#800000] text-white text-[9.5px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider mb-3.5 shadow-sm border border-red-500/20">
-                    Paling Populer
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[28px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-[28px] overflow-hidden flex flex-col h-full justify-between border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] transition-all duration-300">
+                <div>
+                  {/* Header Container (Crimson) */}
+                  <div className="bg-[#990202] px-6 py-9 text-center text-white relative flex flex-col items-center">
+                    {/* Paling Populer Badge */}
+                    <div className="bg-[#800000] text-white text-[9.5px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider mb-3.5 shadow-sm border border-red-500/20">
+                      Paling Populer
+                    </div>
+                    <h4 className="text-[14px] font-black tracking-widest uppercase">
+                      PEMBUATAN PERJANJIAN
+                    </h4>
+                    <div className="mt-3 text-[13px] text-white/50 line-through font-bold">
+                      Rp 8.000.000
+                    </div>
+                    <div className="mt-0.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
+                      <span className="text-[18px] mt-1.5 font-extrabold mr-1">Rp</span>
+                      <span>3.999.000</span>
+                    </div>
+                    <p className="text-[9.5px] font-black text-white/70 tracking-widest uppercase mt-2.5">
+                      TANPA TAMBAHAN BIAYA APAPUN
+                    </p>
                   </div>
-                  <h4 className="text-[14px] font-black tracking-widest uppercase">
-                    PEMBUATAN PERJANJIAN
-                  </h4>
-                  <div className="mt-3 text-[13px] text-white/50 line-through font-bold">
-                    Rp 8.000.000
+
+                  {/* Features Detail */}
+                  <div className="p-6 sm:p-8 space-y-6 text-left">
+                    {/* Lama Proses */}
+                    <div className="space-y-2">
+                      <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase">
+                        LAMA PROSES(1)
+                      </h5>
+                      <div className="flex items-center text-[14px] font-black text-gray-900">
+                        <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0" strokeWidth={3.5} />
+                        <span>7–14 hari kerja</span>
+                      </div>
+                    </div>
+
+                    {/* Yang Diperoleh */}
+                    <div className="space-y-3.5 border-t border-gray-100 pt-5">
+                      <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
+                        YANG DIPEROLEH
+                      </h5>
+                      <div className="flex items-start text-[13.5px] text-gray-700 leading-relaxed font-semibold">
+                        <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                        <span>Konsultasi Pisah Harta dengan ahli hukum keluarga</span>
+                      </div>
+                      <div className="flex items-start text-[13.5px] text-gray-700 leading-relaxed font-semibold">
+                        <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                        <span>Akta Perjanjian Pisah Harta di hadapan notaris</span>
+                      </div>
+                    </div>
+
+                    {/* Bonus Block */}
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
+                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
+                        BONUS
+                      </h5>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Layanan Personal Legal Assistance</span>
+                      </div>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>1 Kupon Undian iPhone</span>
+                      </div>
+                    </div>
+
+                    {/* Extra Bonus Block */}
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
+                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
+                        EXTRA BONUS
+                      </h5>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Voucher EasyLegal Rp 250.000</span>
+                      </div>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen SOP Karyawan</span>
+                      </div>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen SOP Perusahaan</span>
+                      </div>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen Kontrak Bisnis</span>
+                      </div>
+                    </div>
+
                   </div>
-                  <div className="mt-0.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
-                    <span className="text-[18px] mt-1.5 font-extrabold mr-1">Rp</span>
-                    <span>3.999.000</span>
-                  </div>
-                  <p className="text-[9.5px] font-black text-white/70 tracking-widest uppercase mt-2.5">
-                    TANPA TAMBAHAN BIAYA APAPUN
-                  </p>
                 </div>
 
-                {/* Features Detail */}
-                <div className="p-6 sm:p-8 space-y-6 text-left">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase">
-                      LAMA PROSES(1)
-                    </h5>
-                    <div className="flex items-center text-[14px] font-black text-gray-900">
-                      <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0" strokeWidth={3.5} />
-                      <span>7–14 hari kerja</span>
-                    </div>
-                  </div>
-
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-3.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
-                      YANG DIPEROLEH
-                    </h5>
-                    <div className="flex items-start text-[13.5px] text-gray-700 leading-relaxed font-semibold">
-                      <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span>Konsultasi Pisah Harta dengan ahli hukum keluarga</span>
-                    </div>
-                    <div className="flex items-start text-[13.5px] text-gray-700 leading-relaxed font-semibold">
-                      <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <span>Akta Perjanjian Pisah Harta di hadapan notaris</span>
-                    </div>
-                  </div>
-
-                  {/* Bonus Block */}
-                  <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
-                    <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
-                      BONUS
-                    </h5>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Layanan Personal Legal Assistance</span>
-                    </div>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>1 Kupon Undian iPhone</span>
-                    </div>
-                  </div>
-
-                  {/* Extra Bonus Block */}
-                  <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
-                    <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
-                      EXTRA BONUS
-                    </h5>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Voucher EasyLegal Rp 250.000</span>
-                    </div>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Karyawan</span>
-                    </div>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Perusahaan</span>
-                    </div>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Kontrak Bisnis</span>
-                    </div>
-                  </div>
-
+                {/* Order Button */}
+                <div className="p-6 sm:p-8 pt-0">
+                  <a
+                    href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Layanan Pembuatan Perjanjian Perkawinan seharga Rp 3.999.000.")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
+                  >
+                    Pilih Pembuatan Perjanjian
+                  </a>
                 </div>
-              </div>
-
-              {/* Order Button */}
-              <div className="p-6 sm:p-8 pt-0">
-                <a
-                  href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Layanan Pembuatan Perjanjian Perkawinan seharga Rp 3.999.000.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
-                >
-                  Pilih Pembuatan Perjanjian
-                </a>
               </div>
             </div>
 
             {/* Right Card: Registrasi KUA / Dukcapil */}
-            <div className="bg-white rounded-[28px] overflow-hidden border border-gray-200 shadow-[0_12px_40px_rgba(0,0,0,0.03)] flex flex-col justify-between transition-all duration-300 hover:shadow-[0_16px_48px_rgba(0,0,0,0.06)]">
-              <div>
-                {/* Header Container (Black) */}
-                <div className="bg-[#151515] px-6 py-9 text-center text-white relative flex flex-col items-center justify-center min-h-[174px]">
-                  <h4 className="text-[14px] font-black tracking-widest uppercase">
-                    REGISTRASI KUA / DUKCAPIL
-                  </h4>
-                  <div className="mt-3 text-[13px] text-white/40 line-through font-bold">
-                    Rp 4.000.000
-                  </div>
-                  <div className="mt-0.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
-                    <span className="text-[18px] mt-1.5 font-extrabold mr-1">Rp</span>
-                    <span>1.999.000</span>
-                  </div>
-                  <p className="text-[9.5px] font-black text-white/60 tracking-widest uppercase mt-2.5">
-                    TANPA TAMBAHAN BIAYA APAPUN
-                  </p>
-                </div>
-
-                {/* Features Detail */}
-                <div className="p-6 sm:p-8 space-y-6 text-left">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase">
-                      LAMA PROSES(2)
-                    </h5>
-                    <div className="flex items-center text-[14px] font-black text-gray-900">
-                      <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0" strokeWidth={3.5} />
-                      <span>7–14 hari kerja</span>
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[28px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-[28px] overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+                <div>
+                  {/* Header Container (Black) */}
+                  <div className="bg-[#151515] px-6 py-9 text-center text-white relative flex flex-col items-center justify-center min-h-[174px]">
+                    <h4 className="text-[14px] font-black tracking-widest uppercase">
+                      REGISTRASI KUA / DUKCAPIL
+                    </h4>
+                    <div className="mt-3 text-[13px] text-white/40 line-through font-bold">
+                      Rp 4.000.000
                     </div>
+                    <div className="mt-0.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
+                      <span className="text-[18px] mt-1.5 font-extrabold mr-1">Rp</span>
+                      <span>1.999.000</span>
+                    </div>
+                    <p className="text-[9.5px] font-black text-white/60 tracking-widest uppercase mt-2.5">
+                      TANPA TAMBAHAN BIAYA APAPUN
+                    </p>
                   </div>
 
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-3.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
-                      YANG DIPEROLEH
-                    </h5>
-                    <div className="flex items-start gap-2.5 text-[13.5px] text-gray-700 leading-relaxed font-semibold">
-                      <Check className="w-5 h-5 text-emerald-600 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <div className="flex-1 grid grid-cols-12 gap-x-1">
-                        <span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span>
-                        <span className="col-span-6 sm:col-span-3 font-bold text-gray-900">KUA Kota Bandung</span>
-                        <span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Muslim)</span>
+                  {/* Features Detail */}
+                  <div className="p-6 sm:p-8 space-y-6 text-left">
+                    {/* Lama Proses */}
+                    <div className="space-y-2">
+                      <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase">
+                        LAMA PROSES(2)
+                      </h5>
+                      <div className="flex items-center text-[14px] font-black text-gray-900">
+                        <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0" strokeWidth={3.5} />
+                        <span>7–14 hari kerja</span>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 text-[13.5px] text-gray-700 leading-relaxed font-semibold">
-                      <Check className="w-5 h-5 text-emerald-600 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                      <div className="flex-1 grid grid-cols-12 gap-x-1">
-                        <span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span>
-                        <span className="col-span-6 sm:col-span-3 font-bold text-gray-900">Dukcapil Kota Bandung</span>
-                        <span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Non-Muslim)</span>
+
+                    {/* Yang Diperoleh */}
+                    <div className="space-y-3.5 border-t border-gray-100 pt-5">
+                      <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
+                        YANG DIPEROLEH
+                      </h5>
+                      <div className="flex items-start gap-2.5 text-[13.5px] text-gray-700 leading-relaxed font-semibold">
+                        <Check className="w-5 h-5 text-emerald-600 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                        <div className="flex-1 grid grid-cols-12 gap-x-1">
+                          <span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span>
+                          <span className="col-span-6 sm:col-span-3 font-bold text-gray-900">KUA Kota Bandung</span>
+                          <span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Muslim)</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2.5 text-[13.5px] text-gray-700 leading-relaxed font-semibold">
+                        <Check className="w-5 h-5 text-emerald-600 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                        <div className="flex-1 grid grid-cols-12 gap-x-1">
+                          <span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span>
+                          <span className="col-span-6 sm:col-span-3 font-bold text-gray-900">Dukcapil Kota Bandung</span>
+                          <span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Non-Muslim)</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Bonus Block */}
-                  <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
-                    <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
-                      BONUS
-                    </h5>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Layanan Personal Legal Assistance</span>
+                    {/* Bonus Block */}
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
+                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
+                        BONUS
+                      </h5>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Layanan Personal Legal Assistance</span>
+                      </div>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>1 Kupon Undian iPhone</span>
+                      </div>
                     </div>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>1 Kupon Undian iPhone</span>
-                    </div>
-                  </div>
 
-                  {/* Extra Bonus Block */}
-                  <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
-                    <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
-                      EXTRA BONUS
-                    </h5>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Voucher EasyLegal Rp 250.000</span>
+                    {/* Extra Bonus Block */}
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
+                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
+                        EXTRA BONUS
+                      </h5>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Voucher EasyLegal Rp 250.000</span>
+                      </div>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen SOP Karyawan</span>
+                      </div>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen SOP Perusahaan</span>
+                      </div>
+                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                        <span>Dokumen Kontrak Bisnis</span>
+                      </div>
                     </div>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Karyawan</span>
-                    </div>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen SOP Perusahaan</span>
-                    </div>
-                    <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
-                      <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>Dokumen Kontrak Bisnis</span>
-                    </div>
-                  </div>
 
+                  </div>
                 </div>
-              </div>
 
-              {/* Order Button */}
-              <div className="p-6 sm:p-8 pt-0">
-                <a
-                  href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Layanan Registrasi KUA / Dukcapil Perjanjian Perkawinan seharga Rp 1.999.000.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
-                >
-                  Pilih Registrasi KUA / Dukcapil
-                </a>
+                {/* Order Button */}
+                <div className="p-6 sm:p-8 pt-0">
+                  <a
+                    href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Layanan Registrasi KUA / Dukcapil Perjanjian Perkawinan seharga Rp 1.999.000.")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
+                  >
+                    Pilih Registrasi KUA / Dukcapil
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -832,60 +842,70 @@ export default function PerjanjianPerkawinan() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SKEMA PEMBUATAN</p>
-            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Alur kerja dari konsultasi sampai registrasi.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
               Tim notaris &amp; legal kami pegang seluruh tahapan — Anda cukup datang sekali untuk tanda tangan.
             </p>
+            {/* Scroll indicator text */}
+            <div className="pt-4 text-[11px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+              <span>Geser untuk lihat semua langkah</span>
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
+            </div>
           </div>
 
-          {/* Timeline Stack */}
-          <div className="max-w-[960px] mx-auto relative space-y-8">
+          {/* Horizontal Scrollable Row */}
+          <div className="relative max-w-[1240px] mx-auto">
             
-            {/* Dashed Timeline vertical line (only on desktop/tablet) */}
-            <div className="absolute left-[20px] md:left-[24px] top-6 bottom-6 w-0.5 bg-gray-200 border-l border-dashed border-gray-300 pointer-events-none hidden sm:block" />
-
-            {steps.map((step, idx) => (
-              <div key={idx} className="flex flex-col sm:flex-row items-start gap-4 md:gap-6 relative group">
-                
-                {/* Step Number Circle */}
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#990202] text-[#990202] bg-white flex items-center justify-center font-bold text-[14px] md:text-[16px] flex-shrink-0 z-10 shadow-sm transition-colors group-hover:bg-[#990202] group-hover:text-white duration-300">
-                  {step.no}
-                </div>
-
-                {/* Card Container */}
-                <div className="flex-grow bg-white border border-gray-150/50 rounded-3xl p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-gray-200 transition-all duration-300 w-full text-left">
+            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
+              {steps.map((step, idx) => (
+                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
                   
-                  {/* Header Row */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-gray-100/60">
-                    <h4 className="text-[16px] md:text-[18px] font-black text-gray-955">
-                      {step.title}
-                    </h4>
-                    {/* Duration Badge */}
-                    <div className="inline-flex items-center self-start sm:self-auto px-2.5 py-1 bg-[#FFF5F5] rounded-full text-[#990202] font-extrabold text-[10.5px] uppercase tracking-wider flex-shrink-0 border border-red-50/50">
-                      <Clock className="w-3.5 h-3.5 mr-1 text-[#990202]" strokeWidth={2.5} />
-                      {step.duration}
-                    </div>
+                  {/* Number Badge (Centered on top border) */}
+                  <div className="absolute top-0 left-6 w-10 h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                    {step.no}
                   </div>
+                  
+                  {/* Card Container */}
+                  <div className="bg-white border border-gray-150 rounded-[24px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                    <div className="space-y-3">
+                      
+                      {/* Title */}
+                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
+                        {step.title}
+                      </h4>
+                      
+                      {/* Duration Badge */}
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[10px] font-black uppercase py-1 px-3 rounded-full">
+                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
+                        <span>{step.duration}</span>
+                      </div>
 
-                  {/* Description */}
-                  <p className="text-[13.5px] text-gray-500 mt-3 font-normal leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+                      {/* Description */}
+                      <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
 
-                  {/* Bullet Checklist Grid */}
-                  <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4 mt-4 border-t border-gray-100/80">
-                    {step.points.map((point, pIdx) => (
-                      <li key={pIdx} className="flex items-start text-[12.5px] text-gray-600 font-medium leading-tight">
-                        <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span dangerouslySetInnerHTML={{ __html: point }} />
-                      </li>
-                    ))}
-                  </ul>
+                    </div>
 
+                    <div>
+                      {/* Dotted Divider */}
+                      <div className="border-t border-dashed border-gray-200 my-4"></div>
+
+                      {/* Checklist */}
+                      <ul className="space-y-2">
+                        {step.points.map((point, pIdx) => (
+                          <li key={pIdx} className="flex items-start text-[12px] font-bold text-gray-700 leading-tight">
+                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                            <span dangerouslySetInnerHTML={{ __html: point }} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                  </div>
                 </div>
-
-              </div>
-            ))}
+              ))}
+            </div>
 
           </div>
 

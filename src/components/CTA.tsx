@@ -3,11 +3,12 @@ import Link from "next/link";
 
 interface CTAProps {
   title?: React.ReactNode;
-  description?: string;
+  description?: React.ReactNode;
   whatsappLink?: string;
   whatsappText?: string;
   contactLink?: string;
   contactText?: string;
+  slaText?: string;
 }
 
 export default function CTA({
@@ -17,6 +18,7 @@ export default function CTA({
   whatsappText = "Konsultasi via WhatsApp",
   contactLink = "/kontak",
   contactText = "Hubungi Tim Kami",
+  slaText = "Respons dalam 5 menit · Senin–Sabtu 08.00–20.00",
 }: CTAProps) {
   const defaultTitle = (
     <h2 className="font-inter text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
@@ -31,9 +33,9 @@ export default function CTA({
         {/* Left Column: Heading & Description */}
         <div className="flex flex-col text-left max-w-xl">
           {title || defaultTitle}
-          <p className="text-[14.5px] text-gray-500 leading-relaxed mt-4 max-w-[460px] font-normal">
+          <div className="text-[14.5px] text-gray-500 leading-relaxed mt-4 max-w-[460px] font-normal">
             {description}
-          </p>
+          </div>
         </div>
 
         {/* Right Column: CTA Buttons & SLA subtext */}
@@ -54,10 +56,12 @@ export default function CTA({
           {/* Direct Contact Button */}
           <Link
             href={contactLink}
-            className="w-full mt-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold py-3.5 px-6 rounded-xl flex items-center justify-center gap-1.5 text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
+            className="w-full mt-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-[14.5px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
           >
             <span>{contactText}</span>
-            <span className="text-[14px] ml-1">→</span>
+            <svg className="w-4 h-4 text-gray-800 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
           </Link>
 
           {/* Response SLA text with Green Tick */}
@@ -65,7 +69,7 @@ export default function CTA({
             <svg className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
-            <span>Respons dalam 5 menit · Senin–Sabtu 08.00–20.00</span>
+            <span>{slaText}</span>
           </div>
         </div>
 

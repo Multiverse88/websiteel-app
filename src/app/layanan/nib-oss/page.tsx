@@ -133,7 +133,7 @@ export default function NibOss() {
     },
     {
       q: "Berapa lama proses penerbitan NIB?",
-      a: "Proses standard berkisar antara <strong class=\"font-extrabold text-gray-955\">1 hingga 3 hari kerja</strong> setelah seluruh kelengkapan data administrasi kami terima dengan lengkap dan tidak ada gangguan pada sistem OSS BKPM."
+      a: "Proses standard berkisar antara <strong class=\"font-extrabold text-gray-950\">1 hingga 3 hari kerja</strong> setelah seluruh kelengkapan data administrasi kami terima dengan lengkap dan tidak ada gangguan pada sistem OSS BKPM."
     },
     {
       q: "Apa itu KBLI dan bagaimana cara memilihnya?",
@@ -149,7 +149,7 @@ export default function NibOss() {
     },
     {
       q: "Apakah harga sudah include biaya pemerintah?",
-      a: "Ya, seluruh biaya yang tertera pada paket kami bersifat <strong class=\"font-extrabold text-gray-955\">all-in</strong>. Sudah termasuk biaya jasa profesional kami, pembuatan akun, verifikasi data, hingga seluruh biaya PNBP atau biaya administrasi resmi pemerintah (jika ada)."
+      a: "Ya, seluruh biaya yang tertera pada paket kami bersifat <strong class=\"font-extrabold text-gray-950\">all-in</strong>. Sudah termasuk biaya jasa profesional kami, pembuatan akun, verifikasi data, hingga seluruh biaya PNBP atau biaya administrasi resmi pemerintah (jika ada)."
     },
     {
       q: "Apa yang bisa dilakukan setelah NIB terbit?",
@@ -229,7 +229,7 @@ export default function NibOss() {
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[13.5px] font-black text-gray-955 leading-tight">1-3 hari</p>
+                    <p className="text-[13.5px] font-black text-gray-950 leading-tight">1-3 hari</p>
                     <p className="text-[11px] font-bold text-gray-400">Lama proses</p>
                   </div>
                 </div>
@@ -240,7 +240,7 @@ export default function NibOss() {
                     <span className="text-[16px] font-black leading-none">$</span>
                   </div>
                   <div>
-                    <p className="text-[13.5px] font-black text-gray-955 leading-tight">Mulai Rp 499rb</p>
+                    <p className="text-[13.5px] font-black text-gray-950 leading-tight">Mulai Rp 499rb</p>
                     <p className="text-[11px] font-bold text-gray-400">Harga transparan</p>
                   </div>
                 </div>
@@ -253,7 +253,7 @@ export default function NibOss() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[13.5px] font-black text-gray-955 leading-tight">OSS RBA</p>
+                    <p className="text-[13.5px] font-black text-gray-950 leading-tight">OSS RBA</p>
                     <p className="text-[11px] font-bold text-gray-400">Resmi BKPM</p>
                   </div>
                 </div>
@@ -284,7 +284,7 @@ export default function NibOss() {
                     </svg>
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[12.5px] font-black text-gray-955">NIB Terbit</p>
+                    <p className="text-[12.5px] font-black text-gray-950">NIB Terbit</p>
                     <p className="text-[10px] font-bold text-gray-400">Resmi · 2 hari kerja</p>
                   </div>
                 </div>
@@ -297,7 +297,7 @@ export default function NibOss() {
                     </svg>
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[12.5px] font-black text-gray-955">OSS RBA Aktif</p>
+                    <p className="text-[12.5px] font-black text-gray-950">OSS RBA Aktif</p>
                     <p className="text-[10px] font-bold text-gray-400">Siap operasional</p>
                   </div>
               </div>
@@ -401,7 +401,7 @@ export default function NibOss() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">4 TINGKAT RISIKO USAHA</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-955 leading-tight">
+            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Jenis perizinan sesuai tingkat risiko.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -506,7 +506,7 @@ export default function NibOss() {
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-955 leading-tight">
+            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               4 paket sesuai jenis usaha Anda.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium">
@@ -517,7 +517,11 @@ export default function NibOss() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             
             {/* Paket 1: NIB Perorangan */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.025)] transition-all duration-300 flex flex-col justify-between">
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 {/* Header */}
                 <div className="bg-[#1A1A1A] px-6 py-8 text-center text-white relative">
@@ -611,9 +615,14 @@ export default function NibOss() {
                 </a>
               </div>
             </div>
+          </div>
 
             {/* Paket 2: NIB PT Perorangan (FAVORIT - Border Red) */}
-            <div className="bg-white rounded-3xl overflow-hidden border-[2.5px] border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.06)] scale-[1.025] z-10 flex flex-col justify-between relative">
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-3xl overflow-hidden border-[2.5px] border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.045)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.12)] scale-[1.025] z-10 flex flex-col justify-between relative transition-all duration-300 h-full">
               <div>
                 {/* Header */}
                 <div className="bg-[#990202] px-6 py-8 pt-10 text-center text-white relative">
@@ -631,7 +640,7 @@ export default function NibOss() {
                 <div className="p-6 space-y-5">
                   {/* Lama Proses */}
                   <div className="space-y-2">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">LAMA PROSES</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
                     <div className="flex items-center text-[12.5px] font-semibold text-gray-700">
                       <span className="text-emerald-500 text-[14px] mr-2">✓</span>
                       <span>1-3 Hari Kerja <sup className="text-[9px] text-[#990202]">(1)</sup></span>
@@ -640,7 +649,7 @@ export default function NibOss() {
 
                   {/* Yang Diperoleh */}
                   <div className="space-y-2.5">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">YANG DIPEROLEH</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
                     <ul className="space-y-2">
                       {[
                         "5 KBLI Bidang Usaha",
@@ -678,7 +687,7 @@ export default function NibOss() {
 
                   {/* Extra Bonus */}
                   <div className="space-y-2.5">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">EXTRA BONUS</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-2">
                       {[
                         <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>,
@@ -710,9 +719,14 @@ export default function NibOss() {
                 </a>
               </div>
             </div>
+          </div>
 
             {/* Paket 3: NIB Badan */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.025)] transition-all duration-300 flex flex-col justify-between">
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 {/* Header */}
                 <div className="bg-[#1A1A1A] px-6 py-8 text-center text-white relative">
@@ -727,7 +741,7 @@ export default function NibOss() {
                 <div className="p-6 space-y-5">
                   {/* Lama Proses */}
                   <div className="space-y-2">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">LAMA PROSES</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
                     <div className="flex items-center text-[12.5px] font-semibold text-gray-700">
                       <span className="text-emerald-500 text-[14px] mr-2">✓</span>
                       <span>1-3 Hari Kerja <sup className="text-[9px] text-[#990202]">(1)</sup></span>
@@ -736,7 +750,7 @@ export default function NibOss() {
 
                   {/* Yang Diperoleh */}
                   <div className="space-y-2.5">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">YANG DIPEROLEH</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
                     <ul className="space-y-2">
                       {[
                         "5 KBLI Bidang Usaha",
@@ -774,7 +788,7 @@ export default function NibOss() {
 
                   {/* Extra Bonus */}
                   <div className="space-y-2.5">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">EXTRA BONUS</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-2">
                       {[
                         <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>,
@@ -806,9 +820,14 @@ export default function NibOss() {
                 </a>
               </div>
             </div>
+          </div>
 
             {/* Paket 4: Cabut NIB */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.025)] transition-all duration-300 flex flex-col justify-between">
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 {/* Header */}
                 <div className="bg-[#1A1A1A] px-6 py-8 text-center text-white relative">
@@ -823,7 +842,7 @@ export default function NibOss() {
                 <div className="p-6 space-y-5">
                   {/* Lama Proses */}
                   <div className="space-y-2">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">LAMA PROSES</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
                     <div className="flex items-center text-[12.5px] font-semibold text-gray-700">
                       <span className="text-emerald-500 text-[14px] mr-2">✓</span>
                       <span>1-3 Hari Kerja <sup className="text-[9px] text-[#990202]">(1)</sup></span>
@@ -832,7 +851,7 @@ export default function NibOss() {
 
                   {/* Yang Diperoleh */}
                   <div className="space-y-2.5">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">YANG DIPEROLEH</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
                     <ul className="space-y-2">
                       {[
                         "Pencabutan NIB dari OSS"
@@ -863,7 +882,7 @@ export default function NibOss() {
 
                   {/* Extra Bonus */}
                   <div className="space-y-2.5">
-                    <h4 className="text-[10px] font-black text-gray-955 tracking-wider uppercase">EXTRA BONUS</h4>
+                    <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-2">
                       {[
                         <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>,
@@ -895,6 +914,7 @@ export default function NibOss() {
                 </a>
               </div>
             </div>
+          </div>
 
           </div>
 
@@ -914,7 +934,7 @@ export default function NibOss() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">LAYANAN TAMBAHAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-955 leading-tight">
+            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Perubahan KBLI & data usaha.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium">
@@ -983,7 +1003,11 @@ export default function NibOss() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1140px] mx-auto items-stretch">
             
             {/* Card 1: Cabut KBLI */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.025)] transition-all duration-300 flex flex-col justify-between">
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 <div className="bg-[#1A1A1A] px-6 py-7 text-center text-white relative">
                   <h3 className="text-[13px] font-black tracking-widest text-white/90">CABUT KBLI</h3>
@@ -1006,7 +1030,7 @@ export default function NibOss() {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="text-[9.5px] font-black text-gray-955 tracking-wider uppercase">YANG DIPEROLEH</h4>
+                    <h4 className="text-[9.5px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
                     <ul className="space-y-2">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1032,7 +1056,7 @@ export default function NibOss() {
 
                   {/* Extra Bonus */}
                   <div className="space-y-2">
-                    <h4 className="text-[9.5px] font-black text-gray-955 tracking-wider uppercase">EXTRA BONUS</h4>
+                    <h4 className="text-[9.5px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1071,9 +1095,14 @@ export default function NibOss() {
                 </a>
               </div>
             </div>
+          </div>
 
             {/* Card 2: Tambah KBLI (FAVORIT/RED) */}
-            <div className="bg-white rounded-3xl overflow-hidden border-[2.5px] border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.06)] scale-[1.02] z-10 flex flex-col justify-between relative">
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-3xl overflow-hidden border-[2.5px] border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.045)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.12)] scale-[1.02] z-10 flex flex-col justify-between relative transition-all duration-300 h-full">
               <div>
                 <div className="bg-[#990202] px-6 py-7 pt-9 text-center text-white relative">
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#990202] text-white text-[8px] font-black tracking-widest uppercase px-3 py-0.5 rounded-full whitespace-nowrap">
@@ -1091,7 +1120,7 @@ export default function NibOss() {
 
                 <div className="p-6 space-y-4">
                   <div className="space-y-1">
-                    <h4 className="text-[9.5px] font-black text-gray-955 tracking-wider uppercase">LAMA PROSES</h4>
+                    <h4 className="text-[9.5px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
                     <div className="flex items-center text-[12px] font-semibold text-gray-700">
                       <span className="text-emerald-500 text-[13px] mr-2">✓</span>
                       <span>1-3 Hari Kerja <sup className="text-[9px] text-[#990202]">(1)</sup></span>
@@ -1099,7 +1128,7 @@ export default function NibOss() {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="text-[9.5px] font-black text-gray-955 tracking-wider uppercase">YANG DIPEROLEH</h4>
+                    <h4 className="text-[9.5px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
                     <ul className="space-y-2">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1125,7 +1154,7 @@ export default function NibOss() {
 
                   {/* Extra Bonus */}
                   <div className="space-y-2">
-                    <h4 className="text-[9.5px] font-black text-gray-955 tracking-wider uppercase">EXTRA BONUS</h4>
+                    <h4 className="text-[9.5px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1164,9 +1193,14 @@ export default function NibOss() {
                 </a>
               </div>
             </div>
+          </div>
 
             {/* Card 3: Cabut & Tambah */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.025)] transition-all duration-300 flex flex-col justify-between">
+            <div className="relative group h-full">
+              {/* Interactive Red Hover Glow behind Card */}
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              
+              <div className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 <div className="bg-[#1A1A1A] px-6 py-7 text-center text-white relative">
                   <h3 className="text-[13px] font-black tracking-widest text-white/90">CABUT & TAMBAH</h3>
@@ -1181,7 +1215,7 @@ export default function NibOss() {
 
                 <div className="p-6 space-y-4">
                   <div className="space-y-1">
-                    <h4 className="text-[9.5px] font-black text-gray-955 tracking-wider uppercase">LAMA PROSES</h4>
+                    <h4 className="text-[9.5px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
                     <div className="flex items-center text-[12px] font-semibold text-gray-700">
                       <span className="text-emerald-500 text-[13px] mr-2">✓</span>
                       <span>1-3 Hari Kerja <sup className="text-[9px] text-[#990202]">(1)</sup></span>
@@ -1189,7 +1223,7 @@ export default function NibOss() {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="text-[9.5px] font-black text-gray-955 tracking-wider uppercase">YANG DIPEROLEH</h4>
+                    <h4 className="text-[9.5px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
                     <ul className="space-y-2">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1219,7 +1253,7 @@ export default function NibOss() {
 
                   {/* Extra Bonus */}
                   <div className="space-y-2">
-                    <h4 className="text-[9.5px] font-black text-gray-955 tracking-wider uppercase">EXTRA BONUS</h4>
+                    <h4 className="text-[9.5px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1258,6 +1292,7 @@ export default function NibOss() {
                 </a>
               </div>
             </div>
+          </div>
 
           </div>
 

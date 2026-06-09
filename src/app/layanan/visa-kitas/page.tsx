@@ -193,7 +193,7 @@ export default function VisaKitas() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-955 leading-[1.1] tracking-tight">
+              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
                 Visa Bisnis &amp; <span className="text-[#990202]">KITAS</span> <br />
                 resmi untuk WNA di <br className="hidden sm:block" /> Indonesia.
               </h1>
@@ -230,7 +230,7 @@ export default function VisaKitas() {
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-955">3-10 Hari</div>
+                    <div className="text-[13.5px] font-black text-gray-950">3-10 Hari</div>
                     <div className="text-[10.5px] text-gray-500 font-semibold">Proses cepat</div>
                   </div>
                 </div>
@@ -241,7 +241,7 @@ export default function VisaKitas() {
                     <MapPin className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-955">3 Kategori</div>
+                    <div className="text-[13.5px] font-black text-gray-950">3 Kategori</div>
                     <div className="text-[10.5px] text-gray-500 font-semibold">Bisnis - Investor - TKA</div>
                   </div>
                 </div>
@@ -252,7 +252,7 @@ export default function VisaKitas() {
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-955">100% Resmi</div>
+                    <div className="text-[13.5px] font-black text-gray-950">100% Resmi</div>
                     <div className="text-[10.5px] text-gray-500 font-semibold">Sesuai Ditjen Imigrasi</div>
                   </div>
                 </div>
@@ -340,7 +340,7 @@ export default function VisaKitas() {
                     <Home className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[12.5px] font-black text-gray-955 leading-none">Untuk Bisnis &amp; PMA</div>
+                    <div className="text-[12.5px] font-black text-gray-950 leading-none">Untuk Bisnis &amp; PMA</div>
                     <div className="text-[9.5px] text-gray-500 font-semibold mt-1">PT PMA, investor, ekspat</div>
                   </div>
                 </div>
@@ -359,7 +359,7 @@ export default function VisaKitas() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Visa &amp; KITAS — apa bedanya?
             </h2>
             <p className="text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -379,7 +379,7 @@ export default function VisaKitas() {
                   <FileText className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-955">Visa Bisnis</h4>
+                  <h4 className="text-[14px] font-black text-gray-950">Visa Bisnis</h4>
                   <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Kunjungan bisnis 60 hari - single/multiple entry</p>
                 </div>
               </div>
@@ -390,7 +390,7 @@ export default function VisaKitas() {
                   <TrendingUp className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-955">KITAS Investor</h4>
+                  <h4 className="text-[14px] font-black text-gray-950">KITAS Investor</h4>
                   <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Penanam modal PT PMA · 1-2 tahun</p>
                 </div>
               </div>
@@ -401,7 +401,7 @@ export default function VisaKitas() {
                   <User className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-955">KITAS Tenaga Kerja Asing</h4>
+                  <h4 className="text-[14px] font-black text-gray-950">KITAS Tenaga Kerja Asing</h4>
                   <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">WNA bekerja di Indonesia · 6-24 bulan</p>
                 </div>
               </div>
@@ -412,7 +412,7 @@ export default function VisaKitas() {
                   <Compass className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-955">MERP Re-Entry Permit</h4>
+                  <h4 className="text-[14px] font-black text-gray-950">MERP Re-Entry Permit</h4>
                   <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Bebas keluar-masuk Indonesia selama KITAS aktif</p>
                 </div>
               </div>
@@ -481,7 +481,7 @@ export default function VisaKitas() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PENGURUSAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Pilih kategori sesuai kebutuhan.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -532,120 +532,124 @@ export default function VisaKitas() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto items-stretch">
             {pricingData[activeCategory].map((pkg, idx) => {
               const isFirst = idx === 0;
+              const cardBorder = isFirst
+                ? "border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] relative z-10 transition-all duration-300"
+                : "border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
+
               return (
-                <div
-                  key={idx}
-                  className={`bg-white rounded-[24px] overflow-hidden border shadow-lg flex flex-col justify-between transition-all duration-300 hover:shadow-xl ${
-                    isFirst ? "border-[#990202]" : "border-gray-200"
-                  }`}
-                >
-                  <div>
-                    {/* Header */}
-                    <div className={`px-6 py-7 text-center text-white relative ${isFirst ? "bg-[#990202]" : "bg-[#1A1A1A]"}`}>
-                      {isFirst && (
-                        <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[9px] font-black tracking-widest uppercase py-1 shadow-sm">
-                          PALING POPULER
+                <div key={idx} className="relative group h-full">
+                  {/* Interactive Red Hover Glow behind Card */}
+                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                  
+                  <div className={`bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between ${cardBorder}`}>
+                    <div>
+                      {/* Header */}
+                      <div className={`px-6 py-7 text-center text-white relative ${isFirst ? "bg-[#990202]" : "bg-[#1A1A1A]"}`}>
+                        {isFirst && (
+                          <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[9px] font-black tracking-widest uppercase py-1 shadow-sm">
+                            PALING POPULER
+                          </div>
+                        )}
+                        <h4 className="text-[12px] font-black tracking-widest uppercase opacity-90 mt-2">
+                          {pkg.title}
+                        </h4>
+                        <div className="mt-4 text-[13px] text-white/50 line-through font-bold">
+                          {pkg.originalPrice}
                         </div>
-                      )}
-                      <h4 className="text-[12px] font-black tracking-widest uppercase opacity-90 mt-2">
-                        {pkg.title}
-                      </h4>
-                      <div className="mt-4 text-[13px] text-white/50 line-through font-bold">
-                        {pkg.originalPrice}
-                      </div>
-                      <div className="mt-0.5 text-[28px] sm:text-[32px] font-black tracking-tight flex items-start justify-center gap-0.5">
-                        <span className="text-[15px] mt-1.5 font-extrabold">IDR</span>
-                        <span>{pkg.price}</span>
-                      </div>
-                      <p className="text-[9.5px] font-black text-white/70 tracking-widest uppercase mt-2">
-                        TANPA TAMBAHAN BIAYA APAPUN
-                      </p>
-                    </div>
-
-                    {/* Features Detail */}
-                    <div className="p-7 space-y-6 text-left">
-                      
-                      {/* Lama Proses */}
-                      <div className="space-y-1">
-                        <h4 className="text-[11.5px] font-black text-red-800 tracking-wider uppercase">
-                          LAMA PROSES
-                        </h4>
-                        <p className="flex items-center text-[13.5px] font-bold text-gray-700">
-                          <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3} />
-                          <span>{pkg.lamaProses}</span>
+                        <div className="mt-0.5 text-[28px] sm:text-[32px] font-black tracking-tight flex items-start justify-center gap-0.5">
+                          <span className="text-[15px] mt-1.5 font-extrabold">IDR</span>
+                          <span>{pkg.price}</span>
+                        </div>
+                        <p className="text-[9.5px] font-black text-white/70 tracking-widest uppercase mt-2">
+                          TANPA TAMBAHAN BIAYA APAPUN
                         </p>
                       </div>
 
-                      {/* Yang Diperoleh */}
-                      <div className="space-y-1 border-t border-gray-100 pt-4">
-                        <h4 className="text-[11.5px] font-black text-red-800 tracking-wider uppercase">
-                          YANG DIPEROLEH
-                        </h4>
-                        <p className="flex items-start text-[13.5px] font-bold text-gray-700 leading-relaxed">
-                          <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                          <span>{pkg.yangDiperoleh}</span>
-                        </p>
-                      </div>
+                      {/* Features Detail */}
+                      <div className="p-7 space-y-6 text-left">
+                        
+                        {/* Lama Proses */}
+                        <div className="space-y-1">
+                          <h4 className="text-[11.5px] font-black text-red-800 tracking-wider uppercase">
+                            LAMA PROSES
+                          </h4>
+                          <p className="flex items-center text-[13.5px] font-bold text-gray-700">
+                            <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3} />
+                            <span>{pkg.lamaProses}</span>
+                          </p>
+                        </div>
 
-                      {/* Bonus */}
-                      <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 border border-gray-150">
-                        <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
-                          BONUS
-                        </h4>
-                        <ul className="space-y-1.5">
-                          <li className="flex items-start text-[12.5px] font-bold text-gray-700">
-                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <span>Layanan Personal Legal Assistance</span>
-                          </li>
-                          <li className="flex items-start text-[12.5px] font-bold text-gray-700">
-                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
-                          </li>
-                        </ul>
-                      </div>
+                        {/* Yang Diperoleh */}
+                        <div className="space-y-1 border-t border-gray-100 pt-4">
+                          <h4 className="text-[11.5px] font-black text-red-800 tracking-wider uppercase">
+                            YANG DIPEROLEH
+                          </h4>
+                          <p className="flex items-start text-[13.5px] font-bold text-gray-700 leading-relaxed">
+                            <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                            <span>{pkg.yangDiperoleh}</span>
+                          </p>
+                        </div>
 
-                      {/* Extra Bonus */}
-                      <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 border border-gray-150">
-                        <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
-                          EXTRA BONUS
-                        </h4>
-                        <ul className="space-y-2">
-                          <li className="flex items-start text-[12px] font-bold text-gray-700">
-                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
-                          </li>
-                          <li className="flex items-start text-[12px] font-bold text-gray-700">
-                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <span>Dokumen SOP Karyawan</span>
-                          </li>
-                          <li className="flex items-start text-[12px] font-bold text-gray-700">
-                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <span>Dokumen SOP Perusahaan</span>
-                          </li>
-                          <li className="flex items-start text-[12px] font-bold text-gray-700">
-                            <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <span>Dokumen Kontrak Bisnis</span>
-                          </li>
-                        </ul>
-                      </div>
+                        {/* Bonus */}
+                        <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 border border-gray-150">
+                          <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
+                            BONUS
+                          </h4>
+                          <ul className="space-y-1.5">
+                            <li className="flex items-start text-[12.5px] font-bold text-gray-700">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                              <span>Layanan Personal Legal Assistance</span>
+                            </li>
+                            <li className="flex items-start text-[12.5px] font-bold text-gray-700">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                              <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
+                            </li>
+                          </ul>
+                        </div>
 
+                        {/* Extra Bonus */}
+                        <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 border border-gray-150">
+                          <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
+                            EXTRA BONUS
+                          </h4>
+                          <ul className="space-y-2">
+                            <li className="flex items-start text-[12px] font-bold text-gray-700">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                              <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
+                            </li>
+                            <li className="flex items-start text-[12px] font-bold text-gray-700">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                              <span>Dokumen SOP Karyawan</span>
+                            </li>
+                            <li className="flex items-start text-[12px] font-bold text-gray-700">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                              <span>Dokumen SOP Perusahaan</span>
+                            </li>
+                            <li className="flex items-start text-[12px] font-bold text-gray-700">
+                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                              <span>Dokumen Kontrak Bisnis</span>
+                            </li>
+                          </ul>
+                        </div>
+
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Order Button */}
-                  <div className="p-7 pt-0">
-                    <a
-                      href={`https://wa.me/6281123456789?text=${encodeURIComponent(pkg.waText)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`block w-full py-4.5 text-center font-black text-[13.5px] rounded-xl transition-all duration-250 cursor-pointer ${
-                        isFirst
-                          ? "text-white bg-[#990202] hover:bg-[#800000] shadow-md shadow-red-900/10"
-                          : "text-gray-800 bg-white hover:bg-gray-50 border-2 border-gray-150 hover:border-gray-250"
-                      }`}
-                    >
-                      {pkg.labelBtn}
-                    </a>
+                    {/* Order Button */}
+                    <div className="p-7 pt-0">
+                      <a
+                        href={`https://wa.me/6281123456789?text=${encodeURIComponent(pkg.waText)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`block w-full py-4.5 text-center font-black text-[13.5px] rounded-xl transition-all duration-250 cursor-pointer ${
+                          isFirst
+                            ? "text-white bg-[#990202] hover:bg-[#800000] shadow-md shadow-red-900/10"
+                            : "text-gray-800 bg-white hover:bg-gray-50 border-2 border-gray-150 hover:border-gray-250"
+                        }`}
+                      >
+                        {pkg.labelBtn}
+                      </a>
+                    </div>
                   </div>
                 </div>
               );
@@ -670,7 +674,7 @@ export default function VisaKitas() {
           {/* Section Header */}
           <div className="mb-16 space-y-4">
             <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-955 leading-tight tracking-tight">
+            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Pertanyaan seputar Visa &amp; KITAS.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -735,7 +739,7 @@ export default function VisaKitas() {
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
           
           <div className="space-y-4 max-w-2xl">
-            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-955">
+            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
               Butuh konsultasi <span className="text-[#990202]">Visa atau KITAS?</span>
             </h2>
             <p className="text-[14.5px] sm:text-[15.5px] text-gray-500 leading-relaxed font-semibold">

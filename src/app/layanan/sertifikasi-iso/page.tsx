@@ -717,7 +717,7 @@ export default function SertifikasiIso() {
 
                     {/* Titles */}
                     <div>
-                      <h3 className="text-[19px] font-black text-gray-955 leading-none">{service.title}</h3>
+                      <h3 className="text-[19px] font-black text-gray-950 leading-none">{service.title}</h3>
                       <p className="text-[12px] text-gray-450 font-bold mt-2 uppercase tracking-wide">{service.subtitle}</p>
                     </div>
 
@@ -792,11 +792,15 @@ export default function SertifikasiIso() {
               {pricingPackages.slice(0, 3).map((pkg, idx) => {
                 const headerBg = pkg.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
                 const cardBorder = pkg.isPopular
-                  ? "border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(153,2,2,0.06)] relative"
-                  : "border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.03)] transition-all duration-300";
+                  ? "border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] relative z-10 transition-all duration-300"
+                  : "border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
 
                 return (
-                  <div key={idx} className={`bg-white rounded-2xl overflow-hidden flex flex-col justify-between ${cardBorder}`}>
+                  <div key={idx} className="relative group h-full">
+                    {/* Interactive Red Hover Glow behind Card */}
+                    <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                    
+                    <div className={`bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between ${cardBorder}`}>
                     <div>
                       {/* Card Header */}
                       <div className={`${headerBg} px-6 py-7 text-white text-center relative`}>
@@ -899,14 +903,19 @@ export default function SertifikasiIso() {
                       </a>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
+          </div>
 
             {/* Row 2: 3 cards */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
               {pricingPackages.slice(3, 6).map((pkg, idx) => (
-                <div key={idx} className="bg-white rounded-2xl overflow-hidden flex flex-col justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.03)] transition-all duration-300">
+                <div key={idx} className="relative group h-full">
+                  {/* Interactive Red Hover Glow behind Card */}
+                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                  
+                  <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                   <div>
                     {/* Card Header */}
                     <div className="bg-[#1A1A1A] px-6 py-7 text-white text-center relative">
@@ -998,8 +1007,9 @@ export default function SertifikasiIso() {
                     </a>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
             {/* Row 3: 1 card centered */}
             <div className="flex justify-center">
@@ -1007,7 +1017,11 @@ export default function SertifikasiIso() {
                 {(() => {
                   const pkg = pricingPackages[6];
                   return (
-                    <div className="bg-white rounded-2xl overflow-hidden flex flex-col justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.03)] transition-all duration-300">
+                    <div className="relative group h-full">
+                      {/* Interactive Red Hover Glow behind Card */}
+                      <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                      
+                      <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                       <div>
                         {/* Card Header */}
                         <div className="bg-[#1A1A1A] px-6 py-7 text-white text-center relative">
@@ -1099,13 +1113,12 @@ export default function SertifikasiIso() {
                         </a>
                       </div>
                     </div>
-                  );
-                })()}
-              </div>
+                  </div>
+                );
+              })()}
             </div>
-
           </div>
-
+          </div>
           {/* Pricing Footnote Box */}
           <div className="max-w-[1140px] mx-auto mt-12 bg-white border border-gray-200/60 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
@@ -1120,65 +1133,73 @@ export default function SertifikasiIso() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES SERTIFIKASI ISO</p>
             <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              7 langkah sertifikasi ISO<br />kami pandu A–Z.
+              7 langkah sertifikasi ISO, kami pandu A–Z.
             </h2>
-            <p className="text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
               Dari gap analysis sampai sertifikat resmi terbit — semua tahap kami pendampingi dengan auditor UAF accredited.
             </p>
+            {/* Scroll indicator text */}
+            <div className="pt-4 text-[11px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+              <span>Geser untuk lihat semua langkah</span>
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
+            </div>
           </div>
 
-          {/* Steps Timeline */}
-          <div className="max-w-[860px] mx-auto space-y-0">
-            {steps.map((step, idx) => (
-              <div key={idx} className="relative flex gap-6 sm:gap-8">
-                
-                {/* Left Column: Step Number */}
-                <div className="flex flex-col items-center flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-white border-[2.5px] border-[#990202] text-[#990202] flex items-center justify-center font-black text-[15px] shadow-sm z-10">
+          {/* Horizontal Scrollable Row */}
+          <div className="relative max-w-[1240px] mx-auto">
+            
+            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
+              {steps.map((step, idx) => (
+                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
+                  
+                  {/* Number Badge (Centered on top border) */}
+                  <div className="absolute top-0 left-6 w-10 h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
                     {String(idx + 1).padStart(2, "0")}
                   </div>
-                  {idx < steps.length - 1 && (
-                    <div className="w-[2px] flex-1 bg-gray-100 mt-0" />
-                  )}
-                </div>
-
-                {/* Right Column: Content Card */}
-                <div className="flex-1 pb-10 last:pb-0">
-                  <div className="bg-white border border-gray-200/60 rounded-2xl p-6 sm:p-7 shadow-[0_2px_15px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.03)] transition-shadow duration-300">
-                    
-                    {/* Title row with duration badge */}
-                    <div className="flex items-start justify-between gap-4 mb-3">
-                      <h3 className="text-[17px] sm:text-[19px] font-black text-gray-950 leading-tight">
+                  
+                  {/* Card Container */}
+                  <div className="bg-white border border-gray-150 rounded-[24px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                    <div className="space-y-3">
+                      
+                      {/* Title */}
+                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
                         {step.title}
-                      </h3>
-                      <div className="flex items-center gap-1.5 flex-shrink-0 bg-red-50 text-[#990202] px-3 py-1.5 rounded-lg">
-                        <Clock className="w-3 h-3" />
-                        <span className="text-[9px] font-black tracking-wider uppercase whitespace-nowrap">{step.duration}</span>
+                      </h4>
+                      
+                      {/* Duration Badge */}
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[10px] font-black uppercase py-1 px-3 rounded-full">
+                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
+                        <span>{step.duration}</span>
                       </div>
+
+                      {/* Description */}
+                      <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+
                     </div>
 
-                    {/* Description */}
-                    <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal mb-5">
-                      {step.desc}
-                    </p>
+                    <div>
+                      {/* Dotted Divider */}
+                      <div className="border-t border-dashed border-gray-200 my-4"></div>
 
-                    {/* Checklist */}
-                    <ul className="space-y-2.5">
-                      {step.checklist.map((item, i) => (
-                        <li key={i} className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
-                          <Check className="w-4 h-4 text-gray-400 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                      {/* Checklist */}
+                      <ul className="space-y-2">
+                        {step.checklist.map((item, pIdx) => (
+                          <li key={pIdx} className="flex items-start text-[12px] font-bold text-gray-700 leading-tight">
+                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                            <span dangerouslySetInnerHTML={{ __html: item }} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
                   </div>
                 </div>
+              ))}
+            </div>
 
-              </div>
-            ))}
           </div>
 
         </div>
@@ -1193,7 +1214,7 @@ export default function SertifikasiIso() {
           
           {/* Left Column */}
           <div className="space-y-4 max-w-2xl text-left">
-            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-955">
+            <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
               Siap dapatkan <span className="text-[#990202]">sertifikasi ISO UAF Accredited?</span>
             </h2>
             <p className="text-[14.5px] text-gray-500 leading-relaxed font-medium">

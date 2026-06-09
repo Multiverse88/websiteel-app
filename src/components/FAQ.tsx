@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 
 interface FAQItem {
@@ -26,12 +25,12 @@ export default function FAQ({
 
   return (
     <section className="bg-white py-24 border-b border-gray-100">
-      <div className="max-w-[1000px] mx-auto px-6 sm:px-8">
+      <div className="max-w-[850px] mx-auto px-6 sm:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-16 space-y-3.5">
+        <div className="text-center mb-16 space-y-3">
           <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
-          <h2 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+          <h2 className="font-inter text-[34px] sm:text-[38px] font-bold text-gray-950 leading-tight tracking-tight">
             {title}
           </h2>
           <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
@@ -44,25 +43,25 @@ export default function FAQ({
           {items.map((faq, idx) => {
             const isExpanded = expandedIdx === idx;
             return (
-              <div key={idx} className="py-6 transition-all duration-200">
+              <div key={idx} className="py-7 sm:py-8 transition-all duration-200">
                 <button
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"
                 >
-                  <span className={`text-[16px] sm:text-[17.5px] font-extrabold leading-snug transition-colors duration-200 pr-4 ${isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"}`}>
+                  <span className={`text-[16px] sm:text-[17px] font-bold leading-snug transition-colors duration-200 pr-6 ${isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"}`}>
                     {faq.q}
                   </span>
                   
                   {/* Circle icon container */}
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isExpanded ? "bg-[#990202] text-white rotate-0 shadow-sm" : "bg-[#F3F4F6] text-gray-900 hover:bg-gray-200"}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isExpanded ? "bg-[#990202] text-white rotate-0 shadow-sm" : "bg-[#F3F4F6] text-gray-500 group-hover:bg-[#E5E7EB] group-hover:text-gray-900"}`}>
                     {isExpanded ? (
                       // Clean white 'X' icon
-                      <svg className="w-3.5 h-3.5 fill-current stroke-current" viewBox="0 0 24 24" strokeWidth="1.5" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     ) : (
                       // Clean bold '+' icon
-                      <svg className="w-3.5 h-3.5 fill-current stroke-current" viewBox="0 0 24 24" strokeWidth="2.5" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                       </svg>
                     )}
@@ -70,9 +69,9 @@ export default function FAQ({
                 </button>
 
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  className={`overflow-hidden transition-all duration-355 ease-in-out ${
                     isExpanded ? "max-h-[500px] mt-4" : "max-h-0"
-                  }`}
+      }`}
                 >
                   <p 
                     className="text-[14.5px] text-gray-500 leading-relaxed font-medium pr-12"

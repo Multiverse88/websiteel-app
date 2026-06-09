@@ -811,82 +811,86 @@ export default function MerekHaki() {
                 <div className={`grid ${gridCols} gap-8 mx-auto items-stretch`}>
                   {currentTab.cards.map((card, cIdx) => {
                     const cardBorder = card.isPopular
-                      ? "border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(153,2,2,0.06)] scale-[1.02] relative z-10"
-                      : "border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] transition-all duration-300";
+                      ? "border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] scale-[1.02] relative z-10 transition-all duration-300"
+                      : "border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
                     const headerBg = card.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
 
                     return (
-                      <div
-                        key={cIdx}
-                        className={`bg-white rounded-[32px] overflow-hidden flex flex-col justify-between ${cardBorder}`}
-                      >
-                        <div>
-                          {/* Card Header */}
-                          <div className={`${headerBg} p-6 text-white text-center relative`}>
-                            {card.isPopular && card.badgeText && (
-                              <div className="absolute top-2.5 left-0 right-0 text-[8px] font-black uppercase tracking-wider text-white bg-red-800/80 py-0.5 w-[110px] mx-auto rounded-full">
-                                {card.badgeText}
+                      <div key={cIdx} className="relative group h-full">
+                        {/* Interactive Red Hover Glow behind Card */}
+                        <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[32px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                        
+                        <div
+                          className={`bg-white rounded-[32px] overflow-hidden flex flex-col justify-between h-full ${cardBorder}`}
+                        >
+                          <div>
+                            {/* Card Header */}
+                            <div className={`${headerBg} p-6 text-white text-center relative`}>
+                              {card.isPopular && card.badgeText && (
+                                <div className="absolute top-2.5 left-0 right-0 text-[8px] font-black uppercase tracking-wider text-white bg-red-800/80 py-0.5 w-[110px] mx-auto rounded-full">
+                                  {card.badgeText}
+                                </div>
+                              )}
+                              <h3 className={`text-[17px] sm:text-[18px] font-black text-white uppercase tracking-wider ${card.isPopular && card.badgeText ? "mt-2.5" : ""}`}>
+                                {card.title}
+                              </h3>
+                              {card.strikePrice && (
+                                <div className={`mt-3 text-[12px] font-bold line-through ${card.isPopular ? "text-red-200" : "text-gray-400"}`}>
+                                  {card.strikePrice}
+                                </div>
+                              )}
+                              <div className="mt-1 flex items-baseline justify-center">
+                                <span className="text-[28px] sm:text-[30px] font-black tracking-tight">{card.price}</span>
                               </div>
-                            )}
-                            <h3 className={`text-[17px] sm:text-[18px] font-black text-white uppercase tracking-wider ${card.isPopular && card.badgeText ? "mt-2.5" : ""}`}>
-                              {card.title}
-                            </h3>
-                            {card.strikePrice && (
-                              <div className={`mt-3 text-[12px] font-bold line-through ${card.isPopular ? "text-red-200" : "text-gray-400"}`}>
-                                {card.strikePrice}
-                              </div>
-                            )}
-                            <div className="mt-1 flex items-baseline justify-center">
-                              <span className="text-[28px] sm:text-[30px] font-black tracking-tight">{card.price}</span>
+                              {card.subLabel && (
+                                <div className={`mt-2.5 text-[9.5px] font-bold tracking-widest uppercase ${card.isPopular ? "text-red-100" : "text-gray-400"}`}>
+                                  {card.subLabel}
+                                </div>
+                              )}
                             </div>
-                            {card.subLabel && (
-                              <div className={`mt-2.5 text-[9.5px] font-bold tracking-widest uppercase ${card.isPopular ? "text-red-100" : "text-gray-400"}`}>
-                                {card.subLabel}
-                              </div>
-                            )}
+
+                            {/* Card Content List */}
+                            <div className="p-6.5 space-y-6">
+                              {card.groups.map((group, gIdx) => (
+                                <div key={gIdx} className="space-y-2.5">
+                                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
+                                    {group.title}
+                                  </h5>
+                                  <ul className="space-y-2.5">
+                                    {group.items.map((item, iIdx) => (
+                                      <li key={iIdx} className="flex items-start text-[13px] font-medium text-gray-700">
+                                        <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                                        <span>
+                                          {item.text}
+                                          {item.footnoteIndex && (
+                                            <sup className="text-[9px] font-semibold text-[#990202] ml-0.5">
+                                              ({item.footnoteIndex})
+                                            </sup>
+                                          )}
+                                        </span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              ))}
+                            </div>
                           </div>
 
-                          {/* Card Content List */}
-                          <div className="p-6.5 space-y-6">
-                            {card.groups.map((group, gIdx) => (
-                              <div key={gIdx} className="space-y-2.5">
-                                <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
-                                  {group.title}
-                                </h5>
-                                <ul className="space-y-2.5">
-                                  {group.items.map((item, iIdx) => (
-                                    <li key={iIdx} className="flex items-start text-[13px] font-medium text-gray-700">
-                                      <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                                      <span>
-                                        {item.text}
-                                        {item.footnoteIndex && (
-                                          <sup className="text-[9px] font-semibold text-[#990202] ml-0.5">
-                                            ({item.footnoteIndex})
-                                          </sup>
-                                        )}
-                                      </span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ))}
+                          {/* Action Button */}
+                          <div className="px-6.5 pb-7 pt-1">
+                            <a
+                              href={card.buttonLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm ${
+                                card.isPopular
+                                  ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                                  : "border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
+                              }`}
+                            >
+                              {card.buttonText}
+                            </a>
                           </div>
-                        </div>
-
-                        {/* Action Button */}
-                        <div className="px-6.5 pb-7 pt-1">
-                          <a
-                            href={card.buttonLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm ${
-                              card.isPopular
-                                ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
-                                : "border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
-                            }`}
-                          >
-                            {card.buttonText}
-                          </a>
                         </div>
                       </div>
                     );

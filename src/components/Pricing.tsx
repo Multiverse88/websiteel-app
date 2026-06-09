@@ -39,7 +39,7 @@ export interface FootnoteItem {
 export interface PricingProps {
   sectionTitleTag?: string;
   sectionTitle: string;
-  sectionSubtitle?: string;
+  sectionSubtitle?: React.ReactNode;
   packages: PricingPackage[];
   footnotes?: string[] | FootnoteItem[];
 }

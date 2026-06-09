@@ -241,7 +241,7 @@ export default function PendirianBadanUsaha() {
     {
       no: "01",
       title: "Konsultasi & Perencanaan",
-      duration: "1 Hari Kerja",
+      duration: "1 HARI KERJA",
       desc: "Konsultasi gratis dengan tim legal kami untuk menentukan struktur bisnis yang sesuai dengan visi & rencana Anda.",
       points: [
         "Identifikasi visi, modal awal & rencana bisnis",
@@ -252,7 +252,7 @@ export default function PendirianBadanUsaha() {
     {
       no: "02",
       title: "Cek & Pemesanan Nama PT",
-      duration: "1 Hari Kerja",
+      duration: "1 HARI KERJA",
       desc: "Kami verifikasi nama PT yang Anda inginkan di database AHU Kemenkumham, lalu pesan secara resmi.",
       points: [
         "Pengecekan ketersediaan nama di AHU",
@@ -263,7 +263,7 @@ export default function PendirianBadanUsaha() {
     {
       no: "03",
       title: "Persiapan Dokumen Pendiri",
-      duration: "1-2 Hari Kerja",
+      duration: "1-2 HARI KERJA",
       desc: "Pengumpulan dokumen pendukung dari semua pendiri & pengurus. Bisa di-upload via portal aman kami.",
       points: [
         "KTP & NPWP semua pendiri, komisaris, direksi",
@@ -274,7 +274,7 @@ export default function PendirianBadanUsaha() {
     {
       no: "04",
       title: "Penyusunan Akta Pendirian",
-      duration: "2 Hari Kerja",
+      duration: "2 HARI KERJA",
       desc: "Notaris menyusun & menandatangani akta pendirian — bisa via e-Notary (tanpa harus datang).",
       points: [
         "Drafting akta oleh notaris partner",
@@ -285,7 +285,7 @@ export default function PendirianBadanUsaha() {
     {
       no: "05",
       title: "Pengesahan SK Kemenkumham",
-      duration: "1-2 Hari Kerja",
+      duration: "1-2 HARI KERJA",
       desc: "Akta pendirian disahkan menjadi badan hukum resmi oleh Kementerian Hukum & HAM.",
       points: [
         "Pengajuan ke AHU Online",
@@ -296,7 +296,7 @@ export default function PendirianBadanUsaha() {
     {
       no: "06",
       title: "NPWP Badan & SKT Pajak",
-      duration: "1-2 Hari Kerja",
+      duration: "1-2 HARI KERJA",
       desc: "Registrasi PT sebagai wajib pajak badan ke Direktorat Jenderal Pajak (DJP).",
       points: [
         "Pendaftaran NPWP perusahaan via Coretax",
@@ -307,7 +307,7 @@ export default function PendirianBadanUsaha() {
     {
       no: "07",
       title: "NIB & Akun OSS RBA",
-      duration: "1-2 Hari Kerja",
+      duration: "1-2 HARI KERJA",
       desc: "Aktivasi izin berusaha berbasis risiko (RBA) di sistem OSS — PT siap beroperasi penuh!",
       points: [
         "Pendaftaran akun OSS RBA",
@@ -648,56 +648,64 @@ export default function PendirianBadanUsaha() {
             <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium">
               Dari konsultasi awal sampai dokumen lengkap di tangan Anda — total estimasi 7–14 hari kerja, semua transparan di dashboard.
             </p>
+            {/* Scroll indicator text */}
+            <div className="pt-4 text-[11px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+              <span>Geser untuk lihat semua langkah</span>
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
+            </div>
           </div>
 
-          {/* Timeline Stack */}
-          <div className="max-w-[960px] mx-auto relative space-y-8">
+          {/* Horizontal Scrollable Row */}
+          <div className="relative max-w-[1240px] mx-auto">
             
-            {/* Dashed Timeline vertical line (only on desktop/tablet) */}
-            <div className="absolute left-[20px] md:left-[24px] top-6 bottom-6 w-0.5 bg-gray-200 border-l border-dashed border-gray-300 pointer-events-none hidden sm:block" />
-
-            {steps.map((step, idx) => (
-              <div key={idx} className="flex flex-col sm:flex-row items-start gap-4 md:gap-6 relative group">
-                
-                {/* Step Number Circle */}
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#990202] text-[#990202] bg-white flex items-center justify-center font-bold text-[14px] md:text-[16px] flex-shrink-0 z-10 shadow-sm transition-colors group-hover:bg-[#990202] group-hover:text-white duration-300">
-                  {step.no}
-                </div>
-
-                {/* Card Container */}
-                <div className="flex-grow bg-white border border-gray-150/50 rounded-3xl p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-gray-200 transition-all duration-300 w-full">
+            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
+              {steps.map((step, idx) => (
+                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
                   
-                  {/* Header Row */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-gray-100/60">
-                    <h4 className="text-[16px] md:text-[18px] font-black text-gray-950">
-                      {step.title}
-                    </h4>
-                    {/* Duration Badge */}
-                    <div className="inline-flex items-center self-start sm:self-auto px-2.5 py-1 bg-[#FFF5F5] rounded-full text-[#990202] font-extrabold text-[10.5px] uppercase tracking-wider flex-shrink-0 border border-red-50/50">
-                      <Clock className="w-3.5 h-3.5 mr-1 text-[#990202]" strokeWidth={2.5} />
-                      {step.duration}
-                    </div>
+                  {/* Number Badge (Centered on top border) */}
+                  <div className="absolute top-0 left-6 w-10 h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                    {step.no}
                   </div>
+                  
+                  {/* Card Container */}
+                  <div className="bg-white border border-gray-150 rounded-[24px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                    <div className="space-y-3">
+                      
+                      {/* Title */}
+                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
+                        {step.title}
+                      </h4>
+                      
+                      {/* Duration Badge */}
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[10px] font-black uppercase py-1 px-3 rounded-full">
+                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
+                        <span>{step.duration}</span>
+                      </div>
 
-                  {/* Description */}
-                  <p className="text-[13.5px] text-gray-500 mt-3 font-normal leading-relaxed">
-                    {step.desc}
-                  </p>
+                      {/* Description */}
+                      <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
 
-                  {/* Bullet Checklist Grid */}
-                  <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4 mt-4 border-t border-gray-100/80">
-                    {step.points.map((point, pIdx) => (
-                      <li key={pIdx} className="flex items-start text-[12.5px] text-gray-600 font-medium leading-tight">
-                        <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    </div>
 
+                    <div>
+                      {/* Dotted Divider */}
+                      <div className="border-t border-dashed border-gray-200 my-4"></div>
+
+                      {/* Checklist */}
+                      <ul className="space-y-2">
+                        {step.points.map((point, pIdx) => (
+                          <li key={pIdx} className="flex items-start text-[12px] font-bold text-gray-700 leading-tight">
+                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                            <span dangerouslySetInnerHTML={{ __html: point }} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                  </div>
                 </div>
-
-              </div>
-            ))}
+              ))}
+            </div>
 
           </div>
 
