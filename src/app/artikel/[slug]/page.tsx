@@ -1,17 +1,82 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
-import { Calendar, Clock, Home, Tag, ChevronRight, ArrowRight } from "lucide-react";
+import { Calendar, Clock, Home, Tag, ChevronRight } from "lucide-react";
 import ShareButton from "@/components/ShareButton";
 import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+async function getArticle(slug: string) {
+  return prisma.article.findUnique({
+    where: { slug },
+    select: {
+      id: true,
+      title: true,
+      excerpt: true,
+      content: true,
+      coverImage: true,
+      category: true,
+      readTime: true,
+      slug: true,
+      createdAt: true,
+      author: {
+        select: { name: true, avatar: true, bio: true, role: true }
+      }
+    }
+  });
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await getArticle(slug);
+
+  if (!article) {
+    return { title: "Artikel Tidak Ditemukan — EasyLegal" };
+  }
+
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.id";
+
+  return {
+    title: `${article.title} — EasyLegal`,
+    description: article.excerpt,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      url: `${appUrl}/artikel/${article.slug}`,
+      siteName: "EasyLegal",
+      images: [
+        {
+          url: article.coverImage,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+      locale: "id_ID",
+      type: "article",
+      publishedTime: article.createdAt.toISOString(),
+      authors: [article.author?.name || "EasyLegal"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: [article.coverImage],
+    },
+    alternates: {
+      canonical: `${appUrl}/artikel/${article.slug}`,
+    },
+  };
+}
 
 // Simple custom markdown renderer to ensure clean semantic HTML with premium styling
 function renderMarkdownContent(text: string) {
@@ -131,18 +196,12 @@ function extractHeadings(text: string) {
 export default async function ArtikelDetailPage({ params }: Props) {
   const { slug } = await params;
 
-  // Fetch article from DB
-  const article = await prisma.article.findUnique({
-    where: { slug },
-    include: { author: true },
-  });
+  const article = await getArticle(slug);
 
-  // If article not found, redirect to 404 handler
   if (!article) {
     notFound();
   }
 
-  // Get related articles (same category, excluding current)
   const relatedArticles = await prisma.article.findMany({
     where: {
       category: article.category,
@@ -150,6 +209,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
     },
     take: 3,
     orderBy: { createdAt: "desc" },
+    select: { id: true, title: true, slug: true, coverImage: true, category: true, readTime: true }
   });
 
   // If not enough related articles, fill with latest
@@ -158,11 +218,12 @@ export default async function ArtikelDetailPage({ params }: Props) {
     const moreArticles = await prisma.article.findMany({
       where: {
         slug: {
-          notIn: [article.slug, ...relatedArticles.map((a) => a.slug)],
+          notIn: [article.slug, ...relatedArticles.map((a: { slug: string }) => a.slug)],
         },
       },
       take: 3 - relatedArticles.length,
       orderBy: { createdAt: "desc" },
+      select: { id: true, title: true, slug: true, coverImage: true, category: true, readTime: true }
     });
     displayRelated = [...relatedArticles, ...moreArticles];
   }
@@ -219,10 +280,12 @@ export default async function ArtikelDetailPage({ params }: Props) {
               {/* Author */}
               <div className="flex items-center space-x-3">
                 {article.author?.avatar ? (
-                  <img
+                  <Image
                     src={article.author.avatar}
                     alt={article.author.name}
-                    className="w-10 h-10 rounded-full object-cover shadow-sm border border-gray-150"
+                    width={40}
+                    height={40}
+                    className="rounded-full object-cover shadow-sm border border-gray-150"
                   />
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[11px] font-black shadow-sm">
@@ -266,10 +329,12 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
           {/* ─── HERO IMAGE ─── */}
           <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-gray-50 aspect-[16/9] w-full mb-10">
-            <img
+            <Image
               src={article.coverImage}
               alt={article.title}
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="(max-width: 800px) 100vw, 800px"
+              className="object-cover object-center"
             />
           </div>
 
@@ -320,10 +385,12 @@ export default async function ArtikelDetailPage({ params }: Props) {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
               <div className="flex items-center space-x-4">
                 {article.author?.avatar ? (
-                  <img
+                  <Image
                     src={article.author.avatar}
                     alt={article.author.name}
-                    className="w-14 h-14 rounded-full object-cover shadow-sm border border-gray-150"
+                    width={56}
+                    height={56}
+                    className="rounded-full object-cover shadow-sm border border-gray-150"
                   />
                 ) : (
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[14px] font-black shadow-sm">
@@ -351,39 +418,6 @@ export default async function ArtikelDetailPage({ params }: Props) {
           </div>
         </article>
 
-        {/* ─── DARK CTA BANNER ─── */}
-        <section className="bg-[#1A1A1A] py-14 sm:py-16 mt-6">
-          <div className="max-w-[800px] mx-auto px-6 text-center">
-            <p className="text-[12px] font-bold text-[#990202] uppercase tracking-widest mb-3">Konsultasi Gratis</p>
-            <h2 className="font-inter text-[24px] sm:text-[30px] font-extrabold text-white leading-tight mb-4">
-              Butuh bantuan untuk urus legalitas bisnis Anda?
-            </h2>
-            <p className="text-[14.5px] text-gray-400 max-w-[520px] mx-auto mb-8 leading-relaxed">
-              Konsultasikan kebutuhan Anda langsung dengan tim EasyLegal. Gratis, tanpa komitmen, respons cepat.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20legalitas%20bisnis."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14px] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <svg className="w-4.5 h-4.5 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.022-.079-.186-.208-.432-.332-.246-.123-1.455-.717-1.68-.8-.223-.082-.387-.122-.55.122-.165.245-.64.8-.787.969-.147.17-.294.19-.54.067-.244-.124-.992-.367-1.89-1.168-.698-.622-1.17-1.392-1.307-1.637-.136-.246-.015-.379.108-.501.112-.11.246-.287.37-.43.123-.14.164-.24.246-.4.082-.162.04-.303-.02-.427-.06-.124-.55-1.324-.752-1.815-.197-.474-.397-.41-.547-.418-.14-.008-.302-.008-.464-.008-.162 0-.427.06-.65.3-.224.24-.854.83-.854 2.03 0 1.201.874 2.36 1.996 3.86 1.123 1.5 2.617 2.29 4.193 2.97 1.573.68 2.36.545 3.208.435.85-.11 1.764-.72 2.012-1.417.25-.7.25-1.3.175-1.417-.075-.117-.24-.183-.34-.233zM12 22a9.96 9.96 0 01-5.066-1.378l-.363-.214-3.766.987 1.004-3.667-.235-.374A9.96 9.96 0 012 12c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10zm0-22C5.373 0 0 5.373 0 12a11.96 11.96 0 002.586 7.424L0 24l4.743-1.242A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
-                </svg>
-                Konsultasi via WhatsApp
-              </a>
-              <Link
-                href="/kontak"
-                className="inline-flex items-center gap-1.5 px-7 py-3.5 bg-white/10 hover:bg-white/15 text-white font-extrabold text-[14px] rounded-xl border border-white/10 hover:-translate-y-0.5 transition-all duration-200"
-              >
-                Hubungi Tim Kami
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
         {/* ─── RELATED ARTICLES + NEWSLETTER ─── */}
         <section className="py-16 sm:py-20 bg-[#FAFAFA]">
           <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
@@ -398,7 +432,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
                 {displayRelated.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {displayRelated.slice(0, 2).map((related) => (
+                    {displayRelated.slice(0, 2).map((related: { id: string; title: string; slug: string; coverImage: string; category: string; readTime: string }) => (
                       <Link
                         key={related.id}
                         href={`/artikel/${related.slug}`}
@@ -406,10 +440,12 @@ export default async function ArtikelDetailPage({ params }: Props) {
                       >
                         {/* Image */}
                         <div className="relative aspect-[1.55] w-full overflow-hidden rounded-2xl bg-gray-100 mb-4">
-                          <img
+                          <Image
                             src={related.coverImage}
                             alt={related.title}
-                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                            fill
+                            sizes="(max-width: 640px) 100vw, 50vw"
+                            className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
 

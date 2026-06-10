@@ -19,6 +19,7 @@ import {
   Compass,
   Shield,
 } from "lucide-react";
+import Image from "next/image";
 import FAQ from "@/components/FAQ";
 
 export default function NibOss() {
@@ -161,7 +162,7 @@ export default function NibOss() {
     <div className="flex flex-col min-h-screen">
       
       {/* ─── 1. HERO SECTION ─── */}
-      <section className="bg-white pt-24 lg:pt-28 pb-16 lg:pb-24 border-b border-gray-200/40 overflow-hidden relative">
+      <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 border-b border-gray-200/40 overflow-hidden relative">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -268,10 +269,12 @@ export default function NibOss() {
                 
                 {/* Photo container */}
                 <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden border border-gray-100 shadow-lg relative bg-gray-55">
-                  <img
+                  <Image
                     src="/cerita-kami-team.png"
                     alt="EasyLegal Team Collaboration"
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 460px"
+                    className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
                 </div>
@@ -330,10 +333,12 @@ export default function NibOss() {
               <div className="relative w-full max-w-[460px] aspect-[4/3] sm:aspect-square md:aspect-[4/3] lg:aspect-[4/3]">
                 {/* Photo container */}
                 <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden border border-gray-150 shadow-lg relative bg-gray-55">
-                  <img
+                  <Image
                     src="/nib-desk-mockup.png"
                     alt="Tax Document Calculator Desk"
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 460px"
+                    className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
                 </div>

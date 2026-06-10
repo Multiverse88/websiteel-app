@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Star, Check } from "lucide-react";
 import { row1Reviews, row2Reviews, trustedBy } from "./data";
 
@@ -8,30 +9,6 @@ export default function Testimonials() {
   return (
     <>
       <section className="py-20 bg-[#F9FAFB] overflow-hidden relative">
-        <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes marquee-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          @keyframes marquee-right {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-          }
-          .animate-marquee-left {
-            display: flex;
-            width: max-content;
-            animation: marquee-left 45s linear infinite;
-          }
-          .animate-marquee-right {
-            display: flex;
-            width: max-content;
-            animation: marquee-right 45s linear infinite;
-          }
-          .marquee-container:hover .animate-marquee-left,
-          .marquee-container:hover .animate-marquee-right {
-            animation-play-state: paused;
-          }
-        ` }} />
 
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center relative z-10">
           <div className="mb-14">
@@ -75,10 +52,12 @@ export default function Testimonials() {
 
                   <div className="flex items-center gap-3 mt-auto pt-4 border-t border-gray-50">
                     {item.avatar ? (
-                      <img 
-                        src={item.avatar} 
-                        alt={item.name} 
-                        className="w-8 h-8 rounded-full object-cover flex-shrink-0 shadow-sm"
+                      <Image
+                        src={item.avatar}
+                        alt={item.name}
+                        width={32}
+                        height={32}
+                        className="rounded-full object-cover flex-shrink-0 shadow-sm"
                         referrerPolicy="no-referrer"
                       />
                     ) : (
@@ -128,10 +107,12 @@ export default function Testimonials() {
 
                   <div className="flex items-center gap-3 mt-auto pt-4 border-t border-gray-50">
                     {item.avatar ? (
-                      <img 
-                        src={item.avatar} 
-                        alt={item.name} 
-                        className="w-8 h-8 rounded-full object-cover flex-shrink-0 shadow-sm"
+                      <Image
+                        src={item.avatar}
+                        alt={item.name}
+                        width={32}
+                        height={32}
+                        className="rounded-full object-cover flex-shrink-0 shadow-sm"
                         referrerPolicy="no-referrer"
                       />
                     ) : (

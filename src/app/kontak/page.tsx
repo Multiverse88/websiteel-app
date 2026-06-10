@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Offices from "@/components/Offices";
 import FAQ from "@/components/FAQ";
-import CTA from "@/components/CTA";
 import {
   Mail,
   Phone,
@@ -445,9 +444,6 @@ export default function Kontak() {
 
       {/* ─── 5. FAQ ACCORDION ─── */}
       <FAQ items={faqs} />
-
-      {/* ─── 6. CTA BANNER ─── */}
-      <CTA />
 
       {/* Toast notification */}
       {formSubmitted && (

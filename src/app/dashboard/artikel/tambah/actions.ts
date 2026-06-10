@@ -89,7 +89,8 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
     let counter = 1;
     while (true) {
       const existing = await prisma.article.findUnique({
-        where: { slug: uniqueSlug }
+        where: { slug: uniqueSlug },
+        select: { id: true }
       });
       if (!existing) break;
       uniqueSlug = `${slug}-${counter}`;
@@ -128,20 +129,22 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
             ],
           },
         },
+        select: { key: true, value: true }
       });
 
-      const settingsMap = new Map(settings.map((s) => [s.key, s.value]));
+      const settingsMap = new Map<string, string>(settings.map((s: { key: string; value: string }) => [s.key, s.value]));
       const isAutoActive = settingsMap.get("newsletter_auto_broadcast") === "true";
 
       if (isAutoActive) {
         const subscribers = await prisma.newsletterSubscriber.findMany({
           where: { isActive: true },
+          select: { email: true }
         });
 
         if (subscribers.length > 0) {
           const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-          const rawSubject = settingsMap.get("newsletter_default_subject") || "Artikel Baru: {{title}}";
-          const rawMessage = settingsMap.get("newsletter_default_message") || "Halo! Kami baru saja mempublikasikan artikel legalitas terbaru yang sangat penting untuk perkembangan bisnis Anda. Mari baca pembahasan lengkap artikel kami di bawah ini.";
+          const rawSubject = (settingsMap.get("newsletter_default_subject") || "Artikel Baru: {{title}}") as string;
+          const rawMessage = (settingsMap.get("newsletter_default_message") || "Halo! Kami baru saja mempublikasikan artikel legalitas terbaru yang sangat penting untuk perkembangan bisnis Anda. Mari baca pembahasan lengkap artikel kami di bawah ini.") as string;
 
           // Replace placeholders
           const subject = rawSubject.replace("{{title}}", newArticle.title);
@@ -159,52 +162,64 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
           });
 
           let sentCount = 0;
+          const batchSize = 10;
 
-          for (const subscriber of subscribers) {
-            const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
+          for (let i = 0; i < subscribers.length; i += batchSize) {
+            const batch = subscribers.slice(i, i + batchSize);
+            
+            const results = await Promise.allSettled(
+              batch.map(async (subscriber: { email: string }) => {
+                const unsubscribeLink = `${appUrl}/newsletter/unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
 
-            const htmlContent = generateNewsletterHtml({
-              articleTitle: newArticle.title,
-              articleExcerpt: newArticle.excerpt,
-              articleCategory: newArticle.category,
-              articleSlug: newArticle.slug,
-              introMessage,
-              unsubscribeLink,
-              coverImage: newArticle.coverImage,
-            });
+                const htmlContent = generateNewsletterHtml({
+                  articleTitle: newArticle.title,
+                  articleExcerpt: newArticle.excerpt,
+                  articleCategory: newArticle.category,
+                  articleSlug: newArticle.slug,
+                  introMessage,
+                  unsubscribeLink,
+                  coverImage: newArticle.coverImage,
+                });
 
-            const textContent = `${introMessage}\n\nArtikel Baru: ${newArticle.title}\nKategori: ${newArticle.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${newArticle.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;
+                const textContent = `${introMessage}\n\nArtikel Baru: ${newArticle.title}\nKategori: ${newArticle.category}\nBaca artikel selengkapnya di: ${appUrl}/artikel/${newArticle.slug}\n\nBatal berlangganan: ${unsubscribeLink}`;
 
-            let status = "failed";
-            let errorMessage: string | null = null;
+                let status = "failed";
+                let errorMessage: string | null = null;
 
-            try {
-              const result = await sendEmail({
-                to: subscriber.email,
-                subject,
-                html: htmlContent,
-                text: textContent,
-              });
-              status = result?.simulated ? "simulated" : "sent";
-              if (status === "sent" || status === "simulated") sentCount++;
-            } catch (err: unknown) {
-              errorMessage = err instanceof Error ? err.message : "Unknown error";
-              if (!broadcastError) {
-                broadcastError = errorMessage;
+                try {
+                  const result = await sendEmail({
+                    to: subscriber.email,
+                    subject,
+                    html: htmlContent,
+                    text: textContent,
+                  });
+                  status = result?.simulated ? "simulated" : "sent";
+                } catch (err: unknown) {
+                  errorMessage = err instanceof Error ? err.message : "Unknown error";
+                  console.error(`Gagal mengirim email otomatis ke ${subscriber.email}:`, err);
+                }
+
+                await prisma.emailLog.create({
+                  data: {
+                    recipient: subscriber.email,
+                    subject,
+                    status,
+                    errorMessage,
+                    broadcastId: broadcast.id,
+                    source: "auto-broadcast",
+                  },
+                });
+                
+                return status === "sent" || status === "simulated" ? 1 : 0;
+              })
+            );
+
+            results.forEach((result: PromiseSettledResult<number>) => {
+              if (result.status === 'fulfilled' && result.value === 1) {
+                sentCount++;
+              } else if (result.status === 'rejected' && !broadcastError) {
+                broadcastError = result.reason instanceof Error ? result.reason.message : "Unknown error";
               }
-              console.error(`Gagal mengirim email otomatis ke ${subscriber.email}:`, err);
-            }
-
-            // Log every email attempt
-            await prisma.emailLog.create({
-              data: {
-                recipient: subscriber.email,
-                subject,
-                status,
-                errorMessage,
-                broadcastId: broadcast.id,
-                source: "auto-broadcast",
-              },
             });
           }
 

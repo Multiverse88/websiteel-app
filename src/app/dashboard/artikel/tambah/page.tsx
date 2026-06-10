@@ -2,7 +2,8 @@
 
 import React, { useState, useRef, useTransition } from "react";
 import Link from "next/link";
-import { ArrowLeft, Home, Sparkles, Image, Upload, Link2, X, Check, FileText, HelpCircle, Loader2 } from "lucide-react";
+import ImageComponent from "next/image";
+import { ArrowLeft, Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, HelpCircle, Loader2 } from "lucide-react";
 import { createArticle } from "./actions";
 
 // Image Presets for premium aesthetics
@@ -290,10 +291,12 @@ export default function TambahArtikelPage() {
                       {coverFile ? (
                         /* File selected preview */
                         <div className="relative border border-gray-200 rounded-xl overflow-hidden">
-                          <img
+                          <ImageComponent
                             src={coverPreview}
                             alt="Preview"
-                            className="w-full aspect-[1.6] object-cover"
+                            fill
+                            sizes="(max-width: 640px) 100vw, 50vw"
+                            className="object-cover"
                           />
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                             <div className="flex items-center justify-between">
@@ -355,7 +358,7 @@ export default function TambahArtikelPage() {
                       {/* Presets */}
                       <div className="pt-1">
                         <div className="text-[12px] font-extrabold text-gray-400 mb-2 flex items-center gap-1">
-                          <Image className="w-3.5 h-3.5" />
+                          <ImageIcon className="w-3.5 h-3.5" />
                           <span>Atau gunakan gambar preset:</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -402,7 +405,7 @@ export default function TambahArtikelPage() {
                       {/* Presets */}
                       <div className="pt-1">
                         <div className="text-[12px] font-extrabold text-gray-400 mb-2 flex items-center gap-1">
-                          <Image className="w-3.5 h-3.5" />
+                          <ImageIcon className="w-3.5 h-3.5" />
                           <span>Atau gunakan gambar preset:</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -521,13 +524,12 @@ export default function TambahArtikelPage() {
 
               <div className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.03)] flex flex-col group transition-all duration-300">
                 <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
-                  <img
+                  <ImageComponent
                     src={getPreviewImage()}
                     alt="Cover preview"
-                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-102"
-                    onError={(e) => {
-                      e.currentTarget.src = IMAGE_PRESETS[0].url;
-                    }}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-102"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="inline-flex px-3 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">

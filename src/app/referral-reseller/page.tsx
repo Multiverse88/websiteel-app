@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Check,
   Users,
@@ -94,7 +95,7 @@ export default function ReferralResellerPage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
       {/* ─── 1. HERO SECTION ─── */}
-      <section className="bg-white pt-12 pb-20 lg:pt-16 lg:pb-24 relative overflow-hidden">
+      <section className="bg-white pt-8 lg:pt-12 pb-20 lg:pb-24 relative overflow-hidden">
         {/* Soft Pink/Rose Radial Gradient Background on the left */}
         <div
           className="absolute -left-[200px] top-1/4 w-[700px] sm:w-[900px] aspect-square rounded-full pointer-events-none z-0"
@@ -828,17 +829,21 @@ export default function ReferralResellerPage() {
         {/* Soft radial glows in the background for a modern premium aesthetic */}
         {/* Background glow images on left and right */}
         <div className="absolute left-0 top-0 bottom-0 w-[45%] overflow-hidden pointer-events-none z-0 select-none">
-          <img
+          <Image
             src="/cta-bg-glow.jpg"
             alt=""
-            className="w-full h-full object-cover object-left opacity-90 mix-blend-multiply"
+            fill
+            sizes="45vw"
+            className="object-cover object-left opacity-90 mix-blend-multiply"
           />
         </div>
         <div className="absolute right-0 top-0 bottom-0 w-[45%] overflow-hidden pointer-events-none z-0 select-none">
-          <img
+          <Image
             src="/cta-bg-glow.jpg"
             alt=""
-            className="w-full h-full object-cover object-left scale-x-[-1] opacity-90 mix-blend-multiply"
+            fill
+            sizes="45vw"
+            className="object-cover object-left scale-x-[-1] opacity-90 mix-blend-multiply"
           />
         </div>
 

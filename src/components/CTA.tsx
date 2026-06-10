@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface CTAProps {
   title?: React.ReactNode;
@@ -28,7 +31,13 @@ export default function CTA({
 
   return (
     <section className="py-20 bg-white border-t border-gray-100 overflow-hidden relative">
-      <div className="max-w-[1240px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5 }}
+        className="max-w-[1240px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-8"
+      >
         
         {/* Left Column: Heading & Description */}
         <div className="flex flex-col text-left max-w-xl">
@@ -73,7 +82,8 @@ export default function CTA({
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }
+

@@ -186,7 +186,7 @@ export default function PRMedia() {
     <div className="flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
 
       {/* ─── 1. HERO SECTION ─── */}
-      <section className="bg-white pt-8 lg:pt-16 pb-16 lg:pb-24 border-b border-gray-200/50 overflow-hidden relative">
+      <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 border-b border-gray-200/50 overflow-hidden relative">
         <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-red-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
 

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ChevronLeft,
   ChevronRight,
@@ -124,10 +125,13 @@ export default function Hero() {
                 currentSlide === idx ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
               }`}
             >
-              <img
+              <Image
                 src={slide.image}
                 alt={slide.tag}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority={idx === 0}
               />
               <div className="absolute inset-0 bg-black/5" />
             </div>

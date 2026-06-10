@@ -35,7 +35,7 @@ export default async function DashboardPage() {
   });
 
   const totalArticles = articles.length;
-  const totalViews = articles.reduce((sum, a) => sum + a.viewCount, 0);
+  const totalViews = articles.reduce((sum: number, a: { viewCount: number }) => sum + a.viewCount, 0);
   const subscriberCount = await prisma.newsletterSubscriber.count({ where: { isActive: true } });
 
   return (
@@ -136,7 +136,7 @@ export default async function DashboardPage() {
               </div>
 
               {/* Table Rows */}
-              {articles.map((article) => {
+              {articles.map((article: { id: string; title: string; slug: string; category: string; coverImage: string; readTime: string; viewCount: number; createdAt: Date }) => {
                 const date = new Date(article.createdAt).toLocaleDateString("id-ID", {
                   day: "numeric",
                   month: "short",

@@ -14,6 +14,7 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
     // Get article info
     const article = await prisma.article.findUnique({
       where: { id: articleId },
+      select: { id: true, title: true, excerpt: true, category: true, slug: true, coverImage: true }
     });
 
     if (!article) {
@@ -23,6 +24,7 @@ export async function sendBroadcast(articleId: string, customSubject?: string, c
     // Get all active subscribers
     const subscribers = await prisma.newsletterSubscriber.findMany({
       where: { isActive: true },
+      select: { email: true }
     });
 
     if (subscribers.length === 0) {
@@ -143,6 +145,7 @@ export async function toggleSubscriber(id: string) {
   try {
     const subscriber = await prisma.newsletterSubscriber.findUnique({
       where: { id },
+      select: { id: true, isActive: true }
     });
     if (!subscriber) return { success: false, error: "Subscriber tidak ditemukan." };
 

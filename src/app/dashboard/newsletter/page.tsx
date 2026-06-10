@@ -17,12 +17,14 @@ export default async function NewsletterDashboardPage() {
   // Fetch all subscribers
   const subscribers = await prisma.newsletterSubscriber.findMany({
     orderBy: { subscribedAt: "desc" },
+    select: { id: true, email: true, isActive: true, subscribedAt: true }
   });
 
   // Fetch broadcast history
   const broadcasts = await prisma.newsletterBroadcast.findMany({
     orderBy: { sentAt: "desc" },
     take: 10,
+    select: { id: true, articleId: true, articleTitle: true, totalSent: true, sentAt: true }
   });
 
   // Fetch recent articles for broadcast
@@ -39,7 +41,7 @@ export default async function NewsletterDashboardPage() {
   });
 
   // Get broadcast article IDs and count per article
-  const broadcastArticleIds = new Set(broadcasts.map((b) => b.articleId));
+  const broadcastArticleIds = new Set(broadcasts.map((b: { articleId: string }) => b.articleId));
   const broadcastCountMap = new Map<string, number>();
   for (const b of broadcasts) {
     broadcastCountMap.set(b.articleId, (broadcastCountMap.get(b.articleId) || 0) + 1);
@@ -60,7 +62,7 @@ export default async function NewsletterDashboardPage() {
     },
   });
 
-  const activeCount = subscribers.filter((s) => s.isActive).length;
+  const activeCount = subscribers.filter((s: { isActive: boolean }) => s.isActive).length;
   const inactiveCount = subscribers.length - activeCount;
 
   return (
@@ -167,7 +169,7 @@ export default async function NewsletterDashboardPage() {
                   </div>
 
                   {/* Table Rows */}
-                  {subscribers.map((subscriber) => (
+                  {subscribers.map((subscriber: { id: string; email: string; isActive: boolean; subscribedAt: Date }) => (
                     <div
                       key={subscriber.id}
                       className="grid grid-cols-12 gap-3 px-5 py-3.5 border-b border-gray-50 hover:bg-gray-50/50 transition-colors items-center"
@@ -236,7 +238,7 @@ export default async function NewsletterDashboardPage() {
                   <p className="text-[13px] text-gray-400 italic">Belum ada artikel.</p>
                 ) : (
                   <div className="space-y-3">
-                    {articles.map((article) => {
+                    {articles.map((article: { id: string; title: string; slug: string; category: string; createdAt: Date }) => {
                       const alreadySent = broadcastArticleIds.has(article.id);
                       return (
                         <div
@@ -287,7 +289,7 @@ export default async function NewsletterDashboardPage() {
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                  {broadcasts.map((broadcast, idx) => (
+                  {broadcasts.map((broadcast: { id: string; articleId: string; articleTitle: string; totalSent: number; sentAt: Date }, idx: number) => (
                     <div
                       key={broadcast.id}
                       className={`flex items-center gap-3.5 px-5 py-3.5 ${
@@ -341,7 +343,7 @@ export default async function NewsletterDashboardPage() {
                     <div className="col-span-4">Tanggal</div>
                   </div>
 
-                  {emailLogs.map((log, idx) => (
+                  {emailLogs.map((log: { id: string; recipient: string; subject: string; status: string; errorMessage: string | null; source: string; sentAt: Date }, idx: number) => (
                     <div
                       key={log.id}
                       className={`px-5 py-3.5 ${

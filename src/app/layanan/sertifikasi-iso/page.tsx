@@ -16,6 +16,7 @@ import {
   TrendingUp,
   Globe,
 } from "lucide-react";
+import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Benefits from "@/components/Benefits";
 
@@ -542,10 +543,12 @@ export default function SertifikasiIso() {
                 
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fit=crop&w=800&h=800&q=80"
                     alt="Sertifikasi ISO Perusahaan Terpercaya"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
                   />
                 </div>
 
@@ -599,10 +602,12 @@ export default function SertifikasiIso() {
               <div className="relative w-full max-w-[500px] lg:max-w-none">
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_15px_35px_rgba(0,0,0,0.04)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?fit=crop&w=800&h=800&q=80"
                     alt="Tim profesional berdiskusi standar audit ISO"
-                    className="w-full h-full object-cover object-center"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 500px"
+                    className="object-cover object-center"
                   />
                 </div>
 

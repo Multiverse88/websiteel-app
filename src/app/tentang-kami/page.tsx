@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import CTA from "@/components/CTA";
+import Image from "next/image";
 import Offices from "@/components/Offices";
 import {
   ShieldCheck,
@@ -153,10 +153,12 @@ export default function TentangKami() {
                 
                 {/* Main Corporate Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
-                  <img
+                  <Image
                     src="/hero-tentang-kami.png"
                     alt="Tim EasyLegal membantu UMKM pengurusan legalitas"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
                   />
                   
                   {/* Decorative Subtle Orange Logo at Top-Right */}
@@ -207,10 +209,12 @@ export default function TentangKami() {
                 
                 {/* Main Team Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-200 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[4/3] sm:aspect-[1.4] lg:aspect-[4/3]">
-                  <img
+                  <Image
                     src="/cerita-kami-team.png"
                     alt="Tim EasyLegal bekerja bersama membantu perizinan UMKM"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
                   />
                 </div>
 
@@ -332,10 +336,12 @@ export default function TentangKami() {
                 
                 {/* Team Member Image */}
                 <div className="relative aspect-[1.15] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
-                  <img
+                  <Image
                     src={member.img}
                     alt={member.name}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 300px"
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
 
@@ -385,9 +391,6 @@ export default function TentangKami() {
 
       {/* ─── 6. KANTOR KAMI ─── */}
       <Offices />
-
-      {/* ─── 7. CTA BANNER ─── */}
-      <CTA />
 
     </div>
   );

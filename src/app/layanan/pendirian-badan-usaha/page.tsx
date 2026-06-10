@@ -16,7 +16,7 @@ import {
   Users,
   FileText,
 } from "lucide-react";
-import CTA from "@/components/CTA";
+import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 
@@ -457,10 +457,12 @@ export default function PendirianBadanUsaha() {
                 
                 {/* Corporate Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fit=crop&w=800&h=800&q=80"
                     alt="Penandatanganan akta pendirian badan usaha"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
                   />
                 </div>
 
@@ -513,10 +515,12 @@ export default function PendirianBadanUsaha() {
             <div className="lg:col-span-5 relative flex items-center justify-center">
               <div className="relative w-full max-w-[480px] lg:max-w-none">
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_15px_35px_rgba(0,0,0,0.04)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?fit=crop&w=800&h=800&q=80"
                     alt="Rapat tim membahas Perseroan Terbatas"
-                    className="w-full h-full object-cover object-center"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center"
                   />
                 </div>
 
@@ -715,17 +719,7 @@ export default function PendirianBadanUsaha() {
       {/* ─── 6. FAQ ACCORDION ─── */}
       <FAQ title="Pertanyaan seputar pendirian badan usaha." items={faqs} />
 
-      {/* ─── 4. CTA BANNER ─── */}
-      <CTA
-        title={
-          <h2 className="font-inter text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
-            Siap mulai bisnis dengan <span className="text-[#990202]">legalitas resmi</span>?
-          </h2>
-        }
-        description="Konsultasikan struktur bisnis & kebutuhan Anda dengan tim kami — gratis, tanpa komitmen."
-        whatsappLink="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20pendirian%20badan%20usaha."
-      />
+      </div>
+      );
+      }
 
-    </div>
-  );
-}

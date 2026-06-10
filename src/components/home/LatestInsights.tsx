@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export default function LatestInsights() {
@@ -39,10 +40,12 @@ export default function LatestInsights() {
               className="group flex flex-col h-full bg-white rounded-3xl border border-gray-150/70 overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
             >
               <div className="aspect-[16/10] w-full overflow-hidden bg-slate-50 relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=600&auto=format&fit=crop" 
                   alt="Sertifikasi ISO 9001" 
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 600px"
+                  className="object-cover group-hover:scale-102 transition-transform duration-700"
                 />
               </div>
               
@@ -77,10 +80,12 @@ export default function LatestInsights() {
               className="group flex flex-col bg-white rounded-3xl border border-gray-150/70 overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
             >
               <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=400&auto=format&fit=crop" 
                   alt="Pendirian PT vs CV" 
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover group-hover:scale-102 transition-transform duration-700"
                 />
               </div>
               <div className="p-5 flex-grow flex flex-col justify-between">
@@ -106,10 +111,12 @@ export default function LatestInsights() {
               className="group flex flex-col bg-white rounded-3xl border border-gray-150/70 overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
             >
               <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop" 
                   alt="KBLI 2025" 
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover group-hover:scale-102 transition-transform duration-700"
                 />
               </div>
               <div className="p-5 flex-grow flex flex-col justify-between">
@@ -135,10 +142,12 @@ export default function LatestInsights() {
               className="group flex flex-col bg-white rounded-3xl border border-gray-150/70 overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
             >
               <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=400&auto=format&fit=crop" 
                   alt="NIB & OSS" 
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover group-hover:scale-102 transition-transform duration-700"
                 />
               </div>
               <div className="p-5 flex-grow flex flex-col justify-between">
@@ -164,10 +173,12 @@ export default function LatestInsights() {
               className="group flex flex-col bg-white rounded-3xl border border-gray-150/70 overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
             >
               <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1561070791-26c113006238?q=80&w=400&auto=format&fit=crop" 
                   alt="Cek Daftar Merek" 
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover group-hover:scale-102 transition-transform duration-700"
                 />
               </div>
               <div className="p-5 flex-grow flex flex-col justify-between">

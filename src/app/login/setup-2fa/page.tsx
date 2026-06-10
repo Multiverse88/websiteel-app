@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useTransition } from "react";
+import Image from "next/image";
 import { ShieldCheck, Loader2 } from "lucide-react";
 import { initiateSetup, completeSetup } from "./actions";
 import Link from "next/link";
@@ -107,11 +108,11 @@ export default function Setup2FAPage() {
           {qrCodeDataUrl && (
             <div className="mb-6 flex flex-col items-center justify-center">
               <div className="bg-white p-3 border border-gray-200 rounded-2xl shadow-sm">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={qrCodeDataUrl}
                   alt="2FA QR Code"
-                  className="w-48 h-48"
+                  width={192}
+                  height={192}
                 />
               </div>
               <p className="text-[12px] text-gray-400 mt-2 text-center">

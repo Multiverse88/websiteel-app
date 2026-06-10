@@ -1,5 +1,5 @@
-"use client";
+import PageWrapper from "@/components/home/PageWrapper";
 
-import Home from "../page";
-
-export default Home;
+export default function Page() {
+  return <PageWrapper />;
+}

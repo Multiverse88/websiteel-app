@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Building2, Check, Users } from "lucide-react";
 import { layananIndividual } from "./data";
 
@@ -37,7 +38,7 @@ export default function LayananKami() {
                 return (
                   <Link
                     key={idx}
-                    href="/"
+                    href={item.href}
                     className="group rounded-2xl p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden"
                     style={{
                       minHeight: "175px",
@@ -89,9 +90,11 @@ export default function LayananKami() {
 
             <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-2.5 shadow-sm border border-border/60 mb-5 self-start">
               <div className="w-6 h-5 overflow-hidden rounded-[4px] relative flex items-center justify-center">
-                <img 
+                <Image 
                   src="/Logo EL.png" 
                   alt="EL Icon" 
+                  width={24}
+                  height={20}
                   className="absolute w-[160%] h-[160%] max-w-none object-cover" 
                   style={{ objectPosition: "center 22%" }}
                 />

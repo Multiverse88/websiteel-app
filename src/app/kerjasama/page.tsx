@@ -97,7 +97,7 @@ export default function KerjasamaPage() {
     <div className="flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
       
       {/* ─── 1. HERO SECTION ─── */}
-      <section className="bg-white pt-16 pb-24 relative overflow-hidden">
+      <section className="bg-white pt-8 lg:pt-12 pb-24 relative overflow-hidden">
         {/* Soft Modern Radial Gradient Spots matching screenshot exactly */}
         <div 
           className="absolute -left-[150px] sm:-left-[250px] top-1/2 -translate-y-1/2 w-[500px] sm:w-[800px] aspect-square rounded-full pointer-events-none z-0" 

@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
+import CTA from "@/components/CTA";
 
 // Simple social icon components matching the Figma screenshot's clean line aesthetics
 const IgIcon = () => (
@@ -32,6 +34,8 @@ const YtIcon = () => (
   </svg>
 );
 
+const trustedBy = ["PT Maju Jaya", "CV Sukses Abadi", "UD Berkah", "PT Nusantara", "CV Mitra", "PT Globalindo"];
+
 export default function Footer() {
   const layananLinks = [
     { name: "Pendirian Badan Usaha", href: "/layanan/pendirian-badan-usaha" },
@@ -62,41 +66,44 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#F9F9F9] border-t border-[#EAEAEA] pt-16 pb-8">
+    <>
+      {/* ─── CTA SECTION ─── */}
+      <CTA />
+
+      {/* ─── TRUSTED BY SECTION ─── */}
+      <section className="py-12 bg-bg-light border-y border-border">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center">
+          <p className="text-[12px] text-muted mb-8 font-medium uppercase tracking-widest">
+            Dipercaya oleh <span className="font-bold text-primary">12.000+ pengusaha</span> di seluruh Indonesia
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+            {trustedBy.map((c, idx) => (
+              <span key={idx} className="text-[14px] font-semibold text-dark/30 hover:text-dark/50 transition-colors">
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-[#F9F9F9] border-t border-[#EAEAEA] pt-16 pb-8">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14">
-          
+
           {/* Col 1: Logo, description, contact details & addresses */}
           <div className="lg:col-span-5 flex flex-col space-y-6">
-            
-            {/* Stacking Brand Logo exactly like screenshot */}
-            <Link href="/home-gads" className="inline-flex flex-col items-start gap-1 group w-fit">
-              {/* Red Logo Box */}
-              <div className="w-[46px] h-[40px] bg-[#D62828] rounded-[10px] flex items-center justify-center relative shadow-sm transition-transform duration-300 group-hover:scale-[1.02]">
-                {/* SVG for the stylized cursive eL logo mark */}
-                <svg viewBox="0 0 44 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[30px] h-[26px] text-white">
-                  <path
-                    d="M10 20C10 15 13 11 17.5 11C21.5 11 23.5 14 22 17.5C20.5 21 17.5 21 15 20C13.5 19.5 13 18 14.5 16.5C16 15 18 15 19.5 16.5C21 18 20 20.5 18 21"
-                    stroke="currentColor"
-                    strokeWidth="3.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M25.5 11V24.5C25.5 26 26.5 27 28 27C29.5 27 30.5 26 30.5 24.5"
-                    stroke="currentColor"
-                    strokeWidth="3.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              {/* Brand Text below in lowercase and bold */}
-              <div className="flex flex-col items-start leading-[1.1] mt-1.5">
-                <span className="text-[13px] font-bold text-[#D62828] tracking-tight">easy</span>
-                <span className="text-[13px] font-bold text-[#1A1A1A] tracking-tight">legal</span>
-              </div>
+
+            {/* Stacking Brand Logo exactly like navbar */}
+            <Link href="/home-gads" className="inline-flex items-start group w-fit">
+              <Image
+                src="/Logo EL.png"
+                alt="EasyLegal Logo"
+                width={200}
+                height={100}
+                className="h-[100px] w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Description */}
@@ -229,5 +236,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

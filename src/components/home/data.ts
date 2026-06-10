@@ -109,15 +109,15 @@ export const quickTools = [
 export const partnerLogos = ["KEMENKUMHAM", "OSS BKPM", "DJKI", "KEMENPERIN", "PSE Kominfo"];
 
 export const layananIndividual = [
-  { name: "Pendirian PT", desc: "Badan usaha & legal", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2" },
-  { name: "Daftar Merek", desc: "HAKI & brand", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB" },
-  { name: "NIB & OSS", desc: "Perizinan usaha", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF" },
-  { name: "Sertifikasi ISO", desc: "Standard internasional", icon: Award, circleBg: "#16A34A", cardTint: "#F0FDF4" },
-  { name: "Pengajuan PKP", desc: "Perpajakan & e-Faktur", icon: FileText, circleBg: "#EA580C", cardTint: "#FFF7ED" },
-  { name: "Visa & KITAS", desc: "Imigrasi WNA", icon: Globe, circleBg: "#1E3A5F", cardTint: "#F0F4FF" },
-  { name: "Perjanjian Perkawinan", desc: "Pisah harta & legal", icon: Scale, circleBg: "#7C3AED", cardTint: "#F5F3FF" },
-  { name: "Press Release", desc: "PR & media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2" },
-  { name: "Pelaporan LKPM", desc: "Lapor BKPM rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA" },
+  { name: "Pendirian PT", desc: "Badan usaha & legal", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha" },
+  { name: "Daftar Merek", desc: "HAKI & brand", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki" },
+  { name: "NIB & OSS", desc: "Perizinan usaha", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss" },
+  { name: "Sertifikasi ISO", desc: "Standard internasional", icon: Award, circleBg: "#16A34A", cardTint: "#F0FDF4", href: "/layanan/sertifikasi-iso" },
+  { name: "Pengajuan PKP", desc: "Perpajakan & e-Faktur", icon: FileText, circleBg: "#EA580C", cardTint: "#FFF7ED", href: "/layanan/pengajuan-pkp" },
+  { name: "Visa & KITAS", desc: "Imigrasi WNA", icon: Globe, circleBg: "#1E3A5F", cardTint: "#F0F4FF", href: "/layanan/visa-kitas" },
+  { name: "Perjanjian Perkawinan", desc: "Pisah harta & legal", icon: Scale, circleBg: "#7C3AED", cardTint: "#F5F3FF", href: "/layanan/perjanjian-perkawinan" },
+  { name: "Press Release", desc: "PR & media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/press-release" },
+  { name: "Pelaporan LKPM", desc: "Lapor BKPM rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA", href: "/layanan/pelaporan-lkpm" },
 ];
 
 export const whyChoose = [

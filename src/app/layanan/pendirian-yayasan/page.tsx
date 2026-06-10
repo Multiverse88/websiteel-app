@@ -11,15 +11,12 @@ import {
   Check,
   Home,
   ArrowRight,
-  Shield,
   Users,
   FileText,
-  Briefcase,
-  Star,
   Eye,
   UserCheck,
 } from "lucide-react";
-import CTA from "@/components/CTA";
+import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 
@@ -359,10 +356,12 @@ export default function PendirianYayasan() {
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
                 
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?fit=crop&w=800&h=800&q=80"
                     alt="Misi sosial yayasan bersatu tangan"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
                   />
                 </div>
 
@@ -414,10 +413,12 @@ export default function PendirianYayasan() {
             <div className="lg:col-span-5 relative flex items-center justify-center">
               <div className="relative w-full max-w-[480px] lg:max-w-none">
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_15px_35px_rgba(0,0,0,0.04)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1497366216548-37526070297c?fit=crop&w=800&h=800&q=80"
                     alt="Modern loft office workstation"
-                    className="w-full h-full object-cover object-center"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center"
                   />
                 </div>
 
@@ -636,27 +637,13 @@ export default function PendirianYayasan() {
       </section>
 
       {/* ─── 6. FAQ ACCORDION ─── */}
-      <FAQ 
-        title="Pertanyaan seputar pendirian yayasan." 
+      <FAQ
+        title="Pertanyaan seputar pendirian yayasan."
         subtitle="Sebelum mulai, mungkin jawabannya sudah ada di sini."
-        items={faqs} 
+        items={faqs}
       />
 
-      {/* ─── 7. CTA BANNER ─── */}
-      <CTA
-        title={
-          <h2 className="font-inter text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-[1.1] tracking-tight max-w-[500px]">
-            Siap mendirikan yayasan untuk <span className="text-[#990202]">misi sosial Anda?</span>
-          </h2>
-        }
-        description={
-          <>
-            Konsultasikan visi yayasan & struktur organ Anda dengan tim kami — gratis, tanpa komitmen. <span className="font-bold text-gray-900">Diskon 50% — kuota terbatas!</span>
-          </>
-        }
-        whatsappLink="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20pendirian%20yayasan."
-      />
+      </div>
+      );
+      }
 
-    </div>
-  );
-}

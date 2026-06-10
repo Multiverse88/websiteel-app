@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { MapPin, Clock, Phone } from "lucide-react";
 
 interface Office {
@@ -80,10 +81,12 @@ export default function Offices({
             >
               {/* Office Image and Tag Overlay */}
               <div className="relative aspect-[1.5] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
-                <img
+                <Image
                   src={office.img}
                   alt={`Kantor EasyLegal ${office.city}`}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
                 
                 {/* Tag Overlay */}

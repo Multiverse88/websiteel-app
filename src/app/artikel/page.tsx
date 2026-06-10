@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { prisma } from "@/lib/db";
+import type { Article } from "@prisma/client";
 import { Calendar, Clock, ArrowRight, BookOpen, Home } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -141,18 +143,6 @@ Membuat SOP, melakukan audit internal, dan mempersiapkan audit eksternal bisa me
 ];
 
 export default async function ArtikelPage() {
-  // Check if database has articles
-  let articlesCount = await prisma.article.count();
-  
-  if (articlesCount === 0) {
-    // Perform auto-seeding
-    console.log("Seeding database with default articles...");
-    await prisma.article.createMany({
-      data: seedArticles
-    });
-    articlesCount = seedArticles.length;
-  }
-
   // Fetch all articles
   const articles = await prisma.article.findMany({
     orderBy: {
@@ -204,17 +194,19 @@ export default async function ArtikelPage() {
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
+            {articles.map((article: Article) => (
               <article 
                 key={article.id} 
                 className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col group"
               >
                 {/* Cover Image */}
                 <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-100 border-b border-gray-100">
-                  <img
+                  <Image
                     src={article.coverImage}
                     alt={article.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                   
                   {/* Category Pill Over Image */}

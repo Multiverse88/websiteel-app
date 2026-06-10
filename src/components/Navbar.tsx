@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 
@@ -12,10 +13,17 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -55,21 +63,16 @@ export default function Navbar() {
           <Link
             href="/home-gads"
             onClick={handleLinkClick}
-            className="flex items-center space-x-2 group flex-shrink-0"
+            className="flex items-center group flex-shrink-0"
           >
-            {/* Red rounded square icon cropped from Logo EL.png */}
-            <div className="w-[38px] h-[32px] overflow-hidden rounded-[8px] relative flex items-center justify-center">
-              <img 
-                src="/Logo EL.png" 
-                alt="EL Icon" 
-                className="absolute w-[160%] h-[160%] max-w-none object-cover" 
-                style={{ objectPosition: "center 22%" }}
-              />
-            </div>
-            <div className="flex items-baseline">
-              <span className="text-[14.5px] font-black text-[#D62828] tracking-tight">easy</span>
-              <span className="text-[14.5px] font-black text-[#111827] tracking-tight">legal</span>
-            </div>
+            <Image 
+              src="/Logo EL.png" 
+              alt="EasyLegal Logo" 
+              width={150}
+              height={52}
+              className="h-[52px] w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation - Center */}

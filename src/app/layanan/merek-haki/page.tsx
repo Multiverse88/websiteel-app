@@ -21,7 +21,7 @@ import {
   Building,
   AlertCircle,
 } from "lucide-react";
-import CTA from "@/components/CTA";
+import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import Benefits from "@/components/Benefits";
@@ -621,10 +621,12 @@ export default function MerekHaki() {
                 
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?fit=crop&w=800&h=800&q=80"
                     alt="Pendaftaran Merek & HAKI EasyLegal"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
                   />
                 </div>
 
@@ -678,10 +680,12 @@ export default function MerekHaki() {
               <div className="relative w-full max-w-[500px] lg:max-w-none">
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_15px_35px_rgba(0,0,0,0.04)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?fit=crop&w=800&h=800&q=80"
                     alt="Workspace desainer logo dan merek"
-                    className="w-full h-full object-cover object-center"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 500px"
+                    className="object-cover object-center"
                   />
                 </div>
 
@@ -1016,17 +1020,6 @@ export default function MerekHaki() {
 
       {/* ─── 5. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran merek." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
-
-      {/* ─── 6. CTA BANNER ─── */}
-      <CTA
-        title={
-          <h2 className="font-inter text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
-            Lindungi <span className="text-[#990202]">brand Anda</span> mulai hari ini.
-          </h2>
-        }
-        description="Semakin cepat didaftarkan, semakin aman dari penjiplakan. Konsultasi gratis dengan konsultan HKI kami."
-        whatsappLink="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20ingin%20konsultasi%20mengenai%20pengecekan%20dan%20pendaftaran%20merek."
-      />
 
     </div>
   );

@@ -34,9 +34,10 @@ export async function getNewsletterSettings(): Promise<NewsletterSettings> {
           ],
         },
       },
+      select: { key: true, value: true }
     });
 
-    const settingsMap = new Map(settings.map((s) => [s.key, s.value]));
+    const settingsMap = new Map<string, string>(settings.map((s: { key: string; value: string }) => [s.key, s.value]));
 
     return {
       autoBroadcast: settingsMap.get("newsletter_auto_broadcast") === "true",

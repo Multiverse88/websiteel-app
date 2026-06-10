@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useActionState } from "react";
+import Image from "next/image";
 import { Save, Loader2, Camera, AlertCircle, CheckCircle2, User, ArrowLeft } from "lucide-react";
 import { updateProfile } from "./actions";
 import Link from "next/link";
@@ -45,10 +46,12 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
         <div className="relative group">
           <div className="w-28 h-28 rounded-full border border-gray-200 overflow-hidden bg-gray-50 flex items-center justify-center relative">
             {avatarPreview ? (
-              <img 
-                src={avatarPreview} 
-                alt={name} 
-                className="w-full h-full object-cover"
+              <Image
+                src={avatarPreview}
+                alt={name}
+                width={112}
+                height={112}
+                className="object-cover"
               />
             ) : (
               <User className="w-12 h-12 text-gray-300" />

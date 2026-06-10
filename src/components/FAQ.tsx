@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 interface FAQItem {
   q: string;
@@ -28,7 +29,13 @@ export default function FAQ({
       <div className="max-w-[850px] mx-auto px-6 sm:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-16 space-y-3">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16 space-y-3"
+        >
           <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
           <h2 className="font-inter text-[34px] sm:text-[38px] font-bold text-gray-950 leading-tight tracking-tight">
             {title}
@@ -36,10 +43,16 @@ export default function FAQ({
           <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
             {subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Accordion Divider List */}
-        <div className="border-t border-gray-100 divide-y divide-gray-100">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="border-t border-gray-100 divide-y divide-gray-100"
+        >
           {items.map((faq, idx) => {
             const isExpanded = expandedIdx === idx;
             return (
@@ -81,7 +94,7 @@ export default function FAQ({
               </div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
     </section>

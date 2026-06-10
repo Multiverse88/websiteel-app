@@ -301,7 +301,7 @@ export default function CekKBLI() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#FFFDFB] overflow-hidden flex flex-col items-center pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-[#FFFDFB] overflow-hidden flex flex-col items-center pt-8 lg:pt-12 pb-20 px-4 sm:px-6 lg:px-8">
       {/* Ambient background glows */}
       <div className="absolute left-[-200px] top-[15%] w-[550px] h-[550px] rounded-full bg-[#F5C2C4]/35 blur-[110px] pointer-events-none animate-pulse-subtle" />
       <div className="absolute right-[-250px] bottom-[-100px] w-[700px] h-[700px] rounded-full bg-[#FEEDDC]/40 blur-[130px] pointer-events-none animate-pulse-subtle" />
