@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/db";
 import type { Article } from "@prisma/client";
-import { Calendar, Clock, ArrowRight, BookOpen, Home } from "lucide-react";
+import { Clock, BookOpen, Home, Search, X, ChevronDown } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -142,124 +142,377 @@ Membuat SOP, melakukan audit internal, dan mempersiapkan audit eksternal bisa me
   }
 ];
 
-export default async function ArtikelPage() {
-  // Fetch all articles
-  const articles = await prisma.article.findMany({
-    orderBy: {
-      createdAt: "desc"
+// Predefined category mappings: Database category -> Display Category
+const CATEGORY_MAP: Record<string, string> = {
+  "Pendirian PT": "Pendirian Usaha",
+  "Legalitas PT": "Pendirian Usaha",
+  "Merek & HAKI": "Haki",
+  "Sertifikasi ISO": "ISO",
+  "KBLI": "Perizinan",
+  "Perizinan": "Perizinan",
+  "Pajak": "Pajak",
+  "Branding": "Branding",
+};
+
+// Display Category -> DB Categories list
+const DB_CATEGORIES_MAP: Record<string, string[]> = {
+  "Pendirian Usaha": ["Pendirian PT", "Legalitas PT"],
+  "Haki": ["Merek & HAKI"],
+  "ISO": ["Sertifikasi ISO"],
+  "Perizinan": ["Perizinan", "KBLI"],
+  "Pajak": ["Pajak"],
+  "Branding": ["Branding"],
+};
+
+interface PageProps {
+  searchParams: Promise<{ q?: string; category?: string; limit?: string }>;
+}
+
+export default async function ArtikelPage({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
+  const q = resolvedSearchParams.q || "";
+  const activeCategory = resolvedSearchParams.category || "All";
+  const limit = resolvedSearchParams.limit ? parseInt(resolvedSearchParams.limit, 10) : 7;
+
+  // Fetch all articles to dynamically build category counts
+  const allArticlesForCounting = await prisma.article.findMany({
+    select: { category: true },
+  });
+
+  // Standard categories to display in order
+  const displayCategories = ["All", "Pendirian Usaha", "Pajak", "Haki", "ISO", "Perizinan", "Branding"];
+
+  // Initialize counts
+  const counts: Record<string, number> = {
+    All: allArticlesForCounting.length,
+  };
+  displayCategories.slice(1).forEach((cat) => {
+    counts[cat] = 0;
+  });
+
+  // Count them dynamically
+  allArticlesForCounting.forEach((art) => {
+    const dbCat = art.category;
+    const displayCat = CATEGORY_MAP[dbCat] || dbCat;
+    if (counts[displayCat] !== undefined) {
+      counts[displayCat]++;
+    } else {
+      counts[displayCat] = 1;
     }
   });
 
+  // Ensure any other dynamic categories from DB are included
+  const finalCategories = [...displayCategories];
+  Object.keys(counts).forEach((cat) => {
+    if (!finalCategories.includes(cat)) {
+      finalCategories.push(cat);
+    }
+  });
+
+  // Build Prisma query filter for active view
+  const whereClause: any = {};
+
+  if (q) {
+    whereClause.OR = [
+      { title: { contains: q, mode: "insensitive" } },
+      { excerpt: { contains: q, mode: "insensitive" } },
+      { category: { contains: q, mode: "insensitive" } },
+      { content: { contains: q, mode: "insensitive" } },
+    ];
+  }
+
+  if (activeCategory !== "All") {
+    const dbCategories = DB_CATEGORIES_MAP[activeCategory];
+    if (dbCategories) {
+      whereClause.category = { in: dbCategories };
+    } else {
+      whereClause.category = { equals: activeCategory, mode: "insensitive" };
+    }
+  }
+
+  // Get total matching count before applying limit
+  const totalMatchingCount = await prisma.article.count({
+    where: whereClause,
+  });
+
+  // Fetch articles up to current limit
+  const articles = await prisma.article.findMany({
+    where: whereClause,
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: limit,
+  });
+
+  // Split featured and regular articles
+  const featuredArticle = articles.length > 0 ? articles[0] : null;
+  const regularArticles = articles.length > 1 ? articles.slice(1) : [];
+
+  // Helper for tab category link URLs (resets limit to default 6)
+  const getCategoryHref = (cat: string) => {
+    const params = new URLSearchParams();
+    if (cat !== "All") {
+      params.set("category", cat);
+    }
+    if (q) {
+      params.set("q", q);
+    }
+    const searchStr = params.toString();
+    return searchStr ? `/artikel?${searchStr}` : "/artikel";
+  };
+
+  // Helper for Load More button URL (increases limit by 7)
+  const getLoadMoreHref = () => {
+    const params = new URLSearchParams();
+    if (activeCategory !== "All") {
+      params.set("category", activeCategory);
+    }
+    if (q) {
+      params.set("q", q);
+    }
+    params.set("limit", (limit + 7).toString());
+    const searchStr = params.toString();
+    return `/artikel?${searchStr}`;
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
+    <div className="flex flex-col min-h-screen bg-[#FAFAFA] blog-page-container">
       
       {/* ─── HERO & HEADER ─── */}
-      <section className="bg-white pt-8 lg:pt-12 pb-16 border-b border-gray-100 relative overflow-hidden">
+      <section className="bg-white pt-8 lg:pt-12 pb-16 relative overflow-hidden">
         {/* Top-right radial glow for premium aesthetic */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-red-500/10 rounded-full blur-[130px] pointer-events-none" />
+        {/* Bottom-left radial glow for premium aesthetic */}
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-[13px] font-medium text-gray-500 mb-6">
+          <nav className="flex items-center space-x-2 text-[13px] font-medium text-gray-500 mb-8">
             <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
               <Home className="w-3.5 h-3.5" />
               <span>Beranda</span>
             </Link>
             <span className="text-gray-300 font-normal">&gt;</span>
-            <span className="text-[13px] font-bold text-gray-900">Artikel & Edukasi</span>
+            <span className="text-[13px] font-bold text-gray-900">Artikel &amp; Edukasi</span>
           </nav>
 
-          {/* Pill Badge */}
-          <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-3.5 rounded-full border border-red-100 shadow-sm mb-5">
+          {/* Pill Badge / Section Indicator */}
+          <div className="flex items-center space-x-2 mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-            <span className="text-[12.5px] font-bold text-[#990202] tracking-wide">Edukasi Bisnis</span>
+            <span className="text-[11px] font-black uppercase tracking-widest text-[#990202]">
+              BLOG &amp; ARTIKEL
+            </span>
           </div>
 
-          <div className="max-w-2xl">
-              <h1 className="font-inter text-[44px] sm:text-[52px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
-                Artikel & Panduan{" "}
-                <span className="relative inline-block text-[#990202] px-2 py-0.5 bg-red-500/5 rounded-lg border border-red-100/40">
-                  Legalitas Bisnis
-                </span>
-              </h1>
-              <p className="text-[16px] sm:text-[17.5px] text-gray-500 leading-relaxed mt-4 max-w-2xl font-normal">
-                Temukan informasi terpercaya, kupas tuntas regulasi terbaru, dan panduan praktis untuk mendirikan serta melindungi bisnis Anda di Indonesia.
-              </p>
+          <div className="max-w-3xl">
+            <h1 className="font-inter text-[38px] sm:text-[50px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+              Insight legalitas untuk <span className="text-[#990202]">bisnis</span>
+              <br />
+              <span className="text-[#990202]">Anda</span>.
+            </h1>
+            <p className="text-[15px] sm:text-[16px] text-gray-500 leading-relaxed mt-5 max-w-2xl font-normal">
+              Panduan praktis seputar pendirian usaha, pajak, HAKI, ISO, perizinan &amp; branding — ditulis tim legal EasyLegal, update tiap minggu.
+            </p>
+          </div>
+
+          {/* Search Container */}
+          <div className="mt-8 max-w-xl">
+            <form action="/artikel" method="GET" className="relative flex items-center bg-white border border-gray-200/85 rounded-2xl p-1.5 shadow-[0_8px_30px_rgba(0,0,0,0.015)] focus-within:border-red-200 focus-within:shadow-[0_12px_30px_rgba(153,2,2,0.04)] transition-all">
+              <div className="flex items-center pl-3.5 pr-1 text-gray-400 pointer-events-none">
+                <Search className="w-5 h-5" />
+              </div>
+              <input
+                type="text"
+                name="q"
+                defaultValue={q}
+                placeholder="Cari artikel... (mis. NIB, PKP, merek)"
+                className="w-full pl-2 pr-4 py-3 bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none text-[14px] sm:text-[15px]"
+              />
+              <button
+                type="submit"
+                className="bg-[#990202] hover:bg-[#800000] text-white px-6 py-2.5 rounded-xl font-bold text-[14.5px] transition-colors shadow-sm whitespace-nowrap mr-0.5 cursor-pointer"
+              >
+                Cari
+              </button>
+            </form>
+
+            {/* Search feedback & reset button */}
+            {q && (
+              <div className="mt-4 flex items-center space-x-2 text-[13.5px] text-gray-500">
+                <span>Hasil pencarian untuk: <strong>"{q}"</strong></span>
+                <span className="text-gray-300">•</span>
+                <Link href="/artikel" className="text-[#990202] hover:underline font-semibold flex items-center gap-0.5">
+                  <X className="w-3.5 h-3.5 inline" />
+                  Hapus
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* ─── ARTICLE GRID SECTION ─── */}
-      <section className="py-20 flex-grow">
+      {/* ─── ARTICLE LIST SECTION ─── */}
+      <section className="py-16 flex-grow">
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article: Article) => (
-              <article 
-                key={article.id} 
-                className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col group"
-              >
-                {/* Cover Image */}
-                <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-100 border-b border-gray-100">
-                  <Image
-                    src={article.coverImage}
-                    alt={article.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
-                  
-                  {/* Category Pill Over Image */}
-                  <div className="absolute top-4 left-4">
-                    <span className="inline-flex px-3 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">
-                      {article.category}
-                    </span>
-                  </div>
-                </div>
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-dashed border-gray-200">
+            {finalCategories.map((cat) => {
+              const count = counts[cat] || 0;
+              if (count === 0 && !displayCategories.includes(cat)) return null;
 
-                {/* Content Details */}
-                <div className="p-6 flex-grow flex flex-col justify-between">
-                  <div className="space-y-4">
-                    {/* Meta info */}
-                    <div className="flex items-center space-x-4 text-[12.5px] font-bold text-gray-400">
-                      <div className="flex items-center space-x-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-[#990202]" />
-                        <span>
-                          {new Date(article.createdAt).toLocaleDateString("id-ID", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric"
-                          })}
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-1.5">
-                        <Clock className="w-3.5 h-3.5 text-[#990202]" />
-                        <span>{article.readTime}</span>
-                      </div>
+              const isActive = activeCategory === cat;
+              return (
+                <Link
+                  key={cat}
+                  href={getCategoryHref(cat)}
+                  className={`px-4.5 py-2 rounded-full text-[13px] font-extrabold transition-all duration-200 ${
+                    isActive
+                      ? "bg-[#990202] text-white shadow-sm"
+                      : "bg-[#F3F4F6] text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                  }`}
+                >
+                  {cat}{" "}
+                  <span className={`text-[11px] font-medium ml-0.5 ${isActive ? "text-red-200" : "text-gray-400"}`}>
+                    ({count})
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Featured Article Layout */}
+          {featuredArticle && (
+            <div className="mb-12">
+              <div className="group bg-white border border-gray-150 rounded-3xl p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.04)] transition-all duration-300">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                  
+                  {/* Image Column */}
+                  <div className="relative aspect-[1.6] w-full rounded-2xl overflow-hidden bg-gray-50 border border-gray-100">
+                    <Image
+                      src={featuredArticle.coverImage}
+                      alt={featuredArticle.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                      className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-full text-[10.5px] font-extrabold uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">
+                        <span className="text-red-600 font-bold">★</span> <span>ARTIKEL PILIHAN</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content Column */}
+                  <div className="flex flex-col justify-between py-2">
+                    <div>
+                      <span className="text-[#990202] text-[11.5px] font-black tracking-widest uppercase block mb-3">
+                        {CATEGORY_MAP[featuredArticle.category] || featuredArticle.category}
+                      </span>
+                      <h2 className="font-inter text-[24px] sm:text-[30px] font-extrabold text-gray-950 leading-tight group-hover:text-[#990202] transition-colors duration-200">
+                        <Link href={`/artikel/${featuredArticle.slug}`}>
+                          {featuredArticle.title}
+                        </Link>
+                      </h2>
+                      <p className="text-[14.5px] sm:text-[15px] text-gray-500 leading-relaxed mt-4 line-clamp-4">
+                        {featuredArticle.excerpt}
+                      </p>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
-                      <Link href={`/artikel/${article.slug}`} className="focus:outline-none">
-                        {article.title}
-                      </Link>
-                    </h3>
-
-                    {/* Excerpt */}
-                    <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal line-clamp-3">
-                      {article.excerpt}
-                    </p>
-                  </div>
-
-                  {/* Read More Footer */}
-                  <div className="flex items-center text-[13.5px] font-extrabold text-[#990202] group-hover:text-[#800000] mt-6 pt-4 border-t border-gray-100 transition-colors">
-                    <span>Baca Selengkapnya</span>
-                    <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
+                    <div className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-400 mt-6 pt-4 border-t border-gray-100">
+                      <div className="flex items-center text-[#990202]">
+                        <Clock className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="font-semibold text-gray-600">{featuredArticle.readTime}</span>
+                      <span className="text-gray-300">•</span>
+                      <span>
+                        {new Date(featuredArticle.createdAt).toLocaleDateString("id-ID", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+            </div>
+          )}
+
+          {/* Regular Articles Grid */}
+          {regularArticles.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {regularArticles.map((article: Article) => (
+                <article
+                  key={article.id}
+                  className="bg-white rounded-3xl border border-gray-200/80 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+                >
+                  {/* Image container inside card padding */}
+                  <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-50 border border-gray-100 rounded-2xl mb-4">
+                    <Image
+                      src={article.coverImage}
+                      alt={article.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-center group-hover:scale-103 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Details */}
+                  <div className="px-2 pb-2 flex-grow flex flex-col justify-between">
+                    <div>
+                      <span className="text-[#990202] text-[11px] font-black tracking-widest uppercase block mb-2">
+                        {CATEGORY_MAP[article.category] || article.category}
+                      </span>
+                      <h3 className="font-inter text-[17px] sm:text-[18px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug mb-2 line-clamp-2">
+                        <Link href={`/artikel/${article.slug}`} className="focus:outline-none">
+                          {article.title}
+                        </Link>
+                      </h3>
+                      <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal line-clamp-3 mb-4">
+                        {article.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-400 pt-4 border-t border-gray-100 mt-2">
+                      <div className="flex items-center text-[#990202]">
+                        <Clock className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="font-semibold text-gray-600">{article.readTime}</span>
+                      <span className="text-gray-300">•</span>
+                      <span>
+                        {new Date(article.createdAt).toLocaleDateString("id-ID", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+
+          {/* Load More Button & Count Indicator */}
+          {articles.length > 0 && (
+            <div className="flex flex-col items-center justify-center mt-16 space-y-4">
+              {articles.length < totalMatchingCount && (
+                <Link
+                  href={getLoadMoreHref()}
+                  scroll={false}
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white border border-gray-200/90 hover:border-gray-300 hover:bg-gray-50 text-gray-800 rounded-full font-bold text-[13.5px] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] cursor-pointer"
+                >
+                  <span>Muat Lebih Banyak</span>
+                  <ChevronDown className="w-4.5 h-4.5 text-gray-500" />
+                </Link>
+              )}
+              <p className="text-[12.5px] text-gray-400 font-bold tracking-wide">
+                Menampilkan {articles.length} dari {totalMatchingCount} artikel
+              </p>
+            </div>
+          )}
 
           {/* Empty State fallback */}
           {articles.length === 0 && (

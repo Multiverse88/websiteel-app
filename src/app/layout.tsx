@@ -3,6 +3,7 @@ import { DM_Sans, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollManager from "@/components/ScrollManager";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${jakarta.variable} ${inter.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col pt-[72px] bg-white text-dark font-['DM_Sans',sans-serif]">
+        <ScrollManager />
         <Navbar />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />

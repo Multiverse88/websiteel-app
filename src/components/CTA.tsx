@@ -30,7 +30,7 @@ export default function CTA({
   );
 
   return (
-    <section className="py-20 bg-white border-t border-gray-100 overflow-hidden relative">
+    <section id="footer-cta" className="py-20 bg-white border-t border-gray-100 overflow-hidden relative">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

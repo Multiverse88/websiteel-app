@@ -280,6 +280,95 @@ Kekurangan:
 
 Tim **EasyLegal** siap membantu Anda menentukan struktur badan usaha yang paling sesuai dengan kebutuhan bisnis Anda. Kami mengurus pendirian PT Perorangan maupun PT Biasa secara lengkap dan transparan. Hubungi kami untuk konsultasi gratis!`
   },
+  {
+    slug: "panduan-pajak-umkm-sederhana",
+    title: "Panduan Praktis Pajak UMKM: Cara Hitung dan Lapor",
+    excerpt: "Bingung cara menghitung dan melaporkan pajak bisnis UMKM Anda? Simak panduan praktis mengenai tarif PPh Final 0.5% dan batas waktu pembayarannya.",
+    coverImage: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?fit=crop&w=800&h=500&q=80",
+    category: "Pajak",
+    readTime: "5 menit baca",
+    content: `### Pentingnya Kepatuhan Pajak bagi UMKM
+    
+Kepatuhan pajak bukan hanya kewajiban konstitusional, tetapi juga instrumen penting untuk memprofesionalkan bisnis UMKM Anda. Dengan administrasi pajak yang rapi, bisnis Anda akan lebih mudah mengakses pembiayaan perbankan, mendapatkan legalitas formal (seperti PKP), serta menghindari denda administratif yang merugikan.
+
+Pemerintah Indonesia menawarkan kemudahan melalui PPh Final PP 23/2018 (sebesar 0,5% dari omzet bruto) khusus bagi pelaku usaha dengan omzet di bawah Rp4,8 Miliar per tahun.
+
+---
+
+### Cara Menghitung PPh Final 0,5%
+Perhitungan PPh Final UMKM tergolong sangat mudah karena tidak memerlukan pembukuan rumit, melainkan cukup pencatatan omzet (peredaran bruto) bulanan:
+- **Contoh**: Jika omzet kedai kopi Anda di bulan Januari 2026 adalah Rp50.000.000, maka PPh Final yang harus dibayar adalah:
+  0,5% x Rp50.000.000 = Rp250.000.
+- **Catatan Penting (UU Harmonisasi Peraturan Perpajakan)**: Bagi wajib pajak orang pribadi (perorangan), omzet sampai dengan Rp500.000.000 dalam satu tahun pajak dibebaskan dari pengenaan PPh Final. Jadi Anda baru membayar pajak setelah total omzet tahunan melewati batas Rp500 juta.
+
+---
+
+### Batas Waktu Pembayaran dan Pelaporan
+- **Pembayaran Bulanan**: PPh Final harus disetor paling lambat tanggal 15 bulan berikutnya setelah masa pajak berakhir.
+- **Pelaporan Tahunan**: Meskipun telah membayar setiap bulan, pelaku usaha wajib melaporkan SPT Tahunan PPh paling lambat tanggal 31 Maret tahun berikutnya untuk Wajib Pajak Orang Pribadi, dan 30 April untuk Wajib Pajak Badan.`
+  },
+  {
+    slug: "pkp-atau-non-pkp-pilihan-pajak",
+    title: "PKP atau Non-PKP? Panduan Memilih Status Pajak Usaha",
+    excerpt: "Ketahui perbedaan antara Pengusaha Kena Pajak (PKP) dan Non-PKP, serta keuntungan masing-masing status bagi kredibilitas dan transaksi bisnis Anda.",
+    coverImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fit=crop&w=800&h=500&q=80",
+    category: "Pajak",
+    readTime: "6 menit baca",
+    content: `### Apa Perbedaan PKP dan Non-PKP?
+    
+Secara garis besar, **Pengusaha Kena Pajak (PKP)** adalah pengusaha yang melakukan penyerahan Barang Kena Pajak (BKP) atau Jasa Kena Pajak (JKP) yang dikenai pajak berdasarkan UU Pajak Pertambahan Nilai (PPN). Sedangkan **Non-PKP** adalah pelaku usaha kecil yang belum dikukuhkan sebagai PKP.
+
+Undang-Undang menetapkan bahwa perusahaan dengan omzet di atas **Rp4,8 Miliar per tahun wajib** dikukuhkan sebagai PKP. Jika omzet masih di bawah batas tersebut, perusahaan dibolehkan memilih (opsional) untuk menjadi PKP atau tetap Non-PKP.
+
+---
+
+### Kapan Sebaiknya Memilih Status PKP?
+Menjadi PKP menawarkan keuntungan tersendiri, antara lain:
+1. **Dapat Bertransaksi dengan Instansi Pemerintah & BUMN**: Sebagian besar proyek pemerintah atau tender perusahaan besar mensyaratkan status PKP untuk menerbitkan Faktur Pajak.
+2. **Kredibilitas Bisnis Meningkat**: Perusahaan Anda dinilai bonafide secara hukum dan kepatuhan perpajakan.
+3. **Mekanisme Pajak Masukan-Keluaran**: Anda bisa melakukan pengkreditan pajak atas pembelian bahan baku (Pajak Masukan) sehingga mengurangi beban pajak riil.`
+  },
+  {
+    slug: "strategi-branding-merek-baru",
+    title: "5 Fondasi Utama Membangun Identitas Brand yang Dipercaya",
+    excerpt: "Brand kuat bukan cuma soal logo bagus. Pelajari cara menentukan visi, riset kompetitor, serta konsistensi warna untuk membuat merek Anda melekat di hati konsumen.",
+    coverImage: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?fit=crop&w=800&h=500&q=80",
+    category: "Branding",
+    readTime: "5 menit baca",
+    content: `### Branding: Kunci Sukses Bisnis Jangka Panjang
+    
+Banyak pengusaha pemula mengira bahwa branding adalah sekadar logo dan nama bisnis. Faktasnya, branding adalah persepsi atau ikatan emosional antara produk Anda dengan hati para pelanggan. Branding yang baik menceritakan cerita, menyampaikan nilai-nilai perusahaan, dan memberikan janji kualitas yang konsisten.
+
+---
+
+### 5 Fondasi Penting Membangun Brand
+1. **Definisikan Visi dan Target Pasar**: Siapa konsumen ideal Anda? Apa masalah mereka yang ingin Anda selesaikan?
+2. **Tentukan Unique Selling Proposition (USP)**: Apa keunggulan produk Anda yang tidak dimiliki oleh kompetitor lain?
+3. **Rancang Identitas Visual yang Konsisten**: Pilih palet warna, jenis huruf (typography), dan logo yang mencerminkan karakter brand Anda.
+4. **Gunakan Tone of Voice yang Sesuai**: Gaya bahasa dalam komunikasi (media sosial, layanan pelanggan) harus konsisten, apakah formal, santai, humoris, atau edukatif.
+5. **Jaga Konsistensi Janji Brand**: Merek yang kuat dibangun di atas fondasi kepercayaan. Pastikan kualitas produk dan pelayanan selalu stabil.`
+  },
+  {
+    slug: "cara-cek-merek-diterima-djki",
+    title: "Cara Cek Merek Dagang Agar Tidak Ditolak oleh DJKI",
+    excerpt: "Sebelum mendaftarkan merek Anda, lakukan penelusuran mandiri dengan panduan ini untuk menekan risiko penolakan akibat kemiripan dengan merek lain.",
+    coverImage: "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?fit=crop&w=800&h=500&q=80",
+    category: "Merek & HAKI",
+    readTime: "4 menit baca",
+    content: `### Mengapa Merek Sering Ditolak DJKI?
+    
+Lebih dari 30% permohonan pendaftaran merek ditolak oleh DJKI (Direktorat Jenderal Kekayaan Intelektual). Alasan paling umum penolakan tersebut adalah **adanya persamaan pada pokoknya** atau secara keseluruhan dengan merek terdaftar milik pihak lain untuk kelas barang atau jasa yang sejenis.
+
+Penolakan merek ini mengakibatkan kerugian biaya PNBP yang sudah dibayarkan (tidak dapat ditarik kembali) serta hilangnya waktu tunggu pemeriksaan yang memakan waktu berbulan-bulan.
+
+---
+
+### Cara Melakukan Penelusuran Merek Mandiri
+Sebelum mengajukan pendaftaran, pastikan Anda menempuh langkah-langkah berikut:
+1. **Buka Database DJKI**: Akses portal resmi penelusuran merek di pdki-indonesia.dgki.go.id.
+2. **Ketik Nama Merek**: Masukkan nama merek Anda. Lakukan variasi pencarian (e.g., penulisan digabung, dipisah, ejaan fonetik mirip).
+3. **Analisis Kemiripan**: Periksa apakah ada merek terdaftar dengan ejaan, pengucapan suara (fonetik), atau visual logo yang mirip di kelas barang/jasa yang sama.`
+  }
 ];
 
 async function main() {

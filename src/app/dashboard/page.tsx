@@ -150,7 +150,7 @@ export default async function DashboardPage() {
                   >
                     {/* Cover Image */}
                     <div className="col-span-1">
-                      <div className="w-12 h-10 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+                      <div className="relative w-12 h-10 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
                         <ArticleImage
                           src={article.coverImage}
                           alt={article.title}

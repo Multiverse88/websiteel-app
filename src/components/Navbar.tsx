@@ -4,11 +4,12 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLayananOpen, setIsLayananOpen] = useState(false);
+  const [isPendirianOpen, setIsPendirianOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -30,23 +31,37 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const services = [
-    { name: "Pendirian Badan Usaha", desc: "Pendirian PT, CV, Yayasan, dll", href: "/layanan/pendirian-badan-usaha" },
-    { name: "Pendirian Yayasan", desc: "Pendirian Yayasan Sosial & Keagamaan", href: "/layanan/pendirian-yayasan" },
     { name: "Merek & HAKI", desc: "Pendaftaran Merek & HAKI DJKI", href: "/layanan/merek-haki" },
+    {
+      name: "Pendirian Badan Usaha",
+      desc: "Pendirian PT, CV, Yayasan, dll",
+      href: "/layanan/pendirian-badan-usaha",
+      sublinks: [
+        { name: "PT", href: "/layanan/pendirian-badan-usaha/pt" },
+        { name: "CV", href: "/layanan/pendirian-badan-usaha/cv" },
+        { name: "PT PMA", href: "/layanan/pendirian-badan-usaha/pt-pma" },
+        { name: "PT Perorangan", href: "/layanan/pendirian-badan-usaha/pt-perorangan" },
+        { name: "Firma", href: "/layanan/pendirian-badan-usaha/firma" },
+        { name: "Yayasan", href: "/layanan/pendirian-badan-usaha/yayasan" },
+        { name: "Perkumpulan", href: "/layanan/pendirian-badan-usaha/perkumpulan" },
+        { name: "Koperasi", href: "/layanan/pendirian-badan-usaha/koperasi" },
+      ],
+    },
     { name: "NIB & OSS", desc: "NIB, OSS RBA & Perizinan Usaha", href: "/layanan/nib-oss" },
     { name: "Pengajuan PKP", desc: "Pengusaha Kena Pajak", href: "/layanan/pengajuan-pkp" },
     { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/layanan/visa-kitas" },
     { name: "PR & Media", desc: "Publikasi Media Online", href: "/layanan/pr-media" },
     { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/layanan/perjanjian-perkawinan" },
     { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/layanan/pelaporan-lkpm" },
-    { name: "Virtual Office", desc: "Alamat Bisnis Strategis & Legal", href: "/layanan/virtual-office" },
     { name: "Referral & Reseller", desc: "Program Kemitraan & Komisi", href: "/referral-reseller" },
     { name: "Cek Nama PT", desc: "Cek Ketersediaan Nama PT", href: "/cek-nama" },
   ];
 
+
   const handleLinkClick = () => {
     setIsOpen(false);
     setIsLayananOpen(false);
+    setIsPendirianOpen(false);
   };
 
   return (
@@ -71,6 +86,7 @@ export default function Navbar() {
               width={150}
               height={52}
               className="h-[52px] w-auto object-contain"
+              style={{ width: "auto" }}
               priority
             />
           </Link>
@@ -93,7 +109,7 @@ export default function Navbar() {
             <div
               className="relative"
               onMouseEnter={() => setIsLayananOpen(true)}
-              onMouseLeave={() => setIsLayananOpen(false)}
+              onMouseLeave={() => { setIsLayananOpen(false); setIsPendirianOpen(false); }}
             >
               <button
                 className={`flex items-center space-x-1 text-[14px] font-medium transition-colors ${
@@ -109,24 +125,63 @@ export default function Navbar() {
               {isLayananOpen && (
                 <div className="absolute top-full -left-20 w-[560px] mt-0 pt-3 bg-transparent animate-slide-down">
                   <div className="bg-white rounded-xl shadow-xl border border-border/60 p-5 grid grid-cols-2 gap-1">
-                    {services.map((item, idx) => (
-                      <Link
-                        key={idx}
-                        href={item.href}
-                        onClick={handleLinkClick}
-                        className="group flex items-start p-3 rounded-lg hover:bg-primary-light transition-colors"
-                      >
-                        <div className="h-2 w-2 rounded-full bg-primary/30 group-hover:bg-primary mt-1.5 mr-3 transition-colors flex-shrink-0" />
-                        <div>
-                          <div className="text-[13px] font-bold text-dark group-hover:text-primary transition-colors">
-                            {item.name}
-                          </div>
-                          <div className="text-[11px] text-muted mt-0.5 line-clamp-1">
-                            {item.desc}
-                          </div>
+                    {services.map((item, idx) => 
+                      "sublinks" in item ? (
+                        <div
+                          key={idx}
+                          className="relative"
+                        >
+                          <button
+                            onClick={() => setIsPendirianOpen(!isPendirianOpen)}
+                            className="flex items-start p-3 rounded-lg hover:bg-primary-light transition-colors w-full text-left"
+                          >
+                            <div className="h-2 w-2 rounded-full bg-primary/30 mt-1.5 mr-3 transition-colors flex-shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <div className="text-[13px] font-bold text-dark transition-colors">
+                                {item.name}
+                              </div>
+                              <div className="text-[11px] text-muted mt-0.5 line-clamp-1">
+                                {item.desc}
+                              </div>
+                            </div>
+                            <ChevronRight className={`w-4 h-4 text-muted/40 flex-shrink-0 self-center ml-2 transition-all duration-200 ${isPendirianOpen ? "rotate-180 translate-x-0.5 text-primary/60" : ""}`} />
+                          </button>
+                          {isPendirianOpen && (
+                            <div className="absolute left-full top-0 ml-2 bg-transparent">
+                              <div className="bg-white rounded-xl shadow-xl border border-border/60 p-3 min-w-[200px]">
+                                {item.sublinks!.map((sub, subIdx) => (
+                                  <Link
+                                    key={subIdx}
+                                    href={sub.href}
+                                    onClick={handleLinkClick}
+                                    className="block px-3 py-2 text-[13px] font-medium text-muted hover:text-primary hover:bg-primary-light rounded-lg transition-colors"
+                                  >
+                                    {sub.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
-                      </Link>
-                    ))}
+                      ) : (
+                        <Link
+                          key={idx}
+                          href={item.href}
+                          onClick={handleLinkClick}
+                          className="group flex items-start p-3 rounded-lg hover:bg-primary-light transition-colors"
+                        >
+                          <div className="h-2 w-2 rounded-full bg-primary/30 group-hover:bg-primary mt-1.5 mr-3 transition-colors flex-shrink-0" />
+                          <div>
+                            <div className="text-[13px] font-bold text-dark group-hover:text-primary transition-colors">
+                              {item.name}
+                            </div>
+                            <div className="text-[11px] text-muted mt-0.5 line-clamp-1">
+                              {item.desc}
+                            </div>
+                          </div>
+                        </Link>
+                      )
+                    )}
                   </div>
                 </div>
               )}
@@ -158,6 +213,18 @@ export default function Navbar() {
               }`}
             >
               Blog
+            </Link>
+
+            <Link
+              href="/testimoni"
+              onClick={handleLinkClick}
+              className={`text-[14px] font-medium transition-colors ${
+                pathname === "/testimoni"
+                  ? "text-dark font-semibold"
+                  : "text-muted hover:text-dark"
+              }`}
+            >
+              Testimoni
             </Link>
 
             <Link
@@ -225,6 +292,7 @@ export default function Navbar() {
               { name: "Cek KBLI", href: "/cek-kbli" },
               { name: "Virtual Office", href: "/layanan/virtual-office" },
               { name: "Blog", href: "/artikel" },
+              { name: "Testimoni", href: "/testimoni" },
               { name: "Tentang Kami", href: "/tentang-kami" },
               { name: "Kontak", href: "/kontak" },
             ].map((item) => {
@@ -264,16 +332,43 @@ export default function Navbar() {
 
               {isLayananOpen && (
                 <div className="pl-4 pr-2 mt-1 py-1 bg-bg-light/50 rounded-lg grid grid-cols-1 gap-0.5">
-                  {services.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      href={item.href}
-                      onClick={handleLinkClick}
-                      className="block px-3 py-1.5 text-[13px] font-medium text-muted hover:text-primary"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                  {services.map((item, idx) =>
+                    "sublinks" in item ? (
+                      <div key={idx} className="space-y-0.5">
+                        <div className="flex items-center px-3 py-1.5">
+                          <Link
+                            href={item.href}
+                            onClick={handleLinkClick}
+                            className="text-[13px] font-bold text-muted hover:text-primary flex-1"
+                          >
+                            {item.name}
+                          </Link>
+                          <ChevronRight className="w-3.5 h-3.5 text-muted/40 flex-shrink-0" />
+                        </div>
+                        <div className="pl-4 border-l-2 border-primary/20 ml-3 space-y-0.5">
+                          {item.sublinks!.map((sub, subIdx) => (
+                            <Link
+                              key={subIdx}
+                              href={sub.href}
+                              onClick={handleLinkClick}
+                              className="block px-3 py-1 text-[12px] font-medium text-muted hover:text-primary"
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <Link
+                        key={idx}
+                        href={item.href}
+                        onClick={handleLinkClick}
+                        className="block px-3 py-1.5 text-[13px] font-medium text-muted hover:text-primary"
+                      >
+                        {item.name}
+                      </Link>
+                    )
+                  )}
                 </div>
               )}
             </div>

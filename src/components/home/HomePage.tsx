@@ -1468,8 +1468,15 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
 
               {/* EasyLegal CORPORATE badge */}
               <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-2.5 shadow-sm border border-border/60 mb-5 self-start">
-                <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center flex-shrink-0">
-                  <span className="text-[8px] font-black text-white tracking-tight">EL</span>
+                <div className="w-6 h-5 overflow-hidden rounded-[4px] relative flex items-center justify-center flex-shrink-0">
+                  <Image 
+                    src="/Logo EL.png" 
+                    alt="EasyLegal Logo" 
+                    width={24}
+                    height={20}
+                    className="absolute w-[160%] h-[160%] max-w-none object-cover" 
+                    style={{ objectPosition: "center 22%" }}
+                  />
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="text-[12.5px] font-extrabold text-primary">easy</span>
@@ -2180,6 +2187,68 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
                 </div>
               ))}
             </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          PROMO CARDS + SERTIFIKASI + LIPUTAN MEDIA
+          ═══════════════════════════════════════════ */}
+      <section className="bg-white py-16 border-b border-border/40 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1280px] mx-auto space-y-12">
+
+          {/* Promo Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Jangkauan Nasional */}
+            <div className="bg-[#990202] rounded-2xl p-8 text-white relative overflow-hidden border-2 border-dashed border-white/20 min-h-[180px] flex flex-col justify-center">
+              <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                <span className="text-[11px] font-black text-white/80">EL</span>
+              </div>
+              <p className="text-[11px] font-bold text-white/70 uppercase tracking-widest mb-2">Jangkauan Nasional</p>
+              <h3 className="text-[24px] sm:text-[28px] font-black text-white leading-tight mb-2">Melayani Seluruh Indonesia</h3>
+              <p className="text-[13px] text-white/80 leading-relaxed">Dari Sabang sampai Merauke — urus legalitas bisnis 100% online, tanpa perlu datang ke kantor.</p>
+            </div>
+
+            {/* Legal Festival Special */}
+            <div className="bg-gradient-to-br from-[#D97706] to-[#F59E0B] rounded-2xl p-8 text-white relative overflow-hidden border-2 border-dashed border-white/20 min-h-[180px] flex flex-col justify-center">
+              <p className="text-[11px] font-bold text-white/70 uppercase tracking-widest mb-2">Legal Festival Special</p>
+              <h3 className="text-[24px] sm:text-[28px] font-black text-white leading-tight mb-2">Menangkan iPhone & Hadiah senilai<br />Rp12.000.000</h3>
+              <p className="text-[13px] text-white/80 leading-relaxed">+ Setiap pembelian PT berkesempatan dapat iPhone</p>
+            </div>
+          </div>
+
+          {/* Sertifikasi ISO */}
+          <div className="text-center">
+            <p className="text-[12px] font-extrabold text-[#6B7280] uppercase tracking-[0.2em] mb-8">EasyLegal Resmi Bersertifikat ISO</p>
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              <div className="w-full max-w-[240px] h-[100px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
+                <Image src="/EasyLegal.id_-scaled.jpg" alt="PSe KOMDIGI" fill className="object-cover" />
+              </div>
+              <div className="w-full max-w-[240px] h-[100px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
+                <Image src="/ISO-sertifikat-scaled.jpg" alt="ISO 9001:2015" fill className="object-cover" />
+              </div>
+              <div className="w-full max-w-[240px] h-[100px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
+                <Image src="/ISO-27001-2022.png" alt="ISO 27001:2022" fill className="object-cover" />
+              </div>
+            </div>
+          </div>
+
+          {/* Liputan Media */}
+          <div className="text-center">
+            <p className="text-[12px] font-extrabold text-[#6B7280] uppercase tracking-[0.2em] mb-8">Liputan Media EasyLegal</p>
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+              {["Kontan.co.id", "jpnn.com", "industry.co.id", "detikcom", "IDN TIMES", "SINDONEWS.com"].map((media, idx) => (
+                <span key={idx} className="text-[16px] font-bold text-gray-300 hover:text-gray-400 transition-colors cursor-default">
+                  {media}
+                </span>
+              ))}
+            </div>
+            <p className="text-[13px] text-gray-400 mt-6 flex items-center justify-center gap-2">
+              Bisa Juga transaksi via
+              <Image src="/EasyLegal-Shopee.png" alt="Shopee" width={100} height={40} className="object-contain" />
+              EasyLegal Official Store
+            </p>
           </div>
 
         </div>

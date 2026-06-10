@@ -102,6 +102,7 @@ export default function Footer() {
                 width={200}
                 height={100}
                 className="h-[100px] w-auto object-contain"
+                style={{ width: "auto" }}
                 priority
               />
             </Link>

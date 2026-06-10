@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useTransition } from "react";
+import React, { useState, useRef, useTransition, useEffect } from "react";
 import Link from "next/link";
 import ImageComponent from "next/image";
 import { ArrowLeft, Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, HelpCircle, Loader2 } from "lucide-react";
@@ -32,6 +32,7 @@ export default function TambahArtikelPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const editorRef = useRef<HTMLDivElement>(null);
 
   // Cover image state
   const [coverMode, setCoverMode] = useState<CoverMode>("upload");
@@ -46,6 +47,25 @@ export default function TambahArtikelPage() {
   const [readTime, setReadTime] = useState("5 menit baca");
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    if (editorRef.current && !editorRef.current.innerHTML) {
+      editorRef.current.innerHTML = markdownToHtml(content || "");
+    }
+  }, []);
+
+  const handleEditorInput = () => {
+    const html = editorRef.current?.innerHTML || "";
+    const md = htmlToMarkdown(html);
+    setContent(md);
+  };
+
+  const handleFormat = (command: string, value: string = "") => {
+    if (typeof document !== "undefined") {
+      document.execCommand(command, false, value);
+      handleEditorInput();
+    }
+  };
 
   const handleFileSelect = (file: File) => {
     if (!file.type.startsWith("image/")) {
@@ -108,6 +128,12 @@ export default function TambahArtikelPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+
+    // Validate content manually since the textarea is hidden
+    if (!content.trim()) {
+      setError("Isi lengkap artikel tidak boleh kosong!");
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
 
@@ -457,33 +483,174 @@ export default function TambahArtikelPage() {
                 {/* Content */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <label htmlFor="content" className="text-[13.5px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                    <label className="text-[13.5px] font-extrabold text-gray-900 flex items-center gap-1.5">
                       Isi Lengkap Artikel <span className="text-[#990202]">*</span>
                     </label>
-                    <div className="group relative flex items-center gap-1 cursor-pointer">
-                      <HelpCircle className="w-3.8 h-3.8 text-gray-400 hover:text-gray-600 transition-colors" />
-                      <span className="text-[11.5px] text-gray-400 hover:text-gray-600 transition-colors font-bold">Format Penulisan</span>
-                      <div className="absolute right-0 bottom-full mb-2 w-[280px] bg-gray-900 text-white rounded-xl p-3.5 shadow-lg border border-white/10 invisible group-hover:visible transition-all duration-200 z-50 text-[11.5px] leading-relaxed font-normal">
-                        <div className="font-extrabold mb-1.5 border-b border-white/10 pb-1 text-[#FF8E8E]">Panduan Format Markdown:</div>
-                        <ul className="space-y-1 list-none pl-0">
-                          <li><strong className="text-white">### Judul</strong> : Judul Sub-bab baru</li>
-                          <li><strong className="text-white">**Teks**</strong> : Teks tebal/bold</li>
-                          <li><strong className="text-white">* Poin</strong> : Daftar peluru</li>
-                          <li><strong className="text-white">1. Poin</strong> : Daftar bernomor</li>
-                          <li><strong className="text-white">---</strong> : Garis pembatas horizontal</li>
-                        </ul>
-                      </div>
-                    </div>
                   </div>
+
+                  {/* Format Helper Toolbar */}
+                  <div className="flex flex-wrap items-center gap-2 p-1.5 bg-gray-50 border border-gray-200 rounded-xl">
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => handleFormat("formatBlock", "<h3>")}
+                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Ubah menjadi Sub-judul (H3)"
+                    >
+                      <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">H3</span>
+                      <span>Sub-judul</span>
+                    </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => handleFormat("bold")}
+                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Jadikan Teks Tebal"
+                    >
+                      <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">B</span>
+                      <span>Tebal</span>
+                    </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => handleFormat("insertUnorderedList")}
+                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Sisipkan List Poin"
+                    >
+                      <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">•</span>
+                      <span>List Poin</span>
+                    </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => handleFormat("insertOrderedList")}
+                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Sisipkan List Angka"
+                    >
+                      <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">1.</span>
+                      <span>List Angka</span>
+                    </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => handleFormat("insertHorizontalRule")}
+                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Sisipkan Garis Pembatas"
+                    >
+                      <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">―</span>
+                      <span>Pembatas</span>
+                    </button>
+                  </div>
+
+                  {/* WYSIWYG Content Editor */}
+                  <div className="relative border border-gray-200 rounded-xl overflow-hidden shadow-inner">
+                    <div
+                      ref={editorRef}
+                      contentEditable={true}
+                      onInput={handleEditorInput}
+                      data-placeholder="Tuliskan isi lengkap artikel Anda di sini. Klik tombol di atas untuk memformat secara langsung..."
+                      className="w-full bg-white px-4 py-3.5 text-[14.5px] focus:outline-none transition-all font-medium text-gray-950 min-h-[350px] max-h-[600px] overflow-y-auto prose-editor"
+                    />
+                  </div>
+                  
+                  {/* Style for WYSIWYG editor placeholders and layout elements */}
+                  <style>{`
+                    .prose-editor:empty::before {
+                      content: attr(data-placeholder);
+                      color: #9ca3af;
+                      font-style: italic;
+                      cursor: text;
+                    }
+                    .prose-editor h3 {
+                      font-family: var(--font-inter), sans-serif;
+                      font-size: 17px !important;
+                      font-weight: 800 !important;
+                      color: #030712 !important;
+                      border-left: 4px solid #990202 !important;
+                      padding-left: 10px !important;
+                      margin-top: 20px !important;
+                      margin-bottom: 10px !important;
+                    }
+                    .prose-editor strong {
+                      font-weight: 800 !important;
+                      color: #111827 !important;
+                    }
+                    .prose-editor p, .prose-editor div {
+                      font-size: 14.5px !important;
+                      color: #4b5563 !important;
+                      line-height: 1.7 !important;
+                      margin-top: 8px !important;
+                      margin-bottom: 8px !important;
+                    }
+                    .prose-editor ul {
+                      list-style-type: none !important;
+                      padding-left: 0 !important;
+                      margin-top: 10px !important;
+                      margin-bottom: 10px !important;
+                    }
+                    .prose-editor ul li {
+                      position: relative !important;
+                      padding-left: 20px !important;
+                      font-size: 14px !important;
+                      color: #4b5563 !important;
+                      margin-top: 4px !important;
+                    }
+                    .prose-editor ul li::before {
+                      content: "" !important;
+                      position: absolute !important;
+                      left: 0 !important;
+                      top: 8px !important;
+                      width: 6px !important;
+                      height: 6px !important;
+                      border-radius: 9999px !important;
+                      background-color: rgba(153, 2, 2, 0.7) !important;
+                    }
+                    .prose-editor ol {
+                      counter-reset: item !important;
+                      list-style-type: none !important;
+                      padding-left: 0 !important;
+                      margin-top: 10px !important;
+                      margin-bottom: 10px !important;
+                    }
+                    .prose-editor ol li {
+                      display: flex !important;
+                      align-items: flex-start !important;
+                      font-size: 14px !important;
+                      color: #4b5563 !important;
+                      margin-top: 6px !important;
+                    }
+                    .prose-editor ol li::before {
+                      content: counter(item) !important;
+                      counter-increment: item !important;
+                      display: inline-flex !important;
+                      align-items: center !important;
+                      justify-content: center !important;
+                      width: 18px !important;
+                      height: 18px !important;
+                      border-radius: 6px !important;
+                      background-color: #fef2f2 !important;
+                      border: 1px solid rgba(254, 242, 242, 0.4) !important;
+                      color: #990202 !important;
+                      font-size: 10px !important;
+                      font-weight: 900 !important;
+                      margin-right: 10px !important;
+                      flex-shrink: 0 !important;
+                      margin-top: 2px !important;
+                    }
+                    .prose-editor hr {
+                      border: 0 !important;
+                      border-top: 1px solid #e5e7eb !important;
+                      margin-top: 20px !important;
+                      margin-bottom: 20px !important;
+                    }
+                  `}</style>
+
                   <textarea
                     id="content"
                     name="content"
-                    required
-                    rows={12}
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="Tuliskan konten artikel lengkap menggunakan format panduan di atas..."
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 text-[14.5px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950 resize-y"
+                    className="hidden"
                   />
                 </div>
 
@@ -572,6 +739,82 @@ export default function TambahArtikelPage() {
                 Gunakan judul yang memancing rasa ingin tahu, lengkapi dengan kutipan pendek yang persuasif, dan tulislah sub-bab menggunakan format heading <code className="bg-amber-100/60 px-1.5 py-0.5 rounded font-black text-amber-950">###</code> agar artikel tersusun secara rapi dan mudah dibaca oleh klien.
               </div>
 
+              {/* Format Cheat Sheet Card */}
+              <div className="bg-white rounded-3xl border border-gray-200/80 p-5 shadow-[0_12px_30px_rgba(0,0,0,0.03)] space-y-4">
+                <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
+                  <FileText className="w-5 h-5 text-[#990202]" />
+                  <span className="text-[14px] font-extrabold text-gray-900">
+                    Contoh Hasil Tampilan Format
+                  </span>
+                </div>
+
+                <div className="space-y-4 text-[12.5px] leading-relaxed text-gray-600">
+                  {/* Heading H3 */}
+                  <div className="space-y-1">
+                    <div className="text-[11px] font-extrabold text-gray-400 uppercase tracking-wide">
+                      Sub-judul (H3)
+                    </div>
+                    <div className="border-l-4 border-[#990202] pl-3 py-0.5 font-extrabold text-gray-950 text-[14.5px]">
+                      Contoh Judul Sub-bab
+                    </div>
+                  </div>
+
+                  {/* Bold text */}
+                  <div className="space-y-1">
+                    <div className="text-[11px] font-extrabold text-gray-400 uppercase tracking-wide">
+                      Teks Tebal
+                    </div>
+                    <div className="bg-gray-50/50 p-2.5 rounded-lg border border-gray-100 font-medium">
+                      Menjamin <strong className="font-extrabold text-gray-900">pemisahan harta pribadi</strong> secara hukum.
+                    </div>
+                  </div>
+
+                  {/* Bullet points */}
+                  <div className="space-y-1">
+                    <div className="text-[11px] font-extrabold text-gray-400 uppercase tracking-wide">
+                      Daftar Poin (Bullet List)
+                    </div>
+                    <ul className="bg-gray-50/50 p-2.5 rounded-lg border border-gray-100 list-none pl-0 space-y-1.5 font-medium">
+                      <li className="relative pl-4 flex items-center">
+                        <span className="absolute left-0 w-1.5 h-1.5 rounded-full bg-[#990202]/70" />
+                        <span>Dokumen Akta Pendirian</span>
+                      </li>
+                      <li className="relative pl-4 flex items-center">
+                        <span className="absolute left-0 w-1.5 h-1.5 rounded-full bg-[#990202]/70" />
+                        <span>Pengesahan Kemenkumham</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Numbered List */}
+                  <div className="space-y-1">
+                    <div className="text-[11px] font-extrabold text-gray-400 uppercase tracking-wide">
+                      Daftar Angka (Numbered List)
+                    </div>
+                    <ol className="bg-gray-50/50 p-2.5 rounded-lg border border-gray-100 list-none pl-0 space-y-1.5 font-medium">
+                      <li className="flex items-center">
+                        <span className="w-4.5 h-4.5 bg-red-50 text-[#990202] text-[10px] font-black rounded flex items-center justify-center mr-2 border border-red-100/40">1</span>
+                        <span>Registrasi akun OSS</span>
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-4.5 h-4.5 bg-red-50 text-[#990202] text-[10px] font-black rounded flex items-center justify-center mr-2 border border-red-100/40">2</span>
+                        <span>Penerbitan NIB</span>
+                      </li>
+                    </ol>
+                  </div>
+
+                  {/* Horizontal Rule */}
+                  <div className="space-y-1">
+                    <div className="text-[11px] font-extrabold text-gray-400 uppercase tracking-wide">
+                      Garis Pembatas
+                    </div>
+                    <div className="bg-gray-50/50 py-2.5 px-2 rounded-lg border border-gray-100 flex items-center justify-center">
+                      <hr className="w-full border-gray-200" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>
@@ -582,3 +825,232 @@ export default function TambahArtikelPage() {
     </div>
   );
 }
+
+// Simple custom markdown renderer to ensure clean semantic HTML with premium styling
+function renderMarkdownContent(text: string) {
+  const blocks = text.split("\n\n");
+  let headingCounter = 0;
+
+  return blocks.map((block, idx) => {
+    const trimmed = block.trim();
+
+    // Horizontal Rule
+    if (trimmed === "---") {
+      return <hr key={idx} className="my-6 border-gray-200/60" />;
+    }
+
+    // Headings
+    if (trimmed.startsWith("### ")) {
+      headingCounter++;
+      const headingText = trimmed.replace("### ", "");
+      const headingId = headingText
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, "")
+        .replace(/\s+/g, "-");
+      return (
+        <h3
+          key={idx}
+          id={headingId}
+          className="font-inter text-[17px] sm:text-[18px] font-extrabold text-gray-950 mt-6 mb-3 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-2.5"
+        >
+          {headingText}
+        </h3>
+      );
+    }
+
+    // Bullet Lists
+    if (trimmed.startsWith("* ") || trimmed.startsWith("- ")) {
+      const items = trimmed.split("\n").map((li) => li.replace(/^[\*\-]\s+/, ""));
+      return (
+        <ul key={idx} className="space-y-2 my-4 pl-1 list-none">
+          {items.map((item, itemIdx) => {
+            const parsedItem = parseBoldText(item);
+            return (
+              <li key={itemIdx} className="text-[13.5px] leading-relaxed text-gray-600 relative pl-5 flex items-start">
+                <span className="absolute left-0 top-[7px] w-1.5 h-1.5 rounded-full bg-[#990202]/70" />
+                <span className="flex-1">{parsedItem}</span>
+              </li>
+            );
+          })}
+        </ul>
+      );
+    }
+
+    // Numbered Lists
+    if (/^\d+\.\s+/.test(trimmed)) {
+      const items = trimmed.split("\n").map((li) => li.replace(/^\d+\.\s+/, ""));
+      return (
+        <ol key={idx} className="space-y-2 my-4 pl-1 list-none">
+          {items.map((item, itemIdx) => {
+            const parsedItem = parseBoldText(item);
+            return (
+              <li key={itemIdx} className="text-[13.5px] leading-relaxed text-gray-600 flex items-start">
+                <span className="flex items-center justify-center w-5 h-5 rounded-lg bg-red-50 text-[#990202] text-[10.5px] font-black mr-2.5 flex-shrink-0 mt-0.5 border border-red-100/40">
+                  {itemIdx + 1}
+                </span>
+                <span className="flex-1">{parsedItem}</span>
+              </li>
+            );
+          })}
+        </ol>
+      );
+    }
+
+    // Default Paragraph with Bold text parser
+    return (
+      <p key={idx} className="text-[13.5px] leading-[1.7] text-gray-600 font-normal my-3">
+        {parseBoldText(trimmed)}
+      </p>
+    );
+  });
+}
+
+// Utility to parse **bold** text to standard JSX strong tags
+function parseBoldText(text: string) {
+  const parts = text.split(/\*\*([^*]+)\*\*/g);
+  return parts.map((part, index) => {
+    if (index % 2 === 1) {
+      return (
+        <strong key={index} className="font-extrabold text-gray-900">
+          {part}
+        </strong>
+      );
+    }
+    return part;
+  });
+}
+
+// Bi-directional Parsers: Convert Markdown to HTML for editor, and HTML back to Markdown for database
+
+function markdownToHtml(markdown: string): string {
+  if (!markdown) return "";
+  
+  const normalized = markdown.replace(/\r\n/g, "\n");
+  const blocks = normalized.split(/\n\n+/);
+  
+  const htmlBlocks = blocks.map(block => {
+    const trimmed = block.trim();
+    if (!trimmed) return "";
+    
+    // Horizontal rule
+    if (trimmed === "---") {
+      return "<hr>";
+    }
+    
+    // Headings
+    if (trimmed.startsWith("### ")) {
+      const text = trimmed.substring(4);
+      return `<h3>${parseMarkdownInlineHtml(text)}</h3>`;
+    }
+    
+    // Unordered list
+    if (trimmed.startsWith("* ") || trimmed.startsWith("- ")) {
+      const items = trimmed.split("\n").map(li => {
+        const itemText = li.replace(/^[\*\-]\s+/, "");
+        return `<li>${parseMarkdownInlineHtml(itemText)}</li>`;
+      });
+      return `<ul>${items.join("")}</ul>`;
+    }
+    
+    // Ordered list
+    if (/^\d+\.\s+/.test(trimmed)) {
+      const items = trimmed.split("\n").map(li => {
+        const itemText = li.replace(/^\d+\.\s+/, "");
+        return `<li>${parseMarkdownInlineHtml(itemText)}</li>`;
+      });
+      return `<ol>${items.join("")}</ol>`;
+    }
+    
+    // Default Paragraph
+    return `<p>${parseMarkdownInlineHtml(trimmed)}</p>`;
+  });
+  
+  return htmlBlocks.filter(b => b !== "").join("");
+}
+
+function parseMarkdownInlineHtml(text: string): string {
+  // Bold: **text** -> <strong>text</strong>
+  return text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+}
+
+function htmlToMarkdown(html: string): string {
+  if (typeof window === "undefined") return "";
+  
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const body = doc.body;
+  
+  const markdownBlocks: string[] = [];
+  
+  // Helper to extract text from a node converting specific formatting tags
+  function getInlineMarkdown(element: HTMLElement): string {
+    let md = "";
+    Array.from(element.childNodes).forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        md += node.textContent || "";
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        const el = node as HTMLElement;
+        const nodeName = el.nodeName.toUpperCase();
+        if (nodeName === "STRONG" || nodeName === "B") {
+          md += `**${el.textContent || ""}**`;
+        } else if (nodeName === "BR") {
+          md += "\n";
+        } else {
+          md += getInlineMarkdown(el);
+        }
+      }
+    });
+    return md;
+  }
+  
+  // Traverse top-level nodes of the body
+  Array.from(body.childNodes).forEach(node => {
+    const nodeName = node.nodeName.toUpperCase();
+    
+    if (node.nodeType === Node.TEXT_NODE) {
+      const txt = node.textContent?.trim();
+      if (txt) {
+        markdownBlocks.push(txt);
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as HTMLElement;
+      
+      if (nodeName === "H3") {
+        markdownBlocks.push(`### ${getInlineMarkdown(el)}`);
+      } else if (nodeName === "UL") {
+        const items: string[] = [];
+        Array.from(el.querySelectorAll("li")).forEach(li => {
+          items.push(`* ${getInlineMarkdown(li)}`);
+        });
+        if (items.length > 0) {
+          markdownBlocks.push(items.join("\n"));
+        }
+      } else if (nodeName === "OL") {
+        const items: string[] = [];
+        Array.from(el.querySelectorAll("li")).forEach((li, idx) => {
+          items.push(`${idx + 1}. ${getInlineMarkdown(li)}`);
+        });
+        if (items.length > 0) {
+          markdownBlocks.push(items.join("\n"));
+        }
+      } else if (nodeName === "HR") {
+        markdownBlocks.push("---");
+      } else if (nodeName === "P" || nodeName === "DIV") {
+        const content = getInlineMarkdown(el).trim();
+        if (content) {
+          markdownBlocks.push(content);
+        }
+      } else if (nodeName === "BR") {
+        // Line break
+      } else {
+        const content = getInlineMarkdown(el).trim();
+        if (content) {
+          markdownBlocks.push(content);
+        }
+      }
+    }
+  });
+  
+  return markdownBlocks.join("\n\n");
+}
+

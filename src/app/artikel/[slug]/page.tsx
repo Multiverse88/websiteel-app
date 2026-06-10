@@ -3,11 +3,40 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
-import { Calendar, Clock, Home, Tag, ChevronRight } from "lucide-react";
+import { Calendar, Clock, Home, Tag } from "lucide-react";
 import ShareButton from "@/components/ShareButton";
 import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";
+import TableOfContents from "./table-of-contents";
 import type { Metadata } from "next";
+
+const IgIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="2" y="2" width="20" height="20" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+  </svg>
+);
+
+const FbIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+const LiIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
+const ChatIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+  </svg>
+);
 
 export const dynamic = "force-dynamic";
 
@@ -103,11 +132,8 @@ function renderMarkdownContent(text: string) {
         <h3
           key={idx}
           id={headingId}
-          className="font-inter text-[20px] sm:text-[22px] font-extrabold text-gray-950 mt-12 mb-5 leading-tight flex items-center scroll-mt-24"
+          className="font-inter text-[21px] sm:text-[23px] font-extrabold text-gray-950 mt-12 mb-5 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-3.5"
         >
-          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FFF5F5] text-[#990202] text-[13px] font-black mr-3.5 flex-shrink-0 border border-red-100/50">
-            {headingCounter}
-          </span>
           {headingText}
         </h3>
       );
@@ -193,6 +219,25 @@ function extractHeadings(text: string) {
   return headings;
 }
 
+const CATEGORY_MAP: Record<string, string> = {
+  "Pendirian PT": "Pendirian Usaha",
+  "Legalitas PT": "Pendirian Usaha",
+  "Merek & HAKI": "Haki",
+  "Sertifikasi ISO": "ISO",
+  "KBLI": "Perizinan",
+  "Perizinan": "Perizinan",
+  "Pajak": "Pajak",
+  "Branding": "Branding",
+};
+
+function getAuthorInitials(name: string) {
+  const parts = name.split(" ");
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return name.substring(0, 2).toUpperCase();
+}
+
 export default async function ArtikelDetailPage({ params }: Props) {
   const { slug } = await params;
 
@@ -234,187 +279,243 @@ export default async function ArtikelDetailPage({ params }: Props) {
   const tags = generateTags(article.category, article.title);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white relative overflow-hidden blog-detail-container">
       <ViewTracker slug={slug} />
 
-      {/* ─── BREADCRUMBS ─── */}
-      <div className="bg-[#FAFAFA] border-b border-gray-100">
-        <div className="max-w-[800px] mx-auto px-6 py-4">
-          <nav className="flex items-center space-x-2 text-[13px] font-medium text-gray-500">
-            <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
-              <Home className="w-3.5 h-3.5" />
-              <span>Beranda</span>
-            </Link>
-            <ChevronRight className="w-3 h-3 text-gray-300" />
-            <Link href="/artikel" className="hover:text-[#990202] transition-colors">
-              Artikel
-            </Link>
-            <ChevronRight className="w-3 h-3 text-gray-300" />
-            <span className="text-gray-400 truncate max-w-[200px] sm:max-w-[350px]">
-              {article.title}
-            </span>
-          </nav>
-        </div>
-      </div>
+      {/* Radial Glows for premium aesthetics */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-[20%] left-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* ─── MAIN ARTICLE CONTAINER ─── */}
-      <main className="flex-grow">
-        <article className="max-w-[800px] mx-auto px-6">
+      <main className="flex-grow relative z-10">
+        <article className="max-w-[1240px] mx-auto px-6">
 
-          {/* ─── ARTICLE HEADER ─── */}
-          <header className="pt-10 sm:pt-14 pb-8">
-            {/* Category Badge */}
-            <div className="mb-5">
-              <span className="inline-flex px-3.5 py-1.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-[#FFF5F5] text-[#990202] border border-red-100/50">
-                {article.category}
-              </span>
-            </div>
-
-            {/* Title */}
-            <h1 className="font-inter text-[30px] sm:text-[38px] lg:text-[42px] font-extrabold text-gray-950 leading-[1.15] tracking-tight mb-6">
-              {article.title}
-            </h1>
-
-            {/* Author & Meta Row */}
-            <div className="flex flex-wrap items-center gap-4 pb-8 border-b border-gray-100">
-              {/* Author */}
-              <div className="flex items-center space-x-3">
-                {article.author?.avatar ? (
-                  <Image
-                    src={article.author.avatar}
-                    alt={article.author.name}
-                    width={40}
-                    height={40}
-                    className="rounded-full object-cover shadow-sm border border-gray-150"
-                  />
-                ) : (
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[11px] font-black shadow-sm">
-                    EL
-                  </div>
-                )}
-                <div>
-                  <div className="text-[13.5px] font-bold text-gray-900">
-                    {article.author?.name || "EasyLegal"}
-                  </div>
-                </div>
-              </div>
-
-              {/* Separator */}
-              <div className="w-px h-5 bg-gray-200 hidden sm:block" />
-
-              {/* Date */}
-              <div className="flex items-center space-x-1.5 text-[13px] text-gray-500">
-                <Calendar className="w-3.5 h-3.5 text-gray-400" />
-                <span>
-                  {new Date(article.createdAt).toLocaleDateString("id-ID", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
+          {/* Wrapper for centered header to keep it readable */}
+          <div className="max-w-[900px] mx-auto">
+            {/* ─── BREADCRUMBS & ARTICLE HEADER ─── */}
+            <header className="pt-12 sm:pt-16 pb-8 text-center">
+              {/* Breadcrumb Trail */}
+              <div className="flex items-center justify-center flex-wrap gap-2 text-[12.5px] font-medium text-gray-500 mb-6">
+                <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
+                  <Home className="w-3.5 h-3.5" />
+                  <span>Beranda</span>
+                </Link>
+                <span className="text-gray-300 font-normal">&gt;</span>
+                <Link href="/artikel" className="hover:text-[#990202] transition-colors">
+                  Blog
+                </Link>
+                <span className="text-gray-300 font-normal">&gt;</span>
+                <span className="text-gray-800 font-bold">{CATEGORY_MAP[article.category] || article.category}</span>
+                <span className="inline-flex px-2 py-0.5 ml-1.5 rounded bg-[#FFF5F5] text-[10px] font-extrabold tracking-wider uppercase text-[#990202] border border-red-100/60 shadow-sm">
+                  Legalitas Bisnis
                 </span>
               </div>
 
-              {/* Read Time */}
-              <div className="flex items-center space-x-1.5 text-[13px] text-gray-500">
-                <Clock className="w-3.5 h-3.5 text-gray-400" />
-                <span>{article.readTime}</span>
-              </div>
+              {/* Title */}
+              <h1 className="font-inter text-[32px] sm:text-[40px] lg:text-[46px] font-extrabold text-gray-950 leading-[1.15] tracking-tight max-w-[800px] mx-auto mb-6">
+                {article.title}
+              </h1>
 
-              {/* Share - pushed to right on desktop */}
-              <div className="sm:ml-auto">
-                <ShareButton />
-              </div>
-            </div>
-          </header>
+              {/* Author & Meta Row */}
+              <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2.5 text-[13.5px] text-gray-500 pb-8 border-b border-gray-100/80">
+                {/* Author Info */}
+                <div className="flex items-center space-x-2">
+                  {article.author?.avatar ? (
+                    <Image
+                      src={article.author.avatar}
+                      alt={article.author.name}
+                      width={28}
+                      height={28}
+                      className="rounded-full object-cover border border-gray-150 shadow-sm"
+                    />
+                  ) : (
+                    <div className="w-7 h-7 rounded-full bg-[#990202] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
+                      {getAuthorInitials(article.author?.name || "EasyLegal")}
+                    </div>
+                  )}
+                  <span className="font-bold text-gray-900">{article.author?.name || "EasyLegal"}</span>
+                </div>
 
-          {/* ─── HERO IMAGE ─── */}
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-gray-50 aspect-[16/9] w-full mb-10">
-            <Image
-              src={article.coverImage}
-              alt={article.title}
-              fill
-              sizes="(max-width: 800px) 100vw, 800px"
-              className="object-cover object-center"
-            />
-          </div>
+                {/* Separator dot */}
+                <span className="text-gray-300 font-normal">•</span>
 
-          {/* ─── TABLE OF CONTENTS (if multiple sections) ─── */}
-          {headings.length > 1 && (
-            <div className="bg-[#FAFAFA] border border-gray-200/60 rounded-2xl p-6 mb-10">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-1 h-5 bg-[#990202] rounded-full" />
-                <h2 className="text-[15px] font-extrabold text-gray-900">Daftar Isi</h2>
-              </div>
-              <nav className="space-y-2">
-                {headings.map((heading, idx) => (
-                  <a
-                    key={idx}
-                    href={`#${heading.id}`}
-                    className="flex items-center gap-3 text-[14px] text-gray-600 hover:text-[#990202] transition-colors group py-1"
-                  >
-                    <span className="flex items-center justify-center w-5 h-5 rounded-md bg-white text-[#990202] text-[10.5px] font-black border border-red-100/40 group-hover:bg-[#990202] group-hover:text-white transition-colors flex-shrink-0">
-                      {idx + 1}
-                    </span>
-                    <span className="group-hover:translate-x-0.5 transition-transform">{heading.text}</span>
-                  </a>
-                ))}
-              </nav>
-            </div>
-          )}
+                {/* Date */}
+                <div className="flex items-center space-x-1.5">
+                  <Calendar className="w-4 h-4 text-[#990202] flex-shrink-0" />
+                  <span>
+                    {new Date(article.createdAt).toLocaleDateString("id-ID", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
 
-          {/* ─── ARTICLE BODY ─── */}
-          <div className="prose-article mb-12">
-            {renderMarkdownContent(article.content)}
-          </div>
+                {/* Separator dot */}
+                <span className="text-gray-300 font-normal">•</span>
 
-          {/* ─── TAGS ─── */}
-          <div className="flex flex-wrap items-center gap-2 pb-8 mb-8 border-b border-gray-100">
-            <Tag className="w-4 h-4 text-gray-400 mr-1" />
-            {tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className="inline-flex px-3 py-1.5 rounded-lg text-[12px] font-bold text-gray-600 bg-gray-50 border border-gray-200/60 hover:bg-[#FFF5F5] hover:text-[#990202] hover:border-red-100 transition-colors cursor-pointer"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* ─── AUTHOR CARD ─── */}
-          <div className="bg-[#FAFAFA] rounded-2xl border border-gray-200/60 p-6 flex flex-col gap-4 mb-10">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
-              <div className="flex items-center space-x-4">
-                {article.author?.avatar ? (
-                  <Image
-                    src={article.author.avatar}
-                    alt={article.author.name}
-                    width={56}
-                    height={56}
-                    className="rounded-full object-cover shadow-sm border border-gray-150"
-                  />
-                ) : (
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[14px] font-black shadow-sm">
-                    EL
-                  </div>
-                )}
-                <div>
-                  <div className="text-[15px] font-extrabold text-gray-950">
-                    {article.author?.name || "Tim Penulis EasyLegal"}
-                  </div>
-                  <div className="text-[12px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">
-                    {article.author?.role || "Spesialis Konsultan Hukum & Legalitas Bisnis"}
-                  </div>
+                {/* Read Time */}
+                <div className="flex items-center space-x-1.5">
+                  <Clock className="w-4 h-4 text-[#990202] flex-shrink-0" />
+                  <span>{article.readTime}</span>
                 </div>
               </div>
-              <div className="flex-shrink-0">
-                <ShareButton />
+            </header>
+          </div>
+
+          {/* Wrapper for cover image */}
+          <div className="max-w-[1000px] mx-auto mb-10">
+            {/* ─── HERO IMAGE ─── */}
+            <div className="relative overflow-hidden rounded-[32px] border border-gray-150 shadow-[0_8px_30px_rgba(0,0,0,0.03)] bg-gray-50 aspect-[16/9] w-full">
+              <Image
+                src={article.coverImage}
+                alt={article.title}
+                fill
+                sizes="(max-width: 1000px) 100vw, 1000px"
+                priority
+                className="object-cover object-center"
+              />
+            </div>
+            {/* Dynamic Excerpt Caption below image */}
+            <p className="text-center text-[12.5px] text-gray-400 italic mt-4 max-w-2xl mx-auto leading-relaxed">
+              {article.excerpt}
+            </p>
+          </div>
+
+          {/* Split 2-Column Grid Layout (Body + Sidebar) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 mt-12 items-start">
+            
+            {/* Left Column: Article Body */}
+            <div className="lg:col-span-8">
+              {/* ─── ARTICLE BODY ─── */}
+              <div className="prose-article mb-12">
+                {renderMarkdownContent(article.content)}
+              </div>
+
+              {/* ─── TAGS ─── */}
+              <div className="flex flex-wrap items-center gap-2 pb-8 mb-8 border-b border-gray-100">
+                <Tag className="w-4 h-4 text-gray-400 mr-1" />
+                {tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex px-3 py-1.5 rounded-lg text-[12px] font-bold text-gray-600 bg-gray-50 border border-gray-200/60 hover:bg-[#FFF5F5] hover:text-[#990202] hover:border-red-100 transition-colors cursor-pointer"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* ─── AUTHOR CARD ─── */}
+              <div className="bg-[#FAFAFA] rounded-2xl border border-gray-200/60 p-6 flex flex-col gap-4 mb-10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                  <div className="flex items-center space-x-4">
+                    {article.author?.avatar ? (
+                      <Image
+                        src={article.author.avatar}
+                        alt={article.author.name}
+                        width={56}
+                        height={56}
+                        className="rounded-full object-cover shadow-sm border border-gray-150"
+                      />
+                    ) : (
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[14px] font-black shadow-sm">
+                        EL
+                      </div>
+                    )}
+                    <div>
+                      <div className="text-[15px] font-extrabold text-gray-950">
+                        {article.author?.name || "Tim Penulis EasyLegal"}
+                      </div>
+                      <div className="text-[12px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">
+                        {article.author?.role || "Spesialis Konsultan Hukum & Legalitas Bisnis"}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <ShareButton />
+                  </div>
+                </div>
+                {article.author?.bio && (
+                  <p className="text-[13.5px] leading-relaxed text-gray-500 font-normal">
+                    {article.author.bio}
+                  </p>
+                )}
               </div>
             </div>
-            {article.author?.bio && (
-              <p className="text-[13.5px] leading-relaxed text-gray-500 font-normal">
-                {article.author.bio}
-              </p>
-            )}
+
+            {/* Right Column: Sidebar */}
+            <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-24 h-fit mt-12 lg:mt-0">
+              
+              {/* Table of Contents Widget */}
+              {headings.length > 1 && (
+                <TableOfContents headings={headings} />
+              )}
+
+              {/* Ad Card (Card Iklan) */}
+              <a
+                href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20promo%20Diskon%2050%25%20Layanan%20Pendirian%20PT%20%26%20CV."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group relative overflow-hidden rounded-[30px] bg-gradient-to-b from-[#800000] to-[#4A0000] p-7 text-white hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 border border-red-950 shadow-md"
+              >
+                {/* Glow reflection inside */}
+                <div className="absolute -top-10 -right-10 w-28 h-28 bg-red-400/20 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500" />
+                
+                {/* EL Badge */}
+                <div className="inline-flex bg-white/10 text-white rounded-lg px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-widest border border-white/5 shadow-sm">
+                  EL
+                </div>
+
+                {/* Text Content */}
+                <h3 className="text-[28px] font-black leading-tight tracking-tight mt-4 text-center">
+                  Diskon 50%
+                </h3>
+                <p className="text-[13px] font-black text-red-100 text-center tracking-wide mt-1 uppercase">
+                  Untuk Layanan Pendirian PT &amp; CV
+                </p>
+                <p className="text-[12px] text-red-200/90 text-center mt-3 max-w-[210px] mx-auto leading-relaxed font-normal">
+                  Konsultasi gratis dengan tim legal EasyLegal. Proses cepat, harga transparan.
+                </p>
+
+                {/* Card Image */}
+                <div className="relative aspect-[1.5] w-full overflow-hidden rounded-2xl mt-6 border border-white/5 shadow-sm">
+                  <Image
+                    src="https://images.unsplash.com/photo-1556761175-4b46a572b786?fit=crop&w=500&h=300&q=80"
+                    alt="Layanan Pendirian PT & CV"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 320px"
+                    className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
+                  />
+                </div>
+              </a>
+
+              {/* Tentang EasyLegal Card */}
+              <div className="bg-white border border-gray-200/70 rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.01)]">
+                <h4 className="text-[12.5px] font-extrabold text-gray-900 mb-1.5">
+                  Tentang EasyLegal
+                </h4>
+                <p className="text-[11.5px] leading-relaxed text-gray-500 mb-4 font-normal">
+                  Ikuti update informasi seputar legalitas bisnis lewat media sosial kami.
+                </p>
+                <div className="flex items-center space-x-2">
+                  {[
+                    { Icon: IgIcon, href: "/", label: "Instagram" },
+                    { Icon: FbIcon, href: "/", label: "Facebook" },
+                    { Icon: LiIcon, href: "/", label: "LinkedIn" },
+                    { Icon: ChatIcon, href: "/", label: "Chat" },
+                  ].map(({ Icon, href, label }) => (
+                    <Link
+                      key={label}
+                      href={href}
+                      className="w-9 h-9 bg-white border border-[#E5E7EB] rounded-[10px] flex items-center justify-center text-[#555555] hover:text-[#990202] hover:border-[#990202] hover:scale-105 transition-all duration-200 shadow-[0_1px_2px_rgba(0,0,0,0.01)]"
+                      aria-label={label}
+                    >
+                      <Icon className="w-[14px] h-[14px]" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </aside>
           </div>
         </article>
 

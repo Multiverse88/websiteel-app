@@ -3,6 +3,15 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   serverExternalPackages: ["@prisma/client"],
+  async redirects() {
+    return [
+      {
+        source: "/layanan/pendirian-yayasan",
+        destination: "/layanan/pendirian-badan-usaha/yayasan",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
