@@ -24,20 +24,29 @@ if [ ! -f .env.production ]; then
 fi
 
 # 1. Pull latest code
-echo -e "\n${YELLOW}[1/4] Pulling latest code...${NC}"
+echo -e "\n${YELLOW}[1/5] Pulling latest code...${NC}"
 git pull origin main
 
-# 2. Build containers
-echo -e "\n${YELLOW}[2/4] Building containers...${NC}"
+# 2. Run automation test to check for regressions
+echo -e "\n${YELLOW}[2/5] Running automation test...${NC}"
+npm test
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Test failed! Aborting deploy.${NC}"
+    exit 1
+fi
+echo -e "${GREEN}All tests passed!${NC}"
+
+# 3. Build containers
+echo -e "\n${YELLOW}[3/5] Building containers...${NC}"
 docker compose build --no-cache
 
-# 3. Stop old containers & start new ones
-echo -e "\n${YELLOW}[3/4] Restarting services...${NC}"
+# 4. Stop old containers & start new ones
+echo -e "\n${YELLOW}[4/5] Restarting services...${NC}"
 docker compose down
 docker compose up -d
 
-# 4. Wait for health check
-echo -e "\n${YELLOW}[4/4] Waiting for services to start...${NC}"
+# 5. Wait for health check
+echo -e "\n${YELLOW}[5/5] Waiting for services to start...${NC}"
 sleep 5
 
 # Check status
@@ -48,8 +57,8 @@ if docker compose ps | grep -q "Up"; then
     echo ""
     docker compose ps
     echo ""
-    echo "Website: https://easylegal.id"
-    echo "Dashboard: https://easylegal.id/dashboard"
+    echo "Website: https://easylegal.my.id"
+    echo "Dashboard: https://easylegal.my.id/login"
     echo ""
 else
     echo -e "\n${RED}Deploy may have issues. Check logs:${NC}"
