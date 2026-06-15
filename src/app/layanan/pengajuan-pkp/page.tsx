@@ -26,6 +26,7 @@ import {
   Briefcase,
   Clipboard,
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 
@@ -179,7 +180,7 @@ export default function PengajuanPkp() {
               <div className="relative w-full max-w-[460px] aspect-[4/3] sm:aspect-square md:aspect-[4/3] lg:aspect-[4/3]">
                 
                 {/* Photo container */}
-                <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden border border-gray-100 shadow-lg relative bg-gray-55">
+                <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
                     src="/cerita-kami-team.png"
                     alt="EasyLegal Tax Consultants"
@@ -191,7 +192,7 @@ export default function PengajuanPkp() {
                 </div>
 
                 {/* Overlay Badge 1: Top-Left */}
-                <div className="absolute -top-4 -left-6 sm:-left-10 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-100 flex items-center gap-3 z-20">
+                <div className="absolute -top-4 -left-6 sm:-left-10 bg-white rounded-2xl p-3 sm:p-4 shadow-xl flex items-center gap-3 z-20">
                   <div className="w-10 h-10 bg-red-50 text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
@@ -204,7 +205,7 @@ export default function PengajuanPkp() {
                 </div>
 
                 {/* Overlay Badge 2: Bottom-Right */}
-                <div className="absolute -bottom-4 -right-4 sm:-right-6 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-100 flex items-center gap-3 z-20">
+                <div className="absolute -bottom-4 -right-4 sm:-right-6 bg-white rounded-2xl p-3 sm:p-4 shadow-xl flex items-center gap-3 z-20">
                   <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
@@ -244,7 +245,7 @@ export default function PengajuanPkp() {
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-full max-w-[460px] aspect-[4/3] sm:aspect-square md:aspect-[4/3] lg:aspect-[4/3]">
                 {/* Photo container */}
-                <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden border border-gray-150 shadow-lg relative bg-gray-55">
+                <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
                     src="/nib-desk-mockup.png"
                     alt="Tax Consultation Desk Documents"
@@ -256,7 +257,7 @@ export default function PengajuanPkp() {
                 </div>
 
                 {/* Floating Law Info Badge */}
-                <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-3 shadow-md border border-gray-100 flex items-center gap-3 z-20">
+                <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-3 shadow-md flex items-center gap-3 z-20">
                   <div className="w-9 h-9 bg-[#990202] text-white rounded-lg flex items-center justify-center flex-shrink-0">
                     <FileText className="w-4.5 h-4.5" />
                   </div>
@@ -273,7 +274,7 @@ export default function PengajuanPkp() {
             <div className="lg:col-span-7 space-y-4">
               
               {/* Card 1: Pengertian PKP */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-200 text-left space-y-3">
+              <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <User className="w-4.5 h-4.5" />
                   <h4 className="text-[12px] font-extrabold tracking-wider uppercase">PENGERTIAN PKP</h4>
@@ -284,7 +285,7 @@ export default function PengajuanPkp() {
               </div>
 
               {/* Card 2: Pengertian PPN */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-200 text-left space-y-3">
+              <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <DollarSign className="w-4.5 h-4.5" />
                   <h4 className="text-[12px] font-extrabold tracking-wider uppercase">PENGERTIAN PPN</h4>
@@ -295,7 +296,7 @@ export default function PengajuanPkp() {
               </div>
 
               {/* Card 3: Kewajiban Wajib Pajak */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-200 text-left space-y-3">
+              <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <Clock className="w-4.5 h-4.5" />
                   <h4 className="text-[12px] font-extrabold tracking-wider uppercase">KEWAJIBAN WAJIB PAJAK</h4>
@@ -416,7 +417,7 @@ export default function PengajuanPkp() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1140px] mx-auto items-stretch">
             
             {/* Card 1: Terbitkan Faktur Pajak */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-[0_2px_15px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-300 flex flex-col justify-between text-left space-y-5">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between text-left space-y-5">
               <div className="space-y-4">
                 <div className="w-11 h-11 bg-[#FFF5F5] text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                   <CreditCard className="w-5.5 h-5.5" />
@@ -429,7 +430,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 2: Klaim PPN Masukan */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-[0_2px_15px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-300 flex flex-col justify-between text-left space-y-5">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between text-left space-y-5">
               <div className="space-y-4">
                 <div className="w-11 h-11 bg-[#FFF5F5] text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                   <Clock className="w-5.5 h-5.5" />
@@ -442,7 +443,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 3: Win Tender Korporat */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-[0_2px_15px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-300 flex flex-col justify-between text-left space-y-5">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between text-left space-y-5">
               <div className="space-y-4">
                 <div className="w-11 h-11 bg-[#FFF5F5] text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                   <Star className="w-5.5 h-5.5" />
@@ -455,7 +456,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 4: Kredibilitas Bisnis */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-[0_2px_15px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-300 flex flex-col justify-between text-left space-y-5">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between text-left space-y-5">
               <div className="space-y-4">
                 <div className="w-11 h-11 bg-[#FFF5F5] text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5.5 h-5.5" />
@@ -490,7 +491,7 @@ export default function PengajuanPkp() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[960px] mx-auto mb-8">
             
             {/* Card 1 */}
-            <div className="bg-white rounded-xl p-5 border border-gray-150 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-xl p-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-start gap-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="w-10 h-10 bg-[#FFF5F5] text-[#990202] rounded-lg flex items-center justify-center flex-shrink-0">
                 <FileText className="w-5 h-5" />
               </div>
@@ -503,7 +504,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-xl p-5 border border-gray-150 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-xl p-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-start gap-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="w-10 h-10 bg-[#FFF5F5] text-[#990202] rounded-lg flex items-center justify-center flex-shrink-0">
                 <CreditCard className="w-5 h-5" />
               </div>
@@ -516,7 +517,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-xl p-5 border border-gray-150 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-xl p-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-start gap-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="w-10 h-10 bg-[#FFF5F5] text-[#990202] rounded-lg flex items-center justify-center flex-shrink-0">
                 <User className="w-5 h-5" />
               </div>
@@ -529,7 +530,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 4 */}
-            <div className="bg-white rounded-xl p-5 border border-gray-150 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-xl p-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-start gap-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="w-10 h-10 bg-[#FFF5F5] text-[#990202] rounded-lg flex items-center justify-center flex-shrink-0">
                 <Home className="w-5 h-5" />
               </div>
@@ -542,7 +543,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 5 */}
-            <div className="bg-white rounded-xl p-5 border border-gray-150 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-xl p-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-start gap-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="w-10 h-10 bg-[#FFF5F5] text-[#990202] rounded-lg flex items-center justify-center flex-shrink-0">
                 <Clipboard className="w-5 h-5" />
               </div>
@@ -555,7 +556,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 6 */}
-            <div className="bg-white rounded-xl p-5 border border-gray-150 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-xl p-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-start gap-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="w-10 h-10 bg-[#FFF5F5] text-[#990202] rounded-lg flex items-center justify-center flex-shrink-0">
                 <UploadCloud className="w-5 h-5" />
               </div>
@@ -568,7 +569,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 7 */}
-            <div className="bg-white rounded-xl p-5 border border-gray-150 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-xl p-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-start gap-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="w-10 h-10 bg-[#FFF5F5] text-[#990202] rounded-lg flex items-center justify-center flex-shrink-0">
                 <Briefcase className="w-5 h-5" />
               </div>
@@ -581,7 +582,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 8 */}
-            <div className="bg-white rounded-xl p-5 border border-gray-150 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-xl p-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-start gap-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="w-10 h-10 bg-[#FFF5F5] text-[#990202] rounded-lg flex items-center justify-center flex-shrink-0">
                 <MapPin className="w-5 h-5" />
               </div>
@@ -666,7 +667,7 @@ export default function PengajuanPkp() {
                     </div>
 
                     {/* Bonus */}
-                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
+                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 shadow-[0_4px_16px_rgba(0,0,0,0.06)] text-left">
                       <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">BONUS</h4>
                       <ul className="space-y-2.5">
                         <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
@@ -681,7 +682,7 @@ export default function PengajuanPkp() {
                     </div>
 
                     {/* Extra Bonus */}
-                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
+                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 shadow-[0_4px_16px_rgba(0,0,0,0.06)] text-left">
                       <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">EXTRA BONUS</h4>
                       <ul className="space-y-2.5">
                         <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
@@ -761,7 +762,7 @@ export default function PengajuanPkp() {
                     </div>
 
                     {/* Bonus */}
-                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
+                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 shadow-[0_4px_16px_rgba(0,0,0,0.06)] text-left">
                       <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">BONUS</h4>
                       <ul className="space-y-2.5">
                         <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">
@@ -776,7 +777,7 @@ export default function PengajuanPkp() {
                     </div>
 
                     {/* Extra Bonus */}
-                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 border border-gray-100 text-left">
+                    <div className="bg-gray-55 rounded-xl p-5 space-y-3 shadow-[0_4px_16px_rgba(0,0,0,0.06)] text-left">
                       <h4 className="text-[12px] font-black text-gray-900 tracking-wider uppercase">EXTRA BONUS</h4>
                       <ul className="space-y-2.5">
                         <li className="flex items-start text-[13px] font-medium text-gray-700 leading-relaxed">

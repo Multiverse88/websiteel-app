@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import {
   Award,
@@ -19,6 +20,7 @@ import {
   Compass,
   Shield,
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 
@@ -268,7 +270,7 @@ export default function NibOss() {
               <div className="relative w-full max-w-[460px] aspect-[4/3] sm:aspect-square md:aspect-[4/3] lg:aspect-[4/3]">
                 
                 {/* Photo container */}
-                <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden border border-gray-100 shadow-lg relative bg-gray-55">
+                <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
                     src="/cerita-kami-team.png"
                     alt="EasyLegal Team Collaboration"
@@ -280,7 +282,7 @@ export default function NibOss() {
                 </div>
 
                 {/* Overlay Badge 1: Top-Left */}
-                <div className="absolute -top-4 -left-6 sm:-left-10 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-100 flex items-center gap-3 z-20">
+                <div className="absolute -top-4 -left-6 sm:-left-10 bg-white rounded-2xl p-3 sm:p-4 shadow-xl flex items-center gap-3 z-20">
                   <div className="w-10 h-10 bg-red-50 text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
@@ -293,7 +295,7 @@ export default function NibOss() {
                 </div>
 
                 {/* Overlay Badge 2: Bottom-Right */}
-                <div className="absolute -bottom-4 -right-4 sm:-right-6 bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-100 flex items-center gap-3 z-20">
+                <div className="absolute -bottom-4 -right-4 sm:-right-6 bg-white rounded-2xl p-3 sm:p-4 shadow-xl flex items-center gap-3 z-20">
                   <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
@@ -332,7 +334,7 @@ export default function NibOss() {
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-full max-w-[460px] aspect-[4/3] sm:aspect-square md:aspect-[4/3] lg:aspect-[4/3]">
                 {/* Photo container */}
-                <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden border border-gray-150 shadow-lg relative bg-gray-55">
+                <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
                     src="/nib-desk-mockup.png"
                     alt="Tax Document Calculator Desk"
@@ -344,7 +346,7 @@ export default function NibOss() {
                 </div>
 
                 {/* Floating Law Info Badge */}
-                <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-3 shadow-md border border-gray-100 flex items-center gap-3 z-20">
+                <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-3 shadow-md flex items-center gap-3 z-20">
                   <div className="w-9 h-9 bg-[#990202] text-white rounded-lg flex items-center justify-center flex-shrink-0">
                     <FileText className="w-4.5 h-4.5" />
                   </div>
@@ -361,7 +363,7 @@ export default function NibOss() {
             <div className="lg:col-span-7 space-y-4">
               
               {/* Card 1: Pengertian NIB */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-200 text-left space-y-3">
+              <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <BookOpen className="w-4.5 h-4.5" />
                   <h4 className="text-[12px] font-extrabold tracking-wider uppercase">PENGERTIAN NIB</h4>
@@ -372,7 +374,7 @@ export default function NibOss() {
               </div>
 
               {/* Card 2: Pengertian OSS RBA */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-200 text-left space-y-3">
+              <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <Compass className="w-4.5 h-4.5" />
                   <h4 className="text-[12px] font-extrabold tracking-wider uppercase">PENGERTIAN OSS RBA</h4>
@@ -383,7 +385,7 @@ export default function NibOss() {
               </div>
 
               {/* Card 3: Perizinan Usaha Berbasis Risiko */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-200 text-left space-y-3">
+              <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <Shield className="w-4.5 h-4.5" />
                   <h4 className="text-[12px] font-extrabold tracking-wider uppercase">PERIZINAN USAHA BERBASIS RISIKO</h4>
@@ -418,7 +420,7 @@ export default function NibOss() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1140px] mx-auto">
             
             {/* Level 1 */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-gray-150 shadow-[0_2px_15px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.02)] transition-all duration-300 flex flex-col">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col">
               <div className="bg-[#0F9D58] p-5 text-white text-center">
                 <p className="text-[9px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 1</p>
                 <p className="text-[16px] font-black mt-1">Risiko Rendah (R)</p>
@@ -435,7 +437,7 @@ export default function NibOss() {
             </div>
 
             {/* Level 2 */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-gray-150 shadow-[0_2px_15px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.02)] transition-all duration-300 flex flex-col">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col">
               <div className="bg-[#E67E22] p-5 text-white text-center">
                 <p className="text-[9px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 2</p>
                 <p className="text-[16px] font-black mt-1">Menengah Rendah (MR)</p>
@@ -456,7 +458,7 @@ export default function NibOss() {
             </div>
 
             {/* Level 3 */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-gray-150 shadow-[0_2px_15px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.02)] transition-all duration-300 flex flex-col">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col">
               <div className="bg-[#D35400] p-5 text-white text-center">
                 <p className="text-[9px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 3</p>
                 <p className="text-[16px] font-black mt-1">Menengah Tinggi (MT)</p>
@@ -477,7 +479,7 @@ export default function NibOss() {
             </div>
 
             {/* Level 4 */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-gray-150 shadow-[0_2px_15px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.02)] transition-all duration-300 flex flex-col">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col">
               <div className="bg-[#990202] p-5 text-white text-center">
                 <p className="text-[9px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 4</p>
                 <p className="text-[16px] font-black mt-1">Risiko Tinggi (T)</p>
@@ -624,16 +626,17 @@ export default function NibOss() {
 
             {/* Paket 2: NIB PT Perorangan (FAVORIT - Border Red) */}
             <div className="relative group h-full">
+              {/* UMKM FAVORIT badge (outside overflow-hidden) */}
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 bg-[#990202] text-white text-[8px] font-black tracking-widest uppercase px-3.5 py-1 rounded-full whitespace-nowrap">
+                UMKM FAVORIT
+              </div>
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
               <div className="bg-white rounded-3xl overflow-hidden border-[2.5px] border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.045)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.12)] scale-[1.025] z-10 flex flex-col justify-between relative transition-all duration-300 h-full">
               <div>
                 {/* Header */}
-                <div className="bg-[#990202] px-6 py-8 pt-10 text-center text-white relative">
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#990202] text-white text-[8px] font-black tracking-widest uppercase px-3.5 py-1 rounded-full whitespace-nowrap">
-                    UMKM FAVORIT
-                  </div>
+                <div className="bg-[#990202] px-6 py-8 text-center text-white relative">
                   <h3 className="text-[14px] font-black tracking-widest text-white/90">NIB PT PERORANGAN</h3>
                   <p className="text-[9px] font-bold text-white/50 tracking-wider uppercase mt-1">PT PERORANGAN UMKM</p>
                   <div className="mt-4 text-[12px] text-white/40 line-through">Rp 1.000.000</div>
@@ -1005,7 +1008,16 @@ export default function NibOss() {
           </div>
 
           {/* Tab Contents Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1140px] mx-auto items-stretch">
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={activeSubTab}
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1140px] mx-auto items-stretch"
+            >
             
             {/* Card 1: Cabut KBLI */}
             <div className="relative group h-full">
@@ -1104,15 +1116,16 @@ export default function NibOss() {
 
             {/* Card 2: Tambah KBLI (FAVORIT/RED) */}
             <div className="relative group h-full">
+              {/* PALING POPULER badge (outside overflow-hidden) */}
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 bg-[#990202] text-white text-[8px] font-black tracking-widest uppercase px-3.5 py-1 rounded-full whitespace-nowrap">
+                PALING POPULER
+              </div>
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
               <div className="bg-white rounded-3xl overflow-hidden border-[2.5px] border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.045)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.12)] scale-[1.02] z-10 flex flex-col justify-between relative transition-all duration-300 h-full">
               <div>
-                <div className="bg-[#990202] px-6 py-7 pt-9 text-center text-white relative">
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#990202] text-white text-[8px] font-black tracking-widest uppercase px-3 py-0.5 rounded-full whitespace-nowrap">
-                    PALING POPULER
-                  </div>
+                <div className="bg-[#990202] px-6 py-7 text-center text-white relative">
                   <h3 className="text-[13px] font-black tracking-widest text-white/90">TAMBAH KBLI</h3>
                   <div className="mt-3 text-[11px] text-white/40 line-through">
                     {activeSubTab === "perorangan" ? "Rp 1.000.000" : activeSubTab === "badan" ? "Rp 1.800.000" : "Rp 1.200.000"}
@@ -1299,7 +1312,8 @@ export default function NibOss() {
             </div>
           </div>
 
-          </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Footnote disclaimers */}
           <div className="max-w-[1140px] mx-auto mt-12 bg-white border border-gray-200/60 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium text-left">

@@ -16,6 +16,7 @@ import {
   TrendingUp,
   Globe,
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Benefits from "@/components/Benefits";
@@ -542,7 +543,7 @@ export default function SertifikasiIso() {
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
                 
                 {/* Image Container */}
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
                     src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fit=crop&w=800&h=800&q=80"
                     alt="Sertifikasi ISO Perusahaan Terpercaya"
@@ -553,7 +554,7 @@ export default function SertifikasiIso() {
                 </div>
 
                 {/* Floating Badge 1: Top Left */}
-                <div className="absolute -top-6 -left-2 sm:-left-6 bg-white rounded-2xl p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3.5 w-[230px] transition-transform hover:-translate-y-1 duration-300 z-20">
+                <div className="absolute -top-6 -left-2 sm:-left-6 bg-white rounded-2xl p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.06)] flex items-center space-x-3.5 w-[230px] transition-transform hover:-translate-y-1 duration-300 z-20">
                   <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 flex-shrink-0">
                     <Award className="w-5.5 h-5.5 text-amber-600" />
                   </div>
@@ -564,7 +565,7 @@ export default function SertifikasiIso() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Right */}
-                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white rounded-2xl p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3.5 w-[215px] transition-transform hover:-translate-y-1 duration-300 z-20">
+                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white rounded-2xl p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.06)] flex items-center space-x-3.5 w-[215px] transition-transform hover:-translate-y-1 duration-300 z-20">
                   <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                     <CheckCircle className="w-5.5 h-5.5 text-[#990202]" />
                   </div>
@@ -601,7 +602,7 @@ export default function SertifikasiIso() {
             <div className="lg:col-span-6 relative w-full flex items-center justify-center">
               <div className="relative w-full max-w-[500px] lg:max-w-none">
                 {/* Image Container */}
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_15px_35px_rgba(0,0,0,0.04)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
                     src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?fit=crop&w=800&h=800&q=80"
                     alt="Tim profesional berdiskusi standar audit ISO"
@@ -1166,7 +1167,7 @@ export default function SertifikasiIso() {
                   </div>
                   
                   {/* Card Container */}
-                  <div className="bg-white border border-gray-150 rounded-[24px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                  <div className="bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-[24px] py-6 px-5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
                     <div className="space-y-3">
                       
                       {/* Title */}

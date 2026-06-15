@@ -152,7 +152,7 @@ export default function TentangKami() {
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
                 
                 {/* Main Corporate Image Container */}
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
                   <Image
                     src="/hero-tentang-kami.png"
                     alt="Tim EasyLegal membantu UMKM pengurusan legalitas"
@@ -171,7 +171,7 @@ export default function TentangKami() {
                 </div>
 
                 {/* Floating Badge 1: 11.000+ Bisnis Terlayani */}
-                <div className="absolute -top-6 -left-2 sm:-left-6 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center space-x-3.5 w-[210px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute -top-6 -left-2 sm:-left-6 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] flex items-center space-x-3.5 w-[210px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-11 h-11 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                     <User className="w-5.5 h-5.5 stroke-[2.2]" />
                   </div>
@@ -182,7 +182,7 @@ export default function TentangKami() {
                 </div>
 
                 {/* Floating Badge 2: 4.9/5 Rating Google */}
-                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center space-x-3.5 w-[190px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] flex items-center space-x-3.5 w-[190px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-11 h-11 rounded-xl bg-red-50 flex items-center justify-center text-[#D62828] flex-shrink-0">
                     <Star className="w-5.5 h-5.5 fill-[#D62828] text-[#D62828]" />
                   </div>
@@ -219,7 +219,7 @@ export default function TentangKami() {
                 </div>
 
                 {/* Floating Badge: Berdiri 2020 */}
-                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center space-x-3.5 w-[210px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] flex items-center space-x-3.5 w-[210px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-11 h-11 rounded-xl bg-[#990202] flex items-center justify-center text-white flex-shrink-0 shadow-[0_4px_12px_rgba(153,2,2,0.2)]">
                     <Calendar className="w-5.5 h-5.5 stroke-[2.2]" />
                   </div>

@@ -30,6 +30,7 @@ import {
   Megaphone,
   Menu
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 
 export default function PRMedia() {
   // State for interactive Pricing filter tabs
@@ -160,26 +161,26 @@ export default function PRMedia() {
   ];
 
   const mediaPartners = [
-    { label: "detikcom", style: "text-[#0F52BA] font-extrabold text-[15px] italic tracking-tight" },
-    { label: "KOMPAS.com", style: "text-[#002244] font-black text-[14px]" },
-    { label: "Tribunnews", style: "text-[#1C4E80] font-black text-[13px] tracking-wide" },
-    { label: "Liputan6", style: "text-[#FF4F00] font-black text-[16px]" },
-    { label: "Kumparan", style: "text-[#008080] font-bold text-[15px] tracking-tight" },
-    { label: "Tirto.id", style: "text-[#800020] font-extrabold text-[15px] italic" },
+    { label: "detikcom", icon: "/icon-brand/logo·detik.jpg" },
+    { label: "KOMPAS.com", icon: "/icon-brand/logo·kompasiana.jpg" },
+    { label: "Tribunnews", icon: "/icon-brand/logo·tribun.jpg" },
+    { label: "Liputan6", icon: "/icon-brand/logo·liputan.jpg" },
+    { label: "Kumparan", icon: "/icon-brand/logo·industry.jpg" },
+    { label: "iNews", icon: "/icon-brand/logo·inews.jpg" },
 
-    { label: "CNBC", style: "text-[#1E3F66] font-black text-[16px] tracking-tighter" },
-    { label: "VIVA", style: "text-[#E63946] font-black text-[15px] tracking-widest" },
-    { label: "KONTAN", style: "text-[#0A192F] font-black text-[14px] tracking-widest" },
-    { label: "Merdeka", style: "text-red-600 font-extrabold text-[15px]" },
-    { label: "IDN Times", style: "text-black font-black text-[15px] tracking-tight bg-yellow-400 px-1 rounded" },
-    { label: "SindoNews", style: "text-[#3D5A80] font-bold text-[14px]" },
+    { label: "JPNN", icon: "/icon-brand/logo·jpnn.jpg" },
+    { label: "VIVA", icon: "/icon-brand/logo·warta.jpg" },
+    { label: "KONTAN", icon: "/icon-brand/logo·kontan.jpg" },
+    { label: "Merdeka", icon: "/icon-brand/logo·merdeka.jpg" },
+    { label: "Okezone", icon: "/icon-brand/logo·okezone.jpg" },
+    { label: "SindoNews", icon: "/icon-brand/logo·sindonews.jpg" },
 
-    { label: "Republika", style: "text-emerald-700 font-extrabold text-[14px]" },
-    { label: "Suara.com", style: "text-red-500 font-black text-[14px]" },
-    { label: "KapanLagi", style: "text-sky-700 font-extrabold text-[14px]" },
-    { label: "Bisnis.com", style: "text-blue-900 font-black text-[13.5px] italic" },
-    { label: "Tempo.co", style: "text-red-700 font-black text-[15px] tracking-widest" },
-    { label: "+ 80 media lainnya", style: "text-gray-500 font-bold text-[12.5px]" }
+    { label: "Republika", icon: "/icon-brand/logo·republika.jpg" },
+    { label: "Suara.com", icon: "/icon-brand/logo·suara.jpg" },
+    { label: "Antara", icon: "/icon-brand/logo·antara.jpg" },
+    { label: "Bisnis.com", icon: "/icon-brand/logo·bisnis.jpg" },
+    { label: "Tempo.co", icon: "/icon-brand/logo·tempo.jpg" },
+    { label: "+ 80 media lainnya", icon: null }
   ];
 
   return (
@@ -209,7 +210,7 @@ export default function PRMedia() {
               </nav>
 
               {/* Pill Badge */}
-              <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-sm">
+              <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100/50 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
                 <span className="text-[12.5px] font-bold text-[#990202] tracking-wide">PR &amp; Media</span>
               </div>
@@ -247,7 +248,7 @@ export default function PRMedia() {
               {/* Checkpoints Row */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-gray-150 max-w-[620px]">
                 {/* Checkpoint 1 */}
-                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                   <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
@@ -258,7 +259,7 @@ export default function PRMedia() {
                 </div>
 
                 {/* Checkpoint 2 */}
-                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                   <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                     <Menu className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
@@ -269,7 +270,7 @@ export default function PRMedia() {
                 </div>
 
                 {/* Checkpoint 3 */}
-                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                   <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
@@ -344,7 +345,7 @@ export default function PRMedia() {
                 </div>
 
                 {/* Floating Badge 1: Top Left */}
-                <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3 w-[220px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[220px] hover:-translate-y-1 transition-transform duration-300 z-20">
                   <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Megaphone className="w-4.5 h-4.5" />
                   </div>
@@ -355,7 +356,7 @@ export default function PRMedia() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Right */}
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
                   <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Clock className="w-4.5 h-4.5" />
                   </div>
@@ -373,7 +374,7 @@ export default function PRMedia() {
       </section>
 
       {/* ─── 2. PERBEDAAN / PENJELASAN SECTION ─── */}
-      <section className="bg-white py-24 border-b border-gray-200/50">
+      <section className="bg-white py-24">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
@@ -390,7 +391,7 @@ export default function PRMedia() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
             {/* Left Column: KONTEN YANG COCOK (Unified soft-pink card container) */}
-            <div className="lg:col-span-5 bg-[#FFF5F5] rounded-[32px] p-6 sm:p-7.5 space-y-3.5 text-left border border-red-50/60 shadow-[0_10px_35px_rgba(153,2,2,0.02)]">
+            <div className="lg:col-span-5 bg-[#FFF5F5] rounded-[32px] p-6 sm:p-7.5 space-y-3.5 text-left shadow-[0_10px_35px_rgba(153,2,2,0.06)]">
               <h3 className="text-[12px] sm:text-[13px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
                 KONTEN YANG COCOK UNTUK PRESS RELEASE
               </h3>
@@ -466,7 +467,7 @@ export default function PRMedia() {
             <div className="lg:col-span-7 space-y-6 text-left">
 
               {/* Box 1: PRESS RELEASE */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300 space-y-4">
+              <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Megaphone className="w-5 h-5" />
                   <h4 className="text-[13px] sm:text-[13.5px] font-black tracking-wider uppercase">PRESS RELEASE</h4>
@@ -477,7 +478,7 @@ export default function PRMedia() {
               </div>
 
               {/* Box 2: MANFAAT UNTUK BISNIS */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300 space-y-4">
+              <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Layers className="w-5 h-5" />
                   <h4 className="text-[13px] sm:text-[13.5px] font-black tracking-wider uppercase">MANFAAT UNTUK BISNIS</h4>
@@ -488,7 +489,7 @@ export default function PRMedia() {
               </div>
 
               {/* Box 3: YANG MEMBEDAKAN EASYPRESS */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300 space-y-4">
+              <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Clock className="w-5 h-5" />
                   <h4 className="text-[13px] sm:text-[13.5px] font-black tracking-wider uppercase">YANG MEMBEDAKAN EASYPRESS</h4>
@@ -505,7 +506,7 @@ export default function PRMedia() {
       </section>
 
       {/* ─── 3. KEBUTUHAN SECTION ─── */}
-      <section className="bg-[#FBFBFA] py-24 border-b border-gray-200/50">
+      <section className="bg-[#FBFBFA] py-24">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
@@ -523,7 +524,7 @@ export default function PRMedia() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1140px] mx-auto items-stretch text-left">
 
             {/* Card 1 */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-sm hover:shadow-md transition-all duration-250 flex flex-col justify-between space-y-4">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-250 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Megaphone className="w-5.5 h-5.5 text-[#990202]" />
@@ -536,7 +537,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-sm hover:shadow-md transition-all duration-250 flex flex-col justify-between space-y-4">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-250 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Calendar className="w-5.5 h-5.5 text-[#990202]" />
@@ -549,7 +550,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-sm hover:shadow-md transition-all duration-250 flex flex-col justify-between space-y-4">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-250 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5.5 h-5.5 text-[#990202]" />
@@ -562,7 +563,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 4 */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-sm hover:shadow-md transition-all duration-250 flex flex-col justify-between space-y-4">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-250 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <ShoppingCart className="w-5.5 h-5.5 text-[#990202]" />
@@ -575,7 +576,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 5 */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-sm hover:shadow-md transition-all duration-250 flex flex-col justify-between space-y-4">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-250 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Layers className="w-5.5 h-5.5 text-[#990202]" />
@@ -588,7 +589,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 6 */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-150 shadow-sm hover:shadow-md transition-all duration-250 flex flex-col justify-between space-y-4">
+            <div className="bg-white rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-250 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <AlertCircle className="w-5.5 h-5.5 text-[#990202]" />
@@ -606,7 +607,7 @@ export default function PRMedia() {
       </section>
 
       {/* ─── 4. KENAPA PRESS RELEASE SECTION ─── */}
-      <section className="bg-white py-24 border-b border-gray-200/50">
+      <section className="bg-white py-24">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
@@ -624,7 +625,7 @@ export default function PRMedia() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1140px] mx-auto items-stretch text-left">
 
             {/* Card 1 */}
-            <div className="bg-white rounded-2xl p-5.5 border border-gray-150 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Heart className="w-5 h-5 text-[#990202]" />
@@ -637,7 +638,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-2xl p-5.5 border border-gray-150 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Award className="w-5 h-5 text-[#990202]" />
@@ -650,7 +651,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-2xl p-5.5 border border-gray-150 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <TrendingUp className="w-5 h-5 text-[#990202]" />
@@ -663,7 +664,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 4 */}
-            <div className="bg-white rounded-2xl p-5.5 border border-gray-150 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Check className="w-5 h-5 text-[#990202]" strokeWidth={3} />
@@ -676,7 +677,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 5 */}
-            <div className="bg-white rounded-2xl p-5.5 border border-gray-150 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Globe className="w-5 h-5 text-[#990202]" />
@@ -689,7 +690,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 6 */}
-            <div className="bg-white rounded-2xl p-5.5 border border-gray-150 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Activity className="w-5 h-5 text-[#990202]" />
@@ -702,7 +703,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 7 */}
-            <div className="bg-white rounded-2xl p-5.5 border border-gray-150 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5 h-5 text-[#990202]" />
@@ -715,7 +716,7 @@ export default function PRMedia() {
             </div>
 
             {/* Card 8 */}
-            <div className="bg-white rounded-2xl p-5.5 border border-gray-150 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow duration-200">
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <BarChart className="w-5 h-5 text-[#990202]" />
@@ -733,7 +734,7 @@ export default function PRMedia() {
       </section>
 
       {/* ─── 5. MEDIA PARTNER SECTION ─── */}
-      <section className="bg-[#FAF9F7] py-24 border-b border-gray-200/50">
+      <section className="bg-[#FAF9F7] py-24">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
           {/* Section Header */}
@@ -752,9 +753,13 @@ export default function PRMedia() {
             {mediaPartners.map((media, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-xl py-5 px-3 border border-gray-150 shadow-sm flex items-center justify-center min-h-[68px] hover:shadow transition-shadow duration-200"
+                className="bg-white rounded-xl py-4 px-3 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center justify-center min-h-[68px] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200"
               >
-                <span className={media.style}>{media.label}</span>
+                {media.icon ? (
+                  <img src={media.icon} alt={media.label} className="w-10 h-10 rounded-full object-cover" />
+                ) : (
+                  <span className="text-gray-500 font-bold text-[12.5px]">{media.label}</span>
+                )}
               </div>
             ))}
           </div>
@@ -768,7 +773,7 @@ export default function PRMedia() {
       </section>
 
       {/* ─── 6. PRICING SECTION ─── */}
-      <section id="paket-harga" className="bg-[#FBFBFA] py-24 border-b border-gray-200/50 scroll-mt-16">
+      <section id="paket-harga" className="bg-[#FBFBFA] py-24 scroll-mt-16">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
@@ -1129,7 +1134,7 @@ export default function PRMedia() {
       </section>
 
       {/* ─── 6.5. PROSES ORDER SECTION ─── */}
-      <section className="bg-[#FCFBFA] py-24 border-b border-gray-200/50">
+      <section className="bg-[#FCFBFA] py-24">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
           {/* Section Header */}
@@ -1159,7 +1164,7 @@ export default function PRMedia() {
                 {/* Gap 20px */}
                 <div className="h-5"></div>
                 {/* Card */}
-                <div className="bg-white border border-gray-150 rounded-[20px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
+                <div className="bg-white rounded-[20px] py-6 px-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
                   <div className="space-y-3">
                     <h4 className="text-[16px] font-black text-gray-950 leading-tight">
                       Konsultasi &amp; Pilih Paket
@@ -1205,7 +1210,7 @@ export default function PRMedia() {
                 {/* Gap 20px */}
                 <div className="h-5"></div>
                 {/* Card */}
-                <div className="bg-white border border-gray-150 rounded-[20px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
+                <div className="bg-white rounded-[20px] py-6 px-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
                   <div className="space-y-3">
                     <h4 className="text-[16px] font-black text-gray-950 leading-tight">
                       Penulisan Artikel
@@ -1251,7 +1256,7 @@ export default function PRMedia() {
                 {/* Gap 20px */}
                 <div className="h-5"></div>
                 {/* Card */}
-                <div className="bg-white border border-gray-150 rounded-[20px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
+                <div className="bg-white rounded-[20px] py-6 px-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
                   <div className="space-y-3">
                     <h4 className="text-[16px] font-black text-gray-950 leading-tight">
                       Approve Naskah Final
@@ -1297,7 +1302,7 @@ export default function PRMedia() {
                 {/* Gap 20px */}
                 <div className="h-5"></div>
                 {/* Card */}
-                <div className="bg-white border border-gray-150 rounded-[20px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
+                <div className="bg-white rounded-[20px] py-6 px-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
                   <div className="space-y-3">
                     <h4 className="text-[16px] font-black text-gray-950 leading-tight">
                       Distribusi ke Media
@@ -1343,7 +1348,7 @@ export default function PRMedia() {
                 {/* Gap 20px */}
                 <div className="h-5"></div>
                 {/* Card */}
-                <div className="bg-white border border-gray-150 rounded-[20px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
+                <div className="bg-white rounded-[20px] py-6 px-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col justify-between flex-grow text-left">
                   <div className="space-y-3">
                     <h4 className="text-[16px] font-black text-gray-950 leading-tight">
                       Publikasi &amp; Laporan
@@ -1387,7 +1392,7 @@ export default function PRMedia() {
       </section>
 
       {/* ─── 7. FAQ SECTION ─── */}
-      <section className="bg-white py-24 border-b border-gray-200/50">
+      <section className="bg-white py-24">
         <div className="max-w-[1000px] mx-auto px-6 sm:px-8 text-center">
 
           {/* Section Header */}
@@ -1402,11 +1407,11 @@ export default function PRMedia() {
           </div>
 
           {/* Custom Accordion FAQ List */}
-          <div className="border-t border-b border-gray-150 divide-y divide-gray-150 max-w-[860px] mx-auto">
+          <div className="space-y-4 max-w-[860px] mx-auto">
             {faqItems.map((faq, idx) => {
               const isExpanded = expandedFaqIdx === idx;
               return (
-                <div key={idx} className="py-6 text-left transition-all duration-300">
+                <div key={idx} className={`py-5 px-6 rounded-2xl text-left transition-all duration-300 ${isExpanded ? "bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)]" : "bg-[#F9FAFB] hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"}`}>
                   <button
                     onClick={() => toggleFaq(idx)}
                     className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"

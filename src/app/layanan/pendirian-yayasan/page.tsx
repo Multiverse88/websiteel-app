@@ -16,6 +16,7 @@ import {
   Eye,
   UserCheck,
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
@@ -355,7 +356,7 @@ export default function PendirianYayasan() {
             <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-12 lg:mt-0">
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
                 
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
                     src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?fit=crop&w=800&h=800&q=80"
                     alt="Misi sosial yayasan bersatu tangan"
@@ -366,7 +367,7 @@ export default function PendirianYayasan() {
                 </div>
 
                 {/* Floating Badge 1 - Akta Yayasan (Top Left) */}
-                <div className="absolute top-12 -left-8 sm:-left-12 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3.5 w-[220px] transition-transform hover:-translate-y-1 duration-300 z-20">
+                <div className="absolute top-12 -left-8 sm:-left-12 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] flex items-center space-x-3.5 w-[220px] transition-transform hover:-translate-y-1 duration-300 z-20">
                   <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                     <FileText className="w-5.5 h-5.5 stroke-[2.2]" />
                   </div>
@@ -377,7 +378,7 @@ export default function PendirianYayasan() {
                 </div>
 
                 {/* Floating Badge 2 - SK Kemenkumham (Bottom Right) */}
-                <div className="absolute bottom-12 -right-6 sm:-right-10 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3.5 w-[210px] transition-transform hover:-translate-y-1 duration-300 z-20">
+                <div className="absolute bottom-12 -right-6 sm:-right-10 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] flex items-center space-x-3.5 w-[210px] transition-transform hover:-translate-y-1 duration-300 z-20">
                   <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 flex-shrink-0">
                     <ShieldCheck className="w-5.5 h-5.5" />
                   </div>
@@ -412,7 +413,7 @@ export default function PendirianYayasan() {
             {/* Left side */}
             <div className="lg:col-span-5 relative flex items-center justify-center">
               <div className="relative w-full max-w-[480px] lg:max-w-none">
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_15px_35px_rgba(0,0,0,0.04)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
                     src="https://images.unsplash.com/photo-1497366216548-37526070297c?fit=crop&w=800&h=800&q=80"
                     alt="Modern loft office workstation"
@@ -423,7 +424,7 @@ export default function PendirianYayasan() {
                 </div>
 
                 {/* Floating Badge */}
-                <div className="absolute -bottom-6 left-6 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3.5 w-[280px] transition-transform hover:-translate-y-1 duration-300 z-10">
+                <div className="absolute -bottom-6 left-6 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] flex items-center space-x-3.5 w-[280px] transition-transform hover:-translate-y-1 duration-300 z-10">
                   <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                     <FileText className="w-5.5 h-5.5 stroke-[2.2]" />
                   </div>
@@ -487,7 +488,7 @@ export default function PendirianYayasan() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* Card 1: Pembina */}
-            <div className="bg-[#F9FAFB]/70 border border-gray-150 rounded-3xl p-6.5 hover:shadow-md transition-all duration-300 flex flex-col justify-between items-start">
+            <div className="bg-[#F9FAFB]/70 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-3xl p-6.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between items-start">
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-xl border border-gray-200/60 bg-white flex items-center justify-center text-[#990202]">
                   <Users className="w-5.5 h-5.5 stroke-[2]" />
@@ -500,7 +501,7 @@ export default function PendirianYayasan() {
             </div>
 
             {/* Card 2: Pengurus */}
-            <div className="bg-[#F9FAFB]/70 border border-gray-150 rounded-3xl p-6.5 hover:shadow-md transition-all duration-300 flex flex-col justify-between items-start">
+            <div className="bg-[#F9FAFB]/70 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-3xl p-6.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between items-start">
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-xl border border-gray-200/60 bg-white flex items-center justify-center text-[#990202]">
                   <UserCheck className="w-5.5 h-5.5 stroke-[2]" />
@@ -513,7 +514,7 @@ export default function PendirianYayasan() {
             </div>
 
             {/* Card 3: Pengawas */}
-            <div className="bg-[#F9FAFB]/70 border border-gray-150 rounded-3xl p-6.5 hover:shadow-md transition-all duration-300 flex flex-col justify-between items-start">
+            <div className="bg-[#F9FAFB]/70 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-3xl p-6.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between items-start">
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-xl border border-gray-200/60 bg-white flex items-center justify-center text-[#990202]">
                   <Eye className="w-5.5 h-5.5 stroke-[2]" />
@@ -526,7 +527,7 @@ export default function PendirianYayasan() {
             </div>
 
             {/* Card 4: Status Hukum */}
-            <div className="bg-[#F9FAFB]/70 border border-gray-150 rounded-3xl p-6.5 hover:shadow-md transition-all duration-300 flex flex-col justify-between items-start">
+            <div className="bg-[#F9FAFB]/70 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-3xl p-6.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between items-start">
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-xl border border-gray-200/60 bg-white flex items-center justify-center text-[#990202]">
                   <ShieldCheck className="w-5.5 h-5.5 stroke-[2]" />
@@ -592,7 +593,7 @@ export default function PendirianYayasan() {
                   </div>
                   
                   {/* Card Container */}
-                  <div className="bg-white border border-gray-150 rounded-[24px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                  <div className="bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-[24px] py-6 px-5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
                     <div className="space-y-3">
                       
                       {/* Title */}

@@ -1468,19 +1468,17 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
 
               {/* EasyLegal CORPORATE badge */}
               <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-2.5 shadow-sm border border-border/60 mb-5 self-start">
-                <div className="w-6 h-5 overflow-hidden rounded-[4px] relative flex items-center justify-center flex-shrink-0">
+                  <div className="w-6 h-5 overflow-hidden rounded-[4px] relative flex items-center justify-center flex-shrink-0">
                   <Image 
                     src="/Logo EL.png" 
                     alt="EasyLegal Logo" 
-                    width={24}
-                    height={20}
-                    className="absolute w-[160%] h-[160%] max-w-none object-cover" 
+                    fill
+                    className="object-cover scale-150" 
                     style={{ objectPosition: "center 22%" }}
                   />
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="text-[12.5px] font-extrabold text-primary">easy</span>
-                  <span className="text-[12.5px] font-bold text-dark">legal</span>
+                <div className="flex items-center">
+                  <span className="text-[12.5px] font-extrabold text-primary">easy</span><span className="text-[12.5px] font-bold text-dark">legal</span>
                 </div>
                 <div className="w-px h-3.5 bg-border mx-1" />
                 <span className="text-[9px] font-bold text-dark/40 uppercase tracking-[0.15em]">CORPORATE</span>
@@ -2222,29 +2220,40 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           <div className="text-center">
             <p className="text-[12px] font-extrabold text-[#6B7280] uppercase tracking-[0.2em] mb-8">EasyLegal Resmi Bersertifikat ISO</p>
             <div className="flex flex-wrap items-center justify-center gap-6">
-              <div className="w-full max-w-[240px] h-[100px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
+              <div className="w-full max-w-[395px] h-[126px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
                 <Image src="/EasyLegal.id_-scaled.jpg" alt="PSe KOMDIGI" fill className="object-cover" />
               </div>
-              <div className="w-full max-w-[240px] h-[100px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
+              <div className="w-full max-w-[395px] h-[126px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
                 <Image src="/ISO-sertifikat-scaled.jpg" alt="ISO 9001:2015" fill className="object-cover" />
               </div>
-              <div className="w-full max-w-[240px] h-[100px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
+              <div className="w-full max-w-[395px] h-[126px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
                 <Image src="/ISO-27001-2022.png" alt="ISO 27001:2022" fill className="object-cover" />
               </div>
             </div>
           </div>
 
           {/* Liputan Media */}
-          <div className="text-center">
-            <p className="text-[12px] font-extrabold text-[#6B7280] uppercase tracking-[0.2em] mb-8">Liputan Media EasyLegal</p>
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-              {["Kontan.co.id", "jpnn.com", "industry.co.id", "detikcom", "IDN TIMES", "SINDONEWS.com"].map((media, idx) => (
-                <span key={idx} className="text-[16px] font-bold text-gray-300 hover:text-gray-400 transition-colors cursor-default">
-                  {media}
-                </span>
+          <div className="text-center mt-20">
+            <p className="text-[12px] font-extrabold text-[#6B7280] uppercase tracking-[0.2em] mb-12">Liputan Media EasyLegal</p>
+            <div className="flex flex-wrap md:flex-nowrap items-center justify-center md:justify-between gap-x-8 lg:gap-x-12 gap-y-10 max-w-[1100px] mx-auto px-4">
+
+              {[
+                { src: "/logo-berita/images.png", alt: "Kontan" },
+                { src: "/logo-berita/download.png", alt: "jpnn.com", scaleClass: "scale-[3]" },
+                { src: "/logo-berita/download (1).png", alt: "industry.co.id" },
+                { src: "/logo-berita/download (2).png", alt: "detikcom", scaleClass: "scale-[1.4]" },
+                { src: "/logo-berita/download (3).png", alt: "IDN TIMES" },
+                { src: "/logo-berita/download (4).png", alt: "SINDONEWS.com", scaleClass: "scale-[3]" }
+              ].map((media, idx) => (
+                <div key={idx} className="flex items-center justify-center hover:scale-105 transition-transform duration-300 w-[120px] md:w-auto">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={media.src} alt={media.alt} className={`max-h-8 md:max-h-10 lg:max-h-11 object-contain w-full md:w-auto ${media.scaleClass || ""}`} />
+                </div>
               ))}
+
             </div>
-            <p className="text-[13px] text-gray-400 mt-6 flex items-center justify-center gap-2">
+
+            <p className="text-[13px] text-gray-400 mt-14 flex items-center justify-center gap-2">
               Bisa Juga transaksi via
               <Image src="/EasyLegal-Shopee.png" alt="Shopee" width={100} height={40} className="object-contain" />
               EasyLegal Official Store

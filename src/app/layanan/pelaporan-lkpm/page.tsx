@@ -21,6 +21,7 @@ import {
   Building,
   Award
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 
 export default function PelaporanLKPM() {
   // State for FAQ expanded accordions (default: index 0 expanded)
@@ -234,7 +235,7 @@ export default function PelaporanLKPM() {
               <div className="relative w-full max-w-[440px] aspect-[1.1] sm:aspect-square lg:aspect-[1.1] bg-gradient-to-br from-[#0f1b2f] via-[#0a1122] to-[#7f080c] rounded-[32px] p-6 relative flex items-center justify-center shadow-2xl border border-gray-800/80">
                 
                 {/* Official Report Card Mockup (LKPM Report) */}
-                <div className="bg-white rounded-2xl p-5 shadow-2xl relative w-[255px] h-[280px] border border-gray-100 flex flex-col justify-between text-left">
+                <div className="bg-white rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative w-[255px] h-[280px] flex flex-col justify-between text-left">
                   
                   {/* Card Top Header */}
                   <div className="flex justify-between items-center border-b border-gray-100 pb-2.5">
@@ -303,7 +304,7 @@ export default function PelaporanLKPM() {
                 </div>
 
                 {/* Floating Badge 1: Top Right */}
-                <div className="absolute -top-5 -right-5 sm:-top-7 sm:-right-7 md:-top-5 md:-right-5 bg-white rounded-2xl py-2 px-3.5 shadow-xl border border-gray-100 flex items-center space-x-2.5 w-[165px] z-20">
+                <div className="absolute -top-5 -right-5 sm:-top-7 sm:-right-7 md:-top-5 md:-right-5 bg-white rounded-2xl py-2 px-3.5 shadow-xl flex items-center space-x-2.5 w-[165px] z-20">
                   <div className="w-8 h-8 rounded-lg bg-[#FFF0F0] text-[#990202] flex items-center justify-center flex-shrink-0">
                     <svg className="w-4.5 h-4.5 text-[#990202]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -319,7 +320,7 @@ export default function PelaporanLKPM() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Left */}
-                <div className="absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 md:-bottom-5 md:-left-5 bg-white rounded-2xl py-2 px-3.5 shadow-xl border border-gray-100 flex items-center space-x-2.5 w-[185px] z-20">
+                <div className="absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 md:-bottom-5 md:-left-5 bg-white rounded-2xl py-2 px-3.5 shadow-xl flex items-center space-x-2.5 w-[185px] z-20">
                   <div className="w-8 h-8 rounded-lg bg-[#FFF0F0] text-[#990202] flex items-center justify-center flex-shrink-0">
                     <svg className="w-4.5 h-4.5 text-[#990202]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -442,7 +443,7 @@ export default function PelaporanLKPM() {
             <div className="lg:col-span-7 space-y-5 text-left">
               
               {/* Card 1: LKPM */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <svg className="w-4.5 h-4.5 text-[#990202]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -458,7 +459,7 @@ export default function PelaporanLKPM() {
               </div>
 
               {/* Card 2: Wajib Lapor */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <svg className="w-4.5 h-4.5 text-[#990202]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
@@ -472,7 +473,7 @@ export default function PelaporanLKPM() {
               </div>
 
               {/* Card 3: Manfaat Lapor Tepat Waktu */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <svg className="w-4.5 h-4.5 text-[#990202]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
@@ -553,7 +554,7 @@ export default function PelaporanLKPM() {
             </div>
 
             {/* Right Card: Menengah & Besar */}
-            <div className="bg-white rounded-[28px] p-8 border border-gray-150 shadow-sm flex flex-col justify-between text-left">
+            <div className="bg-white rounded-[28px] p-8 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between text-left">
               <div className="space-y-6">
                 
                 {/* Scale Label */}
@@ -638,7 +639,7 @@ export default function PelaporanLKPM() {
             
             {/* Card 1 */}
             <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-white border border-gray-150 flex items-center justify-center text-[#990202] shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <DollarSign className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
               <div className="space-y-1">
@@ -649,7 +650,7 @@ export default function PelaporanLKPM() {
 
             {/* Card 2 */}
             <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-white border border-gray-150 flex items-center justify-center text-[#990202] shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <Users className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
               <div className="space-y-1">
@@ -660,7 +661,7 @@ export default function PelaporanLKPM() {
 
             {/* Card 3 */}
             <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-white border border-gray-150 flex items-center justify-center text-[#990202] shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <Activity className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
               <div className="space-y-1">
@@ -671,7 +672,7 @@ export default function PelaporanLKPM() {
 
             {/* Card 4 */}
             <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-white border border-gray-150 flex items-center justify-center text-[#990202] shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <FileText className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
               <div className="space-y-1">
@@ -682,7 +683,7 @@ export default function PelaporanLKPM() {
 
             {/* Card 5 */}
             <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-white border border-gray-150 flex items-center justify-center text-[#990202] shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <AlertCircle className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
               <div className="space-y-1">
@@ -714,7 +715,7 @@ export default function PelaporanLKPM() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1140px] mx-auto items-stretch">
             
             {/* Step 1 */}
-            <div className="bg-white rounded-[24px] p-6.5 border border-gray-150 shadow-sm text-left flex flex-col justify-between space-y-5 relative">
+            <div className="bg-white rounded-[24px] p-6.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] text-left flex flex-col justify-between space-y-5 relative">
               <div className="absolute top-6 right-6 text-[36px] font-black text-red-500/10 leading-none">1</div>
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-full bg-[#FFF5F5] text-[#990202] flex items-center justify-center font-black">
@@ -728,7 +729,7 @@ export default function PelaporanLKPM() {
             </div>
 
             {/* Step 2 */}
-            <div className="bg-white rounded-[24px] p-6.5 border border-gray-150 shadow-sm text-left flex flex-col justify-between space-y-5 relative">
+            <div className="bg-white rounded-[24px] p-6.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] text-left flex flex-col justify-between space-y-5 relative">
               <div className="absolute top-6 right-6 text-[36px] font-black text-red-500/10 leading-none">2</div>
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-full bg-[#FFF5F5] text-[#990202] flex items-center justify-center font-black">
@@ -742,7 +743,7 @@ export default function PelaporanLKPM() {
             </div>
 
             {/* Step 3 */}
-            <div className="bg-white rounded-[24px] p-6.5 border border-gray-150 shadow-sm text-left flex flex-col justify-between space-y-5 relative">
+            <div className="bg-white rounded-[24px] p-6.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] text-left flex flex-col justify-between space-y-5 relative">
               <div className="absolute top-6 right-6 text-[36px] font-black text-red-500/10 leading-none">3</div>
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-full bg-[#FFF5F5] text-[#990202] flex items-center justify-center font-black">
@@ -756,7 +757,7 @@ export default function PelaporanLKPM() {
             </div>
 
             {/* Step 4 */}
-            <div className="bg-white rounded-[24px] p-6.5 border border-gray-150 shadow-sm text-left flex flex-col justify-between space-y-5 relative">
+            <div className="bg-white rounded-[24px] p-6.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] text-left flex flex-col justify-between space-y-5 relative">
               <div className="absolute top-6 right-6 text-[36px] font-black text-red-500/10 leading-none">4</div>
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-full bg-[#FFF5F5] text-[#990202] flex items-center justify-center font-black">

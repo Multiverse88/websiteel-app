@@ -68,7 +68,7 @@ export default function TestimoniPage() {
             {/* Right */}
             <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-12 lg:mt-0">
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
                   <Image
                     src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop"
                     alt="Testimoni EasyLegal"
@@ -82,7 +82,7 @@ export default function TestimoniPage() {
                 </div>
 
                 {/* Floating badge: 4.9/5 */}
-                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center space-x-3.5 w-[190px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] flex items-center space-x-3.5 w-[190px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-11 h-11 rounded-xl bg-red-50 flex items-center justify-center text-[#D62828] flex-shrink-0">
                     <Star className="w-5.5 h-5.5 fill-[#D62828] text-[#D62828]" />
                   </div>

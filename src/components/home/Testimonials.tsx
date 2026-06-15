@@ -33,7 +33,7 @@ export default function Testimonials() {
             <div className="animate-marquee-left flex">
               {[...row1Reviews, ...row1Reviews].map((item, idx) => (
                 <a 
-                  key={idx}
+                  key={`${item.name}-row1-${idx}`}
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -88,7 +88,7 @@ export default function Testimonials() {
             <div className="animate-marquee-right flex">
               {[...row2Reviews, ...row2Reviews].map((item, idx) => (
                 <a 
-                  key={idx}
+                  key={`${item.name}-row2-${idx}`}
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"

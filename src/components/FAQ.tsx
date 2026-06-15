@@ -25,7 +25,7 @@ export default function FAQ({
   };
 
   return (
-    <section className="bg-white py-24 border-b border-gray-100">
+    <section className="bg-white py-24">
       <div className="max-w-[850px] mx-auto px-6 sm:px-8">
         
         {/* Section Header */}
@@ -51,12 +51,12 @@ export default function FAQ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="border-t border-gray-100 divide-y divide-gray-100"
+          className="space-y-4"
         >
           {items.map((faq, idx) => {
             const isExpanded = expandedIdx === idx;
             return (
-              <div key={idx} className="py-7 sm:py-8 transition-all duration-200">
+              <div key={idx} className={`py-5 sm:py-6 px-6 sm:px-7 rounded-2xl transition-all duration-300 ${isExpanded ? "bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)]" : "bg-[#F9FAFB] hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"}`}>
                 <button
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"

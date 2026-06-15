@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import {
   Briefcase,
@@ -24,6 +25,7 @@ import {
   HelpCircle,
   ChevronUp
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 
 export default function VisaKitas() {
   // State for interactive Pricing filter tabs
@@ -225,7 +227,7 @@ export default function VisaKitas() {
               {/* Checkpoints Row */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-gray-150 max-w-[620px]">
                 {/* Checkpoint 1 */}
-                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                   <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
@@ -236,7 +238,7 @@ export default function VisaKitas() {
                 </div>
 
                 {/* Checkpoint 2 */}
-                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                   <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
@@ -247,7 +249,7 @@ export default function VisaKitas() {
                 </div>
 
                 {/* Checkpoint 3 */}
-                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                   <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
@@ -324,7 +326,7 @@ export default function VisaKitas() {
                 </div>
 
                 {/* Floating Badge 1: Top Right */}
-                <div className="absolute -top-6 -right-6 sm:-right-8 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                <div className="absolute -top-6 -right-6 sm:-right-8 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
                   <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Check className="w-4.5 h-4.5" strokeWidth={3} />
                   </div>
@@ -335,7 +337,7 @@ export default function VisaKitas() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Left */}
-                <div className="absolute -bottom-6 -left-4 sm:-left-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3 w-[220px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                <div className="absolute -bottom-6 -left-4 sm:-left-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[220px] hover:-translate-y-1 transition-transform duration-300 z-20">
                   <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Home className="w-4.5 h-4.5" />
                   </div>
@@ -374,7 +376,7 @@ export default function VisaKitas() {
               <h3 className="text-[12px] font-black text-[#990202] tracking-widest uppercase mb-4 pl-1">KATEGORI VISA &amp; KITAS</h3>
               
               {/* Item 1 */}
-              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 border border-gray-150 shadow-sm flex items-center space-x-3.5">
+              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center space-x-3.5">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <FileText className="w-5 h-5 text-[#990202]" />
                 </div>
@@ -385,7 +387,7 @@ export default function VisaKitas() {
               </div>
 
               {/* Item 2 */}
-              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 border border-gray-150 shadow-sm flex items-center space-x-3.5">
+              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center space-x-3.5">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <TrendingUp className="w-5 h-5 text-[#990202]" />
                 </div>
@@ -396,7 +398,7 @@ export default function VisaKitas() {
               </div>
 
               {/* Item 3 */}
-              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 border border-gray-150 shadow-sm flex items-center space-x-3.5">
+              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center space-x-3.5">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <User className="w-5 h-5 text-[#990202]" />
                 </div>
@@ -407,7 +409,7 @@ export default function VisaKitas() {
               </div>
 
               {/* Item 4 */}
-              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 border border-gray-150 shadow-sm flex items-center space-x-3.5">
+              <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center space-x-3.5">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Compass className="w-5 h-5 text-[#990202]" />
                 </div>
@@ -436,7 +438,7 @@ export default function VisaKitas() {
             <div className="lg:col-span-7 space-y-5 text-left">
               
               {/* Box 1: VISA */}
-              <div className="bg-white border border-gray-150 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+              <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-3 text-[#990202]">
                   <FileText className="w-5 h-5" />
                   <h4 className="text-[14.5px] font-black tracking-wider uppercase">VISA</h4>
@@ -447,7 +449,7 @@ export default function VisaKitas() {
               </div>
 
               {/* Box 2: KITAS / ITAS */}
-              <div className="bg-white border border-gray-150 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+              <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-3 text-[#990202]">
                   <Check className="w-5 h-5" strokeWidth={3} />
                   <h4 className="text-[14.5px] font-black tracking-wider uppercase">KITAS / ITAS</h4>
@@ -458,7 +460,7 @@ export default function VisaKitas() {
               </div>
 
               {/* Box 3: YANG DIURUS EASYLEGAL */}
-              <div className="bg-white border border-gray-150 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-3.5">
+              <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-3 text-[#990202]">
                   <Clock className="w-5 h-5" />
                   <h4 className="text-[14.5px] font-black tracking-wider uppercase">YANG DIURUS EASYLEGAL</h4>
@@ -530,14 +532,22 @@ export default function VisaKitas() {
 
           {/* Packages Display Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto items-stretch">
-            {pricingData[activeCategory].map((pkg, idx) => {
-              const isFirst = idx === 0;
-              const cardBorder = isFirst
-                ? "border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] relative z-10 transition-all duration-300"
-                : "border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
+            <AnimatePresence>
+              {pricingData[activeCategory].map((pkg, idx) => {
+                const isFirst = idx === 0;
+                const cardBorder = isFirst
+                  ? "border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] relative z-10 transition-all duration-300"
+                  : "shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
 
-              return (
-                <div key={idx} className="relative group h-full">
+                return (
+                  <motion.div
+                    key={`${activeCategory}-${idx}`}
+                    initial={{ opacity: 0, y: 20, scale: 0.92 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.92 }}
+                    transition={{ duration: 0.5, delay: idx * 0.12 }}
+                    className="relative group h-full"
+                  >
                   {/* Interactive Red Hover Glow behind Card */}
                   <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
                   
@@ -591,7 +601,7 @@ export default function VisaKitas() {
                         </div>
 
                         {/* Bonus */}
-                        <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 border border-gray-150">
+                        <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                           <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
                             BONUS
                           </h4>
@@ -608,7 +618,7 @@ export default function VisaKitas() {
                         </div>
 
                         {/* Extra Bonus */}
-                        <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 border border-gray-150">
+                        <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                           <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
                             EXTRA BONUS
                           </h4>
@@ -651,9 +661,10 @@ export default function VisaKitas() {
                       </a>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
+            </AnimatePresence>
           </div>
 
           {/* Pricing Bottom Warning Alert */}

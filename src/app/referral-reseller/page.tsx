@@ -649,7 +649,7 @@ export default function ReferralResellerPage() {
           </div>
 
           {/* Table Container */}
-          <div className="rounded-[20px] overflow-hidden shadow-[0_0_0_1px_rgba(0,0,0,0.045),_0_8px_30px_rgba(0,0,0,0.03)] border border-gray-100">
+          <div className="rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
             {/* Table Header */}
             <div className="grid grid-cols-[35px_1fr_120px] sm:grid-cols-[60px_1fr_200px] bg-[#111111] px-6 py-3.5 items-center">
               <span className="text-gray-400 text-[10px] font-extrabold tracking-widest uppercase text-center">#</span>

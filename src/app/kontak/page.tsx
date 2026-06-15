@@ -27,6 +27,8 @@ export default function Kontak() {
     consent: true,
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -37,10 +39,30 @@ export default function Kontak() {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
+    // Clear error when typing
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrs = { ...prev };
+        delete newErrs[name];
+        return newErrs;
+      });
+    }
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const newErrors: Record<string, string> = {};
+    if (!formData.name.trim()) newErrors.name = "Nama wajib diisi.";
+    if (!formData.email.trim()) newErrors.email = "Email wajib diisi.";
+    if (!formData.whatsapp.trim()) newErrors.whatsapp = "No. WhatsApp wajib diisi.";
+    if (!formData.topic) newErrors.topic = "Topik konsultasi wajib dipilih.";
+    if (!formData.message.trim()) newErrors.message = "Pesan wajib diisi.";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    
     setFormSubmitted(true);
   };
 
@@ -255,7 +277,7 @@ export default function Kontak() {
                   
                   {/* Nama Lengkap + Nama Bisnis */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
+                    <div className="relative">
                       <label className="text-[13px] font-bold text-gray-900 mb-2 block">Nama Lengkap*</label>
                       <input
                         type="text"
@@ -264,8 +286,9 @@ export default function Kontak() {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Mis. Budi Santoso"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900"
+                        className={`w-full px-4 py-3 rounded-xl border ${errors.name ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900`}
                       />
+                      {errors.name && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.name}</p>}
                     </div>
                     <div>
                       <label className="text-[13px] font-bold text-gray-900 mb-2 block">Nama Bisnis / Perusahaan</label>
@@ -282,7 +305,7 @@ export default function Kontak() {
 
                   {/* Email + WA */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
+                    <div className="relative">
                       <label className="text-[13px] font-bold text-gray-900 mb-2 block">Email*</label>
                       <input
                         type="email"
@@ -291,10 +314,11 @@ export default function Kontak() {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="nama@email.com"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900"
+                        className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900`}
                       />
+                      {errors.email && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.email}</p>}
                     </div>
-                    <div>
+                    <div className="relative">
                       <label className="text-[13px] font-bold text-gray-900 mb-2 block">No. WhatsApp*</label>
                       <input
                         type="tel"
@@ -303,13 +327,14 @@ export default function Kontak() {
                         value={formData.whatsapp}
                         onChange={handleInputChange}
                         placeholder="0812-3456-7890"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900"
+                        className={`w-full px-4 py-3 rounded-xl border ${errors.whatsapp ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900`}
                       />
+                      {errors.whatsapp && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.whatsapp}</p>}
                     </div>
                   </div>
 
                   {/* Topik */}
-                  <div>
+                  <div className="relative">
                     <label className="text-[13px] font-bold text-gray-900 mb-2 block">
                       Topik Konsultasi*
                     </label>
@@ -319,7 +344,7 @@ export default function Kontak() {
                         required
                         value={formData.topic}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all appearance-none cursor-pointer text-gray-700"
+                        className={`w-full px-4 py-3 rounded-xl border ${errors.topic ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all appearance-none cursor-pointer text-gray-700`}
                       >
                         <option value="" disabled>Pilih Topik Konsultasi</option>
                         <option value="Pendirian PT / CV">Pendirian PT / CV</option>
@@ -334,10 +359,11 @@ export default function Kontak() {
                         <ChevronDown className="w-4 h-4" />
                       </div>
                     </div>
+                    {errors.topic && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.topic}</p>}
                   </div>
 
                   {/* Pesan */}
-                  <div>
+                  <div className="relative">
                     <label className="text-[13px] font-bold text-gray-900 mb-2 block">Pesan / Pertanyaan*</label>
                     <textarea
                       name="message"
@@ -346,8 +372,9 @@ export default function Kontak() {
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Ceritakan kebutuhan legalitas bisnis Anda — kami akan bantu rekomendasikan solusi yang sesuai."
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900 resize-none leading-relaxed"
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.message ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900 resize-none leading-relaxed`}
                     />
+                    {errors.message && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.message}</p>}
                   </div>
 
                   {/* Consent Text Statement */}

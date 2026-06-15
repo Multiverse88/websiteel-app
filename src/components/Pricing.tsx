@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Check, X } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 
 export interface PricingItem {
   text: string;
@@ -64,7 +65,7 @@ export default function Pricing({
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <FadeIn className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
             {sectionTitleTag}
           </p>
@@ -76,9 +77,9 @@ export default function Pricing({
               {sectionSubtitle}
             </p>
           )}
-        </div>
-
+        </FadeIn>
         {/* Pricing Grid */}
+        <FadeIn delay={0.15}>
         <div className={`grid ${gridColsClass} gap-6 items-start`}>
           {packages.map((pkg, pIdx) => {
             const headerBg = pkg.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
@@ -181,6 +182,7 @@ export default function Pricing({
             );
           })}
         </div>
+        </FadeIn>
 
         {/* Footnotes Box */}
         {footnotes && footnotes.length > 0 && (

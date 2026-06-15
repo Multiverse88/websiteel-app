@@ -26,6 +26,7 @@ import {
   Heart,
   Menu
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 
 export default function PerjanjianPerkawinan() {
   // State for FAQ expanded accordions (default: index 0 expanded)
@@ -317,7 +318,7 @@ export default function PerjanjianPerkawinan() {
                 </div>
 
                 {/* Floating Badge 1: Top Right */}
-                <div className="absolute top-8 right-4 bg-white rounded-xl py-2.5 px-3.5 shadow-xl border border-gray-100 flex items-center space-x-2.5 w-[200px] z-20">
+                <div className="absolute top-8 right-4 bg-white rounded-xl py-2.5 px-3.5 shadow-xl flex items-center space-x-2.5 w-[200px] z-20">
                   <div className="w-7 h-7 rounded-lg bg-[#FFF0F0] text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Shield className="w-4 h-4 text-[#990202]" strokeWidth={2.5} />
                   </div>
@@ -328,7 +329,7 @@ export default function PerjanjianPerkawinan() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Left */}
-                <div className="absolute bottom-8 left-4 bg-white rounded-xl py-2.5 px-3.5 shadow-xl border border-gray-100 flex items-center space-x-2.5 w-[220px] z-20">
+                <div className="absolute bottom-8 left-4 bg-white rounded-xl py-2.5 px-3.5 shadow-xl flex items-center space-x-2.5 w-[220px] z-20">
                   <div className="w-7 h-7 rounded-lg bg-[#FFF0F0] text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3.5} />
                   </div>
@@ -439,7 +440,7 @@ export default function PerjanjianPerkawinan() {
             <div className="lg:col-span-7 space-y-6 text-left">
 
               {/* Card 1: PERJANJIAN PERKAWINAN */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-4">
+              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <FileText className="w-5 h-5" strokeWidth={2.5} />
                   <h4 className="text-[12.5px] sm:text-[13px] font-black tracking-wider uppercase">PERJANJIAN PERKAWINAN</h4>
@@ -450,7 +451,7 @@ export default function PerjanjianPerkawinan() {
               </div>
 
               {/* Card 2: PRENUP & POSTNUP */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-4">
+              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Layers className="w-5 h-5 rotate-90" strokeWidth={2.5} />
                   <h4 className="text-[12.5px] sm:text-[13px] font-black tracking-wider uppercase">PRENUP &amp; POSTNUP</h4>
@@ -461,7 +462,7 @@ export default function PerjanjianPerkawinan() {
               </div>
 
               {/* Card 3: MANFAAT PERJANJIAN PISAH HARTA */}
-              <div className="bg-white border border-gray-150 rounded-2xl p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-md transition-shadow duration-300 space-y-4">
+              <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <ShieldCheck className="w-5 h-5" strokeWidth={2.5} />
                   <h4 className="text-[12.5px] sm:text-[13px] font-black tracking-wider uppercase">MANFAAT PERJANJIAN PISAH HARTA</h4>
@@ -496,7 +497,7 @@ export default function PerjanjianPerkawinan() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1140px] mx-auto items-stretch">
 
             {/* Left Card: Pembuatan Akta */}
-            <div className="bg-white rounded-[28px] p-6 sm:p-8 border border-gray-150 shadow-sm flex flex-col justify-between">
+            <div className="bg-white rounded-[28px] p-6 sm:p-8 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between">
               <div>
                 {/* Card Header */}
                 <div className="flex items-center space-x-4 pb-5 border-b border-gray-100">
@@ -540,7 +541,7 @@ export default function PerjanjianPerkawinan() {
             </div>
 
             {/* Right Card: Registrasi */}
-            <div className="bg-white rounded-[28px] p-6 sm:p-8 border border-gray-150 shadow-sm flex flex-col justify-between">
+            <div className="bg-white rounded-[28px] p-6 sm:p-8 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between">
               <div>
                 {/* Card Header */}
                 <div className="flex items-center space-x-4 pb-5 border-b border-gray-100">
@@ -868,7 +869,7 @@ export default function PerjanjianPerkawinan() {
                   </div>
                   
                   {/* Card Container */}
-                  <div className="bg-white border border-gray-150 rounded-[24px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                  <div className="bg-white rounded-[24px] py-6 px-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
                     <div className="space-y-3">
                       
                       {/* Title */}

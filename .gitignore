@@ -70,3 +70,17 @@ Desktop.ini
 logs/
 .eslintcache
 
+
+# Sentry Config File
+.env.sentry-build-plugin
+
+# Testing outputs and reports
+dogfood-output/
+playwright-report/
+test-results/
+
+# AI tool generated files
+CLAUDE.md
+
+# Stray binaries in public
+public/logo-berita/*.msi

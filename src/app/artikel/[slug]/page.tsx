@@ -279,7 +279,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
   const tags = generateTags(article.category, article.title);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white relative overflow-hidden blog-detail-container">
+    <div className="flex flex-col min-h-screen bg-white relative overflow-clip blog-detail-container">
       <ViewTracker slug={slug} />
 
       {/* Radial Glows for premium aesthetics */}
@@ -383,8 +383,8 @@ export default async function ArtikelDetailPage({ params }: Props) {
           </div>
 
           {/* Split 2-Column Grid Layout (Body + Sidebar) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 mt-12 items-start">
-            
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 mt-12">
+
             {/* Left Column: Article Body */}
             <div className="lg:col-span-8">
               {/* ─── ARTICLE BODY ─── */}
@@ -444,8 +444,11 @@ export default async function ArtikelDetailPage({ params }: Props) {
             </div>
 
             {/* Right Column: Sidebar */}
-            <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-24 h-fit mt-12 lg:mt-0">
-              
+            {/* Outer wrapper memberi tinggi = kolom artikel (default grid behavior) → ruang scroll untuk sticky child */}
+            <div className="lg:col-span-4 mt-12 lg:mt-0">
+              {/* Inner sticky container: menempel di kanan saat scroll, lepas di akhir kolom artikel */}
+              <aside className="space-y-6 lg:sticky lg:top-24">
+
               {/* Table of Contents Widget */}
               {headings.length > 1 && (
                 <TableOfContents headings={headings} />
@@ -515,7 +518,8 @@ export default async function ArtikelDetailPage({ params }: Props) {
                   ))}
                 </div>
               </div>
-            </aside>
+              </aside>
+            </div>
           </div>
         </article>
 

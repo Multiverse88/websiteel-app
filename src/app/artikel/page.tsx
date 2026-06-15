@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db";
 import type { Article } from "@prisma/client";
 import { Clock, BookOpen, Home, Search, X, ChevronDown } from "lucide-react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 // Mock Data for Auto-Seeding
 const seedArticles = [

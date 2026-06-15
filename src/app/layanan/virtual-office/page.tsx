@@ -258,7 +258,7 @@ export default function VirtualOffice() {
               className="lg:w-[45%] relative mt-12 lg:mt-0"
             >
               {/* Main Image Container */}
-              <div className="relative rounded-[32px] overflow-hidden shadow-xl border border-gray-100 z-10">
+              <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] z-10 aspect-[4/3]">
                 <Image
                   src="/cerita-kami-team.png"
                   alt="Team Collaboration"
@@ -269,7 +269,7 @@ export default function VirtualOffice() {
               </div>
 
               {/* Top Overlay Card */}
-              <div className="absolute top-12 left-[-32px] z-20 hidden sm:flex items-center gap-4 p-4.5 bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] border border-gray-100 max-w-[245px] hover:scale-105 transition-transform duration-300">
+              <div className="absolute top-12 left-[-32px] z-20 hidden sm:flex items-center gap-4 p-4.5 bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] max-w-[245px] hover:scale-105 transition-transform duration-300">
                 <div className="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Building className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
@@ -280,7 +280,7 @@ export default function VirtualOffice() {
               </div>
 
               {/* Bottom Overlay Card */}
-              <div className="absolute bottom-12 right-[-24px] z-20 hidden sm:flex items-center gap-4 p-4.5 bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] border border-gray-100 max-w-[265px] hover:scale-105 transition-transform duration-300">
+              <div className="absolute bottom-12 right-[-24px] z-20 hidden sm:flex items-center gap-4 p-4.5 bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] max-w-[265px] hover:scale-105 transition-transform duration-300">
                 <div className="w-11 h-11 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5.5 h-5.5 text-amber-600" />
                 </div>
@@ -329,7 +329,7 @@ export default function VirtualOffice() {
               transition={{ duration: 0.6 }}
               className="lg:col-span-6 relative"
             >
-              <div className="relative rounded-[32px] overflow-hidden shadow-xl border border-gray-100">
+              <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] aspect-[4/3]">
                 <Image
                   src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop"
                   alt="Cozy Virtual Office Seating Area"
@@ -339,7 +339,7 @@ export default function VirtualOffice() {
                 />
 
                 {/* Floating Card */}
-                <div className="absolute bottom-6 left-6 z-20 bg-white p-4.5 rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] border border-gray-100 max-w-[280px] flex items-center gap-3.5 hover:scale-105 transition-transform duration-300">
+                <div className="absolute bottom-6 left-6 z-20 bg-white p-4.5 rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] max-w-[280px] flex items-center gap-3.5 hover:scale-105 transition-transform duration-300">
                   <div className="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0 text-[#990202]">
                     <MapPin className="w-5 h-5" />
                   </div>
@@ -435,9 +435,9 @@ export default function VirtualOffice() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-[#F9FAFB] border border-gray-100 p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-lg hover:shadow-gray-200/50 hover:bg-white hover:border-gray-200/60 transition-all duration-300"
+              className="bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
             >
-              <div className="w-10 h-10 bg-white border border-gray-150/70 rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <MapPin className="w-5 h-5" />
               </div>
               <h3 className="text-[17px] font-extrabold text-gray-950 mb-3.5">Alamat Prestisius</h3>
@@ -452,9 +452,9 @@ export default function VirtualOffice() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-[#F9FAFB] border border-gray-100 p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-lg hover:shadow-gray-200/50 hover:bg-white hover:border-gray-200/60 transition-all duration-300"
+              className="bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
             >
-              <div className="w-10 h-10 bg-white border border-gray-150/70 rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <DollarSign className="w-5 h-5" />
               </div>
               <h3 className="text-[17px] font-extrabold text-gray-950 mb-3.5">Hemat Biaya</h3>
@@ -469,9 +469,9 @@ export default function VirtualOffice() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-[#F9FAFB] border border-gray-100 p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-lg hover:shadow-gray-200/50 hover:bg-white hover:border-gray-200/60 transition-all duration-300"
+              className="bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
             >
-              <div className="w-10 h-10 bg-white border border-gray-150/70 rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <Star className="w-5 h-5" />
               </div>
               <h3 className="text-[17px] font-extrabold text-gray-950 mb-3.5">Dukungan Legalitas</h3>
@@ -486,9 +486,9 @@ export default function VirtualOffice() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-[#F9FAFB] border border-gray-100 p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-lg hover:shadow-gray-200/50 hover:bg-white hover:border-gray-200/60 transition-all duration-300"
+              className="bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
             >
-              <div className="w-10 h-10 bg-white border border-gray-150/70 rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <Calendar className="w-5 h-5" />
               </div>
               <h3 className="text-[17px] font-extrabold text-gray-950 mb-3.5">Meeting Room Gratis</h3>
@@ -531,7 +531,7 @@ export default function VirtualOffice() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white rounded-[32px] overflow-hidden border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+              className="bg-white rounded-[32px] overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full"
             >
               {/* Header Box */}
               <div className="bg-[#1A1A1A] p-6 text-white text-center flex-shrink-0">
@@ -840,7 +840,7 @@ export default function VirtualOffice() {
           </div>
 
           {/* Footnote Banner */}
-          <div className="max-w-[1140px] mx-auto mt-12 bg-white border border-gray-100 rounded-2xl p-5 text-[12px] text-gray-500 leading-relaxed font-medium">
+          <div className="max-w-[1140px] mx-auto mt-12 bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-2xl p-5 text-[12px] text-gray-500 leading-relaxed font-medium">
             <strong className="font-extrabold text-gray-800 mr-1.5">Catatan:</strong>
             Harga sudah include semua fasilitas dasar &mdash; alamat komersial, surat domisili 1 tahun, meeting room 70 jam, &amp; resepsionis. Tidak ada biaya tersembunyi. Pembayaran dilakukan tahunan dengan deposit refundable Rp 500.000.
           </div>
@@ -879,7 +879,7 @@ export default function VirtualOffice() {
               transition={{ duration: 0.6 }}
               className="lg:col-span-6 relative"
             >
-              <div className="relative rounded-[32px] overflow-hidden shadow-xl border border-gray-100 z-10">
+              <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] z-10 aspect-[4/3]">
                 <Image
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
                   alt="EasyOffice Bandung Corridor"
@@ -889,7 +889,7 @@ export default function VirtualOffice() {
                 />
 
                 {/* Floating Card */}
-                <div className="absolute bottom-6 left-6 z-20 bg-white p-4.5 rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] border border-gray-100 max-w-[245px] flex items-center gap-3.5 hover:scale-105 transition-transform duration-300">
+                <div className="absolute bottom-6 left-6 z-20 bg-white p-4.5 rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] max-w-[245px] flex items-center gap-3.5 hover:scale-105 transition-transform duration-300">
                   <div className="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0 text-[#990202]">
                     <MapPin className="w-5 h-5" />
                   </div>

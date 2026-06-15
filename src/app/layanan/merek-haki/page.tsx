@@ -21,6 +21,7 @@ import {
   Building,
   AlertCircle,
 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
@@ -620,7 +621,7 @@ export default function MerekHaki() {
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
                 
                 {/* Image Container */}
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
                     src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?fit=crop&w=800&h=800&q=80"
                     alt="Pendaftaran Merek & HAKI EasyLegal"
@@ -679,7 +680,7 @@ export default function MerekHaki() {
             <div className="lg:col-span-6 relative w-full flex items-center justify-center">
               <div className="relative w-full max-w-[500px] lg:max-w-none">
                 {/* Image Container */}
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_15px_35px_rgba(0,0,0,0.04)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
                     src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?fit=crop&w=800&h=800&q=80"
                     alt="Workspace desainer logo dan merek"

@@ -403,7 +403,7 @@ export default function CekKBLI() {
             </div>
           </div>
 
-          <div className="absolute top-[-15px] right-[-10px] sm:right-[10px] bg-white rounded-[20px] shadow-[0_10px_35px_rgba(0,0,0,0.06)] border border-gray-100 p-4 flex items-center gap-3.5 z-20">
+          <div className="absolute top-[-15px] right-[-10px] sm:right-[10px] bg-white rounded-[20px] shadow-[0_10px_35px_rgba(0,0,0,0.06)] p-4 flex items-center gap-3.5 z-20">
             <div className="w-10 h-10 rounded-xl bg-[#FFF3E0] flex items-center justify-center text-[#E65100] flex-shrink-0">
               <BookOpen className="w-5 h-5 stroke-[2.2px]" />
             </div>
@@ -413,7 +413,7 @@ export default function CekKBLI() {
             </div>
           </div>
 
-          <div className="absolute bottom-[-15px] left-[-15px] sm:left-[10px] bg-white rounded-[20px] shadow-[0_10px_35px_rgba(0,0,0,0.06)] border border-gray-100 p-4 flex items-center gap-3.5 z-20">
+          <div className="absolute bottom-[-15px] left-[-15px] sm:left-[10px] bg-white rounded-[20px] shadow-[0_10px_35px_rgba(0,0,0,0.06)] p-4 flex items-center gap-3.5 z-20">
             <div className="w-10 h-10 rounded-xl bg-[#FFF0F0] flex items-center justify-center text-[#B91C1C] flex-shrink-0">
               <Check className="w-5 h-5 stroke-[3px]" />
             </div>
@@ -441,7 +441,7 @@ export default function CekKBLI() {
         </div>
 
         {/* Large Premium Search Card */}
-        <div className="w-full bg-white rounded-[32px] border border-gray-100 shadow-[0_15px_60px_rgba(0,0,0,0.03)] overflow-hidden">
+        <div className="w-full bg-white rounded-[32px] shadow-[0_15px_60px_rgba(0,0,0,0.05)] overflow-hidden">
           
           <div className="p-8 sm:p-10 space-y-6">
             
@@ -499,7 +499,7 @@ export default function CekKBLI() {
                 {filteredKBLI.map((item) => (
                   <div
                     key={item.code}
-                    className="border border-gray-100 hover:border-[#B91C1C]/20 rounded-2xl p-6 bg-white hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                    className="rounded-2xl p-6 bg-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between"
                   >
                     <div>
                       {/* Top Row: Code & Risk */}
@@ -681,7 +681,7 @@ export default function CekKBLI() {
       {/* ─── INTERACTIVE DETAIL MODAL ─── */}
       {selectedKBLI && (
         <div className="fixed inset-0 bg-dark/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-white rounded-[20px] sm:rounded-[28px] max-w-lg w-full p-5 sm:p-8 text-left space-y-5 sm:space-y-6 relative shadow-2xl animate-slide-down border border-gray-100">
+          <div className="bg-white rounded-[20px] sm:rounded-[28px] max-w-lg w-full p-5 sm:p-8 text-left space-y-5 sm:space-y-6 relative shadow-2xl animate-slide-down">
             {/* Close Button */}
             <button
               onClick={() => setSelectedKBLI(null)}
