@@ -358,7 +358,7 @@ export default function PendirianYayasan() {
                 
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?fit=crop&w=800&h=800&q=80"
+                    src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?fit=crop&w=800&h=800&q=80"
                     alt="Misi sosial yayasan bersatu tangan"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -415,7 +415,7 @@ export default function PendirianYayasan() {
               <div className="relative w-full max-w-[480px] lg:max-w-none">
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?fit=crop&w=800&h=800&q=80"
+                    src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?fit=crop&w=800&h=800&q=80"
                     alt="Modern loft office workstation"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"

@@ -129,7 +129,7 @@ export default function HowItWorks() {
                 <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#F2994A] to-[#F2C94C] shadow-lg opacity-95 transition-all duration-500" />
                 <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?fit=crop&w=600&h=800&q=80"
                     alt="Professional woman smiling" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -139,7 +139,7 @@ export default function HowItWorks() {
                 <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#D1E7DD] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#C1D7CD]/30" />
                 <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500 hover:rotate-1">
                   <Image 
-                    src="https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=300&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?fit=crop&w=300&h=800&q=80"
                     alt="Signing document" 
                     fill
                     sizes="(max-width: 768px) 100vw, 300px"

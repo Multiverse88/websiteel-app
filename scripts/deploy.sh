@@ -57,8 +57,8 @@ if docker compose ps | grep -q "Up"; then
     echo ""
     docker compose ps
     echo ""
-    echo "Website: https://easylegal.my.id"
-    echo "Dashboard: https://easylegal.my.id/login"
+    echo "Website: https://easylegal.id"
+    echo "Dashboard: https://easylegal.id/login"
     echo ""
 else
     echo -e "\n${RED}Deploy may have issues. Check logs:${NC}"

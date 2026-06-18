@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 import CTA from "@/components/CTA";
+import { config } from "@/lib/config";
 
 // Simple social icon components matching the Figma screenshot's clean line aesthetics
 const IgIcon = () => (
@@ -40,29 +41,29 @@ export default function Footer() {
   const layananLinks = [
     { name: "Pendirian Badan Usaha", href: "/layanan/pendirian-badan-usaha" },
     { name: "Daftar Merek", href: "/layanan/merek-haki" },
-    { name: "NIB & OSS", href: "/" },
-    { name: "Pengajuan PKP", href: "/" },
+    { name: "NIB & OSS", href: "/layanan/nib-oss" },
+    { name: "Pengajuan PKP", href: "/layanan/pengajuan-pkp" },
     { name: "Sertifikasi ISO", href: "/layanan/sertifikasi-iso" },
-    { name: "Visa & KITAS", href: "/" },
-    { name: "Press Release", href: "/" },
+    { name: "Visa & KITAS", href: "/layanan/visa-kitas" },
+    { name: "Press Release", href: "/layanan/press-release" },
   ];
 
   const perusahaanLinks = [
     { name: "Tentang Kami", href: "/tentang-kami" },
-    { name: "Blog & Artikel", href: "/" },
-    { name: "Testimoni", href: "/" },
+    { name: "Blog & Artikel", href: "/artikel" },
+    { name: "Testimoni", href: "/testimoni" },
     { name: "Referral dan Reseller", href: "/referral-reseller" },
     { name: "Kerjasama", href: "/kerjasama" },
-    { name: "Karier", href: "/" },
+    { name: "Karier", href: "/tentang-kami" },
   ];
 
   const toolsLinks = [
     { name: "Cek Nama PT", href: "/cek-nama" },
     { name: "Cek Nama Merek", href: "/cek-nama" },
     { name: "Cek Kode KBLI", href: "/cek-kbli" },
-    { name: "FAQ", href: "/kontak" },
-    { name: "Kebijakan Privasi", href: "/" },
-    { name: "Syarat & Ketentuan", href: "/" },
+    { name: "FAQ", href: "/kontak#faq" },
+    { name: "Kebijakan Privasi", href: "/tentang-kami" },
+    { name: "Syarat & Ketentuan", href: "/tentang-kami" },
   ];
 
   return (
@@ -122,13 +123,13 @@ export default function Footer() {
                 <span>info@easylegal.id</span>
               </a>
               <a
-                href="https://wa.me/6281123456789"
+                href={`https://wa.me/${config.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2.5 text-[13px] font-bold text-[#1A1A1A] hover:text-[#D62828] transition-colors"
               >
                 <Phone className="w-[15px] h-[15px] text-[#D62828] flex-shrink-0" />
-                <span>0811-2345-6789</span>
+                <span>{config.company.whatsapp}</span>
               </a>
             </div>
 
@@ -217,10 +218,10 @@ export default function Footer() {
           {/* Social media card-style boxes */}
           <div className="flex items-center space-x-2">
             {[
-              { Icon: IgIcon, href: "/", label: "Instagram" },
-              { Icon: FbIcon, href: "/", label: "Facebook" },
-              { Icon: LiIcon, href: "/", label: "LinkedIn" },
-              { Icon: YtIcon, href: "/", label: "YouTube" },
+              { Icon: IgIcon, href: "https://instagram.com/easylegal.id", label: "Instagram" },
+              { Icon: FbIcon, href: "https://facebook.com/easylegal.id", label: "Facebook" },
+              { Icon: LiIcon, href: "https://linkedin.com/company/easylegal", label: "LinkedIn" },
+              { Icon: YtIcon, href: "https://youtube.com/@easylegal", label: "YouTube" },
             ].map(({ Icon, href, label }) => (
               <a
                 key={label}

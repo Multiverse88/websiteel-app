@@ -331,7 +331,7 @@ export default function VirtualOffice() {
             >
               <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] aspect-[4/3]">
                 <Image
-                  src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?fit=crop&w=800&h=800&q=80"
                   alt="Cozy Virtual Office Seating Area"
                   fill
                   sizes="(max-width: 768px) 100vw, 600px"
@@ -881,7 +881,7 @@ export default function VirtualOffice() {
             >
               <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] z-10 aspect-[4/3]">
                 <Image
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1497215842964-222b430dc094?fit=crop&w=800&h=800&q=80"
                   alt="EasyOffice Bandung Corridor"
                   fill
                   sizes="(max-width: 768px) 100vw, 600px"

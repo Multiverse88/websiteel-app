@@ -29,6 +29,7 @@ import {
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage, FootnoteItem } from "@/components/Pricing";
+import { getFAQJsonLd, getServiceJsonLd } from "@/lib/structured-data";
 import type { BadanUsahaContent } from "@/data/layanan-badan-usaha";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -52,8 +53,28 @@ export default function BadanUsahaTemplate({ content }: Props) {
 
   const c = content;
 
+  const faqJsonLd = c.faqs?.length
+    ? getFAQJsonLd(c.faqs.map((f) => ({ question: f.q, answer: f.a })))
+    : null;
+
+  const serviceJsonLd = getServiceJsonLd({
+    name: c.nama,
+    description: c.heroDescription,
+    url: `/layanan/pendirian-badan-usaha/${c.id}`,
+  });
+
   return (
     <div className="flex flex-col min-h-screen">
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       
       {/* ─── 1. HERO SECTION ─── */}
       <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 border-b border-gray-200/40 overflow-hidden relative">

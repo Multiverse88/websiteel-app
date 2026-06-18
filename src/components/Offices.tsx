@@ -26,7 +26,7 @@ const officesData: Office[] = [
     hours: "Sen–Sab · 08–17",
     tel: "022-1234-5678",
     map: "https://maps.google.com",
-    img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fit=crop&w=600&h=400&q=80",
+    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?fit=crop&w=600&h=400&q=80",
   },
   {
     city: "Jakarta",
@@ -35,7 +35,7 @@ const officesData: Office[] = [
     hours: "Sen–Sab · 08–17",
     tel: "021-1234-5678",
     map: "https://maps.google.com",
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?fit=crop&w=600&h=400&q=80",
+    img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?fit=crop&w=600&h=400&q=80",
   },
   {
     city: "Bekasi",
@@ -44,7 +44,7 @@ const officesData: Office[] = [
     hours: "Sen–Sab · 08–17",
     tel: "021-9876-5432",
     map: "https://maps.google.com",
-    img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?fit=crop&w=600&h=400&q=80",
+    img: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?fit=crop&w=600&h=400&q=80",
   },
 ];
 

@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { loginWithPassword } from "@/lib/auth";
 import { cookies } from "next/headers";
+import { checkRateLimit, recordFailedAttempt, resetAttempts, getRemainingAttempts } from "@/lib/rate-limit";
 
 export async function loginAction(prevState: Record<string, unknown> | null, formData: FormData) {
   const email = formData.get("email") as string;
@@ -12,10 +13,28 @@ export async function loginAction(prevState: Record<string, unknown> | null, for
     return { error: "Email dan password wajib diisi!" };
   }
 
+  // Rate limiting check
+  const rateLimit = checkRateLimit(email);
+  if (!rateLimit.allowed) {
+    const minutes = Math.ceil((rateLimit.retryAfter || 0) / 60);
+    return { error: `Terlalu banyak percobaan gagal. Coba lagi dalam ${minutes} menit.` };
+  }
+
   const user = await loginWithPassword(email, password);
   if (!user) {
-    return { error: "Email atau password salah!" };
+    const result = recordFailedAttempt(email);
+    const remaining = getRemainingAttempts(email);
+    
+    if (result.locked) {
+      const minutes = Math.ceil((result.retryAfter || 0) / 60);
+      return { error: `Akun terkunci karena terlalu banyak percobaan gagal. Coba lagi dalam ${minutes} menit.` };
+    }
+    
+    return { error: `Email atau password salah! Sisa percobaan: ${remaining}` };
   }
+
+  // Login successful, reset rate limit
+  resetAttempts(email);
 
   // Store user info temporarily for 2FA verification
   const cookieStore = await cookies();

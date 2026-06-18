@@ -7,235 +7,31 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
-import CTA from "@/components/CTA";
 import InformasiHukumSection, { ArticleItem } from "@/components/home/InformasiHukumSection";
+import LayananKami from "@/components/home/LayananKami";
+import Hero from "@/components/home/Hero";
+import Testimonials from "@/components/home/Testimonials";
+import {
+  quickTools, 
+  partnerLogos, 
+} from "./data";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 import {
-  ChevronLeft,
-  ChevronRight,
   ArrowRight,
   Check,
   Star,
   Building2,
-  Search,
   MessageCircle,
-  Scale,
-  FileCheck,
   ShieldCheck,
-  Globe,
   FileText,
-  Users,
-  Zap,
-  Clock,
   Award,
-  Headphones,
-  TrendingUp,
   Lock,
   Phone,
   MapPin,
 } from "lucide-react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
 
 /* ─── DATA ─── */
-
-const heroSlides = [
-  {
-    tag: "Layanan Unggulan",
-    titleLines: [
-      { text: "Pendirian PT," },
-      { text: "prosesnya" },
-      { text: "cepat & beres.", red: true },
-    ],
-    desc: "Dari konsultasi sampai akta di tangan Anda. Tim legal berpengalaman telah membantu lebih dari 11.000 pengusaha. Mulai dari Rp2,5jt.",
-    cta: "Konsultasi Gratis",
-    ctaLink: "/kontak",
-    cta2: "Lihat Paket PT",
-    cta2Link: "/",
-    trustBadges: ["7-14 hari kerja", "Tracking real-time", "Garansi tuntas"],
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    tag: "Perlindungan Merek",
-    titleLines: [
-      { text: "Daftar Merek" },
-      { text: "Dagang &" },
-      { text: "HAKI Online.", red: true },
-    ],
-    desc: "Lindungi brand dan nama usaha Anda dari plagiarisme. Proses resmi, aman, dan dapat dilacak real-time dari dashboard.",
-    cta: "Cek Ketersediaan Merek",
-    ctaLink: "/cek-nama",
-    cta2: "Pelajari Lebih Lanjut",
-    cta2Link: "/",
-    trustBadges: ["Database DJKI resmi", "Tracking real-time", "Garansi Selesai"],
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    tag: "Standar Internasional",
-    titleLines: [
-      { text: "Sertifikasi ISO" },
-      { text: "Mudah, Cepat" },
-      { text: "& Accredited.", red: true },
-    ],
-    desc: "Tingkatkan kredibilitas perusahaan Anda di kancah internasional dengan sertifikasi ISO 9001, 14001, 27001, dan 45001.",
-    cta: "Pelajari Sertifikasi ISO",
-    ctaLink: "/",
-    cta2: "Konsultasi Gratis",
-    cta2Link: "/kontak",
-    trustBadges: ["UAF Accredited", "Proses cepat", "Harga transparan"],
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    tag: "Perizinan Usaha",
-    titleLines: [
-      { text: "Urus NIB &" },
-      { text: "OSS RBA" },
-      { text: "Tanpa Ribet.", red: true },
-    ],
-    desc: "Dapatkan Nomor Induk Berusaha (NIB) dan perizinan teknis sesuai KBLI terbaru secara resmi, aman, dan patuh regulasi.",
-    cta: "Konsultasi Perizinan",
-    ctaLink: "/kontak",
-    cta2: "Cek Kode KBLI",
-    cta2Link: "/",
-    trustBadges: ["Database KBLI 2025", "OSS RBA Resmi", "Garansi Selesai"],
-    image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=1200&auto=format&fit=crop",
-  },
-];
-
-const quickTools = [
-  {
-    tag: "TOOL GRATIS",
-    title: "Cek Nama PT & Merek",
-    desc: "Hindari nama yang sudah dipakai sebelum mendaftar.",
-    cta: "Cek sekarang",
-    href: "/cek-nama",
-    icon: Building2,
-  },
-  {
-    tag: "DATABASE 2025",
-    title: "Cek Kode KBLI",
-    desc: "Temukan kode KBLI yang tepat untuk perizinan usaha Anda.",
-    cta: "Buka pencarian",
-    href: "/cek-kbli",
-    icon: Search,
-  },
-  {
-    tag: "RESPONS 5 MENIT",
-    title: "Konsultasi via WhatsApp",
-    desc: "Tanya tim legal kami langsung — gratis, tanpa komitmen.",
-    cta: "Mulai chat",
-    href: "https://wa.me/6281123456789",
-    external: true,
-    icon: MessageCircle,
-  },
-];
-
-const partnerLogos = ["KEMENKUMHAM", "OSS BKPM", "DJKI", "KEMENPERIN", "PSE Kominfo"];
-
-const layananIndividual = [
-  { name: "Pendirian PT", desc: "Badan usaha & legal", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha" },
-  { name: "Daftar Merek", desc: "HAKI & brand", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki" },
-  { name: "NIB & OSS", desc: "Perizinan usaha", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss" },
-  { name: "Sertifikasi ISO", desc: "Standard internasional", icon: Award, circleBg: "#16A34A", cardTint: "#F0FDF4", href: "/layanan/sertifikasi-iso" },
-  { name: "Pengajuan PKP", desc: "Perpajakan & e-Faktur", icon: FileText, circleBg: "#EA580C", cardTint: "#FFF7ED", href: "/layanan/pengajuan-pkp" },
-  { name: "Visa & KITAS", desc: "Imigrasi WNA", icon: Globe, circleBg: "#1E3A5F", cardTint: "#F0F4FF", href: "/layanan/visa-kitas" },
-  { name: "Perjanjian Perkawinan", desc: "Pisah harta & legal", icon: Scale, circleBg: "#7C3AED", cardTint: "#F5F3FF", href: "/layanan/perjanjian-perkawinan" },
-  { name: "Press Release", desc: "PR & media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/press-release" },
-  { name: "Pelaporan LKPM", desc: "Lapor BKPM rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA", href: "/layanan/pelaporan-lkpm" },
-];
-
-const whyChoose = [
-  {
-    icon: Clock,
-    title: "Proses Cepat",
-    desc: "Pendirian PT selesai dalam 7-14 hari kerja dengan tracking real-time dari dashboard.",
-  },
-  {
-    icon: Users,
-    title: "Tim Berpengalaman",
-    desc: "Lebih dari 11.000 pengusaha mempercayai kami untuk urusan legalitas bisnis mereka.",
-  },
-  {
-    icon: Lock,
-    title: "Harga Transparan",
-    desc: "Tidak ada biaya tersembunyi. Semua biaya dijelaskan di awal sebelum proses dimulai.",
-  },
-  {
-    icon: Headphones,
-    title: "Support 24/7",
-    desc: "Tim support kami siap membantu kapan saja via WhatsApp, email, atau telepon.",
-  },
-];
-
-const trustedBy = ["PT Maju Jaya", "CV Sukses Abadi", "UD Berkah", "PT Nusantara", "CV Mitra", "PT Globalindo"];
-
-const testimonials = [
-  {
-    name: "Ahmad Fauzi",
-    role: "CEO, PT Maju Sejahtera",
-    text: "Proses cepat, pelayanan ramah, dan harga transparan. Pendirian PT saya selesai dalam 10 hari!",
-    rating: 5,
-  },
-  {
-    name: "Siti Rahma",
-    role: "Founder, Rumah Kreatif",
-    text: "Sangat terbantu dengan layanan EasyLegal. Merek dagang saya terdaftar dengan aman.",
-    rating: 5,
-  },
-  {
-    name: "Budi Santoso",
-    role: "Direktur, CV Jaya Abadi",
-    text: "Tim support yang responsif. NIB dan OSS saya selesai tanpa ribet sama sekali.",
-    rating: 5,
-  },
-];
-
-const insights = [
-  {
-    tag: "Panduan",
-    title: "Perbedaan PT Perorangan dan PT Biasa yang Perlu Anda Ketahui",
-    desc: "Kenali perbedaan mendasar antara PT Perorangan dan PT Biasa sebelum memutuskan jenis pendirian yang tepat.",
-    date: "15 Jan 2026",
-  },
-  {
-    tag: "Regulasi",
-    title: "Cara Mendaftarkan Merek Dagang Secara Online di DJKI",
-    desc: "Panduan lengkap pendaftaran merek dagang melalui sistem online DJKI Kemenkumham.",
-    date: "10 Jan 2026",
-  },
-  {
-    tag: "Tips",
-    title: "Mengapa Sertifikasi ISO Penting untuk Pertumbuhan Bisnis Anda?",
-    desc: "Pelajari bagaimana sertifikasi ISO dapat meningkatkan kredibilitas dan daya saing perusahaan.",
-    date: "5 Jan 2026",
-  },
-];
-
-const caraKerjaSteps = [
-  {
-    num: "01",
-    title: "Konsultasi",
-    description: "Langkah Awal",
-    flowItems: ["Data Diri", "Dokumen Pendukung", "Draft Akta"],
-  },
-  {
-    num: "02",
-    title: "Pengerjaan",
-    description: "Proses Pengurusan",
-    flowItems: ["Verifikasi Data", "Pengurusan Dokumen", "Review Akhir"],
-  },
-  {
-    num: "03",
-    title: "Tanda Tangan",
-    description: "Selesai & Akta",
-    flowItems: ["Tanda Tangan Digital", "Penerbitan Akta", "Arsip Resmi"],
-  },
-];
 
 function VideoEmbedSection() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -341,7 +137,7 @@ function CaraKerjaSection() {
               Cara Kerja
             </span>
             <h2 className="text-[34px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.12] tracking-[-0.02em]">
-              Empat langkah, semua beres<br />tanpa pusing.
+              Empat Langkah, Semua Beres<br />Tanpa Pusing.
             </h2>
             <p className="mt-4 text-[14.5px] text-[#6B7280] leading-relaxed max-w-[460px]">
               Proses transparan dari konsultasi sampai dokumen di tangan Anda — semua bisa dipantau dari satu dashboard.
@@ -448,7 +244,7 @@ function CaraKerjaSection() {
                 {/* Main Photo of Smiling Professional Woman */}
                 <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?fit=crop&w=600&h=800&q=80"
                     alt="Professional woman smiling" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -462,7 +258,7 @@ function CaraKerjaSection() {
                 {/* Small document signing photo (top-right overlay) */}
                 <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500 hover:rotate-1">
                   <Image 
-                    src="https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=300&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?fit=crop&w=300&h=800&q=80"
                     alt="Signing document" 
                     fill
                     sizes="(max-width: 768px) 100vw, 300px"
@@ -596,7 +392,7 @@ function CaraKerjaSection() {
                 {/* Main Photo of Lawyer/Consultant */}
                 <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=600&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?fit=crop&w=600&h=800&q=80"
                     alt="Legal Consultant Online" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -610,7 +406,7 @@ function CaraKerjaSection() {
                 {/* Small communication overlay photo (top-right overlay) */}
                 <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=300&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1553877522-43269d4ea984?fit=crop&w=300&h=800&q=80"
                     alt="Meeting schedule" 
                     fill
                     sizes="(max-width: 768px) 100vw, 300px"
@@ -730,7 +526,7 @@ function CaraKerjaSection() {
                 {/* Main Photo of Secure Laptop Working */}
                 <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?fit=crop&w=600&h=800&q=80"
                     alt="Online Document Process" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -744,7 +540,7 @@ function CaraKerjaSection() {
                 {/* Small folder overlay photo (top-right overlay) */}
                 <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=300&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fit=crop&w=300&h=800&q=80"
                     alt="Corporate documentation folder" 
                     fill
                     sizes="(max-width: 768px) 100vw, 300px"
@@ -862,7 +658,7 @@ function CaraKerjaSection() {
                 {/* Main Photo of Happy Entrepreneurs */}
                 <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?fit=crop&w=600&h=800&q=80"
                     alt="Happy Entrepreneurs" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -876,7 +672,7 @@ function CaraKerjaSection() {
                 {/* Small badge overlay (top-right overlay) */}
                 <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=300&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?fit=crop&w=300&h=800&q=80"
                     alt="Professional success" 
                     fill
                     sizes="(max-width: 768px) 100vw, 300px"
@@ -989,8 +785,6 @@ function CaraKerjaSection() {
 /* ─── COMPONENT ─── */
 
 export default function HomePage({ articles }: { articles: ArticleItem[] }) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const heroRef = useRef<HTMLElement>(null);
   const whyChooseRef = useRef<HTMLElement>(null);
   const layananRef = useRef<HTMLElement>(null);
@@ -1006,14 +800,6 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
     }, { scope: pageRef });
     return () => ctx.revert();
   }, { dependencies: [] });
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [isAutoPlaying]);
 
   // Refresh ScrollTrigger after hydration to prevent invisible elements
   useEffect(() => {
@@ -1110,171 +896,23 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
     return () => ctx.revert();
   }, { dependencies: [] });
 
-  const nextSlide = () => {
-    setIsAutoPlaying(false);
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-  };
-
-  const prevSlide = () => {
-    setIsAutoPlaying(false);
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  };
-
   return (
     <div ref={pageRef} className="flex flex-col min-h-screen">
 
       {/* ═══════════════════════════════════════════
           HERO SECTION
           ═══════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[580px] relative">
-
-          {/* Left Arrow (overlaps far left of cream section) */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-gray-100 flex items-center justify-center transition-all hover:scale-105"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          {/* Right Arrow (overlaps far right of image section) */}
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-gray-100 flex items-center justify-center transition-all hover:scale-105"
-            aria-label="Next slide"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
-          {/* Left: warm cream/rose gradient background with text */}
-          <div className="bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] px-8 sm:px-12 lg:px-16 xl:px-24 py-14 lg:py-20 flex flex-col justify-center relative z-10 border-r border-[#FAF0E6]/30">
-
-            <div className="relative min-h-[350px] flex flex-col justify-center">
-              {heroSlides.map((slide, idx) => (
-                <div
-                  key={idx}
-                  className={`transition-all duration-700 ease-out ${currentSlide === idx
-                    ? "opacity-100 translate-y-0 relative"
-                    : "opacity-0 translate-y-4 absolute inset-0 pointer-events-none"
-                    }`}
-                >
-                  {/* Tag badge with red dot and light pink border */}
-                  <div className="hero-tag inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-red-100 bg-[#FFF5F5] text-[#D62828] text-[12px] font-bold tracking-wide mb-6 w-fit">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#D62828]" />
-                    <span>{slide.tag}</span>
-                  </div>
-
-                  {/* Main heading */}
-                  <h1 className="hero-heading text-[44px] sm:text-[50px] lg:text-[56px] font-extrabold text-[#1A1A1A] leading-[1.08] tracking-[-0.02em]">
-                    {slide.titleLines.map((line, i) => (
-                      <span key={i} className={line.red ? "text-[#D62828] block" : "block"}>{line.text}</span>
-                    ))}
-                  </h1>
-
-                  {/* Description */}
-                  <p className="hero-desc mt-6 text-[14.5px] text-[#555555] leading-relaxed max-w-[440px]">
-                    {slide.desc}
-                  </p>
-
-                  {/* CTA buttons */}
-                  <div className="mt-8 flex flex-wrap gap-3 hero-cta">
-                    <Link
-                      href={slide.ctaLink}
-                      className="group inline-flex items-center gap-2 px-7 py-3.5 bg-[#9B1C1C] hover:bg-[#8B0000] text-white font-bold text-[14.5px] rounded-[12px] shadow-sm hover:shadow-md transition-all duration-200"
-                    >
-                      {slide.cta}
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
-                    </Link>
-                    <Link
-                      href={slide.cta2Link}
-                      className="inline-flex items-center px-7 py-3.5 bg-[#F3EBE4] hover:bg-[#EAE0D7] text-[#1A1A1A] font-bold text-[14.5px] rounded-[12px] transition-all duration-200"
-                    >
-                      {slide.cta2}
-                    </Link>
-                  </div>
-
-                  {/* Trust badges with custom checkmarks */}
-                  <div className="hero-badges mt-8 flex flex-wrap gap-x-5 gap-y-2">
-                    {slide.trustBadges.map((badge, bidx) => (
-                      <span key={bidx} className="inline-flex items-center space-x-1.5 text-[12.5px] font-semibold text-[#444444]">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-[14px] h-[14px] text-emerald-600 flex-shrink-0">
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span>{badge}</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: transition slideshow for images */}
-          <div className="relative min-h-[400px] lg:min-h-[580px] overflow-hidden bg-gray-50">
-            {heroSlides.map((slide, idx) => (
-              <div
-                key={idx}
-                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                  currentSlide === idx ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
-                }`}
-              >
-                <Image
-                  src={slide.image}
-                  alt={slide.tag}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-black/5" />
-              </div>
-            ))}
-
-            {/* Floating badge: 11.000+ Bisnis Terlayani */}
-            <div className="hero-float absolute top-8 right-8 bg-white rounded-2xl px-5 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-3.5 z-20 animate-float-slow">
-              <div className="w-[38px] h-[38px] bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0 text-[#D62828]">
-                <Users className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-[16px] font-black text-[#1A1A1A] leading-tight">11.000+</div>
-                <div className="text-[10px] text-[#6B7280] font-bold mt-0.5">Bisnis terlayani</div>
-              </div>
-            </div>
-
-            {/* Floating badge: 4.9/5 Star Rating */}
-            <div className="hero-float absolute bottom-10 left-8 bg-white rounded-2xl px-5 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-3.5 z-20 animate-float-medium">
-              <div className="w-[38px] h-[38px] bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0 text-[#16A34A]">
-                <Check className="w-5 h-5" strokeWidth={3} />
-              </div>
-              <div>
-                <div className="text-[16px] font-black text-[#1A1A1A] leading-tight">4.9<span className="text-[11px] font-bold text-gray-400">/5</span></div>
-                <div className="flex space-x-0.5 mt-0.5">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star key={s} className="w-3 h-3 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Dot slide indicators on the bottom center of the image */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-2 z-20">
-              {heroSlides.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    setIsAutoPlaying(false);
-                    setCurrentSlide(idx);
-                  }}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    currentSlide === idx ? "w-6 bg-[#D62828]" : "w-2 bg-white/40 hover:bg-white/60"
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero
+        ref={heroRef}
+        gsapClasses={{
+          tag: "hero-tag",
+          heading: "hero-heading",
+          desc: "hero-desc",
+          cta: "hero-cta",
+          badges: "hero-badges",
+          float: "hero-float",
+        }}
+      />
 
       {/* ═══════════════════════════════════════════
           QUICK TOOLS — floating strip overlapping hero
@@ -1370,203 +1008,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
       {/* ═══════════════════════════════════════════
           LAYANAN KAMI
           ═══════════════════════════════════════════ */}
-      <section ref={layananRef} className="py-16 bg-white">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
-
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-10"
-          >
-            <span className="text-[10.5px] font-bold text-primary uppercase tracking-[0.15em]">
-              Solusi EasyLegal
-            </span>
-            <h2 className="text-[34px] sm:text-[40px] font-extrabold text-dark mt-2 tracking-tight leading-[1.1]">
-              Temukan layanan legal yang<br />paling tepat untuk bisnis Anda.
-            </h2>
-          </motion.div>
-
-          {/* Two-column layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-5">
-
-            {/* LEFT: Layanan Individual */}
-            <div className="border border-border/80 rounded-2xl p-6">
-              {/* Sub-header */}
-              <div className="flex items-center gap-2.5 mb-5">
-                <div className="w-7 h-7 rounded-lg bg-primary-light flex items-center justify-center flex-shrink-0">
-                  <span className="text-[13px] text-primary font-bold leading-none">⊞</span>
-                </div>
-                <div>
-                  <h3 className="text-[15px] font-bold text-dark leading-tight">Layanan Individual</h3>
-                  <p className="text-[11px] text-muted leading-tight mt-0.5">Layanan siap pakai untuk berbagai kebutuhan legalitas bisnis</p>
-                </div>
-              </div>
-
-              {/* Grid 3x3 */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {layananIndividual.map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={idx}
-                      href={item.href}
-                      className="layanan-card group rounded-2xl p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden"
-                      style={{
-                        minHeight: "175px",
-                        background: `linear-gradient(180deg, #ffffff 30%, ${item.cardTint} 100%)`,
-                      }}
-                    >
-                      {/* Text top-left */}
-                      <div>
-                        <h4 className="text-[13.5px] font-bold text-dark leading-snug">{item.name}</h4>
-                        <p className="text-[11px] text-muted mt-0.5 leading-snug">{item.desc}</p>
-                      </div>
-
-                      {/* Double-ring icon — centered at bottom */}
-                      <div className="flex justify-center mt-4">
-                        {/* Outer soft ring */}
-                        <div
-                          className="w-[72px] h-[72px] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
-                          style={{ backgroundColor: `${item.cardTint}` }}
-                        >
-                          {/* Inner solid circle */}
-                          <div
-                            className="w-[50px] h-[50px] rounded-full flex items-center justify-center shadow-md"
-                            style={{ backgroundColor: item.circleBg }}
-                          >
-                            <Icon className="w-[22px] h-[22px] text-white" strokeWidth={2} />
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div
-              className="rounded-2xl p-6 flex flex-col border border-black/[0.06]"
-              style={{ 
-                background: "radial-gradient(100% 100% at 100% 0%, #FFE2E2 0%, transparent 50%), radial-gradient(80% 80% at 100% 100%, #FFF6DA 0%, transparent 50%), #FFFCFC" 
-              }}
-            >
-              {/* Header: icon + title */}
-              <div className="flex items-start gap-3 mb-5">
-                <div className="w-9 h-9 rounded-xl bg-[#FEE2E2] flex items-center justify-center flex-shrink-0">
-                  <Building2 className="w-[18px] h-[18px] text-primary" strokeWidth={2} />
-                </div>
-                <div>
-                  <h3 className="text-[17px] font-extrabold text-dark leading-tight">Solusi Korporat</h3>
-                  <p className="text-[11.5px] text-muted leading-snug mt-0.5">
-                    Dirancang untuk kebutuhan perusahaan & partnership B2B
-                  </p>
-                </div>
-              </div>
-
-              {/* EasyLegal CORPORATE badge */}
-              <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-2.5 shadow-sm border border-border/60 mb-5 self-start">
-                  <div className="w-6 h-5 overflow-hidden rounded-[4px] relative flex items-center justify-center flex-shrink-0">
-                  <Image 
-                    src="/Logo EL.png" 
-                    alt="EasyLegal Logo" 
-                    fill
-                    className="object-cover scale-150" 
-                    style={{ objectPosition: "center 22%" }}
-                  />
-                </div>
-                <div className="flex items-center">
-                  <span className="text-[12.5px] font-extrabold text-primary">easy</span><span className="text-[12.5px] font-bold text-dark">legal</span>
-                </div>
-                <div className="w-px h-3.5 bg-border mx-1" />
-                <span className="text-[9px] font-bold text-dark/40 uppercase tracking-[0.15em]">CORPORATE</span>
-              </div>
-
-              {/* Description */}
-              <p className="text-[13px] text-muted leading-relaxed mb-5">
-                Solusi kustom oleh tim partnership EasyLegal yang dirancang sesuai kebutuhan korporasi — dari volume tinggi, integrasi sistem, sampai dedicated support.
-              </p>
-
-              {/* Feature checkmarks — green ticks like Figma */}
-              <ul className="space-y-3 mb-6">
-                {[
-                  "Alur kerja & integrasi terkustomisasi",
-                  "Dedicated Account Manager & MOU resmi",
-                  "Volume discount & branded partner portal",
-                  "Priority processing & co-marketing support",
-                ].map((feat, i) => (
-                  <li key={i} className="flex items-center gap-2.5 text-[13px] text-dark/85">
-                    {/* Green checkmark circle */}
-                    <div className="w-5 h-5 rounded-full bg-[#DCFCE7] flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3 h-3 text-[#16A34A]" strokeWidth={3} />
-                    </div>
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA button */}
-              <Link
-                href="/kontak"
-                className="inline-flex items-center justify-center px-7 py-3 bg-primary text-white text-[13.5px] font-bold rounded-xl hover:bg-primary-hover transition-colors self-start shadow-sm hover:shadow-md"
-              >
-                Pelajari lebih lanjut
-              </Link>
-
-              {/* Dashboard mockup */}
-              <div className="mt-6 rounded-2xl bg-white border border-border/60 shadow-sm overflow-hidden relative pb-6">
-                {/* Browser chrome */}
-                <div className="bg-[#F5F5F5] px-3.5 py-2.5 flex items-center gap-1.5 border-b border-border/40">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
-                </div>
-
-                {/* Mockup content */}
-                <div className="p-4 space-y-2.5">
-                  {/* Top row: dark bar + text bar */}
-                  <div className="flex items-center gap-3">
-                    <div className="h-5 w-24 bg-primary/80 rounded-md flex-shrink-0" />
-                    <div className="h-2 bg-dark/15 rounded-full flex-1" />
-                  </div>
-                  {/* Separator */}
-                  <div className="h-px bg-border/60" />
-                  {/* Two col row: red pills */}
-                  <div className="flex gap-2 pt-1">
-                    <div className="flex-1 space-y-1.5">
-                      <div className="h-5 bg-primary/15 rounded-md" />
-                      <div className="h-2 bg-dark/8 rounded-full w-3/4" />
-                      <div className="h-2 bg-dark/8 rounded-full w-1/2" />
-                    </div>
-                    <div className="flex-1 space-y-1.5">
-                      <div className="h-5 bg-primary/15 rounded-md" />
-                      <div className="h-2 bg-dark/8 rounded-full w-3/4" />
-                      <div className="h-2 bg-dark/8 rounded-full w-1/2" />
-                    </div>
-                  </div>
-                  {/* Footer line */}
-                  <div className="h-2 bg-dark/6 rounded-full w-2/3 mt-1" />
-                </div>
-
-                {/* 50+ Mitra badge — bottom left */}
-                <div className="absolute bottom-3 left-3 bg-white rounded-lg px-3 py-1.5 shadow-md border border-border/60 flex items-center gap-1.5">
-                  <Users className="w-3.5 h-3.5 text-muted" strokeWidth={2} />
-                  <span className="text-[10.5px] font-bold text-dark">50+ Mitra</span>
-                </div>
-
-                {/* MOU Aktif badge — bottom right */}
-                <div className="absolute bottom-3 right-3 bg-white rounded-lg px-3 py-1.5 shadow-md border border-border/60 flex items-center gap-1.5">
-                  <Check className="w-3 h-3 text-primary" strokeWidth={3} />
-                  <span className="text-[10.5px] font-bold text-dark">MOU Aktif</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+      <LayananKami />
 
       {/* ═══════════════════════════════════════════
           CARA KERJA
@@ -1867,328 +1309,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
       {/* ═══════════════════════════════════════════
           TESTIMONIALS
           ═══════════════════════════════════════════ */}
-      <section className="py-20 bg-[#F9FAFB] overflow-hidden relative">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center relative z-10">
-          
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-14"
-          >
-            <span className="text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
-              TESTIMONI
-            </span>
-            <h2 className="text-[34px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] mt-3 tracking-[-0.02em] leading-tight">
-              Kata mereka yang sudah jalan<br />duluan.
-            </h2>
-            <p className="text-[14.5px] text-[#6B7280] mt-4 max-w-[620px] mx-auto leading-relaxed">
-              Dari UMKM kuliner sampai startup teknologi — semua percayakan urusan legalnya ke EasyLegal.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Marquee Wrapper Container */}
-        <div className="relative w-full overflow-hidden flex flex-col gap-2 mt-4 py-8 marquee-container">
-          
-          {/* Left & Right Elegant Fading Shadow Overlays */}
-          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
-
-          {/* ROW 1: Scrolling Left */}
-          <div className="flex w-full py-4 overflow-visible">
-            <div className="animate-marquee-left flex">
-              {/* First Track Copy */}
-              {[
-                {
-                  initials: "AR",
-                  name: "Ahmad Rizky",
-                  role: "Founder · PT Maju Bersama",
-                  text: "Prosesnya jauh lebih cepat dari ekspektasi. PT saya keluar dalam 10 hari kerja, semua dibantu dari A-Z.",
-                  bg: "bg-[#B91C1C]"
-                },
-                {
-                  initials: "SW",
-                  name: "Siti Wahyuni",
-                  role: "Owner · Brand Fashion Lokal",
-                  text: "Daftar merek dijelaskan detail sampai pilihan kelas. Harga jelas dari awal, gak ada biaya kejutan di tengah.",
-                  bg: "bg-[#111827]"
-                },
-                {
-                  initials: "BH",
-                  name: "Budi Hartono",
-                  role: "CEO · Startup Teknologi",
-                  text: "CS-nya responsif banget via WA. Untuk startup yang baru mulai kayak kami, ini sangat membantu. Highly recommended.",
-                  bg: "bg-[#450A0A]"
-                },
-                {
-                  initials: "AP",
-                  name: "Andika Putra",
-                  role: "Owner · UMKM Konveksi",
-                  text: "Awalnya khawatir ribet ngurus sendiri. Tapi dibantu sampai paham, tim sabar banget jawab pertanyaan saya yang banyak.",
-                  bg: "bg-[#B91C1C]"
-                }
-              ].map((item, idx) => (
-                <div 
-                  key={idx}
-                  className="w-[350px] flex-shrink-0 bg-white rounded-3xl p-6 border border-gray-150/70 shadow-[0_8px_30px_rgba(0,0,0,0.015)] flex flex-col justify-between text-left mx-3 transition-all duration-300 hover:scale-[1.06] hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] hover:border-gray-250/90 hover:z-20 relative cursor-pointer"
-                >
-                  <div>
-                    {/* Stars */}
-                    <div className="flex space-x-0.5 mb-3.5">
-                      {[1, 2, 3, 4, 5].map(s => (
-                        <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    {/* Review Text */}
-                    <p className="text-[13px] text-gray-700 font-medium leading-relaxed mb-5">
-                      &quot;{item.text}&quot;
-                    </p>
-                  </div>
-
-                  {/* User Profile */}
-                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-gray-50">
-                    <div className={`w-8 h-8 rounded-full ${item.bg} flex items-center justify-center text-white text-[11px] font-black flex-shrink-0 shadow-sm`}>
-                      {item.initials}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-[13px] font-black text-[#111827] leading-tight truncate">
-                        {item.name}
-                      </div>
-                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5 truncate">
-                        {item.role}
-                      </div>
-                    </div>
-                    {/* Google Badge */}
-                    <div className="flex items-center gap-1 bg-[#E8F5E9] text-[#2E7D32] px-2.5 py-0.5 rounded-lg text-[9px] font-black border border-emerald-100/30 ml-auto flex-shrink-0">
-                      <Check className="w-2.5 h-2.5" strokeWidth={4} />
-                      <span>Google</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* Second Track Copy (Infinite Loop Repeat) */}
-              {[
-                {
-                  initials: "AR",
-                  name: "Ahmad Rizky",
-                  role: "Founder · PT Maju Bersama",
-                  text: "Prosesnya jauh lebih cepat dari ekspektasi. PT saya keluar dalam 10 hari kerja, semua dibantu dari A-Z.",
-                  bg: "bg-[#B91C1C]"
-                },
-                {
-                  initials: "SW",
-                  name: "Siti Wahyuni",
-                  role: "Owner · Brand Fashion Lokal",
-                  text: "Daftar merek dijelaskan detail sampai pilihan kelas. Harga jelas dari awal, gak ada biaya kejutan di tengah.",
-                  bg: "bg-[#111827]"
-                },
-                {
-                  initials: "BH",
-                  name: "Budi Hartono",
-                  role: "CEO · Startup Teknologi",
-                  text: "CS-nya responsif banget via WA. Untuk startup yang baru mulai kayak kami, ini sangat membantu. Highly recommended.",
-                  bg: "bg-[#450A0A]"
-                },
-                {
-                  initials: "AP",
-                  name: "Andika Putra",
-                  role: "Owner · UMKM Konveksi",
-                  text: "Awalnya khawatir ribet ngurus sendiri. Tapi dibantu sampai paham, tim sabar banget jawab pertanyaan saya yang banyak.",
-                  bg: "bg-[#B91C1C]"
-                }
-              ].map((item, idx) => (
-                <div 
-                  key={`dup-${idx}`}
-                  className="w-[350px] flex-shrink-0 bg-white rounded-3xl p-6 border border-gray-150/70 shadow-[0_8px_30px_rgba(0,0,0,0.015)] flex flex-col justify-between text-left mx-3 transition-all duration-300 hover:scale-[1.06] hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] hover:border-gray-250/90 hover:z-20 relative cursor-pointer"
-                >
-                  <div>
-                    {/* Stars */}
-                    <div className="flex space-x-0.5 mb-3.5">
-                      {[1, 2, 3, 4, 5].map(s => (
-                        <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    {/* Review Text */}
-                    <p className="text-[13px] text-gray-700 font-medium leading-relaxed mb-5">
-                      &quot;{item.text}&quot;
-                    </p>
-                  </div>
-
-                  {/* User Profile */}
-                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-gray-50">
-                    <div className={`w-8 h-8 rounded-full ${item.bg} flex items-center justify-center text-white text-[11px] font-black flex-shrink-0 shadow-sm`}>
-                      {item.initials}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-[13px] font-black text-[#111827] leading-tight truncate">
-                        {item.name}
-                      </div>
-                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5 truncate">
-                        {item.role}
-                      </div>
-                    </div>
-                    {/* Google Badge */}
-                    <div className="flex items-center gap-1 bg-[#E8F5E9] text-[#2E7D32] px-2.5 py-0.5 rounded-lg text-[9px] font-black border border-emerald-100/30 ml-auto flex-shrink-0">
-                      <Check className="w-2.5 h-2.5" strokeWidth={4} />
-                      <span>Google</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ROW 2: Scrolling Right */}
-          <div className="flex w-full py-4 overflow-visible">
-            <div className="animate-marquee-right flex">
-              {/* First Track Copy */}
-              {[
-                {
-                  initials: "FK",
-                  name: "Feri Kurniawan",
-                  role: "Direktur · PT Logistik Jaya",
-                  text: "Layanan LKPM dan perizinan bea cukai diurus dengan teliti. Laporan rapi, tidak ada kendala dengan dinas.",
-                  bg: "bg-[#1F2937]"
-                },
-                {
-                  initials: "DL",
-                  name: "Dewi Lestari",
-                  role: "Co-founder · SaaS Startup",
-                  text: "Virtual Office Jakarta sudah aktif hari yang sama saya bayar. Untuk PT digital kami, ini exactly yang dibutuhkan.",
-                  bg: "bg-[#B91C1C]"
-                },
-                {
-                  initials: "LH",
-                  name: "Linda Hartono",
-                  role: "Owner · PT Beauty Care",
-                  text: "Perubahan akta PT yang biasanya ribet, di EasyLegal cepat banget. Update direksi selesai dalam seminggu.",
-                  bg: "bg-[#450A0A]"
-                },
-                {
-                  initials: "BS",
-                  name: "Bayu Setiawan",
-                  role: "Owner · F&B Restoran",
-                  text: "Sertifikat halal untuk produk kami diurus sampai keluar. Tim follow up rajin sampai semuanya tuntas.",
-                  bg: "bg-[#451A03]"
-                }
-              ].map((item, idx) => (
-                <div 
-                  key={idx}
-                  className="w-[350px] flex-shrink-0 bg-white rounded-3xl p-6 border border-gray-150/70 shadow-[0_8px_30px_rgba(0,0,0,0.015)] flex flex-col justify-between text-left mx-3 transition-all duration-300 hover:scale-[1.06] hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] hover:border-gray-250/90 hover:z-20 relative cursor-pointer"
-                >
-                  <div>
-                    {/* Stars */}
-                    <div className="flex space-x-0.5 mb-3.5">
-                      {[1, 2, 3, 4, 5].map(s => (
-                        <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    {/* Review Text */}
-                    <p className="text-[13px] text-gray-700 font-medium leading-relaxed mb-5">
-                      &quot;{item.text}&quot;
-                    </p>
-                  </div>
-
-                  {/* User Profile */}
-                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-gray-50">
-                    <div className={`w-8 h-8 rounded-full ${item.bg} flex items-center justify-center text-white text-[11px] font-black flex-shrink-0 shadow-sm`}>
-                      {item.initials}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-[13px] font-black text-[#111827] leading-tight truncate">
-                        {item.name}
-                      </div>
-                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5 truncate">
-                        {item.role}
-                      </div>
-                    </div>
-                    {/* Google Badge */}
-                    <div className="flex items-center gap-1 bg-[#E8F5E9] text-[#2E7D32] px-2.5 py-0.5 rounded-lg text-[9px] font-black border border-emerald-100/30 ml-auto flex-shrink-0">
-                      <Check className="w-2.5 h-2.5" strokeWidth={4} />
-                      <span>Google</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* Second Track Copy (Infinite Loop Repeat) */}
-              {[
-                {
-                  initials: "FK",
-                  name: "Feri Kurniawan",
-                  role: "Direktur · PT Logistik Jaya",
-                  text: "Layanan LKPM dan perizinan bea cukai diurus dengan teliti. Laporan rapi, tidak ada kendala dengan dinas.",
-                  bg: "bg-[#1F2937]"
-                },
-                {
-                  initials: "DL",
-                  name: "Dewi Lestari",
-                  role: "Co-founder · SaaS Startup",
-                  text: "Virtual Office Jakarta sudah aktif hari yang sama saya bayar. Untuk PT digital kami, ini exactly yang dibutuhkan.",
-                  bg: "bg-[#B91C1C]"
-                },
-                {
-                  initials: "LH",
-                  name: "Linda Hartono",
-                  role: "Owner · PT Beauty Care",
-                  text: "Perubahan akta PT yang biasanya ribet, di EasyLegal cepat banget. Update direksi selesai dalam seminggu.",
-                  bg: "bg-[#450A0A]"
-                },
-                {
-                  initials: "BS",
-                  name: "Bayu Setiawan",
-                  role: "Owner · F&B Restoran",
-                  text: "Sertifikat halal untuk produk kami diurus sampai keluar. Tim follow up rajin sampai semuanya tuntas.",
-                  bg: "bg-[#451A03]"
-                }
-              ].map((item, idx) => (
-                <div 
-                  key={`dup-${idx}`}
-                  className="w-[350px] flex-shrink-0 bg-white rounded-3xl p-6 border border-gray-150/70 shadow-[0_8px_30px_rgba(0,0,0,0.015)] flex flex-col justify-between text-left mx-3 transition-all duration-300 hover:scale-[1.06] hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] hover:border-gray-250/90 hover:z-20 relative cursor-pointer"
-                >
-                  <div>
-                    {/* Stars */}
-                    <div className="flex space-x-0.5 mb-3.5">
-                      {[1, 2, 3, 4, 5].map(s => (
-                        <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    {/* Review Text */}
-                    <p className="text-[13px] text-gray-700 font-medium leading-relaxed mb-5">
-                      &quot;{item.text}&quot;
-                    </p>
-                  </div>
-
-                  {/* User Profile */}
-                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-gray-50">
-                    <div className={`w-8 h-8 rounded-full ${item.bg} flex items-center justify-center text-white text-[11px] font-black flex-shrink-0 shadow-sm`}>
-                      {item.initials}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-[13px] font-black text-[#111827] leading-tight truncate">
-                        {item.name}
-                      </div>
-                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5 truncate">
-                        {item.role}
-                      </div>
-                    </div>
-                    {/* Google Badge */}
-                    <div className="flex items-center gap-1 bg-[#E8F5E9] text-[#2E7D32] px-2.5 py-0.5 rounded-lg text-[9px] font-black border border-emerald-100/30 ml-auto flex-shrink-0">
-                      <Check className="w-2.5 h-2.5" strokeWidth={4} />
-                      <span>Google</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </section>
+      <Testimonials />
 
       {/* ═══════════════════════════════════════════
           PROMO CARDS + SERTIFIKASI + LIPUTAN MEDIA

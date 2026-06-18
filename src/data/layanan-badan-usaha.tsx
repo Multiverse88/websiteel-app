@@ -88,7 +88,7 @@ export const dataPT: BadanUsahaContent = {
   heroDescription:
     "PT, PT PMA, PT Perorangan, CV, Firma, Yayasan, sampai Koperasi — kami pandu Anda pilih struktur yang tepat & urus prosesnya sampai akta di tangan.",
   heroImage:
-    "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1497215842964-222b430dc094?fit=crop&w=800&h=800&q=80",
   heroImageAlt: "Penandatanganan akta pendirian badan usaha",
   heroStats: [
     { icon: "Clock", value: "7–14 hari", label: "SLA kerja" },
@@ -119,7 +119,7 @@ export const dataPT: BadanUsahaContent = {
   pengertianIntro:
     "Sebelum mulai, kenali dulu badan hukum yang paling populer untuk bisnis serius di Indonesia.",
   pengertianImage:
-    "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?fit=crop&w=800&h=800&q=80",
   pengertianImageAlt: "Rapat tim membahas Perseroan Terbatas",
   hukumIcon: "FileText",
   hukumIconBg: "bg-red-50",
@@ -347,7 +347,7 @@ export const dataCV: BadanUsahaContent = {
   heroDescription:
     "CV adalah pilihan tepat untuk usaha kecil-menengah yang ingin struktur jelas tanpa kompleksitas PT. Proses cepat, biaya terjangkau, dan cocok untuk bisnis keluarga.",
   heroImage:
-    "https://images.unsplash.com/photo-1556761175-b413da4baf72?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?fit=crop&w=800&h=800&q=80",
   heroImageAlt: "Tim kecil mendirikan CV",
   heroStats: [
     { icon: "Clock", value: "3–7 hari", label: "SLA kerja" },
@@ -378,7 +378,7 @@ export const dataCV: BadanUsahaContent = {
   pengertianIntro:
     "Pahami dulu bentuk usaha tradisional yang masih relevan untuk UKM Indonesia.",
   pengertianImage:
-    "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1573164713988-8665fc963095?fit=crop&w=800&h=800&q=80",
   pengertianImageAlt: "Diskusi pendirian CV",
   hukumIcon: "FileText",
   hukumIconBg: "bg-blue-50",
@@ -498,6 +498,7 @@ export const dataCV: BadanUsahaContent = {
           { text: "Pengecekan Nama CV", checked: true },
           { text: "Penyusunan Anggaran Dasar", checked: true },
         ]},
+
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris", checked: true },
           { text: "Surat Keterangan Terdaftar Pengadilan Negeri", checked: true },
@@ -561,7 +562,7 @@ export const dataPMA: BadanUsahaContent = {
   heroDescription:
     "PT PMA adalah badan hukum untuk perusahaan dengan pemodal asing. Kami pandu seluruh proses — dari perizinan BKPM sampai akta pendirian — sesuai aturan investasi Indonesia.",
   heroImage:
-    "https://images.unsplash.com/photo-1521791136064-7986c2920216?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fit=crop&w=800&h=800&q=80",
   heroImageAlt: "Rapat bisnis investasi asing",
   heroStats: [
     { icon: "Clock", value: "3–6 minggu", label: "SLA kerja" },
@@ -592,7 +593,7 @@ export const dataPMA: BadanUsahaContent = {
   pengertianIntro:
     "Pahami kerangka hukum investasi asing di Indonesia sebelum memulai.",
   pengertianImage:
-    "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1559526324-593bc073d938?fit=crop&w=800&h=800&q=80",
   pengertianImageAlt: "Kantor representasi asing",
   hukumIcon: "FileText",
   hukumIconBg: "bg-indigo-50",
@@ -779,7 +780,7 @@ export const dataPTPerorangan: BadanUsahaContent = {
   heroDescription:
     "PT Perorangan adalah badan hukum untuk 1 pendiri — proses mudah, modal kecil, dan legalitas penuh. Cocok untuk solopreneur & UMKM yang ingin naik kelas.",
   heroImage:
-    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1553877522-43269d4ea984?fit=crop&w=800&h=800&q=80",
   heroImageAlt: "Pengusaha individu mengembangkan bisnis",
   heroStats: [
     { icon: "Clock", value: "3–7 hari", label: "SLA kerja" },
@@ -810,7 +811,7 @@ export const dataPTPerorangan: BadanUsahaContent = {
   pengertianIntro:
     "Solusi badan hukum modern untuk pelaku UMKM yang ingin legal tanpa kompleksitas PT biasa.",
   pengertianImage:
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?fit=crop&w=800&h=800&q=80",
   pengertianImageAlt: "Wirausaha individu",
   hukumIcon: "FileText",
   hukumIconBg: "bg-emerald-50",
@@ -984,7 +985,7 @@ export const dataFirma: BadanUsahaContent = {
   heroDescription:
     "Firma adalah badan usaha yang didirikan oleh 2 orang atau lebih dengan tanggung jawab penuh bersama. Cocok untuk bisnis profesional & jasa yang mengutamakan kepercayaan.",
   heroImage:
-    "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?fit=crop&w=800&h=800&q=80",
   heroImageAlt: "Rekan bisnis mendirikan Firma",
   heroStats: [
     { icon: "Clock", value: "3–7 hari", label: "SLA kerja" },
@@ -998,6 +999,7 @@ export const dataFirma: BadanUsahaContent = {
       iconColor: "text-orange-600",
       title: "Akta Firma",
       subtitle: "Terbit dalam 2 hari",
+
       position: "-top-6 -left-2 sm:-left-6",
     },
     {
@@ -1015,7 +1017,7 @@ export const dataFirma: BadanUsahaContent = {
   pengertianIntro:
     "Pahami badan usaha berbasis kepercayaan & kerja sama antar rekan.",
   pengertianImage:
-    "https://images.unsplash.com/photo-1552581234-26160f608093?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1515187029135-18ee286d815b?fit=crop&w=800&h=800&q=80",
   pengertianImageAlt: "Kerja sama tim Firma",
   hukumIcon: "FileText",
   hukumIconBg: "bg-orange-50",
@@ -1180,7 +1182,7 @@ export const dataYayasan: BadanUsahaContent = {
   heroDescription:
     "Yayasan adalah badan hukum nirlaba untuk bidang sosial, keagamaan, dan kemanusiaan. Kami pandu pendiriannya dari akta notaris sampai SK Kemenkumham.",
   heroImage:
-    "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1559027615-cd4628902d4a?fit=crop&w=800&h=800&q=80",
   heroImageAlt: "Kegiatan sosial yayasan",
   heroStats: [
     { icon: "Clock", value: "7–14 hari", label: "SLA kerja" },
@@ -1211,7 +1213,7 @@ export const dataYayasan: BadanUsahaContent = {
   pengertianIntro:
     "Pahami badan hukum nirlaba untuk tujuan sosial, kemanusiaan, dan keagamaan.",
   pengertianImage:
-    "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?fit=crop&w=800&h=800&q=80",
   pengertianImageAlt: "Kegiatan yayasan sosial",
   hukumIcon: "FileText",
   hukumIconBg: "bg-pink-50",
@@ -1380,7 +1382,7 @@ export const dataPerkumpulan: BadanUsahaContent = {
   heroDescription:
     "Perkumpulan adalah badan hukum nirlaba berbasis keanggotaan untuk organisasi komunitas, profesi, dan advokasi. Proses pendirian mudah dan cepat.",
   heroImage:
-    "https://images.unsplash.com/photo-1544027993-37dbfe43562a?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?fit=crop&w=800&h=800&q=80",
   heroImageAlt: "Komunitas perkumpulan",
   heroStats: [
     { icon: "Clock", value: "7–14 hari", label: "SLA kerja" },
@@ -1411,7 +1413,7 @@ export const dataPerkumpulan: BadanUsahaContent = {
   pengertianIntro:
     "Pahami badan hukum berbasis keanggotaan untuk komunitas & organisasi sosial.",
   pengertianImage:
-    "https://images.unsplash.com/photo-1559027615-cd4628902d4a?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1528605248644-14dd04022da1?fit=crop&w=800&h=800&q=80",
   pengertianImageAlt: "Anggota perkumpulan",
   hukumIcon: "FileText",
   hukumIconBg: "bg-teal-50",
@@ -1498,6 +1500,7 @@ export const dataPerkumpulan: BadanUsahaContent = {
       title: "PAKET EXPRESS",
       price: "Rp 5.999.000",
       strikePrice: "Rp 10.000.000",
+
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
       buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Express%20Pendirian%20Perkumpulan.",
@@ -1573,7 +1576,7 @@ export const dataKoperasi: BadanUsahaContent = {
   heroDescription:
     "Koperasi adalah badan hukum yang mengutamakan kesejahteraan anggota berdasarkan prinsip gotong royong. Kami bantu pendiriannya dari akta sampai pengesahan.",
   heroImage:
-    "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?fit=crop&w=800&h=800&q=80",
   heroImageAlt: "Rapat anggota koperasi",
   heroStats: [
     { icon: "Clock", value: "14–30 hari", label: "SLA kerja" },
@@ -1604,7 +1607,7 @@ export const dataKoperasi: BadanUsahaContent = {
   pengertianIntro:
     "Pahami badan hukum ekonomi kerakyatan yang mengutamakan kesejahteraan anggota.",
   pengertianImage:
-    "https://images.unsplash.com/photo-1559136555-9303baea8ebd?fit=crop&w=800&h=800&q=80",
+    "https://images.unsplash.com/photo-1556761175-4b46a572b786?fit=crop&w=800&h=800&q=80",
   pengertianImageAlt: "Anggota koperasi",
   hukumIcon: "FileText",
   hukumIconBg: "bg-green-50",
@@ -1759,3 +1762,4 @@ export const contentMap: Record<string, BadanUsahaContent> = {
   "perkumpulan": dataPerkumpulan,
   "koperasi": dataKoperasi,
 };
+

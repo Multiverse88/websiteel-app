@@ -36,6 +36,10 @@ model Article {
   updatedAt  DateTime @updatedAt
   authorId   String?
   author     User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  @@index([category])
+  @@index([createdAt])
+  @@index([authorId])
 }
 
 model NewsletterSubscriber {
@@ -43,6 +47,9 @@ model NewsletterSubscriber {
   email        String   @unique
   isActive     Boolean  @default(true)
   subscribedAt DateTime @default(now())
+
+  @@index([isActive])
+  @@index([subscribedAt])
 }
 
 model NewsletterBroadcast {
@@ -52,6 +59,9 @@ model NewsletterBroadcast {
   totalSent   Int         @default(0)
   sentAt      DateTime    @default(now())
   emailLogs   EmailLog[]
+
+  @@index([articleId])
+  @@index([sentAt])
 }
 
 model EmailLog {
@@ -64,9 +74,29 @@ model EmailLog {
   broadcast    NewsletterBroadcast? @relation(fields: [broadcastId], references: [id])
   source       String   // "broadcast" | "auto-broadcast"
   sentAt       DateTime @default(now())
+
+  @@index([broadcastId])
+  @@index([recipient])
+  @@index([status])
+  @@index([sentAt])
 }
 
 model SystemSetting {
   key   String @id
   value String
+}
+
+model ContactSubmission {
+  id           String   @id @default(cuid())
+  name         String
+  businessName String?
+  email        String
+  whatsapp     String
+  topic        String
+  message      String
+  status       String   @default("new") // "new" | "read" | "replied"
+  createdAt    DateTime @default(now())
+
+  @@index([status])
+  @@index([createdAt])
 }

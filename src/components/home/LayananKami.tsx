@@ -6,8 +6,8 @@ import { layananIndividual } from "./data";
 
 export default function LayananKami() {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <section className="py-20 bg-white" id="layanan">
+      <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
         {/* Header */}
         <div className="mb-10">
           <span className="text-[10.5px] font-bold text-primary uppercase tracking-[0.15em]">
@@ -99,8 +99,8 @@ export default function LayananKami() {
                 />
               </div>
               <div className="flex items-center gap-1">
-                <span className="text-[12.5px] font-extrabold text-[#D62828] tracking-tight">easy</span>
-                <span className="text-[12.5px] font-bold text-[#111827] tracking-tight">legal</span>
+                <span className="text-[12.5px] font-extrabold text-[#D62828] tracking-tight">Easy</span>
+                <span className="text-[12.5px] font-bold text-[#111827] tracking-tight">Legal</span>
               </div>
               <div className="w-px h-3.5 bg-border mx-1" />
               <span className="text-[9px] font-bold text-dark/40 uppercase tracking-[0.15em]">CORPORATE</span>

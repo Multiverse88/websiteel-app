@@ -623,7 +623,7 @@ export default function MerekHaki() {
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?fit=crop&w=800&h=800&q=80"
+                    src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?fit=crop&w=800&h=800&q=80"
                     alt="Pendaftaran Merek & HAKI EasyLegal"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -682,7 +682,7 @@ export default function MerekHaki() {
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?fit=crop&w=800&h=800&q=80"
+                    src="https://images.unsplash.com/photo-1573164713988-8665fc963095?fit=crop&w=800&h=800&q=80"
                     alt="Workspace desainer logo dan merek"
                     fill
                     sizes="(max-width: 768px) 100vw, 500px"

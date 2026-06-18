@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,7 +13,23 @@ import {
 } from "lucide-react";
 import { heroSlides } from "./data";
 
-export default function Hero() {
+interface HeroProps {
+  className?: string;
+  onSlideChange?: (slide: number) => void;
+  gsapClasses?: {
+    tag?: string;
+    heading?: string;
+    desc?: string;
+    cta?: string;
+    badges?: string;
+    float?: string;
+  };
+}
+
+const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
+  { className, gsapClasses },
+  ref
+) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
@@ -35,8 +51,15 @@ export default function Hero() {
     setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
   };
 
+  const tagClass = gsapClasses?.tag || "";
+  const headingClass = gsapClasses?.heading || "";
+  const descClass = gsapClasses?.desc || "";
+  const ctaClass = gsapClasses?.cta || "";
+  const badgesClass = gsapClasses?.badges || "";
+  const floatClass = gsapClasses?.float || "";
+
   return (
-    <section className="relative overflow-hidden">
+    <section ref={ref} className={`relative overflow-hidden ${className || ""}`}>
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[580px] relative">
         {/* Left Arrow */}
         <button
@@ -68,12 +91,12 @@ export default function Hero() {
                     : "opacity-0 translate-y-4 absolute inset-0 pointer-events-none"
                 }`}
               >
-                <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-red-100 bg-[#FFF5F5] text-[#D62828] text-[12px] font-bold tracking-wide mb-6 w-fit">
+                <div className={`inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-red-100 bg-[#FFF5F5] text-[#D62828] text-[12px] font-bold tracking-wide mb-6 w-fit ${tagClass}`}>
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D62828]" />
                   <span>{slide.tag}</span>
                 </div>
 
-                <h1 className="text-[32px] xs:text-[38px] sm:text-[50px] lg:text-[56px] font-extrabold text-[#1A1A1A] leading-[1.08] tracking-[-0.02em]">
+                <h1 className={`text-[32px] xs:text-[38px] sm:text-[50px] lg:text-[56px] font-extrabold text-[#1A1A1A] leading-[1.08] tracking-[-0.02em] ${headingClass}`}>
                   {slide.titleLines.map((line, i) => (
                     <span key={i} className={line.red ? "text-[#D62828] block" : "block"}>
                       {line.text}
@@ -81,11 +104,11 @@ export default function Hero() {
                   ))}
                 </h1>
 
-                <p className="mt-6 text-[14.5px] text-[#555555] leading-relaxed max-w-[440px]">
+                <p className={`mt-6 text-[14.5px] text-[#555555] leading-relaxed max-w-[440px] ${descClass}`}>
                   {slide.desc}
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className={`mt-8 flex flex-wrap gap-3 ${ctaClass}`}>
                   <Link
                     href={slide.ctaLink}
                     className="group inline-flex items-center gap-2 px-7 py-3.5 bg-[#9B1C1C] hover:bg-[#8B0000] text-white font-bold text-[14.5px] rounded-[12px] shadow-sm hover:shadow-md transition-all duration-200"
@@ -101,7 +124,7 @@ export default function Hero() {
                   </Link>
                 </div>
 
-                <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
+                <div className={`mt-8 flex flex-wrap gap-x-5 gap-y-2 ${badgesClass}`}>
                   {slide.trustBadges.map((badge, bidx) => (
                     <span key={bidx} className="inline-flex items-center space-x-1.5 text-[12.5px] font-semibold text-[#444444]">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-[14px] h-[14px] text-emerald-600 flex-shrink-0">
@@ -138,7 +161,7 @@ export default function Hero() {
           ))}
 
           {/* Floating Badges */}
-          <div className="absolute top-8 right-8 bg-white rounded-2xl px-5 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-3.5 z-20 animate-float-slow">
+          <div className={`absolute top-8 right-8 bg-white rounded-2xl px-5 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-3.5 z-20 animate-float-slow ${floatClass}`}>
             <div className="w-[38px] h-[38px] bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0 text-[#D62828]">
               <Users className="w-5 h-5" />
             </div>
@@ -148,7 +171,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="absolute bottom-10 left-8 bg-white rounded-2xl px-5 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-3.5 z-20 animate-float-medium">
+          <div className={`absolute bottom-10 left-8 bg-white rounded-2xl px-5 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-3.5 z-20 animate-float-medium ${floatClass}`}>
             <div className="w-[38px] h-[38px] bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0 text-[#16A34A]">
               <Check className="w-5 h-5" strokeWidth={3} />
             </div>
@@ -182,4 +205,6 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+});
+
+export default Hero;

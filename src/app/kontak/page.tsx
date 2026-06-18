@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import Link from "next/link";
 import Offices from "@/components/Offices";
 import FAQ from "@/components/FAQ";
@@ -13,10 +13,15 @@ import {
   ChevronDown,
   X,
   Home,
+  Loader2,
 } from "lucide-react";
+import { submitContactForm } from "./actions";
 
 export default function Kontak() {
+  const [isPending, startTransition] = useTransition();
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [submittedName, setSubmittedName] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     businessName: "",
@@ -47,6 +52,7 @@ export default function Kontak() {
         return newErrs;
       });
     }
+    if (formError) setFormError(null);
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -62,8 +68,27 @@ export default function Kontak() {
       setErrors(newErrors);
       return;
     }
-    
-    setFormSubmitted(true);
+
+    setFormError(null);
+    const submittedNameValue = formData.name;
+
+    startTransition(async () => {
+      const fd = new FormData();
+      fd.append("name", formData.name);
+      fd.append("businessName", formData.businessName);
+      fd.append("email", formData.email);
+      fd.append("whatsapp", formData.whatsapp);
+      fd.append("topic", formData.topic);
+      fd.append("message", formData.message);
+
+      const result = await submitContactForm(null, fd);
+      if (result && result.error) {
+        setFormError(result.error);
+      } else if (result && result.success) {
+        setSubmittedName(submittedNameValue);
+        setFormSubmitted(true);
+      }
+    });
   };
 
   const closeToast = () => {
@@ -275,6 +300,14 @@ export default function Kontak() {
 
                 <form onSubmit={handleFormSubmit} className="space-y-6">
                   
+                  {/* Error message */}
+                  {formError && (
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-[14px] text-red-700 font-medium flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0 animate-ping" />
+                      <span>{formError}</span>
+                    </div>
+                  )}
+
                   {/* Nama Lengkap + Nama Bisnis */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative">
@@ -388,10 +421,20 @@ export default function Kontak() {
 
                   <button
                     type="submit"
-                    className="w-full py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-sm hover:shadow transition-all duration-200 flex justify-center items-center gap-2 group cursor-pointer"
+                    disabled={isPending}
+                    className="w-full py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-sm hover:shadow transition-all duration-200 flex justify-center items-center gap-2 group cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
                   >
-                    <span>Kirim Pertanyaan</span>
-                    <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                    {isPending ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Mengirim...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Kirim Pertanyaan</span>
+                        <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
@@ -485,7 +528,7 @@ export default function Kontak() {
             <div>
               <div className="text-[13px] font-bold text-dark mb-1">Pertanyaan Dikirim!</div>
               <p className="text-[11.5px] text-muted leading-relaxed">
-                Tim kami akan menghubungi <strong>{formData.name}</strong> secepatnya.
+                Tim kami akan menghubungi <strong>{submittedName}</strong> secepatnya.
               </p>
             </div>
           </div>

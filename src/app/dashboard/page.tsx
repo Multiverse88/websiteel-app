@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { FileText, LogOut, ExternalLink, Calendar, Clock, Eye, Mail, User } from "lucide-react";
+import { FileText, LogOut, ExternalLink, Calendar, Clock, Eye, Mail, User, Pencil } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { logoutAction } from "./actions";
 import ArticleImage from "./article-image";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import DeleteArticleButton from "./delete-article-button";
 
 export const dynamic = "force-dynamic";
 
@@ -200,7 +201,14 @@ export default async function DashboardPage() {
                     </div>
 
                     {/* Actions */}
-                    <div className="col-span-1 flex justify-end">
+                    <div className="col-span-1 flex justify-end gap-1">
+                      <Link
+                        href={`/dashboard/artikel/${article.id}/edit`}
+                        className="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
+                        title="Edit artikel"
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </Link>
                       <Link
                         href={`/artikel/${article.slug}`}
                         target="_blank"
@@ -209,6 +217,7 @@ export default async function DashboardPage() {
                       >
                         <ExternalLink className="w-4 h-4" />
                       </Link>
+                      <DeleteArticleButton articleId={article.id} articleTitle={article.title} />
                     </div>
                   </div>
                 );

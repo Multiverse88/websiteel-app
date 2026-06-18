@@ -70,7 +70,7 @@ export default function TestimoniPage() {
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
                   <Image
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?fit=crop&w=600&h=800&q=80"
                     alt="Testimoni EasyLegal"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"

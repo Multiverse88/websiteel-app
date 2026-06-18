@@ -41,7 +41,7 @@ export default function LatestInsights() {
             >
               <div className="aspect-[16/10] w-full overflow-hidden bg-slate-50 relative">
                 <Image 
-                  src="https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=600&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1554224155-6726b3ff8588?fit=crop&w=600&h=800&q=80"
                   alt="Sertifikasi ISO 9001" 
                   fill
                   sizes="(max-width: 768px) 100vw, 600px"
@@ -81,7 +81,7 @@ export default function LatestInsights() {
             >
               <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50">
                 <Image 
-                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=400&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?fit=crop&w=400&h=800&q=80"
                   alt="Pendirian PT vs CV" 
                   fill
                   sizes="(max-width: 768px) 100vw, 400px"
@@ -112,7 +112,7 @@ export default function LatestInsights() {
             >
               <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50">
                 <Image 
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?fit=crop&w=400&h=800&q=80"
                   alt="KBLI 2025" 
                   fill
                   sizes="(max-width: 768px) 100vw, 400px"
@@ -143,7 +143,7 @@ export default function LatestInsights() {
             >
               <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50">
                 <Image 
-                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=400&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1521791136064-7986c2920216?fit=crop&w=400&h=800&q=80"
                   alt="NIB & OSS" 
                   fill
                   sizes="(max-width: 768px) 100vw, 400px"
@@ -174,7 +174,7 @@ export default function LatestInsights() {
             >
               <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50">
                 <Image 
-                  src="https://images.unsplash.com/photo-1561070791-26c113006238?q=80&w=400&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1589330694653-ded6df03f754?fit=crop&w=400&h=800&q=80"
                   alt="Cek Daftar Merek" 
                   fill
                   sizes="(max-width: 768px) 100vw, 400px"
