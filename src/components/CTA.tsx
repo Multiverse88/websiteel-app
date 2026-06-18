@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { getWhatsAppLink } from "@/lib/config";
 
 interface CTAProps {
   title?: React.ReactNode;
@@ -17,7 +18,7 @@ interface CTAProps {
 export default function CTA({
   title,
   description = "Konsultasikan kebutuhan Anda sekarang — gratis, tanpa komitmen. Tim kami akan menjelaskan syarat, timeline, dan biaya yang dibutuhkan.",
-  whatsappLink = "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20legalitas%20bisnis.",
+  whatsappLink,
   whatsappText = "Konsultasi via WhatsApp",
   contactLink = "/kontak",
   contactText = "Hubungi Tim Kami",
@@ -28,6 +29,8 @@ export default function CTA({
       Siap mulai urus legalitas bisnis Anda?
     </h2>
   );
+
+  const waLink = whatsappLink || getWhatsAppLink();
 
   return (
     <section id="footer-cta" className="py-20 bg-white border-t border-gray-100 overflow-hidden relative">
@@ -51,7 +54,7 @@ export default function CTA({
         <div className="flex flex-col items-start w-full lg:w-[380px] flex-shrink-0">
           {/* WhatsApp Button */}
           <a
-            href={whatsappLink}
+            href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[14px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"

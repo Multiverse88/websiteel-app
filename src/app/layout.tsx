@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
 };
 
+export const viewport = {
+  themeColor: "#990202",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -44,6 +48,21 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(d,t) {
+            var BASE_URL="https://chatwoot.easylegal.my.id";
+            var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=BASE_URL+"/packs/js/sdk.js";
+            g.async = true;
+            s.parentNode.insertBefore(g,s);
+            g.onload=function(){
+              window.chatwootSDK.run({
+                websiteToken: 'JSCtebHsqNj2LNdFf4kxAXcK',
+                baseUrl: BASE_URL
+              })
+            }
+          })(document,"script");
+        ` }} />
       </body>
     </html>
   );

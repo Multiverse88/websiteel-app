@@ -70,6 +70,9 @@ test.describe('Smoke Test - Service Pages', () => {
     '/layanan/visa-kitas',
     '/layanan/virtual-office',
     '/layanan/press-release',
+    '/layanan/pelaporan-lkpm',
+    '/layanan/perjanjian-perkawinan',
+    '/layanan/pr-media',
   ];
 
   for (const path of servicePages) {

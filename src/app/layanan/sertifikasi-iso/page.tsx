@@ -604,7 +604,7 @@ export default function SertifikasiIso() {
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?fit=crop&w=800&h=800&q=80"
+                    src="https://images.unsplash.com/photo-1559526324-593bc073d938?fit=crop&w=800&h=800&q=80"
                     alt="Tim profesional berdiskusi standar audit ISO"
                     fill
                     sizes="(max-width: 768px) 100vw, 500px"

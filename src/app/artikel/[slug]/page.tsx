@@ -8,6 +8,7 @@ import ShareButton from "@/components/ShareButton";
 import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";
 import TableOfContents from "./table-of-contents";
+import { getArticleJsonLd } from "@/lib/structured-data";
 import type { Metadata } from "next";
 
 const IgIcon = ({ className }: { className?: string }) => (
@@ -281,6 +282,21 @@ export default async function ArtikelDetailPage({ params }: Props) {
   return (
     <div className="flex flex-col min-h-screen bg-white relative overflow-clip blog-detail-container">
       <ViewTracker slug={slug} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            getArticleJsonLd({
+              title: article.title,
+              description: article.excerpt,
+              slug: article.slug,
+              publishedAt: article.createdAt.toISOString(),
+              author: article.author?.name || undefined,
+              image: article.coverImage || undefined,
+            })
+          ),
+        }}
+      />
 
       {/* Radial Glows for premium aesthetics */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[130px] pointer-events-none" />

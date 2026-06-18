@@ -19,17 +19,17 @@ export const heroSlides = [
   {
     tag: "Layanan Unggulan",
     titleLines: [
-      { text: "Pendirian PT," },
-      { text: "prosesnya" },
-      { text: "cepat & beres.", red: true },
+      { text: "Pendirian Badan Usaha," },
+      { text: "Prosesnya" },
+      { text: "Cepat & Beres.", red: true },
     ],
     desc: "Dari konsultasi sampai akta di tangan Anda. Tim legal berpengalaman telah membantu lebih dari 11.000 pengusaha. Mulai dari Rp2,5jt.",
     cta: "Konsultasi Gratis",
     ctaLink: "/kontak",
-    cta2: "Lihat Paket PT",
+    cta2: "Lihat Paket Badan Usaha",
     cta2Link: "/",
-    trustBadges: ["7-14 hari kerja", "Tracking real-time", "Garansi tuntas"],
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop",
+    trustBadges: ["2-12 jam pengerjaan", "Tracking real-time", "Garansi tuntas"],
+    image: "https://images.pexels.com/photos/3184353/pexels-photo-3184353.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop",
   },
   {
     tag: "Perlindungan Merek",
@@ -44,7 +44,7 @@ export const heroSlides = [
     cta2: "Pelajari Lebih Lanjut",
     cta2Link: "/",
     trustBadges: ["Database DJKI resmi", "Tracking real-time", "Garansi Selesai"],
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop",
+    image: "https://images.pexels.com/photos/3184332/pexels-photo-3184332.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop",
   },
   {
     tag: "Standar Internasional",
@@ -59,7 +59,7 @@ export const heroSlides = [
     cta2: "Konsultasi Gratis",
     cta2Link: "/kontak",
     trustBadges: ["UAF Accredited", "Proses cepat", "Harga transparan"],
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
+    image: "https://images.pexels.com/photos/3184329/pexels-photo-3184329.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop",
   },
   {
     tag: "Perizinan Usaha",
@@ -74,7 +74,7 @@ export const heroSlides = [
     cta2: "Cek Kode KBLI",
     cta2Link: "/",
     trustBadges: ["Database KBLI 2025", "OSS RBA Resmi", "Garansi Selesai"],
-    image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=1200&auto=format&fit=crop",
+    image: "https://images.pexels.com/photos/3184297/pexels-photo-3184297.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop",
   },
 ];
 
@@ -109,22 +109,22 @@ export const quickTools = [
 export const partnerLogos = ["KEMENKUMHAM", "OSS BKPM", "DJKI", "KEMENPERIN", "PSE Kominfo"];
 
 export const layananIndividual = [
-  { name: "Pendirian PT", desc: "Badan usaha & legal", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha" },
-  { name: "Daftar Merek", desc: "HAKI & brand", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki" },
-  { name: "NIB & OSS", desc: "Perizinan usaha", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss" },
-  { name: "Sertifikasi ISO", desc: "Standard internasional", icon: Award, circleBg: "#16A34A", cardTint: "#F0FDF4", href: "/layanan/sertifikasi-iso" },
-  { name: "Pengajuan PKP", desc: "Perpajakan & e-Faktur", icon: FileText, circleBg: "#EA580C", cardTint: "#FFF7ED", href: "/layanan/pengajuan-pkp" },
+  { name: "Pendirian Badan Usaha", desc: "Badan Usaha & Legal", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha" },
+  { name: "Daftar Merek", desc: "HAKI & Brand", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki" },
+  { name: "NIB & OSS", desc: "Perizinan Usaha", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss" },
+  { name: "Sertifikasi ISO", desc: "Standar Internasional", icon: Award, circleBg: "#16A34A", cardTint: "#F0FDF4", href: "/layanan/sertifikasi-iso" },
+  { name: "Pengajuan PKP", desc: "Perpajakan & E-Faktur", icon: FileText, circleBg: "#EA580C", cardTint: "#FFF7ED", href: "/layanan/pengajuan-pkp" },
   { name: "Visa & KITAS", desc: "Imigrasi WNA", icon: Globe, circleBg: "#1E3A5F", cardTint: "#F0F4FF", href: "/layanan/visa-kitas" },
-  { name: "Perjanjian Perkawinan", desc: "Pisah harta & legal", icon: Scale, circleBg: "#7C3AED", cardTint: "#F5F3FF", href: "/layanan/perjanjian-perkawinan" },
-  { name: "Press Release", desc: "PR & media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/press-release" },
-  { name: "Pelaporan LKPM", desc: "Lapor BKPM rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA", href: "/layanan/pelaporan-lkpm" },
+  { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Legal", icon: Scale, circleBg: "#7C3AED", cardTint: "#F5F3FF", href: "/layanan/perjanjian-perkawinan" },
+  { name: "Press Release", desc: "PR & Media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/press-release" },
+  { name: "Pelaporan LKPM", desc: "Lapor BKPM Rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA", href: "/layanan/pelaporan-lkpm" },
 ];
 
 export const whyChoose = [
   {
     icon: Clock,
     title: "Proses Cepat",
-    desc: "Pendirian PT selesai dalam 7-14 hari kerja dengan tracking real-time dari dashboard.",
+    desc: "Pendirian Badan Usaha selesai dalam 2-12 jam pengerjaan dengan tracking real-time dari dashboard.",
   },
   {
     icon: Users,
@@ -192,5 +192,56 @@ export const row2Reviews = [
     text: "Layanan korporatnya sangat membantu untuk pengurusan legalitas cabang di berbagai daerah.",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop",
     url: "#",
+  },
+];
+
+export const insights = [
+  {
+    title: "Panduan Lengkap Pendirian PT di Indonesia 2026",
+    category: "Legalitas PT",
+    readTime: "8 menit baca",
+    slug: "panduan-lengkap-pendirian-pt-di-indonesia-2026",
+    excerpt: "Semua yang perlu Anda ketahui tentang syarat, prosedur, dan biaya pendirian PT terbaru.",
+  },
+  {
+    title: "Cara Daftar Merek Dagang Online via HKI",
+    category: "Merek & HAKI",
+    readTime: "6 menit baca",
+    slug: "cara-daftar-merek-dagang-online-via-hki",
+    excerpt: "Langkah demi langkah pendaftaran merek dagang secara online yang benar dan cepat.",
+  },
+  {
+    title: "Perbedaan NIB, OSS, dan KBLI yang Harus Diketahui",
+    category: "Perizinan Usaha",
+    readTime: "5 menit baca",
+    slug: "perbedaan-nib-oss-dan-kbli",
+    excerpt: "Penjelasan lengkap tentang dokumen perizinan usaha yang sering tertukar.",
+  },
+];
+
+export const caraKerjaSteps = [
+  {
+    step: "01",
+    title: "Konsultasi Gratis",
+    desc: "Hubungi tim kami via WhatsApp atau form kontak. Ceritakan kebutuhan bisnis Anda.",
+    icon: MessageCircle,
+  },
+  {
+    step: "02",
+    title: "Pilih Paket Layanan",
+    desc: "Pilih paket yang sesuai dengan kebutuhan dan budget Anda. Harga transparan.",
+    icon: FileCheck,
+  },
+  {
+    step: "03",
+    title: "Upload Dokumen",
+    desc: "Unggah berkas yang diperlukan melalui dashboard. Proses 100% online & paperless.",
+    icon: FileText,
+  },
+  {
+    step: "04",
+    title: "Proses & Tracking",
+    desc: "Tim kami memproses dokumen Anda. Pantau status real-time dari dashboard.",
+    icon: TrendingUp,
   },
 ];

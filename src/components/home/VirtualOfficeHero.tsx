@@ -66,7 +66,7 @@ const VirtualOfficeHero = () => {
           {/* Right Column */}
           <div className="relative aspect-[4/3] lg:aspect-auto h-full">
             <Image
-              src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1974&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1556761175-5973dc0f5070?fit=crop&w=1974&h=800&q=80"
               alt="Business meeting in a modern office"
               fill
               className="rounded-3xl object-cover"
