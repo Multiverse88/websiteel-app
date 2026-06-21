@@ -28,7 +28,7 @@ git pull origin main
 
 # 2. Build & restart containers (use cache for faster builds)
 echo -e "\n${YELLOW}[2/4] Building & restarting containers...${NC}"
-docker compose up -d --build
+docker compose up -d --build --remove-orphans
 
 # 3. Prune old images, build cache, and stopped containers
 echo -e "\n${YELLOW}[3/4] Cleaning up Docker cache...${NC}"
