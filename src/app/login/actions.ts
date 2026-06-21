@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { loginWithPassword } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { checkRateLimit, recordFailedAttempt, resetAttempts, getRemainingAttempts } from "@/lib/rate-limit";
+import { trackMetric } from "@/lib/metrics";
 
 export async function loginAction(prevState: Record<string, unknown> | null, formData: FormData) {
   const email = formData.get("email") as string;
@@ -22,6 +23,7 @@ export async function loginAction(prevState: Record<string, unknown> | null, for
 
   const user = await loginWithPassword(email, password);
   if (!user) {
+    trackMetric("login_attempt", 1, { status: "failed" });
     const result = recordFailedAttempt(email);
     const remaining = getRemainingAttempts(email);
     
@@ -35,6 +37,7 @@ export async function loginAction(prevState: Record<string, unknown> | null, for
 
   // Login successful, reset rate limit
   resetAttempts(email);
+  trackMetric("login_attempt", 1, { status: "success" });
 
   // Store user info temporarily for 2FA verification
   const cookieStore = await cookies();

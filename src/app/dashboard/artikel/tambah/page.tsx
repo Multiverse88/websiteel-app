@@ -1066,60 +1066,6 @@ export default function TambahArtikelPage() {
                     .prose-editor a:hover {
                       color: #B91C1C !important;
                     }
-                    .prose-editor img {
-                      max-width: 100% !important;
-                      border-radius: 12px !important;
-                      margin: 0 !important;
-                      display: block !important;
-                      box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important;
-                    }
-                    .prose-editor .img-wrapper {
-                      position: relative !important;
-                      margin: 16px 0 !important;
-                      border-radius: 12px !important;
-                      overflow: hidden !important;
-                    }
-                    .prose-editor .img-overlay {
-                      position: absolute !important;
-                      top: 0 !important;
-                      left: 0 !important;
-                      right: 0 !important;
-                      bottom: 0 !important;
-                      background: rgba(0,0,0,0.4) !important;
-                      display: flex !important;
-                      align-items: center !important;
-                      justify-content: center !important;
-                      gap: 8px !important;
-                      opacity: 0 !important;
-                      transition: opacity 0.2s !important;
-                      border-radius: 12px !important;
-                    }
-                    .prose-editor .img-wrapper:hover .img-overlay {
-                      opacity: 1 !important;
-                    }
-                    .prose-editor .img-btn {
-                      padding: 6px 16px !important;
-                      border-radius: 8px !important;
-                      font-size: 12px !important;
-                      font-weight: 700 !important;
-                      cursor: pointer !important;
-                      border: none !important;
-                      transition: all 0.15s !important;
-                    }
-                    .prose-editor .img-btn-edit {
-                      background: white !important;
-                      color: #374151 !important;
-                    }
-                    .prose-editor .img-btn-edit:hover {
-                      background: #f3f4f6 !important;
-                    }
-                    .prose-editor .img-btn-delete {
-                      background: #dc2626 !important;
-                      color: white !important;
-                    }
-                    .prose-editor .img-btn-delete:hover {
-                      background: #b91c1c !important;
-                    }
                   `}</style>
 
                   <textarea

@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/db";
 import { sendEmail } from "@/lib/mail";
 import { escapeHtml } from "@/lib/utils";
+import { trackMetric } from "@/lib/metrics";
 
 export async function submitContactForm(prevState: Record<string, unknown> | null, formData: FormData) {
   const name = formData.get("name") as string;
@@ -72,8 +73,10 @@ export async function submitContactForm(prevState: Record<string, unknown> | nul
       text: `Pesan Baru dari ${name}\nEmail: ${email}\nWhatsApp: ${whatsapp}\nTopik: ${topic}\nPesan: ${message}`,
     });
 
+    trackMetric("contact_submit", 1, { status: "success", topic });
     return { success: true };
   } catch (err) {
+    trackMetric("contact_submit", 1, { status: "error" });
     console.error("Gagal mengirim pesan kontak:", err);
     return { error: "Terjadi kesalahan. Silakan coba lagi atau hubungi kami via WhatsApp." };
   }

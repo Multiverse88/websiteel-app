@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db";
 import { generateTwoFactorSecret, verifyTwoFactorCode } from "@/lib/2fa";
 import { checkTwoFactorRateLimit, recordTwoFactorFailedAttempt, resetTwoFactorAttempts } from "@/lib/rate-limit";
 import { cookies } from "next/headers";
+import { trackMetric } from "@/lib/metrics";
 
 export async function setupTwoFactor(userId: string, email: string) {
   const setup = await generateTwoFactorSecret(email);
@@ -35,6 +36,7 @@ export async function verifyTwoFactorSetup(userId: string, token: string) {
   const isValid = verifyTwoFactorCode(user.twoFactorSecret, token);
   if (!isValid) {
     recordTwoFactorFailedAttempt(`2fa-setup:${userId}`);
+    trackMetric("2fa_verify", 1, { status: "failed", action: "setup" });
     return { error: "Kode verifikasi salah! Silakan coba lagi." };
   }
 
@@ -45,6 +47,7 @@ export async function verifyTwoFactorSetup(userId: string, token: string) {
     data: { twoFactorEnabled: true },
   });
 
+  trackMetric("2fa_verify", 1, { status: "success", action: "setup" });
   return { success: true };
 }
 
@@ -63,10 +66,11 @@ export async function verifyTwoFactorLogin(userId: string, token: string) {
   const isValid = verifyTwoFactorCode(user.twoFactorSecret, token);
   if (!isValid) {
     recordTwoFactorFailedAttempt(`2fa-login:${userId}`);
+    trackMetric("2fa_verify", 1, { status: "failed", action: "login" });
     return { error: "Kode authenticator salah! Silakan coba lagi." };
   }
 
   resetTwoFactorAttempts(`2fa-login:${userId}`);
-
+  trackMetric("2fa_verify", 1, { status: "success", action: "login" });
   return { success: true };
 }

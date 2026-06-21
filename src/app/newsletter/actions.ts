@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/db";
+import { trackMetric } from "@/lib/metrics";
 
 export async function subscribeNewsletter(email: string) {
   if (!email || !email.includes("@")) {
@@ -22,6 +23,7 @@ export async function subscribeNewsletter(email: string) {
         where: { email: email.toLowerCase().trim() },
         data: { isActive: true },
       });
+      trackMetric("newsletter_subscribe", 1, { type: "reactivate" });
       return { success: true, message: "Selamat datang kembali! Email berhasil diaktifkan ulang." };
     }
 
@@ -32,6 +34,7 @@ export async function subscribeNewsletter(email: string) {
       },
     });
 
+    trackMetric("newsletter_subscribe", 1, { type: "new" });
     return { success: true, message: "Berhasil terdaftar! Anda akan menerima update artikel terbaru." };
   } catch (error) {
     console.error("Newsletter subscribe error:", error);

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { trackMetric } from "@/lib/metrics";
 
 const SKIP_ANIMATION_ROUTES = ["/dashboard", "/login"];
 
@@ -11,6 +12,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const shouldAnimate = !SKIP_ANIMATION_ROUTES.some((r) => pathname.startsWith(r));
+
+  useEffect(() => {
+    trackMetric("page_view", 1, { path: pathname });
+  }, [pathname]);
 
   useGSAP(
     () => {

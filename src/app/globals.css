@@ -290,3 +290,60 @@ body:has(.has-service-cta) #footer-cta {
     transform: none !important;
   }
 }
+
+/* ─── Prose Editor Image Overlay ─── */
+.prose-editor img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 0;
+  display: block;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.prose-editor .img-wrapper {
+  position: relative;
+  margin: 16px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.prose-editor .img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: 12px;
+  z-index: 10;
+}
+.prose-editor .img-wrapper:hover .img-overlay {
+  opacity: 1;
+}
+.prose-editor .img-btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+.prose-editor .img-btn-edit {
+  background: white;
+  color: #374151;
+}
+.prose-editor .img-btn-edit:hover {
+  background: #f3f4f6;
+}
+.prose-editor .img-btn-delete {
+  background: #dc2626;
+  color: white;
+}
+.prose-editor .img-btn-delete:hover {
+  background: #b91c1c;
+}

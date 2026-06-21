@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { getWhatsAppLink } from "@/lib/config";
+import { trackMetric } from "@/lib/metrics";
 
 interface CTAProps {
   title?: React.ReactNode;
@@ -62,6 +63,7 @@ export default function CTA({
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackMetric("whatsapp_click", 1, { source: "cta" })}
             className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[14px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
           >
             <svg className="w-4.5 h-4.5 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
