@@ -146,6 +146,14 @@ Membuat SOP, melakukan audit internal, dan mempersiapkan audit eksternal bisa me
 const CATEGORY_MAP: Record<string, string> = {
   "Pendirian PT": "Pendirian Usaha",
   "Legalitas PT": "Pendirian Usaha",
+  "CV": "Pendirian Usaha",
+  "PT Perorangan": "Pendirian Usaha",
+  "PT PMA": "Pendirian Usaha",
+  "Firma": "Pendirian Usaha",
+  "Perkumpulan": "Pendirian Usaha",
+  "Yayasan": "Pendirian Usaha",
+  "Koperasi": "Pendirian Usaha",
+  "UMKM": "Pendirian Usaha",
   "Merek & HAKI": "Haki",
   "Sertifikasi ISO": "ISO",
   "KBLI": "Perizinan",
@@ -156,7 +164,7 @@ const CATEGORY_MAP: Record<string, string> = {
 
 // Display Category -> DB Categories list
 const DB_CATEGORIES_MAP: Record<string, string[]> = {
-  "Pendirian Usaha": ["Pendirian PT", "Legalitas PT"],
+  "Pendirian Usaha": ["Pendirian PT", "Legalitas PT", "CV", "PT Perorangan", "PT PMA", "Firma", "Perkumpulan", "Yayasan", "Koperasi", "UMKM"],
   "Haki": ["Merek & HAKI"],
   "ISO": ["Sertifikasi ISO"],
   "Perizinan": ["Perizinan", "KBLI"],
@@ -210,7 +218,8 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
   });
 
   // Build Prisma query filter for active view
-  const whereClause: any = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const whereClause: Record<string, any> = {};
 
   if (q) {
     whereClause.OR = [
@@ -339,7 +348,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
             {/* Search feedback & reset button */}
             {q && (
               <div className="mt-4 flex items-center space-x-2 text-[13.5px] text-gray-500">
-                <span>Hasil pencarian untuk: <strong>"{q}"</strong></span>
+                <span>Hasil pencarian untuk: <strong>&quot;{q}&quot;</strong></span>
                 <span className="text-gray-300">•</span>
                 <Link href="/artikel" className="text-[#990202] hover:underline font-semibold flex items-center gap-0.5">
                   <X className="w-3.5 h-3.5 inline" />

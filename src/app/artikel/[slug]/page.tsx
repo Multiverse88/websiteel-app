@@ -39,7 +39,7 @@ const ChatIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -121,6 +121,26 @@ function renderMarkdownContent(text: string) {
       return <hr key={idx} className="my-10 border-gray-200/60" />;
     }
 
+    // Image
+    const imgMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (imgMatch) {
+      return (
+        <figure key={idx} className="my-8">
+          <img
+            src={imgMatch[2]}
+            alt={imgMatch[1] || ""}
+            className="w-full rounded-2xl shadow-lg border border-gray-100/80"
+            loading="lazy"
+          />
+          {imgMatch[1] && (
+            <figcaption className="text-center text-[13px] text-gray-400 mt-3 italic">
+              {imgMatch[1]}
+            </figcaption>
+          )}
+        </figure>
+      );
+    }
+
     // Headings
     if (trimmed.startsWith("### ")) {
       headingCounter++;
@@ -187,16 +207,50 @@ function renderMarkdownContent(text: string) {
   });
 }
 
-// Utility to parse **bold** text to standard JSX strong tags
+// Utility to parse **bold** text, [link](url), and ![alt](url) to JSX
 function parseBoldText(text: string) {
-  const parts = text.split(/\*\*([^*]+)\*\*/g);
+  const combined = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|!\[[^\]]*\]\([^)]+\))/g;
+  const parts = text.split(combined);
+
   return parts.map((part, index) => {
     if (index % 2 === 1) {
-      return (
-        <strong key={index} className="font-extrabold text-gray-900">
-          {part}
-        </strong>
-      );
+      // Bold
+      const boldMatch = part.match(/^\*\*([^*]+)\*\*$/);
+      if (boldMatch) {
+        return (
+          <strong key={index} className="font-extrabold text-gray-900">
+            {boldMatch[1]}
+          </strong>
+        );
+      }
+      // Link
+      const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      if (linkMatch) {
+        return (
+          <a
+            key={index}
+            href={linkMatch[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#990202] font-semibold underline underline-offset-2 hover:text-[#B91C1C] transition-colors"
+          >
+            {linkMatch[1]}
+          </a>
+        );
+      }
+      // Inline Image
+      const imgMatch = part.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+      if (imgMatch) {
+        return (
+          <img
+            key={index}
+            src={imgMatch[2]}
+            alt={imgMatch[1] || ""}
+            className="max-w-full rounded-xl my-2 inline-block align-middle"
+            loading="lazy"
+          />
+        );
+      }
     }
     return part;
   });
@@ -223,6 +277,14 @@ function extractHeadings(text: string) {
 const CATEGORY_MAP: Record<string, string> = {
   "Pendirian PT": "Pendirian Usaha",
   "Legalitas PT": "Pendirian Usaha",
+  "CV": "Pendirian Usaha",
+  "PT Perorangan": "Pendirian Usaha",
+  "PT PMA": "Pendirian Usaha",
+  "Firma": "Pendirian Usaha",
+  "Perkumpulan": "Pendirian Usaha",
+  "Yayasan": "Pendirian Usaha",
+  "Koperasi": "Pendirian Usaha",
+  "UMKM": "Pendirian Usaha",
   "Merek & HAKI": "Haki",
   "Sertifikasi ISO": "ISO",
   "KBLI": "Perizinan",

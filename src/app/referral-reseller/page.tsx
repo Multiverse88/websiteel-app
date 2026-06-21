@@ -721,7 +721,7 @@ export default function ReferralResellerPage() {
                 “
               </div>
               <p className="text-[13.5px] sm:text-[14px] text-gray-600 font-medium leading-relaxed flex-grow">
-                Sebagai konsultan UMKM, saya sering ditanyai "gimana cara daftar PT?" — sebelumnya saya kasih info gratis. Sekarang dengan kode referral EasyLegal, klien tetap dapat diskon, saya dapat komisi. <strong className="font-extrabold text-gray-900">Pure win-win.</strong>
+                Sebagai konsultan UMKM, saya sering ditanyai &quot;gimana cara daftar PT?&quot; — sebelumnya saya kasih info gratis. Sekarang dengan kode referral EasyLegal, klien tetap dapat diskon, saya dapat komisi. <strong className="font-extrabold text-gray-900">Pure win-win.</strong>
               </p>
               <div>
                 <div className="border-t border-dashed border-gray-200/80 my-5" />

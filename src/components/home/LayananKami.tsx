@@ -94,6 +94,7 @@ export default function LayananKami() {
                   src="/Logo EL.png" 
                   alt="EL Icon" 
                   fill
+                  sizes="24px"
                   className="object-cover scale-150" 
                   style={{ objectPosition: "center 22%" }}
                 />

@@ -184,7 +184,7 @@ export default function PressRelease() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
+    <div className="has-service-cta flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
 
       {/* ─── 1. HERO SECTION ─── */}
       <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 border-b border-gray-200/50 overflow-hidden relative">
@@ -311,7 +311,7 @@ export default function PressRelease() {
                         <span className="text-[9px] font-extrabold text-[#990202] tracking-wider uppercase">BREAKING · 14 MEI 2026</span>
                       </div>
                       <h4 className="text-[15.5px] font-black text-white mt-2.5 leading-snug">
-                        "Startup UMKM Indonesia Catat Pertumbuhan Pesat di Kuartal Pertama 2026"
+                        &quot;Startup UMKM Indonesia Catat Pertumbuhan Pesat di Kuartal Pertama 2026&quot;
                       </h4>
                       <p className="text-[11px] text-gray-400 leading-relaxed font-semibold mt-2">
                         Liputan eksklusif tentang ekspansi bisnis Anda — terbit permanen di media nasional pilihan dengan jangkauan jutaan pembaca.

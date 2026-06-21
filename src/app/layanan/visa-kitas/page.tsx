@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import {
   Briefcase,
@@ -25,7 +24,6 @@ import {
   HelpCircle,
   ChevronUp
 } from "lucide-react";
-import FadeIn from "@/components/FadeIn";
 
 export default function VisaKitas() {
   // State for interactive Pricing filter tabs
@@ -162,7 +160,7 @@ export default function VisaKitas() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
+    <div className="has-service-cta flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
       
       {/* ─── 1. HERO SECTION ─── */}
       <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 border-b border-gray-200/50 overflow-hidden relative">
@@ -532,7 +530,6 @@ export default function VisaKitas() {
 
           {/* Packages Display Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto items-stretch">
-            <AnimatePresence>
               {pricingData[activeCategory].map((pkg, idx) => {
                 const isFirst = idx === 0;
                 const cardBorder = isFirst
@@ -540,13 +537,10 @@ export default function VisaKitas() {
                   : "shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
 
                 return (
-                  <motion.div
+                  <div
                     key={`${activeCategory}-${idx}`}
-                    initial={{ opacity: 0, y: 20, scale: 0.92 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -20, scale: 0.92 }}
-                    transition={{ duration: 0.5, delay: idx * 0.12 }}
-                    className="relative group h-full"
+                    className="relative group h-full animate-fade-in-up"
+                    style={{ animationDelay: `${idx * 0.12}s` }}
                   >
                   {/* Interactive Red Hover Glow behind Card */}
                   <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
@@ -661,10 +655,9 @@ export default function VisaKitas() {
                       </a>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
-            </AnimatePresence>
           </div>
 
           {/* Pricing Bottom Warning Alert */}

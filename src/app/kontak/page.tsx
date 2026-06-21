@@ -162,11 +162,11 @@ export default function Kontak() {
             </div>
 
             <h1 className="font-inter text-[36px] sm:text-[44px] lg:text-[48px] font-extrabold text-gray-950 leading-tight tracking-tight mt-6">
-              Mari bicarakan kebutuhan <span className="text-[#990202]">legal bisnis</span> Anda.
+              Mari Bicarakan Kebutuhan <span className="text-[#990202]">Legal Bisnis</span> Anda.
             </h1>
-            
+              
             <p className="text-[15.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
-              Tim kami siap membantu — dari pertanyaan teknis sampai konsultasi mendalam. Pilih cara yang paling nyaman untuk Anda.
+              Tim kami akan menjelaskan semua yang Anda butuhkan. Pilih cara yang paling nyaman untuk Anda.
             </p>
           </div>
 

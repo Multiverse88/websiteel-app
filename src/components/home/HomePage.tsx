@@ -6,7 +6,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
+
 import InformasiHukumSection, { ArticleItem } from "@/components/home/InformasiHukumSection";
 import LayananKami from "@/components/home/LayananKami";
 import Hero from "@/components/home/Hero";
@@ -35,14 +35,21 @@ import {
 
 function VideoEmbedSection() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setRevealed(true); obs.unobserve(el); }
+    }, { rootMargin: "-50px" });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: 0.15 }}
-    >
+    <div ref={ref} className={`animate-scroll-reveal ${revealed ? "revealed" : ""}`}>
       <div className="group relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-gray-100 hover:shadow-[0_25px_70px_rgba(0,0,0,0.12)] transition-all duration-500">
         <div className="relative aspect-video w-full bg-black overflow-hidden">
           <iframe
@@ -76,7 +83,7 @@ function VideoEmbedSection() {
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -153,20 +160,10 @@ function CaraKerjaSection() {
                     className="border-b border-gray-100 py-5 transition-all duration-300"
                   >
                     {isActive ? (
-                      <motion.div 
-                        className="flex flex-col text-left"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-                      >
-                        {/* Active Header with Red Arrow */}
-                        <motion.button 
+                      <div className="flex flex-col text-left animate-fade-in">
+                        <button 
                           onClick={() => setActiveStep(idx)}
                           className="flex items-center gap-3 text-left group"
-                          initial={{ x: -10, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          transition={{ duration: 0.3, delay: 0.05 }}
                         >
                           <span className="text-[#B91C1C] text-[18px] font-extrabold transition-transform duration-200 group-hover:translate-x-1">
                             →
@@ -174,36 +171,31 @@ function CaraKerjaSection() {
                           <span className="text-[17px] font-black text-[#111827]">
                             {step.title}
                           </span>
-                        </motion.button>
+                        </button>
                         
-                        {/* Expanded details */}
-                        <motion.div 
-                          className="mt-3 pl-7 overflow-hidden"
-                          initial={{ opacity: 0, y: -8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.35, delay: 0.1 }}
+                        <div 
+                          className="mt-3 pl-7 overflow-hidden animate-fade-in-up"
+                          style={{ animationDelay: "0.1s" }}
                         >
                           <p className="text-[13px] text-[#6B7280] font-medium leading-relaxed mb-4">
                             {step.description}
                           </p>
                           <ul className="space-y-3">
                             {step.features.map((feat, fidx) => (
-                              <motion.li 
+                              <li 
                                 key={fidx} 
-                                className="flex items-start gap-3 text-[13px] text-gray-700 leading-snug"
-                                initial={{ opacity: 0, x: -12 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.3, delay: 0.15 + fidx * 0.08 }}
+                                className="flex items-start gap-3 text-[13px] text-gray-700 leading-snug animate-fade-in-up"
+                                style={{ animationDelay: `${0.15 + fidx * 0.08}s` }}
                               >
                                 <div className="w-5 h-5 rounded-full bg-[#DCFCE7] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm border border-emerald-100">
                                   <Check className="w-3.5 h-3.5 text-[#16A34A]" strokeWidth={3} />
                                 </div>
                                 <span className="font-medium text-gray-600">{feat}</span>
-                              </motion.li>
+                              </li>
                             ))}
                           </ul>
-                        </motion.div>
-                      </motion.div>
+                        </div>
+                      </div>
                     ) : (
                       /* Inactive Item Row */
                       <button
@@ -226,18 +218,10 @@ function CaraKerjaSection() {
 
           {/* RIGHT: Overlapping layered dashboard composition */}
           <div className="lg:col-span-7 relative w-full h-[520px] flex items-center justify-center scale-90 sm:scale-100 origin-center transition-all duration-500">
-            <AnimatePresence mode="wait">
             
             {/* Step 1 Visual Container */}
             {activeStep === 0 && (
-              <motion.div 
-                key="step-0" 
-                className="absolute inset-0 w-full h-full"
-                initial={{ opacity: 0, scale: 0.96, x: 30 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                exit={{ opacity: 0, scale: 0.96, x: -30 }}
-                transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-              >
+              <div key="step-0" className="absolute inset-0 w-full h-full animate-step-in">
                 {/* Orange backdrop offset rectangle */}
                 <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#F2994A] to-[#F2C94C] shadow-lg opacity-95 transition-all duration-500" />
                 
@@ -373,19 +357,12 @@ function CaraKerjaSection() {
                     <div className="text-[8px] text-gray-400 font-bold mt-0.5 truncate">Tahap 3/4 · 2 hari lagi</div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
 
             {/* Step 2 Visual Container */}
             {activeStep === 1 && (
-              <motion.div 
-                key="step-1" 
-                className="absolute inset-0 w-full h-full"
-                initial={{ opacity: 0, scale: 0.96, x: 30 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                exit={{ opacity: 0, scale: 0.96, x: -30 }}
-                transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-              >
+              <div key="step-1" className="absolute inset-0 w-full h-full animate-step-in">
                 {/* Blue/Warm backdrop offset rectangle */}
                 <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#1E3A8A] to-[#3B82F6] shadow-lg opacity-90 transition-all duration-500" />
                 
@@ -507,19 +484,12 @@ function CaraKerjaSection() {
                     <div className="text-[8px] text-gray-400 font-bold mt-0.5 truncate">Hari ini · 14:00 WIB</div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
 
             {/* Step 3 Visual Container */}
             {activeStep === 2 && (
-              <motion.div 
-                key="step-2" 
-                className="absolute inset-0 w-full h-full"
-                initial={{ opacity: 0, scale: 0.96, x: 30 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                exit={{ opacity: 0, scale: 0.96, x: -30 }}
-                transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-              >
+              <div key="step-2" className="absolute inset-0 w-full h-full animate-step-in">
                 {/* Purple backdrop offset rectangle */}
                 <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#0F172A] to-[#334155] shadow-lg opacity-90 transition-all duration-500" />
                 
@@ -639,19 +609,12 @@ function CaraKerjaSection() {
                     <div className="text-[8px] text-gray-400 font-bold mt-0.5 truncate">Oleh Tim Ahli Legal</div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
 
             {/* Step 4 Visual Container */}
             {activeStep === 3 && (
-              <motion.div 
-                key="step-3" 
-                className="absolute inset-0 w-full h-full"
-                initial={{ opacity: 0, scale: 0.96, x: 30 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                exit={{ opacity: 0, scale: 0.96, x: -30 }}
-                transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-              >
+              <div key="step-3" className="absolute inset-0 w-full h-full animate-step-in">
                 {/* Green backdrop offset rectangle */}
                 <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#064E3B] to-[#10B981] shadow-lg opacity-90 transition-all duration-500" />
                 
@@ -770,10 +733,9 @@ function CaraKerjaSection() {
                     <div className="text-[8px] text-gray-400 font-bold mt-0.5 truncate">Bisnis Siap Jalan!</div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
 
-            </AnimatePresence>
           </div>
 
         </div>
@@ -917,12 +879,15 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
       {/* ═══════════════════════════════════════════
           QUICK TOOLS — floating strip overlapping hero
           ═══════════════════════════════════════════ */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-20 -mt-10"
+      <div
+        className="relative z-20 -mt-10 animate-scroll-reveal"
+        ref={(el) => {
+          if (!el) return;
+          const obs = new IntersectionObserver(([e]) => {
+            if (e.isIntersecting) { el.classList.add("revealed"); obs.unobserve(el); }
+          }, { rootMargin: "0px 0px -30% 0px" });
+          obs.observe(el);
+        }}
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#EAEAEA] rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.03)] overflow-hidden">
@@ -977,17 +942,20 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* ═══════════════════════════════════════════
           PARTNER BAR
           ═══════════════════════════════════════════ */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="bg-white py-5"
+      <section
+        className="bg-white py-5 animate-scroll-reveal-fade"
+        ref={(el) => {
+          if (!el) return;
+          const obs = new IntersectionObserver(([e]) => {
+            if (e.isIntersecting) { el.classList.add("revealed"); obs.unobserve(el); }
+          });
+          obs.observe(el);
+        }}
       >
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
@@ -1003,7 +971,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* ═══════════════════════════════════════════
           LAYANAN KAMI
@@ -1022,12 +990,15 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-14 text-left"
+          <div
+            className="mb-14 text-left animate-scroll-reveal"
+            ref={(el) => {
+              if (!el) return;
+              const obs = new IntersectionObserver(([e]) => {
+                if (e.isIntersecting) { el.classList.add("revealed"); obs.unobserve(el); }
+              }, { rootMargin: "0px 0px -50px 0px" });
+              obs.observe(el);
+            }}
           >
             <span className="text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
               KENAPA EASYLEGAL
@@ -1038,7 +1009,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             <p className="text-[15px] text-[#6B7280] mt-3 max-w-2xl leading-relaxed">
               Bukan sekadar urus dokumen — kami partner legal yang menyederhanakan proses, transparan dalam biaya, dan responsif kapan saja.
             </p>
-          </motion.div>
+          </div>
 
           {/* Premium Custom Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -1280,12 +1251,15 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
         <div className="max-w-[1040px] mx-auto px-6 sm:px-8">
 
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12 space-y-3"
+          <div
+            className="text-center mb-12 space-y-3 animate-scroll-reveal"
+            ref={(el) => {
+              if (!el) return;
+              const obs = new IntersectionObserver(([e]) => {
+                if (e.isIntersecting) { el.classList.add("revealed"); obs.unobserve(el); }
+              }, { rootMargin: "-50px" });
+              obs.observe(el);
+            }}
           >
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#B91C1C]" />
@@ -1298,7 +1272,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             <p className="text-[15px] text-gray-500 leading-relaxed max-w-xl mx-auto font-medium">
               Tonton cerita singkat kami — proses, layanan, dan bukti nyata ribuan klien terlayani.
             </p>
-          </motion.div>
+          </div>
 
           {/* Video Card */}
           <VideoEmbedSection />

@@ -71,7 +71,7 @@ export default function PengajuanPkp() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="has-service-cta flex flex-col min-h-screen">
       
       {/* ─── 1. HERO SECTION ─── */}
       <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 border-b border-gray-200/40 overflow-hidden relative">

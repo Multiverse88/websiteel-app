@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
@@ -20,12 +20,15 @@ interface TableOfContentsProps {
 
 export default function TableOfContents({ headings }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("");
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     if (headings.length === 0) return;
 
-    // Set initial active ID
-    setActiveId(headings[0].id);
+    if (!initializedRef.current) {
+      initializedRef.current = true;
+      setActiveId(headings[0].id);
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {

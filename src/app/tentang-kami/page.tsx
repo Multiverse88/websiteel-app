@@ -237,18 +237,18 @@ export default function TentangKami() {
               <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">Cerita Kami</p>
               
               <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-                Lahir dari pengalaman{" "}
+                Lahir Dari Pengalaman{" "}
                 <span className="text-[#990202]">
-                  mengurus PT sendiri.
+                  Mengurus PT Sendiri.
                 </span>
               </h2>
               
               <p className="text-[15.5px] text-gray-600 leading-relaxed font-normal">
-                Founder kami pernah mengalaminya — bolak-balik ke notaris, antri panjang di kantor pemerintah, dan kebingungan dengan biaya yang tidak transparan. Kami pikir, kalau kami yang punya akses dan jaringan saja kesulitan, bagaimana dengan pelaku UMKM lain?
+                Founder kami pernah mengalaminya — bolak-balik ke notaris, antre panjang di kantor pemerintah, dan kebingungan dengan biaya yang tidak transparan. Kami pikir, kalau kami yang punya akses dan jaringan saja kesulitan, bagaimana dengan pelaku UMKM lain?
               </p>
               
               <p className="text-[15.5px] text-gray-600 leading-relaxed font-normal">
-                Dari sanalah <strong className="font-extrabold text-gray-900">EasyLegal.id</strong> dibangun: sebuah platform yang memudahkan akses legalitas untuk semua pengusaha Indonesia. Mulai dari pendirian PT, NIB, pendaftaran merek, hingga sertifikasi ISO — semua bisa diurus online dengan harga yang transparan.
+                Dari sanalah <strong className="font-extrabold text-gray-900">EasyLegal.id</strong> dibangun: sebuah platform yang memudahkan akses legalitas untuk semua pengusaha Indonesia. Lebih dari 11.000 UMKM mengurus perizinan, pendirian badan usaha, hingga sertifikasi ISO — semua bisa diurus online dengan harga yang transparan.
               </p>
 
               {/* Trust points list */}

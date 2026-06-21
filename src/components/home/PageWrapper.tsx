@@ -2,6 +2,8 @@ import { prisma } from "@/lib/db";
 import HomePage from "./HomePage";
 import type { ArticleItem } from "./InformasiHukumSection";
 
+export const revalidate = 60;
+
 export default async function PageWrapper() {
   let articles: ArticleItem[] = [];
 

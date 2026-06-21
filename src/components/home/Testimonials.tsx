@@ -2,8 +2,8 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
-import { Star, Check, ChevronLeft, ChevronRight } from "lucide-react";
+import gsap from "gsap";
+import { Star, Check } from "lucide-react";
 import { row1Reviews, row2Reviews, trustedBy } from "./data";
 
 function ReviewCard({ item }: { item: typeof row1Reviews[0] }) {
@@ -57,72 +57,88 @@ function ReviewCard({ item }: { item: typeof row1Reviews[0] }) {
   );
 }
 
-function DraggableRow({ items, direction }: { items: typeof row1Reviews; direction: "left" | "right" }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [autoplay, setAutoplay] = useState(true);
-  const speed = direction === "left" ? -0.5 : 0.5;
-
-  useAnimationFrame((_, delta) => {
-    if (!autoplay || isDragging) return;
-    const current = x.get();
-    const cardWidth = 380;
-    const totalWidth = items.length * cardWidth;
-
-    if (direction === "left") {
-      if (current <= -totalWidth) x.set(0);
-      else x.set(current + speed * (delta / 16));
-    } else {
-      if (current >= 0) x.set(-totalWidth);
-      else x.set(current + speed * (delta / 16));
-    }
-  });
-
-  useEffect(() => {
-    if (isDragging) {
-      setAutoplay(false);
-    } else {
-      const timer = setTimeout(() => setAutoplay(true), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [isDragging]);
-
+function AutoScrollRow({ items, direction }: { items: typeof row1Reviews; direction: "left" | "right" }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
   const duplicated = [...items, ...items, ...items, ...items];
 
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const cardWidth = 380;
+    const totalWidth = items.length * cardWidth;
+    const startX = direction === "left" ? 0 : -totalWidth;
+    const endX = direction === "left" ? -totalWidth : 0;
+
+    gsap.set(track, { x: startX });
+
+    const tween = gsap.to(track, {
+      x: endX,
+      duration: (totalWidth / 50),
+      ease: "none",
+      repeat: -1,
+    });
+
+    const handlePause = () => { setIsPaused(true); tween.pause(); };
+    const handleResume = () => { setIsPaused(false); tween.resume(); };
+
+    track.addEventListener("pointerenter", handlePause);
+    track.addEventListener("pointerleave", handleResume);
+
+    return () => {
+      tween.kill();
+      track.removeEventListener("pointerenter", handlePause);
+      track.removeEventListener("pointerleave", handleResume);
+    };
+  }, [direction, items.length]);
+
   return (
-    <div ref={containerRef} className="relative group">
+    <div className="relative group">
       <div className="overflow-hidden">
-        <motion.div
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.15}
-          onDragStart={() => setIsDragging(true)}
-          onDragEnd={() => setIsDragging(false)}
-          style={{ x }}
-          className="flex cursor-grab active:cursor-grabbing"
-        >
+        <div ref={trackRef} className="flex cursor-grab active:cursor-grabbing">
           {duplicated.map((item, idx) => (
             <ReviewCard key={`${item.name}-${direction}-${idx}`} item={item} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );
 }
 
 export default function Testimonials() {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const rowsRef = useRef<HTMLDivElement>(null);
+  const trustedRef = useRef<HTMLElement>(null);
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const [rowsVisible, setRowsVisible] = useState(false);
+  const [trustedVisible, setTrustedVisible] = useState(false);
+
+  useEffect(() => {
+    const els = [
+      { el: headerRef.current, set: setHeaderVisible },
+      { el: rowsRef.current, set: setRowsVisible },
+      { el: trustedRef.current, set: setTrustedVisible },
+    ];
+    const observers: IntersectionObserver[] = [];
+    els.forEach(({ el, set }) => {
+      if (!el) return;
+      const obs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { set(true); obs.unobserve(el); }
+      }, { rootMargin: "0px 0px -50px 0px" });
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   return (
     <>
       <section className="py-20 bg-[#F9FAFB] overflow-hidden relative">
-
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-14"
+          <div
+            ref={headerRef}
+            className={`mb-14 transition-all duration-600 ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
           >
             <span className="text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
               TESTIMONI
@@ -133,40 +149,24 @@ export default function Testimonials() {
             <p className="text-[14.5px] text-[#6B7280] mt-4 max-w-[620px] mx-auto leading-relaxed">
               Dari UMKM kuliner sampai startup teknologi — semua percayakan urusan legalnya ke EasyLegal.
             </p>
-          </motion.div>
+          </div>
         </div>
 
-        <div className="relative w-full overflow-hidden flex flex-col gap-2 mt-4 py-8 marquee-container">
+        <div
+          ref={rowsRef}
+          className={`relative w-full overflow-hidden flex flex-col gap-2 mt-4 py-8 transition-all duration-700 delay-150 ${rowsVisible ? "opacity-100" : "opacity-0"}`}
+        >
           <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
 
-          <motion.div
-            initial={{ opacity: 0, x: -80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <DraggableRow items={row1Reviews} direction="left" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-          >
-            <DraggableRow items={row2Reviews} direction="right" />
-          </motion.div>
+          <AutoScrollRow items={row1Reviews} direction="left" />
+          <AutoScrollRow items={row2Reviews} direction="right" />
         </div>
       </section>
 
-      {/* TRUSTED BY */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="py-12 bg-bg-light border-y border-border"
+      <section
+        ref={trustedRef}
+        className={`py-12 bg-bg-light border-y border-border transition-all duration-600 ${trustedVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
       >
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center">
           <p className="text-[12px] text-muted mb-8 font-medium uppercase tracking-widest">
@@ -180,7 +180,7 @@ export default function Testimonials() {
             ))}
           </div>
         </div>
-      </motion.section>
+      </section>
     </>
   );
 }

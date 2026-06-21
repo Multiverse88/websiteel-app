@@ -60,7 +60,7 @@ export default function HowItWorks() {
               Cara Kerja
             </span>
             <h2 className="text-[34px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.12] tracking-[-0.02em]">
-              Empat langkah, semua beres<br />tanpa pusing.
+              Empat Langkah, Semua Beres<br />Tanpa Pusing.
             </h2>
             <p className="mt-4 text-[14.5px] text-[#6B7280] leading-relaxed max-w-[460px]">
               Proses transparan dari konsultasi sampai dokumen di tangan Anda — semua bisa dipantau dari satu dashboard.

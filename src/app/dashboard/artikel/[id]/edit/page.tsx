@@ -3,8 +3,9 @@
 import React, { useState, useRef, useTransition, useEffect } from "react";
 import Link from "next/link";
 import ImageComponent from "next/image";
-import { ArrowLeft, Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2 } from "lucide-react";
+import { ArrowLeft, Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2, ExternalLink } from "lucide-react";
 import { updateArticle, getArticle } from "./actions";
+import { compressImageFile } from "@/lib/compress-image";
 
 const IMAGE_PRESETS = [
   {
@@ -27,6 +28,22 @@ const IMAGE_PRESETS = [
 
 type CoverMode = "upload" | "url";
 
+function wrapExistingImages(container: HTMLElement) {
+  container.querySelectorAll("img").forEach(img => {
+    if (img.closest(".img-wrapper")) return;
+    const wrapper = document.createElement("div");
+    wrapper.className = "img-wrapper";
+    wrapper.style.position = "relative";
+    wrapper.style.margin = "16px 0";
+    const overlay = document.createElement("div");
+    overlay.className = "img-overlay";
+    overlay.innerHTML = `<button type="button" data-img-action="edit" class="img-btn img-btn-edit">Ganti</button><button type="button" data-img-action="delete" class="img-btn img-btn-delete">Hapus</button>`;
+    img.parentNode?.insertBefore(wrapper, img);
+    wrapper.appendChild(img);
+    wrapper.appendChild(overlay);
+  });
+}
+
 type ArticleData = {
   id: string;
   title: string;
@@ -42,6 +59,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isCompressing, setIsCompressing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const editorRef = useRef<HTMLDivElement>(null);
 
@@ -58,6 +76,19 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
   const [readTime, setReadTime] = useState("5 menit baca");
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
+
+  // Link insertion state
+  const [showLinkModal, setShowLinkModal] = useState(false);
+  const [linkUrl, setLinkUrl] = useState("");
+  const savedSelectionRef = useRef<{ range: Range; rect: DOMRect | null } | null>(null);
+
+  // Image insertion state
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageAlt, setImageAlt] = useState("");
+  const imageFileInputRef = useRef<HTMLInputElement>(null);
+  const editingImageRef = useRef<HTMLImageElement | null>(null);
+  const [isEditingImage, setIsEditingImage] = useState(false);
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -78,6 +109,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
         setTimeout(() => {
           if (editorRef.current) {
             editorRef.current.innerHTML = markdownToHtml(article.content || "");
+            wrapExistingImages(editorRef.current);
           }
         }, 100);
       }
@@ -99,19 +131,218 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
     }
   };
 
-  const handleFileSelect = (file: File) => {
+  const handleOpenLinkModal = () => {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0) {
+      const range = sel.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+      savedSelectionRef.current = { range: range.cloneRange(), rect };
+
+      const editor = editorRef.current;
+      if (editor && editor.contains(range.commonAncestorContainer)) {
+        setLinkUrl("");
+        setShowLinkModal(true);
+      }
+    }
+  };
+
+  const handleApplyLink = () => {
+    if (!linkUrl.trim()) return;
+
+    const url = linkUrl.trim();
+    const saved = savedSelectionRef.current;
+    if (!saved) return;
+
+    const sel = window.getSelection();
+    if (sel) {
+      sel.removeAllRanges();
+      sel.addRange(saved.range);
+    }
+
+    const range = saved.range;
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    range.surroundContents(a);
+
+    setShowLinkModal(false);
+    setLinkUrl("");
+    savedSelectionRef.current = null;
+    handleEditorInput();
+  };
+
+  const handleRemoveLink = () => {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0) {
+      const range = sel.getRangeAt(0);
+      const editor = editorRef.current;
+      if (editor && editor.contains(range.commonAncestorContainer)) {
+        let node: HTMLElement | null = range.commonAncestorContainer as HTMLElement;
+        while (node && node !== editor) {
+          if (node.nodeName === "A") {
+            const parent = node.parentNode;
+            while (node.firstChild) {
+              parent?.insertBefore(node.firstChild, node);
+            }
+            parent?.removeChild(node);
+            handleEditorInput();
+            return;
+          }
+          node = node.parentElement;
+        }
+      }
+    }
+  };
+
+  const handleOpenImageModal = () => {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0) {
+      const range = sel.getRangeAt(0);
+      const editor = editorRef.current;
+      if (editor && editor.contains(range.commonAncestorContainer)) {
+        savedSelectionRef.current = { range: range.cloneRange(), rect: range.getBoundingClientRect() };
+      }
+    }
+    editingImageRef.current = null;
+    setIsEditingImage(false);
+    setImageUrl("");
+    setImageAlt("");
+    setShowImageModal(true);
+  };
+
+  const handleOpenEditImage = (img: HTMLImageElement) => {
+    editingImageRef.current = img;
+    setIsEditingImage(true);
+    setImageUrl(img.src);
+    setImageAlt(img.alt === "Gambar artikel" ? "" : img.alt);
+    setShowImageModal(true);
+  };
+
+  const handleDeleteImage = (img: HTMLImageElement) => {
+    const wrapper = img.closest(".img-wrapper");
+    if (wrapper) {
+      wrapper.replaceWith(document.createTextNode(""));
+    } else {
+      img.remove();
+    }
+    handleEditorInput();
+  };
+
+  const handleInsertImage = () => {
+    if (!imageUrl.trim()) return;
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    const editing = editingImageRef.current;
+    if (editing) {
+      editing.src = imageUrl.trim();
+      editing.alt = imageAlt.trim() || "Gambar artikel";
+    } else {
+      editor.focus();
+      const saved = savedSelectionRef.current;
+      if (saved) {
+        const sel = window.getSelection();
+        if (sel) {
+          sel.removeAllRanges();
+          sel.addRange(saved.range);
+        }
+      }
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount > 0) {
+        const range = sel.getRangeAt(0);
+        if (editor.contains(range.commonAncestorContainer)) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "img-wrapper";
+          wrapper.style.position = "relative";
+          wrapper.style.margin = "16px 0";
+
+          const img = document.createElement("img");
+          img.src = imageUrl.trim();
+          img.alt = imageAlt.trim() || "Gambar artikel";
+          img.style.maxWidth = "100%";
+          img.style.borderRadius = "12px";
+          img.style.display = "block";
+
+          const overlay = document.createElement("div");
+          overlay.className = "img-overlay";
+          overlay.innerHTML = `<button type="button" data-img-action="edit" class="img-btn img-btn-edit">Ganti</button><button type="button" data-img-action="delete" class="img-btn img-btn-delete">Hapus</button>`;
+
+          wrapper.appendChild(img);
+          wrapper.appendChild(overlay);
+          range.deleteContents();
+          range.insertNode(wrapper);
+
+          const p = document.createElement("p");
+          p.innerHTML = "<br>";
+          wrapper.after(p);
+          const newRange = document.createRange();
+          newRange.setStart(p, 0);
+          sel.removeAllRanges();
+          sel.addRange(newRange);
+        }
+      }
+    }
+    handleEditorInput();
+    savedSelectionRef.current = null;
+    setShowImageModal(false);
+    setImageUrl("");
+    setImageAlt("");
+    editingImageRef.current = null;
+    setIsEditingImage(false);
+  };
+
+  const handleEditorClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const action = target.getAttribute("data-img-action");
+    if (!action) return;
+    const wrapper = target.closest(".img-wrapper");
+    if (!wrapper) return;
+    const img = wrapper.querySelector("img");
+    if (!img) return;
+    if (action === "edit") {
+      handleOpenEditImage(img as HTMLImageElement);
+    } else if (action === "delete") {
+      handleDeleteImage(img as HTMLImageElement);
+    }
+  };
+
+  const handleImageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
     if (!file.type.startsWith("image/")) {
       setError("Format file tidak didukung! Gunakan gambar.");
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-      setError("Ukuran gambar maksimal 5MB!");
+    setError(null);
+    setIsCompressing(true);
+    try {
+      const compressed = await compressImageFile(file);
+      setImageUrl(URL.createObjectURL(compressed));
+    } catch {
+      setError("Gagal mengompres gambar.");
+    } finally {
+      setIsCompressing(false);
+    }
+  };
+
+  const handleFileSelect = async (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      setError("Format file tidak didukung! Gunakan gambar.");
       return;
     }
     setError(null);
-    setCoverFile(file);
-    setCoverPreview(URL.createObjectURL(file));
-    setExistingCoverImage("");
+    setIsCompressing(true);
+    try {
+      const compressed = await compressImageFile(file);
+      setCoverFile(compressed);
+      setCoverPreview(URL.createObjectURL(compressed));
+      setExistingCoverImage("");
+    } catch {
+      setError("Gagal mengompres gambar.");
+    } finally {
+      setIsCompressing(false);
+    }
   };
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -288,11 +519,23 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       onChange={(e) => setCategory(e.target.value)}
                       className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[14.5px] focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-semibold text-gray-800"
                     >
-                      <option value="Legalitas PT">Legalitas PT</option>
-                      <option value="Merek & HAKI">Merek & HAKI</option>
-                      <option value="Sertifikasi ISO">Sertifikasi ISO</option>
-                      <option value="Pajak Bisnis">Pajak Bisnis</option>
-                      <option value="Virtual Office">Virtual Office</option>
+                      <optgroup label="Pendirian Usaha">
+                        <option value="Legalitas PT">Legalitas PT</option>
+                        <option value="CV">CV</option>
+                        <option value="PT Perorangan">PT Perorangan</option>
+                        <option value="PT PMA">PT PMA</option>
+                        <option value="Firma">Firma</option>
+                        <option value="Perkumpulan">Perkumpulan</option>
+                        <option value="Yayasan">Yayasan</option>
+                        <option value="Koperasi">Koperasi</option>
+                        <option value="UMKM">UMKM</option>
+                      </optgroup>
+                      <optgroup label="Lainnya">
+                        <option value="Merek & HAKI">Merek & HAKI</option>
+                        <option value="Sertifikasi ISO">Sertifikasi ISO</option>
+                        <option value="Pajak Bisnis">Pajak Bisnis</option>
+                        <option value="Virtual Office">Virtual Office</option>
+                      </optgroup>
                     </select>
                   </div>
                   <div className="space-y-2">
@@ -551,6 +794,36 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
+                      onClick={handleOpenLinkModal}
+                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Sisipkan Link"
+                    >
+                      <ExternalLink className="w-3 h-3 text-[#990202]" />
+                      <span>Link</span>
+                    </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={handleRemoveLink}
+                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Hapus Link dari Teks"
+                    >
+                      <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">~</span>
+                      <span>Hapus Link</span>
+                    </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={handleOpenImageModal}
+                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Sisipkan Gambar"
+                    >
+                      <ImageIcon className="w-3 h-3 text-[#990202]" />
+                      <span>Gambar</span>
+                    </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertUnorderedList")}
                       className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan List Poin"
@@ -585,10 +858,143 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       ref={editorRef}
                       contentEditable={true}
                       onInput={handleEditorInput}
+                      onClick={handleEditorClick}
                       data-placeholder="Tuliskan isi lengkap artikel Anda di sini..."
                       className="w-full bg-white px-4 py-3.5 text-[14.5px] focus:outline-none transition-all font-medium text-gray-950 min-h-[350px] max-h-[600px] overflow-y-auto prose-editor"
                     />
                   </div>
+
+                  {/* Link Insertion Modal */}
+                  {showLinkModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" onMouseDown={(e) => { if (e.target === e.currentTarget) { setShowLinkModal(false); setLinkUrl(""); } }}>
+                      <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-5 w-full max-w-md mx-4">
+                        <div className="flex items-center gap-2 mb-4">
+                          <ExternalLink className="w-4 h-4 text-[#990202]" />
+                          <h3 className="text-[14px] font-extrabold text-gray-900">Sisipkan Link</h3>
+                        </div>
+                        <input
+                          type="url"
+                          value={linkUrl}
+                          onChange={(e) => setLinkUrl(e.target.value)}
+                          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleApplyLink(); } }}
+                          placeholder="https://example.com"
+                          autoFocus
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[14px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                        />
+                        <div className="flex justify-end gap-2 mt-4">
+                          <button
+                            type="button"
+                            onClick={() => { setShowLinkModal(false); setLinkUrl(""); }}
+                            className="px-4 py-2 text-[13px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
+                          >
+                            Batal
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleApplyLink}
+                            disabled={!linkUrl.trim()}
+                            className="px-4 py-2 bg-[#990202] text-white text-[13px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                          >
+                            Pasang Link
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Image Insertion Modal */}
+                  {showImageModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" onMouseDown={(e) => { if (e.target === e.currentTarget) { setShowImageModal(false); setImageUrl(""); setImageAlt(""); } }}>
+                      <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-5 w-full max-w-md mx-4">
+                        <div className="flex items-center gap-2 mb-4">
+                          <ImageIcon className="w-4 h-4 text-[#990202]" />
+                          <h3 className="text-[14px] font-extrabold text-gray-900">{isEditingImage ? "Ganti Gambar" : "Sisipkan Gambar"}</h3>
+                        </div>
+
+                        <div className="mb-4">
+                          <label className="text-[12px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Upload File</label>
+                          <input
+                            ref={imageFileInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageFileUpload}
+                            className="hidden"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => imageFileInputRef.current?.click()}
+                            disabled={isCompressing}
+                            className="w-full py-2.5 border-2 border-dashed border-gray-200 rounded-xl text-[13px] font-bold text-gray-500 hover:border-[#990202] hover:text-[#990202] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {isCompressing ? (
+                              <>
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                                <span>Mengompres gambar...</span>
+                              </>
+                            ) : (
+                              <>
+                                <Upload className="w-4 h-4" />
+                                <span>Pilih Gambar dari Komputer</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                        <div className="mb-4">
+                          <label className="text-[12px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Atau Input URL</label>
+                          <input
+                            type="url"
+                            value={imageUrl.startsWith("blob:") ? "" : imageUrl}
+                            onChange={(e) => setImageUrl(e.target.value)}
+                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInsertImage(); } }}
+                            placeholder="https://example.com/gambar.jpg"
+                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                          />
+                        </div>
+
+                        <div className="mb-4">
+                          <label className="text-[12px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Alt Text (Opsional)</label>
+                          <input
+                            type="text"
+                            value={imageAlt}
+                            onChange={(e) => setImageAlt(e.target.value)}
+                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInsertImage(); } }}
+                            placeholder="Deskripsi singkat gambar"
+                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                          />
+                        </div>
+
+                        {imageUrl && (
+                          <div className="mb-4 rounded-xl overflow-hidden border border-gray-100 bg-gray-50">
+                            <img
+                              src={imageUrl}
+                              alt={imageAlt || "Preview"}
+                              className="w-full max-h-[200px] object-contain"
+                              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                            />
+                          </div>
+                        )}
+
+                        <div className="flex justify-end gap-2 mt-4">
+                          <button
+                            type="button"
+                            onClick={() => { setShowImageModal(false); setImageUrl(""); setImageAlt(""); }}
+                            className="px-4 py-2 text-[13px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
+                          >
+                            Batal
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleInsertImage}
+                            disabled={!imageUrl.trim()}
+                            className="px-4 py-2 bg-[#990202] text-white text-[13px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                          >
+                            {isEditingImage ? "Ganti Gambar" : "Pasang Gambar"}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   
                   <style>{`
                     .prose-editor:empty::before {
@@ -678,6 +1084,70 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       border-top: 1px solid #e5e7eb !important;
                       margin-top: 20px !important;
                       margin-bottom: 20px !important;
+                    }
+                    .prose-editor a {
+                      color: #990202 !important;
+                      text-decoration: underline !important;
+                      text-underline-offset: 2px !important;
+                      font-weight: 600 !important;
+                      transition: color 0.15s !important;
+                    }
+                    .prose-editor a:hover {
+                      color: #B91C1C !important;
+                    }
+                    .prose-editor img {
+                      max-width: 100% !important;
+                      border-radius: 12px !important;
+                      margin: 0 !important;
+                      display: block !important;
+                      box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important;
+                    }
+                    .prose-editor .img-wrapper {
+                      position: relative !important;
+                      margin: 16px 0 !important;
+                      border-radius: 12px !important;
+                      overflow: hidden !important;
+                    }
+                    .prose-editor .img-overlay {
+                      position: absolute !important;
+                      top: 0 !important;
+                      left: 0 !important;
+                      right: 0 !important;
+                      bottom: 0 !important;
+                      background: rgba(0,0,0,0.4) !important;
+                      display: flex !important;
+                      align-items: center !important;
+                      justify-content: center !important;
+                      gap: 8px !important;
+                      opacity: 0 !important;
+                      transition: opacity 0.2s !important;
+                      border-radius: 12px !important;
+                    }
+                    .prose-editor .img-wrapper:hover .img-overlay {
+                      opacity: 1 !important;
+                    }
+                    .prose-editor .img-btn {
+                      padding: 6px 16px !important;
+                      border-radius: 8px !important;
+                      font-size: 12px !important;
+                      font-weight: 700 !important;
+                      cursor: pointer !important;
+                      border: none !important;
+                      transition: all 0.15s !important;
+                    }
+                    .prose-editor .img-btn-edit {
+                      background: white !important;
+                      color: #374151 !important;
+                    }
+                    .prose-editor .img-btn-edit:hover {
+                      background: #f3f4f6 !important;
+                    }
+                    .prose-editor .img-btn-delete {
+                      background: #dc2626 !important;
+                      color: white !important;
+                    }
+                    .prose-editor .img-btn-delete:hover {
+                      background: #b91c1c !important;
                     }
                   `}</style>
 
@@ -792,6 +1262,11 @@ function markdownToHtml(markdown: string): string {
       return "<hr>";
     }
     
+    const imgMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (imgMatch) {
+      return `<img src="${imgMatch[2]}" alt="${imgMatch[1]}" style="max-width:100%;border-radius:12px;margin:16px 0;display:block" />`;
+    }
+    
     if (trimmed.startsWith("### ")) {
       const text = trimmed.substring(4);
       return `<h3>${parseMarkdownInlineHtml(text)}</h3>`;
@@ -820,7 +1295,10 @@ function markdownToHtml(markdown: string): string {
 }
 
 function parseMarkdownInlineHtml(text: string): string {
-  return text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  let result = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:12px;margin:8px 0;display:inline-block;vertical-align:middle" />');
+  result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  result = result.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  return result;
 }
 
 function htmlToMarkdown(html: string): string {
@@ -842,6 +1320,14 @@ function htmlToMarkdown(html: string): string {
         const nodeName = el.nodeName.toUpperCase();
         if (nodeName === "STRONG" || nodeName === "B") {
           md += `**${el.textContent || ""}**`;
+        } else if (nodeName === "A") {
+          const href = el.getAttribute("href") || "#";
+          const linkText = el.textContent || "";
+          md += `[${linkText}](${href})`;
+        } else if (nodeName === "IMG") {
+          const src = el.getAttribute("src") || "";
+          const alt = el.getAttribute("alt") || "";
+          md += `![${alt}](${src})`;
         } else if (nodeName === "BR") {
           md += "\n";
         } else {
@@ -865,6 +1351,10 @@ function htmlToMarkdown(html: string): string {
       
       if (nodeName === "H3") {
         markdownBlocks.push(`### ${getInlineMarkdown(el)}`);
+      } else if (nodeName === "IMG") {
+        const src = el.getAttribute("src") || "";
+        const alt = el.getAttribute("alt") || "";
+        markdownBlocks.push(`![${alt}](${src})`);
       } else if (nodeName === "UL") {
         const items: string[] = [];
         Array.from(el.querySelectorAll("li")).forEach(li => {

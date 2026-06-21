@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { getWhatsAppLink } from "@/lib/config";
 
 interface CTAProps {
@@ -24,6 +23,17 @@ export default function CTA({
   contactText = "Hubungi Tim Kami",
   slaText = "Respons dalam 5 menit · Senin–Sabtu 08.00–20.00",
 }: CTAProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); } }, { rootMargin: "-50px" });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   const defaultTitle = (
     <h2 className="font-inter text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
       Siap mulai urus legalitas bisnis Anda?
@@ -34,14 +44,10 @@ export default function CTA({
 
   return (
     <section id="footer-cta" className="py-20 bg-white border-t border-gray-100 overflow-hidden relative">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5 }}
-        className="max-w-[1240px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-8"
+      <div
+        ref={ref}
+        className={`max-w-[1240px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-8 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
       >
-        
         {/* Left Column: Heading & Description */}
         <div className="flex flex-col text-left max-w-xl">
           {title || defaultTitle}
@@ -52,7 +58,6 @@ export default function CTA({
 
         {/* Right Column: CTA Buttons & SLA subtext */}
         <div className="flex flex-col items-start w-full lg:w-[380px] flex-shrink-0">
-          {/* WhatsApp Button */}
           <a
             href={waLink}
             target="_blank"
@@ -65,7 +70,6 @@ export default function CTA({
             <span>{whatsappText}</span>
           </a>
 
-          {/* Direct Contact Button */}
           <Link
             href={contactLink}
             className="w-full mt-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-[14.5px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
@@ -76,7 +80,6 @@ export default function CTA({
             </svg>
           </Link>
 
-          {/* Response SLA text with Green Tick */}
           <div className="flex items-center gap-1.5 mt-4 text-[11.5px] text-gray-500 font-bold leading-none pl-1">
             <svg className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -84,9 +87,7 @@ export default function CTA({
             <span>{slaText}</span>
           </div>
         </div>
-
-      </motion.div>
+      </div>
     </section>
   );
 }
-

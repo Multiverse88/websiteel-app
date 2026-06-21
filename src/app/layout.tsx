@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ChatwootWidget from "@/components/ChatwootWidget";
 import { DM_Sans, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -8,19 +9,19 @@ import ScrollManager from "@/components/ScrollManager";
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700", "800"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -48,21 +49,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function(d,t) {
-            var BASE_URL="https://chatwoot.easylegal.my.id";
-            var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=BASE_URL+"/packs/js/sdk.js";
-            g.async = true;
-            s.parentNode.insertBefore(g,s);
-            g.onload=function(){
-              window.chatwootSDK.run({
-                websiteToken: 'JSCtebHsqNj2LNdFf4kxAXcK',
-                baseUrl: BASE_URL
-              })
-            }
-          })(document,"script");
-        ` }} />
+        <ChatwootWidget />
       </body>
     </html>
   );

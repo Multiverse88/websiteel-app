@@ -20,13 +20,15 @@ All commands are run from `websiteel-app/`.
 | Start production server | `npm start` |
 | Lint | `npm run lint` (eslint, flat config in `eslint.config.mjs`) |
 | Type-check | `npx tsc --noEmit` |
+| Run smoke tests (Playwright) | `npm test` |
+| Run single test file | `npx playwright test tests/smoke.spec.ts` |
 | Apply migrations | `npx prisma migrate deploy` |
 | Create a new migration | `npx prisma migrate dev --name <name>` |
 | Seed the database | `npx prisma db seed` (configured in `package.json` → `prisma.seed`) |
 | Open Prisma Studio | `npx prisma studio` |
 | Run a single TS script | `npx tsx scripts/<file>.ts` |
 
-There is no test runner configured (no Jest/Vitest/Playwright). Lint is the only automated check.
+Playwright is configured for integration/smoke tests (runs via `npm test` or `npx playwright test`). Lint/type-check are configured.
 
 ## Environment & Database
 

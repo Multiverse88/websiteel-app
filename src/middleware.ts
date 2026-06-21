@@ -8,7 +8,7 @@ if (!JWT_SECRET) {
 }
 const secret = new TextEncoder().encode(JWT_SECRET);
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Only protect /dashboard routes

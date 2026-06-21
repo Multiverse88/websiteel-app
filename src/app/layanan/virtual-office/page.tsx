@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   Clock,
   DollarSign,
@@ -155,40 +154,31 @@ export default function VirtualOffice() {
 
           <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
             <div className="lg:w-[55%] text-left">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FEF2F2] border border-[#FEE2E2] mb-6"
+              <div 
+                className="animate-fade-in-up inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FEF2F2] border border-[#FEE2E2] mb-6"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-[#B91C1C]" />
                 <span className="text-[12.5px] font-extrabold text-[#B91C1C]">Virtual Office EasyLegal</span>
-              </motion.div>
+              </div>
 
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="font-inter text-[38px] sm:text-[48px] lg:text-[54px] font-black text-gray-950 leading-[1.12] tracking-tight"
+              <h1 
+                className="animate-fade-in-up font-inter text-[38px] sm:text-[48px] lg:text-[54px] font-black text-gray-950 leading-[1.12] tracking-tight"
+                style={{ animationDelay: "0.1s" }}
               >
                 Alamat bisnis prestisius,<br />
                 <span className="text-[#990202]">tanpa sewa kantor fisik.</span>
-              </motion.h1>
+              </h1>
 
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-[15px] sm:text-[16px] text-gray-500 mt-5 leading-relaxed max-w-[580px] font-medium font-sans"
+              <p 
+                className="animate-fade-in-up text-[15px] sm:text-[16px] text-gray-500 mt-5 leading-relaxed max-w-[580px] font-medium font-sans"
+                style={{ animationDelay: "0.2s" }}
               >
                 Dapatkan alamat komersial di Bandung, Jakarta, &amp; Bekasi untuk legalitas PT, NPWP, hingga PKP &mdash; lengkap dengan resepsionis, meeting room, &amp; layanan surat-menyurat. Mulai dari Rp1jt/tahun.
-              </motion.p>
+              </p>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4 mt-8"
+              <div 
+                className="animate-fade-in-up flex flex-col sm:flex-row gap-4 mt-8"
+                style={{ animationDelay: "0.3s" }}
               >
                 <a
                   href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20Virtual%20Office."
@@ -207,14 +197,12 @@ export default function VirtualOffice() {
                 >
                   Lihat Lokasi Office
                 </button>
-              </motion.div>
+              </div>
 
               {/* Bottom Features */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14 pt-8 border-t border-gray-100/80"
+              <div 
+                className="animate-fade-in-up grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14 pt-8 border-t border-gray-100/80"
+                style={{ animationDelay: "0.4s" }}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-lg bg-[#FEF2F2] flex items-center justify-center flex-shrink-0 text-[#990202]">
@@ -248,14 +236,12 @@ export default function VirtualOffice() {
                     <div className="text-[12px] text-gray-400 font-medium">Legalitas lengkap</div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:w-[45%] relative mt-12 lg:mt-0"
+            <div 
+              className="animate-fade-in lg:w-[45%] relative mt-12 lg:mt-0"
+              style={{ animationDelay: "0.2s" }}
             >
               {/* Main Image Container */}
               <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] z-10 aspect-[4/3]">
@@ -293,7 +279,7 @@ export default function VirtualOffice() {
               {/* Decorative background glow */}
               <div className="absolute -top-10 -right-10 w-[300px] h-[300px] bg-red-500/5 blur-[100px] rounded-full" />
               <div className="absolute -bottom-10 -left-10 w-[300px] h-[300px] bg-amber-500/5 blur-[100px] rounded-full" />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -303,12 +289,8 @@ export default function VirtualOffice() {
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
 
           {/* Section Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
-            className="text-left mb-10"
+          <div 
+            className="animate-scroll-reveal text-left mb-10"
           >
             <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">TENTANG VIRTUAL OFFICE</p>
             <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-950 leading-tight tracking-tight">
@@ -317,17 +299,14 @@ export default function VirtualOffice() {
             <p className="text-[15px] sm:text-[16px] text-gray-500 leading-relaxed mt-3 max-w-2xl font-medium">
               Solusi alamat bisnis profesional di kota besar - tanpa biaya sewa kantor fisik, tanpa kompromi legalitas.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
             {/* Left Column: Image & Floating Card */}
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-6 relative"
+            <div 
+              className="animate-scroll-reveal lg:col-span-6 relative"
+              style={{ transform: "translateX(-30px)" }}
             >
               <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] aspect-[4/3]">
                 <Image
@@ -349,15 +328,12 @@ export default function VirtualOffice() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Right Column: Paragraphs & Checklist */}
-            <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-6 space-y-6"
+            <div 
+              className="animate-scroll-reveal lg:col-span-6 space-y-6"
+              style={{ transform: "translateX(30px)" }}
             >
               <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
                 <strong className="font-extrabold text-gray-900">Virtual Office</strong> adalah layanan alamat kantor komersial yang dapat Anda pakai sebagai domisili resmi untuk PT, NPWP, NIB, hingga PKP - tanpa harus menyewa ruang fisik penuh.
@@ -403,7 +379,7 @@ export default function VirtualOffice() {
                   </li>
                 </ul>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -413,29 +389,22 @@ export default function VirtualOffice() {
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
 
           {/* Section Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+          <div 
+            className="animate-scroll-reveal text-center mb-12"
           >
             <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">MANFAAT VIRTUAL OFFICE</p>
             <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-950 leading-tight tracking-tight">
               Kenapa pebisnis modern pilih Virtual Office?
             </h2>
-          </motion.div>
+          </div>
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
             {/* Card 1 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+            <div 
+              className="animate-scroll-reveal bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+              style={{ animationDelay: "0.1s" }}
             >
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <MapPin className="w-5 h-5" />
@@ -444,15 +413,12 @@ export default function VirtualOffice() {
               <p className="text-[13.5px] text-gray-500 font-medium leading-relaxed font-sans">
                 Lokasi strategis di pusat bisnis kota besar - tingkatkan citra profesional di mata klien &amp; partner.
               </p>
-            </motion.div>
+            </div>
 
             {/* Card 2 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+            <div 
+              className="animate-scroll-reveal bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+              style={{ animationDelay: "0.2s" }}
             >
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <DollarSign className="w-5 h-5" />
@@ -461,15 +427,12 @@ export default function VirtualOffice() {
               <p className="text-[13.5px] text-gray-500 font-medium leading-relaxed font-sans">
                 Mulai Rp1jt/tahun saja - jauh lebih murah dari sewa kantor konvensional yang ratusan juta/tahun.
               </p>
-            </motion.div>
+            </div>
 
             {/* Card 3 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+            <div 
+              className="animate-scroll-reveal bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+              style={{ animationDelay: "0.3s" }}
             >
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <Star className="w-5 h-5" />
@@ -478,15 +441,12 @@ export default function VirtualOffice() {
               <p className="text-[13.5px] text-gray-500 font-medium leading-relaxed font-sans">
                 Sudah PKP-friendly &amp; punya semua dokumen legalitas - siap dipakai pendirian PT, NPWP, hingga izin OSS.
               </p>
-            </motion.div>
+            </div>
 
             {/* Card 4 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+            <div 
+              className="animate-scroll-reveal bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+              style={{ animationDelay: "0.4s" }}
             >
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <Calendar className="w-5 h-5" />
@@ -495,7 +455,7 @@ export default function VirtualOffice() {
               <p className="text-[13.5px] text-gray-500 font-medium leading-relaxed font-sans">
                 70 jam meeting room gratis per tahun - bisa pakai LED Smart TV, WiFi high-speed, &amp; resepsionis.
               </p>
-            </motion.div>
+            </div>
 
           </div>
         </div>
@@ -506,12 +466,8 @@ export default function VirtualOffice() {
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
 
           {/* Section Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto mb-16"
+          <div 
+            className="animate-scroll-reveal text-center max-w-3xl mx-auto mb-16"
           >
             <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">PILIH LOKASI OFFICE</p>
             <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-950 leading-tight tracking-tight">
@@ -520,18 +476,15 @@ export default function VirtualOffice() {
             <p className="text-[14.5px] sm:text-[15px] text-gray-500 leading-relaxed mt-4 font-medium font-sans">
               Harga sudah include semua fasilitas &mdash; alamat komersial, meeting room 70 jam/tahun, WiFi high-speed, dan layanan surat. <strong className="font-extrabold text-gray-950">Bisa langsung dipakai untuk pendirian PT/CV &amp; PKP.</strong>
             </p>
-          </motion.div>
+          </div>
 
           {/* Pricing Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-[1140px] mx-auto">
 
             {/* Card 1: Jakarta */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white rounded-[32px] overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full"
+            <div 
+              className="animate-scroll-reveal bg-white rounded-[32px] overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full"
+              style={{ animationDelay: "0.1s" }}
             >
               {/* Header Box */}
               <div className="bg-[#1A1A1A] p-6 text-white text-center flex-shrink-0">
@@ -626,15 +579,12 @@ export default function VirtualOffice() {
                   Pilih Jakarta
                 </a>
               </div>
-            </motion.div>
+            </div>
 
             {/* Card 2: Bandung */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-[32px] overflow-hidden border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.035)] hover:shadow-[0_20px_50px_rgba(153,2,2,0.08)] scale-[1.03] lg:-translate-y-2.5 relative z-10 transition-all duration-300 flex flex-col h-full"
+            <div 
+              className="animate-scroll-reveal bg-white rounded-[32px] overflow-hidden border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.035)] hover:shadow-[0_20px_50px_rgba(153,2,2,0.08)] scale-[1.03] lg:-translate-y-2.5 relative z-10 transition-all duration-300 flex flex-col h-full"
+              style={{ animationDelay: "0.2s" }}
             >
               {/* Header Box */}
               <div className="bg-[#990202] p-6 text-white text-center relative flex-shrink-0">
@@ -732,15 +682,12 @@ export default function VirtualOffice() {
                   Pilih Bandung
                 </a>
               </div>
-            </motion.div>
+            </div>
 
             {/* Card 3: Bekasi */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white rounded-[32px] overflow-hidden border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+            <div 
+              className="animate-scroll-reveal bg-white rounded-[32px] overflow-hidden border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+              style={{ animationDelay: "0.3s" }}
             >
               {/* Header Box */}
               <div className="bg-[#1A1A1A] p-6 text-white text-center flex-shrink-0">
@@ -835,7 +782,7 @@ export default function VirtualOffice() {
                   Pilih Bekasi
                 </a>
               </div>
-            </motion.div>
+            </div>
 
           </div>
 
@@ -853,12 +800,8 @@ export default function VirtualOffice() {
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
 
           {/* Section Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto mb-16"
+          <div 
+            className="animate-scroll-reveal text-center max-w-3xl mx-auto mb-16"
           >
             <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">DETAIL LOKASI</p>
             <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-950 leading-tight tracking-tight">
@@ -867,17 +810,13 @@ export default function VirtualOffice() {
             <p className="text-[14.5px] sm:text-[15px] text-gray-500 leading-relaxed mt-4 font-medium font-sans">
               Alamat prestisius di jantung area komersial Cihampelas, dengan fasilitas lengkap &amp; harga paling terjangkau di antara 3 lokasi kami.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
             {/* Left Column: Image & Floating Card */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-6 relative"
+            <div 
+              className="animate-scroll-reveal lg:col-span-6 relative"
             >
               <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] z-10 aspect-[4/3]">
                 <Image
@@ -908,15 +847,12 @@ export default function VirtualOffice() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Right Column: Address Box & Services & Buttons */}
-            <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-6 space-y-6"
+            <div 
+              className="animate-scroll-reveal lg:col-span-6 space-y-6"
+              style={{ transform: "translateX(30px)" }}
             >
 
               {/* Address Card */}
@@ -1023,7 +959,7 @@ export default function VirtualOffice() {
                 </a>
               </div>
 
-            </motion.div>
+            </div>
 
           </div>
         </div>

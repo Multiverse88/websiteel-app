@@ -81,6 +81,12 @@ test-results/
 
 # AI tool generated files
 CLAUDE.md
+PLANNING.md
+DAILY-PLAN.md
 
 # Stray binaries in public
 public/logo-berita/*.msi
+
+# Document files
+*.docx
+COPYWRITING_AUDIT.md

@@ -126,8 +126,8 @@ export default function PerjanjianPerkawinan() {
 
   const faqItems = [
     {
-      q: "Apa beda Prenup dengan Postnup?",
-      a: "<strong>Prenup (Prenuptial Agreement)</strong> dibuat <strong>sebelum menikah</strong> & berlaku sejak hari pernikahan. <strong>Postnup (Postnuptial Agreement)</strong> dibuat <strong>setelah menikah</strong> berdasarkan putusan Mahkamah Konstitusi No. 69/PUU-XIII/2015 yang mengakui keabsahannya. Keduanya sama sah secara hukum — bedanya cuma <strong>timing pembuatan</strong>."
+      q: "Apa Beda Perjanjian Pra-Nikah dengan Pasca-Nikah?",
+      a: "<strong>Perjanjian Pra-Nikah</strong> dibuat <strong>sebelum menikah</strong> & berlaku sejak hari pernikahan. <strong>Perjanjian Pasca-Nikah</strong> dibuat <strong>setelah menikah</strong> berdasarkan putusan Mahkamah Konstitusi No. 69/PUU-XIII/2015 yang mengakui keabsahannya. Keduanya sama sah secara hukum — bedanya cuma <strong>waktu pembuatan</strong>."
     },
     {
       q: "Apa yang bisa diatur dalam perjanjian pisah harta?",
@@ -164,7 +164,7 @@ export default function PerjanjianPerkawinan() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
+    <div className="has-service-cta flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
 
       {/* ─── 1. HERO SECTION ─── */}
       <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 border-b border-gray-200/50 overflow-hidden relative">
@@ -454,10 +454,10 @@ export default function PerjanjianPerkawinan() {
               <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Layers className="w-5 h-5 rotate-90" strokeWidth={2.5} />
-                  <h4 className="text-[12.5px] sm:text-[13px] font-black tracking-wider uppercase">PRENUP &amp; POSTNUP</h4>
+                  <h4 className="text-[12.5px] sm:text-[13px] font-black tracking-wider uppercase">PERJANJIAN PRA &amp; PASCA NIKAH</h4>
                 </div>
                 <p className="text-[13.5px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
-                  <strong className="font-extrabold text-gray-900">Prenuptial Agreement (Prenup):</strong> dibuat <strong className="font-extrabold text-gray-900">sebelum menikah</strong> &amp; berlaku sejak hari pernikahan. <strong className="font-extrabold text-gray-900">Postnuptial Agreement (Postnup):</strong> dibuat <strong className="font-extrabold text-gray-900">setelah menikah</strong> berdasarkan putusan MK No. 69/2015 &amp; berlaku sejak terdaftar. Keduanya sama-sama sah secara hukum.
+                  <strong className="font-extrabold text-gray-900">Perjanjian Pra-Nikah:</strong> dibuat <strong className="font-extrabold text-gray-900">sebelum menikah</strong> &amp; berlaku sejak hari pernikahan. <strong className="font-extrabold text-gray-900">Perjanjian Pasca-Nikah:</strong> dibuat <strong className="font-extrabold text-gray-900">setelah menikah</strong> berdasarkan putusan MK No. 69/2015 &amp; berlaku sejak terdaftar. Keduanya sama-sama sah secara hukum.
                 </p>
               </div>
 

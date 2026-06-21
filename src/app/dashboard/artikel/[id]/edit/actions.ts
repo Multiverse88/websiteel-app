@@ -27,8 +27,16 @@ export async function getArticle(id: string) {
       coverImage: true,
       excerpt: true,
       content: true,
+      authorId: true,
     },
   });
+
+  if (!article) return null;
+
+  // Ownership check: only author or admin can access
+  if (article.authorId !== session.userId) {
+    return null;
+  }
 
   return article;
 }
@@ -57,11 +65,15 @@ export async function updateArticle(prevState: Record<string, unknown> | null, f
   // Check if article exists
   const existingArticle = await prisma.article.findUnique({
     where: { id },
-    select: { id: true, coverImage: true, slug: true },
+    select: { id: true, coverImage: true, slug: true, authorId: true },
   });
 
   if (!existingArticle) {
     return { error: "Artikel tidak ditemukan!" };
+  }
+
+  if (existingArticle.authorId !== session.userId) {
+    return { error: "Anda tidak memiliki akses untuk mengedit artikel ini." };
   }
 
   let coverImage = existingCoverImage || existingArticle.coverImage;

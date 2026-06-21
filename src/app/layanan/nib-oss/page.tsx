@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import {
   Award,
@@ -161,7 +160,7 @@ export default function NibOss() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="has-service-cta flex flex-col min-h-screen">
       
       {/* ─── 1. HERO SECTION ─── */}
       <section className="bg-white pt-8 lg:pt-12 pb-16 lg:pb-24 border-b border-gray-200/40 overflow-hidden relative">
@@ -561,8 +560,8 @@ export default function NibOss() {
                         "NIB",
                         "Akun OSS RBA",
                         "K3L/SPUMKTTR & SPPL",
-                        <span>Sertifikat Standar <sup className="text-[9px] text-[#990202]">(2)</sup></span>,
-                        <span>Angka Pengenal Impor <sup className="text-[9px] text-[#990202]">(3)</sup></span>
+                        <span key="sertifikat-standar">Sertifikat Standar <sup className="text-[9px] text-[#990202]">(2)</sup></span>,
+                        <span key="angka-pengenal-impor">Angka Pengenal Impor <sup className="text-[9px] text-[#990202]">(3)</sup></span>
                       ].map((item, i) => (
                         <li key={i} className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                           <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
@@ -593,11 +592,11 @@ export default function NibOss() {
                     <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-2">
                       {[
-                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>,
+                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>,
                         "Dokumen SOP Karyawan",
                         "Dokumen SOP Perusahaan",
                         "Dokumen Kontrak Bisnis",
-                        <span>Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
+                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
                       ].map((item, i) => (
                         <li key={i} className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                           <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
@@ -666,8 +665,8 @@ export default function NibOss() {
                         "NIB",
                         "Akun OSS RBA",
                         "K3L/SPUMKTTR & SPPL",
-                        <span>Sertifikat Standar <sup className="text-[9px] text-[#990202]">(2)</sup></span>,
-                        <span>Angka Pengenal Impor <sup className="text-[9px] text-[#990202]">(3)</sup></span>
+                        <span key="sertifikat-standar">Sertifikat Standar <sup className="text-[9px] text-[#990202]">(2)</sup></span>,
+                        <span key="angka-pengenal-impor">Angka Pengenal Impor <sup className="text-[9px] text-[#990202]">(3)</sup></span>
                       ].map((item, i) => (
                         <li key={i} className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                           <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
@@ -698,11 +697,11 @@ export default function NibOss() {
                     <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-2">
                       {[
-                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>,
+                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>,
                         "Dokumen SOP Karyawan",
                         "Dokumen SOP Perusahaan",
                         "Dokumen Kontrak Bisnis",
-                        <span>Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
+                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
                       ].map((item, i) => (
                         <li key={i} className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                           <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
@@ -767,8 +766,8 @@ export default function NibOss() {
                         "NIB",
                         "Akun OSS RBA",
                         "K3L/SPUMKTTR & SPPL",
-                        <span>Sertifikat Standar <sup className="text-[9px] text-[#990202]">(2)</sup></span>,
-                        <span>Angka Pengenal Impor <sup className="text-[9px] text-[#990202]">(3)</sup></span>
+                        <span key="sertifikat-standar">Sertifikat Standar <sup className="text-[9px] text-[#990202]">(2)</sup></span>,
+                        <span key="angka-pengenal-impor">Angka Pengenal Impor <sup className="text-[9px] text-[#990202]">(3)</sup></span>
                       ].map((item, i) => (
                         <li key={i} className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                           <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
@@ -799,11 +798,11 @@ export default function NibOss() {
                     <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-2">
                       {[
-                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>,
+                        <span key="voucher-250k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>,
                         "Dokumen SOP Karyawan",
                         "Dokumen SOP Perusahaan",
                         "Dokumen Kontrak Bisnis",
-                        <span>Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
+                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
                       ].map((item, i) => (
                         <li key={i} className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                           <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
@@ -893,11 +892,11 @@ export default function NibOss() {
                     <h4 className="text-[10px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
                     <ul className="space-y-2">
                       {[
-                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>,
+                        <span key="voucher-250k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>,
                         "Dokumen SOP Karyawan",
                         "Dokumen SOP Perusahaan",
                         "Dokumen Kontrak Bisnis",
-                        <span>Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
+                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
                       ].map((item, i) => (
                         <li key={i} className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                           <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
@@ -1008,16 +1007,7 @@ export default function NibOss() {
           </div>
 
           {/* Tab Contents Grid */}
-          <AnimatePresence mode="popLayout">
-            <motion.div
-              key={activeSubTab}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1140px] mx-auto items-stretch"
-            >
+          <div key={activeSubTab} className="animate-fade-in grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1140px] mx-auto items-stretch">
             
             {/* Card 1: Cabut KBLI */}
             <div className="relative group h-full">
@@ -1077,7 +1067,7 @@ export default function NibOss() {
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
-                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
+                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
                       </li>
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1093,7 +1083,7 @@ export default function NibOss() {
                       </li>
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
-                        <span>Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
+                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
                       </li>
                     </ul>
                   </div>
@@ -1176,7 +1166,7 @@ export default function NibOss() {
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
-                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
+                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
                       </li>
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1192,7 +1182,7 @@ export default function NibOss() {
                       </li>
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
-                        <span>Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
+                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
                       </li>
                     </ul>
                   </div>
@@ -1275,7 +1265,7 @@ export default function NibOss() {
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
-                        <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
+                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
                       </li>
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
@@ -1291,7 +1281,7 @@ export default function NibOss() {
                       </li>
                       <li className="flex items-start text-[12.5px] font-medium text-gray-600 leading-relaxed">
                         <span className="text-emerald-500 text-[13px] mr-2 flex-shrink-0">✓</span>
-                        <span>Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
+                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
                       </li>
                     </ul>
                   </div>
@@ -1312,8 +1302,7 @@ export default function NibOss() {
             </div>
           </div>
 
-            </motion.div>
-          </AnimatePresence>
+          </div>
 
           {/* Footnote disclaimers */}
           <div className="max-w-[1140px] mx-auto mt-12 bg-white border border-gray-200/60 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium text-left">

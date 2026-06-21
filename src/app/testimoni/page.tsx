@@ -8,7 +8,7 @@ export default function TestimoniPage() {
   const stats = [
     { value: "4.9/5", label: "Rating Google" },
     { value: "500+", label: "Review positif" },
-    { value: "12.000+", label: "Bisnis terlayani" },
+    { value: "11.000+", label: "Bisnis terlayani" },
     { value: "98%", label: "Client puas" },
   ];
 
@@ -39,7 +39,7 @@ export default function TestimoniPage() {
               <h1 className="font-inter text-[44px] sm:text-[52px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Apa kata{" "}
                 <span className="relative inline-block text-[#990202] px-2 py-0.5 bg-red-500/5 rounded-lg border border-red-100/40">
-                  12.000+ pengusaha
+                  11.000+ pengusaha
                 </span>{" "}
                 tentang kami.
               </h1>
@@ -100,7 +100,7 @@ export default function TestimoniPage() {
       {/* ─── TESTIMONIALS ─── */}
       <Testimonials />
 
-      {/* ─── STATS ─── */}
+      {/* ─── 3. STATS ROW ─── */}
       <section className="bg-white py-14 border-b border-border/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -118,7 +118,7 @@ export default function TestimoniPage() {
       <section className="bg-[#990202] py-16">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-[32px] sm:text-[38px] font-extrabold text-white leading-tight mb-4">
-            Siap bergabung dengan 12.000+ pengusaha lainnya?
+            Siap bergabung dengan 11.000+ pengusaha lainnya?
           </h2>
           <p className="text-[16px] text-red-100 max-w-[560px] mx-auto mb-8 font-medium">
             Konsultasi gratis sekarang. Tim legal kami siap membantu Anda dari awal hingga selesai.

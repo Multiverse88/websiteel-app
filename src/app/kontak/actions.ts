@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/db";
 import { sendEmail } from "@/lib/mail";
+import { escapeHtml } from "@/lib/utils";
 
 export async function submitContactForm(prevState: Record<string, unknown> | null, formData: FormData) {
   const name = formData.get("name") as string;
@@ -28,14 +29,12 @@ export async function submitContactForm(prevState: Record<string, unknown> | nul
     return { error: "Pesan wajib diisi." };
   }
 
-  // Email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return { error: "Format email tidak valid." };
   }
 
   try {
-    // Save to database
     await prisma.contactSubmission.create({
       data: {
         name: name.trim(),
@@ -47,21 +46,20 @@ export async function submitContactForm(prevState: Record<string, unknown> | nul
       },
     });
 
-    // Send notification email to admin
     const adminEmail = process.env.SMTP_FROM || "info@easylegal.id";
     const subject = `[EasyLegal] Pesan Baru: ${topic}`;
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #990202;">Pesan Baru dari Formulir Kontak</h2>
         <hr style="border: 1px solid #eee;">
-        <p><strong>Nama:</strong> ${name}</p>
-        ${businessName ? `<p><strong>Perusahaan:</strong> ${businessName}</p>` : ""}
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>WhatsApp:</strong> ${whatsapp}</p>
-        <p><strong>Topik:</strong> ${topic}</p>
+        <p><strong>Nama:</strong> ${escapeHtml(name)}</p>
+        ${businessName ? `<p><strong>Perusahaan:</strong> ${escapeHtml(businessName)}</p>` : ""}
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>WhatsApp:</strong> ${escapeHtml(whatsapp)}</p>
+        <p><strong>Topik:</strong> ${escapeHtml(topic)}</p>
         <hr style="border: 1px solid #eee;">
         <p><strong>Pesan:</strong></p>
-        <p style="background: #f9f9f9; padding: 15px; border-radius: 8px; white-space: pre-wrap;">${message}</p>
+        <p style="background: #f9f9f9; padding: 15px; border-radius: 8px; white-space: pre-wrap;">${escapeHtml(message)}</p>
         <hr style="border: 1px solid #eee;">
         <p style="color: #666; font-size: 12px;">Email ini dikirim otomatis dari formulir kontak easylegal.id</p>
       </div>

@@ -59,7 +59,7 @@ export const heroSlides = [
     cta2: "Konsultasi Gratis",
     cta2Link: "/kontak",
     trustBadges: ["UAF Accredited", "Proses cepat", "Harga transparan"],
-    image: "https://images.pexels.com/photos/3184329/pexels-photo-3184329.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fit=crop&w=1200&h=800&q=80",
   },
   {
     tag: "Perizinan Usaha",
@@ -124,7 +124,7 @@ export const whyChoose = [
   {
     icon: Clock,
     title: "Proses Cepat",
-    desc: "Pendirian Badan Usaha selesai dalam 2-12 jam pengerjaan dengan tracking real-time dari dashboard.",
+    desc: "Pendirian Badan Usaha selesai, paling cepat 2 jam pengerjaan dengan tracking real-time dari dashboard.",
   },
   {
     icon: Users,

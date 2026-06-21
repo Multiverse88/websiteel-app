@@ -68,6 +68,12 @@ export interface BadanUsahaContent {
   // FAQ
   faqTitle: string;
   faqs: { q: string; a: string }[];
+
+  // CTA
+  ctaTitle: string;
+  ctaHighlight: string;
+  ctaDescription: string;
+  ctaWhatsAppMessage: string;
 }
 
 export const dataPT: BadanUsahaContent = {
@@ -155,7 +161,7 @@ export const dataPT: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN PT",
   pricingTitle: "Pilih paket sesuai kebutuhan bisnis Anda.",
   pricingSubtitle:
-    "Harga sudah include semua biaya — notaris, AHU Kemenkumham, NPWP, dan jasa kami. Tidak ada tambahan biaya apapun di tengah proses.",
+    "Harga sudah termasuk semua biaya — notaris, AHU Kemenkumham, NPWP, dan jasa kami. Tidak ada tambahan biaya apapun di tengah proses.",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -327,6 +333,11 @@ export const dataPT: BadanUsahaContent = {
     { q: "Bagaimana kalau nama PT yang saya inginkan sudah dipakai?", a: "Sebelum melakukan pemesanan nama resmi di sistem AHU Kemenkumham, tim EasyLegal akan melakukan pengecekan ketersediaan nama secara gratis. Jika nama yang Anda inginkan sudah dipakai atau terlalu mirip dengan PT lain, kami akan menyarankan alternatif nama terbaik." },
     { q: "Kalau pendiri saya WNA, bisa pakai PT biasa?", a: "Jika salah satu pendiri atau pemegang saham adalah Warga Negara Asing (WNA) atau perusahaan asing, maka jenis badan usahanya wajib berbentuk PT PMA (Penanaman Modal Asing) yang tunduk pada aturan modal dasar minimal Rp10 Miliar." },
   ],
+
+  ctaTitle: "Siap dirikan",
+  ctaHighlight: "PT Anda?",
+  ctaDescription: "Konsultasi gratis untuk menentukan struktur PT yang tepat — tanpa komitmen.",
+  ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian PT.",
 };
 
 export const dataCV: BadanUsahaContent = {
@@ -387,14 +398,14 @@ export const dataCV: BadanUsahaContent = {
   hukumLaw: "Kitab Undang-Undang Hukum Dagang (KUHD) & UU No. 3 Tahun 1982",
   pengertianDetail: (
     <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
-      <strong className="font-extrabold text-gray-900">Commanditaire Vennootschap (CV)</strong> adalah bentuk badan usaha yang didirikan oleh dua orang atau lebih dengan dua jenis sekutu: <strong className="font-extrabold text-gray-900">Sekutu Aktif</strong> yang menjalankan perusahaan dan bertanggung jawab penuh, serta <strong className="font-extrabold text-gray-900">Sekutu Pasif/Komanditer</strong> yang hanya menyetor modal dan bertanggung jawab sebatas modal yang disetorkan. CV tidak berstatus badan hukum seperti PT, namun tetap memiliki legalitas yang diakui untuk berbagai keperluan bisnis.
+      <strong className="font-extrabold text-gray-900">Perseroan Komanditer (CV)</strong> adalah persekutuan yang didirikan oleh satu orang atau lebih yang mempercayakan uang atau barang mereka kepada satu orang atau lebih yang menjalankan perusahaan dan bertindak sebagai pemimpin. CV memiliki dua sekutu, yaitu Sekutu Aktif (yang menjalankan bisnis dan bertanggung jawab penuh secara pribadi) dan Sekutu Pasif/Komanditer (yang hanya menyetorkan modal).
     </p>
   ),
   karakteristik: [
-    { bold: "Dua jenis sekutu", text: " — Sekutu Aktif (pengelola) dan Sekutu Pasif (investor) dengan tanggung jawab berbeda." },
-    { bold: "Tanpa modal minimum", text: " — fleksibel dalam penentuan modal, sesuai kesepakatan para pendiri." },
-    { bold: "Proses pendirian sederhana", text: " — cukup akta notaris dan pendaftaran ke Pengadilan Negeri setempat." },
-    { bold: "Cocok untuk UKM", text: " — struktur sederhana, cocok untuk bisnis keluarga atau skala kecil-menengah." },
+    { bold: "Minimal didirikan oleh 2 orang", text: " (Sekutu Aktif dan Sekutu Pasif)." },
+    { bold: "Sekutu Aktif bertanggung jawab", text: " secara penuh sampai ke harta pribadi." },
+    { bold: "Sekutu Pasif bertanggung jawab", text: " hanya sebatas modal yang disetorkan." },
+    { bold: "Tidak memiliki batas", text: " minimal modal pendirian." },
   ],
 
   manfaatTag: "MANFAAT MEMILIH CV",
@@ -409,7 +420,7 @@ export const dataCV: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN CV",
   pricingTitle: "Pilih paket pendirian CV sesuai kebutuhan.",
   pricingSubtitle:
-    "Harga sudah include semua biaya — notaris, pendaftaran Pengadilan Negeri, NPWP, dan jasa kami. Tanpa biaya tersembunyi.",
+    "Harga sudah termasuk semua biaya — notaris, pendaftaran Pengadilan Negeri, NPWP, dan jasa kami. Tanpa biaya tersembunyi.",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -542,6 +553,11 @@ export const dataCV: BadanUsahaContent = {
     { q: "Berapa jumlah pendiri minimal CV?", a: "CV minimal didirikan oleh 2 orang — satu sebagai Sekutu Aktif dan satu sebagai Sekutu Pasif. Jika hanya ada 1 orang, disarankan memilih PT Perorangan." },
     { q: "Apakah CV bisa diubah menjadi PT?", a: "Ya, CV dapat diubah menjadi PT melalui proses perubahan badan hukum. Kami dapat membantu Anda melakukan perubahan bentuk badan usaha sesuai perkembangan bisnis." },
   ],
+
+  ctaTitle: "Siap dirikan",
+  ctaHighlight: "CV Anda?",
+  ctaDescription: "Konsultasi gratis untuk menentukan struktur CV yang tepat — tanpa komitmen.",
+  ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian CV.",
 };
 
 export const dataPMA: BadanUsahaContent = {
@@ -602,14 +618,14 @@ export const dataPMA: BadanUsahaContent = {
   hukumLaw: "UU No. 25 Tahun 2007 tentang Penanaman Modal & Peraturan BKPM",
   pengertianDetail: (
     <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
-      <strong className="font-extrabold text-gray-900">PT PMA (Penanaman Modal Asing)</strong> adalah Perseroan Terbatas yang didirikan berdasarkan hukum Indonesia dengan kepemilikan saham oleh Warga Negara Asing (WNA) dan/atau badan hukum asing. PT PMA diatur secara khusus oleh <strong className="font-extrabold text-gray-900">UU No. 25 Tahun 2007 tentang Penanaman Modal</strong> dan diawasi oleh BKPM (Badan Koordinasi Penanaman Modal). Modal dasar minimal Rp10 Miliar dengan setoran modal minimal Rp2,5 Miliar.
+      <strong className="font-extrabold text-gray-900">PT Penanaman Modal Asing (PT PMA)</strong> adalah Perseroan Terbatas yang didirikan berdasarkan hukum di Indonesia, di mana pemegang sahamnya dapat berupa Warga Negara Asing (WNA), perusahaan asing, atau pemerintah asing. PT PMA tunduk pada ketentuan UU No. 25 Tahun 2007 tentang Penanaman Modal dan diawasi langsung oleh BKPM.
     </p>
   ),
   karakteristik: [
-    { bold: "Modal minimal Rp10 Miliar", text: " — modal dasar dengan setoran minimum Rp2,5 Miliar sesuai aturan BKPM." },
-    { bold: "Kepemilikan asing", text: " — saham dapat dimiliki WNA atau badan hukum asing, dengan batasan sesuai DNI." },
-    { bold: "Izin BKPM wajib", text: " — seluruh proses investasi harus mendapatkan persetujuan dari BKPM." },
-    { bold: "Bidang usaha terbatas", text: " — tidak semua bidang usaha terbuka untuk PMA, terdaftar di DNI (Daftar Negatif Investasi)." },
+    { bold: "Modal dasar minimal Rp10 Miliar", text: " dengan modal ditempatkan/disetor minimal Rp2,5 Miliar." },
+    { bold: "Pemegang saham dapat berupa WNA,", text: " badan hukum asing, atau badan hukum Indonesia." },
+    { bold: "Wajib menyampaikan LKPM", text: " (Laporan Kegiatan Penanaman Modal) berkala ke BKPM." },
+    { bold: "Batasan kepemilikan asing", text: " sesuai aturan investasi pada beberapa bidang usaha." },
   ],
 
   manfaatTag: "MANFAAT MEMILIH PT PMA",
@@ -624,7 +640,7 @@ export const dataPMA: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN PT PMA",
   pricingTitle: "Pilih paket pendirian PT PMA sesuai kebutuhan.",
   pricingSubtitle:
-    "Harga sudah include konsultasi BKPM, pembuatan akta, pengurusan izin prinsip, NPWP, dan NIB.",
+    "Harga sudah termasuk konsultasi BKPM, pembuatan akta, pengurusan izin prinsip, NPWP, dan NIB.",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -760,6 +776,11 @@ export const dataPMA: BadanUsahaContent = {
     { q: "Apakah WNA bisa menjadi Direksi atau Komisaris?", a: "Ya, WNA dapat menjabat sebagai Direksi atau Komisaris PT PMA. Namun, untuk Direksi wajib memiliki IMTA dan KITAS yang masih berlaku." },
     { q: "Apa perbedaan PT PMA dengan PT biasa?", a: "PT PMA diperuntukkan bagi perusahaan dengan kepemilikan asing, memiliki modal minimal lebih besar (Rp10 Miliar), harus mendapatkan Izin Prinsip BKPM, dan tunduk pada peraturan investasi asing yang lebih ketat." },
   ],
+
+  ctaTitle: "Siap dirikan",
+  ctaHighlight: "PT PMA Anda?",
+  ctaDescription: "Konsultasi gratis untuk investasi asing di Indonesia — tanpa komitmen.",
+  ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian PT PMA.",
 };
 
 export const dataPTPerorangan: BadanUsahaContent = {
@@ -820,14 +841,14 @@ export const dataPTPerorangan: BadanUsahaContent = {
   hukumLaw: "UU No. 6 Tahun 2023 (Cipta Kerja) & PP No. 8 Tahun 2021",
   pengertianDetail: (
     <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
-      <strong className="font-extrabold text-gray-900">Perseroan Perorangan</strong> adalah PT yang didirikan oleh satu orang Warga Negara Indonesia (WNI) sebagai pemegang saham tunggal sekaligus direktur. Diperkenalkan melalui <strong className="font-extrabold text-gray-900">UU Cipta Kerja</strong>, PT Perorangan dirancang khusus untuk UMKM dan usaha mikro dengan persyaratan yang jauh lebih sederhana dibanding PT biasa — tanpa keharusan akta notaris dan tanpa modal minimum.
+      <strong className="font-extrabold text-gray-900">Perseroan Perorangan (PT Perorangan)</strong> adalah bentuk badan hukum yang didirikan oleh hanya satu orang Warga Negara Indonesia (WNI) untuk memenuhi kriteria Usaha Mikro dan Kecil (UMK) sesuai dengan UU Cipta Kerja. Pendiri bertindak sekaligus sebagai pemegang saham tunggal dan direktur perusahaan.
     </p>
   ),
   karakteristik: [
-    { bold: "Satu pendiri", text: " — cukup satu orang WNI, merangkap sebagai pemegang saham & direktur." },
-    { bold: "Tanpa akta notaris", text: " — pendirian cukup melalui pernyataan pendirian secara elektronik via SABH." },
-    { bold: "Tanpa modal minimum", text: " — sesuai kemampuan usaha mikro & kecil." },
-    { bold: "Untuk UMKM", text: " — khusus untuk usaha mikro & kecil sesuai kriteria UU Cipta Kerja." },
+    { bold: "Satu orang pendiri", text: " yang merangkap sebagai direktur." },
+    { bold: "Khusus bagi usaha mikro", text: " dan kecil (UMK)." },
+    { bold: "Tidak memerlukan akta notaris", text: " untuk pendiriannya." },
+    { bold: "Tanggung jawab pemilik", text: " terbatas pada modal yang disetorkan." },
   ],
 
   manfaatTag: "MANFAAT MEMILIH PT PERORANGAN",
@@ -842,7 +863,7 @@ export const dataPTPerorangan: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN PT PERORANGAN",
   pricingTitle: "Pilih paket pendirian PT Perorangan.",
   pricingSubtitle:
-    "Harga sudah include pembuatan pernyataan pendirian, SK Kemenkumham, NPWP, dan NIB.",
+    "Harga sudah termasuk pembuatan pernyataan pendirian, SK Kemenkumham, NPWP, dan NIB.",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -965,6 +986,11 @@ export const dataPTPerorangan: BadanUsahaContent = {
     { q: "Apakah PT Perorangan bisa diubah jadi PT biasa?", a: "Ya, jika usaha Anda berkembang, PT Perorangan dapat ditingkatkan menjadi PT biasa dengan akta notaris dan tambahan pemegang saham." },
     { q: "Siapa yang bisa mendirikan PT Perorangan?", a: "Warga Negara Indonesia (WNI) yang memenuhi kriteria usaha mikro atau kecil sesuai UU Cipta Kerja." },
   ],
+
+  ctaTitle: "Siap dirikan",
+  ctaHighlight: "PT Perorangan Anda?",
+  ctaDescription: "Konsultasi gratis untuk mulai usaha dengan badan hukum PT — tanpa komitmen.",
+  ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian PT Perorangan.",
 };
 
 export const dataFirma: BadanUsahaContent = {
@@ -1026,14 +1052,14 @@ export const dataFirma: BadanUsahaContent = {
   hukumLaw: "Kitab Undang-Undang Hukum Dagang (KUHD) Pasal 16–35",
   pengertianDetail: (
     <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
-      <strong className="font-extrabold text-gray-900">Firma (Fa)</strong> adalah badan usaha yang didirikan oleh dua orang atau lebih dengan menggunakan nama bersama dalam satu ikatan perjanjian usaha. Setiap sekutu (partner) dalam Firma memiliki <strong className="font-extrabold text-gray-900">tanggung jawab penuh dan tidak terbatas (solidar)</strong> — artinya kewajiban perusahaan menjadi tanggung jawab pribadi seluruh sekutu secara bersama-sama. Firma diatur dalam KUHD dan memerlukan akta notaris serta pendaftaran ke Pengadilan Negeri.
+      <strong className="font-extrabold text-gray-900">Firma (Fa)</strong> adalah suatu bentuk persekutuan bisnis yang didirikan oleh dua orang atau lebih dengan kesepakatan untuk menjalankan usaha bersama di bawah satu nama yang sama. Setiap anggota Firma (pesero) memiliki tanggung jawab yang tidak terbatas dan bersifat tanggung renteng atas seluruh kewajiban dan utang perusahaan.
     </p>
   ),
   karakteristik: [
-    { bold: "Tanggung jawab solidar", text: " — semua sekutu bertanggung jawab penuh secara pribadi atas kewajiban Firma." },
-    { bold: "Nama bersama", text: " — usaha dijalankan dengan satu nama yang menjadi identitas bersama." },
-    { bold: "Akta notaris wajib", text: " — pendirian memerlukan akta notaris dan didaftarkan ke Pengadilan Negeri." },
-    { bold: "Cocok untuk profesi", text: " — banyak digunakan oleh kantor hukum, akuntan, konsultan, dan jasa profesional." },
+    { bold: "Didirikan oleh minimal 2 orang", text: " di bawah satu nama bersama." },
+    { bold: "Tanggung jawab anggota", text: " bersifat tidak terbatas dan tanggung renteng." },
+    { bold: "Setiap sekutu memiliki hak penuh", text: " untuk bertindak atas nama Firma." },
+    { bold: "Pembagian keuntungan diatur", text: " berdasarkan kesepakatan dalam akta pendirian." },
   ],
 
   manfaatTag: "MANFAAT MEMILIH FIRMA",
@@ -1048,7 +1074,7 @@ export const dataFirma: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN FIRMA",
   pricingTitle: "Pilih paket pendirian Firma sesuai kebutuhan.",
   pricingSubtitle:
-    "Harga sudah include akta notaris, pendaftaran Pengadilan Negeri, NPWP, dan NIB.",
+    "Harga sudah termasuk akta notaris, pendaftaran Pengadilan Negeri, NPWP, dan NIB.",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -1162,6 +1188,11 @@ export const dataFirma: BadanUsahaContent = {
     { q: "Berapa modal untuk mendirikan Firma?", a: "Tidak ada ketentuan modal minimum untuk Firma. Modal ditentukan berdasarkan kesepakatan para sekutu dan kebutuhan usaha." },
     { q: "Apakah Firma berstatus badan hukum?", a: "Tidak. Firma bukan badan hukum, melainkan badan usaha yang terdaftar di Pengadilan Negeri. Namun tetap memiliki kekuatan hukum untuk menjalankan kegiatan usaha." },
   ],
+
+  ctaTitle: "Siap dirikan",
+  ctaHighlight: "Firma Anda?",
+  ctaDescription: "Konsultasi gratis untuk menentukan struktur Firma yang tepat — tanpa komitmen.",
+  ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian Firma.",
 };
 
 export const dataYayasan: BadanUsahaContent = {
@@ -1222,14 +1253,14 @@ export const dataYayasan: BadanUsahaContent = {
   hukumLaw: "UU No. 16 Tahun 2001 jo. UU No. 28 Tahun 2004 tentang Yayasan",
   pengertianDetail: (
     <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
-      <strong className="font-extrabold text-gray-900">Yayasan</strong> adalah badan hukum yang terdiri atas kekayaan yang dipisahkan dan diperuntukkan untuk mencapai tujuan tertentu di bidang sosial, keagamaan, dan kemanusiaan — bukan untuk mencari keuntungan (nirlaba). Yayasan memiliki <strong className="font-extrabold text-gray-900">Pembina, Pengurus, dan Pengawas</strong> sebagai organ-organ yayasan. Diatur dalam UU No. 16 Tahun 2001 jo. UU No. 28 Tahun 2004, yayasan wajib memiliki akta notaris dan mendapatkan pengesahan dari Kemenkumham.
+      <strong className="font-extrabold text-gray-900">Yayasan</strong> adalah badan hukum yang terdiri atas kekayaan yang dipisahkan dan diperuntukkan untuk mencapai tujuan tertentu di bidang sosial, keagamaan, dan kemanusiaan, yang tidak mempunyai anggota. Yayasan diatur oleh UU No. 16 Tahun 2001 tentang Yayasan sebagaimana telah diubah dengan UU No. 28 Tahun 2004.
     </p>
   ),
   karakteristik: [
-    { bold: "Nirlaba", text: " — tujuan utama bukan mencari keuntungan, melainkan sosial/kemanusiaan." },
-    { bold: "Tiga organ", text: " — Pembina, Pengurus, dan Pengawas dengan tugas & wewenang masing-masing." },
-    { bold: "Kekayaan dipisahkan", text: " — harta yayasan terpisah dari kekayaan pribadi pendiri/pengurus." },
-    { bold: "Badan hukum", text: " — disahkan oleh Kemenkumham, setara dengan PT dalam status badan hukum." },
+    { bold: "Merupakan badan hukum nirlaba", text: " (tidak mencari keuntungan pribadi)." },
+    { bold: "Memiliki struktur kepengurusan", text: " yang terdiri dari Pembina, Pengurus, dan Pengawas." },
+    { bold: "Kekayaan yayasan dipisahkan", text: " dari kekayaan pribadi pendiri/pengurus." },
+    { bold: "Tidak memiliki anggota", text: " seperti perseroan atau koperasi." },
   ],
 
   manfaatTag: "MANFAAT MEMILIH YAYASAN",
@@ -1244,7 +1275,7 @@ export const dataYayasan: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN YAYASAN",
   pricingTitle: "Pilih paket pendirian Yayasan sesuai kebutuhan.",
   pricingSubtitle:
-    "Harga sudah include akta notaris, SK Kemenkumham, NPWP, dan NIB Yayasan.",
+    "Harga sudah termasuk akta notaris, SK Kemenkumham, NPWP, dan NIB Yayasan.",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -1362,6 +1393,11 @@ export const dataYayasan: BadanUsahaContent = {
     { q: "Apakah Yayasan bisa melakukan kegiatan komersial?", a: "Yayasan dapat melakukan kegiatan komersial sepanjang hasilnya digunakan untuk mencapai tujuan sosial yayasan, bukan dibagi kepada Pembina/Pengurus." },
     { q: "Berapa minimal pendiri Yayasan?", a: "Yayasan minimal didirikan oleh 1 orang sebagai Pembina, ditambah 1 Pengurus dan 1 Pengawas. Total minimal 3 orang untuk struktur lengkap." },
   ],
+
+  ctaTitle: "Siap dirikan",
+  ctaHighlight: "Yayasan Anda?",
+  ctaDescription: "Konsultasi gratis untuk mendirikan yayasan nirlaba — tanpa komitmen.",
+  ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian Yayasan.",
 };
 
 export const dataPerkumpulan: BadanUsahaContent = {
@@ -1422,14 +1458,14 @@ export const dataPerkumpulan: BadanUsahaContent = {
   hukumLaw: "UU No. 16 Tahun 2001 jo. UU No. 28 Tahun 2004 (sama dengan Yayasan) & Keputusan Menteri Hukum",
   pengertianDetail: (
     <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
-      <strong className="font-extrabold text-gray-900">Perkumpulan</strong> adalah badan hukum nirlaba yang didirikan oleh sekelompok orang berdasarkan kesamaan profesi, hobi, atau tujuan sosial — dengan struktur organisasi berbasis keanggotaan. Berbeda dengan yayasan yang berbasis kekayaan, perkumpulan berbasis <strong className="font-extrabold text-gray-900">keanggotaan (membership)</strong>. Perkumpulan memiliki Rapat Anggota sebagai organ tertinggi, serta Pengurus dan Pengawas yang dipilih oleh anggota.
+      <strong className="font-extrabold text-gray-900">Perkumpulan</strong> adalah badan hukum yang merupakan kumpulan orang yang didirikan untuk mewujudkan kesamaan maksud dan tujuan tertentu di bidang sosial, keagamaan, kemanusiaan, atau keilmuan, dan tidak membagikan keuntungan kepada anggotanya. Diatur berdasarkan Staatsblad 1870 No. 64 dan peraturan Kemenkumham.
     </p>
   ),
   karakteristik: [
-    { bold: "Berbasis anggota", text: " — organ tertinggi adalah Rapat Anggota, bukan Pembina." },
-    { bold: "Nirlaba", text: " — tujuan sosial, profesi, atau hobi — bukan mencari keuntungan." },
-    { bold: "Anggaran Dasar & ART", text: " — memiliki AD/ART yang disahkan dalam Rapat Anggota." },
-    { bold: "Badan hukum opsional", text: " — bisa berbadan hukum (disahkan Kemenkumham) atau tidak." },
+    { bold: "Didirikan oleh sekumpulan orang", text: " dengan kesamaan visi dan misi non-profit." },
+    { bold: "Dapat berbentuk badan hukum", text: " atau perkumpulan biasa (tidak berbadan hukum)." },
+    { bold: "Keanggotaan bersifat sukarela", text: " dan diatur dalam anggaran dasar." },
+    { bold: "Pendapatan organisasi sepenuhnya", text: " digunakan untuk mencapai tujuan perkumpulan." },
   ],
 
   manfaatTag: "MANFAAT MEMILIH PERKUMPULAN",
@@ -1444,7 +1480,7 @@ export const dataPerkumpulan: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN PERKUMPULAN",
   pricingTitle: "Pilih paket pendirian Perkumpulan.",
   pricingSubtitle:
-    "Harga sudah include akta notaris, pengesahan Kemenkumham, NPWP, dan NIB.",
+    "Harga sudah termasuk akta notaris, pengesahan Kemenkumham, NPWP, dan NIB.",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -1556,6 +1592,11 @@ export const dataPerkumpulan: BadanUsahaContent = {
     { q: "Apakah Perkumpulan bisa melakukan kegiatan komersial?", a: "Perkumpulan boleh melakukan kegiatan yang menghasilkan uang, namun hasilnya harus digunakan untuk tujuan organisasi, bukan dibagi ke anggota." },
     { q: "Apakah Perkumpulan wajib berbadan hukum?", a: "Tidak wajib. Perkumpulan dapat beroperasi tanpa badan hukum, namun status badan hukum memberikan kredibilitas dan kemudahan administrasi." },
   ],
+
+  ctaTitle: "Siap dirikan",
+  ctaHighlight: "Perkumpulan Anda?",
+  ctaDescription: "Konsultasi gratis untuk mendirikan perkumpulan resmi — tanpa komitmen.",
+  ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian Perkumpulan.",
 };
 
 export const dataKoperasi: BadanUsahaContent = {
@@ -1616,14 +1657,14 @@ export const dataKoperasi: BadanUsahaContent = {
   hukumLaw: "UU No. 25 Tahun 1992 tentang Perkoperasian & PP No. 7 Tahun 2021",
   pengertianDetail: (
     <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
-      <strong className="font-extrabold text-gray-900">Koperasi</strong> adalah badan hukum yang beranggotakan orang-seorang atau badan hukum dengan melandaskan kegiatannya berdasarkan prinsip koperasi sekaligus sebagai gerakan ekonomi rakyat yang berdasarkan asas kekeluargaan. Koperasi bertujuan <strong className="font-extrabold text-gray-900">mensejahterakan anggota</strong> pada khususnya dan masyarakat pada umumnya. Koperasi memiliki Rapat Anggota sebagai kekuasaan tertinggi, serta Pengurus dan Pengawas yang dipilih oleh anggota.
+      <strong className="font-extrabold text-gray-900">Koperasi</strong> adalah badan usaha yang beranggotakan orang-seorang atau badan hukum koperasi dengan melandaskan kegiatannya berdasarkan prinsip koperasi sekaligus sebagai gerakan ekonomi rakyat yang berdasarkan atas asas kekeluargaan. Koperasi bertujuan memajukan kesejahteraan anggota pada khususnya dan masyarakat pada umumnya.
     </p>
   ),
   karakteristik: [
-    { bold: "Keanggotaan sukarela", text: " — anggota bergabung secara sukarela, tanpa paksaan." },
-    { bold: "Satu anggota satu suara", text: " — setiap anggota punya hak suara yang sama, tidak tergantung jumlah simpanan." },
-    { bold: "Pembagian SHU", text: " — Sisa Hasil Usaha dibagi berdasarkan jasa usaha & partisipasi anggota." },
-    { bold: "Pendidikan anggota", text: " — koperasi wajib memberikan pendidikan perkoperasian kepada anggotanya." },
+    { bold: "Didirikan berdasarkan asas kekeluargaan", text: " dan gotong royong." },
+    { bold: "Keanggotaan bersifat sukarela", text: " dan terbuka." },
+    { bold: "Kekuasaan tertinggi berada", text: " pada Rapat Anggota Tahunan (RAT)." },
+    { bold: "Sisa Hasil Usaha (SHU)", text: " dibagikan secara adil sebanding dengan jasa usaha masing-masing anggota." },
   ],
 
   manfaatTag: "MANFAAT MEMILIH KOPERASI",
@@ -1638,7 +1679,7 @@ export const dataKoperasi: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN KOPERASI",
   pricingTitle: "Pilih paket pendirian Koperasi sesuai kebutuhan.",
   pricingSubtitle:
-    "Harga sudah include akta notaris, pengesahan Kemenkumham, NPWP, dan NIB Koperasi.",
+    "Harga sudah termasuk akta notaris, pengesahan Kemenkumham, NPWP, dan NIB Koperasi.",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -1750,6 +1791,11 @@ export const dataKoperasi: BadanUsahaContent = {
     { q: "Apakah koperasi bisa mendapatkan pinjaman dari bank?", a: "Ya, koperasi yang sudah berbadan hukum dan memiliki laporan keuangan yang baik dapat mengajukan pinjaman ke bank atau lembaga keuangan lainnya." },
     { q: "Apa jenis-jenis Koperasi yang ada?", a: "Ada berbagai jenis koperasi: Koperasi Simpan Pinjam (KSP), Koperasi Konsumen, Koperasi Produsen, Koperasi Jasa, Koperasi Pemasaran, dan Koperasi Serba Usaha (KSU)." },
   ],
+
+  ctaTitle: "Siap dirikan",
+  ctaHighlight: "Koperasi Anda?",
+  ctaDescription: "Konsultasi gratis untuk mendirikan koperasi — tanpa komitmen.",
+  ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian Koperasi.",
 };
 
 export const contentMap: Record<string, BadanUsahaContent> = {

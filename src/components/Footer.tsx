@@ -75,7 +75,7 @@ export default function Footer() {
       <section className="py-12 bg-bg-light border-y border-border">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center">
           <p className="text-[12px] text-muted mb-8 font-medium uppercase tracking-widest">
-            Dipercaya oleh <span className="font-bold text-primary">12.000+ pengusaha</span> di seluruh Indonesia
+            Dipercaya oleh <span className="font-bold text-primary">11.000+ pengusaha</span> di seluruh Indonesia
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
             {trustedBy.map((c, idx) => (
