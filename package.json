@@ -7,7 +7,7 @@
     "build": "prisma migrate deploy && next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "set NODE_OPTIONS=--disable-warning=DEP0205&& npx playwright test",
+    "test": "NODE_OPTIONS=--disable-warning=DEP0205 npx playwright test",
     "postinstall": "prisma generate"
   },
   "dependencies": {

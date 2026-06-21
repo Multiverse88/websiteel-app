@@ -10,6 +10,8 @@ services:
     restart: unless-stopped
     env_file:
       - .env.production
+    environment:
+      - HOSTNAME=0.0.0.0
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
