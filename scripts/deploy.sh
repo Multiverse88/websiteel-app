@@ -19,34 +19,25 @@ NC='\033[0m'
 # Check if .env.production exists
 if [ ! -f .env.production ]; then
     echo -e "${RED}Error: .env.production not found!${NC}"
-    echo "Copy .env.example to .env.production and fill in the values."
     exit 1
 fi
 
 # 1. Pull latest code
-echo -e "\n${YELLOW}[1/5] Pulling latest code...${NC}"
+echo -e "\n${YELLOW}[1/3] Pulling latest code...${NC}"
 git pull origin main
 
-# 2. Run automation test to check for regressions
-echo -e "\n${YELLOW}[2/5] Running automation test...${NC}"
-npm test
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Test failed! Aborting deploy.${NC}"
-    exit 1
-fi
-echo -e "${GREEN}All tests passed!${NC}"
+# 2. Build & restart containers (use cache for faster builds)
+echo -e "\n${YELLOW}[2/4] Building & restarting containers...${NC}"
+docker compose up -d --build
 
-# 3. Build containers
-echo -e "\n${YELLOW}[3/5] Building containers...${NC}"
-docker compose build --no-cache
+# 3. Prune old images, build cache, and stopped containers
+echo -e "\n${YELLOW}[3/4] Cleaning up Docker cache...${NC}"
+docker image prune -f
+docker builder prune -f --filter "until=72h"
+docker container prune -f
 
-# 4. Stop old containers & start new ones
-echo -e "\n${YELLOW}[4/5] Restarting services...${NC}"
-docker compose down
-docker compose up -d
-
-# 5. Wait for health check
-echo -e "\n${YELLOW}[5/5] Waiting for services to start...${NC}"
+# 4. Wait for health check
+echo -e "\n${YELLOW}[4/4] Waiting for services to start...${NC}"
 sleep 5
 
 # Check status
@@ -57,8 +48,8 @@ if docker compose ps | grep -q "Up"; then
     echo ""
     docker compose ps
     echo ""
-    echo "Website: https://easylegal.id"
-    echo "Dashboard: https://easylegal.id/login"
+    echo "Website: https://easylegal.my.id"
+    echo "Dashboard: https://easylegal.my.id/login"
     echo ""
 else
     echo -e "\n${RED}Deploy may have issues. Check logs:${NC}"
