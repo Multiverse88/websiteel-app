@@ -25,8 +25,6 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build Next.js (skip prisma migrate deploy - hanya jalan saat container start)
-# Set dummy DATABASE_URL agar pre-render halaman tidak error
-ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
 RUN npx next build
 
 # ============================================

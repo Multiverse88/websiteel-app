@@ -2,16 +2,17 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) {
-  throw new Error("JWT_SECRET environment variable is required. Generate one with: openssl rand -base64 32");
+function getJwtSecret(): Uint8Array {
+  const JWT_SECRET = process.env.JWT_SECRET;
+  if (!JWT_SECRET) {
+    throw new Error("JWT_SECRET environment variable is required. Generate one with: openssl rand -base64 32");
+  }
+  return new TextEncoder().encode(JWT_SECRET);
 }
-const secret = new TextEncoder().encode(JWT_SECRET);
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Only protect /dashboard routes
   if (pathname.startsWith("/dashboard")) {
     const token = request.cookies.get("admin_token")?.value;
 
@@ -20,7 +21,7 @@ export async function middleware(request: NextRequest) {
     }
 
     try {
-      await jwtVerify(token, secret);
+      await jwtVerify(token, getJwtSecret());
       return NextResponse.next();
     } catch {
       return NextResponse.redirect(new URL("/login", request.url));
