@@ -3,14 +3,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import InformasiHukumSection, { ArticleItem } from "@/components/home/InformasiHukumSection";
-import LayananKami from "@/components/home/LayananKami";
+const InformasiHukumSection = dynamic(() => import("@/components/home/InformasiHukumSection"), {
+  ssr: true,
+  loading: () => <div className="h-[600px] w-full animate-pulse bg-gray-50/50" />
+});
+const LayananKami = dynamic(() => import("@/components/home/LayananKami"), { ssr: true });
 import Hero from "@/components/home/Hero";
-import Testimonials from "@/components/home/Testimonials";
+const Testimonials = dynamic(() => import("@/components/home/Testimonials"), { ssr: true });
 import {
   quickTools, 
   partnerLogos, 
@@ -821,41 +825,59 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
 
   // GSAP: Why Choose bento grid - staggered entrance on scroll
   useGSAP(() => {
+    const mm = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      gsap.from(".bento-card", {
-        scrollTrigger: {
-          trigger: whyChooseRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-        autoAlpha: 0,
-        y: 40,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
+      mm.add("(min-width: 768px)", () => {
+        gsap.from(".bento-card", {
+          scrollTrigger: {
+            trigger: whyChooseRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          autoAlpha: 0,
+          y: 40,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
+        });
+      });
+      mm.add("(max-width: 767px)", () => {
+        gsap.set(".bento-card", { autoAlpha: 1, y: 0 });
       });
     }, { scope: whyChooseRef });
-    return () => ctx.revert();
+    return () => {
+      mm.revert();
+      ctx.revert();
+    };
   }, { dependencies: [] });
 
   // GSAP: Layanan section cards
   useGSAP(() => {
+    const mm = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      gsap.from(".layanan-card", {
-        scrollTrigger: {
-          trigger: layananRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-        autoAlpha: 0,
-        y: 30,
-        scale: 0.95,
-        duration: 0.5,
-        stagger: 0.06,
-        ease: "power2.out",
+      mm.add("(min-width: 768px)", () => {
+        gsap.from(".layanan-card", {
+          scrollTrigger: {
+            trigger: layananRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          autoAlpha: 0,
+          y: 30,
+          scale: 0.95,
+          duration: 0.5,
+          stagger: 0.06,
+          ease: "power2.out",
+        });
+      });
+      mm.add("(max-width: 767px)", () => {
+        gsap.set(".layanan-card", { autoAlpha: 1, y: 0, scale: 1 });
       });
     }, { scope: layananRef });
-    return () => ctx.revert();
+    return () => {
+      mm.revert();
+      ctx.revert();
+    };
   }, { dependencies: [] });
 
   return (
@@ -1342,7 +1364,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
               ].map((media, idx) => (
                 <div key={idx} className="flex items-center justify-center hover:scale-105 transition-transform duration-300 w-[120px] md:w-auto">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={media.src} alt={media.alt} className={`max-h-8 md:max-h-10 lg:max-h-11 object-contain w-full md:w-auto ${media.scaleClass || ""}`} />
+                  <img src={media.src} alt={media.alt} width={120} height={40} className={`max-h-8 md:max-h-10 lg:max-h-11 object-contain w-full md:w-auto ${media.scaleClass || ""}`} />
                 </div>
               ))}
 

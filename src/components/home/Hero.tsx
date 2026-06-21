@@ -152,9 +152,9 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                 src={slide.image}
                 alt={slide.tag}
                 fill
+                priority={idx === 0}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
-                priority={idx === 0}
               />
               <div className="absolute inset-0 bg-black/5" />
             </div>
