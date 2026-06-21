@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import gsap from "gsap";
 import { Star, Check } from "lucide-react";
 import { row1Reviews, row2Reviews, trustedBy } from "./data";
 
@@ -58,49 +57,15 @@ function ReviewCard({ item }: { item: typeof row1Reviews[0] }) {
 }
 
 function AutoScrollRow({ items, direction }: { items: typeof row1Reviews; direction: "left" | "right" }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const duplicated = [...items, ...items, ...items, ...items];
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const cardWidth = 380;
-    const totalWidth = items.length * cardWidth;
-    const startX = direction === "left" ? 0 : -totalWidth;
-    const endX = direction === "left" ? -totalWidth : 0;
-
-    gsap.set(track, { x: startX });
-
-    const tween = gsap.to(track, {
-      x: endX,
-      duration: (totalWidth / 50),
-      ease: "none",
-      repeat: -1,
-    });
-
-    const handlePause = () => { setIsPaused(true); tween.pause(); };
-    const handleResume = () => { setIsPaused(false); tween.resume(); };
-
-    track.addEventListener("pointerenter", handlePause);
-    track.addEventListener("pointerleave", handleResume);
-
-    return () => {
-      tween.kill();
-      track.removeEventListener("pointerenter", handlePause);
-      track.removeEventListener("pointerleave", handleResume);
-    };
-  }, [direction, items.length]);
+  const duplicated = [...items, ...items];
+  const animationClass = direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
 
   return (
-    <div className="relative group">
-      <div className="overflow-hidden">
-        <div ref={trackRef} className="flex cursor-grab active:cursor-grabbing">
-          {duplicated.map((item, idx) => (
-            <ReviewCard key={`${item.name}-${direction}-${idx}`} item={item} />
-          ))}
-        </div>
+    <div className="relative group marquee-container overflow-hidden">
+      <div className={`flex ${animationClass}`}>
+        {duplicated.map((item, idx) => (
+          <ReviewCard key={`${item.name}-${direction}-${idx}`} item={item} />
+        ))}
       </div>
     </div>
   );

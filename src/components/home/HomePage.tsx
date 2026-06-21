@@ -1,30 +1,31 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 const InformasiHukumSection = dynamic(() => import("@/components/home/InformasiHukumSection"), {
   ssr: true,
   loading: () => <div className="h-[600px] w-full animate-pulse bg-gray-50/50" />
 });
 const LayananKami = dynamic(() => import("@/components/home/LayananKami"), { ssr: true });
-import Hero from "@/components/home/Hero";
+const Hero = dynamic(() => import("@/components/home/Hero"), {
+  ssr: true,
+  loading: () => <div className="min-h-[580px] w-full animate-pulse bg-gray-50/50" />
+});
 const Testimonials = dynamic(() => import("@/components/home/Testimonials"), { ssr: true });
 import {
-  quickTools, 
-  partnerLogos, 
+  quickTools,
+  partnerLogos,
 } from "./data";
+import { ArticleItem } from "./InformasiHukumSection";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 import {
   ArrowRight,
   Check,
-  Star,
   Building2,
   MessageCircle,
   ShieldCheck,
@@ -751,150 +752,22 @@ function CaraKerjaSection() {
 /* ─── COMPONENT ─── */
 
 export default function HomePage({ articles }: { articles: ArticleItem[] }) {
-  const heroRef = useRef<HTMLElement>(null);
   const whyChooseRef = useRef<HTMLElement>(null);
-  const layananRef = useRef<HTMLElement>(null);
-  const pageRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        pageRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }
-      );
-    }, { scope: pageRef });
-    return () => ctx.revert();
-  }, { dependencies: [] });
-
-  // Refresh ScrollTrigger after hydration to prevent invisible elements
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 300);
-
-    // Fallback: If GSAP/ScrollTrigger doesn't fire within 2s, force all animated elements visible
-    const fallback = setTimeout(() => {
-      const selectors = [
-        ".hero-tag", ".hero-heading", ".hero-desc",
-        ".hero-cta", ".hero-badges", ".hero-float",
-        ".bento-card", ".layanan-card",
-      ];
-      document.querySelectorAll(selectors.join(",")).forEach((el) => {
-        const htmlEl = el as HTMLElement;
-        const isHidden = htmlEl.style.visibility === "hidden" || htmlEl.style.opacity === "0";
-        const computed = getComputedStyle(htmlEl);
-        const isComputedHidden = computed.visibility === "hidden" || computed.opacity === "0";
-        if (isHidden || isComputedHidden) {
-          gsap.set(htmlEl, { clearProps: "all" });
-          htmlEl.style.visibility = "visible";
-          htmlEl.style.opacity = "1";
-          htmlEl.style.transform = "none";
-        }
-      });
-      // Also ensure page container is visible
-      if (pageRef.current) {
-        if (pageRef.current.style.opacity === "0" || getComputedStyle(pageRef.current).opacity === "0") {
-          gsap.set(pageRef.current, { clearProps: "all" });
-          pageRef.current.style.visibility = "visible";
-          pageRef.current.style.opacity = "1";
-          pageRef.current.style.transform = "none";
-        }
-      }
-    }, 2000);
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(fallback);
-    };
-  }, []);
-
-  // GSAP: Hero section staggered entrance
-  useGSAP(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(".hero-tag", { autoAlpha: 0, y: 20, duration: 0.5 })
-        .from(".hero-heading", { autoAlpha: 0, y: 30, duration: 0.6 }, "-=0.2")
-        .from(".hero-desc", { autoAlpha: 0, y: 20, duration: 0.5 }, "-=0.3")
-        .from(".hero-cta", { autoAlpha: 0, y: 20, duration: 0.5, stagger: 0.1 }, "-=0.2")
-        .from(".hero-badges", { autoAlpha: 0, y: 15, duration: 0.4 }, "-=0.2")
-        .from(".hero-float", { autoAlpha: 0, scale: 0.9, duration: 0.6, stagger: 0.15 }, "-=0.3");
-    }, { scope: heroRef });
-    return () => ctx.revert();
-  });
-
-  // GSAP: Why Choose bento grid - staggered entrance on scroll
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
-    const ctx = gsap.context(() => {
-      mm.add("(min-width: 768px)", () => {
-        gsap.from(".bento-card", {
-          scrollTrigger: {
-            trigger: whyChooseRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-          autoAlpha: 0,
-          y: 40,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power3.out",
-        });
-      });
-      mm.add("(max-width: 767px)", () => {
-        gsap.set(".bento-card", { autoAlpha: 1, y: 0 });
-      });
-    }, { scope: whyChooseRef });
-    return () => {
-      mm.revert();
-      ctx.revert();
-    };
-  }, { dependencies: [] });
-
-  // GSAP: Layanan section cards
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
-    const ctx = gsap.context(() => {
-      mm.add("(min-width: 768px)", () => {
-        gsap.from(".layanan-card", {
-          scrollTrigger: {
-            trigger: layananRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-          autoAlpha: 0,
-          y: 30,
-          scale: 0.95,
-          duration: 0.5,
-          stagger: 0.06,
-          ease: "power2.out",
-        });
-      });
-      mm.add("(max-width: 767px)", () => {
-        gsap.set(".layanan-card", { autoAlpha: 1, y: 0, scale: 1 });
-      });
-    }, { scope: layananRef });
-    return () => {
-      mm.revert();
-      ctx.revert();
-    };
-  }, { dependencies: [] });
 
   return (
-    <div ref={pageRef} className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen">
 
       {/* ═══════════════════════════════════════════
           HERO SECTION
           ═══════════════════════════════════════════ */}
       <Hero
-        ref={heroRef}
         gsapClasses={{
-          tag: "hero-tag",
-          heading: "hero-heading",
-          desc: "hero-desc",
-          cta: "hero-cta",
-          badges: "hero-badges",
-          float: "hero-float",
+          tag: "hero-animate-tag",
+          heading: "hero-animate-heading",
+          desc: "hero-animate-desc",
+          cta: "hero-animate-cta",
+          badges: "hero-animate-badges",
+          float: "hero-animate-float",
         }}
       />
 
@@ -1008,7 +881,20 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
       {/* ═══════════════════════════════════════════
           WHY CHOOSE EL PARTNERS
           ═══════════════════════════════════════════ */}
-      <section ref={whyChooseRef} className="py-20 bg-[#FCFCFC] overflow-hidden">
+      <section
+        className="py-20 bg-[#FCFCFC] overflow-hidden"
+        ref={(el) => {
+          if (!el) return;
+          whyChooseRef.current = el;
+          const obs = new IntersectionObserver(([e]) => {
+            if (e.isIntersecting) {
+              el.classList.add("bento-revealed");
+              obs.unobserve(el);
+            }
+          }, { rootMargin: "0px 0px -15% 0px" });
+          obs.observe(el);
+        }}
+      >
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           
           {/* Header */}

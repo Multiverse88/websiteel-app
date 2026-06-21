@@ -3,12 +3,12 @@ import type { NextConfig } from "next";
 
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://chatwoot.easylegal.my.id https://packs.chatwoot.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline';
   style-src 'self' 'unsafe-inline';
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://chatwoot.easylegal.my.id https://sentry.io https://*.ingest.sentry.io;
-  frame-src 'self' https://www.youtube.com https://chatwoot.easylegal.my.id;
+  connect-src 'self' https://sentry.io https://*.ingest.sentry.io;
+  frame-src 'self' https://www.youtube.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self';

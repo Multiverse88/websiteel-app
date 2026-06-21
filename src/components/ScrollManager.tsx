@@ -2,13 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-// Register the ScrollToPlugin on client side
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollToPlugin);
-}
 
 export default function ScrollManager() {
   const pathname = usePathname();
@@ -57,11 +51,9 @@ export default function ScrollManager() {
       // Case 1: Clicking a link that goes to the current page itself without hash (e.g. Logo or active page in Navbar)
       if (isSamePage && !anchor.hash) {
         e.preventDefault();
-        gsap.to(window, {
-          duration: 0.8,
-          scrollTo: { y: 0 },
-          ease: "power3.out",
-          overwrite: "auto",
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
         });
         return;
       }
@@ -73,11 +65,11 @@ export default function ScrollManager() {
         if (targetEl) {
           e.preventDefault();
           
-          gsap.to(window, {
-            duration: 0.8,
-            scrollTo: { y: targetEl, offsetY: 88 },
-            ease: "power3.out",
-            overwrite: "auto",
+          const elementPosition = targetEl.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - 88;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
           });
 
           // Update URL hash without browser jump
@@ -104,11 +96,11 @@ export default function ScrollManager() {
       if (targetEl) {
         // Jeda singkat untuk memastikan proses rendering Next.js & hidrasi DOM selesai
         const timer = setTimeout(() => {
-          gsap.to(window, {
-            duration: 0.8,
-            scrollTo: { y: targetEl, offsetY: 88 },
-            ease: "power3.out",
-            overwrite: "auto",
+          const elementPosition = targetEl.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - 88;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
           });
         }, 150);
         return () => clearTimeout(timer);

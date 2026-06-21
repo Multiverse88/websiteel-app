@@ -1,0 +1,11 @@
+Task Name,Description,Status,Priority,Assignee,Due Date,Tags
+Add GSAP and next-view-transitions dependencies,"Install gsap, @gsap/react, next-view-transitions for animation system",Done,High,,2026-06-21,"animation,dependencies"
+Integrate ViewTransitions in root layout,"Wrap layout.tsx with <ViewTransitions> for global page transitions",Done,High,,2026-06-21,"animation,layout"
+Create useIntersectionObserver hook,"Lightweight IntersectionObserver hook for scroll reveals",Done,Medium,,2026-06-21,"animation,hooks"
+Create ScrollReveal component,"Reusable scroll reveal component using CSS animations",Done,Medium,,2026-06-21,"animation,components"
+Apply GSAP animations on Hero component,"Staggered intro timeline for badge, heading, desc, CTA, badges, float elements",Done,High,,2026-06-21,"animation,gsap,hero"
+Dynamic import Hero component,"Code-split Hero with dynamic() so GSAP only loads on homepage",Done,High,,2026-06-21,"performance,code-splitting"
+Replace next/link with next-view-transitions Link,"Update Navbar, Footer, CTA, LayananKami, LatestInsights, InformasiHukumSection, HomePage, BadanUsahaTemplate, Hero",Done,Medium,,2026-06-21,"navigation,transitions"
+Update .gitignore for Playwright,"Add playwright/.cache/ and remove playwright-report from git tracking",Done,Low,,2026-06-21,"git,ci"
+Build verification,"npm run build - TypeScript pass, bundle optimized",Done,High,,2026-06-21,"build,verify"
+Smoke tests pass,"npm test - 20 Playwright tests all pass",Done,High,,2026-06-21,"test,playwright"

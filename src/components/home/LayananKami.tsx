@@ -1,12 +1,25 @@
 import React from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { Building2, Check, Users } from "lucide-react";
 import { layananIndividual } from "./data";
 
 export default function LayananKami() {
   return (
-    <section className="py-20 bg-white" id="layanan">
+    <section 
+      className="py-20 bg-white" 
+      id="layanan"
+      ref={(el) => {
+        if (!el) return;
+        const obs = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) {
+            el.classList.add("layanan-revealed");
+            obs.unobserve(el);
+          }
+        }, { rootMargin: "0px 0px -15% 0px" });
+        obs.observe(el);
+      }}
+    >
       <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
         {/* Header */}
         <div className="mb-10">
@@ -39,7 +52,7 @@ export default function LayananKami() {
                   <Link
                     key={idx}
                     href={item.href}
-                    className="group rounded-2xl p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden"
+                    className="group layanan-card rounded-2xl p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden"
                     style={{
                       minHeight: "175px",
                       background: `linear-gradient(180deg, #ffffff 30%, ${item.cardTint} 100%)`,

@@ -1,13 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-// Register the ScrollToPlugin on the client side
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollToPlugin);
-}
 
 interface Heading {
   id: string;
@@ -62,11 +56,11 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) {
-      gsap.to(window, {
-        duration: 0.8,
-        scrollTo: { y: el, offsetY: 88 },
-        ease: "power3.out",
-        overwrite: "auto",
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - 88;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
       });
       setActiveId(id);
       // Update URL hash without causing page jump
