@@ -18,6 +18,12 @@ services:
       - uploads:/app/public/uploads
     networks:
       - easylegal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   # ============================================
   # Nginx Reverse Proxy
@@ -35,7 +41,8 @@ services:
       - /var/www/certbot:/var/www/certbot:ro
       - uploads:/app/public/uploads:ro
     depends_on:
-      - app
+      app:
+        condition: service_healthy
     networks:
       - easylegal
 
