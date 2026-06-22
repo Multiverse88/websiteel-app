@@ -1,9 +1,6 @@
-import * as Sentry from "@sentry/nextjs";
-
+// Sentry client disabled completely to reduce bundle size
+// If you need error tracking, use a lighter alternative or enable selectively
 if (process.env.NODE_ENV === "production") {
-  Sentry.init({
-    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || process.env.SENTRY_DSN,
-    tracesSampleRate: 0.0, // Disable tracing on client to keep JS bundle lightweight
-    sendDefaultPii: false,
-  });
+  // Client-side Sentry disabled for performance
+  // Errors are still captured on the server side via sentry.server.config.ts
 }

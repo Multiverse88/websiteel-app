@@ -3,8 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ScrollManager from "@/components/ScrollManager";
-import { ViewTransitions } from "next-view-transitions";
+import { Suspense } from "react";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -28,19 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html
-        lang="id"
-        data-scroll-behavior="smooth"
-        className={`${dmSans.variable} h-full antialiased scroll-smooth`}
-      >
-        <body className="min-h-full flex flex-col pt-[72px] bg-white text-dark font-sans">
-          <ScrollManager />
+    <html
+      lang="id"
+      data-scroll-behavior="smooth"
+      className={`${dmSans.variable} h-full antialiased scroll-smooth`}
+    >
+      <body className="min-h-full flex flex-col pt-[72px] bg-white text-dark font-sans">
+        <Suspense fallback={null}>
           <Navbar />
-          <main className="flex-grow flex flex-col">{children}</main>
-          <Footer />
-        </body>
-      </html>
-    </ViewTransitions>
+        </Suspense>
+        <main className="flex-grow flex flex-col">{children}</main>
+        <Footer />
+      </body>
+    </html>
   );
 }

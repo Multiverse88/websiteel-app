@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 import CTA from "@/components/CTA";

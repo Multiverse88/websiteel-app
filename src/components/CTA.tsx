@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { getWhatsAppLink } from "@/lib/config";
 import { trackMetric } from "@/lib/metrics";
 

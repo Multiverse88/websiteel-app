@@ -12,6 +12,8 @@ async function HomeWithData() {
   return <HomePage articles={articles} />;
 }
 
+export const revalidate = 300; // Revalidate every 5 minutes instead of on every request
+
 export default function Page() {
   return (
     <>

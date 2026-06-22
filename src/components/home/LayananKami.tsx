@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import Image from "next/image";
 import { Building2, Check, Users } from "lucide-react";
 import { layananIndividual } from "./data";
