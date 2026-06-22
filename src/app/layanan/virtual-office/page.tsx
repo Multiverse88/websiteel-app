@@ -290,7 +290,7 @@ export default function VirtualOffice() {
 
           {/* Section Header */}
           <div 
-            className="animate-scroll-reveal text-left mb-10"
+            className="animate-fade-in-up text-left mb-10"
           >
             <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">TENTANG VIRTUAL OFFICE</p>
             <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-950 leading-tight tracking-tight">
@@ -305,7 +305,7 @@ export default function VirtualOffice() {
 
             {/* Left Column: Image & Floating Card */}
             <div 
-              className="animate-scroll-reveal lg:col-span-6 relative"
+              className="animate-fade-in-up lg:col-span-6 relative"
               style={{ transform: "translateX(-30px)" }}
             >
               <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] aspect-[4/3]">
@@ -332,7 +332,7 @@ export default function VirtualOffice() {
 
             {/* Right Column: Paragraphs & Checklist */}
             <div 
-              className="animate-scroll-reveal lg:col-span-6 space-y-6"
+              className="animate-fade-in-up lg:col-span-6 space-y-6"
               style={{ transform: "translateX(30px)" }}
             >
               <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
@@ -390,7 +390,7 @@ export default function VirtualOffice() {
 
           {/* Section Header */}
           <div 
-            className="animate-scroll-reveal text-center mb-12"
+            className="animate-fade-in-up text-center mb-12"
           >
             <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">MANFAAT VIRTUAL OFFICE</p>
             <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-950 leading-tight tracking-tight">
@@ -403,7 +403,7 @@ export default function VirtualOffice() {
 
             {/* Card 1 */}
             <div 
-              className="animate-scroll-reveal bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+              className="animate-fade-in-up bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
               style={{ animationDelay: "0.1s" }}
             >
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
@@ -417,7 +417,7 @@ export default function VirtualOffice() {
 
             {/* Card 2 */}
             <div 
-              className="animate-scroll-reveal bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+              className="animate-fade-in-up bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
               style={{ animationDelay: "0.2s" }}
             >
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
@@ -431,7 +431,7 @@ export default function VirtualOffice() {
 
             {/* Card 3 */}
             <div 
-              className="animate-scroll-reveal bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+              className="animate-fade-in-up bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
               style={{ animationDelay: "0.3s" }}
             >
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
@@ -445,7 +445,7 @@ export default function VirtualOffice() {
 
             {/* Card 4 */}
             <div 
-              className="animate-scroll-reveal bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
+              className="animate-fade-in-up bg-[#F9FAFB] shadow-[0_4px_16px_rgba(0,0,0,0.06)] p-8 rounded-[24px] flex flex-col items-start text-left hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:bg-white transition-all duration-300"
               style={{ animationDelay: "0.4s" }}
             >
               <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#990202] mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
@@ -467,7 +467,7 @@ export default function VirtualOffice() {
 
           {/* Section Header */}
           <div 
-            className="animate-scroll-reveal text-center max-w-3xl mx-auto mb-16"
+            className="animate-fade-in-up text-center max-w-3xl mx-auto mb-16"
           >
             <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">PILIH LOKASI OFFICE</p>
             <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-950 leading-tight tracking-tight">
@@ -483,7 +483,7 @@ export default function VirtualOffice() {
 
             {/* Card 1: Jakarta */}
             <div 
-              className="animate-scroll-reveal bg-white rounded-[32px] overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full"
+              className="animate-fade-in-up bg-white rounded-[32px] overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full"
               style={{ animationDelay: "0.1s" }}
             >
               {/* Header Box */}
@@ -583,7 +583,7 @@ export default function VirtualOffice() {
 
             {/* Card 2: Bandung */}
             <div 
-              className="animate-scroll-reveal bg-white rounded-[32px] overflow-hidden border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.035)] hover:shadow-[0_20px_50px_rgba(153,2,2,0.08)] scale-[1.03] lg:-translate-y-2.5 relative z-10 transition-all duration-300 flex flex-col h-full"
+              className="animate-fade-in-up bg-white rounded-[32px] overflow-hidden border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.035)] hover:shadow-[0_20px_50px_rgba(153,2,2,0.08)] scale-[1.03] lg:-translate-y-2.5 relative z-10 transition-all duration-300 flex flex-col h-full"
               style={{ animationDelay: "0.2s" }}
             >
               {/* Header Box */}
@@ -686,7 +686,7 @@ export default function VirtualOffice() {
 
             {/* Card 3: Bekasi */}
             <div 
-              className="animate-scroll-reveal bg-white rounded-[32px] overflow-hidden border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+              className="animate-fade-in-up bg-white rounded-[32px] overflow-hidden border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col h-full"
               style={{ animationDelay: "0.3s" }}
             >
               {/* Header Box */}
@@ -801,7 +801,7 @@ export default function VirtualOffice() {
 
           {/* Section Header */}
           <div 
-            className="animate-scroll-reveal text-center max-w-3xl mx-auto mb-16"
+            className="animate-fade-in-up text-center max-w-3xl mx-auto mb-16"
           >
             <p className="text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">DETAIL LOKASI</p>
             <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-950 leading-tight tracking-tight">
@@ -816,7 +816,7 @@ export default function VirtualOffice() {
 
             {/* Left Column: Image & Floating Card */}
             <div 
-              className="animate-scroll-reveal lg:col-span-6 relative"
+              className="animate-fade-in-up lg:col-span-6 relative"
             >
               <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] z-10 aspect-[4/3]">
                 <Image
@@ -851,7 +851,7 @@ export default function VirtualOffice() {
 
             {/* Right Column: Address Box & Services & Buttons */}
             <div 
-              className="animate-scroll-reveal lg:col-span-6 space-y-6"
+              className="animate-fade-in-up lg:col-span-6 space-y-6"
               style={{ transform: "translateX(30px)" }}
             >
 
