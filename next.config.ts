@@ -4,8 +4,8 @@ import type { NextConfig } from "next";
 // Improved CSP policy - removes unsafe-eval for better security
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self';
-  script-src-elem 'self' https://www.youtube.com https://www.youtube-nocookie.com;
+  script-src 'self' 'unsafe-inline';
+  script-src-elem 'self' 'unsafe-inline' https://www.youtube.com https://www.youtube-nocookie.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
