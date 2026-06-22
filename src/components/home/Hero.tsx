@@ -186,7 +186,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
               <Check className="w-5 h-5" strokeWidth={3} />
             </div>
             <div>
-              <div className="text-[16px] font-black text-[#1A1A1A] leading-tight">4.9<span className="text-[11px] font-bold text-gray-400">/5</span></div>
+              <div className="text-[16px] font-black text-[#1A1A1A] leading-tight">4.9<span className="text-[11px] font-bold text-gray-500">/5</span></div>
               <div className="flex space-x-0.5 mt-0.5">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <Star key={s} className="w-3 h-3 fill-amber-400 text-amber-400" />
@@ -195,7 +195,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
             </div>
           </div>
 
-          {/* Dot Indicators */}
+          {/* Dot Indicators - larger touch targets for accessibility */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-2 z-20">
             {heroSlides.map((_, idx) => (
               <button
@@ -205,10 +205,11 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                   setHasNavigated(true);
                   setCurrentSlide(idx);
                 }}
-                className={`h-2 rounded-full transition-all duration-300 ${
+                className={`min-w-3 min-h-3 rounded-full transition-all duration-300 ${
                   currentSlide === idx ? "w-6 bg-[#D62828]" : "w-2 bg-white/40 hover:bg-white/60"
                 }`}
-                aria-label={`Go to slide ${idx + 1}`}
+                aria-label={`Pergi ke slide ${idx + 1}`}
+                aria-current={currentSlide === idx ? "step" : undefined}
               />
             ))}
           </div>

@@ -102,7 +102,7 @@ export default function Pricing({
                     {pkg.title}
                   </h3>
                   {pkg.strikePrice && (
-                    <div className={`mt-3 text-[12px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-gray-400"}`}>
+                    <div className={`mt-3 text-[12px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-gray-500"}`}>
                       {pkg.strikePrice}
                     </div>
                   )}
@@ -110,7 +110,7 @@ export default function Pricing({
                     <span className="text-[28px] sm:text-[30px] font-black tracking-tight">{pkg.price}</span>
                   </div>
                   {pkg.subLabel && (
-                    <div className={`mt-2.5 text-[9.5px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-gray-400"}`}>
+                    <div className={`mt-2.5 text-[9.5px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-gray-500"}`}>
                       {pkg.subLabel}
                     </div>
                   )}
@@ -133,7 +133,7 @@ export default function Pricing({
                           {group.items.map((item, iIdx) => {
                             const liClass = item.checked
                               ? "flex items-start text-[13px] font-medium text-gray-700"
-                              : "flex items-start text-[13px] font-medium text-gray-400 line-through";
+                              : "flex items-start text-[13px] font-medium text-gray-500 line-through";
 
                             return (
                               <li key={iIdx} className={liClass}>
@@ -148,7 +148,7 @@ export default function Pricing({
                                   )}
                                   <span dangerouslySetInnerHTML={{ __html: item.text }} />
                                   {item.footnoteIndex && (
-                                    <sup className={`text-[9px] font-semibold ${item.checked ? "text-[#990202]" : "text-gray-400"}`}>
+                                    <sup className={`text-[9px] font-semibold ${item.checked ? "text-[#990202]" : "text-gray-500"}`}>
                                       ({item.footnoteIndex})
                                     </sup>
                                   )}

@@ -59,31 +59,34 @@ function VideoEmbedSection() {
         <div className="relative aspect-video w-full bg-black overflow-hidden">
           {isPlaying ? (
             <iframe
-              src="https://www.youtube.com/embed/PHyO3XoAGEU?autoplay=1&rel=0&modestbranding=1"
+              src="https://www.youtube-nocookie.com/embed/PHyO3XoAGEU?autoplay=1&rel=0&modestbranding=1"
               title="EasyLegal — Client Story: Menguatkan Pebisnis Awam Lewat Taka Lab"
               className="absolute inset-0 w-full h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
+              loading="lazy"
               style={{ border: 0 }}
             />
           ) : (
             <>
-              {/* Static YouTube cover image placeholder */}
+              {/* Static YouTube cover image placeholder - deprioritized for LCP */}
               <Image
                 src="https://img.youtube.com/vi/PHyO3XoAGEU/maxresdefault.jpg"
                 alt="EasyLegal Video Cover"
                 fill
                 sizes="(max-width: 768px) 100vw, 800px"
                 className="object-cover opacity-90 group-hover:scale-[1.01] transition-transform duration-700"
+                fetchPriority="low"
+                placeholder="empty"
               />
               <div className="absolute inset-0 bg-black/20" />
               {/* Click-to-play button */}
               <button
                 onClick={() => setIsPlaying(true)}
-                className="absolute inset-0 w-full h-full cursor-pointer z-10 focus:outline-none flex items-center justify-center"
-                aria-label="Play video"
+                className="absolute inset-0 w-full h-full cursor-pointer z-10 focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50 flex items-center justify-center"
+                aria-label="Putar video"
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#B91C1C] flex items-center justify-center shadow-[0_8px_30px_rgba(185,28,28,0.4)] group-hover:scale-110 group-hover:shadow-[0_12px_40px_rgba(185,28,28,0.5)] transition-all duration-300">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#B91C1C] flex items-center justify-center shadow-[0_8px_30px_rgba(185,28,28,0.4)] group-hover:scale-110 group-hover:shadow-[0_12px_40px_rgba(185,28,28,0.5)] transition-all duration-300" aria-hidden="true">
                   <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z" />
                   </svg>
@@ -215,7 +218,7 @@ function CaraKerjaSection() {
                         <span className="text-[#9CA3AF] text-[14.5px] font-extrabold tracking-wider w-6">
                           {step.num}
                         </span>
-                        <span className="text-[16px] font-semibold text-gray-400 group-hover:text-gray-700 transition-colors duration-150">
+                        <span className="text-[16px] font-semibold text-gray-500 group-hover:text-gray-700 transition-colors duration-150">
                           {step.title}
                         </span>
                       </button>
@@ -295,7 +298,7 @@ function CaraKerjaSection() {
                     {/* Option Box: NIB & OSS */}
                     <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300">
                       <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
-                        <FileText className="w-3.5 h-3.5 text-gray-400" />
+                        <FileText className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
                         <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">NIB & OSS</div>
@@ -306,7 +309,7 @@ function CaraKerjaSection() {
                     {/* Option Box: Daftar Merek */}
                     <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300">
                       <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
-                        <ShieldCheck className="w-3.5 h-3.5 text-gray-400" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
                         <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">Daftar Merek</div>
@@ -317,7 +320,7 @@ function CaraKerjaSection() {
                     {/* Option Box: ISO 9001 */}
                     <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300">
                       <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
-                        <Award className="w-3.5 h-3.5 text-gray-400" />
+                        <Award className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
                         <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">ISO 9001</div>
@@ -334,7 +337,7 @@ function CaraKerjaSection() {
                   </div>
                   <div className="flex items-baseline leading-none">
                     <span className="text-[10px] font-black text-gray-800">Akta selesai</span>
-                    <span className="text-[8px] text-gray-400 font-bold ml-1.5">2 menit lalu</span>
+                    <span className="text-[8px] text-gray-500 font-bold ml-1.5">2 menit lalu</span>
                   </div>
                 </div>
 
@@ -342,7 +345,7 @@ function CaraKerjaSection() {
                 <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
                   <div className="flex items-center justify-between">
                     <span className="text-amber-500 font-extrabold text-[12px] flex items-center gap-0.5">★ 4.9</span>
-                    <span className="text-[8px] text-gray-400 font-black tracking-wider">GOOGLE</span>
+                    <span className="text-[8px] text-gray-500 font-black tracking-wider">GOOGLE</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="flex -space-x-1.5 overflow-hidden">
@@ -352,7 +355,7 @@ function CaraKerjaSection() {
                     </div>
                     <div className="leading-tight">
                       <div className="text-[9.5px] font-black text-gray-800">11.000+</div>
-                      <div className="text-[7.5px] font-bold text-gray-400">bisnis terbantu</div>
+                      <div className="text-[7.5px] font-bold text-gray-500">bisnis terbantu</div>
                     </div>
                   </div>
                 </div>
@@ -364,7 +367,7 @@ function CaraKerjaSection() {
                   </div>
                   <div className="leading-tight min-w-0">
                     <div className="text-[10px] font-black text-gray-800 truncate">Pendirian PT — proses</div>
-                    <div className="text-[8px] text-gray-400 font-bold mt-0.5 truncate">Tahap 3/4 · 2 hari lagi</div>
+                    <div className="text-[8px] text-gray-500 font-bold mt-0.5 truncate">Tahap 3/4 · 2 hari lagi</div>
                   </div>
                 </div>
               </div>
@@ -476,11 +479,11 @@ function CaraKerjaSection() {
                 <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
                   <div className="flex items-center justify-between">
                     <span className="text-amber-500 font-extrabold text-[12px] flex items-center gap-0.5">★ 5.0</span>
-                    <span className="text-[8px] text-gray-400 font-black tracking-wider">RATING</span>
+                    <span className="text-[8px] text-gray-500 font-black tracking-wider">RATING</span>
                   </div>
                   <div className="leading-tight">
                     <div className="text-[10px] font-black text-gray-800">Advokat Senior</div>
-                    <div className="text-[7.5px] font-semibold text-gray-400 mt-0.5">100% Solutif & Terpercaya</div>
+                    <div className="text-[7.5px] font-semibold text-gray-500 mt-0.5">100% Solutif & Terpercaya</div>
                   </div>
                 </div>
 
@@ -491,7 +494,7 @@ function CaraKerjaSection() {
                   </div>
                   <div className="leading-tight min-w-0">
                     <div className="text-[10px] font-black text-gray-800 truncate">Jadwal Terkonfirmasi</div>
-                    <div className="text-[8px] text-gray-400 font-bold mt-0.5 truncate">Hari ini · 14:00 WIB</div>
+                    <div className="text-[8px] text-gray-500 font-bold mt-0.5 truncate">Hari ini · 14:00 WIB</div>
                   </div>
                 </div>
               </div>
@@ -616,7 +619,7 @@ function CaraKerjaSection() {
                   </div>
                   <div className="leading-tight min-w-0">
                     <div className="text-[10px] font-black text-gray-800 truncate">Verifikasi Berkas</div>
-                    <div className="text-[8px] text-gray-400 font-bold mt-0.5 truncate">Oleh Tim Ahli Legal</div>
+                    <div className="text-[8px] text-gray-500 font-bold mt-0.5 truncate">Oleh Tim Ahli Legal</div>
                   </div>
                 </div>
               </div>
@@ -729,7 +732,7 @@ function CaraKerjaSection() {
                 <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
                   <div className="leading-tight">
                     <div className="text-[10px] font-black text-gray-800">100% Sah & Resmi</div>
-                    <div className="text-[7.5px] font-semibold text-gray-400 mt-1">Terdaftar di Kemenkumham & DJKI</div>
+                    <div className="text-[7.5px] font-semibold text-gray-500 mt-1">Terdaftar di Kemenkumham & DJKI</div>
                   </div>
                 </div>
 
@@ -740,7 +743,7 @@ function CaraKerjaSection() {
                   </div>
                   <div className="leading-tight min-w-0">
                     <div className="text-[10px] font-black text-gray-800 truncate">Selesai & Legal</div>
-                    <div className="text-[8px] text-gray-400 font-bold mt-0.5 truncate">Bisnis Siap Jalan!</div>
+                    <div className="text-[8px] text-gray-500 font-bold mt-0.5 truncate">Bisnis Siap Jalan!</div>
                   </div>
                 </div>
               </div>
@@ -1012,7 +1015,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
 
                 {/* Step 4: Pengesahan AHU (Inactive) */}
                 <div className="flex items-center gap-3 opacity-55 pl-1.5">
-                  <div className="w-5 h-5 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 text-[10px] font-extrabold flex-shrink-0 border border-gray-250">
+                  <div className="w-5 h-5 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 text-[10px] font-extrabold flex-shrink-0 border border-gray-250">
                     4
                   </div>
                   <span className="text-[12.5px] font-bold text-gray-500">Pengesahan AHU</span>
@@ -1050,7 +1053,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
 
               {/* Right: Pricing Card Mockup */}
               <div className="w-full sm:w-[200px] bg-white rounded-2xl border-2 border-dashed border-[#B91C1C]/15 p-4 flex flex-col text-left flex-shrink-0 shadow-sm">
-                <span className="text-[9px] font-extrabold text-gray-400 tracking-wider uppercase">
+                <span className="text-[9px] font-extrabold text-gray-500 tracking-wider uppercase">
                   PENDIRIAN PT
                 </span>
                 <div className="text-[20px] font-black text-[#B91C1C] leading-tight mt-1">
@@ -1120,7 +1123,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
                   <div className="text-[28px] font-black text-[#B91C1C] leading-none">
                     11.000+
                   </div>
-                  <div className="text-[11px] text-gray-400 font-bold mt-2.5">
+                  <div className="text-[11px] text-gray-500 font-bold mt-2.5">
                     Bisnis terlayani
                   </div>
                 </div>
@@ -1133,7 +1136,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
                   <div className="text-[28px] font-black text-gray-800 leading-none flex items-baseline">
                     4.9<span className="text-amber-500 ml-0.5">★</span>
                   </div>
-                  <div className="text-[11px] text-gray-400 font-bold mt-2.5">
+                  <div className="text-[11px] text-gray-500 font-bold mt-2.5">
                     Rating Google
                   </div>
                 </div>
@@ -1146,7 +1149,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
                   <div className="text-[28px] font-black text-[#B91C1C] leading-none">
                     5thn
                   </div>
-                  <div className="text-[11px] text-gray-400 font-bold mt-2.5">
+                  <div className="text-[11px] text-gray-500 font-bold mt-2.5">
                     Pengalaman
                   </div>
                 </div>
@@ -1261,7 +1264,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
 
             </div>
 
-            <p className="text-[13px] text-gray-400 mt-14 flex items-center justify-center gap-2">
+            <p className="text-[13px] text-gray-500 mt-14 flex items-center justify-center gap-2">
               Bisa Juga transaksi via
               <Image src="/EasyLegal-Shopee.png" alt="Shopee" width={100} height={40} className="object-contain" />
               EasyLegal Official Store

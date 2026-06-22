@@ -55,7 +55,7 @@ export default function LatestInsights() {
                     <span className="bg-[#FEF2F2] text-[#B91C1C] px-2.5 py-0.5 rounded-lg text-[9px] font-black tracking-wider uppercase border border-[#FEE2E2]">
                       SERTIFIKASI ISO
                     </span>
-                    <span className="text-[10.5px] text-gray-400 font-bold ml-3.5">
+                    <span className="text-[10.5px] text-gray-500 font-bold ml-3.5">
                       15 Mei 2026 · 8 min baca
                     </span>
                   </div>
@@ -94,7 +94,7 @@ export default function LatestInsights() {
                     <span className="bg-[#FEF2F2] text-[#B91C1C] px-2 py-0.5 rounded-lg text-[9px] font-black tracking-wider uppercase border border-[#FEE2E2]">
                       PENDIRIAN PT
                     </span>
-                    <span className="text-[10px] text-gray-400 font-bold ml-2.5">
+                    <span className="text-[10px] text-gray-500 font-bold ml-2.5">
                       12 Mei · 6 min
                     </span>
                   </div>
@@ -125,7 +125,7 @@ export default function LatestInsights() {
                     <span className="bg-[#FEF2F2] text-[#B91C1C] px-2 py-0.5 rounded-lg text-[9px] font-black tracking-wider uppercase border border-[#FEE2E2]">
                       KBLI 2025
                     </span>
-                    <span className="text-[10px] text-gray-400 font-bold ml-2.5">
+                    <span className="text-[10px] text-gray-500 font-bold ml-2.5">
                       10 Mei · 5 min
                     </span>
                   </div>
@@ -156,7 +156,7 @@ export default function LatestInsights() {
                     <span className="bg-[#FEF2F2] text-[#B91C1C] px-2 py-0.5 rounded-lg text-[9px] font-black tracking-wider uppercase border border-[#FEE2E2]">
                       PERIZINAN
                     </span>
-                    <span className="text-[10px] text-gray-400 font-bold ml-2.5">
+                    <span className="text-[10px] text-gray-500 font-bold ml-2.5">
                       8 Mei · 4 min
                     </span>
                   </div>
@@ -187,7 +187,7 @@ export default function LatestInsights() {
                     <span className="bg-[#FEF2F2] text-[#B91C1C] px-2 py-0.5 rounded-lg text-[9px] font-black tracking-wider uppercase border border-[#FEE2E2]">
                       MEREK & HAKI
                     </span>
-                    <span className="text-[10px] text-gray-400 font-bold ml-2.5">
+                    <span className="text-[10px] text-gray-500 font-bold ml-2.5">
                       5 Mei · 7 min
                     </span>
                   </div>

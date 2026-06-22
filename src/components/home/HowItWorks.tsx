@@ -112,7 +112,7 @@ export default function HowItWorks() {
                         <span className="text-[#9CA3AF] text-[14.5px] font-extrabold tracking-wider w-6">
                           {step.num}
                         </span>
-                        <span className="text-[16px] font-semibold text-gray-400 group-hover:text-gray-700 transition-colors duration-150">
+                        <span className="text-[16px] font-semibold text-gray-500 group-hover:text-gray-700 transition-colors duration-150">
                           {step.title}
                         </span>
                       </button>
@@ -175,7 +175,7 @@ export default function HowItWorks() {
                     </div>
                     <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300">
                       <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
-                        <FileText className="w-3.5 h-3.5 text-gray-400" />
+                        <FileText className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
                         <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">NIB & OSS</div>
@@ -184,7 +184,7 @@ export default function HowItWorks() {
                     </div>
                     <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300">
                       <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
-                        <ShieldCheck className="w-3.5 h-3.5 text-gray-400" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
                         <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">Daftar Merek</div>
@@ -193,7 +193,7 @@ export default function HowItWorks() {
                     </div>
                     <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300">
                       <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
-                        <Award className="w-3.5 h-3.5 text-gray-400" />
+                        <Award className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
                         <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">ISO 9001</div>
@@ -209,14 +209,14 @@ export default function HowItWorks() {
                   </div>
                   <div className="flex items-baseline leading-none">
                     <span className="text-[10px] font-black text-gray-800">Akta selesai</span>
-                    <span className="text-[8px] text-gray-400 font-bold ml-1.5">2 menit lalu</span>
+                    <span className="text-[8px] text-gray-500 font-bold ml-1.5">2 menit lalu</span>
                   </div>
                 </div>
 
                 <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
                   <div className="flex items-center justify-between">
                     <span className="text-amber-500 font-extrabold text-[12px] flex items-center gap-0.5">★ 4.9</span>
-                    <span className="text-[8px] text-gray-400 font-black tracking-wider">GOOGLE</span>
+                    <span className="text-[8px] text-gray-500 font-black tracking-wider">GOOGLE</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="flex -space-x-1.5 overflow-hidden">
@@ -236,7 +236,7 @@ export default function HowItWorks() {
                     <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-gray-100">
                        <Check className="w-8 h-8 text-[#B91C1C]" />
                     </div>
-                    <p className="text-[14px] font-bold text-gray-400">Visual {steps[activeStep].title}</p>
+                    <p className="text-[14px] font-bold text-gray-500">Visual {steps[activeStep].title}</p>
                   </div>
                </div>
             )}

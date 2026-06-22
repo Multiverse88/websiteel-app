@@ -1,18 +1,22 @@
 import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
+// Improved CSP policy - removes unsafe-eval for better security
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline';
+  script-src 'self';
+  script-src-elem 'self' https://www.youtube.com https://www.youtube-nocookie.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' https://sentry.io https://*.ingest.sentry.io;
-  frame-src 'self' https://www.youtube.com;
+  frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
+  media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'none';
+  require-trusted-types-for 'script';
 `;
 
 const securityHeaders = [
@@ -43,6 +47,14 @@ const securityHeaders = [
   {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
+  },
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin",
+  },
+  {
+    key: "Cross-Origin-Embedder-Policy",
+    value: "require-corp",
   },
 ];
 

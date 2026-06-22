@@ -70,7 +70,7 @@ export default function NewsletterWidget() {
           placeholder="email@kamu.com"
           required
           disabled={status === "loading" || status === "success"}
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#FAFAFA] text-[14px] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#990202]/20 focus:border-[#990202] transition-all disabled:opacity-60"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#FAFAFA] text-[14px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#990202]/20 focus:border-[#990202] transition-all disabled:opacity-60"
         />
         <button
           type="submit"
@@ -112,7 +112,7 @@ export default function NewsletterWidget() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-[11.5px] text-gray-400 mt-3.5 text-center leading-relaxed">
+      <p className="text-[11.5px] text-gray-500 mt-3.5 text-center leading-relaxed">
         Tidak ada spam. Unsubscribe kapan saja.
       </p>
     </div>
