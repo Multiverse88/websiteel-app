@@ -85,6 +85,12 @@ CLAUDE.md
 PLANNING.md
 DAILY-PLAN.md
 
+# AI agents/skills (local environment, not project code)
+.agents/
+.claude/skills/
+skills-lock.json
+docs/superpowers/
+
 # Stray binaries in public
 public/logo-berita/*.msi
 
