@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, forwardRef, useRef } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
 import {
@@ -12,10 +12,6 @@ import {
   Star,
 } from "lucide-react";
 import { heroSlides } from "./data";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface HeroProps {
   className?: string;
@@ -36,17 +32,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
 ) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const ctxRef = useRef<gsap.Context | null>(null);
-  const localRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!ref) return;
-    if (typeof ref === "function") {
-      ref(localRef.current);
-    } else {
-      ref.current = localRef.current;
-    }
-  });
+  const [hasNavigated, setHasNavigated] = useState(false);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -56,32 +42,15 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const slide = heroSlides[currentSlide];
-
-      // Staggered intro animation for each slide element
-      const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
-
-      tl.from(".hero-animate-tag", { y: 30, opacity: 0, duration: 0.6 })
-        .from(".hero-animate-heading", { y: 30, opacity: 0, duration: 0.8 }, "-=0.4")
-        .from(".hero-animate-desc", { y: 30, opacity: 0, duration: 0.6 }, "-=0.4")
-        .from(".hero-animate-cta", { y: 30, opacity: 0, duration: 0.6 }, "-=0.3")
-        .from(".hero-animate-badges", { y: 30, opacity: 0, duration: 0.5 }, "-=0.3")
-        .from(".hero-animate-float", { scale: 0.9, opacity: 0, duration: 0.7 }, "-=0.4");
-    }, localRef);
-
-    ctxRef.current = ctx;
-    return () => ctx.revert();
-  }, [currentSlide]);
-
   const nextSlide = () => {
     setIsAutoPlaying(false);
+    setHasNavigated(true);
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
   };
 
   const prevSlide = () => {
     setIsAutoPlaying(false);
+    setHasNavigated(true);
     setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
   };
 
@@ -93,7 +62,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
   const floatClass = gsapClasses?.float || "";
 
   return (
-    <section ref={localRef} className={`relative overflow-hidden ${className || ""}`}>
+    <section ref={ref} className={`relative overflow-hidden ${className || ""}`}>
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[580px] relative">
         {/* Left Arrow */}
         <button
@@ -175,24 +144,31 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
 
         {/* Right Image Slideshow */}
         <div className="relative min-h-[400px] lg:min-h-[580px] overflow-hidden bg-gray-50">
-          {heroSlides.map((slide, idx) => (
-            <div
-              key={idx}
-              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                currentSlide === idx ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
-              }`}
-            >
-              <Image
-                src={slide.image}
-                alt={slide.tag}
-                fill
-                priority={idx === 0}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-black/5" />
-            </div>
-          ))}
+          {heroSlides.map((slide, idx) => {
+            // Lazy load images 2-4: render them only when active or after user has navigated
+            const shouldRenderImage = idx === 0 || currentSlide === idx || hasNavigated;
+            if (!shouldRenderImage) return null;
+
+            return (
+              <div
+                key={idx}
+                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                  currentSlide === idx ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
+                }`}
+              >
+                <Image
+                  src={slide.image}
+                  alt={slide.tag}
+                  fill
+                  priority={idx === 0}
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/5" />
+              </div>
+            );
+          })}
 
           {/* Floating Badges */}
           <div className={`absolute top-8 right-8 bg-white rounded-2xl px-5 py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-3.5 z-20 animate-float-slow ${floatClass}`}>
@@ -226,6 +202,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                 key={idx}
                 onClick={() => {
                   setIsAutoPlaying(false);
+                  setHasNavigated(true);
                   setCurrentSlide(idx);
                 }}
                 className={`h-2 rounded-full transition-all duration-300 ${

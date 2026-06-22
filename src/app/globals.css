@@ -11,8 +11,8 @@
   --color-bg-light: #F9FAFB;
   --color-whatsapp: #25D366;
   --color-whatsapp-hover: #1EA760;
-  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-inter: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
+  --font-inter: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
   --breakpoint-xs: 375px;
 }
 

@@ -1,16 +1,11 @@
 import { prisma } from "@/lib/db";
-import HomePage from "./HomePage";
 import type { ArticleItem } from "./InformasiHukumSection";
 
-export const revalidate = 60;
-
-export default async function PageWrapper() {
-  let articles: ArticleItem[] = [];
-
+export async function LatestInsightsServer(): Promise<ArticleItem[]> {
   try {
     const count = await prisma.article.count();
     if (count > 0) {
-      articles = await prisma.article.findMany({
+      return prisma.article.findMany({
         orderBy: { createdAt: "desc" },
         take: 5,
         select: {
@@ -28,6 +23,5 @@ export default async function PageWrapper() {
   } catch {
     // silently fail — section will show no articles
   }
-
-  return <HomePage articles={articles} />;
+  return [];
 }

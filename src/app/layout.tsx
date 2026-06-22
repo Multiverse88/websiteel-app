@@ -34,7 +34,7 @@ export default function RootLayout({
         data-scroll-behavior="smooth"
         className={`${dmSans.variable} h-full antialiased scroll-smooth`}
       >
-        <body className="min-h-full flex flex-col pt-[72px] bg-white text-dark font-['DM_Sans',sans-serif]">
+        <body className="min-h-full flex flex-col pt-[72px] bg-white text-dark font-sans">
           <ScrollManager />
           <Navbar />
           <main className="flex-grow flex flex-col">{children}</main>

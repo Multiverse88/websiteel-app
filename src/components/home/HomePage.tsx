@@ -57,34 +57,39 @@ function VideoEmbedSection() {
     <div ref={ref} className={`animate-scroll-reveal ${revealed ? "revealed" : ""}`}>
       <div className="group relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-gray-100 hover:shadow-[0_25px_70px_rgba(0,0,0,0.12)] transition-all duration-500">
         <div className="relative aspect-video w-full bg-black overflow-hidden">
-          <iframe
-            src={
-              isPlaying
-                ? "https://www.youtube.com/embed/PHyO3XoAGEU?autoplay=1&rel=0&modestbranding=1"
-                : "https://www.youtube.com/embed/PHyO3XoAGEU?rel=0&modestbranding=1"
-            }
-            title="EasyLegal — Client Story: Menguatkan Pebisnis Awam Lewat Taka Lab"
-            className="absolute inset-0 w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            style={{ border: 0 }}
-          />
-          {/* Click-to-play overlay (only shown before playing) */}
-          {!isPlaying && (
-            <button
-              onClick={() => setIsPlaying(true)}
-              className="absolute inset-0 w-full h-full cursor-pointer z-10 focus:outline-none"
-              aria-label="Play video"
-            >
-              {/* Center: Play button */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {isPlaying ? (
+            <iframe
+              src="https://www.youtube.com/embed/PHyO3XoAGEU?autoplay=1&rel=0&modestbranding=1"
+              title="EasyLegal — Client Story: Menguatkan Pebisnis Awam Lewat Taka Lab"
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              style={{ border: 0 }}
+            />
+          ) : (
+            <>
+              {/* Static YouTube cover image placeholder */}
+              <Image
+                src="https://img.youtube.com/vi/PHyO3XoAGEU/maxresdefault.jpg"
+                alt="EasyLegal Video Cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="object-cover opacity-90 group-hover:scale-[1.01] transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-black/20" />
+              {/* Click-to-play button */}
+              <button
+                onClick={() => setIsPlaying(true)}
+                className="absolute inset-0 w-full h-full cursor-pointer z-10 focus:outline-none flex items-center justify-center"
+                aria-label="Play video"
+              >
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#B91C1C] flex items-center justify-center shadow-[0_8px_30px_rgba(185,28,28,0.4)] group-hover:scale-110 group-hover:shadow-[0_12px_40px_rgba(185,28,28,0.5)] transition-all duration-300">
                   <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
-              </div>
-            </button>
+              </button>
+            </>
           )}
         </div>
       </div>

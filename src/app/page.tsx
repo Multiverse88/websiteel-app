@@ -1,8 +1,16 @@
-import PageWrapper from "@/components/home/PageWrapper";
+import { Suspense } from "react";
+import HomePage from "@/components/home/HomePage";
+import HomePageSkeleton from "@/components/home/HomePageSkeleton";
+import { LatestInsightsServer } from "@/components/home/LatestInsightsServer";
 import {
   getLocalBusinessJsonLd,
   getWebsiteJsonLd,
 } from "@/lib/structured-data";
+
+async function HomeWithData() {
+  const articles = await LatestInsightsServer();
+  return <HomePage articles={articles} />;
+}
 
 export default function Page() {
   return (
@@ -19,7 +27,9 @@ export default function Page() {
           __html: JSON.stringify(getWebsiteJsonLd()),
         }}
       />
-      <PageWrapper />
+      <Suspense fallback={<HomePageSkeleton />}>
+        <HomeWithData />
+      </Suspense>
     </>
   );
 }
