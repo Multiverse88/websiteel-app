@@ -8,7 +8,6 @@ Dockerfile
 docker-compose.yml
 docker-compose*.yml
 nginx/
-scripts/
 *.md
 .vercel
 .DS_Store
