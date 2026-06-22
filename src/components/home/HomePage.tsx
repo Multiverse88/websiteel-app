@@ -230,7 +230,7 @@ function CaraKerjaSection() {
           </div>
 
           {/* RIGHT: Overlapping layered dashboard composition */}
-          <div className="lg:col-span-7 relative w-full h-[520px] flex items-center justify-center scale-90 sm:scale-100 origin-center transition-all duration-500">
+          <div className="lg:col-span-7 relative w-full h-[520px] hidden lg:flex items-center justify-center scale-90 sm:scale-100 origin-center transition-all duration-500">
             
             {/* Step 1 Visual Container */}
             {activeStep === 0 && (
@@ -761,6 +761,85 @@ function CaraKerjaSection() {
 
 export default function HomePage({ articles }: { articles: ArticleItem[] }) {
   const whyChooseRef = useRef<HTMLElement>(null);
+  const quickToolsRef = useRef<HTMLDivElement>(null);
+  const partnersRef = useRef<HTMLElement>(null);
+  const whyChooseHeaderRef = useRef<HTMLDivElement>(null);
+  const videoProfilHeaderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Quick Tools Observer
+    const quickToolsEl = quickToolsRef.current;
+    let quickToolsObs: IntersectionObserver | null = null;
+    if (quickToolsEl) {
+      quickToolsObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          quickToolsEl.classList.add("revealed");
+          quickToolsObs?.unobserve(quickToolsEl);
+        }
+      }, { rootMargin: "0px 0px -30% 0px" });
+      quickToolsObs.observe(quickToolsEl);
+    }
+
+    // Partners Observer
+    const partnersEl = partnersRef.current;
+    let partnersObs: IntersectionObserver | null = null;
+    if (partnersEl) {
+      partnersObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          partnersEl.classList.add("revealed");
+          partnersObs?.unobserve(partnersEl);
+        }
+      });
+      partnersObs.observe(partnersEl);
+    }
+
+    // Why Choose Section Observer (Bento revealed)
+    const whyChooseEl = whyChooseRef.current;
+    let whyChooseObs: IntersectionObserver | null = null;
+    if (whyChooseEl) {
+      whyChooseObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          whyChooseEl.classList.add("bento-revealed");
+          whyChooseObs?.unobserve(whyChooseEl);
+        }
+      }, { rootMargin: "0px 0px -15% 0px" });
+      whyChooseObs.observe(whyChooseEl);
+    }
+
+    // Why Choose Header Observer
+    const whyChooseHeaderEl = whyChooseHeaderRef.current;
+    let whyChooseHeaderObs: IntersectionObserver | null = null;
+    if (whyChooseHeaderEl) {
+      whyChooseHeaderObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          whyChooseHeaderEl.classList.add("revealed");
+          whyChooseHeaderObs?.unobserve(whyChooseHeaderEl);
+        }
+      }, { rootMargin: "0px 0px -50px 0px" });
+      whyChooseHeaderObs.observe(whyChooseHeaderEl);
+    }
+
+    // Video Profil Header Observer
+    const videoProfilHeaderEl = videoProfilHeaderRef.current;
+    let videoProfilHeaderObs: IntersectionObserver | null = null;
+    if (videoProfilHeaderEl) {
+      videoProfilHeaderObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          videoProfilHeaderEl.classList.add("revealed");
+          videoProfilHeaderObs?.unobserve(videoProfilHeaderEl);
+        }
+      }, { rootMargin: "-50px" });
+      videoProfilHeaderObs.observe(videoProfilHeaderEl);
+    }
+
+    return () => {
+      quickToolsObs?.disconnect();
+      partnersObs?.disconnect();
+      whyChooseObs?.disconnect();
+      whyChooseHeaderObs?.disconnect();
+      videoProfilHeaderObs?.disconnect();
+    };
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -784,13 +863,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           ═══════════════════════════════════════════ */}
       <div
         className="relative z-20 -mt-10 animate-scroll-reveal"
-        ref={(el) => {
-          if (!el) return;
-          const obs = new IntersectionObserver(([e]) => {
-            if (e.isIntersecting) { el.classList.add("revealed"); obs.unobserve(el); }
-          }, { rootMargin: "0px 0px -30% 0px" });
-          obs.observe(el);
-        }}
+        ref={quickToolsRef}
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#EAEAEA] rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.03)] overflow-hidden">
@@ -852,13 +925,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           ═══════════════════════════════════════════ */}
       <section
         className="bg-white py-5 animate-scroll-reveal-fade"
-        ref={(el) => {
-          if (!el) return;
-          const obs = new IntersectionObserver(([e]) => {
-            if (e.isIntersecting) { el.classList.add("revealed"); obs.unobserve(el); }
-          });
-          obs.observe(el);
-        }}
+        ref={partnersRef}
       >
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
@@ -891,30 +958,14 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           ═══════════════════════════════════════════ */}
       <section
         className="py-20 bg-[#FCFCFC] overflow-hidden"
-        ref={(el) => {
-          if (!el) return;
-          whyChooseRef.current = el;
-          const obs = new IntersectionObserver(([e]) => {
-            if (e.isIntersecting) {
-              el.classList.add("bento-revealed");
-              obs.unobserve(el);
-            }
-          }, { rootMargin: "0px 0px -15% 0px" });
-          obs.observe(el);
-        }}
+        ref={whyChooseRef}
       >
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           
           {/* Header */}
           <div
             className="mb-14 text-left animate-scroll-reveal"
-            ref={(el) => {
-              if (!el) return;
-              const obs = new IntersectionObserver(([e]) => {
-                if (e.isIntersecting) { el.classList.add("revealed"); obs.unobserve(el); }
-              }, { rootMargin: "0px 0px -50px 0px" });
-              obs.observe(el);
-            }}
+            ref={whyChooseHeaderRef}
           >
             <span className="text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
               KENAPA EASYLEGAL
@@ -1169,13 +1220,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           {/* Header */}
           <div
             className="text-center mb-12 space-y-3 animate-scroll-reveal"
-            ref={(el) => {
-              if (!el) return;
-              const obs = new IntersectionObserver(([e]) => {
-                if (e.isIntersecting) { el.classList.add("revealed"); obs.unobserve(el); }
-              }, { rootMargin: "-50px" });
-              obs.observe(el);
-            }}
+            ref={videoProfilHeaderRef}
           >
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#B91C1C]" />
@@ -1232,13 +1277,13 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             <p className="text-[12px] font-extrabold text-[#6B7280] uppercase tracking-[0.2em] mb-8">EasyLegal Resmi Bersertifikat ISO</p>
             <div className="flex flex-wrap items-center justify-center gap-6">
               <div className="w-full max-w-[395px] h-[126px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
-                <Image src="/EasyLegal.id_-scaled.jpg" alt="PSe KOMDIGI" fill className="object-cover" />
+                <Image src="/EasyLegal.id_-scaled.jpg" alt="PSe KOMDIGI" fill sizes="(max-width: 640px) 100vw, 395px" className="object-cover" />
               </div>
               <div className="w-full max-w-[395px] h-[126px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
-                <Image src="/ISO-sertifikat-scaled.jpg" alt="ISO 9001:2015" fill className="object-cover" />
+                <Image src="/ISO-sertifikat-scaled.jpg" alt="ISO 9001:2015" fill sizes="(max-width: 640px) 100vw, 395px" className="object-cover" />
               </div>
               <div className="w-full max-w-[395px] h-[126px] bg-white border border-gray-100 rounded-xl overflow-hidden flex items-center justify-center shadow-sm relative">
-                <Image src="/ISO-27001-2022.png" alt="ISO 27001:2022" fill className="object-cover" />
+                <Image src="/ISO-27001-2022.webp" alt="ISO 27001:2022" fill sizes="(max-width: 640px) 100vw, 395px" className="object-cover" />
               </div>
             </div>
           </div>

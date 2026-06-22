@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { writeFile, mkdir, unlink } from "fs/promises";
 import path from "path";
+import { isMinioConfigured, uploadToMinio } from "@/lib/s3";
 import { getSession } from "@/lib/auth";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -94,24 +95,28 @@ export async function updateArticle(prevState: Record<string, unknown> | null, f
       // Generate unique filename
       const ext = coverImageFile.name.split(".").pop() || "jpg";
       const filename = `cover-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
-      const uploadDir = path.join(process.cwd(), "public", "uploads", "articles");
 
-      // Ensure directory exists
-      await mkdir(uploadDir, { recursive: true });
-      await writeFile(path.join(uploadDir, filename), buffer);
+      if (isMinioConfigured()) {
+        coverImage = await uploadToMinio(buffer, filename, coverImageFile.type, "uploads/articles");
+      } else {
+        const uploadDir = path.join(process.cwd(), "public", "uploads", "articles");
+        // Ensure directory exists
+        await mkdir(uploadDir, { recursive: true });
+        await writeFile(path.join(uploadDir, filename), buffer);
 
-      // Delete old cover image if it's a local file
-      if (existingArticle.coverImage && existingArticle.coverImage.startsWith("/uploads/")) {
-        const oldPath = path.join(process.cwd(), "public", existingArticle.coverImage);
-        try {
-          await unlink(oldPath);
-        } catch {
-          // Ignore error if old file doesn't exist
+        // Delete old cover image if it's a local file
+        if (existingArticle.coverImage && existingArticle.coverImage.startsWith("/uploads/")) {
+          const oldPath = path.join(process.cwd(), "public", existingArticle.coverImage);
+          try {
+            await unlink(oldPath);
+          } catch {
+            // Ignore error if old file doesn't exist
+          }
         }
+        coverImage = `/uploads/articles/${filename}`;
       }
-
-      coverImage = `/uploads/articles/${filename}`;
-    } catch {
+    } catch (err) {
+      console.error("Gagal melakukan upload file edit:", err);
       // File upload failed, fallback to URL
       if (coverImageUrl) {
         coverImage = coverImageUrl;

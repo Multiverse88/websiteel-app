@@ -271,7 +271,7 @@ export default function NibOss() {
                 {/* Photo container */}
                 <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
-                    src="/cerita-kami-team.png"
+                    src="/cerita-kami-team.webp"
                     alt="EasyLegal Team Collaboration"
                     fill
                     sizes="(max-width: 768px) 100vw, 460px"
@@ -335,7 +335,7 @@ export default function NibOss() {
                 {/* Photo container */}
                 <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
-                    src="/nib-desk-mockup.png"
+                    src="/nib-desk-mockup.webp"
                     alt="Tax Document Calculator Desk"
                     fill
                     sizes="(max-width: 768px) 100vw, 460px"

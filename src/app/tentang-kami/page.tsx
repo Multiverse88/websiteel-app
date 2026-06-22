@@ -154,7 +154,7 @@ export default function TentangKami() {
                 {/* Main Corporate Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
                   <Image
-                    src="/hero-tentang-kami.png"
+                    src="/hero-tentang-kami.webp"
                     alt="Tim EasyLegal membantu UMKM pengurusan legalitas"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -210,7 +210,7 @@ export default function TentangKami() {
                 {/* Main Team Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] border border-gray-200 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[4/3] sm:aspect-[1.4] lg:aspect-[4/3]">
                   <Image
-                    src="/cerita-kami-team.png"
+                    src="/cerita-kami-team.webp"
                     alt="Tim EasyLegal bekerja bersama membantu perizinan UMKM"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"

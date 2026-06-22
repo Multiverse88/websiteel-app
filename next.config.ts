@@ -52,10 +52,6 @@ const securityHeaders = [
     key: "Cross-Origin-Opener-Policy",
     value: "same-origin",
   },
-  {
-    key: "Cross-Origin-Embedder-Policy",
-    value: "require-corp",
-  },
 ];
 
 const nextConfig: NextConfig = {
@@ -81,6 +77,7 @@ const nextConfig: NextConfig = {
   images: {
     minimumCacheTTL: 31536000,
     formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200],
     remotePatterns: [
       {
         protocol: 'https',
@@ -93,6 +90,14 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'images.pexels.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.easylegal.my.id',
+      },
+      {
+        protocol: 'https',
+        hostname: 'easylegal.my.id',
       },
     ],
   },

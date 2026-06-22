@@ -10,6 +10,7 @@
     "test": "NODE_OPTIONS=--disable-warning=DEP0205 npx playwright test"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1073.0",
     "@prisma/client": "^6.19.3",
     "@sentry/nextjs": "^10.57.0",
     "@types/bcryptjs": "^2.4.6",

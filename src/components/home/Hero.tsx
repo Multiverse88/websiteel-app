@@ -37,7 +37,9 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
   useEffect(() => {
     if (!isAutoPlaying) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+      if (document.visibilityState === "visible") {
+        setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+      }
     }, 6000);
     return () => clearInterval(interval);
   }, [isAutoPlaying]);

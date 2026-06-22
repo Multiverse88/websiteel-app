@@ -5,6 +5,7 @@ import { getSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { isMinioConfigured, uploadToMinio } from "@/lib/s3";
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -66,14 +67,18 @@ export async function updateProfile(prevState: { error?: string; success?: strin
       // Generate unique filename
       const ext = avatarFile.name.split(".").pop() || "jpg";
       const filename = `avatar-${session.userId}-${Date.now()}.${ext}`;
-      const uploadDir = path.join(process.cwd(), "public", "uploads", "avatars");
 
-      // Ensure directory exists
-      await mkdir(uploadDir, { recursive: true });
-      await writeFile(path.join(uploadDir, filename), buffer);
-
-      avatar = `/uploads/avatars/${filename}`;
-    } catch {
+      if (isMinioConfigured()) {
+        avatar = await uploadToMinio(buffer, filename, avatarFile.type, "uploads/avatars");
+      } else {
+        const uploadDir = path.join(process.cwd(), "public", "uploads", "avatars");
+        // Ensure directory exists
+        await mkdir(uploadDir, { recursive: true });
+        await writeFile(path.join(uploadDir, filename), buffer);
+        avatar = `/uploads/avatars/${filename}`;
+      }
+    } catch (err) {
+      console.error("Gagal melakukan upload avatar:", err);
       // File upload gagal (kemungkinan di Vercel serverless), fallback ke URL
       if (!avatar && avatarUrl) {
         avatar = avatarUrl;

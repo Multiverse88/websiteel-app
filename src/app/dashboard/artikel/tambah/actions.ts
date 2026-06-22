@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { isMinioConfigured, uploadToMinio } from "@/lib/s3";
 import { sendEmail, generateNewsletterHtml } from "@/lib/mail";
 import { getSession } from "@/lib/auth";
 
@@ -47,14 +48,18 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
       // Generate unique filename
       const ext = coverImageFile.name.split(".").pop() || "jpg";
       const filename = `cover-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
-      const uploadDir = path.join(process.cwd(), "public", "uploads", "articles");
 
-      // Ensure directory exists
-      await mkdir(uploadDir, { recursive: true });
-      await writeFile(path.join(uploadDir, filename), buffer);
-
-      coverImage = `/uploads/articles/${filename}`;
-    } catch {
+      if (isMinioConfigured()) {
+        coverImage = await uploadToMinio(buffer, filename, coverImageFile.type, "uploads/articles");
+      } else {
+        const uploadDir = path.join(process.cwd(), "public", "uploads", "articles");
+        // Ensure directory exists
+        await mkdir(uploadDir, { recursive: true });
+        await writeFile(path.join(uploadDir, filename), buffer);
+        coverImage = `/uploads/articles/${filename}`;
+      }
+    } catch (err) {
+      console.error("Gagal melakukan upload file:", err);
       // File upload gagal (kemungkinan di Vercel serverless), fallback ke URL
       if (coverImageUrl) {
         coverImage = coverImageUrl;

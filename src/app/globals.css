@@ -255,3 +255,58 @@ body:has(.has-service-cta) #footer-cta {
 .prose-editor .img-btn-edit:hover { background: #f3f4f6; }
 .prose-editor .img-btn-delete { background: #dc2626; color: white; }
 .prose-editor .img-btn-delete:hover { background: #b91c1c; }
+
+/* Marquee keyframes for desktop */
+@keyframes marquee-left {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marquee-right {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+.animate-marquee-left {
+  animation: marquee-left 35s linear infinite;
+  will-change: transform;
+}
+.animate-marquee-right {
+  animation: marquee-right 35s linear infinite;
+  will-change: transform;
+}
+
+/* Mobile performance overrides */
+@media (max-width: 768px) {
+  /* Pause infinite marquee animations */
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none !important;
+  }
+  .marquee-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Disable active float / bounce animations */
+  .animate-float-slow,
+  .animate-float-medium,
+  .animate-bounce-slow,
+  [class*="animate-float"],
+  [class*="animate-bounce"] {
+    animation: none !important;
+  }
+  
+  /* Instantly show scroll reveal elements to avoid CPU layout calc on scroll */
+  .animate-scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  /* Disable delayed transitions on bento/layanan cards */
+  .bento-card,
+  .layanan-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

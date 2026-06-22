@@ -1,24 +1,30 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Building2, Check, Users } from "lucide-react";
 import { layananIndividual } from "./data";
 
 export default function LayananKami() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        el.classList.add("layanan-revealed");
+        obs.unobserve(el);
+      }
+    }, { rootMargin: "0px 0px -15% 0px" });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section 
       className="py-20 bg-white" 
       id="layanan"
-      ref={(el) => {
-        if (!el) return;
-        const obs = new IntersectionObserver(([e]) => {
-          if (e.isIntersecting) {
-            el.classList.add("layanan-revealed");
-            obs.unobserve(el);
-          }
-        }, { rootMargin: "0px 0px -15% 0px" });
-        obs.observe(el);
-      }}
+      ref={sectionRef}
     >
       <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
         {/* Header */}

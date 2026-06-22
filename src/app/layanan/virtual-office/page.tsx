@@ -246,7 +246,7 @@ export default function VirtualOffice() {
               {/* Main Image Container */}
               <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] z-10 aspect-[4/3]">
                 <Image
-                  src="/cerita-kami-team.png"
+                  src="/cerita-kami-team.webp"
                   alt="Team Collaboration"
                   fill
                   sizes="(max-width: 768px) 100vw, 500px"
