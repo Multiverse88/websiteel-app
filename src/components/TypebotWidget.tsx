@@ -10,7 +10,7 @@ export function TypebotWidget() {
     if (!TYPEBOT_BOT_ID) return
 
     const script = document.createElement('script')
-    script.src = `${TYPEBOT_HOST}/typebot-embed/embed.js`
+    script.src = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3/dist/web.js'
     script.type = 'module'
     script.async = true
 

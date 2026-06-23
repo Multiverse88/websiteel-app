@@ -8,7 +8,7 @@ const ContentSecurityPolicy = isProd
   ? `
   default-src 'self';
   script-src 'self' 'unsafe-inline';
-  script-src-elem 'self' 'unsafe-inline' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
+  script-src-elem 'self' 'unsafe-inline' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://cdn.jsdelivr.net;
   style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
@@ -24,7 +24,7 @@ const ContentSecurityPolicy = isProd
   : `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval';
-  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
+  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://cdn.jsdelivr.net;
   style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
