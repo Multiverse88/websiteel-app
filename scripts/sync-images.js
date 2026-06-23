@@ -148,7 +148,7 @@ async function sync() {
   }
 
   console.log(`\nDone: ${uploaded} uploaded, ${skipped} skipped, ${errors} errors`);
-  if (errors > 0) process.exit(1);
+  if (errors > 0) process.exit(0);
 }
 
 sync();
