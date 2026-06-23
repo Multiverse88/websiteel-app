@@ -10,7 +10,7 @@ export function TypebotWidget() {
     if (!TYPEBOT_BOT_ID) return
 
     const script = document.createElement('script')
-    script.src = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3/dist/web.js'
+    script.src = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@latest/dist/web.js'
     script.type = 'module'
     script.async = true
 
@@ -25,9 +25,9 @@ export function TypebotWidget() {
             button: {
               backgroundColor: '#D62828',
               iconColor: '#FFFFFF',
-              customSize: '64px',
-              bottom: '24px',
-              right: '24px',
+              size: 72,
+              bottom: 24,
+              right: 24,
             },
             chatWindow: {
               backgroundColor: '#FFFFFF',
