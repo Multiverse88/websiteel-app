@@ -36,10 +36,12 @@ echo -e "\n${YELLOW}[3/4] Cleaning up Docker cache & restarting Nginx...${NC}"
 docker image prune -f
 docker builder prune -f
 docker container prune -f
-if command -v systemctl >/dev/null 2>&1 && systemctl is-active --quiet nginx; then
-    sudo systemctl restart nginx
+if docker compose ps | grep -q "nginx"; then
+    echo "Restarting Nginx docker container..."
+    docker compose restart nginx
 else
-    echo "Nginx system service not active on host or u lack permissions. Skipping systemctl restart."
+    echo "Nginx container not found. Running compose up..."
+    docker compose up -d nginx
 fi
 
 # 4. Wait for health check
