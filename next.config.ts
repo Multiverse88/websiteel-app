@@ -13,7 +13,7 @@ const ContentSecurityPolicy = isProd
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id;
-  frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
+  frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
   object-src 'none';
   base-uri 'self';
@@ -29,7 +29,7 @@ const ContentSecurityPolicy = isProd
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' ws: wss: https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id;
-  frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
+  frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
   object-src 'none';
   base-uri 'self';
