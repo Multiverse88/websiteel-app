@@ -26,15 +26,17 @@ fi
 echo -e "\n${YELLOW}[1/3] Pulling latest code...${NC}"
 git pull origin main
 
-# 2. Build & restart containers (use cache for faster builds)
-echo -e "\n${YELLOW}[2/4] Building & restarting containers...${NC}"
-docker compose up -d --build --remove-orphans
+# 2. Build & restart containers (without cache to ensure clean build & clear CSP headers)
+echo -e "\n${YELLOW}[2/4] Building & restarting containers (clean build)...${NC}"
+docker compose build --no-cache
+docker compose up -d --remove-orphans
 
-# 3. Prune old images, build cache, and stopped containers
-echo -e "\n${YELLOW}[3/4] Cleaning up Docker cache...${NC}"
+# 3. Clean Docker Cache and Purge Nginx Cache
+echo -e "\n${YELLOW}[3/4] Cleaning up Docker cache & restarting Nginx...${NC}"
 docker image prune -f
-docker builder prune -f --filter "until=72h"
+docker builder prune -f
 docker container prune -f
+docker compose restart nginx
 
 # 4. Wait for health check
 echo -e "\n${YELLOW}[4/4] Waiting for services to start...${NC}"
