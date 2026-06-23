@@ -53,17 +53,19 @@ services:
     image: baptistearno/typebot-builder:latest
     container_name: easylegal-typebot-builder
     restart: unless-stopped
+    env_file:
+      - .env.production
     environment:
       - DATABASE_URL=postgresql://easylegal:jauhimaksiat%401@172.17.0.1:5432/typebot
       - NEXTAUTH_URL=https://typebot.easylegal.my.id
       - NEXT_PUBLIC_VIEWER_URL=https://typebot.easylegal.my.id
-      - ENCRYPTION_SECRET=b2e181bccac27bb06629464c3d318972
+      - ENCRYPTION_SECRET=${TYPEBOT_ENCRYPTION_SECRET}
       - ADMIN_EMAIL=admin@easylegal.my.id
       # - DISABLE_SIGNUP=true  # Aktifkan setelah admin pertama dibuat
       - SMTP_HOST=smtp.hostinger.com
       - SMTP_PORT=465
-      - SMTP_USERNAME=newsletter@easylegal.id
-      - SMTP_PASSWORD=Jauhimaksiat@1
+      - SMTP_USERNAME=${TYPEBOT_SMTP_USERNAME}
+      - SMTP_PASSWORD=${TYPEBOT_SMTP_PASSWORD}
       - SMTP_SECURE=true
       - NEXT_PUBLIC_SMTP_FROM=Easy Legal <newsletter@easylegal.id>
     networks:
@@ -75,11 +77,13 @@ services:
     image: baptistearno/typebot-viewer:latest
     container_name: easylegal-typebot-viewer
     restart: unless-stopped
+    env_file:
+      - .env.production
     environment:
       - DATABASE_URL=postgresql://easylegal:jauhimaksiat%401@172.17.0.1:5432/typebot
       - NEXTAUTH_URL=https://typebot.easylegal.my.id
       - NEXT_PUBLIC_VIEWER_URL=https://typebot.easylegal.my.id
-      - ENCRYPTION_SECRET=b2e181bccac27bb06629464c3d318972
+      - ENCRYPTION_SECRET=${TYPEBOT_ENCRYPTION_SECRET}
     networks:
       - easylegal
     depends_on:
