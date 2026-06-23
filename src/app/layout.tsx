@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { TypebotWidget } from "@/components/TypebotWidget";
 import { Suspense } from "react";
 
 const dmSans = DM_Sans({
@@ -38,6 +39,7 @@ export default function RootLayout({
         </Suspense>
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />
+        <TypebotWidget />
       </body>
     </html>
   );
