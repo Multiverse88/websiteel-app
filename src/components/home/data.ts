@@ -1,3 +1,4 @@
+import { getWhatsAppLink } from "@/lib/config";
 import {
   Building2,
   Search,
@@ -100,7 +101,7 @@ export const quickTools = [
     title: "Konsultasi via WhatsApp",
     desc: "Tanya tim legal kami langsung — gratis, tanpa komitmen.",
     cta: "Mulai chat",
-    href: "https://wa.me/6281123456789",
+    href: getWhatsAppLink(),
     external: true,
     icon: MessageCircle,
   },

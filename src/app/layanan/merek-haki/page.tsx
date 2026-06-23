@@ -26,6 +26,7 @@ import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import Benefits from "@/components/Benefits";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function MerekHaki() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -105,7 +106,7 @@ export default function MerekHaki() {
           strikePrice: "Rp 375.000",
           subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
           buttonText: "Pilih Cek Manual",
-          buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Layanan%20Cek%20Merek%20Manual.",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Cek Merek Manual."),
           groups: [
             {
               title: "LAMA PROSES",
@@ -131,7 +132,7 @@ export default function MerekHaki() {
           isPopular: true,
           badgeText: "REKOMENDASI",
           buttonText: "Pilih Cek AI",
-          buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Layanan%20Cek%20Merek%20AI.",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Cek Merek AI."),
           groups: [
             {
               title: "LAMA PROSES",
@@ -166,7 +167,7 @@ export default function MerekHaki() {
           strikePrice: "Rp 3.500.000",
           subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
           buttonText: "Pilih Perpanjangan UMKM",
-          buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Layanan%20Perpanjangan%20Merek%20UMKM.",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek UMKM."),
           groups: [
             {
               title: "LAMA PROSES",
@@ -193,7 +194,7 @@ export default function MerekHaki() {
           isPopular: true,
           badgeText: "REKOMENDASI",
           buttonText: "Pilih Perpanjangan Umum",
-          buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Layanan%20Perpanjangan%20Merek%20Umum.",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek Umum."),
           groups: [
             {
               title: "LAMA PROSES",
@@ -228,7 +229,7 @@ export default function MerekHaki() {
           isPopular: true,
           badgeText: "REKOMENDASI",
           buttonText: "Pilih Pengalihan Hak",
-          buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Layanan%20Pengalihan%20Hak%20Merek.",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pengalihan Hak Merek."),
           groups: [
             {
               title: "LAMA PROSES",
@@ -263,7 +264,7 @@ export default function MerekHaki() {
           isPopular: true,
           badgeText: "REKOMENDASI",
           buttonText: "Pilih Tanggapan Penolakan",
-          buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Layanan%20Tanggapan%20Penolakan%20DJKI.",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Tanggapan Penolakan DJKI."),
           groups: [
             {
               title: "LAMA PROSES",
@@ -293,7 +294,7 @@ export default function MerekHaki() {
       strikePrice: "Rp 3.500.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Basic",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Basic%20Pendaftaran%20Merek.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendaftaran Merek."),
       groups: [
         {
           title: "LAMA PROSES",
@@ -340,7 +341,7 @@ export default function MerekHaki() {
       strikePrice: "Rp 4.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Basic + AI",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Basic%20plus%20AI%20Pendaftaran%20Merek.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic plus AI Pendaftaran Merek."),
       groups: [
         {
           title: "LAMA PROSES",
@@ -389,7 +390,7 @@ export default function MerekHaki() {
       isPopular: true,
       badgeText: "PALING POPULER",
       buttonText: "Pilih Premium",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Premium%20Pendaftaran%20Merek.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Premium Pendaftaran Merek."),
       groups: [
         {
           title: "LAMA PROSES",
@@ -436,7 +437,7 @@ export default function MerekHaki() {
       strikePrice: "Rp 5.500.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Ultimate",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Ultimate%20Pendaftaran%20Merek.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Ultimate Pendaftaran Merek."),
       groups: [
         {
           title: "LAMA PROSES",

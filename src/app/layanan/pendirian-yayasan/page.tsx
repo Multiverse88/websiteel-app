@@ -20,6 +20,7 @@ import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function PendirianYayasan() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -37,7 +38,7 @@ export default function PendirianYayasan() {
       strikePrice: "Rp 5.998.000",
       subLabel: "DISKON 50% · TANPA BIAYA TAMBAHAN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Basic%20Pendirian%20Yayasan.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Yayasan."),
       groups: [
         {
           title: "LAMA PROSES",
@@ -89,7 +90,7 @@ export default function PendirianYayasan() {
       isPopular: true,
       badgeText: "PALING POPULER",
       buttonText: "Pilih Paket Complete",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Complete%20Pendirian%20Yayasan.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Yayasan."),
       groups: [
         {
           title: "LAMA PROSES",
@@ -300,7 +301,7 @@ export default function PendirianYayasan() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20pendirian%20yayasan."
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pendirian yayasan.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-bold text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"

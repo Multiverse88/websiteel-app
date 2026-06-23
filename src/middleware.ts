@@ -10,7 +10,7 @@ function getJwtSecret(): Uint8Array {
   return new TextEncoder().encode(JWT_SECRET);
 }
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/dashboard")) {

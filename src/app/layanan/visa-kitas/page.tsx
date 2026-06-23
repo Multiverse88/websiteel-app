@@ -24,6 +24,7 @@ import {
   HelpCircle,
   ChevronUp
 } from "lucide-react";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function VisaKitas() {
   // State for interactive Pricing filter tabs
@@ -213,7 +214,7 @@ export default function VisaKitas() {
                   Lihat Paket Visa &amp; KITAS
                 </a>
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20berkonsultasi%20mengenai%20pembuatan%20Visa%20atau%20KITAS."
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai pembuatan Visa atau KITAS.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-150 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -642,7 +643,7 @@ export default function VisaKitas() {
                     {/* Order Button */}
                     <div className="p-7 pt-0">
                       <a
-                        href={`https://wa.me/6281123456789?text=${encodeURIComponent(pkg.waText)}`}
+                        href={getWhatsAppLink(pkg.waText)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`block w-full py-4.5 text-center font-black text-[13.5px] rounded-xl transition-all duration-250 cursor-pointer ${
@@ -754,7 +755,7 @@ export default function VisaKitas() {
           <div className="w-full md:w-auto flex flex-col gap-3 min-w-[320px] sm:min-w-[360px]">
             {/* WhatsApp action */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20berkonsultasi%20mengenai%20pembuatan%20Visa%20atau%20KITAS."
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai pembuatan Visa atau KITAS.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
@@ -766,7 +767,7 @@ export default function VisaKitas() {
             </a>
 
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20berkonsultasi%20mengenai%20layanan%2520keimigrasian."
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai layanan keimigrasian.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-150 hover:border-gray-250 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer"

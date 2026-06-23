@@ -27,6 +27,7 @@ import {
   Menu
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function PerjanjianPerkawinan() {
   // State for FAQ expanded accordions (default: index 0 expanded)
@@ -215,7 +216,7 @@ export default function PerjanjianPerkawinan() {
                   Lihat Paket Perjanjian
                 </a>
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20ingin%20berkonsultasi%20mengenai%20layanan%20Perjanjian%20Perkawinan."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin berkonsultasi mengenai layanan Perjanjian Perkawinan.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 border border-gray-250 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -706,7 +707,7 @@ export default function PerjanjianPerkawinan() {
                 {/* Order Button */}
                 <div className="p-6 sm:p-8 pt-0">
                   <a
-                    href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Layanan Pembuatan Perjanjian Perkawinan seharga Rp 3.999.000.")}`}
+                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pembuatan Perjanjian Perkawinan seharga Rp 3.999.000.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
@@ -821,7 +822,7 @@ export default function PerjanjianPerkawinan() {
                 {/* Order Button */}
                 <div className="p-6 sm:p-8 pt-0">
                   <a
-                    href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Layanan Registrasi KUA / Dukcapil Perjanjian Perkawinan seharga Rp 1.999.000.")}`}
+                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Registrasi KUA / Dukcapil Perjanjian Perkawinan seharga Rp 1.999.000.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
@@ -995,7 +996,7 @@ export default function PerjanjianPerkawinan() {
           <div className="w-full md:w-auto flex flex-col gap-3.5 min-w-[320px] sm:min-w-[360px] max-w-[400px]">
             {/* WhatsApp Action */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20layanan%20Perjanjian%20Perkawinan."
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Perjanjian Perkawinan.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2.5 px-6 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl transition-all duration-200 cursor-pointer shadow-md shadow-red-950/5"
@@ -1008,7 +1009,7 @@ export default function PerjanjianPerkawinan() {
 
             {/* Hubungi Tim Kami Action */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20menghubungi%20tim%20spesialis%20hukum%20perjanjian."
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin menghubungi tim spesialis hukum perjanjian.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-55 text-gray-900 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl transition-all duration-200 cursor-pointer shadow-sm"

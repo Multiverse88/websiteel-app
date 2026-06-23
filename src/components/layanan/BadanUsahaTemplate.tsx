@@ -29,6 +29,7 @@ import {
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage, FootnoteItem } from "@/components/Pricing";
+import { getWhatsAppLink } from "@/lib/config";
 import { getFAQJsonLd, getServiceJsonLd } from "@/lib/structured-data";
 import type { BadanUsahaContent } from "@/data/layanan-badan-usaha";
 
@@ -120,7 +121,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
 
               <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
                 <a
-                  href={`https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20${encodeURIComponent(c.nama.toLowerCase())}.`}
+                  href={getWhatsAppLink(`Halo EasyLegal, saya ingin konsultasi mengenai ${c.nama.toLowerCase()}.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-bold text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
@@ -378,7 +379,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
 
           <div className="w-full lg:w-auto flex flex-col gap-3 min-w-[340px] sm:min-w-[360px]">
             <a
-              href={`https://wa.me/6281123456789?text=${encodeURIComponent(c.ctaWhatsAppMessage)}`}
+              href={getWhatsAppLink(c.ctaWhatsAppMessage)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

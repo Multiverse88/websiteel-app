@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -261,7 +262,7 @@ export default function Navbar() {
               Cek Nama PT
             </Link>
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20legalitas%20bisnis."
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2.5 bg-primary rounded-full text-[14px] font-bold text-white hover:bg-primary-hover shadow-sm hover:shadow transition-all duration-200"
@@ -382,7 +383,7 @@ export default function Navbar() {
                 Cek Nama PT
               </Link>
               <a
-                href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20legalitas%20bisnis."
+                href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleLinkClick}

@@ -22,6 +22,7 @@ import {
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function NibOss() {
   const [activeSubTab, setActiveSubTab] = useState<"perorangan" | "badan" | "oss-rba" | "pt-perorangan">("perorangan");
@@ -65,7 +66,7 @@ export default function NibOss() {
       strikePrice: "900.000",
       isPopular: false,
       buttonText: "Pilih NIB Perseorangan",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20NIB%20Perseorangan%20(UMK).",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perseorangan (UMK)."),
       duration: "1-2 Hari Kerja",
       features: [
         "Pendaftaran Hak Akses Akun OSS RBA",
@@ -87,7 +88,7 @@ export default function NibOss() {
       strikePrice: "1.800.000",
       isPopular: true,
       buttonText: "Pilih NIB Badan Usaha",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20NIB%20Badan%20Usaha%20(PT/CV).",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan Usaha (PT/CV)."),
       duration: "1-2 Hari Kerja",
       features: [
         "Pendaftaran Hak Akses Akun OSS RBA Badan Usaha",
@@ -110,7 +111,7 @@ export default function NibOss() {
       strikePrice: "3.500.000",
       isPopular: false,
       buttonText: "Pilih NIB Risiko Menengah",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20NIB%20%2B%20Sertifikat%20Standar.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB + Sertifikat Standar."),
       duration: "3-5 Hari Kerja",
       features: [
         "Semua Layanan NIB Badan Usaha",
@@ -205,7 +206,7 @@ export default function NibOss() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20ingin%20berkonsultasi%20mengenai%20pembuatan%20NIB%20dan%20izin%20OSS%20RBA."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin berkonsultasi mengenai pembuatan NIB dan izin OSS RBA.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-bold text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
@@ -612,7 +613,7 @@ export default function NibOss() {
               {/* Footer Button */}
               <div className="p-6 pt-0">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20NIB%20Perorangan."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perorangan.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 text-center font-extrabold text-[13px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
@@ -717,7 +718,7 @@ export default function NibOss() {
               {/* Footer Button */}
               <div className="p-6 pt-0">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20NIB%20PT%20Perorangan."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB PT Perorangan.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 text-center font-extrabold text-[13px] text-white bg-[#990202] hover:bg-[#800000] rounded-xl transition-all duration-200 shadow-md"
@@ -818,7 +819,7 @@ export default function NibOss() {
               {/* Footer Button */}
               <div className="p-6 pt-0">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20NIB%20Badan."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 text-center font-extrabold text-[13px] text-gray-800 bg-white hover:bg-gray-55 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
@@ -912,7 +913,7 @@ export default function NibOss() {
               {/* Footer Button */}
               <div className="p-6 pt-0">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Cabut%20NIB."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Cabut NIB.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 text-center font-extrabold text-[13px] text-gray-800 bg-white hover:bg-gray-55 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
@@ -1093,7 +1094,7 @@ export default function NibOss() {
 
               <div className="p-6 pt-0">
                 <a
-                  href={`https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Cabut%20KBLI%20(${activeSubTab}).`}
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut KBLI (${activeSubTab}).`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3 text-center font-extrabold text-[12.5px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
@@ -1192,7 +1193,7 @@ export default function NibOss() {
 
               <div className="p-6 pt-0">
                 <a
-                  href={`https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Tambah%20KBLI%20(${activeSubTab}).`}
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Tambah KBLI (${activeSubTab}).`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3 text-center font-extrabold text-[12.5px] text-white bg-[#990202] hover:bg-[#800000] rounded-xl transition-all duration-200 shadow-md"
@@ -1291,7 +1292,7 @@ export default function NibOss() {
 
               <div className="p-6 pt-0">
                 <a
-                  href={`https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20Cabut%20%26%20Tambah%20KBLI%20(${activeSubTab}).`}
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut & Tambah KBLI (${activeSubTab}).`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3 text-center font-extrabold text-[12.5px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
@@ -1334,7 +1335,7 @@ export default function NibOss() {
           <div className="w-full lg:w-auto flex flex-col gap-3 min-w-[340px] sm:min-w-[360px]">
             {/* Button WhatsApp */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Jasa%20Pembuatan%20NIB%20dan%20OSS%20RBA%20perusahaan."
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Pembuatan NIB dan OSS RBA perusahaan.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
@@ -1347,7 +1348,7 @@ export default function NibOss() {
 
             {/* Button Hubungi Tim Kami */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%2520ingin%2520konsultasi%2520mengenai%2520layanan%2520NIB%2520dan%2520OSS%2520RBA."
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin konsultasi mengenai layanan NIB dan OSS RBA.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

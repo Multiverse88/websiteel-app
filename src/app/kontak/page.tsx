@@ -15,6 +15,7 @@ import {
   Home,
   Loader2,
 } from "lucide-react";
+import { getWhatsAppLink } from "@/lib/config";
 import { submitContactForm } from "./actions";
 
 export default function Kontak() {
@@ -202,7 +203,7 @@ export default function Kontak() {
 
               {/* Action Link */}
               <a
-                href="https://wa.me/6281123456789"
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 flex items-center text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"

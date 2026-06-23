@@ -16,18 +16,7 @@ function parsePendingUser(raw: string): { userId: string; email: string } | null
 }
 
 export async function initiateSetup(): Promise<{ manualEntryKey?: string; qrCodeDataUrl?: string; message?: string; error?: string }> {
-  const cookieStore = await cookies();
-  const pendingUser = cookieStore.get("pending_2fa_user")?.value;
-  if (!pendingUser) {
-    return { error: "Sesi berakhir. Silakan login kembali." };
-  }
-
-  const parsed = parsePendingUser(pendingUser);
-  if (!parsed) {
-    return { error: "Sesi tidak valid. Silakan login kembali." };
-  }
-
-  const result = await setupTwoFactor(parsed.userId, parsed.email);
+  const result = await setupTwoFactor();
   return result;
 }
 
@@ -38,23 +27,19 @@ export async function completeSetup(prevState: { error?: string } | null, formDa
     return { error: "Kode harus 6 digit!" };
   }
 
-  const cookieStore = await cookies();
-  const pendingUser = cookieStore.get("pending_2fa_user")?.value;
-  if (!pendingUser) {
-    return { error: "Sesi berakhir. Silakan login kembali." };
-  }
-
-  const parsed = parsePendingUser(pendingUser);
-  if (!parsed) {
-    return { error: "Sesi tidak valid. Silakan login kembali." };
-  }
-
-  const result = await verifyTwoFactorSetup(parsed.userId, token);
+  const result = await verifyTwoFactorSetup(token);
   if (result.error) {
     return { error: result.error };
   }
 
-  // Create session and clear pending cookie
+  // Baca cookie untuk buat session setelah sukses
+  const cookieStore = await cookies();
+  const pendingUser = cookieStore.get("pending_2fa_user")?.value;
+  const parsed = pendingUser ? parsePendingUser(pendingUser) : null;
+  if (!parsed) {
+    return { error: "Sesi berakhir. Silakan login kembali." };
+  }
+
   await createSession({ userId: parsed.userId, email: parsed.email, twoFactorEnabled: true });
   cookieStore.delete("pending_2fa_user");
 

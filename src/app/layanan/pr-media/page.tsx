@@ -31,6 +31,7 @@ import {
   Menu
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function PRMedia() {
   // State for interactive Pricing filter tabs
@@ -236,7 +237,7 @@ export default function PRMedia() {
                   Lihat Paket Press Release
                 </a>
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20ingin%20berkonsultasi%20mengenai%20layanan%20Press%20Release."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin berkonsultasi mengenai layanan Press Release.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-150 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-55 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -885,12 +886,12 @@ export default function PRMedia() {
                 {/* Order Button */}
                 <div className="p-6 sm:p-7 pt-0">
                   <a
-                    href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Paket A Press Release seharga Rp 1.199.000.")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-gray-800 bg-white hover:bg-gray-55 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
-                  >
-                    Pilih Paket A
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket A Press Release seharga Rp 1.199.000.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
+                >
+                  Pilih Paket A
                   </a>
                 </div>
               </div>
@@ -994,12 +995,12 @@ export default function PRMedia() {
                 {/* Order Button */}
                 <div className="p-6 sm:p-7 pt-0">
                   <a
-                    href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Paket B Press Release seharga Rp 4.999.000.")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-sm shadow-red-900/10"
-                  >
-                    Pilih Paket B
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket B Press Release seharga Rp 4.999.000.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
+                >
+                  Pilih Paket B
                   </a>
                 </div>
               </div>
@@ -1100,12 +1101,12 @@ export default function PRMedia() {
                 {/* Order Button */}
                 <div className="p-6 sm:p-7 pt-0">
                   <a
-                    href={`https://wa.me/6281123456789?text=${encodeURIComponent("Halo EasyLegal, saya tertarik dengan Paket C Press Release seharga Rp 8.999.000.")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-gray-800 bg-white hover:bg-gray-55 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
-                  >
-                    Pilih Paket C
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket C Press Release seharga Rp 8.999.000.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-gray-800 bg-white hover:bg-gray-55 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
+                >
+                  Pilih Paket C
                   </a>
                 </div>
               </div>
@@ -1473,7 +1474,7 @@ export default function PRMedia() {
           <div className="w-full md:w-auto flex flex-col gap-3 min-w-[320px] sm:min-w-[360px] max-w-[400px]">
             {/* WhatsApp Action */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20publikasi%20Press%20Release."
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai publikasi Press Release.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
@@ -1486,7 +1487,7 @@ export default function PRMedia() {
 
             {/* Email/Form Action */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Jasa%2520Publikasi%2520Press%2520Release%2520Media."
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Publikasi Press Release Media.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 hover:border-gray-300 font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"

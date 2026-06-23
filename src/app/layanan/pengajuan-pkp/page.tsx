@@ -29,6 +29,7 @@ import {
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function PengajuanPkp() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -116,7 +117,7 @@ export default function PengajuanPkp() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20ingin%20berkonsultasi%20mengenai%20layanan%20pengukuhan%20PKP%20perusahaan."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin berkonsultasi mengenai layanan pengukuhan PKP perusahaan.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-bold text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
@@ -710,7 +711,7 @@ export default function PengajuanPkp() {
                 {/* Footer Button */}
                 <div className="p-8 pt-0">
                   <a
-                    href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20PKP%20Pulau%20Jawa."
+                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Pulau Jawa.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full py-4 text-center font-bold text-[14px] text-white bg-[#990202] hover:bg-[#800000] rounded-xl transition-all duration-200 shadow-sm"
@@ -805,7 +806,7 @@ export default function PengajuanPkp() {
                 {/* Footer Button */}
                 <div className="p-8 pt-0">
                   <a
-                    href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20PKP%20Luar%20Jawa."
+                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Luar Jawa.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full py-4 text-center font-bold text-[14px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
@@ -848,7 +849,7 @@ export default function PengajuanPkp() {
           <div className="w-full lg:w-auto flex flex-col gap-3 min-w-[340px] sm:min-w-[360px]">
             {/* Button WhatsApp */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Jasa%20Pengurusan%20PKP%20perusahaan."
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Pengurusan PKP perusahaan.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
@@ -861,7 +862,7 @@ export default function PengajuanPkp() {
 
             {/* Button Hubungi Tim Kami */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%2520ingin%2520konsultasi%2520mengenai%2520layanan%2520pengukuhan%2520PKP%2520perusahaan."
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin konsultasi mengenai layanan pengukuhan PKP perusahaan.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

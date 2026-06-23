@@ -22,6 +22,7 @@ import {
   Home,
   CheckCircle2
 } from "lucide-react";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function KerjasamaPage() {
   // Form submission state
@@ -600,7 +601,7 @@ export default function KerjasamaPage() {
 
                 {/* Footer Note */}
                 <p className="text-center text-[11px] sm:text-[11.5px] text-gray-500 font-semibold mt-4">
-                  Akan dikirim ke <strong className="font-extrabold text-gray-900">partnership@easylegal.id</strong> · Urgent? <a href="https://wa.me/6281123456789" className="text-[#990202] hover:text-[#800000] font-extrabold underline">WhatsApp Tim</a>
+                  Akan dikirim ke <strong className="font-extrabold text-gray-900">partnership@easylegal.id</strong> · Urgent? <a href={getWhatsAppLink()} className="text-[#990202] hover:text-[#800000] font-extrabold underline">WhatsApp Tim</a>
                 </p>
 
               </form>
@@ -641,7 +642,7 @@ export default function KerjasamaPage() {
 
                 <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto">
                   <a
-                    href={`https://wa.me/6281123456789?text=Halo%20Partnership%20Manager%20EasyLegal,%20saya%20${encodeURIComponent(formData.name)}%20baru%20saja%20mengajukan%20kemitraan%20${encodeURIComponent(formData.partnershipType)}%20via%20formulir%20website.`}
+                    href={getWhatsAppLink(`Halo Partnership Manager EasyLegal, saya ${formData.name} baru saja mengajukan kemitraan ${formData.partnershipType} via formulir website.`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14px] rounded-xl shadow-md hover:shadow-lg transition-colors cursor-pointer text-center flex-1"

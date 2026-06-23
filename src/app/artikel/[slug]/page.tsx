@@ -9,6 +9,7 @@ import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";
 import TableOfContents from "./table-of-contents";
 import { trackMetric } from "@/lib/metrics";
+import { getWhatsAppLink } from "@/lib/config";
 import { getArticleJsonLd } from "@/lib/structured-data";
 import type { Metadata } from "next";
 
@@ -537,7 +538,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
               {/* Ad Card (Card Iklan) */}
               <a
-                href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20promo%20Diskon%2050%25%20Layanan%20Pendirian%20PT%20%26%20CV."
+                href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan promo Diskon 50% Layanan Pendirian PT & CV.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block group relative overflow-hidden rounded-[30px] bg-gradient-to-b from-[#800000] to-[#4A0000] p-7 text-white hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 border border-red-950 shadow-md"

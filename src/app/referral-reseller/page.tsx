@@ -18,6 +18,7 @@ import {
   ShieldCheck,
   Award
 } from "lucide-react";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function ReferralResellerPage() {
   // FAQ state
@@ -137,7 +138,7 @@ export default function ReferralResellerPage() {
               {/* Action buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20mendaftar%20Program%20Referral%20%26%20Reseller%20tanpa%20modal."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik mendaftar Program Referral & Reseller tanpa modal.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-center space-x-2 shrink-0"
@@ -858,7 +859,7 @@ export default function ReferralResellerPage() {
           {/* Action buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20siap%20gabung%20Program%20Referral%20%26%20Reseller%20sekarang."
+              href={getWhatsAppLink("Halo EasyLegal, saya siap gabung Program Referral & Reseller sekarang.")}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 space-x-2.5 cursor-pointer"
@@ -870,7 +871,7 @@ export default function ReferralResellerPage() {
               <span>Daftar Gratis Sekarang</span>
             </a>
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20bertanya%20mengenai%20kemitraan%20referral."
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin bertanya mengenai kemitraan referral.")}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 border border-gray-200 text-gray-850 font-extrabold text-[14.5px] rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 shadow-sm cursor-pointer"

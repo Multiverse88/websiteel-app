@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { getWhatsAppLink } from "@/lib/config";
 import { Building2, Search, MessageCircle, Check } from "lucide-react";
 
 export default function CekNama() {
@@ -46,8 +47,7 @@ export default function CekNama() {
                 `- WhatsApp: ${formData.whatsapp || "-"}`;
     }
 
-    const encodedMessage = encodeURIComponent(message);
-    const waUrl = `https://wa.me/6281123456789?text=${encodedMessage}`;
+    const waUrl = getWhatsAppLink(message);
     window.open(waUrl, "_blank");
   };
 

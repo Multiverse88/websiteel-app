@@ -19,6 +19,7 @@ import Image from "next/image";
 import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function VirtualOffice() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -36,7 +37,7 @@ export default function VirtualOffice() {
       strikePrice: "Rp 4.500.000",
       subLabel: "PER TAHUN · LOKASI STRATEGIS",
       buttonText: "Pilih Paket Silver",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Virtual%20Office%20Silver.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Virtual Office Silver."),
       groups: [
         {
           title: "FASILITAS ALAMAT",
@@ -73,7 +74,7 @@ export default function VirtualOffice() {
       isPopular: true,
       badgeText: "REKOMENDASI",
       buttonText: "Pilih Paket Gold",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Virtual%20Office%20Gold.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Virtual Office Gold."),
       groups: [
         {
           title: "FASILITAS ALAMAT",
@@ -181,7 +182,7 @@ export default function VirtualOffice() {
                 style={{ animationDelay: "0.3s" }}
               >
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20ingin%20konsultasi%20mengenai%20Virtual%20Office."
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Virtual Office.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold rounded-xl text-[14px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
@@ -571,7 +572,7 @@ export default function VirtualOffice() {
               {/* Action Button */}
               <div className="px-7 pb-7 pt-1 flex-shrink-0">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20EasyOffice%20Jakarta."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Jakarta.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 text-center font-extrabold text-[13.5px] rounded-xl shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
@@ -674,7 +675,7 @@ export default function VirtualOffice() {
               {/* Action Button */}
               <div className="px-7 pb-7 pt-1 flex-shrink-0">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%2520dengan%20EasyOffice%20Bandung."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Bandung.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 bg-[#990202] hover:bg-[#800000] text-white text-center font-extrabold text-[13.5px] rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
@@ -774,7 +775,7 @@ export default function VirtualOffice() {
               {/* Action Button */}
               <div className="px-7 pb-7 pt-1 flex-shrink-0">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%2520dengan%2520EasyOffice%2520Bekasi."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Bekasi.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 text-center font-extrabold text-[13.5px] rounded-xl shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
@@ -938,7 +939,7 @@ export default function VirtualOffice() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <a
-                  href="https://wa.me/62818881425?text=Halo%20EasyOffice%20Bandung,%20saya%20ingin%20tanya%20mengenai%20Virtual%20Office."
+                  href={getWhatsAppLink("Halo EasyOffice Bandung, saya ingin tanya mengenai Virtual Office.") /* Different number: 62818881425 */}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold rounded-xl text-[14px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 flex-grow"

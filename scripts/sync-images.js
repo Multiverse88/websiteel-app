@@ -39,6 +39,7 @@ const s3Client = new S3Client({
   credentials: { accessKeyId, secretAccessKey },
   region: "us-east-1",
   forcePathStyle: true,
+  requestHandler: { requestTimeout: 10_000 },
 });
 
 const publicDir = path.join(__dirname, '../public');

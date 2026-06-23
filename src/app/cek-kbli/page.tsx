@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { getWhatsAppLink } from "@/lib/config";
 import { Search, MessageCircle, Check, BookOpen, ArrowRight, Shield, Zap, X } from "lucide-react";
 
 // KBLI Data Structure
@@ -278,7 +279,7 @@ export default function CekKBLI() {
   const handleWhatsAppConsult = (e: React.MouseEvent) => {
     e.preventDefault();
     const message = `Halo EasyLegal, saya tidak menemukan kode KBLI yang cocok. Mohon bantu mencarikan kode KBLI untuk bisnis saya.\n\nKata kunci: ${searchQuery || "-"}`;
-    const waUrl = `https://wa.me/6281123456789?text=${encodeURIComponent(message)}`;
+    const waUrl = getWhatsAppLink(message);
     window.open(waUrl, "_blank");
   };
 
@@ -288,7 +289,7 @@ export default function CekKBLI() {
                     `- Judul KBLI: ${item.title}\n` +
                     `- Tingkat Risiko: ${item.risk}\n\n` +
                     `Apakah KBLI ini sudah sesuai dengan rencana bisnis saya?`;
-    const waUrl = `https://wa.me/6281123456789?text=${encodeURIComponent(message)}`;
+    const waUrl = getWhatsAppLink(message);
     window.open(waUrl, "_blank");
   };
 

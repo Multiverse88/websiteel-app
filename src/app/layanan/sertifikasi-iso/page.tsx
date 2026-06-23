@@ -20,6 +20,7 @@ import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Benefits from "@/components/Benefits";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function SertifikasiIso() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -41,7 +42,7 @@ export default function SertifikasiIso() {
       desc: "Standar paling populer & aplikatif untuk semua industri. Fokus pada kepuasan pelanggan & perbaikan mutu berkelanjutan.",
       cocok: ["Semua sektor", "Manufaktur", "Jasa", "Retail"],
       price: "9,9jt",
-      link: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%209001:2015."
+      link: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO 9001:2015.")
     },
     {
       id: "iso-14001",
@@ -52,7 +53,7 @@ export default function SertifikasiIso() {
       desc: "Pengelolaan dampak lingkungan, kepatuhan AMDAL, & pengurangan limbah. Wajib untuk ekspor ke EU & Jepang.",
       cocok: ["Manufaktur", "Pertanian", "Pertambangan", "Ekspor"],
       price: "9,9jt",
-      link: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%2014001:2015."
+      link: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO 14001:2015.")
     },
     {
       id: "iso-45001",
@@ -63,7 +64,7 @@ export default function SertifikasiIso() {
       desc: "Keselamatan & kesehatan kerja — wajib untuk industri berisiko tinggi. Mengurangi kecelakaan kerja & klaim BPJS.",
       cocok: ["Konstruksi", "Manufaktur", "Oil & Gas", "Pertambangan"],
       price: "11,9jt",
-      link: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%2045001:2018."
+      link: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO 45001:2018.")
     },
     {
       id: "iso-22000",
@@ -74,7 +75,7 @@ export default function SertifikasiIso() {
       desc: "Sistem keamanan pangan terintegrasi dengan prinsip HACCP. Wajib untuk industri makanan & minuman skala besar.",
       cocok: ["F&B", "Restoran", "Hotel", "Supplier Makanan"],
       price: "14,4jt",
-      link: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%2022000:2018."
+      link: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO 22000:2018.")
     },
     {
       id: "iso-27001",
@@ -85,7 +86,7 @@ export default function SertifikasiIso() {
       desc: "Keamanan data & informasi — wajib untuk perusahaan teknologi, finansial, & healthcare yang handle data sensitif.",
       cocok: ["Tech & SaaS", "Finance", "Healthcare", "E-commerce"],
       price: "14,4jt",
-      link: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%2027001:2022."
+      link: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO 27001:2022.")
     },
     {
       id: "iso-37001",
@@ -96,7 +97,7 @@ export default function SertifikasiIso() {
       desc: "Sistem anti-suap untuk good governance — kewajiban BUMN, kontraktor pemerintah, & perusahaan publik.",
       cocok: ["BUMN", "Konstruksi", "Infrastruktur", "Kontraktor"],
       price: "14,4jt",
-      link: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%2037001:2016."
+      link: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO 37001:2016.")
     },
     {
       id: "iso-13485",
@@ -107,7 +108,7 @@ export default function SertifikasiIso() {
       desc: "Standar khusus perangkat medis — manufaktur, distribusi, & service alat kesehatan. Wajib untuk regulasi BPOM.",
       cocok: ["Alat Kesehatan", "Distribusi Medis", "Rumah Sakit", "Lab"],
       price: "17,4jt",
-      link: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%2013485:2016."
+      link: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO 13485:2016.")
     }
   ];
 
@@ -143,7 +144,7 @@ export default function SertifikasiIso() {
       subLabel: "SISTEM MANAJEMEN MUTU",
       isPopular: true,
       buttonText: "Pilih ISO 9001",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20ISO%209001:2015%20Mutu.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket ISO 9001:2015 Mutu."),
       lamaProses: "3-7 Hari Kerja",
       yangDiperoleh: [
         "Sistem Manajemen Mutu Terakreditasi UAF",
@@ -171,7 +172,7 @@ export default function SertifikasiIso() {
       subLabel: "MANAJEMEN LINGKUNGAN",
       isPopular: false,
       buttonText: "Pilih ISO 14001",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20ISO%2014001:2015%20Lingkungan.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket ISO 14001:2015 Lingkungan."),
       lamaProses: "7 Hari Kerja",
       yangDiperoleh: [
         "Sistem Manajemen Lingkungan Terakreditasi UAF",
@@ -199,7 +200,7 @@ export default function SertifikasiIso() {
       subLabel: "K3 (OH&S)",
       isPopular: false,
       buttonText: "Pilih ISO 45001",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20ISO%2045001:2018%20K3.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket ISO 45001:2018 K3."),
       lamaProses: "7 Hari Kerja",
       yangDiperoleh: [
         "Sistem Manajemen K3 Terakreditasi UAF",
@@ -227,7 +228,7 @@ export default function SertifikasiIso() {
       subLabel: "KEAMANAN PANGAN",
       isPopular: false,
       buttonText: "Pilih ISO 22000",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20ISO%2022000:2018%20Keamanan%20Pangan.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket ISO 22000:2018 Keamanan Pangan."),
       lamaProses: "7 Hari Kerja",
       yangDiperoleh: [
         "Sistem Manajemen Keamanan Pangan Terakreditasi UAF",
@@ -255,7 +256,7 @@ export default function SertifikasiIso() {
       subLabel: "KEAMANAN INFORMASI",
       isPopular: false,
       buttonText: "Pilih ISO 27001",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20ISO%2027001:2022%20Keamanan%20Informasi.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket ISO 27001:2022 Keamanan Informasi."),
       lamaProses: "7 Hari Kerja",
       yangDiperoleh: [
         "Sistem Manajemen Keamanan Informasi Terakreditasi UAF",
@@ -283,7 +284,7 @@ export default function SertifikasiIso() {
       subLabel: "ANTI PENYUAPAN",
       isPopular: false,
       buttonText: "Pilih ISO 37001",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20ISO%2037001:2016%20Anti%20Penyuapan.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket ISO 37001:2016 Anti Penyuapan."),
       lamaProses: "7 Hari Kerja",
       yangDiperoleh: [
         "Sistem Manajemen Anti Penyuapan Terakreditasi UAF",
@@ -311,7 +312,7 @@ export default function SertifikasiIso() {
       subLabel: "MUTU PERANGKAT MEDIS",
       isPopular: false,
       buttonText: "Pilih ISO 13485",
-      buttonLink: "https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Paket%20ISO%2013485:2016%20Alat%20Kesehatan.",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket ISO 13485:2016 Alat Kesehatan."),
       lamaProses: "7 Hari Kerja",
       yangDiperoleh: [
         "Sistem Mutu Perangkat Medis Terakreditasi UAF",
@@ -483,7 +484,7 @@ export default function SertifikasiIso() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
                 <a
-                  href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%2520tertarik%20ingin%20berkonsultasi%20mengenai%20pembuatan%20Sertifikasi%20ISO%20dengan%20auditor%20UAF."
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin berkonsultasi mengenai pembuatan Sertifikasi ISO dengan auditor UAF.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-bold text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
@@ -1232,7 +1233,7 @@ export default function SertifikasiIso() {
           <div className="w-full lg:w-auto flex flex-col gap-3.5 min-w-[340px] sm:min-w-[360px]">
             {/* Button WhatsApp */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%20perusahaan.%20Boleh%20minta%20info%20penawaran%20khusus?"
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO perusahaan. Boleh minta info penawaran khusus?")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
@@ -1245,7 +1246,7 @@ export default function SertifikasiIso() {
 
             {/* Button Hubungi Tim Kami */}
             <a
-              href="https://wa.me/6281123456789?text=Halo%20EasyLegal,%20saya%20tertarik%20dengan%20Sertifikasi%20ISO%20perusahaan.%20Boleh%20minta%20info%20penawaran%2520khusus?"
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO perusahaan. Boleh minta info penawaran khusus?")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

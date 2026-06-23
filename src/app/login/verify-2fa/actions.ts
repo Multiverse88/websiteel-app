@@ -22,24 +22,19 @@ export async function verifyLogin2FA(prevState: { error?: string } | null, formD
     return { error: "Kode harus 6 digit!" };
   }
 
-  // Get pending user from cookie
-  const cookieStore = await cookies();
-  const pendingUser = cookieStore.get("pending_2fa_user")?.value;
-  if (!pendingUser) {
-    return { error: "Sesi verifikasi sudah berakhir. Silakan login kembali." };
-  }
-
-  const parsed = parsePendingUser(pendingUser);
-  if (!parsed) {
-    return { error: "Sesi tidak valid. Silakan login kembali." };
-  }
-
-  const result = await verifyTwoFactorLogin(parsed.userId, token);
+  const result = await verifyTwoFactorLogin(token);
   if (result.error) {
     return { error: result.error };
   }
 
-  // Create session and clear pending cookie
+  // Get pending user from cookie for session creation
+  const cookieStore = await cookies();
+  const pendingUser = cookieStore.get("pending_2fa_user")?.value;
+  const parsed = pendingUser ? parsePendingUser(pendingUser) : null;
+  if (!parsed) {
+    return { error: "Sesi verifikasi sudah berakhir. Silakan login kembali." };
+  }
+
   await createSession({ userId: parsed.userId, email: parsed.email, twoFactorEnabled: true });
   cookieStore.delete("pending_2fa_user");
 
