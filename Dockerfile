@@ -21,6 +21,10 @@ WORKDIR /app
 # Install openssl
 RUN apk add --no-cache openssl
 
+# Build-time env vars for NEXT_PUBLIC_* variables
+ARG NEXT_PUBLIC_TYPEBOT_BOT_ID
+ENV NEXT_PUBLIC_TYPEBOT_BOT_ID=${NEXT_PUBLIC_TYPEBOT_BOT_ID}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
