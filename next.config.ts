@@ -19,7 +19,6 @@ const ContentSecurityPolicy = isProd
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'none';
-  require-trusted-types-for 'script';
 `
   : `
   default-src 'self';
