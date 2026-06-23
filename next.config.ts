@@ -8,32 +8,34 @@ const ContentSecurityPolicy = isProd
   ? `
   default-src 'self';
   script-src 'self' 'unsafe-inline';
-  script-src-elem 'self' 'unsafe-inline' https://www.youtube.com https://www.youtube-nocookie.com;
-  style-src 'self' 'unsafe-inline';
+  script-src-elem 'self' 'unsafe-inline' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
+  style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://sentry.io https://*.ingest.sentry.io;
+  connect-src 'self' https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id;
   frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'none';
+  worker-src 'self' blob:;
 `
   : `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval';
-  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com;
-  style-src 'self' 'unsafe-inline';
+  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
+  style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' ws: wss: https://sentry.io https://*.ingest.sentry.io;
+  connect-src 'self' ws: wss: https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id;
   frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'none';
+  worker-src 'self' blob:;
 `;
 
 const securityHeaders = [
