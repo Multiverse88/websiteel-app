@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_TYPEBOT_BOT_ID=easylegal-assistant
     container_name: easylegal-app
     restart: unless-stopped
     env_file:
