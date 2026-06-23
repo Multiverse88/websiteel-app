@@ -3,8 +3,8 @@
 import React, { useState, useRef, useTransition, useEffect } from "react";
 import Link from "next/link";
 import ImageComponent from "next/image";
-import { ArrowLeft, Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2, ExternalLink } from "lucide-react";
-import { updateArticle, getArticle } from "./actions";
+import { ArrowLeft, Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2, ExternalLink, Cloud } from "lucide-react";
+import { updateArticle, getArticle, uploadInlineImage } from "./actions";
 import { compressImageFile } from "@/lib/compress-image";
 
 const IMAGE_PRESETS = [
@@ -60,6 +60,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [isCompressing, setIsCompressing] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const editorRef = useRef<HTMLDivElement>(null);
 
@@ -318,11 +319,21 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
     setIsCompressing(true);
     try {
       const compressed = await compressImageFile(file);
-      setImageUrl(URL.createObjectURL(compressed));
+      setIsCompressing(false);
+      setIsUploadingImage(true);
+      const uploadForm = new FormData();
+      uploadForm.set("image", compressed);
+      const result = await uploadInlineImage(uploadForm);
+      if (result.error) {
+        setError(result.error);
+      } else if (result.url) {
+        setImageUrl(result.url);
+      }
     } catch {
       setError("Gagal mengompres gambar.");
     } finally {
       setIsCompressing(false);
+      setIsUploadingImage(false);
     }
   };
 
@@ -923,10 +934,15 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                           <button
                             type="button"
                             onClick={() => imageFileInputRef.current?.click()}
-                            disabled={isCompressing}
+                            disabled={isCompressing || isUploadingImage}
                             className="w-full py-2.5 border-2 border-dashed border-gray-200 rounded-xl text-[13px] font-bold text-gray-500 hover:border-[#990202] hover:text-[#990202] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
-                            {isCompressing ? (
+                            {isUploadingImage ? (
+                              <>
+                                <Cloud className="w-4 h-4 animate-pulse" />
+                                <span>Mengunggah ke CDN...</span>
+                              </>
+                            ) : isCompressing ? (
                               <>
                                 <Loader2 className="w-4 h-4 animate-spin" />
                                 <span>Mengompres gambar...</span>

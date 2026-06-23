@@ -112,10 +112,14 @@ src/
 └── middleware.ts           # Dashboard auth gate
 scripts/
 ├── deploy.sh              # Deploy VPS (pull → build → up -d)
-├── sync-images.js         # MinIO/CDN sync (jalan di CMD Docker)
+├── sync-images.js         # MinIO/CDN sync (jalan di CMD Docker & manual)
 ├── deploy-setup.sh        # Setup VPS pertama kali
 ├── backup-db.sh           # pg_dump ke /opt/backups/
-└── secure-vps.sh          # Hardening helper
+├── secure-vps.sh          # Hardening helper
+├── optimize-images.sh     # Convert JPG/PNG → WebP
+├── optimize-db.sh         # PostgreSQL vacuum + analyze + index check
+├── audit-security.sh      # Security audit (read-only)
+└── check-ssl.sh           # SSL cert expiry + auto-renew
 ```
 
 ---
@@ -207,6 +211,32 @@ bash scripts/deploy.sh       # pull → build → up -d → cleanup → health c
 | SENTRY_DSN dobel di `.env.production` | `.env.production` | **SUDAH DIFIX** |
 | Komponen mati di `src/components/home/` | `HowItWorks.tsx`, `LatestInsights.tsx`, wrappers | **SUDAH DIFIX** |
 | 100+ nomor WhatsApp hardcoded di halaman service | semua file `src/app/layanan/` + komponen | **SUDAH DIFIX** |
+| `cdn.easylegal.my.id` belum ada di nginx | `nginx/nginx.conf` | **SUDAH DIFIX** |
+| `MINIO_PUBLIC_URL` salah (`easylegal.my.id`) | `.env.production` | **SUDAH DIFIX** |
+| `sync-images.js` upload ulang file tiap startup | `scripts/sync-images.js` | **SUDAH DIFIX** (skip existing) |
+| Statis images belum sync ke MinIO | `scripts/sync-images.js` | **SUDAH DIFIX** |
+
+---
+
+## MinIO / CDN Image Storage
+
+MinIO berjalan sebagai container terpisah (`cdn-storage`) di port 9000 (S3 API) & 9001 (Console).
+Bucket: `images`. Akses publik via `cdn.easylegal.my.id` (nginx → MinIO).
+
+| Alur | Detail |
+|------|--------|
+| Upload user | Dashboard → `uploadToMinio()` → MinIO → return CDN URL |
+| Static images | `scripts/sync-images.js` sync `public/` → MinIO (skip existing) |
+| Serving | `/images/*` di nginx diproxy ke `172.17.0.1:9000/images/*` |
+| URL format | `https://cdn.easylegal.my.id/images/uploads/articles/xxx.jpg` |
+
+**Key mapping:** File `public/images/hero/hero.jpg` → key `hero/hero.jpg` di bucket `images`
+(karena bucket sudah bernama `images`, prefix `images/` di-strip).
+
+**Deploy notes:**
+- `cdn.easylegal.my.id` butuh DNS CNAME → `157.10.252.77` + SSL cert
+- Sync jalan otomatis di CMD Docker (`sync-images.js` — HEAD check, skip existing)
+- `.env.production` butuh `MINIO_PUBLIC_URL="https://cdn.easylegal.my.id/images"`
 
 ---
 

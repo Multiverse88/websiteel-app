@@ -10,7 +10,50 @@ import { sendEmail, generateNewsletterHtml } from "@/lib/mail";
 import { getSession } from "@/lib/auth";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_INLINE_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+
+export async function uploadInlineImage(formData: FormData): Promise<{ url?: string; error?: string }> {
+  const session = await getSession();
+  if (!session) {
+    return { error: "Sesi tidak valid!" };
+  }
+
+  const file = formData.get("image") as File | null;
+  if (!file || file.size === 0) {
+    return { error: "Tidak ada file yang dipilih." };
+  }
+
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    return { error: "Format gambar tidak didukung! Gunakan JPG, PNG, WebP, atau GIF." };
+  }
+
+  if (file.size > MAX_INLINE_FILE_SIZE) {
+    return { error: "Ukuran gambar maksimal 2MB!" };
+  }
+
+  try {
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const ext = file.name.split(".").pop() || "jpg";
+    const filename = `inline-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+
+    let url: string;
+    if (isMinioConfigured()) {
+      url = await uploadToMinio(buffer, filename, file.type, "uploads/articles");
+    } else {
+      const uploadDir = path.join(process.cwd(), "public", "uploads", "articles");
+      await mkdir(uploadDir, { recursive: true });
+      await writeFile(path.join(uploadDir, filename), buffer);
+      url = `/uploads/articles/${filename}`;
+    }
+
+    return { url };
+  } catch (err) {
+    console.error("Gagal upload inline image:", err);
+    return { error: "Gagal mengunggah gambar. Silakan coba lagi." };
+  }
+}
 
 export async function createArticle(prevState: Record<string, unknown> | null, formData: FormData) {
   const session = await getSession();
