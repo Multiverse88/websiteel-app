@@ -31,12 +31,16 @@ echo -e "\n${YELLOW}[2/4] Building & restarting containers (clean build)...${NC}
 docker compose build --no-cache
 docker compose up -d --remove-orphans
 
-# 3. Clean Docker Cache and Purge Nginx Cache
+# 3. Clean Docker Cache and Restart system Nginx (if running on host)
 echo -e "\n${YELLOW}[3/4] Cleaning up Docker cache & restarting Nginx...${NC}"
 docker image prune -f
 docker builder prune -f
 docker container prune -f
-docker compose restart nginx
+if command -v systemctl >/dev/null 2>&1 && systemctl is-active --quiet nginx; then
+    sudo systemctl restart nginx
+else
+    echo "Nginx system service not active on host or u lack permissions. Skipping systemctl restart."
+fi
 
 # 4. Wait for health check
 echo -e "\n${YELLOW}[4/4] Waiting for services to start...${NC}"
