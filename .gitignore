@@ -97,3 +97,6 @@ public/logo-berita/*.msi
 # Document files
 *.docx
 COPYWRITING_AUDIT.md
+
+# Accidental uploads
+Telegram Desktop/
