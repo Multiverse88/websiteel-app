@@ -142,9 +142,9 @@ export default function VirtualOffice() {
       <section className="relative pb-6 lg:pb-20 overflow-hidden bg-white">
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-[13px] text-gray-400 pt-0 pb-1 mb-1 font-medium">
+          <nav className="flex items-center gap-2 text-[13px] text-gray-600 pt-0 pb-1 mb-1 font-medium">
             <Link href="/home-gads" className="flex items-center gap-1 hover:text-gray-900 transition-colors">
-              <Home className="w-3.5 h-3.5 text-gray-400" />
+              <Home className="w-3.5 h-3.5 text-gray-600" />
               <span>Beranda</span>
             </Link>
             <ChevronRight className="w-3 h-3 text-gray-300" />
@@ -211,7 +211,7 @@ export default function VirtualOffice() {
                   </div>
                   <div>
                     <div className="text-[14px] font-extrabold text-gray-950">3 Kota</div>
-                    <div className="text-[12px] text-gray-400 font-medium">Bandung &middot; Jakarta &middot; Bekasi</div>
+                    <div className="text-[12px] text-gray-600 font-medium">Bandung &middot; Jakarta &middot; Bekasi</div>
                   </div>
                 </div>
 
@@ -221,7 +221,7 @@ export default function VirtualOffice() {
                   </div>
                   <div>
                     <div className="text-[14px] font-extrabold text-gray-950">70 jam/tahun</div>
-                    <div className="text-[12px] text-gray-400 font-medium">Meeting room gratis</div>
+                    <div className="text-[12px] text-gray-600 font-medium">Meeting room gratis</div>
                   </div>
                 </div>
 
@@ -234,7 +234,7 @@ export default function VirtualOffice() {
                   </div>
                   <div>
                     <div className="text-[14px] font-extrabold text-gray-950">PKP-friendly</div>
-                    <div className="text-[12px] text-gray-400 font-medium">Legalitas lengkap</div>
+                    <div className="text-[12px] text-gray-600 font-medium">Legalitas lengkap</div>
                   </div>
                 </div>
               </div>
@@ -325,7 +325,7 @@ export default function VirtualOffice() {
                   </div>
                   <div>
                     <div className="text-[13.5px] font-extrabold text-gray-950 leading-tight">3 Lokasi Strategis</div>
-                    <div className="text-[10.5px] text-gray-400 font-medium leading-tight mt-1">Cihampelas Bandung - Cilandak Jakarta - Summarecon Bekasi</div>
+                    <div className="text-[10.5px] text-gray-600 font-medium leading-tight mt-1">Cihampelas Bandung - Cilandak Jakarta - Summarecon Bekasi</div>
                   </div>
                 </div>
               </div>
@@ -489,16 +489,16 @@ export default function VirtualOffice() {
             >
               {/* Header Box */}
               <div className="bg-[#1A1A1A] p-6 text-white text-center flex-shrink-0">
-                <h3 className="text-[12.5px] font-extrabold uppercase tracking-widest text-gray-400">EASYOFFICE JAKARTA</h3>
+                <h3 className="text-[12.5px] font-extrabold uppercase tracking-widest text-gray-600">EASYOFFICE JAKARTA</h3>
                 <div className="mt-2 text-[30px] font-black tracking-tight text-white">Rp3.500.000</div>
-                <div className="mt-1.5 text-[9px] font-extrabold tracking-wider text-gray-400 uppercase">PER TAHUN &middot; CILANDAK, JAKARTA SELATAN</div>
+                <div className="mt-1.5 text-[9px] font-extrabold tracking-wider text-gray-600 uppercase">PER TAHUN &middot; CILANDAK, JAKARTA SELATAN</div>
               </div>
 
               {/* List Content */}
               <div className="p-7 space-y-6 flex-grow">
                 {/* Alamat Lengkap */}
                 <div>
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">ALAMAT LENGKAP</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">ALAMAT LENGKAP</h4>
                   <div className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                     <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span>Sovereign Plaza 12th Floor, Jl. TB Simatupang No. 36, Cilandak Barat</span>
@@ -507,7 +507,7 @@ export default function VirtualOffice() {
 
                 {/* Fasilitas Office */}
                 <div className="pt-2.5 border-t border-gray-100">
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">FASILITAS OFFICE</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">FASILITAS OFFICE</h4>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                       <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -534,7 +534,7 @@ export default function VirtualOffice() {
 
                 {/* Legalitas Gedung */}
                 <div className="pt-2.5 border-t border-gray-100">
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">LEGALITAS GEDUNG</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">LEGALITAS GEDUNG</h4>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                       <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -554,7 +554,7 @@ export default function VirtualOffice() {
                 {/* Akses Transportasi */}
                 <div className="pt-2.5 border-t border-gray-100">
                   <div className="bg-gray-50 border border-gray-150/45 rounded-2xl p-4 space-y-2">
-                    <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">AKSES TRANSPORTASI</h5>
+                    <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">AKSES TRANSPORTASI</h4>
                     <ul className="space-y-2">
                       <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -601,7 +601,7 @@ export default function VirtualOffice() {
               <div className="p-7 space-y-6 flex-grow">
                 {/* Alamat Lengkap */}
                 <div>
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">ALAMAT LENGKAP</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">ALAMAT LENGKAP</h4>
                   <div className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                     <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span>Jl. Cihampelas No. 201A, RT/RW 01/02 Cipaganti, Coblong, Bandung 40131</span>
@@ -610,7 +610,7 @@ export default function VirtualOffice() {
 
                 {/* Fasilitas Office */}
                 <div className="pt-2.5 border-t border-gray-100">
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">FASILITAS OFFICE</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">FASILITAS OFFICE</h4>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                       <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -637,7 +637,7 @@ export default function VirtualOffice() {
 
                 {/* Legalitas Gedung */}
                 <div className="pt-2.5 border-t border-gray-100">
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">LEGALITAS GEDUNG</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">LEGALITAS GEDUNG</h4>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                       <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -657,7 +657,7 @@ export default function VirtualOffice() {
                 {/* Akses Transportasi */}
                 <div className="pt-2.5 border-t border-gray-100">
                   <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-4 space-y-2">
-                    <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">AKSES TRANSPORTASI</h5>
+                    <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">AKSES TRANSPORTASI</h4>
                     <ul className="space-y-2">
                       <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -692,16 +692,16 @@ export default function VirtualOffice() {
             >
               {/* Header Box */}
               <div className="bg-[#1A1A1A] p-6 text-white text-center flex-shrink-0">
-                <h3 className="text-[12.5px] font-extrabold uppercase tracking-widest text-gray-400">EASYOFFICE BEKASI</h3>
+                <h3 className="text-[12.5px] font-extrabold uppercase tracking-widest text-gray-600">EASYOFFICE BEKASI</h3>
                 <div className="mt-2 text-[30px] font-black tracking-tight text-white">Rp2.500.000</div>
-                <div className="mt-1.5 text-[9px] font-extrabold tracking-wider text-gray-400 uppercase">PER TAHUN &middot; SUMMARECON, BEKASI</div>
+                <div className="mt-1.5 text-[9px] font-extrabold tracking-wider text-gray-600 uppercase">PER TAHUN &middot; SUMMARECON, BEKASI</div>
               </div>
 
               {/* List Content */}
               <div className="p-7 space-y-6 flex-grow">
                 {/* Alamat Lengkap */}
                 <div>
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">ALAMAT LENGKAP</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">ALAMAT LENGKAP</h4>
                   <div className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                     <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span>Emerald Commercial, Summarecon Bekasi, Jawa Barat</span>
@@ -710,7 +710,7 @@ export default function VirtualOffice() {
 
                 {/* Fasilitas Office */}
                 <div className="pt-2.5 border-t border-gray-100">
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">FASILITAS OFFICE</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">FASILITAS OFFICE</h4>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                       <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -737,7 +737,7 @@ export default function VirtualOffice() {
 
                 {/* Legalitas Gedung */}
                 <div className="pt-2.5 border-t border-gray-100">
-                  <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">LEGALITAS GEDUNG</h5>
+                  <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-2">LEGALITAS GEDUNG</h4>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                       <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -757,7 +757,7 @@ export default function VirtualOffice() {
                 {/* Akses Transportasi */}
                 <div className="pt-2.5 border-t border-gray-100">
                   <div className="bg-gray-50 border border-gray-150/45 rounded-2xl p-4 space-y-2">
-                    <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">AKSES TRANSPORTASI</h5>
+                    <h4 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">AKSES TRANSPORTASI</h4>
                     <ul className="space-y-2">
                       <li className="flex items-start gap-2.5 text-[13px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4 h-4 text-emerald-500 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
@@ -843,7 +843,7 @@ export default function VirtualOffice() {
                         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>
                         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>
                       </div>
-                      <span className="text-[10px] text-gray-400 font-bold leading-none">&middot; Cihampelas</span>
+                      <span className="text-[10px] text-gray-600 font-bold leading-none">&middot; Cihampelas</span>
                     </div>
                   </div>
                 </div>
@@ -859,9 +859,9 @@ export default function VirtualOffice() {
               {/* Address Card */}
               <div className="bg-white rounded-[24px] border border-gray-150/50 shadow-[0_10px_25px_rgba(0,0,0,0.015)] p-6 space-y-4">
                 <p className="text-[10px] font-black text-[#990202] uppercase tracking-[0.25em]">LOKASI OFFICE</p>
-                <h4 className="text-[14.5px] font-extrabold text-gray-950 leading-relaxed">
+                <h3 className="text-[14.5px] font-extrabold text-gray-950 leading-relaxed">
                   Jl. Cihampelas No. 201A, RT/RW 01/02 Cipaganti, Kec Coblong, Kota Bandung, Jawa Barat 40131
-                </h4>
+                </h3>
                 <div className="space-y-2 text-[13px] text-gray-500 font-medium font-sans">
                   <div>
                     <strong className="font-extrabold text-gray-800">No tlp:</strong> 022 3209 9037
