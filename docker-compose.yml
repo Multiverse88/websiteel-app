@@ -78,7 +78,7 @@ services:
       - S3_ACCESS_KEY=cdn_easylegal
       - S3_SECRET_KEY=micro2312
       - S3_BUCKET=images
-      - S3_PUBLIC_URL=https://cdn.easylegal.my.id/images
+      - S3_PUBLIC_URL=https://easylegal.my.id/images
     networks:
       - easylegal
     depends_on:
@@ -103,7 +103,7 @@ services:
       - S3_ACCESS_KEY=cdn_easylegal
       - S3_SECRET_KEY=micro2312
       - S3_BUCKET=images
-      - S3_PUBLIC_URL=https://cdn.easylegal.my.id/images
+      - S3_PUBLIC_URL=https://easylegal.my.id/images
     networks:
       - easylegal
     depends_on:
