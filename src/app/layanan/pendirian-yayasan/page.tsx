@@ -35,7 +35,7 @@ export default function PendirianYayasan() {
     {
       title: "PAKET BASIC",
       price: "Rp 2.999.000",
-      strikePrice: "Rp 5.998.000",
+      strikePrice: "Rp 6.000.000",
       subLabel: "DISKON 50% · TANPA BIAYA TAMBAHAN",
       buttonText: "Pilih Paket Basic",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Yayasan."),
@@ -84,8 +84,8 @@ export default function PendirianYayasan() {
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 4.499.000",
-      strikePrice: "Rp 8.998.000",
+      price: "Rp 4.999.000",
+      strikePrice: "Rp 10.000.000",
       subLabel: "DISKON 50% · TANPA BIAYA TAMBAHAN",
       isPopular: true,
       badgeText: "PALING POPULER",
@@ -96,7 +96,7 @@ export default function PendirianYayasan() {
           title: "LAMA PROSES",
           items: [
             { text: "Dokumen Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-            { text: "Dokumen Lainnya <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 2 }
+            { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 }
           ]
         },
         {
@@ -134,12 +134,63 @@ export default function PendirianYayasan() {
           ]
         }
       ]
+    },
+    {
+      title: "PAKET PRESTIGE",
+      price: "Rp 5.999.000",
+      strikePrice: "Rp 12.000.000",
+      subLabel: "DISKON 50% · TANPA BIAYA TAMBAHAN",
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan."),
+      groups: [
+        {
+          title: "LAMA PROSES",
+          items: [
+            { text: "Dokumen Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+            { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 }
+          ]
+        },
+        {
+          title: "FASILITAS",
+          items: [
+            { text: "Pengecekan & Pemesanan Nama Yayasan", checked: true },
+            { text: "Anggaran Dasar & Anggaran Rumah Tangga", checked: true },
+            { text: "Konsultasi Struktur Organ Yayasan", checked: true }
+          ]
+        },
+        {
+          title: "DOKUMEN PENDIRIAN",
+          items: [
+            { text: "Akta Notaris Pendirian Yayasan", checked: true },
+            { text: "SK Kemenkumham (Pengesahan Badan Hukum)", checked: true }
+          ]
+        },
+        {
+          title: "DOKUMEN LAINNYA",
+          items: [
+            { text: "NPWP Yayasan", checked: true },
+            { text: "NIB & Akun OSS", checked: true },
+            { text: "Izin Operasional Yayasan", checked: true, footnoteIndex: 3 },
+            { text: "Stempel Yayasan (1-3 Warna)", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Layanan Personal Legal Assistant", checked: true },
+            { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+            { text: "Pembukaan Rekening Bank Yayasan", checked: true, footnoteIndex: "*" },
+            { text: "Gratis Ongkir <strong>Seluruh Indonesia</strong>", checked: true }
+          ]
+        }
+      ]
     }
   ];
 
   const pricingFootnotes = [
     { label: "1", text: "Setelah nama yayasan disetujui &amp; tidak terdapat kendala pada sistem AHU." },
-    { label: "2", text: "Jika tidak terdapat kendala pada sistem OSS &amp; instansi pengeluar izin operasional." },
+    { label: "2", text: "Jika tidak terdapat kendala pada sistem Coretax &amp; OSS." },
     { label: "3", text: "Izin operasional sesuai bidang yayasan (sosial/keagamaan/kemanusiaan)." },
     { label: "*", text: "Syarat &amp; ketentuan berlaku — tergantung kebijakan bank yang dipilih." }
   ];
