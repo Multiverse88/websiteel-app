@@ -457,7 +457,7 @@ export const dataCV: BadanUsahaContent = {
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 3.499.000",
+      price: "Rp 2.999.000",
       strikePrice: "Rp 6.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
@@ -490,7 +490,7 @@ export const dataCV: BadanUsahaContent = {
     },
     {
       title: "PAKET EXPRESS",
-      price: "Rp 4.999.000",
+      price: "Rp 4.499.000",
       strikePrice: "Rp 9.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
@@ -583,7 +583,7 @@ export const dataPMA: BadanUsahaContent = {
   heroImageAlt: "Rapat bisnis investasi asing",
   heroStats: [
     { icon: "Clock", value: "3–6 minggu", label: "SLA kerja" },
-    { icon: "DollarSign", value: "Mulai Rp7,99jt", label: "Harga transparan" },
+    { icon: "DollarSign", value: "Mulai Rp6,99jt", label: "Harga transparan" },
     { icon: "Globe", value: "Investasi Asing", label: "BKPM approved" },
   ],
   floatingBadges: [
@@ -674,7 +674,7 @@ export const dataPMA: BadanUsahaContent = {
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 12.999.000",
+      price: "Rp 11.999.000",
       strikePrice: "Rp 24.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
@@ -709,7 +709,7 @@ export const dataPMA: BadanUsahaContent = {
     },
     {
       title: "PAKET EXPRESS",
-      price: "Rp 16.999.000",
+      price: "Rp 15.999.000",
       strikePrice: "Rp 30.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
@@ -924,9 +924,9 @@ export const dataPTPerorangan: BadanUsahaContent = {
         ]},
       ],
     },
-    {
-      title: "PAKET EXPRESS",
-      price: "Rp 3.999.000",
+{
+      title: "PAKET COMPLETE",
+      price: "Rp 3.499.000",
       strikePrice: "Rp 7.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
@@ -1016,7 +1016,7 @@ export const dataFirma: BadanUsahaContent = {
   heroImageAlt: "Rekan bisnis mendirikan Firma",
   heroStats: [
     { icon: "Clock", value: "3–7 hari", label: "SLA kerja" },
-    { icon: "DollarSign", value: "Mulai Rp2,49jt", label: "Harga transparan" },
+    { icon: "DollarSign", value: "Mulai Rp1,99jt", label: "Harga transparan" },
     { icon: "Users", value: "2+ Pendiri", label: "Kerja sama" },
   ],
   floatingBadges: [
@@ -1079,8 +1079,8 @@ export const dataFirma: BadanUsahaContent = {
   pricingPackages: [
     {
       title: "PAKET BASIC",
-      price: "Rp 2.499.000",
-      strikePrice: "Rp 5.000.000",
+      price: "Rp 1.999.000",
+      strikePrice: "Rp 4.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Firma."),
@@ -1104,8 +1104,8 @@ export const dataFirma: BadanUsahaContent = {
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 3.999.000",
-      strikePrice: "Rp 7.000.000",
+      price: "Rp 2.999.000",
+      strikePrice: "Rp 6.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
@@ -1131,18 +1131,40 @@ export const dataFirma: BadanUsahaContent = {
       ],
     },
     {
-      title: "PAKET EXPRESS",
-      price: "Rp 5.499.000",
-      strikePrice: "Rp 10.000.000",
+      title: "PAKET OFFICE",
+      price: "Rp 4.499.000",
+      strikePrice: "Rp 9.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Firma."),
-      customHeaderOverlay: (
-        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
-        </div>
-      ),
+      buttonText: "Pilih Paket Office",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Office Pendirian Firma."),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Pendaftaran PN & Perizinan <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Akta Notaris Pendirian Firma", checked: true },
+          { text: "Pendaftaran ke Pengadilan Negeri", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "NPWP Badan & SKT Pajak", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "SPPL & Sertifikat Standar", checked: true },
+        ]},
+        { title: "BONUS", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 200.000</strong>", checked: true },
+          { text: "Gratis Ongkir Seluruh Indonesia", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET PRESTIGE",
+      price: "Rp 5.649.000",
+      strikePrice: "Rp 11.300.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Firma."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1307,7 +1329,7 @@ export const dataYayasan: BadanUsahaContent = {
     {
       title: "PAKET COMPLETE",
       price: "Rp 4.999.000",
-      strikePrice: "Rp 9.000.000",
+      strikePrice: "Rp 10.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
@@ -1334,12 +1356,12 @@ export const dataYayasan: BadanUsahaContent = {
       ],
     },
     {
-      title: "PAKET EXPRESS",
-      price: "Rp 6.999.000",
+      title: "PAKET PRESTIGE",
+      price: "Rp 5.999.000",
       strikePrice: "Rp 12.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Yayasan."),
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
