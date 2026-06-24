@@ -25,7 +25,7 @@ export function TypebotWidget() {
             button: {
               backgroundColor: '#D62828',
               iconColor: '#FFFFFF',
-              size: 72,
+              size: '72px',
               bottom: 24,
               right: 24,
             },
