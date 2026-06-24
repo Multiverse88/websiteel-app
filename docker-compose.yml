@@ -84,6 +84,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://easylegal:jauhimaksiat%401@172.17.0.1:5432/typebot
       - NEXTAUTH_URL=https://typebot.easylegal.my.id
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-Ub1Ir6felK890zb8uj7Le93nxZvyXL1JGa7S0jo05sB}
       - NEXT_PUBLIC_VIEWER_URL=https://typebot.easylegal.my.id
       - ENCRYPTION_SECRET=${TYPEBOT_ENCRYPTION_SECRET}
     networks:
