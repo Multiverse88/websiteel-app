@@ -74,15 +74,13 @@ services:
       - SMTP_PASSWORD=${TYPEBOT_SMTP_PASSWORD}
       - SMTP_SECURE=true
       - NEXT_PUBLIC_SMTP_FROM=Easy Legal <newsletter@easylegal.id>
-      - S3_ENDPOINT=http://host.docker.internal:9000
-      - S3_ACCESS_KEY=cdn_easylegal
-      - S3_SECRET_KEY=micro2312
-      - S3_BUCKET=images
-      - S3_PUBLIC_URL=https://easylegal.my.id/images
+      - NEXT_PUBLIC_UPLOAD_TYPE=local
     networks:
       - easylegal
     depends_on:
       - app
+    volumes:
+      - typebot-data:/app/apps/builder/public
 
   typebot-viewer:
     image: baptistearno/typebot-viewer:latest
@@ -99,11 +97,6 @@ services:
       - NEXT_PUBLIC_APP_URL=https://typebot.easylegal.my.id
       - NEXT_PUBLIC_VIEWER_URL=https://typebot.easylegal.my.id
       - ENCRYPTION_SECRET=${TYPEBOT_ENCRYPTION_SECRET}
-      - S3_ENDPOINT=http://host.docker.internal:9000
-      - S3_ACCESS_KEY=cdn_easylegal
-      - S3_SECRET_KEY=micro2312
-      - S3_BUCKET=images
-      - S3_PUBLIC_URL=https://easylegal.my.id/images
     networks:
       - easylegal
     depends_on:
@@ -111,6 +104,7 @@ services:
 
 volumes:
   uploads:
+  typebot-data:
 
 networks:
   easylegal:
