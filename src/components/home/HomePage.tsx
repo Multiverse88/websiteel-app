@@ -973,101 +973,106 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Bento Card 1: Expert Legal Team */}
-            <div className="relative bg-white rounded-3xl p-8 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] bento-card">
+          <div className="text-center mb-12 sm:mb-16 animate-scroll-reveal" ref={whyChooseHeaderRef}>
+            <span className="text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-3 inline-block">
+              Kenapa EasyLegal
+            </span>
+            <h2 className="text-[34px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.12] tracking-[-0.02em]">
+              Fondasi kokoh untuk legalitas<br />bisnis Anda.
+            </h2>
+            <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+              Bukan sekadar urus dokumen — kami partner legal yang menyederhanakan proses, transparan dalam biaya, dan responsif kapan saja.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* 1: Proses cepat & terlacak */}
+            <div className="relative bg-white rounded-3xl p-6 sm:p-8 pb-14 sm:pb-16 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 group">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-[#FEF2F2] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <ShieldCheck className="w-7 h-7 text-[#D62828]" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FEF2F2] rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-[#FEE2E2]">
+                  <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7 text-[#D62828]" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 leading-tight">
-                  Tim Legal Berpengalaman
-                </h3>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Proses cepat & terlacak</h3>
               </div>
-              <p className="text-gray-600 text-[15px] leading-relaxed">
-                Didukung oleh advokat dan konsultan hukum terkemuka yang siap membantu setiap aspek legal bisnis Anda.
-              </p>
-              <ArrowRight className="absolute bottom-6 right-6 w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors" />
+              <p className="text-gray-600 text-sm sm:text-[15px] leading-relaxed">SLA 7–14 hari kerja dengan progress yang dipantau real-time.</p>
             </div>
 
-            {/* Bento Card 2: Transparent Pricing */}
-            <div className="relative bg-white rounded-3xl p-8 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] bento-card">
+            {/* 2: Konsultan hukum berpengalaman */}
+            <div className="relative bg-white rounded-3xl p-6 sm:p-8 pb-14 sm:pb-16 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 group">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-[#FFFBEB] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg className="w-7 h-7 text-[#D97706]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FFFBEB] rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-[#FEF3C7]">
+                  <Building2 className="w-6 h-6 sm:w-7 sm:h-7 text-[#D97706]" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 leading-tight">
-                  Harga Transparan
-                </h3>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Konsultan hukum berpengalaman</h3>
               </div>
-              <p className="text-gray-600 text-[15px] leading-relaxed">
-                Tidak ada biaya tersembunyi. Semua harga dijelaskan di awal, termasuk biaya pemerintah dan jasa profesional kami.
-              </p>
-              <ArrowRight className="absolute bottom-6 right-6 w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors" />
+              <p className="text-gray-600 text-sm sm:text-[15px] leading-relaxed">Ditangani lawyer yang sudah menangani ribuan kasus UMKM.</p>
             </div>
 
-            {/* Bento Card 3: Digital & Efisien */}
-            <div className="relative bg-white rounded-3xl p-8 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] bento-card">
+            {/* 3: Resmi terdaftar PSE Kominfo */}
+            <div className="relative bg-white rounded-3xl p-6 sm:p-8 pb-14 sm:pb-16 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 group">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-[#EEF2FF] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg className="w-7 h-7 text-[#4F46E5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M3 6h18M5 10h14L12 21 5 10z"></path></svg>
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#EEF2FF] rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-[#E0E7FF]">
+                  <Lock className="w-6 h-6 sm:w-7 sm:h-7 text-[#4F46E5]" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 leading-tight">
-                  Proses Digital & Cepat
-                </h3>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Resmi terdaftar PSE Kominfo</h3>
               </div>
-              <p className="text-gray-600 text-[15px] leading-relaxed">
-                Manfaatkan portal klien kami untuk upload dokumen, tanda tangan digital, dan pantau progres secara real-time.
-              </p>
-              <ArrowRight className="absolute bottom-6 right-6 w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors" />
+              <p className="text-gray-600 text-sm sm:text-[15px] leading-relaxed">Data Anda aman & terlindungi sesuai regulasi.</p>
             </div>
 
-            {/* Bento Card 4: Dedicated Support */}
-            <div className="relative bg-white rounded-3xl p-8 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] bento-card">
+            {/* 4: Harga transparan (Tall Card) */}
+            <div className="relative bg-white rounded-3xl p-6 sm:p-8 pb-14 sm:pb-16 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 group lg:row-span-2 flex flex-col">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-[#ECFDF5] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <MessageCircle className="w-7 h-7 text-[#10B981]" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#ECFDF5] rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-[#D1FAE5]">
+                  <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-[#10B981]" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 leading-tight">
-                  Dukungan Penuh
-                </h3>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Harga transparan, tanpa kejutan</h3>
               </div>
-              <p className="text-gray-600 text-[15px] leading-relaxed">
-                Tim dukungan kami siap menjawab pertanyaan dan memberikan panduan di setiap langkah, memastikan Anda tidak sendirian.
-              </p>
-              <ArrowRight className="absolute bottom-6 right-6 w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors" />
+              <p className="text-gray-600 text-sm sm:text-[15px] leading-relaxed mb-6">Semua biaya tertera di awal — termasuk jasa kami dan biaya pemerintah. Tidak ada add-on mendadak di tengah proses.</p>
+              
+              <div className="mt-auto">
+                 <div className="bg-gray-50 rounded-2xl p-4 sm:p-6 border border-gray-100 relative overflow-hidden group-hover:border-green-100 transition-colors">
+                    <div className="text-sm text-gray-500 font-medium mb-1">Pendirian PT</div>
+                    <div className="text-2xl sm:text-3xl font-black text-gray-900">Rp 2.5jt</div>
+                    <div className="text-[11px] text-gray-400 mt-2">Jasa kami + Biaya AHU</div>
+                 </div>
+              </div>
             </div>
 
-            {/* Bento Card 5: Comprehensive Solutions */}
-            <div className="relative bg-white rounded-3xl p-8 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] bento-card">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-[#F0F9FF] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Building2 className="w-7 h-7 text-[#0EA5E9]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 leading-tight">
-                  Solusi Komprehensif
-                </h3>
+            {/* 5: Web interface (Wide) */}
+            <div className="relative bg-white rounded-3xl p-6 sm:p-8 pb-14 sm:pb-16 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 group lg:col-span-2">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                 <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#F0F9FF] rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-[#E0F2FE]">
+                   <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 text-[#0EA5E9]" />
+                 </div>
+                 <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight mb-2">100% online & paperless</h3>
+                    <p className="text-gray-600 text-sm sm:text-[15px] leading-relaxed max-w-xl">Upload aman dari mana saja, tanpa harus ke kantor. WhatsApp dijawab rata-rata &lt; 5 menit.</p>
+                 </div>
               </div>
-              <p className="text-gray-600 text-[15px] leading-relaxed">
-                Dari pendirian PT hingga perlindungan merek, kami menyediakan spektrum layanan legal yang luas untuk berbagai kebutuhan bisnis.
-              </p>
-              <ArrowRight className="absolute bottom-6 right-6 w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors" />
+              
+              <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-3 sm:gap-4">
+                 {[
+                   { label: "Bisnis Terlayani", val: "8.000+" },
+                   { label: "Rating Google", val: "4.9 ★" },
+                   { label: "Pengalaman", val: "5 thn" }
+                 ].map((stat, i) => (
+                    <div key={i} className="text-center p-2.5 sm:p-3 rounded-xl bg-gray-50 border border-gray-100">
+                       <span className="block text-base sm:text-lg font-bold text-gray-900">{stat.val}</span>
+                       <span className="block text-[10px] sm:text-[11px] text-gray-500 font-medium uppercase tracking-wider mt-0.5 sm:mt-1">{stat.label}</span>
+                    </div>
+                 ))}
+              </div>
             </div>
 
-            {/* Bento Card 6: Secure & Confidential */}
-            <div className="relative bg-white rounded-3xl p-8 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] bento-card">
+            {/* 6: Secure & Confidential */}
+            <div className="relative bg-white rounded-3xl p-6 sm:p-8 pb-14 sm:pb-16 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 group">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-[#FDF2F8] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Lock className="w-7 h-7 text-[#EC4899]" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FDF2F8] rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-[#FCE7F3]">
+                  <Award className="w-6 h-6 sm:w-7 sm:h-7 text-[#EC4899]" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 leading-tight">
-                  Keamanan Data Terjamin
-                </h3>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Tracking real-time</h3>
               </div>
-              <p className="text-gray-600 text-[15px] leading-relaxed">
-                Kami menggunakan teknologi enkripsi terkini untuk melindungi semua dokumen dan informasi bisnis Anda dengan standar tertinggi.
-              </p>
-              <ArrowRight className="absolute bottom-6 right-6 w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors" />
+              <p className="text-gray-600 text-sm sm:text-[15px] leading-relaxed">Pantau setiap tahap pengurusan dari dashboard kami yang simpel.</p>
             </div>
           </div>
         </div>

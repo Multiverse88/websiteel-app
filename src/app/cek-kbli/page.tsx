@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { getWhatsAppLink } from "@/lib/config";
 import { Search, MessageCircle, Check, BookOpen, ArrowRight, Shield, Zap, X } from "lucide-react";
 
@@ -333,12 +334,12 @@ export default function CekKBLI() {
               <span className="text-[15px]">↓</span>
             </a>
             
-            <a
+            <Link
               href="/layanan/nib-oss"
               className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-white border border-gray-200 text-[#111111] font-extrabold text-[14.5px] rounded-xl hover:bg-gray-55 transition-all duration-200 shadow-sm"
             >
               Jasa Pengurusan NIB
-            </a>
+            </Link>
           </div>
         </div>
 
