@@ -54,7 +54,7 @@ export default function LayananTemplate({ content }: Props) {
     <div className="bg-white min-h-screen pt-[25px]">
       {/* ─── 1. HERO SECTION ─── */}
       <section className="relative pb-6 lg:pb-20 overflow-hidden bg-white">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-[13px] text-gray-600 pt-0 pb-1 mb-1 font-medium">
             <Link href="/" className="flex items-center gap-1 hover:text-gray-900 transition-colors">
@@ -141,7 +141,7 @@ export default function LayananTemplate({ content }: Props) {
 
       {/* ─── 2. BENEFITS SECTION ─── */}
       <section className="py-16 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               {c.benefitsTitle}
@@ -170,7 +170,7 @@ export default function LayananTemplate({ content }: Props) {
 
       {/* ─── 3. PRICING SECTION ─── */}
       <section id="paket-harga" className="py-16">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               {c.pricingTitle}
@@ -191,7 +191,7 @@ export default function LayananTemplate({ content }: Props) {
       {/* ─── 4. FAQ SECTION ─── */}
       {c.faqs?.length > 0 && (
         <section className="py-16 bg-gray-50 border-t border-gray-100">
-          <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
                 Frequently Asked Questions
