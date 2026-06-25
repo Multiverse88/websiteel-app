@@ -26,7 +26,7 @@ export default function LayananKami() {
       id="layanan"
       ref={sectionRef}
     >
-      <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10">
           <span className="text-[10.5px] font-bold text-primary uppercase tracking-[0.15em]">

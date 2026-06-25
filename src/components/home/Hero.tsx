@@ -69,7 +69,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         {/* Left Arrow */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-gray-100 flex items-center justify-center transition-all hover:scale-105"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-gray-100 flex items-center justify-center transition-all hover:scale-105 active:scale-95"
           aria-label="Previous slide"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -78,14 +78,14 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         {/* Right Arrow */}
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-gray-100 flex items-center justify-center transition-all hover:scale-105"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-gray-100 flex items-center justify-center transition-all hover:scale-105 active:scale-95"
           aria-label="Next slide"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
 
         {/* Left Content */}
-        <div className="bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] px-8 sm:px-12 lg:px-16 xl:px-24 py-14 lg:py-20 flex flex-col justify-center relative z-10 border-r border-[#FAF0E6]/30">
+        <div className="bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] px-4 sm:px-12 lg:px-16 xl:px-24 py-14 lg:py-20 flex flex-col justify-center relative z-10 border-r border-[#FAF0E6]/30">
           <div className="relative min-h-[350px] flex flex-col justify-center">
             {heroSlides.map((slide, idx) => (
               <div
@@ -116,14 +116,14 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                 <div className={`mt-8 flex flex-wrap gap-3 ${ctaClass}`}>
                   <Link
                     href={slide.ctaLink}
-                    className="group inline-flex items-center gap-2 px-7 py-3.5 bg-[#9B1C1C] hover:bg-[#8B0000] text-white font-bold text-[14.5px] rounded-[12px] shadow-sm hover:shadow-md transition-all duration-200"
+                    className="group inline-flex items-center gap-2 px-7 py-3.5 bg-[#9B1C1C] hover:bg-[#8B0000] active:scale-[0.98] text-white font-bold text-[14.5px] rounded-[12px] shadow-sm hover:shadow-md transition-all duration-200"
                   >
                     {slide.cta}
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
                   </Link>
                   <Link
                     href={slide.cta2Link}
-                    className="inline-flex items-center px-7 py-3.5 bg-[#F3EBE4] hover:bg-[#EAE0D7] text-[#1A1A1A] font-bold text-[14.5px] rounded-[12px] transition-all duration-200"
+                    className="inline-flex items-center px-7 py-3.5 bg-[#F3EBE4] hover:bg-[#EAE0D7] active:scale-[0.98] text-[#1A1A1A] font-bold text-[14.5px] rounded-[12px] transition-all duration-200"
                   >
                     {slide.cta2}
                   </Link>
