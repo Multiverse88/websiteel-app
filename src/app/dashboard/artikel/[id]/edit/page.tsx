@@ -446,7 +446,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
       <section className="bg-white pt-8 lg:pt-12 pb-10 border-b border-gray-100 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-red-500/5 rounded-full blur-[60px] pointer-events-none" />
 
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <nav className="flex items-center space-x-2 text-[13px] font-medium text-gray-500 mb-6">
             <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
               <Home className="w-3.5 h-3.5" />
@@ -484,7 +484,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
 
       {/* MAIN CONTENT */}
       <section className="py-14 flex-grow">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
@@ -1127,7 +1127,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[15px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
+                    className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-4 px-4 sm:px-6 rounded-xl flex items-center justify-center gap-2.5 text-[15px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none active:scale-95"
                   >
                     {isPending ? (
                       <>

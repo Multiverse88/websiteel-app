@@ -274,6 +274,36 @@ body:has(.has-service-cta) #footer-cta {
   will-change: transform;
 }
 
+/* Floating & Bouncing Animations (GPU accelerated via translate3d) */
+@keyframes floatSlow {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes floatMedium {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -6px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes bounceSlow {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+  will-change: transform;
+}
+.animate-float-medium {
+  animation: floatMedium 4s ease-in-out infinite;
+  will-change: transform;
+}
+.animate-bounce-slow {
+  animation: bounceSlow 3s ease-in-out infinite;
+  will-change: transform;
+}
+
 /* Mobile performance overrides */
 @media (max-width: 768px) {
   /* Pause infinite marquee animations */
