@@ -69,7 +69,7 @@ export default async function NewsletterDashboardPage() {
     <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
       {/* HEADER */}
       <section className="bg-white pt-8 lg:pt-12 pb-10 border-b border-gray-100">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           <div className="flex items-center gap-3 mb-4">
             <Link
               href="/dashboard"
@@ -134,7 +134,7 @@ export default async function NewsletterDashboardPage() {
 
       {/* CONTENT */}
       <section className="py-10 flex-grow">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
             {/* LEFT: Subscribers List */}

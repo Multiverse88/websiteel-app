@@ -79,7 +79,7 @@ export default function Testimonials() {
   return (
     <>
       <section className="py-20 bg-[#F9FAFB] overflow-hidden relative">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center relative z-10">
           <div
             ref={headerRef}
             className="mb-14 opacity-100 translate-y-0"
@@ -112,7 +112,7 @@ export default function Testimonials() {
         ref={trustedRef}
         className="py-12 bg-bg-light border-y border-border opacity-100 translate-y-0"
       >
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center">
           <p className="text-[12px] text-muted mb-8 font-medium uppercase tracking-widest">
             Dipercaya oleh <span className="font-bold text-primary">12.000+ pengusaha</span> di seluruh Indonesia
           </p>

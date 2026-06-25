@@ -73,7 +73,7 @@ export default function Footer() {
 
       {/* ─── TRUSTED BY SECTION ─── */}
       <section className="py-12 bg-bg-light border-y border-border">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center">
           <p className="text-[12px] text-muted mb-8 font-medium uppercase tracking-widest">
             Dipercaya oleh <span className="font-bold text-primary">11.000+ pengusaha</span> di seluruh Indonesia
           </p>

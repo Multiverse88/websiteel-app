@@ -43,7 +43,7 @@ export default async function DashboardPage() {
     <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
       {/* HEADER */}
       <section className="bg-white pt-8 lg:pt-12 pb-10 border-b border-gray-100">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-[1240px] mx-auto px-6 sm:px-8 flex items-center justify-between">
           <div>
             <h1 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Dashboard
@@ -94,7 +94,7 @@ export default async function DashboardPage() {
 
       {/* ARTICLES LIST */}
       <section className="py-10 flex-grow">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
 
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-[18px] font-extrabold text-gray-900">
