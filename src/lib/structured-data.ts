@@ -1,4 +1,4 @@
-const SITE_URL = "https://easylegal.id";
+const SITE_URL = "https://easylegal.my.id";
 
 export function getLocalBusinessJsonLd() {
   return {
@@ -127,5 +127,53 @@ export function getWebsiteJsonLd() {
       target: `${SITE_URL}/artikel?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
+  };
+}
+
+export function getOrganizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "EasyLegal",
+    alternateName: "EasyLegal.id",
+    url: SITE_URL,
+    logo: `${SITE_URL}/Logo%20EL.png`,
+    description:
+      "Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Layanan pendirian PT, pendaftaran merek, NIB & OSS, sertifikasi ISO, dan lainnya.",
+    foundingDate: "2022",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Jl. Asia Afrika No. 1",
+      addressLocality: "Bandung",
+      addressRegion: "Jawa Barat",
+      addressCountry: "ID",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+6281123456789",
+      contactType: "customer service",
+      availableLanguage: "Indonesian",
+    },
+    sameAs: [
+      "https://www.instagram.com/easylegal.id",
+      "https://www.facebook.com/easylegal.id",
+      "https://www.linkedin.com/company/easylegal",
+      "https://www.youtube.com/@easylegal",
+    ],
+  };
+}
+
+export function getBreadcrumbJsonLd(
+  items: { name: string; url: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.url}`,
+    })),
   };
 }
