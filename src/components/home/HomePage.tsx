@@ -148,11 +148,11 @@ function CaraKerjaSection() {
 
   return (
     <section className="py-20 bg-white overflow-hidden relative">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
           
           {/* LEFT: Step-by-Step Accordion Flow */}
-          <div className="lg:col-span-5 flex flex-col justify-start w-full">
+          <div className="lg:col-span-5 flex flex-col justify-start">
             <span className="text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-3">
               Cara Kerja
             </span>
@@ -867,13 +867,13 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#EAEAEA] rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.03)] overflow-hidden">
-            <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-0 snap-x snap-mandatory scrollbar-thin pb-2 md:pb-0">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
               {quickTools.map((tool, idx) => {
                 const Icon = tool.icon;
                 return (
                   <div 
                     key={idx} 
-                    className="group flex flex-col items-start gap-5 p-6 md:p-8 transition-colors duration-300 hover:bg-neutral-50/40 border-b last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 border-[#F0F0F0] min-w-[280px] snap-start"
+                    className="group flex items-start gap-5 p-8 transition-colors duration-300 hover:bg-neutral-50/40 border-b last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 border-[#F0F0F0]"
                   >
                     {/* Rounded Icon Box */}
                     <div className="w-12 h-12 rounded-[14px] bg-[#FFF5F5] text-[#8B1E1E] flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105 active:scale-95 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
@@ -927,7 +927,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
         className="bg-white py-5 animate-scroll-reveal-fade"
         ref={partnersRef}
       >
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
             <span className="text-[12px] text-muted font-medium whitespace-nowrap">
               Bekerja dengan instansi resmi:
@@ -960,7 +960,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
         className="py-16 sm:py-24 bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6]"
         ref={whyChooseRef}
       >
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
+        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           <div 
             className="text-center mb-12 sm:mb-16 animate-scroll-reveal"
             ref={whyChooseHeaderRef}
@@ -973,7 +973,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Bento Card 1: Expert Legal Team */}
             <div className="relative bg-white rounded-3xl p-8 border border-gray-100/60 shadow-[0_4px_25px_rgba(0,0,0,0.02)] bento-card">
               <div className="flex items-center gap-4 mb-4">
@@ -1077,7 +1077,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           VIDEO PROFILE
           ═══════════════════════════════════════════ */}
       <section className="py-16 sm:py-24 bg-gray-50/70">
-        <div className="max-w-[1000px] mx-auto px-4 sm:px-8">
+        <div className="max-w-[1000px] mx-auto px-6 sm:px-8">
           <div 
             className="text-center mb-12 sm:mb-16 animate-scroll-reveal"
             ref={videoProfilHeaderRef}
