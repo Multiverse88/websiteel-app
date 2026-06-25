@@ -169,6 +169,7 @@ const nextConfig: NextConfig = {
       // 16. Press Release
       { source: "/jasa-press-release-media-online", destination: "/layanan/press-release" },
       { source: "/jasa-press-release-gads", destination: "/layanan/press-release" },
+      { source: "/layanan/pr-media", destination: "/layanan/press-release" },
 
       // 17. PKKPR
       { source: "/lp-produk-pkkpr-gads", destination: "/layanan/pkkpr" },
@@ -178,6 +179,7 @@ const nextConfig: NextConfig = {
       { source: "/lp-iklan-legalitas-metaads", destination: "/layanan/virtual-office" },
       { source: "/konsultasi-legal-bisnis", destination: "/kontak" }, // Arahkan langsung ke form Kontak
       { source: "/terima-kasih-konsultasi-legalitas-bisnis-metaads", destination: "/testimoni" },
+      { source: "/testimoni-klien-gads", destination: "/testimoni" },
       { source: "/lp-produk-layanan-dads", destination: "/layanan/virtual-office" }
     ];
   },
