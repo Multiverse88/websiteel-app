@@ -97,6 +97,14 @@ public/logo-berita/*.msi
 # Document files
 *.docx
 COPYWRITING_AUDIT.md
+*.csv
+docs/mobile-responsive-optimization.md
+docs/typebot-improvements.md
+docs/architecture-optimization.md
+today-worked-*.md
+weekly-report-*.md
+easylegal_links.csv
+graphify-out/
 
 # Accidental uploads
 Telegram Desktop/
