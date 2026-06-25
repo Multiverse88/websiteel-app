@@ -61,26 +61,26 @@ export default function Pricing({
         : "grid-cols-1 md:grid-cols-2";
 
   return (
-    <section id="paket-harga" className="bg-[#F9FAFB] py-20 border-b border-gray-200/40">
+    <section id="paket-harga" className="bg-[#F9FAFB] py-8 sm:py-20 border-b border-gray-200/40">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <FadeIn className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
+        <FadeIn className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-2 sm:space-y-3">
+          <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
             {sectionTitleTag}
           </p>
-          <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+          <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
             {sectionTitle}
           </h2>
           {sectionSubtitle && (
-            <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium">
+            <p className="text-[12.5px] sm:text-[15px] text-gray-500 font-medium">
               {sectionSubtitle}
             </p>
           )}
         </FadeIn>
         {/* Pricing Grid */}
         <FadeIn delay={0.15}>
-        <div className={`grid ${gridColsClass} gap-6 items-start`}>
+        <div className={`grid ${gridColsClass} gap-4 sm:gap-6 items-start`}>
           {packages.map((pkg, pIdx) => {
             const headerBg = pkg.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
             const cardBorder = pkg.isPopular
@@ -88,59 +88,59 @@ export default function Pricing({
               : "border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] transition-all duration-300";
 
             return (
-              <div key={pIdx} className={`bg-white rounded-[32px] overflow-hidden ${cardBorder}`}>
+              <div key={pIdx} className={`bg-white rounded-2xl sm:rounded-[32px] overflow-hidden ${cardBorder}`}>
                 
                 {/* Header Box */}
-                <div className={`${headerBg} p-6 text-white text-center relative`}>
+                <div className={`${headerBg} p-4 sm:p-6 text-white text-center relative`}>
                   {pkg.customHeaderOverlay}
                   {pkg.badgeText && (
                     <div className={`absolute top-2.5 left-0 right-0 text-[8px] font-black uppercase tracking-wider ${pkg.badgeTextColor || "text-white"} ${pkg.badgeBgColor || "bg-red-800/80"} py-0.5 w-[110px] mx-auto rounded-full`}>
                       {pkg.badgeText}
                     </div>
                   )}
-                  <h3 className={`text-[18px] sm:text-[19px] font-black text-white uppercase tracking-wider ${pkg.badgeText ? "mt-2.5" : ""}`}>
+                  <h3 className={`text-[15px] sm:text-[19px] font-black text-white uppercase tracking-wider ${pkg.badgeText ? "mt-2.5" : ""}`}>
                     {pkg.title}
                   </h3>
                   {pkg.strikePrice && (
-                    <div className={`mt-3 text-[12px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-gray-500"}`}>
+                    <div className={`mt-2 sm:mt-3 text-[10px] sm:text-[12px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-gray-500"}`}>
                       {pkg.strikePrice}
                     </div>
                   )}
                   <div className="mt-1 flex items-baseline justify-center">
-                    <span className="text-[28px] sm:text-[30px] font-black tracking-tight">{pkg.price}</span>
+                    <span className="text-[22px] sm:text-[30px] font-black tracking-tight">{pkg.price}</span>
                   </div>
                   {pkg.subLabel && (
-                    <div className={`mt-2.5 text-[9.5px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-gray-500"}`}>
+                    <div className={`mt-2 sm:mt-2.5 text-[8px] sm:text-[9.5px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-gray-500"}`}>
                       {pkg.subLabel}
                     </div>
                   )}
                 </div>
 
                 {/* Service List / Content Groups */}
-                <div className="p-5.5 space-y-5">
+                <div className="p-4 sm:p-5.5 space-y-4 sm:space-y-5">
                   {pkg.groups.map((group, gIdx) => {
                     const isBoxed = group.isBoxed;
                     const containerClass = isBoxed
-                      ? "bg-gray-55/60 border border-gray-150/45 rounded-2xl p-4 space-y-2 shadow-[0_2px_8px_rgba(0,0,0,0.01)]"
-                      : "space-y-2.5";
+                      ? "bg-gray-55/60 border border-gray-150/45 rounded-xl sm:rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 shadow-[0_2px_8px_rgba(0,0,0,0.01)]"
+                      : "space-y-1.5 sm:space-y-2.5";
                     
                     return (
-                      <div key={gIdx} className={`${containerClass} ${!isBoxed && gIdx > 0 ? "pt-1.5 border-t border-gray-100" : ""}`}>
-                        <h5 className="text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
+                      <div key={gIdx} className={`${containerClass} ${!isBoxed && gIdx > 0 ? "pt-2 sm:pt-2.5 border-t border-gray-100" : ""}`}>
+                        <h5 className="text-[8.5px] sm:text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
                           {group.title}
                         </h5>
-                        <ul className="space-y-2">
+                        <ul className="space-y-1.5 sm:space-y-2">
                           {group.items.map((item, iIdx) => {
                             const liClass = item.checked
-                              ? "flex items-start text-[13px] font-medium text-gray-700"
-                              : "flex items-start text-[13px] font-medium text-gray-500 line-through";
+                              ? "flex items-start text-[11.5px] sm:text-[13px] font-medium text-gray-700"
+                              : "flex items-start text-[11.5px] sm:text-[13px] font-medium text-gray-500 line-through";
 
                             return (
                               <li key={iIdx} className={liClass}>
                                 {item.checked ? (
-                                  <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                                  <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                                 ) : (
-                                  <X className="w-4 h-4 text-red-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                                  <X className="w-3.5 h-3.5 text-red-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                                 )}
                                 <span>
                                   {item.boldText && (

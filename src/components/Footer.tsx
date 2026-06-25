@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Building, Award, Search, HelpCircle, Shield, FileText } from "lucide-react";
 import CTA from "@/components/CTA";
 import { config } from "@/lib/config";
 
@@ -35,7 +35,6 @@ const YtIcon = () => (
   </svg>
 );
 
-const trustedBy = ["PT Maju Jaya", "CV Sukses Abadi", "UD Berkah", "PT Nusantara", "CV Mitra", "PT Globalindo"];
 
 export default function Footer() {
   const layananLinks = [
@@ -71,26 +70,12 @@ export default function Footer() {
       {/* ─── CTA SECTION ─── */}
       <CTA />
 
-      {/* ─── TRUSTED BY SECTION ─── */}
-      <section className="py-12 bg-bg-light border-y border-border">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 text-center">
-          <p className="text-[12px] text-muted mb-8 font-medium uppercase tracking-widest">
-            Dipercaya oleh <span className="font-bold text-primary">11.000+ pengusaha</span> di seluruh Indonesia
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {trustedBy.map((c, idx) => (
-              <span key={idx} className="text-[14px] font-semibold text-dark/30 hover:text-dark/50 transition-colors">
-                {c}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <footer className="bg-[#F9F9F9] border-t border-[#EAEAEA] pt-16 pb-8">
+      
+      <footer className="bg-[#F9F9F9] border-t border-[#EAEAEA] pt-10 pb-6 md:pt-16 md:pb-8">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main footer grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14">
+        
+        {/* ─── DESKTOP VIEW ─── */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14">
 
           {/* Col 1: Logo, description, contact details & addresses */}
           <div className="lg:col-span-5 flex flex-col space-y-6">
@@ -109,7 +94,7 @@ export default function Footer() {
             </Link>
 
             {/* Description */}
-            <p className="text-[13px] leading-relaxed text-[#555555] max-w-[340px]">
+            <p className="text-[14px] sm:text-[13px] leading-relaxed text-[#555555] max-w-[340px]">
               Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Proses mudah, harga transparan, hasil terjamin.
             </p>
 
@@ -117,7 +102,7 @@ export default function Footer() {
             <div className="space-y-2.5 pt-1">
               <a
                 href="mailto:info@easylegal.id"
-                className="flex items-center space-x-2.5 text-[13px] font-bold text-[#1A1A1A] hover:text-[#D62828] transition-colors"
+                className="flex items-center space-x-2.5 text-[14px] sm:text-[13px] font-bold text-[#1A1A1A] hover:text-[#D62828] transition-colors"
               >
                 <Mail className="w-[15px] h-[15px] text-[#D62828] flex-shrink-0" />
                 <span>info@easylegal.id</span>
@@ -126,7 +111,7 @@ export default function Footer() {
                 href={`https://wa.me/${config.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2.5 text-[13px] font-bold text-[#1A1A1A] hover:text-[#D62828] transition-colors"
+                className="flex items-center space-x-2.5 text-[14px] sm:text-[13px] font-bold text-[#1A1A1A] hover:text-[#D62828] transition-colors"
               >
                 <Phone className="w-[15px] h-[15px] text-[#D62828] flex-shrink-0" />
                 <span>{config.company.whatsapp}</span>
@@ -143,8 +128,8 @@ export default function Footer() {
                 <div key={idx} className="flex items-start space-x-2.5">
                   <MapPin className="w-[15px] h-[15px] text-[#D62828] flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-[13px] font-bold text-[#1A1A1A]">{office.city}</div>
-                    <div className="text-[12px] text-[#666666] mt-0.5">{office.addr}</div>
+                    <div className="text-[14px] sm:text-[13px] font-bold text-[#1A1A1A]">{office.city}</div>
+                    <div className="text-[12.5px] sm:text-[12px] text-[#666666] mt-0.5">{office.addr}</div>
                   </div>
                 </div>
               ))}
@@ -153,7 +138,7 @@ export default function Footer() {
 
           {/* Col 2: LAYANAN */}
           <div className="lg:col-span-2">
-            <h3 className="text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
+            <h3 className="text-[13px] sm:text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
               LAYANAN
             </h3>
             <ul className="space-y-3.5">
@@ -161,7 +146,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={link.href}
-                    className="text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
+                    className="text-[14px] sm:text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -172,7 +157,7 @@ export default function Footer() {
 
           {/* Col 3: PERUSAHAAN */}
           <div className="lg:col-span-2">
-            <h3 className="text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
+            <h3 className="text-[13px] sm:text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
               PERUSAHAAN
             </h3>
             <ul className="space-y-3.5">
@@ -180,7 +165,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={link.href}
-                    className="text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
+                    className="text-[14px] sm:text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -191,7 +176,7 @@ export default function Footer() {
 
           {/* Col 4: TOOLS GRATIS */}
           <div className="lg:col-span-3">
-            <h3 className="text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
+            <h3 className="text-[13px] sm:text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
               TOOLS GRATIS
             </h3>
             <ul className="space-y-3.5">
@@ -199,7 +184,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={link.href}
-                    className="text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
+                    className="text-[14px] sm:text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -209,9 +194,132 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* ─── MOBILE VIEW ─── */}
+        <div className="block md:hidden space-y-6 pb-6">
+          {/* Logo & description row */}
+          <div className="flex items-start gap-3.5">
+            <Link href="/home-gads" className="inline-flex items-start flex-shrink-0">
+              <Image
+                src="/Logo EL.png"
+                alt="EasyLegal Logo"
+                width={120}
+                height={60}
+                className="h-[60px] w-auto object-contain"
+                style={{ width: "auto" }}
+                priority
+              />
+            </Link>
+            <div>
+              <p className="text-[11.5px] text-gray-500 leading-relaxed max-w-[280px] mt-1.5">
+                Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia.
+              </p>
+            </div>
+          </div>
+
+          {/* Contact details grid */}
+          <div className="grid grid-cols-2 gap-3.5">
+            <div className="bg-white border border-gray-150/60 rounded-xl p-3 flex items-start gap-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+              <Mail className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Email</div>
+                <div className="text-[11px] font-semibold text-gray-800 break-all">info@easylegal.id</div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-150/60 rounded-xl p-3 flex items-start gap-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+              <Phone className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">WhatsApp</div>
+                <div className="text-[11px] font-semibold text-gray-800">{config.company.whatsapp}</div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-150/60 rounded-xl p-3 flex items-start gap-2 col-span-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+              <MapPin className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
+              <div className="flex flex-wrap gap-x-5 gap-y-1.5 w-full">
+                <div>
+                  <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Bandung</div>
+                  <div className="text-[11px] font-semibold text-gray-800">Jl. Asia Afrika No. 1</div>
+                </div>
+                <div>
+                  <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Jakarta</div>
+                  <div className="text-[11px] font-semibold text-gray-800">Jl. Sudirman Kav. 52</div>
+                </div>
+                <div>
+                  <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Bekasi</div>
+                  <div className="text-[11px] font-semibold text-gray-800">Jl. Ahmad Yani No. 10</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="h-[0.5px] bg-[#EAEAEA]" />
+
+          {/* Menus grid */}
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <div className="text-[9.5px] font-extrabold text-gray-400 uppercase tracking-wider mb-2.5">LAYANAN</div>
+              <ul className="space-y-2">
+                {layananLinks.map((link, idx) => (
+                  <li key={idx}>
+                    <Link href={link.href} className="text-[11.5px] text-gray-500 hover:text-[#990202] transition-colors block py-0.5">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="text-[9.5px] font-extrabold text-gray-400 uppercase tracking-wider mb-2.5">PERUSAHAAN</div>
+              <ul className="space-y-2">
+                {perusahaanLinks.map((link, idx) => (
+                  <li key={idx}>
+                    <Link href={link.href} className="text-[11.5px] text-gray-500 hover:text-[#990202] transition-colors block py-0.5">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Tools Section (Chips) */}
+          <div className="space-y-2.5">
+            <div className="text-[9.5px] font-extrabold text-gray-400 uppercase tracking-wider">Tools Gratis</div>
+            <div className="flex flex-wrap gap-2">
+              <Link href="/cek-nama" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+                <Building className="w-3 h-3 text-[#990202]" />
+                <span>Cek Nama PT</span>
+              </Link>
+              <Link href="/cek-nama" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+                <Award className="w-3 h-3 text-[#990202]" />
+                <span>Cek Nama Merek</span>
+              </Link>
+              <Link href="/cek-kbli" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+                <Search className="w-3 h-3 text-[#990202]" />
+                <span>Cek Kode KBLI</span>
+              </Link>
+              <Link href="/kontak#faq" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+                <HelpCircle className="w-3 h-3 text-[#990202]" />
+                <span>FAQ</span>
+              </Link>
+              <Link href="/tentang-kami" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+                <Shield className="w-3 h-3 text-[#990202]" />
+                <span>Kebijakan Privasi</span>
+              </Link>
+              <Link href="/tentang-kami" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+                <FileText className="w-3 h-3 text-[#990202]" />
+                <span>Syarat & Ketentuan</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="h-[0.5px] bg-[#EAEAEA]" />
+        </div>
+
         {/* Bottom bar with copyright and rounded-xl social cards */}
         <div className="border-t border-[#EAEAEA] pt-6 pb-2 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-[12.5px] text-[#666666]">
+          <p className="text-[13.5px] sm:text-[12.5px] text-[#666666] text-center sm:text-left">
             © 2026 EasyLegal.id — Terdaftar PSE Kominfo. All rights reserved.
           </p>
 
