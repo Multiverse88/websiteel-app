@@ -5,6 +5,12 @@ import { useEffect } from 'react'
 const TYPEBOT_HOST = 'https://typebot.easylegal.my.id'
 const TYPEBOT_BOT_ID = process.env.NEXT_PUBLIC_TYPEBOT_BOT_ID || ''
 
+interface TypebotWindow {
+  Typebot?: {
+    initBubble: (config: Record<string, unknown>) => void;
+  };
+}
+
 export function TypebotWidget() {
   useEffect(() => {
     if (!TYPEBOT_BOT_ID) return
@@ -15,10 +21,9 @@ export function TypebotWidget() {
     script.async = true
 
     script.onload = () => {
-      // @ts-ignore
-      if (window.Typebot) {
-        // @ts-ignore
-        window.Typebot.initBubble({
+      const typebot = (window as unknown as TypebotWindow).Typebot;
+      if (typebot) {
+        typebot.initBubble({
           typebot: TYPEBOT_BOT_ID,
           apiHost: TYPEBOT_HOST,
           theme: {

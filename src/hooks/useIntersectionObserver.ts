@@ -8,6 +8,8 @@ export function useIntersectionObserver(
 ): boolean {
   const [isVisible, setIsVisible] = useState(false);
 
+  const { root, rootMargin, threshold } = options;
+
   useEffect(() => {
     const element = elementRef.current;
     if (!element) return;
@@ -18,11 +20,11 @@ export function useIntersectionObserver(
         // Once visible, stop observing if we only want to trigger once
         observer.unobserve(element);
       }
-    }, options);
+    }, { root, rootMargin, threshold });
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, [elementRef, options]);
+  }, [elementRef, root, rootMargin, threshold]);
 
   return isVisible;
 }
