@@ -294,7 +294,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
         {/* Bottom-left radial glow for premium aesthetic */}
         <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
           {/* Breadcrumb */}
           <nav className="flex items-center space-x-2 text-[13px] font-medium text-gray-500 mb-8">
             <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
@@ -362,7 +362,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
 
       {/* ─── ARTICLE LIST SECTION ─── */}
       <section className="py-16 flex-grow">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
           
           {/* Category Filter Tabs */}
           <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-dashed border-gray-200">
@@ -528,7 +528,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
             <div className="text-center py-20 bg-white rounded-3xl border border-gray-100 shadow-sm max-w-xl mx-auto">
               <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
               <h3 className="text-[18px] font-extrabold text-gray-900 mb-2">Belum ada artikel</h3>
-              <p className="text-[14px] text-gray-500 px-4 sm:px-6">
+              <p className="text-[14px] text-gray-500 px-6">
                 Kami sedang menyiapkan konten-konten edukasi berkualitas untuk Anda. Kunjungi beberapa saat lagi!
               </p>
             </div>

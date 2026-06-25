@@ -85,7 +85,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         </button>
 
         {/* Left Content */}
-        <div className="bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] px-4 sm:px-12 lg:px-16 xl:px-24 py-14 lg:py-20 flex flex-col justify-center relative z-10 border-r border-[#FAF0E6]/30">
+        <div className="bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] px-8 sm:px-12 lg:px-16 xl:px-24 py-14 lg:py-20 flex flex-col justify-center relative z-10 border-r border-[#FAF0E6]/30">
           <div className="relative min-h-[350px] flex flex-col justify-center">
             {heroSlides.map((slide, idx) => (
               <div
