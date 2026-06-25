@@ -4,4 +4,4 @@ Disallow: /dashboard
 Disallow: /login
 Disallow: /api/
 
-Sitemap: https://easylegal.id/sitemap.xml
+Sitemap: https://easylegal.my.id/sitemap.xml

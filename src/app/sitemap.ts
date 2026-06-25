@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { prisma } from "@/lib/db";
 
-const BASE_URL = "https://easylegal.id";
+const BASE_URL = "https://easylegal.my.id";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages

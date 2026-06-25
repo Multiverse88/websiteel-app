@@ -5,6 +5,7 @@ import { LatestInsightsServer } from "@/components/home/LatestInsightsServer";
 import {
   getLocalBusinessJsonLd,
   getWebsiteJsonLd,
+  getOrganizationJsonLd,
 } from "@/lib/structured-data";
 
 async function HomeWithData() {
@@ -27,6 +28,12 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(getWebsiteJsonLd()),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(getOrganizationJsonLd()),
         }}
       />
       <Suspense fallback={<HomePageSkeleton />}>
