@@ -144,7 +144,6 @@ export const whyChoose = [
   },
 ];
 
-export const trustedBy = ["PT Maju Jaya", "CV Sukses Abadi", "UD Berkah", "PT Nusantara", "CV Mitra", "PT Globalindo"];
 
 export const row1Reviews = [
   {
