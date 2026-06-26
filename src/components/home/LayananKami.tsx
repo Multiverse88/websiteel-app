@@ -40,7 +40,7 @@ export default function LayananKami() {
         {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-4 sm:gap-5">
           {/* LEFT: Layanan Individual */}
-          <div className="border border-border/80 rounded-2xl p-4 sm:p-6 bg-white shadow-sm md:shadow-none">
+          <div className="shadow-sm border border-black/[0.03] rounded-2xl p-4 sm:p-6 bg-white shadow-sm md:shadow-none">
             <div className="flex items-center gap-2 sm:gap-2.5 mb-4 sm:mb-5">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-primary-light flex items-center justify-center flex-shrink-0">
                 <span className="text-[11px] sm:text-[13px] text-primary font-bold leading-none">⊞</span>
@@ -106,7 +106,7 @@ export default function LayananKami() {
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 sm:gap-2 bg-white rounded-xl px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-sm border border-border/60 mb-4 sm:mb-5 self-start">
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-white rounded-xl px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-sm shadow-sm border border-black/[0.03] mb-4 sm:mb-5 self-start">
               <div className="w-5 h-4 overflow-hidden rounded-[3px] sm:rounded-[4px] relative flex items-center justify-center">
                 <Image 
                   src="/Logo EL.png" 
@@ -153,7 +153,7 @@ export default function LayananKami() {
             </Link>
 
             {/* Dashboard mockup */}
-            <div className="mt-5 sm:mt-6 rounded-2xl bg-white border border-border/60 shadow-sm overflow-hidden relative pb-6 hidden sm:block">
+            <div className="mt-5 sm:mt-6 rounded-2xl bg-white shadow-sm border border-black/[0.03] shadow-sm overflow-hidden relative pb-6 hidden sm:block">
               <div className="bg-[#F5F5F5] px-3.5 py-2.5 flex items-center gap-1.5 border-b border-border/40">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
@@ -181,12 +181,12 @@ export default function LayananKami() {
                 <div className="h-2 bg-dark/6 rounded-full w-2/3 mt-1" />
               </div>
 
-              <div className="absolute bottom-3 left-3 bg-white rounded-lg px-3 py-1.5 shadow-md border border-border/60 flex items-center gap-1.5">
+              <div className="absolute bottom-3 left-3 bg-white rounded-lg px-3 py-1.5 shadow-md shadow-sm border border-black/[0.03] flex items-center gap-1.5">
                 <Users className="w-3.5 h-3.5 text-muted" strokeWidth={2} />
                 <span className="text-[10.5px] font-bold text-dark">50+ Mitra</span>
               </div>
 
-              <div className="absolute bottom-3 right-3 bg-white rounded-lg px-3 py-1.5 shadow-md border border-border/60 flex items-center gap-1.5">
+              <div className="absolute bottom-3 right-3 bg-white rounded-lg px-3 py-1.5 shadow-md shadow-sm border border-black/[0.03] flex items-center gap-1.5">
                 <Check className="w-3 h-3 text-primary" strokeWidth={3} />
                 <span className="text-[10.5px] font-bold text-dark">MOU Aktif</span>
               </div>

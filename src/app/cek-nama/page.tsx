@@ -60,7 +60,7 @@ export default function CekNama() {
       {/* ─── HEADER ─── */}
       <div className="text-center max-w-[800px] mx-auto z-10 mb-10 flex flex-col items-center">
         {/* Tools Gratis Badge */}
-        <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)] mb-6 text-[12.5px] font-semibold text-[#B91C1C]">
+        <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full shadow-sm border border-black/[0.02] shadow-[0_2px_10px_rgba(0,0,0,0.03)] mb-6 text-[12.5px] font-semibold text-[#B91C1C]">
           <span className="w-1.5 h-1.5 rounded-full bg-[#B91C1C]" />
           Tools Gratis
         </div>
@@ -77,7 +77,7 @@ export default function CekNama() {
       </div>
 
       {/* ─── MAIN CARD CONTAINER ─── */}
-      <div className="w-full max-w-[760px] bg-white rounded-[32px] border border-gray-100 shadow-[0_15px_60px_rgba(0,0,0,0.04)] overflow-hidden z-10 mb-8">
+      <div className="w-full max-w-[760px] bg-white rounded-[32px] shadow-sm border border-black/[0.02] shadow-[0_15px_60px_rgba(0,0,0,0.04)] overflow-hidden z-10 mb-8">
         
         {/* Tab Switcher Header */}
         <div className="bg-[#F5F4F0]/50 border-b border-gray-100 p-2 flex gap-2">
@@ -319,7 +319,7 @@ export default function CekNama() {
       </div>      {/* ─── TRUST BADGES BELOW CARD ─── */}
       <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 z-10 mb-20">
         {/* Badge 1 */}
-        <div className="bg-white rounded-full border border-gray-150/70 px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
           <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">
             <Check className="w-2.5 h-2.5 stroke-[3px]" />
           </div>
@@ -329,7 +329,7 @@ export default function CekNama() {
         </div>
 
         {/* Badge 2 */}
-        <div className="bg-white rounded-full border border-gray-150/70 px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
           <div className="w-4 h-4 rounded-full bg-[#FFF0F0] text-[#B91C1C] flex items-center justify-center flex-shrink-0 text-[10px]">
             🕒
           </div>
@@ -339,7 +339,7 @@ export default function CekNama() {
         </div>
 
         {/* Badge 3 */}
-        <div className="bg-white rounded-full border border-gray-150/70 px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
           <div className="w-4 h-4 rounded-full bg-[#EBF5FF] text-blue-600 flex items-center justify-center flex-shrink-0 text-[10px]">
             🛡️
           </div>
@@ -382,7 +382,7 @@ export default function CekNama() {
           ].map((step, idx) => (
             <div key={idx} className="relative flex flex-col items-center">
               {/* Card Container */}
-              <div className="w-full h-full bg-white rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.02)] border border-gray-100/60 p-8 sm:p-10 flex flex-col items-center text-center">
+              <div className="w-full h-full bg-white rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.02)] shadow-sm border border-black/[0.02] p-8 sm:p-10 flex flex-col items-center text-center">
                 {/* Red Circle Number */}
                 <div className="w-12 h-12 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[17px] font-black shadow-[0_4px_16px_rgba(185,28,28,0.25)] mb-6">
                   {step.num}

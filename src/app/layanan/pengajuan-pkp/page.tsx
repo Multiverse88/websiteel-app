@@ -128,7 +128,7 @@ export default function PengajuanPkp() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 border border-gray-200 text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-305 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer bg-white"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-305 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer bg-white"
                 >
                   Lihat Paket Harga
                 </a>
@@ -364,7 +364,7 @@ export default function PengajuanPkp() {
             </div>
 
             {/* Card 2: Sukarela (Gray Border) */}
-            <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col justify-between text-left space-y-6">
+            <div className="bg-white rounded-3xl p-8 shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col justify-between text-left space-y-6">
               <div className="space-y-5">
                 {/* Tag */}
                 <div className="bg-gray-100 text-gray-500 py-1 px-3 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 w-fit">
@@ -727,7 +727,7 @@ export default function PengajuanPkp() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[16px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+              <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                 <div>
                   {/* Header */}
                   <div className="bg-[#1A1A1A] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
@@ -809,7 +809,7 @@ export default function PengajuanPkp() {
                     href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Luar Jawa.")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full py-4 text-center font-bold text-[14px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
+                    className="block w-full py-4 text-center font-bold text-[14px] text-gray-800 bg-white hover:bg-gray-50 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
                   >
                     Pilih PKP Luar Jawa
                   </a>
@@ -820,7 +820,7 @@ export default function PengajuanPkp() {
           </div>
 
           {/* Footnote disclaimers */}
-          <div className="max-w-[860px] mx-auto mt-5 sm:mt-10 bg-[#FAF9F9] border border-gray-200/80 rounded-2xl p-6 text-[12px] text-gray-500 leading-relaxed font-medium text-left">
+          <div className="max-w-[860px] mx-auto mt-5 sm:mt-10 bg-[#FAF9F9] shadow-md border border-black/[0.04] rounded-2xl p-6 text-[12px] text-gray-500 leading-relaxed font-medium text-left">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             <span>Perbedaan harga karena KPP di luar Pulau Jawa membutuhkan biaya akomodasi tambahan untuk pendampingan survei lapangan. <strong className="font-bold text-gray-700">Persetujuan &amp; pengesahan PKP sepenuhnya berada di bawah kewenangan KPP setempat</strong> — kami mendampingi proses, namun keputusan akhir ada di tangan petugas DJP.</span>
           </div>
@@ -865,7 +865,7 @@ export default function PengajuanPkp() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin konsultasi mengenai layanan pengukuhan PKP perusahaan.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[15px] font-normal">→</span>

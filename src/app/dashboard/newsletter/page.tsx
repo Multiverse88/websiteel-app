@@ -91,7 +91,7 @@ export default async function NewsletterDashboardPage() {
             <div>
               <Link
                 href="/dashboard/newsletter/settings"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-white text-gray-700 hover:text-gray-900 border border-gray-200/80 hover:bg-gray-50 shadow-sm transition-all"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-white text-gray-700 hover:text-gray-900 shadow-md border border-black/[0.04] hover:bg-gray-50 shadow-sm transition-all"
               >
                 <Settings className="w-4 h-4 text-gray-500" />
                 Atur Otomatisasi
@@ -101,7 +101,7 @@ export default async function NewsletterDashboardPage() {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-            <div className="bg-[#FAFAFA] rounded-xl border border-gray-200/60 p-5 flex items-center gap-4">
+            <div className="bg-[#FAFAFA] rounded-xl shadow-md border border-black/[0.04] p-5 flex items-center gap-4">
               <div className="w-11 h-11 rounded-xl bg-[#FFF5F5] border border-red-100/50 flex items-center justify-center flex-shrink-0">
                 <Users className="w-5 h-5 text-[#990202]" />
               </div>
@@ -110,8 +110,8 @@ export default async function NewsletterDashboardPage() {
                 <div className="text-[12px] text-gray-500 mt-1 font-medium">Subscriber Aktif</div>
               </div>
             </div>
-            <div className="bg-[#FAFAFA] rounded-xl border border-gray-200/60 p-5 flex items-center gap-4">
-              <div className="w-11 h-11 rounded-xl bg-gray-100 border border-gray-200/60 flex items-center justify-center flex-shrink-0">
+            <div className="bg-[#FAFAFA] rounded-xl shadow-md border border-black/[0.04] p-5 flex items-center gap-4">
+              <div className="w-11 h-11 rounded-xl bg-gray-100 shadow-md border border-black/[0.04] flex items-center justify-center flex-shrink-0">
                 <Mail className="w-5 h-5 text-gray-500" />
               </div>
               <div>
@@ -119,7 +119,7 @@ export default async function NewsletterDashboardPage() {
                 <div className="text-[12px] text-gray-500 mt-1 font-medium">Total Subscriber</div>
               </div>
             </div>
-            <div className="bg-[#FAFAFA] rounded-xl border border-gray-200/60 p-5 flex items-center gap-4">
+            <div className="bg-[#FAFAFA] rounded-xl shadow-md border border-black/[0.04] p-5 flex items-center gap-4">
               <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200/50 flex items-center justify-center flex-shrink-0">
                 <Send className="w-5 h-5 text-emerald-600" />
               </div>
@@ -149,7 +149,7 @@ export default async function NewsletterDashboardPage() {
               </div>
 
               {subscribers.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-200 p-10 text-center">
+                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-10 text-center">
                   <div className="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
                     <Mail className="w-7 h-7 text-[#990202]" />
                   </div>
@@ -159,7 +159,7 @@ export default async function NewsletterDashboardPage() {
                   </p>
                 </div>
               ) : (
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
                   {/* Table Header */}
                   <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[11px] font-extrabold text-gray-400 uppercase tracking-wider">
                     <div className="col-span-5">Email</div>
@@ -206,7 +206,7 @@ export default async function NewsletterDashboardPage() {
                           className={`inline-flex px-2.5 py-1 rounded-md text-[10px] font-bold ${
                             subscriber.isActive
                               ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
-                              : "bg-gray-100 text-gray-500 border border-gray-200/60"
+                              : "bg-gray-100 text-gray-500 shadow-md border border-black/[0.04]"
                           }`}
                         >
                           {subscriber.isActive ? "Aktif" : "Nonaktif"}
@@ -229,7 +229,7 @@ export default async function NewsletterDashboardPage() {
               <h2 className="text-[18px] font-extrabold text-gray-900 mb-5">
                 Kirim Broadcast
               </h2>
-              <div className="bg-white rounded-2xl border border-gray-200 p-5 mb-6">
+              <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-5 mb-6">
                 <p className="text-[13px] text-gray-500 mb-4 leading-relaxed">
                   Pilih artikel untuk dikirim ke <strong className="text-gray-900">{activeCount} subscriber</strong> aktif:
                 </p>
@@ -243,7 +243,7 @@ export default async function NewsletterDashboardPage() {
                       return (
                         <div
                           key={article.id}
-                          className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#FAFAFA] border border-gray-100"
+                          className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#FAFAFA] shadow-sm border border-black/[0.02]"
                         >
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
@@ -284,11 +284,11 @@ export default async function NewsletterDashboardPage() {
                 Riwayat Broadcast
               </h2>
               {broadcasts.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-200 p-6 text-center">
+                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-6 text-center">
                   <p className="text-[13px] text-gray-400">Belum ada broadcast yang dikirim.</p>
                 </div>
               ) : (
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
                   {broadcasts.map((broadcast: { id: string; articleId: string; articleTitle: string; totalSent: number; sentAt: Date }, idx: number) => (
                     <div
                       key={broadcast.id}
@@ -330,11 +330,11 @@ export default async function NewsletterDashboardPage() {
                 Log Pengiriman
               </h2>
               {emailLogs.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-200 p-6 text-center">
+                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-6 text-center">
                   <p className="text-[13px] text-gray-400">Belum ada log pengiriman email.</p>
                 </div>
               ) : (
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
                   {/* Table Header */}
                   <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[11px] font-extrabold text-gray-400 uppercase tracking-wider">
                     <div className="col-span-4">Email</div>
@@ -382,7 +382,7 @@ export default async function NewsletterDashboardPage() {
 
                         {/* Source */}
                         <div className="col-span-2 flex justify-center">
-                          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-bold bg-gray-100 text-gray-600 border border-gray-200/60">
+                          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-bold bg-gray-100 text-gray-600 shadow-md border border-black/[0.04]">
                             {log.source === "broadcast" ? "Manual" : "Otomatis"}
                           </span>
                         </div>

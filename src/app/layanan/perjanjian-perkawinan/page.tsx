@@ -657,7 +657,7 @@ export default function PerjanjianPerkawinan() {
                     </div>
 
                     {/* Bonus Block */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
                       <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
                         BONUS
                       </h5>
@@ -672,7 +672,7 @@ export default function PerjanjianPerkawinan() {
                     </div>
 
                     {/* Extra Bonus Block */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
                       <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
                         EXTRA BONUS
                       </h5>
@@ -716,7 +716,7 @@ export default function PerjanjianPerkawinan() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[28px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-[28px] overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+              <div className="bg-white rounded-[28px] overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                 <div>
                   {/* Header Container (Black) */}
                   <div className="bg-[#151515] px-6 py-9 text-center text-white relative flex flex-col items-center justify-center min-h-[174px]">
@@ -772,7 +772,7 @@ export default function PerjanjianPerkawinan() {
                     </div>
 
                     {/* Bonus Block */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
                       <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
                         BONUS
                       </h5>
@@ -787,7 +787,7 @@ export default function PerjanjianPerkawinan() {
                     </div>
 
                     {/* Extra Bonus Block */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 border border-gray-150/50">
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
                       <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
                         EXTRA BONUS
                       </h5>
@@ -944,7 +944,7 @@ export default function PerjanjianPerkawinan() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin menghubungi tim spesialis hukum perjanjian.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-55 text-gray-900 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl transition-all duration-200 cursor-pointer shadow-sm"
+              className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-55 text-gray-900 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl transition-all duration-200 cursor-pointer shadow-sm"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[15px] font-bold">→</span>

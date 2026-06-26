@@ -218,7 +218,7 @@ export default function Footer() {
 
           {/* Contact details grid */}
           <div className="grid grid-cols-2 gap-3.5">
-            <div className="bg-white border border-gray-150/60 rounded-xl p-3 flex items-start gap-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+            <div className="bg-white shadow-md border border-black/[0.03] rounded-xl p-3 flex items-start gap-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
               <Mail className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
               <div>
                 <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Email</div>
@@ -226,7 +226,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="bg-white border border-gray-150/60 rounded-xl p-3 flex items-start gap-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+            <div className="bg-white shadow-md border border-black/[0.03] rounded-xl p-3 flex items-start gap-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
               <Phone className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
               <div>
                 <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">WhatsApp</div>
@@ -234,7 +234,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="bg-white border border-gray-150/60 rounded-xl p-3 flex items-start gap-2 col-span-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+            <div className="bg-white shadow-md border border-black/[0.03] rounded-xl p-3 flex items-start gap-2 col-span-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
               <MapPin className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
               <div className="flex flex-wrap gap-x-5 gap-y-1.5 w-full">
                 <div>
@@ -287,27 +287,27 @@ export default function Footer() {
           <div className="space-y-2.5">
             <div className="text-[9.5px] font-extrabold text-gray-400 uppercase tracking-wider">Tools Gratis</div>
             <div className="flex flex-wrap gap-2">
-              <Link href="/cek-nama" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+              <Link href="/cek-nama" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
                 <Building className="w-3 h-3 text-[#990202]" />
                 <span>Cek Nama PT</span>
               </Link>
-              <Link href="/cek-nama" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+              <Link href="/cek-nama" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
                 <Award className="w-3 h-3 text-[#990202]" />
                 <span>Cek Nama Merek</span>
               </Link>
-              <Link href="/cek-kbli" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+              <Link href="/cek-kbli" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
                 <Search className="w-3 h-3 text-[#990202]" />
                 <span>Cek Kode KBLI</span>
               </Link>
-              <Link href="/kontak#faq" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+              <Link href="/kontak#faq" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
                 <HelpCircle className="w-3 h-3 text-[#990202]" />
                 <span>FAQ</span>
               </Link>
-              <Link href="/tentang-kami" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+              <Link href="/tentang-kami" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
                 <Shield className="w-3 h-3 text-[#990202]" />
                 <span>Kebijakan Privasi</span>
               </Link>
-              <Link href="/tentang-kami" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-150/60 rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
+              <Link href="/tentang-kami" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
                 <FileText className="w-3 h-3 text-[#990202]" />
                 <span>Syarat & Ketentuan</span>
               </Link>

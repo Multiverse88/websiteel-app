@@ -217,7 +217,7 @@ export default function NibOss() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 border border-gray-200 text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-305 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer bg-white"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-305 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer bg-white"
                 >
                   Lihat Paket Harga
                 </a>
@@ -528,7 +528,7 @@ export default function NibOss() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
+              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 {/* Header */}
                 <div className="bg-[#1A1A1A] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
@@ -573,7 +573,7 @@ export default function NibOss() {
                   </div>
 
                   {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 border border-gray-150/50">
+                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 shadow-md border border-black/[0.03]">
                     <h4 className="text-[8.5px] sm:text-[10px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
                     <ul className="space-y-2">
                       {[
@@ -616,7 +616,7 @@ export default function NibOss() {
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perorangan.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[11.5px] sm:text-[13px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
+                  className="block w-full py-3.5 text-center font-extrabold text-[11.5px] sm:text-[13px] text-gray-800 bg-white hover:bg-gray-50 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
                 >
                   Pilih NIB Perorangan
                 </a>
@@ -678,7 +678,7 @@ export default function NibOss() {
                   </div>
 
                   {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 border border-gray-150/50">
+                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 shadow-md border border-black/[0.03]">
                     <h4 className="text-[8.5px] sm:text-[10px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
                     <ul className="space-y-2">
                       {[
@@ -734,7 +734,7 @@ export default function NibOss() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
+              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 {/* Header */}
                 <div className="bg-[#1A1A1A] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
@@ -779,7 +779,7 @@ export default function NibOss() {
                   </div>
 
                   {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 border border-gray-150/50">
+                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 shadow-md border border-black/[0.03]">
                     <h4 className="text-[8.5px] sm:text-[10px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
                     <ul className="space-y-2">
                       {[
@@ -822,7 +822,7 @@ export default function NibOss() {
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[11.5px] sm:text-[13px] text-gray-800 bg-white hover:bg-gray-55 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
+                  className="block w-full py-3.5 text-center font-extrabold text-[11.5px] sm:text-[13px] text-gray-800 bg-white hover:bg-gray-55 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
                 >
                   Pilih NIB Badan
                 </a>
@@ -835,7 +835,7 @@ export default function NibOss() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
+              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 {/* Header */}
                 <div className="bg-[#1A1A1A] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
@@ -873,7 +873,7 @@ export default function NibOss() {
                   </div>
 
                   {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 border border-gray-150/50">
+                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 shadow-md border border-black/[0.03]">
                     <h4 className="text-[8.5px] sm:text-[10px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
                     <ul className="space-y-2">
                       {[
@@ -916,7 +916,7 @@ export default function NibOss() {
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Cabut NIB.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[11.5px] sm:text-[13px] text-gray-800 bg-white hover:bg-gray-55 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
+                  className="block w-full py-3.5 text-center font-extrabold text-[11.5px] sm:text-[13px] text-gray-800 bg-white hover:bg-gray-55 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
                 >
                   Pilih Cabut NIB
                 </a>
@@ -927,7 +927,7 @@ export default function NibOss() {
           </div>
 
           {/* Footnote disclaimers */}
-          <div className="max-w-[1400px] mx-auto mt-6 sm:mt-12 bg-white border border-gray-200/60 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium">
+          <div className="max-w-[1400px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS. (2) Untuk risiko menengah rendah. (3) Opsional, jika usaha melakukan impor.</span>
           </div>
@@ -959,7 +959,7 @@ export default function NibOss() {
               className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[11.5px] sm:text-[13px] font-extrabold transition-all duration-200 ${
                 activeSubTab === "perorangan"
                   ? "bg-[#990202] text-white shadow-sm"
-                  : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300 cursor-pointer"
+                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
               }`}
             >
               <User className="w-4 h-4" />
@@ -972,7 +972,7 @@ export default function NibOss() {
               className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[11.5px] sm:text-[13px] font-extrabold transition-all duration-200 ${
                 activeSubTab === "badan"
                   ? "bg-[#990202] text-white shadow-sm"
-                  : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300 cursor-pointer"
+                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
               }`}
             >
               <Building className="w-4 h-4" />
@@ -985,7 +985,7 @@ export default function NibOss() {
               className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[11.5px] sm:text-[13px] font-extrabold transition-all duration-200 ${
                 activeSubTab === "oss-rba"
                   ? "bg-[#990202] text-white shadow-sm"
-                  : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300 cursor-pointer"
+                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
               }`}
             >
               <CheckCircle className="w-4 h-4" />
@@ -998,7 +998,7 @@ export default function NibOss() {
               className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[11.5px] sm:text-[13px] font-extrabold transition-all duration-200 ${
                 activeSubTab === "pt-perorangan"
                   ? "bg-[#990202] text-white shadow-sm"
-                  : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300 cursor-pointer"
+                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
               }`}
             >
               <FileText className="w-4 h-4" />
@@ -1015,7 +1015,7 @@ export default function NibOss() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
+              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 <div className="bg-[#1A1A1A] px-4 py-4 sm:px-6 sm:py-7 text-center text-white relative">
                   <h3 className="text-[11px] sm:text-[13px] font-black tracking-widest text-white/90">CABUT KBLI</h3>
@@ -1048,7 +1048,7 @@ export default function NibOss() {
                   </div>
 
                   {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 border border-gray-150/50">
+                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 shadow-md border border-black/[0.03]">
                     <h4 className="text-[9.5px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-bold text-gray-700 leading-relaxed">
@@ -1097,7 +1097,7 @@ export default function NibOss() {
                   href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut KBLI (${activeSubTab}).`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-3 text-center font-extrabold text-[12.5px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
+                  className="block w-full py-3 text-center font-extrabold text-[12.5px] text-gray-800 bg-white hover:bg-gray-50 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
                 >
                   Pilih Cabut KBLI
                 </a>
@@ -1147,7 +1147,7 @@ export default function NibOss() {
                   </div>
 
                   {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 border border-gray-150/50">
+                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 shadow-md border border-black/[0.03]">
                     <h4 className="text-[9.5px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-bold text-gray-700 leading-relaxed">
@@ -1209,7 +1209,7 @@ export default function NibOss() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
+              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
               <div>
                 <div className="bg-[#1A1A1A] px-4 py-4 sm:px-6 sm:py-7 text-center text-white relative">
                   <h3 className="text-[11px] sm:text-[13px] font-black tracking-widest text-white/90">CABUT & TAMBAH</h3>
@@ -1246,7 +1246,7 @@ export default function NibOss() {
                   </div>
 
                   {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 border border-gray-150/50">
+                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 shadow-md border border-black/[0.03]">
                     <h4 className="text-[9.5px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
                     <ul className="space-y-1.5">
                       <li className="flex items-start text-[12.5px] font-bold text-gray-700 leading-relaxed">
@@ -1295,7 +1295,7 @@ export default function NibOss() {
                   href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut & Tambah KBLI (${activeSubTab}).`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-3 text-center font-extrabold text-[12.5px] text-gray-800 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
+                  className="block w-full py-3 text-center font-extrabold text-[12.5px] text-gray-800 bg-white hover:bg-gray-50 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
                 >
                   Pilih Cabut & Tambah
                 </a>
@@ -1306,7 +1306,7 @@ export default function NibOss() {
           </div>
 
           {/* Footnote disclaimers */}
-          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white border border-gray-200/60 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium text-left">
+          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium text-left">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS.</span>
           </div>
@@ -1351,7 +1351,7 @@ export default function NibOss() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin konsultasi mengenai layanan NIB dan OSS RBA.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[15px] font-normal">→</span>

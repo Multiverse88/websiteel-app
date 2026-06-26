@@ -140,7 +140,7 @@ export default function TentangKami() {
                 </Link>
                 <Link
                   href="/"
-                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 border border-gray-200 text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
+                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
                 >
                   Lihat Layanan
                 </Link>
@@ -208,7 +208,7 @@ export default function TentangKami() {
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
                 
                 {/* Main Team Image Container */}
-                <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-gray-200 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[4/3] sm:aspect-[1.4] lg:aspect-[4/3]">
+                <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] shadow-md border border-black/[0.04] shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[4/3] sm:aspect-[1.4] lg:aspect-[4/3]">
                   <Image
                     src="/cerita-kami-team.webp"
                     alt="Tim EasyLegal bekerja bersama membantu perizinan UMKM"
@@ -278,7 +278,7 @@ export default function TentangKami() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {stats.map((stat, idx) => (
-              <div key={idx} className="text-center space-y-1 sm:space-y-2 py-4 sm:py-6 border border-border/40 rounded-2xl bg-bg-light transition-all duration-300 hover:border-red-100 hover:shadow-md">
+              <div key={idx} className="text-center space-y-1 sm:space-y-2 py-4 sm:py-6 shadow-sm border border-black/[0.03] rounded-2xl bg-bg-light transition-all duration-300 hover:border-red-100 hover:shadow-md">
                 <div className="text-[26px] sm:text-[44px] font-extrabold text-[#990202] tracking-tight">{stat.value}</div>
                 <div className="text-[10px] sm:text-[13.5px] font-bold text-[#990202]/85">{stat.label}</div>
               </div>
@@ -302,7 +302,7 @@ export default function TentangKami() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {values.map((val, idx) => (
-              <div key={idx} className="bg-white rounded-xl p-4 sm:p-7 border border-border/60 hover:border-primary/20 hover:shadow-sm transition-all duration-200 flex space-x-3.5 sm:space-x-4">
+              <div key={idx} className="bg-white rounded-xl p-4 sm:p-7 shadow-sm border border-black/[0.03] hover:border-primary/20 hover:shadow-sm transition-all duration-200 flex space-x-3.5 sm:space-x-4">
                 <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl bg-primary-light flex items-center justify-center flex-shrink-0">
                   <val.Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                 </div>
@@ -332,7 +332,7 @@ export default function TentangKami() {
           {/* 2 rows × 4 cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {team.map((member, idx) => (
-              <div key={idx} className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200/80 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col group">
+              <div key={idx} className="bg-white rounded-2xl sm:rounded-3xl shadow-md border border-black/[0.04] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                 
                 {/* Team Member Image */}
                 <div className="relative aspect-[1.15] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
@@ -370,14 +370,14 @@ export default function TentangKami() {
                       href="https://linkedin.com/company/easylegal"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] transition-all duration-200"
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg shadow-md border border-black/[0.04] flex items-center justify-center text-gray-400 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] transition-all duration-200"
                       title="LinkedIn Profile"
                     >
                       <LinkedinIcon />
                     </a>
                     <a
                       href="mailto:info@easylegal.id"
-                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] transition-all duration-200"
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg shadow-md border border-black/[0.04] flex items-center justify-center text-gray-400 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] transition-all duration-200"
                       title="Send Email"
                     >
                       <Mail className="w-3.5 h-3.5" />

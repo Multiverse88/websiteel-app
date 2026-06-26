@@ -71,7 +71,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
   if (headings.length === 0) return null;
 
   return (
-    <div className="bg-[#FAFAFA] border border-gray-200/65 rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.01)]">
+    <div className="bg-[#FAFAFA] shadow-md border border-black/[0.04] rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.01)]">
       <div className="flex items-center gap-2 mb-4 text-[11px] font-black uppercase text-gray-400 tracking-wider">
         <svg
           className="w-4 h-4 text-gray-400"

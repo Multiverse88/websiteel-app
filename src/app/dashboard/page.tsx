@@ -55,14 +55,14 @@ export default async function DashboardPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/dashboard/profile"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] border border-gray-200 hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] shadow-md border border-black/[0.04] hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
             >
               <User className="w-4 h-4 text-gray-500" />
               <span>Edit Profil</span>
             </Link>
             <Link
               href="/dashboard/newsletter"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] border border-gray-200 hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] shadow-md border border-black/[0.04] hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
             >
               <Mail className="w-4 h-4" />
               <span>Newsletter</span>
@@ -82,7 +82,7 @@ export default async function DashboardPage() {
             <form action={logoutAction}>
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-500 hover:text-[#990202] border border-gray-200 hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
+                className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-500 hover:text-[#990202] shadow-md border border-black/[0.04] hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Logout</span>
@@ -104,7 +104,7 @@ export default async function DashboardPage() {
 
           {articles.length === 0 ? (
             /* Empty State */
-            <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center">
+            <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-12 text-center">
               <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
                 <FileText className="w-8 h-8 text-[#990202]" />
               </div>
@@ -124,7 +124,7 @@ export default async function DashboardPage() {
             </div>
           ) : (
             /* Articles Table */
-            <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
               {/* Table Header */}
               <div className="grid grid-cols-12 gap-4 px-6 py-3 bg-gray-50 border-b border-gray-100 text-[12px] font-extrabold text-gray-400 uppercase tracking-wider">
                 <div className="col-span-1">Gambar</div>
@@ -151,7 +151,7 @@ export default async function DashboardPage() {
                   >
                     {/* Cover Image */}
                     <div className="col-span-1">
-                      <div className="relative w-12 h-10 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+                      <div className="relative w-12 h-10 rounded-lg overflow-hidden bg-gray-100 shadow-md border border-black/[0.04]">
                         <ArticleImage
                           src={article.coverImage}
                           alt={article.title}

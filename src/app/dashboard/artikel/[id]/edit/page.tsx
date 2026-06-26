@@ -473,7 +473,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
 
             <Link
               href="/dashboard"
-              className="inline-flex items-center justify-center px-5 py-3 border border-gray-200 text-gray-700 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] font-bold text-[14px] rounded-xl transition-all duration-200 bg-white shadow-sm flex-shrink-0"
+              className="inline-flex items-center justify-center px-5 py-3 shadow-md border border-black/[0.04] text-gray-700 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] font-bold text-[14px] rounded-xl transition-all duration-200 bg-white shadow-sm flex-shrink-0"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               <span>Kembali ke Dashboard</span>
@@ -489,7 +489,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
             {/* FORM */}
-            <div className="lg:col-span-7 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.03)] rounded-[28px] border border-gray-200/80 p-6 sm:p-8">
+            <div className="lg:col-span-7 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.03)] rounded-[28px] shadow-md border border-black/[0.04] p-6 sm:p-8">
 
               {error && (
                 <div className="mb-6 p-4.5 bg-red-50 border border-red-200 rounded-2xl text-[14px] text-[#990202] font-semibold flex items-center gap-2">
@@ -578,7 +578,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       onClick={switchToUpload}
                       className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[13px] font-bold transition-all ${
                         coverMode === "upload"
-                          ? "bg-white text-[#990202] shadow-sm border border-gray-200/50"
+                          ? "bg-white text-[#990202] shadow-sm shadow-md border border-black/[0.04]"
                           : "text-gray-500 hover:text-gray-700"
                       }`}
                     >
@@ -590,7 +590,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       onClick={switchToUrl}
                       className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[13px] font-bold transition-all ${
                         coverMode === "url"
-                          ? "bg-white text-[#990202] shadow-sm border border-gray-200/50"
+                          ? "bg-white text-[#990202] shadow-sm shadow-md border border-black/[0.04]"
                           : "text-gray-500 hover:text-gray-700"
                       }`}
                     >
@@ -610,7 +610,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       />
 
                       {coverFile ? (
-                        <div className="relative border border-gray-200 rounded-xl overflow-hidden">
+                        <div className="relative shadow-md border border-black/[0.04] rounded-xl overflow-hidden">
                           <ImageComponent
                             src={coverPreview}
                             alt="Preview"
@@ -781,12 +781,12 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                     </label>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2 p-1.5 bg-gray-50 border border-gray-200 rounded-xl">
+                  <div className="flex flex-wrap items-center gap-2 p-1.5 bg-gray-50 shadow-md border border-black/[0.04] rounded-xl">
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("formatBlock", "<h3>")}
-                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Ubah menjadi Sub-judul (H3)"
                     >
                       <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">H3</span>
@@ -796,7 +796,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("bold")}
-                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Jadikan Teks Tebal"
                     >
                       <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">B</span>
@@ -806,7 +806,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleOpenLinkModal}
-                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Link"
                     >
                       <ExternalLink className="w-3 h-3 text-[#990202]" />
@@ -816,7 +816,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleRemoveLink}
-                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Hapus Link dari Teks"
                     >
                       <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">~</span>
@@ -826,7 +826,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleOpenImageModal}
-                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Gambar"
                     >
                       <ImageIcon className="w-3 h-3 text-[#990202]" />
@@ -836,7 +836,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertUnorderedList")}
-                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan List Poin"
                     >
                       <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">•</span>
@@ -846,7 +846,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertOrderedList")}
-                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan List Angka"
                     >
                       <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">1.</span>
@@ -856,7 +856,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertHorizontalRule")}
-                      className="px-2.5 py-1.5 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[11.5px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Garis Pembatas"
                     >
                       <span className="font-mono text-[9px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">―</span>
@@ -864,7 +864,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                     </button>
                   </div>
 
-                  <div className="relative border border-gray-200 rounded-xl overflow-hidden shadow-inner">
+                  <div className="relative shadow-md border border-black/[0.04] rounded-xl overflow-hidden shadow-inner">
                     <div
                       ref={editorRef}
                       contentEditable={true}
@@ -878,7 +878,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                   {/* Link Insertion Modal */}
                   {showLinkModal && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" onMouseDown={(e) => { if (e.target === e.currentTarget) { setShowLinkModal(false); setLinkUrl(""); } }}>
-                      <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-5 w-full max-w-md mx-4">
+                      <div className="bg-white rounded-2xl shadow-2xl shadow-md border border-black/[0.04] p-5 w-full max-w-md mx-4">
                         <div className="flex items-center gap-2 mb-4">
                           <ExternalLink className="w-4 h-4 text-[#990202]" />
                           <h3 className="text-[14px] font-extrabold text-gray-900">Sisipkan Link</h3>
@@ -916,7 +916,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                   {/* Image Insertion Modal */}
                   {showImageModal && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" onMouseDown={(e) => { if (e.target === e.currentTarget) { setShowImageModal(false); setImageUrl(""); setImageAlt(""); } }}>
-                      <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-5 w-full max-w-md mx-4">
+                      <div className="bg-white rounded-2xl shadow-2xl shadow-md border border-black/[0.04] p-5 w-full max-w-md mx-4">
                         <div className="flex items-center gap-2 mb-4">
                           <ImageIcon className="w-4 h-4 text-[#990202]" />
                           <h3 className="text-[14px] font-extrabold text-gray-900">{isEditingImage ? "Ganti Gambar" : "Sisipkan Gambar"}</h3>
@@ -981,7 +981,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                         </div>
 
                         {imageUrl && (
-                          <div className="mb-4 rounded-xl overflow-hidden border border-gray-100 bg-gray-50">
+                          <div className="mb-4 rounded-xl overflow-hidden shadow-sm border border-black/[0.02] bg-gray-50">
                             <img
                               src={imageUrl}
                               alt={imageAlt || "Preview"}
@@ -1149,7 +1149,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
             {/* LIVE PREVIEW */}
             <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
 
-              <div className="bg-white/40 border border-gray-200/50 rounded-2xl py-3 px-4 flex items-center justify-between">
+              <div className="bg-white/40 shadow-md border border-black/[0.04] rounded-2xl py-3 px-4 flex items-center justify-between">
                 <div className="text-[12.5px] font-extrabold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-500" />
                   <span>Pratinjau Langsung (Live Preview)</span>
@@ -1157,7 +1157,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
               </div>
 
-              <div className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.03)] flex flex-col group transition-all duration-300">
+              <div className="bg-white rounded-3xl shadow-md border border-black/[0.04] overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.03)] flex flex-col group transition-all duration-300">
                 <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
                   <ImageComponent
                     src={getPreviewImage()}

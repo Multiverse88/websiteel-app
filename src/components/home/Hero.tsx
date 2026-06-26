@@ -69,7 +69,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         {/* Left Arrow - hidden on mobile */}
         <button
           onClick={prevSlide}
-          className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-gray-100 items-center justify-center transition-all hover:scale-105 active:scale-95"
+          className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] shadow-sm border border-black/[0.02] items-center justify-center transition-all hover:scale-105 active:scale-95"
           aria-label="Previous slide"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -78,7 +78,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         {/* Right Arrow - hidden on mobile */}
         <button
           onClick={nextSlide}
-          className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-gray-100 items-center justify-center transition-all hover:scale-105 active:scale-95"
+          className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] shadow-sm border border-black/[0.02] items-center justify-center transition-all hover:scale-105 active:scale-95"
           aria-label="Next slide"
         >
           <ChevronRight className="w-5 h-5" />

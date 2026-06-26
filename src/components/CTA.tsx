@@ -76,7 +76,7 @@ export default function CTA({
 
           <Link
             href={contactLink}
-            className="w-full mt-2 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold py-2.5 sm:py-3.5 px-6 rounded-lg sm:rounded-xl flex items-center justify-center gap-2 text-[11.5px] sm:text-[14.5px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
+            className="w-full mt-2 bg-white shadow-md border border-black/[0.04] text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold py-2.5 sm:py-3.5 px-6 rounded-lg sm:rounded-xl flex items-center justify-center gap-2 text-[11.5px] sm:text-[14.5px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
           >
             <span>{contactText}</span>
             <svg className="w-3 h-3 sm:w-4 sm:h-4 text-gray-800 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">

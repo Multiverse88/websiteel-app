@@ -135,7 +135,7 @@ export default function Navbar() {
 
               {isLayananOpen && (
                 <div className="absolute top-full -left-20 w-[560px] mt-0 pt-3 bg-transparent animate-slide-down">
-                  <div className="bg-white rounded-xl shadow-xl border border-border/60 p-5 grid grid-cols-2 gap-1">
+                  <div className="bg-white rounded-xl shadow-xl shadow-sm border border-black/[0.03] p-5 grid grid-cols-2 gap-1">
                     {services.map((item, idx) => 
                       "sublinks" in item ? (
                         <div
@@ -159,7 +159,7 @@ export default function Navbar() {
                           </button>
                           {isPendirianOpen && (
                             <div className="absolute left-full top-0 ml-2 bg-transparent">
-                              <div className="bg-white rounded-xl shadow-xl border border-border/60 p-3 min-w-[200px]">
+                              <div className="bg-white rounded-xl shadow-xl shadow-sm border border-black/[0.03] p-3 min-w-[200px]">
                                 {item.sublinks!.map((sub, subIdx) => (
                                   <Link
                                     key={subIdx}

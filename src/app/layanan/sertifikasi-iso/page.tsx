@@ -495,7 +495,7 @@ export default function SertifikasiIso() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 border border-gray-200 text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Lihat Paket Harga
                 </a>
@@ -614,7 +614,7 @@ export default function SertifikasiIso() {
                 </div>
 
                 {/* Floating Badge (Bottom Left) */}
-                <div className="absolute -bottom-6 left-4 bg-white rounded-2xl p-4 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-150/50 flex items-center space-x-3.5 w-[290px] sm:w-[320px]">
+                <div className="absolute -bottom-6 left-4 bg-white rounded-2xl p-4 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-md border border-black/[0.03] flex items-center space-x-3.5 w-[290px] sm:w-[320px]">
                   <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 flex-shrink-0">
                     <Award className="w-5.5 h-5.5 text-amber-600" />
                   </div>
@@ -698,7 +698,7 @@ export default function SertifikasiIso() {
               const isPopular = service.id === "iso-9001";
               const cardBorder = isPopular
                 ? "border-[1.5px] border-[#990202] shadow-[0_20px_40px_rgba(153,2,2,0.04)] relative"
-                : "border border-gray-200/60 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.03)] hover:border-gray-300 transition-all duration-300 relative";
+                : "shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.03)] hover:border-gray-300 transition-all duration-300 relative";
               
               return (
                 <div
@@ -742,7 +742,7 @@ export default function SertifikasiIso() {
                         {service.cocok.map((tag) => (
                           <span
                             key={tag}
-                            className="bg-gray-50 border border-gray-150 rounded-md px-2.5 py-1 text-[11px] font-medium text-gray-600"
+                            className="bg-gray-50 shadow-md border border-black/[0.03] rounded-md px-2.5 py-1 text-[11px] font-medium text-gray-600"
                           >
                             {tag}
                           </span>
@@ -800,7 +800,7 @@ export default function SertifikasiIso() {
                 const headerBg = pkg.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
                 const cardBorder = pkg.isPopular
                   ? "border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] relative z-10 transition-all duration-300"
-                  : "border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
+                  : "shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
 
                 return (
                   <div key={idx} className="relative group h-full">
@@ -903,7 +903,7 @@ export default function SertifikasiIso() {
                         className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm ${
                           pkg.isPopular
                             ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
-                            : "border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
+                            : "shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
                         }`}
                       >
                         {pkg.buttonText}
@@ -922,7 +922,7 @@ export default function SertifikasiIso() {
                   {/* Interactive Red Hover Glow behind Card */}
                   <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
                   
-                  <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+                  <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                   <div>
                     {/* Card Header */}
                     <div className="bg-[#1A1A1A] px-6 py-7 text-white text-center relative">
@@ -1008,7 +1008,7 @@ export default function SertifikasiIso() {
                       href={pkg.buttonLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full py-3.5 border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm"
+                      className="block w-full py-3.5 shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm"
                     >
                       {pkg.buttonText}
                     </a>
@@ -1028,7 +1028,7 @@ export default function SertifikasiIso() {
                       {/* Interactive Red Hover Glow behind Card */}
                       <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
                       
-                      <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+                      <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                       <div>
                         {/* Card Header */}
                         <div className="bg-[#1A1A1A] px-6 py-7 text-white text-center relative">
@@ -1114,7 +1114,7 @@ export default function SertifikasiIso() {
                           href={pkg.buttonLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block w-full py-3.5 border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm"
+                          className="block w-full py-3.5 shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm"
                         >
                           {pkg.buttonText}
                         </a>
@@ -1127,7 +1127,7 @@ export default function SertifikasiIso() {
           </div>
           </div>
           {/* Pricing Footnote Box */}
-          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white border border-gray-200/60 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium">
+          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed font-medium">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             <span>(1) Harga belum termasuk PPN. Biaya &amp; estimasi ruangan lapangan dilakukan terpisah, all-in-cost. (2) Estimasi pelaksanaan Audit.</span>
           </div>
@@ -1249,7 +1249,7 @@ export default function SertifikasiIso() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO perusahaan. Boleh minta info penawaran khusus?")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-4 bg-white hover:bg-gray-50 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[15px] font-normal">→</span>

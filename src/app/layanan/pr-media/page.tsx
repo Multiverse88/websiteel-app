@@ -793,7 +793,7 @@ export default function PRMedia() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between border border-gray-200/80 shadow-md group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-md group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                 <div>
                   {/* Header */}
                   <div className="bg-[#151515] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
@@ -853,7 +853,7 @@ export default function PRMedia() {
                     </div>
 
                     {/* Bonus Container */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 border border-gray-100/50">
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
                       <h5 className="text-[10.5px] font-black text-gray-900 tracking-wider uppercase">
                         BONUS
                       </h5>
@@ -962,7 +962,7 @@ export default function PRMedia() {
                     </div>
 
                     {/* Bonus Container */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 border border-gray-100/50">
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
                       <h5 className="text-[10.5px] font-black text-gray-900 tracking-wider uppercase">
                         BONUS
                       </h5>
@@ -1008,7 +1008,7 @@ export default function PRMedia() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between border border-gray-200/80 shadow-md group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-md group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                 <div>
                   {/* Header */}
                   <div className="bg-[#151515] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
@@ -1068,7 +1068,7 @@ export default function PRMedia() {
                     </div>
 
                     {/* Bonus Container */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 border border-gray-100/50">
+                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
                       <h5 className="text-[10.5px] font-black text-gray-900 tracking-wider uppercase">
                         BONUS
                       </h5>
@@ -1112,7 +1112,7 @@ export default function PRMedia() {
           </div>
 
           {/* Pricing Bottom Keterangan Penting Section */}
-          <div className="max-w-[1180px] mx-auto bg-[#F0F0F0] rounded-3xl py-5 px-6 sm:py-6.5 sm:px-9 border border-gray-200 mt-8 sm:mt-5 sm:mt-10 text-left space-y-3 shadow-[0_8px_30px_rgba(0,0,0,0.035)]">
+          <div className="max-w-[1180px] mx-auto bg-[#F0F0F0] rounded-3xl py-5 px-6 sm:py-6.5 sm:px-9 shadow-md border border-black/[0.04] mt-8 sm:mt-5 sm:mt-10 text-left space-y-3 shadow-[0_8px_30px_rgba(0,0,0,0.035)]">
             <h4 className="text-[14px] font-black text-gray-900">
               Keterangan penting:
             </h4>
@@ -1426,7 +1426,7 @@ export default function PRMedia() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Publikasi Press Release Media.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 hover:border-gray-300 font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
+              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-50 text-gray-900 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[15px] font-bold">→</span>

@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import * as fs from "fs";
+import * as path from "path";
 
 const prisma = new PrismaClient();
 
@@ -365,14 +367,14 @@ Penolakan merek ini mengakibatkan kerugian biaya PNBP yang sudah dibayarkan (tid
 
 ### Cara Melakukan Penelusuran Merek Mandiri
 Sebelum mengajukan pendaftaran, pastikan Anda menempuh langkah-langkah berikut:
-1. **Buka Database DJKI**: Akses portal resmi penelusuran merek di pdki-indonesia.dgki.go.id.
+1. **Buka Database DJKI**: Akses portal resmi penelusuran merek di pdki-indonesia.dgky.go.id.
 2. **Ketik Nama Merek**: Masukkan nama merek Anda. Lakukan variasi pencarian (e.g., penulisan digabung, dipisah, ejaan fonetik mirip).
 3. **Analisis Kemiripan**: Periksa apakah ada merek terdaftar dengan ejaan, pengucapan suara (fonetik), atau visual logo yang mirip di kelas barang/jasa yang sama.`
   }
 ];
 
 async function main() {
-  // Clear existing articles to ensure clean seed with correct categories
+  // Clear existing articles to ensure clean seed
   const existingCount = await prisma.article.count();
 
   if (existingCount > 0) {
@@ -380,16 +382,48 @@ async function main() {
     await prisma.article.deleteMany({});
   }
 
-  console.log("Seeding articles...");
+  // Load articles from JSON file (190 artikel dari database lama)
+  const seedArticlesPath = path.join(__dirname, "articles-seed.json");
+  if (!fs.existsSync(seedArticlesPath)) {
+    throw new Error(`Seed data file not found at: ${seedArticlesPath}`);
+  }
+
+  console.log(`Reading seed articles from ${seedArticlesPath}...`);
+  const seedArticlesRaw = fs.readFileSync(seedArticlesPath, "utf-8");
+  const rawArticles = JSON.parse(seedArticlesRaw);
+
+  console.log(`Preparing ${rawArticles.length} articles from JSON...`);
+  const parsedJsonArticles = rawArticles.map((art: any) => ({
+    id: art.id,
+    slug: art.slug,
+    title: art.title,
+    excerpt: art.excerpt,
+    content: art.content,
+    coverImage: art.coverImage,
+    category: art.category,
+    readTime: art.readTime,
+    createdAt: new Date(art.createdAt),
+    updatedAt: new Date(art.createdAt)
+  }));
+
+  // Gabungkan 10 artikel inline + 190 artikel dari JSON
+  // Filter duplikat slug agar tidak bentrok
+  const jsonSlugs = new Set(parsedJsonArticles.map((a: any) => a.slug));
+  const uniqueInlineArticles = seedArticles.filter(a => !jsonSlugs.has(a.slug));
+
+  console.log(`Combining ${uniqueInlineArticles.length} inline articles + ${parsedJsonArticles.length} database articles...`);
+  const allArticles = [...parsedJsonArticles, ...uniqueInlineArticles];
+
+  console.log(`Seeding total ${allArticles.length} articles into database...`);
   await prisma.article.createMany({
-    data: seedArticles,
+    data: allArticles,
   });
-  console.log(`Seeded ${seedArticles.length} articles successfully.`);
+  console.log(`✅ Seeded ${allArticles.length} articles successfully.`);
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error("Seed error:", e);
     process.exit(1);
   })
   .finally(async () => {

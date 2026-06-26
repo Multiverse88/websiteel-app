@@ -73,7 +73,7 @@ export default async function NewsletterSettingsPage() {
           <SmtpTestCard />
 
           {/* Ringkasan Status Otomatisasi */}
-          <div className="bg-white rounded-xl border border-gray-150 p-6 shadow-sm flex flex-col gap-4">
+          <div className="bg-white rounded-xl shadow-md border border-black/[0.03] p-6 shadow-sm flex flex-col gap-4">
             <h3 className="font-bold text-gray-900 text-sm border-b border-gray-100 pb-2 flex items-center gap-1.5">
               <ToggleRight className="w-4 h-4 text-[#990202]" /> Ringkasan Newsletter
             </h3>
@@ -102,7 +102,7 @@ export default async function NewsletterSettingsPage() {
           </div>
 
           {/* Panduan Placeholder Tagging */}
-          <div className="bg-white rounded-xl border border-gray-150 p-6 shadow-sm flex flex-col gap-3 text-xs leading-relaxed text-gray-600">
+          <div className="bg-white rounded-xl shadow-md border border-black/[0.03] p-6 shadow-sm flex flex-col gap-3 text-xs leading-relaxed text-gray-600">
             <h3 className="font-bold text-gray-900 text-sm border-b border-gray-100 pb-2">
               💡 Panduan Placeholder Tagging
             </h3>

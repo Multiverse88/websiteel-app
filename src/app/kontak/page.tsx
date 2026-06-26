@@ -175,7 +175,7 @@ export default function Kontak() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
             
             {/* WhatsApp Card */}
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[220px] sm:min-h-[320px]">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-md border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[220px] sm:min-h-[320px]">
               <div>
                 {/* Icon Container */}
                 <div className="h-9 w-9 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-[#25D366] flex items-center justify-center mb-4 sm:mb-6 transition-transform group-hover:scale-105 duration-300 shadow-sm">
@@ -213,7 +213,7 @@ export default function Kontak() {
             </div>
 
             {/* Email Card */}
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[220px] sm:min-h-[320px]">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-md border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[220px] sm:min-h-[320px]">
               <div>
                 {/* Icon Container */}
                 <div className="h-9 w-9 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-[#990202] flex items-center justify-center mb-4 sm:mb-6 transition-transform group-hover:scale-105 duration-300 shadow-sm">
@@ -246,7 +246,7 @@ export default function Kontak() {
             </div>
 
             {/* Telepon Card */}
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[220px] sm:min-h-[320px]">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-md border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.008)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group min-h-[220px] sm:min-h-[320px]">
               <div>
                 {/* Icon Container */}
                 <div className="h-9 w-9 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-[#111827] flex items-center justify-center mb-4 sm:mb-6 transition-transform group-hover:scale-105 duration-300 shadow-sm">
@@ -289,7 +289,7 @@ export default function Kontak() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
             {/* Form */}
-            <div className="lg:col-span-7 bg-white border border-gray-200/60 rounded-2xl sm:rounded-3xl shadow-sm p-5 sm:p-10">
+            <div className="lg:col-span-7 bg-white shadow-md border border-black/[0.04] rounded-2xl sm:rounded-3xl shadow-sm p-5 sm:p-10">
               <div>
                 <h2 className="text-[20px] sm:text-[24px] font-extrabold text-gray-950 mb-1 tracking-tight">Kirim pertanyaan Anda</h2>
                 <p className="text-[12.5px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
@@ -458,7 +458,7 @@ export default function Kontak() {
               </div>
 
               {/* Jam Operasional */}
-              <div className="bg-white border border-gray-200/60 rounded-2xl p-6">
+              <div className="bg-white shadow-md border border-black/[0.04] rounded-2xl p-6">
                 <div className="flex items-center space-x-3 mb-5">
                   <Clock className="w-5 h-5 text-[#990202]" />
                   <span className="text-[15px] font-bold text-gray-900">Jam Operasional</span>
@@ -481,7 +481,7 @@ export default function Kontak() {
               </div>
 
               {/* Kantor Pusat */}
-              <div className="bg-white border border-gray-200/60 rounded-2xl p-6">
+              <div className="bg-white shadow-md border border-black/[0.04] rounded-2xl p-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <MapPin className="w-5 h-5 text-[#990202]" />
                   <span className="text-[15px] font-bold text-gray-900">Kantor Pusat</span>
@@ -519,7 +519,7 @@ export default function Kontak() {
       {/* Toast notification */}
       {formSubmitted && (
         <div className="fixed bottom-6 right-6 z-50 animate-slide-down">
-          <div className="bg-white border border-border rounded-2xl p-5 shadow-2xl max-w-xs flex items-start space-x-3 relative">
+          <div className="bg-white shadow-sm border border-black/[0.03] rounded-2xl p-5 shadow-2xl max-w-xs flex items-start space-x-3 relative">
             <button onClick={closeToast} className="absolute top-3 right-3 p-1 rounded-full hover:bg-bg-light text-muted">
               <X className="w-4 h-4" />
             </button>

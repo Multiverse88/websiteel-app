@@ -66,7 +66,7 @@ export default function InformasiHukumSection({ articles }: { articles: ArticleI
           </div>
           <Link
             href="/artikel"
-            className="w-full sm:w-auto text-center justify-center inline-flex items-center gap-1.5 px-5 py-2.5 bg-white border border-gray-200 text-[11px] sm:text-[13px] font-bold text-gray-800 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm flex-shrink-0"
+            className="w-full sm:w-auto text-center justify-center inline-flex items-center gap-1.5 px-5 py-2.5 bg-white shadow-md border border-black/[0.04] text-[11px] sm:text-[13px] font-bold text-gray-800 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm flex-shrink-0"
           >
             <span>Lihat semua</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -79,7 +79,7 @@ export default function InformasiHukumSection({ articles }: { articles: ArticleI
           <div className="lg:col-span-5 h-full">
             <Link
               href={`/artikel/${featured.slug}`}
-              className="group flex flex-col h-full bg-white rounded-2xl sm:rounded-3xl border border-gray-150/70 overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
+              className="group flex flex-col h-full bg-white rounded-2xl sm:rounded-3xl shadow-md border border-black/[0.03] overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
             >
               <div className="aspect-[16/10] w-full overflow-hidden bg-slate-50 relative">
                 <Image
@@ -117,7 +117,7 @@ export default function InformasiHukumSection({ articles }: { articles: ArticleI
               <Link
                 key={article.id}
                 href={`/artikel/${article.slug}`}
-                className="group flex flex-col bg-white rounded-2xl border border-gray-150/70 overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
+                className="group flex flex-col bg-white rounded-2xl shadow-md border border-black/[0.03] overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.012)] hover:shadow-md hover:scale-[1.015] transition-all duration-300 text-left"
               >
                 <div className="aspect-[16/9] w-full overflow-hidden bg-slate-50 relative">
                   <Image

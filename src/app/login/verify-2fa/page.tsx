@@ -40,7 +40,7 @@ export default function Verify2FAPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8">
+        <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8">
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-[14px] text-[#990202] font-semibold">
               {error}

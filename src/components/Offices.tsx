@@ -76,7 +76,7 @@ export default function Offices({
               href={office.map}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+              className="bg-white rounded-3xl shadow-md border border-black/[0.04] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
               title="Buka di Google Maps"
             >
               {/* Office Image and Tag Overlay */}

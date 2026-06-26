@@ -36,7 +36,7 @@ export default async function UnsubscribePage({ searchParams }: Props) {
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
       <div className="flex-grow flex items-center justify-center py-20 px-6">
-        <div className="max-w-[440px] w-full bg-white rounded-2xl border border-gray-200/60 p-8 sm:p-10 text-center shadow-sm">
+        <div className="max-w-[440px] w-full bg-white rounded-2xl shadow-md border border-black/[0.04] p-8 sm:p-10 text-center shadow-sm">
           {status === "success" ? (
             <>
               <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-5">

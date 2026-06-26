@@ -326,7 +326,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
 
           {/* Search Container */}
           <div className="mt-8 max-w-xl">
-            <form action="/artikel" method="GET" className="relative flex items-center bg-white border border-gray-200/85 rounded-2xl p-1.5 shadow-[0_8px_30px_rgba(0,0,0,0.015)] focus-within:border-red-200 focus-within:shadow-[0_12px_30px_rgba(153,2,2,0.04)] transition-all">
+            <form action="/artikel" method="GET" className="relative flex items-center bg-white shadow-md border border-black/[0.04] rounded-2xl p-1.5 shadow-[0_8px_30px_rgba(0,0,0,0.015)] focus-within:border-red-200 focus-within:shadow-[0_12px_30px_rgba(153,2,2,0.04)] transition-all">
               <div className="flex items-center pl-3.5 pr-1 text-gray-400 pointer-events-none">
                 <Search className="w-5 h-5" />
               </div>
@@ -393,11 +393,11 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
           {/* Featured Article Layout */}
           {featuredArticle && (
             <div className="mb-12">
-              <div className="group bg-white border border-gray-150 rounded-3xl p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.04)] transition-all duration-300">
+              <div className="group bg-white shadow-md border border-black/[0.03] rounded-3xl p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.04)] transition-all duration-300">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                   
                   {/* Image Column */}
-                  <div className="relative aspect-[1.6] w-full rounded-2xl overflow-hidden bg-gray-50 border border-gray-100">
+                  <div className="relative aspect-[1.6] w-full rounded-2xl overflow-hidden bg-gray-50 shadow-sm border border-black/[0.02]">
                     <Image
                       src={featuredArticle.coverImage}
                       alt={featuredArticle.title}
@@ -455,10 +455,10 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
               {regularArticles.map((article: Article) => (
                 <article
                   key={article.id}
-                  className="bg-white rounded-3xl border border-gray-200/80 p-4 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+                  className="bg-white rounded-3xl shadow-md border border-black/[0.04] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
                 >
                   {/* Image container inside card padding */}
-                  <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-50 border border-gray-100 rounded-2xl mb-4">
+                  <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-50 shadow-sm border border-black/[0.02] rounded-2xl mb-4">
                     <Image
                       src={article.coverImage}
                       alt={article.title}
@@ -511,7 +511,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                 <Link
                   href={getLoadMoreHref()}
                   scroll={false}
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white border border-gray-200/90 hover:border-gray-300 hover:bg-gray-50 text-gray-800 rounded-full font-bold text-[13.5px] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] cursor-pointer"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white shadow-md border border-black/[0.04] hover:border-gray-300 hover:bg-gray-50 text-gray-800 rounded-full font-bold text-[13.5px] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] cursor-pointer"
                 >
                   <span>Muat Lebih Banyak</span>
                   <ChevronDown className="w-4.5 h-4.5 text-gray-500" />
@@ -525,7 +525,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
 
           {/* Empty State fallback */}
           {articles.length === 0 && (
-            <div className="text-center py-20 bg-white rounded-3xl border border-gray-100 shadow-sm max-w-xl mx-auto">
+            <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-black/[0.02] shadow-sm max-w-xl mx-auto">
               <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
               <h3 className="text-[18px] font-extrabold text-gray-900 mb-2">Belum ada artikel</h3>
               <p className="text-[14px] text-gray-500 px-6">

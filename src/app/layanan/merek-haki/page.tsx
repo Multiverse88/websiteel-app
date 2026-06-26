@@ -573,7 +573,7 @@ export default function MerekHaki() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 border border-gray-200 text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Lihat Paket Harga
                 </a>
@@ -633,7 +633,7 @@ export default function MerekHaki() {
                 </div>
 
                 {/* Floating Badge 1: Merek Terdaftar (Top Left) */}
-                <div className="absolute -top-6 -left-2 sm:-left-6 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-150/50 flex items-center space-x-3.5 w-[230px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute -top-6 -left-2 sm:-left-6 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-md border border-black/[0.03] flex items-center space-x-3.5 w-[230px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 flex-shrink-0">
                     <Tag className="w-5.5 h-5.5 stroke-[2.2] text-[#D97706]" />
                   </div>
@@ -644,7 +644,7 @@ export default function MerekHaki() {
                 </div>
 
                 {/* Floating Badge 2: Hak Eksklusif (Bottom Right) */}
-                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-150/50 flex items-center space-x-3.5 w-[215px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-md border border-black/[0.03] flex items-center space-x-3.5 w-[215px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                     <ShieldCheck className="w-5.5 h-5.5 text-[#990202]" />
                   </div>
@@ -692,7 +692,7 @@ export default function MerekHaki() {
                 </div>
 
                 {/* Floating Badge (Bottom Left) */}
-                <div className="absolute -bottom-6 left-4 bg-white rounded-2xl p-4 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-150/50 flex items-center space-x-3.5 w-[280px] sm:w-[320px]">
+                <div className="absolute -bottom-6 left-4 bg-white rounded-2xl p-4 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-md border border-black/[0.03] flex items-center space-x-3.5 w-[280px] sm:w-[320px]">
                   <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-[#990202] text-white flex items-center justify-center flex-shrink-0">
                     <FileText className="w-5 h-5" />
                   </div>
@@ -788,7 +788,7 @@ export default function MerekHaki() {
               const isActive = activeTab === tab.id;
               const tabClass = isActive
                 ? "inline-flex items-center space-x-2 bg-[#990202] text-white py-3 px-6 rounded-2xl shadow-md border border-[#990202] font-extrabold text-[14px] transition-all duration-200 cursor-pointer"
-                : "inline-flex items-center space-x-2 bg-white text-gray-600 hover:text-gray-800 py-3 px-6 rounded-2xl border border-gray-200 hover:border-gray-300 font-bold text-[12px] sm:text-[14px] shadow-sm hover:shadow transition-all duration-200 cursor-pointer";
+                : "inline-flex items-center space-x-2 bg-white text-gray-600 hover:text-gray-800 py-3 px-6 rounded-2xl shadow-md border border-black/[0.04] hover:border-gray-300 font-bold text-[12px] sm:text-[14px] shadow-sm hover:shadow transition-all duration-200 cursor-pointer";
               return (
                 <button
                   key={tab.id}
@@ -818,7 +818,7 @@ export default function MerekHaki() {
                   {currentTab.cards.map((card, cIdx) => {
                     const cardBorder = card.isPopular
                       ? "border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] scale-[1.02] relative z-10 transition-all duration-300"
-                      : "border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
+                      : "shadow-md border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
                     const headerBg = card.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
 
                     return (
@@ -891,7 +891,7 @@ export default function MerekHaki() {
                               className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm ${
                                 card.isPopular
                                   ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
-                                  : "border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
+                                  : "shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
                               }`}
                             >
                               {card.buttonText}
@@ -905,7 +905,7 @@ export default function MerekHaki() {
 
                 {/* Tab Footnote Box */}
                 {currentTab.footnote && (
-                  <div className="bg-white border border-gray-150/40 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed max-w-[960px] mx-auto font-medium shadow-sm">
+                  <div className="bg-white shadow-md border border-black/[0.03] rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed max-w-[960px] mx-auto font-medium shadow-sm">
                     <span dangerouslySetInnerHTML={{ __html: currentTab.footnote }} />
                   </div>
                 )}
@@ -937,7 +937,7 @@ export default function MerekHaki() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-[1080px] mx-auto items-stretch">
             
             {/* Card 1: Pemohon Perorangan */}
-            <div className="bg-white border border-gray-150/60 rounded-3xl p-6.5 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] hover:border-gray-200 transition-all duration-300 flex flex-col space-y-6">
+            <div className="bg-white shadow-md border border-black/[0.03] rounded-3xl p-6.5 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] hover:border-gray-200 transition-all duration-300 flex flex-col space-y-6">
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                   <User className="w-6 h-6" />
@@ -972,7 +972,7 @@ export default function MerekHaki() {
             </div>
 
             {/* Card 2: Pemohon Badan Usaha */}
-            <div className="bg-white border border-gray-150/60 rounded-3xl p-6.5 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] hover:border-gray-200 transition-all duration-300 flex flex-col space-y-6">
+            <div className="bg-white shadow-md border border-black/[0.03] rounded-3xl p-6.5 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] hover:border-gray-200 transition-all duration-300 flex flex-col space-y-6">
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                   <Building className="w-6 h-6" />

@@ -260,25 +260,25 @@ export default function PelaporanLKPM() {
                     <div className="grid grid-cols-2 gap-2 mt-3.5">
                       
                       {/* Card 1 */}
-                      <div className="bg-[#FAF9F7] rounded-xl p-2.5 border border-gray-100/60 flex flex-col justify-between">
+                      <div className="bg-[#FAF9F7] rounded-xl p-2.5 shadow-sm border border-black/[0.02] flex flex-col justify-between">
                         <span className="text-[8px] font-black text-gray-450 tracking-wider uppercase">REALISASI</span>
                         <span className="text-[11.5px] font-black text-gray-900 mt-1 block">Rp 1,2M</span>
                       </div>
 
                       {/* Card 2 */}
-                      <div className="bg-[#FAF9F7] rounded-xl p-2.5 border border-gray-100/60 flex flex-col justify-between">
+                      <div className="bg-[#FAF9F7] rounded-xl p-2.5 shadow-sm border border-black/[0.02] flex flex-col justify-between">
                         <span className="text-[8px] font-black text-gray-450 tracking-wider uppercase">TENAGA KERJA</span>
                         <span className="text-[11.5px] font-black text-gray-900 mt-1 block">18 Orang</span>
                       </div>
 
                       {/* Card 3 */}
-                      <div className="bg-[#FAF9F7] rounded-xl p-2.5 border border-gray-100/60 flex flex-col justify-between">
+                      <div className="bg-[#FAF9F7] rounded-xl p-2.5 shadow-sm border border-black/[0.02] flex flex-col justify-between">
                         <span className="text-[8px] font-black text-gray-450 tracking-wider uppercase">PRODUKSI</span>
                         <span className="text-[11.5px] font-black text-gray-900 mt-1 block">Aktif</span>
                       </div>
 
                       {/* Card 4 */}
-                      <div className="bg-[#FAF9F7] rounded-xl p-2.5 border border-gray-100/60 flex flex-col justify-between">
+                      <div className="bg-[#FAF9F7] rounded-xl p-2.5 shadow-sm border border-black/[0.02] flex flex-col justify-between">
                         <span className="text-[8px] font-black text-gray-450 tracking-wider uppercase">STATUS</span>
                         <span className="text-[11.5px] font-black text-emerald-600 mt-1 block">On Track</span>
                       </div>
@@ -568,7 +568,7 @@ export default function PelaporanLKPM() {
                 <div className="space-y-3 pt-2">
                   <h4 className="text-[10.5px] font-black text-[#990202] tracking-widest uppercase block mt-3">DEADLINE PELAPORAN</h4>
                   
-                  <div className="bg-[#F8F9FA] rounded-xl p-4.5 border border-gray-100/60 space-y-3.5 mt-3 shadow-sm">
+                  <div className="bg-[#F8F9FA] rounded-xl p-4.5 shadow-sm border border-black/[0.02] space-y-3.5 mt-3 shadow-sm">
                     {/* Item 1 */}
                     <div className="flex items-start space-x-2.5 text-[13px] sm:text-[13.5px] text-gray-700 font-semibold leading-normal">
                       <svg className="w-4.5 h-4.5 text-[#990202] flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -632,7 +632,7 @@ export default function PelaporanLKPM() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 max-w-[1240px] mx-auto">
             
             {/* Card 1 */}
-            <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
+            <div className="bg-[#FAF9F7] rounded-2xl p-6 shadow-md border border-black/[0.03] shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
               <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <DollarSign className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
@@ -643,7 +643,7 @@ export default function PelaporanLKPM() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
+            <div className="bg-[#FAF9F7] rounded-2xl p-6 shadow-md border border-black/[0.03] shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
               <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <Users className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
@@ -654,7 +654,7 @@ export default function PelaporanLKPM() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
+            <div className="bg-[#FAF9F7] rounded-2xl p-6 shadow-md border border-black/[0.03] shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
               <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <Activity className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
@@ -665,7 +665,7 @@ export default function PelaporanLKPM() {
             </div>
 
             {/* Card 4 */}
-            <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
+            <div className="bg-[#FAF9F7] rounded-2xl p-6 shadow-md border border-black/[0.03] shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
               <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <FileText className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
@@ -676,7 +676,7 @@ export default function PelaporanLKPM() {
             </div>
 
             {/* Card 5 */}
-            <div className="bg-[#FAF9F7] rounded-2xl p-6 border border-gray-150/60 shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
+            <div className="bg-[#FAF9F7] rounded-2xl p-6 shadow-md border border-black/[0.03] shadow-sm hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between space-y-4">
               <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-white flex items-center justify-center text-[#990202] shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
                 <AlertCircle className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
               </div>
@@ -840,7 +840,7 @@ export default function PelaporanLKPM() {
                     </div>
 
                     {/* Bonus */}
-                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
+                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 shadow-md border border-black/[0.03] space-y-2 mt-4">
                       <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
                         BONUS
                       </span>
@@ -855,7 +855,7 @@ export default function PelaporanLKPM() {
                     </div>
 
                     {/* Extra Bonus */}
-                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
+                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 shadow-md border border-black/[0.03] space-y-2 mt-4">
                       <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
                         EXTRA BONUS
                       </span>
@@ -898,7 +898,7 @@ export default function PelaporanLKPM() {
               {/* Interactive Red Hover Glow behind Card */}
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               
-              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between border border-gray-200 shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
+              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
                 <div>
                   {/* Header (Dark) */}
                   <div className="bg-[#151515] px-6 pt-7 pb-6 text-center text-white relative flex flex-col items-center">
@@ -947,7 +947,7 @@ export default function PelaporanLKPM() {
                     </div>
 
                     {/* Bonus */}
-                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 border border-gray-150/40 space-y-2 mt-4">
+                    <div className="bg-[#FAF9F7] rounded-[16px] p-4 shadow-md border border-black/[0.03] space-y-2 mt-4">
                       <span className="text-[10px] font-extrabold text-gray-800 tracking-widest uppercase block mb-1">
                         BONUS
                       </span>
@@ -992,7 +992,7 @@ export default function PelaporanLKPM() {
                     href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Menengah Besar seharga Rp 2.499.000.")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full py-3.5 text-center font-extrabold text-[14px] rounded-xl text-gray-800 bg-white border border-gray-200 hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-sm"
+                    className="block w-full py-3.5 text-center font-extrabold text-[14px] rounded-xl text-gray-800 bg-white shadow-md border border-black/[0.04] hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-sm"
                   >
                     Pilih LKPM Menengah Besar
                   </a>
@@ -1027,7 +1027,7 @@ export default function PelaporanLKPM() {
               <div className="w-[50px] h-[50px] rounded-full bg-white border-2 border-[#990202] flex items-center justify-center flex-shrink-0 shadow-sm">
                 <span className="text-[14px] font-black text-[#990202] font-mono leading-none">01</span>
               </div>
-              <div className="flex-1 bg-white border border-gray-150/40 rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
+              <div className="flex-1 bg-white shadow-md border border-black/[0.03] rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
                 <h4 className="text-[16.5px] font-black text-gray-900 leading-tight">
                   Pengumpulan Data Periode
                 </h4>
@@ -1042,7 +1042,7 @@ export default function PelaporanLKPM() {
               <div className="w-[50px] h-[50px] rounded-full bg-white border-2 border-[#990202] flex items-center justify-center flex-shrink-0 shadow-sm">
                 <span className="text-[14px] font-black text-[#990202] font-mono leading-none">02</span>
               </div>
-              <div className="flex-1 bg-white border border-gray-150/40 rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
+              <div className="flex-1 bg-white shadow-md border border-black/[0.03] rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
                 <h4 className="text-[16.5px] font-black text-gray-900 leading-tight">
                   Verifikasi &amp; Penyusunan Laporan
                 </h4>
@@ -1057,7 +1057,7 @@ export default function PelaporanLKPM() {
               <div className="w-[50px] h-[50px] rounded-full bg-white border-2 border-[#990202] flex items-center justify-center flex-shrink-0 shadow-sm">
                 <span className="text-[14px] font-black text-[#990202] font-mono leading-none">03</span>
               </div>
-              <div className="flex-1 bg-white border border-gray-150/40 rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
+              <div className="flex-1 bg-white shadow-md border border-black/[0.03] rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
                 <h4 className="text-[16.5px] font-black text-gray-900 leading-tight">
                   Submit via OSS RBA
                 </h4>
@@ -1072,7 +1072,7 @@ export default function PelaporanLKPM() {
               <div className="w-[50px] h-[50px] rounded-full bg-white border-2 border-[#990202] flex items-center justify-center flex-shrink-0 shadow-sm">
                 <span className="text-[14px] font-black text-[#990202] font-mono leading-none">04</span>
               </div>
-              <div className="flex-1 bg-white border border-gray-150/40 rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
+              <div className="flex-1 bg-white shadow-md border border-black/[0.03] rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
                 <h4 className="text-[16.5px] font-black text-gray-900 leading-tight">
                   Penerbitan Tanda Terima
                 </h4>
@@ -1087,7 +1087,7 @@ export default function PelaporanLKPM() {
               <div className="w-[50px] h-[50px] rounded-full bg-white border-2 border-[#990202] flex items-center justify-center flex-shrink-0 shadow-sm">
                 <span className="text-[14px] font-black text-[#990202] font-mono leading-none">05</span>
               </div>
-              <div className="flex-1 bg-white border border-gray-150/40 rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
+              <div className="flex-1 bg-white shadow-md border border-black/[0.03] rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
                 <h4 className="text-[16.5px] font-black text-gray-900 leading-tight">
                   Arsip &amp; Reminder Periode Berikutnya
                 </h4>
@@ -1139,7 +1139,7 @@ export default function PelaporanLKPM() {
                 href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai Pelaporan LKPM.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3.5 border border-gray-200 text-gray-800 font-extrabold text-[15px] bg-white hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow transition-all duration-200 cursor-pointer text-center w-full rounded-xl"
+                className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[15px] bg-white hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow transition-all duration-200 cursor-pointer text-center w-full rounded-xl"
               >
                 <span>Hubungi Tim Kami</span>
                 <ArrowRight className="w-4 h-4 ml-2" strokeWidth={3.5} />

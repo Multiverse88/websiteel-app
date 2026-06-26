@@ -98,7 +98,7 @@ export default function LayananTemplate({ content }: Props) {
                 </a>
                 <button
                   onClick={scrollToPricing}
-                  className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold rounded-xl text-[12px] sm:text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200 flex items-center"
+                  className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-white shadow-md border border-black/[0.04] text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold rounded-xl text-[12px] sm:text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200 flex items-center"
                 >
                   Lihat Paket
                 </button>
@@ -155,7 +155,7 @@ export default function LayananTemplate({ content }: Props) {
             {c.benefits.map((b, i) => {
               const Icon = iconMap[b.icon] || ShieldCheck;
               return (
-                <div key={i} className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+                <div key={i} className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-black/[0.02] shadow-sm">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#FEF2F2] flex items-center justify-center text-[#990202] mb-4 sm:mb-5">
                     <Icon className="w-5.5 h-5.5 sm:w-6 sm:h-6" />
                   </div>
