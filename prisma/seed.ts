@@ -374,11 +374,17 @@ Sebelum mengajukan pendaftaran, pastikan Anda menempuh langkah-langkah berikut:
 ];
 
 async function main() {
-  // Clear existing articles to ensure clean seed
+  // Check if database already has articles
   const existingCount = await prisma.article.count();
+  const forceSeed = process.env.FORCE_SEED === "true" || process.argv.includes("--force");
 
   if (existingCount > 0) {
-    console.log(`Clearing ${existingCount} existing articles before re-seed...`);
+    if (!forceSeed) {
+      console.log(`\n[SEED] Database already has ${existingCount} articles. Skipping seed to prevent data loss.`);
+      console.log(`[SEED] To force re-seed (which will clear all articles), run: FORCE_SEED=true node prisma/seed.js\n`);
+      return;
+    }
+    console.log(`Clearing ${existingCount} existing articles before re-seed (FORCE_SEED is active)...`);
     await prisma.article.deleteMany({});
   }
 
