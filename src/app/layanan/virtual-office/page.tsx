@@ -148,7 +148,7 @@ export default function VirtualOffice() {
               <span>Beranda</span>
             </Link>
             <ChevronRight className="w-3 h-3 text-gray-300" />
-            <span className="hover:text-gray-900 transition-colors cursor-pointer">Layanan</span>
+            <Link href="/layanan" className="hover:text-gray-900 transition-colors">Layanan</Link>
             <ChevronRight className="w-3 h-3 text-gray-300" />
             <span className="font-bold text-gray-800">Virtual Office</span>
           </nav>

@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Artikel Tidak Ditemukan — EasyLegal" };
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.id";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.my.id";
 
   return {
     title: `${article.title} — EasyLegal`,
@@ -478,12 +478,13 @@ export default async function ArtikelDetailPage({ params }: Props) {
               <div className="flex flex-wrap items-center gap-2 pb-8 mb-8 border-b border-gray-100">
                 <Tag className="w-4 h-4 text-gray-400 mr-1" />
                 {tags.map((tag, idx) => (
-                  <span
+                  <Link
                     key={idx}
+                    href={`/artikel?tag=${encodeURIComponent(tag)}`}
                     className="inline-flex px-3 py-1.5 rounded-lg text-[12px] font-bold text-gray-600 bg-gray-50 border border-gray-200/60 hover:bg-[#FFF5F5] hover:text-[#990202] hover:border-red-100 transition-colors cursor-pointer"
                   >
                     {tag}
-                  </span>
+                  </Link>
                 ))}
               </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   Check,
@@ -11,7 +11,6 @@ import {
   ArrowRight,
   TrendingUp,
   AlertCircle,
-  ChevronDown,
   Shield,
   Layers,
   Users,
@@ -22,16 +21,10 @@ import {
   Award
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
+import FAQ from "@/components/FAQ";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function PelaporanLKPM() {
-  // State for FAQ expanded accordions (default: index 0 expanded)
-  const [expandedFaqIdx, setExpandedFaqIdx] = useState<number | null>(0);
-
-  const toggleFaq = (idx: number) => {
-    setExpandedFaqIdx((prev) => (prev === idx ? null : idx));
-  };
-
   const scrollToPricing = (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById("paket-harga");
@@ -93,7 +86,7 @@ export default function PelaporanLKPM() {
     }
   ];
 
-  const faqItems = [
+  const faqs = [
     {
       q: "Apakah perusahaan saya wajib lapor LKPM?",
       a: "Wajib, jika perusahaan Anda memiliki NIB & izin berusaha — termasuk PMA, PMDN, UMK, sampai perusahaan besar. Mulai dari tahap konstruksi sampai operasional, perusahaan harus lapor LKPM. Pengecualian: usaha mikro dengan modal < Rp 1 miliar sesuai PP 7/2021 boleh tidak melapor (cek konsultasi untuk konfirmasi status Anda)."
@@ -1109,70 +1102,7 @@ export default function PelaporanLKPM() {
       </section>
 
       {/* ─── 8. FAQ SECTION ─── */}
-      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
-
-          {/* Section Header */}
-          <div className="max-w-3xl mx-auto mb-20 space-y-3">
-            <p className="text-[12.5px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">FAQ</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              Pertanyaan seputar Pelaporan LKPM.
-            </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
-              Belum yakin? Mungkin jawabannya ada di sini.
-            </p>
-          </div>
-
-          {/* FAQ Accordion List */}
-          <div className="max-w-[880px] mx-auto space-y-4 text-left">
-            {faqItems.map((item, idx) => {
-              const isOpen = expandedFaqIdx === idx;
-              return (
-                <div
-                  key={idx}
-                  className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
-                    isOpen
-                      ? "border-red-200/80 bg-[#FFFDFD] shadow-[0_4px_20px_rgba(153,2,2,0.03)]"
-                      : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
-                  }`}
-                >
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full flex justify-between items-center px-6 sm:px-8 py-5.5 text-left focus:outline-none transition-colors duration-200"
-                  >
-                    <span
-                      className={`text-[15px] sm:text-[16px] font-black leading-tight ${
-                        isOpen ? "text-[#990202]" : "text-gray-900"
-                      }`}
-                    >
-                      {item.q}
-                    </span>
-                    <span className="ml-4 flex-shrink-0">
-                      <ChevronDown
-                        className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
-                          isOpen ? "rotate-180 text-[#990202]" : ""
-                        }`}
-                      />
-                    </span>
-                  </button>
-
-                  {/* Expanded Body Panel */}
-                  <div
-                    className={`transition-all duration-300 ease-in-out ${
-                      isOpen ? "max-h-[300px] border-t border-red-50/50" : "max-h-0"
-                    } overflow-hidden`}
-                  >
-                    <div className="px-6 sm:px-8 py-5 text-[14px] leading-relaxed text-gray-600 font-normal">
-                      <p dangerouslySetInnerHTML={{ __html: item.a }} />
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
+      <FAQ items={faqs} />
 
       {/* ─── 9. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100">

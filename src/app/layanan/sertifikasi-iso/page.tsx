@@ -459,7 +459,7 @@ export default function SertifikasiIso() {
                   <span>Beranda</span>
                 </Link>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-gray-500 font-medium">Layanan</span>
+                <Link href="/layanan" className="text-gray-500 font-medium hover:text-[#990202] transition-colors">Layanan</Link>
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-[13px] font-bold text-gray-900">Sertifikasi ISO</span>
               </nav>

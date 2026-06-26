@@ -367,14 +367,16 @@ export default function TentangKami() {
                   {/* Social Links Footer */}
                   <div className="flex items-center space-x-2 mt-4 pt-3 border-t border-gray-100">
                     <a
-                      href="#"
+                      href="https://linkedin.com/company/easylegal"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] transition-all duration-200"
                       title="LinkedIn Profile"
                     >
                       <LinkedinIcon />
                     </a>
                     <a
-                      href="#"
+                      href="mailto:info@easylegal.id"
                       className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] transition-all duration-200"
                       title="Send Email"
                     >
