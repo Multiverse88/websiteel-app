@@ -31,6 +31,10 @@ COPY . .
 # Build Next.js (skip prisma migrate deploy - hanya jalan saat container start)
 RUN npx next build
 
+# Compile typescript seed script to Javascript
+RUN npx tsc prisma/seed.ts --module commonjs --target es2020 --moduleResolution node --skipLibCheck --outDir prisma/
+
+
 # ============================================
 # Stage 3: Production
 # ============================================

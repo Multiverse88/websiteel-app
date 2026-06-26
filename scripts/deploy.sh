@@ -80,6 +80,11 @@ done
 
 # Final status
 if [ "$HEALTH_OK" = true ] && docker compose ps | grep -q "Up"; then
+    # Run database seed (runs automatically if database is empty)
+    echo -e "\n${YELLOW}Running database seed check...${NC}"
+    FORCE_SEED=${FORCE_SEED:-false}
+    docker compose exec -T app sh -c "FORCE_SEED=$FORCE_SEED node prisma/seed.js" || echo -e "${RED}Warning: Database seed failed!${NC}"
+
     # Tag release
     git tag -f "$DEPLOY_TAG" 2>/dev/null || true
     echo -e "\n========================================="

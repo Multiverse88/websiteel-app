@@ -121,3 +121,8 @@ notes/**/attachments/
 # File SQL besar di root (bukan migration)
 /*.sql
 u947750278_easy.sql
+
+# Compiled seed scripts/folders
+prisma/seed.js
+dist-seed/
+
