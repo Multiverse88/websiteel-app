@@ -26,7 +26,15 @@ export default function Navbar() {
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleOpenPendirian = () => {
+      setIsLayananOpen(true);
+      setIsPendirianOpen(true);
+    };
+    window.addEventListener("open-pendirian", handleOpenPendirian);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("open-pendirian", handleOpenPendirian);
+    };
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);

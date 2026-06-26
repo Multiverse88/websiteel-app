@@ -122,12 +122,21 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                     <span>{slide.cta}</span>
                     <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
                   </Link>
-                  <Link
-                    href={slide.cta2Link}
-                    className="flex-1 sm:flex-initial text-center justify-center inline-flex items-center px-4 sm:px-7 py-3 bg-white border border-gray-300 sm:bg-[#F3EBE4] sm:hover:bg-[#EAE0D7] active:scale-[0.98] text-[#1A1A1A] font-bold text-[12px] sm:text-[14.5px] rounded-[8px] sm:rounded-[12px] transition-all duration-200"
-                  >
-                    {slide.cta2}
-                  </Link>
+                  {slide.cta2Link === "/layanan/pendirian-badan-usaha" ? (
+                    <button
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-pendirian'))}
+                      className="flex-1 sm:flex-initial text-center justify-center inline-flex items-center px-4 sm:px-7 py-3 bg-white border border-gray-300 sm:bg-[#F3EBE4] sm:hover:bg-[#EAE0D7] active:scale-[0.98] text-[#1A1A1A] font-bold text-[12px] sm:text-[14.5px] rounded-[8px] sm:rounded-[12px] transition-all duration-200"
+                    >
+                      {slide.cta2}
+                    </button>
+                  ) : (
+                    <Link
+                      href={slide.cta2Link}
+                      className="flex-1 sm:flex-initial text-center justify-center inline-flex items-center px-4 sm:px-7 py-3 bg-white border border-gray-300 sm:bg-[#F3EBE4] sm:hover:bg-[#EAE0D7] active:scale-[0.98] text-[#1A1A1A] font-bold text-[12px] sm:text-[14.5px] rounded-[8px] sm:rounded-[12px] transition-all duration-200"
+                    >
+                      {slide.cta2}
+                    </Link>
+                  )}
                 </div>
 
                 <div className={`mt-6 sm:mt-8 flex flex-wrap gap-x-3 sm:gap-x-5 gap-y-2 ${badgesClass}`}>

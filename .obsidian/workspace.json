@@ -11,10 +11,14 @@
             "id": "4c9eb93ee49e144e",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "2026-06-26.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-06-26"
             }
           }
         ]
@@ -157,16 +161,49 @@
               "icon": "lucide-list",
               "title": "Outline"
             }
+          },
+          {
+            "id": "5c28763cc320bed3",
+            "type": "leaf",
+            "state": {
+              "type": "terminal-view",
+              "state": {
+                "tabs": [
+                  {
+                    "name": "Hermes 1",
+                    "color": "",
+                    "cwd": "/home/ainan-dev/Documents/Project/websiteel-app",
+                    "bufferSerial": "\r\n\u001b[33mConsole binaries not installed.\r\n\u001b[0mGo to Settings → Hermes Console to download them.\u001b[1B\u001b[49D"
+                  }
+                ],
+                "activeIndex": 0
+              },
+              "icon": "hermes-caduceus-wing",
+              "title": "Hermes Console"
+            }
+          },
+          {
+            "id": "9c4eaa23ad5b2c3e",
+            "type": "leaf",
+            "state": {
+              "type": "opencode-terminal",
+              "state": {},
+              "icon": "terminal",
+              "title": "Opencode"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 798.5
   },
   "left-ribbon": {
     "hiddenItems": {
+      "opencode:Opencode terminal": false,
+      "opencode:Opencode conversations": false,
+      "hermes-console:Open Hermes Console": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
