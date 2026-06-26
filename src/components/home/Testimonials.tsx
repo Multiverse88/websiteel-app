@@ -11,7 +11,7 @@ function ReviewCard({ item }: { item: typeof row1Reviews[0] }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-[240px] sm:w-[350px] flex-shrink-0 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-gray-150/70 shadow-[0_8px_30px_rgba(0,0,0,0.015)] flex flex-col justify-between text-left mx-2 sm:mx-3 transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] hover:border-gray-250/90 hover:z-20 relative cursor-pointer block select-none"
+      className="w-[240px] sm:w-[350px] flex-shrink-0 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-md border border-black/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.015)] flex flex-col justify-between text-left mx-2 sm:mx-3 transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] hover:border-gray-250/90 hover:z-20 relative cursor-pointer block select-none"
     >
       <div>
         <div className="flex space-x-0.5 mb-2.5 sm:mb-3.5">

@@ -85,7 +85,7 @@ export default function Pricing({
             const headerBg = pkg.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
             const cardBorder = pkg.isPopular
               ? "border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(153,2,2,0.08)] scale-[1.03] lg:-translate-y-2.5 relative z-10"
-              : "border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] transition-all duration-300";
+              : "shadow-md border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] transition-all duration-300";
 
             return (
               <div key={pIdx} className={`bg-white rounded-2xl sm:rounded-[32px] overflow-hidden ${cardBorder}`}>
@@ -121,7 +121,7 @@ export default function Pricing({
                   {pkg.groups.map((group, gIdx) => {
                     const isBoxed = group.isBoxed;
                     const containerClass = isBoxed
-                      ? "bg-gray-55/60 border border-gray-150/45 rounded-xl sm:rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 shadow-[0_2px_8px_rgba(0,0,0,0.01)]"
+                      ? "bg-gray-55/60 shadow-md border border-black/[0.03] rounded-xl sm:rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 shadow-[0_2px_8px_rgba(0,0,0,0.01)]"
                       : "space-y-1.5 sm:space-y-2.5";
                     
                     return (
@@ -171,7 +171,7 @@ export default function Pricing({
                     className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm ${
                       pkg.isPopular
                         ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
-                        : "border border-gray-200 text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
+                        : "shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
                     }`}
                   >
                     {pkg.buttonText}
@@ -186,7 +186,7 @@ export default function Pricing({
 
         {/* Footnotes Box */}
         {footnotes && footnotes.length > 0 && (
-          <div className="mt-12 bg-gray-55 border border-gray-150/40 rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed max-w-full font-medium">
+          <div className="mt-12 bg-gray-55 shadow-md border border-black/[0.03] rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed max-w-full font-medium">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             {footnotes.map((fn, idx) => {
               const label = typeof fn === "string" ? `(${idx + 1})` : `(${fn.label || idx + 1})`;

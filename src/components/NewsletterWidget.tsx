@@ -47,7 +47,7 @@ export default function NewsletterWidget() {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200/60 p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+    <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-6 sm:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
       {/* Mail Icon */}
       <div className="w-12 h-12 rounded-xl bg-[#FFF5F5] border border-red-100/50 flex items-center justify-center mb-5">
         <Mail className="w-5 h-5 text-[#990202]" />

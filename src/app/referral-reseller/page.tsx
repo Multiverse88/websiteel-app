@@ -18,12 +18,10 @@ import {
   ShieldCheck,
   Award
 } from "lucide-react";
+import FAQ from "@/components/FAQ";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function ReferralResellerPage() {
-  // FAQ state
-  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
-
   // Simulasi Penghasilan state
   const [selectedScenario, setSelectedScenario] = useState("Santai");
 
@@ -49,36 +47,36 @@ export default function ReferralResellerPage() {
 
   const faqs = [
     {
-      question: "Siapa saja yang bisa gabung program referral?",
-      answer: "Siapa saja boleh gabung! Tidak ada syarat khusus — usia min. 17 tahun, punya WhatsApp aktif & rekening bank. Cocok untuk: freelancer, konsultan, agen properti, content creator, mahasiswa, ibu rumah tangga, karyawan yang cari side income, atau pelaku bisnis dengan jaringan luas. Tidak ada syarat minimum follower atau pengalaman sales."
+      q: "Siapa saja yang bisa gabung program referral?",
+      a: "Siapa saja boleh gabung! Tidak ada syarat khusus — usia min. 17 tahun, punya WhatsApp aktif & rekening bank. Cocok untuk: freelancer, konsultan, agen properti, content creator, mahasiswa, ibu rumah tangga, karyawan yang cari side income, atau pelaku bisnis dengan jaringan luas. Tidak ada syarat minimum follower atau pengalaman sales."
     },
     {
-      question: "Apakah ada biaya pendaftaran atau minimum transaksi?",
-      answer: "Tidak ada biaya pendaftaran sama sekali (100% gratis) dan tidak ada target minimum transaksi bulanan. Anda bisa mereferensikan kapan saja tanpa tekanan target."
+      q: "Apakah ada biaya pendaftaran atau minimum transaksi?",
+      a: "Tidak ada biaya pendaftaran sama sekali (100% gratis) dan tidak ada target minimum transaksi bulanan. Anda bisa mereferensikan kapan saja tanpa tekanan target."
     },
     {
-      question: "Berapa lama komisi cair setelah klien bayar?",
-      answer: "Komisi Anda akan diproses dan ditransfer ke rekening bank Anda dalam waktu maksimal 3 hari kerja setelah klien melakukan pembayaran lunas kepada EasyLegal."
+      q: "Berapa lama komisi cair setelah klien bayar?",
+      a: "Komisi Anda akan diproses dan ditransfer ke rekening bank Anda dalam waktu maksimal 3 hari kerja setelah klien melakukan pembayaran lunas kepada EasyLegal."
     },
     {
-      question: "Bagaimana cara klien pakai kode referral saya?",
-      answer: "Saat klien menghubungi kami via WhatsApp atau formulir, mereka cukup menginfokan nama atau kode referral Anda kepada tim kami. Kami akan mencatat transaksi tersebut di bawah referral Anda secara otomatis."
+      q: "Bagaimana cara klien pakai kode referral saya?",
+      a: "Saat klien menghubungi kami via WhatsApp atau formulir, mereka cukup menginfokan nama atau kode referral Anda kepada tim kami. Kami akan mencatat transaksi tersebut di bawah referral Anda secara otomatis."
     },
     {
-      question: "Apakah komisi berbeda untuk setiap layanan?",
-      answer: "Ya, besaran komisi bervariasi bergantung pada jenis layanan yang diambil oleh klien. Layanan komisi terbesar dapat Anda lihat pada tabel Top 10 Komisi di atas."
+      q: "Apakah komisi berbeda untuk setiap layanan?",
+      a: "Ya, besaran komisi bervariasi bergantung pada jenis layanan yang diambil oleh klien. Layanan komisi terbesar dapat Anda lihat pada tabel Top 10 Komisi di atas."
     },
     {
-      question: "Apakah saya bisa pakai kode untuk diri sendiri?",
-      answer: "Tentu saja! Anda bisa menggunakan kode referral sendiri untuk mendapatkan diskon langsung (cashback) saat mendirikan PT atau menggunakan layanan legalitas lainnya dari EasyLegal."
+      q: "Apakah saya bisa pakai kode untuk diri sendiri?",
+      a: "Tentu saja! Anda bisa menggunakan kode referral sendiri untuk mendapatkan diskon langsung (cashback) saat mendirikan PT atau menggunakan layanan legalitas lainnya dari EasyLegal."
     },
     {
-      question: "Layanan apa saja yang bisa direferralkan?",
-      answer: "Seluruh layanan EasyLegal yang berjumlah 90+ layanan dapat direferralkan, termasuk pendirian PT/CV, pendaftaran Merek/Paten, pengurusan KITAS/Visa, sertifikasi ISO, LKPM, hingga pembuatan perjanjian hukum."
+      q: "Layanan apa saja yang bisa direferralkan?",
+      a: "Seluruh layanan EasyLegal yang berjumlah 90+ layanan dapat direferralkan, termasuk pendirian PT/CV, pendaftaran Merek/Paten, pengurusan KITAS/Visa, sertifikasi ISO, LKPM, hingga pembuatan perjanjian hukum."
     },
     {
-      question: "Bagaimana cara mulai gabung?",
-      answer: "Sangat mudah! Klik tombol 'Daftar Gratis Sekarang' untuk menghubungi tim partnership kami melalui WhatsApp. Kami akan memverifikasi data Anda dan mengirimkan kode referral aktif Anda dalam waktu 5 menit."
+      q: "Bagaimana cara mulai gabung?",
+      a: "Sangat mudah! Klik tombol 'Daftar Gratis Sekarang' untuk menghubungi tim partnership kami melalui WhatsApp. Kami akan memverifikasi data Anda dan mengirimkan kode referral aktif Anda dalam waktu 5 menit."
     }
   ];
 
@@ -184,7 +182,7 @@ export default function ReferralResellerPage() {
                   </div>
 
                   {/* Checklist of Services */}
-                  <div className="space-y-4 mb-5 border-t border-b border-gray-100 py-5">
+                  <div className="space-y-4 mb-5 shadow-sm rounded-xl bg-gray-50/50 py-5 px-5">
                     {/* Item 1 */}
                     <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
                       <div className="flex items-center space-x-2.5">
@@ -695,7 +693,7 @@ export default function ReferralResellerPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
             {/* Testimonial 1 */}
-            <div className="relative bg-white border border-gray-200/80 rounded-[20px] p-6 sm:p-8 pt-10 sm:pt-12 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-all duration-300">
+            <div className="relative bg-white shadow-md border border-black/[0.04] rounded-[20px] p-6 sm:p-8 pt-10 sm:pt-12 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-all duration-300">
               <div className="absolute -top-4 left-6 bg-white px-2 text-[#990202] text-[48px] font-serif leading-none select-none">
                 “
               </div>
@@ -717,7 +715,7 @@ export default function ReferralResellerPage() {
             </div>
 
             {/* Testimonial 2 */}
-            <div className="relative bg-white border border-gray-200/80 rounded-[20px] p-6 sm:p-8 pt-10 sm:pt-12 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-all duration-300">
+            <div className="relative bg-white shadow-md border border-black/[0.04] rounded-[20px] p-6 sm:p-8 pt-10 sm:pt-12 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-all duration-300">
               <div className="absolute -top-4 left-6 bg-white px-2 text-[#990202] text-[48px] font-serif leading-none select-none">
                 “
               </div>
@@ -739,7 +737,7 @@ export default function ReferralResellerPage() {
             </div>
 
             {/* Testimonial 3 */}
-            <div className="relative bg-white border border-gray-200/80 rounded-[20px] p-6 sm:p-8 pt-10 sm:pt-12 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-all duration-300">
+            <div className="relative bg-white shadow-md border border-black/[0.04] rounded-[20px] p-6 sm:p-8 pt-10 sm:pt-12 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-all duration-300">
               <div className="absolute -top-4 left-6 bg-white px-2 text-[#990202] text-[48px] font-serif leading-none select-none">
                 “
               </div>
@@ -767,63 +765,7 @@ export default function ReferralResellerPage() {
 
 
       {/* ─── 6. FAQ SECTION ─── */}
-      <section id="faq" className="py-24 bg-white scroll-mt-16 border-t border-gray-100/50">
-        <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Section Header */}
-          <div className="text-center mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">FAQ</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
-              Pertanyaan tentang Program Referral.
-            </h2>
-            <p className="text-[15px] text-gray-550 font-medium leading-relaxed max-w-lg mx-auto">
-              Belum yakin? Mungkin jawabannya ada di sini.
-            </p>
-          </div>
-
-          {/* Accordion List */}
-          <div className="divide-y divide-gray-150 border-t border-b border-gray-150">
-            {faqs.map((faq, idx) => {
-              const isOpen = openFaqIdx === idx;
-              return (
-                <div key={idx} className="py-5">
-                  <button
-                    onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between text-left focus:outline-none group"
-                  >
-                    <span className={`text-[15px] sm:text-[16px] font-extrabold transition-colors duration-200 ${isOpen ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"}`}>
-                      {faq.question}
-                    </span>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 ${isOpen ? "bg-[#990202] text-white" : "bg-gray-100 text-gray-600 group-hover:bg-[#990202]/10"}`}>
-                      {isOpen ? (
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      ) : (
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                        </svg>
-                      )}
-                    </div>
-                  </button>
-                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[300px] mt-4 opacity-100" : "max-h-0 opacity-0"}`}>
-                    <p className="text-[13.5px] sm:text-[14px] text-gray-550 font-medium leading-relaxed">
-                      {idx === 0 ? (
-                        <>
-                          <strong className="text-gray-800 font-extrabold">Siapa saja boleh gabung!</strong> Tidak ada syarat khusus — usia min. 17 tahun, punya WhatsApp aktif &amp; rekening bank. Cocok untuk: freelancer, konsultan, agen properti, content creator, mahasiswa, ibu rumah tangga, karyawan yang cari side income, atau pelaku bisnis dengan jaringan luas. Tidak ada syarat minimum follower atau pengalaman sales.
-                        </>
-                      ) : (
-                        faq.answer
-                      )}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
+      <FAQ title="Pertanyaan tentang Program Referral." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
 
       {/* ─── 7. CTA SECTION ─── */}
       <section id="cta" className="py-24 relative overflow-hidden bg-white border-t border-gray-100">
@@ -874,7 +816,7 @@ export default function ReferralResellerPage() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin bertanya mengenai kemitraan referral.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 border border-gray-200 text-gray-850 font-extrabold text-[14.5px] rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 shadow-sm cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 shadow-md border border-black/[0.04] text-gray-850 font-extrabold text-[14.5px] rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 shadow-sm cursor-pointer"
             >
               Tanya Tim Kami
             </a>

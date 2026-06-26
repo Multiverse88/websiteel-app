@@ -58,7 +58,7 @@ export default function TestimoniPage() {
                 </Link>
                 <Link
                   href="/"
-                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 border border-gray-200 text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
+                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
                 >
                   Lihat Layanan
                 </Link>
@@ -105,7 +105,7 @@ export default function TestimoniPage() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {stats.map((stat, idx) => (
-              <div key={idx} className="text-center space-y-1 sm:space-y-2 py-4 sm:py-6 border border-border/40 rounded-2xl bg-bg-light transition-all duration-300 hover:border-red-100 hover:shadow-md">
+              <div key={idx} className="text-center space-y-1 sm:space-y-2 py-4 sm:py-6 shadow-sm border border-black/[0.03] rounded-2xl bg-bg-light transition-all duration-300 hover:border-red-100 hover:shadow-md">
                 <div className="text-[26px] sm:text-[44px] font-extrabold text-[#990202] tracking-tight">{stat.value}</div>
                 <div className="text-[10px] sm:text-[13.5px] font-bold text-[#990202]/85">{stat.label}</div>
               </div>

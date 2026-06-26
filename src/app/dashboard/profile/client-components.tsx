@@ -42,9 +42,9 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
   return (
     <form action={formAction} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Left Column - Avatar Upload & Quick Info */}
-      <div className="bg-white border border-gray-150 rounded-xl p-6 shadow-sm flex flex-col items-center text-center gap-4 h-fit">
+      <div className="bg-white shadow-md border border-black/[0.03] rounded-xl p-6 shadow-sm flex flex-col items-center text-center gap-4 h-fit">
         <div className="relative group">
-          <div className="w-28 h-28 rounded-full border border-gray-200 overflow-hidden bg-gray-50 flex items-center justify-center relative">
+          <div className="w-28 h-28 rounded-full shadow-md border border-black/[0.04] overflow-hidden bg-gray-50 flex items-center justify-center relative">
             {avatarPreview ? (
               <Image
                 src={avatarPreview}
@@ -83,7 +83,7 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
       </div>
 
       {/* Right Column - Edit Form Details */}
-      <div className="lg:col-span-2 bg-white border border-gray-150 rounded-xl p-6 shadow-sm flex flex-col gap-5">
+      <div className="lg:col-span-2 bg-white shadow-md border border-black/[0.03] rounded-xl p-6 shadow-sm flex flex-col gap-5">
         <div className="border-b border-gray-100 pb-3">
           <h3 className="font-bold text-gray-900 text-sm">Informasi Profil</h3>
           <p className="text-xs text-gray-500">Sesuaikan data profil penulis Anda untuk dipajang di artikel</p>

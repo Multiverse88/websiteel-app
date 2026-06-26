@@ -194,7 +194,7 @@ export default function VirtualOffice() {
                 </a>
                 <button
                   onClick={scrollToPricing}
-                  className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold rounded-xl text-[12px] sm:text-[12px] sm:text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200 flex items-center"
+                  className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-white shadow-md border border-black/[0.04] text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold rounded-xl text-[12px] sm:text-[12px] sm:text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200 flex items-center"
                 >
                   Lihat Lokasi
                 </button>
@@ -553,7 +553,7 @@ export default function VirtualOffice() {
 
                 {/* Akses Transportasi */}
                 <div className="pt-2 sm:pt-2.5 border-t border-gray-100">
-                  <div className="bg-gray-50 border border-gray-150/45 rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+                  <div className="bg-gray-50 shadow-md border border-black/[0.03] rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2">
                     <h4 className="text-[8px] sm:text-[8px] sm:text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-0.5 sm:mb-1">AKSES TRANSPORTASI</h4>
                     <ul className="space-y-1.5 sm:space-y-2">
                       <li className="flex items-start gap-2 text-[11.5px] sm:text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
@@ -575,7 +575,7 @@ export default function VirtualOffice() {
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Jakarta.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-2.5 sm:py-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 text-center font-extrabold text-[12px] sm:text-[13.5px] rounded-xl shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
+                  className="block w-full py-2.5 sm:py-3.5 bg-white shadow-md border border-black/[0.04] text-gray-800 hover:bg-gray-50 hover:border-gray-300 text-center font-extrabold text-[12px] sm:text-[13.5px] rounded-xl shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
                 >
                   Pilih Jakarta
                 </a>
@@ -656,7 +656,7 @@ export default function VirtualOffice() {
 
                 {/* Akses Transportasi */}
                 <div className="pt-2 sm:pt-2.5 border-t border-gray-100">
-                  <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+                  <div className="bg-gray-55/60 shadow-md border border-black/[0.03] rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2">
                     <h4 className="text-[8px] sm:text-[8px] sm:text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-0.5 sm:mb-1">AKSES TRANSPORTASI</h4>
                     <ul className="space-y-1.5 sm:space-y-2">
                       <li className="flex items-start gap-2 text-[11.5px] sm:text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
@@ -687,7 +687,7 @@ export default function VirtualOffice() {
 
             {/* Card 3: Bekasi */}
             <div 
-              className="animate-fade-in-up bg-white rounded-[24px] sm:rounded-[32px] overflow-hidden border border-gray-150/50 shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+              className="animate-fade-in-up bg-white rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-md border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col h-full"
               style={{ animationDelay: "0.3s" }}
             >
               {/* Header Box */}
@@ -756,7 +756,7 @@ export default function VirtualOffice() {
 
                 {/* Akses Transportasi */}
                 <div className="pt-2 sm:pt-2.5 border-t border-gray-100">
-                  <div className="bg-gray-55/60 border border-gray-150/45 rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+                  <div className="bg-gray-55/60 shadow-md border border-black/[0.03] rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2">
                     <h4 className="text-[8px] sm:text-[8px] sm:text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-0.5 sm:mb-1">AKSES TRANSPORTASI</h4>
                     <ul className="space-y-1.5 sm:space-y-2">
                       <li className="flex items-start gap-2 text-[11.5px] sm:text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
@@ -778,7 +778,7 @@ export default function VirtualOffice() {
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Bekasi.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-2.5 sm:py-3.5 bg-white border border-gray-200 text-gray-800 hover:bg-gray-50 hover:border-gray-300 text-center font-extrabold text-[12px] sm:text-[13.5px] rounded-xl shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
+                  className="block w-full py-2.5 sm:py-3.5 bg-white shadow-md border border-black/[0.04] text-gray-800 hover:bg-gray-50 hover:border-gray-300 text-center font-extrabold text-[12px] sm:text-[13.5px] rounded-xl shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200"
                 >
                   Pilih Bekasi
                 </a>
@@ -857,7 +857,7 @@ export default function VirtualOffice() {
             >
 
               {/* Address Card */}
-              <div className="bg-white rounded-2xl border border-gray-150/50 shadow-[0_10px_25px_rgba(0,0,0,0.015)] p-4 sm:p-6 space-y-3 sm:space-y-4">
+              <div className="bg-white rounded-2xl shadow-md border border-black/[0.03] shadow-[0_10px_25px_rgba(0,0,0,0.015)] p-4 sm:p-6 space-y-3 sm:space-y-4">
                 <p className="text-[8.5px] sm:text-[8.5px] sm:text-[10px] font-black text-[#990202] uppercase tracking-[0.25em]">LOKASI OFFICE</p>
                 <h3 className="text-sm sm:text-[14.5px] font-extrabold text-gray-950 leading-relaxed">
                   Jl. Cihampelas No. 201A, RT/RW 01/02 Cipaganti, Kec Coblong, Kota Bandung, Jawa Barat 40131
@@ -951,7 +951,7 @@ export default function VirtualOffice() {
                 </a>
                 <a
                   href="#paket-harga"
-                  className="flex-1 text-center justify-center px-4 py-3 bg-[#F9FAFB] border border-gray-200 text-gray-800 hover:bg-gray-100 hover:border-gray-300 font-extrabold rounded-xl text-[12px] sm:text-[12px] sm:text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1"
+                  className="flex-1 text-center justify-center px-4 py-3 bg-[#F9FAFB] shadow-md border border-black/[0.04] text-gray-800 hover:bg-gray-100 hover:border-gray-300 font-extrabold rounded-xl text-[12px] sm:text-[12px] sm:text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1"
                 >
                   <span>Cek Lokasi</span>
                   <svg className="w-3.5 h-3.5 ml-0.5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">

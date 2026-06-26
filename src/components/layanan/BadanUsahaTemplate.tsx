@@ -132,7 +132,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center px-7 py-4 border border-gray-200 text-gray-800 font-bold text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center px-7 py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Lihat Paket Harga
                 </a>
@@ -157,7 +157,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
             <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-12 lg:mt-0">
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
                 
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-sm border border-black/[0.02] shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
                     src={c.heroImage}
                     alt={c.heroImageAlt}
@@ -170,7 +170,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                 {c.floatingBadges.map((badge, idx) => (
                   <div
                     key={idx}
-                    className={`absolute ${badge.position} bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3.5 w-[220px] transition-transform hover:-translate-y-1 duration-300`}
+                    className={`absolute ${badge.position} bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[220px] transition-transform hover:-translate-y-1 duration-300`}
                   >
                     <div className={`w-10 h-10 rounded-xl ${badge.iconBg} flex items-center justify-center ${badge.iconColor} flex-shrink-0`}>
                       {React.createElement(iconMap[badge.icon] || Building, { className: "w-5 h-5 stroke-[2.2]" })}
@@ -206,7 +206,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5 relative flex items-center justify-center">
               <div className="relative w-full max-w-[480px] lg:max-w-none">
-                <div className="relative overflow-hidden rounded-[32px] border border-gray-100 shadow-[0_15px_35px_rgba(0,0,0,0.04)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                <div className="relative overflow-hidden rounded-[32px] shadow-sm border border-black/[0.02] shadow-[0_15px_35px_rgba(0,0,0,0.04)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
                     src={c.pengertianImage}
                     alt={c.pengertianImageAlt}
@@ -216,7 +216,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                   />
                 </div>
 
-                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center space-x-3.5 w-[250px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[250px] transition-transform hover:-translate-y-1 duration-300">
                   <div className={`w-10 h-10 rounded-xl ${c.hukumIconBg} flex items-center justify-center ${c.hukumIconColor} flex-shrink-0`}>
                     {React.createElement(iconMap[c.hukumIcon] || FileText, { className: "w-5 h-5 stroke-[2.2]" })}
                   </div>
@@ -270,9 +270,9 @@ export default function BadanUsahaTemplate({ content }: Props) {
             {c.manfaatItems.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-3xl p-6 border border-gray-200/50 hover:border-gray-300 hover:shadow-md transition-all duration-300 flex flex-col items-start"
+                className="bg-white rounded-3xl p-6 shadow-md border border-black/[0.04] hover:border-gray-300 hover:shadow-md transition-all duration-300 flex flex-col items-start"
               >
-                <div className="w-10 h-10 rounded-xl border border-gray-100 flex items-center justify-center text-[#990202] mb-5 shadow-[0_2px_8px_rgba(0,0,0,0.01)] bg-white">
+                <div className="w-10 h-10 rounded-xl shadow-sm border border-black/[0.02] flex items-center justify-center text-[#990202] mb-5 shadow-[0_2px_8px_rgba(0,0,0,0.01)] bg-white">
                   {React.createElement(iconMap[item.Icon] || Shield, { className: "w-5 h-5 stroke-[2]" })}
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950 mb-2">{item.title}</h4>
@@ -323,7 +323,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                     {step.no}
                   </div>
                   
-                  <div className="bg-white border border-gray-150 rounded-[24px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                  <div className="bg-white shadow-md border border-black/[0.03] rounded-[24px] py-6 px-5 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
                     <div className="space-y-3">
                       
                       <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
@@ -392,7 +392,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
 
             <a
               href="/kontak"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[15px] font-normal">→</span>

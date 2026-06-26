@@ -55,7 +55,7 @@ function VideoEmbedSection() {
 
   return (
     <div ref={ref} className={`animate-scroll-reveal ${revealed ? "revealed" : ""}`}>
-      <div className="group relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-gray-100 hover:shadow-[0_25px_70px_rgba(0,0,0,0.12)] transition-all duration-500">
+      <div className="group relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] hover:shadow-[0_25px_70px_rgba(0,0,0,0.12)] transition-all duration-500">
         <div className="relative aspect-video w-full bg-black overflow-hidden">
           {isPlaying ? (
             <iframe
@@ -270,7 +270,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Main FLOATING card "01 Pilih Layanan" */}
-                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 border border-gray-100/60 animate-float-slow transition-all duration-300">
+                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
                   {/* Card Header */}
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
@@ -296,8 +296,8 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: NIB & OSS */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
+                      <div className="w-7 h-7 rounded-lg bg-white shadow-md border border-black/[0.04] flex items-center justify-center flex-shrink-0">
                         <FileText className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
@@ -307,8 +307,8 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: Daftar Merek */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
+                      <div className="w-7 h-7 rounded-lg bg-white shadow-md border border-black/[0.04] flex items-center justify-center flex-shrink-0">
                         <ShieldCheck className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
@@ -318,8 +318,8 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: ISO 9001 */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
+                      <div className="w-7 h-7 rounded-lg bg-white shadow-md border border-black/[0.04] flex items-center justify-center flex-shrink-0">
                         <Award className="w-3.5 h-3.5 text-gray-500" />
                       </div>
                       <div className="min-w-0">
@@ -331,7 +331,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating "Akta selesai" Badge */}
-                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center gap-2 z-40 animate-bounce-slow">
+                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2 z-40 animate-bounce-slow">
                   <div className="w-4.5 h-4.5 rounded-full bg-[#E8F5E9] flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3 text-[#2E7D32]" strokeWidth={4} />
                   </div>
@@ -342,7 +342,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating "Google 4.9 Rating" Badge */}
-                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
+                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
                   <div className="flex items-center justify-between">
                     <span className="text-amber-500 font-extrabold text-[12px] flex items-center gap-0.5">★ 4.9</span>
                     <span className="text-[8px] text-gray-500 font-black tracking-wider">GOOGLE</span>
@@ -361,7 +361,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating "Pendirian PT - proses" Badge */}
-                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
+                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
                   <div className="w-9 h-9 rounded-full border-2 border-red-500 flex items-center justify-center text-[10px] font-black text-red-600 flex-shrink-0 bg-red-50/50">
                     72%
                   </div>
@@ -408,7 +408,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* FLOATING card "02 Jadwal Konsultasi" */}
-                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 border border-gray-100/60 animate-float-slow transition-all duration-300">
+                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
                   {/* Card Header */}
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
@@ -434,7 +434,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: Zoom Meeting */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0 text-white">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                       </div>
@@ -445,7 +445,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: Telepon */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0 text-white">
                         <Phone className="w-3 h-3" />
                       </div>
@@ -456,7 +456,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: Kunjungan */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-purple-500 flex items-center justify-center flex-shrink-0 text-white">
                         <MapPin className="w-3 h-3" />
                       </div>
@@ -469,14 +469,14 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating "Konsultan Online" Badge */}
-                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center gap-2 z-40 animate-bounce-slow">
+                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2 z-40 animate-bounce-slow">
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping absolute -left-0.5" />
                   <span className="w-2 h-2 rounded-full bg-green-500" />
                   <span className="text-[10px] font-black text-gray-800">Konsultan Aktif</span>
                 </div>
 
                 {/* Floating Expert Rating Badge */}
-                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
+                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
                   <div className="flex items-center justify-between">
                     <span className="text-amber-500 font-extrabold text-[12px] flex items-center gap-0.5">★ 5.0</span>
                     <span className="text-[8px] font-black tracking-wider">RATING</span>
@@ -488,7 +488,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating Jadwal Badge */}
-                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
+                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
                   <div className="w-9 h-9 rounded-full border-2 border-emerald-500 flex items-center justify-center text-[10px] font-black text-emerald-600 flex-shrink-0 bg-emerald-50">
                     OK
                   </div>
@@ -535,7 +535,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* FLOATING card "03 Upload Dokumen" */}
-                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 border border-gray-100/60 animate-float-slow transition-all duration-300">
+                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
                   {/* Card Header */}
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
@@ -561,7 +561,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: KK & Akta Pendiri */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
@@ -572,7 +572,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: Pengecekan Nama */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
@@ -583,7 +583,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: Modal & Domisili */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0 text-white">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                       </div>
@@ -596,13 +596,13 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating Secure SSL Badge */}
-                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center gap-2 z-40 animate-bounce-slow">
+                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2 z-40 animate-bounce-slow">
                   <Lock className="w-3.5 h-3.5 text-[#B91C1C]" />
                   <span className="text-[10px] font-black text-gray-800">Secure Vault SSL</span>
                 </div>
 
                 {/* Floating Draft Akta Ready Card */}
-                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
+                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
                   <div className="leading-tight">
                     <div className="text-[10px] font-black text-gray-800">Draft Akta Selesai!</div>
                     <div className="text-[7.5px] font-bold text-emerald-600 mt-1 flex items-center gap-1">
@@ -613,7 +613,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating progress verifikasi */}
-                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
+                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
                   <div className="w-9 h-9 rounded-full border-2 border-[#B91C1C] flex items-center justify-center text-[10px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50/50">
                     92%
                   </div>
@@ -662,7 +662,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* FLOATING card "04 Hasil Digital" */}
-                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 border border-gray-100/60 animate-float-slow transition-all duration-300">
+                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
                   {/* Card Header */}
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
@@ -688,7 +688,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: SK Kemenkumham */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       </div>
@@ -699,7 +699,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: NIB & OSS */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       </div>
@@ -710,7 +710,7 @@ function CaraKerjaSection() {
                     </div>
 
                     {/* Option Box: NPWP Perusahaan */}
-                    <div className="border border-gray-100 bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
+                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
                       <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       </div>
@@ -723,13 +723,13 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating delivery/hardcopy Badge */}
-                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center gap-2 z-40 animate-bounce-slow">
+                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2 z-40 animate-bounce-slow">
                   <svg className="w-3.5 h-3.5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
                   <span className="text-[10px] font-black text-gray-800">Hardcopy Terkirim</span>
                 </div>
 
                 {/* Floating Sah & Resmi badge */}
-                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
+                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
                   <div className="leading-tight">
                     <div className="text-[10px] font-black text-gray-800">100% Sah & Resmi</div>
                     <div className="text-[7.5px] font-semibold text-gray-500 mt-1">Terdaftar di Kemenkumham & DJKI</div>
@@ -737,7 +737,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Floating Success Badge */}
-                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
+                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
                   <div className="w-9 h-9 rounded-full border-2 border-emerald-500 flex items-center justify-center text-[10px] font-black text-emerald-600 flex-shrink-0 bg-emerald-50">
                     100%
                   </div>
@@ -976,9 +976,9 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             
             {/* Row 1, Col 1: Proses cepat & terlacak */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-gray-100/60 shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
@@ -989,9 +989,9 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
 
             {/* Row 1, Col 2: Konsultan hukum berpengalaman */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-gray-100/60 shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
@@ -1002,9 +1002,9 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
 
             {/* Row 1, Col 3: Resmi terdaftar PSE Kominfo */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-gray-100/60 shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
@@ -1015,9 +1015,9 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
 
             {/* Row 1, Col 4: Harga transparan, tanpa kejutan */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-gray-100/60 shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -1048,9 +1048,9 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
 
             {/* Row 2, Col 3: 100% online & paperless */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-gray-100/60 shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
@@ -1061,11 +1061,11 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
 
             {/* Row 2, Col 4 (Span vertical / Full on mobile): Tracking real-time mockup card */}
-            <div className="bg-[#FAF9F6]/30 rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group col-span-2 lg:row-span-2 flex flex-col justify-between">
+            <div className="bg-[#FAF9F6]/30 rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group col-span-2 lg:row-span-2 flex flex-col justify-between">
               <div>
                 {/* Mockup Header on Mobile */}
                 <div className="flex items-center gap-2 sm:gap-3 mb-4">
-                  <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-gray-100/60 shadow-sm flex-shrink-0">
+                  <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm flex-shrink-0">
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012-2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
@@ -1079,7 +1079,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
                 {/* Mockup Tracking */}
                 <div className="space-y-2 sm:space-y-3 mb-2 sm:mb-8">
                   {/* Step 1 */}
-                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-gray-100/80 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-sm border border-black/[0.02] flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
                     <div className="flex items-center gap-2 sm:gap-3">
                       <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#10B981] flex items-center justify-center">
                         <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
@@ -1092,7 +1092,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
                   </div>
 
                   {/* Step 2 */}
-                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-gray-100/80 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-sm border border-black/[0.02] flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
                     <div className="flex items-center gap-2 sm:gap-3">
                       <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#10B981] flex items-center justify-center">
                         <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
@@ -1116,7 +1116,7 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
                   </div>
 
                   {/* Step 4 */}
-                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-gray-100/80 flex items-center justify-between opacity-50">
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-sm border border-black/[0.02] flex items-center justify-between opacity-50">
                     <div className="flex items-center gap-2 sm:gap-3">
                       <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 text-[10px] sm:text-[11px] font-bold">
                         4
@@ -1129,9 +1129,9 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
 
             {/* Row 3, Col 1 (Full on mobile): CS responsif 24/7 */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group col-span-2 lg:col-span-2 flex flex-col justify-center items-center text-center min-h-[120px] sm:min-h-[200px]">
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group col-span-2 lg:col-span-2 flex flex-col justify-center items-center text-center min-h-[120px] sm:min-h-[200px]">
               <div className="flex flex-col items-center">
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-gray-100/60 shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
@@ -1148,17 +1148,17 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
                 <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm">Dari UMKM kuliner sampai startup teknologi.</p>
               </div>
               <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full lg:w-auto">
-                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center border border-gray-100">
+                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center shadow-sm border border-black/[0.02]">
                   <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none">11.000+</div>
                   <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Bisnis terlayani</div>
                 </div>
-                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center border border-gray-100">
+                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center shadow-sm border border-black/[0.02]">
                   <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none flex items-center justify-center gap-0.5">
                     4.9<span className="text-[#B91C1C] text-xs sm:text-2xl">★</span>
                   </div>
                   <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Rating Google</div>
                 </div>
-                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center border border-gray-100">
+                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center shadow-sm border border-black/[0.02]">
                   <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none">5 thn</div>
                   <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Pengalaman</div>
                 </div>

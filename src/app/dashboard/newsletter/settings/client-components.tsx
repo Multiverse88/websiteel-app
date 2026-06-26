@@ -29,7 +29,7 @@ export function SmtpTestCard() {
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-150 p-6 shadow-sm flex flex-col gap-4">
+    <div className="bg-white rounded-xl shadow-md border border-black/[0.03] p-6 shadow-sm flex flex-col gap-4">
       <div className="flex flex-col gap-1 border-b border-gray-100 pb-3">
         <h3 className="font-bold text-gray-900 text-sm flex items-center gap-1.5">
           <Send className="w-4 h-4 text-[#990202]" />
@@ -56,7 +56,7 @@ export function SmtpTestCard() {
         <button
           type="submit"
           disabled={status === "loading" || status === "success"}
-          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold bg-white text-gray-700 hover:text-gray-900 border border-gray-200/80 hover:bg-gray-50 shadow-sm transition-all disabled:opacity-50"
+          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold bg-white text-gray-700 hover:text-gray-900 shadow-md border border-black/[0.04] hover:bg-gray-50 shadow-sm transition-all disabled:opacity-50"
         >
           {status === "loading" ? (
             <>
@@ -135,7 +135,7 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
   return (
     <form onSubmit={handleSave} className="flex flex-col gap-6">
       {/* Kartu Status Otomatisasi */}
-      <div className="bg-white rounded-xl border border-gray-150 p-6 shadow-sm flex flex-col gap-4">
+      <div className="bg-white rounded-xl shadow-md border border-black/[0.03] p-6 shadow-sm flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1">
             <h3 className="font-bold text-gray-900 text-sm">Status Otomatisasi</h3>
@@ -184,7 +184,7 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
       </div>
 
       {/* Kartu Desain Template default */}
-      <div className={`bg-white rounded-xl border border-gray-150 p-6 shadow-sm flex flex-col gap-5 transition-opacity duration-300 ${
+      <div className={`bg-white rounded-xl shadow-md border border-black/[0.03] p-6 shadow-sm flex flex-col gap-5 transition-opacity duration-300 ${
         autoBroadcast ? "opacity-100" : "opacity-60 pointer-events-none"
       }`}>
         <div className="flex flex-col gap-1 border-b border-gray-100 pb-3">
@@ -237,16 +237,16 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
           <div className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1">
             <RefreshCw className="w-3.5 h-3.5" /> Preview Hasil Auto-Broadcast
           </div>
-          <div className="border border-gray-200 rounded-lg overflow-hidden bg-gray-50 text-xs">
+          <div className="shadow-md border border-black/[0.04] rounded-lg overflow-hidden bg-gray-50 text-xs">
             <div className="bg-white px-4 py-2 border-b border-gray-200 text-gray-400">
               <span className="font-semibold text-gray-600">Subjek:</span> {getSubjectPreview()}
             </div>
-            <div className="p-4 bg-white m-3 rounded border border-gray-150 max-h-[160px] overflow-y-auto">
+            <div className="p-4 bg-white m-3 rounded shadow-md border border-black/[0.03] max-h-[160px] overflow-y-auto">
               <div className="mb-3 text-[#990202] font-bold text-sm pb-1.5 border-b border-red-50">Easy Legal</div>
               <p className="whitespace-pre-wrap text-gray-600 leading-relaxed mb-4 text-[11px]">
                 {getMessagePreview()}
               </p>
-              <div className="bg-gray-50 rounded-lg p-2.5 border border-gray-100 flex flex-col gap-0.5">
+              <div className="bg-gray-50 rounded-lg p-2.5 shadow-sm border border-black/[0.02] flex flex-col gap-0.5">
                 <div className="text-[9px] uppercase font-bold text-[#990202]">{sampleArticleCategory}</div>
                 <div className="font-bold text-gray-900 text-xs">{sampleArticleTitle}</div>
                 <div className="text-[10px] text-gray-400 mt-1">✓ Klik di email untuk membaca selengkapnya</div>

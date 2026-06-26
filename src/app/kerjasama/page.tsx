@@ -117,7 +117,7 @@ export default function KerjasamaPage() {
 
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6.5 flex flex-col items-center">
           {/* Badge Pill */}
-          <div className="inline-flex items-center space-x-2 bg-white py-1.5 px-4 rounded-full border border-gray-150/70 shadow-[0_2px_12px_rgba(0,0,0,0.015)] mb-1">
+          <div className="inline-flex items-center space-x-2 bg-white py-1.5 px-4 rounded-full shadow-md border border-black/[0.03] shadow-[0_2px_12px_rgba(0,0,0,0.015)] mb-1">
             <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
             <span className="text-[11.5px] font-black text-[#990202] tracking-wider">Program Kerjasama B2B</span>
           </div>
@@ -150,7 +150,7 @@ export default function KerjasamaPage() {
                   element.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="inline-flex items-center justify-center px-7 py-3.5 border border-gray-200 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 text-center shadow-sm cursor-pointer"
+              className="inline-flex items-center justify-center px-7 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 text-center shadow-sm cursor-pointer"
             >
               Lihat Jenis Mitra
             </a>
@@ -158,7 +158,7 @@ export default function KerjasamaPage() {
 
           {/* Centered Checkpoints Row in white rounded-full pill */}
           <div className="pt-6">
-            <div className="inline-flex flex-col sm:flex-row items-center sm:space-x-8 space-y-2 sm:space-y-0 bg-white border border-gray-150/70 py-3.5 px-8 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.015)]">
+            <div className="inline-flex flex-col sm:flex-row items-center sm:space-x-8 space-y-2 sm:space-y-0 bg-white shadow-md border border-black/[0.03] py-3.5 px-8 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.015)]">
               {/* Checkpoint 1 */}
               <div className="flex items-center space-x-1.5 text-[12px] sm:text-[12.5px] text-gray-500 font-semibold">
                 <Check className="w-3.5 h-3.5 text-[#990202]" strokeWidth={4} />
@@ -570,7 +570,7 @@ export default function KerjasamaPage() {
                 </div>
 
                 {/* Consent Checkbox / Info */}
-                <div className="bg-[#FAF9F7] rounded-xl p-4.5 border border-gray-150/40 text-center text-[12.5px] sm:text-[13px] text-gray-600 font-semibold leading-relaxed">
+                <div className="bg-[#FAF9F7] rounded-xl p-4.5 shadow-md border border-black/[0.03] text-center text-[12.5px] sm:text-[13px] text-gray-600 font-semibold leading-relaxed">
                   Saya menyetujui EasyLegal memproses data ini untuk follow-up kerjasama sesuai <Link href="/kebijakan-privasi" className="text-[#990202] underline hover:text-[#800000]">Kebijakan Privasi</Link>.
                 </div>
 
@@ -621,7 +621,7 @@ export default function KerjasamaPage() {
                   </p>
                 </div>
 
-                <div className="bg-[#FAF9F7] rounded-2xl p-5 border border-gray-150/40 text-left max-w-md mx-auto space-y-2 text-[13px] sm:text-[13.5px] text-gray-650 font-semibold">
+                <div className="bg-[#FAF9F7] rounded-2xl p-5 shadow-md border border-black/[0.03] text-left max-w-md mx-auto space-y-2 text-[13px] sm:text-[13.5px] text-gray-650 font-semibold">
                   <div className="flex justify-between border-b border-gray-200/50 pb-2">
                     <span className="text-gray-400">Program</span>
                     <span className="text-gray-900 font-extrabold text-right">{formData.partnershipType}</span>
@@ -664,7 +664,7 @@ export default function KerjasamaPage() {
                         proposal: ""
                       });
                     }}
-                    className="inline-flex items-center justify-center px-6 py-3.5 border border-gray-200 text-gray-800 font-extrabold text-[14px] rounded-xl bg-white hover:bg-gray-50 transition-colors cursor-pointer text-center flex-1"
+                    className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[14px] rounded-xl bg-white hover:bg-gray-50 transition-colors cursor-pointer text-center flex-1"
                   >
                     Kirim Ulang
                   </button>

@@ -45,10 +45,10 @@ export default function Benefits({
           {items.map((item, idx) => (
             <div
               key={idx}
-              className="bg-gray-55/60 border border-gray-150/45 rounded-3xl p-6.5 hover:shadow-md hover:border-gray-200 transition-all duration-300 flex flex-col space-y-4 shadow-[0_2px_8px_rgba(0,0,0,0.01)]"
+              className="bg-gray-55/60 shadow-md border border-black/[0.03] rounded-3xl p-6.5 hover:shadow-md hover:border-gray-200 transition-all duration-300 flex flex-col space-y-4 shadow-[0_2px_8px_rgba(0,0,0,0.01)]"
             >
               {/* White Box for the Red Icon */}
-              <div className="w-10 h-10 bg-white border border-gray-150/40 rounded-xl flex items-center justify-center text-[#990202] flex-shrink-0 shadow-sm">
+              <div className="w-10 h-10 bg-white shadow-md border border-black/[0.03] rounded-xl flex items-center justify-center text-[#990202] flex-shrink-0 shadow-sm">
                 {item.icon}
               </div>
               
