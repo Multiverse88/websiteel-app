@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   Check,
@@ -17,7 +17,6 @@ import {
   AlertCircle,
   MapPin,
   TrendingUp,
-  ChevronDown,
   BookOpen,
   Award,
   Calendar,
@@ -27,16 +26,10 @@ import {
   Menu
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
+import FAQ from "@/components/FAQ";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function PerjanjianPerkawinan() {
-  // State for FAQ expanded accordions (default: index 0 expanded)
-  const [expandedFaqIdx, setExpandedFaqIdx] = useState<number | null>(0);
-
-  const toggleFaq = (idx: number) => {
-    setExpandedFaqIdx((prev) => (prev === idx ? null : idx));
-  };
-
   const scrollToPricing = (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById("paket-harga");
@@ -125,7 +118,7 @@ export default function PerjanjianPerkawinan() {
     },
   ];
 
-  const faqItems = [
+  const faqs = [
     {
       q: "Apa Beda Perjanjian Pra-Nikah dengan Pasca-Nikah?",
       a: "<strong>Perjanjian Pra-Nikah</strong> dibuat <strong>sebelum menikah</strong> & berlaku sejak hari pernikahan. <strong>Perjanjian Pasca-Nikah</strong> dibuat <strong>setelah menikah</strong> berdasarkan putusan Mahkamah Konstitusi No. 69/PUU-XIII/2015 yang mengakui keabsahannya. Keduanya sama sah secara hukum — bedanya cuma <strong>waktu pembuatan</strong>."
@@ -915,68 +908,7 @@ export default function PerjanjianPerkawinan() {
       </section>
 
       {/* ─── 7. FAQ SECTION ─── */}
-      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
-        <div className="max-w-[1000px] mx-auto px-6 sm:px-8 text-center">
-
-          {/* Section Header */}
-          <div className="mb-8 sm:mb-16 space-y-4">
-            <p className="text-[11.5px] font-black text-[#990202] uppercase tracking-[0.22em]">FAQ</p>
-            <h2 className="font-inter text-[36px] sm:text-[40px] font-extrabold text-gray-900 leading-tight tracking-tight">
-              Pertanyaan seputar Perjanjian Perkawinan.
-            </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
-              Belum yakin? Mungkin jawabannya ada di sini.
-            </p>
-          </div>
-
-          {/* Custom Accordion FAQ List */}
-          <div className="border-t border-b border-gray-150 divide-y divide-gray-150 max-w-[860px] mx-auto">
-            {faqItems.map((faq, idx) => {
-              const isExpanded = expandedFaqIdx === idx;
-              return (
-                <div key={idx} className="py-6 text-left transition-all duration-300">
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"
-                  >
-                    <span className={`text-[15px] sm:text-[16px] font-black leading-snug transition-colors duration-200 pr-6 ${isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"
-                      }`}>
-                      {faq.q}
-                    </span>
-
-                    {/* Circle icon container */}
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isExpanded
-                        ? "bg-[#990202] text-white shadow-sm"
-                        : "bg-[#F5F5F5] text-gray-700 hover:bg-gray-200"
-                      }`}>
-                      {isExpanded ? (
-                        <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="3.5" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      ) : (
-                        <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="3.5" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                      )}
-                    </div>
-                  </button>
-
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? "max-h-[500px] mt-4.5 opacity-100" : "max-h-0 opacity-0"
-                      }`}
-                  >
-                    <p
-                      className="text-[13.5px] sm:text-[14px] text-gray-500 leading-relaxed font-semibold pr-10 pt-1 pb-1"
-                      dangerouslySetInnerHTML={{ __html: faq.a }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
+      <FAQ items={faqs} />
 
       {/* ─── 8. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-150/60">

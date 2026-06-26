@@ -71,7 +71,7 @@ function VideoEmbedSection() {
             <>
               {/* Static YouTube cover image placeholder - deprioritized for LCP */}
               <Image
-                src="https://img.youtube.com/vi/PHyO3XoAGEU/maxresdefault.jpg"
+                src="https://img.youtube.com/vi/PHyO3XoAGEU/hqdefault.jpg"
                 alt="EasyLegal Video Cover"
                 fill
                 sizes="(max-width: 768px) 100vw, 800px"
@@ -1129,8 +1129,8 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
 
             {/* Row 3, Col 1 (Full on mobile): CS responsif 24/7 */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group col-span-2 lg:col-span-1 flex flex-col justify-between min-h-[120px] sm:min-h-[200px]">
-              <div>
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group col-span-2 lg:col-span-2 flex flex-col justify-center items-center text-center min-h-[120px] sm:min-h-[200px]">
+              <div className="flex flex-col items-center">
                 <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-gray-100/60 shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -1142,24 +1142,24 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
             </div>
 
             {/* Row 3, Col 2-4: Stats block */}
-            <div className="bg-[#f9f9f9] sm:bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-transparent sm:border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] group col-span-2 lg:col-span-3 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 sm:gap-6">
+            <div className="bg-[#f9f9f9] sm:bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-transparent sm:border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] group col-span-2 lg:col-span-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 sm:gap-6">
               <div className="max-w-md">
                 <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-snug mb-1">Dipercaya pengusaha Indonesia di berbagai industri</h3>
                 <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm">Dari UMKM kuliner sampai startup teknologi.</p>
               </div>
               <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full lg:w-auto">
                 <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center border border-gray-100">
-                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] sm:text-gray-900 leading-none">8.000+</div>
+                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none">11.000+</div>
                   <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Bisnis terlayani</div>
                 </div>
                 <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center border border-gray-100">
-                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] sm:text-gray-900 leading-none flex items-center justify-center gap-0.5">
-                    4.9<span className="text-[#B91C1C] sm:text-red-600 text-xs sm:text-2xl">★</span>
+                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none flex items-center justify-center gap-0.5">
+                    4.9<span className="text-[#B91C1C] text-xs sm:text-2xl">★</span>
                   </div>
                   <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Rating Google</div>
                 </div>
                 <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center border border-gray-100">
-                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] sm:text-gray-900 leading-none">5 thn</div>
+                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none">5 thn</div>
                   <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Pengalaman</div>
                 </div>
               </div>

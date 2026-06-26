@@ -62,7 +62,7 @@ export default function LayananTemplate({ content }: Props) {
               <span>Beranda</span>
             </Link>
             <ChevronRight className="w-3 h-3 text-gray-300" />
-            <span className="hover:text-gray-900 transition-colors cursor-pointer">Layanan</span>
+            <Link href="/layanan" className="hover:text-gray-900 transition-colors">Layanan</Link>
             <ChevronRight className="w-3 h-3 text-gray-300" />
             <span className="font-bold text-gray-800">{c.nama}</span>
           </nav>
@@ -189,22 +189,7 @@ export default function LayananTemplate({ content }: Props) {
       </section>
 
       {/* ─── 4. FAQ SECTION ─── */}
-      {c.faqs?.length > 0 && (
-        <section className="py-8 sm:py-16 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-              <h2 className="text-[20px] sm:text-3xl font-extrabold text-gray-900 tracking-tight">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-[12.5px] sm:text-base text-gray-500 mt-2 sm:mt-3 font-medium">
-                Pertanyaan yang paling sering ditanyakan mengenai {c.nama}
-              </p>
-            </div>
-
-            <FAQ items={c.faqs} />
-          </div>
-        </section>
-      )}
+      {c.faqs?.length > 0 && <FAQ items={c.faqs} />}
 
       {/* ─── 5. CTA SECTION ─── */}
       <CTA
