@@ -57,7 +57,7 @@ export default function Setup2FAPage() {
     return (
       <div className="flex items-center justify-center min-h-[80vh] px-4">
         <div className="w-full max-w-md">
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8 text-center">
+          <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8 text-center">
             <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl text-[14px] text-[#990202] font-semibold">
               {error}
             </div>
@@ -90,7 +90,7 @@ export default function Setup2FAPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8">
+        <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8">
           {/* Instructions */}
           <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
             <p className="text-[13.5px] text-amber-800 font-semibold mb-2">
@@ -107,7 +107,7 @@ export default function Setup2FAPage() {
           {/* QR Code */}
           {qrCodeDataUrl && (
             <div className="mb-6 flex flex-col items-center justify-center">
-              <div className="bg-white p-3 border border-gray-200 rounded-2xl shadow-sm">
+              <div className="bg-white p-3 shadow-md border border-black/[0.04] rounded-2xl shadow-sm">
                 <Image
                   src={qrCodeDataUrl}
                   alt="2FA QR Code"

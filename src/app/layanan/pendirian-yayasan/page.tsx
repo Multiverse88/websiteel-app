@@ -363,7 +363,7 @@ export default function PendirianYayasan() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 border border-gray-200 text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-350 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-350 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Lihat Paket Harga
                 </a>
@@ -542,7 +542,7 @@ export default function PendirianYayasan() {
             {/* Card 1: Pembina */}
             <div className="bg-[#F9FAFB]/70 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-3xl p-6.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between items-start">
               <div className="space-y-4">
-                <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl border border-gray-200/60 bg-white flex items-center justify-center text-[#990202]">
+                <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl shadow-md border border-black/[0.04] bg-white flex items-center justify-center text-[#990202]">
                   <Users className="w-5.5 h-5.5 stroke-[2]" />
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950">Pembina</h4>
@@ -555,7 +555,7 @@ export default function PendirianYayasan() {
             {/* Card 2: Pengurus */}
             <div className="bg-[#F9FAFB]/70 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-3xl p-6.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between items-start">
               <div className="space-y-4">
-                <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl border border-gray-200/60 bg-white flex items-center justify-center text-[#990202]">
+                <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl shadow-md border border-black/[0.04] bg-white flex items-center justify-center text-[#990202]">
                   <UserCheck className="w-5.5 h-5.5 stroke-[2]" />
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950">Pengurus</h4>
@@ -568,7 +568,7 @@ export default function PendirianYayasan() {
             {/* Card 3: Pengawas */}
             <div className="bg-[#F9FAFB]/70 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-3xl p-6.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between items-start">
               <div className="space-y-4">
-                <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl border border-gray-200/60 bg-white flex items-center justify-center text-[#990202]">
+                <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl shadow-md border border-black/[0.04] bg-white flex items-center justify-center text-[#990202]">
                   <Eye className="w-5.5 h-5.5 stroke-[2]" />
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950">Pengawas</h4>
@@ -581,7 +581,7 @@ export default function PendirianYayasan() {
             {/* Card 4: Status Hukum */}
             <div className="bg-[#F9FAFB]/70 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-3xl p-6.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col justify-between items-start">
               <div className="space-y-4">
-                <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl border border-gray-200/60 bg-white flex items-center justify-center text-[#990202]">
+                <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl shadow-md border border-black/[0.04] bg-white flex items-center justify-center text-[#990202]">
                   <ShieldCheck className="w-5.5 h-5.5 stroke-[2]" />
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950">Status Hukum</h4>

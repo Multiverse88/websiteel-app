@@ -116,3 +116,8 @@ notes/.obsidian/
 
 # Obsidian attachments (images/files dragged into notes)
 notes/**/attachments/
+
+# Data artikel besar — disimpan terpisah di luar repo
+prisma/articles-seed.json
+prisma/seed_original.ts
+*.sql

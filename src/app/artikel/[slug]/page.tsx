@@ -110,12 +110,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+type InlineRelated = { title: string; slug: string; category: string; coverImage: string; readTime: string } | null;
+
 // Simple custom markdown renderer to ensure clean semantic HTML with premium styling
-function renderMarkdownContent(text: string) {
-  const blocks = text.split("\n\n");
+function renderMarkdownContent(text: string, inlineRelated?: InlineRelated) {
+  // Pre-process: gabungkan item numbered list yang terpecah oleh blank line
+  // HANYA jika baris sebelum blank line JUGA adalah item list (bukan paragraf biasa)
+  const preprocessed = text.replace(
+    /(^\d+\..+)\n\n(\d+\.\s+)/gm,
+    (_, prevLine, nextNum) => prevLine + "\n" + nextNum
+  );
+
+  const blocks = preprocessed.split("\n\n");
   let headingCounter = 0;
 
-  return blocks.map((block, idx) => {
+  // Titik injeksi "Baca Juga": setelah ~50% blok konten, pilih sesudah heading terdekat
+  const midpoint = Math.floor(blocks.length * 0.5);
+  let injectAt = midpoint;
+  // Geser ke sesudah heading terdekat setelah midpoint
+  for (let i = midpoint; i < Math.min(midpoint + 5, blocks.length); i++) {
+    if (blocks[i].trim().startsWith("### ")) { injectAt = i + 1; break; }
+  }
+  const result = blocks.map((block, idx) => {
     const trimmed = block.trim();
 
     // Horizontal Rule
@@ -131,7 +147,7 @@ function renderMarkdownContent(text: string) {
           <img
             src={imgMatch[2]}
             alt={imgMatch[1] || ""}
-            className="w-full rounded-2xl shadow-lg border border-gray-100/80"
+            className="w-full rounded-2xl shadow-lg shadow-sm border border-black/[0.02]"
             loading="lazy"
           />
           {imgMatch[1] && (
@@ -182,7 +198,20 @@ function renderMarkdownContent(text: string) {
 
     // Numbered Lists
     if (/^\d+\.\s+/.test(trimmed)) {
-      const items = trimmed.split("\n").map((li) => li.replace(/^\d+\.\s+/, ""));
+      // Gabungkan baris yang mungkin terpecah akibat split("\n\n"), lalu pisah per item bernomor
+      const rawLines = trimmed.split("\n");
+      const items: string[] = [];
+      let current = "";
+      for (const line of rawLines) {
+        if (/^\d+\.\s+/.test(line)) {
+          if (current) items.push(current.trim());
+          current = line.replace(/^\d+\.\s+/, "");
+        } else {
+          current += " " + line;
+        }
+      }
+      if (current) items.push(current.trim());
+
       return (
         <ol key={idx} className="space-y-4 my-6 pl-1 list-none">
           {items.map((item, itemIdx) => {
@@ -207,6 +236,49 @@ function renderMarkdownContent(text: string) {
       </p>
     );
   });
+
+  // Injeksi inline related card setelah blok ke-injectAt
+  if (inlineRelated && result.length > 2) {
+    const clampedAt = Math.min(injectAt, result.length - 1);
+    result.splice(clampedAt, 0,
+      <a
+        key="inline-related"
+        href={`/artikel/${inlineRelated.slug}`}
+        className="group my-8 flex items-stretch gap-0 rounded-2xl border border-red-100 bg-gradient-to-r from-[#FFF5F5] to-white overflow-hidden hover:border-red-200 hover:shadow-md transition-all duration-200 no-underline"
+      >
+        {/* Accent bar */}
+        <span className="w-1 flex-shrink-0 bg-[#D62828] rounded-l-2xl" />
+        {/* Content */}
+        <span className="flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 flex-1">
+          <span className="flex-1">
+            <span className="block text-[10.5px] font-black uppercase tracking-widest text-[#990202] mb-1">
+              📖 Baca Juga
+            </span>
+            <span className="block text-[14.5px] font-bold text-gray-900 leading-snug group-hover:text-[#990202] transition-colors">
+              {inlineRelated.title}
+            </span>
+            <span className="block text-[11.5px] text-gray-400 mt-1">
+              {inlineRelated.category} · {inlineRelated.readTime}
+            </span>
+          </span>
+          {/* Thumbnail */}
+          <span className="hidden sm:block flex-shrink-0 w-20 h-14 rounded-xl overflow-hidden bg-gray-100">
+            <img
+              src={inlineRelated.coverImage}
+              alt={inlineRelated.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          </span>
+          {/* Arrow */}
+          <span className="flex-shrink-0 w-7 h-7 rounded-full bg-white border border-gray-100 flex items-center justify-center shadow-sm group-hover:bg-[#990202] group-hover:border-[#990202] transition-colors">
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-gray-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </span>
+      </a>
+    );
+  }
+
+  return result;
 }
 
 // Utility to parse **bold** text, [link](url), and ![alt](url) to JSX
@@ -225,18 +297,21 @@ function parseBoldText(text: string) {
           </strong>
         );
       }
-      // Link
+      // Link — strip **bold** wrapper dari teks link jika ada
       const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
       if (linkMatch) {
+        const rawLinkText = linkMatch[1];
+        const boldInLink = rawLinkText.match(/^\*\*(.+)\*\*$/);
+        const linkText = boldInLink ? boldInLink[1] : rawLinkText;
         return (
           <a
             key={index}
             href={linkMatch[2]}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#990202] font-semibold underline underline-offset-2 hover:text-[#B91C1C] transition-colors"
+            className={`text-[#990202] underline underline-offset-2 hover:text-[#B91C1C] transition-colors ${boldInLink ? "font-extrabold" : "font-semibold"}`}
           >
-            {linkMatch[1]}
+            {linkText}
           </a>
         );
       }
@@ -314,31 +389,38 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
   trackMetric("article_read", 1, { category: article.category, slug });
 
-  const relatedArticles = await prisma.article.findMany({
-    where: {
-      category: article.category,
-      slug: { not: article.slug },
-    },
-    take: 3,
+  // ── Smart Related Articles: keyword + category matching ──────────────────
+  // Ekstrak kata kunci bermakna dari judul artikel (min 4 karakter, skip stopwords)
+  const STOPWORDS = new Set(["yang", "untuk", "dengan", "dalam", "dari", "pada", "oleh", "atau",
+    "dan", "ini", "itu", "adalah", "akan", "sudah", "bisa", "cara", "agar", "jika",
+    "mana", "siapa", "apa", "bagaimana", "kenapa", "mengapa", "setelah", "sebelum",
+    "lebih", "serta", "juga", "namun", "tetapi", "karena", "saat", "ketika"]);
+  
+  const titleKeywords = article.title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(w => w.length >= 4 && !STOPWORDS.has(w));
+
+  // Ambil semua artikel kandidat (same category + recent lainnya), lalu score
+  const candidatePool = await prisma.article.findMany({
+    where: { slug: { not: article.slug } },
     orderBy: { createdAt: "desc" },
+    take: 60,
     select: { id: true, title: true, slug: true, coverImage: true, category: true, readTime: true }
   });
 
-  // If not enough related articles, fill with latest
-  let displayRelated = relatedArticles;
-  if (relatedArticles.length < 2) {
-    const moreArticles = await prisma.article.findMany({
-      where: {
-        slug: {
-          notIn: [article.slug, ...relatedArticles.map((a: { slug: string }) => a.slug)],
-        },
-      },
-      take: 3 - relatedArticles.length,
-      orderBy: { createdAt: "desc" },
-      select: { id: true, title: true, slug: true, coverImage: true, category: true, readTime: true }
-    });
-    displayRelated = [...relatedArticles, ...moreArticles];
-  }
+  // Scoring: +3 per keyword match di judul, +2 jika same category
+  const scored = candidatePool.map(a => {
+    const titleLower = a.title.toLowerCase();
+    const keywordScore = titleKeywords.filter(kw => titleLower.includes(kw)).length * 3;
+    const categoryScore = a.category === article.category ? 2 : 0;
+    return { ...a, score: keywordScore + categoryScore };
+  });
+
+  // Sort by score desc, ambil top 2
+  scored.sort((a, b) => b.score - a.score);
+  let displayRelated = scored.slice(0, 2);
 
   const headings = extractHeadings(article.content);
 
@@ -408,7 +490,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                       alt={article.author.name}
                       width={28}
                       height={28}
-                      className="rounded-full object-cover border border-gray-150 shadow-sm"
+                      className="rounded-full object-cover shadow-md border border-black/[0.03] shadow-sm"
                     />
                   ) : (
                     <div className="w-7 h-7 rounded-full bg-[#990202] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
@@ -448,7 +530,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
           {/* Wrapper for cover image */}
           <div className="max-w-[1000px] mx-auto mb-10">
             {/* ─── HERO IMAGE ─── */}
-            <div className="relative overflow-hidden rounded-[32px] border border-gray-150 shadow-[0_8px_30px_rgba(0,0,0,0.03)] bg-gray-50 aspect-[16/9] w-full">
+            <div className="relative overflow-hidden rounded-[32px] shadow-md border border-black/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.03)] bg-gray-50 aspect-[16/9] w-full">
               <Image
                 src={article.coverImage}
                 alt={article.title}
@@ -471,7 +553,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
             <div className="lg:col-span-8">
               {/* ─── ARTICLE BODY ─── */}
               <div className="prose-article mb-12">
-                {renderMarkdownContent(article.content)}
+                {renderMarkdownContent(article.content, displayRelated[1] ?? displayRelated[0] ?? null)}
               </div>
 
               {/* ─── TAGS ─── */}
@@ -481,7 +563,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                   <Link
                     key={idx}
                     href={`/artikel?tag=${encodeURIComponent(tag)}`}
-                    className="inline-flex px-3 py-1.5 rounded-lg text-[12px] font-bold text-gray-600 bg-gray-50 border border-gray-200/60 hover:bg-[#FFF5F5] hover:text-[#990202] hover:border-red-100 transition-colors cursor-pointer"
+                    className="inline-flex px-3 py-1.5 rounded-lg text-[12px] font-bold text-gray-600 bg-gray-50 shadow-md border border-black/[0.04] hover:bg-[#FFF5F5] hover:text-[#990202] hover:border-red-100 transition-colors cursor-pointer"
                   >
                     {tag}
                   </Link>
@@ -489,7 +571,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
               </div>
 
               {/* ─── AUTHOR CARD ─── */}
-              <div className="bg-[#FAFAFA] rounded-2xl border border-gray-200/60 p-6 flex flex-col gap-4 mb-10">
+              <div className="bg-[#FAFAFA] rounded-2xl shadow-md border border-black/[0.04] p-6 flex flex-col gap-4 mb-10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
                   <div className="flex items-center space-x-4">
                     {article.author?.avatar ? (
@@ -498,7 +580,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                         alt={article.author.name}
                         width={56}
                         height={56}
-                        className="rounded-full object-cover shadow-sm border border-gray-150"
+                        className="rounded-full object-cover shadow-sm shadow-md border border-black/[0.03]"
                       />
                     ) : (
                       <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[14px] font-black shadow-sm">
@@ -576,7 +658,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
               </a>
 
               {/* Tentang EasyLegal Card */}
-              <div className="bg-white border border-gray-200/70 rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.01)]">
+              <div className="bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.01)]">
                 <h4 className="text-[12.5px] font-extrabold text-gray-900 mb-1.5">
                   Tentang EasyLegal
                 </h4>

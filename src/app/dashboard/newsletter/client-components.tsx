@@ -49,7 +49,7 @@ export function BroadcastButton({ articleId, articleTitle }: { articleId: string
       {isOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div 
-            className="bg-white rounded-xl shadow-2xl border border-gray-100 w-full max-w-2xl max-h-[90vh] overflow-y-auto flex flex-col animate-in fade-in zoom-in-95 duration-200"
+            className="bg-white rounded-xl shadow-2xl shadow-sm border border-black/[0.02] w-full max-w-2xl max-h-[90vh] overflow-y-auto flex flex-col animate-in fade-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -102,16 +102,16 @@ export function BroadcastButton({ articleId, articleTitle }: { articleId: string
               {/* Email Live Preview (Desktop View Design) */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Live Preview Tampilan Email</label>
-                <div className="border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
+                <div className="shadow-md border border-black/[0.04] rounded-lg overflow-hidden bg-gray-50">
                   <div className="bg-white px-4 py-2 border-b border-gray-200 text-[11px] text-gray-400 flex items-center gap-1.5">
                     <span className="font-semibold text-gray-600">Subjek:</span> {subject || <span className="italic text-gray-300">Kosong</span>}
                   </div>
-                  <div className="p-5 font-sans text-sm text-gray-800 bg-white m-3 rounded shadow-sm border border-gray-150 max-h-[180px] overflow-y-auto">
+                  <div className="p-5 font-sans text-sm text-gray-800 bg-white m-3 rounded shadow-sm shadow-md border border-black/[0.03] max-h-[180px] overflow-y-auto">
                     <div className="mb-4 text-[#990202] font-bold text-base border-b border-red-100 pb-2">Easy Legal</div>
                     <p className="whitespace-pre-wrap text-gray-600 leading-relaxed mb-4 text-xs">
                       {customText || <span className="italic text-gray-300">Tulis pesan untuk melihat preview...</span>}
                     </p>
-                    <div className="bg-gray-50 rounded-lg p-3 border border-gray-100 flex flex-col gap-1">
+                    <div className="bg-gray-50 rounded-lg p-3 shadow-sm border border-black/[0.02] flex flex-col gap-1">
                       <div className="text-[10px] uppercase font-bold text-[#990202]">{`Kategori: ${articleTitle ? 'Legalitas' : ''}`}</div>
                       <div className="font-bold text-gray-900 text-xs">{articleTitle}</div>
                       <div className="text-[11px] text-gray-400 mt-1">✓ Klik di email untuk membaca selengkapnya</div>

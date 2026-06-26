@@ -486,7 +486,7 @@ export default function VisaKitas() {
 
           {/* Interactive Toggle Tabs */}
           <div className="flex justify-center mb-6 sm:mb-12">
-            <div className="inline-flex p-1.5 bg-gray-200/50 rounded-2xl border border-gray-200/40">
+            <div className="inline-flex p-1.5 bg-gray-200/50 rounded-2xl shadow-md border border-black/[0.04]">
               <button
                 onClick={() => setActiveCategory("visa")}
                 className={`px-5 py-2.5 rounded-xl text-[13px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
@@ -656,7 +656,7 @@ export default function VisaKitas() {
           </div>
 
           {/* Pricing Bottom Warning Alert */}
-          <div className="max-w-[960px] mx-auto bg-white rounded-2xl p-5 border border-gray-200 mt-6 sm:mt-12 flex items-start gap-3.5 shadow-sm text-left">
+          <div className="max-w-[960px] mx-auto bg-white rounded-2xl p-5 shadow-md border border-black/[0.04] mt-6 sm:mt-12 flex items-start gap-3.5 shadow-sm text-left">
             <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
             <p className="text-[13px] text-gray-600 font-semibold leading-relaxed">
               <strong className="font-extrabold text-[#990202]">Visa Bisnis</strong> hanya untuk kegiatan bisnis (meeting, audit, kunjungan klien) dan <strong className="font-extrabold text-gray-950">tidak memberikan izin bekerja</strong> di Indonesia. Untuk bekerja, perlu KITAS TKA. Berlaku 60 hari per kunjungan, bisa diperpanjang.

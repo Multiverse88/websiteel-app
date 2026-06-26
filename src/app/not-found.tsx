@@ -38,7 +38,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/artikel"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-gray-200 text-gray-700 hover:text-[#990202] hover:border-red-200 font-bold text-[14px] rounded-xl transition-all duration-200 bg-white"
+            className="inline-flex items-center gap-2 px-6 py-3 shadow-md border border-black/[0.04] text-gray-700 hover:text-[#990202] hover:border-red-200 font-bold text-[14px] rounded-xl transition-all duration-200 bg-white"
           >
             <span>Baca Artikel</span>
           </Link>
