@@ -118,8 +118,6 @@ notes/.obsidian/
 notes/**/attachments/
 
 # Data artikel besar — disimpan terpisah di luar repo
-prisma/articles-seed.json
-prisma/seed_original.ts
 # File SQL besar di root (bukan migration)
 /*.sql
 u947750278_easy.sql
