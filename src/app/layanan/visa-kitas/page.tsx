@@ -12,7 +12,6 @@ import {
   Award,
   Clock,
   ArrowRight,
-  ChevronDown,
   User,
   Star,
   Activity,
@@ -21,21 +20,16 @@ import {
   MapPin,
   Compass,
   TrendingUp,
-  HelpCircle,
-  ChevronUp
 } from "lucide-react";
+import FAQ from "@/components/FAQ";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function VisaKitas() {
   // State for interactive Pricing filter tabs
   const [activeCategory, setActiveCategory] = useState<"visa" | "investor" | "tka">("visa");
   
-  // State for FAQ expanded accordions (default: index 0 expanded)
-  const [expandedFaqIdx, setExpandedFaqIdx] = useState<number | null>(0);
 
-  const toggleFaq = (idx: number) => {
-    setExpandedFaqIdx((prev) => (prev === idx ? null : idx));
-  };
+
 
   const scrollToPricing = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -121,7 +115,7 @@ export default function VisaKitas() {
     ]
   };
 
-  const faqItems = [
+  const faqs = [
     {
       q: "Apa beda Visa Bisnis dengan KITAS?",
       a: "<strong>Visa Bisnis</strong> adalah izin kunjungan jangka pendek (60 hari) untuk kegiatan bisnis seperti meeting, audit, & kunjungan klien — <strong>tidak boleh untuk bekerja</strong>. <strong>KITAS</strong> adalah izin tinggal jangka menengah (6–24 bulan) untuk WNA yang ingin tinggal & beraktivitas resmi di Indonesia (investor, tenaga kerja, pelajar, pasangan WNI). KITAS lebih kompleks & membutuhkan sponsor (perusahaan/keluarga WNI)."
@@ -673,69 +667,7 @@ export default function VisaKitas() {
       </section>
 
       {/* ─── 4. FAQ SECTION ─── */}
-      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
-        <div className="max-w-[1000px] mx-auto px-6 sm:px-8 text-center">
-          
-          {/* Section Header */}
-          <div className="mb-8 sm:mb-16 space-y-4">
-            <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              Pertanyaan seputar Visa &amp; KITAS.
-            </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
-              Belum yakin? Mungkin jawabannya ada di sini.
-            </p>
-          </div>
-
-          {/* Custom Accordion FAQ List */}
-          <div className="border-t border-gray-150 divide-y divide-gray-150 max-w-[840px] mx-auto">
-            {faqItems.map((faq, idx) => {
-              const isExpanded = expandedFaqIdx === idx;
-              return (
-                <div key={idx} className="py-5 text-left transition-all duration-300">
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"
-                  >
-                    <span className={`text-[15.5px] sm:text-[16.5px] font-black leading-snug transition-colors duration-200 pr-4 ${
-                      isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"
-                    }`}>
-                      {faq.q}
-                    </span>
-                    
-                    {/* Circle icon container */}
-                    <div className={`w-7.5 h-7.5 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                      isExpanded ? "bg-[#990202] text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}>
-                      {isExpanded ? (
-                        <svg className="w-3 h-3 fill-current stroke-current" viewBox="0 0 24 24" strokeWidth="3" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
-                        </svg>
-                      ) : (
-                        <svg className="w-3 h-3 fill-current stroke-current" viewBox="0 0 24 24" strokeWidth="3" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                      )}
-                    </div>
-                  </button>
-
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      isExpanded ? "max-h-[500px] mt-4 opacity-100" : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    <p
-                      className="text-[14px] text-gray-500 leading-relaxed font-medium pr-8 pt-1"
-                      dangerouslySetInnerHTML={{ __html: faq.a }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
+      <FAQ title="Pertanyaan seputar Visa &amp; KITAS." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
 
       {/* ─── 5. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 relative overflow-hidden border-t border-gray-100">

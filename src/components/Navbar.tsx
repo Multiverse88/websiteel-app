@@ -49,6 +49,7 @@ export default function Navbar() {
       ],
     },
     { name: "NIB & OSS", desc: "NIB, OSS RBA & Perizinan Usaha", href: "/layanan/nib-oss" },
+    { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 27001 & lainnya", href: "/layanan/sertifikasi-iso" },
     { name: "Pengajuan PKP", desc: "Pengusaha Kena Pajak", href: "/layanan/pengajuan-pkp" },
     { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/layanan/visa-kitas" },
     { name: "PR & Media", desc: "Publikasi Media Online", href: "/layanan/pr-media" },
@@ -113,6 +114,7 @@ export default function Navbar() {
               onMouseLeave={() => { setIsLayananOpen(false); setIsPendirianOpen(false); }}
             >
               <button
+                onClick={() => setIsLayananOpen(!isLayananOpen)}
                 className={`flex items-center space-x-1 text-[14px] font-medium transition-colors ${
                   isLayananOpen
                     ? "text-dark font-semibold"
