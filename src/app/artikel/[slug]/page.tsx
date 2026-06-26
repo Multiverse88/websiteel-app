@@ -134,129 +134,201 @@ function cleanArticleUrl(url: string, articleTitle: string): string {
   return url;
 }
 
+interface Block {
+  type: "paragraph" | "heading" | "ul" | "ol" | "hr" | "image";
+  content?: string; // for single lines
+  items?: string[]; // for lists
+}
+
 // Simple custom markdown renderer to ensure clean semantic HTML with premium styling
 function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, articleTitle: string = "") {
-  // Pre-process: gabungkan item numbered list yang terpecah oleh blank line
-  // HANYA jika baris sebelum blank line JUGA adalah item list (bukan paragraf biasa)
-  const preprocessed = text.replace(
-    /(^\d+\..+)\n\n(\d+\.\s+)/gm,
-    (_, prevLine, nextNum) => prevLine + "\n" + nextNum
-  );
+  // 1. Normalize carriage returns
+  let cleanedText = text.replace(/\r\n/g, "\n");
 
-  const blocks = preprocessed.split("\n\n");
-  let headingCounter = 0;
+  // 2. Remove empty headings (e.g., "###" followed by optional spaces on its own line)
+  cleanedText = cleanedText.replace(/^###\s*$/gm, "");
 
-  // Titik injeksi "Baca Juga": setelah ~50% blok konten, pilih sesudah heading terdekat
-  const midpoint = Math.floor(blocks.length * 0.5);
-  let injectAt = midpoint;
-  // Geser ke sesudah heading terdekat setelah midpoint
-  for (let i = midpoint; i < Math.min(midpoint + 5, blocks.length); i++) {
-    if (blocks[i].trim().startsWith("### ")) { injectAt = i + 1; break; }
-  }
-  const result = blocks.map((block, idx) => {
-    const trimmed = block.trim();
+  // 3. Strip raw bold markers "**" around headings
+  cleanedText = cleanedText.replace(/^### \*\*\s*([^*]+?)\s*\*\*$/gm, "### $1");
 
-    // Horizontal Rule
-    if (trimmed === "---") {
-      return <hr key={idx} className="my-10 border-gray-200/60" />;
+  // 4. Convert tabbed list items (e.g. starting with \t or spaces then \t) to standard markdown list items "* "
+  cleanedText = cleanedText.replace(/^\s*\t+\s*/gm, "* ");
+
+  // 5. Pre-process numbered lists to merge items split by blank lines (only if they are list items)
+  cleanedText = cleanedText.replace(/(^\d+\..+)\n\n(\d+\.\s+)/gm, (_, prevLine, nextNum) => prevLine + "\n" + nextNum);
+
+  const lines = cleanedText.split("\n");
+  const parsedBlocks: Block[] = [];
+  let currentBlock: Block | null = null;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (trimmed === "") {
+      if (currentBlock) {
+        parsedBlocks.push(currentBlock);
+        currentBlock = null;
+      }
+      continue;
     }
 
-    // Image
+    if (trimmed === "---") {
+      if (currentBlock) parsedBlocks.push(currentBlock);
+      parsedBlocks.push({ type: "hr", content: trimmed });
+      currentBlock = null;
+      continue;
+    }
+
+    if (trimmed.startsWith("### ")) {
+      if (currentBlock) parsedBlocks.push(currentBlock);
+      parsedBlocks.push({ type: "heading", content: trimmed.replace("### ", "") });
+      currentBlock = null;
+      continue;
+    }
+
     const imgMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
     if (imgMatch) {
-      return (
-        <figure key={idx} className="my-8">
-          <img
-            src={imgMatch[2]}
-            alt={imgMatch[1] || ""}
-            className="w-full rounded-2xl shadow-lg shadow-sm border border-black/[0.02]"
-            loading="lazy"
-          />
-          {imgMatch[1] && (
-            <figcaption className="text-center text-[13px] text-gray-400 mt-3 italic">
-              {imgMatch[1]}
-            </figcaption>
-          )}
-        </figure>
-      );
+      if (currentBlock) parsedBlocks.push(currentBlock);
+      parsedBlocks.push({ type: "image", content: trimmed });
+      currentBlock = null;
+      continue;
     }
 
-    // Headings
-    if (trimmed.startsWith("### ")) {
-      headingCounter++;
-      const headingText = trimmed.replace("### ", "");
-      const headingId = headingText
-        .toLowerCase()
-        .replace(/[^a-z0-9\s]/g, "")
-        .replace(/\s+/g, "-");
-      return (
-        <h3
-          key={idx}
-          id={headingId}
-          className="font-inter text-[21px] sm:text-[23px] font-extrabold text-gray-950 mt-12 mb-5 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-3.5"
-        >
-          {headingText}
-        </h3>
-      );
-    }
+    const isUl = trimmed.startsWith("* ") || trimmed.startsWith("- ");
+    const isOl = /^\d+\.\s+/.test(trimmed);
 
-    // Bullet Lists
-    if (trimmed.startsWith("* ") || trimmed.startsWith("- ")) {
-      const items = trimmed.split("\n").map((li) => li.replace(/^[\*\-]\s+/, ""));
-      return (
-        <ul key={idx} className="space-y-3.5 my-6 pl-1 list-none">
-          {items.map((item, itemIdx) => {
-            const parsedItem = parseBoldText(item, articleTitle);
-            return (
-              <li key={itemIdx} className="text-[15px] leading-relaxed text-gray-600 relative pl-7 flex items-start">
-                <span className="absolute left-0 top-[9px] w-2 h-2 rounded-full bg-[#990202]/70" />
-                <span className="flex-1">{parsedItem}</span>
-              </li>
-            );
-          })}
-        </ul>
-      );
-    }
-
-    // Numbered Lists
-    if (/^\d+\.\s+/.test(trimmed)) {
-      // Gabungkan baris yang mungkin terpecah akibat split("\n\n"), lalu pisah per item bernomor
-      const rawLines = trimmed.split("\n");
-      const items: string[] = [];
-      let current = "";
-      for (const line of rawLines) {
-        if (/^\d+\.\s+/.test(line)) {
-          if (current) items.push(current.trim());
-          current = line.replace(/^\d+\.\s+/, "");
-        } else {
-          current += " " + line;
-        }
+    if (isUl) {
+      if (currentBlock && currentBlock.type !== "ul") {
+        parsedBlocks.push(currentBlock);
+        currentBlock = null;
       }
-      if (current) items.push(current.trim());
-
-      return (
-        <ol key={idx} className="space-y-4 my-6 pl-1 list-none">
-          {items.map((item, itemIdx) => {
-            const parsedItem = parseBoldText(item, articleTitle);
-            return (
-              <li key={itemIdx} className="text-[15px] leading-relaxed text-gray-600 flex items-start">
-                <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-red-50 text-[#990202] text-[11.5px] font-black mr-3.5 flex-shrink-0 mt-0.5 border border-red-100/40">
-                  {itemIdx + 1}
-                </span>
-                <span className="flex-1">{parsedItem}</span>
-              </li>
-            );
-          })}
-        </ol>
-      );
+      if (!currentBlock) {
+        currentBlock = { type: "ul", items: [] };
+      }
+      currentBlock!.items!.push(trimmed.replace(/^[\*\-]\s+/, ""));
+      continue;
     }
 
-    // Default Paragraph with Bold text parser
-    return (
-      <p key={idx} className="text-[15px] sm:text-[15.5px] leading-[1.85] text-gray-600 font-normal my-5">
-        {parseBoldText(trimmed, articleTitle)}
-      </p>
-    );
+    if (isOl) {
+      if (currentBlock && currentBlock.type !== "ol") {
+        parsedBlocks.push(currentBlock);
+        currentBlock = null;
+      }
+      if (!currentBlock) {
+        currentBlock = { type: "ol", items: [] };
+      }
+      currentBlock!.items!.push(trimmed.replace(/^\d+\.\s+/, ""));
+      continue;
+    }
+
+    // Paragraph
+    if (currentBlock && currentBlock.type !== "paragraph") {
+      parsedBlocks.push(currentBlock);
+      currentBlock = null;
+    }
+    if (!currentBlock) {
+      currentBlock = { type: "paragraph", content: "" };
+    }
+    currentBlock.content = currentBlock.content ? currentBlock.content + " " + trimmed : trimmed;
+  }
+
+  if (currentBlock) {
+    parsedBlocks.push(currentBlock);
+  }
+
+  // Titik injeksi "Baca Juga": setelah ~50% blok konten, pilih sesudah heading terdekat
+  const midpoint = Math.floor(parsedBlocks.length * 0.5);
+  let injectAt = midpoint;
+  // Geser ke sesudah heading terdekat setelah midpoint
+  for (let i = midpoint; i < Math.min(midpoint + 5, parsedBlocks.length); i++) {
+    if (parsedBlocks[i].type === "heading") {
+      injectAt = i + 1;
+      break;
+    }
+  }
+
+  const result = parsedBlocks.map((block, idx) => {
+    switch (block.type) {
+      case "hr":
+        return <hr key={idx} className="my-10 border-gray-200/60" />;
+
+      case "image": {
+        const imgMatch = block.content.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+        if (!imgMatch) return null;
+        return (
+          <figure key={idx} className="my-8">
+            <img
+              src={imgMatch[2]}
+              alt={imgMatch[1] || ""}
+              className="w-full rounded-2xl shadow-lg shadow-sm border border-black/[0.02]"
+              loading="lazy"
+            />
+            {imgMatch[1] && (
+              <figcaption className="text-center text-[13px] text-gray-400 mt-3 italic">
+                {imgMatch[1]}
+              </figcaption>
+            )}
+          </figure>
+        );
+      }
+
+      case "heading": {
+        const headingText = block.content;
+        const headingId = headingText
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, "")
+          .replace(/\s+/g, "-");
+        return (
+          <h3
+            key={idx}
+            id={headingId}
+            className="font-inter text-[21px] sm:text-[23px] font-extrabold text-gray-950 mt-12 mb-5 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-3.5"
+          >
+            {headingText}
+          </h3>
+        );
+      }
+
+      case "ul":
+        return (
+          <ul key={idx} className="space-y-3.5 my-6 pl-1 list-none">
+            {block.items!.map((item, itemIdx) => {
+              const parsedItem = parseBoldText(item, articleTitle);
+              return (
+                <li key={itemIdx} className="text-[15px] leading-relaxed text-gray-600 relative pl-7 flex items-start">
+                  <span className="absolute left-0 top-[9px] w-2 h-2 rounded-full bg-[#990202]/70" />
+                  <span className="flex-1">{parsedItem}</span>
+                </li>
+              );
+            })}
+          </ul>
+        );
+
+      case "ol":
+        return (
+          <ol key={idx} className="space-y-4 my-6 pl-1 list-none">
+            {block.items!.map((item, itemIdx) => {
+              const parsedItem = parseBoldText(item, articleTitle);
+              return (
+                <li key={itemIdx} className="text-[15px] leading-relaxed text-gray-600 flex items-start">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-red-50 text-[#990202] text-[11.5px] font-black mr-3.5 flex-shrink-0 mt-0.5 border border-red-100/40">
+                    {itemIdx + 1}
+                  </span>
+                  <span className="flex-1">{parsedItem}</span>
+                </li>
+              );
+            })}
+          </ol>
+        );
+
+      case "paragraph":
+      default:
+        return (
+          <p key={idx} className="text-[15px] sm:text-[15.5px] leading-[1.85] text-gray-600 font-normal my-5">
+            {parseBoldText(block.content, articleTitle)}
+          </p>
+        );
+    }
   });
 
   // Injeksi inline related card setelah blok ke-injectAt
@@ -303,53 +375,93 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
   return result;
 }
 
-// Utility to parse **bold** text, [link](url), and ![alt](url) to JSX
-function parseBoldText(text: string, articleTitle: string = "") {
-  const combined = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|!\[[^\]]*\]\([^)]+\))/g;
-  const parts = text.split(combined);
+// Utility to parse **bold** text, [link](url), and ![alt](url) to JSX elements
+function parseBoldText(text: string, articleTitle: string = ""): React.ReactNode[] {
+  // Regex to match links and images:
+  // Group 1: Optional image marker "!"
+  // Group 2: Alt/Text inside brackets
+  // Group 3: URL inside parentheses
+  const linkRegex = /(!?)\[([^\]]+)\]\(([^)]+)\)/g;
 
+  const elements: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match;
+
+  // Find all matches for links and images first
+  while ((match = linkRegex.exec(text)) !== null) {
+    const matchIndex = match.index;
+    const isImage = match[1] === "!";
+    const linkText = match[2];
+    const rawUrl = match[3];
+
+    // 1. Process text before the match for any **bold** markers
+    const beforeText = text.substring(lastIndex, matchIndex);
+    if (beforeText) {
+      elements.push(...parseOnlyBold(beforeText, `b-pre-${matchIndex}`));
+    }
+
+    // 2. Process the matched link or image
+    if (isImage) {
+      elements.push(
+        <img
+          key={`img-${matchIndex}`}
+          src={rawUrl}
+          alt={linkText}
+          className="max-w-full rounded-xl my-2 inline-block align-middle"
+          loading="lazy"
+        />
+      );
+    } else {
+      const cleanedUrl = cleanArticleUrl(rawUrl, articleTitle);
+      const isExternal = cleanedUrl.startsWith("http") || cleanedUrl.startsWith("https") || cleanedUrl.startsWith("//");
+      
+      // Determine if the entire link text is bolded, e.g. **Link Text**
+      const isBoldLink = linkText.startsWith("**") && linkText.endsWith("**");
+      const cleanLinkText = isBoldLink ? linkText.slice(2, -2) : linkText;
+      
+      // Parse any inline bold elements within the link text itself
+      const parsedLinkContent = parseOnlyBold(cleanLinkText, `link-content-${matchIndex}`);
+
+      elements.push(
+        <a
+          key={`link-${matchIndex}`}
+          href={cleanedUrl}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          className={`text-[#990202] underline underline-offset-2 hover:text-[#B91C1C] transition-colors ${
+            isBoldLink ? "font-extrabold" : "font-semibold"
+          }`}
+        >
+          {parsedLinkContent}
+        </a>
+      );
+    }
+
+    lastIndex = linkRegex.lastIndex;
+  }
+
+  // 3. Process remaining text after the last match
+  const afterText = text.substring(lastIndex);
+  if (afterText) {
+    elements.push(...parseOnlyBold(afterText, `b-post-${lastIndex}`));
+  }
+
+  return elements;
+}
+
+// Helper to parse **bold** markers in clean text segments
+function parseOnlyBold(text: string, baseKey: string): React.ReactNode[] {
+  // Regex split to locate **bold** text blocks
+  const boldRegex = /(\*\*[^*]+\*\*)/g;
+  const parts = text.split(boldRegex);
   return parts.map((part, index) => {
     if (index % 2 === 1) {
-      // Bold
-      const boldMatch = part.match(/^\*\*([^*]+)\*\*$/);
-      if (boldMatch) {
+      const match = part.match(/^\*\*([^*]+)\*\*$/);
+      if (match) {
         return (
-          <strong key={index} className="font-extrabold text-gray-900">
-            {boldMatch[1]}
+          <strong key={`${baseKey}-${index}`} className="font-extrabold text-gray-900">
+            {match[1]}
           </strong>
-        );
-      }
-      // Link — strip **bold** wrapper dari teks link jika ada
-      const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-      if (linkMatch) {
-        const rawLinkText = linkMatch[1];
-        const boldInLink = rawLinkText.match(/^\*\*(.+)\*\*$/);
-        const linkText = boldInLink ? boldInLink[1] : rawLinkText;
-        const cleanedUrl = cleanArticleUrl(linkMatch[2], articleTitle);
-        const isExternal = cleanedUrl.startsWith("http") || cleanedUrl.startsWith("https") || cleanedUrl.startsWith("//");
-        return (
-          <a
-            key={index}
-            href={cleanedUrl}
-            target={isExternal ? "_blank" : undefined}
-            rel={isExternal ? "noopener noreferrer" : undefined}
-            className={`text-[#990202] underline underline-offset-2 hover:text-[#B91C1C] transition-colors ${boldInLink ? "font-extrabold" : "font-semibold"}`}
-          >
-            {linkText}
-          </a>
-        );
-      }
-      // Inline Image
-      const imgMatch = part.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
-      if (imgMatch) {
-        return (
-          <img
-            key={index}
-            src={imgMatch[2]}
-            alt={imgMatch[1] || ""}
-            className="max-w-full rounded-xl my-2 inline-block align-middle"
-            loading="lazy"
-          />
         );
       }
     }
