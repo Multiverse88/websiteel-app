@@ -110,3 +110,9 @@ graphify-out/
 
 # Accidental uploads
 Telegram Desktop/
+
+# Obsidian vault config (machine-specific)
+notes/.obsidian/
+
+# Obsidian attachments (images/files dragged into notes)
+notes/**/attachments/

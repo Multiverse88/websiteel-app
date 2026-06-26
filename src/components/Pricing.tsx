@@ -81,7 +81,7 @@ export default function Pricing({
         {/* Pricing Grid */}
         <FadeIn delay={0.15}>
         <div className={`grid ${gridColsClass} gap-4 sm:gap-6 items-start`}>
-          {packages.map((pkg, pIdx) => {
+            {packages.map((pkg, pIdx) => {
             const headerBg = pkg.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
             const cardBorder = pkg.isPopular
               ? "border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(153,2,2,0.08)] scale-[1.03] lg:-translate-y-2.5 relative z-10"
@@ -192,10 +192,10 @@ export default function Pricing({
               const label = typeof fn === "string" ? `(${idx + 1})` : `(${fn.label || idx + 1})`;
               const text = typeof fn === "string" ? fn : fn.text;
               return (
-                <span key={idx} className={idx > 0 ? "ml-2" : ""}>
+                <span key={idx}>
+                  {idx > 0 && <span className="mx-2" />}
                   <strong className="font-extrabold text-gray-800 mr-1">{label}</strong>
                   <span dangerouslySetInnerHTML={{ __html: text }} />
-                  {idx < footnotes.length - 1 && " "}
                 </span>
               );
             })}
