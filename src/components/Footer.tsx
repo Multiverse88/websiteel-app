@@ -45,6 +45,7 @@ export default function Footer() {
     { name: "Sertifikasi ISO", href: "/layanan/sertifikasi-iso" },
     { name: "Visa & KITAS", href: "/layanan/visa-kitas" },
     { name: "Press Release", href: "/layanan/press-release" },
+    { name: "Apostille", href: "/layanan/apostille" },
   ];
 
   const perusahaanLinks = [
@@ -61,8 +62,8 @@ export default function Footer() {
     { name: "Cek Nama Merek", href: "/cek-nama" },
     { name: "Cek Kode KBLI", href: "/cek-kbli" },
     { name: "FAQ", href: "/kontak#faq" },
-    { name: "Kebijakan Privasi", href: "/tentang-kami" },
-    { name: "Syarat & Ketentuan", href: "/tentang-kami" },
+    { name: "Kebijakan Privasi", href: "/tentang-kami#privasi" },
+    { name: "Syarat & Ketentuan", href: "/tentang-kami#ketentuan" },
   ];
 
   return (

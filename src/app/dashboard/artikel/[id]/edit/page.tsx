@@ -466,7 +466,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                 <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                 <span className="text-[12px] font-bold text-amber-700 tracking-wide">CMS Panel</span>
               </div>
-              <h1 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+              <h1 className="font-heading text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 Edit Artikel
               </h1>
             </div>
@@ -1020,7 +1020,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                       cursor: text;
                     }
                     .prose-editor h3 {
-                      font-family: var(--font-inter), sans-serif;
+                      font-family: var(--font-heading), sans-serif;
                       font-size: 17px !important;
                       font-weight: 800 !important;
                       color: #030712 !important;
@@ -1185,7 +1185,7 @@ export default function EditArtikelPage({ params }: { params: Promise<{ id: stri
                         <span>{readTime || "5 menit baca"}</span>
                       </div>
                     </div>
-                    <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 leading-snug line-clamp-2">
+                    <h3 className="font-heading text-[18px] sm:text-[20px] font-extrabold text-gray-950 leading-snug line-clamp-2">
                       {title || "Judul artikel Anda akan tampil di sini..."}
                     </h3>
                     <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal line-clamp-3">

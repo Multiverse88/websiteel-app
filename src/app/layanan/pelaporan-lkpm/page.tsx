@@ -153,7 +153,7 @@ export default function PelaporanLKPM() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.15] tracking-tight">
+              <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.15] tracking-tight">
                 Lapor LKPM tepat waktu, <span className="text-[#990202]">hindari sanksi BKPM.</span>
               </h1>
 
@@ -341,7 +341,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PENGERTIAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu LKPM &amp; kenapa wajib lapor?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -492,7 +492,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PERIODE &amp; BATAS WAKTU</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Kapan harus lapor LKPM?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -620,7 +620,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DATA YANG DILAPORKAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa saja isi laporan LKPM?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -697,7 +697,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SANKSI JIKA TIDAK LAPOR</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Konsekuensi telat / tidak lapor LKPM.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -775,7 +775,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA JASA PELAPORAN LKPM</p>
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               2 paket sesuai skala usaha Anda.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -1011,7 +1011,7 @@ export default function PelaporanLKPM() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12.5px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">ALUR PELAPORAN DI OSS RBA</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               5 langkah submit laporan LKPM.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -1111,7 +1111,7 @@ export default function PelaporanLKPM() {
             
             {/* Left Column: Text content */}
             <div className="lg:col-span-7 space-y-4 text-left">
-              <h2 className="font-inter text-[32px] sm:text-[38px] font-black text-gray-900 leading-[1.2] tracking-tight">
+              <h2 className="font-heading text-[32px] sm:text-[38px] font-black text-gray-900 leading-[1.2] tracking-tight">
                 Mau lapor LKPM <span className="text-[#990202]">tanpa ribet?</span>
               </h2>
               <p className="text-[14.5px] sm:text-[15.5px] text-gray-500 leading-relaxed font-normal max-w-xl">

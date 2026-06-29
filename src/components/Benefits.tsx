@@ -30,7 +30,7 @@ export default function Benefits({
           <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
             {sectionTitleTag}
           </p>
-          <h2 className="font-inter text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight">
+          <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight">
             {sectionTitle}
           </h2>
           {sectionSubtitle && (

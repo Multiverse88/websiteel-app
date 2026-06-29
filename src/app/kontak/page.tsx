@@ -162,7 +162,7 @@ export default function Kontak() {
               <span className="text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Hubungi Kami</span>
             </div>
 
-            <h1 className="font-inter text-[20px] sm:text-[44px] lg:text-[48px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight tracking-tight mt-4 sm:mt-6">
+            <h1 className="font-heading text-[20px] sm:text-[44px] lg:text-[48px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight tracking-tight mt-4 sm:mt-6">
               Mari Bicarakan Kebutuhan <span className="text-[#990202]">Legal Bisnis</span> Anda.
             </h1>
               
@@ -191,7 +191,7 @@ export default function Kontak() {
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-inter text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
+                <h3 className="font-heading text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
                   0811-2345-6789
                 </h3>
                 
@@ -226,7 +226,7 @@ export default function Kontak() {
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-inter text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
+                <h3 className="font-heading text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
                   info@easylegal.id
                 </h3>
                 
@@ -259,7 +259,7 @@ export default function Kontak() {
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-inter text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
+                <h3 className="font-heading text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
                   (022) 1234-5678
                 </h3>
                 

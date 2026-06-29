@@ -36,7 +36,7 @@ export default function TestimoniPage() {
                 <span className="text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Testimoni</span>
               </div>
 
-              <h1 className="font-inter text-[26px] sm:text-[52px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[26px] sm:text-[52px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight">
                 Apa kata{" "}
                 <span className="relative inline-block text-[#990202] px-2 py-0.5 bg-red-500/5 rounded-lg border border-red-100/40">
                   11.000+ pengusaha

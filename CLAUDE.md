@@ -35,7 +35,7 @@ Playwright is configured for integration/smoke tests (runs via `npm test` or `np
 - `cp .env.example .env` for local dev. Required vars: `DATABASE_URL`, `DIRECT_URL`, `JWT_SECRET`. Optional: `SMTP_*`, `NEXT_PUBLIC_APP_URL`, `DISABLE_SECURE_COOKIES`.
 - Database is PostgreSQL (use `host.docker.internal` from the app container to reach a host-installed Postgres, per `docker-compose.yml`).
 - Prisma schema: `prisma/schema.prisma`. Migrations live in `prisma/migrations/`. Models: `User`, `Article`, `NewsletterSubscriber`, `NewsletterBroadcast`, `EmailLog`, `SystemSetting`. Author relation is optional with `onDelete: SetNull`.
-- Seeding (`prisma/seed.ts`) creates the default admin (`admin@easylegal.id` / `admin123`, bcrypt cost 12), default system settings, and 3 starter articles.
+- Seeding (`prisma/seed.ts`) seeds ~200 articles (10 inline + ~190 from `prisma/articles-seed.json`). Skips if articles already exist; use `FORCE_SEED=true` or `--force` to clear and re-seed. Does **not** create admin users or system settings.
 - The Prisma client is the standard global-singleton pattern in `src/lib/db.ts` (dev hot-reload safe).
 
 ## High-Level Architecture
@@ -74,8 +74,8 @@ websiteel-app/src
 There is a permanent redirect from `/layanan/pendirian-yayasan` → `/layanan/pendirian-badan-usaha/yayasan` (declared in `next.config.ts`).
 
 ### Article system
-- **Listing** (`src/app/artikel/page.tsx`): SSR, `dynamic = "force-dynamic"`, auto-seeds 3 default articles if DB is empty.
-- **Detail** (`src/app/artikel/[slug]/page.tsx`): SSR, custom markdown renderer in-file (supports `### headings`, `**bold**`, bullet/numbered lists, `---`); auto-generated ToC (`table-of-contents.tsx`); client-side `view-tracker.tsx` increments `viewCount`.
+- **Listing** (`src/app/artikel/page.tsx`): ISR with `revalidate = 60`.
+- **Detail** (`src/app/artikel/[slug]/page.tsx`): ISR (`revalidate = 300`), custom markdown renderer in-file (supports `### headings`, `**bold**`, bullet/numbered lists, `---`); auto-generated ToC (`table-of-contents.tsx`); client-side `view-tracker.tsx` increments `viewCount`.
 - **CMS** (`src/app/dashboard/artikel/tambah/`): client-component with live preview, file upload (5MB limit) or URL mode, 4 Unsplash preset images, calls `createArticle` Server Action.
 
 ### Newsletter system

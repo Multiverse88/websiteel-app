@@ -1,0 +1,386 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  .hero-wrap {
+    font-family: 'Inter', var(--font-sans);
+    background: #0A0A0A;
+    border-radius: 16px;
+    overflow: hidden;
+    min-height: 480px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 56px 52px 52px;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .hero-bg-accent {
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(196,30,30,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-bg-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(196,30,30,0.12);
+    border: 0.5px solid rgba(196,30,30,0.35);
+    border-radius: 100px;
+    padding: 5px 14px;
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E84242;
+  }
+  .hero-eyebrow-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #E84242;
+    animation: pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-title {
+    margin: 0 0 20px;
+    line-height: 1.0;
+  }
+  .hero-title-line1 {
+    display: block;
+    font-size: 58px;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -0.03em;
+  }
+  .hero-title-line2 {
+    display: block;
+    font-size: 58px;
+    font-weight: 900;
+    color: #C41E1E;
+    letter-spacing: -0.03em;
+  }
+  .hero-title-line3 {
+    display: block;
+    font-size: 22px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: -0.01em;
+    margin-top: 8px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.55);
+    margin: 0 0 32px;
+    max-width: 380px;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #C41E1E;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 22px;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: #A51818; }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    font-weight: 500;
+    border: 0.5px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 13px 22px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.45); color: #fff; }
+
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .stat-item {}
+  .stat-num {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+
+  .doc-card {
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: border-color 0.2s;
+  }
+  .doc-card:hover { border-color: rgba(255,255,255,0.22); }
+  .doc-card.featured {
+    background: rgba(196,30,30,0.08);
+    border-color: rgba(196,30,30,0.3);
+  }
+  .doc-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .doc-icon.red { background: rgba(196,30,30,0.2); }
+  .doc-icon.gray { background: rgba(255,255,255,0.07); }
+  .doc-info {}
+  .doc-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 3px;
+  }
+  .doc-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+  }
+  .doc-badge {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-green {
+    background: rgba(34,197,94,0.12);
+    color: #4ade80;
+    border: 0.5px solid rgba(34,197,94,0.25);
+  }
+  .badge-amber {
+    background: rgba(251,191,36,0.1);
+    color: #fbbf24;
+    border: 0.5px solid rgba(251,191,36,0.2);
+  }
+  .badge-muted {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.45);
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+
+  .process-strip {
+    background: rgba(255,255,255,0.03);
+    border: 0.5px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .proc-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+  .proc-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    flex-shrink: 0;
+  }
+  .proc-num.active {
+    background: #C41E1E;
+    border-color: #C41E1E;
+    color: #fff;
+  }
+  .proc-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+  .proc-text.active { color: rgba(255,255,255,0.8); }
+  .proc-arrow {
+    font-size: 12px;
+    color: rgba(255,255,255,0.15);
+    margin: 0 4px;
+  }
+</style>
+
+<h2 class="sr-only">Redesign hero section halaman layanan Apostille EasyLegal</h2>
+
+<div class="hero-wrap">
+  <div class="hero-bg-accent"></div>
+  <div class="hero-bg-line"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <span>Layanan Apostille Resmi</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="hero-title-line1">Apostille</span>
+      <span class="hero-title-line2">Indonesia</span>
+      <span class="hero-title-line3">Legalisasi Dokumen Internasional</span>
+    </h1>
+
+    <p class="hero-desc">
+      Legalisasi dokumen Indonesia untuk penggunaan di 129+ negara anggota. Proses mudah, cepat, dan bisa 100% online — tanpa perlu datang ke kantor.
+    </p>
+
+    <div class="hero-cta-row">
+      <a class="btn-primary" href="#">
+        <i class="ti ti-message-circle" aria-hidden="true"></i>
+        Konsultasi Gratis
+      </a>
+      <a class="btn-secondary" href="#">
+        Lihat Paket Harga
+        <i class="ti ti-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">129+</div>
+        <div class="stat-label">Negara Anggota</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Jenis Dokumen</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">≤3 Hari</div>
+        <div class="stat-label">Proses Kerja SLA</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="doc-card featured">
+      <div class="doc-icon red">
+        <i class="ti ti-file-certificate" style="color:#E84242;font-size:18px;" aria-hidden="true"></i>
+      </div>
+      <div class="doc-info">
+        <div class="doc-name">Akta Notaris / Perusahaan</div>
+        <div class="doc-sub">Kemenkumham RI · Convention de La Haye</div>
+      </div>
+      <span class="doc-badge badge-green">Selesai</span>
+    </div>
+
+    <div class="doc-card">
+      <div class="doc-icon gray">
+        <i class="ti ti-school" style="color:rgba(255,255,255,0.5);font-size:18px;" aria-hidden="true"></i>
+      </div>
+      <div class="doc-info">
+        <div class="doc-name">Ijazah & Transkrip Nilai</div>
+        <div class="doc-sub">Kemdikbud · Apostille Pendidikan</div>
+      </div>
+      <span class="doc-badge badge-amber">Proses</span>
+    </div>
+
+    <div class="doc-card">
+      <div class="doc-icon gray">
+        <i class="ti ti-heart-handshake" style="color:rgba(255,255,255,0.5);font-size:18px;" aria-hidden="true"></i>
+      </div>
+      <div class="doc-info">
+        <div class="doc-name">Dokumen Sipil & Pernikahan</div>
+        <div class="doc-sub">Kemendagri · Akta Catatan Sipil</div>
+      </div>
+      <span class="doc-badge badge-muted">Antre</span>
+    </div>
+
+    <div class="process-strip">
+      <div class="proc-step">
+        <div class="proc-num active">1</div>
+        <span class="proc-text active">Upload Dok.</span>
+      </div>
+      <span class="proc-arrow">→</span>
+      <div class="proc-step">
+        <div class="proc-num active">2</div>
+        <span class="proc-text active">Verifikasi</span>
+      </div>
+      <span class="proc-arrow">→</span>
+      <div class="proc-step">
+        <div class="proc-num">3</div>
+        <span class="proc-text">Proses Resmi</span>
+      </div>
+      <span class="proc-arrow">→</span>
+      <div class="proc-step">
+        <div class="proc-num">4</div>
+        <span class="proc-text">Terima Apostille</span>
+      </div>
+    </div>
+  </div>
+</div>

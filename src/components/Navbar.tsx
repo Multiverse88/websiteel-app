@@ -43,7 +43,7 @@ export default function Navbar() {
     { name: "Merek & HAKI", desc: "Pendaftaran Merek & HAKI DJKI", href: "/layanan/merek-haki" },
     {
       name: "Pendirian Badan Usaha",
-      desc: "Pendirian PT, CV, Yayasan, dll",
+      desc: "Pendirian PT, CV, Yayasan, dsb",
       href: "/layanan/pendirian-badan-usaha",
       sublinks: [
         { name: "PT", href: "/layanan/pendirian-badan-usaha/pt" },
@@ -57,13 +57,14 @@ export default function Navbar() {
       ],
     },
     { name: "NIB & OSS", desc: "NIB, OSS RBA & Perizinan Usaha", href: "/layanan/nib-oss" },
+    { name: "Apostille", desc: "Legalitas dokumen untuk luar negeri", href: "/layanan/apostille" },
     { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 27001 & lainnya", href: "/layanan/sertifikasi-iso" },
     { name: "Pengajuan PKP", desc: "Pengusaha Kena Pajak", href: "/layanan/pengajuan-pkp" },
     { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/layanan/visa-kitas" },
     { name: "PR & Media", desc: "Publikasi Media Online", href: "/layanan/pr-media" },
     { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/layanan/perjanjian-perkawinan" },
     { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/layanan/pelaporan-lkpm" },
-    { name: "Referral & Reseller", desc: "Program Kemitraan & Komisi", href: "/referral-reseller" },
+    { name: "Referensi & Reseller", desc: "Program Kemitraan & Komisi", href: "/referral-reseller" },
     { name: "Cek Nama PT", desc: "Cek Ketersediaan Nama PT", href: "/cek-nama" },
   ];
 
