@@ -62,8 +62,8 @@ export default function Footer() {
     { name: "Cek Nama Merek", href: "/cek-nama" },
     { name: "Cek Kode KBLI", href: "/cek-kbli" },
     { name: "FAQ", href: "/kontak#faq" },
-    { name: "Kebijakan Privasi", href: "/tentang-kami#privasi" },
-    { name: "Syarat & Ketentuan", href: "/tentang-kami#ketentuan" },
+    { name: "Kebijakan Privasi", href: "/kebijakan-privasi" },
+    { name: "Syarat & Ketentuan", href: "/syarat-ketentuan" },
   ];
 
   return (
@@ -109,7 +109,7 @@ export default function Footer() {
                 <span>info@easylegal.id</span>
               </a>
               <a
-                href={`https://wa.me/${config.whatsappNumber}`}
+                href="https://mauorder.online/easylegal-5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2.5 text-[14px] sm:text-[13px] font-bold text-[#1A1A1A] hover:text-[#D62828] transition-colors"
@@ -122,9 +122,9 @@ export default function Footer() {
             {/* Office addresses with side-aligned map pins */}
             <div className="space-y-4 pt-2">
               {[
-                { city: "Bandung", addr: "Jl. Asia Afrika No. 1, Bandung" },
-                { city: "Jakarta", addr: "Jl. Sudirman Kav. 52, Jakarta" },
-                { city: "Bekasi", addr: "Jl. Ahmad Yani No. 10, Bekasi" },
+                { city: "Bandung", addr: "Jl. Cihampelas No.201A, Bandung" },
+                { city: "Jakarta", addr: "Jl. TB Simatupang No.36, Jakarta Selatan" },
+                { city: "Bekasi", addr: "Emerald Commercial Summarecon Bekasi" },
               ].map((office, idx) => (
                 <div key={idx} className="flex items-start space-x-2.5">
                   <MapPin className="w-[15px] h-[15px] text-[#D62828] flex-shrink-0 mt-0.5" />
@@ -240,15 +240,15 @@ export default function Footer() {
               <div className="flex flex-wrap gap-x-5 gap-y-1.5 w-full">
                 <div>
                   <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Bandung</div>
-                  <div className="text-[11px] font-semibold text-gray-800">Jl. Asia Afrika No. 1</div>
+                  <div className="text-[11px] font-semibold text-gray-800">Jl. Cihampelas No.201A</div>
                 </div>
                 <div>
                   <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Jakarta</div>
-                  <div className="text-[11px] font-semibold text-gray-800">Jl. Sudirman Kav. 52</div>
+                  <div className="text-[11px] font-semibold text-gray-800">Jl. TB Simatupang No.36</div>
                 </div>
                 <div>
                   <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Bekasi</div>
-                  <div className="text-[11px] font-semibold text-gray-800">Jl. Ahmad Yani No. 10</div>
+                  <div className="text-[11px] font-semibold text-gray-800">Emerald Commercial Summarecon</div>
                 </div>
               </div>
             </div>
@@ -327,10 +327,10 @@ export default function Footer() {
           {/* Social media card-style boxes */}
           <div className="flex items-center space-x-2">
             {[
-              { Icon: IgIcon, href: "https://instagram.com/easylegal.id", label: "Instagram" },
+              { Icon: IgIcon, href: "https://instagram.com/id.easylegal", label: "Instagram" },
               { Icon: FbIcon, href: "https://facebook.com/easylegal.id", label: "Facebook" },
-              { Icon: LiIcon, href: "https://linkedin.com/company/easylegal", label: "LinkedIn" },
-              { Icon: YtIcon, href: "https://youtube.com/@easylegal", label: "YouTube" },
+              { Icon: LiIcon, href: "https://id.linkedin.com/company/easylegal-id", label: "LinkedIn" },
+              { Icon: YtIcon, href: "https://youtube.com/@easylegal.official", label: "YouTube" },
             ].map(({ Icon, href, label }) => (
               <a
                 key={label}

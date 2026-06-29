@@ -170,7 +170,7 @@ export const dataPT: BadanUsahaContent = {
       strikePrice: "Rp 6.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pembuatan PT."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pembuatan PT. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Dokumen Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -214,7 +214,7 @@ export const dataPT: BadanUsahaContent = {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pembuatan PT."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pembuatan PT. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Dokumen Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -257,7 +257,7 @@ export const dataPT: BadanUsahaContent = {
       strikePrice: "Rp 11.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pembuatan PT."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pembuatan PT. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
@@ -429,7 +429,7 @@ export const dataCV: BadanUsahaContent = {
       strikePrice: "Rp 4.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pembuatan CV."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pembuatan CV. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta Pendirian <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -462,7 +462,7 @@ export const dataCV: BadanUsahaContent = {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pembuatan CV."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pembuatan CV. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta Pendirian <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -494,7 +494,7 @@ export const dataCV: BadanUsahaContent = {
       strikePrice: "Rp 9.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pembuatan CV."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pembuatan CV. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
@@ -649,7 +649,7 @@ export const dataPMA: BadanUsahaContent = {
       strikePrice: "Rp 15.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian PT PMA."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Izin Prinsip BKPM <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -679,7 +679,7 @@ export const dataPMA: BadanUsahaContent = {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian PT PMA."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Izin Prinsip BKPM <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -713,7 +713,7 @@ export const dataPMA: BadanUsahaContent = {
       strikePrice: "Rp 30.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT PMA."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
@@ -872,7 +872,7 @@ export const dataPTPerorangan: BadanUsahaContent = {
       strikePrice: "Rp 3.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian PT Perorangan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Pendirian Online <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -899,7 +899,7 @@ export const dataPTPerorangan: BadanUsahaContent = {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian PT Perorangan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Pendirian Online <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -930,7 +930,7 @@ export const dataPTPerorangan: BadanUsahaContent = {
       strikePrice: "Rp 7.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT Perorangan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
@@ -1083,7 +1083,7 @@ export const dataFirma: BadanUsahaContent = {
       strikePrice: "Rp 4.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Firma."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Firma. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta Pendirian <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1109,7 +1109,7 @@ export const dataFirma: BadanUsahaContent = {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Firma."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Firma. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1136,7 +1136,7 @@ export const dataFirma: BadanUsahaContent = {
       strikePrice: "Rp 9.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Office",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Office Pendirian Firma."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Office Pendirian Firma. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1164,7 +1164,7 @@ export const dataFirma: BadanUsahaContent = {
       strikePrice: "Rp 11.300.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Prestige",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Firma."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Firma. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1306,7 +1306,7 @@ export const dataYayasan: BadanUsahaContent = {
       strikePrice: "Rp 6.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Yayasan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & SK Kemenkumham <strong>2–5 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1333,7 +1333,7 @@ export const dataYayasan: BadanUsahaContent = {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Yayasan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & SK Kemenkumham <strong>2–5 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1361,7 +1361,7 @@ export const dataYayasan: BadanUsahaContent = {
       strikePrice: "Rp 12.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Prestige",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
@@ -1511,7 +1511,7 @@ export const dataPerkumpulan: BadanUsahaContent = {
       strikePrice: "Rp 5.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Perkumpulan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Perkumpulan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & Pengesahan <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1534,7 +1534,7 @@ export const dataPerkumpulan: BadanUsahaContent = {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Perkumpulan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Perkumpulan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & Pengesahan <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1562,7 +1562,7 @@ export const dataPerkumpulan: BadanUsahaContent = {
 
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Perkumpulan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Perkumpulan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
@@ -1710,7 +1710,7 @@ export const dataKoperasi: BadanUsahaContent = {
       strikePrice: "Rp 7.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Koperasi."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Koperasi. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & SK Kemenkumham <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1733,7 +1733,7 @@ export const dataKoperasi: BadanUsahaContent = {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Koperasi."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Koperasi. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & SK Kemenkumham <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
@@ -1760,7 +1760,7 @@ export const dataKoperasi: BadanUsahaContent = {
       strikePrice: "Rp 14.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Koperasi."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Koperasi. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
