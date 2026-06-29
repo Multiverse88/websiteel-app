@@ -60,18 +60,22 @@ echo " Mode:      $(if $DRY_RUN; then echo 'DRY RUN'; else echo 'LIVE'; fi)"
 echo "========================================="
 
 # ── Check mc (MinIO Client) ──────────────────────────
-if ! command -v mc &>/dev/null; then
-  echo -e "${YELLOW}MinIO Client (mc) not found. Installing...${NC}"
-  curl -sSL https://dl.min.io/client/mc/release/linux-amd64/mc -o /usr/local/bin/mc
-  chmod +x /usr/local/bin/mc
+MC_BIN="$HOME/.local/bin/mc"
+export PATH="$HOME/.local/bin:$PATH"
+
+if ! command -v mc &>/dev/null && [ ! -f "$MC_BIN" ]; then
+  echo -e "${YELLOW}MinIO Client (mc) not found. Installing to $MC_BIN...${NC}"
+  mkdir -p "$HOME/.local/bin"
+  curl -sSL https://dl.min.io/client/mc/release/linux-amd64/mc -o "$MC_BIN"
+  chmod +x "$MC_BIN"
   echo -e "${GREEN}mc installed.${NC}"
 fi
 
 # ── Configure mc alias ───────────────────────────────
-mc alias set easylegal "$ENDPOINT" "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY" --api S3v4 2>/dev/null
+"$MC_BIN" alias set easylegal "$ENDPOINT" "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY" --api S3v4 2>/dev/null
 
 # ── Ensure bucket exists ─────────────────────────────
-mc mb easylegal/"$BUCKET" --ignore-existing 2>/dev/null || true
+"$MC_BIN" mb easylegal/"$BUCKET" --ignore-existing 2>/dev/null || true
 
 # ── File extensions to sync ──────────────────────────
 IMAGE_EXTS="jpg|jpeg|png|webp|gif|svg|ico|avif|mp4|mp3|pdf"
@@ -152,7 +156,7 @@ while IFS= read -r -d '' file; do
   file_size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file" 2>/dev/null || echo 0)
 
   # Skip if already exists on MinIO
-  if mc stat easylegal/"$BUCKET"/"$key" &>/dev/null 2>&1; then
+  if "$MC_BIN" stat easylegal/"$BUCKET"/"$key" &>/dev/null 2>&1; then
     skipped=$((skipped + 1))
     continue
   fi
@@ -166,9 +170,9 @@ while IFS= read -r -d '' file; do
 
   mime=$(get_mime "$ext_lower")
 
-  if mc cp "$file" "easylegal/$BUCKET/$key" --quiet 2>/dev/null; then
+  if "$MC_BIN" cp "$file" "easylegal/$BUCKET/$key" --quiet 2>/dev/null; then
     # Set cache headers
-    mc annotate "easylegal/$BUCKET/$key" \
+    "$MC_BIN" annotate "easylegal/$BUCKET/$key" \
       --metadata "Cache-Control=public, max-age=31536000, immutable" 2>/dev/null || true
     echo -e "  ${GREEN}✓${NC} ${rel_path} → ${key} ($(( file_size / 1024 ))KB)"
     uploaded=$((uploaded + 1))
