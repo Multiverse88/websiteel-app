@@ -89,6 +89,7 @@ DAILY-PLAN.md
 .agent/
 .agents/
 .claude/skills/
+.opencode/
 skills-lock.json
 docs/superpowers/
 design-system/
@@ -98,6 +99,7 @@ public/logo-berita/*.msi
 
 # Document files
 *.docx
+*.pdf
 COPYWRITING_AUDIT.md
 *.csv
 docs/mobile-responsive-optimization.md
@@ -110,6 +112,14 @@ graphify-out/
 
 # Accidental uploads
 Telegram Desktop/
+
+# Media files (local only, not needed on VPS)
+*.mp3
+*.mp4
+*.webm
+*.ogg
+*.wav
+*.opus
 
 # Obsidian vault config (machine-specific)
 notes/.obsidian/
