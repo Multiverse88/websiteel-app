@@ -253,7 +253,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
         return <hr key={idx} className="my-10 border-gray-200/60" />;
 
       case "image": {
-        const imgMatch = block.content.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+        const imgMatch = block.content?.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
         if (!imgMatch) return null;
         return (
           <figure key={idx} className="my-8">
@@ -273,7 +273,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
       }
 
       case "heading": {
-        const headingText = block.content;
+        const headingText = block.content ?? "";
         const headingId = headingText
           .toLowerCase()
           .replace(/[^a-z0-9\s]/g, "")
@@ -325,7 +325,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
       default:
         return (
           <p key={idx} className="text-[15px] sm:text-[15.5px] leading-[1.85] text-gray-600 font-normal my-5">
-            {parseBoldText(block.content, articleTitle)}
+            {parseBoldText(block.content ?? "", articleTitle)}
           </p>
         );
     }
