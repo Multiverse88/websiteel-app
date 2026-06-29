@@ -172,7 +172,7 @@ export default function PelaporanLKPM() {
                   Lihat Paket LKPM
                 </a>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pelaporan LKPM Online perusahaan saya.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pelaporan LKPM Online.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 border border-gray-250 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -882,7 +882,7 @@ export default function PelaporanLKPM() {
                 {/* Action Button */}
                 <div className="p-6 sm:p-7.5 pt-0">
                   <a
-                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Mikro Kecil seharga Rp 1.499.000.")}
+                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Mikro Kecil. Mohon info lengkap biaya dan prosesnya.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full py-3.5 text-center font-extrabold text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] transition-colors duration-200 cursor-pointer shadow-md shadow-red-900/10"
@@ -989,7 +989,7 @@ export default function PelaporanLKPM() {
                 {/* Action Button */}
                 <div className="p-6 sm:p-7.5 pt-0">
                   <a
-                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Menengah Besar seharga Rp 2.499.000.")}
+                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Menengah Besar. Mohon info lengkap biaya dan prosesnya.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full py-3.5 text-center font-extrabold text-[14px] rounded-xl text-gray-800 bg-white shadow-md border border-black/[0.04] hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-sm"
@@ -1123,7 +1123,7 @@ export default function PelaporanLKPM() {
             <div className="lg:col-span-5 flex flex-col items-stretch space-y-4 max-w-[380px] w-full lg:ml-auto text-left">
               {/* Crimson Button */}
               <a
-                href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pelaporan LKPM untuk perusahaan saya.")}
+                href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pelaporan LKPM.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer text-center w-full"
@@ -1136,7 +1136,7 @@ export default function PelaporanLKPM() {
 
               {/* White Button */}
               <a
-                href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai Pelaporan LKPM.")}
+                href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pelaporan LKPM.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[15px] bg-white hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow transition-all duration-200 cursor-pointer text-center w-full rounded-xl"

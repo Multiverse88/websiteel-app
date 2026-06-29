@@ -27,8 +27,10 @@ export function getLocalBusinessJsonLd() {
     priceRange: "$$",
     telephone: "+6281123456789",
     sameAs: [
-      "https://www.instagram.com/easylegal.id",
-      "https://www.linkedin.com/company/easylegal",
+      "https://www.instagram.com/id.easylegal",
+      "https://www.facebook.com/easylegal.id",
+      "https://www.youtube.com/@easylegal.official",
+      "https://id.linkedin.com/company/easylegal-id",
     ],
   };
 }
@@ -155,10 +157,10 @@ export function getOrganizationJsonLd() {
       availableLanguage: "Indonesian",
     },
     sameAs: [
-      "https://www.instagram.com/easylegal.id",
+      "https://www.instagram.com/id.easylegal",
       "https://www.facebook.com/easylegal.id",
-      "https://www.linkedin.com/company/easylegal",
-      "https://www.youtube.com/@easylegal",
+      "https://id.linkedin.com/company/easylegal-id",
+      "https://www.youtube.com/@easylegal.official",
     ],
   };
 }

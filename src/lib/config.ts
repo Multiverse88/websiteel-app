@@ -6,7 +6,7 @@ export const config = {
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6281123456789",
   
   // Default WhatsApp message
-  defaultWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.",
+  defaultWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.",
   
   // Website URL
   baseUrl: process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.my.id",
@@ -20,8 +20,8 @@ export const config = {
   },
 } as const;
 
-// Helper function to generate WhatsApp link
+// Helper function to generate WhatsApp link via mauorder rotator
 export function getWhatsAppLink(message?: string): string {
   const encodedMessage = encodeURIComponent(message || config.defaultWhatsAppMessage);
-  return `https://wa.me/${config.whatsappNumber}?text=${encodedMessage}`;
+  return `https://mauorder.online/easylegal-5?text=${encodedMessage}`;
 }
