@@ -33,6 +33,34 @@ const LinkedinIcon = () => (
   </svg>
 );
 
+// Helper component for team member cards
+const MemberCard = ({ member }: { member: { name: string; role: string; bio: string; img: string } }) => (
+  <div className="bg-white rounded-2xl sm:rounded-3xl shadow-md border border-black/[0.04] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col group">
+    <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
+      <Image
+        src={member.img}
+        alt={member.name}
+        fill
+        sizes="(max-width: 768px) 100vw, 300px"
+        className="object-contain object-bottom group-hover:scale-105 transition-transform duration-500"
+      />
+    </div>
+    <div className="p-4 sm:p-6 flex-grow flex flex-col justify-between">
+      <div className="space-y-2">
+        <div className="inline-flex items-center bg-[#FFF5F5] px-2 py-0.5 rounded-md border border-red-100/50">
+          <span className="text-[9px] sm:text-[10px] font-extrabold text-[#990202] tracking-wider uppercase">{member.role}</span>
+        </div>
+        <h3 className="font-heading text-sm sm:text-[17px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
+          {member.name}
+        </h3>
+        <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed font-normal line-clamp-2">
+          {member.bio}
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
 export default function TentangKami() {
   const stats = [
     { value: "11.000+", label: "Bisnis terlayani" },
@@ -75,14 +103,19 @@ export default function TentangKami() {
   ];
 
   const team = [
-    { name: "Andi Saputra", role: "Founder & CEO", bio: "Memimpin visi & strategi EasyLegal. 12+ tahun di legal tech.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=600&h=600&q=80" },
-    { name: "Maya Kusumawati", role: "Head of Legal", bio: "Lawyer senior, spesialis hukum perusahaan & investasi.", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=600&h=600&q=80" },
-    { name: "Reza Pratama", role: "Operations Lead", bio: "Memastikan setiap pengurusan beres tepat waktu & sesuai SLA.", img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?fit=crop&w=600&h=600&q=80" },
-    { name: "Dewi Lestari", role: "Customer Success", bio: "Memandu pengusaha dari konsultasi awal sampai dokumen di tangan.", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?fit=crop&w=600&h=600&q=80" },
-    { name: "Budi Hartono", role: "Senior Lawyer", bio: "Spesialis HAKI, merek dagang & perlindungan brand internasional.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=600&h=600&q=80" },
-    { name: "Siti Wahyuni", role: "Compliance Lead", bio: "Memastikan setiap proses sesuai regulasi & standar ISO.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=600&h=600&q=80" },
-    { name: "Bayu Setiawan", role: "Tech Lead", bio: "Membangun platform agar proses legal jadi semudah belanja online.", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?fit=crop&w=600&h=600&q=80" },
-    { name: "Linda Hartono", role: "Marketing Lead", bio: "Menyampaikan misi EasyLegal ke seluruh UMKM Indonesia.", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?fit=crop&w=600&h=600&q=80" },
+    // Legal Officers (LO)
+    { name: "Akmal Abdul Arik", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Akmal Abdul Arik, S.H..jpg" },
+    { name: "Risa Rizki Sharon", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Risa Rizki Sharon, S.H, M.H..jpg" },
+    { name: "Tiara Nabila", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Tiara Nabila, S.H..jpg" },
+    { name: "Fauzia Rahmawati", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Fauzia Rahmawati, S.H..jpg" },
+    { name: "Amelia Ingrid Taruna", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Amelia Ingrid Taruna, S.H..jpg" },
+
+    // Personal Legal Assistants (PLA)
+    { name: "Mohammad Faddly Argahari", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Mohammad Faddly Argahari, S.H..jpg" },
+    { name: "Naufal Nandi Pinto", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Naufal Nandi Pinto, S.H..jpg" },
+    { name: "Ela Yuniar", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Ela Yuniar, S.H..jpg" },
+    { name: "Mayang Cahyati", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Mayang Cahyati, S.H..jpg" },
+    { name: "Indiana Oscar", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Indiana Oscar, S.H..jpg" },
   ];
 
 
@@ -116,7 +149,7 @@ export default function TentangKami() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[26px] sm:text-[52px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[26px] sm:text-[52px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight">
                 Memudahkan legalitas untuk{" "}
                 <span className="relative inline-block text-[#990202] px-2 py-0.5 bg-red-500/5 rounded-lg border border-red-100/40">
                   setiap pengusaha
@@ -150,7 +183,7 @@ export default function TentangKami() {
             {/* Right Column: Hero Corporate Image + Badges */}
             <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-8 lg:mt-0">
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
-                
+
                 {/* Main Corporate Image Container */}
                 <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
                   <Image
@@ -160,7 +193,7 @@ export default function TentangKami() {
                     sizes="(max-width: 768px) 100vw, 480px"
                     className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
                   />
-                  
+
                   {/* Decorative Subtle Orange Logo at Top-Right */}
                   <div className="absolute top-5 right-5 bg-black/10 backdrop-blur-md p-2 rounded-xl border border-white/20">
                     <svg width="24" height="20" viewBox="0 0 24 20" fill="none" className="text-amber-500 w-6 h-6">
@@ -206,7 +239,7 @@ export default function TentangKami() {
             {/* Left: Team Image + Floating Badge */}
             <div className="lg:col-span-5 relative w-full flex items-center justify-center mb-8 lg:mb-0">
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
-                
+
                 {/* Main Team Image Container */}
                 <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] shadow-md border border-black/[0.04] shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[4/3] sm:aspect-[1.4] lg:aspect-[4/3]">
                   <Image
@@ -235,18 +268,18 @@ export default function TentangKami() {
             {/* Right: Story Text */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
               <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">Cerita Kami</p>
-              
-              <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
+
+              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
                 Lahir Dari Pengalaman{" "}
                 <span className="text-[#990202]">
                   Mengurus PT Sendiri.
                 </span>
               </h2>
-              
+
               <p className="text-[12.5px] sm:text-[15.5px] text-gray-600 leading-relaxed font-normal">
                 Founder kami pernah mengalaminya — bolak-balik ke notaris, antre panjang di kantor pemerintah, dan kebingungan dengan biaya yang tidak transparan. Kami pikir, kalau kami yang punya akses dan jaringan saja kesulitan, bagaimana dengan pelaku UMKM lain?
               </p>
-              
+
               <p className="text-[12.5px] sm:text-[15.5px] text-gray-600 leading-relaxed font-normal">
                 Dari sanalah <strong className="font-extrabold text-gray-900">EasyLegal.id</strong> dibangun: sebuah platform yang memudahkan akses legalitas untuk semua pengusaha Indonesia. Lebih dari 11.000 UMKM mengurus perizinan, pendirian badan usaha, hingga sertifikasi ISO — semua bisa diurus online dengan harga yang transparan.
               </p>
@@ -292,7 +325,7 @@ export default function TentangKami() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14 space-y-2 sm:space-y-3">
             <p className="text-[9px] sm:text-[12.5px] font-bold text-primary uppercase tracking-wider">Nilai Kami</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-dark leading-[1.25] sm:leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-dark leading-[1.25] sm:leading-tight">
               6 prinsip yang menjadi fondasi kerja kami.
             </h2>
             <p className="text-[12.5px] sm:text-[16.5px] text-muted leading-relaxed">
@@ -321,72 +354,41 @@ export default function TentangKami() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14 space-y-2 sm:space-y-3">
             <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">Tim Kami</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
               Tim di balik setiap proses Anda.
             </h2>
-            <p className="text-[11.5px] sm:text-[14.5px] text-gray-500 leading-relaxed font-normal">
-              Konsultan hukum, ahli compliance, dan tim customer success — semua siap membantu legalitas bisnis Anda.
-            </p>
           </div>
 
-          {/* 2 rows × 4 cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {team.map((member, idx) => (
-              <div key={idx} className="bg-white rounded-2xl sm:rounded-3xl shadow-md border border-black/[0.04] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                
-                {/* Team Member Image */}
-                <div className="relative aspect-[1.15] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
-                  <Image
-                    src={member.img}
-                    alt={member.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 300px"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
+          {/* Legal Officer Team */}
+          <div className="mb-12 sm:mb-20">
+            <h3 className="text-center text-lg font-black text-gray-950 mb-8 sm:mb-10 uppercase tracking-widest">Legal Officer (LO)</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+              {[
+                { name: "Akmal Abdul Arik", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Akmal Abdul Arik, S.H..jpg" },
+                { name: "Risa Rizki Sharon", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Risa Rizki Sharon, S.H, M.H..jpg" },
+                { name: "Tiara Nabila", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Tiara Nabila, S.H..jpg" },
+                { name: "Fauzia Rahmawati", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Fauzia Rahmawati, S.H..jpg" },
+                { name: "Amelia Ingrid Taruna", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Amelia Ingrid Taruna, S.H..jpg" },
+              ].map((member, idx) => (
+                <MemberCard key={idx} member={member} />
+              ))}
+            </div>
+          </div>
 
-                {/* Team Member Info */}
-                <div className="p-4 sm:p-6 flex-grow flex flex-col justify-between">
-                  <div className="space-y-2">
-                    {/* Role Pill */}
-                    <div className="inline-flex items-center bg-[#FFF5F5] px-2 py-0.5 rounded-md border border-red-100/50">
-                      <span className="text-[9px] sm:text-[10px] font-extrabold text-[#990202] tracking-wider uppercase">{member.role}</span>
-                    </div>
-                    
-                    {/* Name */}
-                    <h3 className="font-inter text-sm sm:text-[17px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
-                      {member.name}
-                    </h3>
-                    
-                    {/* Bio */}
-                    <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed font-normal line-clamp-2">
-                      {member.bio}
-                    </p>
-                  </div>
-
-                  {/* Social Links Footer */}
-                  <div className="flex items-center space-x-2 mt-4 pt-3 border-t border-gray-100">
-                    <a
-                      href="https://linkedin.com/company/easylegal"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg shadow-md border border-black/[0.04] flex items-center justify-center text-gray-400 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] transition-all duration-200"
-                      title="LinkedIn Profile"
-                    >
-                      <LinkedinIcon />
-                    </a>
-                    <a
-                      href="mailto:info@easylegal.id"
-                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg shadow-md border border-black/[0.04] flex items-center justify-center text-gray-400 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] transition-all duration-200"
-                      title="Send Email"
-                    >
-                      <Mail className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-                </div>
-
-              </div>
-            ))}
+          {/* PLA Team */}
+          <div>
+            <h3 className="text-center text-lg font-black text-gray-950 mb-8 sm:mb-10 uppercase tracking-widest">Personal Legal Assistant (PLA)</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+              {[
+                { name: "Mohammad Faddly Argahari", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Mohammad Faddly Argahari, S.H..jpg" },
+                { name: "Naufal Nandi Pinto", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Naufal Nandi Pinto, S.H..jpg" },
+                { name: "Ela Yuniar", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Ela Yuniar, S.H..jpg" },
+                { name: "Mayang Cahyati", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Mayang Cahyati, S.H..jpg" },
+                { name: "Indiana Oscar", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Indiana Oscar, S.H..jpg" },
+              ].map((member, idx) => (
+                <MemberCard key={idx} member={member} />
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -471,7 +471,7 @@ export default function SertifikasiIso() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Sertifikasi ISO dengan <br />
                 <span className="text-[#990202]">auditor UAF accredited.</span>
               </h1>
@@ -590,7 +590,7 @@ export default function SertifikasiIso() {
           {/* Section Header */}
           <div className="mb-14">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN ISO &amp; UAF</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Apa itu Sertifikasi ISO?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
@@ -684,7 +684,7 @@ export default function SertifikasiIso() {
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">PILIHAN LAYANAN</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Pilihan Layanan Sertifikasi ISO UAF.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -782,7 +782,7 @@ export default function SertifikasiIso() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">BIAYA SERTIFIKASI ISO UAF</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Harga transparan per standar ISO.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -1142,7 +1142,7 @@ export default function SertifikasiIso() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES SERTIFIKASI ISO</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               7 langkah sertifikasi ISO, kami pandu A–Z.
             </h2>
             <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -1221,7 +1221,7 @@ export default function SertifikasiIso() {
           
           {/* Left Column */}
           <div className="space-y-4 max-w-2xl text-left">
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
               Siap dapatkan <span className="text-[#990202]">sertifikasi ISO UAF Accredited?</span>
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 leading-relaxed font-medium">

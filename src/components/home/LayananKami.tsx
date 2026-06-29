@@ -22,11 +22,12 @@ export default function LayananKami() {
 
   return (
     <section 
-      className="py-8 sm:py-20 bg-white" 
+      className="py-8 sm:py-20 bg-white relative" 
       id="layanan"
       ref={sectionRef}
     >
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
+      <div className="ambient-gradient" />
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
         {/* Header */}
         <div className="mb-5 sm:mb-10">
           <span className="text-[9px] sm:text-[10.5px] font-bold text-primary uppercase tracking-[0.15em]">

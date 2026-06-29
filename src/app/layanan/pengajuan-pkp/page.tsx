@@ -104,7 +104,7 @@ export default function PengajuanPkp() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[26px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[26px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Pengurusan PKP resmi,<br />
                 <span className="text-[#990202]">cepat & bergaransi.</span>
               </h1>
@@ -232,7 +232,7 @@ export default function PengajuanPkp() {
           {/* Header */}
           <div className="text-left mb-8 sm:mb-16 space-y-3">
             <p className="text-[12px] font-black text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN PKP & PPN</p>
-            <h2 className="font-inter text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Pengusaha Kena Pajak (PKP)?
             </h2>
             <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
@@ -320,7 +320,7 @@ export default function PengajuanPkp() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">KAPAN DAFTAR PKP?</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Wajib vs Sukarela.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -406,7 +406,7 @@ export default function PengajuanPkp() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">MANFAAT JADI PKP</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Kenapa daftar PKP penting untuk bisnis Anda?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -480,7 +480,7 @@ export default function PengajuanPkp() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DOKUMEN PERSYARATAN</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Yang perlu Anda siapkan.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -614,7 +614,7 @@ export default function PengajuanPkp() {
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA JASA DAFTAR PKP</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               2 paket sesuai lokasi kantor Anda.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
@@ -837,7 +837,7 @@ export default function PengajuanPkp() {
           
           {/* Left Column */}
           <div className="space-y-4 max-w-2xl text-left">
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
               Siap jadi <span className="text-[#990202]">PKP resmi?</span>
             </h2>
             <p className="text-[12.5px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">

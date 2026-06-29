@@ -45,7 +45,7 @@ export default async function DashboardPage() {
       <section className="bg-white pt-8 lg:pt-12 pb-10 border-b border-gray-100">
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8 flex items-center justify-between">
           <div>
-            <h1 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h1 className="font-heading text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Dashboard
             </h1>
             <p className="text-[14px] text-gray-500 mt-1">

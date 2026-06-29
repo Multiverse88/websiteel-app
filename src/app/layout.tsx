@@ -84,10 +84,17 @@ export default function RootLayout({
       className={`${dmSans.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col pt-[72px] bg-white text-dark font-sans">
+        <div className="noise-overlay" />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-bold focus:shadow-lg focus:outline-none"
+        >
+          Lewati ke konten utama
+        </a>
         <Suspense fallback={null}>
           <Navbar />
         </Suspense>
-        <main className="flex-grow flex flex-col">{children}</main>
+        <main id="main-content" className="flex-grow flex flex-col">{children}</main>
         <Footer />
         <TypebotWidget />
       </body>

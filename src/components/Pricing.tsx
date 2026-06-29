@@ -69,7 +69,7 @@ export default function Pricing({
           <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
             {sectionTitleTag}
           </p>
-          <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+          <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
             {sectionTitle}
           </h2>
           {sectionSubtitle && (

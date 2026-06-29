@@ -188,7 +188,7 @@ export default function VisaKitas() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
+              <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
                 Visa Bisnis &amp; <span className="text-[#990202]">KITAS</span> <br />
                 resmi untuk WNA di <br className="hidden sm:block" /> Indonesia.
               </h1>
@@ -354,7 +354,7 @@ export default function VisaKitas() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Visa &amp; KITAS — apa bedanya?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -476,7 +476,7 @@ export default function VisaKitas() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PENGURUSAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Pilih kategori sesuai kebutuhan.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -676,7 +676,7 @@ export default function VisaKitas() {
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
           
           <div className="space-y-4 max-w-2xl">
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
               Butuh konsultasi <span className="text-[#990202]">Visa atau KITAS?</span>
             </h2>
             <p className="text-[14.5px] sm:text-[15.5px] text-gray-500 leading-relaxed font-semibold">

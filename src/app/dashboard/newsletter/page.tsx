@@ -81,7 +81,7 @@ export default async function NewsletterDashboardPage() {
           </div>
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div>
-              <h1 className="font-inter text-[30px] sm:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight">
+              <h1 className="font-heading text-[30px] sm:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 Newsletter
               </h1>
               <p className="text-[14px] text-gray-500 mt-1">

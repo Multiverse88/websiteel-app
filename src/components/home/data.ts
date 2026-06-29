@@ -118,6 +118,7 @@ export const layananIndividual = [
   { name: "Visa & KITAS", desc: "Imigrasi WNA", icon: Globe, circleBg: "#1E3A5F", cardTint: "#F0F4FF", href: "/layanan/visa-kitas" },
   { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Legal", icon: Scale, circleBg: "#7C3AED", cardTint: "#F5F3FF", href: "/layanan/perjanjian-perkawinan" },
   { name: "Press Release", desc: "PR & Media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/press-release" },
+  { name: "Apostille", desc: "Legalisasi 129+ Negara", icon: Globe, circleBg: "#0891B2", cardTint: "#ECFEFF", href: "/layanan/apostille" },
   { name: "Pelaporan LKPM", desc: "Lapor BKPM Rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA", href: "/layanan/pelaporan-lkpm" },
 ];
 

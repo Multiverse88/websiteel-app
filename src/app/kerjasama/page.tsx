@@ -123,7 +123,7 @@ export default function KerjasamaPage() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-inter text-[42px] sm:text-[54px] font-black text-gray-900 leading-[1.12] tracking-tight max-w-4xl">
+          <h1 className="font-heading text-[42px] sm:text-[54px] font-black text-gray-900 leading-[1.12] tracking-tight max-w-4xl">
             Mari tumbuh bersama.
           </h1>
 
@@ -186,7 +186,7 @@ export default function KerjasamaPage() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">JENIS KERJASAMA</p>
-            <h2 className="font-inter text-[34px] sm:text-[40px] font-black text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[34px] sm:text-[40px] font-black text-gray-900 leading-tight tracking-tight">
               4 model <span className="text-[#990202]">kemitraan.</span>
             </h2>
           </div>
@@ -261,7 +261,7 @@ export default function KerjasamaPage() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">CARA KERJA</p>
-            <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[34px] sm:text-[38px] font-black text-gray-900 leading-tight tracking-tight">
               3 langkah, <span className="text-[#990202]">kolaborasi dimulai.</span>
             </h2>
           </div>
@@ -329,7 +329,7 @@ export default function KerjasamaPage() {
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">FORMULIR PENGAJUAN</p>
-            <h2 className="font-inter text-[34px] sm:text-[38px] font-black text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[34px] sm:text-[38px] font-black text-gray-900 leading-tight tracking-tight">
               Ajukan kerjasama.
             </h2>
             <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed">
