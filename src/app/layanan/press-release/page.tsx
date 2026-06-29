@@ -234,7 +234,7 @@ export default function PressRelease() {
                   Lihat Paket Press Release
                 </a>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin berkonsultasi mengenai layanan Press Release.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Press Release.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-150 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-55 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -883,7 +883,7 @@ export default function PressRelease() {
               {/* Order Button */}
               <div className="p-6 sm:p-7 pt-0">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket A Press Release seharga Rp 1.199.000.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket A Press Release. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
@@ -992,7 +992,7 @@ export default function PressRelease() {
               {/* Order Button */}
               <div className="p-6 sm:p-7 pt-0">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket B Press Release seharga Rp 4.999.000.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket B Press Release. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
@@ -1098,7 +1098,7 @@ export default function PressRelease() {
               {/* Order Button */}
               <div className="p-6 sm:p-7 pt-0">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket C Press Release seharga Rp 8.999.000.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket C Press Release. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-gray-800 bg-white hover:bg-gray-55 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
@@ -1378,7 +1378,7 @@ export default function PressRelease() {
 
             {/* Email/Form Action */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Publikasi Press Release Media.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Publikasi Press Release Media. Mohon info lengkap biaya dan prosesnya.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-50 text-gray-900 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"

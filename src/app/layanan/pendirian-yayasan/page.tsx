@@ -38,7 +38,7 @@ export default function PendirianYayasan() {
       strikePrice: "Rp 6.000.000",
       subLabel: "DISKON 50% · TANPA BIAYA TAMBAHAN",
       buttonText: "Pilih Paket Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Yayasan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         {
           title: "LAMA PROSES",
@@ -90,7 +90,7 @@ export default function PendirianYayasan() {
       isPopular: true,
       badgeText: "PALING POPULER",
       buttonText: "Pilih Paket Complete",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Yayasan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         {
           title: "LAMA PROSES",
@@ -141,7 +141,7 @@ export default function PendirianYayasan() {
       strikePrice: "Rp 12.000.000",
       subLabel: "DISKON 50% · TANPA BIAYA TAMBAHAN",
       buttonText: "Pilih Paket Prestige",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya."),
       groups: [
         {
           title: "LAMA PROSES",

@@ -394,7 +394,7 @@ export default function Navbar() {
                 Cek Nama PT
               </Link>
               <a
-                href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleLinkClick}

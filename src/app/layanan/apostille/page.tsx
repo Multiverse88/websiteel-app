@@ -57,7 +57,7 @@ const pricingPackages: PricingPackage[] = [
     isPopular: true,
     badgeText: "POPULER",
     buttonText: "Pesan Sekarang",
-    buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin memesan layanan Jasa Apostille Dokumen."),
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin memesan layanan Jasa Apostille Dokumen. Mohon info biaya dan prosesnya."),
     groups: [
       {
         title: "BIAYA & PROSES",

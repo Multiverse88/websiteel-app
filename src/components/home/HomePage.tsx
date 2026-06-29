@@ -241,7 +241,7 @@ function CaraKerjaSection() {
                 {/* Main Photo of Smiling Professional Woman */}
                 <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?fit=crop&w=600&h=800&q=80"
+                    src="/Main big photo_ business person workingconsulting.png"
                     alt="Professional woman smiling" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -252,25 +252,8 @@ function CaraKerjaSection() {
                 {/* Soft Green wedge at bottom-left corner */}
                 <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#D1E7DD] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#C1D7CD]/30" />
 
-                {/* Small document signing photo (top-right overlay) */}
-                <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500 hover:rotate-1">
-                  <Image 
-                    src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?fit=crop&w=300&h=800&q=80"
-                    alt="Signing document" 
-                    fill
-                    sizes="(max-width: 768px) 100vw, 300px"
-                    className="object-cover"
-                  />
-                  {/* Golden Spark star icon */}
-                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-amber-500 rounded-full flex items-center justify-center text-white border-2 border-white shadow-md z-40">
-                    <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  </div>
-                </div>
-
                 {/* Main FLOATING card "01 Pilih Layanan" */}
-                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
+                <div className="absolute -top-8 -right-14 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
                   {/* Card Header */}
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
@@ -382,7 +365,7 @@ function CaraKerjaSection() {
                 {/* Main Photo of Lawyer/Consultant */}
                 <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?fit=crop&w=600&h=800&q=80"
+                    src="/cropped-colleagues-generating-business-ideas.jpg"
                     alt="Legal Consultant Online" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -393,22 +376,8 @@ function CaraKerjaSection() {
                 {/* Soft Blue wedge at bottom-left corner */}
                 <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#DBEAFE] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#BFDBFE]/30" />
 
-                {/* Small communication overlay photo (top-right overlay) */}
-                <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500">
-                  <Image 
-                    src="https://images.unsplash.com/photo-1553877522-43269d4ea984?fit=crop&w=300&h=800&q=80"
-                    alt="Meeting schedule" 
-                    fill
-                    sizes="(max-width: 768px) 100vw, 300px"
-                    className="object-cover"
-                  />
-                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-green-500 rounded-full flex items-center justify-center text-white border-2 border-white shadow-md z-40">
-                    <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
-                  </div>
-                </div>
-
                 {/* FLOATING card "02 Jadwal Konsultasi" */}
-                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
+                <div className="absolute -top-8 -right-14 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
                   {/* Card Header */}
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
@@ -520,22 +489,8 @@ function CaraKerjaSection() {
                 {/* Soft Orange wedge at bottom-left corner */}
                 <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#FFEDD5] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#FED7AA]/30" />
 
-                {/* Small folder overlay photo (top-right overlay) */}
-                <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500">
-                  <Image 
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fit=crop&w=300&h=800&q=80"
-                    alt="Corporate documentation folder" 
-                    fill
-                    sizes="(max-width: 768px) 100vw, 300px"
-                    className="object-cover"
-                  />
-                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-primary rounded-full flex items-center justify-center text-white border-2 border-white shadow-md z-40">
-                    <FileText className="w-3.5 h-3.5 text-white" />
-                  </div>
-                </div>
-
                 {/* FLOATING card "03 Upload Dokumen" */}
-                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
+                <div className="absolute -top-8 -right-14 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
                   {/* Card Header */}
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
@@ -634,7 +589,7 @@ function CaraKerjaSection() {
                 {/* Main Photo of Happy Entrepreneurs */}
                 <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
                   <Image 
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?fit=crop&w=600&h=800&q=80"
+                    src="/man-watching-great-news-tablet-pc.jpg"
                     alt="Happy Entrepreneurs" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -645,24 +600,8 @@ function CaraKerjaSection() {
                 {/* Soft Emerald wedge at bottom-left corner */}
                 <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#D1FAE5] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#A7F3D0]/30" />
 
-                {/* Small badge overlay (top-right overlay) */}
-                <div className="absolute top-0 right-4 w-[28%] aspect-[4/3] rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white bg-slate-50 z-30 transition-all duration-500">
-                  <Image 
-                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?fit=crop&w=300&h=800&q=80"
-                    alt="Professional success" 
-                    fill
-                    sizes="(max-width: 768px) 100vw, 300px"
-                    className="object-cover"
-                  />
-                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-amber-500 rounded-full flex items-center justify-center text-white border-2 border-white shadow-md z-40">
-                    <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  </div>
-                </div>
-
                 {/* FLOATING card "04 Hasil Digital" */}
-                <div className="absolute top-[16%] left-0 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
+                <div className="absolute -top-8 -right-14 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
                   {/* Card Header */}
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">

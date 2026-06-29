@@ -203,7 +203,7 @@ export default function Kontak() {
 
               {/* Action Link */}
               <a
-                href={getWhatsAppLink()}
+                href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 sm:mt-6 flex items-center text-[12px] sm:text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
@@ -487,7 +487,7 @@ export default function Kontak() {
                   <span className="text-[15px] font-bold text-gray-900">Kantor Pusat</span>
                 </div>
                 <p className="text-[13.5px] text-gray-500 leading-relaxed pl-8">
-                  Jl. Asia Afrika No. 1, Sumur Bandung, Kota Bandung, Jawa Barat 40111
+                  Jl. Cihampelas No.201A, Cipaganti, Kecamatan Coblong, Kota Bandung, Jawa Barat 40131
                 </p>
                 <div className="mt-5 pl-8">
                   <Link
