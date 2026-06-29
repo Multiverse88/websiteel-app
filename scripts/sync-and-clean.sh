@@ -47,8 +47,21 @@ if [ -z "${MINIO_ENDPOINT:-}" ] || [ -z "${MINIO_ACCESS_KEY:-}" ] || [ -z "${MIN
 fi
 
 BUCKET="${MINIO_BUCKET:-images}"
-ENDPOINT="${MINIO_ENDPOINT}"
 PUBLIC_URL="${MINIO_PUBLIC_URL:-https://easylegal.my.id/images}"
+
+# MinIO API endpoint (not CDN). Try in order:
+# 1. MINIO_API_ENDPOINT env var (if set)
+# 2. localhost:9000 (MinIO on same VPS, different Docker)
+# 3. MINIO_ENDPOINT from .env (fallback)
+if [ -n "${MINIO_API_ENDPOINT:-}" ]; then
+  ENDPOINT="${MINIO_API_ENDPOINT}"
+elif curl -sf http://localhost:19000/minio/health/live >/dev/null 2>&1; then
+  ENDPOINT="http://localhost:19000"
+elif curl -sf http://localhost:9000/minio/health/live >/dev/null 2>&1; then
+  ENDPOINT="http://localhost:9000"
+else
+  ENDPOINT="${MINIO_ENDPOINT}"
+fi
 
 echo "========================================="
 echo " Sync & Clean Images → MinIO"
@@ -58,6 +71,18 @@ echo " Bucket:    $BUCKET"
 echo " Public:    $PUBLIC_URL"
 echo " Mode:      $(if $DRY_RUN; then echo 'DRY RUN'; else echo 'LIVE'; fi)"
 echo "========================================="
+
+# Verify MinIO is reachable
+if ! curl -sf "$ENDPOINT/minio/health/live" >/dev/null 2>&1; then
+  echo -e "${RED}Error: MinIO not reachable at $ENDPOINT${NC}"
+  echo "Tried: $ENDPOINT/minio/health/live"
+  echo ""
+  echo "MinIO might be running on a different port or Docker network."
+  echo "Set MINIO_API_ENDPOINT env var to the correct address, e.g.:"
+  echo "  MINIO_API_ENDPOINT=http://localhost:9000 bash scripts/sync-and-clean.sh"
+  exit 1
+fi
+echo -e "${GREEN}✓ MinIO is reachable at $ENDPOINT${NC}"
 
 # ── Check mc (MinIO Client) ──────────────────────────
 MC_BIN="$HOME/.local/bin/mc"
