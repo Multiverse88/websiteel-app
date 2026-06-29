@@ -103,7 +103,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                 <span className="text-[12.5px] font-bold text-[#990202] tracking-wide">{c.heroBadge}</span>
               </div>
 
-              <h1 className="font-inter text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 {c.heroTitle.map((segment, i) => {
                   if ("break" in segment) {
                     return <br key={i} />;
@@ -195,7 +195,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
           
           <div className="mb-14">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">{c.pengertianTag}</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               {c.pengertianTitle}
             </h2>
             <p className="text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
@@ -261,7 +261,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">{c.manfaatTag}</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               {c.manfaatTitle}
             </h2>
           </div>
@@ -301,7 +301,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">{c.stepsTag}</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               {c.stepsTitle}
             </h2>
             <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium">
@@ -369,7 +369,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
           
           <div className="space-y-4 max-w-2xl text-left">
-            <h2 className="font-inter text-[34px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
+            <h2 className="font-heading text-[34px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
               {c.ctaTitle} <span className="text-[#990202]">{c.ctaHighlight}</span>
             </h2>
             <p className="text-[15px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">

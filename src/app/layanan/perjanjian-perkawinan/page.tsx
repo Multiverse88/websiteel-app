@@ -190,7 +190,7 @@ export default function PerjanjianPerkawinan() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.15] tracking-tight">
+              <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.15] tracking-tight">
                 Lindungi aset pribadi dengan <span className="text-[#990202]">Perjanjian Pisah Harta</span> resmi.
               </h1>
 
@@ -347,7 +347,7 @@ export default function PerjanjianPerkawinan() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Perjanjian Perkawinan / Pisah Harta?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -479,7 +479,7 @@ export default function PerjanjianPerkawinan() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DOKUMEN PERSYARATAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Yang perlu disiapkan.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -589,7 +589,7 @@ export default function PerjanjianPerkawinan() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA PERJANJIAN PERKAWINAN</p>
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               2 layanan — bisa pilih salah satu atau kombinasi.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -837,7 +837,7 @@ export default function PerjanjianPerkawinan() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SKEMA PEMBUATAN</p>
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Alur kerja dari konsultasi sampai registrasi.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -916,7 +916,7 @@ export default function PerjanjianPerkawinan() {
 
           {/* Left Column */}
           <div className="space-y-3.5 max-w-2xl">
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-[#141414]">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-[#141414]">
               Siap lindungi <span className="text-[#990202]">aset pribadi?</span>
             </h2>
             <p className="text-[15px] sm:text-[15.5px] text-[#5E5E5E] leading-relaxed font-normal">

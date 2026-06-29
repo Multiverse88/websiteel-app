@@ -214,7 +214,7 @@ export default function PRMedia() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
+              <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
                 Bisnismu <span className="text-[#990202]">tayang</span> di <br />
                 media nasional dalam 1–3 hari.
               </h1>
@@ -378,7 +378,7 @@ export default function PRMedia() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">MENGENAL PRESS RELEASE</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Press Release &amp; kenapa penting untuk bisnis?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -510,7 +510,7 @@ export default function PRMedia() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KEBUTUHAN PRESS RELEASE</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Kapan kamu butuh press release?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -611,7 +611,7 @@ export default function PRMedia() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KENAPA PRESS RELEASE</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Investasi sekali — manfaat jangka panjang.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -738,7 +738,7 @@ export default function PRMedia() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DAFTAR MEDIA PARTNER</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Publikasi di 100+ media online terpercaya.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -777,7 +777,7 @@ export default function PRMedia() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[11.5px] font-black text-[#990202] uppercase tracking-[0.22em]">BIAYA JASA PRESS RELEASE</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-900 leading-tight tracking-tight">
               Pilih paket sesuai target jangkauan.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -1138,7 +1138,7 @@ export default function PRMedia() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PROSES ORDER SAMPAI TERBIT</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               5 langkah simpel — berita kamu naik di media.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -1398,7 +1398,7 @@ export default function PRMedia() {
 
           {/* Left Column */}
           <div className="space-y-3 max-w-2xl">
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-900">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-900">
               Siap <span className="text-[#990202]">tayang</span> di media nasional?
             </h2>
             <p className="text-[14px] sm:text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 leading-relaxed font-normal">

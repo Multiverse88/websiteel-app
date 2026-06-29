@@ -36,7 +36,7 @@ export default function CTA({
   }, []);
 
   const defaultTitle = (
-    <h2 className="font-inter text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
+    <h2 className="font-heading text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
       Siap mulai urus legalitas bisnis Anda?
     </h2>
   );
@@ -51,7 +51,7 @@ export default function CTA({
       >
         {/* Left Column: Heading & Description */}
         <div className="flex flex-col text-left max-w-xl">
-          <h2 className="font-inter text-[20px] sm:text-[38px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight tracking-tight max-w-[480px]">
+          <h2 className="font-heading text-[20px] sm:text-[38px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight tracking-tight max-w-[480px]">
             Siap mulai urus legalitas bisnis Anda?
           </h2>
           <div className="text-[11.5px] sm:text-[14.5px] text-gray-500 leading-relaxed mt-2.5 sm:mt-4 max-w-[460px] font-normal">

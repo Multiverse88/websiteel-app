@@ -314,7 +314,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
           </div>
 
           <div className="max-w-3xl">
-            <h1 className="font-inter text-[38px] sm:text-[50px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+            <h1 className="font-heading text-[38px] sm:text-[50px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
               Insight legalitas untuk <span className="text-[#990202]">bisnis</span>
               <br />
               <span className="text-[#990202]">Anda</span>.
@@ -419,7 +419,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                       <span className="text-[#990202] text-[11.5px] font-black tracking-widest uppercase block mb-3">
                         {CATEGORY_MAP[featuredArticle.category] || featuredArticle.category}
                       </span>
-                      <h2 className="font-inter text-[24px] sm:text-[30px] font-extrabold text-gray-950 leading-tight group-hover:text-[#990202] transition-colors duration-200">
+                      <h2 className="font-heading text-[24px] sm:text-[30px] font-extrabold text-gray-950 leading-tight group-hover:text-[#990202] transition-colors duration-200">
                         <Link href={`/artikel/${featuredArticle.slug}`}>
                           {featuredArticle.title}
                         </Link>
@@ -474,7 +474,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                       <span className="text-[#990202] text-[11px] font-black tracking-widest uppercase block mb-2">
                         {CATEGORY_MAP[article.category] || article.category}
                       </span>
-                      <h3 className="font-inter text-[17px] sm:text-[18px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug mb-2 line-clamp-2">
+                      <h3 className="font-heading text-[17px] sm:text-[18px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug mb-2 line-clamp-2">
                         <Link href={`/artikel/${article.slug}`} className="focus:outline-none">
                           {article.title}
                         </Link>

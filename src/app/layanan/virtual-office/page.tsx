@@ -163,7 +163,7 @@ export default function VirtualOffice() {
               </div>
 
               <h1 
-                className="animate-fade-in-up font-inter text-[26px] sm:text-[48px] lg:text-[54px] font-black text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight"
+                className="animate-fade-in-up font-heading text-[26px] sm:text-[48px] lg:text-[54px] font-black text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight"
                 style={{ animationDelay: "0.1s" }}
               >
                 Alamat bisnis prestisius,<br />
@@ -294,7 +294,7 @@ export default function VirtualOffice() {
             className="animate-fade-in-up text-left mb-6 sm:mb-5 sm:mb-10"
           >
             <p className="text-[9px] sm:text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-1.5 sm:mb-3">TENTANG VIRTUAL OFFICE</p>
-            <h2 className="font-inter text-[20px] sm:text-[38px] font-black text-gray-950 leading-[1.25] sm:leading-tight tracking-tight">
+            <h2 className="font-heading text-[20px] sm:text-[38px] font-black text-gray-950 leading-[1.25] sm:leading-tight tracking-tight">
               Apa itu Virtual Office?
             </h2>
             <p className="text-[12.5px] sm:text-[16px] text-gray-500 leading-relaxed mt-2.5 sm:mt-3 max-w-2xl font-medium">
@@ -394,7 +394,7 @@ export default function VirtualOffice() {
             className="animate-fade-in-up text-center mb-6 sm:mb-6 sm:mb-12"
           >
             <p className="text-[9px] sm:text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-1.5 sm:mb-3">MANFAAT VIRTUAL OFFICE</p>
-            <h2 className="font-inter text-[20px] sm:text-[38px] font-black text-gray-950 leading-[1.25] sm:leading-tight tracking-tight">
+            <h2 className="font-heading text-[20px] sm:text-[38px] font-black text-gray-950 leading-[1.25] sm:leading-tight tracking-tight">
               Kenapa pebisnis modern pilih Virtual Office?
             </h2>
           </div>
@@ -471,7 +471,7 @@ export default function VirtualOffice() {
             className="animate-fade-in-up text-center max-w-3xl mx-auto mb-8 sm:mb-8 sm:mb-16"
           >
             <p className="text-[9px] sm:text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-1.5 sm:mb-3">PILIH LOKASI OFFICE</p>
-            <h2 className="font-inter text-[20px] sm:text-[38px] font-black text-gray-950 leading-[1.25] sm:leading-tight tracking-tight">
+            <h2 className="font-heading text-[20px] sm:text-[38px] font-black text-gray-950 leading-[1.25] sm:leading-tight tracking-tight">
               3 lokasi EasyOffice, pilih yang paling strategis.
             </h2>
             <p className="text-[12.5px] sm:text-[15px] text-gray-500 leading-relaxed mt-2 sm:mt-4 font-medium font-sans">
@@ -805,7 +805,7 @@ export default function VirtualOffice() {
             className="animate-fade-in-up text-center max-w-3xl mx-auto mb-8 sm:mb-8 sm:mb-16"
           >
             <p className="text-[9px] sm:text-[11px] font-black text-[#990202] uppercase tracking-[0.2em] mb-1.5 sm:mb-3">DETAIL LOKASI</p>
-            <h2 className="font-inter text-[20px] sm:text-[38px] font-black text-gray-950 leading-[1.25] sm:leading-tight tracking-tight">
+            <h2 className="font-heading text-[20px] sm:text-[38px] font-black text-gray-950 leading-[1.25] sm:leading-tight tracking-tight">
               EasyOffice Bandung &mdash; Pusat Cihampelas.
             </h2>
             <p className="text-[12.5px] sm:text-[15px] text-gray-500 leading-relaxed mt-2 sm:mt-4 font-medium font-sans">

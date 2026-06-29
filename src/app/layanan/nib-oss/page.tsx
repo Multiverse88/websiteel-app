@@ -193,7 +193,7 @@ export default function NibOss() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[26px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[26px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 NIB & izin usaha resmi,<br />
                 <span className="text-[#990202]">cepat & lengkap.</span>
               </h1>
@@ -320,7 +320,7 @@ export default function NibOss() {
           {/* Header */}
           <div className="text-left mb-8 sm:mb-16 space-y-3">
             <p className="text-[12px] font-black text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN NIB & OSS RBA</p>
-            <h2 className="font-inter text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu NIB & Perizinan Berbasis Risiko?
             </h2>
             <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
@@ -408,7 +408,7 @@ export default function NibOss() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">4 TINGKAT RISIKO USAHA</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Jenis perizinan sesuai tingkat risiko.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -513,7 +513,7 @@ export default function NibOss() {
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               4 paket sesuai jenis usaha Anda.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium">
@@ -942,7 +942,7 @@ export default function NibOss() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-12 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">LAYANAN TAMBAHAN</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Perubahan KBLI & data usaha.
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium">
@@ -1323,7 +1323,7 @@ export default function NibOss() {
           
           {/* Left Column */}
           <div className="space-y-4 max-w-2xl text-left">
-            <h2 className="font-inter text-[20px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
               Siap urus <span className="text-[#990202]">NIB & izin usaha Anda?</span>
             </h2>
             <p className="text-[12.5px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">

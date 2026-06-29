@@ -124,7 +124,7 @@ export default function ReferralResellerPage() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[36px] sm:text-[48px] lg:text-[54px] font-black text-gray-900 leading-[1.12] tracking-tight max-w-2xl">
+              <h1 className="font-heading text-[36px] sm:text-[48px] lg:text-[54px] font-black text-gray-900 leading-[1.12] tracking-tight max-w-2xl">
                 Cuan sampai Rp 1,27jt per transaksi — tanpa modal sepeser pun.
               </h1>
 
@@ -315,7 +315,7 @@ export default function ReferralResellerPage() {
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">CARA KERJA</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-black text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[42px] font-black text-gray-900 leading-tight tracking-tight">
               4 langkah <span className="text-[#990202]">mulai cuan</span> dari rumah.
             </h2>
             <p className="text-[15px] text-gray-500 font-normal leading-relaxed max-w-xl mx-auto">
@@ -382,7 +382,7 @@ export default function ReferralResellerPage() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">KENAPA GABUNG</p>
-            <h2 className="font-inter text-[36px] sm:text-[42px] font-black text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[42px] font-black text-gray-900 leading-tight tracking-tight">
               Lebih dari sekadar referral biasa.
             </h2>
             <p className="text-[15px] text-gray-500 font-normal leading-relaxed max-w-xl mx-auto">
@@ -508,7 +508,7 @@ export default function ReferralResellerPage() {
           {/* Section Header */}
           <div className="text-center mb-10 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">SIMULASI PENGHASILAN</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
               Berapa potensi <span className="text-[#990202]">cuan per bulan?</span>
             </h2>
             <p className="text-[15px] text-gray-500 font-normal leading-relaxed max-w-lg mx-auto">
@@ -639,7 +639,7 @@ export default function ReferralResellerPage() {
           {/* Section Header */}
           <div className="text-center mb-10 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">TOP 10 KOMISI TERTINGGI</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
               Layanan dengan <span className="text-[#990202]">komisi terbesar.</span>
             </h2>
             <p className="text-[15px] text-gray-550 font-medium leading-relaxed max-w-lg mx-auto">
@@ -681,7 +681,7 @@ export default function ReferralResellerPage() {
           {/* Section Header */}
           <div className="text-center mb-16 space-y-4">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">TESTIMONI PARTNER</p>
-            <h2 className="font-inter text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
               Cerita partner yang sudah cuan.
             </h2>
             <p className="text-[15px] text-gray-500 font-medium leading-relaxed max-w-lg mx-auto">
@@ -791,7 +791,7 @@ export default function ReferralResellerPage() {
         </div>
 
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="font-inter text-[36px] sm:text-[48px] font-black text-gray-900 leading-tight tracking-tight mb-4">
+          <h2 className="font-heading text-[36px] sm:text-[48px] font-black text-gray-900 leading-tight tracking-tight mb-4">
             Siap mulai cuan dari rumah?
           </h2>
           <p className="text-[14.5px] sm:text-[15.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto mb-10">

@@ -551,7 +551,7 @@ export default function MerekHaki() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Daftar merek sekali, <br />
                 brand <span className="text-[#990202]">aman 10 tahun</span>.
               </h1>
@@ -668,7 +668,7 @@ export default function MerekHaki() {
           {/* Section Header */}
           <div className="mb-14">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN MEREK</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Apa itu Merek & HAKI?
             </h2>
             <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
@@ -774,7 +774,7 @@ export default function MerekHaki() {
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest text-center">
               LAYANAN TAMBAHAN MEREK
             </p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight text-center">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight text-center">
               Lebih dari sekadar pendaftaran.
             </h2>
             <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium text-center">
@@ -925,7 +925,7 @@ export default function MerekHaki() {
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest text-center">
               DOKUMEN PERSYARATAN
             </p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight text-center">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight text-center">
               Yang perlu Anda siapkan.
             </h2>
             <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium text-center">

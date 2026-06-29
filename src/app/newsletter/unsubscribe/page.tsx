@@ -42,7 +42,7 @@ export default async function UnsubscribePage({ searchParams }: Props) {
               <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-5">
                 <CheckCircle2 className="w-8 h-8 text-emerald-600" />
               </div>
-              <h1 className="font-inter text-[24px] font-extrabold text-gray-950 mb-3">
+              <h1 className="font-heading text-[24px] font-extrabold text-gray-950 mb-3">
                 Berhasil Unsubscribe
               </h1>
               <p className="text-[14px] text-gray-500 leading-relaxed mb-6">
@@ -55,7 +55,7 @@ export default async function UnsubscribePage({ searchParams }: Props) {
               <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-5">
                 <MailX className="w-8 h-8 text-[#990202]" />
               </div>
-              <h1 className="font-inter text-[24px] font-extrabold text-gray-950 mb-3">
+              <h1 className="font-heading text-[24px] font-extrabold text-gray-950 mb-3">
                 Email Tidak Ditemukan
               </h1>
               <p className="text-[14px] text-gray-500 leading-relaxed mb-6">
@@ -67,7 +67,7 @@ export default async function UnsubscribePage({ searchParams }: Props) {
               <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-5">
                 <MailX className="w-8 h-8 text-[#990202]" />
               </div>
-              <h1 className="font-inter text-[24px] font-extrabold text-gray-950 mb-3">
+              <h1 className="font-heading text-[24px] font-extrabold text-gray-950 mb-3">
                 Link Tidak Valid
               </h1>
               <p className="text-[14px] text-gray-500 leading-relaxed mb-6">

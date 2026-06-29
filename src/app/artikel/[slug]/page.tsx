@@ -282,7 +282,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
           <h3
             key={idx}
             id={headingId}
-            className="font-inter text-[21px] sm:text-[23px] font-extrabold text-gray-950 mt-12 mb-5 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-3.5"
+            className="font-heading text-[21px] sm:text-[23px] font-extrabold text-gray-950 mt-12 mb-5 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-3.5"
           >
             {headingText}
           </h3>
@@ -612,7 +612,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
               </div>
 
               {/* Title */}
-              <h1 className="font-inter text-[32px] sm:text-[40px] lg:text-[46px] font-extrabold text-gray-950 leading-[1.15] tracking-tight max-w-[800px] mx-auto mb-6">
+              <h1 className="font-heading text-[32px] sm:text-[40px] lg:text-[46px] font-extrabold text-gray-950 leading-[1.15] tracking-tight max-w-[800px] mx-auto mb-6">
                 {article.title}
               </h1>
 
@@ -832,7 +832,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
               {/* Left: Related Articles */}
               <div className="lg:col-span-8">
                 <p className="text-[12px] font-bold text-[#990202] uppercase tracking-widest mb-2">Artikel Terkait</p>
-                <h2 className="font-inter text-[24px] sm:text-[28px] font-extrabold text-gray-950 leading-tight mb-8">
+                <h2 className="font-heading text-[24px] sm:text-[28px] font-extrabold text-gray-950 leading-tight mb-8">
                   Mungkin kamu juga suka.
                 </h2>
 

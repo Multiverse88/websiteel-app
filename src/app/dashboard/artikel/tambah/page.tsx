@@ -426,7 +426,7 @@ export default function TambahArtikelPage() {
                 <Sparkles className="w-3.5 h-3.5 text-[#990202]" />
                 <span className="text-[12px] font-bold text-[#990202] tracking-wide">CMS Panel</span>
               </div>
-              <h1 className="font-inter text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+              <h1 className="font-heading text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 Tulis Artikel Baru
               </h1>
             </div>
@@ -991,7 +991,7 @@ export default function TambahArtikelPage() {
                       cursor: text;
                     }
                     .prose-editor h3 {
-                      font-family: var(--font-inter), sans-serif;
+                      font-family: var(--font-heading), sans-serif;
                       font-size: 17px !important;
                       font-weight: 800 !important;
                       color: #030712 !important;
@@ -1156,7 +1156,7 @@ export default function TambahArtikelPage() {
                         <span>{readTime || "5 menit baca"}</span>
                       </div>
                     </div>
-                    <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 leading-snug line-clamp-2">
+                    <h3 className="font-heading text-[18px] sm:text-[20px] font-extrabold text-gray-950 leading-snug line-clamp-2">
                       {title || "Judul artikel Anda akan tampil di sini..."}
                     </h3>
                     <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal line-clamp-3">
@@ -1290,7 +1290,7 @@ function renderMarkdownContent(text: string) {
         <h3
           key={idx}
           id={headingId}
-          className="font-inter text-[17px] sm:text-[18px] font-extrabold text-gray-950 mt-6 mb-3 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-2.5"
+          className="font-heading text-[17px] sm:text-[18px] font-extrabold text-gray-950 mt-6 mb-3 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-2.5"
         >
           {headingText}
         </h3>

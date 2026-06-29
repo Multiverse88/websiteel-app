@@ -339,7 +339,7 @@ export default function PendirianYayasan() {
               </div>
 
               {/* Headline */}
-              <h1 className="font-inter text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Bangun dampak sosial <br />
                 dengan <span className="text-[#990202]">yayasan yang <br /> sah</span>.
               </h1>
@@ -453,7 +453,7 @@ export default function PendirianYayasan() {
           
           <div className="mb-14">
             <p className="text-[12.5px] font-extrabold text-[#990202] uppercase tracking-[0.18em] mb-2">PENGERTIAN YAYASAN</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Apa itu Yayasan?
             </h2>
             <p className="text-[14.5px] sm:text-[15.5px] text-gray-500 mt-3 font-normal max-w-3xl leading-relaxed">
@@ -531,7 +531,7 @@ export default function PendirianYayasan() {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
             <p className="text-[12.5px] font-extrabold text-[#990202] uppercase tracking-[0.18em]">ORGAN YAYASAN</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               3 organ wajib yang harus ada dalam yayasan.
             </h2>
           </div>
@@ -619,7 +619,7 @@ export default function PendirianYayasan() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
             <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES PENDIRIAN YAYASAN</p>
-            <h2 className="font-inter text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               7 langkah pendirian yayasan, kami pandu sampai akta di tangan.
             </h2>
             <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium">

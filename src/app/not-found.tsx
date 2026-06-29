@@ -18,7 +18,7 @@ export default function NotFound() {
         </div>
 
         {/* Title */}
-        <h2 className="font-inter text-[24px] sm:text-[28px] font-extrabold text-gray-950 mb-3">
+        <h2 className="font-heading text-[24px] sm:text-[28px] font-extrabold text-gray-950 mb-3">
           Halaman Tidak Ditemukan
         </h2>
 

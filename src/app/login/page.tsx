@@ -30,7 +30,7 @@ export default function LoginPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-red-50 border border-red-100 mb-4">
             <Lock className="w-7 h-7 text-[#990202]" />
           </div>
-          <h1 className="font-inter text-[28px] font-extrabold text-gray-950">
+          <h1 className="font-heading text-[28px] font-extrabold text-gray-950">
             Admin Login
           </h1>
           <p className="text-[14px] text-gray-500 mt-2">

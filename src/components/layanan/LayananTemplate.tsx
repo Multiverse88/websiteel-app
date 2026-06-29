@@ -76,7 +76,7 @@ export default function LayananTemplate({ content }: Props) {
                 </span>
               </div>
 
-              <h1 className="font-inter text-[26px] sm:text-[48px] lg:text-[54px] font-black text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight">
+              <h1 className="font-heading text-[26px] sm:text-[48px] lg:text-[54px] font-black text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight">
                 {c.heroTitle}
               </h1>
 

@@ -60,7 +60,7 @@ export default function Offices({
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
           <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">{title}</p>
-          <h2 className="font-inter text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+          <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
             {subtitle}
           </h2>
           <p className="text-[14.5px] text-gray-500 leading-relaxed font-normal">
@@ -109,7 +109,7 @@ export default function Offices({
                   {/* MapPin and City */}
                   <div className="flex items-center space-x-2">
                     <MapPin className="w-5 h-5 text-[#990202] flex-shrink-0" strokeWidth={2.5} />
-                    <h3 className="font-inter text-[18px] sm:text-[20px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
+                    <h3 className="font-heading text-[18px] sm:text-[20px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
                       {office.city}
                     </h3>
                   </div>
