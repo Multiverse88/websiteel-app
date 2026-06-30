@@ -13,6 +13,17 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const MAX_INLINE_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
+const MIME_TO_EXT: { [key: string]: string } = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/gif": "gif",
+};
+
+function getExtFromMimeType(mimeType: string): string {
+  return MIME_TO_EXT[mimeType] || "jpg";
+}
+
 export async function uploadInlineImage(formData: FormData): Promise<{ url?: string; error?: string }> {
   const session = await getSession();
   if (!session) {
@@ -35,7 +46,7 @@ export async function uploadInlineImage(formData: FormData): Promise<{ url?: str
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const ext = file.name.split(".").pop() || "jpg";
+    const ext = getExtFromMimeType(file.type);
     const filename = `inline-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
 
     let url: string;
@@ -89,7 +100,7 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
       const buffer = Buffer.from(bytes);
 
       // Generate unique filename
-      const ext = coverImageFile.name.split(".").pop() || "jpg";
+      const ext = getExtFromMimeType(coverImageFile.type);
       const filename = `cover-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
 
       if (isMinioConfigured()) {
