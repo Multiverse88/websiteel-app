@@ -28,40 +28,6 @@ import Pricing, { PricingPackage } from "@/components/Pricing";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 
-export default function MerekHaki() {
-  const scrollToPricing = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.getElementById("paket-harga");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const hakiBenefits = [
-    {
-      icon: <Shield className="w-5.5 h-5.5 text-[#990202]" />,
-      title: "Perlindungan Hukum",
-      desc: "Hak eksklusif terbukti — Anda bisa tuntut siapa saja yang menjiplak brand."
-    },
-    {
-      icon: <Star className="w-5.5 h-5.5 text-[#990202]" />,
-      title: "Aset Berharga",
-      desc: "Merek terdaftar bisa dijual, dilisensikan, atau diwariskan — aset intangible bisnis."
-    },
-    {
-      icon: <span className="text-[14px] sm:text-[14px] sm:text-[20px] font-black text-[#990202]">$</span>,
-      title: "Kredibilitas Brand",
-      desc: "Logo ® meningkatkan kepercayaan konsumen — bukti bisnis yang serius."
-    },
-    {
-      icon: <ShoppingBag className="w-5.5 h-5.5 text-[#990202]" />,
-      title: "Syarat Marketplace",
-      desc: "Wajib untuk official store di Shopee Mall, Tokopedia Mall, dan e-commerce lainnya."
-    }
-  ];
-
-  const [activeTab, setActiveTab] = useState<"pengecekan" | "perpanjangan" | "pengalihan" | "penolakan">("pengecekan");
-
   interface AdditionalServiceItem {
     text: string;
     checked: boolean;
@@ -93,7 +59,30 @@ export default function MerekHaki() {
     footnote?: string;
   }
 
-  const additionalTabs: AdditionalServiceTab[] = [
+const hakiBenefits = [
+    {
+      icon: <Shield className="w-5.5 h-5.5 text-[#990202]" />,
+      title: "Perlindungan Hukum",
+      desc: "Hak eksklusif terbukti — Anda bisa tuntut siapa saja yang menjiplak brand."
+    },
+    {
+      icon: <Star className="w-5.5 h-5.5 text-[#990202]" />,
+      title: "Aset Berharga",
+      desc: "Merek terdaftar bisa dijual, dilisensikan, atau diwariskan — aset intangible bisnis."
+    },
+    {
+      icon: <span className="text-[14px] sm:text-[14px] sm:text-[20px] font-black text-[#990202]">$</span>,
+      title: "Kredibilitas Brand",
+      desc: "Logo ® meningkatkan kepercayaan konsumen — bukti bisnis yang serius."
+    },
+    {
+      icon: <ShoppingBag className="w-5.5 h-5.5 text-[#990202]" />,
+      title: "Syarat Marketplace",
+      desc: "Wajib untuk official store di Shopee Mall, Tokopedia Mall, dan e-commerce lainnya."
+    }
+  ];
+
+const additionalTabs: AdditionalServiceTab[] = [
     {
       id: "pengecekan",
       label: "Pengecekan Merek",
@@ -287,7 +276,7 @@ export default function MerekHaki() {
     }
   ];
 
-  const pricingPackages: PricingPackage[] = [
+const pricingPackages: PricingPackage[] = [
     {
       title: "PAKET BASIC",
       price: "Rp 2.799.000",
@@ -480,14 +469,13 @@ export default function MerekHaki() {
     }
   ];
 
-  const pricingFootnotes = [
+const pricingFootnotes = [
     "Setelah Draft Pendaftaran Merek disetujui.",
     "Sertifikat merek diterbitkan setelah merek dinyatakan berhasil pada masa pengumuman, berlangsung sekitar &plusmn;6 hingga 18 bulan.",
     "Apabila permohonan pendaftaran merek ditolak secara resmi oleh DJKI, Kami memberikan garansi uang kembali jasa EasyLegal sebesar <strong class=\"font-extrabold text-gray-950\">Rp 2.300.000</strong>."
   ];
 
-
-  const faqs = [
+const faqs = [
     {
       q: "Berapa lama sertifikat merek keluar?",
       a: "Total <strong class=\"font-extrabold text-gray-950\">12–18 bulan</strong> dari submit sampai sertifikat fisik terbit. Tapi <strong class=\"font-extrabold text-gray-950\">tanda terima resmi</strong> dari DJKI keluar dalam 1–2 minggu — sejak tanda terima ini Anda sudah punya hak prioritas pemakaian merek dan bisa pakai logo <sup>™</sup>.",
@@ -517,6 +505,27 @@ export default function MerekHaki() {
       a: "Anda bisa mendaftarkan kata (nama merek saja), logo (visual saja), atau kombinasi keduanya. Mendaftarkan keduanya sekaligus dalam satu aplikasi memberikan perlindungan paling menyeluruh dan efisien.",
     },
   ];
+
+export default function MerekHaki() {
+  const scrollToPricing = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById("paket-harga");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  
+
+  const [activeTab, setActiveTab] = useState<"pengecekan" | "perpanjangan" | "pengalihan" | "penolakan">("pengecekan");
+
+  
+
+  
+
+  
+
+  
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -1018,7 +1027,6 @@ export default function MerekHaki() {
 
         </div>
       </section>
-
 
       {/* ─── 5. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran merek." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />

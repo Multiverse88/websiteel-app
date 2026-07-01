@@ -24,18 +24,7 @@ import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import { getWhatsAppLink } from "@/lib/config";
 
-export default function NibOss() {
-  const [activeSubTab, setActiveSubTab] = useState<"perorangan" | "badan" | "oss-rba" | "pt-perorangan">("perorangan");
-
-  const scrollToPricing = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.getElementById("paket-harga");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const nibBenefits = [
+const nibBenefits = [
     {
       icon: <ShieldCheck className="w-5.5 h-5.5 text-[#990202]" />,
       title: "Legalitas Resmi & Kuat",
@@ -58,7 +47,7 @@ export default function NibOss() {
     }
   ];
 
-  const pricingPackages = [
+const pricingPackages = [
     {
       title: "NIB PERSEORANGAN",
       subLabel: "PELAKU USAHA MIKRO & KECIL (UMK)",
@@ -128,8 +117,7 @@ export default function NibOss() {
     }
   ];
 
-
-  const faqs = [
+const faqs = [
     {
       q: "Apa beda NIB Perorangan, NIB PT Perorangan, & NIB Badan?",
       a: "NIB Perorangan — untuk usaha perseorangan tanpa badan hukum (warung, freelancer, dst). NIB PT Perorangan — khusus untuk UMKM Mikro yang sudah didirikan sebagai PT Perorangan. NIB Badan — untuk badan usaha resmi: PT, PT PMA, CV, Firma, Yayasan, Perkumpulan, atau Koperasi. Tim kami bantu pilih yang sesuai status usaha Anda."
@@ -159,6 +147,23 @@ export default function NibOss() {
       a: "Setelah NIB terbit secara resmi, Anda dapat langsung menggunakannya untuk membuka rekening bank bisnis atas nama perusahaan, mendaftar sertifikasi Halal, mengurus pendaftaran merek brand di DJKI, hingga mengajukan permohonan PKP guna ekspansi transaksi dengan klien."
     }
   ];
+
+export default function NibOss() {
+  const [activeSubTab, setActiveSubTab] = useState<"perorangan" | "badan" | "oss-rba" | "pt-perorangan">("perorangan");
+
+  const scrollToPricing = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById("paket-harga");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  
+
+  
+
+  
 
   return (
     <div className="has-service-cta flex flex-col min-h-screen">
