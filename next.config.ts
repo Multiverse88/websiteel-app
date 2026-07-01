@@ -8,12 +8,12 @@ const ContentSecurityPolicy = isProd
   ? `
   default-src 'self';
   script-src 'self' 'unsafe-inline';
-  script-src-elem 'self' 'unsafe-inline' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com;
+  script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com;
   style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://cloudflareinsights.com;
-  frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
+  connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://cloudflareinsights.com;
+  frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com blob: data:;
   object-src 'none';
   base-uri 'self';
@@ -24,12 +24,12 @@ const ContentSecurityPolicy = isProd
   : `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval';
-  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com;
+  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com;
   style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' ws: wss: https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://cloudflareinsights.com;
-  frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
+  connect-src 'self' ws: wss: https://www.googletagmanager.com https://www.google-analytics.com https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://cloudflareinsights.com;
+  frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com blob: data:;
   object-src 'none';
   base-uri 'self';

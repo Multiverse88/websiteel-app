@@ -34,23 +34,7 @@ import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
 import { getWhatsAppLink } from "@/lib/config";
 
-export default function PressRelease() {
-  // State for interactive Pricing filter tabs
-  const [activeCategory, setActiveCategory] = useState<"populer" | "premium" | "bundle">("populer");
-
-
-
-
-  const scrollToPricing = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.getElementById("paket-harga");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  // Pricing packages matching the user's mockup exactly
-  const pricingData = {
+const pricingData = {
     populer: [
       {
         title: "PAKET POPULER · SINGLE MEDIA",
@@ -123,7 +107,9 @@ export default function PressRelease() {
         waText: "Halo EasyLegal, saya ingin memesan Paket Press Release Bundle Pro (5 Media)."
       }
     ]
-  }; const faqs = [
+  };
+
+const faqs = [
     {
       q: "Apa bedanya press release dengan iklan berbayar?",
       a: "<strong>Press release</strong> tampil sebagai berita di media, ditulis gaya jurnalistik, &amp; memiliki kredibilitas tinggi karena dimuat oleh redaksi. <strong>Iklan berbayar</strong> tampil terpisah dari artikel, jelas-jelas ditandai sebagai iklan, &amp; lebih rentan diabaikan pembaca. Press release <strong>terbit permanen</strong> sementara iklan hilang saat budget habis."
@@ -158,7 +144,7 @@ export default function PressRelease() {
     }
   ];
 
-  const mediaPartners = [
+const mediaPartners = [
     { label: "detikcom", icon: "/icon-brand/logo-detik.jpg" },
     { label: "KOMPAS.com", icon: "/icon-brand/logo-kompasiana.jpg" },
     { label: "Tribunnews", icon: "/icon-brand/logo-tribun.jpg" },
@@ -180,6 +166,23 @@ export default function PressRelease() {
     { label: "Tempo.co", icon: "/icon-brand/logo-tempo.jpg" },
     { label: "+ 80 media lainnya", icon: null }
   ];
+
+export default function PressRelease() {
+  // State for interactive Pricing filter tabs
+  const [activeCategory, setActiveCategory] = useState<"populer" | "premium" | "bundle">("populer");
+
+  const scrollToPricing = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById("paket-harga");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Pricing packages matching the user's mockup exactly
+   
+
+  
 
   return (
     <div className="has-service-cta flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">

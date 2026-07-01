@@ -10,6 +10,18 @@ interface RateLimitEntry {
 const loginAttempts = new Map<string, RateLimitEntry>();
 const twoFactorAttempts = new Map<string, RateLimitEntry>();
 
+const MAX_ENTRIES = 10000;
+
+function setWithLimit<K, V>(map: Map<K, V>, key: K, value: V) {
+  if (!map.has(key) && map.size >= MAX_ENTRIES) {
+    const firstKey = map.keys().next().value;
+    if (firstKey !== undefined) {
+      map.delete(firstKey);
+    }
+  }
+  map.set(key, value);
+}
+
 // Clean up old entries every 15 minutes
 setInterval(() => {
   const now = Date.now();
@@ -73,7 +85,7 @@ export function recordFailedAttempt(identifier: string): { locked: boolean; retr
 
   if (!entry) {
     entry = { attempts: 0, lastAttempt: now };
-    loginAttempts.set(identifier, entry);
+    setWithLimit(loginAttempts, identifier, entry);
   }
 
   // Check if attempts window has expired
@@ -127,7 +139,7 @@ export function recordTwoFactorFailedAttempt(identifier: string): { locked: bool
   let entry = twoFactorAttempts.get(identifier);
   if (!entry) {
     entry = { attempts: 0, lastAttempt: now };
-    twoFactorAttempts.set(identifier, entry);
+    setWithLimit(twoFactorAttempts, identifier, entry);
   }
   if (now - entry.lastAttempt > TWO_FACTOR_ATTEMPT_WINDOW) {
     entry.attempts = 0;

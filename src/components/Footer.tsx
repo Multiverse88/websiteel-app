@@ -44,6 +44,7 @@ export default function Footer() {
     { name: "Pengajuan PKP", href: "/layanan/pengajuan-pkp" },
     { name: "Sertifikasi ISO", href: "/layanan/sertifikasi-iso" },
     { name: "Visa & KITAS", href: "/layanan/visa-kitas" },
+    { name: "Pelaporan LKPM", href: "/layanan/pelaporan-lkpm" },
     { name: "Press Release", href: "/layanan/press-release" },
     { name: "Apostille", href: "/layanan/apostille" },
   ];
