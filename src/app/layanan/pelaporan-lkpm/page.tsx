@@ -24,16 +24,7 @@ import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
 import { getWhatsAppLink } from "@/lib/config";
 
-export default function PelaporanLKPM() {
-  const scrollToPricing = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.getElementById("paket-harga");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const steps = [
+const steps = [
     {
       no: "01",
       title: "Pengumpulan Data Periode",
@@ -86,7 +77,7 @@ export default function PelaporanLKPM() {
     }
   ];
 
-  const faqs = [
+const faqs = [
     {
       q: "Apakah perusahaan saya wajib lapor LKPM?",
       a: "Wajib, jika perusahaan Anda memiliki NIB & izin berusaha — termasuk PMA, PMDN, UMK, sampai perusahaan besar. Mulai dari tahap konstruksi sampai operasional, perusahaan harus lapor LKPM. Pengecualian: usaha mikro dengan modal < Rp 1 miliar sesuai PP 7/2021 boleh tidak melapor (cek konsultasi untuk konfirmasi status Anda)."
@@ -120,6 +111,19 @@ export default function PelaporanLKPM() {
       a: "Kami memiliki sistem pemantauan berkala yang akan mengirimkan reminder otomatis melalui WhatsApp dan Email kepada Anda 30 hari, 14 hari, dan 7 hari sebelum batas akhir pelaporan LKPM setiap periode agar Anda terhindar dari sanksi BKPM."
     }
   ];
+
+export default function PelaporanLKPM() {
+  const scrollToPricing = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById("paket-harga");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  
+
+  
 
   return (
     <div className="has-service-cta flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
@@ -335,6 +339,7 @@ export default function PelaporanLKPM() {
       </section>
 
       {/* ─── 2. PENGERTIAN SECTION ─── */}
+      <FadeIn direction="up" delay={0.2}>
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
 
@@ -484,8 +489,10 @@ export default function PelaporanLKPM() {
           </div>
         </div>
       </section>
+      </FadeIn>
 
       {/* ─── 3. PERIODE & BATAS WAKTU SECTION ─── */}
+      <FadeIn direction="up" delay={0.2}>
       <section className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
@@ -612,8 +619,10 @@ export default function PelaporanLKPM() {
           </div>
         </div>
       </section>
+      </FadeIn>
 
       {/* ─── 4. DATA YANG DILAPORKAN SECTION ─── */}
+      <FadeIn direction="up" delay={0.2}>
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
           
@@ -689,8 +698,10 @@ export default function PelaporanLKPM() {
           </div>
         </div>
       </section>
+      </FadeIn>
 
       {/* ─── 5. SANKSI JIKA TIDAK LAPOR SECTION ─── */}
+      <FadeIn direction="up" delay={0.2}>
       <section className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
           
@@ -767,8 +778,10 @@ export default function PelaporanLKPM() {
           </div>
         </div>
       </section>
+      </FadeIn>
 
       {/* ─── 6. BIAYA JASA SECTION ─── */}
+      <FadeIn direction="up" delay={0.2}>
       <section id="paket-harga" className="bg-[#FCFBFA] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
 
@@ -1003,8 +1016,10 @@ export default function PelaporanLKPM() {
           </div>
         </div>
       </section>
+      </FadeIn>
 
       {/* ─── 7. ALUR PELAPORAN SECTION ─── */}
+      <FadeIn direction="up" delay={0.2}>
       <section className="bg-[#FAF9F6] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
           
@@ -1100,11 +1115,15 @@ export default function PelaporanLKPM() {
           </div>
         </div>
       </section>
+      </FadeIn>
 
       {/* ─── 8. FAQ SECTION ─── */}
+      <FadeIn direction="up" delay={0.2}>
       <FAQ items={faqs} />
+      </FadeIn>
 
       {/* ─── 9. CTA SECTION ─── */}
+      <FadeIn direction="up" delay={0.2}>
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100">
         <div className="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -1156,6 +1175,7 @@ export default function PelaporanLKPM() {
           </div>
         </div>
       </section>
+      </FadeIn>
 
     </div>
   );

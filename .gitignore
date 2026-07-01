@@ -53,6 +53,7 @@ next-env.d.ts
 
 # IDEs and editors
 .idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
@@ -70,7 +71,6 @@ Desktop.ini
 logs/
 .eslintcache
 
-
 # Sentry Config File
 .env.sentry-build-plugin
 
@@ -81,14 +81,16 @@ playwright/.cache/
 test-results/
 
 # AI tool generated files
+AGENTS.md
 CLAUDE.md
 PLANNING.md
 DAILY-PLAN.md
+opencode.json
 
 # AI agents/skills (local environment, not project code)
 .agent/
 .agents/
-.claude/skills/
+.claude/
 .opencode/
 skills-lock.json
 docs/superpowers/
@@ -100,15 +102,23 @@ public/logo-berita/*.msi
 # Document files
 *.docx
 *.pdf
-COPYWRITING_AUDIT.md
 *.csv
+*.html
+COPYWRITING_AUDIT.md
+
+# Daily logs and reports
+today-worked-*.md
+weekly-report-*.md
+2026-*.md
+
+# Project-specific docs (not needed in repo)
 docs/mobile-responsive-optimization.md
 docs/typebot-improvements.md
 docs/architecture-optimization.md
-today-worked-*.md
-weekly-report-*.md
 easylegal_links.csv
 graphify-out/
+whatsapp-links-campaign.md
+tasks-completed-*.csv
 
 # Accidental uploads
 Telegram Desktop/
@@ -121,11 +131,16 @@ Telegram Desktop/
 *.wav
 *.opus
 
-# Obsidian vault config (machine-specific)
-notes/.obsidian/
+# Obsidian vault (personal notes, not project code)
+my-vault/
+.obsidian/
 
-# Obsidian attachments (images/files dragged into notes)
-notes/**/attachments/
+# Obsidian canvas and base files
+*.canvas
+*.base
+
+# Notes (personal, not project code)
+notes/
 
 # Data artikel besar — disimpan terpisah di luar repo
 # File SQL besar di root (bukan migration)
@@ -135,4 +150,3 @@ u947750278_easy.sql
 # Compiled seed scripts/folders
 prisma/seed.js
 dist-seed/
-

@@ -114,6 +114,11 @@ type InlineRelated = { title: string; slug: string; category: string; coverImage
 
 // Helper to dynamically clean and redirect hardcoded/outdated links in articles
 function cleanArticleUrl(url: string, articleTitle: string): string {
+  // Block javascript: URLs to prevent Stored XSS
+  if (url.trim().toLowerCase().startsWith("javascript:")) {
+    return "#";
+  }
+
   // 1. WhatsApp link router (mauorder.online, wa.me, api.whatsapp.com)
   if (url.includes("mauorder.online") || url.includes("wa.me") || url.includes("api.whatsapp.com")) {
     return getWhatsAppLink(`Halo EasyLegal, saya membaca artikel "${articleTitle || 'Legalitas'}" dan ingin berkonsultasi.`);

@@ -2,14 +2,8 @@ import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
 import { prisma } from "./db";
+import { getJwtSecret } from "./config";
 
-function getJwtSecret(): Uint8Array {
-  const JWT_SECRET = process.env.JWT_SECRET;
-  if (!JWT_SECRET) {
-    throw new Error("JWT_SECRET environment variable is required. Generate one with: openssl rand -base64 32");
-  }
-  return new TextEncoder().encode(JWT_SECRET);
-}
 const COOKIE_NAME = "admin_token";
 
 export interface SessionPayload extends JWTPayload {
