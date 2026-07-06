@@ -15,14 +15,16 @@ services:
     environment:
       - HOSTNAME=0.0.0.0
       - MINIO_ENDPOINT=http://host.docker.internal:9000
+      - DATABASE_URL=postgresql://postgres:X8yGKPhk3kFCyZTA@172.17.0.1:54322/postgres?schema=easylegal
+      - DIRECT_URL=postgresql://postgres:X8yGKPhk3kFCyZTA@172.17.0.1:54322/postgres?schema=easylegal
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
       - uploads:/app/public/uploads
     networks:
       - easylegal
-    expose:
-      - "3000"
+    ports:
+      - "3001:3000"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
       interval: 10s
@@ -38,8 +40,8 @@ services:
     container_name: easylegal-nginx
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
+      - "8443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
@@ -58,10 +60,12 @@ services:
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    ports:
+      - "3002:3000"
     env_file:
       - .env.production
     environment:
-      - DATABASE_URL=postgresql://easylegal:jauhimaksiat%401@172.17.0.1:5432/typebot
+      - DATABASE_URL=postgresql://postgres:X8yGKPhk3kFCyZTA@172.17.0.1:54322/typebot
       - NEXTAUTH_URL=https://typebot.easylegal.my.id
       - NEXT_PUBLIC_APP_URL=https://typebot.easylegal.my.id
       - NEXT_PUBLIC_VIEWER_URL=https://typebot.easylegal.my.id
@@ -88,10 +92,12 @@ services:
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    ports:
+      - "3003:3000"
     env_file:
       - .env.production
     environment:
-      - DATABASE_URL=postgresql://easylegal:jauhimaksiat%401@172.17.0.1:5432/typebot
+      - DATABASE_URL=postgresql://postgres:X8yGKPhk3kFCyZTA@172.17.0.1:54322/typebot
       - NEXTAUTH_URL=https://typebot.easylegal.my.id
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-Ub1Ir6felK890zb8uj7Le93nxZvyXL1JGa7S0jo05sB}
       - NEXT_PUBLIC_APP_URL=https://typebot.easylegal.my.id
