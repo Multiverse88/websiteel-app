@@ -24,7 +24,18 @@ function loadEnv(envPath) {
 loadEnv(path.join(__dirname, '../.env.production'));
 loadEnv(path.join(__dirname, '../.env'));
 
-const endpoint = process.env.MINIO_ENDPOINT;
+// Use internal MinIO endpoint when running on VPS (sync from host/VPS, not from outside)
+// This avoids going through Cloudflare which returns 526 SSL handshake failed
+const isVPS = process.env.IS_VPS === 'true' || fs.existsSync('/.dockerenv') || fs.existsSync('/run/.containerenv');
+
+let endpoint = process.env.MINIO_ENDPOINT;
+if (isVPS && endpoint && !endpoint.includes('://')) {
+  // Override to internal MinIO endpoint for VPS sync
+  endpoint = `http://172.17.0.1:9000`;
+} else if (isVPS && endpoint && endpoint.startsWith('https://cdn.easylegal.my.id')) {
+  endpoint = `http://172.17.0.1:9000`;
+}
+
 const accessKeyId = process.env.MINIO_ACCESS_KEY;
 const secretAccessKey = process.env.MINIO_SECRET_KEY;
 const bucketName = process.env.MINIO_BUCKET || "images";
