@@ -84,13 +84,13 @@ export default function Footer() {
           <div className="lg:col-span-5 flex flex-col space-y-6">
 
             {/* Stacking Brand Logo exactly like navbar */}
-            <Link href="/home-gads" className="inline-flex items-start group w-fit">
+            <Link href="/home-gads" className="footer-logo-lg inline-flex items-start group w-fit">
               <Image
                 src="/Logo EL.png"
                 alt="EasyLegal Logo"
                 width={200}
                 height={100}
-                className="!h-[100px] !w-auto object-contain"
+                className="object-contain"
                 priority
               />
             </Link>
@@ -200,13 +200,13 @@ export default function Footer() {
         <div className="block md:hidden space-y-6 pb-6">
           {/* Logo & description row */}
           <div className="flex items-start gap-3.5">
-            <Link href="/home-gads" className="inline-flex items-start flex-shrink-0">
+            <Link href="/home-gads" className="footer-logo-sm inline-flex items-start flex-shrink-0">
               <Image
                 src="/Logo EL.png"
                 alt="EasyLegal Logo"
                 width={120}
                 height={60}
-                className="!h-[60px] !w-auto object-contain"
+                className="object-contain"
                 priority
               />
             </Link>
