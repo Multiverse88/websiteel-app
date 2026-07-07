@@ -97,8 +97,7 @@ export default function Navbar() {
               alt="EasyLegal Logo" 
               width={150}
               height={52}
-              className="h-[52px] w-auto object-contain"
-              style={{ height: "52px" }}
+              className="!h-[52px] !w-auto object-contain"
               priority
             />
           </Link>
