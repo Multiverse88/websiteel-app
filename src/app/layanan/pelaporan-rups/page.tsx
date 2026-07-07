@@ -251,7 +251,6 @@ const packages = [
 
 export default function PelaporanRUPS() {
   const [activePkgIdx, setActivePkgIdx] = useState(1);
-  const [faqExpandedIdx, setFaqExpandedIdx] = useState<number | null>(0);
   const desktopCarouselRef = useRef<HTMLDivElement>(null);
   const mobileCarouselRef = useRef<HTMLDivElement>(null);
 
@@ -383,7 +382,7 @@ export default function PelaporanRUPS() {
                   </div>
 
                   {/* Checkpoints */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-gray-150 max-w-[650px]">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 max-w-[650px]">
                     <div className="flex items-center space-x-3 bg-[#FFF5F5] p-2.5 rounded-xl border border-red-50/50 shadow-sm">
                       <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm border border-red-100">
                         <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
@@ -856,71 +855,12 @@ export default function PelaporanRUPS() {
           </FadeIn>
 
 
-          {/* ─── 4. FAQ (REPLACED WITH CUSTOM ACCORDION) ─── */}
-          <FadeIn direction="up" delay={0.2}>
-            <section className="bg-white py-16 lg:py-24 border-b border-gray-200/50">
-              <div className="max-w-[850px] mx-auto px-4 sm:px-8">
-                
-                {/* FAQ Header */}
-                <div className="text-center mb-12 space-y-3">
-                  <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
-                  <h2 className="font-heading text-[26px] sm:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight">
-                    Pertanyaan yang Sering Ditanyakan
-                  </h2>
-                  <p className="text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed">
-                    Sebelum mulai, mungkin jawabannya sudah ada di sini.
-                  </p>
-                </div>
-
-                {/* FAQ List */}
-                <div className="space-y-4">
-                  {rupsFaqs.map((item, idx) => {
-                    const isExpanded = faqExpandedIdx === idx;
-                    return (
-                      <div 
-                        key={idx} 
-                        className="border-b border-gray-150/70 pb-5 pt-2"
-                      >
-                        <button
-                          onClick={() => setFaqExpandedIdx(isExpanded ? null : idx)}
-                          className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"
-                        >
-                          <span className={`text-[15px] sm:text-[16.5px] font-bold leading-snug transition-colors duration-200 ${
-                            isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"
-                          }`}>
-                            {item.q}
-                          </span>
-                          
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                            isExpanded ? "bg-[#990202] text-white" : "bg-gray-100 text-gray-500 group-hover:bg-gray-200"
-                          }`}>
-                            {isExpanded ? (
-                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                            ) : (
-                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                              </svg>
-                            )}
-                          </div>
-                        </button>
-
-                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                          isExpanded ? "max-h-[300px] mt-3" : "max-h-0"
-                        }`}>
-                          <p className="text-[13px] sm:text-[14px] text-gray-500 leading-relaxed font-normal pr-8">
-                            {item.a}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-              </div>
-            </section>
-          </FadeIn>
+          {/* ─── 4. FAQ ─── */}
+          <FAQ 
+            title="Pertanyaan yang Sering Ditanyakan"
+            subtitle="Sebelum mulai, mungkin jawabannya sudah ada di sini."
+            items={rupsFaqs} 
+          />
 
           {/* ─── 5. CTA BOTTOM (REPLACED WITH CUSTOM 2-COLUMN) ─── */}
           <FadeIn direction="up" delay={0.2}>
