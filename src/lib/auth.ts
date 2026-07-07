@@ -47,16 +47,7 @@ export async function deleteSession() {
   cookieStore.delete(COOKIE_NAME);
 }
 
-export async function login(email: string, password: string) {
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user) return null;
 
-  // Verifikasi password dengan bcrypt hash
-  const isValid = await bcrypt.compare(password, user.password);
-  if (!isValid) return null;
-
-  return { userId: user.id, email: user.email, name: user.name };
-}
 
 export async function loginWithPassword(email: string, password: string) {
   const user = await prisma.user.findUnique({ where: { email } });
