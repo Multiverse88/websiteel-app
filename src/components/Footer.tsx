@@ -45,6 +45,7 @@ export default function Footer() {
     { name: "Sertifikasi ISO", href: "/layanan/sertifikasi-iso" },
     { name: "Visa & KITAS", href: "/layanan/visa-kitas" },
     { name: "Pelaporan LKPM", href: "/layanan/pelaporan-lkpm" },
+    { name: "Pelaporan RUPS", href: "/layanan/pelaporan-rups" },
     { name: "Press Release", href: "/layanan/press-release" },
     { name: "Apostille", href: "/layanan/apostille" },
   ];
@@ -90,7 +91,7 @@ export default function Footer() {
                 width={200}
                 height={100}
                 className="h-[100px] w-auto object-contain"
-                style={{ width: "auto" }}
+                style={{ width: "auto", height: "auto" }}
                 priority
               />
             </Link>
@@ -207,7 +208,7 @@ export default function Footer() {
                 width={120}
                 height={60}
                 className="h-[60px] w-auto object-contain"
-                style={{ width: "auto" }}
+                style={{ width: "auto", height: "auto" }}
                 priority
               />
             </Link>

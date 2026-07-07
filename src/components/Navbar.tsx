@@ -64,6 +64,7 @@ export default function Navbar() {
     { name: "PR & Media", desc: "Publikasi Media Online", href: "/layanan/pr-media" },
     { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/layanan/perjanjian-perkawinan" },
     { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/layanan/pelaporan-lkpm" },
+    { name: "Pelaporan RUPS", desc: "RUPS Tahunan & Luar Biasa", href: "/layanan/pelaporan-rups" },
     { name: "Referensi & Reseller", desc: "Program Kemitraan & Komisi", href: "/referral-reseller" },
     { name: "Cek Nama PT", desc: "Cek Ketersediaan Nama PT", href: "/cek-nama" },
   ];
@@ -97,7 +98,7 @@ export default function Navbar() {
               width={150}
               height={52}
               className="h-[52px] w-auto object-contain"
-              style={{ width: "auto" }}
+              style={{ width: "auto", height: "auto" }}
               priority
             />
           </Link>

@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand, HeadBucketCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const endpoint = process.env.MINIO_ENDPOINT;
 const accessKeyId = process.env.MINIO_ACCESS_KEY;
@@ -7,7 +7,6 @@ const bucketName = process.env.MINIO_BUCKET || "images";
 const publicUrl = process.env.MINIO_PUBLIC_URL || `http://${endpoint}/${bucketName}`;
 
 let s3Client: S3Client | null = null;
-let bucketReady = false;
 
 export function isMinioConfigured(): boolean {
   return !!(endpoint && accessKeyId && secretAccessKey);
@@ -24,16 +23,6 @@ if (isMinioConfigured()) {
     forcePathStyle: true,
     requestHandler: { requestTimeout: 10_000 },
   });
-}
-
-export async function ensureBucket(): Promise<void> {
-  if (!s3Client || bucketReady) return;
-  try {
-    await s3Client.send(new HeadBucketCommand({ Bucket: bucketName }));
-    bucketReady = true;
-  } catch {
-    console.warn(`Bucket "${bucketName}" not accessible — uploads may fail`);
-  }
 }
 
 export async function uploadToMinio(
