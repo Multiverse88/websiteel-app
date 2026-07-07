@@ -363,3 +363,17 @@ body:has(.has-service-cta) #footer-cta {
     transition: none !important;
   }
 }
+
+/* Override Next.js Image inline width:auto;height:auto on logos */
+.navbar-logo img {
+  height: 52px !important;
+  width: auto !important;
+}
+.footer-logo-lg img {
+  height: 100px !important;
+  width: auto !important;
+}
+.footer-logo-sm img {
+  height: 60px !important;
+  width: auto !important;
+}

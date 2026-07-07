@@ -92,14 +92,16 @@ export default function Navbar() {
             onClick={handleLinkClick}
             className="flex items-center group flex-shrink-0"
           >
-            <Image 
-              src="/Logo EL.png" 
-              alt="EasyLegal Logo" 
-              width={150}
-              height={52}
-              className="!h-[52px] !w-auto object-contain"
-              priority
-            />
+            <div className="navbar-logo">
+              <Image 
+                src="/Logo EL.png" 
+                alt="EasyLegal Logo" 
+                width={150}
+                height={52}
+                className="object-contain"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation - Center */}
