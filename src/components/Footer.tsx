@@ -91,6 +91,7 @@ export default function Footer() {
                 width={200}
                 height={100}
                 className="h-[100px] w-auto object-contain"
+                style={{ height: "100px" }}
                 priority
               />
             </Link>
@@ -207,6 +208,7 @@ export default function Footer() {
                 width={120}
                 height={60}
                 className="h-[60px] w-auto object-contain"
+                style={{ height: "60px" }}
                 priority
               />
             </Link>
