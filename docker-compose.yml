@@ -63,7 +63,7 @@ services:
     env_file:
       - .env.production
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@172.17.0.1:54322/typebot
+      - DATABASE_URL=${TYPEBOT_DATABASE_URL}
       - NEXTAUTH_URL=https://typebot.easylegal.my.id
       - NEXT_PUBLIC_APP_URL=https://typebot.easylegal.my.id
       - NEXT_PUBLIC_VIEWER_URL=https://typebot.easylegal.my.id
@@ -95,7 +95,7 @@ services:
     env_file:
       - .env.production
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@172.17.0.1:54322/typebot
+      - DATABASE_URL=${TYPEBOT_DATABASE_URL}
       - NEXTAUTH_URL=https://typebot.easylegal.my.id
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-Ub1Ir6felK890zb8uj7Le93nxZvyXL1JGa7S0jo05sB}
       - NEXT_PUBLIC_APP_URL=https://typebot.easylegal.my.id
