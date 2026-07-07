@@ -17,7 +17,8 @@ echo "Backing up database..."
 mkdir -p $BACKUP_DIR
 
 # Backup (PostgreSQL on host)
-pg_dump -U easylegal easylegal | gzip > $BACKUP_FILE
+docker run --rm --network host -e PGPASSWORD=postgres postgres:17 \
+  pg_dump -h 127.0.0.1 -p 54322 -U postgres --schema=easylegal --no-owner --no-privileges postgres | gzip > $BACKUP_FILE
 
 # Show result
 if [ -f "$BACKUP_FILE" ]; then
