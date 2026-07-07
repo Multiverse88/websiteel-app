@@ -90,8 +90,7 @@ export default function Footer() {
                 alt="EasyLegal Logo"
                 width={200}
                 height={100}
-                className="h-[100px] w-auto object-contain"
-                style={{ height: "100px" }}
+                className="!h-[100px] !w-auto object-contain"
                 priority
               />
             </Link>
@@ -207,8 +206,7 @@ export default function Footer() {
                 alt="EasyLegal Logo"
                 width={120}
                 height={60}
-                className="h-[60px] w-auto object-contain"
-                style={{ height: "60px" }}
+                className="!h-[60px] !w-auto object-contain"
                 priority
               />
             </Link>
