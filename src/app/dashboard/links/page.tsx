@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
-import { ArrowLeft, Link2, ExternalLink, Plus, Calendar, MousePointerClick } from "lucide-react";
+import { ArrowLeft, Link2, ExternalLink, Plus, Calendar, MousePointerClick, Pencil } from "lucide-react";
 import DeleteLinkButton from "./delete-button";
 
 export const dynamic = "force-dynamic";
@@ -128,7 +128,14 @@ export default async function LinksPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="col-span-1 flex justify-end">
+                  <div className="col-span-1 flex justify-end gap-1">
+                    <Link
+                      href={`/dashboard/links/${link.id}`}
+                      className="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
+                      title="Edit link"
+                    >
+                      <Pencil className="w-4 h-4" />
+                    </Link>
                     <DeleteLinkButton id={link.id} slug={link.slug} />
                   </div>
                 </div>
