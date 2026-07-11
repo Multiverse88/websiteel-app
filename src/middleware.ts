@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 import { getJwtSecret } from "@/lib/config";
-import { prisma } from "@/lib/db";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -25,13 +24,16 @@ export async function middleware(request: NextRequest) {
 
     if (slug) {
       try {
+        // Dynamic import — PrismaClient is Node-only, can't be top-level import in Edge runtime
+        // ponytail: if Edge runtime rejection persists, replace with fetch to internal route
+        const { prisma } = await import("@/lib/db");
         const redirect = await prisma.redirect.findUnique({
           where: { slug },
           select: { destination: true },
         });
 
         if (redirect) {
-          // Fire-and-forget — don't block response
+          // Fire-and-forget click count — don't block response
           prisma.redirect
             .update({ where: { slug }, data: { clicks: { increment: 1 } } })
             .catch(() => {});
@@ -39,7 +41,7 @@ export async function middleware(request: NextRequest) {
           return NextResponse.redirect(redirect.destination);
         }
       } catch {
-        // DB down — fall through, site keeps working
+        // DB or Edge runtime reject — fall through, site keeps working
       }
     }
   }
