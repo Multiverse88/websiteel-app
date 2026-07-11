@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
 
   // 2. Redirect check — only GET/HEAD
   if (request.method === "GET" || request.method === "HEAD") {
-    const slug = pathname.slice(1); // "/daftar-klien" → "daftar-klien"
+    const slug = pathname.slice(1).replace(/\/$/, ""); // "/daftar-klien/" → "daftar-klien"
 
     if (slug) {
       try {
