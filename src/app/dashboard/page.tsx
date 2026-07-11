@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FileText, LogOut, ExternalLink, Calendar, Clock, Eye, Mail, User, Pencil } from "lucide-react";
+import { FileText, LogOut, ExternalLink, Calendar, Clock, Eye, Mail, User, Pencil, Link2 } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { logoutAction } from "./actions";
 import ArticleImage from "./article-image";
@@ -38,6 +38,7 @@ export default async function DashboardPage() {
   const totalArticles = articles.length;
   const totalViews = articles.reduce((sum: number, a: { viewCount: number }) => sum + a.viewCount, 0);
   const subscriberCount = await prisma.newsletterSubscriber.count({ where: { isActive: true } });
+  const linksCount = await prisma.redirect.count();
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
@@ -69,6 +70,18 @@ export default async function DashboardPage() {
               {subscriberCount > 0 && (
                 <span className="ml-0.5 px-1.5 py-0.5 bg-[#990202] text-white text-[10px] font-bold rounded-md">
                   {subscriberCount}
+                </span>
+              )}
+            </Link>
+            <Link
+              href="/dashboard/links"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] shadow-md border border-black/[0.04] hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
+            >
+              <Link2 className="w-4 h-4" />
+              <span>Redirect Links</span>
+              {linksCount > 0 && (
+                <span className="ml-0.5 px-1.5 py-0.5 bg-[#990202] text-white text-[10px] font-bold rounded-md">
+                  {linksCount}
                 </span>
               )}
             </Link>
