@@ -22,25 +22,22 @@ function setWithLimit<K, V>(map: Map<K, V>, key: K, value: V) {
   map.set(key, value);
 }
 
+function cleanMap(map: Map<string, RateLimitEntry>, maxAgeMs: number) {
+  const now = Date.now();
+  for (const [key, entry] of map.entries()) {
+    if (!entry.lockedUntil && now - entry.lastAttempt > maxAgeMs) {
+      map.delete(key);
+    }
+    if (entry.lockedUntil && now > entry.lockedUntil) {
+      map.delete(key);
+    }
+  }
+}
+
 // Clean up old entries every 15 minutes
 setInterval(() => {
-  const now = Date.now();
-  for (const [key, entry] of loginAttempts.entries()) {
-    if (!entry.lockedUntil && now - entry.lastAttempt > 60 * 60 * 1000) {
-      loginAttempts.delete(key);
-    }
-    if (entry.lockedUntil && now > entry.lockedUntil) {
-      loginAttempts.delete(key);
-    }
-  }
-  for (const [key, entry] of twoFactorAttempts.entries()) {
-    if (!entry.lockedUntil && now - entry.lastAttempt > 60 * 60 * 1000) {
-      twoFactorAttempts.delete(key);
-    }
-    if (entry.lockedUntil && now > entry.lockedUntil) {
-      twoFactorAttempts.delete(key);
-    }
-  }
+  cleanMap(loginAttempts, 60 * 60 * 1000);
+  cleanMap(twoFactorAttempts, 60 * 60 * 1000);
 }, 15 * 60 * 1000);
 
 const MAX_ATTEMPTS = 5;
@@ -51,59 +48,59 @@ const TWO_FACTOR_MAX_ATTEMPTS = 5;
 const TWO_FACTOR_LOCKOUT_DURATION = 5 * 60 * 1000;
 const TWO_FACTOR_ATTEMPT_WINDOW = 5 * 60 * 1000;
 
-export function checkRateLimit(identifier: string): { allowed: boolean; retryAfter?: number } {
+function checkLimit(map: Map<string, RateLimitEntry>, identifier: string, windowMs: number): { allowed: boolean; retryAfter?: number } {
   const now = Date.now();
-  const entry = loginAttempts.get(identifier);
+  const entry = map.get(identifier);
 
-  if (!entry) {
-    return { allowed: true };
-  }
+  if (!entry) return { allowed: true };
 
-  // Check if account is locked
   if (entry.lockedUntil) {
     if (now < entry.lockedUntil) {
-      const retryAfter = Math.ceil((entry.lockedUntil - now) / 1000);
-      return { allowed: false, retryAfter };
+      return { allowed: false, retryAfter: Math.ceil((entry.lockedUntil - now) / 1000) };
     }
-    // Lockout expired, reset
-    loginAttempts.delete(identifier);
+    map.delete(identifier);
     return { allowed: true };
   }
 
-  // Check if attempts window has expired
-  if (now - entry.lastAttempt > ATTEMPT_WINDOW) {
-    loginAttempts.delete(identifier);
+  if (now - entry.lastAttempt > windowMs) {
+    map.delete(identifier);
     return { allowed: true };
   }
 
   return { allowed: true };
 }
 
-export function recordFailedAttempt(identifier: string): { locked: boolean; retryAfter?: number } {
+function recordAttempt(map: Map<string, RateLimitEntry>, identifier: string, maxAttempts: number, lockoutMs: number, windowMs: number): { locked: boolean; retryAfter?: number } {
   const now = Date.now();
-  let entry = loginAttempts.get(identifier);
+  let entry = map.get(identifier);
 
   if (!entry) {
     entry = { attempts: 0, lastAttempt: now };
-    setWithLimit(loginAttempts, identifier, entry);
+    setWithLimit(map, identifier, entry);
   }
 
-  // Check if attempts window has expired
-  if (now - entry.lastAttempt > ATTEMPT_WINDOW) {
+  if (now - entry.lastAttempt > windowMs) {
     entry.attempts = 0;
   }
 
   entry.attempts++;
   entry.lastAttempt = now;
 
-  // Lock account if max attempts reached
-  if (entry.attempts >= MAX_ATTEMPTS) {
-    entry.lockedUntil = now + LOCKOUT_DURATION;
-    const retryAfter = Math.ceil(LOCKOUT_DURATION / 1000);
-    return { locked: true, retryAfter };
+  if (entry.attempts >= maxAttempts) {
+    entry.lockedUntil = now + lockoutMs;
+    return { locked: true, retryAfter: Math.ceil(lockoutMs / 1000) };
   }
 
   return { locked: false };
+}
+
+// Login rate limit
+export function checkRateLimit(identifier: string): { allowed: boolean; retryAfter?: number } {
+  return checkLimit(loginAttempts, identifier, ATTEMPT_WINDOW);
+}
+
+export function recordFailedAttempt(identifier: string): { locked: boolean; retryAfter?: number } {
+  return recordAttempt(loginAttempts, identifier, MAX_ATTEMPTS, LOCKOUT_DURATION, ATTEMPT_WINDOW);
 }
 
 export function resetAttempts(identifier: string) {
@@ -116,41 +113,13 @@ export function getRemainingAttempts(identifier: string): number {
   return Math.max(0, MAX_ATTEMPTS - entry.attempts);
 }
 
+// 2FA rate limit
 export function checkTwoFactorRateLimit(identifier: string): { allowed: boolean; retryAfter?: number } {
-  const now = Date.now();
-  const entry = twoFactorAttempts.get(identifier);
-  if (!entry) return { allowed: true };
-  if (entry.lockedUntil) {
-    if (now < entry.lockedUntil) {
-      return { allowed: false, retryAfter: Math.ceil((entry.lockedUntil - now) / 1000) };
-    }
-    twoFactorAttempts.delete(identifier);
-    return { allowed: true };
-  }
-  if (now - entry.lastAttempt > TWO_FACTOR_ATTEMPT_WINDOW) {
-    twoFactorAttempts.delete(identifier);
-    return { allowed: true };
-  }
-  return { allowed: true };
+  return checkLimit(twoFactorAttempts, identifier, TWO_FACTOR_ATTEMPT_WINDOW);
 }
 
 export function recordTwoFactorFailedAttempt(identifier: string): { locked: boolean; retryAfter?: number } {
-  const now = Date.now();
-  let entry = twoFactorAttempts.get(identifier);
-  if (!entry) {
-    entry = { attempts: 0, lastAttempt: now };
-    setWithLimit(twoFactorAttempts, identifier, entry);
-  }
-  if (now - entry.lastAttempt > TWO_FACTOR_ATTEMPT_WINDOW) {
-    entry.attempts = 0;
-  }
-  entry.attempts++;
-  entry.lastAttempt = now;
-  if (entry.attempts >= TWO_FACTOR_MAX_ATTEMPTS) {
-    entry.lockedUntil = now + TWO_FACTOR_LOCKOUT_DURATION;
-    return { locked: true, retryAfter: Math.ceil(TWO_FACTOR_LOCKOUT_DURATION / 1000) };
-  }
-  return { locked: false };
+  return recordAttempt(twoFactorAttempts, identifier, TWO_FACTOR_MAX_ATTEMPTS, TWO_FACTOR_LOCKOUT_DURATION, TWO_FACTOR_ATTEMPT_WINDOW);
 }
 
 export function resetTwoFactorAttempts(identifier: string) {

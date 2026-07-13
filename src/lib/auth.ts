@@ -47,6 +47,16 @@ export async function deleteSession() {
   cookieStore.delete(COOKIE_NAME);
 }
 
+export function parsePendingUser(raw: string): { userId: string; email: string } | null {
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed?.userId && parsed?.email) return parsed;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 
 
 export async function loginWithPassword(email: string, password: string) {

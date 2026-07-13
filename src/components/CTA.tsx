@@ -16,7 +16,11 @@ interface CTAProps {
 }
 
 export default function CTA({
-  title,
+  title = (
+    <h2 className="font-heading text-[20px] sm:text-[38px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight tracking-tight max-w-[480px]">
+      Siap mulai urus legalitas bisnis Anda?
+    </h2>
+  ),
   description = "Konsultasikan kebutuhan Anda sekarang — gratis, tanpa komitmen. Tim kami akan menjelaskan syarat, timeline, dan biaya yang dibutuhkan.",
   whatsappLink,
   whatsappText = "Konsultasi via WhatsApp",
@@ -35,12 +39,6 @@ export default function CTA({
     return () => obs.disconnect();
   }, []);
 
-  const defaultTitle = (
-    <h2 className="font-heading text-[34px] sm:text-[38px] font-extrabold text-gray-950 leading-tight tracking-tight max-w-[480px]">
-      Siap mulai urus legalitas bisnis Anda?
-    </h2>
-  );
-
   const waLink = whatsappLink || getWhatsAppLink();
 
   return (
@@ -51,9 +49,7 @@ export default function CTA({
       >
         {/* Left Column: Heading & Description */}
         <div className="flex flex-col text-left max-w-xl">
-          <h2 className="font-heading text-[20px] sm:text-[38px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight tracking-tight max-w-[480px]">
-            Siap mulai urus legalitas bisnis Anda?
-          </h2>
+          {title}
           <div className="text-[11.5px] sm:text-[14.5px] text-gray-500 leading-relaxed mt-2.5 sm:mt-4 max-w-[460px] font-normal">
             {description}
           </div>

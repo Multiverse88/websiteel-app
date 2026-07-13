@@ -5,16 +5,7 @@ import { generateTwoFactorSecret, verifyTwoFactorCode } from "@/lib/2fa";
 import { checkTwoFactorRateLimit, recordTwoFactorFailedAttempt, resetTwoFactorAttempts } from "@/lib/rate-limit";
 import { cookies } from "next/headers";
 import { trackMetric } from "@/lib/metrics";
-
-function parsePendingUser(raw: string): { userId: string; email: string } | null {
-  try {
-    const parsed = JSON.parse(raw);
-    if (parsed?.userId && parsed?.email) return parsed;
-    return null;
-  } catch {
-    return null;
-  }
-}
+import { parsePendingUser } from "@/lib/auth";
 
 async function getPendingUser() {
   const cookieStore = await cookies();
