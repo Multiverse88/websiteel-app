@@ -1,4 +1,6 @@
-const SITE_URL = "https://easylegal.my.id";
+import { config } from "./config";
+
+const SITE_URL = config.baseUrl;
 
 export function getLocalBusinessJsonLd() {
   return {
