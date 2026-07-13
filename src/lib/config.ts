@@ -2,9 +2,6 @@
 // Update this file to change global settings
 
 export const config = {
-  // WhatsApp number (without + prefix)
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6281123456789",
-  
   // Default WhatsApp message
   defaultWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.",
   

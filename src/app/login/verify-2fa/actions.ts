@@ -2,18 +2,8 @@
 
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { createSession } from "@/lib/auth";
+import { createSession, parsePendingUser } from "@/lib/auth";
 import { verifyTwoFactorLogin } from "../actions-2fa";
-
-function parsePendingUser(raw: string): { userId: string; email: string } | null {
-  try {
-    const parsed = JSON.parse(raw);
-    if (parsed?.userId && parsed?.email) return parsed;
-    return null;
-  } catch {
-    return null;
-  }
-}
 
 export async function verifyLogin2FA(prevState: { error?: string } | null, formData: FormData) {
   const token = formData.get("token") as string;

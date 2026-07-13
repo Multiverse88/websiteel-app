@@ -156,7 +156,6 @@ export async function createArticle(prevState: Record<string, unknown> | null, f
       counter++;
     }
 
-    const session = await getSession();
     const authorId = session?.userId || null;
 
     // Insert article

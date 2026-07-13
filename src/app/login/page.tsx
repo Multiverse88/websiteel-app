@@ -4,6 +4,8 @@ import React, { useState, useTransition } from "react";
 import { Lock, Mail, Loader2 } from "lucide-react";
 import { loginAction } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 export default function LoginPage() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);

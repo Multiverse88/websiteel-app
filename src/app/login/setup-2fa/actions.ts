@@ -2,18 +2,8 @@
 
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { createSession } from "@/lib/auth";
+import { createSession, parsePendingUser } from "@/lib/auth";
 import { setupTwoFactor, verifyTwoFactorSetup } from "../actions-2fa";
-
-function parsePendingUser(raw: string): { userId: string; email: string } | null {
-  try {
-    const parsed = JSON.parse(raw);
-    if (parsed?.userId && parsed?.email) return parsed;
-    return null;
-  } catch {
-    return null;
-  }
-}
 
 export async function initiateSetup(): Promise<{ manualEntryKey?: string; qrCodeDataUrl?: string; message?: string; error?: string }> {
   const result = await setupTwoFactor();

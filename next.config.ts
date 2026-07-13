@@ -12,12 +12,12 @@ const ContentSecurityPolicy = isProd
   style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://cloudflareinsights.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://connect.facebook.net https://graph.facebook.com https://www.facebook.com;
-  frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id;
+  connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://cloudflareinsights.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app;
+  frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://www.facebook.com;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com blob: data:;
   object-src 'none';
   base-uri 'self';
-  form-action 'self';
+  form-action 'self' https://www.facebook.com;
   frame-ancestors 'none';
   worker-src 'self' blob:;
 `
