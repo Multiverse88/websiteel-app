@@ -2,7 +2,9 @@
 
 import React from "react";
 import { Check, X } from "lucide-react";
+import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
+import PricingFooter from "@/components/PricingFooter";
 
 export interface PricingItem {
   text: string;
@@ -43,6 +45,7 @@ export interface PricingProps {
   sectionSubtitle?: React.ReactNode;
   packages: PricingPackage[];
   footnotes?: string[] | FootnoteItem[];
+  promoBadgeSrc?: string;
 }
 
 export default function Pricing({
@@ -51,6 +54,7 @@ export default function Pricing({
   sectionSubtitle,
   packages,
   footnotes,
+  promoBadgeSrc = "/images/badges/promo-50.png",
 }: PricingProps) {
   // Determine grid columns dynamically based on package count
   const gridColsClass =
@@ -65,18 +69,29 @@ export default function Pricing({
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <FadeIn className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-2 sm:space-y-3">
-          <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
-            {sectionTitleTag}
-          </p>
-          <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-            {sectionTitle}
-          </h2>
-          {sectionSubtitle && (
-            <p className="text-[12.5px] sm:text-[15px] text-gray-500 font-medium">
-              {sectionSubtitle}
+        <FadeIn className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+          <div className="max-w-2xl space-y-2 sm:space-y-3">
+            <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
+              {sectionTitleTag}
             </p>
-          )}
+            <h2 className="font-heading text-[20px] sm:text-[38px] lg:text-[42px] font-extrabold text-gray-950 leading-tight tracking-tight">
+              {sectionTitle}
+            </h2>
+            {sectionSubtitle && (
+              <p className="text-[12.5px] sm:text-[15px] text-gray-500 font-medium leading-relaxed">
+                {sectionSubtitle}
+              </p>
+            )}
+          </div>
+          <div className="flex-shrink-0 flex justify-start md:justify-end">
+            <Image 
+              src={promoBadgeSrc} 
+              alt="Promo Discount Badge" 
+              width={280} 
+              height={120}
+              className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+            />
+          </div>
         </FadeIn>
         {/* Pricing Grid */}
         <FadeIn delay={0.15}>
@@ -102,7 +117,7 @@ export default function Pricing({
                     {pkg.title}
                   </h3>
                   {pkg.strikePrice && (
-                    <div className={`mt-2 sm:mt-3 text-[10px] sm:text-[12px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-gray-500"}`}>
+                    <div className={`mt-2 sm:mt-3 text-[10px] sm:text-[12px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-white"}`}>
                       {pkg.strikePrice}
                     </div>
                   )}
@@ -110,7 +125,7 @@ export default function Pricing({
                     <span className="text-[22px] sm:text-[30px] font-black tracking-tight">{pkg.price}</span>
                   </div>
                   {pkg.subLabel && (
-                    <div className={`mt-2 sm:mt-2.5 text-[8px] sm:text-[9.5px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-gray-500"}`}>
+                    <div className={`mt-2 sm:mt-2.5 text-[8px] sm:text-[9.5px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-white"}`}>
                       {pkg.subLabel}
                     </div>
                   )}
@@ -201,6 +216,8 @@ export default function Pricing({
             })}
           </div>
         )}
+
+        <PricingFooter />
 
       </div>
     </section>

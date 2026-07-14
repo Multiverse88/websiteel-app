@@ -377,3 +377,15 @@ body:has(.has-service-cta) #footer-cta {
   height: 60px !important;
   width: auto !important;
 }
+
+/* ── Dashboard Shell ─────────────────────────────────────── */
+/* Hide root layout's Navbar, Footer, TypebotWidget          */
+/* when inside the dashboard or login pages.                 */
+body:has(.dashboard-shell) {
+  padding-top: 0 !important;
+}
+body:has(.dashboard-shell) nav,
+body:has(.dashboard-shell) footer,
+body:has(.dashboard-shell) #typebot-bubble {
+  display: none !important;
+}

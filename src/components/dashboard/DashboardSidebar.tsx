@@ -51,7 +51,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
   ];
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 min-h-screen flex flex-col justify-between shrink-0">
+    <aside className="w-64 bg-white border-r border-gray-200 h-screen flex flex-col justify-between shrink-0 overflow-y-auto hidden md:flex">
       <div className="flex flex-col">
         <div className="px-6 py-6 border-b border-gray-100 flex items-center">
           <Link href="/dashboard" className="text-xl font-bold text-gray-900 flex items-center gap-2">

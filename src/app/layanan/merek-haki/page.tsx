@@ -25,6 +25,8 @@ import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 
@@ -633,7 +635,7 @@ export default function MerekHaki() {
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[24px] sm:rounded-[24px] sm:rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?fit=crop&w=800&h=800&q=80"
+                    src="/images/layanan/merek-1.jpg"
                     alt="Pendaftaran Merek & HAKI EasyLegal"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -692,7 +694,7 @@ export default function MerekHaki() {
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1573164713988-8665fc963095?fit=crop&w=800&h=800&q=80"
+                    src="/images/layanan/merek-2.jpg"
                     alt="Workspace desainer logo dan merek"
                     fill
                     sizes="(max-width: 768px) 100vw, 500px"
@@ -772,6 +774,7 @@ export default function MerekHaki() {
         sectionSubtitle="Harga sudah include biaya resmi DJKI & jasa kami — tidak ada tambahan di tengah proses."
         packages={pricingPackages}
         footnotes={pricingFootnotes}
+        promoBadgeSrc="/images/badges/promo-20.png"
       />
 
       {/* ─── 3.5 LAYANAN TAMBAHAN MEREK (TABBED PRICING) ─── */}
@@ -1031,6 +1034,7 @@ export default function MerekHaki() {
       {/* ─── 5. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran merek." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
 
+      <MediaCoverage />
     </div>
   );
 }

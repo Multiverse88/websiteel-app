@@ -16,6 +16,8 @@ const Hero = dynamic(() => import("@/components/home/Hero"), {
   loading: () => <div className="min-h-[580px] w-full animate-pulse bg-gray-50/50" />
 });
 const Testimonials = dynamic(() => import("@/components/home/Testimonials"), { ssr: true });
+const BottomPromoSection = dynamic(() => import("@/components/home/BottomPromoSection"), { ssr: true });
+import MediaCoverage from "@/components/MediaCoverage";
 import {
   quickTools,
   partnerLogos,
@@ -34,6 +36,8 @@ import {
   Lock,
   Phone,
   MapPin,
+  Truck,
+  Download,
 } from "lucide-react";
 
 /* ─── DATA ─── */
@@ -235,122 +239,140 @@ function CaraKerjaSection() {
             {/* Step 1 Visual Container */}
             {activeStep === 0 && (
               <div key="step-0" className="absolute inset-0 w-full h-full animate-step-in">
-                {/* Orange backdrop offset rectangle */}
-                <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#F2994A] to-[#F2C94C] shadow-lg opacity-95 transition-all duration-500" />
                 
-                {/* Main Photo of Smiling Professional Woman */}
-                <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
+                {/* Main Photo of Smiling Professional Man */}
+                <div className="absolute top-8 left-[12%] w-[76%] h-[80%] rounded-[2rem] overflow-hidden drop-shadow-xl transition-all duration-500 bg-slate-50">
                   <Image 
-                    src="/Main big photo_ business person workingconsulting.png"
-                    alt="Professional woman smiling" 
+                    src="/images/home/cara-kerja-step1.png"
+                    alt="Pilih Layanan" 
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-cover object-top hover:scale-102 transition-transform duration-700"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700"
                   />
                 </div>
 
-                {/* Soft Green wedge at bottom-left corner */}
-                <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#D1E7DD] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#C1D7CD]/30" />
-
-                {/* Main FLOATING card "01 Pilih Layanan" */}
-                <div className="absolute -top-8 -right-14 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
-                  {/* Card Header */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
-                      01
-                    </div>
-                    <div>
-                      <div className="text-[12px] font-black text-[#111827] leading-tight">Pilih Layanan</div>
-                      <div className="text-[9px] text-[#6B7280] font-semibold mt-0.5">Tentukan jasa legal yang Anda butuhkan</div>
-                    </div>
-                  </div>
-
-                  {/* 2x2 Options Grid */}
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    {/* Active Option Box: Pendirian PT */}
-                    <div className="border border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-[#B91C1C] flex items-center justify-center flex-shrink-0 shadow-sm">
-                        <Building2 className="w-3.5 h-3.5 text-white" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-[9.5px] font-black text-[#B91C1C] leading-tight truncate">Pendirian PT</div>
-                        <div className="text-[8px] font-bold text-[#B91C1C] mt-0.5 leading-none">Mulai Rp2,5jt</div>
-                      </div>
-                    </div>
-
-                    {/* Option Box: NIB & OSS */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-white shadow-md border border-black/[0.04] flex items-center justify-center flex-shrink-0">
-                        <FileText className="w-3.5 h-3.5 text-gray-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">NIB & OSS</div>
-                        <div className="text-[8px] font-medium text-gray-500 mt-0.5 leading-none">Mulai Rp500rb</div>
-                      </div>
-                    </div>
-
-                    {/* Option Box: Daftar Merek */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-white shadow-md border border-black/[0.04] flex items-center justify-center flex-shrink-0">
-                        <ShieldCheck className="w-3.5 h-3.5 text-gray-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">Daftar Merek</div>
-                        <div className="text-[8px] font-medium text-gray-500 mt-0.5 leading-none">Mulai Rp1,5jt</div>
-                      </div>
-                    </div>
-
-                    {/* Option Box: ISO 9001 */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left transition-all duration-300 active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-white shadow-md border border-black/[0.04] flex items-center justify-center flex-shrink-0">
-                        <Award className="w-3.5 h-3.5 text-gray-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">ISO 9001</div>
-                        <div className="text-[8px] font-medium text-gray-500 mt-0.5 leading-none">Konsultasi</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Floating "Akta selesai" Badge */}
-                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2 z-40 animate-bounce-slow">
-                  <div className="w-4.5 h-4.5 rounded-full bg-[#E8F5E9] flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3 h-3 text-[#2E7D32]" strokeWidth={4} />
+                <div className="absolute top-[12%] right-[2%] bg-white rounded-full px-3.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
+                  <div className="w-5 h-5 rounded-full bg-[#E8F5E9] flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3.5 h-3.5 text-[#2E7D32]" strokeWidth={4} />
                   </div>
-                  <div className="flex items-baseline leading-none">
-                    <span className="text-[10px] font-black text-gray-800">Akta selesai</span>
-                    <span className="text-[8px] text-gray-500 font-bold ml-1.5">2 menit lalu</span>
+                  <div className="flex items-baseline gap-1.5 leading-none pr-1">
+                    <span className="text-[12px] font-black text-gray-800">Akta selesai</span>
+                    <span className="text-[10px] text-gray-500 font-bold">2 menit lalu</span>
                   </div>
                 </div>
 
                 {/* Floating "Google 4.9 Rating" Badge */}
-                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
+                <div className="absolute top-[40%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex flex-col gap-3 z-40 w-[200px] animate-float-medium">
                   <div className="flex items-center justify-between">
-                    <span className="text-amber-500 font-extrabold text-[12px] flex items-center gap-0.5">★ 4.9</span>
-                    <span className="text-[8px] text-gray-500 font-black tracking-wider">GOOGLE</span>
+                    <span className="text-amber-500 font-extrabold text-[14px] flex items-center gap-1">★ 4.9</span>
+                    <span className="text-[10px] text-gray-400 font-black tracking-wider">GOOGLE</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="flex -space-x-1.5 overflow-hidden">
-                      <Image className="inline-block h-5.5 w-5.5 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="User 1" width={22} height={22} />
-                      <Image className="inline-block h-5.5 w-5.5 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" alt="User 2" width={22} height={22} />
-                      <Image className="inline-block h-5.5 w-5.5 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" alt="User 3" width={22} height={22} />
+                  <div className="flex items-center gap-3">
+                    <div className="flex -space-x-2.5 overflow-hidden">
+                      <Image className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="User 1" width={28} height={28} />
+                      <Image className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" alt="User 2" width={28} height={28} />
+                      <Image className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" alt="User 3" width={28} height={28} />
                     </div>
                     <div className="leading-tight">
-                      <div className="text-[9.5px] font-black text-gray-800">11.000+</div>
-                      <div className="text-[7.5px] font-bold text-gray-500">bisnis terbantu</div>
+                      <div className="text-[12px] font-black text-gray-800">11.000+</div>
+                      <div className="text-[10px] font-bold text-gray-500 mt-0.5">bisnis terbantu</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Floating "Pendirian PT - proses" Badge */}
-                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
-                  <div className="w-9 h-9 rounded-full border-2 border-red-500 flex items-center justify-center text-[10px] font-black text-red-600 flex-shrink-0 bg-red-50/50">
-                    72%
+                {/* Gold Shield */}
+                <div className="absolute bottom-[20%] right-[0%] z-35 animate-float-slow">
+                  <div className="w-[100px] h-[100px] drop-shadow-[0_15px_20px_rgba(217,119,6,0.25)]">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="shield-gold" x1="20" y1="10" x2="80" y2="90" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#FDE047" />
+                          <stop offset="50%" stopColor="#EAB308" />
+                          <stop offset="100%" stopColor="#854D0E" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M50 5 L90 20 L90 45 C90 70 72 90 50 98 C28 90 10 70 10 45 L10 20 Z" fill="url(#shield-gold)" />
+                      <path d="M50 12 L84 25 L84 45 C84 66 68 84 50 91 C32 84 16 66 16 45 L16 25 Z" fill="none" stroke="#FEF08A" strokeWidth="2" />
+                      <path d="M35 50 L45 60 L65 35" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Main FLOATING card "01 Pilih Layanan" */}
+                <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                  {/* Card Header */}
+                  <div className="flex items-center gap-3 mb-3.5">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-500/30">
+                      01
+                    </div>
+                    <div>
+                      <div className="text-[14px] font-black text-[#111827] leading-tight">Pilih Layanan</div>
+                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5">Tentukan jasa legal yang Anda butuhkan</div>
+                    </div>
+                  </div>
+
+                  {/* 2x2 Options Grid */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* Active Option Box: Pendirian PT */}
+                    <div className="border-[1.5px] border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2.5 flex items-center gap-2 text-left shadow-sm">
+                      <div className="w-7 h-7 rounded-[8px] bg-[#B91C1C] flex items-center justify-center flex-shrink-0 shadow-md">
+                        <Building2 className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[10px] font-black text-[#B91C1C] leading-tight truncate">Pendirian PT</div>
+                        <div className="text-[8px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Mulai Rp2,5jt</div>
+                      </div>
+                    </div>
+
+                    {/* Option Box: NIB & OSS */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
+                        <FileText className="w-3.5 h-3.5 text-gray-400" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">NIB & OSS</div>
+                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Mulai Rp500rb</div>
+                      </div>
+                    </div>
+
+                    {/* Option Box: Daftar Merek */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
+                        <ShieldCheck className="w-3.5 h-3.5 text-gray-400" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">Daftar Merek</div>
+                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Mulai Rp1,5jt</div>
+                      </div>
+                    </div>
+
+                    {/* Option Box: ISO 9001 */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
+                        <Award className="w-3.5 h-3.5 text-gray-400" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">ISO 9001</div>
+                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Konsultasi</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating "Pendirian PT - proses" Circular Badge */}
+                <div className="absolute -bottom-[108px] right-[5%] bg-white rounded-[20px] p-2.5 shadow-[0_20px_40px_rgba(0,0,0,0.1)] border border-gray-100 flex items-center gap-2.5 z-50 w-[205px] animate-float-medium">
+                  {/* Circular progress */}
+                  <div className="relative w-9 h-9 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                      <path className="text-gray-100" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path className="text-[#B91C1C]" strokeDasharray="72, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <span className="absolute text-[10px] font-black text-gray-800">72%</span>
                   </div>
                   <div className="leading-tight min-w-0">
-                    <div className="text-[10px] font-black text-gray-800 truncate">Pendirian PT — proses</div>
-                    <div className="text-[8px] text-gray-500 font-bold mt-0.5 truncate">Tahap 3/4 · 2 hari lagi</div>
+                    <div className="text-[11px] font-black text-gray-800 truncate">Pendirian PT — proses</div>
+                    <div className="text-[9px] text-gray-500 font-bold mt-1 truncate">Tahap 3/4 · 2 hari lagi</div>
                   </div>
                 </div>
               </div>
@@ -359,111 +381,112 @@ function CaraKerjaSection() {
             {/* Step 2 Visual Container */}
             {activeStep === 1 && (
               <div key="step-1" className="absolute inset-0 w-full h-full animate-step-in">
-                {/* Blue/Warm backdrop offset rectangle */}
-                <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#1E3A8A] to-[#3B82F6] shadow-lg opacity-90 transition-all duration-500" />
                 
                 {/* Main Photo of Lawyer/Consultant */}
-                <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
-                  <Image 
-                    src="/cropped-colleagues-generating-business-ideas.jpg"
-                    alt="Legal Consultant Online" 
+                <div className="absolute top-8 left-[12%] w-[76%] h-[80%] rounded-[2rem] overflow-hidden drop-shadow-xl transition-all duration-500 bg-slate-50">
+                  <Image
+                    src="/images/home/promo-bule2.png"
+                    alt="Konsultasi Gratis"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-cover object-top hover:scale-102 transition-transform duration-700"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700"
                   />
                 </div>
 
-                {/* Soft Blue wedge at bottom-left corner */}
-                <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#DBEAFE] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#BFDBFE]/30" />
 
-                {/* FLOATING card "02 Jadwal Konsultasi" */}
-                <div className="absolute -top-8 -right-14 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
+
+                {/* "Konsultasi Aktif — Online" Badge */}
+                <div className="absolute top-[12%] right-[2%] bg-white rounded-full px-3.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
+                  <div className="w-5 h-5 rounded-full bg-[#E8F5E9] flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3.5 h-3.5 text-[#2E7D32]" strokeWidth={4} />
+                  </div>
+                  <div className="flex items-baseline gap-1.5 pr-1">
+                    <span className="text-[12px] font-black text-gray-800">Konsultasi Aktif</span>
+                    <span className="text-[10px] text-green-600 font-bold">Online</span>
+                  </div>
+                </div>
+
+                {/* "Jadwal Terkonfirmasi" Badge */}
+                <div className="absolute top-[40%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-3 z-40 w-[200px] animate-float-medium">
+                  <div className="w-10 h-10 rounded-full border-[2px] border-emerald-500 flex items-center justify-center text-[12px] font-black text-emerald-600 flex-shrink-0 bg-emerald-50">
+                    OK
+                  </div>
+                  <div className="leading-tight min-w-0">
+                    <div className="text-[13px] font-black text-gray-800 truncate">Jadwal Fix</div>
+                    <div className="text-[10px] text-gray-500 font-bold mt-1 truncate">Hari Ini · 14.00 WIB</div>
+                  </div>
+                </div>
+
+                {/* 5.0 Rating Badge */}
+                <div className="absolute bottom-[20%] right-[0%] bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex flex-col gap-2 z-40 w-[180px] animate-float-slow">
+                  <div className="flex items-center justify-between">
+                    <span className="text-amber-500 font-extrabold text-[14px] flex items-center gap-1">★ 5.0</span>
+                    <span className="text-[10px] text-gray-400 font-black tracking-wider">RATING</span>
+                  </div>
+                  <div className="leading-tight">
+                    <div className="text-[12px] font-black text-gray-800">Paham Hukum</div>
+                    <div className="text-[10px] text-gray-500 font-bold mt-1">100% Solutif</div>
+                  </div>
+                </div>
+
+                {/* "02 Hubungi Ahli" Card */}
+                <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
+                  <div className="flex items-center gap-3 mb-3.5">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-500/30">
                       02
                     </div>
                     <div>
-                      <div className="text-[12px] font-black text-[#111827] leading-tight">Hubungi Ahli</div>
-                      <div className="text-[9px] text-[#6B7280] font-semibold mt-0.5">Konsultasi hukum & bisnis gratis</div>
+                      <div className="text-[14px] font-black text-[#111827] leading-tight">Hubungi Ahli</div>
+                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5">Konsultasi hukum & bisnis gratis</div>
                     </div>
                   </div>
 
                   {/* 2x2 Options Grid */}
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    {/* Active Option Box: WhatsApp */}
-                    <div className="border border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* WhatsApp */}
+                    <div className="border-[1.5px] border-green-500 bg-green-50/50 rounded-xl p-2.5 flex items-center gap-2 text-left shadow-sm">
+                      <div className="w-7 h-7 rounded-[8px] bg-green-500 flex items-center justify-center flex-shrink-0 shadow-md">
                         <MessageCircle className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-black text-gray-800 leading-tight truncate">WhatsApp</div>
-                        <div className="text-[8px] font-bold text-green-600 mt-0.5 leading-none">Online 24/7</div>
+                        <div className="text-[10px] font-black text-gray-800 leading-tight truncate">WhatsApp</div>
+                        <div className="text-[8px] font-extrabold text-green-600 mt-0.5 leading-none">Online 24/7</div>
                       </div>
                     </div>
 
-                    {/* Option Box: Zoom Meeting */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0 text-white">
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    {/* Zoom Call */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-blue-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">Zoom Call</div>
-                        <div className="text-[8px] font-medium text-gray-500 mt-0.5 leading-none">Jadwalkan</div>
+                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">Zoom Call</div>
+                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Jadwalkan</div>
                       </div>
                     </div>
 
-                    {/* Option Box: Telepon */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0 text-white">
-                        <Phone className="w-3 h-3" />
+                    {/* Telepon */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-amber-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <Phone className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">Telepon</div>
-                        <div className="text-[8px] font-medium text-gray-500 mt-0.5 leading-none">Tanya Ahli</div>
+                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">Telepon</div>
+                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Tanya Ahli</div>
                       </div>
                     </div>
 
-                    {/* Option Box: Kunjungan */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-purple-500 flex items-center justify-center flex-shrink-0 text-white">
-                        <MapPin className="w-3 h-3" />
+                    {/* Kantor Kami */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-purple-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <MapPin className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">Kantor Kami</div>
-                        <div className="text-[8px] font-medium text-gray-500 mt-0.5 leading-none">Kunjungan</div>
+                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">Kantor Kami</div>
+                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Kunjungan</div>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Floating "Konsultan Online" Badge */}
-                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2 z-40 animate-bounce-slow">
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping absolute -left-0.5" />
-                  <span className="w-2 h-2 rounded-full bg-green-500" />
-                  <span className="text-[10px] font-black text-gray-800">Konsultan Aktif</span>
-                </div>
-
-                {/* Floating Expert Rating Badge */}
-                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
-                  <div className="flex items-center justify-between">
-                    <span className="text-amber-500 font-extrabold text-[12px] flex items-center gap-0.5">★ 5.0</span>
-                    <span className="text-[8px] font-black tracking-wider">RATING</span>
-                  </div>
-                  <div className="leading-tight">
-                    <div className="text-[10px] font-black text-gray-800">Advokat Senior</div>
-                    <div className="text-[7.5px] font-semibold text-gray-500 mt-0.5">100% Solutif & Terpercaya</div>
-                  </div>
-                </div>
-
-                {/* Floating Jadwal Badge */}
-                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
-                  <div className="w-9 h-9 rounded-full border-2 border-emerald-500 flex items-center justify-center text-[10px] font-black text-emerald-600 flex-shrink-0 bg-emerald-50">
-                    OK
-                  </div>
-                  <div className="leading-tight min-w-0">
-                    <div className="text-[10px] font-black text-gray-800 truncate">Jadwal Terkonfirmasi</div>
-                    <div className="text-[8px] font-bold text-gray-500 mt-0.5 truncate">Hari ini · 14:00 WIB</div>
                   </div>
                 </div>
               </div>
@@ -472,217 +495,225 @@ function CaraKerjaSection() {
             {/* Step 3 Visual Container */}
             {activeStep === 2 && (
               <div key="step-2" className="absolute inset-0 w-full h-full animate-step-in">
-                {/* Purple backdrop offset rectangle */}
-                <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#0F172A] to-[#334155] shadow-lg opacity-90 transition-all duration-500" />
                 
-                {/* Main Photo of Secure Laptop Working */}
-                <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
-                  <Image 
-                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?fit=crop&w=600&h=800&q=80"
-                    alt="Online Document Process" 
+                {/* Main Photo */}
+                <div className="absolute top-8 left-[12%] w-[76%] h-[80%] rounded-[2rem] overflow-hidden drop-shadow-xl transition-all duration-500 bg-slate-50">
+                  <Image
+                    src="/images/home/promo-bule3.png"
+                    alt="Kirim Dokumen Online"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-cover object-center hover:scale-102 transition-transform duration-700"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700"
                   />
                 </div>
 
-                {/* Soft Orange wedge at bottom-left corner */}
-                <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#FFEDD5] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#FED7AA]/30" />
+                {/* "Draft Akta Selesai!" — left side */}
+                <div className="absolute top-[20%] -left-[2%] bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.04] flex items-center gap-3 z-40 animate-float-slow">
+                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center flex-shrink-0 border border-red-100">
+                    <FileText className="w-5 h-5 text-[#B91C1C]" />
+                  </div>
+                  <div className="leading-tight pr-2">
+                    <div className="text-[12px] font-black text-gray-800">Draft Akta Selesai!</div>
+                    <div className="text-[10px] font-bold text-gray-500 mt-1">Siap Ditinjau</div>
+                  </div>
+                </div>
 
-                {/* FLOATING card "03 Upload Dokumen" */}
-                <div className="absolute -top-8 -right-14 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
+                {/* "Secure Vault SSL" — right side, top */}
+                <div className="absolute top-[35%] right-[0%] bg-white rounded-full px-4 py-2.5 shadow-[0_12px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
+                  <Lock className="w-4 h-4 text-[#B91C1C]" />
+                  <span className="text-[12px] font-black text-gray-800">Secure Vault SSL</span>
+                </div>
+
+                {/* "92% Verifikasi Berkas" — right side, middle */}
+                <div className="absolute top-[55%] -right-[5%] bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-black/[0.04] flex items-center gap-3 z-30 w-[190px] animate-float-medium">
+                  <div className="w-10 h-10 rounded-full border-2 border-[#B91C1C] flex items-center justify-center text-[12px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50/50">
+                    92%
+                  </div>
+                  <div className="leading-tight min-w-0">
+                    <div className="text-[11px] font-black text-gray-800 truncate">Verifikasi Berkas</div>
+                    <div className="text-[9px] font-bold text-gray-500 mt-1 truncate">Oleh Tim Ahli Legal</div>
+                  </div>
+                </div>
+
+                {/* "03 Upload Dokumen" Card — bottom */}
+                <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
+                  <div className="flex items-center gap-3 mb-3.5">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-500/30">
                       03
                     </div>
                     <div>
-                      <div className="text-[12px] font-black text-[#111827] leading-tight">Upload Dokumen</div>
-                      <div className="text-[9px] text-[#6B7280] font-semibold mt-0.5">Kirim berkas dengan mudah & aman</div>
+                      <div className="text-[14px] font-black text-[#111827] leading-tight">Upload Dokumen</div>
+                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5">Kirim berkas dengan mudah & aman</div>
                     </div>
                   </div>
 
                   {/* 2x2 Options Grid */}
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    {/* Active Option Box: KTP & NPWP */}
-                    <div className="border border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-[#B91C1C] flex items-center justify-center flex-shrink-0 text-white">
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* KTP & NPWP */}
+                    <div className="border-[1.5px] border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2.5 flex items-center gap-2 text-left shadow-sm">
+                      <div className="w-7 h-7 rounded-[8px] bg-[#B91C1C] flex items-center justify-center flex-shrink-0 shadow-md">
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-black text-gray-800 leading-tight truncate">KTP & NPWP</div>
-                        <div className="text-[8px] font-bold text-[#B91C1C] mt-0.5 leading-none">Verified</div>
+                        <div className="text-[10px] font-black text-[#B91C1C] leading-tight truncate">KTP & NPWP</div>
+                        <div className="text-[8px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Verified</div>
                       </div>
                     </div>
 
-                    {/* Option Box: KK & Akta Pendiri */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
+                    {/* KK & Akta */}
+                    <div className="shadow-sm border border-gray-100 bg-[#FFF7ED] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
-                        <div className="text-[8px] font-medium text-green-600 mt-0.5 leading-none">Verified</div>
+                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
+                        <div className="text-[8px] font-bold text-orange-600 mt-0.5 leading-none">Verified</div>
                       </div>
                     </div>
 
-                    {/* Option Box: Pengecekan Nama */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
+                    {/* Nama PT */}
+                    <div className="shadow-sm border border-gray-100 bg-[#F0FDF4] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-green-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">Nama PT</div>
-                        <div className="text-[8px] font-medium text-green-600 mt-0.5 leading-none">Verified</div>
+                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">Nama PT</div>
+                        <div className="text-[8px] font-bold text-green-600 mt-0.5 leading-none">Verified</div>
                       </div>
                     </div>
 
-                    {/* Option Box: Modal & Domisili */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0 text-white">
+                    {/* Modal Usaha */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-blue-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
-                        <div className="text-[8px] font-medium text-blue-500 mt-0.5 leading-none">Ready</div>
+                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
+                        <div className="text-[8px] font-bold text-blue-500 mt-0.5 leading-none">Ready</div>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Floating Secure SSL Badge */}
-                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2 z-40 animate-bounce-slow">
-                  <Lock className="w-3.5 h-3.5 text-[#B91C1C]" />
-                  <span className="text-[10px] font-black text-gray-800">Secure Vault SSL</span>
-                </div>
-
-                {/* Floating Draft Akta Ready Card */}
-                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
-                  <div className="leading-tight">
-                    <div className="text-[10px] font-black text-gray-800">Draft Akta Selesai!</div>
-                    <div className="text-[7.5px] font-bold text-emerald-600 mt-1 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                      Siap Ditinjau
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating progress verifikasi */}
-                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
-                  <div className="w-9 h-9 rounded-full border-2 border-[#B91C1C] flex items-center justify-center text-[10px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50/50">
-                    92%
-                  </div>
-                  <div className="leading-tight min-w-0">
-                    <div className="text-[10px] font-black text-gray-800 truncate">Verifikasi Berkas</div>
-                    <div className="text-[8px] text-gray-500 font-bold mt-0.5 truncate">Oleh Tim Ahli Legal</div>
                   </div>
                 </div>
               </div>
             )}
 
             {/* Step 4 Visual Container */}
+            {/* Step 4 Visual Container */}
             {activeStep === 3 && (
               <div key="step-3" className="absolute inset-0 w-full h-full animate-step-in">
-                {/* Green backdrop offset rectangle */}
-                <div className="absolute top-6 left-[22%] w-[60%] h-[78%] rounded-[2.5rem] bg-gradient-to-br from-[#064E3B] to-[#10B981] shadow-lg opacity-90 transition-all duration-500" />
                 
-                {/* Main Photo of Happy Entrepreneurs */}
-                <div className="absolute top-10 left-[24%] w-[58%] h-[78%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-50 transition-all duration-500">
-                  <Image 
-                    src="/man-watching-great-news-tablet-pc.jpg"
-                    alt="Happy Entrepreneurs" 
+                {/* Main Photo */}
+                <div className="absolute top-8 left-[12%] w-[76%] h-[80%] rounded-[2rem] overflow-hidden drop-shadow-xl transition-all duration-500 bg-slate-50">
+                  <Image
+                    src="/images/home/promo-bule4.png"
+                    alt="Terima Hasil Digital"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-cover object-top hover:scale-102 transition-transform duration-700"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700"
                   />
                 </div>
 
-                {/* Soft Emerald wedge at bottom-left corner */}
-                <div className="absolute -bottom-2 left-[18%] w-24 h-24 bg-[#D1FAE5] rounded-tr-[5.5rem] rounded-bl-[1.5rem] z-20 shadow-sm border border-[#A7F3D0]/30" />
+                {/* "Draft Akta Selesai!" — left side top */}
+                <div className="absolute top-[15%] -left-[2%] bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.04] flex items-center gap-3 z-40 animate-float-slow">
+                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center flex-shrink-0 border border-red-100">
+                    <FileText className="w-5 h-5 text-[#B91C1C]" />
+                  </div>
+                  <div className="leading-tight pr-2">
+                    <div className="text-[12px] font-black text-gray-800">Draft Akta Selesai!</div>
+                    <div className="text-[10px] font-bold text-gray-500 mt-1">Siap Ditinjau</div>
+                  </div>
+                </div>
 
-                {/* FLOATING card "04 Hasil Digital" */}
-                <div className="absolute -top-8 -right-14 w-[48%] bg-white rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-30 shadow-sm border border-black/[0.02] animate-float-slow transition-all duration-300">
+                {/* "New Message" Notification — left side below */}
+                <div className="absolute top-[32%] -left-[5%] bg-white/95 backdrop-blur-sm rounded-[16px] p-3 shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 flex items-start gap-3 z-40 w-[240px] animate-float-medium">
+                   <div className="w-9 h-9 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0">EL</div>
+                   <div className="leading-tight min-w-0 pt-0.5 w-full">
+                     <div className="flex justify-between items-center mb-1">
+                       <span className="text-[12px] font-black text-gray-800">EasyLegal</span>
+                       <span className="text-[9px] font-bold text-gray-400">10:24 AM</span>
+                     </div>
+                     <p className="text-[10px] text-gray-600 leading-snug">Your document has been completed...</p>
+                   </div>
+                </div>
+
+                {/* "Hardcopy Terkirim" — right side, top */}
+                <div className="absolute top-[25%] right-[2%] bg-white rounded-full px-4 py-2.5 shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
+                  <div className="w-6 h-6 rounded-full bg-red-50 flex items-center justify-center">
+                    <Truck className="w-3.5 h-3.5 text-[#B91C1C]" />
+                  </div>
+                  <span className="text-[12px] font-black text-gray-800">Hardcopy Terkirim</span>
+                </div>
+
+                {/* "100% Selesai & Legal" — right side, middle */}
+                <div className="absolute top-[50%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-3 z-40 w-[200px] animate-float-medium">
+                  <div className="w-10 h-10 rounded-full border-[2px] border-[#B91C1C] flex items-center justify-center text-[11px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50 shadow-sm">
+                    100%
+                  </div>
+                  <div className="leading-tight min-w-0">
+                    <div className="text-[12px] font-black text-gray-800 truncate">Selesai & Legal</div>
+                    <div className="text-[10px] font-bold text-gray-500 mt-1 truncate">Bisnis Siap Jalan!</div>
+                  </div>
+                </div>
+
+                {/* "04 Terima Hasil" Card — bottom */}
+                <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#B91C1C] flex items-center justify-center text-white font-extrabold text-[12px] flex-shrink-0">
+                  <div className="flex items-center gap-3 mb-3.5">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-500/30">
                       04
                     </div>
                     <div>
-                      <div className="text-[12px] font-black text-[#111827] leading-tight">Terima Hasil</div>
-                      <div className="text-[9px] text-[#6B7280] font-semibold mt-0.5">Unduh berkas legalitas resmi Anda</div>
+                      <div className="text-[14px] font-black text-[#111827] leading-tight">Terima Hasil</div>
+                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5">Unduh berkas legalitas resmi Anda</div>
                     </div>
                   </div>
 
                   {/* 2x2 Options Grid */}
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    {/* Active Option Box: Akta Pendirian */}
-                    <div className="border border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-[#B91C1C] flex items-center justify-center flex-shrink-0 text-white shadow-sm">
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* Akta PT */}
+                    <div className="border-[1.5px] border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2.5 flex items-center gap-2 text-left shadow-sm">
+                      <div className="w-7 h-7 rounded-[8px] bg-[#B91C1C] flex items-center justify-center flex-shrink-0 shadow-md">
+                        <Download className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-black text-gray-800 leading-tight truncate">Akta PT</div>
-                        <div className="text-[8px] font-bold text-[#B91C1C] mt-0.5 leading-none">Unduh PDF</div>
+                        <div className="text-[10px] font-black text-[#B91C1C] leading-tight truncate">Akta PT</div>
+                        <div className="text-[8px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Unduh PDF</div>
                       </div>
                     </div>
 
-                    {/* Option Box: SK Kemenkumham */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    {/* KK & Akta */}
+                    <div className="shadow-sm border border-gray-100 bg-[#FFF7ED] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <Download className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">SK Kemenkum</div>
-                        <div className="text-[8px] font-medium text-green-600 mt-0.5 leading-none">Unduh PDF</div>
+                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
+                        <div className="text-[8px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
                       </div>
                     </div>
 
-                    {/* Option Box: NIB & OSS */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    {/* NIB & OSS */}
+                    <div className="shadow-sm border border-gray-100 bg-[#FFF7ED] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <Download className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">NIB & OSS</div>
-                        <div className="text-[8px] font-medium text-green-600 mt-0.5 leading-none">Unduh PDF</div>
+                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">NIB & OSS</div>
+                        <div className="text-[8px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
                       </div>
                     </div>
 
-                    {/* Option Box: NPWP Perusahaan */}
-                    <div className="shadow-sm border border-black/[0.02] bg-[#F9FAFB] rounded-xl p-2 flex items-center gap-1.5 text-left active:scale-95">
-                      <div className="w-7 h-7 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 text-white">
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    {/* Modal Usaha */}
+                    <div className="shadow-sm border border-gray-100 bg-[#FFF7ED] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <Download className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[9.5px] font-bold text-gray-800 leading-tight truncate">NPWP Badan</div>
-                        <div className="text-[8px] font-medium text-green-600 mt-0.5 leading-none">Unduh PDF</div>
+                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
+                        <div className="text-[8px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Floating delivery/hardcopy Badge */}
-                <div className="absolute top-[32%] right-1 bg-white rounded-full px-3 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2 z-40 animate-bounce-slow">
-                  <svg className="w-3.5 h-3.5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-                  <span className="text-[10px] font-black text-gray-800">Hardcopy Terkirim</span>
-                </div>
-
-                {/* Floating Sah & Resmi badge */}
-                <div className="absolute top-[54%] -right-2 bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex flex-col gap-2 z-30 w-[170px] animate-float-medium">
-                  <div className="leading-tight">
-                    <div className="text-[10px] font-black text-gray-800">100% Sah & Resmi</div>
-                    <div className="text-[7.5px] font-semibold text-gray-500 mt-1">Terdaftar di Kemenkumham & DJKI</div>
-                  </div>
-                </div>
-
-                {/* Floating Success Badge */}
-                <div className="absolute bottom-2 right-[6%] bg-white rounded-2xl p-2.5 shadow-[0_15px_30px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] flex items-center gap-2.5 z-30 w-[190px] animate-float-slow">
-                  <div className="w-9 h-9 rounded-full border-2 border-emerald-500 flex items-center justify-center text-[10px] font-black text-emerald-600 flex-shrink-0 bg-emerald-50">
-                    100%
-                  </div>
-                  <div className="leading-tight min-w-0">
-                    <div className="text-[10px] font-black text-gray-800 truncate">Selesai & Legal</div>
-                    <div className="text-[8px] font-bold text-gray-500 mt-0.5 truncate">Bisnis Siap Jalan!</div>
                   </div>
                 </div>
               </div>
@@ -863,22 +894,46 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           PARTNER BAR
           ═══════════════════════════════════════════ */}
       <section
-        className="bg-white py-5 animate-scroll-reveal-fade"
+        className="bg-white py-8 sm:py-12 border-b border-[#F0F0F0] overflow-hidden"
         ref={partnersRef}
       >
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
-            <span className="text-[12px] text-muted font-medium whitespace-nowrap">
-              Bekerja dengan instansi resmi:
-            </span>
-            <div className="flex flex-wrap items-center justify-center gap-5 md:gap-8">
-              {partnerLogos.map((c, idx) => (
-                <span key={idx} className="text-[12px] font-semibold text-dark/40 uppercase tracking-wide hover:text-dark/60 transition-colors">
-                  {c}
-                </span>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 mb-6 sm:mb-10 text-center">
+          <span className="text-[10px] sm:text-[12px] font-bold text-dark/40 uppercase tracking-[0.15em]">
+            DIPERCAYA OLEH RIBUAN PELAKU BISNIS :
+          </span>
+        </div>
+        
+        {/* Marquee Container */}
+        <div className="relative w-full flex overflow-hidden group">
+          {/* Duplicate the logo array 2 times to ensure smooth infinite scroll */}
+          {[1, 2].map((groupIndex) => (
+            <div 
+              key={groupIndex} 
+              className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-4 sm:px-8"
+            >
+              {[
+                "akiha.png", "arava-tour.png", "artave.png", "beeskin.png", 
+                "bss.png", "callme.png", "daingsuper.png", "dewa-rackindo.png", 
+                "gmk-door.png", "guri-senbei.png", "happyeats.png", "javarudraksha.png", 
+                "kafeel.netz.png", "kms.png", "moonbow.png", "oseal.png", 
+                "pabriek-kuweh.png", "power-computerindo.png", "satoshi.png", 
+                "sumber-aneka-wangi.png", "tantri.png", "vidichi.png"
+              ].map((logo, idx) => (
+                <div key={`${groupIndex}-${idx}`} className="flex-shrink-0 w-24 sm:w-32 h-10 sm:h-12 relative transition-all duration-300 hover:scale-105 cursor-pointer">
+                  <Image
+                    src={`/images/logo-klien/${logo}`}
+                    alt={`Client Logo ${idx + 1}`}
+                    fill
+                    className="object-contain"
+                    sizes="128px"
+                  />
+                </div>
               ))}
             </div>
-          </div>
+          ))}
+          {/* Gradient Overlays for smooth fade out at edges */}
+          <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+          <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
         </div>
       </section>
 
@@ -1137,6 +1192,16 @@ export default function HomePage({ articles }: { articles: ArticleItem[] }) {
           INFORMASI HUKUM TERBARU
           ═══════════════════════════════════════════ */}
       <InformasiHukumSection articles={articles} />
+
+      {/* ═══════════════════════════════════════════
+          PROMO & MARKETPLACE
+          ═══════════════════════════════════════════ */}
+      <BottomPromoSection />
+
+      {/* ═══════════════════════════════════════════
+          LIPUTAN MEDIA
+          ═══════════════════════════════════════════ */}
+      <MediaCoverage />
 
     </div>
   );

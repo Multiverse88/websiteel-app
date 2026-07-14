@@ -17,10 +17,14 @@ import {
   Activity,
   DollarSign,
   AlertTriangle,
-  Award
+  Award,
+  Building,
 } from "lucide-react";
+import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
 import { Fraunces, Inter, Space_Mono } from "next/font/google";
 
@@ -260,91 +264,16 @@ export default function PelaporanLKPM() {
 
                 </div>
 
-                {/* Right Column: Premium Mockup */}
+                {/* Right Column */}
                 <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-8 lg:mt-0">
-                  <div className="relative w-full max-w-[440px] aspect-[1.1] sm:aspect-square lg:aspect-[1.1] bg-gradient-to-br from-[#0f1b2f] via-[#0a1122] to-[#7f080c] rounded-[32px] p-6 relative flex items-center justify-center shadow-2xl border border-gray-800/80">
-                    
-                    {/* Official Report Card Mockup (LKPM Report) */}
-                    <div className="bg-white rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative w-[255px] h-[280px] flex flex-col justify-between text-left">
-                      <div className="flex justify-between items-center border-b border-gray-100 pb-2.5">
-                        <div className="flex items-center space-x-1.5">
-                          <div className="w-6 h-6 bg-[#990202] rounded-md flex items-center justify-center flex-shrink-0">
-                            <span className="text-white text-[7px] font-black leading-none uppercase">EL</span>
-                          </div>
-                          <span className="text-[11px] font-extrabold text-gray-900 tracking-tight">LKPM Report</span>
-                        </div>
-                        <span className="bg-emerald-50 text-emerald-700 text-[8.5px] font-black px-2 py-0.5 rounded border border-emerald-200/35 uppercase tracking-wider">
-                          Submitted
-                        </span>
-                      </div>
-
-                      <div className="mt-3 flex-1">
-                        <span className="text-[8.5px] font-extrabold text-gray-400 tracking-wider uppercase block">
-                          PERIODE TRIWULAN I — 2026
-                        </span>
-                        <h4 className="text-[13px] font-black text-gray-900 leading-tight mt-1">
-                          Laporan Kegiatan Penanaman Modal
-                        </h4>
-
-                        <div className="grid grid-cols-2 gap-2 mt-3.5">
-                          <div className="bg-[#FAF9F7] rounded-xl p-2.5 shadow-sm border border-black/[0.02] flex flex-col justify-between">
-                            <span className="text-[8px] font-black text-gray-450 tracking-wider uppercase">REALISASI</span>
-                            <span className="text-[11.5px] font-black text-gray-900 mt-1 block">Rp 1,2M</span>
-                          </div>
-                          <div className="bg-[#FAF9F7] rounded-xl p-2.5 shadow-sm border border-black/[0.02] flex flex-col justify-between">
-                            <span className="text-[8px] font-black text-gray-450 tracking-wider uppercase">TENAGA KERJA</span>
-                            <span className="text-[11.5px] font-black text-gray-900 mt-1 block">18 Orang</span>
-                          </div>
-                          <div className="bg-[#FAF9F7] rounded-xl p-2.5 shadow-sm border border-black/[0.02] flex flex-col justify-between">
-                            <span className="text-[8px] font-black text-gray-450 tracking-wider uppercase">PRODUKSI</span>
-                            <span className="text-[11.5px] font-black text-gray-900 mt-1 block">Aktif</span>
-                          </div>
-                          <div className="bg-[#FAF9F7] rounded-xl p-2.5 shadow-sm border border-black/[0.02] flex flex-col justify-between">
-                            <span className="text-[8px] font-black text-gray-450 tracking-wider uppercase">STATUS</span>
-                            <span className="text-[11.5px] font-black text-emerald-600 mt-1 block">On Track</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-between items-center pt-3 border-t border-gray-100 text-[8.5px] font-extrabold text-gray-400">
-                        <span>BKPM · OSS RBA</span>
-                        <span className="text-[#990202] flex items-center space-x-0.5">
-                          <Check className="w-3 h-3 text-[#990202]" strokeWidth={4} />
-                          <span>Terkirim</span>
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Floating Badge 1: Top Right */}
-                    <div className="hidden sm:flex absolute -top-5 -right-5 sm:-top-7 sm:-right-7 md:-top-5 md:-right-5 bg-white rounded-2xl py-2 px-3.5 shadow-xl items-center space-x-2.5 w-[165px] z-20">
-                      <div className="w-8 h-8 rounded-lg bg-[#FFF0F0] text-[#990202] flex items-center justify-center flex-shrink-0">
-                        <svg className="w-4.5 h-4.5 text-[#990202]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                          <line x1="16" y1="2" x2="16" y2="6"></line>
-                          <line x1="8" y1="2" x2="8" y2="6"></line>
-                          <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                      </div>
-                      <div className="text-left">
-                        <div className="text-[11px] font-black text-gray-900 leading-none">Tepat Waktu</div>
-                        <div className="text-[8.5px] text-gray-400 font-semibold mt-1 block">Sesuai jadwal BKPM</div>
-                      </div>
-                    </div>
-
-                    {/* Floating Badge 2: Bottom Left */}
-                    <div className="hidden sm:flex absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 md:-bottom-5 md:-left-5 bg-white rounded-2xl py-2 px-3.5 shadow-xl items-center space-x-2.5 w-[185px] z-20">
-                      <div className="w-8 h-8 rounded-lg bg-[#FFF0F0] text-[#990202] flex items-center justify-center flex-shrink-0">
-                        <svg className="w-4.5 h-4.5 text-[#990202]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                          <path d="m9 11 2 2 4-4"></path>
-                        </svg>
-                      </div>
-                      <div className="text-left">
-                        <div className="text-[11px] font-black text-gray-900 leading-none">Hindari Sanksi</div>
-                        <div className="text-[8.5px] text-gray-400 font-semibold mt-1 block">Cabut izin - suspensi NIB</div>
-                      </div>
-                    </div>
-
+                  <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1] w-full max-w-[440px]">
+                    <Image
+                      src="/images/layanan/lkpm-1.jpg"
+                      alt="Laporan LKPM Terpercaya"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 440px"
+                      className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
+                    />
                   </div>
                 </div>
 
@@ -717,14 +646,25 @@ export default function PelaporanLKPM() {
           <FadeIn direction="up" delay={0.2}>
             <section id="paket-harga" className="bg-[#FCFBFA] py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
-                <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
-                  <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA JASA PELAPORAN LKPM</p>
-                  <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
-                    2 paket sesuai skala usaha Anda.
-                  </h2>
-                  <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
-                    Pilih paket berdasarkan kategori UMK atau Menengah-Besar. Harga sudah termasuk konsultasi, pengisian, &amp; submit ke OSS.
-                  </p>
+                <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+                  <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
+                    <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA JASA PELAPORAN LKPM</p>
+                    <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+                      2 paket sesuai skala usaha Anda.
+                    </h2>
+                    <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
+                      Pilih paket berdasarkan kategori UMK atau Menengah-Besar. Harga sudah termasuk konsultasi, pengisian, &amp; submit ke OSS.
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 flex justify-start md:justify-end">
+                    <Image 
+                      src="/images/badges/promo-50.png" 
+                      alt="Promo 50% Off Legal Deals" 
+                      width={280} 
+                      height={120}
+                      className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[920px] mx-auto items-stretch">
@@ -875,6 +815,7 @@ export default function PelaporanLKPM() {
                     </div>
                   </div>
                 </div>
+                <PricingFooter />
               </div>
             </section>
           </FadeIn>
@@ -2290,6 +2231,7 @@ export default function PelaporanLKPM() {
           </div>
         </div>
       </div>
+      <MediaCoverage />
     </div>
   );
 }

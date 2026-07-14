@@ -21,7 +21,11 @@ import {
   Compass,
   TrendingUp,
 } from "lucide-react";
+import Image from "next/image";
+import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function VisaKitas() {
@@ -259,63 +263,15 @@ export default function VisaKitas() {
             <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-8 lg:mt-0">
               <div className="relative w-full max-w-[460px] aspect-[1.05] sm:aspect-square lg:aspect-[1.05]">
                 
-                {/* Main Dark Backdrop Graphic */}
-                <div className="w-full h-full rounded-[36px] bg-gradient-to-br from-[#121E36] via-[#0C1221] to-[#600C0F] p-7 shadow-2xl relative border border-gray-800 flex flex-col justify-between overflow-hidden">
-                  
-                  {/* Glowing detail */}
-                  <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#990202]/30 rounded-full blur-3xl pointer-events-none" />
-                  <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-                  
-                  {/* Mockup Header bar */}
-                  <div className="flex items-center justify-between border-b border-gray-850 pb-4">
-                    <div className="flex space-x-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    </div>
-                    <span className="text-[10px] font-extrabold text-gray-500 tracking-wider uppercase">INDONESIA E-VISA</span>
-                  </div>
-
-                  {/* Mockup Body Content - Business KITAS Card */}
-                  <div className="my-6 bg-black/40 backdrop-blur-md rounded-2xl p-6 border border-gray-800/60 shadow-inner space-y-4 text-left">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <span className="text-[9px] font-extrabold text-[#F59E0B] tracking-widest uppercase bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">REPUBLIK INDONESIA</span>
-                        <p className="text-[9px] font-bold text-gray-400 mt-2.5 uppercase tracking-wide">VISA TYPE</p>
-                        <h4 className="text-[18px] font-black text-white leading-tight">Business / KITAS</h4>
-                      </div>
-                      <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[#F59E0B] flex items-center justify-center">
-                        <User className="w-4.5 h-4.5" />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 border-t border-gray-800/50 pt-4">
-                      <div>
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">ISSUED</p>
-                        <p className="text-[13px] font-extrabold text-white mt-0.5">Jakarta</p>
-                      </div>
-                      <div>
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">VALID UNTIL</p>
-                        <p className="text-[13px] font-extrabold text-white mt-0.5">2 Tahun</p>
-                      </div>
-                    </div>
-
-                    <div className="pt-2">
-                      <div className="w-full py-2.5 bg-amber-500/10 rounded-xl border border-amber-500/20 text-center text-[12px] font-bold text-[#F59E0B] flex items-center justify-center space-x-1.5">
-                        <span>✓ Approved · Ditjen Imigrasi</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Mockup footer data */}
-                  <div className="flex justify-between items-center text-[9px] text-gray-500 font-bold border-t border-gray-800/50 pt-4">
-                    <span>SISTEM IMIGRASI ONLINE</span>
-                    <span className="flex items-center gap-1.5 text-emerald-400">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      Sistem Aktif
-                    </span>
-                  </div>
-
+                {/* Image Container */}
+                <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                  <Image
+                    src="/images/layanan/visa-kitas-1.jpg"
+                    alt="Layanan Visa & KITAS Resmi"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 460px"
+                    className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
+                  />
                 </div>
 
                 {/* Floating Badge 1: Top Right */}
@@ -474,14 +430,25 @@ export default function VisaKitas() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PENGURUSAN</p>
-            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              Pilih kategori sesuai kebutuhan.
-            </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
-              Harga sudah include biaya negara (PNBP), pendampingan dokumen, &amp; konsultasi penuh sampai izin terbit.
-            </p>
+          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
+              <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PENGURUSAN</p>
+              <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+                Pilih kategori sesuai kebutuhan.
+              </h2>
+              <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed">
+                Harga sudah include biaya negara (PNBP), pendampingan dokumen, &amp; konsultasi penuh sampai izin terbit.
+              </p>
+            </div>
+            <div className="flex-shrink-0 flex justify-start md:justify-end">
+              <Image 
+                src="/images/badges/promo-50.png" 
+                alt="Promo 50% Off Legal Deals" 
+                width={280} 
+                height={120}
+                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+              />
+            </div>
           </div>
 
           {/* Interactive Toggle Tabs */}
@@ -663,6 +630,8 @@ export default function VisaKitas() {
             </p>
           </div>
 
+          <PricingFooter />
+
         </div>
       </section>
 
@@ -717,6 +686,7 @@ export default function VisaKitas() {
         </div>
       </section>
 
+      <MediaCoverage />
     </div>
   );
 }

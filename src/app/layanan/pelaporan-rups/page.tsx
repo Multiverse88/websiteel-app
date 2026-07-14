@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
 
 /* ─── DATA ─── */
@@ -613,15 +615,26 @@ export default function PelaporanRUPS() {
           <FadeIn direction="up" delay={0.2}>
             <section id="paket-harga" className="bg-[#FAF9F7] py-16 lg:py-24 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 space-y-3">
-                  <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-1">BIAYA JASA PENDIRIAN PERUSAHAAN</p>
-                  <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[42px] font-extrabold text-gray-950 leading-tight tracking-tight">
-                    Pilih paket sesuai kebutuhan perusahaan Anda.
-                  </h2>
-                  <p className="text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
-                    Harga sudah include semua biaya — 3 Dokumen Pelaporan RUPS.<br/>
-                    <strong className="font-extrabold text-gray-900">Tidak ada tambahan biaya apapun</strong> di tengah proses. <span className="text-[#990202] font-extrabold">Diskon 50% — kuota terbatas!</span>
-                  </p>
+                <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+                  <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
+                    <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-1">BIAYA JASA PENDIRIAN PERUSAHAAN</p>
+                    <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[42px] font-extrabold text-gray-950 leading-tight tracking-tight">
+                      Pilih paket sesuai kebutuhan perusahaan Anda.
+                    </h2>
+                    <p className="text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed">
+                      Harga sudah include semua biaya — 3 Dokumen Pelaporan RUPS.<br/>
+                      <strong className="font-extrabold text-gray-900">Tidak ada tambahan biaya apapun</strong> di tengah proses. <span className="text-[#990202] font-extrabold">Diskon 50% — kuota terbatas!</span>
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 flex justify-start md:justify-end">
+                    <Image 
+                      src="/images/badges/promo-50.png" 
+                      alt="Promo 50% Off Legal Deals" 
+                      width={280} 
+                      height={120}
+                      className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                 </div>
 
                 {/* Quick-Select Buttons / Tabs */}
@@ -792,6 +805,8 @@ export default function PelaporanRUPS() {
                   </p>
                 </div>
 
+                <PricingFooter />
+
               </div>
             </section>
           </FadeIn>
@@ -918,6 +933,8 @@ export default function PelaporanRUPS() {
             </section>
           </FadeIn>
 
+          <MediaCoverage />
+
         </div>
       </div>
 
@@ -970,8 +987,7 @@ export default function PelaporanRUPS() {
                 Lihat Paket Harga
               </a>
             </div>
-
-            <div className="grid grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-3 gap-2.5">
               {[
                 { label: "Durasi 7–10", sub: "Hari kerja" },
                 { label: "Diskon 50%", sub: "Promo terbatas" },

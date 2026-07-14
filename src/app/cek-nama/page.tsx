@@ -316,7 +316,9 @@ export default function CekNama() {
           </div>
 
         </form>
-      </div>      {/* ─── TRUST BADGES BELOW CARD ─── */}
+      </div>
+      
+      {/* ─── TRUST BADGES BELOW CARD ─── */}
       <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 z-10 mb-20">
         {/* Badge 1 */}
         <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">

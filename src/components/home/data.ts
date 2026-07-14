@@ -30,7 +30,7 @@ export const heroSlides = [
     cta2: "Lihat Paket Badan Usaha",
     cta2Link: "/layanan/pendirian-badan-usaha",
     trustBadges: ["2-12 jam pengerjaan", "Tracking real-time", "Garansi tuntas"],
-    image: "/images/hero/hero-badan-usaha.jpg",
+    image: "/images/hero/hero-badan-usaha-v2.jpg",
   },
   {
     tag: "Perlindungan Merek",
@@ -45,7 +45,7 @@ export const heroSlides = [
     cta2: "Pelajari Lebih Lanjut",
     cta2Link: "/layanan/merek-haki",
     trustBadges: ["Database DJKI resmi", "Tracking real-time", "Garansi Selesai"],
-    image: "/images/hero/hero-merek.jpg",
+    image: "/images/hero/hero-merek-v2.jpg",
   },
   {
     tag: "Standar Internasional",
@@ -60,7 +60,7 @@ export const heroSlides = [
     cta2: "Konsultasi Gratis",
     cta2Link: "/kontak",
     trustBadges: ["UAF Accredited", "Proses cepat", "Harga transparan"],
-    image: "/images/hero/hero-iso.jpg",
+    image: "/images/hero/hero-iso-v2.jpg",
   },
   {
     tag: "Perizinan Usaha",
@@ -75,7 +75,7 @@ export const heroSlides = [
     cta2: "Cek Kode KBLI",
     cta2Link: "/cek-kbli",
     trustBadges: ["Database KBLI 2025", "OSS RBA Resmi", "Garansi Selesai"],
-    image: "/images/hero/hero-nib.jpg",
+    image: "/images/hero/hero-nib-v2.jpg",
   },
 ];
 

@@ -192,12 +192,12 @@ export default function Kontak() {
                 
                 {/* Title */}
                 <h3 className="font-heading text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
-                  0811-2345-6789
+                  0817-770-048
                 </h3>
                 
                 {/* Subtext */}
                 <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed mt-2 sm:mt-3">
-                  Respons rata-rata kurang dari 5 menit. Tersedia Senin–Sabtu, 08:00–20:00 WIB.
+                  Respons rata-rata kurang dari 5 menit. Tersedia Senin-Jumat, 08:00-17:00 WIB. Sabtu, 09.00-12.00 WIB
                 </p>
               </div>
 
@@ -227,18 +227,18 @@ export default function Kontak() {
                 
                 {/* Title */}
                 <h3 className="font-heading text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
-                  info@easylegal.id
+                  care@easylegal.id
                 </h3>
                 
                 {/* Subtext */}
                 <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed mt-2 sm:mt-3">
-                  Untuk pertanyaan detail, dokumentasi, atau kerjasama. Dibalas dalam 24 jam kerja.
+                  Untuk pertanyaan detail, dokumentasi, atau kerjasama. Pesan akan ditindaklanjuti oleh tim kami..
                 </p>
               </div>
 
               {/* Action Link */}
               <a
-                href="mailto:info@easylegal.id"
+                href="mailto:care@easylegal.id"
                 className="mt-4 sm:mt-6 flex items-center text-[12px] sm:text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
               >
                 Kirim email →
@@ -260,7 +260,7 @@ export default function Kontak() {
                 
                 {/* Title */}
                 <h3 className="font-heading text-sm sm:text-[22px] font-extrabold text-gray-950 mt-1 sm:mt-2 leading-snug">
-                  (022) 1234-5678
+                  (022) 3209 3292
                 </h3>
                 
                 {/* Subtext */}
@@ -271,7 +271,7 @@ export default function Kontak() {
 
               {/* Action Link */}
               <a
-                href="tel:02212345678"
+                href="tel:02232093292"
                 className="mt-4 sm:mt-6 flex items-center text-[12px] sm:text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
               >
                 Telepon kami →
