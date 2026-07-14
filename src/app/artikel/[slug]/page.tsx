@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { Calendar, Clock, Home, Tag } from "lucide-react";
 import ShareButton from "@/components/ShareButton";
+import SocialShare from "@/components/SocialShare";
 import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";
 import TableOfContents from "./table-of-contents";
@@ -711,6 +712,41 @@ export default async function ArtikelDetailPage({ params }: Props) {
                 ))}
               </div>
 
+              {/* ─── SOCIAL SHARE ─── */}
+              <div className="mb-8">
+                <SocialShare title={article.title} />
+              </div>
+
+              {/* ─── CTA CARD ─── */}
+              <div className="mb-10 bg-gradient-to-br from-[#2A1110] to-[#120504] rounded-[24px] p-7 sm:p-9 shadow-xl relative overflow-hidden border border-white/5">
+                {/* Glow effect */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-[80px]" />
+                
+                <div className="relative z-10 flex flex-col items-start">
+                  <div className="text-[#D4AF37] text-[10.5px] sm:text-[11px] font-black tracking-[0.15em] uppercase mb-4 flex items-center gap-2">
+                    <span className="text-[11px]">★</span> LAYANAN EASYLEGAL
+                  </div>
+                  <h3 className="text-[22px] sm:text-[26px] font-bold text-white mb-2.5 leading-snug">
+                    {article.category === "Sertifikasi ISO" || article.category === "ISO"
+                      ? "Mau sertifikasi ISO untuk bisnismu?" 
+                      : "Butuh bantuan legalitas untuk bisnismu?"}
+                  </h3>
+                  <p className="text-[13px] sm:text-[14px] text-gray-400 leading-relaxed mb-6 max-w-[500px] font-normal">
+                    {article.category === "Sertifikasi ISO" || article.category === "ISO"
+                      ? "Konsultasi gratis dengan tim ISO kami. Pendampingan end-to-end dari gap analysis sampai sertifikat terbit."
+                      : "Konsultasi gratis dengan tim legal EasyLegal. Proses cepat, aman, dan harga transparan."}
+                  </p>
+                  <a
+                    href={getWhatsAppLink(`Halo EasyLegal, saya tertarik konsultasi layanan ${article.category}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-white text-gray-950 font-bold text-[13.5px] px-5 py-3 rounded-xl hover:bg-gray-100 transition-colors shadow-sm"
+                  >
+                    {article.category === "Sertifikasi ISO" || article.category === "ISO" ? "Lihat Paket Sertifikasi ISO" : "Lihat Layanan Kami"} &rarr;
+                  </a>
+                </div>
+              </div>
+
               {/* ─── AUTHOR CARD ─── */}
               <div className="bg-[#FAFAFA] rounded-2xl shadow-md border border-black/[0.04] p-6 flex flex-col gap-4 mb-10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
@@ -725,7 +761,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                       />
                     ) : (
                       <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#990202] to-[#D62828] flex items-center justify-center text-white text-[14px] font-black shadow-sm">
-                        EL
+                        {getAuthorInitials(article.author?.name || "EasyLegal")}
                       </div>
                     )}
                     <div>
@@ -736,9 +772,6 @@ export default async function ArtikelDetailPage({ params }: Props) {
                         {article.author?.role || "Spesialis Konsultan Hukum & Legalitas Bisnis"}
                       </div>
                     </div>
-                  </div>
-                  <div className="flex-shrink-0">
-                    <ShareButton />
                   </div>
                 </div>
                 {article.author?.bio && (
@@ -765,36 +798,48 @@ export default async function ArtikelDetailPage({ params }: Props) {
                 href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan promo Diskon 50% Layanan Pendirian PT & CV.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group relative overflow-hidden rounded-[30px] bg-gradient-to-b from-[#800000] to-[#4A0000] p-7 text-white hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 border border-red-950 shadow-md"
+                className="block group relative overflow-hidden rounded-[24px] bg-[#990202] p-6 text-white hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 border border-[#800000] shadow-md"
               >
                 {/* Glow reflection inside */}
                 <div className="absolute -top-10 -right-10 w-28 h-28 bg-red-400/20 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500" />
                 
-                {/* EL Badge */}
-                <div className="inline-flex bg-white/10 text-white rounded-lg px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-widest border border-white/5 shadow-sm">
-                  EL
+                {/* Logo */}
+                <div className="flex justify-center mb-3">
+                  <Image 
+                    src="/images/logo-putih.png" 
+                    alt="EasyLegal" 
+                    width={100} 
+                    height={32} 
+                    className="h-8 w-auto object-contain"
+                  />
                 </div>
 
                 {/* Text Content */}
-                <h3 className="text-[28px] font-black leading-tight tracking-tight mt-4 text-center">
+                <h3 className="text-[32px] font-black leading-tight tracking-tight text-center">
                   Diskon 50%
                 </h3>
-                <p className="text-[13px] font-black text-red-100 text-center tracking-wide mt-1 uppercase">
+                <p className="text-[13px] font-bold text-white text-center tracking-wide mt-1">
                   Untuk Layanan Pendirian PT &amp; CV
                 </p>
-                <p className="text-[12px] text-red-200/90 text-center mt-3 max-w-[210px] mx-auto leading-relaxed font-normal">
+                <p className="text-[11.5px] text-white/90 text-center mt-3 max-w-[240px] mx-auto leading-relaxed font-normal">
                   Konsultasi gratis dengan tim legal EasyLegal. Proses cepat, harga transparan.
                 </p>
 
                 {/* Card Image */}
-                <div className="relative aspect-[1.5] w-full overflow-hidden rounded-2xl mt-6 border border-white/5 shadow-sm">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[16px] mt-5 shadow-sm bg-white">
                   <Image
-                    src="https://images.unsplash.com/photo-1556761175-4b46a572b786?fit=crop&w=500&h=300&q=80"
+                    src="/images/home/cara-kerja-step1.png"
                     alt="Layanan Pendirian PT & CV"
                     fill
                     sizes="(max-width: 1024px) 100vw, 320px"
-                    className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
+                    className="object-cover object-bottom"
                   />
+                </div>
+
+                {/* Button */}
+                <div className="mt-5 w-full bg-white text-gray-900 rounded-xl py-3.5 flex items-center justify-center gap-2 font-bold text-[14px] shadow-sm transition-colors group-hover:bg-gray-50">
+                  <span className="w-[20px] h-[20px] bg-current" style={{ WebkitMask: 'url(https://api.iconify.design/ri:whatsapp-line.svg) center/cover', mask: 'url(https://api.iconify.design/ri:whatsapp-line.svg) center/cover' }} />
+                  Cek via WhatsApp
                 </div>
               </a>
 
@@ -808,18 +853,18 @@ export default async function ArtikelDetailPage({ params }: Props) {
                 </p>
                 <div className="flex items-center space-x-2">
                   {[
-                    { Icon: IgIcon, href: "/", label: "Instagram" },
-                    { Icon: FbIcon, href: "/", label: "Facebook" },
-                    { Icon: LiIcon, href: "/", label: "LinkedIn" },
-                    { Icon: ChatIcon, href: "/", label: "Chat" },
-                  ].map(({ Icon, href, label }) => (
+                    { iconUrl: "https://api.iconify.design/ri:instagram-line.svg", href: "/", label: "Instagram" },
+                    { iconUrl: "https://api.iconify.design/ri:facebook-fill.svg", href: "/", label: "Facebook" },
+                    { iconUrl: "https://api.iconify.design/ri:linkedin-fill.svg", href: "/", label: "LinkedIn" },
+                    { iconUrl: "https://api.iconify.design/ri:chat-3-line.svg", href: "/", label: "Chat" },
+                  ].map(({ iconUrl, href, label }) => (
                     <Link
                       key={label}
                       href={href}
                       className="w-9 h-9 bg-white border border-[#E5E7EB] rounded-[10px] flex items-center justify-center text-[#555555] hover:text-[#990202] hover:border-[#990202] hover:scale-105 transition-all duration-200 shadow-[0_1px_2px_rgba(0,0,0,0.01)]"
                       aria-label={label}
                     >
-                      <Icon className="w-[14px] h-[14px]" />
+                      <span className="w-[15px] h-[15px] bg-current" style={{ WebkitMask: `url(${iconUrl}) center/cover`, mask: `url(${iconUrl}) center/cover` }} />
                     </Link>
                   ))}
                 </div>

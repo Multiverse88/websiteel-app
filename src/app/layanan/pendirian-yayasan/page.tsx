@@ -19,7 +19,10 @@ import {
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
-import Pricing, { PricingPackage } from "@/components/Pricing";
+import Pricing, { PricingPackage, FootnoteItem } from "@/components/Pricing";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
+import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function PendirianYayasan() {
@@ -696,6 +699,7 @@ export default function PendirianYayasan() {
         items={faqs}
       />
 
+      <MediaCoverage />
       </div>
       );
       }

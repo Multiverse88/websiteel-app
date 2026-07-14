@@ -65,7 +65,7 @@ export default function TentangKami() {
   const stats = [
     { value: "11.000+", label: "Bisnis terlayani" },
     { value: "15+", label: "Jenis layanan legal" },
-    { value: "5 thn", label: "Pengalaman melayani" },
+    { value: "4 thn", label: "Pengalaman melayani" },
     { value: "3 kota", label: "Office presence" },
   ];
 
@@ -185,22 +185,15 @@ export default function TentangKami() {
               <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
 
                 {/* Main Corporate Image Container */}
-                <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
+                <div className="relative w-full max-w-[480px] lg:max-w-none group aspect-square lg:aspect-[4/5] flex items-end justify-center">
                   <Image
-                    src="/hero-tentang-kami.webp"
+                    src="/images/home/tentang-kami-hero.png"
                     alt="Tim EasyLegal membantu UMKM pengurusan legalitas"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
-                    className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
+                    className="object-contain object-bottom group-hover:scale-[1.02] transition-transform duration-700 drop-shadow-xl"
+                    priority
                   />
-
-                  {/* Decorative Subtle Orange Logo at Top-Right */}
-                  <div className="absolute top-5 right-5 bg-black/10 backdrop-blur-md p-2 rounded-xl border border-white/20">
-                    <svg width="24" height="20" viewBox="0 0 24 20" fill="none" className="text-amber-500 w-6 h-6">
-                      <path d="M4 4L10 10L4 16" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M20 4L14 10L20 16" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
                 </div>
 
                 {/* Floating Badge 1: 11.000+ Bisnis Terlayani */}
@@ -232,7 +225,7 @@ export default function TentangKami() {
       </section>
 
       {/* ─── 2. CERITA KAMI ─── */}
-      <section className="bg-bg-light py-8 sm:py-20 border-b border-border/40 overflow-hidden">
+      <section className="bg-white py-8 sm:py-20 border-b border-border/40 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
@@ -243,7 +236,7 @@ export default function TentangKami() {
                 {/* Main Team Image Container */}
                 <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] shadow-md border border-black/[0.04] shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[4/3] sm:aspect-[1.4] lg:aspect-[4/3]">
                   <Image
-                    src="/cerita-kami-team.webp"
+                    src="/images/home/tentang-kami-cerita.jpg"
                     alt="Tim EasyLegal bekerja bersama membantu perizinan UMKM"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -251,14 +244,14 @@ export default function TentangKami() {
                   />
                 </div>
 
-                {/* Floating Badge: Berdiri 2020 */}
+                {/* Floating Badge: Berdiri 2023 */}
                 <div className="absolute -bottom-4 left-2 sm:left-6 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] flex items-center space-x-2 sm:space-x-3.5 w-[140px] sm:w-[210px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-[#990202] flex items-center justify-center text-white flex-shrink-0 shadow-[0_4px_12px_rgba(153,2,2,0.2)]">
                     <Calendar className="w-4 h-4 sm:w-5.5 sm:h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[12px] sm:text-[15px] font-black text-gray-900 leading-none">Berdiri 2020</div>
-                    <div className="text-[9px] sm:text-[12px] text-gray-500 font-bold mt-1">5 tahun melayani</div>
+                    <div className="text-[12px] sm:text-[15px] font-black text-gray-900 leading-none">Berdiri 2023</div>
+                    <div className="text-[9px] sm:text-[12px] text-gray-500 font-bold mt-1">4 tahun melayani UMKM</div>
                   </div>
                 </div>
 
@@ -270,9 +263,9 @@ export default function TentangKami() {
               <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">Cerita Kami</p>
 
               <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
-                Lahir Dari Pengalaman{" "}
+                Lahir dari pengalaman{" "}
                 <span className="text-[#990202]">
-                  Mengurus PT Sendiri.
+                  mengurus PT sendiri
                 </span>
               </h2>
 

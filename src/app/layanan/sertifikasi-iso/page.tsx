@@ -15,10 +15,13 @@ import {
   CheckCircle,
   TrendingUp,
   Globe,
+  CheckCircle2,
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 
@@ -546,7 +549,7 @@ export default function SertifikasiIso() {
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[24px] sm:rounded-[24px] sm:rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fit=crop&w=800&h=800&q=80"
+                    src="/images/layanan/iso-1.png"
                     alt="Sertifikasi ISO Perusahaan Terpercaya"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -605,7 +608,7 @@ export default function SertifikasiIso() {
                 {/* Image Container */}
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1559526324-593bc073d938?fit=crop&w=800&h=800&q=80"
+                    src="/images/layanan/iso-2.png"
                     alt="Tim profesional berdiskusi standar audit ISO"
                     fill
                     sizes="(max-width: 768px) 100vw, 500px"
@@ -780,15 +783,26 @@ export default function SertifikasiIso() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">BIAYA SERTIFIKASI ISO UAF</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              Harga transparan per standar ISO.
-            </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
-              Semua paket include audit, training, sertifikasi resmi UAF, &amp; dokumen mutu (SOP ISO).<br />
-              Tanpa tambahan biaya proses.
-            </p>
+          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
+              <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">BIAYA SERTIFIKASI ISO UAF</p>
+              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+                Harga transparan per standar ISO.
+              </h2>
+              <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
+                Semua paket include audit, training, sertifikasi resmi UAF, &amp; dokumen mutu (SOP ISO).<br />
+                Tanpa tambahan biaya proses.
+              </p>
+            </div>
+            <div className="flex-shrink-0 flex justify-start md:justify-end">
+              <Image 
+                src="/images/badges/promo-50.png" 
+                alt="Promo 50% Off Legal Deals" 
+                width={280} 
+                height={120}
+                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+              />
+            </div>
           </div>
 
           {/* Pricing Cards */}
@@ -1132,6 +1146,8 @@ export default function SertifikasiIso() {
             <span>(1) Harga belum termasuk PPN. Biaya &amp; estimasi ruangan lapangan dilakukan terpisah, all-in-cost. (2) Estimasi pelaksanaan Audit.</span>
           </div>
 
+          <PricingFooter />
+
         </div>
       </section>
 
@@ -1267,7 +1283,7 @@ export default function SertifikasiIso() {
         </div>
       </section>
 
-
+      <MediaCoverage />
     </div>
   );
 }
