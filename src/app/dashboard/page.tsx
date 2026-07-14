@@ -1,244 +1,170 @@
 import React from "react";
 import Link from "next/link";
-import { FileText, LogOut, ExternalLink, Calendar, Clock, Eye, Mail, User, Pencil, Link2 } from "lucide-react";
 import { prisma } from "@/lib/db";
-import { logoutAction } from "./actions";
-import ArticleImage from "./article-image";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import DeleteArticleButton from "./delete-article-button";
+import { FileText, Eye, Mail, Layers, ArrowRight, Phone } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-export default async function DashboardPage() {
+export default async function DashboardOverviewPage() {
   const session = await getSession();
   if (!session) {
     redirect("/login");
   }
 
-  // Check if 2FA is set up
   if (!session.twoFactorEnabled) {
     redirect("/login/setup-2fa");
   }
 
-  const articles = await prisma.article.findMany({
+  // Query stats
+  const totalArticles = await prisma.article.count();
+  const viewSum = await prisma.article.aggregate({ _sum: { viewCount: true } });
+  const totalViews = viewSum._sum.viewCount || 0;
+  const subscriberCount = await prisma.newsletterSubscriber.count({ where: { isActive: true } });
+  const totalLeads = await prisma.landingPageLead.count();
+
+  // Query latest leads
+  const latestLeads = await prisma.landingPageLead.findMany({
+    take: 5,
     orderBy: { createdAt: "desc" },
+    include: { landingPage: true }
+  });
+
+  // Query popular articles
+  const popularArticles = await prisma.article.findMany({
+    take: 5,
+    orderBy: { viewCount: "desc" },
     select: {
       id: true,
       title: true,
       slug: true,
-      category: true,
-      coverImage: true,
-      readTime: true,
       viewCount: true,
-      createdAt: true,
-    },
+      category: true,
+    }
   });
 
-  const totalArticles = articles.length;
-  const totalViews = articles.reduce((sum: number, a: { viewCount: number }) => sum + a.viewCount, 0);
-  const subscriberCount = await prisma.newsletterSubscriber.count({ where: { isActive: true } });
-  const linksCount = await prisma.redirect.count();
+  const stats = [
+    { name: "Total Artikel", value: totalArticles, icon: FileText, desc: "Artikel terbit" },
+    { name: "Total Views", value: totalViews.toLocaleString("id-ID"), icon: Eye, desc: "Pembaca artikel" },
+    { name: "Subscriber Aktif", value: subscriberCount, icon: Mail, desc: "Newsletter subscriber" },
+    { name: "Total Prospek (Leads)", value: totalLeads, icon: Layers, desc: "Dari Landing Pages" },
+  ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
-      {/* HEADER */}
-      <section className="bg-white pt-8 lg:pt-12 pb-10 border-b border-gray-100">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8 flex items-center justify-between">
-          <div>
-            <h1 className="font-heading text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              Dashboard
-            </h1>
-            <p className="text-[14px] text-gray-500 mt-1">
-              {totalArticles} artikel terbit &middot; {totalViews.toLocaleString("id-ID")} total views
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/dashboard/profile"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] shadow-md border border-black/[0.04] hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
-            >
-              <User className="w-4 h-4 text-gray-500" />
-              <span>Edit Profil</span>
-            </Link>
-            <Link
-              href="/dashboard/newsletter"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] shadow-md border border-black/[0.04] hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
-            >
-              <Mail className="w-4 h-4" />
-              <span>Newsletter</span>
-              {subscriberCount > 0 && (
-                <span className="ml-0.5 px-1.5 py-0.5 bg-[#990202] text-white text-[10px] font-bold rounded-md">
-                  {subscriberCount}
-                </span>
-              )}
-            </Link>
-            <Link
-              href="/dashboard/links"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-[#990202] shadow-md border border-black/[0.04] hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
-            >
-              <Link2 className="w-4 h-4" />
-              <span>Redirect Links</span>
-              {linksCount > 0 && (
-                <span className="ml-0.5 px-1.5 py-0.5 bg-[#990202] text-white text-[10px] font-bold rounded-md">
-                  {linksCount}
-                </span>
-              )}
-            </Link>
-            <Link
-              href="/dashboard/artikel/tambah"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[13px] rounded-xl shadow-sm hover:shadow-md transition-all"
-            >
-              <FileText className="w-4 h-4" />
-              <span>Tulis Baru</span>
-            </Link>
-            <form action={logoutAction}>
-              <button
-                type="submit"
-                className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-bold text-gray-500 hover:text-[#990202] shadow-md border border-black/[0.04] hover:border-red-200 rounded-xl transition-all bg-white hover:bg-red-50"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>Logout</span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
+    <div className="p-8 max-w-7xl mx-auto space-y-8">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900">Ringkasan Utama</h1>
+        <p className="text-gray-500 mt-1">Pantau statistik performa artikel, prospek, dan pemasaran EasyLegal secara langsung.</p>
+      </div>
 
-      {/* ARTICLES LIST */}
-      <section className="py-10 flex-grow">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
-
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-[18px] font-extrabold text-gray-900">
-              Semua Artikel
-            </h2>
-          </div>
-
-          {articles.length === 0 ? (
-            /* Empty State */
-            <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-12 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
-                <FileText className="w-8 h-8 text-[#990202]" />
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
+          return (
+            <div key={stat.name} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start gap-4">
+              <div className="p-3 bg-red-50 text-[#990202] rounded-xl">
+                <Icon className="w-6 h-6" />
               </div>
-              <h3 className="text-[18px] font-extrabold text-gray-900 mb-2">
-                Belum ada artikel
-              </h3>
-              <p className="text-[14px] text-gray-500 mb-6">
-                Mulai tulis artikel pertama untuk klien EasyLegal.
-              </p>
-              <Link
-                href="/dashboard/artikel/tambah"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all"
-              >
-                <FileText className="w-4 h-4" />
-                <span>Tulis Artikel Pertama</span>
+              <div>
+                <span className="block text-sm font-semibold text-gray-500">{stat.name}</span>
+                <span className="block text-2xl font-bold text-gray-900 mt-1">{stat.value}</span>
+                <span className="block text-xs text-gray-400 mt-1">{stat.desc}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Split Panels */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Left: Leads List */}
+        <div className="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between">
+          <div>
+            <div className="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-gray-900">Prospek Terbaru (Leads)</h2>
+              <Link href="/dashboard/landing-pages" className="text-xs font-bold text-[#990202] hover:underline flex items-center gap-1">
+                Kelola Landing Pages <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-          ) : (
-            /* Articles Table */
-            <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
-              {/* Table Header */}
-              <div className="grid grid-cols-12 gap-4 px-6 py-3 bg-gray-50 border-b border-gray-100 text-[12px] font-extrabold text-gray-400 uppercase tracking-wider">
-                <div className="col-span-1">Gambar</div>
-                <div className="col-span-4">Judul</div>
-                <div className="col-span-2">Kategori</div>
-                <div className="col-span-1 text-center">Views</div>
-                <div className="col-span-2">Tanggal</div>
-                <div className="col-span-1">Waktu</div>
-                <div className="col-span-1 text-right">Aksi</div>
+            {latestLeads.length === 0 ? (
+              <div className="p-8 text-center text-gray-500 text-sm">
+                Belum ada prospek yang masuk.
               </div>
-
-              {/* Table Rows */}
-              {articles.map((article: { id: string; title: string; slug: string; category: string; coverImage: string; readTime: string; viewCount: number; createdAt: Date }) => {
-                const date = new Date(article.createdAt).toLocaleDateString("id-ID", {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                });
-
-                return (
-                  <div
-                    key={article.id}
-                    className="grid grid-cols-12 gap-4 px-6 py-4 border-b border-gray-50 hover:bg-gray-50/50 transition-colors items-center"
-                  >
-                    {/* Cover Image */}
-                    <div className="col-span-1">
-                      <div className="relative w-12 h-10 rounded-lg overflow-hidden bg-gray-100 shadow-md border border-black/[0.04]">
-                        <ArticleImage
-                          src={article.coverImage}
-                          alt={article.title}
-                        />
+            ) : (
+              <div className="divide-y divide-gray-100">
+                {latestLeads.map((lead) => {
+                  const date = new Date(lead.createdAt).toLocaleDateString("id-ID", {
+                    day: "numeric",
+                    month: "short",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  });
+                  return (
+                    <div key={lead.id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                      <div>
+                        <div className="font-bold text-gray-950 text-sm">{lead.name || "Anonim"}</div>
+                        <div className="text-xs text-gray-500 mt-1 flex items-center gap-1.5">
+                          <span>LP: {lead.landingPage.title}</span>
+                          <span>&bull;</span>
+                          <span>{date}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {lead.phone && (
+                          <a
+                            href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#25D366] text-white rounded-xl text-xs font-bold hover:bg-[#1ea760] transition-colors"
+                          >
+                            <Phone className="w-3.5 h-3.5" />
+                            <span>WhatsApp</span>
+                          </a>
+                        )}
                       </div>
                     </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
 
-                    {/* Title */}
-                    <div className="col-span-4">
-                      <p className="text-[14px] font-bold text-gray-900 line-clamp-1">
-                        {article.title}
-                      </p>
-                      <p className="text-[12px] text-gray-400 font-mono mt-0.5">
-                        /artikel/{article.slug}
-                      </p>
-                    </div>
-
-                    {/* Category */}
-                    <div className="col-span-2">
-                      <span className="inline-flex px-2.5 py-1 rounded-md text-[11px] font-bold bg-red-50 text-[#990202] border border-red-100/50">
-                        {article.category}
-                      </span>
-                    </div>
-
-                    {/* Views */}
-                    <div className="col-span-1">
-                      <div className="flex items-center justify-center gap-1.5 text-[13px] font-bold text-gray-700">
-                        <Eye className="w-3.5 h-3.5 text-gray-400" />
-                        <span>{article.viewCount.toLocaleString("id-ID")}</span>
+        {/* Right: Popular Articles */}
+        <div className="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between">
+          <div>
+            <div className="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-gray-900">Artikel Populer</h2>
+              <Link href="/dashboard/artikel" className="text-xs font-bold text-[#990202] hover:underline flex items-center gap-1">
+                Kelola Artikel <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+            {popularArticles.length === 0 ? (
+              <div className="p-8 text-center text-gray-500 text-sm">
+                Belum ada artikel terbit.
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-100">
+                {popularArticles.map((article, idx) => (
+                  <div key={article.id} className="px-6 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
+                    <span className="text-lg font-extrabold text-gray-300 w-6 text-center">#{idx + 1}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-gray-950 text-sm truncate">{article.title}</div>
+                      <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-red-50 text-[#990202] rounded text-[10px] font-bold">{article.category}</span>
+                        <span>{article.viewCount.toLocaleString("id-ID")} views</span>
                       </div>
-                    </div>
-
-                    {/* Date */}
-                    <div className="col-span-2">
-                      <div className="flex items-center gap-1.5 text-[13px] text-gray-500">
-                        <Calendar className="w-3.5 h-3.5 text-gray-400" />
-                        <span>{date}</span>
-                      </div>
-                    </div>
-
-                    {/* Read Time */}
-                    <div className="col-span-1">
-                      <div className="flex items-center gap-1.5 text-[13px] text-gray-500">
-                        <Clock className="w-3.5 h-3.5 text-gray-400" />
-                        <span>{article.readTime}</span>
-                      </div>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="col-span-1 flex justify-end gap-1">
-                      <Link
-                        href={`/dashboard/artikel/${article.id}/edit`}
-                        className="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
-                        title="Edit artikel"
-                      >
-                        <Pencil className="w-4 h-4" />
-                      </Link>
-                      <Link
-                        href={`/artikel/${article.slug}`}
-                        target="_blank"
-                        className="p-2 text-gray-400 hover:text-[#990202] hover:bg-red-50 rounded-lg transition-colors"
-                        title="Lihat artikel"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </Link>
-                      <DeleteArticleButton articleId={article.id} articleTitle={article.title} />
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
