@@ -26,7 +26,7 @@ export default async function DashboardLayout({
   ]);
 
   return (
-    <div className="dashboard-shell flex h-screen overflow-hidden bg-[#FAFAFA]">
+    <div className="dashboard-shell flex h-screen overflow-hidden bg-[#121212] text-white">
       <DashboardSidebar subscriberCount={subscriberCount} linksCount={linksCount} />
       <main className="flex-1 overflow-y-auto">
         {children}
