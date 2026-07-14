@@ -19,9 +19,11 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Fetch counts for badges
-  const subscriberCount = await prisma.newsletterSubscriber.count({ where: { isActive: true } });
-  const linksCount = await prisma.redirect.count();
+  // Fetch counts for badges concurrently
+  const [subscriberCount, linksCount] = await Promise.all([
+    prisma.newsletterSubscriber.count({ where: { isActive: true } }),
+    prisma.redirect.count(),
+  ]);
 
   return (
     <div className="dashboard-shell flex min-h-screen bg-[#FAFAFA]">
