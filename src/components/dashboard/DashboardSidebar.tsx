@@ -51,11 +51,11 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
   ];
 
   return (
-    <aside className="w-64 bg-[#121212] border-r border-[#2C2C2E] h-screen flex flex-col justify-between shrink-0 overflow-y-auto hidden md:flex">
+    <aside className="w-64 bg-white border-r border-gray-200 h-screen flex flex-col justify-between shrink-0 overflow-y-auto hidden md:flex">
       <div className="flex flex-col">
-        <div className="px-6 py-6 border-b border-[#2C2C2E] flex items-center">
-          <Link href="/dashboard" className="text-xl font-bold text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-lg bg-[#00E5FF] text-black flex items-center justify-center font-extrabold text-sm">EL</span>
+        <div className="px-6 py-6 border-b border-gray-100 flex items-center">
+          <Link href="/dashboard" className="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-[#990202] text-white flex items-center justify-center font-extrabold text-sm">EL</span>
             <span>EasyLegal</span>
           </Link>
         </div>
@@ -73,17 +73,17 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
                 href={item.href}
                 className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
                   isActive
-                    ? "bg-[#1E1E1E] text-[#00E5FF]"
-                    : "text-[#98989D] hover:bg-[#1E1E1E] hover:text-white"
+                    ? "bg-red-50 text-[#990202]"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className={`w-4 h-4 ${isActive ? "text-[#00E5FF]" : "text-[#98989D]"}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? "text-[#990202]" : "text-gray-400"}`} />
                   <span>{item.name}</span>
                 </div>
                 {item.badge !== undefined && item.badge > 0 && (
                   <span className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold ${
-                    isActive ? "bg-[#FF453A] text-white" : "bg-[#1E1E1E] text-[#98989D] border border-[#2C2C2E]"
+                    isActive ? "bg-[#990202] text-white" : "bg-gray-100 text-gray-600"
                   }`}>
                     {item.badge}
                   </span>
@@ -94,13 +94,13 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
         </div>
       </div>
 
-      <div className="p-4 border-t border-[#2C2C2E]">
+      <div className="p-4 border-t border-gray-100">
         <form action={logoutAction}>
           <button
             type="submit"
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-[#98989D] hover:bg-[#3A1C1C] hover:text-[#FF453A] hover:border-l-4 hover:border-[#FF453A] transition-all text-left"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-gray-500 hover:bg-red-50 hover:text-[#990202] transition-all text-left"
           >
-            <LogOut className="w-4 h-4" />
+            <LogOut className="w-4 h-4 text-gray-400" />
             <span>Logout</span>
           </button>
         </form>
