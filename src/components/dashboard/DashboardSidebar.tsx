@@ -60,7 +60,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
           </Link>
         </div>
 
-        <nav className="p-4 space-y-1.5">
+        <div className="p-4 space-y-1.5" role="navigation">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = item.exact 
@@ -91,7 +91,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
               </Link>
             );
           })}
-        </nav>
+        </div>
       </div>
 
       <div className="p-4 border-t border-gray-100">
