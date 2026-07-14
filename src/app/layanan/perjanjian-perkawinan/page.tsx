@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Check,
   Globe,
@@ -23,10 +24,13 @@ import {
   Shield,
   Layers,
   Heart,
-  Menu
+  Menu,
+  Scale
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function PerjanjianPerkawinan() {
@@ -258,58 +262,14 @@ export default function PerjanjianPerkawinan() {
 
             {/* Right Column */}
             <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-8 lg:mt-0">
-              <div className="relative w-full max-w-[460px] aspect-[1.05] sm:aspect-square lg:aspect-[1.05] rounded-[36px] bg-gradient-to-br from-[#1E1E1E] via-[#141414] to-[#7B080C] p-8 shadow-2xl overflow-hidden border border-gray-800 flex items-center justify-center">
-
-                {/* Main White Document Mockup - Slightly rotated */}
-                <div className="bg-[#FAF8F5] rounded-[12px] p-4.5 shadow-2xl relative w-[235px] h-[265px] border border-gray-300/40 text-left flex flex-col justify-between transform rotate-[-3deg] hover:rotate-0 transition-transform duration-500">
-
-                  {/* Red Seal */}
-                  <div className="absolute -top-3 -right-3 w-[56px] h-[56px] rounded-full bg-[#990202] border-2 border-dashed border-white/45 flex items-center justify-center text-center shadow-lg transform rotate-[12deg] z-10">
-                    <span className="text-[6.5px] font-black text-white leading-tight uppercase p-1 tracking-wider">
-                      AKTA NOTARIS RESMI
-                    </span>
-                  </div>
-
-                  {/* Document Header */}
-                  <div className="text-center space-y-0.5 border-b border-gray-300/80 pb-2">
-                    <span className="text-[7px] font-black text-[#990202]/90 tracking-[0.2em] uppercase block">
-                      AKTA PERJANJIAN
-                    </span>
-                    <h4 className="text-[9.5px] font-extrabold text-gray-900 leading-tight tracking-tight uppercase">
-                      PERJANJIAN PERKAWINAN / PISAH HARTA
-                    </h4>
-                  </div>
-
-                  {/* Document Lines */}
-                  <div className="space-y-2 mt-3.5 flex-1">
-                    <div className="h-1 bg-gray-200 rounded w-full" />
-                    <div className="h-1 bg-gray-200 rounded w-[92%]" />
-                    <div className="h-1 bg-gray-200 rounded w-[85%]" />
-                    <div className="h-1 bg-gray-200 rounded w-[96%]" />
-                    <div className="h-1 bg-gray-200 rounded w-[60%]" />
-                  </div>
-
-                  {/* Document Signatures */}
-                  <div className="flex justify-between items-end pt-3 border-t border-gray-200/80">
-                    <div className="text-center space-y-0.5">
-                      <svg className="w-10 h-5 text-gray-500 mx-auto" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M10,40 Q25,10 40,40 T70,20 T90,40" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span className="text-[6.5px] font-black text-gray-400 block tracking-wider">
-                        PIHAK I
-                      </span>
-                    </div>
-                    <div className="text-center space-y-0.5">
-                      <svg className="w-10 h-5 text-gray-500 mx-auto" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M15,35 Q30,45 45,15 T75,35 T85,25" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span className="text-[6.5px] font-black text-gray-400 block tracking-wider">
-                        PIHAK II
-                      </span>
-                    </div>
-                  </div>
-
-                </div>
+              <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1] w-full max-w-[460px]">
+                <Image
+                  src="/images/layanan/perjanjian-perkawinan-1.jpg"
+                  alt="Perjanjian Perkawinan Resmi"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 460px"
+                  className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
+                />
 
                 {/* Floating Badge 1: Top Right */}
                 <div className="absolute top-8 right-4 bg-white rounded-xl py-2.5 px-3.5 shadow-xl flex items-center space-x-2.5 w-[200px] z-20">
@@ -587,14 +547,25 @@ export default function PerjanjianPerkawinan() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
 
           {/* Section Header */}
-          <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA PERJANJIAN PERKAWINAN</p>
-            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              2 layanan — bisa pilih salah satu atau kombinasi.
-            </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
-              Pembuatan akta &amp; registrasi resmi bisa dipesan terpisah. Tim kami rekomendasikan keduanya untuk perlindungan hukum penuh.
-            </p>
+          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
+              <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA PERJANJIAN PERKAWINAN</p>
+              <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+                2 layanan — bisa pilih salah satu atau kombinasi.
+              </h2>
+              <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
+                Pembuatan akta &amp; registrasi resmi bisa dipesan terpisah. Tim kami rekomendasikan keduanya untuk perlindungan hukum penuh.
+              </p>
+            </div>
+            <div className="flex-shrink-0 flex justify-start md:justify-end">
+              <Image 
+                src="/images/badges/promo-50.png" 
+                alt="Promo 50% Off Legal Deals" 
+                width={280} 
+                height={120}
+                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+              />
+            </div>
           </div>
 
           {/* Pricing Grid */}
@@ -827,6 +798,7 @@ export default function PerjanjianPerkawinan() {
             </div>
 
           </div>
+          <PricingFooter />
         </div>
       </section>
 
@@ -960,6 +932,7 @@ export default function PerjanjianPerkawinan() {
         </div>
       </section>
 
+      <MediaCoverage />
     </div>
   );
 }

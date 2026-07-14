@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { submitPartnershipForm } from "./actions";
 import {
   Check,
   Handshake,
@@ -20,7 +21,9 @@ import {
   Award,
   Globe,
   Home,
-  CheckCircle2
+  CheckCircle2,
+  Upload,
+  Send
 } from "lucide-react";
 import { getWhatsAppLink } from "@/lib/config";
 
@@ -32,14 +35,40 @@ export default function KerjasamaPage() {
     email: "",
     whatsapp: "",
     companyName: "",
-    industry: "Pilih Industri",
+    businessActivity: "",
     website: "",
+    officeAddress: "",
     partnershipType: "Pilih Jenis Kerjasama",
-    proposal: ""
+    proposal: "",
+    source: "Pilih"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [step, setStep] = useState(1);
+
+  const nextStep = () => {
+    let stepErrors: Record<string, string> = {};
+    if (step === 1) {
+      if (!formData.name.trim()) stepErrors.name = "Nama lengkap wajib diisi.";
+      if (!formData.role.trim()) stepErrors.role = "Jabatan wajib diisi.";
+      if (!formData.email.trim()) stepErrors.email = "Alamat email wajib diisi.";
+      if (!formData.whatsapp.trim()) stepErrors.whatsapp = "Nomor WhatsApp wajib diisi.";
+    } else if (step === 2) {
+      if (!formData.companyName.trim()) stepErrors.companyName = "Nama perusahaan wajib diisi.";
+    }
+    
+    if (Object.keys(stepErrors).length > 0) {
+      setErrors(stepErrors);
+      return;
+    }
+    setErrors({});
+    setStep(step + 1);
+  };
+
+  const prevStep = () => {
+    setStep(step - 1);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -63,27 +92,36 @@ export default function KerjasamaPage() {
     } else if (formData.whatsapp.length < 9) {
       newErrors.whatsapp = "Nomor WhatsApp terlalu pendek.";
     }
-    if (!formData.companyName.trim()) newErrors.companyName = "Nama perusahaan wajib diisi.";
+    if (!formData.companyName.trim()) newErrors.companyName = "Nama pendirian/perusahaan wajib diisi.";
+    if (!formData.businessActivity.trim()) newErrors.businessActivity = "Kegiatan usaha wajib diisi.";
     if (formData.partnershipType === "Pilih Jenis Kerjasama") {
       newErrors.partnershipType = "Pilih jenis kerjasama yang diminati.";
     }
-    if (!formData.proposal.trim()) newErrors.proposal = "Proposal kerjasama wajib diisi.";
+    if (!formData.proposal.trim()) newErrors.proposal = "Pesan tambahan wajib diisi.";
+    if (formData.source === "Pilih" || !formData.source) {
+      newErrors.source = "Pilih sumber informasi.";
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setErrors({});
     
-    // Simulate API Submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    const result = await submitPartnershipForm(formData);
+    
+    setIsSubmitting(false);
+    
+    if (result.error) {
+      alert(result.error);
+    } else {
       setIsSuccess(true);
-    }, 1200);
+    }
   };
 
   const scrollToForm = (e: React.MouseEvent) => {
@@ -345,141 +383,305 @@ export default function KerjasamaPage() {
             {!isSuccess ? (
               <form onSubmit={handleSubmit} className="space-y-8">
                 
-                {/* GROUP 1: TENTANG ANDA */}
-                <div className="space-y-5">
-                  <div className="border-b border-dashed border-gray-200 pb-2.5 text-left">
-                    <span className="text-[#990202] text-[11px] font-black tracking-widest uppercase">
-                      TENTANG ANDA
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    {/* Nama Lengkap */}
-                    <div className="space-y-1.5 text-left">
-                      <label htmlFor="name" className="text-[12.5px] font-bold text-gray-800">
-                        Nama Lengkap<span className="text-[#990202]">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
-                          errors.name ? "border-red-500 bg-red-50/5" : "border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60"
-                        } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
-                        placeholder="Nama lengkap"
-                      />
-                      {errors.name && <span className="text-[11px] font-bold text-red-500">{errors.name}</span>}
+                {/* Stepper */}
+                <div className="flex items-center justify-center mb-10 mt-2">
+                  <div className="flex items-center">
+                    <div className="flex flex-col items-center">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[15px] ${step >= 1 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                        {step > 1 ? <Check className="w-5 h-5 text-white" strokeWidth={3} /> : '1'}
+                      </div>
+                      <span className={`text-[9.5px] font-bold mt-2.5 uppercase tracking-widest ${step === 1 ? 'text-[#990202]' : step > 1 ? 'text-gray-900' : 'text-gray-400'}`}>TENTANG ANDA</span>
                     </div>
-
-                    {/* Jabatan */}
-                    <div className="space-y-1.5 text-left">
-                      <label htmlFor="role" className="text-[12.5px] font-bold text-gray-800">
-                        Jabatan<span className="text-[#990202]">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="role"
-                        name="role"
-                        value={formData.role}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
-                          errors.role ? "border-red-500 bg-red-50/5" : "border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60"
-                        } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
-                        placeholder="CEO / Founder / dll"
-                      />
-                      {errors.role && <span className="text-[11px] font-bold text-red-500">{errors.role}</span>}
+                    <div className={`w-12 sm:w-20 h-[1.5px] mx-1 sm:mx-3 mb-6 ${step >= 2 ? 'bg-[#990202]' : 'bg-gray-300'}`} />
+                    <div className="flex flex-col items-center">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[15px] ${step >= 2 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                        {step > 2 ? <Check className="w-5 h-5 text-white" strokeWidth={3} /> : '2'}
+                      </div>
+                      <span className={`text-[9.5px] font-bold mt-2.5 uppercase tracking-widest ${step === 2 ? 'text-[#990202]' : step > 2 ? 'text-gray-900' : 'text-gray-400'}`}>TENTANG USAHA</span>
                     </div>
-
-                    {/* Email Kerja */}
-                    <div className="space-y-1.5 text-left">
-                      <label htmlFor="email" className="text-[12.5px] font-bold text-gray-800">
-                        Email Kerja<span className="text-[#990202]">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
-                          errors.email ? "border-red-500 bg-red-50/5" : "border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60"
-                        } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
-                        placeholder="nama@perusahaan.com"
-                      />
-                      {errors.email && <span className="text-[11px] font-bold text-red-500">{errors.email}</span>}
-                    </div>
-
-                    {/* No. WhatsApp */}
-                    <div className="space-y-1.5 text-left">
-                      <label htmlFor="whatsapp" className="text-[12.5px] font-bold text-gray-800">
-                        No. WhatsApp<span className="text-[#990202]">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        id="whatsapp"
-                        name="whatsapp"
-                        value={formData.whatsapp}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
-                          errors.whatsapp ? "border-red-500 bg-red-50/5" : "border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60"
-                        } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
-                        placeholder="0812xxxxxxxx"
-                      />
-                      {errors.whatsapp && <span className="text-[11px] font-bold text-red-500">{errors.whatsapp}</span>}
+                    <div className={`w-12 sm:w-20 h-[1.5px] mx-1 sm:mx-3 mb-6 ${step >= 3 ? 'bg-[#990202]' : 'bg-gray-300'}`} />
+                    <div className="flex flex-col items-center">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[15px] ${step >= 3 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                        3
+                      </div>
+                      <span className={`text-[9.5px] font-bold mt-2.5 uppercase tracking-widest ${step === 3 ? 'text-[#990202]' : 'text-gray-400'}`}>DETAIL KERJASAMA</span>
                     </div>
                   </div>
                 </div>
 
-                {/* GROUP 2: TENTANG PERUSAHAAN */}
-                <div className="space-y-5">
-                  <div className="border-b border-dashed border-gray-200 pb-2.5 text-left">
-                    <span className="text-[#990202] text-[11px] font-black tracking-widest uppercase">
-                      TENTANG PERUSAHAAN
-                    </span>
-                  </div>
+                {/* STEP 1 */}
+                {step === 1 && (
+                  <div className="animate-fade-in space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      {/* Nama Lengkap */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="name" className="text-[12.5px] font-bold text-gray-900">
+                          Nama Lengkap<span className="text-[#990202]">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className={`w-full px-4 py-3 rounded-xl border ${
+                            errors.name ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
+                          } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          placeholder="Nama lengkap"
+                        />
+                        {errors.name && <span className="text-[11px] font-bold text-red-500">{errors.name}</span>}
+                      </div>
 
-                  <div className="space-y-5">
-                    {/* Nama Perusahaan */}
-                    <div className="space-y-1.5 text-left">
-                      <label htmlFor="companyName" className="text-[12.5px] font-bold text-gray-800">
-                        Nama Perusahaan<span className="text-[#990202]">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="companyName"
-                        name="companyName"
-                        value={formData.companyName}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
-                          errors.companyName ? "border-red-500 bg-red-50/5" : "border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60"
-                        } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
-                        placeholder="PT / CV / Firma / Yayasan ..."
-                      />
-                      {errors.companyName && <span className="text-[11px] font-bold text-red-500">{errors.companyName}</span>}
+                      {/* Jabatan */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="role" className="text-[12.5px] font-bold text-gray-900">
+                          Jabatan<span className="text-[#990202]">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="role"
+                          name="role"
+                          value={formData.role}
+                          onChange={handleInputChange}
+                          className={`w-full px-4 py-3 rounded-xl border ${
+                            errors.role ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
+                          } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          placeholder="Direktur / Notaris / Founder ..."
+                        />
+                        {errors.role && <span className="text-[11px] font-bold text-red-500">{errors.role}</span>}
+                      </div>
+
+                      {/* Alamat Email */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="email" className="text-[12.5px] font-bold text-gray-900">
+                          Alamat Email<span className="text-[#990202]">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className={`w-full px-4 py-3 rounded-xl border ${
+                            errors.email ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
+                          } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          placeholder="nama@email.com"
+                        />
+                        {errors.email && <span className="text-[11px] font-bold text-red-500">{errors.email}</span>}
+                      </div>
+
+                      {/* No. WhatsApp */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="whatsapp" className="text-[12.5px] font-bold text-gray-900">
+                          Nomor WhatsApp<span className="text-[#990202]">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          id="whatsapp"
+                          name="whatsapp"
+                          value={formData.whatsapp}
+                          onChange={handleInputChange}
+                          className={`w-full px-4 py-3 rounded-xl border ${
+                            errors.whatsapp ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
+                          } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          placeholder="0812xxxxxxxx"
+                        />
+                        {errors.whatsapp && <span className="text-[11px] font-bold text-red-500">{errors.whatsapp}</span>}
+                      </div>
                     </div>
 
+                    <button
+                      type="button"
+                      onClick={nextStep}
+                      className="w-full mt-6 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-md transition-all flex justify-center items-center gap-2 group"
+                    >
+                      Lanjut <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    </button>
+                  </div>
+                )}
+
+                {/* STEP 2 */}
+                {step === 2 && (
+                  <div className="animate-fade-in space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      {/* Industri */}
+                      {/* Nama Pendirian / Perusahaan */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="industry" className="text-[12.5px] font-bold text-gray-800">
-                          Industri
+                        <label htmlFor="companyName" className="text-[12.5px] font-bold text-gray-900">
+                          Nama Pendirian / Perusahaan<span className="text-[#990202]">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="companyName"
+                          name="companyName"
+                          value={formData.companyName}
+                          onChange={handleInputChange}
+                          className={`w-full px-4 py-3 rounded-xl border ${
+                            errors.companyName ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
+                          } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          placeholder="PT / CV / Kantor Notaris ..."
+                        />
+                        {errors.companyName && <span className="text-[11px] font-bold text-red-500">{errors.companyName}</span>}
+                      </div>
+
+                      {/* Nama Kegiatan Usaha */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="businessActivity" className="text-[12.5px] font-bold text-gray-900">
+                          Nama Kegiatan Usaha<span className="text-[#990202]">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="businessActivity"
+                          name="businessActivity"
+                          value={formData.businessActivity}
+                          onChange={handleInputChange}
+                          className={`w-full px-4 py-3 rounded-xl border ${
+                            errors.businessActivity ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
+                          } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          placeholder="mis. Notaris / Jasa Legalitas"
+                        />
+                        {errors.businessActivity && <span className="text-[11px] font-bold text-red-500">{errors.businessActivity}</span>}
+                      </div>
+
+                      {/* Alamat Website */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="website" className="text-[12.5px] font-bold text-gray-900">
+                          Alamat Website
+                        </label>
+                        <input
+                          type="text"
+                          id="website"
+                          name="website"
+                          value={formData.website}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 rounded-xl border border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors"
+                          placeholder="https://usaha-anda.com"
+                        />
+                      </div>
+
+                      {/* Alamat Kantor */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="officeAddress" className="text-[12.5px] font-bold text-gray-900">
+                          Alamat Kantor
+                        </label>
+                        <input
+                          type="text"
+                          id="officeAddress"
+                          name="officeAddress"
+                          value={formData.officeAddress}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 rounded-xl border border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors"
+                          placeholder="Kota / alamat lengkap"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 mt-6">
+                      <button
+                        type="button"
+                        onClick={prevStep}
+                        className="w-1/3 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 font-bold text-[15px] rounded-xl shadow-sm transition-all flex justify-center items-center gap-2 group"
+                      >
+                        <ArrowRight className="w-5 h-5 transform rotate-180 transition-transform group-hover:-translate-x-1" />
+                        Kembali
+                      </button>
+                      <button
+                        type="button"
+                        onClick={nextStep}
+                        className="w-2/3 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-md transition-all flex justify-center items-center gap-2 group"
+                      >
+                        Lanjut <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 3 */}
+                {step === 3 && (
+                  <div className="animate-fade-in space-y-6">
+                    <div className="space-y-5">
+                      {/* Jenis Kerjasama */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="partnershipType" className="text-[12.5px] font-bold text-gray-900">
+                          Jenis Kerjasama<span className="text-[#990202]">*</span>
                         </label>
                         <div className="relative">
                           <select
-                            id="industry"
-                            name="industry"
-                            value={formData.industry}
+                            id="partnershipType"
+                            name="partnershipType"
+                            value={formData.partnershipType}
                             onChange={handleInputChange}
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60 text-[13.5px] font-medium text-gray-900 focus:outline-none appearance-none cursor-pointer"
+                            className={`w-full px-4 py-3 rounded-xl border appearance-none cursor-pointer ${
+                              errors.partnershipType ? "border-red-500 bg-red-50/5" : "border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white"
+                            } text-[13.5px] font-medium text-gray-900 focus:outline-none`}
                           >
-                            <option value="Pilih Industri">Pilih Industri</option>
-                            <option value="Tech / IT / SaaS">Tech / IT / SaaS</option>
-                            <option value="Fintech / Keuangan">Fintech / Keuangan</option>
-                            <option value="Coworking Space / Properti">Coworking Space / Properti</option>
-                            <option value="Konsultan / Agency">Konsultan / Agency</option>
-                            <option value="E-commerce / Retail">E-commerce / Retail</option>
+                            <option value="Pilih Jenis Kerjasama">Pilih Jenis Kerjasama</option>
+                            <option value="Corporate Partnership">Corporate Partnership</option>
+                            <option value="Reseller Agency">Reseller Agency</option>
+                            <option value="API & Integration">API &amp; Integration</option>
+                            <option value="Co-Marketing">Co-Marketing</option>
+                          </select>
+                          <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-550">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </div>
+                        {errors.partnershipType && <span className="text-[11px] font-bold text-red-500">{errors.partnershipType}</span>}
+                      </div>
+
+                      {/* Pesan Tambahan */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="proposal" className="text-[12.5px] font-bold text-gray-900">
+                          Pesan Tambahan<span className="text-[#990202]">*</span>
+                        </label>
+                        <textarea
+                          id="proposal"
+                          name="proposal"
+                          value={formData.proposal}
+                          onChange={handleInputChange}
+                          rows={4}
+                          className={`w-full px-4 py-3 rounded-xl border ${
+                            errors.proposal ? "border-red-500 bg-red-50/5" : "border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white"
+                          } text-[13.5px] font-medium text-gray-900 focus:outline-none resize-none transition-colors`}
+                          placeholder="Pesan untuk kerjasama & value yang ingin disampaikan (singkat saja)..."
+                        />
+                        {errors.proposal && <span className="text-[11px] font-bold text-red-500">{errors.proposal}</span>}
+                      </div>
+
+                      {/* Upload Berkas Kerjasama */}
+                      <div className="space-y-1.5 text-left">
+                        <label className="text-[12.5px] font-bold text-gray-900">
+                          Upload Berkas Kerjasama / Proposal
+                        </label>
+                        <div className="w-full border border-dashed border-gray-400 bg-[#F9F9F9] rounded-xl p-5 flex items-center gap-4 cursor-pointer hover:bg-gray-50 transition-colors">
+                          <Upload className="w-6 h-6 text-[#990202]" />
+                          <div className="flex flex-col">
+                            <span className="text-[13px] font-bold text-gray-900">Klik untuk upload berkas</span>
+                            <span className="text-[12px] text-gray-500">PDF, DOC, atau gambar — maks 10MB</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Dari mana Anda mengetahui EasyLegal? */}
+                      <div className="space-y-1.5 text-left">
+                        <label htmlFor="source" className="text-[12.5px] font-bold text-gray-900">
+                          Dari mana Anda mengetahui EasyLegal?<span className="text-[#990202]">*</span>
+                        </label>
+                        <div className="relative">
+                          <select
+                            id="source"
+                            name="source"
+                            value={formData.source}
+                            onChange={handleInputChange}
+                            className={`w-full px-4 py-3 rounded-xl border appearance-none cursor-pointer ${
+                              errors.source ? "border-red-500 bg-red-50/5" : "border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white"
+                            } text-[13.5px] font-medium text-gray-900 focus:outline-none`}
+                          >
+                            <option value="Pilih">Pilih</option>
+                            <option value="Pencarian Google">Pencarian Google</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Referensi Teman/Kolega">Referensi Teman/Kolega</option>
                             <option value="Lainnya">Lainnya</option>
                           </select>
                           <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-550">
@@ -488,121 +690,43 @@ export default function KerjasamaPage() {
                             </svg>
                           </div>
                         </div>
-                      </div>
-
-                      {/* Website */}
-                      <div className="space-y-1.5 text-left">
-                        <label htmlFor="website" className="text-[12.5px] font-bold text-gray-800">
-                          Website
-                        </label>
-                        <input
-                          type="text"
-                          id="website"
-                          name="website"
-                          value={formData.website}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60 text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors"
-                          placeholder="https://perusahaan.com"
-                        />
+                        {errors.source && <span className="text-[11px] font-bold text-red-500">{errors.source}</span>}
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* GROUP 3: DETAIL KERJASAMA */}
-                <div className="space-y-5">
-                  <div className="border-b border-dashed border-gray-200 pb-2.5 text-left">
-                    <span className="text-[#990202] text-[11px] font-black tracking-widest uppercase">
-                      DETAIL KERJASAMA
-                    </span>
-                  </div>
-
-                  <div className="space-y-5">
-                    {/* Jenis Kerjasama */}
-                    <div className="space-y-1.5 text-left">
-                      <label htmlFor="partnershipType" className="text-[12.5px] font-bold text-gray-800">
-                        Jenis Kerjasama<span className="text-[#990202]">*</span>
-                      </label>
-                      <div className="relative">
-                        <select
-                          id="partnershipType"
-                          name="partnershipType"
-                          value={formData.partnershipType}
-                          onChange={handleInputChange}
-                          className={`w-full px-4 py-3 rounded-xl border appearance-none cursor-pointer ${
-                            errors.partnershipType ? "border-red-500 bg-red-50/5" : "border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60"
-                          } text-[13.5px] font-medium text-gray-900 focus:outline-none`}
-                        >
-                          <option value="Pilih Jenis Kerjasama">Pilih Jenis Kerjasama</option>
-                          <option value="Corporate Partnership">Corporate Partnership</option>
-                          <option value="Reseller Agency">Reseller Agency</option>
-                          <option value="API & Integration">API &amp; Integration</option>
-                          <option value="Co-Marketing">Co-Marketing</option>
-                        </select>
-                        <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-550">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </div>
-                      </div>
-                      {errors.partnershipType && <span className="text-[11px] font-bold text-red-500">{errors.partnershipType}</span>}
+                    {/* Privacy Disclaimer */}
+                    <div className="bg-[#F9F9F9] rounded-xl p-4 border border-gray-100 text-left mt-2">
+                      <p className="text-[11.5px] sm:text-[12px] text-gray-500 font-medium leading-relaxed">
+                        Saya menyetujui EasyLegal memproses data ini untuk follow-up kerjasama sesuai <span className="font-bold text-[#990202]">Kebijakan Privasi</span>.
+                      </p>
                     </div>
 
-                    {/* Proposal Kerjasama */}
-                    <div className="space-y-1.5 text-left">
-                      <label htmlFor="proposal" className="text-[12.5px] font-bold text-gray-800">
-                        Proposal Kerjasama<span className="text-[#990202]">*</span>
-                      </label>
-                      <textarea
-                        id="proposal"
-                        name="proposal"
-                        rows={4}
-                        value={formData.proposal}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${
-                          errors.proposal ? "border-red-500 bg-red-50/5" : "border-gray-200 focus:border-gray-400 bg-[#F7F7F7]/60"
-                        } text-[13.5px] font-medium text-gray-900 focus:outline-none transition-colors resize-none`}
-                        placeholder="Tujuan kerjasama, value yang ditawarkan, ekspektasi, &amp; timeline ideal..."
-                      />
-                      {errors.proposal && <span className="text-[11px] font-bold text-red-500">{errors.proposal}</span>}
+                    <div className="flex gap-4 mt-6">
+                      <button
+                        type="button"
+                        onClick={prevStep}
+                        className="w-1/3 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 font-bold text-[15px] rounded-xl shadow-sm transition-all flex justify-center items-center gap-2 group"
+                      >
+                        <ArrowRight className="w-5 h-5 transform rotate-180 transition-transform group-hover:-translate-x-1" />
+                        Kembali
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-2/3 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_12px_rgba(153,2,2,0.2)] hover:shadow-[0_6px_16px_rgba(153,2,2,0.3)] transition-all flex justify-center items-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        ) : (
+                          <>
+                            Kirim Pengajuan
+                            <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 -mt-0.5" />
+                          </>
+                        )}
+                      </button>
                     </div>
                   </div>
-                </div>
-
-                {/* Consent Checkbox / Info */}
-                <div className="bg-[#FAF9F7] rounded-xl p-4.5 shadow-md border border-black/[0.03] text-center text-[12.5px] sm:text-[13px] text-gray-600 font-semibold leading-relaxed">
-                  Saya menyetujui EasyLegal memproses data ini untuk follow-up kerjasama sesuai <Link href="/kebijakan-privasi" className="text-[#990202] underline hover:text-[#800000]">Kebijakan Privasi</Link>.
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-[#990202] hover:bg-[#800000] disabled:bg-[#990202]/60 text-white font-extrabold text-[15px] rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 text-center flex items-center justify-center cursor-pointer"
-                >
-                  {isSubmitting ? (
-                    <div className="flex items-center space-x-2">
-                      <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      <span>Mengirim Pengajuan...</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center space-x-2">
-                      <span>Kirim Pengajuan</span>
-                      <svg className="w-4 h-4 transform rotate-45 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                      </svg>
-                    </div>
-                  )}
-                </button>
-
-                {/* Footer Note */}
-                <p className="text-center text-[11px] sm:text-[11.5px] text-gray-500 font-semibold mt-4">
-                  Akan dikirim ke <strong className="font-extrabold text-gray-900">partnership@easylegal.id</strong> · Urgent? <a href={getWhatsAppLink()} className="text-[#990202] hover:text-[#800000] font-extrabold underline">WhatsApp Tim</a>
-                </p>
+                )}
 
               </form>
             ) : (
@@ -652,16 +776,19 @@ export default function KerjasamaPage() {
                   <button
                     onClick={() => {
                       setIsSuccess(false);
+                      setStep(1);
                       setFormData({
                         name: "",
                         role: "",
                         email: "",
                         whatsapp: "",
                         companyName: "",
-                        industry: "Pilih Industri",
+                        businessActivity: "",
                         website: "",
+                        officeAddress: "",
                         partnershipType: "Pilih Jenis Kerjasama",
-                        proposal: ""
+                        proposal: "",
+                        source: "Pilih"
                       });
                     }}
                     className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[14px] rounded-xl bg-white hover:bg-gray-50 transition-colors cursor-pointer text-center flex-1"

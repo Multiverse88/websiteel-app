@@ -22,13 +22,6 @@ const CATEGORIES = [
   { id: "Semua", label: "Semua", dotColor: "" },
   { id: "KULINER", label: "Kuliner", dotColor: "bg-amber-500" },
   { id: "RETAIL", label: "Retail", dotColor: "bg-pink-400" },
-  { id: "JASA", label: "Jasa", dotColor: "bg-amber-800" },
-  { id: "TEKNOLOGI", label: "Teknologi", dotColor: "bg-blue-400" },
-  { id: "PROPERTI", label: "Properti", dotColor: "bg-emerald-400" },
-  { id: "MANUFAKTUR", label: "Manufaktur", dotColor: "bg-red-400" },
-  { id: "PENDIDIKAN", label: "Pendidikan", dotColor: "bg-amber-600" },
-  { id: "KESEHATAN", label: "Kesehatan", dotColor: "bg-emerald-500" },
-  { id: "TRANSPORTASI", label: "Transportasi", dotColor: "bg-orange-400" },
 ];
 
 const KBLI_DATABASE: KBLIItem[] = [
@@ -184,72 +177,6 @@ const KBLI_DATABASE: KBLIItem[] = [
     details: {
       entity: "PT, CV, atau PT Perorangan",
       permits: ["NIB (Nomor Induk Berusaha)", "Tanda Daftar Penyelenggara Sistem Elektronik (TD PSE) dari Kominfo"],
-    }
-  },
-  {
-    code: "62019",
-    title: "Aktivitas Pemrograman Komputer Lainnya",
-    category: "TEKNOLOGI",
-    risk: "Risiko Rendah",
-    desc: "Pengembangan software kustom, pembuatan website, aplikasi mobile.",
-    details: {
-      entity: "PT, CV, atau PT Perorangan",
-      permits: ["NIB (Nomor Induk Berusaha)"],
-    }
-  },
-  {
-    code: "68111",
-    title: "Real Estat yang Dimiliki atau Disewa",
-    category: "PROPERTI",
-    risk: "Risiko Rendah",
-    desc: "Penyewaan gedung perkantoran, apartemen, perumahan, virtual office.",
-    details: {
-      entity: "PT atau CV",
-      permits: ["NIB (Nomor Induk Berusaha)", "Konfirmasi Kesesuaian Kegiatan Pemanfaatan Ruang (KKKPR)"],
-    }
-  },
-  {
-    code: "14111",
-    title: "Industri Pakaian Jadi Konveksi",
-    category: "MANUFAKTUR",
-    risk: "Risiko Rendah",
-    desc: "Pembuatan pakaian jadi konveksi massal berdasarkan pesanan.",
-    details: {
-      entity: "PT, CV, atau PT Perorangan",
-      permits: ["NIB (Nomor Induk Berusaha)"],
-    }
-  },
-  {
-    code: "85491",
-    title: "Jasa Pendidikan Non-Formal Lainnya",
-    category: "PENDIDIKAN",
-    risk: "Risiko Rendah",
-    desc: "Lembaga kursus komputer, bahasa asing, bimbingan belajar, dll.",
-    details: {
-      entity: "PT atau CV",
-      permits: ["NIB (Nomor Induk Berusaha)", "Persetujuan Teknis Dinas Pendidikan setempat"],
-    }
-  },
-  {
-    code: "86101",
-    title: "Aktivitas Rumah Sakit Swasta",
-    category: "KESEHATAN",
-    risk: "Risiko Tinggi",
-    desc: "Penyediaan perawatan medis dan operasi jangka panjang oleh pihak swasta.",
-    details: {
-      entity: "PT (Perseroan Terbatas)",
-      permits: ["NIB (Nomor Induk Berusaha)", "Izin Operasional Rumah Sakit terverifikasi Kemenkes", "Analisis Mengenai Dampak Lingkungan (AMDAL)"],
-    }
-  },
-  {
-    code: "49211",
-    title: "Angkutan Orang Dengan Bus",
-    category: "TRANSPORTASI",
-    risk: "Menengah-Tinggi",
-    desc: "Pengangkutan penumpang menggunakan bus umum antar kota maupun dalam kota.",
-    details: {
-      entity: "PT atau CV",
-      permits: ["NIB (Nomor Induk Berusaha)", "Sertifikat Standar terverifikasi Kementerian Perhubungan", "Izin Trayek"],
     }
   },
 ];

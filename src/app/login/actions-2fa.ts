@@ -1,11 +1,50 @@
 "use server";
 
 import { prisma } from "@/lib/db";
-import { generateTwoFactorSecret, verifyTwoFactorCode } from "@/lib/2fa";
+import { generateSecret, generateURI, verifySync } from "otplib";
+import * as QRCode from "qrcode";
+import fs from "fs/promises";
+import path from "path";
 import { checkTwoFactorRateLimit, recordTwoFactorFailedAttempt, resetTwoFactorAttempts } from "@/lib/rate-limit";
 import { cookies } from "next/headers";
 import { trackMetric } from "@/lib/metrics";
 import { parsePendingUser } from "@/lib/auth";
+
+const APP_NAME = "EasyLegal";
+
+interface TwoFactorSetup {
+  secret: string;
+  otpauthUrl: string;
+  manualEntryKey: string;
+  qrCodeDataUrl: string;
+}
+
+async function generateTwoFactorSecret(email: string): Promise<TwoFactorSetup> {
+  const secret = generateSecret();
+  const otpauthUrl = generateURI({ issuer: APP_NAME, label: email, secret });
+  let qrCodeDataUrl = "";
+
+  try {
+    qrCodeDataUrl = await QRCode.toDataURL(otpauthUrl);
+  } catch {
+    // Failed to generate base64 QR code
+  }
+
+  try {
+    const qrFolder = path.join(process.cwd(), "public", "uploads", "2fa");
+    await fs.mkdir(qrFolder, { recursive: true });
+    const qrPath = path.join(qrFolder, `qr-${email.replace(/[^a-zA-Z0-9]/g, "_")}.png`);
+    await QRCode.toFile(qrPath, otpauthUrl);
+  } catch {
+    // QR file write failed — expected on Vercel serverless
+  }
+
+  return { secret, otpauthUrl, manualEntryKey: secret, qrCodeDataUrl };
+}
+
+function verifyTwoFactorCode(secret: string, token: string): boolean {
+  return verifySync({ token, secret }).valid;
+}
 
 async function getPendingUser() {
   const cookieStore = await cookies();

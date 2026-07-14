@@ -35,26 +35,37 @@ const YtIcon = () => (
   </svg>
 );
 
+const WaIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+    <path d="M16.5 13.52c-.63-.64-1.63-.64-2.27 0l-.39.4a1 1 0 0 1-1.35.08A6.84 6.84 0 0 1 9.4 10.9a1 1 0 0 1 .08-1.35l.4-.39c.64-.63.64-1.64 0-2.27l-.6-.6c-.63-.64-1.64-.64-2.27 0l-.6.6c-.63.64-.52 2.11.23 3.65A9.85 9.85 0 0 0 9.8 14.1a9.85 9.85 0 0 0 3.56 2.56c1.54.75 3 .86 3.65.23l.6-.6c.64-.63.64-1.64 0-2.27z" />
+  </svg>
+);
+
 
 export default function Footer() {
+  const virtualOfficeLinks = [
+    { name: "Jakarta - Sovereign Plaza", href: "/layanan/virtual-office" },
+    { name: "Jakarta Selatan - Serpong", href: "/layanan/virtual-office" },
+    { name: "Bekasi - Summarecon", href: "/layanan/virtual-office" },
+    { name: "Bandung - EasyBuilding", href: "/layanan/virtual-office" },
+  ];
+
   const layananLinks = [
-    { name: "Pendirian Badan Usaha", href: "/layanan/pendirian-badan-usaha" },
+    { name: "Pendirian PT", href: "/layanan/pendirian-badan-usaha/pt" },
     { name: "Daftar Merek", href: "/layanan/merek-haki" },
     { name: "NIB & OSS", href: "/layanan/nib-oss" },
     { name: "Pengajuan PKP", href: "/layanan/pengajuan-pkp" },
     { name: "Sertifikasi ISO", href: "/layanan/sertifikasi-iso" },
     { name: "Visa & KITAS", href: "/layanan/visa-kitas" },
-    { name: "Pelaporan LKPM", href: "/layanan/pelaporan-lkpm" },
-    { name: "Pelaporan RUPS", href: "/layanan/pelaporan-rups" },
     { name: "Press Release", href: "/layanan/press-release" },
-    { name: "Apostille", href: "/layanan/apostille" },
   ];
 
   const perusahaanLinks = [
     { name: "Tentang Kami", href: "/tentang-kami" },
     { name: "Blog & Artikel", href: "/artikel" },
     { name: "Testimoni", href: "/testimoni" },
-    { name: "Referral dan Reseller", href: "/referral-reseller" },
+    { name: "Program Reseller", href: "/referral-reseller" },
     { name: "Kerjasama", href: "/kerjasama" },
     { name: "Karier", href: "/tentang-kami" },
   ];
@@ -73,280 +84,209 @@ export default function Footer() {
       {/* ─── CTA SECTION ─── */}
       <CTA />
 
-      
-      <footer className="bg-[#F9F9F9] border-t border-[#EAEAEA] pt-10 pb-6 md:pt-16 md:pb-8">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* ─── DESKTOP VIEW ─── */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14">
-
-          {/* Col 1: Logo, description, contact details & addresses */}
-          <div className="lg:col-span-5 flex flex-col space-y-6">
-
-            {/* Stacking Brand Logo exactly like navbar */}
-            <Link href="/home-gads" className="footer-logo-lg inline-flex items-start group w-fit">
+      <footer className="bg-[#F8F9FA] border-t border-[#EAEAEA] pt-14 pb-8 md:pt-20 md:pb-10">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
+          
+          {/* ─── HEADER ROW (Logo & Badges) ─── */}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-8 w-full">
+            <Link href="/" className="inline-block flex-shrink-0">
               <Image
                 src="/Logo EL.png"
                 alt="EasyLegal Logo"
-                width={200}
-                height={100}
-                className="object-contain"
-                priority
-              />
-            </Link>
-
-            {/* Description */}
-            <p className="text-[14px] sm:text-[13px] leading-relaxed text-[#555555] max-w-[340px]">
-              Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Proses mudah, harga transparan, hasil terjamin.
-            </p>
-
-            {/* Contact info with red icons and bold text */}
-            <div className="space-y-2.5 pt-1">
-              <a
-                href="mailto:info@easylegal.id"
-                className="flex items-center space-x-2.5 text-[14px] sm:text-[13px] font-bold text-[#1A1A1A] hover:text-[#D62828] transition-colors"
-              >
-                <Mail className="w-[15px] h-[15px] text-[#D62828] flex-shrink-0" />
-                <span>info@easylegal.id</span>
-              </a>
-              <a
-                href="https://mauorder.online/easylegal-5"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2.5 text-[14px] sm:text-[13px] font-bold text-[#1A1A1A] hover:text-[#D62828] transition-colors"
-              >
-                <Phone className="w-[15px] h-[15px] text-[#D62828] flex-shrink-0" />
-                <span>{config.company.whatsapp}</span>
-              </a>
-            </div>
-
-            {/* Office addresses with side-aligned map pins */}
-            <div className="space-y-4 pt-2">
-              {[
-                { city: "Bandung", addr: "Jl. Cihampelas No.201A, Bandung" },
-                { city: "Jakarta", addr: "Jl. TB Simatupang No.36, Jakarta Selatan" },
-                { city: "Bekasi", addr: "Emerald Commercial Summarecon Bekasi" },
-              ].map((office, idx) => (
-                <div key={idx} className="flex items-start space-x-2.5">
-                  <MapPin className="w-[15px] h-[15px] text-[#D62828] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-[14px] sm:text-[13px] font-bold text-[#1A1A1A]">{office.city}</div>
-                    <div className="text-[12.5px] sm:text-[12px] text-[#666666] mt-0.5">{office.addr}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Col 2: LAYANAN */}
-          <div className="lg:col-span-2">
-            <h3 className="text-[13px] sm:text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
-              LAYANAN
-            </h3>
-            <ul className="space-y-3.5">
-              {layananLinks.map((link, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={link.href}
-                    className="text-[14px] sm:text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3: PERUSAHAAN */}
-          <div className="lg:col-span-2">
-            <h3 className="text-[13px] sm:text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
-              PERUSAHAAN
-            </h3>
-            <ul className="space-y-3.5">
-              {perusahaanLinks.map((link, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={link.href}
-                    className="text-[14px] sm:text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 4: TOOLS GRATIS */}
-          <div className="lg:col-span-3">
-            <h3 className="text-[13px] sm:text-[12px] font-bold text-[#1A1A1A] uppercase tracking-wider mb-5">
-              TOOLS GRATIS
-            </h3>
-            <ul className="space-y-3.5">
-              {toolsLinks.map((link, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={link.href}
-                    className="text-[14px] sm:text-[13px] text-[#555555] hover:text-[#D62828] transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* ─── MOBILE VIEW ─── */}
-        <div className="block md:hidden space-y-6 pb-6">
-          {/* Logo & description row */}
-          <div className="flex items-start gap-3.5">
-            <Link href="/home-gads" className="footer-logo-sm inline-flex items-start flex-shrink-0">
-              <Image
-                src="/Logo EL.png"
-                alt="EasyLegal Logo"
-                width={120}
+                width={160}
                 height={60}
                 className="object-contain"
                 priority
               />
             </Link>
-            <div>
-              <p className="text-[11.5px] text-gray-500 leading-relaxed max-w-[280px] mt-1.5">
-                Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia.
+            
+            <div className="flex flex-col items-center md:items-end">
+              <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">Terdaftar resmi di</div>
+              <div className="flex items-center gap-5">
+                <Image 
+                  src="/images/badges/pse-terdaftar.png" 
+                  alt="PSE Kominfo" 
+                  width={140} 
+                  height={60} 
+                  className="object-contain h-[45px] w-auto" 
+                />
+                <Image 
+                  src="/images/badges/iso-sertifikat.png" 
+                  alt="ISO Certified" 
+                  width={140} 
+                  height={60} 
+                  className="object-contain h-[45px] w-auto" 
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* ─── MAIN LINKS GRID ─── */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14">
+            
+            {/* Col 1: Description & Contacts */}
+            <div className="lg:col-span-4 flex flex-col space-y-7">
+              <p className="text-[13px] leading-relaxed text-[#666] max-w-[320px]">
+                Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Proses mudah, harga transparan, hasil terjamin.
               </p>
-            </div>
-          </div>
-
-          {/* Contact details grid */}
-          <div className="grid grid-cols-2 gap-3.5">
-            <div className="bg-white shadow-md border border-black/[0.03] rounded-xl p-3 flex items-start gap-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-              <Mail className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
-              <div>
-                <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Email</div>
-                <div className="text-[11px] font-semibold text-gray-800 break-all">info@easylegal.id</div>
+              
+              <div className="space-y-3">
+                <a href="mailto:care@easylegal.id" className="flex items-center space-x-3 text-[13px] font-bold text-[#333] hover:text-[#990202] transition-colors">
+                  <Mail className="w-[15px] h-[15px] text-[#990202]" />
+                  <span>care@easylegal.id</span>
+                </a>
+                <a href="tel:02232093292" className="flex items-center space-x-3 text-[13px] font-bold text-[#333] hover:text-[#990202] transition-colors">
+                  <Phone className="w-[15px] h-[15px] text-[#990202]" />
+                  <span>022 3209 3292</span>
+                </a>
+                <a href="https://wa.me/62817770048" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[13px] font-bold text-[#333] hover:text-[#990202] transition-colors">
+                  <WaIcon className="w-[15px] h-[15px] text-[#990202]" />
+                  <span>0817 770 048</span>
+                </a>
+                <a href="https://wa.me/62817321162" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[13px] font-bold text-[#333] hover:text-[#990202] transition-colors">
+                  <WaIcon className="w-[15px] h-[15px] text-[#990202]" />
+                  <span>0817 321 162</span>
+                </a>
+                <a href="https://wa.me/62818818090" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[13px] font-bold text-[#333] hover:text-[#990202] transition-colors">
+                  <WaIcon className="w-[15px] h-[15px] text-[#990202]" />
+                  <span>0818 818 090</span>
+                </a>
               </div>
             </div>
 
-            <div className="bg-white shadow-md border border-black/[0.03] rounded-xl p-3 flex items-start gap-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-              <Phone className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
-              <div>
-                <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">WhatsApp</div>
-                <div className="text-[11px] font-semibold text-gray-800">{config.company.whatsapp}</div>
-              </div>
+            {/* Col 2: VIRTUAL OFFICE */}
+            <div className="lg:col-span-2">
+              <h3 className="text-[11px] font-black text-[#1A1A1A] uppercase tracking-wider mb-6">
+                VIRTUAL OFFICE
+              </h3>
+              <ul className="space-y-4">
+                {virtualOfficeLinks.map((link, idx) => (
+                  <li key={idx}>
+                    <Link href={link.href} className="text-[13px] text-[#666] hover:text-[#990202] transition-colors">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="bg-white shadow-md border border-black/[0.03] rounded-xl p-3 flex items-start gap-2 col-span-2 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-              <MapPin className="w-4 h-4 text-[#990202] flex-shrink-0 mt-0.5" />
-              <div className="flex flex-wrap gap-x-5 gap-y-1.5 w-full">
-                <div>
-                  <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Bandung</div>
-                  <div className="text-[11px] font-semibold text-gray-800">Jl. Cihampelas No.201A</div>
-                </div>
-                <div>
-                  <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Jakarta</div>
-                  <div className="text-[11px] font-semibold text-gray-800">Jl. TB Simatupang No.36</div>
-                </div>
-                <div>
-                  <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Bekasi</div>
-                  <div className="text-[11px] font-semibold text-gray-800">Emerald Commercial Summarecon</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="h-[0.5px] bg-[#EAEAEA]" />
-
-          {/* Menus grid */}
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <div className="text-[9.5px] font-extrabold text-gray-400 uppercase tracking-wider mb-2.5">LAYANAN</div>
-              <ul className="space-y-2">
+            {/* Col 3: LAYANAN */}
+            <div className="lg:col-span-2">
+              <h3 className="text-[11px] font-black text-[#1A1A1A] uppercase tracking-wider mb-6">
+                LAYANAN
+              </h3>
+              <ul className="space-y-4">
                 {layananLinks.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href} className="text-[11.5px] text-gray-500 hover:text-[#990202] transition-colors block py-0.5">
+                    <Link href={link.href} className="text-[13px] text-[#666] hover:text-[#990202] transition-colors">
                       {link.name}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
-            <div>
-              <div className="text-[9.5px] font-extrabold text-gray-400 uppercase tracking-wider mb-2.5">PERUSAHAAN</div>
-              <ul className="space-y-2">
+
+            {/* Col 4: PERUSAHAAN */}
+            <div className="lg:col-span-2">
+              <h3 className="text-[11px] font-black text-[#1A1A1A] uppercase tracking-wider mb-6">
+                PERUSAHAAN
+              </h3>
+              <ul className="space-y-4">
                 {perusahaanLinks.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href} className="text-[11.5px] text-gray-500 hover:text-[#990202] transition-colors block py-0.5">
+                    <Link href={link.href} className="text-[13px] text-[#666] hover:text-[#990202] transition-colors">
                       {link.name}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
+
+            {/* Col 5: TOOLS GRATIS */}
+            <div className="lg:col-span-2">
+              <h3 className="text-[11px] font-black text-[#1A1A1A] uppercase tracking-wider mb-6">
+                TOOLS GRATIS
+              </h3>
+              <ul className="space-y-4">
+                {toolsLinks.map((link, idx) => (
+                  <li key={idx}>
+                    <Link href={link.href} className="text-[13px] text-[#666] hover:text-[#990202] transition-colors">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
           </div>
 
-          {/* Tools Section (Chips) */}
-          <div className="space-y-2.5">
-            <div className="text-[9.5px] font-extrabold text-gray-400 uppercase tracking-wider">Tools Gratis</div>
-            <div className="flex flex-wrap gap-2">
-              <Link href="/cek-nama" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
-                <Building className="w-3 h-3 text-[#990202]" />
-                <span>Cek Nama PT</span>
-              </Link>
-              <Link href="/cek-nama" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
-                <Award className="w-3 h-3 text-[#990202]" />
-                <span>Cek Nama Merek</span>
-              </Link>
-              <Link href="/cek-kbli" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
-                <Search className="w-3 h-3 text-[#990202]" />
-                <span>Cek Kode KBLI</span>
-              </Link>
-              <Link href="/kontak#faq" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
-                <HelpCircle className="w-3 h-3 text-[#990202]" />
-                <span>FAQ</span>
-              </Link>
-              <Link href="/tentang-kami" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
-                <Shield className="w-3 h-3 text-[#990202]" />
-                <span>Kebijakan Privasi</span>
-              </Link>
-              <Link href="/tentang-kami" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white shadow-md border border-black/[0.03] rounded-full text-[11px] font-semibold text-gray-700 hover:border-[#990202] shadow-[0_1px_2px_rgba(0,0,0,0.015)]">
-                <FileText className="w-3 h-3 text-[#990202]" />
-                <span>Syarat & Ketentuan</span>
-              </Link>
+          <div className="w-full h-px bg-gray-200 mb-10" />
+
+          {/* ─── ADDRESSES ROW ─── */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12">
+            {[
+              {
+                title: "EasyLegal Bandung (Head Office)",
+                building: "EasyBuilding",
+                street1: "Jl. Cihampelas No. 201A, Cipaganti, Coblong,",
+                street2: "Kota Bandung, Jawa Barat 40131"
+              },
+              {
+                title: "EasyLegal Jakarta (Branch Office)",
+                building: "Dewata Office - Sovereign Plaza 12th Floor",
+                street1: "Jl. TB Simatupang No. 36, Cilandak Barat, Cilandak,",
+                street2: "Kota Jakarta Selatan, DKI Jakarta 12430"
+              },
+              {
+                title: "EasyLegal Bekasi (Branch Office)",
+                building: "Emerald Commercial Summarecon Bekasi Blok UF No. 10",
+                street1: "Jl. Bulevar Selatan, Marga Mulya, Bekasi Utara,",
+                street2: "Kota Bekasi, Jawa Barat 17142"
+              }
+            ].map((addr, idx) => (
+              <div key={idx} className="flex items-start space-x-3">
+                <MapPin className="w-[16px] h-[16px] text-[#990202] flex-shrink-0 mt-0.5" />
+                <div className="flex flex-col">
+                  <span className="text-[11.5px] font-bold text-[#1A1A1A] mb-1.5">{addr.title}</span>
+                  <span className="text-[12px] text-[#666] leading-relaxed">{addr.building}</span>
+                  <span className="text-[12px] text-[#666] leading-relaxed">{addr.street1}</span>
+                  <span className="text-[12px] text-[#666] leading-relaxed">{addr.street2}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="w-full h-px bg-gray-200 mb-8" />
+
+          {/* ─── COPYRIGHT & SOCIALS ─── */}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+            <p className="text-[12.5px] font-medium text-[#777] text-center sm:text-left">
+              © 2026 EasyLegal.id — Terdaftar PSE Kominfo. All rights reserved.
+            </p>
+
+            <div className="flex items-center space-x-2.5">
+              {[
+                { Icon: IgIcon, href: "https://instagram.com/id.easylegal", label: "Instagram" },
+                { Icon: FbIcon, href: "https://facebook.com/easylegal.id", label: "Facebook" },
+                { Icon: LiIcon, href: "https://id.linkedin.com/company/easylegal-id", label: "LinkedIn" },
+                { Icon: YtIcon, href: "https://youtube.com/@easylegal.official", label: "YouTube" },
+              ].map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-[34px] h-[34px] bg-white border border-[#E5E7EB] rounded-[8px] flex items-center justify-center text-[#555] hover:text-[#990202] hover:border-[#990202] transition-all duration-200 shadow-sm"
+                >
+                  <Icon />
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className="h-[0.5px] bg-[#EAEAEA]" />
         </div>
-
-        {/* Bottom bar with copyright and rounded-xl social cards */}
-        <div className="border-t border-[#EAEAEA] pt-6 pb-2 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-[13.5px] sm:text-[12.5px] text-[#666666] text-center sm:text-left">
-            © 2026 EasyLegal.id — Terdaftar PSE Kominfo. All rights reserved.
-          </p>
-
-          {/* Social media card-style boxes */}
-          <div className="flex items-center space-x-2">
-            {[
-              { Icon: IgIcon, href: "https://instagram.com/id.easylegal", label: "Instagram" },
-              { Icon: FbIcon, href: "https://facebook.com/easylegal.id", label: "Facebook" },
-              { Icon: LiIcon, href: "https://id.linkedin.com/company/easylegal-id", label: "LinkedIn" },
-              { Icon: YtIcon, href: "https://youtube.com/@easylegal.official", label: "YouTube" },
-            ].map(({ Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="w-9 h-9 bg-white border border-[#E5E7EB] rounded-[10px] flex items-center justify-center text-[#444444] hover:text-[#D62828] hover:border-[#D62828] hover:scale-105 transition-all duration-200 shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
-              >
-                <Icon />
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </footer>
+      </footer>
     </>
   );
 }

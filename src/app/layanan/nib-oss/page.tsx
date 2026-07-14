@@ -18,10 +18,15 @@ import {
   BookOpen,
   Compass,
   Shield,
+  ChevronRight,
+  LineChart,
+  Search
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
 
 const nibBenefits = [
@@ -277,7 +282,7 @@ export default function NibOss() {
                 {/* Photo container */}
                 <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
-                    src="/cerita-kami-team.webp"
+                    src="/images/layanan/nib-1.jpg"
                     alt="EasyLegal Team Collaboration"
                     fill
                     sizes="(max-width: 768px) 100vw, 460px"
@@ -341,7 +346,7 @@ export default function NibOss() {
                 {/* Photo container */}
                 <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
-                    src="/nib-desk-mockup.webp"
+                    src="/images/layanan/nib-2.jpg"
                     alt="Tax Document Calculator Desk"
                     fill
                     sizes="(max-width: 768px) 100vw, 460px"
@@ -515,15 +520,25 @@ export default function NibOss() {
       {/* ─── 4. PRICING SECTION ─── */}
       <section id="paket-harga" className="bg-[#FAF9F9] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40 scroll-mt-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              4 paket sesuai jenis usaha Anda.
-            </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium">
-              Harga sudah include semua biaya — pengurusan NIB, NPWP, OSS RBA, & sertifikat standar. Tanpa tambahan biaya apapun.
-            </p>
+          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
+              <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
+              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+                4 paket sesuai jenis usaha Anda.
+              </h2>
+              <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium">
+                Harga sudah include semua biaya — pengurusan NIB, NPWP, OSS RBA, & sertifikat standar. Tanpa tambahan biaya apapun.
+              </p>
+            </div>
+            <div className="flex-shrink-0 flex justify-start md:justify-end">
+              <Image 
+                src="/images/badges/promo-50.png" 
+                alt="Promo 50% Off Legal Deals" 
+                width={280} 
+                height={120}
+                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
@@ -936,6 +951,8 @@ export default function NibOss() {
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS. (2) Untuk risiko menengah rendah. (3) Opsional, jika usaha melakukan impor.</span>
           </div>
+
+          <PricingFooter />
 
         </div>
       </section>
@@ -1374,6 +1391,7 @@ export default function NibOss() {
         </div>
       </section>
 
+      <MediaCoverage />
     </div>
   );
 }

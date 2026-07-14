@@ -22,44 +22,46 @@ const officesData: Office[] = [
   {
     city: "Bandung",
     tag: "Kantor Pusat",
-    addr: "Jl. Cihampelas No.201A, Cipaganti, Kecamatan Coblong, Kota Bandung, Jawa Barat 40131",
-    hours: "Sen–Sab · 08–17",
-    tel: "022-1234-5678",
+    addr: "Jl. Cihampelas No.201A, Bandung",
+    hours: "Sen~Sab · 08~17",
+    tel: "022-3209-3292",
     map: "https://maps.app.goo.gl/pGWtnZAvSV6aLsEm7",
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?fit=crop&w=600&h=400&q=80",
+    img: "/images/virtual-office/kantor-bandung.jpg",
   },
   {
     city: "Jakarta",
     tag: "Branch Office",
-    addr: "Jl. TB Simatupang No.36, RT.1/RW.2, Cilandak Bar., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12430",
-    hours: "Sen–Sab · 08–17",
-    tel: "021-1234-5678",
+    addr: "Jl. TB Simatupang No.36, Jakarta Selatan",
+    hours: "Sen~Sab · 08~17",
+    tel: "021-2940-0153",
     map: "https://maps.app.goo.gl/Sai9hVo6KieeDQVP9",
-    img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?fit=crop&w=600&h=400&q=80",
+    img: "/images/virtual-office/kantor-jakarta.jpg",
   },
   {
     city: "Bekasi",
     tag: "Branch Office",
-    addr: "Emerald Commercial Summarecon Bekasi, Jl. Bulevar Selatan Blok UF No. 10, RT.004/RW.011, Marga Mulya, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17142",
-    hours: "Sen–Sab · 08–17",
-    tel: "021-9876-5432",
+    addr: "Emerald Commercial Summarecon Bekasi",
+    hours: "Sen~Sab · 08~17",
+    tel: "",
     map: "https://maps.app.goo.gl/fMkFnJdBd8rCTb9U8",
-    img: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?fit=crop&w=600&h=400&q=80",
+    img: "/images/virtual-office/kantor-bekasi.jpg",
   },
 ];
 
 export default function Offices({
   title = "Kantor Kami",
-  subtitle = "Hadir di 3 kota, melayani seluruh Indonesia.",
+  subtitle = "Hadir di 3 kota, melayani seluruh Indonesia",
   description = "Walaupun proses kami 100% online, kami tetap punya kantor fisik yang bisa Anda kunjungi.",
 }: OfficesProps) {
   return (
-    <section className="bg-[#F9FAFB] py-20 border-b border-gray-200/40 overflow-hidden">
+    <section className="bg-white py-20 border-b border-gray-200/40 overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Section */}
-        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3 hidden">
           <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">{title}</p>
+        </div>
+        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
           <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
             {subtitle}
           </h2>
@@ -76,7 +78,7 @@ export default function Offices({
               href={office.map}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-3xl shadow-md border border-black/[0.04] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+              className="bg-white rounded-3xl shadow-sm border border-black/[0.04] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
               title="Buka di Google Maps"
             >
               {/* Office Image and Tag Overlay */}
@@ -121,15 +123,17 @@ export default function Offices({
                 </div>
 
                 {/* Hours and Telephone Footer */}
-                <div className="flex items-center justify-between text-[12px] text-gray-500 font-bold border-t border-gray-100 mt-5 pt-4">
+                <div className="flex items-center text-[12px] text-gray-500 font-bold border-t border-gray-100 mt-5 pt-4">
                   <div className="flex items-center space-x-1.5">
                     <Clock className="w-3.8 h-3.8 text-[#990202] flex-shrink-0" strokeWidth={2.5} />
                     <span>{office.hours}</span>
                   </div>
-                  <div className="flex items-center space-x-1.5">
-                    <Phone className="w-3.8 h-3.8 text-[#990202] flex-shrink-0" strokeWidth={2.5} />
-                    <span>{office.tel}</span>
-                  </div>
+                  {office.tel && (
+                    <div className="flex items-center space-x-1.5 ml-6">
+                      <Phone className="w-3.8 h-3.8 text-[#990202] flex-shrink-0" strokeWidth={2.5} />
+                      <span>{office.tel}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 

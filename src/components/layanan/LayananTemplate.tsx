@@ -17,6 +17,7 @@ import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
+import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
 import type { LayananContent } from "@/data/layanan-lainnya";
 
@@ -197,6 +198,8 @@ export default function LayananTemplate({ content }: Props) {
         description={c.ctaDescription}
         whatsappLink={getWhatsAppLink(c.ctaWhatsAppMessage)}
       />
+
+      <MediaCoverage />
     </div>
   );
 }

@@ -49,21 +49,21 @@ websiteel-app/src
 │   │                   # /cek-nama, /cek-kbli, /referral-reseller, /kerjasama,
 │   │                   # /layanan/*, /home-gads
 │   ├── login/          # /login + 2FA setup/verify Server Actions
-│   └── dashboard/      # Protected (see proxy.ts); article CMS, newsletter, profile
+│   └── dashboard/      # Protected (see middleware.ts); article CMS, newsletter, profile
 ├── components/         # Shared (Navbar, Footer, CTA, FAQ, Pricing, …)
 │   ├── home/           # Homepage section components (Hero, LayananKami, etc.)
 │   ├── layanan/        # Shared service-page templates (e.g. BadanUsahaTemplate)
 │   └── ui/             # shadcn primitives (accordion, button, …)
 ├── data/               # Static content data (e.g. layanan-badan-usaha.tsx)
 ├── lib/                # auth.ts, 2fa.ts, db.ts, mail.ts, utils.ts
-└── proxy.ts            # Next.js middleware → protects /dashboard/* via JWT
+└── middleware.ts        # Next.js middleware → protects /dashboard/* via JWT
 ```
 
 ### Authentication flow
 1. `POST /login` → `loginAction` (Server Action) bcrypt-verifies against `User`, sets a 5-min `pending_2fa_user` cookie, redirects to `/login/setup-2fa` (first time) or `/login/verify-2fa` (returning).
 2. 2FA actions live in `src/app/login/actions-2fa.ts` and use helpers in `src/lib/2fa.ts` (`otplib` + `qrcode`).
 3. On success, `createSession` (`src/lib/auth.ts`) mints a 24h HS256 JWT (`jose`) into the `admin_token` httpOnly cookie.
-4. `src/proxy.ts` is the Next.js middleware (matcher: `/dashboard`, `/dashboard/:path*`); on every request it calls `jwtVerify` and redirects to `/login` if invalid.
+4. `src/middleware.ts` is the Next.js middleware (matcher: `/dashboard`, `/dashboard/:path*`); on every request it calls `jwtVerify` and redirects to `/login` if invalid.
 5. Each dashboard Server Component also calls `getSession()` defensively and re-checks `twoFactorEnabled` (see `src/app/dashboard/page.tsx`).
 
 ### Service-page pattern
@@ -82,7 +82,21 @@ There is a permanent redirect from `/layanan/pendirian-yayasan` → `/layanan/pe
 - Subscribe via the widget on article pages → `NewsletterSubscriber` row.
 - Admin broadcasts from `/dashboard/newsletter` → loops active subscribers, sends via Nodemailer, logs each attempt to `EmailLog` linked to a `NewsletterBroadcast` parent.
 - If `SMTP_*` env vars are absent, `src/lib/mail.ts` falls back to a console simulation (`status: "simulated"`).
-- `SystemSetting` key/value store drives auto-broadcast on new article creation (see dashboard `actions.ts`).
+- `SystemSetting` key/value store drives auto-broadcast on new article creation (see `src/app/dashboard/artikel/tambah/actions.ts`).
+
+### Contact form
+- Submissions via `/kontak` → `ContactSubmission` row. Admin email notification via Nodemailer.
+- WhatsApp funnel for public lead-gen (kontak, cek-nama, cek-kbli, referral, kerjasama).
+
+### Redirect links
+- Database-driven redirects via `Redirect` model. Middleware checks `GET/HEAD` requests against `Redirect.slug` → 307 redirect to `destination`.
+- Admin CRUD from `/dashboard/links`. Click count incremented fire-and-forget in middleware.
+
+### Dashboard
+- Protected by JWT middleware (`src/middleware.ts`) + defensive `getSession()` in each page.
+- Navigation: articles (`/dashboard`), newsletter (`/dashboard/newsletter`), redirect links (`/dashboard/links`), profile (`/dashboard/profile`).
+- Article CMS: create (`/dashboard/artikel/tambah`) with live preview, file upload (5MB limit) or URL mode, auto-slug generation, auto-broadcast to newsletter subscribers.
+- Each dashboard page starts with `export const dynamic = "force-dynamic";` and auth check.
 
 ### Animations
 - GSAP is the primary animation library; `ScrollManager.tsx` (mounted in root layout) handles smooth-scroll for same-page links + hash navigation on route change using `ScrollToPlugin`.
@@ -130,6 +144,6 @@ Nginx config in `websiteel-app/nginx/nginx.conf` is wired to `easylegal.my.id` (
 - `websiteel-app/DOCUMENTATION.md` — full prose tour of routes, schema, features, and architecture.
 - `websiteel-app/DEPLOYMENT.md` — VPS deploy walkthrough.
 - `websiteel-app/prisma/schema.prisma` — canonical data model.
-- `websiteel-app/src/proxy.ts` — dashboard auth gate.
+- `websiteel-app/src/middleware.ts` — dashboard auth gate.
 - `websiteel-app/src/lib/auth.ts` + `2fa.ts` — session/JWT/TOTP primitives.
 - `websiteel-app/src/app/dashboard/newsletter/actions.ts` — reference for Server Action shape, Prisma + Nodemailer integration, and `revalidatePath` usage.

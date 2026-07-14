@@ -25,10 +25,14 @@ import {
   UploadCloud,
   Briefcase,
   Clipboard,
+  ArrowRight,
+  Calculator
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function PengajuanPkp() {
@@ -183,7 +187,7 @@ export default function PengajuanPkp() {
                 {/* Photo container */}
                 <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
-                    src="/cerita-kami-team.webp"
+                    src="/images/layanan/pkp-1.jpg"
                     alt="EasyLegal Tax Consultants"
                     fill
                     sizes="(max-width: 768px) 100vw, 460px"
@@ -248,7 +252,7 @@ export default function PengajuanPkp() {
                 {/* Photo container */}
                 <div className="w-full h-full rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] relative bg-gray-55">
                   <Image
-                    src="/nib-desk-mockup.webp"
+                    src="/images/layanan/pkp-2.jpg"
                     alt="Tax Consultation Desk Documents"
                     fill
                     sizes="(max-width: 768px) 100vw, 460px"
@@ -611,15 +615,25 @@ export default function PengajuanPkp() {
       {/* ─── 4. PRICING SECTION ─── */}
       <section id="paket-harga" className="bg-[#FAF9F9] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40 scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA JASA DAFTAR PKP</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              2 paket sesuai lokasi kantor Anda.
-            </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
-              Harga sudah include konsultasi, pendaftaran, pendampingan survei DJP, sampai aktivasi e-Faktur. Tanpa tambahan biaya apapun.
-            </p>
+          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
+              <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA JASA DAFTAR PKP</p>
+              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+                2 paket sesuai lokasi kantor Anda.
+              </h2>
+              <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
+                Harga sudah include konsultasi, pendaftaran, pendampingan survei DJP, sampai aktivasi e-Faktur. Tanpa tambahan biaya apapun.
+              </p>
+            </div>
+            <div className="flex-shrink-0 flex justify-start md:justify-end">
+              <Image 
+                src="/images/badges/promo-50.png" 
+                alt="Promo 50% Off Legal Deals" 
+                width={280} 
+                height={120}
+                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[860px] mx-auto items-stretch">
@@ -825,6 +839,8 @@ export default function PengajuanPkp() {
             <span>Perbedaan harga karena KPP di luar Pulau Jawa membutuhkan biaya akomodasi tambahan untuk pendampingan survei lapangan. <strong className="font-bold text-gray-700">Persetujuan &amp; pengesahan PKP sepenuhnya berada di bawah kewenangan KPP setempat</strong> — kami mendampingi proses, namun keputusan akhir ada di tangan petugas DJP.</span>
           </div>
 
+          <PricingFooter />
+
         </div>
       </section>
 
@@ -883,6 +899,7 @@ export default function PengajuanPkp() {
         </div>
       </section>
 
+      <MediaCoverage />
     </div>
   );
 }

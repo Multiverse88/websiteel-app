@@ -29,6 +29,8 @@ import {
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage, FootnoteItem } from "@/components/Pricing";
+import PricingFooter from "@/components/PricingFooter";
+import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
 import { getFAQJsonLd, getServiceJsonLd } from "@/lib/structured-data";
 import type { BadanUsahaContent } from "@/data/layanan-badan-usaha";
@@ -409,6 +411,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
         </div>
       </section>
 
+      <MediaCoverage />
       </div>
       );
 }

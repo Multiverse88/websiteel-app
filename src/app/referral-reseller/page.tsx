@@ -5,16 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Check,
-  Users,
-  Share2,
-  Building,
-  Briefcase,
-  Gift,
-  ArrowRight,
-  Clock,
-  Home,
-  Mail,
-  Phone,
   ShieldCheck,
   Award
 } from "lucide-react";
@@ -81,7 +71,7 @@ export default function ReferralResellerPage() {
   ];
 
   const activeScenario = scenarios.find(s => s.id === selectedScenario) ?? scenarios[0];
-  const formatRp = (n: number) => n.toLocaleString("id-ID");;
+  const formatRp = (n: number) => n.toLocaleString("id-ID");
 
   const scrollToCaraKerja = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -118,13 +108,13 @@ export default function ReferralResellerPage() {
             {/* Left Column (col-span-7) */}
             <div className="lg:col-span-7 flex flex-col space-y-6 text-left">
               {/* Badge Pill */}
-              <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-[0_2px_12px_rgba(0,0,0,0.015)] w-fit">
+              <div className="inline-flex items-center space-x-2 bg-white py-1.5 px-4 rounded-full border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
                 <span className="text-[11.5px] font-bold text-[#990202] tracking-wider">Program Referral &amp; Reseller</span>
               </div>
 
               {/* Headline */}
-              <h1 className="font-heading text-[36px] sm:text-[48px] lg:text-[54px] font-black text-gray-900 leading-[1.12] tracking-tight max-w-2xl">
+              <h1 className="font-heading text-[36px] sm:text-[48px] lg:text-[54px] font-black text-gray-900 leading-[1.12] tracking-tight max-w-[550px]">
                 Cuan sampai Rp 1,27jt per transaksi — tanpa modal sepeser pun.
               </h1>
 
@@ -164,7 +154,7 @@ export default function ReferralResellerPage() {
                 <div className="bg-white rounded-[24px] p-6 sm:p-8 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_20px_50px_rgba(0,0,0,0.035)] relative">
 
                   {/* Floating badge centered on the top card border */}
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#8A0000] text-white text-[9.5px] font-black tracking-widest px-4.5 py-1.5 rounded-full uppercase border border-[#8A0000] shadow-md z-20 whitespace-nowrap">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#990202] text-white text-[10px] font-black tracking-widest px-5 py-1.5 rounded-full uppercase shadow-md z-20 whitespace-nowrap">
                     CONTOH KOMISI • 1 KLIEN
                   </div>
 
@@ -182,13 +172,11 @@ export default function ReferralResellerPage() {
                   </div>
 
                   {/* Checklist of Services */}
-                  <div className="space-y-4 mb-5 shadow-sm rounded-xl bg-gray-50/50 py-5 px-5">
+                  <div className="space-y-4 mb-6 px-1">
                     {/* Item 1 */}
                     <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
-                      <div className="flex items-center space-x-2.5">
-                        <div className="w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-                          <Check className="w-3.5 h-3.5" strokeWidth={4} />
-                        </div>
+                      <div className="flex items-center space-x-3">
+                        <Check className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={4} />
                         <span className="font-semibold text-gray-700">Pendirian PT</span>
                       </div>
                       <span className="font-extrabold text-gray-850">Rp 400.000</span>
@@ -196,10 +184,8 @@ export default function ReferralResellerPage() {
 
                     {/* Item 2 */}
                     <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
-                      <div className="flex items-center space-x-2.5">
-                        <div className="w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-                          <Check className="w-3.5 h-3.5" strokeWidth={4} />
-                        </div>
+                      <div className="flex items-center space-x-3">
+                        <Check className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={4} />
                         <span className="font-semibold text-gray-700">Daftar Merek</span>
                       </div>
                       <span className="font-extrabold text-gray-850">Rp 250.000</span>
@@ -207,10 +193,8 @@ export default function ReferralResellerPage() {
 
                     {/* Item 3 */}
                     <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
-                      <div className="flex items-center space-x-2.5">
-                        <div className="w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-                          <Check className="w-3.5 h-3.5" strokeWidth={4} />
-                        </div>
+                      <div className="flex items-center space-x-3">
+                        <Check className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={4} />
                         <span className="font-semibold text-gray-700">NIB &amp; OSS</span>
                       </div>
                       <span className="font-extrabold text-gray-850">Rp 100.000</span>
@@ -218,10 +202,8 @@ export default function ReferralResellerPage() {
 
                     {/* Item 4 */}
                     <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
-                      <div className="flex items-center space-x-2.5">
-                        <div className="w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-                          <Check className="w-3.5 h-3.5" strokeWidth={4} />
-                        </div>
+                      <div className="flex items-center space-x-3">
+                        <Check className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={4} />
                         <span className="font-semibold text-gray-700">Virtual Office</span>
                       </div>
                       <span className="font-extrabold text-gray-850">Rp 100.000</span>
@@ -229,7 +211,7 @@ export default function ReferralResellerPage() {
                   </div>
 
                   {/* Total per Klien */}
-                  <div className="flex items-center justify-between pt-1 border-t border-gray-100">
+                  <div className="flex items-center justify-between pt-5 border-t border-gray-100">
                     <span className="text-gray-900 font-extrabold text-[12.5px] sm:text-[13px] tracking-wide">
                       TOTAL PER KLIEN
                     </span>
@@ -271,32 +253,26 @@ export default function ReferralResellerPage() {
           </div>
 
           {/* Checkpoints Row (Spans across the bottom below grid) */}
-          <div className="border-t border-gray-150 pt-8 mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 max-w-[850px] mr-auto">
+          <div className="pt-8 mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 max-w-[850px] mr-auto">
             {/* Checkpoint 1 */}
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
-                <ShieldCheck className="w-5 h-5 text-[#990202]" />
-              </div>
+            <div className="flex items-center space-x-3">
+              <ShieldCheck className="w-6 h-6 text-[#990202] shrink-0" strokeWidth={2} />
               <div>
                 <div className="font-extrabold text-[15px] text-gray-900 leading-tight">6.500+</div>
                 <div className="text-[12px] text-gray-500 font-semibold mt-0.5">Klien terlayani</div>
               </div>
             </div>
             {/* Checkpoint 2 */}
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
-                <Check className="w-5 h-5 text-[#990202]" strokeWidth={3.5} />
-              </div>
+            <div className="flex items-center space-x-3">
+              <Check className="w-6 h-6 text-[#990202] shrink-0" strokeWidth={3} />
               <div>
                 <div className="font-extrabold text-[15px] text-gray-900 leading-tight">90+ Layanan</div>
                 <div className="text-[12px] text-gray-500 font-semibold mt-0.5">Satu kode komisi</div>
               </div>
             </div>
             {/* Checkpoint 3 */}
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-[#990202] shrink-0">
-                <Award className="w-5 h-5 text-[#990202]" />
-              </div>
+            <div className="flex items-center space-x-3">
+              <Award className="w-6 h-6 text-[#990202] shrink-0" strokeWidth={2} />
               <div>
                 <div className="font-extrabold text-[15px] text-gray-900 leading-tight">ISO Certified</div>
                 <div className="text-[12px] text-gray-500 font-semibold mt-0.5">9001 &amp; 27001</div>

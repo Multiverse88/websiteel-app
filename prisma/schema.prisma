@@ -20,6 +20,7 @@ model User {
   twoFactorEnabled Boolean   @default(false)
   createdAt        DateTime  @default(now())
   articles         Article[]
+  landingPages     LandingPage[]
 }
 
 model Article {
@@ -110,4 +111,48 @@ model Redirect {
   updatedAt   DateTime @updatedAt
 
   @@index([slug])
+}
+
+model LandingPage {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  description      String?
+  ogImage          String?
+  pixelId          String?
+  
+  sections         Json
+  
+  redirectSettings Json?
+  
+  status           String   @default("draft") // "draft" | "published"
+  
+  createdBy        String
+  author           User     @relation(fields: [createdBy], references: [id])
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  leads            LandingPageLead[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([createdBy])
+}
+
+model LandingPageLead {
+  id            String   @id @default(cuid())
+  landingPageId String
+  landingPage   LandingPage @relation(fields: [landingPageId], references: [id], onDelete: Cascade)
+  
+  name          String?
+  email         String?
+  phone         String?
+  
+  data          Json?
+  
+  createdAt     DateTime @default(now())
+  
+  @@index([landingPageId])
+  @@index([createdAt])
 }

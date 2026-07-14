@@ -97,7 +97,7 @@ export default function InformasiHukumSection({ articles }: { articles: ArticleI
                       {formatCategory(featured.category)}
                     </span>
                     <span className="text-[10px] sm:text-[10.5px] text-gray-500 font-bold ml-3.5">
-                      {formatDate(featured.createdAt)} · {featured.readTime}
+                      {formatDate(featured.createdAt)} - {featured.readTime}
                     </span>
                   </div>
                   <h3 className="text-sm sm:text-[18px] lg:text-[20px] font-black text-[#111827] mt-3 sm:mt-3.5 leading-snug group-hover:text-[#B91C1C] transition-colors">
@@ -135,7 +135,7 @@ export default function InformasiHukumSection({ articles }: { articles: ArticleI
                         {formatCategory(article.category)}
                       </span>
                       <span className="text-[10px] text-gray-500 font-bold ml-2.5">
-                        {formatDate(article.createdAt)} · {article.readTime}
+                        {formatDate(article.createdAt)} - {article.readTime}
                       </span>
                     </div>
                     <h3 className="text-xs sm:text-[14px] lg:text-[14.5px] font-black text-[#111827] mt-2 sm:mt-3 leading-snug group-hover:text-[#B91C1C] transition-colors line-clamp-2">
