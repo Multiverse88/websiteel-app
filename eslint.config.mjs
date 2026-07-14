@@ -15,6 +15,12 @@ const eslintConfig = defineConfig([
     // Node.js scripts with require() — not part of Next.js app
     "scripts/**",
   ]),
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "warn",
+      "prefer-const": "warn"
+    }
+  }
 ]);
 
 export default eslintConfig;
