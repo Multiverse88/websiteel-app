@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, Building, Award, Search, HelpCircle, Shield, FileText } from "lucide-react";
-import CTA from "@/components/CTA";
 import { config } from "@/lib/config";
 
 // Simple social icon components matching the Figma screenshot's clean line aesthetics
@@ -81,8 +80,6 @@ export default function Footer() {
 
   return (
     <>
-      {/* ─── CTA SECTION ─── */}
-      <CTA />
 
       <footer className="bg-[#F8F9FA] border-t border-[#EAEAEA] pt-14 pb-8 md:pt-20 md:pb-10">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
