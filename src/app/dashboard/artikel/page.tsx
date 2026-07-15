@@ -6,10 +6,14 @@ import ArticleImage from "../article-image";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import DeleteArticleButton from "../delete-article-button";
+import { ArticleControls } from "./article-controls";
 
 export const dynamic = "force-dynamic";
 
-export default async function DashboardArticlesPage() {
+export default async function DashboardArticlesPage(
+  props: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }
+) {
+  const searchParams = await props.searchParams;
   const session = await getSession();
   if (!session) {
     redirect("/login");
@@ -19,8 +23,24 @@ export default async function DashboardArticlesPage() {
     redirect("/login/setup-2fa");
   }
 
+  const limit = typeof searchParams.limit === "string" ? parseInt(searchParams.limit) : 10;
+  const page = typeof searchParams.page === "string" ? Math.max(1, parseInt(searchParams.page)) : 1;
+  const sort = typeof searchParams.sort === "string" ? searchParams.sort : "newest";
+  
+  const take = [10, 20, 40].includes(limit) ? limit : 10;
+  const skip = (page - 1) * take;
+
+  let orderBy: any = { createdAt: "desc" };
+  if (sort === "oldest") orderBy = { createdAt: "asc" };
+  else if (sort === "most_viewed") orderBy = { viewCount: "desc" };
+  else if (sort === "least_viewed") orderBy = { viewCount: "asc" };
+
+  const totalArticles = await prisma.article.count();
+
   const articles = await prisma.article.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy,
+    take,
+    skip,
     select: {
       id: true,
       title: true,
@@ -39,7 +59,7 @@ export default async function DashboardArticlesPage() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Kelola Artikel</h1>
           <p className="text-gray-500 mt-1">
-            Total {articles.length} artikel terbit &middot; Kelola tulisan, edit isi, atau hapus artikel.
+            Total {totalArticles} artikel terbit &middot; Kelola tulisan, edit isi, atau hapus artikel.
           </p>
         </div>
         <Link
@@ -51,7 +71,7 @@ export default async function DashboardArticlesPage() {
         </Link>
       </div>
 
-      {articles.length === 0 ? (
+      {totalArticles === 0 ? (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center">
           <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
             <FileText className="w-8 h-8 text-[#990202]" />
@@ -72,6 +92,7 @@ export default async function DashboardArticlesPage() {
         </div>
       ) : (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <ArticleControls totalItems={totalArticles} currentPage={page} pageSize={take} />
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
