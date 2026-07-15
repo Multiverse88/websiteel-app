@@ -37,7 +37,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto overflow-x-hidden">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden" role="navigation">
         <ul className="space-y-1">
           {menuItems.map((item) => {
             const Icon = item.icon;
@@ -69,7 +69,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
             );
           })}
         </ul>
-      </nav>
+      </div>
 
       {/* Bottom Actions */}
       <div className="px-5 mt-auto space-y-4 overflow-hidden shrink-0">
