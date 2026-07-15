@@ -59,7 +59,7 @@ export default function Offices({
         
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3 hidden">
-          <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">{title}</p>
+          <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider">{title}</p>
         </div>
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
           <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
@@ -94,7 +94,7 @@ export default function Offices({
                 {/* Tag Overlay */}
                 <div className="absolute top-4 left-4">
                   <span
-                    className={`inline-flex px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-sm border ${
+                    className={`inline-flex px-3 py-1.5 rounded-lg text-[14px] font-black uppercase tracking-wider shadow-sm border ${
                       office.tag === "Kantor Pusat"
                         ? "bg-[#990202] text-white border-red-900/10"
                         : "bg-white text-gray-900 border-gray-200/50"
@@ -117,13 +117,13 @@ export default function Offices({
                   </div>
                   
                   {/* Address */}
-                  <p className="text-[13px] text-gray-500 leading-relaxed font-normal mt-3">
+                  <p className="text-[14px] text-gray-500 leading-relaxed font-normal mt-3">
                     {office.addr}
                   </p>
                 </div>
 
                 {/* Hours and Telephone Footer */}
-                <div className="flex items-center text-[12px] text-gray-500 font-bold border-t border-gray-100 mt-5 pt-4">
+                <div className="flex items-center text-[14px] text-gray-500 font-bold border-t border-gray-100 mt-5 pt-4">
                   <div className="flex items-center space-x-1.5">
                     <Clock className="w-3.8 h-3.8 text-[#990202] flex-shrink-0" strokeWidth={2.5} />
                     <span>{office.hours}</span>

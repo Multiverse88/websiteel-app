@@ -22,18 +22,18 @@ export default function TestimoniPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Left */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-              <nav className="flex items-center space-x-2 text-[11px] sm:text-[13px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
                 </Link>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[11px] sm:text-[13px] font-bold text-gray-900">Testimoni</span>
+                <span className="text-[14px] sm:text-[14px] font-bold text-gray-900">Testimoni</span>
               </nav>
 
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Testimoni</span>
+                <span className="text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Testimoni</span>
               </div>
 
               <h1 className="font-heading text-[26px] sm:text-[52px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight">
@@ -44,21 +44,21 @@ export default function TestimoniPage() {
                 tentang kami.
               </h1>
 
-              <p className="text-[13px] sm:text-[18px] text-gray-600 leading-relaxed max-w-2xl font-normal">
+              <p className="text-[14px] sm:text-[18px] text-gray-600 leading-relaxed max-w-2xl font-normal">
                 Dari UMKM kuliner hingga startup teknologi — semuanya percaya EasyLegal untuk urusan legalitas bisnis mereka.
               </p>
 
               <div className="flex flex-row gap-3 pt-2">
                 <Link
                   href="/kontak"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center"
                 >
                   <span>Konsultasi Gratis</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-1.5 sm:ml-2" />
                 </Link>
                 <Link
                   href="/"
-                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
+                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
                 >
                   Lihat Layanan
                 </Link>
@@ -88,7 +88,7 @@ export default function TestimoniPage() {
                   </div>
                   <div>
                     <div className="text-[14px] sm:text-[20px] font-black text-[#990202] leading-none">4.9 / 5</div>
-                    <div className="text-[9px] sm:text-[12px] text-[#990202]/85 font-bold mt-1">Rating Google</div>
+                    <div className="text-[14px] sm:text-[14px] text-[#990202]/85 font-bold mt-1">Rating Google</div>
                   </div>
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default function TestimoniPage() {
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center space-y-1 sm:space-y-2 py-4 sm:py-6 shadow-sm border border-black/[0.03] rounded-2xl bg-bg-light transition-all duration-300 hover:border-red-100 hover:shadow-md">
                 <div className="text-[26px] sm:text-[44px] font-extrabold text-[#990202] tracking-tight">{stat.value}</div>
-                <div className="text-[10px] sm:text-[13.5px] font-bold text-[#990202]/85">{stat.label}</div>
+                <div className="text-[14px] sm:text-[14px] font-bold text-[#990202]/85">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -120,20 +120,20 @@ export default function TestimoniPage() {
           <h2 className="text-[20px] sm:text-[38px] font-extrabold text-white leading-[1.25] sm:leading-tight mb-3 sm:mb-4">
             Siap bergabung dengan 11.000+ pengusaha lainnya?
           </h2>
-          <p className="text-[12.5px] sm:text-[16px] text-red-100 max-w-[560px] sm:mx-auto mb-6 sm:mb-8 font-medium">
+          <p className="text-[14px] sm:text-[16px] text-red-100 max-w-[560px] sm:mx-auto mb-6 sm:mb-8 font-medium">
             Konsultasi gratis sekarang. Tim legal kami siap membantu Anda dari awal hingga selesai.
           </p>
           <div className="flex flex-row sm:flex-row gap-3 justify-start sm:justify-center">
             <Link
               href="/kontak"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 bg-white text-[#990202] font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 bg-white text-[#990202] font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-50 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center"
             >
               <span>Konsultasi Gratis</span>
               <ArrowRight className="w-3.5 h-3.5 ml-1.5 sm:ml-2" />
             </Link>
             <Link
               href="/"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 border-2 border-white/40 text-white font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200 text-center"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 border-2 border-white/40 text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200 text-center"
             >
               Lihat Layanan
             </Link>

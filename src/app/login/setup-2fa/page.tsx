@@ -63,7 +63,7 @@ export default function Setup2FAPage() {
             </div>
             <Link
               href="/login"
-              className="text-[13.5px] text-[#990202] hover:text-[#800000] transition-colors font-semibold"
+              className="text-[14px] text-[#990202] hover:text-[#800000] transition-colors font-semibold"
             >
               Kembali ke login
             </Link>
@@ -93,10 +93,10 @@ export default function Setup2FAPage() {
         <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8">
           {/* Instructions */}
           <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-            <p className="text-[13.5px] text-amber-800 font-semibold mb-2">
+            <p className="text-[14px] text-amber-800 font-semibold mb-2">
               Langkah-langkah:
             </p>
-            <ol className="text-[13px] text-amber-700 space-y-1.5 list-decimal list-inside">
+            <ol className="text-[14px] text-amber-700 space-y-1.5 list-decimal list-inside">
               <li>Buka aplikasi Google Authenticator</li>
               <li>Pilih &quot;Tambah akun&quot; atau &quot;+&quot;</li>
               <li>Pilih &quot;Pindai kode QR&quot; (Scan QR Code)</li>
@@ -115,7 +115,7 @@ export default function Setup2FAPage() {
                   height={192}
                 />
               </div>
-              <p className="text-[12px] text-gray-400 mt-2 text-center">
+              <p className="text-[14px] text-gray-400 mt-2 text-center">
                 Scan QR Code ini menggunakan Google Authenticator
               </p>
             </div>
@@ -130,11 +130,11 @@ export default function Setup2FAPage() {
           {/* Verification Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <label htmlFor="token" className="text-[13.5px] font-extrabold text-gray-900 flex items-center gap-1.5">
+              <label htmlFor="token" className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 Kode Verifikasi
               </label>
-              <p className="text-[12.5px] text-gray-500">
+              <p className="text-[14px] text-gray-500">
                 Masukkan kode 6 digit dari Google Authenticator untuk mengaktifkan 2FA
               </p>
               <input
@@ -172,7 +172,7 @@ export default function Setup2FAPage() {
           <div className="mt-6 text-center">
             <Link
               href="/login"
-              className="text-[13.5px] text-gray-500 hover:text-[#990202] transition-colors font-medium"
+              className="text-[14px] text-gray-500 hover:text-[#990202] transition-colors font-medium"
             >
               Kembali ke login
             </Link>

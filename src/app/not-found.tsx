@@ -46,7 +46,7 @@ export default function NotFound() {
 
         {/* Quick Links */}
         <div className="mt-12 pt-8 border-t border-gray-100">
-          <p className="text-[12px] font-bold text-gray-400 uppercase tracking-wider mb-4">
+          <p className="text-[14px] font-bold text-gray-400 uppercase tracking-wider mb-4">
             Link Populer
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2">
@@ -59,7 +59,7 @@ export default function NotFound() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-1.5 text-[12px] font-semibold text-gray-600 hover:text-[#990202] bg-gray-50 hover:bg-red-50 rounded-lg transition-colors"
+                className="px-3 py-1.5 text-[14px] font-semibold text-gray-600 hover:text-[#990202] bg-gray-50 hover:bg-red-50 rounded-lg transition-colors"
               >
                 {link.name}
               </Link>

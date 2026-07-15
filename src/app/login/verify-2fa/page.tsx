@@ -50,7 +50,7 @@ export default function Verify2FAPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* 6-digit code */}
             <div className="space-y-2">
-              <label htmlFor="token" className="text-[13.5px] font-extrabold text-gray-900 flex items-center gap-1.5">
+              <label htmlFor="token" className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 Kode Authenticator
               </label>
@@ -89,7 +89,7 @@ export default function Verify2FAPage() {
           <div className="mt-6 text-center">
             <Link
               href="/login"
-              className="text-[13.5px] text-gray-500 hover:text-[#990202] transition-colors font-medium"
+              className="text-[14px] text-gray-500 hover:text-[#990202] transition-colors font-medium"
             >
               Kembali ke login
             </Link>

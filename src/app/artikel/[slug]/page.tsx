@@ -270,7 +270,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
               loading="lazy"
             />
             {imgMatch[1] && (
-              <figcaption className="text-center text-[13px] text-gray-400 mt-3 italic">
+              <figcaption className="text-center text-[14px] text-gray-400 mt-3 italic">
                 {imgMatch[1]}
               </figcaption>
             )}
@@ -317,7 +317,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
               const parsedItem = parseBoldText(item, articleTitle);
               return (
                 <li key={itemIdx} className="text-[15px] leading-relaxed text-gray-600 flex items-start">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-red-50 text-[#990202] text-[11.5px] font-black mr-3.5 flex-shrink-0 mt-0.5 border border-red-100/40">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-red-50 text-[#990202] text-[14px] font-black mr-3.5 flex-shrink-0 mt-0.5 border border-red-100/40">
                     {itemIdx + 1}
                   </span>
                   <span className="flex-1">{parsedItem}</span>
@@ -351,13 +351,13 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
         {/* Content */}
         <span className="flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 flex-1">
           <span className="flex-1">
-            <span className="block text-[10.5px] font-black uppercase tracking-widest text-[#990202] mb-1">
+            <span className="block text-[14px] font-black uppercase tracking-widest text-[#990202] mb-1">
               📖 Baca Juga
             </span>
             <span className="block text-[14.5px] font-bold text-gray-900 leading-snug group-hover:text-[#990202] transition-colors">
               {inlineRelated.title}
             </span>
-            <span className="block text-[11.5px] text-gray-400 mt-1">
+            <span className="block text-[14px] text-gray-400 mt-1">
               {inlineRelated.category} · {inlineRelated.readTime}
             </span>
           </span>
@@ -601,7 +601,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
             {/* ─── BREADCRUMBS & ARTICLE HEADER ─── */}
             <header className="pt-12 sm:pt-16 pb-8 text-center">
               {/* Breadcrumb Trail */}
-              <div className="flex items-center justify-center flex-wrap gap-2 text-[12.5px] font-medium text-gray-500 mb-6">
+              <div className="flex items-center justify-center flex-wrap gap-2 text-[14px] font-medium text-gray-500 mb-6">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -612,7 +612,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                 </Link>
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-800 font-bold">{CATEGORY_MAP[article.category] || article.category}</span>
-                <span className="inline-flex px-2 py-0.5 ml-1.5 rounded bg-[#FFF5F5] text-[10px] font-extrabold tracking-wider uppercase text-[#990202] border border-red-100/60 shadow-sm">
+                <span className="inline-flex px-2 py-0.5 ml-1.5 rounded bg-[#FFF5F5] text-[14px] font-extrabold tracking-wider uppercase text-[#990202] border border-red-100/60 shadow-sm">
                   Legalitas Bisnis
                 </span>
               </div>
@@ -623,7 +623,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
               </h1>
 
               {/* Author & Meta Row */}
-              <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2.5 text-[13.5px] text-gray-500 pb-8 border-b border-gray-100/80">
+              <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2.5 text-[14px] text-gray-500 pb-8 border-b border-gray-100/80">
                 {/* Author Info */}
                 <div className="flex items-center space-x-2">
                   {article.author?.avatar ? (
@@ -635,7 +635,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                       className="rounded-full object-cover shadow-md border border-black/[0.03] shadow-sm"
                     />
                   ) : (
-                    <div className="w-7 h-7 rounded-full bg-[#990202] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
+                    <div className="w-7 h-7 rounded-full bg-[#990202] flex items-center justify-center text-white text-[14px] font-bold shadow-sm">
                       {getAuthorInitials(article.author?.name || "EasyLegal")}
                     </div>
                   )}
@@ -683,7 +683,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
               />
             </div>
             {/* Dynamic Excerpt Caption below image */}
-            <p className="text-center text-[12.5px] text-gray-400 italic mt-4 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-center text-[14px] text-gray-400 italic mt-4 max-w-2xl mx-auto leading-relaxed">
               {article.excerpt}
             </p>
           </div>
@@ -705,7 +705,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                   <Link
                     key={idx}
                     href={`/artikel?tag=${encodeURIComponent(tag)}`}
-                    className="inline-flex px-3 py-1.5 rounded-lg text-[12px] font-bold text-gray-600 bg-gray-50 shadow-md border border-black/[0.04] hover:bg-[#FFF5F5] hover:text-[#990202] hover:border-red-100 transition-colors cursor-pointer"
+                    className="inline-flex px-3 py-1.5 rounded-lg text-[14px] font-bold text-gray-600 bg-gray-50 shadow-md border border-black/[0.04] hover:bg-[#FFF5F5] hover:text-[#990202] hover:border-red-100 transition-colors cursor-pointer"
                   >
                     {tag}
                   </Link>
@@ -723,15 +723,15 @@ export default async function ArtikelDetailPage({ params }: Props) {
                 <div className="absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-[80px]" />
                 
                 <div className="relative z-10 flex flex-col items-start">
-                  <div className="text-[#D4AF37] text-[10.5px] sm:text-[11px] font-black tracking-[0.15em] uppercase mb-4 flex items-center gap-2">
-                    <span className="text-[11px]">★</span> LAYANAN EASYLEGAL
+                  <div className="text-[#D4AF37] text-[14px] sm:text-[14px] font-black tracking-[0.15em] uppercase mb-4 flex items-center gap-2">
+                    <span className="text-[14px]">★</span> LAYANAN EASYLEGAL
                   </div>
                   <h3 className="text-[22px] sm:text-[26px] font-bold text-white mb-2.5 leading-snug">
                     {article.category === "Sertifikasi ISO" || article.category === "ISO"
                       ? "Mau sertifikasi ISO untuk bisnismu?" 
                       : "Butuh bantuan legalitas untuk bisnismu?"}
                   </h3>
-                  <p className="text-[13px] sm:text-[14px] text-gray-400 leading-relaxed mb-6 max-w-[500px] font-normal">
+                  <p className="text-[14px] sm:text-[14px] text-gray-400 leading-relaxed mb-6 max-w-[500px] font-normal">
                     {article.category === "Sertifikasi ISO" || article.category === "ISO"
                       ? "Konsultasi gratis dengan tim ISO kami. Pendampingan end-to-end dari gap analysis sampai sertifikat terbit."
                       : "Konsultasi gratis dengan tim legal EasyLegal. Proses cepat, aman, dan harga transparan."}
@@ -740,7 +740,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                     href={getWhatsAppLink(`Halo EasyLegal, saya tertarik konsultasi layanan ${article.category}.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-white text-gray-950 font-bold text-[13.5px] px-5 py-3 rounded-xl hover:bg-gray-100 transition-colors shadow-sm"
+                    className="inline-flex items-center justify-center bg-white text-gray-950 font-bold text-[14px] px-5 py-3 rounded-xl hover:bg-gray-100 transition-colors shadow-sm"
                   >
                     {article.category === "Sertifikasi ISO" || article.category === "ISO" ? "Lihat Paket Sertifikasi ISO" : "Lihat Layanan Kami"} &rarr;
                   </a>
@@ -768,14 +768,14 @@ export default async function ArtikelDetailPage({ params }: Props) {
                       <div className="text-[15px] font-extrabold text-gray-950">
                         {article.author?.name || "Tim Penulis EasyLegal"}
                       </div>
-                      <div className="text-[12px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">
+                      <div className="text-[14px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">
                         {article.author?.role || "Spesialis Konsultan Hukum & Legalitas Bisnis"}
                       </div>
                     </div>
                   </div>
                 </div>
                 {article.author?.bio && (
-                  <p className="text-[13.5px] leading-relaxed text-gray-500 font-normal">
+                  <p className="text-[14px] leading-relaxed text-gray-500 font-normal">
                     {article.author.bio}
                   </p>
                 )}
@@ -818,10 +818,10 @@ export default async function ArtikelDetailPage({ params }: Props) {
                 <h3 className="text-[32px] font-black leading-tight tracking-tight text-center">
                   Diskon 50%
                 </h3>
-                <p className="text-[13px] font-bold text-white text-center tracking-wide mt-1">
+                <p className="text-[14px] font-bold text-white text-center tracking-wide mt-1">
                   Untuk Layanan Pendirian PT &amp; CV
                 </p>
-                <p className="text-[11.5px] text-white/90 text-center mt-3 max-w-[240px] mx-auto leading-relaxed font-normal">
+                <p className="text-[14px] text-white/90 text-center mt-3 max-w-[240px] mx-auto leading-relaxed font-normal">
                   Konsultasi gratis dengan tim legal EasyLegal. Proses cepat, harga transparan.
                 </p>
 
@@ -845,10 +845,10 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
               {/* Tentang EasyLegal Card */}
               <div className="bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.01)]">
-                <h4 className="text-[12.5px] font-extrabold text-gray-900 mb-1.5">
+                <h4 className="text-[14px] font-extrabold text-gray-900 mb-1.5">
                   Tentang EasyLegal
                 </h4>
-                <p className="text-[11.5px] leading-relaxed text-gray-500 mb-4 font-normal">
+                <p className="text-[14px] leading-relaxed text-gray-500 mb-4 font-normal">
                   Ikuti update informasi seputar legalitas bisnis lewat media sosial kami.
                 </p>
                 <div className="flex items-center space-x-2">
@@ -881,7 +881,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
               {/* Left: Related Articles */}
               <div className="lg:col-span-8">
-                <p className="text-[12px] font-bold text-[#990202] uppercase tracking-widest mb-2">Artikel Terkait</p>
+                <p className="text-[14px] font-bold text-[#990202] uppercase tracking-widest mb-2">Artikel Terkait</p>
                 <h2 className="font-heading text-[24px] sm:text-[28px] font-extrabold text-gray-950 leading-tight mb-8">
                   Mungkin kamu juga suka.
                 </h2>
@@ -906,7 +906,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                         </div>
 
                         {/* Category */}
-                        <p className="text-[11.5px] font-black uppercase tracking-wider text-[#990202] mb-2">
+                        <p className="text-[14px] font-black uppercase tracking-wider text-[#990202] mb-2">
                           {related.category}
                         </p>
 
@@ -916,7 +916,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                         </h3>
 
                         {/* Read Time */}
-                        <div className="flex items-center space-x-1.5 text-[12.5px] text-gray-400 font-medium">
+                        <div className="flex items-center space-x-1.5 text-[14px] text-gray-400 font-medium">
                           <Clock className="w-3.5 h-3.5 text-gray-400" />
                           <span>{related.readTime}</span>
                         </div>

@@ -47,7 +47,7 @@ export default function EditLinkForm({ id, slug: initialSlug, destination: initi
 
       {/* Slug */}
       <div className="space-y-2">
-        <label className="text-[13.5px] font-extrabold text-gray-900">
+        <label className="text-[14px] font-extrabold text-gray-900">
           Slug Link
         </label>
         <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl">
@@ -64,7 +64,7 @@ export default function EditLinkForm({ id, slug: initialSlug, destination: initi
 
       {/* Destination */}
       <div className="space-y-2">
-        <label className="text-[13.5px] font-extrabold text-gray-900">
+        <label className="text-[14px] font-extrabold text-gray-900">
           URL Tujuan <span className="text-[#990202]">*</span>
         </label>
         <input
