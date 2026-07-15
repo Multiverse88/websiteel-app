@@ -174,7 +174,7 @@ export default function VisaKitas() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -182,13 +182,13 @@ export default function VisaKitas() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[12.5px] font-bold text-gray-900">Visa &amp; KITAS</span>
+                <span className="text-[14px] font-bold text-gray-900">Visa &amp; KITAS</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[10px] sm:text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Imigrasi - WNA</span>
+                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Imigrasi - WNA</span>
               </div>
 
               {/* Headline */}
@@ -198,7 +198,7 @@ export default function VisaKitas() {
               </h1>
 
               {/* Description */}
-              <p className="text-[12.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
+              <p className="text-[14px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
                 Bantuan pengurusan visa bisnis, KITAS investor &amp; KITAS Tenaga Kerja Asing — proses cepat, dokumentasi lengkap, &amp; sesuai regulasi Direktorat Jenderal Imigrasi.
               </p>
 
@@ -229,8 +229,8 @@ export default function VisaKitas() {
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-950">3-10 Hari</div>
-                    <div className="text-[10.5px] text-gray-500 font-semibold">Proses cepat</div>
+                    <div className="text-[14px] font-black text-gray-950">3-10 Hari</div>
+                    <div className="text-[14px] text-gray-500 font-semibold">Proses cepat</div>
                   </div>
                 </div>
 
@@ -240,8 +240,8 @@ export default function VisaKitas() {
                     <MapPin className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-950">3 Kategori</div>
-                    <div className="text-[10.5px] text-gray-500 font-semibold">Bisnis - Investor - TKA</div>
+                    <div className="text-[14px] font-black text-gray-950">3 Kategori</div>
+                    <div className="text-[14px] text-gray-500 font-semibold">Bisnis - Investor - TKA</div>
                   </div>
                 </div>
 
@@ -251,8 +251,8 @@ export default function VisaKitas() {
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-950">100% Resmi</div>
-                    <div className="text-[10.5px] text-gray-500 font-semibold">Sesuai Ditjen Imigrasi</div>
+                    <div className="text-[14px] font-black text-gray-950">100% Resmi</div>
+                    <div className="text-[14px] text-gray-500 font-semibold">Sesuai Ditjen Imigrasi</div>
                   </div>
                 </div>
               </div>
@@ -280,8 +280,8 @@ export default function VisaKitas() {
                     <Check className="w-4.5 h-4.5" strokeWidth={3} />
                   </div>
                   <div className="text-left">
-                    <div className="text-[12.5px] font-black text-gray-950 leading-none">e-Visa Digital</div>
-                    <div className="text-[9.5px] text-gray-500 font-semibold mt-1">Tanpa antri di kedutaan</div>
+                    <div className="text-[14px] font-black text-gray-950 leading-none">e-Visa Digital</div>
+                    <div className="text-[14px] text-gray-500 font-semibold mt-1">Tanpa antri di kedutaan</div>
                   </div>
                 </div>
 
@@ -291,8 +291,8 @@ export default function VisaKitas() {
                     <Home className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[12.5px] font-black text-gray-950 leading-none">Untuk Bisnis &amp; PMA</div>
-                    <div className="text-[9.5px] text-gray-500 font-semibold mt-1">PT PMA, investor, ekspat</div>
+                    <div className="text-[14px] font-black text-gray-950 leading-none">Untuk Bisnis &amp; PMA</div>
+                    <div className="text-[14px] text-gray-500 font-semibold mt-1">PT PMA, investor, ekspat</div>
                   </div>
                 </div>
 
@@ -309,11 +309,11 @@ export default function VisaKitas() {
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Visa &amp; KITAS — apa bedanya?
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Penting untuk memilih jenis izin yang tepat sesuai tujuan &amp; lama tinggal WNA di Indonesia.
             </p>
           </div>
@@ -322,7 +322,7 @@ export default function VisaKitas() {
             
             {/* Left Column: KATEGORI VISA & KITAS */}
             <div className="lg:col-span-5 space-y-4 text-left">
-              <h3 className="text-[12px] font-black text-[#990202] tracking-widest uppercase mb-4 pl-1">KATEGORI VISA &amp; KITAS</h3>
+              <h3 className="text-[14px] font-black text-[#990202] tracking-widest uppercase mb-4 pl-1">KATEGORI VISA &amp; KITAS</h3>
               
               {/* Item 1 */}
               <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center space-x-3.5">
@@ -331,7 +331,7 @@ export default function VisaKitas() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-950">Visa Bisnis</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Kunjungan bisnis 60 hari - single/multiple entry</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5">Kunjungan bisnis 60 hari - single/multiple entry</p>
                 </div>
               </div>
 
@@ -342,7 +342,7 @@ export default function VisaKitas() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-950">KITAS Investor</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Penanam modal PT PMA · 1-2 tahun</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5">Penanam modal PT PMA · 1-2 tahun</p>
                 </div>
               </div>
 
@@ -353,7 +353,7 @@ export default function VisaKitas() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-950">KITAS Tenaga Kerja Asing</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">WNA bekerja di Indonesia · 6-24 bulan</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5">WNA bekerja di Indonesia · 6-24 bulan</p>
                 </div>
               </div>
 
@@ -364,7 +364,7 @@ export default function VisaKitas() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-950">MERP Re-Entry Permit</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5">Bebas keluar-masuk Indonesia selama KITAS aktif</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5">Bebas keluar-masuk Indonesia selama KITAS aktif</p>
                 </div>
               </div>
 
@@ -374,8 +374,8 @@ export default function VisaKitas() {
                   <Check className="w-4.5 h-4.5 text-white" strokeWidth={3.5} />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-[13px] font-black text-white">Layanan Imigrasi EasyLegal</h4>
-                  <p className="text-[11px] text-gray-400 font-semibold mt-0.5">
+                  <h4 className="text-[14px] font-black text-white">Layanan Imigrasi EasyLegal</h4>
+                  <p className="text-[14px] text-gray-400 font-semibold mt-0.5">
                     Dasar Hukum: UU No. 6/2011 tentang Keimigrasian
                   </p>
                 </div>
@@ -432,11 +432,11 @@ export default function VisaKitas() {
           {/* Section Header */}
           <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
             <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PENGURUSAN</p>
+              <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PENGURUSAN</p>
               <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 Pilih kategori sesuai kebutuhan.
               </h2>
-              <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed">
+              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed">
                 Harga sudah include biaya negara (PNBP), pendampingan dokumen, &amp; konsultasi penuh sampai izin terbit.
               </p>
             </div>
@@ -456,7 +456,7 @@ export default function VisaKitas() {
             <div className="inline-flex p-1.5 bg-gray-200/50 rounded-2xl shadow-md border border-black/[0.04]">
               <button
                 onClick={() => setActiveCategory("visa")}
-                className={`px-5 py-2.5 rounded-xl text-[13px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                   activeCategory === "visa"
                     ? "bg-[#990202] text-white shadow-md"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
@@ -467,7 +467,7 @@ export default function VisaKitas() {
               </button>
               <button
                 onClick={() => setActiveCategory("investor")}
-                className={`px-5 py-2.5 rounded-xl text-[13px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                   activeCategory === "investor"
                     ? "bg-[#990202] text-white shadow-md"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
@@ -478,7 +478,7 @@ export default function VisaKitas() {
               </button>
               <button
                 onClick={() => setActiveCategory("tka")}
-                className={`px-5 py-2.5 rounded-xl text-[13px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                   activeCategory === "tka"
                     ? "bg-[#990202] text-white shadow-md"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
@@ -512,21 +512,21 @@ export default function VisaKitas() {
                       {/* Header */}
                       <div className={`px-4 py-4 sm:px-6 sm:py-7 text-center text-white relative ${isFirst ? "bg-[#990202]" : "bg-[#1A1A1A]"}`}>
                         {isFirst && (
-                          <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[9px] font-black tracking-widest uppercase py-1 shadow-sm">
+                          <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[14px] font-black tracking-widest uppercase py-1 shadow-sm">
                             PALING POPULER
                           </div>
                         )}
-                        <h4 className="text-[12px] font-black tracking-widest uppercase opacity-90 mt-2">
+                        <h4 className="text-[14px] font-black tracking-widest uppercase opacity-90 mt-2">
                           {pkg.title}
                         </h4>
-                        <div className="mt-4 text-[13px] text-white/50 line-through font-bold">
+                        <div className="mt-4 text-[14px] text-white/50 line-through font-bold">
                           {pkg.originalPrice}
                         </div>
                         <div className="mt-0.5 text-[28px] sm:text-[32px] font-black tracking-tight flex items-start justify-center gap-0.5">
                           <span className="text-[15px] mt-1.5 font-extrabold">IDR</span>
                           <span>{pkg.price}</span>
                         </div>
-                        <p className="text-[9.5px] font-black text-white/70 tracking-widest uppercase mt-2">
+                        <p className="text-[14px] font-black text-white/70 tracking-widest uppercase mt-2">
                           TANPA TAMBAHAN BIAYA APAPUN
                         </p>
                       </div>
@@ -536,10 +536,10 @@ export default function VisaKitas() {
                         
                         {/* Lama Proses */}
                         <div className="space-y-1">
-                          <h4 className="text-[11.5px] font-black text-red-800 tracking-wider uppercase">
+                          <h4 className="text-[14px] font-black text-red-800 tracking-wider uppercase">
                             LAMA PROSES
                           </h4>
-                          <p className="flex items-center text-[13.5px] font-bold text-gray-700">
+                          <p className="flex items-center text-[14px] font-bold text-gray-700">
                             <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3} />
                             <span>{pkg.lamaProses}</span>
                           </p>
@@ -547,10 +547,10 @@ export default function VisaKitas() {
 
                         {/* Yang Diperoleh */}
                         <div className="space-y-1 border-t border-gray-100 pt-4">
-                          <h4 className="text-[11.5px] font-black text-red-800 tracking-wider uppercase">
+                          <h4 className="text-[14px] font-black text-red-800 tracking-wider uppercase">
                             YANG DIPEROLEH
                           </h4>
-                          <p className="flex items-start text-[13.5px] font-bold text-gray-700 leading-relaxed">
+                          <p className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
                             <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
                             <span>{pkg.yangDiperoleh}</span>
                           </p>
@@ -558,15 +558,15 @@ export default function VisaKitas() {
 
                         {/* Bonus */}
                         <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
-                          <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
+                          <h4 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
                             BONUS
                           </h4>
                           <ul className="space-y-1.5">
-                            <li className="flex items-start text-[12.5px] font-bold text-gray-700">
+                            <li className="flex items-start text-[14px] font-bold text-gray-700">
                               <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
                               <span>Layanan Personal Legal Assistance</span>
                             </li>
-                            <li className="flex items-start text-[12.5px] font-bold text-gray-700">
+                            <li className="flex items-start text-[14px] font-bold text-gray-700">
                               <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
                               <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
                             </li>
@@ -575,23 +575,23 @@ export default function VisaKitas() {
 
                         {/* Extra Bonus */}
                         <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
-                          <h4 className="text-[11px] font-black text-gray-900 tracking-wider uppercase">
+                          <h4 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
                             EXTRA BONUS
                           </h4>
                           <ul className="space-y-2">
-                            <li className="flex items-start text-[12px] font-bold text-gray-700">
+                            <li className="flex items-start text-[14px] font-bold text-gray-700">
                               <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
                               <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
                             </li>
-                            <li className="flex items-start text-[12px] font-bold text-gray-700">
+                            <li className="flex items-start text-[14px] font-bold text-gray-700">
                               <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
                               <span>Dokumen SOP Karyawan</span>
                             </li>
-                            <li className="flex items-start text-[12px] font-bold text-gray-700">
+                            <li className="flex items-start text-[14px] font-bold text-gray-700">
                               <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
                               <span>Dokumen SOP Perusahaan</span>
                             </li>
-                            <li className="flex items-start text-[12px] font-bold text-gray-700">
+                            <li className="flex items-start text-[14px] font-bold text-gray-700">
                               <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
                               <span>Dokumen Kontrak Bisnis</span>
                             </li>
@@ -607,7 +607,7 @@ export default function VisaKitas() {
                         href={getWhatsAppLink(pkg.waText)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`block w-full py-4.5 text-center font-black text-[13.5px] rounded-xl transition-all duration-250 cursor-pointer ${
+                        className={`block w-full py-4.5 text-center font-black text-[14px] rounded-xl transition-all duration-250 cursor-pointer ${
                           isFirst
                             ? "text-white bg-[#990202] hover:bg-[#800000] shadow-md shadow-red-900/10"
                             : "text-gray-800 bg-white hover:bg-gray-50 border-2 border-gray-150 hover:border-gray-250"
@@ -625,7 +625,7 @@ export default function VisaKitas() {
           {/* Pricing Bottom Warning Alert */}
           <div className="max-w-[960px] mx-auto bg-white rounded-2xl p-5 shadow-md border border-black/[0.04] mt-6 sm:mt-12 flex items-start gap-3.5 shadow-sm text-left">
             <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-            <p className="text-[13px] text-gray-600 font-semibold leading-relaxed">
+            <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
               <strong className="font-extrabold text-[#990202]">Visa Bisnis</strong> hanya untuk kegiatan bisnis (meeting, audit, kunjungan klien) dan <strong className="font-extrabold text-gray-950">tidak memberikan izin bekerja</strong> di Indonesia. Untuk bekerja, perlu KITAS TKA. Berlaku 60 hari per kunjungan, bisa diperpanjang.
             </p>
           </div>
@@ -677,7 +677,7 @@ export default function VisaKitas() {
               <span className="text-[16px] font-normal">→</span>
             </a>
 
-            <div className="flex items-center gap-1.5 text-[12px] text-gray-500 font-semibold pt-1 px-1">
+            <div className="flex items-center gap-1.5 text-[14px] text-gray-500 font-semibold pt-1 px-1">
               <span className="text-emerald-500">✓</span>
               <span>Respons dalam 5 menit · Senin–Sabtu 08:00–20:00</span>
             </div>

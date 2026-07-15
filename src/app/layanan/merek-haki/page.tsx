@@ -544,7 +544,7 @@ export default function MerekHaki() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[11px] sm:text-[11px] sm:text-[13px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] sm:text-[14px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -552,13 +552,13 @@ export default function MerekHaki() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[13px] font-bold text-gray-900">Merek & HAKI</span>
+                <span className="text-[14px] font-bold text-gray-900">Merek & HAKI</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[10px] sm:text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Merek & HAKI</span>
+                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Merek & HAKI</span>
               </div>
 
               {/* Headline */}
@@ -568,7 +568,7 @@ export default function MerekHaki() {
               </h1>
 
               {/* Description */}
-              <p className="text-[12.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+              <p className="text-[14px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
                 Lindungi nama, logo, dan identitas bisnis Anda dari penjiplakan. Kami pandu pemilihan kelas yang tepat & kelola seluruh proses pendaftaran resmi di DJKI.
               </p>
 
@@ -576,7 +576,7 @@ export default function MerekHaki() {
               <div className="flex flex-row gap-3 pt-2">
                 <Link
                   href="/cek-nama"
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
                 >
                   <span>Cek Nama Merek</span>
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5" />
@@ -584,7 +584,7 @@ export default function MerekHaki() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Lihat Paket Harga
                 </a>
@@ -598,8 +598,8 @@ export default function MerekHaki() {
                     <Shield className="w-5 h-5 stroke-[2]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">10 tahun</div>
-                    <div className="text-[11.5px] text-gray-500 mt-0.5">Perlindungan</div>
+                    <div className="text-[14px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">10 tahun</div>
+                    <div className="text-[14px] text-gray-500 mt-0.5">Perlindungan</div>
                   </div>
                 </div>
 
@@ -609,8 +609,8 @@ export default function MerekHaki() {
                     <BookOpen className="w-5 h-5 stroke-[2]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">45 kelas</div>
-                    <div className="text-[11.5px] text-gray-500 mt-0.5">Nice Classification</div>
+                    <div className="text-[14px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">45 kelas</div>
+                    <div className="text-[14px] text-gray-500 mt-0.5">Nice Classification</div>
                   </div>
                 </div>
 
@@ -620,8 +620,8 @@ export default function MerekHaki() {
                     <span className="text-[18px] font-extrabold text-[#990202]">$</span>
                   </div>
                   <div>
-                    <div className="text-[13.5px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">Mulai Rp2,79jt</div>
-                    <div className="text-[11.5px] text-gray-500 mt-0.5">harga transparan</div>
+                    <div className="text-[14px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">Mulai Rp2,79jt</div>
+                    <div className="text-[14px] text-gray-500 mt-0.5">harga transparan</div>
                   </div>
                 </div>
               </div>
@@ -649,8 +649,8 @@ export default function MerekHaki() {
                     <Tag className="w-5.5 h-5.5 stroke-[2.2] text-[#D97706]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-900 leading-none">Merek Terdaftar</div>
-                    <div className="text-[11px] text-gray-400 font-bold mt-1.5">No. IDM000xxxxx · DJKI</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Merek Terdaftar</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">No. IDM000xxxxx · DJKI</div>
                   </div>
                 </div>
 
@@ -660,8 +660,8 @@ export default function MerekHaki() {
                     <ShieldCheck className="w-5.5 h-5.5 text-[#990202]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-900 leading-none">Hak Eksklusif</div>
-                    <div className="text-[11px] text-gray-400 font-bold mt-1.5">Aktif sampai 2036</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Hak Eksklusif</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">Aktif sampai 2036</div>
                   </div>
                 </div>
 
@@ -678,11 +678,11 @@ export default function MerekHaki() {
           
           {/* Section Header */}
           <div className="mb-14">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN MEREK</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN MEREK</p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Apa itu Merek & HAKI?
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
               Sebelum mulai, kenali dulu apa itu merek dan kenapa pendaftaran resmi penting untuk brand Anda.
             </p>
           </div>
@@ -708,8 +708,8 @@ export default function MerekHaki() {
                     <FileText className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-900 leading-none">Dasar Hukum</div>
-                    <div className="text-[11px] text-gray-400 font-bold mt-1.5 leading-snug">UU No. 20 Tahun 2016 tentang Merek &amp; Indikasi Geografis</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Dasar Hukum</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5 leading-snug">UU No. 20 Tahun 2016 tentang Merek &amp; Indikasi Geografis</div>
                   </div>
                 </div>
               </div>
@@ -783,7 +783,7 @@ export default function MerekHaki() {
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-5 sm:mb-10 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest text-center">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest text-center">
               LAYANAN TAMBAHAN MEREK
             </p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight text-center">
@@ -800,7 +800,7 @@ export default function MerekHaki() {
               const isActive = activeTab === tab.id;
               const tabClass = isActive
                 ? "inline-flex items-center space-x-2 bg-[#990202] text-white py-3 px-6 rounded-2xl shadow-md border border-[#990202] font-extrabold text-[14px] transition-all duration-200 cursor-pointer"
-                : "inline-flex items-center space-x-2 bg-white text-gray-600 hover:text-gray-800 py-3 px-6 rounded-2xl shadow-md border border-black/[0.04] hover:border-gray-300 font-bold text-[12px] sm:text-[14px] shadow-sm hover:shadow transition-all duration-200 cursor-pointer";
+                : "inline-flex items-center space-x-2 bg-white text-gray-600 hover:text-gray-800 py-3 px-6 rounded-2xl shadow-md border border-black/[0.04] hover:border-gray-300 font-bold text-[14px] sm:text-[14px] shadow-sm hover:shadow transition-all duration-200 cursor-pointer";
               return (
                 <button
                   key={tab.id}
@@ -845,7 +845,7 @@ export default function MerekHaki() {
                             {/* Card Header */}
                             <div className={`${headerBg} p-6 text-white text-center relative`}>
                               {card.isPopular && card.badgeText && (
-                                <div className="absolute top-2.5 left-0 right-0 text-[8px] font-black uppercase tracking-wider text-white bg-red-800/80 py-0.5 w-[110px] mx-auto rounded-full">
+                                <div className="absolute top-2.5 left-0 right-0 text-[14px] font-black uppercase tracking-wider text-white bg-red-800/80 py-0.5 w-[110px] mx-auto rounded-full">
                                   {card.badgeText}
                                 </div>
                               )}
@@ -853,7 +853,7 @@ export default function MerekHaki() {
                                 {card.title}
                               </h3>
                               {card.strikePrice && (
-                                <div className={`mt-3 text-[12px] font-bold line-through ${card.isPopular ? "text-red-200" : "text-gray-400"}`}>
+                                <div className={`mt-3 text-[14px] font-bold line-through ${card.isPopular ? "text-red-200" : "text-gray-400"}`}>
                                   {card.strikePrice}
                                 </div>
                               )}
@@ -861,7 +861,7 @@ export default function MerekHaki() {
                                 <span className="text-[28px] sm:text-[22px] sm:text-[30px] font-black tracking-tight">{card.price}</span>
                               </div>
                               {card.subLabel && (
-                                <div className={`mt-2.5 text-[9.5px] font-bold tracking-widest uppercase ${card.isPopular ? "text-red-100" : "text-gray-400"}`}>
+                                <div className={`mt-2.5 text-[14px] font-bold tracking-widest uppercase ${card.isPopular ? "text-red-100" : "text-gray-400"}`}>
                                   {card.subLabel}
                                 </div>
                               )}
@@ -871,17 +871,17 @@ export default function MerekHaki() {
                             <div className="p-6.5 space-y-6">
                               {card.groups.map((group, gIdx) => (
                                 <div key={gIdx} className="space-y-2.5">
-                                  <h5 className="text-[10px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
+                                  <h5 className="text-[14px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
                                     {group.title}
                                   </h5>
                                   <ul className="space-y-2.5">
                                     {group.items.map((item, iIdx) => (
-                                      <li key={iIdx} className="flex items-start text-[13px] font-medium text-gray-700">
+                                      <li key={iIdx} className="flex items-start text-[14px] font-medium text-gray-700">
                                         <Check className="w-4 h-4 text-emerald-500 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                                         <span>
                                           {item.text}
                                           {item.footnoteIndex && (
-                                            <sup className="text-[9px] font-semibold text-[#990202] ml-0.5">
+                                            <sup className="text-[14px] font-semibold text-[#990202] ml-0.5">
                                               ({item.footnoteIndex})
                                             </sup>
                                           )}
@@ -900,7 +900,7 @@ export default function MerekHaki() {
                               href={card.buttonLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm ${
+                              className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[14px] transition-all duration-200 cursor-pointer shadow-sm ${
                                 card.isPopular
                                   ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
                                   : "shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
@@ -917,7 +917,7 @@ export default function MerekHaki() {
 
                 {/* Tab Footnote Box */}
                 {currentTab.footnote && (
-                  <div className="bg-white shadow-md border border-black/[0.03] rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed max-w-[960px] mx-auto font-medium shadow-sm">
+                  <div className="bg-white shadow-md border border-black/[0.03] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed max-w-[960px] mx-auto font-medium shadow-sm">
                     <span dangerouslySetInnerHTML={{ __html: currentTab.footnote }} />
                   </div>
                 )}
@@ -934,7 +934,7 @@ export default function MerekHaki() {
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest text-center">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest text-center">
               DOKUMEN PERSYARATAN
             </p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight text-center">
@@ -956,7 +956,7 @@ export default function MerekHaki() {
                 </div>
                 <div>
                   <h3 className="text-[18px] font-extrabold text-gray-950 leading-tight">Pemohon Perorangan</h3>
-                  <p className="text-[12.5px] text-gray-400 font-bold mt-1">Untuk individu / UMKM</p>
+                  <p className="text-[14px] text-gray-400 font-bold mt-1">Untuk individu / UMKM</p>
                 </div>
               </div>
               
@@ -991,7 +991,7 @@ export default function MerekHaki() {
                 </div>
                 <div>
                   <h3 className="text-[18px] font-extrabold text-gray-950 leading-tight">Pemohon Badan Usaha</h3>
-                  <p className="text-[12.5px] text-gray-400 font-bold mt-1">Untuk PT / CV / Yayasan</p>
+                  <p className="text-[14px] text-gray-400 font-bold mt-1">Untuk PT / CV / Yayasan</p>
                 </div>
               </div>
               
@@ -1023,7 +1023,7 @@ export default function MerekHaki() {
           {/* Info Alert Box */}
           <div className="max-w-[1080px] mx-auto mt-8 bg-[#FFF5F5] border border-red-100 rounded-2xl p-5 flex items-start space-x-3.5 shadow-sm">
             <AlertCircle className="w-5.5 h-5.5 text-[#990202] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-            <p className="text-[12.5px] sm:text-[13px] text-gray-600 leading-relaxed font-medium">
+            <p className="text-[14px] sm:text-[14px] text-gray-600 leading-relaxed font-medium">
               <strong className="font-extrabold text-gray-900 mr-1">Tarif khusus UMKM:</strong> Pemohon perorangan dengan status UMKM mendapat tarif resmi DJKI yang lebih murah (Rp 500.000 vs Rp 1.800.000 untuk badan). Tim kami siap bantu lengkapi semua dokumen, termasuk pembuatan surat kuasa &amp; surat pernyataan UMKM.
             </p>
           </div>

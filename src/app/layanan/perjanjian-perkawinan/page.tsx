@@ -176,7 +176,7 @@ export default function PerjanjianPerkawinan() {
             <div className="lg:col-span-7 space-y-6 text-left">
 
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -184,13 +184,13 @@ export default function PerjanjianPerkawinan() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[12.5px] font-bold text-gray-900">Perjanjian Perkawinan</span>
+                <span className="text-[14px] font-bold text-gray-900">Perjanjian Perkawinan</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[10px] sm:text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Hukum Perdata · Pernikahan</span>
+                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Hukum Perdata · Pernikahan</span>
               </div>
 
               {/* Headline */}
@@ -199,7 +199,7 @@ export default function PerjanjianPerkawinan() {
               </h1>
 
               {/* Description */}
-              <p className="text-[12.5px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+              <p className="text-[14px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
                 Bantuan pembuatan akta perjanjian perkawinan (prenup &amp; postnup) sampai registrasi resmi di KUA atau Dukcapil. Aset pribadi &amp; bisnis Anda terlindungi secara hukum.
               </p>
 
@@ -230,8 +230,8 @@ export default function PerjanjianPerkawinan() {
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13px] font-black text-gray-950">7–14 Hari</div>
-                    <div className="text-[10px] text-gray-500 font-semibold">Proses lengkap</div>
+                    <div className="text-[14px] font-black text-gray-950">7–14 Hari</div>
+                    <div className="text-[14px] text-gray-500 font-semibold">Proses lengkap</div>
                   </div>
                 </div>
 
@@ -241,8 +241,8 @@ export default function PerjanjianPerkawinan() {
                     <FileText className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13px] font-black text-gray-950">Akta Notaris</div>
-                    <div className="text-[10px] text-gray-500 font-semibold">Resmi &amp; legal</div>
+                    <div className="text-[14px] font-black text-gray-950">Akta Notaris</div>
+                    <div className="text-[14px] text-gray-500 font-semibold">Resmi &amp; legal</div>
                   </div>
                 </div>
 
@@ -252,8 +252,8 @@ export default function PerjanjianPerkawinan() {
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[13px] font-black text-gray-950">KUA/Dukcapil</div>
-                    <div className="text-[10px] text-gray-500 font-semibold">Terdaftar resmi</div>
+                    <div className="text-[14px] font-black text-gray-950">KUA/Dukcapil</div>
+                    <div className="text-[14px] text-gray-500 font-semibold">Terdaftar resmi</div>
                   </div>
                 </div>
               </div>
@@ -277,8 +277,8 @@ export default function PerjanjianPerkawinan() {
                     <Shield className="w-4 h-4 text-[#990202]" strokeWidth={2.5} />
                   </div>
                   <div className="text-left">
-                    <div className="text-[11.5px] font-black text-gray-900 leading-none">Aset Terlindung</div>
-                    <div className="text-[8.5px] text-gray-500 font-medium mt-1">Pisah harta secara hukum</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Aset Terlindung</div>
+                    <div className="text-[14px] text-gray-500 font-medium mt-1">Pisah harta secara hukum</div>
                   </div>
                 </div>
 
@@ -288,8 +288,8 @@ export default function PerjanjianPerkawinan() {
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3.5} />
                   </div>
                   <div className="text-left">
-                    <div className="text-[11.5px] font-black text-gray-900 leading-none">Prenup &amp; Postnup</div>
-                    <div className="text-[8.5px] text-gray-500 font-medium mt-1">Bisa sebelum atau setelah nikah</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Prenup &amp; Postnup</div>
+                    <div className="text-[14px] text-gray-500 font-medium mt-1">Bisa sebelum atau setelah nikah</div>
                   </div>
                 </div>
 
@@ -306,11 +306,11 @@ export default function PerjanjianPerkawinan() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Perjanjian Perkawinan / Pisah Harta?
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
               Perjanjian resmi antara suami-istri untuk mengatur pemisahan harta &amp; tanggung jawab masing-masing — dilindungi hukum.
             </p>
           </div>
@@ -319,7 +319,7 @@ export default function PerjanjianPerkawinan() {
 
             {/* Left Column: YANG BISA DIATUR DALAM PERJANJIAN (Unified pink container) */}
             <div className="lg:col-span-5 bg-[#FFF5F5] rounded-[32px] p-6 sm:p-7.5 space-y-3.5 text-left border border-red-50/60 shadow-[0_10px_35px_rgba(153,2,2,0.02)]">
-              <h3 className="text-[12px] sm:text-[13px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
+              <h3 className="text-[14px] sm:text-[14px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
                 YANG BISA DIATUR DALAM PERJANJIAN
               </h3>
 
@@ -330,7 +330,7 @@ export default function PerjanjianPerkawinan() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Pemisahan Harta Pribadi</h4>
-                  <p className="text-[11.5px] text-gray-500 font-medium mt-0.5 leading-snug">Aset masing-masing tetap milik pribadi</p>
+                  <p className="text-[14px] text-gray-500 font-medium mt-0.5 leading-snug">Aset masing-masing tetap milik pribadi</p>
                 </div>
               </div>
 
@@ -341,7 +341,7 @@ export default function PerjanjianPerkawinan() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Tanggung Jawab Utang</h4>
-                  <p className="text-[11.5px] text-gray-500 font-medium mt-0.5 leading-snug">Utang pribadi tidak menjadi utang bersama</p>
+                  <p className="text-[14px] text-gray-500 font-medium mt-0.5 leading-snug">Utang pribadi tidak menjadi utang bersama</p>
                 </div>
               </div>
 
@@ -352,7 +352,7 @@ export default function PerjanjianPerkawinan() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Aset Bisnis</h4>
-                  <p className="text-[11.5px] text-gray-500 font-medium mt-0.5 leading-snug">Saham, PT, dan aset usaha tetap milik pribadi</p>
+                  <p className="text-[14px] text-gray-500 font-medium mt-0.5 leading-snug">Saham, PT, dan aset usaha tetap milik pribadi</p>
                 </div>
               </div>
 
@@ -363,7 +363,7 @@ export default function PerjanjianPerkawinan() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Properti / Real Estate</h4>
-                  <p className="text-[11.5px] text-gray-500 font-medium mt-0.5 leading-snug">Rumah, tanah, &amp; investasi properti</p>
+                  <p className="text-[14px] text-gray-500 font-medium mt-0.5 leading-snug">Rumah, tanah, &amp; investasi properti</p>
                 </div>
               </div>
 
@@ -374,7 +374,7 @@ export default function PerjanjianPerkawinan() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Hak Waris &amp; Hibah</h4>
-                  <p className="text-[11.5px] text-gray-500 font-medium mt-0.5 leading-snug">Warisan keluarga tidak menjadi harta bersama</p>
+                  <p className="text-[14px] text-gray-500 font-medium mt-0.5 leading-snug">Warisan keluarga tidak menjadi harta bersama</p>
                 </div>
               </div>
 
@@ -385,7 +385,7 @@ export default function PerjanjianPerkawinan() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-white leading-tight">Dasar Hukum</h4>
-                  <p className="text-[11.5px] text-gray-400 font-medium mt-0.5 leading-snug">UU No. 1/1974 &amp; Pasal 119–138 KUHPerdata</p>
+                  <p className="text-[14px] text-gray-400 font-medium mt-0.5 leading-snug">UU No. 1/1974 &amp; Pasal 119–138 KUHPerdata</p>
                 </div>
               </div>
             </div>
@@ -397,9 +397,9 @@ export default function PerjanjianPerkawinan() {
               <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <FileText className="w-5 h-5" strokeWidth={2.5} />
-                  <h4 className="text-[12.5px] sm:text-[13px] font-black tracking-wider uppercase">PERJANJIAN PERKAWINAN</h4>
+                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">PERJANJIAN PERKAWINAN</h4>
                 </div>
-                <p className="text-[13.5px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
+                <p className="text-[14px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
                   Perjanjian Perkawinan adalah perjanjian tertulis antara calon/pasangan suami-istri yang <strong className="font-extrabold text-gray-900">mengatur pemisahan harta &amp; kewajiban</strong> selama perkawinan. Dibuat di hadapan notaris dalam bentuk <strong className="font-extrabold text-gray-900">Akta Otentik</strong>, kemudian didaftarkan di KUA (Muslim) atau Dukcapil (Non-Muslim).
                 </p>
               </div>
@@ -408,9 +408,9 @@ export default function PerjanjianPerkawinan() {
               <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Layers className="w-5 h-5 rotate-90" strokeWidth={2.5} />
-                  <h4 className="text-[12.5px] sm:text-[13px] font-black tracking-wider uppercase">PERJANJIAN PRA &amp; PASCA NIKAH</h4>
+                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">PERJANJIAN PRA &amp; PASCA NIKAH</h4>
                 </div>
-                <p className="text-[13.5px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
+                <p className="text-[14px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
                   <strong className="font-extrabold text-gray-900">Perjanjian Pra-Nikah:</strong> dibuat <strong className="font-extrabold text-gray-900">sebelum menikah</strong> &amp; berlaku sejak hari pernikahan. <strong className="font-extrabold text-gray-900">Perjanjian Pasca-Nikah:</strong> dibuat <strong className="font-extrabold text-gray-900">setelah menikah</strong> berdasarkan putusan MK No. 69/2015 &amp; berlaku sejak terdaftar. Keduanya sama-sama sah secara hukum.
                 </p>
               </div>
@@ -419,9 +419,9 @@ export default function PerjanjianPerkawinan() {
               <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <ShieldCheck className="w-5 h-5" strokeWidth={2.5} />
-                  <h4 className="text-[12.5px] sm:text-[13px] font-black tracking-wider uppercase">MANFAAT PERJANJIAN PISAH HARTA</h4>
+                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">MANFAAT PERJANJIAN PISAH HARTA</h4>
                 </div>
-                <p className="text-[13.5px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
+                <p className="text-[14px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
                   <strong className="font-extrabold text-gray-900">(1)</strong> Lindungi aset pribadi dari kewajiban pasangan, <strong className="font-extrabold text-gray-900">(2)</strong> WNI bisa beli properti dengan SHM meski menikah dengan WNA, <strong className="font-extrabold text-gray-900">(3)</strong> Aset bisnis aman dari risiko perceraian, <strong className="font-extrabold text-gray-900">(4)</strong> Lebih transparan soal keuangan pasangan, <strong className="font-extrabold text-gray-900">(5)</strong> Hindari sengketa harta di masa depan.
                 </p>
               </div>
@@ -438,11 +438,11 @@ export default function PerjanjianPerkawinan() {
 
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DOKUMEN PERSYARATAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DOKUMEN PERSYARATAN</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Yang perlu disiapkan.
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
               Dokumen yang dibutuhkan beda untuk pembuatan akta &amp; registrasi resmi. Tim kami pandu pengumpulan &amp; verifikasi.
             </p>
           </div>
@@ -460,33 +460,33 @@ export default function PerjanjianPerkawinan() {
                   </div>
                   <div className="text-left">
                     <h4 className="text-[16px] font-black text-gray-900 leading-tight">Pembuatan Akta Perjanjian</h4>
-                    <p className="text-[12px] text-gray-500 font-medium mt-0.5 leading-snug">Untuk drafting di hadapan notaris</p>
+                    <p className="text-[14px] text-gray-500 font-medium mt-0.5 leading-snug">Untuk drafting di hadapan notaris</p>
                   </div>
                 </div>
 
                 {/* Requirements Checkpoints */}
                 <ul className="space-y-4 pt-6 text-left">
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">KTP &amp; KK</strong> kedua pihak (suami &amp; istri)</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">NPWP</strong> kedua pihak (jika ada)</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Buku Nikah / Akta Perkawinan</strong> (untuk postnup)</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Daftar aset &amp; utang</strong> masing-masing pihak</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Surat keterangan domisili</strong> kedua pihak</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Kehadiran kedua pihak</strong> saat penandatanganan</span>
                   </li>
@@ -504,33 +504,33 @@ export default function PerjanjianPerkawinan() {
                   </div>
                   <div className="text-left">
                     <h4 className="text-[16px] font-black text-gray-900 leading-tight">Registrasi KUA / Dukcapil</h4>
-                    <p className="text-[12px] text-gray-500 font-medium mt-0.5 leading-snug">Agar perjanjian berkekuatan hukum penuh</p>
+                    <p className="text-[14px] text-gray-500 font-medium mt-0.5 leading-snug">Agar perjanjian berkekuatan hukum penuh</p>
                   </div>
                 </div>
 
                 {/* Requirements Checkpoints */}
                 <ul className="space-y-4 pt-6 text-left">
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Akta Perjanjian</strong> dari notaris (asli + salinan)</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Buku Nikah / Akta Perkawinan</strong></span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">KTP &amp; KK</strong> kedua pihak (asli + fotokopi)</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Surat Permohonan</strong> ke KUA / Dukcapil</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Untuk Muslim</strong>: ke KUA tempat pernikahan tercatat</span>
                   </li>
-                  <li className="flex items-start text-[13.5px] text-gray-650 font-normal leading-relaxed">
+                  <li className="flex items-start text-[14px] text-gray-650 font-normal leading-relaxed">
                     <Check className="w-4.5 h-4.5 text-[#990202] mr-3.5 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                     <span><strong className="font-extrabold text-gray-900">Untuk Non-Muslim</strong>: ke Dukcapil sesuai domisili</span>
                   </li>
@@ -549,11 +549,11 @@ export default function PerjanjianPerkawinan() {
           {/* Section Header */}
           <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
             <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA PERJANJIAN PERKAWINAN</p>
+              <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA PERJANJIAN PERKAWINAN</p>
               <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 2 layanan — bisa pilih salah satu atau kombinasi.
               </h2>
-              <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
+              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
                 Pembuatan akta &amp; registrasi resmi bisa dipesan terpisah. Tim kami rekomendasikan keduanya untuk perlindungan hukum penuh.
               </p>
             </div>
@@ -581,20 +581,20 @@ export default function PerjanjianPerkawinan() {
                   {/* Header Container (Crimson) */}
                   <div className="bg-[#990202] px-6 py-9 text-center text-white relative flex flex-col items-center">
                     {/* Paling Populer Badge */}
-                    <div className="bg-[#800000] text-white text-[9.5px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider mb-3.5 shadow-sm border border-red-500/20">
+                    <div className="bg-[#800000] text-white text-[14px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider mb-3.5 shadow-sm border border-red-500/20">
                       Paling Populer
                     </div>
-                    <h4 className="text-[11.5px] sm:text-[14px] font-black tracking-widest uppercase">
+                    <h4 className="text-[14px] sm:text-[14px] font-black tracking-widest uppercase">
                       PEMBUATAN PERJANJIAN
                     </h4>
-                    <div className="mt-3 text-[13px] text-white/50 line-through font-bold">
+                    <div className="mt-3 text-[14px] text-white/50 line-through font-bold">
                       Rp 8.000.000
                     </div>
                     <div className="mt-0.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
                       <span className="text-[18px] mt-1.5 font-extrabold mr-1">Rp</span>
                       <span>3.999.000</span>
                     </div>
-                    <p className="text-[9.5px] font-black text-white/70 tracking-widest uppercase mt-2.5">
+                    <p className="text-[14px] font-black text-white/70 tracking-widest uppercase mt-2.5">
                       TANPA TAMBAHAN BIAYA APAPUN
                     </p>
                   </div>
@@ -603,7 +603,7 @@ export default function PerjanjianPerkawinan() {
                   <div className="p-6 sm:p-8 space-y-6 text-left">
                     {/* Lama Proses */}
                     <div className="space-y-2">
-                      <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase">
+                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">
                         LAMA PROSES(1)
                       </h5>
                       <div className="flex items-center text-[14px] font-black text-gray-900">
@@ -614,14 +614,14 @@ export default function PerjanjianPerkawinan() {
 
                     {/* Yang Diperoleh */}
                     <div className="space-y-3.5 border-t border-gray-100 pt-5">
-                      <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
+                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
                         YANG DIPEROLEH
                       </h5>
-                      <div className="flex items-start text-[13.5px] text-gray-700 leading-relaxed font-semibold">
+                      <div className="flex items-start text-[14px] text-gray-700 leading-relaxed font-semibold">
                         <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
                         <span>Konsultasi Pisah Harta dengan ahli hukum keluarga</span>
                       </div>
-                      <div className="flex items-start text-[13.5px] text-gray-700 leading-relaxed font-semibold">
+                      <div className="flex items-start text-[14px] text-gray-700 leading-relaxed font-semibold">
                         <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
                         <span>Akta Perjanjian Pisah Harta di hadapan notaris</span>
                       </div>
@@ -629,14 +629,14 @@ export default function PerjanjianPerkawinan() {
 
                     {/* Bonus Block */}
                     <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
-                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
+                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
                         BONUS
                       </h5>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Layanan Personal Legal Assistance</span>
                       </div>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>1 Kupon Undian iPhone</span>
                       </div>
@@ -644,22 +644,22 @@ export default function PerjanjianPerkawinan() {
 
                     {/* Extra Bonus Block */}
                     <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
-                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
+                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
                         EXTRA BONUS
                       </h5>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Voucher EasyLegal Rp 250.000</span>
                       </div>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Dokumen SOP Karyawan</span>
                       </div>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Dokumen SOP Perusahaan</span>
                       </div>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Dokumen Kontrak Bisnis</span>
                       </div>
@@ -691,17 +691,17 @@ export default function PerjanjianPerkawinan() {
                 <div>
                   {/* Header Container (Black) */}
                   <div className="bg-[#151515] px-6 py-9 text-center text-white relative flex flex-col items-center justify-center min-h-[174px]">
-                    <h4 className="text-[11.5px] sm:text-[14px] font-black tracking-widest uppercase">
+                    <h4 className="text-[14px] sm:text-[14px] font-black tracking-widest uppercase">
                       REGISTRASI KUA / DUKCAPIL
                     </h4>
-                    <div className="mt-3 text-[13px] text-white/40 line-through font-bold">
+                    <div className="mt-3 text-[14px] text-white/40 line-through font-bold">
                       Rp 4.000.000
                     </div>
                     <div className="mt-0.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
                       <span className="text-[18px] mt-1.5 font-extrabold mr-1">Rp</span>
                       <span>1.999.000</span>
                     </div>
-                    <p className="text-[9.5px] font-black text-white/60 tracking-widest uppercase mt-2.5">
+                    <p className="text-[14px] font-black text-white/60 tracking-widest uppercase mt-2.5">
                       TANPA TAMBAHAN BIAYA APAPUN
                     </p>
                   </div>
@@ -710,7 +710,7 @@ export default function PerjanjianPerkawinan() {
                   <div className="p-6 sm:p-8 space-y-6 text-left">
                     {/* Lama Proses */}
                     <div className="space-y-2">
-                      <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase">
+                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">
                         LAMA PROSES(2)
                       </h5>
                       <div className="flex items-center text-[14px] font-black text-gray-900">
@@ -721,10 +721,10 @@ export default function PerjanjianPerkawinan() {
 
                     {/* Yang Diperoleh */}
                     <div className="space-y-3.5 border-t border-gray-100 pt-5">
-                      <h5 className="text-[11.5px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
+                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
                         YANG DIPEROLEH
                       </h5>
-                      <div className="flex items-start gap-2.5 text-[13.5px] text-gray-700 leading-relaxed font-semibold">
+                      <div className="flex items-start gap-2.5 text-[14px] text-gray-700 leading-relaxed font-semibold">
                         <Check className="w-5 h-5 text-emerald-600 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
                         <div className="flex-1 grid grid-cols-12 gap-x-1">
                           <span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span>
@@ -732,7 +732,7 @@ export default function PerjanjianPerkawinan() {
                           <span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Muslim)</span>
                         </div>
                       </div>
-                      <div className="flex items-start gap-2.5 text-[13.5px] text-gray-700 leading-relaxed font-semibold">
+                      <div className="flex items-start gap-2.5 text-[14px] text-gray-700 leading-relaxed font-semibold">
                         <Check className="w-5 h-5 text-emerald-600 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
                         <div className="flex-1 grid grid-cols-12 gap-x-1">
                           <span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span>
@@ -744,14 +744,14 @@ export default function PerjanjianPerkawinan() {
 
                     {/* Bonus Block */}
                     <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
-                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
+                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
                         BONUS
                       </h5>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Layanan Personal Legal Assistance</span>
                       </div>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>1 Kupon Undian iPhone</span>
                       </div>
@@ -759,22 +759,22 @@ export default function PerjanjianPerkawinan() {
 
                     {/* Extra Bonus Block */}
                     <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
-                      <h5 className="text-[11px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
+                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
                         EXTRA BONUS
                       </h5>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Voucher EasyLegal Rp 250.000</span>
                       </div>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Dokumen SOP Karyawan</span>
                       </div>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Dokumen SOP Perusahaan</span>
                       </div>
-                      <div className="flex items-start text-[12.5px] text-gray-700 font-semibold leading-relaxed">
+                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Dokumen Kontrak Bisnis</span>
                       </div>
@@ -808,15 +808,15 @@ export default function PerjanjianPerkawinan() {
 
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SKEMA PEMBUATAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SKEMA PEMBUATAN</p>
             <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Alur kerja dari konsultasi sampai registrasi.
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
               Tim notaris &amp; legal kami pegang seluruh tahapan — Anda cukup datang sekali untuk tanda tangan.
             </p>
             {/* Scroll indicator text */}
-            <div className="pt-4 text-[11px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
               <span>Geser untuk lihat semua langkah</span>
               <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
             </div>
@@ -844,13 +844,13 @@ export default function PerjanjianPerkawinan() {
                       </h4>
                       
                       {/* Duration Badge */}
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[10px] font-black uppercase py-1 px-3 rounded-full">
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
                         <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
                         <span>{step.duration}</span>
                       </div>
 
                       {/* Description */}
-                      <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
 
                     </div>
 
@@ -861,7 +861,7 @@ export default function PerjanjianPerkawinan() {
                       {/* Checklist */}
                       <ul className="space-y-2">
                         {step.points.map((point, pIdx) => (
-                          <li key={pIdx} className="flex items-start text-[12px] font-bold text-gray-700 leading-tight">
+                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
                             <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                             <span dangerouslySetInnerHTML={{ __html: point }} />
                           </li>
@@ -923,7 +923,7 @@ export default function PerjanjianPerkawinan() {
             </a>
 
             {/* Response Info */}
-            <div className="flex items-center justify-center gap-1.5 text-[12px] sm:text-[12.5px] text-[#5E5E5E] font-medium pt-1 px-1">
+            <div className="flex items-center justify-center gap-1.5 text-[14px] sm:text-[14px] text-[#5E5E5E] font-medium pt-1 px-1">
               <span className="text-emerald-500 font-bold">✓</span>
               <span>Konsultasi rahasia · Senin–Sabtu 08:00–20:00</span>
             </div>

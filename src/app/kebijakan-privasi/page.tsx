@@ -60,7 +60,7 @@ export default function KebijakanPrivasiPage() {
         <h1 className="font-heading text-3xl sm:text-4xl md:text-[42px] font-extrabold text-gray-950 tracking-tight leading-tight mb-4">
           Kebijakan Privasi
         </h1>
-        <p className="text-[13px] sm:text-sm text-gray-400 mb-10">
+        <p className="text-[14px] sm:text-sm text-gray-400 mb-10">
           Terakhir diperbarui: 29 Juni 2025
         </p>
 

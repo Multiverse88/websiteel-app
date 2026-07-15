@@ -17,7 +17,7 @@ export default function ShareButton() {
   return (
     <button
       onClick={handleShare}
-      className={`inline-flex items-center justify-center px-4 py-2.5 border font-bold text-[13px] rounded-xl transition-all duration-200 shadow-sm ${
+      className={`inline-flex items-center justify-center px-4 py-2.5 border font-bold text-[14px] rounded-xl transition-all duration-200 shadow-sm ${
         copied
           ? "border-emerald-200 bg-emerald-50 text-emerald-700"
           : "border-gray-200 text-gray-700 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5]"

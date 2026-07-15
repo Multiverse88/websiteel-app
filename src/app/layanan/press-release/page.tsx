@@ -205,7 +205,7 @@ export default function PressRelease() {
             <div className="lg:col-span-7 space-y-6 text-left">
 
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -213,13 +213,13 @@ export default function PressRelease() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[12.5px] font-bold text-gray-900">Press Release</span>
+                <span className="text-[14px] font-bold text-gray-900">Press Release</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100/50 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[10px] sm:text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">PR &amp; Media</span>
+                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">PR &amp; Media</span>
               </div>
 
               {/* Headline */}
@@ -229,7 +229,7 @@ export default function PressRelease() {
               </h1>
 
               {/* Description */}
-              <p className="text-[12.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
+              <p className="text-[14px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
                 Tingkatkan kredibilitas brand &amp; jangkau jutaan pembaca lewat publikasi press release di 100+ media online terpercaya. Garansi 100% terbit.
               </p>
 
@@ -260,8 +260,8 @@ export default function PressRelease() {
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[12.5px] sm:text-[13.5px] font-black text-gray-950">1–3 Hari</div>
-                    <div className="text-[10px] sm:text-[10.5px] text-gray-500 font-semibold">Berita terbit</div>
+                    <div className="text-[14px] sm:text-[14px] font-black text-gray-950">1–3 Hari</div>
+                    <div className="text-[14px] sm:text-[14px] text-gray-500 font-semibold">Berita terbit</div>
                   </div>
                 </div>
 
@@ -271,8 +271,8 @@ export default function PressRelease() {
                     <Menu className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[12.5px] sm:text-[13.5px] font-black text-gray-950">100+ Media</div>
-                    <div className="text-[10px] sm:text-[10.5px] text-gray-500 font-semibold">Pilihan publikasi</div>
+                    <div className="text-[14px] sm:text-[14px] font-black text-gray-950">100+ Media</div>
+                    <div className="text-[14px] sm:text-[14px] text-gray-500 font-semibold">Pilihan publikasi</div>
                   </div>
                 </div>
 
@@ -282,8 +282,8 @@ export default function PressRelease() {
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[12.5px] sm:text-[13.5px] font-black text-gray-950">100% Garansi</div>
-                    <div className="text-[10px] sm:text-[10.5px] text-gray-500 font-semibold">Berita tayang</div>
+                    <div className="text-[14px] sm:text-[14px] font-black text-gray-950">100% Garansi</div>
+                    <div className="text-[14px] sm:text-[14px] text-gray-500 font-semibold">Berita tayang</div>
                   </div>
                 </div>
               </div>
@@ -311,20 +311,20 @@ export default function PressRelease() {
                     <h4 className="text-[22px] sm:text-[25px] font-black text-white leading-[1.3] tracking-tight">
                       &quot;Startup UMKM Indonesia Catat Pertumbuhan Pesat di Kuartal Pertama 2026&quot;
                     </h4>
-                    <p className="text-[12px] sm:text-[13px] text-gray-300 leading-relaxed font-semibold max-w-[90%]">
+                    <p className="text-[14px] sm:text-[14px] text-gray-300 leading-relaxed font-semibold max-w-[90%]">
                       Liputan eksklusif tentang ekspansi bisnis Anda — terbit permanen di media nasional pilihan dengan jangkauan jutaan pembaca.
                     </p>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
                       {["#Bisnis", "#Startup", "#UMKM", "#Inovasi"].map((tag) => (
-                        <span key={tag} className="text-[10px] sm:text-[10.5px] font-bold text-gray-300 bg-white/10 px-2.5 py-1 rounded-md border border-white/5 backdrop-blur-sm">
+                        <span key={tag} className="text-[14px] sm:text-[14px] font-bold text-gray-300 bg-white/10 px-2.5 py-1 rounded-md border border-white/5 backdrop-blur-sm">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="pt-4 sm:pt-6 flex items-center text-[9.5px] sm:text-[10px] font-bold text-gray-400">
+                    <div className="pt-4 sm:pt-6 flex items-center text-[14px] sm:text-[14px] font-bold text-gray-400">
                       <strong className="text-white mr-1.5">EasyPress</strong> - Dipublikasi di Detik, Kontan, Tribun &amp; 100+ media lainnya
                     </div>
                   </div>
@@ -337,8 +337,8 @@ export default function PressRelease() {
                     <Megaphone className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[12.5px] font-black text-gray-950 leading-none">100+ Media Nasional</div>
-                    <div className="text-[9.5px] text-gray-500 font-semibold mt-1">Detik · Kontan · Industry.co.id</div>
+                    <div className="text-[14px] font-black text-gray-950 leading-none">100+ Media Nasional</div>
+                    <div className="text-[14px] text-gray-500 font-semibold mt-1">Detik · Kontan · Industry.co.id</div>
                   </div>
                 </div>
 
@@ -348,8 +348,8 @@ export default function PressRelease() {
                     <Clock className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[12.5px] font-black text-gray-950 leading-none">Permanen Online</div>
-                    <div className="text-[9.5px] text-gray-500 font-semibold mt-1">Berita tidak akan dihapus</div>
+                    <div className="text-[14px] font-black text-gray-950 leading-none">Permanen Online</div>
+                    <div className="text-[14px] text-gray-500 font-semibold mt-1">Berita tidak akan dihapus</div>
                   </div>
                 </div>
 
@@ -366,11 +366,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">MENGENAL PRESS RELEASE</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">MENGENAL PRESS RELEASE</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Press Release &amp; kenapa penting untuk bisnis?
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Cara tercepat &amp; paling efektif membangun kredibilitas bisnis lewat liputan media kredibel — bukan iklan biasa.
             </p>
           </div>
@@ -379,7 +379,7 @@ export default function PressRelease() {
 
             {/* Left Column: KONTEN YANG COCOK (Unified soft-pink card container) */}
             <div className="lg:col-span-5 bg-[#FFF5F5] rounded-[32px] p-6 sm:p-7.5 space-y-3.5 text-left shadow-[0_10px_35px_rgba(153,2,2,0.06)]">
-              <h3 className="text-[12px] sm:text-[13px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
+              <h3 className="text-[14px] sm:text-[14px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
                 KONTEN YANG COCOK UNTUK PRESS RELEASE
               </h3>
 
@@ -390,7 +390,7 @@ export default function PressRelease() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Peluncuran Produk Baru</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5 leading-snug">Soft / hard launch produk &amp; layanan</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Soft / hard launch produk &amp; layanan</p>
                 </div>
               </div>
 
@@ -401,7 +401,7 @@ export default function PressRelease() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Liputan Event</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5 leading-snug">Seminar, grand opening, gathering</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Seminar, grand opening, gathering</p>
                 </div>
               </div>
 
@@ -412,7 +412,7 @@ export default function PressRelease() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Centang Biru Sosmed</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5 leading-snug">Syarat verifikasi Instagram &amp; X</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Syarat verifikasi Instagram &amp; X</p>
                 </div>
               </div>
 
@@ -423,7 +423,7 @@ export default function PressRelease() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Syarat Shopee Mall</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5 leading-snug">Salah satu syarat naik tier marketplace</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Salah satu syarat naik tier marketplace</p>
                 </div>
               </div>
 
@@ -434,7 +434,7 @@ export default function PressRelease() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Brand Building</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5 leading-snug">Bangun otoritas &amp; positioning</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Bangun otoritas &amp; positioning</p>
                 </div>
               </div>
 
@@ -445,7 +445,7 @@ export default function PressRelease() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-black text-gray-900 leading-tight">Klarifikasi Publik</h4>
-                  <p className="text-[11.5px] text-gray-500 font-semibold mt-0.5 leading-snug">Respons resmi atas isu / hoaks</p>
+                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Respons resmi atas isu / hoaks</p>
                 </div>
               </div>
             </div>
@@ -457,7 +457,7 @@ export default function PressRelease() {
               <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Megaphone className="w-5 h-5" />
-                  <h4 className="text-[13px] sm:text-[13.5px] font-black tracking-wider uppercase">PRESS RELEASE</h4>
+                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">PRESS RELEASE</h4>
                 </div>
                 <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
                   Press release (siaran pers) adalah <strong className="font-extrabold text-gray-900">publikasi resmi dari perusahaan</strong> berbentuk artikel berita yang dimuat di media online jurnalistik. Berbeda dari iklan, press release ditulis dengan gaya jurnalistik &amp; punya kredibilitas tinggi karena terbit di media terpercaya.
@@ -468,7 +468,7 @@ export default function PressRelease() {
               <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Layers className="w-5 h-5" />
-                  <h4 className="text-[13px] sm:text-[13.5px] font-black tracking-wider uppercase">MANFAAT UNTUK BISNIS</h4>
+                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">MANFAAT UNTUK BISNIS</h4>
                 </div>
                 <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
                   Press release membantu <strong className="font-extrabold text-gray-900">membangun trust di mata konsumen</strong>, memperkuat positioning brand, &amp; jadi salah satu syarat verifikasi akun media sosial (centang biru), marketplace tier premium (Shopee Mall, Tokopedia Official), serta syarat tender korporat.
@@ -479,7 +479,7 @@ export default function PressRelease() {
               <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Clock className="w-5 h-5" />
-                  <h4 className="text-[13px] sm:text-[13.5px] font-black tracking-wider uppercase">YANG MEMBEDAKAN EASYPRESS</h4>
+                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">YANG MEMBEDAKAN EASYPRESS</h4>
                 </div>
                 <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
                   Kami fokus pada <strong className="font-extrabold text-gray-900">produk jurnalistik, bukan advertorial</strong> — artikel ditulis dengan sudut pandang berita, bukan promosi terselubung. <strong className="font-extrabold text-gray-900">Garansi 100% terbit</strong> di media yang Anda pilih, berita <strong className="font-extrabold text-gray-900">permanen online</strong>, &amp; ada laporan publikasi lengkap.
@@ -498,11 +498,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KEBUTUHAN PRESS RELEASE</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KEBUTUHAN PRESS RELEASE</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Kapan kamu butuh press release?
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Bukan cuma untuk perusahaan besar — UMKM &amp; startup juga butuh press release di momen-momen kritis ini.
             </p>
           </div>
@@ -517,7 +517,7 @@ export default function PressRelease() {
                   <Megaphone className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
                 <h4 className="text-[15px] font-black text-gray-950 leading-tight">Launching Produk / Brand</h4>
-                <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Bangun awareness saat soft / hard launch — pastikan target market tahu produkmu rilis lewat media yang mereka baca.
                 </p>
               </div>
@@ -530,7 +530,7 @@ export default function PressRelease() {
                   <Calendar className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
                 <h4 className="text-[15px] font-black text-gray-950 leading-tight">Liputan Event &amp; Aktivitas</h4>
-                <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Seminar, grand opening, gathering, peluncuran kerjasama — liputan media buat acara tersebut terdokumentasi permanen.
                 </p>
               </div>
@@ -543,7 +543,7 @@ export default function PressRelease() {
                   <ShieldCheck className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
                 <h4 className="text-[15px] font-black text-gray-950 leading-tight">Verifikasi Centang Biru</h4>
-                <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Salah satu syarat verifikasi akun bisnis di Instagram, X, &amp; Facebook adalah liputan minimal 3–5 media kredibel.
                 </p>
               </div>
@@ -556,7 +556,7 @@ export default function PressRelease() {
                   <ShoppingCart className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
                 <h4 className="text-[15px] font-black text-gray-950 leading-tight">Syarat Shopee Mall &amp; Marketplace</h4>
-                <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Shopee Mall, Tokopedia Official Store, &amp; Lazada Mall butuh seller dengan kredibilitas media — press release jadi bukti.
                 </p>
               </div>
@@ -569,7 +569,7 @@ export default function PressRelease() {
                   <Layers className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
                 <h4 className="text-[15px] font-black text-gray-950 leading-tight">Brand Building Jangka Panjang</h4>
-                <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Tampil rutin di media membangun otoritas brand — calon klien akan lebih percaya bisnis yang sering diliput pers.
                 </p>
               </div>
@@ -582,7 +582,7 @@ export default function PressRelease() {
                   <AlertCircle className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
                 <h4 className="text-[15px] font-black text-gray-950 leading-tight">Klarifikasi Publik / Hoaks</h4>
-                <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Saat ada isu negatif / hoaks tentang brand, klarifikasi resmi via media kredibel adalah cara paling efektif menetralisir.
                 </p>
               </div>
@@ -599,11 +599,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KENAPA PRESS RELEASE</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KENAPA PRESS RELEASE</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Investasi sekali — manfaat jangka panjang.
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Berbeda dari iklan yang hilang setelah budget habis, press release tetap online &amp; bisa diakses bertahun-tahun.
             </p>
           </div>
@@ -618,7 +618,7 @@ export default function PressRelease() {
                   <Heart className="w-5 h-5 text-[#990202]" />
                 </div>
                 <h4 className="text-[14px] font-black text-gray-950 leading-tight">Bangun Kepercayaan</h4>
-                <p className="text-[11.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Konsumen lebih percaya berita media kredibel dibanding iklan langsung dari brand.
                 </p>
               </div>
@@ -631,7 +631,7 @@ export default function PressRelease() {
                   <Award className="w-5 h-5 text-[#990202]" />
                 </div>
                 <h4 className="text-[14px] font-black text-gray-950 leading-tight">Reputasi &amp; Otoritas</h4>
-                <p className="text-[11.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Liputan media kredibel naikkan persepsi brand sebagai pemain serius di industri.
                 </p>
               </div>
@@ -644,7 +644,7 @@ export default function PressRelease() {
                   <TrendingUp className="w-5 h-5 text-[#990202]" />
                 </div>
                 <h4 className="text-[14px] font-black text-gray-950 leading-tight">Boost Promosi</h4>
-                <p className="text-[11.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Berita media jadi materi promosi multi-channel — share di sosmed, kirim ke calon klien.
                 </p>
               </div>
@@ -657,7 +657,7 @@ export default function PressRelease() {
                   <Check className="w-5 h-5 text-[#990202]" strokeWidth={3} />
                 </div>
                 <h4 className="text-[14px] font-black text-gray-950 leading-tight">Kredibilitas Tinggi</h4>
-                <p className="text-[11.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Bukti konkret bisnismu aktif &amp; berkembang — penting untuk audit investor &amp; partner.
                 </p>
               </div>
@@ -670,7 +670,7 @@ export default function PressRelease() {
                   <Globe className="w-5 h-5 text-[#990202]" />
                 </div>
                 <h4 className="text-[14px] font-black text-gray-950">Jangkauan Luas</h4>
-                <p className="text-[11.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Akses jutaan pembaca media nasional — efektivitas yang sulit dicapai dengan iklan organik.
                 </p>
               </div>
@@ -683,7 +683,7 @@ export default function PressRelease() {
                   <Activity className="w-5 h-5 text-[#990202]" />
                 </div>
                 <h4 className="text-[14px] font-black text-gray-950">SEO &amp; Brand Search</h4>
-                <p className="text-[11.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Artikel media indeks di Google — naikkan visibilitas saat orang search nama brand.
                 </p>
               </div>
@@ -696,7 +696,7 @@ export default function PressRelease() {
                   <ShieldCheck className="w-5 h-5 text-[#990202]" />
                 </div>
                 <h4 className="text-[14px] font-black text-gray-950">Permanen Online</h4>
-                <p className="text-[11.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Berita terbit permanen — tidak akan dihapus, bisa diakses 5–10 tahun ke depan.
                 </p>
               </div>
@@ -709,7 +709,7 @@ export default function PressRelease() {
                   <BarChart className="w-5 h-5 text-[#990202]" />
                 </div>
                 <h4 className="text-[14px] font-black text-gray-950">Kompetitif vs Iklan</h4>
-                <p className="text-[11.5px] text-gray-500 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
                   Biaya 1x publikasi jauh lebih hemat dibanding iklan berbayar dengan jangkauan setara.
                 </p>
               </div>
@@ -726,11 +726,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DAFTAR MEDIA PARTNER</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DAFTAR MEDIA PARTNER</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Publikasi di 100+ media online terpercaya.
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Pilih media yang sesuai target audiens — ekonomi, lifestyle, teknologi, hingga media daerah.
             </p>
           </div>
@@ -745,14 +745,14 @@ export default function PressRelease() {
                 {media.icon ? (
                   <img src={media.icon} alt={media.label} className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full object-cover" />
                 ) : (
-                  <span className="text-gray-500 font-bold text-[12.5px]">{media.label}</span>
+                  <span className="text-gray-500 font-bold text-[14px]">{media.label}</span>
                 )}
               </div>
             ))}
           </div>
 
           {/* Small footer text */}
-          <p className="text-[11.5px] text-gray-500 font-bold mt-8 max-w-4xl mx-auto">
+          <p className="text-[14px] text-gray-500 font-bold mt-8 max-w-4xl mx-auto">
             Daftar lengkap media tersedia saat konsultasi — termasuk media nasional, ekonomi-bisnis, lifestyle, teknologi, &amp; media daerah dengan tier rate berbeda.
           </p>
 
@@ -766,11 +766,11 @@ export default function PressRelease() {
           {/* Section Header */}
           <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
             <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[11.5px] font-black text-[#990202] uppercase tracking-[0.22em]">BIAYA JASA PRESS RELEASE</p>
+              <p className="text-[14px] font-black text-[#990202] uppercase tracking-[0.22em]">BIAYA JASA PRESS RELEASE</p>
               <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-900 leading-tight tracking-tight">
                 Pilih paket sesuai target jangkauan.
               </h2>
-              <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed">
+              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed">
                 Garansi 100% berita terbit &amp; permanen online. Harga sudah termasuk biaya penerbitan di media yang dipilih.
               </p>
             </div>
@@ -797,17 +797,17 @@ export default function PressRelease() {
               <div>
                 {/* Header */}
                 <div className="bg-[#151515] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <h4 className="text-[12px] font-black tracking-widest uppercase opacity-85">
+                  <h4 className="text-[14px] font-black tracking-widest uppercase opacity-85">
                     PAKET A
                   </h4>
-                  <div className="mt-3 text-[13px] text-white/50 line-through font-bold">
+                  <div className="mt-3 text-[14px] text-white/50 line-through font-bold">
                     Rp 2.400.000
                   </div>
                   <div className="mt-0.5 text-[30px] sm:text-[34px] font-black tracking-tight flex items-start justify-center">
                     <span className="text-[16px] mt-1.5 font-extrabold mr-1">Rp</span>
                     <span>1.199.000</span>
                   </div>
-                  <p className="text-[9.5px] font-black text-white/60 tracking-wider uppercase mt-2.5">
+                  <p className="text-[14px] font-black text-white/60 tracking-wider uppercase mt-2.5">
                     / SEKALI PUBLIKASI
                   </p>
                 </div>
@@ -816,10 +816,10 @@ export default function PressRelease() {
                 <div className="p-6 sm:p-4 sm:p-7 space-y-4 sm:space-y-6 text-left">
                   {/* Lama Proses */}
                   <div className="space-y-2">
-                    <h5 className="text-[11px] font-black text-[#990202] tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
                       LAMA PROSES
                     </h5>
-                    <div className="flex items-center text-[11.5px] sm:text-[13px] font-semibold text-gray-700">
+                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
                       <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
                       <span>
                         <strong className="font-extrabold text-gray-900">1–3 hari kerja</strong> sampai terbit
@@ -829,23 +829,23 @@ export default function PressRelease() {
 
                   {/* Yang Diperoleh */}
                   <div className="space-y-2.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[11px] font-black text-[#990202] tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
                       YANG DIPEROLEH
                     </h5>
                     <ul className="space-y-2">
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Bebas pilih <strong className="font-extrabold text-gray-900">1 media</strong> publikasi</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Berita terbit <strong className="font-extrabold text-gray-900">permanen</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Garansi <strong className="font-extrabold text-gray-900">100% tayang</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Laporan hasil publikasi</span>
                       </li>
@@ -854,23 +854,23 @@ export default function PressRelease() {
 
                   {/* Bonus Container */}
                   <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
-                    <h5 className="text-[10.5px] font-black text-gray-900 tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
                       BONUS
                     </h5>
                     <ul className="space-y-2">
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Potongan harga <strong className="font-extrabold text-gray-900">Rp 200.000</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span><strong className="font-extrabold text-gray-900">100+ E-Course</strong> digital marketing</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span><strong className="font-extrabold text-gray-900">2.500+</strong> Template konten digital</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Kalender konten sosial media</span>
                       </li>
@@ -886,7 +886,7 @@ export default function PressRelease() {
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket A Press Release. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
+                  className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
                 >
                   Pilih Paket A
                 </a>
@@ -903,20 +903,20 @@ export default function PressRelease() {
               <div>
                 {/* Header */}
                 <div className="bg-[#990202] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[9px] font-black tracking-[0.25em] uppercase py-1 shadow-inner">
+                  <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[14px] font-black tracking-[0.25em] uppercase py-1 shadow-inner">
                     PALING POPULER
                   </div>
-                  <h4 className="text-[12px] font-black tracking-widest uppercase opacity-90 mt-2">
+                  <h4 className="text-[14px] font-black tracking-widest uppercase opacity-90 mt-2">
                     PAKET B
                   </h4>
-                  <div className="mt-3 text-[13px] text-white/50 line-through font-bold">
+                  <div className="mt-3 text-[14px] text-white/50 line-through font-bold">
                     Rp 10.000.000
                   </div>
                   <div className="mt-0.5 text-[30px] sm:text-[34px] font-black tracking-tight flex items-start justify-center">
                     <span className="text-[16px] mt-1.5 font-extrabold mr-1">Rp</span>
                     <span>4.999.000</span>
                   </div>
-                  <p className="text-[9.5px] font-black text-white/60 tracking-wider uppercase mt-2.5">
+                  <p className="text-[14px] font-black text-white/60 tracking-wider uppercase mt-2.5">
                     / SEKALI PUBLIKASI
                   </p>
                 </div>
@@ -925,10 +925,10 @@ export default function PressRelease() {
                 <div className="p-6 sm:p-4 sm:p-7 space-y-4 sm:space-y-6 text-left">
                   {/* Lama Proses */}
                   <div className="space-y-2">
-                    <h5 className="text-[11px] font-black text-[#990202] tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
                       LAMA PROSES
                     </h5>
-                    <div className="flex items-center text-[11.5px] sm:text-[13px] font-semibold text-gray-700">
+                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
                       <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
                       <span>
                         <strong className="font-extrabold text-gray-900">1–3 hari kerja</strong> sampai terbit
@@ -938,23 +938,23 @@ export default function PressRelease() {
 
                   {/* Yang Diperoleh */}
                   <div className="space-y-2.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[11px] font-black text-[#990202] tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
                       YANG DIPEROLEH
                     </h5>
                     <ul className="space-y-2">
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Bebas pilih <strong className="font-extrabold text-gray-900">5 media</strong> publikasi</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Berita terbit <strong className="font-extrabold text-gray-900">permanen</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Garansi <strong className="font-extrabold text-gray-900">100% tayang</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Laporan hasil publikasi</span>
                       </li>
@@ -963,23 +963,23 @@ export default function PressRelease() {
 
                   {/* Bonus Container */}
                   <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
-                    <h5 className="text-[10.5px] font-black text-gray-900 tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
                       BONUS
                     </h5>
                     <ul className="space-y-2">
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Potongan harga <strong className="font-extrabold text-gray-900">Rp 200.000</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span><strong className="font-extrabold text-gray-900">100+ E-Course</strong> digital marketing</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span><strong className="font-extrabold text-gray-900">2.500+</strong> Template konten digital</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Kalender konten sosial media</span>
                       </li>
@@ -995,7 +995,7 @@ export default function PressRelease() {
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket B Press Release. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
+                  className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
                 >
                   Pilih Paket B
                 </a>
@@ -1012,17 +1012,17 @@ export default function PressRelease() {
               <div>
                 {/* Header */}
                 <div className="bg-[#151515] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <h4 className="text-[12px] font-black tracking-widest uppercase opacity-85">
+                  <h4 className="text-[14px] font-black tracking-widest uppercase opacity-85">
                     PAKET C
                   </h4>
-                  <div className="mt-3 text-[13px] text-white/50 line-through font-bold">
+                  <div className="mt-3 text-[14px] text-white/50 line-through font-bold">
                     Rp 18.000.000
                   </div>
                   <div className="mt-0.5 text-[30px] sm:text-[34px] font-black tracking-tight flex items-start justify-center">
                     <span className="text-[16px] mt-1.5 font-extrabold mr-1">Rp</span>
                     <span>8.999.000</span>
                   </div>
-                  <p className="text-[9.5px] font-black text-white/60 tracking-wider uppercase mt-2.5">
+                  <p className="text-[14px] font-black text-white/60 tracking-wider uppercase mt-2.5">
                     / SEKALI PUBLIKASI
                   </p>
                 </div>
@@ -1031,10 +1031,10 @@ export default function PressRelease() {
                 <div className="p-6 sm:p-4 sm:p-7 space-y-4 sm:space-y-6 text-left">
                   {/* Lama Proses */}
                   <div className="space-y-2">
-                    <h5 className="text-[11px] font-black text-[#990202] tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
                       LAMA PROSES
                     </h5>
-                    <div className="flex items-center text-[11.5px] sm:text-[13px] font-semibold text-gray-700">
+                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
                       <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
                       <span>
                         <strong className="font-extrabold text-gray-900">1–3 hari kerja</strong> sampai terbit
@@ -1044,23 +1044,23 @@ export default function PressRelease() {
 
                   {/* Yang Diperoleh */}
                   <div className="space-y-2.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[11px] font-black text-[#990202] tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
                       YANG DIPEROLEH
                     </h5>
                     <ul className="space-y-2">
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Bebas pilih <strong className="font-extrabold text-gray-900">10 media</strong> publikasi</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Berita terbit <strong className="font-extrabold text-gray-900">permanen</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Garansi <strong className="font-extrabold text-gray-900">100% tayang</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[13px] font-semibold text-gray-700 leading-relaxed">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
                         <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Laporan hasil publikasi</span>
                       </li>
@@ -1069,23 +1069,23 @@ export default function PressRelease() {
 
                   {/* Bonus Container */}
                   <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
-                    <h5 className="text-[10.5px] font-black text-gray-900 tracking-wider uppercase">
+                    <h5 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
                       BONUS
                     </h5>
                     <ul className="space-y-2">
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Potongan harga <strong className="font-extrabold text-gray-900">Rp 200.000</strong></span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span><strong className="font-extrabold text-gray-900">100+ E-Course</strong> digital marketing</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span><strong className="font-extrabold text-gray-900">2.500+</strong> Template konten digital</span>
                       </li>
-                      <li className="flex items-start text-[11.5px] sm:text-[12.5px] font-semibold text-gray-700 leading-snug">
+                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
                         <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                         <span>Kalender konten sosial media</span>
                       </li>
@@ -1101,7 +1101,7 @@ export default function PressRelease() {
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket C Press Release. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-black text-[13.5px] rounded-xl text-gray-800 bg-white hover:bg-gray-55 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
+                  className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-gray-800 bg-white hover:bg-gray-55 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
                 >
                   Pilih Paket C
                 </a>
@@ -1116,7 +1116,7 @@ export default function PressRelease() {
             <h4 className="text-[14px] font-black text-gray-900">
               Keterangan penting:
             </h4>
-            <div className="pl-5 sm:pl-6 space-y-1 text-[12.5px] sm:text-[13px] text-gray-650 font-normal leading-relaxed">
+            <div className="pl-5 sm:pl-6 space-y-1 text-[14px] sm:text-[14px] text-gray-650 font-normal leading-relaxed">
               <p>Harga di atas <strong className="font-black text-gray-900">sudah termasuk biaya penerbitan</strong> artikel pada media online yang dipilih.</p>
               <p>Klien bebas menyediakan artikel sendiri atau meminta bantuan tim kami untuk penulisan.</p>
               <p>Biaya penulisan artikel oleh tim kami: <strong className="font-black text-gray-900">Rp 2.000.000</strong> (opsional, di luar paket).</p>
@@ -1140,11 +1140,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-20 space-y-4">
-            <p className="text-[11.5px] font-black text-[#990202] uppercase tracking-[0.22em]">PROSES ORDER SAMPAI TERBIT</p>
+            <p className="text-[14px] font-black text-[#990202] uppercase tracking-[0.22em]">PROSES ORDER SAMPAI TERBIT</p>
             <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-900 leading-tight tracking-tight">
               5 langkah simpel — berita kamu naik di media.
             </h2>
-            <p className="text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Tim kami pegang seluruh proses, kamu cukup approve naskah final &amp; tunggu laporan terbit.
             </p>
           </div>
@@ -1165,24 +1165,24 @@ export default function PressRelease() {
                   <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
                     Konsultasi &amp; Pilih Paket
                   </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[10.5px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
+                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
                     <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
                     <span>1 HARI</span>
                   </div>
                 </div>
-                <p className="text-[13.5px] text-gray-600 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
                   Diskusi tujuan publikasi, target audiens, &amp; pilih paket (1, 5, atau 10 media) sesuai budget &amp; jangkauan yang dibutuhkan.
                 </p>
                 <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Identifikasi sudut pandang artikel</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Rekomendasi media sesuai industri</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Finalisasi paket &amp; pembayaran</span>
                   </div>
@@ -1203,24 +1203,24 @@ export default function PressRelease() {
                   <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
                     Penulisan Artikel
                   </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[10.5px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
+                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
                     <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
                     <span>1 HARI</span>
                   </div>
                 </div>
-                <p className="text-[13.5px] text-gray-600 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
                   Kamu bisa menyediakan artikel sendiri (250–500 kata), atau minta tim jurnalis kami yang menulis dengan gaya berita profesional.
                 </p>
                 <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Briefing detail untuk tim jurnalis</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Format jurnalistik (bukan iklan)</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Revisi sampai naskah sesuai brand voice</span>
                   </div>
@@ -1241,24 +1241,24 @@ export default function PressRelease() {
                   <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
                     Approve Naskah Final
                   </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[10.5px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
+                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
                     <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
                     <span>0,5 HARI</span>
                   </div>
                 </div>
-                <p className="text-[13.5px] text-gray-600 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
                   Naskah final dikirim untuk review &amp; approval. Pastikan semua info akurat &amp; sesuai pesan yang ingin disampaikan ke publik.
                 </p>
                 <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Review akurasi data &amp; angka</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Cek nama produk, brand, &amp; quote</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Sign-off untuk publikasi</span>
                   </div>
@@ -1279,24 +1279,24 @@ export default function PressRelease() {
                   <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
                     Distribusi ke Media
                   </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[10.5px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
+                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
                     <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
                     <span>1–2 HARI</span>
                   </div>
                 </div>
-                <p className="text-[13.5px] text-gray-600 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
                   Tim kami submit naskah ke redaksi media yang Anda pilih. Tunggu proses editing &amp; publikasi oleh redaksi masing-masing.
                 </p>
                 <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Submit ke redaksi pilihan</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Koordinasi dengan editor</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Penyesuaian editorial (jika ada)</span>
                   </div>
@@ -1317,24 +1317,24 @@ export default function PressRelease() {
                   <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
                     Publikasi &amp; Laporan
                   </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[10.5px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
+                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
                     <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
                     <span>FINAL</span>
                   </div>
                 </div>
-                <p className="text-[13.5px] text-gray-600 font-semibold leading-relaxed">
+                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
                   Artikel terbit di semua media yang dipilih. <strong className="font-extrabold text-gray-900">Kami kirim laporan lengkap berisi semua link publikasi</strong> untuk dokumentasi &amp; arsip brand Anda.
                 </p>
                 <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Bukti terbit semua media</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Link publikasi siap-share</span>
                   </div>
-                  <div className="flex items-center text-[12.5px] font-bold text-gray-700">
+                  <div className="flex items-center text-[14px] font-bold text-gray-700">
                     <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
                     <span>Laporan resmi untuk arsip</span>
                   </div>
@@ -1359,7 +1359,7 @@ export default function PressRelease() {
             <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-900">
               Siap <span className="text-[#990202]">tayang</span> di media nasional?
             </h2>
-            <p className="text-[14px] sm:text-[11.5px] sm:text-[11.5px] sm:text-[14.5px] text-gray-500 leading-relaxed font-normal">
+            <p className="text-[14px] sm:text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 leading-relaxed font-normal">
               Konsultasi gratis untuk pilih paket &amp; rekomendasi media — tanpa komitmen.
             </p>
           </div>
@@ -1391,7 +1391,7 @@ export default function PressRelease() {
             </a>
 
             {/* Response Info */}
-            <div className="flex items-center justify-center gap-1.5 text-[11px] sm:text-[11.5px] text-gray-500 font-medium pt-1 px-1">
+            <div className="flex items-center justify-center gap-1.5 text-[14px] sm:text-[14px] text-gray-500 font-medium pt-1 px-1">
               <span className="text-emerald-500 font-bold">✓</span>
               <span>Respons dalam 5 menit · Senin–Sabtu 08:00–20:00</span>
             </div>

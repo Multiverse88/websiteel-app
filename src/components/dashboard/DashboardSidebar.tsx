@@ -60,7 +60,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
                     {item.name}
                   </span>
                   {item.badge !== undefined && item.badge > 0 && (
-                    <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 ml-auto px-1.5 py-0.5 rounded-md text-[10px] font-bold bg-[#b20112] text-white">
+                    <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 ml-auto px-1.5 py-0.5 rounded-md text-[14px] font-bold bg-[#b20112] text-white">
                       {item.badge}
                     </span>
                   )}

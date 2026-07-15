@@ -51,11 +51,11 @@ export default function FAQ({
           ref={headerRef}
           className={`text-center mb-8 sm:mb-16 space-y-2 sm:space-y-3 transition-all duration-500 ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
         >
-          <p className="text-[9px] sm:text-[11px] font-black text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
+          <p className="text-[14px] sm:text-[14px] font-black text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
           <h2 className="font-heading text-[20px] sm:text-[38px] font-bold text-gray-950 leading-tight tracking-tight">
             {title}
           </h2>
-          <p className="text-[12.5px] sm:text-[15px] text-gray-500 leading-relaxed font-medium">
+          <p className="text-[14px] sm:text-[15px] text-gray-500 leading-relaxed font-medium">
             {subtitle}
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function FAQ({
                   }`}
                 >
                   <p
-                    className="text-[12.5px] sm:text-[14.5px] text-gray-500 leading-relaxed font-medium pr-4 sm:pr-12"
+                    className="text-[14px] sm:text-[14.5px] text-gray-500 leading-relaxed font-medium pr-4 sm:pr-12"
                     dangerouslySetInnerHTML={{ __html: faq.a }}
                   />
                 </div>

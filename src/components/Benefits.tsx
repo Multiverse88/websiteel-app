@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export interface BenefitCard {
+interface BenefitCard {
   icon: React.ReactNode;
   title: string;
   desc: string;
@@ -27,7 +27,7 @@ export default function Benefits({
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
+          <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">
             {sectionTitleTag}
           </p>
           <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight">
@@ -56,7 +56,7 @@ export default function Benefits({
                 <h3 className="text-[16.5px] font-extrabold text-gray-950 leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-[13px] text-gray-500 leading-relaxed font-normal">
+                <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>

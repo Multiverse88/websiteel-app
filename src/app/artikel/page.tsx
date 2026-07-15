@@ -296,19 +296,19 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
 
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-[13px] font-medium text-gray-500 mb-8">
+          <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500 mb-8">
             <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
               <Home className="w-3.5 h-3.5" />
               <span>Beranda</span>
             </Link>
             <span className="text-gray-300 font-normal">&gt;</span>
-            <span className="text-[13px] font-bold text-gray-900">Artikel &amp; Edukasi</span>
+            <span className="text-[14px] font-bold text-gray-900">Artikel &amp; Edukasi</span>
           </nav>
 
           {/* Pill Badge / Section Indicator */}
           <div className="flex items-center space-x-2 mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-            <span className="text-[11px] font-black uppercase tracking-widest text-[#990202]">
+            <span className="text-[14px] font-black uppercase tracking-widest text-[#990202]">
               BLOG &amp; ARTIKEL
             </span>
           </div>
@@ -347,7 +347,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
 
             {/* Search feedback & reset button */}
             {q && (
-              <div className="mt-4 flex items-center space-x-2 text-[13.5px] text-gray-500">
+              <div className="mt-4 flex items-center space-x-2 text-[14px] text-gray-500">
                 <span>Hasil pencarian untuk: <strong>&quot;{q}&quot;</strong></span>
                 <span className="text-gray-300">•</span>
                 <Link href="/artikel" className="text-[#990202] hover:underline font-semibold flex items-center gap-0.5">
@@ -375,14 +375,14 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                 <Link
                   key={cat}
                   href={getCategoryHref(cat)}
-                  className={`px-4.5 py-2 rounded-full text-[13px] font-extrabold transition-all duration-200 ${
+                  className={`px-4.5 py-2 rounded-full text-[14px] font-extrabold transition-all duration-200 ${
                     isActive
                       ? "bg-[#990202] text-white shadow-sm"
                       : "bg-[#F3F4F6] text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   }`}
                 >
                   {cat}{" "}
-                  <span className={`text-[11px] font-medium ml-0.5 ${isActive ? "text-red-200" : "text-gray-400"}`}>
+                  <span className={`text-[14px] font-medium ml-0.5 ${isActive ? "text-red-200" : "text-gray-400"}`}>
                     ({count})
                   </span>
                 </Link>
@@ -407,7 +407,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                       className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-full text-[10.5px] font-extrabold uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">
+                      <span className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-full text-[14px] font-extrabold uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">
                         <span className="text-red-600 font-bold">★</span> <span>ARTIKEL PILIHAN</span>
                       </span>
                     </div>
@@ -416,7 +416,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                   {/* Content Column */}
                   <div className="flex flex-col justify-between py-2">
                     <div>
-                      <span className="text-[#990202] text-[11.5px] font-black tracking-widest uppercase block mb-3">
+                      <span className="text-[#990202] text-[14px] font-black tracking-widest uppercase block mb-3">
                         {CATEGORY_MAP[featuredArticle.category] || featuredArticle.category}
                       </span>
                       <h2 className="font-heading text-[24px] sm:text-[30px] font-extrabold text-gray-950 leading-tight group-hover:text-[#990202] transition-colors duration-200">
@@ -429,7 +429,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-400 mt-6 pt-4 border-t border-gray-100">
+                    <div className="flex items-center space-x-2 text-[14px] font-medium text-gray-400 mt-6 pt-4 border-t border-gray-100">
                       <div className="flex items-center text-[#990202]">
                         <Clock className="w-3.5 h-3.5" />
                       </div>
@@ -471,7 +471,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                   {/* Details */}
                   <div className="px-2 pb-2 flex-grow flex flex-col justify-between">
                     <div>
-                      <span className="text-[#990202] text-[11px] font-black tracking-widest uppercase block mb-2">
+                      <span className="text-[#990202] text-[14px] font-black tracking-widest uppercase block mb-2">
                         {CATEGORY_MAP[article.category] || article.category}
                       </span>
                       <h3 className="font-heading text-[17px] sm:text-[18px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug mb-2 line-clamp-2">
@@ -479,12 +479,12 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                           {article.title}
                         </Link>
                       </h3>
-                      <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal line-clamp-3 mb-4">
+                      <p className="text-[14px] text-gray-500 leading-relaxed font-normal line-clamp-3 mb-4">
                         {article.excerpt}
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-400 pt-4 border-t border-gray-100 mt-2">
+                    <div className="flex items-center space-x-2 text-[14px] font-medium text-gray-400 pt-4 border-t border-gray-100 mt-2">
                       <div className="flex items-center text-[#990202]">
                         <Clock className="w-3.5 h-3.5" />
                       </div>
@@ -511,13 +511,13 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                 <Link
                   href={getLoadMoreHref()}
                   scroll={false}
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white shadow-md border border-black/[0.04] hover:border-gray-300 hover:bg-gray-50 text-gray-800 rounded-full font-bold text-[13.5px] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] cursor-pointer"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white shadow-md border border-black/[0.04] hover:border-gray-300 hover:bg-gray-50 text-gray-800 rounded-full font-bold text-[14px] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] cursor-pointer"
                 >
                   <span>Muat Lebih Banyak</span>
                   <ChevronDown className="w-4.5 h-4.5 text-gray-500" />
                 </Link>
               )}
-              <p className="text-[12.5px] text-gray-400 font-bold tracking-wide">
+              <p className="text-[14px] text-gray-400 font-bold tracking-wide">
                 Menampilkan {articles.length} dari {totalMatchingCount} artikel
               </p>
             </div>

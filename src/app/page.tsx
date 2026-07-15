@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import HomePage from "@/components/home/HomePage";
+import HomeGadsPage from "@/components/home/HomeGadsPage";
 import HomePageSkeleton from "@/components/home/HomePageSkeleton";
 import { LatestInsightsServer } from "@/components/home/LatestInsightsServer";
 import {
@@ -10,7 +10,7 @@ import {
 
 async function HomeWithData() {
   const articles = await LatestInsightsServer();
-  return <HomePage articles={articles} />;
+  return <HomeGadsPage articles={articles} />;
 }
 
 export const revalidate = 300; // Revalidate every 5 minutes instead of on every request
