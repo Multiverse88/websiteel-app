@@ -48,12 +48,12 @@ const MemberCard = ({ member }: { member: { name: string; role: string; bio: str
     <div className="p-4 sm:p-6 flex-grow flex flex-col justify-between">
       <div className="space-y-2">
         <div className="inline-flex items-center bg-[#FFF5F5] px-2 py-0.5 rounded-md border border-red-100/50">
-          <span className="text-[9px] sm:text-[10px] font-extrabold text-[#990202] tracking-wider uppercase">{member.role}</span>
+          <span className="text-[14px] sm:text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">{member.role}</span>
         </div>
         <h3 className="font-heading text-sm sm:text-[17px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
           {member.name}
         </h3>
-        <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed font-normal line-clamp-2">
+        <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal line-clamp-2">
           {member.bio}
         </p>
       </div>
@@ -63,9 +63,9 @@ const MemberCard = ({ member }: { member: { name: string; role: string; bio: str
 
 export default function TentangKami() {
   const stats = [
-    { value: "11.000+", label: "Bisnis terlayani" },
+    { value: "12.500+", label: "Bisnis terlayani" },
     { value: "15+", label: "Jenis layanan legal" },
-    { value: "4 thn", label: "Pengalaman melayani" },
+    { value: "4.9 ★", label: "Rating Google" },
     { value: "3 kota", label: "Office presence" },
   ];
 
@@ -133,19 +133,19 @@ export default function TentangKami() {
             {/* Left text */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[11px] sm:text-[13px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
                 </Link>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[11px] sm:text-[13px] font-bold text-gray-900">Tentang Kami</span>
+                <span className="text-[14px] sm:text-[14px] font-bold text-gray-900">Tentang Kami</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Tentang Kami</span>
+                <span className="text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Tentang Kami</span>
               </div>
 
               {/* Headline */}
@@ -158,22 +158,22 @@ export default function TentangKami() {
               </h1>
 
               {/* Description */}
-              <p className="text-[13px] sm:text-[18px] text-gray-600 leading-relaxed max-w-2xl font-normal">
-                EasyLegal hadir karena kami believe legalitas bisnis tidak harus mahal, lama, atau ribet. Sejak 2020, kami sudah membantu lebih dari 11.000 UMKM mengurus PT, perizinan, sampai sertifikasi ISO.
+              <p className="text-[14px] sm:text-[18px] text-gray-600 leading-relaxed max-w-2xl font-normal">
+                EasyLegal hadir karena kami believe legalitas bisnis tidak harus mahal, lama, atau ribet. Sejak 2020, kami sudah membantu lebih dari 12.500 UMKM mengurus PT, perizinan, sampai sertifikasi ISO.
               </p>
 
               {/* Action Buttons */}
               <div className="flex flex-row gap-3 pt-2">
                 <Link
                   href="/kontak"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center"
                 >
                   <span>Konsultasi Gratis</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-1.5 sm:ml-2" />
                 </Link>
                 <Link
                   href="/"
-                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
+                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
                 >
                   Lihat Layanan
                 </Link>
@@ -202,8 +202,8 @@ export default function TentangKami() {
                     <User className="w-4 h-4 sm:w-5.5 sm:h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[20px] font-black text-[#990202] leading-none">11.000+</div>
-                    <div className="text-[9px] sm:text-[12px] text-[#990202]/85 font-bold mt-1">Bisnis terlayani</div>
+                    <div className="text-[14px] sm:text-[20px] font-black text-[#990202] leading-none">12.500+</div>
+                    <div className="text-[14px] sm:text-[14px] text-[#990202]/85 font-bold mt-1">Bisnis terlayani</div>
                   </div>
                 </div>
 
@@ -214,7 +214,7 @@ export default function TentangKami() {
                   </div>
                   <div>
                     <div className="text-[14px] sm:text-[20px] font-black text-[#990202] leading-none">4.9 / 5</div>
-                    <div className="text-[9px] sm:text-[12px] text-[#990202]/85 font-bold mt-1">Rating Google</div>
+                    <div className="text-[14px] sm:text-[14px] text-[#990202]/85 font-bold mt-1">Rating Google</div>
                   </div>
                 </div>
 
@@ -250,8 +250,8 @@ export default function TentangKami() {
                     <Calendar className="w-4 h-4 sm:w-5.5 sm:h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[12px] sm:text-[15px] font-black text-gray-900 leading-none">Berdiri 2023</div>
-                    <div className="text-[9px] sm:text-[12px] text-gray-500 font-bold mt-1">4 tahun melayani UMKM</div>
+                    <div className="text-[14px] sm:text-[15px] font-black text-gray-900 leading-none">Berdiri 2023</div>
+                    <div className="text-[14px] sm:text-[14px] text-gray-500 font-bold mt-1">4 tahun melayani UMKM</div>
                   </div>
                 </div>
 
@@ -260,7 +260,7 @@ export default function TentangKami() {
 
             {/* Right: Story Text */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-              <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">Cerita Kami</p>
+              <p className="text-[14px] sm:text-[14px] font-extrabold text-[#990202] uppercase tracking-wider">Cerita Kami</p>
 
               <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
                 Lahir dari pengalaman{" "}
@@ -269,12 +269,12 @@ export default function TentangKami() {
                 </span>
               </h2>
 
-              <p className="text-[12.5px] sm:text-[15.5px] text-gray-600 leading-relaxed font-normal">
+              <p className="text-[14px] sm:text-[15.5px] text-gray-600 leading-relaxed font-normal">
                 Founder kami pernah mengalaminya — bolak-balik ke notaris, antre panjang di kantor pemerintah, dan kebingungan dengan biaya yang tidak transparan. Kami pikir, kalau kami yang punya akses dan jaringan saja kesulitan, bagaimana dengan pelaku UMKM lain?
               </p>
 
-              <p className="text-[12.5px] sm:text-[15.5px] text-gray-600 leading-relaxed font-normal">
-                Dari sanalah <strong className="font-extrabold text-gray-900">EasyLegal.id</strong> dibangun: sebuah platform yang memudahkan akses legalitas untuk semua pengusaha Indonesia. Lebih dari 11.000 UMKM mengurus perizinan, pendirian badan usaha, hingga sertifikasi ISO — semua bisa diurus online dengan harga yang transparan.
+              <p className="text-[14px] sm:text-[15.5px] text-gray-600 leading-relaxed font-normal">
+                Dari sanalah <strong className="font-extrabold text-gray-900">EasyLegal.id</strong> dibangun: sebuah platform yang memudahkan akses legalitas untuk semua pengusaha Indonesia. Lebih dari 12.500 UMKM mengurus perizinan, pendirian badan usaha, hingga sertifikasi ISO — semua bisa diurus online dengan harga yang transparan.
               </p>
 
               {/* Trust points list */}
@@ -284,7 +284,7 @@ export default function TentangKami() {
                   { bold: "Tim 30+ konsultan hukum", text: " dari berbagai latar industri." },
                   { bold: "Bermitra resmi", text: " dengan KEMENKUMHAM, BKPM, DJKI, dan PSE Kominfo." }
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-start space-x-2 sm:space-x-3 text-[11.5px] sm:text-[14.5px] text-gray-600">
+                  <div key={idx} className="flex items-start space-x-2 sm:space-x-3 text-[14px] sm:text-[14.5px] text-gray-600">
                     <Check className="w-4 h-4 sm:w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
                     <span>
                       <strong className="font-extrabold text-gray-950">{item.bold}</strong>
@@ -306,7 +306,7 @@ export default function TentangKami() {
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center space-y-1 sm:space-y-2 py-4 sm:py-6 shadow-sm border border-black/[0.03] rounded-2xl bg-bg-light transition-all duration-300 hover:border-red-100 hover:shadow-md">
                 <div className="text-[26px] sm:text-[44px] font-extrabold text-[#990202] tracking-tight">{stat.value}</div>
-                <div className="text-[10px] sm:text-[13.5px] font-bold text-[#990202]/85">{stat.label}</div>
+                <div className="text-[14px] sm:text-[14px] font-bold text-[#990202]/85">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -317,11 +317,11 @@ export default function TentangKami() {
       <section className="bg-bg-light py-8 sm:py-20 border-b border-border/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14 space-y-2 sm:space-y-3">
-            <p className="text-[9px] sm:text-[12.5px] font-bold text-primary uppercase tracking-wider">Nilai Kami</p>
+            <p className="text-[14px] sm:text-[14px] font-bold text-primary uppercase tracking-wider">Nilai Kami</p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-dark leading-[1.25] sm:leading-tight">
               6 prinsip yang menjadi fondasi kerja kami.
             </h2>
-            <p className="text-[12.5px] sm:text-[16.5px] text-muted leading-relaxed">
+            <p className="text-[14px] sm:text-[16.5px] text-muted leading-relaxed">
               Setiap proses, harga, dan komunikasi kami dipandu oleh nilai-nilai ini — bukan sekadar slogan.
             </p>
           </div>
@@ -334,7 +334,7 @@ export default function TentangKami() {
                 </div>
                 <div>
                   <h3 className="text-sm sm:text-[17px] font-bold text-dark mb-1 sm:mb-2">{val.title}</h3>
-                  <p className="text-[11px] sm:text-[13.5px] text-muted leading-relaxed">{val.desc}</p>
+                  <p className="text-[14px] sm:text-[14px] text-muted leading-relaxed">{val.desc}</p>
                 </div>
               </div>
             ))}
@@ -346,7 +346,7 @@ export default function TentangKami() {
       <section className="bg-white py-8 sm:py-20 border-b border-border/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14 space-y-2 sm:space-y-3">
-            <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">Tim Kami</p>
+            <p className="text-[14px] sm:text-[14px] font-extrabold text-[#990202] uppercase tracking-wider">Tim Kami</p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
               Tim di balik setiap proses Anda.
             </h2>

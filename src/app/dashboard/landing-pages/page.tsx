@@ -59,7 +59,7 @@ export default async function LandingPagesList() {
                 <tr key={page.id} className="hover:bg-gray-50 transition-colors group">
                   <td className="py-4 px-6">
                     <div className="font-bold text-gray-900">{page.title}</div>
-                    <div className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                    <div className="text-[14px] text-gray-500 mt-1 flex items-center gap-1">
                       <span>/lp/{page.slug}</span>
                       <a href={`/lp/${page.slug}`} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
                         <ExternalLink className="w-3 h-3" />
@@ -67,7 +67,7 @@ export default async function LandingPagesList() {
                     </div>
                   </td>
                   <td className="py-4 px-6">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[14px] font-medium ${
                       page.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                     }`}>
                       {page.status === 'published' ? 'Published' : 'Draft'}

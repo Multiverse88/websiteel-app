@@ -35,14 +35,14 @@ export function SmtpTestCard() {
           <Send className="w-4 h-4 text-[#990202]" />
           Test Koneksi SMTP
         </h3>
-        <p className="text-xs text-gray-500">
+        <p className="text-[14px] text-gray-500">
           Kirim email test untuk memverifikasi bahwa pengaturan SMTP berfungsi dengan benar.
         </p>
       </div>
 
       <form onSubmit={handleTest} className="flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-gray-700">Email Penerima</label>
+          <label className="text-[14px] font-bold text-gray-700">Email Penerima</label>
           <input
             type="email"
             value={testEmail}
@@ -56,7 +56,7 @@ export function SmtpTestCard() {
         <button
           type="submit"
           disabled={status === "loading" || status === "success"}
-          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold bg-white text-gray-700 hover:text-gray-900 shadow-md border border-black/[0.04] hover:bg-gray-50 shadow-sm transition-all disabled:opacity-50"
+          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-[14px] font-bold bg-white text-gray-700 hover:text-gray-900 shadow-md border border-black/[0.04] hover:bg-gray-50 shadow-sm transition-all disabled:opacity-50"
         >
           {status === "loading" ? (
             <>
@@ -73,13 +73,13 @@ export function SmtpTestCard() {
       </form>
 
       {status === "success" && (
-        <div className="p-3 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-semibold flex items-center gap-2 border border-emerald-100">
+        <div className="p-3 bg-emerald-50 text-emerald-700 rounded-lg text-[14px] font-semibold flex items-center gap-2 border border-emerald-100">
           <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
           {feedback}
         </div>
       )}
       {status === "error" && (
-        <div className="p-3 bg-red-50 text-red-700 rounded-lg text-xs font-semibold flex items-center gap-2 border border-red-100">
+        <div className="p-3 bg-red-50 text-red-700 rounded-lg text-[14px] font-semibold flex items-center gap-2 border border-red-100">
           <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
           {feedback}
         </div>
@@ -139,7 +139,7 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1">
             <h3 className="font-bold text-gray-900 text-sm">Status Otomatisasi</h3>
-            <p className="text-xs text-gray-500">
+            <p className="text-[14px] text-gray-500">
               Kirim email otomatis ke semua subscriber aktif setiap kali artikel baru dipublikasikan
             </p>
           </div>
@@ -160,7 +160,7 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
         </div>
 
         {/* Info Box */}
-        <div className={`p-4 rounded-lg text-xs flex gap-3 border ${
+        <div className={`p-4 rounded-lg text-[14px] flex gap-3 border ${
           autoBroadcast 
             ? "bg-emerald-50/50 text-emerald-800 border-emerald-100" 
             : "bg-amber-50/50 text-amber-800 border-amber-100"
@@ -189,7 +189,7 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
       }`}>
         <div className="flex flex-col gap-1 border-b border-gray-100 pb-3">
           <h3 className="font-bold text-gray-900 text-sm">Template Auto-Broadcast</h3>
-          <p className="text-xs text-gray-500">
+          <p className="text-[14px] text-gray-500">
             Sesuaikan subjek dan pesan pembuka yang digunakan oleh sistem ketika mengirim broadcast otomatis
           </p>
         </div>
@@ -197,8 +197,8 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
         {/* Input Subject */}
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-gray-700">Subjek Default</label>
-            <span className="text-[10px] text-gray-400 font-semibold flex items-center gap-1">
+            <label className="text-[14px] font-bold text-gray-700">Subjek Default</label>
+            <span className="text-[14px] text-gray-400 font-semibold flex items-center gap-1">
               <HelpCircle className="w-3 h-3" /> Gunakan <code>{"{{title}}"}</code> untuk menyisipkan judul artikel
             </span>
           </div>
@@ -216,8 +216,8 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
         {/* Input Message */}
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-gray-700">Pesan Pengantar Default (Greeting)</label>
-            <span className="text-[10px] text-gray-400 font-semibold flex items-center gap-1">
+            <label className="text-[14px] font-bold text-gray-700">Pesan Pengantar Default (Greeting)</label>
+            <span className="text-[14px] text-gray-400 font-semibold flex items-center gap-1">
               <HelpCircle className="w-3 h-3" /> Gunakan <code>{"{{category}}"}</code> untuk menyisipkan kategori
             </span>
           </div>
@@ -234,22 +234,22 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
 
         {/* Preview Live */}
         <div className="flex flex-col gap-1.5">
-          <div className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1">
+          <div className="text-[14px] font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1">
             <RefreshCw className="w-3.5 h-3.5" /> Preview Hasil Auto-Broadcast
           </div>
-          <div className="shadow-md border border-black/[0.04] rounded-lg overflow-hidden bg-gray-50 text-xs">
+          <div className="shadow-md border border-black/[0.04] rounded-lg overflow-hidden bg-gray-50 text-[14px]">
             <div className="bg-white px-4 py-2 border-b border-gray-200 text-gray-400">
               <span className="font-semibold text-gray-600">Subjek:</span> {getSubjectPreview()}
             </div>
             <div className="p-4 bg-white m-3 rounded shadow-md border border-black/[0.03] max-h-[160px] overflow-y-auto">
               <div className="mb-3 text-[#990202] font-bold text-sm pb-1.5 border-b border-red-50">Easy Legal</div>
-              <p className="whitespace-pre-wrap text-gray-600 leading-relaxed mb-4 text-[11px]">
+              <p className="whitespace-pre-wrap text-gray-600 leading-relaxed mb-4 text-[14px]">
                 {getMessagePreview()}
               </p>
               <div className="bg-gray-50 rounded-lg p-2.5 shadow-sm border border-black/[0.02] flex flex-col gap-0.5">
-                <div className="text-[9px] uppercase font-bold text-[#990202]">{sampleArticleCategory}</div>
-                <div className="font-bold text-gray-900 text-xs">{sampleArticleTitle}</div>
-                <div className="text-[10px] text-gray-400 mt-1">✓ Klik di email untuk membaca selengkapnya</div>
+                <div className="text-[14px] uppercase font-bold text-[#990202]">{sampleArticleCategory}</div>
+                <div className="font-bold text-gray-900 text-[14px]">{sampleArticleTitle}</div>
+                <div className="text-[14px] text-gray-400 mt-1">✓ Klik di email untuk membaca selengkapnya</div>
               </div>
             </div>
           </div>
@@ -258,13 +258,13 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
 
       {/* Tampilan Status Simpan */}
       {status === "success" && (
-        <div className="p-3 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-semibold flex items-center gap-2 border border-emerald-100">
+        <div className="p-3 bg-emerald-50 text-emerald-700 rounded-lg text-[14px] font-semibold flex items-center gap-2 border border-emerald-100">
           <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
           {feedback}
         </div>
       )}
       {status === "error" && (
-        <div className="p-3 bg-red-50 text-red-700 rounded-lg text-xs font-semibold flex items-center gap-2 border border-red-100">
+        <div className="p-3 bg-red-50 text-red-700 rounded-lg text-[14px] font-semibold flex items-center gap-2 border border-red-100">
           <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
           {feedback}
         </div>
@@ -274,7 +274,7 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
       <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-1">
         <Link
           href="/dashboard/newsletter"
-          className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all"
+          className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-[14px] font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           Kembali ke Newsletter
@@ -283,7 +283,7 @@ export function SettingsForm({ initialSettings }: { initialSettings: NewsletterS
         <button
           type="submit"
           disabled={status === "loading" || status === "success"}
-          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-xs font-bold bg-[#990202] text-white hover:bg-[#800000] border border-[#990202] transition-all disabled:opacity-50 shadow-sm"
+          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-[14px] font-bold bg-[#990202] text-white hover:bg-[#800000] border border-[#990202] transition-all disabled:opacity-50 shadow-sm"
         >
           {status === "loading" ? (
             <>

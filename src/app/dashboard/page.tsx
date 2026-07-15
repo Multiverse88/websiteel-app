@@ -159,7 +159,7 @@ export default async function DashboardOverviewPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-900">Pembaruan Database Selesai</p>
-                  <p className="text-xs text-gray-500 mt-0.5">10:30 AM</p>
+                  <p className="text-[14px] text-gray-500 mt-0.5">10:30 AM</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -169,7 +169,7 @@ export default async function DashboardOverviewPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-900">Database Backup Auto</p>
-                  <p className="text-xs text-gray-500 mt-0.5">09:15 AM</p>
+                  <p className="text-[14px] text-gray-500 mt-0.5">09:15 AM</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -178,7 +178,7 @@ export default async function DashboardOverviewPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-900">Sinkronisasi CDN</p>
-                  <p className="text-xs text-gray-500 mt-0.5">02:00 AM</p>
+                  <p className="text-[14px] text-gray-500 mt-0.5">02:00 AM</p>
                 </div>
               </div>
             </div>
@@ -193,7 +193,7 @@ export default async function DashboardOverviewPage() {
             <div className="flex-1 overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase">
+                  <tr className="border-b border-gray-200 text-[14px] font-semibold text-gray-500 uppercase">
                     <th className="py-3 px-2">Nama</th>
                     <th className="py-3 px-2">Landing Page</th>
                     <th className="py-3 px-2">Waktu</th>
@@ -221,12 +221,12 @@ export default async function DashboardOverviewPage() {
                                 href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366] text-white rounded-lg text-xs font-bold hover:bg-[#1ea760] transition-colors shadow-sm"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366] text-white rounded-lg text-[14px] font-bold hover:bg-[#1ea760] transition-colors shadow-sm"
                               >
                                 <MessageCircle className="w-4 h-4" /> WA
                               </a>
                             ) : (
-                              <span className="text-xs text-gray-400">No WA</span>
+                              <span className="text-[14px] text-gray-400">No WA</span>
                             )}
                           </td>
                         </tr>
@@ -244,7 +244,7 @@ export default async function DashboardOverviewPage() {
             <div className="flex-1 overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase">
+                  <tr className="border-b border-gray-200 text-[14px] font-semibold text-gray-500 uppercase">
                     <th className="py-3 px-2 w-12 text-center">Rank</th>
                     <th className="py-3 px-2">Judul</th>
                     <th className="py-3 px-2">Kategori</th>
@@ -262,7 +262,7 @@ export default async function DashboardOverviewPage() {
                         <td className="py-4 px-2 text-center font-bold text-[#d62828]">{idx + 1}</td>
                         <td className="py-4 px-2 font-medium text-gray-900 truncate max-w-[200px]">{article.title}</td>
                         <td className="py-4 px-2">
-                          <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-bold tracking-wider uppercase">
+                          <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[14px] font-bold tracking-wider uppercase">
                             {article.category}
                           </span>
                         </td>

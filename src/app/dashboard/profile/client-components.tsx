@@ -73,11 +73,11 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
 
         <div>
           <h2 className="font-bold text-gray-900 text-base">{name || "Nama Admin"}</h2>
-          <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mt-0.5">{role}</p>
-          <p className="text-xs text-gray-500 mt-1">{user.email}</p>
+          <p className="text-[14px] text-gray-400 font-semibold uppercase tracking-wider mt-0.5">{role}</p>
+          <p className="text-[14px] text-gray-500 mt-1">{user.email}</p>
         </div>
 
-        <div className="w-full border-t border-gray-100 pt-3 text-[11px] text-gray-400">
+        <div className="w-full border-t border-gray-100 pt-3 text-[14px] text-gray-400">
           * Klik foto di atas untuk mengunggah gambar profil baru secara langsung.
         </div>
       </div>
@@ -86,12 +86,12 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
       <div className="lg:col-span-2 bg-white shadow-md border border-black/[0.03] rounded-xl p-6 shadow-sm flex flex-col gap-5">
         <div className="border-b border-gray-100 pb-3">
           <h3 className="font-bold text-gray-900 text-sm">Informasi Profil</h3>
-          <p className="text-xs text-gray-500">Sesuaikan data profil penulis Anda untuk dipajang di artikel</p>
+          <p className="text-[14px] text-gray-500">Sesuaikan data profil penulis Anda untuk dipajang di artikel</p>
         </div>
 
         {/* Input Name */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-gray-700">Nama Lengkap</label>
+          <label className="text-[14px] font-bold text-gray-700">Nama Lengkap</label>
           <input 
             type="text"
             name="name"
@@ -105,7 +105,7 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
 
         {/* Input Role */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-gray-700">Peran / Jabatan (Role)</label>
+          <label className="text-[14px] font-bold text-gray-700">Peran / Jabatan (Role)</label>
           <input 
             type="text"
             name="role"
@@ -119,7 +119,7 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
 
         {/* Input Avatar URL (Optional) */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-gray-700">Foto Profil URL (Alternatif)</label>
+          <label className="text-[14px] font-bold text-gray-700">Foto Profil URL (Alternatif)</label>
           <input 
             type="text"
             name="avatarUrl"
@@ -135,7 +135,7 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
 
         {/* Input Bio */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-gray-700">Bio Singkat</label>
+          <label className="text-[14px] font-bold text-gray-700">Bio Singkat</label>
           <textarea 
             name="bio"
             value={bio}
@@ -148,13 +148,13 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
 
         {/* Feedback Messages */}
         {state?.error && (
-          <div className="p-3 bg-red-50 text-red-700 rounded-lg text-xs font-semibold flex items-center gap-2 border border-red-100">
+          <div className="p-3 bg-red-50 text-red-700 rounded-lg text-[14px] font-semibold flex items-center gap-2 border border-red-100">
             <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
             {state.error}
           </div>
         )}
         {state?.success && (
-          <div className="p-3 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-semibold flex items-center gap-2 border border-emerald-100">
+          <div className="p-3 bg-emerald-50 text-emerald-700 rounded-lg text-[14px] font-semibold flex items-center gap-2 border border-emerald-100">
             <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
             {state.success}
           </div>
@@ -164,7 +164,7 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
         <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-1">
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[14px] font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Kembali ke Dashboard
@@ -173,7 +173,7 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
           <button
             type="submit"
             disabled={isPending}
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-xs font-bold bg-[#990202] text-white hover:bg-[#800000] border border-[#990202] transition-all disabled:opacity-50 shadow-sm"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-[14px] font-bold bg-[#990202] text-white hover:bg-[#800000] border border-[#990202] transition-all disabled:opacity-50 shadow-sm"
           >
             {isPending ? (
               <>

@@ -157,13 +157,13 @@ function CaraKerjaSection() {
           
           {/* LEFT: Step-by-Step Accordion Flow */}
           <div className="lg:col-span-5 flex flex-col justify-start">
-            <span className="text-[9px] sm:text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3">
+            <span className="text-[14px] sm:text-[14px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3">
               Cara Kerja
             </span>
             <h2 className="text-[20px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.12] tracking-[-0.02em]">
               Empat Langkah, Semua Beres<br className="hidden sm:inline" /> Tanpa Pusing.
             </h2>
-            <p className="mt-2 sm:mt-4 text-[11.5px] sm:text-[14.5px] text-[#6B7280] leading-relaxed max-w-[460px]">
+            <p className="mt-2 sm:mt-4 text-[14px] sm:text-[14.5px] text-[#6B7280] leading-relaxed max-w-[460px]">
               Proses transparan dari konsultasi sampai dokumen di tangan Anda — semua bisa dipantau dari satu dashboard.
             </p>
 
@@ -194,14 +194,14 @@ function CaraKerjaSection() {
                           className="mt-3 pl-7 overflow-hidden animate-fade-in-up"
                           style={{ animationDelay: "0.1s" }}
                         >
-                          <p className="text-[13px] text-[#6B7280] font-medium leading-relaxed mb-4">
+                          <p className="text-[14px] text-[#6B7280] font-medium leading-relaxed mb-4">
                             {step.description}
                           </p>
                           <ul className="space-y-3">
                             {step.features.map((feat, fidx) => (
                               <li 
                                 key={fidx} 
-                                className="flex items-start gap-3 text-[13px] text-gray-700 leading-snug animate-fade-in-up"
+                                className="flex items-start gap-3 text-[14px] text-gray-700 leading-snug animate-fade-in-up"
                                 style={{ animationDelay: `${0.15 + fidx * 0.08}s` }}
                               >
                                 <div className="w-5 h-5 rounded-full bg-[#DCFCE7] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm border border-emerald-100">
@@ -257,8 +257,8 @@ function CaraKerjaSection() {
                     <Check className="w-3.5 h-3.5 text-[#2E7D32]" strokeWidth={4} />
                   </div>
                   <div className="flex items-baseline gap-1.5 leading-none pr-1">
-                    <span className="text-[12px] font-black text-gray-800">Akta selesai</span>
-                    <span className="text-[10px] text-gray-500 font-bold">2 menit lalu</span>
+                    <span className="text-[14px] font-black text-gray-800">Akta selesai</span>
+                    <span className="text-[14px] text-gray-500 font-bold">2 menit lalu</span>
                   </div>
                 </div>
 
@@ -266,7 +266,7 @@ function CaraKerjaSection() {
                 <div className="absolute top-[40%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex flex-col gap-3 z-40 w-[200px] animate-float-medium">
                   <div className="flex items-center justify-between">
                     <span className="text-amber-500 font-extrabold text-[14px] flex items-center gap-1">★ 4.9</span>
-                    <span className="text-[10px] text-gray-400 font-black tracking-wider">GOOGLE</span>
+                    <span className="text-[14px] text-gray-400 font-black tracking-wider">GOOGLE</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="flex -space-x-2.5 overflow-hidden">
@@ -275,8 +275,8 @@ function CaraKerjaSection() {
                       <Image className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" alt="User 3" width={28} height={28} />
                     </div>
                     <div className="leading-tight">
-                      <div className="text-[12px] font-black text-gray-800">11.000+</div>
-                      <div className="text-[10px] font-bold text-gray-500 mt-0.5">bisnis terbantu</div>
+                      <div className="text-[14px] font-black text-gray-800">11.000+</div>
+                      <div className="text-[14px] font-bold text-gray-500 mt-0.5">bisnis terbantu</div>
                     </div>
                   </div>
                 </div>
@@ -303,12 +303,12 @@ function CaraKerjaSection() {
                 <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
                   <div className="flex items-center gap-3 mb-3.5">
-                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-500/30">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[14px] shadow-lg shadow-red-500/30">
                       01
                     </div>
                     <div>
                       <div className="text-[14px] font-black text-[#111827] leading-tight">Pilih Layanan</div>
-                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5">Tentukan jasa legal yang Anda butuhkan</div>
+                      <div className="text-[14px] text-[#6B7280] font-semibold mt-0.5">Tentukan jasa legal yang Anda butuhkan</div>
                     </div>
                   </div>
 
@@ -320,8 +320,8 @@ function CaraKerjaSection() {
                         <Building2 className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-black text-[#B91C1C] leading-tight truncate">Pendirian PT</div>
-                        <div className="text-[8px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Mulai Rp2,5jt</div>
+                        <div className="text-[14px] font-black text-[#B91C1C] leading-tight truncate">Pendirian PT</div>
+                        <div className="text-[14px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Mulai Rp2,5jt</div>
                       </div>
                     </div>
 
@@ -331,8 +331,8 @@ function CaraKerjaSection() {
                         <FileText className="w-3.5 h-3.5 text-gray-400" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">NIB & OSS</div>
-                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Mulai Rp500rb</div>
+                        <div className="text-[14px] font-bold text-gray-700 leading-tight truncate">NIB & OSS</div>
+                        <div className="text-[14px] font-semibold text-gray-400 mt-0.5 leading-none">Mulai Rp500rb</div>
                       </div>
                     </div>
 
@@ -342,8 +342,8 @@ function CaraKerjaSection() {
                         <ShieldCheck className="w-3.5 h-3.5 text-gray-400" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">Daftar Merek</div>
-                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Mulai Rp1,5jt</div>
+                        <div className="text-[14px] font-bold text-gray-700 leading-tight truncate">Daftar Merek</div>
+                        <div className="text-[14px] font-semibold text-gray-400 mt-0.5 leading-none">Mulai Rp1,5jt</div>
                       </div>
                     </div>
 
@@ -353,8 +353,8 @@ function CaraKerjaSection() {
                         <Award className="w-3.5 h-3.5 text-gray-400" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">ISO 9001</div>
-                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Konsultasi</div>
+                        <div className="text-[14px] font-bold text-gray-700 leading-tight truncate">ISO 9001</div>
+                        <div className="text-[14px] font-semibold text-gray-400 mt-0.5 leading-none">Konsultasi</div>
                       </div>
                     </div>
                   </div>
@@ -368,11 +368,11 @@ function CaraKerjaSection() {
                       <path className="text-gray-100" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                       <path className="text-[#B91C1C]" strokeDasharray="72, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                     </svg>
-                    <span className="absolute text-[10px] font-black text-gray-800">72%</span>
+                    <span className="absolute text-[14px] font-black text-gray-800">72%</span>
                   </div>
                   <div className="leading-tight min-w-0">
-                    <div className="text-[11px] font-black text-gray-800 truncate">Pendirian PT — proses</div>
-                    <div className="text-[9px] text-gray-500 font-bold mt-1 truncate">Tahap 3/4 · 2 hari lagi</div>
+                    <div className="text-[14px] font-black text-gray-800 truncate">Pendirian PT — proses</div>
+                    <div className="text-[14px] text-gray-500 font-bold mt-1 truncate">Tahap 3/4 · 2 hari lagi</div>
                   </div>
                 </div>
               </div>
@@ -401,19 +401,19 @@ function CaraKerjaSection() {
                     <Check className="w-3.5 h-3.5 text-[#2E7D32]" strokeWidth={4} />
                   </div>
                   <div className="flex items-baseline gap-1.5 pr-1">
-                    <span className="text-[12px] font-black text-gray-800">Konsultasi Aktif</span>
-                    <span className="text-[10px] text-green-600 font-bold">Online</span>
+                    <span className="text-[14px] font-black text-gray-800">Konsultasi Aktif</span>
+                    <span className="text-[14px] text-green-600 font-bold">Online</span>
                   </div>
                 </div>
 
                 {/* "Jadwal Terkonfirmasi" Badge */}
                 <div className="absolute top-[40%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-3 z-40 w-[200px] animate-float-medium">
-                  <div className="w-10 h-10 rounded-full border-[2px] border-emerald-500 flex items-center justify-center text-[12px] font-black text-emerald-600 flex-shrink-0 bg-emerald-50">
+                  <div className="w-10 h-10 rounded-full border-[2px] border-emerald-500 flex items-center justify-center text-[14px] font-black text-emerald-600 flex-shrink-0 bg-emerald-50">
                     OK
                   </div>
                   <div className="leading-tight min-w-0">
-                    <div className="text-[13px] font-black text-gray-800 truncate">Jadwal Fix</div>
-                    <div className="text-[10px] text-gray-500 font-bold mt-1 truncate">Hari Ini · 14.00 WIB</div>
+                    <div className="text-[14px] font-black text-gray-800 truncate">Jadwal Fix</div>
+                    <div className="text-[14px] text-gray-500 font-bold mt-1 truncate">Hari Ini · 14.00 WIB</div>
                   </div>
                 </div>
 
@@ -421,11 +421,11 @@ function CaraKerjaSection() {
                 <div className="absolute bottom-[20%] right-[0%] bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex flex-col gap-2 z-40 w-[180px] animate-float-slow">
                   <div className="flex items-center justify-between">
                     <span className="text-amber-500 font-extrabold text-[14px] flex items-center gap-1">★ 5.0</span>
-                    <span className="text-[10px] text-gray-400 font-black tracking-wider">RATING</span>
+                    <span className="text-[14px] text-gray-400 font-black tracking-wider">RATING</span>
                   </div>
                   <div className="leading-tight">
-                    <div className="text-[12px] font-black text-gray-800">Paham Hukum</div>
-                    <div className="text-[10px] text-gray-500 font-bold mt-1">100% Solutif</div>
+                    <div className="text-[14px] font-black text-gray-800">Paham Hukum</div>
+                    <div className="text-[14px] text-gray-500 font-bold mt-1">100% Solutif</div>
                   </div>
                 </div>
 
@@ -433,12 +433,12 @@ function CaraKerjaSection() {
                 <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
                   <div className="flex items-center gap-3 mb-3.5">
-                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-500/30">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[14px] shadow-lg shadow-red-500/30">
                       02
                     </div>
                     <div>
                       <div className="text-[14px] font-black text-[#111827] leading-tight">Hubungi Ahli</div>
-                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5">Konsultasi hukum & bisnis gratis</div>
+                      <div className="text-[14px] text-[#6B7280] font-semibold mt-0.5">Konsultasi hukum & bisnis gratis</div>
                     </div>
                   </div>
 
@@ -450,8 +450,8 @@ function CaraKerjaSection() {
                         <MessageCircle className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-black text-gray-800 leading-tight truncate">WhatsApp</div>
-                        <div className="text-[8px] font-extrabold text-green-600 mt-0.5 leading-none">Online 24/7</div>
+                        <div className="text-[14px] font-black text-gray-800 leading-tight truncate">WhatsApp</div>
+                        <div className="text-[14px] font-extrabold text-green-600 mt-0.5 leading-none">Online 24/7</div>
                       </div>
                     </div>
 
@@ -461,8 +461,8 @@ function CaraKerjaSection() {
                         <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">Zoom Call</div>
-                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Jadwalkan</div>
+                        <div className="text-[14px] font-bold text-gray-700 leading-tight truncate">Zoom Call</div>
+                        <div className="text-[14px] font-semibold text-gray-400 mt-0.5 leading-none">Jadwalkan</div>
                       </div>
                     </div>
 
@@ -472,8 +472,8 @@ function CaraKerjaSection() {
                         <Phone className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">Telepon</div>
-                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Tanya Ahli</div>
+                        <div className="text-[14px] font-bold text-gray-700 leading-tight truncate">Telepon</div>
+                        <div className="text-[14px] font-semibold text-gray-400 mt-0.5 leading-none">Tanya Ahli</div>
                       </div>
                     </div>
 
@@ -483,8 +483,8 @@ function CaraKerjaSection() {
                         <MapPin className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-700 leading-tight truncate">Kantor Kami</div>
-                        <div className="text-[8px] font-semibold text-gray-400 mt-0.5 leading-none">Kunjungan</div>
+                        <div className="text-[14px] font-bold text-gray-700 leading-tight truncate">Kantor Kami</div>
+                        <div className="text-[14px] font-semibold text-gray-400 mt-0.5 leading-none">Kunjungan</div>
                       </div>
                     </div>
                   </div>
@@ -513,25 +513,25 @@ function CaraKerjaSection() {
                     <FileText className="w-5 h-5 text-[#B91C1C]" />
                   </div>
                   <div className="leading-tight pr-2">
-                    <div className="text-[12px] font-black text-gray-800">Draft Akta Selesai!</div>
-                    <div className="text-[10px] font-bold text-gray-500 mt-1">Siap Ditinjau</div>
+                    <div className="text-[14px] font-black text-gray-800">Draft Akta Selesai!</div>
+                    <div className="text-[14px] font-bold text-gray-500 mt-1">Siap Ditinjau</div>
                   </div>
                 </div>
 
                 {/* "Secure Vault SSL" — right side, top */}
                 <div className="absolute top-[35%] right-[0%] bg-white rounded-full px-4 py-2.5 shadow-[0_12px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
                   <Lock className="w-4 h-4 text-[#B91C1C]" />
-                  <span className="text-[12px] font-black text-gray-800">Secure Vault SSL</span>
+                  <span className="text-[14px] font-black text-gray-800">Secure Vault SSL</span>
                 </div>
 
                 {/* "92% Verifikasi Berkas" — right side, middle */}
                 <div className="absolute top-[55%] -right-[5%] bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-black/[0.04] flex items-center gap-3 z-30 w-[190px] animate-float-medium">
-                  <div className="w-10 h-10 rounded-full border-2 border-[#B91C1C] flex items-center justify-center text-[12px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50/50">
+                  <div className="w-10 h-10 rounded-full border-2 border-[#B91C1C] flex items-center justify-center text-[14px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50/50">
                     92%
                   </div>
                   <div className="leading-tight min-w-0">
-                    <div className="text-[11px] font-black text-gray-800 truncate">Verifikasi Berkas</div>
-                    <div className="text-[9px] font-bold text-gray-500 mt-1 truncate">Oleh Tim Ahli Legal</div>
+                    <div className="text-[14px] font-black text-gray-800 truncate">Verifikasi Berkas</div>
+                    <div className="text-[14px] font-bold text-gray-500 mt-1 truncate">Oleh Tim Ahli Legal</div>
                   </div>
                 </div>
 
@@ -539,12 +539,12 @@ function CaraKerjaSection() {
                 <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
                   <div className="flex items-center gap-3 mb-3.5">
-                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-500/30">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[14px] shadow-lg shadow-red-500/30">
                       03
                     </div>
                     <div>
                       <div className="text-[14px] font-black text-[#111827] leading-tight">Upload Dokumen</div>
-                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5">Kirim berkas dengan mudah & aman</div>
+                      <div className="text-[14px] text-[#6B7280] font-semibold mt-0.5">Kirim berkas dengan mudah & aman</div>
                     </div>
                   </div>
 
@@ -556,8 +556,8 @@ function CaraKerjaSection() {
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-black text-[#B91C1C] leading-tight truncate">KTP & NPWP</div>
-                        <div className="text-[8px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Verified</div>
+                        <div className="text-[14px] font-black text-[#B91C1C] leading-tight truncate">KTP & NPWP</div>
+                        <div className="text-[14px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Verified</div>
                       </div>
                     </div>
 
@@ -567,8 +567,8 @@ function CaraKerjaSection() {
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
-                        <div className="text-[8px] font-bold text-orange-600 mt-0.5 leading-none">Verified</div>
+                        <div className="text-[14px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
+                        <div className="text-[14px] font-bold text-orange-600 mt-0.5 leading-none">Verified</div>
                       </div>
                     </div>
 
@@ -578,8 +578,8 @@ function CaraKerjaSection() {
                         <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">Nama PT</div>
-                        <div className="text-[8px] font-bold text-green-600 mt-0.5 leading-none">Verified</div>
+                        <div className="text-[14px] font-bold text-gray-800 leading-tight truncate">Nama PT</div>
+                        <div className="text-[14px] font-bold text-green-600 mt-0.5 leading-none">Verified</div>
                       </div>
                     </div>
 
@@ -589,8 +589,8 @@ function CaraKerjaSection() {
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
-                        <div className="text-[8px] font-bold text-blue-500 mt-0.5 leading-none">Ready</div>
+                        <div className="text-[14px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
+                        <div className="text-[14px] font-bold text-blue-500 mt-0.5 leading-none">Ready</div>
                       </div>
                     </div>
                   </div>
@@ -620,20 +620,20 @@ function CaraKerjaSection() {
                     <FileText className="w-5 h-5 text-[#B91C1C]" />
                   </div>
                   <div className="leading-tight pr-2">
-                    <div className="text-[12px] font-black text-gray-800">Draft Akta Selesai!</div>
-                    <div className="text-[10px] font-bold text-gray-500 mt-1">Siap Ditinjau</div>
+                    <div className="text-[14px] font-black text-gray-800">Draft Akta Selesai!</div>
+                    <div className="text-[14px] font-bold text-gray-500 mt-1">Siap Ditinjau</div>
                   </div>
                 </div>
 
                 {/* "New Message" Notification — left side below */}
                 <div className="absolute top-[32%] -left-[5%] bg-white/95 backdrop-blur-sm rounded-[16px] p-3 shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 flex items-start gap-3 z-40 w-[240px] animate-float-medium">
-                   <div className="w-9 h-9 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0">EL</div>
+                   <div className="w-9 h-9 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[14px] font-bold flex-shrink-0">EL</div>
                    <div className="leading-tight min-w-0 pt-0.5 w-full">
                      <div className="flex justify-between items-center mb-1">
-                       <span className="text-[12px] font-black text-gray-800">EasyLegal</span>
-                       <span className="text-[9px] font-bold text-gray-400">10:24 AM</span>
+                       <span className="text-[14px] font-black text-gray-800">EasyLegal</span>
+                       <span className="text-[14px] font-bold text-gray-400">10:24 AM</span>
                      </div>
-                     <p className="text-[10px] text-gray-600 leading-snug">Your document has been completed...</p>
+                     <p className="text-[14px] text-gray-600 leading-snug">Your document has been completed...</p>
                    </div>
                 </div>
 
@@ -642,17 +642,17 @@ function CaraKerjaSection() {
                   <div className="w-6 h-6 rounded-full bg-red-50 flex items-center justify-center">
                     <Truck className="w-3.5 h-3.5 text-[#B91C1C]" />
                   </div>
-                  <span className="text-[12px] font-black text-gray-800">Hardcopy Terkirim</span>
+                  <span className="text-[14px] font-black text-gray-800">Hardcopy Terkirim</span>
                 </div>
 
                 {/* "100% Selesai & Legal" — right side, middle */}
                 <div className="absolute top-[50%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-3 z-40 w-[200px] animate-float-medium">
-                  <div className="w-10 h-10 rounded-full border-[2px] border-[#B91C1C] flex items-center justify-center text-[11px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50 shadow-sm">
+                  <div className="w-10 h-10 rounded-full border-[2px] border-[#B91C1C] flex items-center justify-center text-[14px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50 shadow-sm">
                     100%
                   </div>
                   <div className="leading-tight min-w-0">
-                    <div className="text-[12px] font-black text-gray-800 truncate">Selesai & Legal</div>
-                    <div className="text-[10px] font-bold text-gray-500 mt-1 truncate">Bisnis Siap Jalan!</div>
+                    <div className="text-[14px] font-black text-gray-800 truncate">Selesai & Legal</div>
+                    <div className="text-[14px] font-bold text-gray-500 mt-1 truncate">Bisnis Siap Jalan!</div>
                   </div>
                 </div>
 
@@ -660,12 +660,12 @@ function CaraKerjaSection() {
                 <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
                   <div className="flex items-center gap-3 mb-3.5">
-                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-500/30">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[14px] shadow-lg shadow-red-500/30">
                       04
                     </div>
                     <div>
                       <div className="text-[14px] font-black text-[#111827] leading-tight">Terima Hasil</div>
-                      <div className="text-[10px] text-[#6B7280] font-semibold mt-0.5">Unduh berkas legalitas resmi Anda</div>
+                      <div className="text-[14px] text-[#6B7280] font-semibold mt-0.5">Unduh berkas legalitas resmi Anda</div>
                     </div>
                   </div>
 
@@ -677,8 +677,8 @@ function CaraKerjaSection() {
                         <Download className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-black text-[#B91C1C] leading-tight truncate">Akta PT</div>
-                        <div className="text-[8px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Unduh PDF</div>
+                        <div className="text-[14px] font-black text-[#B91C1C] leading-tight truncate">Akta PT</div>
+                        <div className="text-[14px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Unduh PDF</div>
                       </div>
                     </div>
 
@@ -688,8 +688,8 @@ function CaraKerjaSection() {
                         <Download className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
-                        <div className="text-[8px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
+                        <div className="text-[14px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
+                        <div className="text-[14px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
                       </div>
                     </div>
 
@@ -699,8 +699,8 @@ function CaraKerjaSection() {
                         <Download className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">NIB & OSS</div>
-                        <div className="text-[8px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
+                        <div className="text-[14px] font-bold text-gray-800 leading-tight truncate">NIB & OSS</div>
+                        <div className="text-[14px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
                       </div>
                     </div>
 
@@ -710,8 +710,8 @@ function CaraKerjaSection() {
                         <Download className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <div className="text-[10px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
-                        <div className="text-[8px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
+                        <div className="text-[14px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
+                        <div className="text-[14px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
                       </div>
                     </div>
                   </div>
@@ -851,13 +851,15 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     </div>
                     {/* Content Block */}
                     <div className="flex flex-col flex-grow min-w-0">
-                      <span className="text-[9px] sm:text-[10px] font-black text-[#9B1C1C] tracking-[0.1em] mb-1 sm:mb-1.5 uppercase block">
-                        {tool.tag}
-                      </span>
-                      <h3 className="text-xs sm:text-[15.5px] font-bold text-[#1A1A1A] group-hover:text-[#D62828] transition-colors leading-tight">
+                      {tool.tag && (
+                        <span className="text-[14px] sm:text-[14px] font-black text-[#9B1C1C] tracking-[0.1em] mb-1 sm:mb-1.5 uppercase block">
+                          {tool.tag}
+                        </span>
+                      )}
+                      <h3 className="text-[14px] sm:text-[15.5px] font-bold text-[#1A1A1A] group-hover:text-[#D62828] transition-colors leading-tight">
                         {tool.title}
                       </h3>
-                      <p className="text-[11px] sm:text-[13px] text-[#666666] leading-relaxed mt-1 sm:mt-2">
+                      <p className="text-[14px] sm:text-[14px] text-[#666666] leading-relaxed mt-1 sm:mt-2">
                         {tool.desc}
                       </p>
                       <div className="mt-2 sm:mt-4">
@@ -866,7 +868,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                             href={tool.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center text-[11px] sm:text-[13px] font-bold text-[#9B1C1C] hover:text-[#8B0000] active:scale-[0.98] space-x-1 group/link"
+                            className="inline-flex items-center text-[14px] sm:text-[14px] font-bold text-[#9B1C1C] hover:text-[#8B0000] active:scale-[0.98] space-x-1 group/link"
                           >
                             <span>{tool.cta}</span>
                             <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform group-hover/link:translate-x-0.5" strokeWidth={2.5} />
@@ -874,7 +876,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                         ) : (
                           <Link
                             href={tool.href}
-                            className="inline-flex items-center text-[11px] sm:text-[13px] font-bold text-[#9B1C1C] hover:text-[#8B0000] active:scale-[0.98] space-x-1 group/link"
+                            className="inline-flex items-center text-[14px] sm:text-[14px] font-bold text-[#9B1C1C] hover:text-[#8B0000] active:scale-[0.98] space-x-1 group/link"
                           >
                             <span>{tool.cta}</span>
                             <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform group-hover/link:translate-x-0.5" strokeWidth={2.5} />
@@ -898,8 +900,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
         ref={partnersRef}
       >
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8 mb-6 sm:mb-10 text-center">
-          <span className="text-[10px] sm:text-[12px] font-bold text-dark/40 uppercase tracking-[0.15em]">
-            DIPERCAYA OLEH RIBUAN PELAKU BISNIS :
+          <span className="text-[14px] sm:text-[14px] font-bold text-[#9B1C1C] uppercase tracking-[0.15em]">
+            Dipercaya oleh 12.500+ pelaku bisnis :
           </span>
         </div>
         
@@ -935,34 +937,58 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
           <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
           <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
         </div>
+
+        {/* Premium Statistics Redesign */}
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-8 mt-16 sm:mt-24 mb-10">
+          <div className="bg-gradient-to-br from-[#9B1C1C] to-[#6A0D0D] rounded-[24px] sm:rounded-[32px] p-1 sm:p-2 shadow-[0_20px_50px_rgba(155,28,28,0.15)] relative overflow-hidden group">
+            {/* Ambient Background Flares */}
+            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-white/10 rounded-full blur-[100px] pointer-events-none transition-transform duration-1000 group-hover:translate-x-10" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-black/20 rounded-full blur-[80px] pointer-events-none" />
+            
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[20px] sm:rounded-[28px] p-8 sm:p-14 relative z-10">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-12 sm:gap-y-16 lg:gap-y-0 gap-x-6 sm:gap-x-10 lg:gap-x-0 lg:divide-x lg:divide-white/15">
+                {[
+                  { value: "12.500+", label: "Bisnis Terlayani" },
+                  { value: "15+", label: "Jenis Layanan Legal" },
+                  { value: "4.9 ★", label: "Rating Google" },
+                  { value: "3 Kota", label: "Office Presence" }
+                ].map((stat, idx) => (
+                  <div key={idx} className="flex flex-col items-center justify-center text-center px-4 md:px-6 cursor-default">
+                    <div className="text-[36px] sm:text-[46px] lg:text-[56px] font-black text-white tracking-tighter leading-none mb-3 sm:mb-4 hover:scale-105 transition-transform duration-500 ease-out origin-center">
+                      {stat.value}
+                    </div>
+                    <div className="text-[14px] sm:text-[14px] font-bold text-red-100/70 tracking-[0.1em] uppercase hover:text-white transition-colors duration-300">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-          LAYANAN KAMI
+          LIPUTAN MEDIA
           ═══════════════════════════════════════════ */}
-      <LayananKami />
-
-      {/* ═══════════════════════════════════════════
-          CARA KERJA
-          ═══════════════════════════════════════════ */}
-      <CaraKerjaSection />
+      <MediaCoverage />
 
       {/* ═══════════════════════════════════════════
           WHY CHOOSE EL PARTNERS
           ═══════════════════════════════════════════ */}
       <section
-        className="py-8 sm:py-24 bg-white"
+        className="py-8 sm:pt-12 sm:pb-0 bg-white"
         ref={whyChooseRef}
       >
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
           <div className="mb-6 sm:mb-16 animate-scroll-reveal" ref={whyChooseHeaderRef}>
-            <span className="text-[9px] sm:text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3 inline-block">
+            <span className="text-[14px] sm:text-[14px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3 inline-block">
               KENAPA EASYLEGAL
             </span>
             <h2 className="text-[20px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.15] tracking-[-0.02em] max-w-2xl">
               Fondasi kokoh untuk legalitas bisnis Anda.
             </h2>
-            <p className="mt-2 sm:mt-4 text-[11.5px] sm:text-lg text-gray-500 max-w-3xl">
+            <p className="mt-2 sm:mt-4 text-[14px] sm:text-lg text-gray-500 max-w-3xl">
               Bukan sekadar urus dokumen — kami partner legal yang menyederhanakan proses, transparan dalam biaya, dan responsif kapan saja.
             </p>
           </div>
@@ -977,8 +1003,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses cepat & terlacak</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm leading-relaxed">SLA 7–14 hari kerja dengan progress yang dipantau real-time.</p>
+                <h3 className="text-[14px] sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses cepat & terlacak</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[14px] sm:text-sm leading-relaxed">SLA 7–14 hari kerja dengan progress yang dipantau real-time.</p>
               </div>
             </div>
 
@@ -990,8 +1016,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Konsultan hukum berpengalaman</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm leading-relaxed">Ditangani lawyer yang sudah menangani ribuan kasus UMKM.</p>
+                <h3 className="text-[14px] sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Konsultan hukum berpengalaman</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[14px] sm:text-sm leading-relaxed">Ditangani lawyer yang sudah menangani ribuan kasus UMKM.</p>
               </div>
             </div>
 
@@ -1003,8 +1029,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Resmi terdaftar PSE Kominfo</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm leading-relaxed">Data Anda aman & terlindungi sesuai regulasi.</p>
+                <h3 className="text-[14px] sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Resmi terdaftar PSE Kominfo</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[14px] sm:text-sm leading-relaxed">Data Anda aman & terlindungi sesuai regulasi.</p>
               </div>
             </div>
 
@@ -1016,23 +1042,23 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Harga transparan, tanpa kejutan</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm leading-relaxed">Semua biaya tertera di awal. Tidak ada add-on mendadak.</p>
+                <h3 className="text-[14px] sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Harga transparan, tanpa kejutan</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[14px] sm:text-sm leading-relaxed">Semua biaya tertera di awal. Tidak ada add-on mendadak.</p>
               </div>
             </div>
 
             {/* Row 2, Col 1-2: Pendirian PT (dashed border card) */}
             <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-dashed border-[#e0b0b0] sm:border-gray-300 shadow-[0_4px_20px_rgba(0,0,0,0.015)] group flex flex-col justify-center min-h-[120px] sm:min-h-[220px] text-left sm:text-center">
-              <span className="text-[9px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pendirian PT</span>
+              <span className="text-[14px] sm:text-[14px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pendirian PT</span>
               <div className="text-lg sm:text-2xl font-black text-[#B91C1C] sm:text-gray-900">Rp 2.500.000</div>
               <div className="mt-2 sm:mt-4 space-y-1 text-left sm:inline-block">
-                <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                <div className="flex items-center gap-1.5 text-[14px] sm:text-[14px] text-gray-600">
                   <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#10B981] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                   <span>Jasa kami</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                <div className="flex items-center gap-1.5 text-[14px] sm:text-[14px] text-gray-600">
                   <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#10B981] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
@@ -1049,8 +1075,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
                 </div>
-                <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">100% online & paperless</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm leading-relaxed">Upload aman dari mana saja, tanpa harus ke kantor.</p>
+                <h3 className="text-[14px] sm:text-lg font-bold text-gray-900 leading-tight mb-1 sm:mb-2">100% online & paperless</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[14px] sm:text-sm leading-relaxed">Upload aman dari mana saja, tanpa harus ke kantor.</p>
               </div>
             </div>
 
@@ -1065,8 +1091,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-tight">Tracking real-time</h3>
-                    <p className="text-[10px] sm:text-sm text-gray-400 sm:text-gray-500 leading-none mt-0.5">Pantau setiap tahap pengurusan dari dashboard.</p>
+                    <h3 className="text-[14px] sm:text-lg font-bold text-gray-900 leading-tight">Tracking real-time</h3>
+                    <p className="text-[14px] sm:text-sm text-gray-400 sm:text-gray-500 leading-none mt-0.5">Pantau setiap tahap pengurusan dari dashboard.</p>
                   </div>
                 </div>
 
@@ -1080,9 +1106,9 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span className="text-[11px] sm:text-xs font-semibold text-gray-800">Konsultasi</span>
+                      <span className="text-[14px] sm:text-[14px] font-semibold text-gray-800">Konsultasi</span>
                     </div>
-                    <span className="text-[8px] sm:text-[10px] font-bold text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Done</span>
+                    <span className="text-[14px] sm:text-[14px] font-bold text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Done</span>
                   </div>
 
                   {/* Step 2 */}
@@ -1093,29 +1119,29 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span className="text-[11px] sm:text-xs font-semibold text-gray-800">Cek Nama PT</span>
+                      <span className="text-[14px] sm:text-[14px] font-semibold text-gray-800">Cek Nama PT</span>
                     </div>
-                    <span className="text-[8px] sm:text-[10px] font-bold text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Done</span>
+                    <span className="text-[14px] sm:text-[14px] font-bold text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Done</span>
                   </div>
 
                   {/* Step 3 */}
                   <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-red-100 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[10px] sm:text-[11px] font-bold">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[14px] sm:text-[14px] font-bold">
                         3
                       </div>
-                      <span className="text-[11px] sm:text-xs font-semibold text-gray-800 font-bold">Akta Notaris</span>
+                      <span className="text-[14px] sm:text-[14px] font-semibold text-gray-800 font-bold">Akta Notaris</span>
                     </div>
-                    <span className="text-[8px] sm:text-[10px] font-bold text-[#B91C1C] bg-[#B91C1C]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Jalan</span>
+                    <span className="text-[14px] sm:text-[14px] font-bold text-[#B91C1C] bg-[#B91C1C]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Jalan</span>
                   </div>
 
                   {/* Step 4 */}
                   <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-sm border border-black/[0.02] flex items-center justify-between opacity-50">
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 text-[10px] sm:text-[11px] font-bold">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 text-[14px] sm:text-[14px] font-bold">
                         4
                       </div>
-                      <span className="text-[11px] sm:text-xs font-semibold text-gray-400">Pengesahan AHU</span>
+                      <span className="text-[14px] sm:text-[14px] font-semibold text-gray-400">Pengesahan AHU</span>
                     </div>
                   </div>
                 </div>
@@ -1130,38 +1156,29 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </div>
-                <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-tight mb-1">CS responsif 24/7</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm leading-relaxed">WhatsApp dijawab rata-rata &lt; 5 menit.</p>
-              </div>
-            </div>
-
-            {/* Row 3, Col 2-4: Stats block */}
-            <div className="bg-[#f9f9f9] sm:bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-transparent sm:border-gray-100/80 shadow-[0_4px_20px_rgba(0,0,0,0.015)] group col-span-2 lg:col-span-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 sm:gap-6">
-              <div className="max-w-md">
-                <h3 className="text-xs sm:text-lg font-bold text-gray-900 leading-snug mb-1">Dipercaya pengusaha Indonesia di berbagai industri</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[10px] sm:text-sm">Dari UMKM kuliner sampai startup teknologi.</p>
-              </div>
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full lg:w-auto">
-                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center shadow-sm border border-black/[0.02]">
-                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none">11.000+</div>
-                  <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Bisnis terlayani</div>
-                </div>
-                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center shadow-sm border border-black/[0.02]">
-                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none flex items-center justify-center gap-0.5">
-                    4.9<span className="text-[#B91C1C] text-xs sm:text-2xl">★</span>
-                  </div>
-                  <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Rating Google</div>
-                </div>
-                <div className="bg-white sm:bg-gray-50 rounded-xl p-3 sm:p-3 text-center shadow-sm border border-black/[0.02]">
-                  <div className="text-base sm:text-3xl font-black text-[#B91C1C] leading-none">5 thn</div>
-                  <div className="text-[9px] sm:text-[11px] font-semibold text-gray-400 mt-1 uppercase tracking-wider">Pengalaman</div>
-                </div>
+                <h3 className="text-[14px] sm:text-lg font-bold text-gray-900 leading-tight mb-1">CS responsif 24/7</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[14px] sm:text-sm leading-relaxed">WhatsApp dijawab rata-rata &lt; 5 menit.</p>
               </div>
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════
+          PROMO & MARKETPLACE
+          ═══════════════════════════════════════════ */}
+      <BottomPromoSection />
+
+      {/* ═══════════════════════════════════════════
+          LAYANAN KAMI
+          ═══════════════════════════════════════════ */}
+      <LayananKami />
+
+      {/* ═══════════════════════════════════════════
+          CARA KERJA
+          ═══════════════════════════════════════════ */}
+      <CaraKerjaSection />
 
       {/* ═══════════════════════════════════════════
           VIDEO PROFILE
@@ -1172,7 +1189,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
             className="text-left sm:text-center mb-6 sm:mb-16 animate-scroll-reveal"
             ref={videoProfilHeaderRef}
           >
-            <span className="text-[9px] sm:text-[12px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3 inline-block">
+            <span className="text-[14px] sm:text-[14px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3 inline-block">
               Video Profil
             </span>
             <h2 className="text-[20px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.12] tracking-[-0.02em]">
@@ -1193,15 +1210,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
           ═══════════════════════════════════════════ */}
       <InformasiHukumSection articles={articles} />
 
-      {/* ═══════════════════════════════════════════
-          PROMO & MARKETPLACE
-          ═══════════════════════════════════════════ */}
-      <BottomPromoSection />
 
-      {/* ═══════════════════════════════════════════
-          LIPUTAN MEDIA
-          ═══════════════════════════════════════════ */}
-      <MediaCoverage />
+
 
     </div>
   );

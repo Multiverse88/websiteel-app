@@ -110,7 +110,7 @@ export default function ReferralResellerPage() {
               {/* Badge Pill */}
               <div className="inline-flex items-center space-x-2 bg-white py-1.5 px-4 rounded-full border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[11.5px] font-bold text-[#990202] tracking-wider">Program Referral &amp; Reseller</span>
+                <span className="text-[14px] font-bold text-[#990202] tracking-wider">Program Referral &amp; Reseller</span>
               </div>
 
               {/* Headline */}
@@ -154,19 +154,19 @@ export default function ReferralResellerPage() {
                 <div className="bg-white rounded-[24px] p-6 sm:p-8 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_20px_50px_rgba(0,0,0,0.035)] relative">
 
                   {/* Floating badge centered on the top card border */}
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#990202] text-white text-[10px] font-black tracking-widest px-5 py-1.5 rounded-full uppercase shadow-md z-20 whitespace-nowrap">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#990202] text-white text-[14px] font-black tracking-widest px-5 py-1.5 rounded-full uppercase shadow-md z-20 whitespace-nowrap">
                     CONTOH KOMISI • 1 KLIEN
                   </div>
 
                   <div className="text-center mt-4">
-                    <span className="text-gray-450 text-[10px] font-extrabold tracking-widest block mb-1">
+                    <span className="text-gray-450 text-[14px] font-extrabold tracking-widest block mb-1">
                       TOTAL KOMISI POTENSIAL
                     </span>
                     <div className="flex items-start justify-center text-[#990202] font-black leading-none mb-1 font-sans">
                       <span className="text-[20px] sm:text-[24px] mt-2 sm:mt-2.5 mr-0.5 font-extrabold">Rp</span>
                       <span className="text-[48px] sm:text-[56px] tracking-tight">850.000</span>
                     </div>
-                    <span className="text-gray-450 text-[9.5px] font-bold tracking-wider block mb-6">
+                    <span className="text-gray-450 text-[14px] font-bold tracking-wider block mb-6">
                       DARI 1 PAKET LAYANAN KLIEN
                     </span>
                   </div>
@@ -174,7 +174,7 @@ export default function ReferralResellerPage() {
                   {/* Checklist of Services */}
                   <div className="space-y-4 mb-6 px-1">
                     {/* Item 1 */}
-                    <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
+                    <div className="flex items-center justify-between text-[14px] sm:text-[14px]">
                       <div className="flex items-center space-x-3">
                         <Check className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={4} />
                         <span className="font-semibold text-gray-700">Pendirian PT</span>
@@ -183,7 +183,7 @@ export default function ReferralResellerPage() {
                     </div>
 
                     {/* Item 2 */}
-                    <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
+                    <div className="flex items-center justify-between text-[14px] sm:text-[14px]">
                       <div className="flex items-center space-x-3">
                         <Check className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={4} />
                         <span className="font-semibold text-gray-700">Daftar Merek</span>
@@ -192,7 +192,7 @@ export default function ReferralResellerPage() {
                     </div>
 
                     {/* Item 3 */}
-                    <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
+                    <div className="flex items-center justify-between text-[14px] sm:text-[14px]">
                       <div className="flex items-center space-x-3">
                         <Check className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={4} />
                         <span className="font-semibold text-gray-700">NIB &amp; OSS</span>
@@ -201,7 +201,7 @@ export default function ReferralResellerPage() {
                     </div>
 
                     {/* Item 4 */}
-                    <div className="flex items-center justify-between text-[13px] sm:text-[13.5px]">
+                    <div className="flex items-center justify-between text-[14px] sm:text-[14px]">
                       <div className="flex items-center space-x-3">
                         <Check className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={4} />
                         <span className="font-semibold text-gray-700">Virtual Office</span>
@@ -212,7 +212,7 @@ export default function ReferralResellerPage() {
 
                   {/* Total per Klien */}
                   <div className="flex items-center justify-between pt-5 border-t border-gray-100">
-                    <span className="text-gray-900 font-extrabold text-[12.5px] sm:text-[13px] tracking-wide">
+                    <span className="text-gray-900 font-extrabold text-[14px] sm:text-[14px] tracking-wide">
                       TOTAL PER KLIEN
                     </span>
                     <span className="text-[#990202] font-black text-[14.5px] sm:text-[15.5px]">
@@ -228,8 +228,8 @@ export default function ReferralResellerPage() {
                     <Check className="w-5 h-5 text-white" strokeWidth={3.5} />
                   </div>
                   <div>
-                    <div className="font-black text-[12.5px] text-gray-900 leading-tight">Transfer 3 Hari</div>
-                    <div className="text-[10px] text-gray-450 font-semibold mt-0.5">Setelah klien bayar</div>
+                    <div className="font-black text-[14px] text-gray-900 leading-tight">Transfer 3 Hari</div>
+                    <div className="text-[14px] text-gray-450 font-semibold mt-0.5">Setelah klien bayar</div>
                   </div>
                 </div>
 
@@ -243,8 +243,8 @@ export default function ReferralResellerPage() {
                     </svg>
                   </div>
                   <div>
-                    <div className="font-black text-[12.5px] text-gray-900 leading-tight">Unlimited Income</div>
-                    <div className="text-[10px] text-gray-450 font-semibold mt-0.5">Tidak ada batas komisi</div>
+                    <div className="font-black text-[14px] text-gray-900 leading-tight">Unlimited Income</div>
+                    <div className="text-[14px] text-gray-450 font-semibold mt-0.5">Tidak ada batas komisi</div>
                   </div>
                 </div>
               </div>
@@ -259,7 +259,7 @@ export default function ReferralResellerPage() {
               <ShieldCheck className="w-6 h-6 text-[#990202] shrink-0" strokeWidth={2} />
               <div>
                 <div className="font-extrabold text-[15px] text-gray-900 leading-tight">6.500+</div>
-                <div className="text-[12px] text-gray-500 font-semibold mt-0.5">Klien terlayani</div>
+                <div className="text-[14px] text-gray-500 font-semibold mt-0.5">Klien terlayani</div>
               </div>
             </div>
             {/* Checkpoint 2 */}
@@ -267,7 +267,7 @@ export default function ReferralResellerPage() {
               <Check className="w-6 h-6 text-[#990202] shrink-0" strokeWidth={3} />
               <div>
                 <div className="font-extrabold text-[15px] text-gray-900 leading-tight">90+ Layanan</div>
-                <div className="text-[12px] text-gray-500 font-semibold mt-0.5">Satu kode komisi</div>
+                <div className="text-[14px] text-gray-500 font-semibold mt-0.5">Satu kode komisi</div>
               </div>
             </div>
             {/* Checkpoint 3 */}
@@ -275,7 +275,7 @@ export default function ReferralResellerPage() {
               <Award className="w-6 h-6 text-[#990202] shrink-0" strokeWidth={2} />
               <div>
                 <div className="font-extrabold text-[15px] text-gray-900 leading-tight">ISO Certified</div>
-                <div className="text-[12px] text-gray-500 font-semibold mt-0.5">9001 &amp; 27001</div>
+                <div className="text-[14px] text-gray-500 font-semibold mt-0.5">9001 &amp; 27001</div>
               </div>
             </div>
           </div>
@@ -290,7 +290,7 @@ export default function ReferralResellerPage() {
 
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">CARA KERJA</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">CARA KERJA</p>
             <h2 className="font-heading text-[36px] sm:text-[42px] font-black text-gray-900 leading-tight tracking-tight">
               4 langkah <span className="text-[#990202]">mulai cuan</span> dari rumah.
             </h2>
@@ -309,7 +309,7 @@ export default function ReferralResellerPage() {
                 <span className="text-[#990202] font-black text-[18px] leading-none">1</span>
               </div>
               <h3 className="text-[16px] font-black text-gray-900 leading-tight mb-3">Daftar Gratis</h3>
-              <p className="text-[13px] text-gray-500 font-normal leading-relaxed">
+              <p className="text-[14px] text-gray-500 font-normal leading-relaxed">
                 Chat tim kami via WhatsApp. Isi data singkat — tidak ada biaya pendaftaran sama sekali.
               </p>
             </div>
@@ -320,7 +320,7 @@ export default function ReferralResellerPage() {
                 <span className="text-[#990202] font-black text-[18px] leading-none">2</span>
               </div>
               <h3 className="text-[16px] font-black text-gray-900 leading-tight mb-3">Terima Kode Unik</h3>
-              <p className="text-[13px] text-gray-500 font-normal leading-relaxed">
+              <p className="text-[14px] text-gray-500 font-normal leading-relaxed">
                 Kami kirim kode referral unikmu dalam 1×24 jam. Satu kode untuk semua 90+ layanan kami.
               </p>
             </div>
@@ -331,7 +331,7 @@ export default function ReferralResellerPage() {
                 <span className="text-[#990202] font-black text-[18px] leading-none">3</span>
               </div>
               <h3 className="text-[16px] font-black text-gray-900 leading-tight mb-3">Share ke Kontak</h3>
-              <p className="text-[13px] text-gray-500 font-normal leading-relaxed">
+              <p className="text-[14px] text-gray-500 font-normal leading-relaxed">
                 Sebar kode ke teman, klien, follower — siapa saja yang butuh jasa legalitas bisnis.
               </p>
             </div>
@@ -342,7 +342,7 @@ export default function ReferralResellerPage() {
                 <span className="text-[#990202] font-black text-[18px] leading-none">4</span>
               </div>
               <h3 className="text-[16px] font-black text-gray-900 leading-tight mb-3">Terima Komisi</h3>
-              <p className="text-[13px] text-gray-500 font-normal leading-relaxed">
+              <p className="text-[14px] text-gray-500 font-normal leading-relaxed">
                 Komisi otomatis ditransfer ke rekeningmu dalam <strong className="font-extrabold text-gray-900">3 hari kerja</strong> setelah klien bayar.
               </p>
             </div>
@@ -357,7 +357,7 @@ export default function ReferralResellerPage() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">KENAPA GABUNG</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">KENAPA GABUNG</p>
             <h2 className="font-heading text-[36px] sm:text-[42px] font-black text-gray-900 leading-tight tracking-tight">
               Lebih dari sekadar referral biasa.
             </h2>
@@ -388,7 +388,7 @@ export default function ReferralResellerPage() {
                 <h3 className="text-white font-black text-[22px] sm:text-[24px] leading-tight tracking-tight mb-4">
                   Komisi Tertinggi sampai Rp 1.270.000
                 </h3>
-                <p className="text-white/65 text-[13.5px] font-normal leading-relaxed max-w-[280px]">
+                <p className="text-white/65 text-[14px] font-normal leading-relaxed max-w-[280px]">
                   Setiap layanan punya rate komisi berbeda — beberapa layanan premium kasih komisi sampai jutaan rupiah per transaksi.
                 </p>
               </div>
@@ -417,7 +417,7 @@ export default function ReferralResellerPage() {
                 </div>
                 <div>
                   <h4 className="font-black text-[16px] text-gray-900 leading-tight mb-2">Transfer 3 Hari</h4>
-                  <p className="text-[13px] text-gray-500 font-normal leading-relaxed">
+                  <p className="text-[14px] text-gray-500 font-normal leading-relaxed">
                     Komisi cair otomatis tiga hari kerja setelah pembayaran klien.
                   </p>
                 </div>
@@ -432,7 +432,7 @@ export default function ReferralResellerPage() {
                 </div>
                 <div>
                   <h4 className="font-black text-[16px] text-gray-900 leading-tight mb-2">Klien Dapat Diskon</h4>
-                  <p className="text-[13px] text-gray-500 font-normal leading-relaxed">
+                  <p className="text-[14px] text-gray-500 font-normal leading-relaxed">
                     Klien hemat sampai Rp 80.000 dengan kodemu — win-win.
                   </p>
                 </div>
@@ -449,7 +449,7 @@ export default function ReferralResellerPage() {
                 </div>
                 <div>
                   <h4 className="font-black text-[16px] text-gray-900 leading-tight mb-2">90+ Layanan, 1 Kode</h4>
-                  <p className="text-[13px] text-gray-500 font-normal leading-relaxed">
+                  <p className="text-[14px] text-gray-500 font-normal leading-relaxed">
                     Satu kode untuk seluruh layanan — pendirian PT, merek, NIB, ISO, KITAS, dll.
                   </p>
                 </div>
@@ -466,7 +466,7 @@ export default function ReferralResellerPage() {
                 </div>
                 <div>
                   <h4 className="font-black text-[16px] text-gray-900 leading-tight mb-2">Unlimited Income</h4>
-                  <p className="text-[13px] text-gray-500 font-normal leading-relaxed">
+                  <p className="text-[14px] text-gray-500 font-normal leading-relaxed">
                     Tidak ada batas maksimum komisi — semakin banyak referral, semakin besar penghasilan.
                   </p>
                 </div>
@@ -483,7 +483,7 @@ export default function ReferralResellerPage() {
 
           {/* Section Header */}
           <div className="text-center mb-10 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">SIMULASI PENGHASILAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">SIMULASI PENGHASILAN</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
               Berapa potensi <span className="text-[#990202]">cuan per bulan?</span>
             </h2>
@@ -499,7 +499,7 @@ export default function ReferralResellerPage() {
                 <button
                   key={s.id}
                   onClick={() => setSelectedScenario(s.id)}
-                  className={`px-5 py-2 rounded-full text-[13.5px] font-extrabold transition-all duration-200 cursor-pointer ${
+                  className={`px-5 py-2 rounded-full text-[14px] font-extrabold transition-all duration-200 cursor-pointer ${
                     selectedScenario === s.id
                       ? "bg-[#990202] text-white shadow-md"
                       : "bg-transparent text-gray-600 hover:text-gray-900"
@@ -519,11 +519,11 @@ export default function ReferralResellerPage() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
               {/* Left: estimasi number */}
               <div className="space-y-2">
-                <p className="text-white/60 text-[10.5px] font-extrabold tracking-widest uppercase">ESTIMASI PENGHASILAN BULANAN</p>
+                <p className="text-white/60 text-[14px] font-extrabold tracking-widest uppercase">ESTIMASI PENGHASILAN BULANAN</p>
                 <p className="text-white font-black text-[36px] sm:text-[40px] leading-none tracking-tight">
                   Rp {formatRp(activeScenario.txPerMonth * activeScenario.avgComisi)}
                 </p>
-                <p className="text-white/55 text-[12.5px] italic font-normal">{activeScenario.desc}</p>
+                <p className="text-white/55 text-[14px] italic font-normal">{activeScenario.desc}</p>
               </div>
 
 
@@ -531,7 +531,7 @@ export default function ReferralResellerPage() {
               <div className="flex flex-row gap-3 shrink-0">
                 <div className="rounded-xl px-5 py-3.5 text-center min-w-[85px]" style={{ backgroundColor: "rgba(255,255,255,0.13)" }}>
                   <div className="text-white font-black text-[22px] leading-tight">{activeScenario.txPerMonth}</div>
-                  <div className="text-white/55 text-[10px] font-semibold mt-1">Transaksi/Bln</div>
+                  <div className="text-white/55 text-[14px] font-semibold mt-1">Transaksi/Bln</div>
                 </div>
                 <div className="rounded-xl px-5 py-3.5 text-center min-w-[95px]" style={{ backgroundColor: "rgba(255,255,255,0.13)" }}>
                   <div className="text-white font-black text-[22px] leading-tight">
@@ -539,7 +539,7 @@ export default function ReferralResellerPage() {
                       ? (activeScenario.avgComisi / 1000000).toFixed(1) + "jt"
                       : (activeScenario.avgComisi / 1000) + "rb"}
                   </div>
-                  <div className="text-white/55 text-[10px] font-semibold mt-1">Rata-rata Komisi</div>
+                  <div className="text-white/55 text-[14px] font-semibold mt-1">Rata-rata Komisi</div>
                 </div>
                 <div className="rounded-xl px-5 py-3.5 text-center min-w-[85px]" style={{ backgroundColor: "rgba(255,255,255,0.13)" }}>
                   <div className="text-white font-black text-[22px] leading-tight">
@@ -547,7 +547,7 @@ export default function ReferralResellerPage() {
                       ? Math.round((activeScenario.txPerMonth * activeScenario.avgComisi * 12) / 1000000) + " jt"
                       : formatRp(activeScenario.txPerMonth * activeScenario.avgComisi * 12)}
                   </div>
-                  <div className="text-white/55 text-[10px] font-semibold mt-1">Potensi/Tahun</div>
+                  <div className="text-white/55 text-[14px] font-semibold mt-1">Potensi/Tahun</div>
                 </div>
               </div>
             </div>
@@ -557,10 +557,10 @@ export default function ReferralResellerPage() {
           <div className="mt-4 rounded-[20px] overflow-hidden shadow-[0_0_0_1px_rgba(0,0,0,0.06),_0_8px_40px_rgba(0,0,0,0.05)]">
             {/* Table Header — dark strip */}
             <div className="grid grid-cols-4 bg-gray-900 px-6 py-3">
-              <span className="text-gray-400 text-[10px] font-extrabold tracking-widest uppercase">SKENARIO</span>
-              <span className="text-gray-400 text-[10px] font-extrabold tracking-widest uppercase">TRANSAKSI/BULAN</span>
-              <span className="text-gray-400 text-[10px] font-extrabold tracking-widest uppercase">RATA-RATA KOMISI</span>
-              <span className="text-gray-400 text-[10px] font-extrabold tracking-widest uppercase text-right">TOTAL/BULAN</span>
+              <span className="text-gray-400 text-[14px] font-extrabold tracking-widest uppercase">SKENARIO</span>
+              <span className="text-gray-400 text-[14px] font-extrabold tracking-widest uppercase">TRANSAKSI/BULAN</span>
+              <span className="text-gray-400 text-[14px] font-extrabold tracking-widest uppercase">RATA-RATA KOMISI</span>
+              <span className="text-gray-400 text-[14px] font-extrabold tracking-widest uppercase text-right">TOTAL/BULAN</span>
             </div>
 
             {/* Table Rows */}
@@ -580,8 +580,8 @@ export default function ReferralResellerPage() {
                       <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
                       <span className="text-[14px] font-extrabold text-gray-900">{s.id}</span>
                     </div>
-                    <span className="text-[13.5px] font-medium text-gray-500 self-center">{s.txPerMonth} transaksi</span>
-                    <span className="text-[13.5px] font-medium text-gray-500 self-center">Rp {formatRp(s.avgComisi)}</span>
+                    <span className="text-[14px] font-medium text-gray-500 self-center">{s.txPerMonth} transaksi</span>
+                    <span className="text-[14px] font-medium text-gray-500 self-center">Rp {formatRp(s.avgComisi)}</span>
                     <span className="text-[14px] font-black text-right text-[#990202] self-center">Rp {formatRp(total)}</span>
                   </div>
                 );
@@ -591,14 +591,14 @@ export default function ReferralResellerPage() {
               <div className="px-6 py-5 border-t border-gray-100 space-y-3.5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5">
                   {scenarios.map((s) => (
-                    <div key={s.id} className="flex items-center space-x-2 text-[12px] text-gray-500 font-medium">
+                    <div key={s.id} className="flex items-center space-x-2 text-[14px] text-gray-500 font-medium">
                       <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
                       <span className="font-extrabold text-gray-800">{s.id}</span>
                       <span>= {s.desc.toLowerCase()}</span>
                     </div>
                   ))}
                 </div>
-                <p className="text-gray-400 text-[11px] font-normal leading-relaxed italic">
+                <p className="text-gray-400 text-[14px] font-normal leading-relaxed italic">
                   *Rata-rata komisi dihitung dari mix layanan populer. Belum termasuk potensi cross-sell ketika klien menggunakan layanan tambahan dari ekosistem EasyLegal.
                 </p>
               </div>
@@ -614,7 +614,7 @@ export default function ReferralResellerPage() {
 
           {/* Section Header */}
           <div className="text-center mb-10 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">TOP 10 KOMISI TERTINGGI</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">TOP 10 KOMISI TERTINGGI</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
               Layanan dengan <span className="text-[#990202]">komisi terbesar.</span>
             </h2>
@@ -627,9 +627,9 @@ export default function ReferralResellerPage() {
           <div className="rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
             {/* Table Header */}
             <div className="grid grid-cols-[35px_1fr_120px] sm:grid-cols-[60px_1fr_200px] bg-[#111111] px-6 py-3.5 items-center">
-              <span className="text-gray-400 text-[10px] font-extrabold tracking-widest uppercase text-center">#</span>
-              <span className="text-gray-400 text-[10px] font-extrabold tracking-widest uppercase">LAYANAN</span>
-              <span className="text-gray-400 text-[10px] font-extrabold tracking-widest uppercase text-right">KOMISI/TRANSAKSI</span>
+              <span className="text-gray-400 text-[14px] font-extrabold tracking-widest uppercase text-center">#</span>
+              <span className="text-gray-400 text-[14px] font-extrabold tracking-widest uppercase">LAYANAN</span>
+              <span className="text-gray-400 text-[14px] font-extrabold tracking-widest uppercase text-right">KOMISI/TRANSAKSI</span>
             </div>
 
             {/* Table Rows */}
@@ -640,7 +640,7 @@ export default function ReferralResellerPage() {
                   className="grid grid-cols-[35px_1fr_120px] sm:grid-cols-[60px_1fr_200px] px-6 py-[18px] border-t border-gray-100 hover:bg-gray-50/50 transition-colors duration-150 items-center"
                 >
                   <span className="text-[#990202] font-black text-[14px] text-center">{item.rank}</span>
-                  <span className="text-[13.5px] font-extrabold text-gray-900">{item.name}</span>
+                  <span className="text-[14px] font-extrabold text-gray-900">{item.name}</span>
                   <span className="text-[14px] font-black text-[#990202] text-right">Rp {formatRp(item.amount)}</span>
                 </div>
               ))}
@@ -656,7 +656,7 @@ export default function ReferralResellerPage() {
 
           {/* Section Header */}
           <div className="text-center mb-16 space-y-4">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">TESTIMONI PARTNER</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">TESTIMONI PARTNER</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-black text-gray-900 leading-tight tracking-tight">
               Cerita partner yang sudah cuan.
             </h2>
@@ -673,18 +673,18 @@ export default function ReferralResellerPage() {
               <div className="absolute -top-4 left-6 bg-white px-2 text-[#990202] text-[48px] font-serif leading-none select-none">
                 “
               </div>
-              <p className="text-[13.5px] sm:text-[14px] text-gray-600 font-medium leading-relaxed flex-grow">
+              <p className="text-[14px] sm:text-[14px] text-gray-600 font-medium leading-relaxed flex-grow">
                 Saya agen properti di Bandung — banyak klien beli rumah perlu PT untuk investasi. Sejak gabung 6 bulan lalu, tambahan income rata-rata <strong className="font-extrabold text-gray-900">Rp 4 juta/bulan</strong> hanya dari rekomendasi. Komisi cair tepat waktu, gak perlu push hard sell.
               </p>
               <div>
                 <div className="border-t border-dashed border-gray-200/80 my-5" />
                 <div className="flex items-center space-x-3.5">
                   <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                    <span className="text-[#990202] text-[12.5px] font-black">RA</span>
+                    <span className="text-[#990202] text-[14px] font-black">RA</span>
                   </div>
                   <div className="flex flex-col">
                     <span className="text-[14px] font-black text-gray-900 leading-tight">Rian Aditya</span>
-                    <span className="text-[11.5px] text-gray-400 font-semibold mt-0.5">Agen Properti - Bandung</span>
+                    <span className="text-[14px] text-gray-400 font-semibold mt-0.5">Agen Properti - Bandung</span>
                   </div>
                 </div>
               </div>
@@ -695,18 +695,18 @@ export default function ReferralResellerPage() {
               <div className="absolute -top-4 left-6 bg-white px-2 text-[#990202] text-[48px] font-serif leading-none select-none">
                 “
               </div>
-              <p className="text-[13.5px] sm:text-[14px] text-gray-600 font-medium leading-relaxed flex-grow">
+              <p className="text-[14px] sm:text-[14px] text-gray-600 font-medium leading-relaxed flex-grow">
                 Sebagai konsultan UMKM, saya sering ditanyai &quot;gimana cara daftar PT?&quot; — sebelumnya saya kasih info gratis. Sekarang dengan kode referral EasyLegal, klien tetap dapat diskon, saya dapat komisi. <strong className="font-extrabold text-gray-900">Pure win-win.</strong>
               </p>
               <div>
                 <div className="border-t border-dashed border-gray-200/80 my-5" />
                 <div className="flex items-center space-x-3.5">
                   <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                    <span className="text-[#990202] text-[12.5px] font-black">DS</span>
+                    <span className="text-[#990202] text-[14px] font-black">DS</span>
                   </div>
                   <div className="flex flex-col">
                     <span className="text-[14px] font-black text-gray-900 leading-tight">Dina Sartika</span>
-                    <span className="text-[11.5px] text-gray-400 font-semibold mt-0.5">Konsultan UMKM - Jakarta</span>
+                    <span className="text-[14px] text-gray-400 font-semibold mt-0.5">Konsultan UMKM - Jakarta</span>
                   </div>
                 </div>
               </div>
@@ -717,18 +717,18 @@ export default function ReferralResellerPage() {
               <div className="absolute -top-4 left-6 bg-white px-2 text-[#990202] text-[48px] font-serif leading-none select-none">
                 “
               </div>
-              <p className="text-[13.5px] sm:text-[14px] text-gray-600 font-medium leading-relaxed flex-grow">
+              <p className="text-[14px] sm:text-[14px] text-gray-600 font-medium leading-relaxed flex-grow">
                 Sebagai freelance content creator di niche bisnis, audience saya banyak yang butuh legalitas. Bulan terbaik kemarin saya hasilkan <strong className="font-extrabold text-gray-900">Rp 9,5 juta dari referral EasyLegal</strong>. Honestly, kode referral lainnya gak ada yang sebesar ini.
               </p>
               <div>
                 <div className="border-t border-dashed border-gray-200/80 my-5" />
                 <div className="flex items-center space-x-3.5">
                   <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                    <span className="text-[#990202] text-[12.5px] font-black">FH</span>
+                    <span className="text-[#990202] text-[14px] font-black">FH</span>
                   </div>
                   <div className="flex flex-col">
                     <span className="text-[14px] font-black text-gray-900 leading-tight">Fariz Hadyan</span>
-                    <span className="text-[11.5px] text-gray-400 font-semibold mt-0.5">Content Creator - Surabaya</span>
+                    <span className="text-[14px] text-gray-400 font-semibold mt-0.5">Content Creator - Surabaya</span>
                   </div>
                 </div>
               </div>
@@ -799,7 +799,7 @@ export default function ReferralResellerPage() {
           </div>
 
           {/* Checklist items */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12.5px] text-gray-500 font-semibold">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] text-gray-500 font-semibold">
             <span className="flex items-center">
               <span className="text-[#990202] mr-1">✓</span> Gratis pendaftaran
             </span>

@@ -57,7 +57,7 @@ export default function NewsletterWidget() {
       <h3 className="text-[17px] font-extrabold text-gray-950 leading-snug mb-2">
         Update legalitas tiap minggu
       </h3>
-      <p className="text-[13px] text-gray-500 leading-relaxed mb-6">
+      <p className="text-[14px] text-gray-500 leading-relaxed mb-6">
         Subscribe newsletter EasyLegal — dapat insight regulasi bisnis terbaru langsung ke inbox.
       </p>
 
@@ -96,7 +96,7 @@ export default function NewsletterWidget() {
       {/* Status Message */}
       {message && (
         <div
-          className={`flex items-start gap-2 mt-3 p-3 rounded-lg text-[12.5px] font-medium leading-relaxed ${
+          className={`flex items-start gap-2 mt-3 p-3 rounded-lg text-[14px] font-medium leading-relaxed ${
             status === "success"
               ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
               : "bg-red-50 text-red-700 border border-red-200/60"
@@ -112,7 +112,7 @@ export default function NewsletterWidget() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-[11.5px] text-gray-500 mt-3.5 text-center leading-relaxed">
+      <p className="text-[14px] text-gray-500 mt-3.5 text-center leading-relaxed">
         Tidak ada spam. Unsubscribe kapan saja.
       </p>
     </div>

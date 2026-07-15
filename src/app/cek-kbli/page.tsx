@@ -238,7 +238,7 @@ export default function CekKBLI() {
       {/* ─── HERO SECTION ─── */}
       <section className="w-full max-w-[1200px] mx-auto z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mt-6 mb-20">
         <div className="lg:col-span-6 flex flex-col items-start text-left">
-          <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full shadow-sm border border-black/[0.02] shadow-[0_2px_10px_rgba(0,0,0,0.03)] mb-6 text-[12.5px] font-semibold text-[#B91C1C]">
+          <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full shadow-sm border border-black/[0.02] shadow-[0_2px_10px_rgba(0,0,0,0.03)] mb-6 text-[14px] font-semibold text-[#B91C1C]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#B91C1C]" />
             Database KBLI 2020
           </div>
@@ -278,7 +278,7 @@ export default function CekKBLI() {
               <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
               <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
               <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
-              <div className="absolute inset-x-0 mx-auto text-center text-[10px] text-gray-400 select-none font-semibold">
+              <div className="absolute inset-x-0 mx-auto text-center text-[14px] text-gray-400 select-none font-semibold">
                 database.kbli.bps.go.id
               </div>
             </div>
@@ -292,40 +292,40 @@ export default function CekKBLI() {
             <div className="space-y-2">
               <div className="border border-[#B91C1C] bg-[#FFF8F8] rounded-xl p-3.5 flex items-center justify-between shadow-sm">
                 <div>
-                  <div className="text-[10px] font-black text-[#B91C1C] uppercase tracking-wide">KBLI 56101</div>
-                  <div className="text-[13.5px] font-bold text-gray-900 mt-0.5">Restoran</div>
+                  <div className="text-[14px] font-black text-[#B91C1C] uppercase tracking-wide">KBLI 56101</div>
+                  <div className="text-[14px] font-bold text-gray-900 mt-0.5">Restoran</div>
                 </div>
-                <span className="bg-[#FEF3C7] text-[#D97706] text-[8.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                <span className="bg-[#FEF3C7] text-[#D97706] text-[14px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
                   Menengah-Rendah
                 </span>
               </div>
 
               <div className="shadow-sm border border-black/[0.02] bg-white rounded-xl p-3.5 flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">KBLI 56102</div>
-                  <div className="text-[13.5px] font-bold text-gray-800 mt-0.5">Warung Makan</div>
+                  <div className="text-[14px] font-bold text-gray-400 uppercase tracking-wide">KBLI 56102</div>
+                  <div className="text-[14px] font-bold text-gray-800 mt-0.5">Warung Makan</div>
                 </div>
-                <span className="bg-[#E6F4EA] text-[#137333] text-[8.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                <span className="bg-[#E6F4EA] text-[#137333] text-[14px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
                   Rendah
                 </span>
               </div>
 
               <div className="shadow-sm border border-black/[0.02] bg-white rounded-xl p-3.5 flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">KBLI 56303</div>
-                  <div className="text-[13.5px] font-bold text-gray-800 mt-0.5">Cafe / Kedai Minuman</div>
+                  <div className="text-[14px] font-bold text-gray-400 uppercase tracking-wide">KBLI 56303</div>
+                  <div className="text-[14px] font-bold text-gray-800 mt-0.5">Cafe / Kedai Minuman</div>
                 </div>
-                <span className="bg-[#E6F4EA] text-[#137333] text-[8.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                <span className="bg-[#E6F4EA] text-[#137333] text-[14px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
                   Rendah
                 </span>
               </div>
 
               <div className="shadow-sm border border-black/[0.02] bg-white rounded-xl p-3.5 flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">KBLI 56210</div>
-                  <div className="text-[13.5px] font-bold text-gray-800 mt-0.5">Jasa Boga (Catering)</div>
+                  <div className="text-[14px] font-bold text-gray-400 uppercase tracking-wide">KBLI 56210</div>
+                  <div className="text-[14px] font-bold text-gray-800 mt-0.5">Jasa Boga (Catering)</div>
                 </div>
-                <span className="bg-[#FEF3C7] text-[#D97706] text-[8.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                <span className="bg-[#FEF3C7] text-[#D97706] text-[14px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
                   Menengah-Rendah
                 </span>
               </div>
@@ -338,7 +338,7 @@ export default function CekKBLI() {
             </div>
             <div>
               <div className="text-[14px] font-extrabold text-gray-900 leading-none">1.790+ KBLI</div>
-              <div className="text-[10px] text-[#666666] font-medium mt-1">Database resmi BPS</div>
+              <div className="text-[14px] text-[#666666] font-medium mt-1">Database resmi BPS</div>
             </div>
           </div>
 
@@ -348,7 +348,7 @@ export default function CekKBLI() {
             </div>
             <div>
               <div className="text-[14px] font-extrabold text-gray-900 leading-none">NIB Ready</div>
-              <div className="text-[10px] text-[#666666] font-medium mt-1">Sesuai OSS RBA</div>
+              <div className="text-[14px] text-[#666666] font-medium mt-1">Sesuai OSS RBA</div>
             </div>
           </div>
         </div>
@@ -358,7 +358,7 @@ export default function CekKBLI() {
       <section id="kbli-search-box" className="w-full max-w-[1040px] mx-auto px-4 z-10 scroll-mt-24 mb-20 flex flex-col items-center">
         {/* Section Header */}
         <div className="text-center mb-8">
-          <p className="text-[12px] font-black text-[#B91C1C] tracking-[0.2em] uppercase mb-4">
+          <p className="text-[14px] font-black text-[#B91C1C] tracking-[0.2em] uppercase mb-4">
             Cari KBLI
           </p>
           <h2 className="text-[34px] sm:text-[40px] font-black text-[#111111] leading-tight">
@@ -395,7 +395,7 @@ export default function CekKBLI() {
                   <button
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-[12.5px] font-extrabold transition-all duration-200 ${
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-[14px] font-extrabold transition-all duration-200 ${
                       isActive
                         ? "bg-[#8A0000] text-white shadow-md shadow-[#8A0000]/15"
                         : "bg-white shadow-md border border-black/[0.03] hover:bg-gray-50 text-[#555555] hover:text-[#111111] shadow-sm"
@@ -407,7 +407,7 @@ export default function CekKBLI() {
                     )}
                     {cat.label}
                     {/* Category Count badge */}
-                    <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-full ml-1 ${
+                    <span className={`text-[14px] font-black px-1.5 py-0.5 rounded-full ml-1 ${
                       isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-500"
                     }`}>
                       {count}
@@ -418,7 +418,7 @@ export default function CekKBLI() {
             </div>
 
             {/* Menampilkan X dari Y KBLI Label */}
-            <div className="text-[12.5px] text-[#666666] font-bold uppercase tracking-wider pt-2 border-t border-gray-100">
+            <div className="text-[14px] text-[#666666] font-bold uppercase tracking-wider pt-2 border-t border-gray-100">
               Menampilkan <span className="text-[#111111] font-black">{filteredKBLI.length}</span> dari <span className="text-[#111111] font-black">{KBLI_DATABASE.length}</span> KBLI
             </div>
 
@@ -437,7 +437,7 @@ export default function CekKBLI() {
                           KBLI {item.code}
                         </span>
                         
-                        <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-md uppercase tracking-wide ${
+                        <span className={`text-[14px] font-black px-2.5 py-0.5 rounded-md uppercase tracking-wide ${
                           item.risk === "Risiko Rendah" || item.risk === "Rendah" ? "bg-[#E6F4EA] text-[#137333]"
                           : item.risk === "Menengah-Rendah" || item.risk === "Menengah Rendah" ? "bg-[#FEF3C7] text-[#D97706]"
                           : "bg-[#FFF0F0] text-[#B91C1C]"
@@ -452,14 +452,14 @@ export default function CekKBLI() {
                       </h4>
                       
                       {/* Desc */}
-                      <p className="text-[13px] text-[#666666] leading-relaxed mb-6 line-clamp-2">
+                      <p className="text-[14px] text-[#666666] leading-relaxed mb-6 line-clamp-2">
                         {item.desc}
                       </p>
                     </div>
 
                     {/* Bottom Row */}
                     <div className="flex items-center justify-between border-t border-gray-50 pt-4 mt-auto">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#666666]">
+                      <div className="flex items-center gap-1.5 text-[14px] font-bold text-[#666666]">
                         {/* Dot indicator */}
                         <span className={`w-1.5 h-1.5 rounded-full ${
                           CATEGORIES.find(c => c.id === item.category)?.dotColor || "bg-gray-400"
@@ -470,7 +470,7 @@ export default function CekKBLI() {
                       <button
                         type="button"
                         onClick={() => setSelectedKBLI(item)}
-                        className="text-[12.5px] font-extrabold text-[#B91C1C] hover:text-[#881B1B] transition-colors"
+                        className="text-[14px] font-extrabold text-[#B91C1C] hover:text-[#881B1B] transition-colors"
                       >
                         Lihat Detail →
                       </button>
@@ -481,7 +481,7 @@ export default function CekKBLI() {
             ) : (
               <div className="text-center py-12 bg-gray-50 rounded-[20px] border border-dashed border-gray-200">
                 <p className="text-[14px] font-bold text-[#111111] mb-1">KBLI tidak ditemukan</p>
-                <p className="text-[13px] text-[#666666] max-w-[340px] mx-auto leading-relaxed">
+                <p className="text-[14px] text-[#666666] max-w-[340px] mx-auto leading-relaxed">
                   Tidak menemukan KBLI yang cocok? Tim kami siap membantu mencarikan secara manual.
                 </p>
               </div>
@@ -495,7 +495,7 @@ export default function CekKBLI() {
               <h4 className="text-[16px] font-black text-gray-900 mb-1">
                 Belum ketemu KBLI yang sesuai?
               </h4>
-              <p className="text-[13px] text-[#666666] leading-relaxed max-w-[580px] font-semibold">
+              <p className="text-[14px] text-[#666666] leading-relaxed max-w-[580px] font-semibold">
                 Database lengkap KBLI 2020 punya <b>1.790+ kode</b>. Konsultasikan jenis usahamu — tim kami bantu pilih KBLI yang paling tepat & minim risiko penolakan saat pengurusan NIB.
               </p>
             </div>
@@ -514,7 +514,7 @@ export default function CekKBLI() {
 
       {/* ─── TRUST BADGES ─── */}
       <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 z-10 mb-20 mt-6">
-        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[14px] text-[#111111]">
           <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">
             <Check className="w-2.5 h-2.5 stroke-[3px]" />
           </div>
@@ -523,8 +523,8 @@ export default function CekKBLI() {
           </span>
         </div>
 
-        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
-          <div className="w-4 h-4 rounded-full bg-[#FFF0F0] text-[#B91C1C] flex items-center justify-center flex-shrink-0 text-[10px]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[14px] text-[#111111]">
+          <div className="w-4 h-4 rounded-full bg-[#FFF0F0] text-[#B91C1C] flex items-center justify-center flex-shrink-0 text-[14px]">
             🕒
           </div>
           <span>
@@ -532,8 +532,8 @@ export default function CekKBLI() {
           </span>
         </div>
 
-        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
-          <div className="w-4 h-4 rounded-full bg-[#EBF5FF] text-blue-600 flex items-center justify-center flex-shrink-0 text-[10px]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[14px] text-[#111111]">
+          <div className="w-4 h-4 rounded-full bg-[#EBF5FF] text-blue-600 flex items-center justify-center flex-shrink-0 text-[14px]">
             🛡️
           </div>
           <span>
@@ -545,7 +545,7 @@ export default function CekKBLI() {
       {/* ─── CARA KERJA SECTION ─── */}
       <section className="w-full max-w-[1040px] mx-auto px-4 z-10 mt-10 mb-12">
         <div className="text-center mb-12">
-          <p className="text-[12px] font-black text-[#B91C1C] tracking-[0.2em] uppercase mb-4">
+          <p className="text-[14px] font-black text-[#B91C1C] tracking-[0.2em] uppercase mb-4">
             Cara Kerja
           </p>
           <h2 className="text-[34px] sm:text-[40px] font-black text-[#111111] leading-tight">
@@ -581,7 +581,7 @@ export default function CekKBLI() {
                   {step.title}
                 </h3>
                 
-                <p className="text-[13.5px] text-[#666666] leading-relaxed max-w-[240px]">
+                <p className="text-[14px] text-[#666666] leading-relaxed max-w-[240px]">
                   {step.desc}
                 </p>
               </div>
@@ -622,10 +622,10 @@ export default function CekKBLI() {
             {/* Modal Header */}
             <div>
               <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <span className="bg-[#B91C1C] text-white font-black text-[13px] px-3 py-0.5 rounded-full shadow-sm">
+                <span className="bg-[#B91C1C] text-white font-black text-[14px] px-3 py-0.5 rounded-full shadow-sm">
                   KBLI {selectedKBLI.code}
                 </span>
-                <span className="text-[11px] font-bold text-gray-500 bg-gray-100 px-2.5 py-0.5 rounded-full">
+                <span className="text-[14px] font-bold text-gray-500 bg-gray-100 px-2.5 py-0.5 rounded-full">
                   {selectedKBLI.category}
                 </span>
               </div>
@@ -636,10 +636,10 @@ export default function CekKBLI() {
 
             {/* KBLI Description */}
             <div className="space-y-2">
-              <h4 className="text-[12.5px] font-black text-gray-900 uppercase tracking-wide">
+              <h4 className="text-[14px] font-black text-gray-900 uppercase tracking-wide">
                 Deskripsi Klasifikasi Usaha:
               </h4>
-              <p className="text-[13.5px] text-[#666666] leading-relaxed bg-[#F7F6F3] p-4 rounded-xl font-medium shadow-sm border border-black/[0.02]">
+              <p className="text-[14px] text-[#666666] leading-relaxed bg-[#F7F6F3] p-4 rounded-xl font-medium shadow-sm border border-black/[0.02]">
                 {selectedKBLI.desc}
               </p>
             </div>
@@ -649,22 +649,22 @@ export default function CekKBLI() {
               <div className="space-y-4 pt-2">
                 {/* Recommended Entity */}
                 <div className="grid grid-cols-3 gap-2">
-                  <div className="text-[12.5px] font-black text-gray-900 uppercase tracking-wide">
+                  <div className="text-[14px] font-black text-gray-900 uppercase tracking-wide">
                     Rekomendasi Badan:
                   </div>
-                  <div className="col-span-2 text-[13.5px] text-[#111111] font-bold">
+                  <div className="col-span-2 text-[14px] text-[#111111] font-bold">
                     {selectedKBLI.details.entity}
                   </div>
                 </div>
 
                 {/* Permits Required */}
                 <div className="space-y-2">
-                  <div className="text-[12.5px] font-black text-gray-900 uppercase tracking-wide">
+                  <div className="text-[14px] font-black text-gray-900 uppercase tracking-wide">
                     Syarat Izin & Legalitas:
                   </div>
                   <ul className="space-y-1.5 pl-4 list-disc">
                     {selectedKBLI.details.permits.map((p, idx) => (
-                      <li key={idx} className="text-[13px] text-[#555555] font-semibold">
+                      <li key={idx} className="text-[14px] text-[#555555] font-semibold">
                         {p}
                       </li>
                     ))}

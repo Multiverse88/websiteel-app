@@ -60,7 +60,7 @@ export default function CekNama() {
       {/* ─── HEADER ─── */}
       <div className="text-center max-w-[800px] mx-auto z-10 mb-10 flex flex-col items-center">
         {/* Tools Gratis Badge */}
-        <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full shadow-sm border border-black/[0.02] shadow-[0_2px_10px_rgba(0,0,0,0.03)] mb-6 text-[12.5px] font-semibold text-[#B91C1C]">
+        <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full shadow-sm border border-black/[0.02] shadow-[0_2px_10px_rgba(0,0,0,0.03)] mb-6 text-[14px] font-semibold text-[#B91C1C]">
           <span className="w-1.5 h-1.5 rounded-full bg-[#B91C1C]" />
           Tools Gratis
         </div>
@@ -116,7 +116,7 @@ export default function CekNama() {
             <div className="space-y-6">
               <div>
                 <h2 className="text-[22px] font-extrabold text-[#111111]">Cek Ketersediaan Nama PT</h2>
-                <p className="text-[13.5px] text-[#666666] mt-1 leading-relaxed">
+                <p className="text-[14px] text-[#666666] mt-1 leading-relaxed">
                   Nama PT wajib minimal <b>3 suku kata</b> & belum dipakai. Berikan 3 alternatif untuk peluang persetujuan maksimal.
                 </p>
               </div>
@@ -124,10 +124,10 @@ export default function CekNama() {
               {/* Alt Name #1 */}
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <label className="text-[13.5px] font-bold text-[#111111]">
+                  <label className="text-[14px] font-bold text-[#111111]">
                     Alternatif Nama PT #1
                   </label>
-                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[9.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[14px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
                     Wajib
                   </span>
                 </div>
@@ -144,7 +144,7 @@ export default function CekNama() {
 
               {/* Alt Name #2 */}
               <div>
-                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                <label className="block text-[14px] font-bold text-[#111111] mb-2">
                   Alternatif Nama PT #2
                 </label>
                 <input
@@ -159,7 +159,7 @@ export default function CekNama() {
 
               {/* Alt Name #3 */}
               <div>
-                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                <label className="block text-[14px] font-bold text-[#111111] mb-2">
                   Alternatif Nama PT #3
                 </label>
                 <input
@@ -170,14 +170,14 @@ export default function CekNama() {
                   placeholder="PT Nama Alternatif Ketiga"
                   className="w-full bg-[#F7F6F3] border-none text-[#111111] font-semibold text-[14px] rounded-2xl px-5 py-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]/15 transition-all"
                 />
-                <span className="block text-[11.5px] text-[#666666] mt-2 font-medium">
+                <span className="block text-[14px] text-[#666666] mt-2 font-medium">
                   Rekomendasi: minimal 3 alternatif agar cepat dapat yang lolos.
                 </span>
               </div>
 
               {/* Bidang Usaha */}
               <div>
-                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                <label className="block text-[14px] font-bold text-[#111111] mb-2">
                   Bidang Usaha
                 </label>
                 <input
@@ -195,7 +195,7 @@ export default function CekNama() {
             <div className="space-y-6">
               <div>
                 <h2 className="text-[22px] font-extrabold text-[#111111]">Cek Ketersediaan Nama Merek</h2>
-                <p className="text-[13.5px] text-[#666666] mt-1 leading-relaxed">
+                <p className="text-[14px] text-[#666666] mt-1 leading-relaxed">
                   Merek dagang dilindungi berdasarkan kelas barang/jasa. Tuliskan nama merek dan jenis produk Anda.
                 </p>
               </div>
@@ -203,10 +203,10 @@ export default function CekNama() {
               {/* Brand Name */}
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <label className="text-[13.5px] font-bold text-[#111111]">
+                  <label className="text-[14px] font-bold text-[#111111]">
                     Nama Merek / Brand
                   </label>
-                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[9.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[14px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
                     Wajib
                   </span>
                 </div>
@@ -224,10 +224,10 @@ export default function CekNama() {
               {/* Jenis Barang/Jasa */}
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <label className="text-[13.5px] font-bold text-[#111111]">
+                  <label className="text-[14px] font-bold text-[#111111]">
                     Jenis Barang & Jasa
                   </label>
-                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[9.5px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
+                  <span className="bg-[#FFF0F0] text-[#B91C1C] text-[14px] font-black px-2 py-0.5 rounded-[4px] tracking-wide uppercase">
                     Wajib
                   </span>
                 </div>
@@ -244,7 +244,7 @@ export default function CekNama() {
 
               {/* Deskripsi */}
               <div>
-                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                <label className="block text-[14px] font-bold text-[#111111] mb-2">
                   Deskripsi Bisnis (opsional)
                 </label>
                 <input
@@ -261,14 +261,14 @@ export default function CekNama() {
 
           {/* ─── SHARED KONTAK SECTION ─── */}
           <div className="mt-8 pt-8 border-t border-gray-100/70">
-            <h3 className="text-[12px] font-black text-[#B91C1C] tracking-widest uppercase mb-4">
+            <h3 className="text-[14px] font-black text-[#B91C1C] tracking-widest uppercase mb-4">
               Kontak Anda
             </h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Nama */}
               <div>
-                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                <label className="block text-[14px] font-bold text-[#111111] mb-2">
                   Nama Anda <span className="text-[#B91C1C]">*</span>
                 </label>
                 <input
@@ -284,7 +284,7 @@ export default function CekNama() {
 
               {/* WhatsApp */}
               <div>
-                <label className="block text-[13.5px] font-bold text-[#111111] mb-2">
+                <label className="block text-[14px] font-bold text-[#111111] mb-2">
                   WhatsApp <span className="text-[#B91C1C]">*</span>
                 </label>
                 <input
@@ -310,7 +310,7 @@ export default function CekNama() {
               Cek via WhatsApp
             </button>
 
-            <span className="block text-[12.5px] text-[#666666] font-medium mt-4">
+            <span className="block text-[14px] text-[#666666] font-medium mt-4">
               ✓ <b>100% Gratis</b> · Hasil dalam 10 menit · Senin–Sabtu 08:00–20:00
             </span>
           </div>
@@ -321,7 +321,7 @@ export default function CekNama() {
       {/* ─── TRUST BADGES BELOW CARD ─── */}
       <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 z-10 mb-20">
         {/* Badge 1 */}
-        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[14px] text-[#111111]">
           <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">
             <Check className="w-2.5 h-2.5 stroke-[3px]" />
           </div>
@@ -331,8 +331,8 @@ export default function CekNama() {
         </div>
 
         {/* Badge 2 */}
-        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
-          <div className="w-4 h-4 rounded-full bg-[#FFF0F0] text-[#B91C1C] flex items-center justify-center flex-shrink-0 text-[10px]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[14px] text-[#111111]">
+          <div className="w-4 h-4 rounded-full bg-[#FFF0F0] text-[#B91C1C] flex items-center justify-center flex-shrink-0 text-[14px]">
             🕒
           </div>
           <span>
@@ -341,8 +341,8 @@ export default function CekNama() {
         </div>
 
         {/* Badge 3 */}
-        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[13px] text-[#111111]">
-          <div className="w-4 h-4 rounded-full bg-[#EBF5FF] text-blue-600 flex items-center justify-center flex-shrink-0 text-[10px]">
+        <div className="bg-white rounded-full shadow-md border border-black/[0.03] px-5 py-2.5 flex items-center gap-2 shadow-sm text-[14px] text-[#111111]">
+          <div className="w-4 h-4 rounded-full bg-[#EBF5FF] text-blue-600 flex items-center justify-center flex-shrink-0 text-[14px]">
             🛡️
           </div>
           <span>
@@ -355,7 +355,7 @@ export default function CekNama() {
       <section className="w-full max-w-[1040px] mx-auto px-4 z-10 mt-10 mb-12">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <p className="text-[12px] font-black text-[#B91C1C] tracking-[0.2em] uppercase mb-4">
+          <p className="text-[14px] font-black text-[#B91C1C] tracking-[0.2em] uppercase mb-4">
             Cara Kerja
           </p>
           <h2 className="text-[34px] sm:text-[40px] font-black text-[#111111] leading-tight">
@@ -396,7 +396,7 @@ export default function CekNama() {
                 </h3>
                 
                 {/* Step Description */}
-                <p className="text-[13.5px] text-[#666666] leading-relaxed max-w-[240px]">
+                <p className="text-[14px] text-[#666666] leading-relaxed max-w-[240px]">
                   {step.desc}
                 </p>
               </div>

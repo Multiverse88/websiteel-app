@@ -68,13 +68,13 @@ export default function TambahLinkPage() {
             <div className="flex gap-3 justify-center">
               <Link
                 href="/dashboard/links/tambah"
-                className="px-5 py-2.5 bg-[#990202] text-white font-bold text-[13px] rounded-xl hover:bg-[#800000] transition-all"
+                className="px-5 py-2.5 bg-[#990202] text-white font-bold text-[14px] rounded-xl hover:bg-[#800000] transition-all"
               >
                 Buat Lagi
               </Link>
               <Link
                 href="/dashboard/links"
-                className="px-5 py-2.5 bg-white text-gray-700 font-bold text-[13px] rounded-xl border border-gray-200 hover:border-gray-300 transition-all"
+                className="px-5 py-2.5 bg-white text-gray-700 font-bold text-[14px] rounded-xl border border-gray-200 hover:border-gray-300 transition-all"
               >
                 Kembali ke Daftar
               </Link>
@@ -93,7 +93,7 @@ export default function TambahLinkPage() {
           <div className="flex items-center gap-3 mb-4">
             <Link
               href="/dashboard/links"
-              className="inline-flex items-center gap-1.5 text-[13px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
+              className="inline-flex items-center gap-1.5 text-[14px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Redirect Links
@@ -118,8 +118,8 @@ export default function TambahLinkPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Slug */}
               <div className="space-y-2">
-                <label className="text-[13.5px] font-extrabold text-gray-900 flex items-center gap-1.5">
-                  Slug Link <span className="text-gray-400 font-medium text-[12px]">(kosongi untuk random)</span>
+                <label className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                  Slug Link <span className="text-gray-400 font-medium text-[14px]">(kosongi untuk random)</span>
                 </label>
                 <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl">
                   <span className="text-[14px] text-gray-400 font-mono font-medium whitespace-nowrap">
@@ -133,14 +133,14 @@ export default function TambahLinkPage() {
                     className="flex-1 bg-transparent border-none outline-none text-[14.5px] font-medium text-gray-950 placeholder-gray-400 p-0"
                   />
                 </div>
-                <p className="text-[11px] text-gray-400">
+                <p className="text-[14px] text-gray-400">
                   Hanya huruf kecil, angka, dan tanda strip (-).
                 </p>
               </div>
 
               {/* Destination */}
               <div className="space-y-2">
-                <label className="text-[13.5px] font-extrabold text-gray-900">
+                <label className="text-[14px] font-extrabold text-gray-900">
                   URL Tujuan <span className="text-[#990202]">*</span>
                 </label>
                 <input

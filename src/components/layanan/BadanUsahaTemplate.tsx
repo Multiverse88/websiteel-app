@@ -89,7 +89,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
             
             <div className="lg:col-span-7 space-y-6">
               
-              <nav className="flex items-center space-x-2 text-[13px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -97,12 +97,12 @@ export default function BadanUsahaTemplate({ content }: Props) {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[13px] font-bold text-gray-900">{c.heroBreadcrumbText}</span>
+                <span className="text-[14px] font-bold text-gray-900">{c.heroBreadcrumbText}</span>
               </nav>
 
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[12.5px] font-bold text-[#990202] tracking-wide">{c.heroBadge}</span>
+                <span className="text-[14px] font-bold text-[#990202] tracking-wide">{c.heroBadge}</span>
               </div>
 
               <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
@@ -147,8 +147,8 @@ export default function BadanUsahaTemplate({ content }: Props) {
                       {React.createElement(iconMap[stat.icon] || Clock, { className: "w-5 h-5 stroke-[2]" })}
                     </div>
                     <div>
-                      <div className="text-[13.5px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">{stat.value}</div>
-                      <div className="text-[11.5px] text-gray-500 mt-0.5">{stat.label}</div>
+                      <div className="text-[14px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">{stat.value}</div>
+                      <div className="text-[14px] text-gray-500 mt-0.5">{stat.label}</div>
                     </div>
                   </div>
                 ))}
@@ -178,8 +178,8 @@ export default function BadanUsahaTemplate({ content }: Props) {
                       {React.createElement(iconMap[badge.icon] || Building, { className: "w-5 h-5 stroke-[2.2]" })}
                     </div>
                     <div>
-                      <div className="text-[13.5px] font-black text-gray-900 leading-none">{badge.title}</div>
-                      <div className="text-[11px] text-gray-400 font-bold mt-1.5">{badge.subtitle}</div>
+                      <div className="text-[14px] font-black text-gray-900 leading-none">{badge.title}</div>
+                      <div className="text-[14px] text-gray-400 font-bold mt-1.5">{badge.subtitle}</div>
                     </div>
                   </div>
                 ))}
@@ -196,7 +196,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-14">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">{c.pengertianTag}</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">{c.pengertianTag}</p>
             <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               {c.pengertianTitle}
             </h2>
@@ -223,8 +223,8 @@ export default function BadanUsahaTemplate({ content }: Props) {
                     {React.createElement(iconMap[c.hukumIcon] || FileText, { className: "w-5 h-5 stroke-[2.2]" })}
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-900 leading-none">{c.hukumTitle}</div>
-                    <div className="text-[11px] text-gray-400 font-bold mt-1.5 leading-snug">{c.hukumLaw}</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">{c.hukumTitle}</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5 leading-snug">{c.hukumLaw}</div>
                   </div>
                 </div>
               </div>
@@ -262,7 +262,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-wider">{c.manfaatTag}</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider">{c.manfaatTag}</p>
             <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               {c.manfaatTitle}
             </h2>
@@ -278,7 +278,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                   {React.createElement(iconMap[item.Icon] || Shield, { className: "w-5 h-5 stroke-[2]" })}
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950 mb-2">{item.title}</h4>
-                <p className="text-[13px] text-gray-500 leading-relaxed font-normal">
+                <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>
@@ -302,14 +302,14 @@ export default function BadanUsahaTemplate({ content }: Props) {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">{c.stepsTag}</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">{c.stepsTag}</p>
             <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               {c.stepsTitle}
             </h2>
             <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium">
               {c.stepsSubtitle}
             </p>
-            <div className="pt-4 text-[11px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
               <span>Geser untuk lihat semua langkah</span>
               <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
             </div>
@@ -332,11 +332,11 @@ export default function BadanUsahaTemplate({ content }: Props) {
                         {step.title}
                       </h4>
                       
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[10px] font-black uppercase py-1 px-3 rounded-full">
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
                         <span>{step.duration}</span>
                       </div>
 
-                      <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
 
                     </div>
 
@@ -345,7 +345,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
 
                       <ul className="space-y-2">
                         {step.points.map((point, pIdx) => (
-                          <li key={pIdx} className="flex items-start text-[12px] font-bold text-gray-700 leading-tight">
+                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
                             <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                             <span dangerouslySetInnerHTML={{ __html: point }} />
                           </li>
@@ -400,7 +400,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
               <span className="text-[15px] font-normal">→</span>
             </a>
 
-            <div className="flex items-center gap-1.5 text-[12px] text-gray-500 font-medium pt-1 px-1">
+            <div className="flex items-center gap-1.5 text-[14px] text-gray-500 font-medium pt-1 px-1">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>

@@ -51,7 +51,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email */}
             <div className="space-y-2">
-              <label htmlFor="email" className="text-[13.5px] font-extrabold text-gray-900 flex items-center gap-1.5">
+              <label htmlFor="email" className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5" />
                 Email
               </label>
@@ -67,7 +67,7 @@ export default function LoginPage() {
 
             {/* Password */}
             <div className="space-y-2">
-              <label htmlFor="password" className="text-[13.5px] font-extrabold text-gray-900 flex items-center gap-1.5">
+              <label htmlFor="password" className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
                 <Lock className="w-3.5 h-3.5" />
                 Password
               </label>

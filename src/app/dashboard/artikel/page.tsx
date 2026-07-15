@@ -64,7 +64,7 @@ export default async function DashboardArticlesPage(
         </div>
         <Link
           href="/dashboard/artikel/tambah"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[13px] rounded-xl shadow-sm hover:shadow-md transition-all"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all"
         >
           <FileText className="w-4 h-4" />
           <span>Tulis Baru</span>
@@ -121,10 +121,10 @@ export default async function DashboardArticlesPage(
                     </td>
                     <td className="py-4 px-6">
                       <div className="font-bold text-gray-900 line-clamp-1">{article.title}</div>
-                      <div className="text-xs text-gray-500 mt-1 font-mono">/artikel/{article.slug}</div>
+                      <div className="text-[14px] text-gray-500 mt-1 font-mono">/artikel/{article.slug}</div>
                     </td>
                     <td className="py-4 px-6">
-                      <span className="inline-flex px-2.5 py-1 rounded-md text-[11px] font-bold bg-red-50 text-[#990202] border border-red-100/50">
+                      <span className="inline-flex px-2.5 py-1 rounded-md text-[14px] font-bold bg-red-50 text-[#990202] border border-red-100/50">
                         {article.category}
                       </span>
                     </td>

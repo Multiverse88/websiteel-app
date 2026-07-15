@@ -20,11 +20,11 @@ export const heroSlides = [
   {
     tag: "Layanan Unggulan",
     titleLines: [
-      { text: "Pendirian Badan Usaha," },
-      { text: "Prosesnya" },
-      { text: "Cepat & Beres.", red: true },
+      { text: "BUILD BUSINESS" },
+      { text: "NOT JUST A" },
+      { text: "COMPANY.", red: true },
     ],
-    desc: "Dari konsultasi sampai akta di tangan Anda. Tim legal berpengalaman telah membantu lebih dari 11.000 pengusaha. Mulai dari Rp2,5jt.",
+    desc: "Kami membantu Anda mendirikan bisnis yang memiliki reputasi sebagai entitas profesional.",
     cta: "Konsultasi Gratis",
     ctaLink: "/kontak",
     cta2: "Lihat Paket Badan Usaha",
@@ -35,11 +35,11 @@ export const heroSlides = [
   {
     tag: "Perlindungan Merek",
     titleLines: [
-      { text: "Daftar Merek" },
-      { text: "Dagang &" },
-      { text: "HAKI Online.", red: true },
+      { text: "KEEP YOUR" },
+      { text: "BUSINESS" },
+      { text: "PROTECTED.", red: true },
     ],
-    desc: "Lindungi brand dan nama usaha Anda dari plagiarisme. Proses resmi, aman, dan dapat dilacak real-time dari dashboard.",
+    desc: "Kami menyediakan layanan pendaftaran merek untuk menjaga dan melindungi identitas bisnis Anda.",
     cta: "Cek Ketersediaan Merek",
     ctaLink: "/cek-nama",
     cta2: "Pelajari Lebih Lanjut",
@@ -48,40 +48,24 @@ export const heroSlides = [
     image: "/images/hero/hero-merek-v2.jpg",
   },
   {
-    tag: "Standar Internasional",
+    tag: "Layanan Terlengkap",
     titleLines: [
-      { text: "Sertifikasi ISO" },
-      { text: "Mudah, Cepat" },
-      { text: "& Accredited.", red: true },
+      { text: "START YOUR" },
+      { text: "BUSINESS" },
+      { text: "PROPERLY.", red: true },
     ],
-    desc: "Tingkatkan kredibilitas perusahaan Anda di kancah internasional dengan sertifikasi ISO 9001, 14001, 27001, dan 45001.",
-    cta: "Pelajari Sertifikasi ISO",
-    ctaLink: "/layanan/sertifikasi-iso",
-    cta2: "Konsultasi Gratis",
-    cta2Link: "/kontak",
-    trustBadges: ["UAF Accredited", "Proses cepat", "Harga transparan"],
-    image: "/images/hero/hero-iso-v2.jpg",
-  },
-  {
-    tag: "Perizinan Usaha",
-    titleLines: [
-      { text: "Urus NIB &" },
-      { text: "OSS RBA" },
-      { text: "Tanpa Ribet.", red: true },
-    ],
-    desc: "Dapatkan Nomor Induk Berusaha (NIB) dan perizinan teknis sesuai KBLI terbaru secara resmi, aman, dan patuh regulasi.",
-    cta: "Konsultasi Perizinan",
+    desc: "Wujudkan mimpi Anda menjadi Pengusaha bersama EASYLEGAL. Layanan pengurusan legalitas Terlengkap, Tercepat dan Terpercaya di Indonesia.",
+    cta: "Konsultasi Gratis",
     ctaLink: "/kontak",
-    cta2: "Cek Kode KBLI",
-    cta2Link: "/cek-kbli",
-    trustBadges: ["Database KBLI 2025", "OSS RBA Resmi", "Garansi Selesai"],
-    image: "/images/hero/hero-nib-v2.jpg",
+    cta2: "Lihat Semua Layanan",
+    cta2Link: "/layanan",
+    trustBadges: ["Terlengkap", "Tercepat", "Terpercaya"],
+    image: "/images/hero/hero-iso-v2.jpg",
   },
 ];
 
 export const quickTools = [
   {
-    tag: "TOOL GRATIS",
     title: "Cek Nama PT & Merek",
     desc: "Hindari nama yang sudah dipakai sebelum mendaftar.",
     cta: "Cek sekarang",
@@ -89,7 +73,6 @@ export const quickTools = [
     icon: Building2,
   },
   {
-    tag: "DATABASE 2025",
     title: "Cek Kode KBLI",
     desc: "Temukan kode KBLI yang tepat untuk perizinan usaha Anda.",
     cta: "Buka pencarian",
@@ -97,7 +80,6 @@ export const quickTools = [
     icon: Search,
   },
   {
-    tag: "RESPONS 5 MENIT",
     title: "Konsultasi via WhatsApp",
     desc: "Tanya tim legal kami langsung — gratis, tanpa komitmen.",
     cta: "Mulai chat",
@@ -120,29 +102,6 @@ export const layananIndividual = [
   { name: "Press Release", desc: "PR & Media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/press-release" },
   { name: "Apostille", desc: "Legalisasi 129+ Negara", icon: Globe, circleBg: "#0891B2", cardTint: "#ECFEFF", href: "/layanan/apostille" },
   { name: "Pelaporan LKPM", desc: "Lapor BKPM Rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA", href: "/layanan/pelaporan-lkpm" },
-];
-
-export const whyChoose = [
-  {
-    icon: Clock,
-    title: "Proses Cepat",
-    desc: "Pendirian Badan Usaha selesai, paling cepat 2 jam pengerjaan dengan tracking real-time dari dashboard.",
-  },
-  {
-    icon: Users,
-    title: "Tim Berpengalaman",
-    desc: "Lebih dari 11.000 pengusaha mempercayai kami untuk urusan legalitas bisnis mereka.",
-  },
-  {
-    icon: Lock,
-    title: "Harga Transparan",
-    desc: "Tidak ada biaya tersembunyi. Semua biaya dijelaskan di awal sebelum proses dimulai.",
-  },
-  {
-    icon: Headphones,
-    title: "Support 24/7",
-    desc: "Tim support kami siap membantu kapan saja via WhatsApp, email, atau telepon.",
-  },
 ];
 
 
@@ -196,53 +155,3 @@ export const row2Reviews = [
   },
 ];
 
-export const insights = [
-  {
-    title: "Panduan Lengkap Pendirian PT di Indonesia 2026",
-    category: "Legalitas PT",
-    readTime: "8 menit baca",
-    slug: "panduan-lengkap-pendirian-pt-di-indonesia-2026",
-    excerpt: "Semua yang perlu Anda ketahui tentang syarat, prosedur, dan biaya pendirian PT terbaru.",
-  },
-  {
-    title: "Cara Daftar Merek Dagang Online via HKI",
-    category: "Merek & HAKI",
-    readTime: "6 menit baca",
-    slug: "cara-daftar-merek-dagang-online-via-hki",
-    excerpt: "Langkah demi langkah pendaftaran merek dagang secara online yang benar dan cepat.",
-  },
-  {
-    title: "Perbedaan NIB, OSS, dan KBLI yang Harus Diketahui",
-    category: "Perizinan Usaha",
-    readTime: "5 menit baca",
-    slug: "perbedaan-nib-oss-dan-kbli",
-    excerpt: "Penjelasan lengkap tentang dokumen perizinan usaha yang sering tertukar.",
-  },
-];
-
-export const caraKerjaSteps = [
-  {
-    step: "01",
-    title: "Konsultasi Gratis",
-    desc: "Hubungi tim kami via WhatsApp atau form kontak. Ceritakan kebutuhan bisnis Anda.",
-    icon: MessageCircle,
-  },
-  {
-    step: "02",
-    title: "Pilih Paket Layanan",
-    desc: "Pilih paket yang sesuai dengan kebutuhan dan budget Anda. Harga transparan.",
-    icon: FileCheck,
-  },
-  {
-    step: "03",
-    title: "Upload Dokumen",
-    desc: "Unggah berkas yang diperlukan melalui dashboard. Proses 100% online & paperless.",
-    icon: FileText,
-  },
-  {
-    step: "04",
-    title: "Proses & Tracking",
-    desc: "Tim kami memproses dokumen Anda. Pantau status real-time dari dashboard.",
-    icon: TrendingUp,
-  },
-];

@@ -6,14 +6,14 @@ import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import PricingFooter from "@/components/PricingFooter";
 
-export interface PricingItem {
+interface PricingItem {
   text: string;
   boldText?: string;
   checked: boolean;
   footnoteIndex?: number | string;
 }
 
-export interface PricingGroup {
+interface PricingGroup {
   title: string;
   isBoxed?: boolean;
   items: PricingItem[];
@@ -71,14 +71,14 @@ export default function Pricing({
         {/* Section Header */}
         <FadeIn className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
           <div className="max-w-2xl space-y-2 sm:space-y-3">
-            <p className="text-[9px] sm:text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">
+            <p className="text-[14px] sm:text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">
               {sectionTitleTag}
             </p>
             <h2 className="font-heading text-[20px] sm:text-[38px] lg:text-[42px] font-extrabold text-gray-950 leading-tight tracking-tight">
               {sectionTitle}
             </h2>
             {sectionSubtitle && (
-              <p className="text-[12.5px] sm:text-[15px] text-gray-500 font-medium leading-relaxed">
+              <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium leading-relaxed">
                 {sectionSubtitle}
               </p>
             )}
@@ -109,7 +109,7 @@ export default function Pricing({
                 <div className={`${headerBg} p-4 sm:p-6 text-white text-center relative`}>
                   {pkg.customHeaderOverlay}
                   {pkg.badgeText && (
-                    <div className={`absolute top-2.5 left-0 right-0 text-[8px] font-black uppercase tracking-wider ${pkg.badgeTextColor || "text-white"} ${pkg.badgeBgColor || "bg-red-800/80"} py-0.5 w-[110px] mx-auto rounded-full`}>
+                    <div className={`absolute top-2.5 left-0 right-0 text-[14px] font-black uppercase tracking-wider ${pkg.badgeTextColor || "text-white"} ${pkg.badgeBgColor || "bg-red-800/80"} py-0.5 w-[110px] mx-auto rounded-full`}>
                       {pkg.badgeText}
                     </div>
                   )}
@@ -117,7 +117,7 @@ export default function Pricing({
                     {pkg.title}
                   </h3>
                   {pkg.strikePrice && (
-                    <div className={`mt-2 sm:mt-3 text-[10px] sm:text-[12px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-white"}`}>
+                    <div className={`mt-2 sm:mt-3 text-[14px] sm:text-[14px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-white"}`}>
                       {pkg.strikePrice}
                     </div>
                   )}
@@ -125,7 +125,7 @@ export default function Pricing({
                     <span className="text-[22px] sm:text-[30px] font-black tracking-tight">{pkg.price}</span>
                   </div>
                   {pkg.subLabel && (
-                    <div className={`mt-2 sm:mt-2.5 text-[8px] sm:text-[9.5px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-white"}`}>
+                    <div className={`mt-2 sm:mt-2.5 text-[14px] sm:text-[14px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-white"}`}>
                       {pkg.subLabel}
                     </div>
                   )}
@@ -141,14 +141,14 @@ export default function Pricing({
                     
                     return (
                       <div key={gIdx} className={`${containerClass} ${!isBoxed && gIdx > 0 ? "pt-2 sm:pt-2.5 border-t border-gray-100" : ""}`}>
-                        <h5 className="text-[8.5px] sm:text-[9.5px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
+                        <h5 className="text-[14px] sm:text-[14px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
                           {group.title}
                         </h5>
                         <ul className="space-y-1.5 sm:space-y-2">
                           {group.items.map((item, iIdx) => {
                             const liClass = item.checked
-                              ? "flex items-start text-[11.5px] sm:text-[13px] font-medium text-gray-700"
-                              : "flex items-start text-[11.5px] sm:text-[13px] font-medium text-gray-500 line-through";
+                              ? "flex items-start text-[14px] sm:text-[14px] font-medium text-gray-700"
+                              : "flex items-start text-[14px] sm:text-[14px] font-medium text-gray-500 line-through";
 
                             return (
                               <li key={iIdx} className={liClass}>
@@ -163,7 +163,7 @@ export default function Pricing({
                                   )}
                                   <span dangerouslySetInnerHTML={{ __html: item.text }} />
                                   {item.footnoteIndex && (
-                                    <sup className={`text-[9px] font-semibold ${item.checked ? "text-[#990202]" : "text-gray-500"}`}>
+                                    <sup className={`text-[14px] font-semibold ${item.checked ? "text-[#990202]" : "text-gray-500"}`}>
                                       ({item.footnoteIndex})
                                     </sup>
                                   )}
@@ -183,7 +183,7 @@ export default function Pricing({
                     href={pkg.buttonLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[13.5px] transition-all duration-200 cursor-pointer shadow-sm ${
+                    className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[14px] transition-all duration-200 cursor-pointer shadow-sm ${
                       pkg.isPopular
                         ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
                         : "shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
@@ -201,7 +201,7 @@ export default function Pricing({
 
         {/* Footnotes Box */}
         {footnotes && footnotes.length > 0 && (
-          <div className="mt-12 bg-gray-55 shadow-md border border-black/[0.03] rounded-2xl p-5 text-[11.5px] text-gray-500 leading-relaxed max-w-full font-medium">
+          <div className="mt-12 bg-gray-55 shadow-md border border-black/[0.03] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed max-w-full font-medium">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             {footnotes.map((fn, idx) => {
               const label = typeof fn === "string" ? `(${idx + 1})` : `(${fn.label || idx + 1})`;

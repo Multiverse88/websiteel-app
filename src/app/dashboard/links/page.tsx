@@ -20,7 +20,7 @@ export default async function LinksPage() {
           <div className="flex items-center gap-3 mb-4">
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-1.5 text-[13px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
+              className="inline-flex items-center gap-1.5 text-[14px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Dashboard
@@ -37,7 +37,7 @@ export default async function LinksPage() {
             </div>
             <Link
               href="/dashboard/links/tambah"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[13px] rounded-xl shadow-sm hover:shadow-md transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all"
             >
               <Plus className="w-4 h-4" />
               <span>Buat Link Baru</span>
@@ -71,7 +71,7 @@ export default async function LinksPage() {
           ) : (
             <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
               {/* Table Header */}
-              <div className="grid grid-cols-12 gap-4 px-6 py-3 bg-gray-50 border-b border-gray-100 text-[12px] font-extrabold text-gray-400 uppercase tracking-wider">
+              <div className="grid grid-cols-12 gap-4 px-6 py-3 bg-gray-50 border-b border-gray-100 text-[14px] font-extrabold text-gray-400 uppercase tracking-wider">
                 <div className="col-span-3">Slug</div>
                 <div className="col-span-4">Tujuan</div>
                 <div className="col-span-2 text-center">Klik</div>
@@ -90,7 +90,7 @@ export default async function LinksPage() {
                     <div className="flex items-center gap-2">
                       <span className="text-[14px] font-bold text-gray-900">{link.slug}</span>
                     </div>
-                    <p className="text-[11px] text-gray-400 font-mono mt-0.5">
+                    <p className="text-[14px] text-gray-400 font-mono mt-0.5">
                       /{link.slug}
                     </p>
                   </div>
@@ -99,7 +99,7 @@ export default async function LinksPage() {
                   <div className="col-span-4">
                     <div className="flex items-center gap-1.5">
                       <ExternalLink className="w-3 h-3 text-gray-400 flex-shrink-0" />
-                      <span className="text-[13px] text-gray-600 truncate block">
+                      <span className="text-[14px] text-gray-600 truncate block">
                         {link.destination}
                       </span>
                     </div>
@@ -107,7 +107,7 @@ export default async function LinksPage() {
 
                   {/* Clicks */}
                   <div className="col-span-2 text-center">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gray-50 text-[13px] font-bold text-gray-700">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gray-50 text-[14px] font-bold text-gray-700">
                       <MousePointerClick className="w-3.5 h-3.5 text-gray-400" />
                       {link.clicks.toLocaleString("id-ID")}
                     </div>
@@ -115,7 +115,7 @@ export default async function LinksPage() {
 
                   {/* Date */}
                   <div className="col-span-2">
-                    <div className="flex items-center gap-1.5 text-[12px] text-gray-500">
+                    <div className="flex items-center gap-1.5 text-[14px] text-gray-500">
                       <Calendar className="w-3 h-3 text-gray-400" />
                       <span>
                         {new Date(link.createdAt).toLocaleDateString("id-ID", {

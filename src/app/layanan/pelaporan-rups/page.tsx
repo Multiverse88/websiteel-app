@@ -335,7 +335,7 @@ export default function PelaporanRUPS() {
                 {/* Left Column */}
                 <div className="lg:col-span-7 space-y-6 text-left">
                   {/* Breadcrumb */}
-                  <nav className="flex items-center space-x-2 text-[12.5px] font-medium text-gray-500">
+                  <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
                     <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                       <Home className="w-3.5 h-3.5 text-gray-400" strokeWidth={2} />
                       <span>Beranda</span>
@@ -343,13 +343,13 @@ export default function PelaporanRUPS() {
                     <span className="text-gray-300 font-normal">&gt;</span>
                     <span className="text-gray-500 font-medium">Layanan</span>
                     <span className="text-gray-300 font-normal">&gt;</span>
-                    <span className="text-[12.5px] font-bold text-gray-900">Pelaporan RUPS</span>
+                    <span className="text-[14px] font-bold text-gray-900">Pelaporan RUPS</span>
                   </nav>
 
                   {/* Badge */}
                   <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100/50 shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                    <span className="text-[12px] font-extrabold text-[#990202] tracking-wider uppercase">Pelaporan RUPS</span>
+                    <span className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">Pelaporan RUPS</span>
                   </div>
 
                   {/* Headline */}
@@ -390,8 +390,8 @@ export default function PelaporanRUPS() {
                         <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                       </div>
                       <div>
-                        <div className="text-[13px] font-black text-gray-900">Durasi 7–10</div>
-                        <div className="text-[10px] text-gray-500 font-semibold mt-1">Hari kerja</div>
+                        <div className="text-[14px] font-black text-gray-900">Durasi 7–10</div>
+                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Hari kerja</div>
                       </div>
                     </div>
 
@@ -403,8 +403,8 @@ export default function PelaporanRUPS() {
                         </svg>
                       </div>
                       <div>
-                        <div className="text-[13px] font-black text-gray-900">Diskon 50%</div>
-                        <div className="text-[10px] text-gray-500 font-semibold mt-1">Promo terbatas</div>
+                        <div className="text-[14px] font-black text-gray-900">Diskon 50%</div>
+                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Promo terbatas</div>
                       </div>
                     </div>
 
@@ -417,8 +417,8 @@ export default function PelaporanRUPS() {
                         </svg>
                       </div>
                       <div>
-                        <div className="text-[13px] font-black text-gray-900">100% Online</div>
-                        <div className="text-[10px] text-gray-500 font-semibold mt-1">Tanpa keluar rumah</div>
+                        <div className="text-[14px] font-black text-gray-900">100% Online</div>
+                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Tanpa keluar rumah</div>
                       </div>
                     </div>
                   </div>
@@ -442,8 +442,8 @@ export default function PelaporanRUPS() {
                         <FileText className="w-5 h-5 text-[#990202]" strokeWidth={2} />
                       </div>
                       <div className="text-left">
-                        <div className="text-[12.5px] font-black text-gray-900 leading-none">Pelaporan RUPS</div>
-                        <div className="text-[10px] text-gray-400 font-semibold mt-1.5 block">3 Dokumen resmi</div>
+                        <div className="text-[14px] font-black text-gray-900 leading-none">Pelaporan RUPS</div>
+                        <div className="text-[14px] text-gray-400 font-semibold mt-1.5 block">3 Dokumen resmi</div>
                       </div>
                     </div>
 
@@ -453,8 +453,8 @@ export default function PelaporanRUPS() {
                         <ShieldCheck className="w-5 h-5 text-[#5e430a]" strokeWidth={2.5} />
                       </div>
                       <div className="text-left">
-                        <div className="text-[12.5px] font-black text-gray-900 leading-none">Personal Legal Assistant</div>
-                        <div className="text-[10px] text-gray-400 font-semibold mt-1.5 block">Dibantu tim profesional</div>
+                        <div className="text-[14px] font-black text-gray-900 leading-none">Personal Legal Assistant</div>
+                        <div className="text-[14px] text-gray-400 font-semibold mt-1.5 block">Dibantu tim profesional</div>
                       </div>
                     </div>
                   </div>
@@ -473,7 +473,7 @@ export default function PelaporanRUPS() {
                   {/* Left: Text & Image */}
                   <div className="space-y-8">
                     <div>
-                      <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-3">PENGERTIAN RUPS</p>
+                      <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-3">PENGERTIAN RUPS</p>
                       <h2 className="font-heading text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold text-gray-950 leading-tight tracking-tight">
                         Apa itu RUPS?
                       </h2>
@@ -497,8 +497,8 @@ export default function PelaporanRUPS() {
                           <FileText className="w-4.5 h-4.5 text-white" strokeWidth={2.5} />
                         </div>
                         <div className="text-left">
-                          <div className="text-[12.5px] font-black text-gray-900 leading-none mb-1">Dasar Hukum</div>
-                          <div className="text-[9.5px] text-gray-500 font-medium leading-snug">UU No. 40 Tahun 2007<br/>tentang Perseroan Terbatas</div>
+                          <div className="text-[14px] font-black text-gray-900 leading-none mb-1">Dasar Hukum</div>
+                          <div className="text-[14px] text-gray-500 font-medium leading-snug">UU No. 40 Tahun 2007<br/>tentang Perseroan Terbatas</div>
                         </div>
                       </div>
                     </div>
@@ -507,10 +507,10 @@ export default function PelaporanRUPS() {
                   {/* Right: Explanation & Characteristics */}
                   <div className="space-y-8 pt-2">
                     <div className="space-y-5">
-                      <p className="text-[13.5px] text-gray-700 leading-relaxed font-normal">
+                      <p className="text-[14px] text-gray-700 leading-relaxed font-normal">
                         <strong className="font-extrabold text-gray-900">RUPS (Rapat Umum Pemegang Saham)</strong> adalah organ perseroan yang memegang kewenangan tertinggi dalam PT — mencakup wewenang yang tidak diberikan kepada Direksi maupun Dewan Komisaris, sebagaimana diatur dalam <strong className="font-extrabold text-gray-900">UU No. 40 Tahun 2007</strong> tentang Perseroan Terbatas.
                       </p>
-                      <p className="text-[13.5px] text-gray-700 leading-relaxed font-normal">
+                      <p className="text-[14px] text-gray-700 leading-relaxed font-normal">
                         Setiap keputusan strategis, mulai dari pengesahan laporan tahunan hingga perubahan anggaran dasar, secara hukum harus melalui forum ini agar sah dan mengikat perusahaan.
                       </p>
                     </div>
@@ -521,19 +521,19 @@ export default function PelaporanRUPS() {
                         <ul className="space-y-3.5">
                           <li className="flex items-start gap-3">
                             <Check className="w-4.5 h-4.5 text-[#10b981] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <p className="text-[13px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Organ tertinggi PT</strong> — pemegang kewenangan yang tidak diserahkan ke Direksi/Dewan Komisaris.</p>
+                            <p className="text-[14px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Organ tertinggi PT</strong> — pemegang kewenangan yang tidak diserahkan ke Direksi/Dewan Komisaris.</p>
                           </li>
                           <li className="flex items-start gap-3">
                             <Check className="w-4.5 h-4.5 text-[#10b981] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <p className="text-[13px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Dua jenis RUPS</strong> — RUPS Tahunan (wajib tiap tahun) &amp; RUPS Luar Biasa (sewaktu-waktu bila diperlukan).</p>
+                            <p className="text-[14px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Dua jenis RUPS</strong> — RUPS Tahunan (wajib tiap tahun) &amp; RUPS Luar Biasa (sewaktu-waktu bila diperlukan).</p>
                           </li>
                           <li className="flex items-start gap-3">
                             <Check className="w-4.5 h-4.5 text-[#10b981] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <p className="text-[13px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Wajib diselenggarakan</strong> — paling lambat 6 bulan setelah tahun buku perusahaan berakhir.</p>
+                            <p className="text-[14px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Wajib diselenggarakan</strong> — paling lambat 6 bulan setelah tahun buku perusahaan berakhir.</p>
                           </li>
                           <li className="flex items-start gap-3">
                             <Check className="w-4.5 h-4.5 text-[#10b981] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <p className="text-[13px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Hasil dituangkan dalam akta</strong> — dikuatkan melalui Akta Penegasan RUPS agar punya kekuatan hukum &amp; dapat dilaporkan resmi.</p>
+                            <p className="text-[14px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Hasil dituangkan dalam akta</strong> — dikuatkan melalui Akta Penegasan RUPS agar punya kekuatan hukum &amp; dapat dilaporkan resmi.</p>
                           </li>
                         </ul>
                       </div>
@@ -549,7 +549,7 @@ export default function PelaporanRUPS() {
           <FadeIn direction="up" delay={0.2}>
             <section className="bg-white py-16 lg:py-24">
               <div className="max-w-[1000px] mx-auto px-4 sm:px-8 text-center">
-                <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-4">KENAPA INI PENTING</p>
+                <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-4">KENAPA INI PENTING</p>
                 <h2 className="font-heading text-[26px] sm:text-[32px] lg:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight mb-4">
                   Bukan Sekadar Formalitas, Ini Kewajiban Hukum
                 </h2>
@@ -563,7 +563,7 @@ export default function PelaporanRUPS() {
                       <span className="text-[15px] font-black text-[#990202]">01</span>
                     </div>
                     <h3 className="text-[16px] font-black text-gray-950 mb-3 leading-snug">Wajib Setiap Tahun</h3>
-                    <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal">
+                    <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
                       Setiap PT wajib menyelenggarakan RUPS Tahunan paling lambat 6 bulan setelah tahun buku berakhir, tanpa terkecuali.
                     </p>
                   </div>
@@ -573,7 +573,7 @@ export default function PelaporanRUPS() {
                       <span className="text-[15px] font-black text-[#990202]">02</span>
                     </div>
                     <h3 className="text-[16px] font-black text-gray-950 mb-3 leading-snug">Bukan Cuma Rapat</h3>
-                    <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal">
+                    <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
                       Perlu dituangkan dalam Akta Penegasan RUPS dan dilaporkan resmi ke Kemenkumham — bukan cukup notulen internal.
                     </p>
                   </div>
@@ -583,7 +583,7 @@ export default function PelaporanRUPS() {
                       <span className="text-[15px] font-black text-[#990202]">03</span>
                     </div>
                     <h3 className="text-[16px] font-black text-gray-950 mb-3 leading-snug">Risiko Bila Diabaikan</h3>
-                    <p className="text-[13.5px] text-gray-500 leading-relaxed font-normal">
+                    <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
                       Status legalitas PT yang tidak terupdate dapat menyulitkan proses perbankan, tender, hingga perpanjangan izin usaha.
                     </p>
                   </div>
@@ -604,9 +604,9 @@ export default function PelaporanRUPS() {
             />
             <div className="relative flex w-full max-w-3xl justify-center px-6">
               <img
-                src="https://api.builder.io/api/v1/image/assets/TEMP/ac3943d529ddfa540fe6eac463f44da0322933b2?width=972"
-                alt="Diskon"
-                className="aspect-[18/5] w-full max-w-[486px] object-contain"
+                src="/images/promo-rups.png"
+                alt="Promo RUPS"
+                className="w-full max-w-[486px] object-contain"
               />
             </div>
           </section>
@@ -617,7 +617,7 @@ export default function PelaporanRUPS() {
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
                 <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
                   <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-                    <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-1">BIAYA JASA PENDIRIAN PERUSAHAAN</p>
+                    <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-1">BIAYA JASA PENDIRIAN PERUSAHAAN</p>
                     <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[42px] font-extrabold text-gray-950 leading-tight tracking-tight">
                       Pilih paket sesuai kebutuhan perusahaan Anda.
                     </h2>
@@ -643,7 +643,7 @@ export default function PelaporanRUPS() {
                     <button
                       key={idx}
                       onClick={() => scrollToDesktopCard(idx)}
-                      className={`px-4 py-2 text-[12px] sm:text-[12.5px] font-extrabold rounded-full border transition-all duration-200 ${
+                      className={`px-4 py-2 text-[14px] sm:text-[14px] font-extrabold rounded-full border transition-all duration-200 ${
                         activePkgIdx === idx
                           ? "bg-[#990202] text-white border-[#990202] shadow-md shadow-red-900/10 scale-[1.03]"
                           : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:border-gray-300"
@@ -697,14 +697,14 @@ export default function PelaporanRUPS() {
                                 ? "bg-[#D62828] text-white" 
                                 : "bg-[#990202] text-white"
                             }`}>
-                              <div className={`text-[10px] font-black tracking-widest uppercase mb-1.5 transition-colors ${
+                              <div className={`text-[14px] font-black tracking-widest uppercase mb-1.5 transition-colors ${
                                 isActive ? "text-white" : "text-red-200"
                               }`}>
                                 {pkg.name}
                               </div>
                               
                               {/* Original Price */}
-                              <div className={`text-[13px] line-through font-semibold mb-0.5 transition-colors ${
+                              <div className={`text-[14px] line-through font-semibold mb-0.5 transition-colors ${
                                 isActive ? "text-white/80" : "text-red-300/80"
                               }`}>
                                 {pkg.originalPrice}
@@ -716,7 +716,7 @@ export default function PelaporanRUPS() {
                               </div>
                               
                               {/* Badge */}
-                              <div className={`inline-block text-[9.5px] font-black px-3.5 py-1.5 rounded-full tracking-wider uppercase transition-colors ${
+                              <div className={`inline-block text-[14px] font-black px-3.5 py-1.5 rounded-full tracking-wider uppercase transition-colors ${
                                 isActive ? "bg-white/30 text-white" : "bg-white/20 text-white"
                               }`}>
                                 {pkg.badge}
@@ -727,8 +727,8 @@ export default function PelaporanRUPS() {
                             <div className="p-6 space-y-5 flex-1 flex flex-col text-left">
                               {/* Lama Proses */}
                               <div>
-                                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2">Lama Proses</h4>
-                                <div className="flex items-center gap-2 text-[12.5px] text-gray-800 font-extrabold">
+                                <h4 className="text-[14px] font-black text-gray-400 uppercase tracking-wider mb-2">Lama Proses</h4>
+                                <div className="flex items-center gap-2 text-[14px] text-gray-800 font-extrabold">
                                   <Check className="w-3.5 h-3.5 text-[#25D366] flex-shrink-0" strokeWidth={3} />
                                   <span>{pkg.duration} <sup className="text-red-500 font-bold">(1)</sup></span>
                                 </div>
@@ -736,10 +736,10 @@ export default function PelaporanRUPS() {
                               
                               {/* Yang Diperoleh */}
                               <div>
-                                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2.5">Yang Diperoleh</h4>
+                                <h4 className="text-[14px] font-black text-gray-400 uppercase tracking-wider mb-2.5">Yang Diperoleh</h4>
                                 <ul className="space-y-2">
                                   {pkg.obtained.map((item, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-[12px] sm:text-[12.5px] text-gray-700 leading-snug">
+                                    <li key={i} className="flex items-start gap-2 text-[14px] sm:text-[14px] text-gray-700 leading-snug">
                                       <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                                       <span>{item}</span>
                                     </li>
@@ -749,10 +749,10 @@ export default function PelaporanRUPS() {
                               
                               {/* Bonus */}
                               <div className="bg-[#f8f9fa] rounded-xl p-4 border border-gray-150/40">
-                                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2">Bonus</h4>
+                                <h4 className="text-[14px] font-black text-gray-400 uppercase tracking-wider mb-2">Bonus</h4>
                                 <ul className="space-y-2">
                                   {pkg.bonus.map((item, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-[12px] text-gray-700 font-semibold">
+                                    <li key={i} className="flex items-start gap-2 text-[14px] text-gray-700 font-semibold">
                                       <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                                       <span>{item}</span>
                                     </li>
@@ -762,10 +762,10 @@ export default function PelaporanRUPS() {
                               
                               {/* Extra Bonus */}
                               <div className="bg-[#f8f9fa] rounded-xl p-4 border border-gray-150/40">
-                                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2">Extra Bonus</h4>
+                                <h4 className="text-[14px] font-black text-gray-400 uppercase tracking-wider mb-2">Extra Bonus</h4>
                                 <ul className="space-y-2">
                                   {pkg.extraBonus.map((item, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-[12px] text-gray-700 font-semibold">
+                                    <li key={i} className="flex items-start gap-2 text-[14px] text-gray-700 font-semibold">
                                       <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                                       <span>{item}</span>
                                     </li>
@@ -780,7 +780,7 @@ export default function PelaporanRUPS() {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   onClick={(e) => e.stopPropagation()}
-                                  className={`w-full block text-center py-3.5 font-black text-[13.5px] rounded-xl hover:-translate-y-0.5 transition-all duration-200 shadow-sm ${
+                                  className={`w-full block text-center py-3.5 font-black text-[14px] rounded-xl hover:-translate-y-0.5 transition-all duration-200 shadow-sm ${
                                     isActive
                                       ? "bg-[#990202] text-white hover:bg-[#b50303] shadow-red-900/10"
                                       : "bg-white text-gray-850 border border-gray-250 hover:bg-gray-50"
@@ -800,7 +800,7 @@ export default function PelaporanRUPS() {
 
                 {/* Footer Keterangan */}
                 <div className="max-w-[460px] mx-auto mt-6 text-center">
-                  <p className="text-[10.5px] text-gray-400 font-medium">
+                  <p className="text-[14px] text-gray-400 font-medium">
                     <strong className="text-gray-500">Keterangan: (1)</strong> Setelah Tanda Tangan Draft Akta dan Payment
                   </p>
                 </div>
@@ -818,7 +818,7 @@ export default function PelaporanRUPS() {
                 
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-                  <p className="text-[11px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-1.5">
+                  <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-1.5">
                     ALUR KERJA
                   </p>
                   <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
@@ -830,7 +830,7 @@ export default function PelaporanRUPS() {
                 </div>
 
                 {/* Gesture Indicator */}
-                <div className="flex items-center justify-center gap-1.5 mb-12 text-[10px] font-black text-[#990202] tracking-[0.15em] uppercase">
+                <div className="flex items-center justify-center gap-1.5 mb-12 text-[14px] font-black text-[#990202] tracking-[0.15em] uppercase">
                   <span>GESER UNTUK LIHAT SEMUA LANGKAH</span>
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </div>
@@ -857,7 +857,7 @@ export default function PelaporanRUPS() {
                           <h3 className="text-[14.5px] font-extrabold text-gray-950 mb-2">
                             {step.title}
                           </h3>
-                          <p className="text-[12.5px] text-gray-500 leading-relaxed font-normal">
+                          <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
                             {step.desc}
                           </p>
                         </div>
@@ -920,7 +920,7 @@ export default function PelaporanRUPS() {
                       </svg>
                     </a>
 
-                    <div className="flex items-center gap-2 text-[11.5px] text-gray-400 font-medium mt-1">
+                    <div className="flex items-center gap-2 text-[14px] text-gray-400 font-medium mt-1">
                       <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
@@ -946,7 +946,7 @@ export default function PelaporanRUPS() {
 
           {/* Mobile Hero */}
           <section className="bg-white px-5 pt-8 pb-10 border-b border-gray-200/50">
-            <nav className="flex items-center space-x-1.5 text-[11px] font-medium text-gray-500 mb-5">
+            <nav className="flex items-center space-x-1.5 text-[14px] font-medium text-gray-500 mb-5">
               <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                 <Home className="w-3 h-3 text-gray-400" strokeWidth={2} />
                 <span>Beranda</span>
@@ -959,7 +959,7 @@ export default function PelaporanRUPS() {
 
             <div className="inline-flex items-center space-x-1.5 bg-[#FFF5F5] py-1 px-3 rounded-full border border-red-100/50 mb-4">
               <span className="w-1 h-1 rounded-full bg-[#990202]" />
-              <span className="text-[10px] font-extrabold text-[#990202] tracking-wider uppercase">Pelaporan RUPS</span>
+              <span className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">Pelaporan RUPS</span>
             </div>
 
             <h1 className="text-[32px] font-extrabold text-gray-950 leading-[1.1] tracking-tight mb-4">
@@ -994,8 +994,8 @@ export default function PelaporanRUPS() {
                 { label: "100% Online", sub: "Tanpa keluar rumah" },
               ].map((item, i) => (
                 <div key={i} className="bg-[#FFF5F5] rounded-xl p-2.5 border border-red-50/50 text-center">
-                  <div className="text-[12px] font-black text-gray-900">{item.label}</div>
-                  <div className="text-[9.5px] text-gray-500 font-semibold mt-0.5">{item.sub}</div>
+                  <div className="text-[14px] font-black text-gray-900">{item.label}</div>
+                  <div className="text-[14px] text-gray-500 font-semibold mt-0.5">{item.sub}</div>
                 </div>
               ))}
             </div>
@@ -1003,11 +1003,11 @@ export default function PelaporanRUPS() {
 
           {/* Mobile: Paket Harga */}
           <section id="paket-harga-mobile" className="bg-[#FAF9F7] px-5 py-12 border-b border-gray-200/50">
-            <p className="text-[10px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-2">BIAYA JASA PENDIRIAN PERUSAHAAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-2">BIAYA JASA PENDIRIAN PERUSAHAAN</p>
             <h2 className="text-[24px] font-extrabold text-gray-950 leading-tight mb-4">
               Pilih paket sesuai kebutuhan perusahaan Anda.
             </h2>
-            <p className="text-[13px] text-gray-500 font-normal leading-relaxed mb-8">
+            <p className="text-[14px] text-gray-500 font-normal leading-relaxed mb-8">
               Harga sudah include semua biaya — 3 Dokumen RUPS. <span className="text-[#990202] font-bold">Diskon 50% — kuota terbatas!</span>
             </p>
 
@@ -1017,7 +1017,7 @@ export default function PelaporanRUPS() {
                 <button
                   key={idx}
                   onClick={() => scrollToMobileCard(idx)}
-                  className={`px-3 py-1.5 text-[11.5px] font-extrabold rounded-full border transition-all duration-200 ${
+                  className={`px-3 py-1.5 text-[14px] font-extrabold rounded-full border transition-all duration-200 ${
                     activePkgIdx === idx
                       ? "bg-[#990202] text-white border-[#990202] shadow-sm"
                       : "bg-white text-gray-600 border-gray-200"
@@ -1056,12 +1056,12 @@ export default function PelaporanRUPS() {
                             ? "bg-[#D62828] text-white" 
                             : "bg-[#990202] text-white"
                         }`}>
-                          <div className={`text-[9px] font-black tracking-widest uppercase mb-1.5 transition-colors ${
+                          <div className={`text-[14px] font-black tracking-widest uppercase mb-1.5 transition-colors ${
                             isActive ? "text-white" : "text-red-200"
                           }`}>
                             {pkg.name}
                           </div>
-                          <div className={`text-[12px] line-through font-semibold mb-0.5 transition-colors ${
+                          <div className={`text-[14px] line-through font-semibold mb-0.5 transition-colors ${
                             isActive ? "text-white/80" : "text-red-300/80"
                           }`}>
                             {pkg.originalPrice}
@@ -1069,7 +1069,7 @@ export default function PelaporanRUPS() {
                           <div className="text-[28px] font-black leading-tight mb-2.5">
                             {pkg.price}
                           </div>
-                          <div className={`inline-block text-[8.5px] font-black px-3 py-1 rounded-full tracking-wider uppercase transition-colors ${
+                          <div className={`inline-block text-[14px] font-black px-3 py-1 rounded-full tracking-wider uppercase transition-colors ${
                             isActive ? "bg-white/30 text-white" : "bg-white/20 text-white"
                           }`}>
                             {pkg.badge}
@@ -1079,18 +1079,18 @@ export default function PelaporanRUPS() {
                         {/* Body */}
                         <div className="p-5 space-y-5 flex-1 flex flex-col text-left">
                           <div>
-                            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2">Lama Proses</h4>
-                            <div className="flex items-center gap-2 text-[12.5px] text-gray-800 font-extrabold">
+                            <h4 className="text-[14px] font-black text-gray-400 uppercase tracking-wider mb-2">Lama Proses</h4>
+                            <div className="flex items-center gap-2 text-[14px] text-gray-800 font-extrabold">
                               <Check className="w-3.5 h-3.5 text-[#25D366] flex-shrink-0" strokeWidth={3} />
                               <span>{pkg.duration} <sup className="text-red-500 font-bold">(1)</sup></span>
                             </div>
                           </div>
 
                           <div>
-                            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2.5">Yang Diperoleh</h4>
+                            <h4 className="text-[14px] font-black text-gray-400 uppercase tracking-wider mb-2.5">Yang Diperoleh</h4>
                             <ul className="space-y-2">
                               {pkg.obtained.map((item, i) => (
-                                  <li key={i} className="flex items-start gap-2 text-[12px] text-gray-700 leading-snug">
+                                  <li key={i} className="flex items-start gap-2 text-[14px] text-gray-700 leading-snug">
                                     <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                                     <span>{item}</span>
                                   </li>
@@ -1099,10 +1099,10 @@ export default function PelaporanRUPS() {
                           </div>
 
                           <div className="bg-[#f8f9fa] rounded-xl p-4 border border-gray-150/40">
-                            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2">Bonus</h4>
+                            <h4 className="text-[14px] font-black text-gray-400 uppercase tracking-wider mb-2">Bonus</h4>
                             <ul className="space-y-2">
                               {pkg.bonus.map((item, i) => (
-                                <li key={i} className="flex items-start gap-2 text-[12px] text-gray-700 font-semibold">
+                                <li key={i} className="flex items-start gap-2 text-[14px] text-gray-700 font-semibold">
                                   <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                                   <span>{item}</span>
                                 </li>
@@ -1111,10 +1111,10 @@ export default function PelaporanRUPS() {
                           </div>
 
                           <div className="bg-[#f8f9fa] rounded-xl p-4 border border-gray-150/40">
-                            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2">Extra Bonus</h4>
+                            <h4 className="text-[14px] font-black text-gray-400 uppercase tracking-wider mb-2">Extra Bonus</h4>
                             <ul className="space-y-2">
                               {pkg.extraBonus.map((item, i) => (
-                                <li key={i} className="flex items-start gap-2 text-[12px] text-gray-700 font-semibold">
+                                <li key={i} className="flex items-start gap-2 text-[14px] text-gray-700 font-semibold">
                                   <Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                                   <span>{item}</span>
                                 </li>
@@ -1127,7 +1127,7 @@ export default function PelaporanRUPS() {
                               href={getWhatsAppLink(pkg.waText)}
                               target="_blank" rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className={`block text-center py-3 font-black text-[13px] rounded-xl transition-all shadow-sm ${
+                              className={`block text-center py-3 font-black text-[14px] rounded-xl transition-all shadow-sm ${
                                 isActive
                                   ? "bg-[#990202] text-white hover:bg-[#b50303]"
                                   : "bg-white text-gray-855 border border-gray-250 hover:bg-gray-50"
@@ -1147,7 +1147,7 @@ export default function PelaporanRUPS() {
 
             {/* Footer Keterangan Mobile */}
             <div className="mt-4 text-center">
-              <p className="text-[10px] text-gray-450 font-medium">
+              <p className="text-[14px] text-gray-450 font-medium">
                 <strong className="text-gray-500">Keterangan: (1)</strong> Setelah Tanda Tangan Draft Akta dan Payment
               </p>
             </div>
@@ -1155,7 +1155,7 @@ export default function PelaporanRUPS() {
 
           {/* Mobile: FAQ */}
           <section className="bg-white px-5 py-10">
-            <p className="text-[10px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-2">FAQ</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-2">FAQ</p>
             <h2 className="text-[24px] font-extrabold text-gray-950 leading-tight mb-6">
               Pertanyaan umum
             </h2>
@@ -1167,7 +1167,7 @@ export default function PelaporanRUPS() {
             <h2 className="text-[26px] font-extrabold text-white leading-tight mb-3">
               RUPS PT Anda sudah terurus?
             </h2>
-            <p className="text-[13px] text-red-200 leading-relaxed mb-6">
+            <p className="text-[14px] text-red-200 leading-relaxed mb-6">
               Konsultasikan kebutuhan RUPS perusahaan Anda — gratis, tanpa komitmen.
             </p>
             <a

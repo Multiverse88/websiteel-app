@@ -135,7 +135,7 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
 
     return (
       <div className="space-y-2 border-t border-gray-100 pt-3 mt-3">
-        <label className="block text-xs font-bold text-gray-700">{label}</label>
+        <label className="block text-[14px] font-bold text-gray-700">{label}</label>
         {imageUrl && (
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden border bg-gray-50 mb-2">
             <img src={imageUrl} alt={imageAlt} className="w-full h-full object-cover" />
@@ -147,9 +147,9 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
             placeholder="URL Gambar"
             value={imageUrl}
             onChange={(e) => onUrlChange(e.target.value)}
-            className="flex-grow text-xs px-2.5 py-1.5 border rounded focus:ring-1 focus:ring-red-500 focus:outline-none"
+            className="flex-grow text-[14px] px-2.5 py-1.5 border rounded focus:ring-1 focus:ring-red-500 focus:outline-none"
           />
-          <label className="flex items-center justify-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 border rounded cursor-pointer transition-colors text-xs font-medium text-gray-700">
+          <label className="flex items-center justify-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 border rounded cursor-pointer transition-colors text-[14px] font-medium text-gray-700">
             {isUploading ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
             ) : (
@@ -169,7 +169,7 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
           placeholder="Alt Text (SEO)"
           value={imageAlt}
           onChange={(e) => onAltChange(e.target.value)}
-          className="w-full text-xs px-2.5 py-1.5 border rounded focus:ring-1 focus:ring-red-500 focus:outline-none"
+          className="w-full text-[14px] px-2.5 py-1.5 border rounded focus:ring-1 focus:ring-red-500 focus:outline-none"
         />
       </div>
     );
@@ -180,38 +180,38 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
       return (
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Headline</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Headline</label>
             <input
               type="text"
               value={section.headline || ""}
               onChange={(e) => handleTextChange("headline", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Subheadline</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Subheadline</label>
             <textarea
               value={section.subheadline || ""}
               onChange={(e) => handleTextChange("subheadline", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded h-16"
+              className="w-full text-[14px] px-3 py-2 border rounded h-16"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">CTA Text</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">CTA Text</label>
             <input
               type="text"
               value={section.ctaText || ""}
               onChange={(e) => handleTextChange("ctaText", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">CTA Link</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">CTA Link</label>
             <input
               type="text"
               value={section.ctaLink || ""}
               onChange={(e) => handleTextChange("ctaLink", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
           {renderImageUpload(
@@ -229,12 +229,12 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
       return (
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Link Banner (Opsional)</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Link Banner (Opsional)</label>
             <input
               type="text"
               value={section.link || ""}
               onChange={(e) => handleTextChange("link", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
           {renderImageUpload(
@@ -252,22 +252,22 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
       return (
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Judul Section</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Judul Section</label>
             <input
               type="text"
               value={section.title || ""}
               onChange={(e) => handleTextChange("title", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
 
           <div className="space-y-3 pt-3 border-t">
             <div className="flex justify-between items-center">
-              <label className="block text-xs font-bold text-gray-700">Daftar Fitur</label>
+              <label className="block text-[14px] font-bold text-gray-700">Daftar Fitur</label>
               <button
                 type="button"
                 onClick={() => addItem({ title: "Fitur Baru", desc: "Deskripsi fitur baru..." })}
-                className="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 hover:text-red-700"
+                className="inline-flex items-center gap-1 text-[14px] font-bold text-red-600 hover:text-red-700"
               >
                 <Plus className="w-3.5 h-3.5" /> Tambah
               </button>
@@ -288,7 +288,7 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
                     value={item.title || ""}
                     onChange={(e) => handleItemChange(idx, "title", e.target.value)}
                     placeholder="Judul Fitur"
-                    className="w-full text-xs px-2.5 py-1.5 border rounded"
+                    className="w-full text-[14px] px-2.5 py-1.5 border rounded"
                   />
                 </div>
                 <div>
@@ -296,7 +296,7 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
                     value={item.desc || ""}
                     onChange={(e) => handleItemChange(idx, "desc", e.target.value)}
                     placeholder="Deskripsi Fitur"
-                    className="w-full text-xs px-2.5 py-1.5 border rounded h-16"
+                    className="w-full text-[14px] px-2.5 py-1.5 border rounded h-16"
                   />
                 </div>
                 {renderImageUpload(
@@ -319,22 +319,22 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
       return (
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Judul Section</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Judul Section</label>
             <input
               type="text"
               value={section.title || ""}
               onChange={(e) => handleTextChange("title", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
 
           <div className="space-y-3 pt-3 border-t">
             <div className="flex justify-between items-center">
-              <label className="block text-xs font-bold text-gray-700">Daftar Testimoni</label>
+              <label className="block text-[14px] font-bold text-gray-700">Daftar Testimoni</label>
               <button
                 type="button"
                 onClick={() => addItem({ name: "Nama Klien", quote: "Puas sekali dengan pelayanannya..." })}
-                className="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 hover:text-red-700"
+                className="inline-flex items-center gap-1 text-[14px] font-bold text-red-600 hover:text-red-700"
               >
                 <Plus className="w-3.5 h-3.5" /> Tambah
               </button>
@@ -355,7 +355,7 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
                     value={item.name || ""}
                     onChange={(e) => handleItemChange(idx, "name", e.target.value)}
                     placeholder="Nama Klien"
-                    className="w-full text-xs px-2.5 py-1.5 border rounded"
+                    className="w-full text-[14px] px-2.5 py-1.5 border rounded"
                   />
                 </div>
                 <div>
@@ -363,7 +363,7 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
                     value={item.quote || ""}
                     onChange={(e) => handleItemChange(idx, "quote", e.target.value)}
                     placeholder="Kutipan Testimoni"
-                    className="w-full text-xs px-2.5 py-1.5 border rounded h-16"
+                    className="w-full text-[14px] px-2.5 py-1.5 border rounded h-16"
                   />
                 </div>
                 {renderImageUpload(
@@ -386,34 +386,34 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
       return (
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Judul Form</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Judul Form</label>
             <input
               type="text"
               value={section.title || ""}
               onChange={(e) => handleTextChange("title", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Sub-judul Form</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Sub-judul Form</label>
             <input
               type="text"
               value={section.subtitle || ""}
               onChange={(e) => handleTextChange("subtitle", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Teks Tombol Kirim</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Teks Tombol Kirim</label>
             <input
               type="text"
               value={section.buttonText || ""}
               onChange={(e) => handleTextChange("buttonText", e.target.value)}
-              className="w-full text-xs px-3 py-2 border rounded"
+              className="w-full text-[14px] px-3 py-2 border rounded"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1.5">Fields yang Wajib Diisi</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1.5">Fields yang Wajib Diisi</label>
             <div className="space-y-2 border p-3 rounded bg-gray-50">
               {([
                 { key: "nama", label: "Nama Lengkap (Selalu Wajib)" },
@@ -425,7 +425,7 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
                 const isChecked = isRequiredField || (section.fields || []).includes(key as any);
 
                 return (
-                  <label key={key} className="flex items-center gap-2 text-xs font-medium text-gray-700">
+                  <label key={key} className="flex items-center gap-2 text-[14px] font-medium text-gray-700">
                     <input
                       type="checkbox"
                       checked={isChecked}
@@ -458,12 +458,12 @@ export default function SectionEditor({ section, onChange }: SectionEditorProps)
       return (
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-700 mb-1">Editor Kode HTML / Markdown</label>
+            <label className="block text-[14px] font-bold text-gray-700 mb-1">Editor Kode HTML / Markdown</label>
             <textarea
               value={section.html || ""}
               onChange={(e) => handleTextChange("html", e.target.value)}
               placeholder="Masukkan tag HTML atau teks biasa di sini..."
-              className="w-full font-mono text-xs p-3 border rounded h-64 focus:outline-none focus:ring-1 focus:ring-red-500"
+              className="w-full font-mono text-[14px] p-3 border rounded h-64 focus:outline-none focus:ring-1 focus:ring-red-500"
             />
           </div>
         </div>

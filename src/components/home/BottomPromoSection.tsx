@@ -4,7 +4,7 @@ import { Truck, Smartphone, Gift } from "lucide-react";
 
 export default function BottomPromoSection() {
   return (
-    <section className="py-16 sm:py-24 bg-white border-t border-gray-50 relative overflow-hidden">
+    <section className="pt-5 sm:pt-6 pb-16 sm:pb-24 bg-white relative overflow-hidden">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Top Cards (2 Columns) */}
@@ -16,13 +16,13 @@ export default function BottomPromoSection() {
               <Truck className="w-8 h-8 sm:w-10 sm:h-10 text-gray-900" strokeWidth={1.5} />
             </div>
             <div className="flex flex-col pt-1">
-              <span className="text-[9px] sm:text-[10px] font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2">
+              <span className="text-[14px] sm:text-[14px] font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2">
                 Jangkauan Nasional
               </span>
               <h3 className="text-[18px] sm:text-[22px] font-black text-gray-900 leading-[1.2] mb-2 sm:mb-3">
                 Melayani Seluruh Indonesia
               </h3>
-              <p className="text-[12px] sm:text-[13px] text-gray-500 leading-relaxed max-w-[280px]">
+              <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed max-w-[280px]">
                 Semua biaya tertera di awal — termasuk jasa kami dan biaya pemerintah. Tidak ada add-on mendadak di tengah proses.
               </p>
             </div>
@@ -30,18 +30,18 @@ export default function BottomPromoSection() {
 
           {/* Card 2: Legal Festival */}
           <div className="bg-white border border-gray-100 rounded-3xl p-6 sm:p-8 flex gap-5 sm:gap-6 items-start shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-300">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl border border-red-100 flex-shrink-0 flex items-center justify-center bg-white shadow-sm">
-              <Smartphone className="w-8 h-8 sm:w-10 sm:h-10 text-gray-900" strokeWidth={1.5} />
+            <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 relative rounded-2xl overflow-hidden shadow-sm border border-black/5">
+              <Image src="/images/iphone-mockup.png" alt="iPhone" fill sizes="(max-width: 640px) 64px, 80px" className="object-cover object-center" />
             </div>
             <div className="flex flex-col pt-1">
-              <span className="text-[9px] sm:text-[10px] font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2">
+              <span className="text-[14px] sm:text-[14px] font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2">
                 Legal Festival Special
               </span>
               <h3 className="text-[18px] sm:text-[22px] font-black text-gray-900 leading-[1.2] mb-1 sm:mb-2">
                 Menangkan iPhone &amp; Hadiah senilai Rp 12.000.000
               </h3>
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1.5 rounded-full mt-2 text-[10px] sm:text-[11px] font-bold tracking-wide shadow-sm">
+                <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1.5 rounded-full mt-2 text-[14px] sm:text-[14px] font-bold tracking-wide shadow-sm">
                   <Gift className="w-3.5 h-3.5 text-yellow-400" strokeWidth={2.5} /> 
                   Setiap pembuatan PT berkesempatan dapat iPhone
                 </div>

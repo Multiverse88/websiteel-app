@@ -145,13 +145,13 @@ export default function Kontak() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
           
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-[11px] sm:text-[13px] font-medium text-gray-500 mb-4 sm:mb-6">
+          <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] font-medium text-gray-500 mb-4 sm:mb-6">
             <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
               <Home className="w-3.5 h-3.5" />
               <span>Beranda</span>
             </Link>
             <span className="text-gray-300 font-normal">&gt;</span>
-            <span className="text-[11px] sm:text-[13px] font-bold text-gray-900">Kontak</span>
+            <span className="text-[14px] sm:text-[14px] font-bold text-gray-900">Kontak</span>
           </nav>
 
           {/* Title & Subtitle */}
@@ -159,14 +159,14 @@ export default function Kontak() {
             {/* Pill Badge */}
             <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
               <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-              <span className="text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Hubungi Kami</span>
+              <span className="text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Hubungi Kami</span>
             </div>
 
             <h1 className="font-heading text-[20px] sm:text-[44px] lg:text-[48px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight tracking-tight mt-4 sm:mt-6">
               Mari Bicarakan Kebutuhan <span className="text-[#990202]">Legal Bisnis</span> Anda.
             </h1>
               
-            <p className="text-[12.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+            <p className="text-[14px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
               Tim kami akan menjelaskan semua yang Anda butuhkan. Pilih cara yang paling nyaman untuk Anda.
             </p>
           </div>
@@ -186,7 +186,7 @@ export default function Kontak() {
                 </div>
                 
                 {/* Tag */}
-                <span className="text-[9px] sm:text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block">
+                <span className="text-[14px] sm:text-[14px] font-extrabold text-gray-400 uppercase tracking-widest block">
                   WhatsApp · Tercepat
                 </span>
                 
@@ -196,7 +196,7 @@ export default function Kontak() {
                 </h3>
                 
                 {/* Subtext */}
-                <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed mt-2 sm:mt-3">
+                <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed mt-2 sm:mt-3">
                   Respons rata-rata kurang dari 5 menit. Tersedia Senin-Jumat, 08:00-17:00 WIB. Sabtu, 09.00-12.00 WIB
                 </p>
               </div>
@@ -206,7 +206,7 @@ export default function Kontak() {
                 href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 sm:mt-6 flex items-center text-[12px] sm:text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
+                className="mt-4 sm:mt-6 flex items-center text-[14px] sm:text-[14px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
               >
                 Mulai chat →
               </a>
@@ -221,7 +221,7 @@ export default function Kontak() {
                 </div>
                 
                 {/* Tag */}
-                <span className="text-[9px] sm:text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block">
+                <span className="text-[14px] sm:text-[14px] font-extrabold text-gray-400 uppercase tracking-widest block">
                   Email · Formal
                 </span>
                 
@@ -231,7 +231,7 @@ export default function Kontak() {
                 </h3>
                 
                 {/* Subtext */}
-                <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed mt-2 sm:mt-3">
+                <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed mt-2 sm:mt-3">
                   Untuk pertanyaan detail, dokumentasi, atau kerjasama. Pesan akan ditindaklanjuti oleh tim kami..
                 </p>
               </div>
@@ -239,7 +239,7 @@ export default function Kontak() {
               {/* Action Link */}
               <a
                 href="mailto:care@easylegal.id"
-                className="mt-4 sm:mt-6 flex items-center text-[12px] sm:text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
+                className="mt-4 sm:mt-6 flex items-center text-[14px] sm:text-[14px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
               >
                 Kirim email →
               </a>
@@ -254,7 +254,7 @@ export default function Kontak() {
                 </div>
                 
                 {/* Tag */}
-                <span className="text-[9px] sm:text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block">
+                <span className="text-[14px] sm:text-[14px] font-extrabold text-gray-400 uppercase tracking-widest block">
                   Telepon · Kantor
                 </span>
                 
@@ -264,7 +264,7 @@ export default function Kontak() {
                 </h3>
                 
                 {/* Subtext */}
-                <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed mt-2 sm:mt-3">
+                <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed mt-2 sm:mt-3">
                   Hubungi kantor pusat Bandung. Tim operations siap menjawab di jam kerja.
                 </p>
               </div>
@@ -272,7 +272,7 @@ export default function Kontak() {
               {/* Action Link */}
               <a
                 href="tel:02232093292"
-                className="mt-4 sm:mt-6 flex items-center text-[12px] sm:text-[13.5px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
+                className="mt-4 sm:mt-6 flex items-center text-[14px] sm:text-[14px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"
               >
                 Telepon kami →
               </a>
@@ -292,7 +292,7 @@ export default function Kontak() {
             <div className="lg:col-span-7 bg-white shadow-md border border-black/[0.04] rounded-2xl sm:rounded-3xl shadow-sm p-5 sm:p-10">
               <div>
                 <h2 className="text-[20px] sm:text-[24px] font-extrabold text-gray-950 mb-1 tracking-tight">Kirim pertanyaan Anda</h2>
-                <p className="text-[12.5px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
+                <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
                   Isi form berikut dan tim kami akan menghubungi Anda kembali dalam 1×24 jam kerja.
                 </p>
                 
@@ -312,7 +312,7 @@ export default function Kontak() {
                   {/* Nama Lengkap + Nama Bisnis */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative">
-                      <label className="text-[13px] font-bold text-gray-900 mb-2 block">Nama Lengkap*</label>
+                      <label className="text-[14px] font-bold text-gray-900 mb-2 block">Nama Lengkap*</label>
                       <input
                         type="text"
                         name="name"
@@ -322,10 +322,10 @@ export default function Kontak() {
                         placeholder="Mis. Budi Santoso"
                         className={`w-full px-4 py-3 rounded-xl border ${errors.name ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900`}
                       />
-                      {errors.name && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.name}</p>}
+                      {errors.name && <p className="absolute -bottom-5 left-1 text-[14px] text-red-500 font-medium">{errors.name}</p>}
                     </div>
                     <div>
-                      <label className="text-[13px] font-bold text-gray-900 mb-2 block">Nama Bisnis / Perusahaan</label>
+                      <label className="text-[14px] font-bold text-gray-900 mb-2 block">Nama Bisnis / Perusahaan</label>
                       <input
                         type="text"
                         name="businessName"
@@ -340,7 +340,7 @@ export default function Kontak() {
                   {/* Email + WA */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative">
-                      <label className="text-[13px] font-bold text-gray-900 mb-2 block">Email*</label>
+                      <label className="text-[14px] font-bold text-gray-900 mb-2 block">Email*</label>
                       <input
                         type="email"
                         name="email"
@@ -350,10 +350,10 @@ export default function Kontak() {
                         placeholder="nama@email.com"
                         className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900`}
                       />
-                      {errors.email && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.email}</p>}
+                      {errors.email && <p className="absolute -bottom-5 left-1 text-[14px] text-red-500 font-medium">{errors.email}</p>}
                     </div>
                     <div className="relative">
-                      <label className="text-[13px] font-bold text-gray-900 mb-2 block">No. WhatsApp*</label>
+                      <label className="text-[14px] font-bold text-gray-900 mb-2 block">No. WhatsApp*</label>
                       <input
                         type="tel"
                         name="whatsapp"
@@ -363,13 +363,13 @@ export default function Kontak() {
                         placeholder="0812-3456-7890"
                         className={`w-full px-4 py-3 rounded-xl border ${errors.whatsapp ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900`}
                       />
-                      {errors.whatsapp && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.whatsapp}</p>}
+                      {errors.whatsapp && <p className="absolute -bottom-5 left-1 text-[14px] text-red-500 font-medium">{errors.whatsapp}</p>}
                     </div>
                   </div>
 
                   {/* Topik */}
                   <div className="relative">
-                    <label className="text-[13px] font-bold text-gray-900 mb-2 block">
+                    <label className="text-[14px] font-bold text-gray-900 mb-2 block">
                       Topik Konsultasi*
                     </label>
                     <div className="relative">
@@ -393,12 +393,12 @@ export default function Kontak() {
                         <ChevronDown className="w-4 h-4" />
                       </div>
                     </div>
-                    {errors.topic && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.topic}</p>}
+                    {errors.topic && <p className="absolute -bottom-5 left-1 text-[14px] text-red-500 font-medium">{errors.topic}</p>}
                   </div>
 
                   {/* Pesan */}
                   <div className="relative">
-                    <label className="text-[13px] font-bold text-gray-900 mb-2 block">Pesan / Pertanyaan*</label>
+                    <label className="text-[14px] font-bold text-gray-900 mb-2 block">Pesan / Pertanyaan*</label>
                     <textarea
                       name="message"
                       required
@@ -408,11 +408,11 @@ export default function Kontak() {
                       placeholder="Ceritakan kebutuhan legalitas bisnis Anda — kami akan bantu rekomendasikan solusi yang sesuai."
                       className={`w-full px-4 py-3 rounded-xl border ${errors.message ? 'border-red-500' : 'border-gray-200'} focus:outline-none focus:border-[#990202] focus:ring-1 focus:ring-[#990202] text-[14px] bg-white transition-all text-gray-900 resize-none leading-relaxed`}
                     />
-                    {errors.message && <p className="absolute -bottom-5 left-1 text-[11px] text-red-500 font-medium">{errors.message}</p>}
+                    {errors.message && <p className="absolute -bottom-5 left-1 text-[14px] text-red-500 font-medium">{errors.message}</p>}
                   </div>
 
                   {/* Consent Text Statement */}
-                  <div className="text-[13px] text-gray-500 leading-relaxed mt-6">
+                  <div className="text-[14px] text-gray-500 leading-relaxed mt-6">
                     Saya setuju data yang saya kirim akan diproses sesuai{" "}
                     <Link href="/" className="text-[#990202] font-semibold underline hover:text-[#800000]">
                       Kebijakan Privasi
@@ -453,7 +453,7 @@ export default function Kontak() {
                 </div>
                 <div>
                   <div className="text-[14px] font-bold text-[#0F763E]">Respons cepat</div>
-                  <div className="text-[12px] text-[#1E5C39] font-medium mt-0.5">Rata-rata kurang dari 5 menit via WhatsApp.</div>
+                  <div className="text-[14px] text-[#1E5C39] font-medium mt-0.5">Rata-rata kurang dari 5 menit via WhatsApp.</div>
                 </div>
               </div>
 
@@ -464,7 +464,7 @@ export default function Kontak() {
                   <span className="text-[15px] font-bold text-gray-900">Jam Operasional</span>
                 </div>
                 
-                <div className="space-y-0 text-[13.5px] text-gray-600 font-medium">
+                <div className="space-y-0 text-[14px] text-gray-600 font-medium">
                   <div className="flex justify-between items-center py-3 border-b border-gray-100">
                     <span>Senin – Jumat</span>
                     <span className="text-gray-900 font-semibold">08:00 – 20:00</span>
@@ -486,13 +486,13 @@ export default function Kontak() {
                   <MapPin className="w-5 h-5 text-[#990202]" />
                   <span className="text-[15px] font-bold text-gray-900">Kantor Pusat</span>
                 </div>
-                <p className="text-[13.5px] text-gray-500 leading-relaxed pl-8">
+                <p className="text-[14px] text-gray-500 leading-relaxed pl-8">
                   Jl. Cihampelas No.201A, Cipaganti, Kecamatan Coblong, Kota Bandung, Jawa Barat 40131
                 </p>
                 <div className="mt-5 pl-8">
                   <Link
                     href="/tentang-kami"
-                    className="inline-flex items-center text-[13px] font-extrabold text-[#990202] hover:text-[#800000] gap-1 group transition-all duration-200"
+                    className="inline-flex items-center text-[14px] font-extrabold text-[#990202] hover:text-[#800000] gap-1 group transition-all duration-200"
                   >
                     <span>Lihat semua kantor</span>
                     <span className="transition-transform group-hover:translate-x-0.5">→</span>
@@ -527,8 +527,8 @@ export default function Kontak() {
               <CheckCircle className="w-5 h-5 text-green-500" />
             </div>
             <div>
-              <div className="text-[13px] font-bold text-dark mb-1">Pertanyaan Dikirim!</div>
-              <p className="text-[11.5px] text-muted leading-relaxed">
+              <div className="text-[14px] font-bold text-dark mb-1">Pertanyaan Dikirim!</div>
+              <p className="text-[14px] text-muted leading-relaxed">
                 Tim kami akan menghubungi <strong>{submittedName}</strong> secepatnya.
               </p>
             </div>

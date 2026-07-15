@@ -324,7 +324,7 @@ export default function PendirianYayasan() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[11px] sm:text-[11px] sm:text-[13px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] sm:text-[14px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -332,13 +332,13 @@ export default function PendirianYayasan() {
                 <span className="text-gray-300 font-normal">&rsaquo;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&rsaquo;</span>
-                <span className="text-[13px] font-bold text-gray-900">Pendirian Yayasan</span>
+                <span className="text-[14px] font-bold text-gray-900">Pendirian Yayasan</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[10px] sm:text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Pendirian Yayasan</span>
+                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Pendirian Yayasan</span>
               </div>
 
               {/* Headline */}
@@ -348,7 +348,7 @@ export default function PendirianYayasan() {
               </h1>
 
               {/* Description */}
-              <p className="text-[12.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+              <p className="text-[14px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
                 Dirikan yayasan resmi untuk misi sosial, kemanusiaan, atau keagamaan Anda — kami pandu dari pengecekan nama, akta notaris, sampai SK Kemenkumham, selesai dalam 2 hari kerja.
               </p>
 
@@ -358,7 +358,7 @@ export default function PendirianYayasan() {
                   href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pendirian yayasan.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
                 >
                   <span>Konsultasi Gratis</span>
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5" />
@@ -366,7 +366,7 @@ export default function PendirianYayasan() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-350 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-350 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Lihat Paket Harga
                 </a>
@@ -379,8 +379,8 @@ export default function PendirianYayasan() {
                     <Clock className="w-5 h-5 stroke-[2]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">2 hari kerja</div>
-                    <div className="text-[11.5px] text-gray-500 mt-0.5">Express selesai</div>
+                    <div className="text-[14px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">2 hari kerja</div>
+                    <div className="text-[14px] text-gray-500 mt-0.5">Express selesai</div>
                   </div>
                 </div>
 
@@ -389,8 +389,8 @@ export default function PendirianYayasan() {
                     <DollarSign className="w-5 h-5 stroke-[2]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">Diskon 50%</div>
-                    <div className="text-[11.5px] text-gray-500 mt-0.5">Promo terbatas</div>
+                    <div className="text-[14px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">Diskon 50%</div>
+                    <div className="text-[14px] text-gray-500 mt-0.5">Promo terbatas</div>
                   </div>
                 </div>
 
@@ -399,8 +399,8 @@ export default function PendirianYayasan() {
                     <Upload className="w-5 h-5 stroke-[2]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">100% Online</div>
-                    <div className="text-[11.5px] text-gray-500 mt-0.5">Tanpa keluar rumah</div>
+                    <div className="text-[14px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">100% Online</div>
+                    <div className="text-[14px] text-gray-500 mt-0.5">Tanpa keluar rumah</div>
                   </div>
                 </div>
               </div>
@@ -413,7 +413,7 @@ export default function PendirianYayasan() {
                 
                 <div className="relative overflow-hidden rounded-[24px] sm:rounded-[24px] sm:rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?fit=crop&w=800&h=800&q=80"
+                    src="/images/layanan/yayasan-1.jpg"
                     alt="Misi sosial yayasan bersatu tangan"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -427,8 +427,8 @@ export default function PendirianYayasan() {
                     <FileText className="w-5.5 h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-900 leading-none">Akta Yayasan</div>
-                    <div className="text-[11px] text-gray-400 font-bold mt-1.5">Selesai · 2 hari kerja</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Akta Yayasan</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">Selesai · 2 hari kerja</div>
                   </div>
                 </div>
 
@@ -438,8 +438,8 @@ export default function PendirianYayasan() {
                     <ShieldCheck className="w-5.5 h-5.5" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-900 leading-none">SK Kemenkumham</div>
-                    <div className="text-[11px] text-gray-400 font-bold mt-1.5">Terdaftar resmi</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">SK Kemenkumham</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">Terdaftar resmi</div>
                   </div>
                 </div>
 
@@ -455,7 +455,7 @@ export default function PendirianYayasan() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
           <div className="mb-14">
-            <p className="text-[12.5px] font-extrabold text-[#990202] uppercase tracking-[0.18em] mb-2">PENGERTIAN YAYASAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.18em] mb-2">PENGERTIAN YAYASAN</p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Apa itu Yayasan?
             </h2>
@@ -470,7 +470,7 @@ export default function PendirianYayasan() {
               <div className="relative w-full max-w-[480px] lg:max-w-none">
                 <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
                   <Image
-                    src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?fit=crop&w=800&h=800&q=80"
+                    src="/images/layanan/yayasan-2.jpg"
                     alt="Modern loft office workstation"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
@@ -484,8 +484,8 @@ export default function PendirianYayasan() {
                     <FileText className="w-5.5 h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-900 leading-none">Dasar Hukum</div>
-                    <div className="text-[11px] text-gray-400 font-bold mt-1.5 leading-snug">UU No. 16 Tahun 2001 tentang Yayasan</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Dasar Hukum</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5 leading-snug">UU No. 16 Tahun 2001 tentang Yayasan</div>
                   </div>
                 </div>
               </div>
@@ -509,7 +509,7 @@ export default function PendirianYayasan() {
                     { bold: "Tujuan sosial", text: " — fokus pada bidang sosial, keagamaan, atau kemanusiaan." },
                     { bold: "Kekayaan dipisahkan", text: " — aset yayasan terpisah dari kekayaan pribadi pendiri." }
                   ].map((item, idx) => (
-                    <li key={idx} className="flex items-start text-[13.5px] text-gray-600 leading-normal">
+                    <li key={idx} className="flex items-start text-[14px] text-gray-600 leading-normal">
                       <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
                         <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
                       </div>
@@ -533,7 +533,7 @@ export default function PendirianYayasan() {
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
-            <p className="text-[12.5px] font-extrabold text-[#990202] uppercase tracking-[0.18em]">ORGAN YAYASAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.18em]">ORGAN YAYASAN</p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               3 organ wajib yang harus ada dalam yayasan.
             </h2>
@@ -549,7 +549,7 @@ export default function PendirianYayasan() {
                   <Users className="w-5.5 h-5.5 stroke-[2]" />
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950">Pembina</h4>
-                <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed font-normal">
+                <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
                   Pemegang kewenangan tertinggi — menetapkan kebijakan umum & mengangkat/memberhentikan Pengurus. Minimal 1 orang.
                 </p>
               </div>
@@ -562,7 +562,7 @@ export default function PendirianYayasan() {
                   <UserCheck className="w-5.5 h-5.5 stroke-[2]" />
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950">Pengurus</h4>
-                <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed font-normal">
+                <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
                   Pelaksana harian yayasan — terdiri dari <strong className="font-extrabold text-gray-950">Ketua, Sekretaris, & Bendahara</strong> (minimal 1 orang per posisi).
                 </p>
               </div>
@@ -575,7 +575,7 @@ export default function PendirianYayasan() {
                   <Eye className="w-5.5 h-5.5 stroke-[2]" />
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950">Pengawas</h4>
-                <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed font-normal">
+                <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
                   Pengawas internal — memberikan nasihat & mengawasi kinerja Pengurus. Minimal 1 orang.
                 </p>
               </div>
@@ -588,7 +588,7 @@ export default function PendirianYayasan() {
                   <ShieldCheck className="w-5.5 h-5.5 stroke-[2]" />
                 </div>
                 <h4 className="text-[16px] font-extrabold text-gray-950">Status Hukum</h4>
-                <p className="text-[11px] sm:text-[13px] text-gray-500 leading-relaxed font-normal">
+                <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
                   Setelah disahkan Kemenkumham, yayasan resmi menjadi <strong className="font-extrabold text-gray-950">badan hukum mandiri</strong> & berhak menerima donasi/hibah.
                 </p>
               </div>
@@ -621,7 +621,7 @@ export default function PendirianYayasan() {
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
-            <p className="text-[12px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES PENDIRIAN YAYASAN</p>
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES PENDIRIAN YAYASAN</p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               7 langkah pendirian yayasan, kami pandu sampai akta di tangan.
             </h2>
@@ -629,7 +629,7 @@ export default function PendirianYayasan() {
               Dari konsultasi awal sampai dokumen lengkap diterima — estimasi 2 hari kerja untuk akta pendirian, 5–7 hari kerja untuk dokumen lainnya.
             </p>
             {/* Scroll indicator text */}
-            <div className="pt-4 text-[11px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
               <span>Geser untuk lihat semua langkah</span>
               <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
             </div>
@@ -657,13 +657,13 @@ export default function PendirianYayasan() {
                       </h4>
                       
                       {/* Duration Badge */}
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[10px] font-black uppercase py-1 px-3 rounded-full">
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
                         <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
                         <span>{step.duration}</span>
                       </div>
 
                       {/* Description */}
-                      <p className="text-[12.5px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
 
                     </div>
 
@@ -674,7 +674,7 @@ export default function PendirianYayasan() {
                       {/* Checklist */}
                       <ul className="space-y-2">
                         {step.points.map((point, pIdx) => (
-                          <li key={pIdx} className="flex items-start text-[12px] font-bold text-gray-700 leading-tight">
+                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
                             <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                             <span>{point}</span>
                           </li>

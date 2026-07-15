@@ -63,7 +63,7 @@ export default function DeleteArticleButton({ articleId, articleTitle }: DeleteA
             {/* Content */}
             <div className="px-6 py-5">
               {error ? (
-                <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-[13px] text-red-700 font-medium">
+                <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-[14px] text-red-700 font-medium">
                   {error}
                 </div>
               ) : (
@@ -74,7 +74,7 @@ export default function DeleteArticleButton({ articleId, articleTitle }: DeleteA
                   <p className="mt-2 text-[14px] font-bold text-gray-900 line-clamp-2">
                     &ldquo;{articleTitle}&rdquo;
                   </p>
-                  <p className="mt-2 text-[12px] text-gray-400">
+                  <p className="mt-2 text-[14px] text-gray-400">
                     Tindakan ini tidak dapat dibatalkan.
                   </p>
                 </>
@@ -86,14 +86,14 @@ export default function DeleteArticleButton({ articleId, articleTitle }: DeleteA
               <button
                 onClick={() => !isPending && setShowConfirm(false)}
                 disabled={isPending}
-                className="px-4 py-2.5 text-[13px] font-bold text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-colors disabled:opacity-50"
+                className="px-4 py-2.5 text-[14px] font-bold text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-colors disabled:opacity-50"
               >
                 Batal
               </button>
               <button
                 onClick={handleDelete}
                 disabled={isPending}
-                className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white text-[13px] font-bold rounded-xl transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white text-[14px] font-bold rounded-xl transition-colors disabled:opacity-50 flex items-center gap-2"
               >
                 {isPending ? (
                   <>

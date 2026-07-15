@@ -151,10 +151,10 @@ export default function Navbar() {
                           >
                             <div className="h-2 w-2 rounded-full bg-primary/30 mt-1.5 mr-3 transition-colors flex-shrink-0" />
                             <div className="flex-1 min-w-0">
-                              <div className="text-[13px] font-bold text-dark transition-colors">
+                              <div className="text-[14px] font-bold text-dark transition-colors">
                                 {item.name}
                               </div>
-                              <div className="text-[11px] text-muted mt-0.5 line-clamp-1">
+                              <div className="text-[14px] text-muted mt-0.5 line-clamp-1">
                                 {item.desc}
                               </div>
                             </div>
@@ -168,7 +168,7 @@ export default function Navbar() {
                                     key={subIdx}
                                     href={sub.href}
                                     onClick={handleLinkClick}
-                                    className="block px-3 py-2 text-[13px] font-medium text-muted hover:text-primary hover:bg-primary-light rounded-lg transition-colors"
+                                    className="block px-3 py-2 text-[14px] font-medium text-muted hover:text-primary hover:bg-primary-light rounded-lg transition-colors"
                                   >
                                     {sub.name}
                                   </Link>
@@ -186,10 +186,10 @@ export default function Navbar() {
                         >
                           <div className="h-2 w-2 rounded-full bg-primary/30 group-hover:bg-primary mt-1.5 mr-3 transition-colors flex-shrink-0" />
                           <div>
-                            <div className="text-[13px] font-bold text-dark group-hover:text-primary transition-colors">
+                            <div className="text-[14px] font-bold text-dark group-hover:text-primary transition-colors">
                               {item.name}
                             </div>
-                            <div className="text-[11px] text-muted mt-0.5 line-clamp-1">
+                            <div className="text-[14px] text-muted mt-0.5 line-clamp-1">
                               {item.desc}
                             </div>
                           </div>
@@ -353,7 +353,7 @@ export default function Navbar() {
                           <Link
                             href={item.href}
                             onClick={handleLinkClick}
-                            className="text-[13px] font-bold text-muted hover:text-primary flex-1"
+                            className="text-[14px] font-bold text-muted hover:text-primary flex-1"
                           >
                             {item.name}
                           </Link>
@@ -365,7 +365,7 @@ export default function Navbar() {
                               key={subIdx}
                               href={sub.href}
                               onClick={handleLinkClick}
-                              className="block px-3 py-1 text-[12px] font-medium text-muted hover:text-primary"
+                              className="block px-3 py-1 text-[14px] font-medium text-muted hover:text-primary"
                             >
                               {sub.name}
                             </Link>
@@ -377,7 +377,7 @@ export default function Navbar() {
                         key={idx}
                         href={item.href}
                         onClick={handleLinkClick}
-                        className="block px-3 py-1.5 text-[13px] font-medium text-muted hover:text-primary"
+                        className="block px-3 py-1.5 text-[14px] font-medium text-muted hover:text-primary"
                       >
                         {item.name}
                       </Link>

@@ -2,7 +2,7 @@ import React from "react";
 import type { PricingPackage, FootnoteItem } from "@/components/Pricing";
 import { getWhatsAppLink } from "@/lib/config";
 
-export type TitleSegment =
+type TitleSegment =
   | { text: string; highlight?: boolean }
   | { break: true };
 
@@ -260,8 +260,8 @@ export const dataPT: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pembuatan PT. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
         </div>
       ),
       groups: [
@@ -341,7 +341,7 @@ export const dataPT: BadanUsahaContent = {
   ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian PT.",
 };
 
-export const dataCV: BadanUsahaContent = {
+const dataCV: BadanUsahaContent = {
   id: "cv",
   nama: "CV",
   namaFormal: "Commanditaire Vennootschap",
@@ -497,8 +497,8 @@ export const dataCV: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pembuatan CV. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
         </div>
       ),
       groups: [
@@ -561,7 +561,7 @@ export const dataCV: BadanUsahaContent = {
   ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian CV.",
 };
 
-export const dataPMA: BadanUsahaContent = {
+const dataPMA: BadanUsahaContent = {
   id: "pt-pma",
   nama: "PT PMA",
   namaFormal: "Penanaman Modal Asing",
@@ -716,8 +716,8 @@ export const dataPMA: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
         </div>
       ),
       groups: [
@@ -784,7 +784,7 @@ export const dataPMA: BadanUsahaContent = {
   ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian PT PMA.",
 };
 
-export const dataPTPerorangan: BadanUsahaContent = {
+const dataPTPerorangan: BadanUsahaContent = {
   id: "pt-perorangan",
   nama: "PT Perorangan",
   namaFormal: "Perseroan Perorangan",
@@ -933,8 +933,8 @@ export const dataPTPerorangan: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
         </div>
       ),
       groups: [
@@ -994,7 +994,7 @@ export const dataPTPerorangan: BadanUsahaContent = {
   ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian PT Perorangan.",
 };
 
-export const dataFirma: BadanUsahaContent = {
+const dataFirma: BadanUsahaContent = {
   id: "firma",
   nama: "Firma",
   namaFormal: "Firma (Fa)",
@@ -1218,7 +1218,7 @@ export const dataFirma: BadanUsahaContent = {
   ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian Firma.",
 };
 
-export const dataYayasan: BadanUsahaContent = {
+const dataYayasan: BadanUsahaContent = {
   id: "yayasan",
   nama: "Yayasan",
   namaFormal: "Yayasan",
@@ -1364,8 +1364,8 @@ export const dataYayasan: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
         </div>
       ),
       groups: [
@@ -1423,7 +1423,7 @@ export const dataYayasan: BadanUsahaContent = {
   ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian Yayasan.",
 };
 
-export const dataPerkumpulan: BadanUsahaContent = {
+const dataPerkumpulan: BadanUsahaContent = {
   id: "perkumpulan",
   nama: "Perkumpulan",
   namaFormal: "Perkumpulan",
@@ -1565,8 +1565,8 @@ export const dataPerkumpulan: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Perkumpulan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
         </div>
       ),
       groups: [
@@ -1622,7 +1622,7 @@ export const dataPerkumpulan: BadanUsahaContent = {
   ctaWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi mengenai pendirian Perkumpulan.",
 };
 
-export const dataKoperasi: BadanUsahaContent = {
+const dataKoperasi: BadanUsahaContent = {
   id: "koperasi",
   nama: "Koperasi",
   namaFormal: "Koperasi",
@@ -1763,8 +1763,8 @@ export const dataKoperasi: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Koperasi. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
         <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[7.5px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
+          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
         </div>
       ),
       groups: [

@@ -72,7 +72,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
 
   return (
     <div className="bg-[#FAFAFA] shadow-md border border-black/[0.04] rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.01)]">
-      <div className="flex items-center gap-2 mb-4 text-[11px] font-black uppercase text-gray-400 tracking-wider">
+      <div className="flex items-center gap-2 mb-4 text-[14px] font-black uppercase text-gray-400 tracking-wider">
         <svg
           className="w-4 h-4 text-gray-400"
           fill="none"
@@ -105,7 +105,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
               key={heading.id}
               href={`#${heading.id}`}
               onClick={(e) => handleClick(e, heading.id)}
-              className={`transition-all duration-200 text-[13.5px] py-1.5 px-3 rounded-lg flex items-center leading-snug border-l-2 ${
+              className={`transition-all duration-200 text-[14px] py-1.5 px-3 rounded-lg flex items-center leading-snug border-l-2 ${
                 isSubheading ? "ml-4 pl-3" : ""
               } ${
                 isActive

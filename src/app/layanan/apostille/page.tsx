@@ -18,6 +18,7 @@ import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import FadeIn from "@/components/FadeIn";
+import PricingFooter from "@/components/PricingFooter";
 import { getWhatsAppLink } from "@/lib/config";
 
 // --- FAQ & pricing data from PDF brief ---
@@ -126,7 +127,7 @@ export default function ApostillePage() {
 
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
           {/* Breadcrumbs */}
-          <nav className="flex items-center space-x-2 text-[11px] sm:text-[13px] font-medium text-gray-500 mb-8 sm:mb-12">
+          <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] font-medium text-gray-500 mb-8 sm:mb-12">
             <Link href="/" className="flex items-center gap-1 hover:text-[#990202] transition-colors">
               <Home className="w-3.5 h-3.5" />
               <span>Beranda</span>
@@ -144,7 +145,7 @@ export default function ApostillePage() {
               {/* Eyebrow Pill */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[10px] sm:text-[12.5px] font-bold text-[#990202] tracking-wide">Layanan Jasa Apostille Dokumen</span>
+                <span className="text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Layanan Jasa Apostille Dokumen</span>
               </div>
 
               {/* Headline */}
@@ -159,7 +160,7 @@ export default function ApostillePage() {
               </p>
 
               {/* Description */}
-              <p className="text-[12.5px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+              <p className="text-[14px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-normal">
                 Proses mudah, cepat, dan bisa 100% online — tanpa perlu datang ke kantor.
               </p>
 
@@ -169,14 +170,14 @@ export default function ApostillePage() {
                   href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Jasa Apostille Dokumen.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group"
                 >
                   <span>Konsultasi Gratis</span>
                   <ChevronRight className="w-3.5 h-3.5 ml-1.5 sm:ml-2 group-hover:translate-x-0.5 transition-transform" />
                 </a>
                 <button
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[12px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 shadow-sm cursor-pointer"
                 >
                   Lihat Paket Harga
                 </button>
@@ -194,8 +195,8 @@ export default function ApostillePage() {
                       <stat.icon className="w-5 h-5 stroke-[2]" />
                     </div>
                     <div>
-                      <div className="text-[13.5px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">{stat.num}</div>
-                      <div className="text-[11.5px] text-gray-500 mt-0.5">{stat.label}</div>
+                      <div className="text-[14px] sm:text-[14.5px] font-extrabold text-gray-950 leading-tight">{stat.num}</div>
+                      <div className="text-[14px] text-gray-500 mt-0.5">{stat.label}</div>
                     </div>
                   </div>
                 ))}
@@ -220,7 +221,7 @@ export default function ApostillePage() {
                       <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                       <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                     </div>
-                    <span className="text-[10px] font-extrabold text-gray-500 tracking-wider uppercase">KEMENKUMHAM RI</span>
+                    <span className="text-[14px] font-extrabold text-gray-500 tracking-wider uppercase">KEMENKUMHAM RI</span>
                   </div>
 
                   {/* Mockup Body: Certificate */}
@@ -232,35 +233,35 @@ export default function ApostillePage() {
 
                     <div className="flex items-center space-x-1.5 mb-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-[9px] font-extrabold text-emerald-600 tracking-wider uppercase">SERTIFIKAT APOSTILLE</span>
+                      <span className="text-[14px] font-extrabold text-emerald-600 tracking-wider uppercase">SERTIFIKAT APOSTILLE</span>
                     </div>
 
                     <h4 className="text-[15.5px] font-black text-gray-900 leading-snug pr-12">
                       Convention de La Haye
                     </h4>
-                    <p className="text-[11px] text-gray-500 leading-relaxed font-semibold mt-2">
+                    <p className="text-[14px] text-gray-500 leading-relaxed font-semibold mt-2">
                       Pengesahan dokumen publik untuk keabsahan internasional di 129+ negara anggota Konvensi Hague.
                     </p>
 
                     {/* Mini doc details */}
                     <div className="flex gap-3 mt-4">
                       <div className="flex-1 bg-gray-50 rounded-lg p-2.5 border border-gray-100">
-                        <div className="text-[8.5px] font-bold text-gray-400 uppercase tracking-wider">Jenis</div>
-                        <div className="text-[11px] font-black text-gray-900 mt-0.5">Akta Notaris</div>
+                        <div className="text-[14px] font-bold text-gray-400 uppercase tracking-wider">Jenis</div>
+                        <div className="text-[14px] font-black text-gray-900 mt-0.5">Akta Notaris</div>
                       </div>
                       <div className="flex-1 bg-gray-50 rounded-lg p-2.5 border border-gray-100">
-                        <div className="text-[8.5px] font-bold text-gray-400 uppercase tracking-wider">SLA</div>
-                        <div className="text-[11px] font-black text-gray-900 mt-0.5">≤ 3 Hari</div>
+                        <div className="text-[14px] font-bold text-gray-400 uppercase tracking-wider">SLA</div>
+                        <div className="text-[14px] font-black text-gray-900 mt-0.5">≤ 3 Hari</div>
                       </div>
                       <div className="flex-1 bg-gray-50 rounded-lg p-2.5 border border-gray-100">
-                        <div className="text-[8.5px] font-bold text-gray-400 uppercase tracking-wider">Negara</div>
-                        <div className="text-[11px] font-black text-gray-900 mt-0.5">129+</div>
+                        <div className="text-[14px] font-bold text-gray-400 uppercase tracking-wider">Negara</div>
+                        <div className="text-[14px] font-black text-gray-900 mt-0.5">129+</div>
                       </div>
                     </div>
                   </div>
 
                   {/* Mockup footer */}
-                  <div className="flex justify-between items-center text-[9px] text-gray-500 font-bold border-t border-gray-800/50 pt-4 relative z-10">
+                  <div className="flex justify-between items-center text-[14px] text-gray-500 font-bold border-t border-gray-800/50 pt-4 relative z-10">
                     <span>APOSTILLE ONLINE</span>
                     <span className="flex items-center gap-1.5 text-[#990202]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#990202] animate-pulse" />
@@ -275,8 +276,8 @@ export default function ApostillePage() {
                     <FileText className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[12.5px] font-black text-gray-950 leading-none">Apostille Resmi</div>
-                    <div className="text-[9.5px] text-gray-500 font-semibold mt-1">Kemenkumham RI</div>
+                    <div className="text-[14px] font-black text-gray-950 leading-none">Apostille Resmi</div>
+                    <div className="text-[14px] text-gray-500 font-semibold mt-1">Kemenkumham RI</div>
                   </div>
                 </div>
 
@@ -286,8 +287,8 @@ export default function ApostillePage() {
                     <Globe className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[12.5px] font-black text-gray-950 leading-none">129+ Negara</div>
-                    <div className="text-[9.5px] text-gray-500 font-semibold mt-1">Konvensi Hague</div>
+                    <div className="text-[14px] font-black text-gray-950 leading-none">129+ Negara</div>
+                    <div className="text-[14px] text-gray-500 font-semibold mt-1">Konvensi Hague</div>
                   </div>
                 </div>
 
@@ -323,8 +324,8 @@ export default function ApostillePage() {
                     <ShieldCheck className="w-5 h-5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-black text-gray-900 leading-none">Konvensi Hague</div>
-                    <div className="text-[11px] text-gray-400 font-bold mt-1.5">Sejak 2022 · 129+ negara</div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Konvensi Hague</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">Sejak 2022 · 129+ negara</div>
                   </div>
                 </div>
               </div>
@@ -333,7 +334,7 @@ export default function ApostillePage() {
             {/* Right: Definition Text */}
             <div className="lg:col-span-7">
               <div className="mb-10">
-                <span className="inline-block text-[12px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
+                <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
                   APA ITU APOSTILLE?
                 </span>
                 <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[42px] font-extrabold text-gray-950 tracking-tight leading-[1.15] mb-6">
@@ -357,7 +358,7 @@ export default function ApostillePage() {
                     </div>
                     <div>
                       <h3 className="font-heading font-black text-[15px] text-gray-950 mb-1">{item.title}</h3>
-                      <p className="text-[13px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
+                      <p className="text-[14px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -372,7 +373,7 @@ export default function ApostillePage() {
       <section className="py-20 sm:py-28 bg-[#F9FAFB] border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block text-[12px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
+            <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
               DOKUMEN APA SAJA YANG BISA DI-APOSTILLE?
             </span>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
@@ -415,13 +416,13 @@ export default function ApostillePage() {
             ].map((item, idx) => (
               <div key={idx} className="group relative bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:border-[#990202]/20 transition-all duration-300">
                 <div className="text-2xl mb-4">{item.icon}</div>
-                <span className="font-heading font-black text-[11px] text-[#990202]/40 block mb-3 tracking-wider">
+                <span className="font-heading font-black text-[14px] text-[#990202]/40 block mb-3 tracking-wider">
                   {item.num}
                 </span>
                 <h3 className="font-heading font-black text-[15px] text-gray-950 leading-snug mb-3">
                   {item.title}
                 </h3>
-                <p className="text-[12.5px] text-gray-500 leading-relaxed font-semibold">
+                <p className="text-[14px] text-gray-500 leading-relaxed font-semibold">
                   {item.desc}
                 </p>
               </div>
@@ -434,7 +435,7 @@ export default function ApostillePage() {
       <section className="py-20 sm:py-28 bg-white border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block text-[12px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
+            <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
               MENGAPA PILIH EASYLEGAL?
             </span>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
@@ -454,7 +455,7 @@ export default function ApostillePage() {
                   {item.icon}
                 </div>
                 <h3 className="font-heading font-black text-[15px] text-gray-950 mb-2">{item.title}</h3>
-                <p className="text-[13px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
+                <p className="text-[14px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -469,7 +470,7 @@ export default function ApostillePage() {
                   {item.icon}
                 </div>
                 <h3 className="font-heading font-black text-[15px] text-gray-950 mb-2">{item.title}</h3>
-                <p className="text-[13px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
+                <p className="text-[14px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -494,7 +495,7 @@ export default function ApostillePage() {
       <section ref={railRef} className="py-24 sm:py-32 bg-[#990202] text-white overflow-hidden relative">
         <div className="max-w-[1280px] mx-auto px-6 sm:px-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="inline-block text-[11px] font-black text-white/70 uppercase tracking-[0.25em] mb-4">
+            <span className="inline-block text-[14px] font-black text-white/70 uppercase tracking-[0.25em] mb-4">
               ALUR PROSES APOSTILLE
             </span>
             <h2 className="font-heading text-3xl sm:text-5xl font-black tracking-tight mb-4">
@@ -531,7 +532,7 @@ export default function ApostillePage() {
                     {/* Staggered box positioning */}
                     <div className={`absolute w-56 text-center ${isEven ? 'top-12' : 'bottom-12'}`}>
                       <h3 className="font-heading font-black text-base mb-2">{item.title}</h3>
-                      <p className="text-xs text-white/70 leading-relaxed font-semibold">{item.desc}</p>
+                      <p className="text-[14px] text-white/70 leading-relaxed font-semibold">{item.desc}</p>
                     </div>
 
                     {/* Step Node Circle */}
@@ -559,19 +560,19 @@ export default function ApostillePage() {
             ].map((item, idx) => (
               <div key={idx} className="relative flex items-start gap-6">
                 {/* Step Node Circle */}
-                <div className="w-8 h-8 bg-white text-[#990202] rounded-full flex items-center justify-center font-black text-xs z-10 shadow-md flex-shrink-0">
+                <div className="w-8 h-8 bg-white text-[#990202] rounded-full flex items-center justify-center font-black text-[14px] z-10 shadow-md flex-shrink-0">
                   {item.step}
                 </div>
                 <div>
                   <h3 className="font-heading font-black text-base mb-1">{item.title}</h3>
-                  <p className="text-xs text-white/70 leading-relaxed font-semibold">{item.desc}</p>
+                  <p className="text-[14px] text-white/70 leading-relaxed font-semibold">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* SLA Info & Local Warnings */}
-          <div className="mt-20 border-t border-white/10 pt-10 text-center flex flex-col md:flex-row items-center justify-center gap-4 text-xs font-semibold text-white/80 max-w-3xl mx-auto">
+          <div className="mt-20 border-t border-white/10 pt-10 text-center flex flex-col md:flex-row items-center justify-center gap-4 text-[14px] font-semibold text-white/80 max-w-3xl mx-auto">
             <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl">
               <Info className="w-4 h-4 text-white/90 flex-shrink-0" />
               <p className="text-left">
@@ -587,7 +588,7 @@ export default function ApostillePage() {
       <section className="py-20 sm:py-28 bg-[#F9FAFB] border-b border-gray-200/40">
         <div className="max-w-[1080px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block text-[12px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
+            <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
               SYARAT DOKUMEN
             </span>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
@@ -604,7 +605,7 @@ export default function ApostillePage() {
                 </div>
                 <div>
                   <h3 className="font-heading font-black text-[15px] text-gray-950">Dokumen Fisik & Digital</h3>
-                  <p className="text-[11px] text-gray-400 font-semibold">Yang perlu disiapkan</p>
+                  <p className="text-[14px] text-gray-400 font-semibold">Yang perlu disiapkan</p>
                 </div>
               </div>
               <div className="h-px bg-gray-100 mb-6" />
@@ -616,7 +617,7 @@ export default function ApostillePage() {
                   "KTP/Passport penerima kuasa (jika dikuasakan)",
                   "Negara tujuan penggunaan dokumen"
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-[13px] text-gray-700 font-semibold leading-relaxed">
+                  <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700 font-semibold leading-relaxed">
                     <div className="w-5 h-5 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Check className="w-3 h-3" strokeWidth={3} />
                     </div>
@@ -634,7 +635,7 @@ export default function ApostillePage() {
                 </div>
                 <div>
                   <h3 className="font-heading font-black text-[15px] text-gray-950">Informasi Tambahan</h3>
-                  <p className="text-[11px] text-gray-400 font-semibold">Data dokumen yang dibutuhkan</p>
+                  <p className="text-[14px] text-gray-400 font-semibold">Data dokumen yang dibutuhkan</p>
                 </div>
               </div>
               <div className="h-px bg-gray-100 mb-6" />
@@ -646,7 +647,7 @@ export default function ApostillePage() {
                   "Nama jabatan pejabat",
                   "Nama instansi penerbit dokumen"
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-[13px] text-gray-700 font-semibold leading-relaxed">
+                  <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700 font-semibold leading-relaxed">
                     <div className="w-5 h-5 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Check className="w-3 h-3" strokeWidth={3} />
                     </div>
@@ -660,7 +661,7 @@ export default function ApostillePage() {
           {/* Warning Alert */}
           <div className="mt-8 bg-[#FFF5F5] border border-red-100 rounded-2xl p-5 flex items-start gap-3">
             <Info className="w-5 h-5 text-[#990202] flex-shrink-0 mt-0.5" />
-            <p className="text-[13px] text-gray-600 font-semibold leading-relaxed">
+            <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
               <strong className="text-[#990202]">Catatan Pejabat Belum Terdaftar:</strong> Jika data pejabat belum ada di database AHU, terdapat 2 jalur: (1) legalisasi melalui notaris seperti waarmeerking, atau (2) permintaan spesimen tanda tangan, paraf & cap stempel dari instansi pejabat bersangkutan.
             </p>
           </div>
@@ -671,7 +672,7 @@ export default function ApostillePage() {
       <section className="py-12 bg-[#FAF9F9] border-y border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-6 sm:px-12">
           <div className="text-center mb-8">
-            <span className="inline-block text-[10px] font-black text-gray-400 uppercase tracking-widest">
+            <span className="inline-block text-[14px] font-black text-gray-400 uppercase tracking-widest">
               LIPUTAN MEDIA EASYLEGAL
             </span>
           </div>
@@ -683,7 +684,7 @@ export default function ApostillePage() {
             ].map((media, idx) => (
               <span
                 key={idx}
-                className="text-[13px] font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider cursor-default select-none"
+                className="text-[14px] font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider cursor-default select-none"
               >
                 {media}
               </span>
@@ -695,7 +696,7 @@ export default function ApostillePage() {
       {/* ─── 9. SERTIFIKASI & LEGALITAS (3-COL WITH RULES) ─── */}
       <section className="py-24 bg-white">
         <div className="max-w-[900px] mx-auto px-6 sm:px-12 text-center">
-          <span className="inline-block text-[11px] font-black text-[#990202] uppercase tracking-[0.25em] mb-4">
+          <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.25em] mb-4">
             SERTIFIKASI &amp; LEGALITAS EASYLEGAL
           </span>
 
@@ -707,7 +708,7 @@ export default function ApostillePage() {
             ].map((item, idx) => (
               <div key={idx} className="py-6 md:py-0 md:px-6">
                 <h3 className="font-heading font-black text-lg text-gray-950 mb-1">{item.title}</h3>
-                <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">{item.desc}</p>
+                <p className="text-[14px] text-gray-500 font-semibold uppercase tracking-wider">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -716,20 +717,8 @@ export default function ApostillePage() {
 
       {/* ─── 9.5 TRANSAKSI AMAN VIA MARKETPLACE ─── */}
       <section className="py-16 bg-[#FAF9F9] border-t border-gray-200/50">
-        <div className="max-w-[700px] mx-auto px-6 text-center">
-          <span className="inline-block text-[11px] font-black text-[#990202] uppercase tracking-[0.25em] mb-4">
-            TRANSAKSI AMAN VIA MARKETPLACE
-          </span>
-          <p className="text-sm text-gray-500 font-semibold mb-8">
-            Untuk kenyamanan dan keamanan transaksi Anda, layanan EasyLegal tersedia di marketplace terpercaya dengan jaminan perlindungan pembeli.
-          </p>
-          <div className="flex justify-center items-center gap-8">
-            {["Tokopedia", "Shopee"].map((m, idx) => (
-              <span key={idx} className="text-base font-black text-gray-400 hover:text-gray-900 transition-colors tracking-wide uppercase select-none cursor-default">
-                {m}
-              </span>
-            ))}
-          </div>
+        <div className="max-w-[1240px] mx-auto px-4">
+          <PricingFooter />
         </div>
       </section>
 
@@ -737,7 +726,7 @@ export default function ApostillePage() {
       <section className="py-20 sm:py-28 bg-white border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block text-[12px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
+            <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
               TESTIMONI KLIEN
             </span>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
@@ -781,19 +770,19 @@ export default function ApostillePage() {
 
                 {/* Author */}
                 <div className="pt-5 border-t border-gray-200/60 flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-[#990202] text-white flex items-center justify-center font-black text-[13px]">
+                  <div className="w-9 h-9 rounded-full bg-[#990202] text-white flex items-center justify-center font-black text-[14px]">
                     {item.author.charAt(0)}
                   </div>
                   <div>
-                    <div className="text-[13px] font-black text-gray-950">{item.author}</div>
-                    <div className="text-[11px] text-gray-400 font-semibold">{item.location}</div>
+                    <div className="text-[14px] font-black text-gray-950">{item.author}</div>
+                    <div className="text-[14px] text-gray-400 font-semibold">{item.location}</div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-10 text-[13px] text-gray-500 font-semibold">
+          <div className="text-center mt-10 text-[14px] text-gray-500 font-semibold">
             Google Review EasyLegal: <strong className="text-gray-900">4.8/5</strong> dari 420+ ulasan | <span className="text-[#990202] cursor-pointer hover:underline">Lihat Semua Review</span>
           </div>
         </div>
