@@ -413,7 +413,7 @@ export default function TambahArtikelPage() {
               <span>Beranda</span>
             </Link>
             <span className="text-gray-300 font-normal">&gt;</span>
-            <Link href="/dashboard" className="hover:text-[#990202] transition-colors">
+            <Link href="/dashboard/artikel" className="hover:text-[#990202] transition-colors">
               Dashboard
             </Link>
             <span className="text-gray-300 font-normal">&gt;</span>
@@ -432,7 +432,7 @@ export default function TambahArtikelPage() {
             </div>
 
             <Link
-              href="/artikel"
+              href="/dashboard/artikel"
               className="inline-flex items-center justify-center px-5 py-3 shadow-md border border-black/[0.04] text-gray-700 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] font-bold text-[14px] rounded-xl transition-all duration-200 bg-white shadow-sm flex-shrink-0"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
