@@ -150,3 +150,17 @@ u947750278_easy.sql
 # Compiled seed scripts/folders
 prisma/seed.js
 dist-seed/
+
+# Local utility scripts (not for deployment)
+*.py
+__pycache__/
+
+# Local standalone design files, docs, and txt files (not for deployment)
+/*.png
+/*.html
+/*.xlsx
+/*.txt
+EASYLEGAL-DASHBOARD-DESIGN-BRIEF.md
+MAUORDER-LINK-LIST.md
+planning-landing-page-builder.md
+design-md-*.md
