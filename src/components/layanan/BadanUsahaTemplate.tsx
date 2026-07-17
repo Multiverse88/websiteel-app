@@ -31,6 +31,9 @@ import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage, FootnoteItem } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import Testimonials from "@/components/home/Testimonials";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
+import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import { getFAQJsonLd, getServiceJsonLd } from "@/lib/structured-data";
 import type { BadanUsahaContent } from "@/data/layanan-badan-usaha";
@@ -53,6 +56,14 @@ export default function BadanUsahaTemplate({ content }: Props) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  
+  const mengapaPilihKamiItems = [
+    { title: "Praktis, Fleksibel & Cepat", desc: "Selesaikan semua urusan legalitas dari mana saja tanpa perlu mondar-mandir.", icon: <Clock className="w-5 h-5 stroke-[2]" /> },
+    { title: "Biaya Hemat & Transparan", desc: "Tidak ada biaya tersembunyi. Semua biaya yang Anda bayarkan sudah termasuk biaya resmi pemerintah.", icon: <DollarSign className="w-5 h-5 stroke-[2]" /> },
+    { title: "Keamanan Data Terjamin", desc: "Kerahasiaan data perusahaan Anda adalah prioritas utama kami dengan sistem yang sangat aman.", icon: <ShieldCheck className="w-5 h-5 stroke-[2]" /> },
+    { title: "Gratis Konsultasi Legal", desc: "Tim ahli kami siap memberikan panduan hukum terbaik tanpa biaya tambahan untuk klien.", icon: <Handshake className="w-5 h-5 stroke-[2]" /> },
+  ];
 
   const c = content;
 
@@ -191,102 +202,14 @@ export default function BadanUsahaTemplate({ content }: Props) {
         </div>
       </section>
 
-      {/* ─── 2. PENGERTIAN ─── */}
-      <section className="bg-white py-20 border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-14">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">{c.pengertianTag}</p>
-            <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              {c.pengertianTitle}
-            </h2>
-            <p className="text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
-              {c.pengertianIntro}
-            </p>
-          </div>
+      
+      
+      {/* ─── 2. TRUST SIGNALS & MEDIA COVERAGE ─── */}
+      <MediaCoverage />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-5 relative flex items-center justify-center">
-              <div className="relative w-full max-w-[480px] lg:max-w-none">
-                <div className="relative overflow-hidden rounded-[32px] shadow-sm border border-black/[0.02] shadow-[0_15px_35px_rgba(0,0,0,0.04)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <Image
-                    src={c.pengertianImage}
-                    alt={c.pengertianImageAlt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 480px"
-                    className="object-cover object-center"
-                  />
-                </div>
-
-                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[250px] transition-transform hover:-translate-y-1 duration-300">
-                  <div className={`w-10 h-10 rounded-xl ${c.hukumIconBg} flex items-center justify-center ${c.hukumIconColor} flex-shrink-0`}>
-                    {React.createElement(iconMap[c.hukumIcon] || FileText, { className: "w-5 h-5 stroke-[2.2]" })}
-                  </div>
-                  <div>
-                    <div className="text-[14px] font-black text-gray-900 leading-none">{c.hukumTitle}</div>
-                    <div className="text-[14px] text-gray-400 font-bold mt-1.5 leading-snug">{c.hukumLaw}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 space-y-6">
-              <div className="text-[15px] text-gray-600 leading-relaxed font-normal space-y-4">
-                {c.pengertianDetail}
-              </div>
-
-              <div className="pt-4">
-                <h3 className="text-[16px] font-extrabold text-gray-950 mb-4 tracking-tight">Karakteristik {c.nama}</h3>
-                <ul className="space-y-4">
-                  {c.karakteristik.map((item, idx) => (
-                    <li key={idx} className="flex items-start text-[14px] text-gray-600">
-                      <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
-                        <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
-                      </div>
-                      <span>
-                        <strong className="font-extrabold text-gray-950">{item.bold}</strong>
-                        {item.text}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── 3. MANFAAT ─── */}
-      <section className="bg-[#F9FAFB] py-20 border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider">{c.manfaatTag}</p>
-            <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              {c.manfaatTitle}
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {c.manfaatItems.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-3xl p-6 shadow-md border border-black/[0.04] hover:border-gray-300 hover:shadow-md transition-all duration-300 flex flex-col items-start"
-              >
-                <div className="w-10 h-10 rounded-xl shadow-sm border border-black/[0.02] flex items-center justify-center text-[#990202] mb-5 shadow-[0_2px_8px_rgba(0,0,0,0.01)] bg-white">
-                  {React.createElement(iconMap[item.Icon] || Shield, { className: "w-5 h-5 stroke-[2]" })}
-                </div>
-                <h4 className="text-[16px] font-extrabold text-gray-950 mb-2">{item.title}</h4>
-                <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
+      {/* ─── 3. VALUE PROPOSITION ─── */}
+      <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={mengapaPilihKamiItems} />
+      <BottomPromoSection />
 
       {/* ─── 4. PAKET PRICING ─── */}
       <Pricing
@@ -295,8 +218,11 @@ export default function BadanUsahaTemplate({ content }: Props) {
         sectionSubtitle={c.pricingSubtitle}
         packages={c.pricingPackages}
         footnotes={c.pricingFootnotes}
+        hideFooter={true}
       />
 
+      
+      
       {/* ─── 5. PROSES ─── */}
       <section className="bg-[#F9FAFB] py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -363,9 +289,117 @@ export default function BadanUsahaTemplate({ content }: Props) {
         </div>
       </section>
 
+      
+
+      {/* ─── 7. TESTIMONIALS ─── */}
+      <Testimonials />
+
+      {/* ─── 2. PENGERTIAN ─── */}
+      <section className="bg-white py-20 border-b border-gray-200/40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="mb-14">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">{c.pengertianTag}</p>
+            <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+              {c.pengertianTitle}
+            </h2>
+            <p className="text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
+              {c.pengertianIntro}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-5 relative flex items-center justify-center">
+              <div className="relative w-full max-w-[480px] lg:max-w-none">
+                <div className="relative overflow-hidden rounded-[32px] shadow-sm border border-black/[0.02] shadow-[0_15px_35px_rgba(0,0,0,0.04)] aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                  <Image
+                    src={c.pengertianImage}
+                    alt={c.pengertianImageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center"
+                  />
+                </div>
+
+                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[250px] transition-transform hover:-translate-y-1 duration-300">
+                  <div className={`w-10 h-10 rounded-xl ${c.hukumIconBg} flex items-center justify-center ${c.hukumIconColor} flex-shrink-0`}>
+                    {React.createElement(iconMap[c.hukumIcon] || FileText, { className: "w-5 h-5 stroke-[2.2]" })}
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">{c.hukumTitle}</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5 leading-snug">{c.hukumLaw}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 space-y-6">
+              <div className="text-[15px] text-gray-600 leading-relaxed font-normal space-y-4">
+                {c.pengertianDetail}
+              </div>
+
+              <div className="pt-4">
+                <h3 className="text-[16px] font-extrabold text-gray-950 mb-4 tracking-tight">Karakteristik {c.nama}</h3>
+                <ul className="space-y-4">
+                  {c.karakteristik.map((item, idx) => (
+                    <li key={idx} className="flex items-start text-[14px] text-gray-600">
+                      <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
+                        <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
+                      </div>
+                      <span>
+                        <strong className="font-extrabold text-gray-950">{item.bold}</strong>
+                        {item.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      
+      
+      {/* ─── 3. MANFAAT ─── */}
+      <section className="bg-[#F9FAFB] py-20 border-b border-gray-200/40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider">{c.manfaatTag}</p>
+            <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+              {c.manfaatTitle}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {c.manfaatItems.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-3xl p-6 shadow-md border border-black/[0.04] hover:border-gray-300 hover:shadow-md transition-all duration-300 flex flex-col items-start"
+              >
+                <div className="w-10 h-10 rounded-xl shadow-sm border border-black/[0.02] flex items-center justify-center text-[#990202] mb-5 shadow-[0_2px_8px_rgba(0,0,0,0.01)] bg-white">
+                  {React.createElement(iconMap[item.Icon] || Shield, { className: "w-5 h-5 stroke-[2]" })}
+                </div>
+                <h4 className="text-[16px] font-extrabold text-gray-950 mb-2">{item.title}</h4>
+                <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      
+      
       {/* ─── 6. FAQ ─── */}
       <FAQ title={c.faqTitle} items={c.faqs} />
 
+      
+      
       {/* ─── 7. CTA BANNER ─── */}
       <section className="bg-white py-24 border-t border-gray-100/60 relative">
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
@@ -411,7 +445,6 @@ export default function BadanUsahaTemplate({ content }: Props) {
         </div>
       </section>
 
-      <MediaCoverage />
       </div>
-      );
+  );
 }

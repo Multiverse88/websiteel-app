@@ -3,11 +3,12 @@
 import React from "react";
 import { Check, X } from "lucide-react";
 import Image from "next/image";
+import { useDraggableScroll } from "@/hooks/useDraggableScroll";
 import FadeIn from "@/components/FadeIn";
 import PricingFooter from "@/components/PricingFooter";
 
 interface PricingItem {
-  text: string;
+  text: React.ReactNode;
   boldText?: string;
   checked: boolean;
   footnoteIndex?: number | string;
@@ -46,6 +47,8 @@ export interface PricingProps {
   packages: PricingPackage[];
   footnotes?: string[] | FootnoteItem[];
   promoBadgeSrc?: string;
+  hideFooter?: boolean;
+  headerBottomContent?: React.ReactNode;
 }
 
 export default function Pricing({
@@ -55,14 +58,11 @@ export default function Pricing({
   packages,
   footnotes,
   promoBadgeSrc = "/images/badges/promo-50.png",
+  hideFooter = false,
+  headerBottomContent,
 }: PricingProps) {
-  // Determine grid columns dynamically based on package count
-  const gridColsClass =
-    packages.length === 4
-      ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-      : packages.length === 3
-        ? "grid-cols-1 lg:grid-cols-3"
-        : "grid-cols-1 md:grid-cols-2";
+  const isSlider = packages.length > 3;
+  const scrollHandlers = useDraggableScroll<HTMLDivElement>();
 
   return (
     <section id="paket-harga" className="bg-[#F9FAFB] py-8 sm:py-20 border-b border-gray-200/40">
@@ -93,109 +93,143 @@ export default function Pricing({
             />
           </div>
         </FadeIn>
+
+        {headerBottomContent && (
+          <div className="mb-8 sm:mb-12">
+            {headerBottomContent}
+          </div>
+        )}
+
         {/* Pricing Grid */}
         <FadeIn delay={0.15}>
-        <div className={`grid ${gridColsClass} gap-4 sm:gap-6 items-start`}>
+        <div 
+          className={
+            isSlider 
+              ? "flex overflow-x-auto gap-4 sm:gap-6 pb-8 pt-4 -mx-4 px-4 sm:-mx-6 sm:px-6 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth items-stretch cursor-grab active:cursor-grabbing"
+              : packages.length === 1
+                ? "flex justify-center items-stretch w-full"
+                : `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${packages.length} gap-4 sm:gap-6 items-stretch`
+          }
+          {...(isSlider ? scrollHandlers : {})}
+        >
             {packages.map((pkg, pIdx) => {
-            const headerBg = pkg.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
-            const cardBorder = pkg.isPopular
-              ? "border-[3px] border-[#990202] shadow-[0_20px_50px_rgba(153,2,2,0.08)] scale-[1.03] lg:-translate-y-2.5 relative z-10"
-              : "shadow-md border border-black/[0.03] shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.03)] transition-all duration-300";
+              const isPopular = pkg.isPopular;
+              
+              // Container classes
+              const wrapperClass = `relative h-full ${isSlider ? "min-w-[300px] sm:min-w-[320px] max-w-[350px] snap-center shrink-0 pointer-events-auto" : packages.length === 1 ? "w-full max-w-[400px]" : "w-full"} ${isPopular ? "pt-[16px]" : ""}`;
+              
+              const innerClass = isPopular
+                ? "rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)] lg:-translate-y-[10px]"
+                : "rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]";
 
-            return (
-              <div key={pIdx} className={`bg-white rounded-2xl sm:rounded-[32px] overflow-hidden ${cardBorder}`}>
-                
-                {/* Header Box */}
-                <div className={`${headerBg} p-4 sm:p-6 text-white text-center relative`}>
-                  {pkg.customHeaderOverlay}
-                  {pkg.badgeText && (
-                    <div className={`absolute top-2.5 left-0 right-0 text-[14px] font-black uppercase tracking-wider ${pkg.badgeTextColor || "text-white"} ${pkg.badgeBgColor || "bg-red-800/80"} py-0.5 w-[110px] mx-auto rounded-full`}>
-                      {pkg.badgeText}
+              return (
+                <div key={pIdx} className={wrapperClass}>
+                  {/* Popular Badge */}
+                  {isPopular && (
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[11px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] z-10">
+                      {pkg.badgeText || "PALING POPULER"}
                     </div>
                   )}
-                  <h3 className={`text-[15px] sm:text-[19px] font-black text-white uppercase tracking-wider ${pkg.badgeText ? "mt-2.5" : ""}`}>
-                    {pkg.title}
-                  </h3>
-                  {pkg.strikePrice && (
-                    <div className={`mt-2 sm:mt-3 text-[14px] sm:text-[14px] font-bold line-through ${pkg.isPopular ? "text-red-200" : "text-white"}`}>
-                      {pkg.strikePrice}
-                    </div>
-                  )}
-                  <div className="mt-1 flex items-baseline justify-center">
-                    <span className="text-[22px] sm:text-[30px] font-black tracking-tight">{pkg.price}</span>
-                  </div>
-                  {pkg.subLabel && (
-                    <div className={`mt-2 sm:mt-2.5 text-[14px] sm:text-[14px] font-bold tracking-widest uppercase ${pkg.isPopular ? "text-red-100" : "text-white"}`}>
-                      {pkg.subLabel}
-                    </div>
-                  )}
-                </div>
 
-                {/* Service List / Content Groups */}
-                <div className="p-4 sm:p-5.5 space-y-4 sm:space-y-5">
-                  {pkg.groups.map((group, gIdx) => {
-                    const isBoxed = group.isBoxed;
-                    const containerClass = isBoxed
-                      ? "bg-gray-55/60 shadow-md border border-black/[0.03] rounded-xl sm:rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 shadow-[0_2px_8px_rgba(0,0,0,0.01)]"
-                      : "space-y-1.5 sm:space-y-2.5";
+                  <div className={innerClass}>
+                    {pkg.customHeaderOverlay}
                     
-                    return (
-                      <div key={gIdx} className={`${containerClass} ${!isBoxed && gIdx > 0 ? "pt-2 sm:pt-2.5 border-t border-gray-100" : ""}`}>
-                        <h5 className="text-[14px] sm:text-[14px] font-extrabold tracking-widest text-[#990202] uppercase mb-1">
-                          {group.title}
-                        </h5>
-                        <ul className="space-y-1.5 sm:space-y-2">
-                          {group.items.map((item, iIdx) => {
-                            const liClass = item.checked
-                              ? "flex items-start text-[14px] sm:text-[14px] font-medium text-gray-700"
-                              : "flex items-start text-[14px] sm:text-[14px] font-medium text-gray-500 line-through";
-
-                            return (
-                              <li key={iIdx} className={liClass}>
-                                {item.checked ? (
-                                  <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                                ) : (
-                                  <X className="w-3.5 h-3.5 text-red-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                                )}
-                                <span>
-                                  {item.boldText && (
-                                    <strong className="font-extrabold text-gray-950 mr-1">{item.boldText}</strong>
-                                  )}
-                                  <span dangerouslySetInnerHTML={{ __html: item.text }} />
-                                  {item.footnoteIndex && (
-                                    <sup className={`text-[14px] font-semibold ${item.checked ? "text-[#990202]" : "text-gray-500"}`}>
-                                      ({item.footnoteIndex})
-                                    </sup>
-                                  )}
-                                </span>
-                              </li>
-                            );
-                          })}
-                        </ul>
+                    {/* Title */}
+                    <div className="text-center mb-[18px]">
+                      <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">
+                        {pkg.title}
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
 
-                {/* Action Button */}
-                <div className="px-5.5 pb-7 pt-1">
-                  <a
-                    href={pkg.buttonLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[14px] transition-all duration-200 cursor-pointer shadow-sm ${
-                      pkg.isPopular
-                        ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
-                        : "shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
-                    }`}
-                  >
-                    {pkg.buttonText}
-                  </a>
-                </div>
+                    {/* Pricing */}
+                    <div className="text-center mb-[20px]">
+                      {pkg.strikePrice && (
+                        <div className={`text-[14px] line-through mb-[2px] ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
+                          {pkg.strikePrice}
+                        </div>
+                      )}
+                      <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">
+                        {pkg.price}
+                      </div>
+                      {pkg.subLabel && (
+                        <div className={`text-[11px] font-[700] tracking-[0.03em] mt-[6px] uppercase ${isPopular ? "text-[oklch(0.85_0.1_70)]" : "text-[oklch(0.62_0.15_25)]"}`}>
+                          {pkg.subLabel}
+                        </div>
+                      )}
+                    </div>
 
-              </div>
-            );
-          })}
+                    {/* Button */}
+                    <a
+                      href={pkg.buttonLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-full p-[12px] rounded-[10px] border-none text-[14px] font-[700] cursor-pointer block text-center transition-transform hover:scale-[1.02] ${
+                        isPopular
+                          ? "bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] shadow-lg"
+                          : "bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)]"
+                      }`}
+                    >
+                      {pkg.buttonText}
+                    </a>
+
+                    {/* Divider */}
+                    <div className={`h-[1px] my-[20px] ${isPopular ? "bg-[oklch(0.45_0.1_25/0.5)]" : "bg-[oklch(0.35_0.01_90)]"}`}></div>
+
+                    {/* Features */}
+                    <div className="flex-1">
+                      {pkg.groups.map((group, gIdx) => {
+                        const isLastGroup = gIdx === pkg.groups.length - 1;
+                        return (
+                          <div key={gIdx} className={!isLastGroup ? "mb-[22px]" : ""}>
+                            <div className={`text-[11px] font-[800] tracking-[0.06em] mb-[12px] uppercase ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
+                              {group.title}
+                            </div>
+                            <div className="flex flex-col gap-[10px]">
+                              {group.items.map((item, iIdx) => {
+                                const isActive = item.checked;
+                                
+                                let itemClass = "flex items-start gap-[8px] text-[13.5px] leading-[1.4] ";
+                                let iconColor = "";
+                                let iconText = "";
+
+                                if (isActive) {
+                                  itemClass += "text-[oklch(0.92_0.005_90)]";
+                                  iconColor = isPopular ? "text-[oklch(0.78_0.15_145)]" : "text-[oklch(0.7_0.15_145)]";
+                                  iconText = "✓";
+                                } else {
+                                  itemClass += `line-through opacity-70 ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`;
+                                  iconColor = isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]";
+                                  iconText = "✕";
+                                }
+
+                                return (
+                                  <div key={iIdx} className={itemClass}>
+                                    <span className={`${iconColor} font-[700] shrink-0 mt-[1px]`}>{iconText}</span>
+                                    <span>
+                                      {item.boldText && (
+                                        <strong className="font-[800] mr-1">{item.boldText}</strong>
+                                      )}
+                                      {typeof item.text === 'string' ? (
+                                        <span dangerouslySetInnerHTML={{ __html: item.text }} />
+                                      ) : (
+                                        <span>{item.text}</span>
+                                      )}
+                                      {item.footnoteIndex && (
+                                        <sup className="ml-0.5">({item.footnoteIndex})</sup>
+                                      )}
+                                    </span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
         </div>
         </FadeIn>
 
@@ -217,7 +251,7 @@ export default function Pricing({
           </div>
         )}
 
-        <PricingFooter />
+        {!hideFooter && <PricingFooter />}
 
       </div>
     </section>

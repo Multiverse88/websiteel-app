@@ -25,8 +25,10 @@ import {
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
-import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
+import Benefits from "@/components/Benefits";
+import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
 
 const nibBenefits = [
@@ -323,7 +325,527 @@ export default function NibOss() {
       </div>
     </section>
 
-      {/* ─── 2. APA ITU NIB & PERIZINAN BERBASIS RISIKO ─── */}
+      {/* ─── 2. TRUST SIGNALS & MEDIA COVERAGE ─── */}
+      <MediaCoverage />
+
+      {/* ─── 3. VALUE PROPOSITION ─── */}
+      <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={nibBenefits} />
+      <BottomPromoSection />
+
+      {/* ─── 4. PRICING SECTION ─── */}
+      <section id="paket-harga" className="bg-[#FAF9F9] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40 scroll-mt-20">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
+              <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
+              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+                4 paket sesuai jenis usaha Anda.
+              </h2>
+              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium">
+                Harga sudah include semua biaya — pengurusan NIB, NPWP, OSS RBA, & sertifikat standar. Tanpa tambahan biaya apapun.
+              </p>
+            </div>
+            <div className="flex-shrink-0 flex justify-start md:justify-end">
+              <Image 
+                src="/images/badges/promo-50.png" 
+                alt="Promo 50% Off Legal Deals" 
+                width={280} 
+                height={120}
+                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div>
+
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+
+            {/* Paket 1: NIB Perorangan */}
+            <div className="relative group h-full">
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                <div className="text-center mb-[18px]">
+                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB PERORANGAN</div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">USAHA PERSEORANGAN</div>
+                </div>
+                <div className="text-center mb-[20px]">
+                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 1.000.000</div>
+                  <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 499.000</div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                </div>
+                <a
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perorangan. Mohon info lengkap biaya dan prosesnya.")}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                >Pilih NIB Perorangan</a>
+                <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                  <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
+                  <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
+                </div>
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="flex flex-col gap-[10px] flex-1">
+                  {["5 KBLI Bidang Usaha","NPWP & SKT Pajak","Akun Gmail & OSS","NIB","Akun OSS RBA","K3L/SPUMKTTR & SPPL"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                    <span>Sertifikat Standar <sup className="text-[oklch(0.62_0.15_25)]">(2)</sup></span>
+                  </div>
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                    <span>Angka Pengenal Impor <sup className="text-[oklch(0.62_0.15_25)]">(3)</sup></span>
+                  </div>
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Paket 2: NIB PT Perorangan (FAVORIT) */}
+            <div className="relative group h-full pt-[16px]">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[11px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
+                UMKM FAVORIT
+              </div>
+              <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)] lg:-translate-y-[10px]">
+                <div className="text-center mb-[18px]">
+                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB PT PERORANGAN</div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">PT PERORANGAN UMKM</div>
+                </div>
+                <div className="text-center mb-[20px]">
+                  <div className="text-[14px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 1.000.000</div>
+                  <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 499.000</div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                </div>
+                <a
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB PT Perorangan. Mohon info lengkap biaya dan prosesnya.")}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
+                >Pilih NIB PT Perorangan</a>
+                <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[20px]" />
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                  <span className="text-[oklch(0.78_0.15_145)] font-[700]">✓</span>
+                  <span>1-3 Hari Kerja <sup className="text-[oklch(0.85_0.1_70)]">(1)</sup></span>
+                </div>
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="flex flex-col gap-[10px] flex-1">
+                  {["5 KBLI Bidang Usaha","NPWP & SKT Pajak","Akun Gmail & OSS","NIB","Akun OSS RBA","K3L/SPUMKTTR & SPPL"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                    <span>Sertifikat Standar <sup className="text-[oklch(0.85_0.1_70)]">(2)</sup></span>
+                  </div>
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                    <span>Angka Pengenal Impor <sup className="text-[oklch(0.85_0.1_70)]">(3)</sup></span>
+                  </div>
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Paket 3: NIB Badan */}
+            <div className="relative group h-full">
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                <div className="text-center mb-[18px]">
+                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB BADAN</div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PT, PMA, CV, FIRMA, YAYASAN, KOPERASI</div>
+                </div>
+                <div className="text-center mb-[20px]">
+                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 3.000.000</div>
+                  <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 1.499.000</div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                </div>
+                <a
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan. Mohon info lengkap biaya dan prosesnya.")}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                >Pilih NIB Badan</a>
+                <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                  <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
+                  <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
+                </div>
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="flex flex-col gap-[10px] flex-1">
+                  {["5 KBLI Bidang Usaha","NPWP & SKT Pajak","Akun Gmail & OSS","NIB","Akun OSS RBA","K3L/SPUMKTTR & SPPL"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                    <span>Sertifikat Standar <sup className="text-[oklch(0.62_0.15_25)]">(2)</sup></span>
+                  </div>
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                    <span>Angka Pengenal Impor <sup className="text-[oklch(0.62_0.15_25)]">(3)</sup></span>
+                  </div>
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 250.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Paket 4: Cabut NIB */}
+            <div className="relative group h-full">
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                <div className="text-center mb-[18px]">
+                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT NIB</div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PENCABUTAN NIB DARI OSS</div>
+                </div>
+                <div className="text-center mb-[20px]">
+                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 2.000.000</div>
+                  <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 999.000</div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                </div>
+                <a
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Cabut NIB. Mohon info lengkap biaya dan prosesnya.")}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                >Pilih Cabut NIB</a>
+                <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                  <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
+                  <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
+                </div>
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="flex flex-col gap-[10px] flex-1">
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>Pencabutan NIB dari OSS</span>
+                  </div>
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 250.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Footnote disclaimers */}
+          <div className="max-w-[1400px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed font-medium">
+            <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
+            <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS. (2) Untuk risiko menengah rendah. (3) Opsional, jika usaha melakukan impor.</span>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── 4a. LAYANAN TAMBAHAN (Tabbed interactive section) ─── */}
+      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+          
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-12 space-y-4">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">LAYANAN TAMBAHAN</p>
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+              Perubahan KBLI & data usaha.
+            </h2>
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium">
+              Ubah, tambah, atau cabut KBLI yang ada di NIB Anda — pilih tab sesuai jenis perubahan yang dibutuhkan.
+            </p>
+          </div>
+
+          {/* Interactive Tabs */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8 sm:mb-16 max-w-[1140px] mx-auto">
+            
+            {/* Tab 1: Perorangan */}
+            <button
+              onClick={() => setActiveSubTab("perorangan")}
+              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
+                activeSubTab === "perorangan"
+                  ? "bg-[#990202] text-white shadow-sm"
+                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
+              }`}
+            >
+              <User className="w-4 h-4" />
+              <span>Perubahan KBLI Perorangan</span>
+            </button>
+
+            {/* Tab 2: Badan */}
+            <button
+              onClick={() => setActiveSubTab("badan")}
+              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
+                activeSubTab === "badan"
+                  ? "bg-[#990202] text-white shadow-sm"
+                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
+              }`}
+            >
+              <Building className="w-4 h-4" />
+              <span>Perubahan KBLI Badan</span>
+            </button>
+
+            {/* Tab 3: OSS RBA */}
+            <button
+              onClick={() => setActiveSubTab("oss-rba")}
+              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
+                activeSubTab === "oss-rba"
+                  ? "bg-[#990202] text-white shadow-sm"
+                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
+              }`}
+            >
+              <CheckCircle className="w-4 h-4" />
+              <span>Perubahan Data OSS RBA</span>
+            </button>
+
+            {/* Tab 4: PT Perorangan */}
+            <button
+              onClick={() => setActiveSubTab("pt-perorangan")}
+              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
+                activeSubTab === "pt-perorangan"
+                  ? "bg-[#990202] text-white shadow-sm"
+                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
+              }`}
+            >
+              <FileText className="w-4 h-4" />
+              <span>Perubahan Data PT Perorangan</span>
+            </button>
+
+          </div>
+
+          {/* Tab Contents Grid */}
+          <div key={activeSubTab} className="animate-fade-in grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-[1140px] mx-auto items-stretch">
+
+            {/* Card 1: Cabut KBLI */}
+            <div className="relative group h-full">
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                <div className="text-center mb-[18px]">
+                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT KBLI</div>
+                </div>
+                <div className="text-center mb-[20px]">
+                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">
+                    {activeSubTab === "perorangan" ? "Rp 800.000" : activeSubTab === "badan" ? "Rp 1.500.000" : "Rp 1.000.000"}
+                  </div>
+                  <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">
+                    {activeSubTab === "perorangan" ? "Rp 399.000" : activeSubTab === "badan" ? "Rp 799.000" : "Rp 499.000"}
+                  </div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                </div>
+                <a
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut KBLI (${activeSubTab}).`)}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                >Pilih Cabut KBLI</a>
+                <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                  <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
+                  <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
+                </div>
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="flex flex-col gap-[10px] flex-1">
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>Pencabutan 1 s/d 5 buah KBLI</span>
+                  </div>
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Tambah KBLI (FAVORIT) */}
+            <div className="relative group h-full pt-[16px]">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[11px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
+                PALING POPULER
+              </div>
+              <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)] lg:-translate-y-[10px]">
+                <div className="text-center mb-[18px]">
+                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">TAMBAH KBLI</div>
+                </div>
+                <div className="text-center mb-[20px]">
+                  <div className="text-[14px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">
+                    {activeSubTab === "perorangan" ? "Rp 1.000.000" : activeSubTab === "badan" ? "Rp 1.800.000" : "Rp 1.200.000"}
+                  </div>
+                  <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">
+                    {activeSubTab === "perorangan" ? "Rp 499.000" : activeSubTab === "badan" ? "Rp 999.000" : "Rp 599.000"}
+                  </div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                </div>
+                <a
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Tambah KBLI (${activeSubTab}).`)}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
+                >Pilih Tambah KBLI</a>
+                <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[20px]" />
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                  <span className="text-[oklch(0.78_0.15_145)] font-[700]">✓</span>
+                  <span>1-3 Hari Kerja <sup className="text-[oklch(0.85_0.1_70)]">(1)</sup></span>
+                </div>
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="flex flex-col gap-[10px] flex-1">
+                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>Penambahan 1 s/d 5 buah KBLI</span>
+                  </div>
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Cabut & Tambah */}
+            <div className="relative group h-full">
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                <div className="text-center mb-[18px]">
+                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT &amp; TAMBAH</div>
+                </div>
+                <div className="text-center mb-[20px]">
+                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">
+                    {activeSubTab === "perorangan" ? "Rp 1.700.000" : activeSubTab === "badan" ? "Rp 2.800.000" : "Rp 2.000.000"}
+                  </div>
+                  <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">
+                    {activeSubTab === "perorangan" ? "Rp 849.000" : activeSubTab === "badan" ? "Rp 1.499.000" : "Rp 999.000"}
+                  </div>
+                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                </div>
+                <a
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut & Tambah KBLI (${activeSubTab}).`)}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                >Pilih Cabut &amp; Tambah</a>
+                <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                  <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
+                  <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
+                </div>
+                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="flex flex-col gap-[10px] flex-1">
+                  {["Pencabutan 1 s/d 5 buah KBLI","Penambahan 1 s/d 5 buah KBLI"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="flex flex-col gap-[10px]">
+                  {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Footnote disclaimers */}
+          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed font-medium text-left">
+            <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
+            <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS.</span>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ─── 5. APA ITU NIB & PERIZINAN BERBASIS RISIKO ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
@@ -411,7 +933,7 @@ export default function NibOss() {
         </div>
       </section>
 
-      {/* ─── 3. 4 TINGKAT RISIKO USAHA ─── */}
+      {/* ─── 6. 4 TINGKAT RISIKO USAHA ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
@@ -517,829 +1039,13 @@ export default function NibOss() {
         </div>
       </section>
 
-      {/* ─── 4. PRICING SECTION ─── */}
-      <section id="paket-harga" className="bg-[#FAF9F9] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40 scroll-mt-20">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
-            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
-              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-                4 paket sesuai jenis usaha Anda.
-              </h2>
-              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium">
-                Harga sudah include semua biaya — pengurusan NIB, NPWP, OSS RBA, & sertifikat standar. Tanpa tambahan biaya apapun.
-              </p>
-            </div>
-            <div className="flex-shrink-0 flex justify-start md:justify-end">
-              <Image 
-                src="/images/badges/promo-50.png" 
-                alt="Promo 50% Off Legal Deals" 
-                width={280} 
-                height={120}
-                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </div>
+      {/* ─── 7. TESTIMONIALS ─── */}
+      <Testimonials />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
-            
-            {/* Paket 1: NIB Perorangan */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
-              <div>
-                {/* Header */}
-                <div className="bg-[#1A1A1A] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <h3 className="text-[14px] sm:text-[14px] font-black tracking-widest text-white/90">NIB PERORANGAN</h3>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 tracking-wider uppercase mt-1">USAHA PERSEORANGAN</p>
-                  <div className="mt-4 text-[14px] text-white/40 line-through">Rp 1.000.000</div>
-                  <div className="mt-0.5 text-[18px] sm:text-[24px] font-black">Rp 499.000</div>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 uppercase mt-2">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
-
-                {/* Body Content */}
-                <div className="p-4 sm:p-4 sm:p-6 space-y-3.5 sm:space-y-4 sm:space-y-5">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
-                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
-                      <span className="text-emerald-500 text-[14px] mr-2">✓</span>
-                      <span>1-3 Hari Kerja <sup className="text-[14px] text-[#990202]">(1)</sup></span>
-                    </div>
-                  </div>
-
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-2">
-                      {[
-                        "5 KBLI Bidang Usaha",
-                        "NPWP & SKT Pajak",
-                        "Akun Gmail & OSS",
-                        "NIB",
-                        "Akun OSS RBA",
-                        "K3L/SPUMKTTR & SPPL",
-                        <span key="sertifikat-standar">Sertifikat Standar <sup className="text-[14px] text-[#990202]">(2)</sup></span>,
-                        <span key="angka-pengenal-impor">Angka Pengenal Impor <sup className="text-[14px] text-[#990202]">(3)</sup></span>
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                          <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 shadow-md border border-black/[0.03]">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-2">
-                      {[
-                        "Personal Legal Assistance",
-                        "1 Kupon Undian iPhone"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                          <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-2">
-                      {[
-                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>,
-                        "Dokumen SOP Karyawan",
-                        "Dokumen SOP Perusahaan",
-                        "Dokumen Kontrak Bisnis",
-                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                          <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Footer Button */}
-              <div className="p-6 pt-0">
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perorangan. Mohon info lengkap biaya dan prosesnya.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[14px] sm:text-[14px] text-gray-800 bg-white hover:bg-gray-50 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
-                >
-                  Pilih NIB Perorangan
-                </a>
-              </div>
-            </div>
-          </div>
-
-            {/* Paket 2: NIB PT Perorangan (FAVORIT - Border Red) */}
-            <div className="relative group h-full">
-              {/* UMKM FAVORIT badge (outside overflow-hidden) */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 bg-[#990202] text-white text-[14px] font-black tracking-widest uppercase px-3.5 py-1 rounded-full whitespace-nowrap">
-                UMKM FAVORIT
-              </div>
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border-[2.5px] border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.045)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.12)] scale-[1.025] z-10 flex flex-col justify-between relative transition-all duration-300 h-full">
-              <div>
-                {/* Header */}
-                <div className="bg-[#990202] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <h3 className="text-[14px] sm:text-[14px] font-black tracking-widest text-white/90">NIB PT PERORANGAN</h3>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 tracking-wider uppercase mt-1">PT PERORANGAN UMKM</p>
-                  <div className="mt-4 text-[14px] text-white/40 line-through">Rp 1.000.000</div>
-                  <div className="mt-0.5 text-[18px] sm:text-[24px] font-black">Rp 499.000</div>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 uppercase mt-2">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
-
-                {/* Body Content */}
-                <div className="p-4 sm:p-4 sm:p-6 space-y-3.5 sm:space-y-4 sm:space-y-5">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
-                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
-                      <span className="text-emerald-500 text-[14px] mr-2">✓</span>
-                      <span>1-3 Hari Kerja <sup className="text-[14px] text-[#990202]">(1)</sup></span>
-                    </div>
-                  </div>
-
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-2">
-                      {[
-                        "5 KBLI Bidang Usaha",
-                        "NPWP & SKT Pajak",
-                        "Akun Gmail & OSS",
-                        "NIB",
-                        "Akun OSS RBA",
-                        "K3L/SPUMKTTR & SPPL",
-                        <span key="sertifikat-standar">Sertifikat Standar <sup className="text-[14px] text-[#990202]">(2)</sup></span>,
-                        <span key="angka-pengenal-impor">Angka Pengenal Impor <sup className="text-[14px] text-[#990202]">(3)</sup></span>
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                          <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 shadow-md border border-black/[0.03]">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-2">
-                      {[
-                        "Personal Legal Assistance",
-                        "1 Kupon Undian iPhone"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                          <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-2">
-                      {[
-                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>,
-                        "Dokumen SOP Karyawan",
-                        "Dokumen SOP Perusahaan",
-                        "Dokumen Kontrak Bisnis",
-                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                          <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Footer Button */}
-              <div className="p-6 pt-0">
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB PT Perorangan. Mohon info lengkap biaya dan prosesnya.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[14px] text-white bg-[#990202] hover:bg-[#800000] rounded-xl transition-all duration-200 shadow-md"
-                >
-                  Pilih NIB PT Perorangan
-                </a>
-              </div>
-            </div>
-          </div>
-
-            {/* Paket 3: NIB Badan */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
-              <div>
-                {/* Header */}
-                <div className="bg-[#1A1A1A] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <h3 className="text-[14px] sm:text-[14px] font-black tracking-widest text-white/90">NIB BADAN</h3>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 tracking-wider uppercase mt-1">PT, PMA, CV, FIRMA, YAYASAN, KOPERASI</p>
-                  <div className="mt-4 text-[14px] text-white/40 line-through">Rp 3.000.000</div>
-                  <div className="mt-0.5 text-[18px] sm:text-[24px] font-black">Rp 1.499.000</div>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 uppercase mt-2">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
-
-                {/* Body Content */}
-                <div className="p-4 sm:p-4 sm:p-6 space-y-3.5 sm:space-y-4 sm:space-y-5">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
-                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
-                      <span className="text-emerald-500 text-[14px] mr-2">✓</span>
-                      <span>1-3 Hari Kerja <sup className="text-[14px] text-[#990202]">(1)</sup></span>
-                    </div>
-                  </div>
-
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-2">
-                      {[
-                        "5 KBLI Bidang Usaha",
-                        "NPWP & SKT Pajak",
-                        "Akun Gmail & OSS",
-                        "NIB",
-                        "Akun OSS RBA",
-                        "K3L/SPUMKTTR & SPPL",
-                        <span key="sertifikat-standar">Sertifikat Standar <sup className="text-[14px] text-[#990202]">(2)</sup></span>,
-                        <span key="angka-pengenal-impor">Angka Pengenal Impor <sup className="text-[14px] text-[#990202]">(3)</sup></span>
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                          <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 shadow-md border border-black/[0.03]">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-2">
-                      {[
-                        "Personal Legal Assistance",
-                        "1 Kupon Undian iPhone"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                          <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-2">
-                      {[
-                        <span key="voucher-250k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>,
-                        "Dokumen SOP Karyawan",
-                        "Dokumen SOP Perusahaan",
-                        "Dokumen Kontrak Bisnis",
-                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                          <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Footer Button */}
-              <div className="p-6 pt-0">
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan. Mohon info lengkap biaya dan prosesnya.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[14px] sm:text-[14px] text-gray-800 bg-white hover:bg-gray-55 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
-                >
-                  Pilih NIB Badan
-                </a>
-              </div>
-            </div>
-          </div>
-
-            {/* Paket 4: Cabut NIB */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
-              <div>
-                {/* Header */}
-                <div className="bg-[#1A1A1A] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <h3 className="text-[14px] sm:text-[14px] font-black tracking-widest text-white/90">CABUT NIB</h3>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 tracking-wider uppercase mt-1">PENCABUTAN NIB DARI OSS</p>
-                  <div className="mt-4 text-[14px] text-white/40 line-through">Rp 2.000.000</div>
-                  <div className="mt-0.5 text-[18px] sm:text-[24px] font-black">Rp 999.000</div>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 uppercase mt-2">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
-
-                {/* Body Content */}
-                <div className="p-4 sm:p-4 sm:p-6 space-y-3.5 sm:space-y-4 sm:space-y-5">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
-                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
-                      <span className="text-emerald-500 text-[14px] mr-2">✓</span>
-                      <span>1-3 Hari Kerja <sup className="text-[14px] text-[#990202]">(1)</sup></span>
-                    </div>
-                  </div>
-
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-2">
-                      {[
-                        "Pencabutan NIB dari OSS"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                          <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4.5 space-y-2.5 shadow-md border border-black/[0.03]">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-2">
-                      {[
-                        "Personal Legal Assistance",
-                        "1 Kupon Undian iPhone"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                          <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-[14px] sm:text-[14px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-2">
-                      {[
-                        <span key="voucher-250k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>,
-                        "Dokumen SOP Karyawan",
-                        "Dokumen SOP Perusahaan",
-                        "Dokumen Kontrak Bisnis",
-                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                          <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Footer Button */}
-              <div className="p-6 pt-0">
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Cabut NIB. Mohon info lengkap biaya dan prosesnya.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 text-center font-extrabold text-[14px] sm:text-[14px] text-gray-800 bg-white hover:bg-gray-55 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
-                >
-                  Pilih Cabut NIB
-                </a>
-              </div>
-            </div>
-          </div>
-
-          </div>
-
-          {/* Footnote disclaimers */}
-          <div className="max-w-[1400px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed font-medium">
-            <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
-            <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS. (2) Untuk risiko menengah rendah. (3) Opsional, jika usaha melakukan impor.</span>
-          </div>
-
-          <PricingFooter />
-
-        </div>
-      </section>
-
-      {/* ─── 4.5. LAYANAN TAMBAHAN (Tabbed interactive section) ─── */}
-      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-12 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">LAYANAN TAMBAHAN</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              Perubahan KBLI & data usaha.
-            </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium">
-              Ubah, tambah, atau cabut KBLI yang ada di NIB Anda — pilih tab sesuai jenis perubahan yang dibutuhkan.
-            </p>
-          </div>
-
-          {/* Interactive Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-8 sm:mb-16 max-w-[1140px] mx-auto">
-            
-            {/* Tab 1: Perorangan */}
-            <button
-              onClick={() => setActiveSubTab("perorangan")}
-              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
-                activeSubTab === "perorangan"
-                  ? "bg-[#990202] text-white shadow-sm"
-                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
-              }`}
-            >
-              <User className="w-4 h-4" />
-              <span>Perubahan KBLI Perorangan</span>
-            </button>
-
-            {/* Tab 2: Badan */}
-            <button
-              onClick={() => setActiveSubTab("badan")}
-              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
-                activeSubTab === "badan"
-                  ? "bg-[#990202] text-white shadow-sm"
-                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
-              }`}
-            >
-              <Building className="w-4 h-4" />
-              <span>Perubahan KBLI Badan</span>
-            </button>
-
-            {/* Tab 3: OSS RBA */}
-            <button
-              onClick={() => setActiveSubTab("oss-rba")}
-              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
-                activeSubTab === "oss-rba"
-                  ? "bg-[#990202] text-white shadow-sm"
-                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
-              }`}
-            >
-              <CheckCircle className="w-4 h-4" />
-              <span>Perubahan Data OSS RBA</span>
-            </button>
-
-            {/* Tab 4: PT Perorangan */}
-            <button
-              onClick={() => setActiveSubTab("pt-perorangan")}
-              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
-                activeSubTab === "pt-perorangan"
-                  ? "bg-[#990202] text-white shadow-sm"
-                  : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
-              }`}
-            >
-              <FileText className="w-4 h-4" />
-              <span>Perubahan Data PT Perorangan</span>
-            </button>
-
-          </div>
-
-          {/* Tab Contents Grid */}
-          <div key={activeSubTab} className="animate-fade-in grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-[1140px] mx-auto items-stretch">
-            
-            {/* Card 1: Cabut KBLI */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
-              <div>
-                <div className="bg-[#1A1A1A] px-4 py-4 sm:px-6 sm:py-7 text-center text-white relative">
-                  <h3 className="text-[14px] sm:text-[14px] font-black tracking-widest text-white/90">CABUT KBLI</h3>
-                  <div className="mt-3 text-[14px] text-white/40 line-through">
-                    {activeSubTab === "perorangan" ? "Rp 800.000" : activeSubTab === "badan" ? "Rp 1.500.000" : "Rp 1.000.000"}
-                  </div>
-                  <div className="mt-0.5 text-[17px] sm:text-[22px] font-black">
-                    {activeSubTab === "perorangan" ? "Rp 399.000" : activeSubTab === "badan" ? "Rp 799.000" : "Rp 499.000"}
-                  </div>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 uppercase mt-2">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
-
-                <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
-                  <div className="space-y-1">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
-                    <div className="flex items-center text-[14px] font-semibold text-gray-700">
-                      <span className="text-emerald-500 text-[14px] mr-2">✓</span>
-                      <span>1-3 Hari Kerja <sup className="text-[14px] text-[#990202]">(1)</sup></span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Pencabutan 1 s/d 5 buah KBLI</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 shadow-md border border-black/[0.03]">
-                    <h4 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-1.5">
-                      <li className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                        <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Personal Legal Assistance</span>
-                      </li>
-                      <li className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                        <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>1 Kupon Undian iPhone</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-1.5">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen SOP Karyawan</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen SOP Perusahaan</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen Kontrak Bisnis</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="p-6 pt-0">
-                <a
-                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut KBLI (${activeSubTab}).`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3 text-center font-extrabold text-[14px] text-gray-800 bg-white hover:bg-gray-50 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
-                >
-                  Pilih Cabut KBLI
-                </a>
-              </div>
-            </div>
-          </div>
-
-            {/* Card 2: Tambah KBLI (FAVORIT/RED) */}
-            <div className="relative group h-full">
-              {/* PALING POPULER badge (outside overflow-hidden) */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 bg-[#990202] text-white text-[14px] font-black tracking-widest uppercase px-3.5 py-1 rounded-full whitespace-nowrap">
-                PALING POPULER
-              </div>
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border-[2.5px] border-[#990202] shadow-[0_12px_40px_rgba(153,2,2,0.045)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.12)] scale-[1.02] z-10 flex flex-col justify-between relative transition-all duration-300 h-full">
-              <div>
-                <div className="bg-[#990202] px-4 py-4 sm:px-6 sm:py-7 text-center text-white relative">
-                  <h3 className="text-[14px] sm:text-[14px] font-black tracking-widest text-white/90">TAMBAH KBLI</h3>
-                  <div className="mt-3 text-[14px] text-white/40 line-through">
-                    {activeSubTab === "perorangan" ? "Rp 1.000.000" : activeSubTab === "badan" ? "Rp 1.800.000" : "Rp 1.200.000"}
-                  </div>
-                  <div className="mt-0.5 text-[17px] sm:text-[22px] font-black">
-                    {activeSubTab === "perorangan" ? "Rp 499.000" : activeSubTab === "badan" ? "Rp 999.000" : "Rp 599.000"}
-                  </div>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 uppercase mt-2">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
-
-                <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
-                  <div className="space-y-1">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
-                    <div className="flex items-center text-[14px] font-semibold text-gray-700">
-                      <span className="text-emerald-500 text-[14px] mr-2">✓</span>
-                      <span>1-3 Hari Kerja <sup className="text-[14px] text-[#990202]">(1)</sup></span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Penambahan 1 s/d 5 buah KBLI</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 shadow-md border border-black/[0.03]">
-                    <h4 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-1.5">
-                      <li className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                        <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Personal Legal Assistance</span>
-                      </li>
-                      <li className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                        <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>1 Kupon Undian iPhone</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-1.5">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen SOP Karyawan</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen SOP Perusahaan</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen Kontrak Bisnis</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="p-6 pt-0">
-                <a
-                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Tambah KBLI (${activeSubTab}).`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3 text-center font-extrabold text-[14px] text-white bg-[#990202] hover:bg-[#800000] rounded-xl transition-all duration-200 shadow-md"
-                >
-                  Pilih Tambah KBLI
-                </a>
-              </div>
-            </div>
-          </div>
-
-            {/* Card 3: Cabut & Tambah */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300 flex flex-col justify-between h-full">
-              <div>
-                <div className="bg-[#1A1A1A] px-4 py-4 sm:px-6 sm:py-7 text-center text-white relative">
-                  <h3 className="text-[14px] sm:text-[14px] font-black tracking-widest text-white/90">CABUT & TAMBAH</h3>
-                  <div className="mt-3 text-[14px] text-white/40 line-through">
-                    {activeSubTab === "perorangan" ? "Rp 1.700.000" : activeSubTab === "badan" ? "Rp 2.800.000" : "Rp 2.000.000"}
-                  </div>
-                  <div className="mt-0.5 text-[17px] sm:text-[22px] font-black">
-                    {activeSubTab === "perorangan" ? "Rp 849.000" : activeSubTab === "badan" ? "Rp 1.499.000" : "Rp 999.000"}
-                  </div>
-                  <p className="text-[14px] sm:text-[14px] font-bold text-white/50 uppercase mt-2">TANPA TAMBAHAN BIAYA APAPUN</p>
-                </div>
-
-                <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
-                  <div className="space-y-1">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">LAMA PROSES</h4>
-                    <div className="flex items-center text-[14px] font-semibold text-gray-700">
-                      <span className="text-emerald-500 text-[14px] mr-2">✓</span>
-                      <span>1-3 Hari Kerja <sup className="text-[14px] text-[#990202]">(1)</sup></span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">YANG DIPEROLEH</h4>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Pencabutan 1 s/d 5 buah KBLI</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Penambahan 1 s/d 5 buah KBLI</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Bonus */}
-                  <div className="bg-gray-50/75 rounded-2xl p-4 space-y-2 shadow-md border border-black/[0.03]">
-                    <h4 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">BONUS</h4>
-                    <ul className="space-y-1.5">
-                      <li className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                        <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Personal Legal Assistance</span>
-                      </li>
-                      <li className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                        <span className="text-[#990202] text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>1 Kupon Undian iPhone</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Extra Bonus */}
-                  <div className="space-y-2">
-                    <h4 className="text-[14px] font-black text-gray-950 tracking-wider uppercase">EXTRA BONUS</h4>
-                    <ul className="space-y-1.5">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span key="voucher-50k">Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 50.000</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen SOP Karyawan</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen SOP Perusahaan</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span>Dokumen Kontrak Bisnis</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-medium text-gray-600 leading-relaxed">
-                        <span className="text-emerald-500 text-[14px] mr-2 flex-shrink-0">✓</span>
-                        <span key="cek-merek">Cek Merek senilai <strong className="font-extrabold text-gray-900">Rp 299.000</strong></span>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="p-6 pt-0">
-                <a
-                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut & Tambah KBLI (${activeSubTab}).`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3 text-center font-extrabold text-[14px] text-gray-800 bg-white hover:bg-gray-50 shadow-md border border-black/[0.04] hover:border-gray-300 rounded-xl transition-all duration-200 shadow-sm"
-                >
-                  Pilih Cabut & Tambah
-                </a>
-              </div>
-            </div>
-          </div>
-
-          </div>
-
-          {/* Footnote disclaimers */}
-          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed font-medium text-left">
-            <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
-            <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS.</span>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── 5. FAQ SECTION ─── */}
+      {/* ─── 8. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar NIB & OSS RBA." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
 
-      {/* ─── 6. CTA BANNER (Mockup Clean White) ─── */}
+      {/* ─── 9. CTA BANNER (Mockup Clean White) ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100/60 relative">
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
           
@@ -1391,7 +1097,6 @@ export default function NibOss() {
         </div>
       </section>
 
-      <MediaCoverage />
     </div>
   );
 }

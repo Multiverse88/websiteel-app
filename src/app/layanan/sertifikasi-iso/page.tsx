@@ -21,9 +21,12 @@ import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import PricingFooter from "@/components/PricingFooter";
+import Pricing from "@/components/Pricing";
 import MediaCoverage from "@/components/MediaCoverage";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
+import Testimonials from "@/components/home/Testimonials";
 
 export default function SertifikasiIso() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -441,6 +444,41 @@ export default function SertifikasiIso() {
     }
   ];
 
+  // Convert ISO packages to the standard PricingPackage format
+  const mappedPackages = pricingPackages.map(pkg => ({
+    title: pkg.title,
+    price: pkg.price,
+    strikePrice: pkg.strikePrice,
+    subLabel: pkg.subLabel,
+    isPopular: pkg.isPopular,
+    buttonText: pkg.buttonText,
+    buttonLink: pkg.buttonLink,
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [{ text: pkg.lamaProses, checked: true }]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: pkg.yangDiperoleh.map(item => ({ text: item, checked: true }))
+      },
+      {
+        title: "BONUS",
+        items: pkg.bonus.map(item => ({ 
+          text: typeof item === "string" ? item : `${item.text}: <strong>${(item as any).highlight || (item as any).value}</strong>`, 
+          checked: true 
+        }))
+      },
+      {
+        title: "EXTRA BONUS",
+        items: pkg.extraBonus.map(item => ({ 
+          text: typeof item === "string" ? item : `${item.text}: <strong>${(item as any).value}</strong>`, 
+          checked: true 
+        }))
+      }
+    ]
+  }));
+
   return (
     <div className="has-service-cta flex flex-col min-h-screen">
       
@@ -476,7 +514,7 @@ export default function SertifikasiIso() {
               {/* Headline */}
               <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Sertifikasi ISO dengan <br />
-                <span className="text-[#990202]">auditor UAF accredited.</span>
+                <span className="text-[#990202]">auditor UAF accredited</span>
               </h1>
 
               {/* Description */}
@@ -586,7 +624,108 @@ export default function SertifikasiIso() {
         </div>
       </section>
 
-      {/* ─── 2. APA ITU SERTIFIKASI ISO ─── */}
+      {/* ─── 1.5 TRUST SIGNALS & MEDIA COVERAGE ─── */}
+      <MediaCoverage />
+
+      {/* ─── 1.6 VALUE PROPOSITION ─── */}
+      <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={isoBenefits} />
+      <BottomPromoSection />
+
+
+
+      {/* ─── 2. HARGA PRICING GRID (7 Paket) ─── */}
+      <Pricing 
+        sectionTitleTag="BIAYA SERTIFIKASI ISO UAF"
+        sectionTitle="Harga transparan per standar ISO."
+        sectionSubtitle={
+          <>
+            Semua paket include audit, training, sertifikasi resmi UAF, & dokumen mutu (SOP ISO).<br />
+            Tanpa tambahan biaya proses.
+          </>
+        }
+        packages={mappedPackages}
+        footnotes={["Harga belum termasuk PPN. Biaya & estimasi ruangan lapangan dilakukan terpisah, all-in-cost.", "Estimasi pelaksanaan Audit."]}
+        promoBadgeSrc="/images/badges/promo-50.png"
+      />
+
+      {/* ─── 3. PROSES SERTIFIKASI ISO (7 Langkah) ─── */}
+      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+          
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES SERTIFIKASI ISO</p>
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+              7 langkah sertifikasi ISO, kami pandu A–Z.
+            </h2>
+            <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+              Dari gap analysis sampai sertifikat resmi terbit — semua tahap kami pendampingi dengan auditor UAF accredited.
+            </p>
+            {/* Scroll indicator text */}
+            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+              <span>Geser untuk lihat semua langkah</span>
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
+            </div>
+          </div>
+
+          {/* Horizontal Scrollable Row */}
+          <div className="relative max-w-[1240px] mx-auto">
+            
+            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
+              {steps.map((step, idx) => (
+                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
+                  
+                  {/* Number Badge (Centered on top border) */}
+                  <div className="absolute top-0 left-6 w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                    {String(idx + 1).padStart(2, "0")}
+                  </div>
+                  
+                  {/* Card Container */}
+                  <div className="bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-[24px] py-6 px-5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                    <div className="space-y-3">
+                      
+                      {/* Title */}
+                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
+                        {step.title}
+                      </h4>
+                      
+                      {/* Duration Badge */}
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
+                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
+                        <span>{step.duration}</span>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+
+                    </div>
+
+                    <div>
+                      {/* Dotted Divider */}
+                      <div className="border-t border-dashed border-gray-200 my-4"></div>
+
+                      {/* Checklist */}
+                      <ul className="space-y-2">
+                        {step.checklist.map((item, pIdx) => (
+                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
+                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                            <span dangerouslySetInnerHTML={{ __html: item }} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── 4. APA ITU SERTIFIKASI ISO ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
@@ -674,14 +813,14 @@ export default function SertifikasiIso() {
         </div>
       </section>
 
-      {/* ─── 2.5 MANFAAT SERTIFIKASI ISO ─── */}
+      {/* ─── 4.5 MANFAAT SERTIFIKASI ISO ─── */}
       <Benefits
         sectionTitleTag="MANFAAT SERTIFIKASI ISO"
         sectionTitle="Kenapa bisnis Anda perlu ISO?"
         items={isoBenefits}
       />
 
-      {/* ─── 3. PILIHAN LAYANAN SERTIFIKASI ISO (7 Jenis) ─── */}
+      {/* ─── 5. PILIHAN LAYANAN SERTIFIKASI ISO (7 Jenis) ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
@@ -778,460 +917,13 @@ export default function SertifikasiIso() {
         </div>
       </section>
 
-      {/* ─── 4. HARGA PRICING GRID (7 Paket) ─── */}
-      <section id="paket-harga" className="bg-[#F9FAFB] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
-          {/* Section Header */}
-          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
-            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">BIAYA SERTIFIKASI ISO UAF</p>
-              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-                Harga transparan per standar ISO.
-              </h2>
-              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
-                Semua paket include audit, training, sertifikasi resmi UAF, &amp; dokumen mutu (SOP ISO).<br />
-                Tanpa tambahan biaya proses.
-              </p>
-            </div>
-            <div className="flex-shrink-0 flex justify-start md:justify-end">
-              <Image 
-                src="/images/badges/promo-50.png" 
-                alt="Promo 50% Off Legal Deals" 
-                width={280} 
-                height={120}
-                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </div>
+      {/* ─── 6. TESTIMONIALS (Social Proof) ─── */}
+      <Testimonials />
 
-          {/* Pricing Cards */}
-          <div className="space-y-8 max-w-[1140px] mx-auto">
-
-            {/* Row 1: 3 cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
-              {pricingPackages.slice(0, 3).map((pkg, idx) => {
-                const headerBg = pkg.isPopular ? "bg-[#990202]" : "bg-[#1A1A1A]";
-                const cardBorder = pkg.isPopular
-                  ? "border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] relative z-10 transition-all duration-300"
-                  : "shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
-
-                return (
-                  <div key={idx} className="relative group h-full">
-                    {/* Interactive Red Hover Glow behind Card */}
-                    <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-                    
-                    <div className={`bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between ${cardBorder}`}>
-                    <div>
-                      {/* Card Header */}
-                      <div className={`${headerBg} px-6 py-7 text-white text-center relative`}>
-                        {pkg.isPopular && (
-                          <div className="absolute top-3 left-0 right-0 flex justify-center">
-                            <span className="bg-white/20 backdrop-blur-sm text-white text-[14px] font-black uppercase tracking-widest px-3.5 py-1 rounded-full">
-                              PALING POPULER
-                            </span>
-                          </div>
-                        )}
-                        <h3 className={`text-[16px] font-black text-white/70 uppercase tracking-widest ${pkg.isPopular ? "mt-4" : ""}`}>
-                          {pkg.title}
-                        </h3>
-                        <div className="mt-4 flex items-baseline justify-center gap-1">
-                          <span className="text-[14px] font-bold text-white/60">Rp</span>
-                          <span className="text-[30px] sm:text-[34px] font-black tracking-tight leading-none">{pkg.price}</span>
-                          <span className="text-[14px] font-bold text-white/40 line-through ml-1.5">{pkg.strikePrice},-</span>
-                        </div>
-                        <div className="mt-2.5 text-[14px] font-bold tracking-widest uppercase text-white/50">
-                          {pkg.subLabel}
-                        </div>
-                      </div>
-
-                      {/* Card Body */}
-                      <div className="px-6 py-6 space-y-6">
-
-                        {/* LAMA PROSES */}
-                        <div className="space-y-2.5">
-                          <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">LAMA PROSES</h4>
-                          <div className="flex items-center gap-2">
-                            <Clock className="w-3.5 h-3.5 text-gray-400" />
-                            <span className="text-[14px] font-bold text-gray-700">{pkg.lamaProses}</span>
-                            <span className="bg-blue-50 text-blue-600 text-[14px] font-black tracking-wider uppercase px-1.5 py-0.5 rounded">FYI</span>
-                          </div>
-                        </div>
-
-                        {/* YANG DIPEROLEH */}
-                        <div className="space-y-2.5">
-                          <h4 className="text-[14px] font-black text-[#990202] tracking-widest uppercase">YANG DIPEROLEH</h4>
-                          <ul className="space-y-2">
-                            {pkg.yangDiperoleh.map((item, i) => (
-                              <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                                <Check className="w-3.5 h-3.5 text-gray-400 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* BONUS */}
-                        <div className="space-y-2.5">
-                          <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">BONUS</h4>
-                          <ul className="space-y-2">
-                            {pkg.bonus.map((item, i) => (
-                              <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                                <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                                {typeof item === "string" ? (
-                                  <span>{item}</span>
-                                ) : (
-                                  <span>{item.text}: <strong className="font-extrabold text-gray-900">{item.highlight}</strong></span>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* EXTRA BONUS */}
-                        <div className="space-y-2.5">
-                          <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">EXTRA BONUS</h4>
-                          <ul className="space-y-2">
-                            {pkg.extraBonus.map((item, i) => (
-                              <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                                <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                                {typeof item === "string" ? (
-                                  <span>{item}</span>
-                                ) : (
-                                  <span>{item.text}: <strong className="font-extrabold text-gray-900">{item.value}</strong></span>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    {/* Card Button */}
-                    <div className="px-6 pb-6 pt-1">
-                      <a
-                        href={pkg.buttonLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`block w-full py-3.5 rounded-xl text-center font-extrabold text-[14px] transition-all duration-200 cursor-pointer shadow-sm ${
-                          pkg.isPopular
-                            ? "bg-[#990202] hover:bg-[#800000] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5"
-                            : "shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow"
-                        }`}
-                      >
-                        {pkg.buttonText}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-            {/* Row 2: 3 cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
-              {pricingPackages.slice(3, 6).map((pkg, idx) => (
-                <div key={idx} className="relative group h-full">
-                  {/* Interactive Red Hover Glow behind Card */}
-                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-                  
-                  <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
-                  <div>
-                    {/* Card Header */}
-                    <div className="bg-[#1A1A1A] px-6 py-7 text-white text-center relative">
-                      <h3 className="text-[16px] font-black text-white/70 uppercase tracking-widest">
-                        {pkg.title}
-                      </h3>
-                      <div className="mt-4 flex items-baseline justify-center gap-1">
-                        <span className="text-[14px] font-bold text-white/60">Rp</span>
-                        <span className="text-[30px] sm:text-[34px] font-black tracking-tight leading-none">{pkg.price}</span>
-                        <span className="text-[14px] font-bold text-white/40 line-through ml-1.5">{pkg.strikePrice},-</span>
-                      </div>
-                      <div className="mt-2.5 text-[14px] font-bold tracking-widest uppercase text-white/50">
-                        {pkg.subLabel}
-                      </div>
-                    </div>
-
-                    {/* Card Body */}
-                    <div className="px-6 py-6 space-y-6">
-
-                      {/* LAMA PROSES */}
-                      <div className="space-y-2.5">
-                        <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">LAMA PROSES</h4>
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-3.5 h-3.5 text-gray-400" />
-                          <span className="text-[14px] font-bold text-gray-700">{pkg.lamaProses}</span>
-                          <span className="bg-blue-50 text-blue-600 text-[14px] font-black tracking-wider uppercase px-1.5 py-0.5 rounded">FYI</span>
-                        </div>
-                      </div>
-
-                      {/* YANG DIPEROLEH */}
-                      <div className="space-y-2.5">
-                        <h4 className="text-[14px] font-black text-[#990202] tracking-widest uppercase">YANG DIPEROLEH</h4>
-                        <ul className="space-y-2">
-                          {pkg.yangDiperoleh.map((item, i) => (
-                            <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                              <Check className="w-3.5 h-3.5 text-gray-400 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* BONUS */}
-                      <div className="space-y-2.5">
-                        <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">BONUS</h4>
-                        <ul className="space-y-2">
-                          {pkg.bonus.map((item, i) => (
-                            <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              {typeof item === "string" ? (
-                                <span>{item}</span>
-                              ) : (
-                                <span>{item.text}: <strong className="font-extrabold text-gray-900">{item.highlight}</strong></span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* EXTRA BONUS */}
-                      <div className="space-y-2.5">
-                        <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">EXTRA BONUS</h4>
-                        <ul className="space-y-2">
-                          {pkg.extraBonus.map((item, i) => (
-                            <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              {typeof item === "string" ? (
-                                <span>{item}</span>
-                              ) : (
-                                <span>{item.text}: <strong className="font-extrabold text-gray-900">{item.value}</strong></span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  {/* Card Button */}
-                  <div className="px-6 pb-6 pt-1">
-                    <a
-                      href={pkg.buttonLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full py-3.5 shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow rounded-xl text-center font-extrabold text-[14px] transition-all duration-200 cursor-pointer shadow-sm"
-                    >
-                      {pkg.buttonText}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-            {/* Row 3: 1 card centered */}
-            <div className="flex justify-center">
-              <div className="w-full lg:w-[380px]">
-                {(() => {
-                  const pkg = pricingPackages[6];
-                  return (
-                    <div className="relative group h-full">
-                      {/* Interactive Red Hover Glow behind Card */}
-                      <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-                      
-                      <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
-                      <div>
-                        {/* Card Header */}
-                        <div className="bg-[#1A1A1A] px-6 py-7 text-white text-center relative">
-                          <h3 className="text-[16px] font-black text-white/70 uppercase tracking-widest">
-                            {pkg.title}
-                          </h3>
-                          <div className="mt-4 flex items-baseline justify-center gap-1">
-                            <span className="text-[14px] font-bold text-white/60">Rp</span>
-                            <span className="text-[30px] sm:text-[34px] font-black tracking-tight leading-none">{pkg.price}</span>
-                            <span className="text-[14px] font-bold text-white/40 line-through ml-1.5">{pkg.strikePrice},-</span>
-                          </div>
-                          <div className="mt-2.5 text-[14px] font-bold tracking-widest uppercase text-white/50">
-                            {pkg.subLabel}
-                          </div>
-                        </div>
-
-                        {/* Card Body */}
-                        <div className="px-6 py-6 space-y-6">
-
-                          {/* LAMA PROSES */}
-                          <div className="space-y-2.5">
-                            <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">LAMA PROSES</h4>
-                            <div className="flex items-center gap-2">
-                              <Clock className="w-3.5 h-3.5 text-gray-400" />
-                              <span className="text-[14px] font-bold text-gray-700">{pkg.lamaProses}</span>
-                              <span className="bg-blue-50 text-blue-600 text-[14px] font-black tracking-wider uppercase px-1.5 py-0.5 rounded">FYI</span>
-                            </div>
-                          </div>
-
-                          {/* YANG DIPEROLEH */}
-                          <div className="space-y-2.5">
-                            <h4 className="text-[14px] font-black text-[#990202] tracking-widest uppercase">YANG DIPEROLEH</h4>
-                            <ul className="space-y-2">
-                              {pkg.yangDiperoleh.map((item, i) => (
-                                <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                                  <Check className="w-3.5 h-3.5 text-gray-400 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                                  <span>{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-
-                          {/* BONUS */}
-                          <div className="space-y-2.5">
-                            <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">BONUS</h4>
-                            <ul className="space-y-2">
-                              {pkg.bonus.map((item, i) => (
-                                <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                                  <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                                  {typeof item === "string" ? (
-                                    <span>{item}</span>
-                                  ) : (
-                                    <span>{item.text}: <strong className="font-extrabold text-gray-900">{item.highlight}</strong></span>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-
-                          {/* EXTRA BONUS */}
-                          <div className="space-y-2.5">
-                            <h4 className="text-[14px] font-black text-gray-950 tracking-widest uppercase">EXTRA BONUS</h4>
-                            <ul className="space-y-2">
-                              {pkg.extraBonus.map((item, i) => (
-                                <li key={i} className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                                  <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                                  {typeof item === "string" ? (
-                                    <span>{item}</span>
-                                  ) : (
-                                    <span>{item.text}: <strong className="font-extrabold text-gray-900">{item.value}</strong></span>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-
-                        </div>
-                      </div>
-
-                      {/* Card Button */}
-                      <div className="px-6 pb-6 pt-1">
-                        <a
-                          href={pkg.buttonLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block w-full py-3.5 shadow-md border border-black/[0.04] text-gray-800 bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 hover:shadow rounded-xl text-center font-extrabold text-[14px] transition-all duration-200 cursor-pointer shadow-sm"
-                        >
-                          {pkg.buttonText}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })()}
-            </div>
-          </div>
-          </div>
-          {/* Pricing Footnote Box */}
-          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed font-medium">
-            <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
-            <span>(1) Harga belum termasuk PPN. Biaya &amp; estimasi ruangan lapangan dilakukan terpisah, all-in-cost. (2) Estimasi pelaksanaan Audit.</span>
-          </div>
-
-          <PricingFooter />
-
-        </div>
-      </section>
-
-      {/* ─── 5. PROSES SERTIFIKASI ISO (7 Langkah) ─── */}
-      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES SERTIFIKASI ISO</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              7 langkah sertifikasi ISO, kami pandu A–Z.
-            </h2>
-            <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
-              Dari gap analysis sampai sertifikat resmi terbit — semua tahap kami pendampingi dengan auditor UAF accredited.
-            </p>
-            {/* Scroll indicator text */}
-            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
-              <span>Geser untuk lihat semua langkah</span>
-              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
-            </div>
-          </div>
-
-          {/* Horizontal Scrollable Row */}
-          <div className="relative max-w-[1240px] mx-auto">
-            
-            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
-              {steps.map((step, idx) => (
-                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
-                  
-                  {/* Number Badge (Centered on top border) */}
-                  <div className="absolute top-0 left-6 w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
-                    {String(idx + 1).padStart(2, "0")}
-                  </div>
-                  
-                  {/* Card Container */}
-                  <div className="bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-[24px] py-6 px-5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
-                    <div className="space-y-3">
-                      
-                      {/* Title */}
-                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
-                        {step.title}
-                      </h4>
-                      
-                      {/* Duration Badge */}
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
-                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                        <span>{step.duration}</span>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
-
-                    </div>
-
-                    <div>
-                      {/* Dotted Divider */}
-                      <div className="border-t border-dashed border-gray-200 my-4"></div>
-
-                      {/* Checklist */}
-                      <ul className="space-y-2">
-                        {step.checklist.map((item, pIdx) => (
-                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
-                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                            <span dangerouslySetInnerHTML={{ __html: item }} />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── 6. FAQ SECTION (6 Tanya-Jawab Mockup) ─── */}
+      {/* ─── 7. FAQ SECTION (6 Tanya-Jawab Mockup) ─── */}
       <FAQ title="Pertanyaan seputar sertifikasi ISO." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
 
-      {/* ─── 7. CTA BANNER (Mockup Clean White) ─── */}
+      {/* ─── 8. CTA BANNER (Mockup Clean White) ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100/60 relative">
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
           
@@ -1283,7 +975,6 @@ export default function SertifikasiIso() {
         </div>
       </section>
 
-      <MediaCoverage />
     </div>
   );
 }
