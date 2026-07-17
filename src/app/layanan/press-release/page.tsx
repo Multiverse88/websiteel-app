@@ -36,9 +36,12 @@ import {
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
+import Testimonials from "@/components/home/Testimonials";
 
 const pricingData = {
     populer: [
@@ -190,6 +193,109 @@ export default function PressRelease() {
 
   
 
+
+  const pricingPackages: PricingPackage[] = [
+    {
+      title: "PAKET A",
+      price: "1.199.000",
+      strikePrice: "Rp 2.400.000",
+      subLabel: "/ SEKALI PUBLIKASI",
+      isPopular: false,
+      buttonText: "Pilih Paket A",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket A Press Release. Mohon info lengkap biaya dan prosesnya."),
+      groups: [
+        {
+          title: "LAMA PROSES",
+          items: [{ text: "<strong className=\"font-extrabold text-gray-900\">1–3 hari kerja</strong> sampai terbit", checked: true }]
+        },
+        {
+          title: "YANG DIPEROLEH",
+          items: [
+            { text: "Bebas pilih <strong className=\"font-extrabold text-gray-900\">1 media</strong> publikasi", checked: true },
+            { text: "Berita terbit <strong className=\"font-extrabold text-gray-900\">permanen</strong>", checked: true },
+            { text: "Garansi <strong className=\"font-extrabold text-gray-900\">100% tayang</strong>", checked: true },
+            { text: "Laporan hasil publikasi", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          items: [
+            { text: "Potongan harga <strong className=\"font-extrabold text-gray-900\">Rp 200.000</strong>", checked: true },
+            { text: "<strong className=\"font-extrabold text-gray-900\">100+ E-Course</strong> digital marketing", checked: true },
+            { text: "<strong className=\"font-extrabold text-gray-900\">2.500+</strong> Template konten digital", checked: true },
+            { text: "Kalender konten sosial media", checked: true }
+          ]
+        }
+      ]
+    },
+    {
+      title: "PAKET B",
+      price: "4.999.000",
+      strikePrice: "Rp 10.000.000",
+      subLabel: "/ SEKALI PUBLIKASI",
+      isPopular: true,
+      buttonText: "Pilih Paket B",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket B Press Release. Mohon info lengkap biaya dan prosesnya."),
+      groups: [
+        {
+          title: "LAMA PROSES",
+          items: [{ text: "<strong className=\"font-extrabold text-gray-900\">1–3 hari kerja</strong> sampai terbit", checked: true }]
+        },
+        {
+          title: "YANG DIPEROLEH",
+          items: [
+            { text: "Bebas pilih <strong className=\"font-extrabold text-gray-900\">5 media</strong> publikasi", checked: true },
+            { text: "Berita terbit <strong className=\"font-extrabold text-gray-900\">permanen</strong>", checked: true },
+            { text: "Garansi <strong className=\"font-extrabold text-gray-900\">100% tayang</strong>", checked: true },
+            { text: "Laporan hasil publikasi", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          items: [
+            { text: "Potongan harga <strong className=\"font-extrabold text-gray-900\">Rp 200.000</strong>", checked: true },
+            { text: "<strong className=\"font-extrabold text-gray-900\">100+ E-Course</strong> digital marketing", checked: true },
+            { text: "<strong className=\"font-extrabold text-gray-900\">2.500+</strong> Template konten digital", checked: true },
+            { text: "Kalender konten sosial media", checked: true }
+          ]
+        }
+      ]
+    },
+    {
+      title: "PAKET C",
+      price: "8.999.000",
+      strikePrice: "Rp 18.000.000",
+      subLabel: "/ SEKALI PUBLIKASI",
+      isPopular: false,
+      buttonText: "Pilih Paket C",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket C Press Release. Mohon info lengkap biaya dan prosesnya."),
+      groups: [
+        {
+          title: "LAMA PROSES",
+          items: [{ text: "<strong className=\"font-extrabold text-gray-900\">1–3 hari kerja</strong> sampai terbit", checked: true }]
+        },
+        {
+          title: "YANG DIPEROLEH",
+          items: [
+            { text: "Bebas pilih <strong className=\"font-extrabold text-gray-900\">10 media</strong> publikasi", checked: true },
+            { text: "Berita terbit <strong className=\"font-extrabold text-gray-900\">permanen</strong>", checked: true },
+            { text: "Garansi <strong className=\"font-extrabold text-gray-900\">100% tayang</strong>", checked: true },
+            { text: "Laporan hasil publikasi", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          items: [
+            { text: "Potongan harga <strong className=\"font-extrabold text-gray-900\">Rp 200.000</strong>", checked: true },
+            { text: "<strong className=\"font-extrabold text-gray-900\">100+ E-Course</strong> digital marketing", checked: true },
+            { text: "<strong className=\"font-extrabold text-gray-900\">2.500+</strong> Template konten digital", checked: true },
+            { text: "Kalender konten sosial media", checked: true }
+          ]
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="has-service-cta flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
 
@@ -225,7 +331,7 @@ export default function PressRelease() {
               {/* Headline */}
               <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
                 Bisnismu <span className="text-[#990202]">tayang</span> di <br />
-                media nasional dalam 1–3 hari.
+                media nasional dalam 1–3 hari
               </h1>
 
               {/* Description */}
@@ -360,7 +466,190 @@ export default function PressRelease() {
         </div>
       </section>
 
-      {/* ─── 2. PERBEDAAN / PENJELASAN SECTION ─── */}
+      {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
+      <MediaCoverage />
+
+      {/* ─── 3. KENAPA PRESS RELEASE SECTION ─── */}
+      <section className="bg-white py-8 sm:py-8 sm:py-20">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KENAPA PRESS RELEASE</p>
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+              Investasi sekali — manfaat jangka panjang.
+            </h2>
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+              Berbeda dari iklan yang hilang setelah budget habis, press release tetap online &amp; bisa diakses bertahun-tahun.
+            </p>
+          </div>
+
+          {/* Grid of 8 white cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-[1140px] mx-auto items-stretch text-left">
+
+            {/* Card 1 */}
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
+              <div className="space-y-3">
+                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <Heart className="w-5 h-5 text-[#990202]" />
+                </div>
+                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Bangun Kepercayaan</h4>
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                  Konsumen lebih percaya berita media kredibel dibanding iklan langsung dari brand.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
+              <div className="space-y-3">
+                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <Award className="w-5 h-5 text-[#990202]" />
+                </div>
+                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Reputasi &amp; Otoritas</h4>
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                  Liputan media kredibel naikkan persepsi brand sebagai pemain serius di industri.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
+              <div className="space-y-3">
+                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-5 h-5 text-[#990202]" />
+                </div>
+                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Boost Promosi</h4>
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                  Berita media jadi materi promosi multi-channel — share di sosmed, kirim ke calon klien.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
+              <div className="space-y-3">
+                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <Check className="w-5 h-5 text-[#990202]" strokeWidth={3} />
+                </div>
+                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Kredibilitas Tinggi</h4>
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                  Bukti konkret bisnismu aktif &amp; berkembang — penting untuk audit investor &amp; partner.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 5 */}
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
+              <div className="space-y-3">
+                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <Globe className="w-5 h-5 text-[#990202]" />
+                </div>
+                <h4 className="text-[14px] font-black text-gray-950">Jangkauan Luas</h4>
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                  Akses jutaan pembaca media nasional — efektivitas yang sulit dicapai dengan iklan organik.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 6 */}
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
+              <div className="space-y-3">
+                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <Activity className="w-5 h-5 text-[#990202]" />
+                </div>
+                <h4 className="text-[14px] font-black text-gray-950">SEO &amp; Brand Search</h4>
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                  Artikel media indeks di Google — naikkan visibilitas saat orang search nama brand.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 7 */}
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
+              <div className="space-y-3">
+                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck className="w-5 h-5 text-[#990202]" />
+                </div>
+                <h4 className="text-[14px] font-black text-gray-950">Permanen Online</h4>
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                  Berita terbit permanen — tidak akan dihapus, bisa diakses 5–10 tahun ke depan.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 8 */}
+            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
+              <div className="space-y-3">
+                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
+                  <BarChart className="w-5 h-5 text-[#990202]" />
+                </div>
+                <h4 className="text-[14px] font-black text-gray-950">Kompetitif vs Iklan</h4>
+                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                  Biaya 1x publikasi jauh lebih hemat dibanding iklan berbayar dengan jangkauan setara.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── 4. MEDIA PARTNER SECTION ─── */}
+      <section className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
+
+          {/* Section Header */}
+          <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DAFTAR MEDIA PARTNER</p>
+            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
+              Publikasi di 100+ media online terpercaya.
+            </h2>
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+              Pilih media yang sesuai target audiens — ekonomi, lifestyle, teknologi, hingga media daerah.
+            </p>
+          </div>
+
+          {/* Media Partner Grid Layout */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 max-w-[1140px] mx-auto mb-8">
+            {mediaPartners.map((media, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl py-4 px-3 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center justify-center min-h-[68px] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200"
+              >
+                {media.icon ? (
+                  <img src={media.icon} alt={media.label} className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full object-cover" />
+                ) : (
+                  <span className="text-gray-500 font-bold text-[14px]">{media.label}</span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Small footer text */}
+          <p className="text-[14px] text-gray-500 font-bold mt-8 max-w-4xl mx-auto">
+            Daftar lengkap media tersedia saat konsultasi — termasuk media nasional, ekonomi-bisnis, lifestyle, teknologi, &amp; media daerah dengan tier rate berbeda.
+          </p>
+
+        </div>
+      </section>
+
+      {/* ─── 5. PRICING SECTION ─── */}
+      <BottomPromoSection />
+      <Pricing 
+        sectionTitleTag="BIAYA JASA PRESS RELEASE"
+        sectionTitle="Pilih paket sesuai target jangkauan."
+        sectionSubtitle={
+          <>
+            Garansi 100% berita terbit & permanen online. Harga sudah termasuk biaya penerbitan di media yang dipilih.
+          </>
+        }
+        packages={pricingPackages}
+        footnotes={["Daftar lengkap media tersedia saat konsultasi — termasuk media nasional, ekonomi-bisnis, lifestyle, teknologi, & media daerah dengan tier rate berbeda."]}
+      />
+
+      {/* ─── 6. PERBEDAAN / PENJELASAN SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
 
@@ -492,7 +781,7 @@ export default function PressRelease() {
         </div>
       </section>
 
-      {/* ─── 3. KEBUTUHAN SECTION ─── */}
+      {/* ─── 7. KEBUTUHAN SECTION ─── */}
       <section className="bg-[#FBFBFA] py-8 sm:py-8 sm:py-20">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
 
@@ -593,764 +882,13 @@ export default function PressRelease() {
         </div>
       </section>
 
-      {/* ─── 4. KENAPA PRESS RELEASE SECTION ─── */}
-      <section className="bg-white py-8 sm:py-8 sm:py-20">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+      {/* ─── 8. TESTIMONIALS SECTION ─── */}
+      <Testimonials />
 
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KENAPA PRESS RELEASE</p>
-            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              Investasi sekali — manfaat jangka panjang.
-            </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
-              Berbeda dari iklan yang hilang setelah budget habis, press release tetap online &amp; bisa diakses bertahun-tahun.
-            </p>
-          </div>
-
-          {/* Grid of 8 white cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-[1140px] mx-auto items-stretch text-left">
-
-            {/* Card 1 */}
-            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
-              <div className="space-y-3">
-                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                  <Heart className="w-5 h-5 text-[#990202]" />
-                </div>
-                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Bangun Kepercayaan</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
-                  Konsumen lebih percaya berita media kredibel dibanding iklan langsung dari brand.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
-              <div className="space-y-3">
-                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                  <Award className="w-5 h-5 text-[#990202]" />
-                </div>
-                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Reputasi &amp; Otoritas</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
-                  Liputan media kredibel naikkan persepsi brand sebagai pemain serius di industri.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
-              <div className="space-y-3">
-                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                  <TrendingUp className="w-5 h-5 text-[#990202]" />
-                </div>
-                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Boost Promosi</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
-                  Berita media jadi materi promosi multi-channel — share di sosmed, kirim ke calon klien.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 4 */}
-            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
-              <div className="space-y-3">
-                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                  <Check className="w-5 h-5 text-[#990202]" strokeWidth={3} />
-                </div>
-                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Kredibilitas Tinggi</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
-                  Bukti konkret bisnismu aktif &amp; berkembang — penting untuk audit investor &amp; partner.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 5 */}
-            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
-              <div className="space-y-3">
-                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                  <Globe className="w-5 h-5 text-[#990202]" />
-                </div>
-                <h4 className="text-[14px] font-black text-gray-950">Jangkauan Luas</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
-                  Akses jutaan pembaca media nasional — efektivitas yang sulit dicapai dengan iklan organik.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 6 */}
-            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
-              <div className="space-y-3">
-                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                  <Activity className="w-5 h-5 text-[#990202]" />
-                </div>
-                <h4 className="text-[14px] font-black text-gray-950">SEO &amp; Brand Search</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
-                  Artikel media indeks di Google — naikkan visibilitas saat orang search nama brand.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 7 */}
-            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
-              <div className="space-y-3">
-                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                  <ShieldCheck className="w-5 h-5 text-[#990202]" />
-                </div>
-                <h4 className="text-[14px] font-black text-gray-950">Permanen Online</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
-                  Berita terbit permanen — tidak akan dihapus, bisa diakses 5–10 tahun ke depan.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 8 */}
-            <div className="bg-white rounded-2xl p-5.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between space-y-4 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200">
-              <div className="space-y-3">
-                <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                  <BarChart className="w-5 h-5 text-[#990202]" />
-                </div>
-                <h4 className="text-[14px] font-black text-gray-950">Kompetitif vs Iklan</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
-                  Biaya 1x publikasi jauh lebih hemat dibanding iklan berbayar dengan jangkauan setara.
-                </p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── 5. MEDIA PARTNER SECTION ─── */}
-      <section className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
-
-          {/* Section Header */}
-          <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DAFTAR MEDIA PARTNER</p>
-            <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              Publikasi di 100+ media online terpercaya.
-            </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
-              Pilih media yang sesuai target audiens — ekonomi, lifestyle, teknologi, hingga media daerah.
-            </p>
-          </div>
-
-          {/* Media Partner Grid Layout */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 max-w-[1140px] mx-auto mb-8">
-            {mediaPartners.map((media, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-xl py-4 px-3 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center justify-center min-h-[68px] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200"
-              >
-                {media.icon ? (
-                  <img src={media.icon} alt={media.label} className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full object-cover" />
-                ) : (
-                  <span className="text-gray-500 font-bold text-[14px]">{media.label}</span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Small footer text */}
-          <p className="text-[14px] text-gray-500 font-bold mt-8 max-w-4xl mx-auto">
-            Daftar lengkap media tersedia saat konsultasi — termasuk media nasional, ekonomi-bisnis, lifestyle, teknologi, &amp; media daerah dengan tier rate berbeda.
-          </p>
-
-        </div>
-      </section>
-
-      {/* ─── 6. PRICING SECTION ─── */}
-      <section id="paket-harga" className="bg-[#FBFBFA] py-8 sm:py-8 sm:py-20 scroll-mt-8 sm:mt-16">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-
-          {/* Section Header */}
-          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
-            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[14px] font-black text-[#990202] uppercase tracking-[0.22em]">BIAYA JASA PRESS RELEASE</p>
-              <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-900 leading-tight tracking-tight">
-                Pilih paket sesuai target jangkauan.
-              </h2>
-              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed">
-                Garansi 100% berita terbit &amp; permanen online. Harga sudah termasuk biaya penerbitan di media yang dipilih.
-              </p>
-            </div>
-            <div className="flex-shrink-0 flex justify-start md:justify-end">
-              <Image 
-                src="/images/badges/promo-50.png" 
-                alt="Promo 50% Off Legal Deals" 
-                width={280} 
-                height={120}
-                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </div>
-
-          {/* Packages Display Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1180px] mx-auto items-stretch text-left">
-
-            {/* Paket A */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-md group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
-              <div>
-                {/* Header */}
-                <div className="bg-[#151515] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <h4 className="text-[14px] font-black tracking-widest uppercase opacity-85">
-                    PAKET A
-                  </h4>
-                  <div className="mt-3 text-[14px] text-white/50 line-through font-bold">
-                    Rp 2.400.000
-                  </div>
-                  <div className="mt-0.5 text-[30px] sm:text-[34px] font-black tracking-tight flex items-start justify-center">
-                    <span className="text-[16px] mt-1.5 font-extrabold mr-1">Rp</span>
-                    <span>1.199.000</span>
-                  </div>
-                  <p className="text-[14px] font-black text-white/60 tracking-wider uppercase mt-2.5">
-                    / SEKALI PUBLIKASI
-                  </p>
-                </div>
-
-                {/* Features Detail */}
-                <div className="p-6 sm:p-4 sm:p-7 space-y-4 sm:space-y-6 text-left">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
-                      LAMA PROSES
-                    </h5>
-                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
-                      <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
-                      <span>
-                        <strong className="font-extrabold text-gray-900">1–3 hari kerja</strong> sampai terbit
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
-                      YANG DIPEROLEH
-                    </h5>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Bebas pilih <strong className="font-extrabold text-gray-900">1 media</strong> publikasi</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Berita terbit <strong className="font-extrabold text-gray-900">permanen</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Garansi <strong className="font-extrabold text-gray-900">100% tayang</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Laporan hasil publikasi</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Bonus Container */}
-                  <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
-                    <h5 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
-                      BONUS
-                    </h5>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Potongan harga <strong className="font-extrabold text-gray-900">Rp 200.000</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span><strong className="font-extrabold text-gray-900">100+ E-Course</strong> digital marketing</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span><strong className="font-extrabold text-gray-900">2.500+</strong> Template konten digital</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Kalender konten sosial media</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Order Button */}
-              <div className="p-6 sm:p-7 pt-0">
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket A Press Release. Mohon info lengkap biaya dan prosesnya.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
-                >
-                  Pilih Paket A
-                </a>
-              </div>
-            </div>
-          </div>
-
-            {/* Paket B */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] scale-[1.02] relative z-10 transition-all duration-300">
-              <div>
-                {/* Header */}
-                <div className="bg-[#990202] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[14px] font-black tracking-[0.25em] uppercase py-1 shadow-inner">
-                    PALING POPULER
-                  </div>
-                  <h4 className="text-[14px] font-black tracking-widest uppercase opacity-90 mt-2">
-                    PAKET B
-                  </h4>
-                  <div className="mt-3 text-[14px] text-white/50 line-through font-bold">
-                    Rp 10.000.000
-                  </div>
-                  <div className="mt-0.5 text-[30px] sm:text-[34px] font-black tracking-tight flex items-start justify-center">
-                    <span className="text-[16px] mt-1.5 font-extrabold mr-1">Rp</span>
-                    <span>4.999.000</span>
-                  </div>
-                  <p className="text-[14px] font-black text-white/60 tracking-wider uppercase mt-2.5">
-                    / SEKALI PUBLIKASI
-                  </p>
-                </div>
-
-                {/* Features Detail */}
-                <div className="p-6 sm:p-4 sm:p-7 space-y-4 sm:space-y-6 text-left">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
-                      LAMA PROSES
-                    </h5>
-                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
-                      <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
-                      <span>
-                        <strong className="font-extrabold text-gray-900">1–3 hari kerja</strong> sampai terbit
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
-                      YANG DIPEROLEH
-                    </h5>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Bebas pilih <strong className="font-extrabold text-gray-900">5 media</strong> publikasi</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Berita terbit <strong className="font-extrabold text-gray-900">permanen</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Garansi <strong className="font-extrabold text-gray-900">100% tayang</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Laporan hasil publikasi</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Bonus Container */}
-                  <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
-                    <h5 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
-                      BONUS
-                    </h5>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Potongan harga <strong className="font-extrabold text-gray-900">Rp 200.000</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span><strong className="font-extrabold text-gray-900">100+ E-Course</strong> digital marketing</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span><strong className="font-extrabold text-gray-900">2.500+</strong> Template konten digital</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Kalender konten sosial media</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Order Button */}
-              <div className="p-6 sm:p-7 pt-0">
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket B Press Release. Mohon info lengkap biaya dan prosesnya.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
-                >
-                  Pilih Paket B
-                </a>
-              </div>
-            </div>
-          </div>
-
-            {/* Paket C */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-md group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
-              <div>
-                {/* Header */}
-                <div className="bg-[#151515] px-4 py-5 sm:px-6 sm:py-8 text-center text-white relative">
-                  <h4 className="text-[14px] font-black tracking-widest uppercase opacity-85">
-                    PAKET C
-                  </h4>
-                  <div className="mt-3 text-[14px] text-white/50 line-through font-bold">
-                    Rp 18.000.000
-                  </div>
-                  <div className="mt-0.5 text-[30px] sm:text-[34px] font-black tracking-tight flex items-start justify-center">
-                    <span className="text-[16px] mt-1.5 font-extrabold mr-1">Rp</span>
-                    <span>8.999.000</span>
-                  </div>
-                  <p className="text-[14px] font-black text-white/60 tracking-wider uppercase mt-2.5">
-                    / SEKALI PUBLIKASI
-                  </p>
-                </div>
-
-                {/* Features Detail */}
-                <div className="p-6 sm:p-4 sm:p-7 space-y-4 sm:space-y-6 text-left">
-                  {/* Lama Proses */}
-                  <div className="space-y-2">
-                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
-                      LAMA PROSES
-                    </h5>
-                    <div className="flex items-center text-[14px] sm:text-[14px] font-semibold text-gray-700">
-                      <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3.5} />
-                      <span>
-                        <strong className="font-extrabold text-gray-900">1–3 hari kerja</strong> sampai terbit
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Yang Diperoleh */}
-                  <div className="space-y-2.5 border-t border-gray-100 pt-5">
-                    <h5 className="text-[14px] font-black text-[#990202] tracking-wider uppercase">
-                      YANG DIPEROLEH
-                    </h5>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Bebas pilih <strong className="font-extrabold text-gray-900">10 media</strong> publikasi</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Berita terbit <strong className="font-extrabold text-gray-900">permanen</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Garansi <strong className="font-extrabold text-gray-900">100% tayang</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Laporan hasil publikasi</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Bonus Container */}
-                  <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-2.5 shadow-sm border border-black/[0.02]">
-                    <h5 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
-                      BONUS
-                    </h5>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Potongan harga <strong className="font-extrabold text-gray-900">Rp 200.000</strong></span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span><strong className="font-extrabold text-gray-900">100+ E-Course</strong> digital marketing</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span><strong className="font-extrabold text-gray-900">2.500+</strong> Template konten digital</span>
-                      </li>
-                      <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-snug">
-                        <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Kalender konten sosial media</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Order Button */}
-              <div className="p-6 sm:p-7 pt-0">
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket C Press Release. Mohon info lengkap biaya dan prosesnya.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-gray-800 bg-white hover:bg-gray-55 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
-                >
-                  Pilih Paket C
-                </a>
-              </div>
-            </div>
-          </div>
-
-          </div>
-
-          {/* Pricing Bottom Keterangan Penting Section */}
-          <div className="max-w-[1180px] mx-auto bg-[#F0F0F0] rounded-3xl py-5 px-6 sm:py-6.5 sm:px-9 shadow-md border border-black/[0.04] mt-8 sm:mt-5 sm:mt-10 text-left space-y-3 shadow-[0_8px_30px_rgba(0,0,0,0.035)]">
-            <h4 className="text-[14px] font-black text-gray-900">
-              Keterangan penting:
-            </h4>
-            <div className="pl-5 sm:pl-6 space-y-1 text-[14px] sm:text-[14px] text-gray-650 font-normal leading-relaxed">
-              <p>Harga di atas <strong className="font-black text-gray-900">sudah termasuk biaya penerbitan</strong> artikel pada media online yang dipilih.</p>
-              <p>Klien bebas menyediakan artikel sendiri atau meminta bantuan tim kami untuk penulisan.</p>
-              <p>Biaya penulisan artikel oleh tim kami: <strong className="font-black text-gray-900">Rp 2.000.000</strong> (opsional, di luar paket).</p>
-              <p>Panjang artikel berkisar <strong className="font-black text-gray-900">250–500 kata</strong> sesuai standar jurnalistik.</p>
-              <p>Kami terbuka berdiskusi mengenai sudut pandang &amp; arah pembahasan artikel sesuai kebutuhan brand Anda.</p>
-              <p>Penyebutan nama brand pada judul <strong className="font-black text-gray-900">tidak dapat dijamin</strong> — keputusan akhir di pihak redaksi masing-masing media.</p>
-              <p>Kami menjamin <strong className="font-black text-gray-900">100% penerbitan</strong> artikel di media yang dipilih dari daftar yang tersedia.</p>
-              <p>Layanan kami fokus pada <strong className="font-black text-gray-900">produk jurnalistik, bukan advertorial</strong>.</p>
-              <p>Harga yang ditawarkan <strong className="font-black text-gray-900">tidak termasuk backlink</strong>.</p>
-            </div>
-          </div>
-
-          <PricingFooter />
-
-        </div>
-      </section>
-
-      {/* ─── 6.5. PROSES ORDER SECTION ─── */}
-      <section className="bg-white py-8 sm:py-8 sm:py-20">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
-
-          {/* Section Header */}
-          <div className="max-w-3xl mx-auto mb-20 space-y-4">
-            <p className="text-[14px] font-black text-[#990202] uppercase tracking-[0.22em]">PROSES ORDER SAMPAI TERBIT</p>
-            <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-900 leading-tight tracking-tight">
-              5 langkah simpel — berita kamu naik di media.
-            </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
-              Tim kami pegang seluruh proses, kamu cukup approve naskah final &amp; tunggu laporan terbit.
-            </p>
-          </div>
-
-          {/* Vertical Timeline Stack */}
-          <div className="max-w-[900px] mx-auto space-y-6">
-
-            {/* Step 1 */}
-            <div className="flex items-start gap-4 sm:gap-6 text-left">
-              {/* Circular Number */}
-              <div className="w-12 h-12 rounded-full border-2 border-[#990202] text-[#990202] flex items-center justify-center font-bold text-[16px] sm:text-[17px] flex-shrink-0 mt-2 bg-white">
-                01
-              </div>
-
-              {/* White Card */}
-              <div className="flex-1 bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
-                    Konsultasi &amp; Pilih Paket
-                  </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
-                    <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                    <span>1 HARI</span>
-                  </div>
-                </div>
-                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
-                  Diskusi tujuan publikasi, target audiens, &amp; pilih paket (1, 5, atau 10 media) sesuai budget &amp; jangkauan yang dibutuhkan.
-                </p>
-                <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Identifikasi sudut pandang artikel</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Rekomendasi media sesuai industri</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Finalisasi paket &amp; pembayaran</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex items-start gap-4 sm:gap-6 text-left">
-              {/* Circular Number */}
-              <div className="w-12 h-12 rounded-full border-2 border-[#990202] text-[#990202] flex items-center justify-center font-bold text-[16px] sm:text-[17px] flex-shrink-0 mt-2 bg-white">
-                02
-              </div>
-
-              {/* White Card */}
-              <div className="flex-1 bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
-                    Penulisan Artikel
-                  </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
-                    <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                    <span>1 HARI</span>
-                  </div>
-                </div>
-                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
-                  Kamu bisa menyediakan artikel sendiri (250–500 kata), atau minta tim jurnalis kami yang menulis dengan gaya berita profesional.
-                </p>
-                <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Briefing detail untuk tim jurnalis</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Format jurnalistik (bukan iklan)</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Revisi sampai naskah sesuai brand voice</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex items-start gap-4 sm:gap-6 text-left">
-              {/* Circular Number */}
-              <div className="w-12 h-12 rounded-full border-2 border-[#990202] text-[#990202] flex items-center justify-center font-bold text-[16px] sm:text-[17px] flex-shrink-0 mt-2 bg-white">
-                03
-              </div>
-
-              {/* White Card */}
-              <div className="flex-1 bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
-                    Approve Naskah Final
-                  </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
-                    <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                    <span>0,5 HARI</span>
-                  </div>
-                </div>
-                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
-                  Naskah final dikirim untuk review &amp; approval. Pastikan semua info akurat &amp; sesuai pesan yang ingin disampaikan ke publik.
-                </p>
-                <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Review akurasi data &amp; angka</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Cek nama produk, brand, &amp; quote</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Sign-off untuk publikasi</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex items-start gap-4 sm:gap-6 text-left">
-              {/* Circular Number */}
-              <div className="w-12 h-12 rounded-full border-2 border-[#990202] text-[#990202] flex items-center justify-center font-bold text-[16px] sm:text-[17px] flex-shrink-0 mt-2 bg-white">
-                04
-              </div>
-
-              {/* White Card */}
-              <div className="flex-1 bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
-                    Distribusi ke Media
-                  </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
-                    <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                    <span>1–2 HARI</span>
-                  </div>
-                </div>
-                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
-                  Tim kami submit naskah ke redaksi media yang Anda pilih. Tunggu proses editing &amp; publikasi oleh redaksi masing-masing.
-                </p>
-                <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Submit ke redaksi pilihan</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Koordinasi dengan editor</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Penyesuaian editorial (jika ada)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 5 */}
-            <div className="flex items-start gap-4 sm:gap-6 text-left">
-              {/* Circular Number */}
-              <div className="w-12 h-12 rounded-full border-2 border-[#990202] text-[#990202] flex items-center justify-center font-bold text-[16px] sm:text-[17px] flex-shrink-0 mt-2 bg-white">
-                05
-              </div>
-
-              {/* White Card */}
-              <div className="flex-1 bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <h4 className="text-[16px] sm:text-[17px] font-black text-gray-900">
-                    Publikasi &amp; Laporan
-                  </h4>
-                  <div className="bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3.5 rounded-full flex items-center gap-1 flex-shrink-0">
-                    <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                    <span>FINAL</span>
-                  </div>
-                </div>
-                <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
-                  Artikel terbit di semua media yang dipilih. <strong className="font-extrabold text-gray-900">Kami kirim laporan lengkap berisi semua link publikasi</strong> untuk dokumentasi &amp; arsip brand Anda.
-                </p>
-                <div className="pt-3.5 border-t border-gray-100/50 space-y-2">
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Bukti terbit semua media</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Link publikasi siap-share</span>
-                  </div>
-                  <div className="flex items-center text-[14px] font-bold text-gray-700">
-                    <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0" strokeWidth={3.5} />
-                    <span>Laporan resmi untuk arsip</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── 7. FAQ SECTION ─── */}
+      {/* ─── 9. FAQ SECTION ─── */}
       <FAQ items={faqs} />
 
-      {/* ─── 8. CTA SECTION ─── */}
+      {/* ─── 10. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100">
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
 
@@ -1400,7 +938,6 @@ export default function PressRelease() {
         </div>
       </section>
 
-      <MediaCoverage />
     </div>
   );
 }

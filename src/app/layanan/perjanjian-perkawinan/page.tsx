@@ -29,9 +29,36 @@ import {
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import Benefits from "@/components/Benefits";
+import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
+
+const perjanjianBenefits = [
+  {
+    icon: <ShieldCheck className="w-5.5 h-5.5 text-[#990202]" />,
+    title: "Kepastian Hukum Penuh",
+    desc: "Akta Otentik notaris yang didaftarkan resmi ke KUA/Dukcapil, mengikat & diakui pihak ketiga seperti bank dan BPN."
+  },
+  {
+    icon: <User className="w-5.5 h-5.5 text-[#990202]" />,
+    title: "Ditangani Ahli Hukum Keluarga",
+    desc: "Draf disusun oleh Spesialis Hukum Perdata Keluarga, dijelaskan pasal demi pasal, dengan revisi tanpa batas hingga sepakat."
+  },
+  {
+    icon: <FileText className="w-5.5 h-5.5 text-[#990202]" />,
+    title: "Urus Notaris & Registrasi Sekaligus",
+    desc: "Dari tanda tangan Akta di hadapan notaris partner hingga registrasi resmi ke KUA/Dukcapil — seluruh proses kami pegang."
+  },
+  {
+    icon: <Shield className="w-5.5 h-5.5 text-[#990202]" />,
+    title: "Konsultasi Rahasia & Aman",
+    desc: "Diskusi seputar aset, utang, dan kebutuhan pribadi Anda & pasangan dijaga kerahasiaannya oleh tim legal kami."
+  }
+];
 
 export default function PerjanjianPerkawinan() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -161,6 +188,86 @@ export default function PerjanjianPerkawinan() {
     }
   ];
 
+
+  const pricingPackages: PricingPackage[] = [
+    {
+      title: "PEMBUATAN PERJANJIAN",
+      price: "3.999.000",
+      strikePrice: "Rp 8.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      isPopular: true,
+      buttonText: "Pilih Pembuatan Perjanjian",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pembuatan Perjanjian Perkawinan. Mohon info lengkap biaya dan prosesnya."),
+      groups: [
+        {
+          title: "LAMA PROSES(1)",
+          items: [{ text: "7–14 hari kerja", checked: true }]
+        },
+        {
+          title: "YANG DIPEROLEH",
+          items: [
+            { text: "Konsultasi Pisah Harta dengan ahli hukum keluarga", checked: true },
+            { text: "Akta Perjanjian Pisah Harta di hadapan notaris", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          items: [
+            { text: "Layanan Personal Legal Assistance", checked: true },
+            { text: "1 Kupon Undian iPhone", checked: true }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          items: [
+            { text: "Voucher EasyLegal Rp 250.000", checked: true },
+            { text: "Dokumen SOP Karyawan", checked: true },
+            { text: "Dokumen SOP Perusahaan", checked: true },
+            { text: "Dokumen Kontrak Bisnis", checked: true }
+          ]
+        }
+      ]
+    },
+    {
+      title: "REGISTRASI KUA / DUKCAPIL",
+      price: "1.999.000",
+      strikePrice: "Rp 4.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      isPopular: false,
+      buttonText: "Pilih Registrasi Saja",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Registrasi Perjanjian Perkawinan. Mohon info lengkap biaya dan prosesnya."),
+      groups: [
+        {
+          title: "LAMA PROSES(2)",
+          items: [{ text: "7–14 hari kerja", checked: true }]
+        },
+        {
+          title: "YANG DIPEROLEH",
+          items: [
+            { text: <div className="flex-1 grid grid-cols-12 gap-x-1"><span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span><span className="col-span-6 sm:col-span-3 font-bold text-gray-900">KUA Kota Bandung</span><span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Muslim)</span></div>, checked: true },
+            { text: <div className="flex-1 grid grid-cols-12 gap-x-1"><span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span><span className="col-span-6 sm:col-span-3 font-bold text-gray-900">Dukcapil Kota Bandung</span><span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Non-Muslim)</span></div>, checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          items: [
+            { text: "Layanan Personal Legal Assistance", checked: true },
+            { text: "1 Kupon Undian iPhone", checked: true }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          items: [
+            { text: "Voucher EasyLegal Rp 250.000", checked: true },
+            { text: "Dokumen SOP Karyawan", checked: true },
+            { text: "Dokumen SOP Perusahaan", checked: true },
+            { text: "Dokumen Kontrak Bisnis", checked: true }
+          ]
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="has-service-cta flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
 
@@ -195,7 +302,7 @@ export default function PerjanjianPerkawinan() {
 
               {/* Headline */}
               <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.15] tracking-tight">
-                Lindungi aset pribadi dengan <span className="text-[#990202]">Perjanjian Pisah Harta</span> resmi.
+                Lindungi aset pribadi dengan <span className="text-[#990202]">Perjanjian Pisah Harta</span> resmi
               </h1>
 
               {/* Description */}
@@ -300,7 +407,108 @@ export default function PerjanjianPerkawinan() {
         </div>
       </section>
 
-      {/* ─── 2. PENJELASAN SECTION ─── */}
+      {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
+      <MediaCoverage />
+
+      {/* ─── 3. BENEFITS SECTION ─── */}
+      <Benefits
+        sectionTitleTag="KEUNGGULAN KAMI"
+        sectionTitle="Mengapa Pilih EasyLegal?"
+        items={perjanjianBenefits}
+      />
+
+      {/* ─── 4. HARGA & PAKET SECTION ─── */}
+      <BottomPromoSection />
+      <Pricing 
+        sectionTitleTag="BIAYA PERJANJIAN PERKAWINAN"
+        sectionTitle="2 layanan — bisa pilih salah satu atau kombinasi."
+        sectionSubtitle={
+          <>
+            Pembuatan akta & registrasi resmi bisa dipesan terpisah. Tim kami rekomendasikan keduanya untuk perlindungan hukum penuh.
+          </>
+        }
+        packages={pricingPackages}
+        footnotes={["(1) Estimasi waktu untuk drafting perjanjian & penandatanganan di hadapan notaris.", "(2) Estimasi waktu pendaftaran setelah Akta Notaris selesai. Tergantung jadwal KUA/Dukcapil setempat."]}
+      />
+
+      {/* ─── 5. ALUR PROSES SECTION ─── */}
+      <section className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
+
+          {/* Section Header */}
+          <div className="max-w-3xl mx-auto mb-20 space-y-3">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SKEMA PEMBUATAN</p>
+            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
+              Alur kerja dari konsultasi sampai registrasi.
+            </h2>
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
+              Tim notaris &amp; legal kami pegang seluruh tahapan — Anda cukup datang sekali untuk tanda tangan.
+            </p>
+            {/* Scroll indicator text */}
+            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+              <span>Geser untuk lihat semua langkah</span>
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
+            </div>
+          </div>
+
+          {/* Horizontal Scrollable Row */}
+          <div className="relative max-w-[1240px] mx-auto">
+            
+            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
+              {steps.map((step, idx) => (
+                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
+                  
+                  {/* Number Badge (Centered on top border) */}
+                  <div className="absolute top-0 left-6 w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                    {step.no}
+                  </div>
+                  
+                  {/* Card Container */}
+                  <div className="bg-white rounded-[24px] py-6 px-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                    <div className="space-y-3">
+                      
+                      {/* Title */}
+                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
+                        {step.title}
+                      </h4>
+                      
+                      {/* Duration Badge */}
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
+                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
+                        <span>{step.duration}</span>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+
+                    </div>
+
+                    <div>
+                      {/* Dotted Divider */}
+                      <div className="border-t border-dashed border-gray-200 my-4"></div>
+
+                      {/* Checklist */}
+                      <ul className="space-y-2">
+                        {step.points.map((point, pIdx) => (
+                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
+                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                            <span dangerouslySetInnerHTML={{ __html: point }} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── 6. PENJELASAN SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
 
@@ -432,7 +640,7 @@ export default function PerjanjianPerkawinan() {
         </div>
       </section>
 
-      {/* ─── 2.5. DOKUMEN PERSYARATAN SECTION ─── */}
+      {/* ─── 7. DOKUMEN PERSYARATAN SECTION ─── */}
       <section className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
 
@@ -542,347 +750,13 @@ export default function PerjanjianPerkawinan() {
         </div>
       </section>
 
-      {/* ─── 5. HARGA & PAKET SECTION ─── */}
-      <section id="paket-harga" className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
+      {/* ─── 8. TESTIMONIALS SECTION ─── */}
+      <Testimonials />
 
-          {/* Section Header */}
-          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
-            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">BIAYA PERJANJIAN PERKAWINAN</p>
-              <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
-                2 layanan — bisa pilih salah satu atau kombinasi.
-              </h2>
-              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed">
-                Pembuatan akta &amp; registrasi resmi bisa dipesan terpisah. Tim kami rekomendasikan keduanya untuk perlindungan hukum penuh.
-              </p>
-            </div>
-            <div className="flex-shrink-0 flex justify-start md:justify-end">
-              <Image 
-                src="/images/badges/promo-50.png" 
-                alt="Promo 50% Off Legal Deals" 
-                width={280} 
-                height={120}
-                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </div>
-
-          {/* Pricing Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto items-stretch">
-
-            {/* Left Card: Pembuatan Perjanjian */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[28px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-[28px] overflow-hidden flex flex-col h-full justify-between border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] transition-all duration-300">
-                <div>
-                  {/* Header Container (Crimson) */}
-                  <div className="bg-[#990202] px-6 py-9 text-center text-white relative flex flex-col items-center">
-                    {/* Paling Populer Badge */}
-                    <div className="bg-[#800000] text-white text-[14px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider mb-3.5 shadow-sm border border-red-500/20">
-                      Paling Populer
-                    </div>
-                    <h4 className="text-[14px] sm:text-[14px] font-black tracking-widest uppercase">
-                      PEMBUATAN PERJANJIAN
-                    </h4>
-                    <div className="mt-3 text-[14px] text-white/50 line-through font-bold">
-                      Rp 8.000.000
-                    </div>
-                    <div className="mt-0.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
-                      <span className="text-[18px] mt-1.5 font-extrabold mr-1">Rp</span>
-                      <span>3.999.000</span>
-                    </div>
-                    <p className="text-[14px] font-black text-white/70 tracking-widest uppercase mt-2.5">
-                      TANPA TAMBAHAN BIAYA APAPUN
-                    </p>
-                  </div>
-
-                  {/* Features Detail */}
-                  <div className="p-6 sm:p-8 space-y-6 text-left">
-                    {/* Lama Proses */}
-                    <div className="space-y-2">
-                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">
-                        LAMA PROSES(1)
-                      </h5>
-                      <div className="flex items-center text-[14px] font-black text-gray-900">
-                        <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0" strokeWidth={3.5} />
-                        <span>7–14 hari kerja</span>
-                      </div>
-                    </div>
-
-                    {/* Yang Diperoleh */}
-                    <div className="space-y-3.5 border-t border-gray-100 pt-5">
-                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
-                        YANG DIPEROLEH
-                      </h5>
-                      <div className="flex items-start text-[14px] text-gray-700 leading-relaxed font-semibold">
-                        <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                        <span>Konsultasi Pisah Harta dengan ahli hukum keluarga</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 leading-relaxed font-semibold">
-                        <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                        <span>Akta Perjanjian Pisah Harta di hadapan notaris</span>
-                      </div>
-                    </div>
-
-                    {/* Bonus Block */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
-                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
-                        BONUS
-                      </h5>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Layanan Personal Legal Assistance</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>1 Kupon Undian iPhone</span>
-                      </div>
-                    </div>
-
-                    {/* Extra Bonus Block */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
-                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
-                        EXTRA BONUS
-                      </h5>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Voucher EasyLegal Rp 250.000</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Dokumen SOP Karyawan</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Dokumen SOP Perusahaan</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Dokumen Kontrak Bisnis</span>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-                {/* Order Button */}
-                <div className="p-6 sm:p-8 pt-0">
-                  <a
-                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pembuatan Perjanjian Perkawinan. Mohon info lengkap biaya dan prosesnya.")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-white bg-[#990202] hover:bg-[#800000] hover:scale-[1.01] transition-all duration-200 cursor-pointer shadow-md shadow-red-900/10"
-                  >
-                    Pilih Pembuatan Perjanjian
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Card: Registrasi KUA / Dukcapil */}
-            <div className="relative group h-full">
-              {/* Interactive Red Hover Glow behind Card */}
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[28px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              
-              <div className="bg-white rounded-[28px] overflow-hidden flex flex-col h-full justify-between shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.01)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300">
-                <div>
-                  {/* Header Container (Black) */}
-                  <div className="bg-[#151515] px-6 py-9 text-center text-white relative flex flex-col items-center justify-center min-h-[174px]">
-                    <h4 className="text-[14px] sm:text-[14px] font-black tracking-widest uppercase">
-                      REGISTRASI KUA / DUKCAPIL
-                    </h4>
-                    <div className="mt-3 text-[14px] text-white/40 line-through font-bold">
-                      Rp 4.000.000
-                    </div>
-                    <div className="mt-0.5 text-[34px] sm:text-[38px] font-black tracking-tight flex items-start justify-center text-white">
-                      <span className="text-[18px] mt-1.5 font-extrabold mr-1">Rp</span>
-                      <span>1.999.000</span>
-                    </div>
-                    <p className="text-[14px] font-black text-white/60 tracking-widest uppercase mt-2.5">
-                      TANPA TAMBAHAN BIAYA APAPUN
-                    </p>
-                  </div>
-
-                  {/* Features Detail */}
-                  <div className="p-6 sm:p-8 space-y-6 text-left">
-                    {/* Lama Proses */}
-                    <div className="space-y-2">
-                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">
-                        LAMA PROSES(2)
-                      </h5>
-                      <div className="flex items-center text-[14px] font-black text-gray-900">
-                        <Check className="w-5 h-5 text-emerald-600 mr-2.5 flex-shrink-0" strokeWidth={3.5} />
-                        <span>7–14 hari kerja</span>
-                      </div>
-                    </div>
-
-                    {/* Yang Diperoleh */}
-                    <div className="space-y-3.5 border-t border-gray-100 pt-5">
-                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-3">
-                        YANG DIPEROLEH
-                      </h5>
-                      <div className="flex items-start gap-2.5 text-[14px] text-gray-700 leading-relaxed font-semibold">
-                        <Check className="w-5 h-5 text-emerald-600 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                        <div className="flex-1 grid grid-cols-12 gap-x-1">
-                          <span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span>
-                          <span className="col-span-6 sm:col-span-3 font-bold text-gray-900">KUA Kota Bandung</span>
-                          <span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Muslim)</span>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2.5 text-[14px] text-gray-700 leading-relaxed font-semibold">
-                        <Check className="w-5 h-5 text-emerald-600 mr-0.5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                        <div className="flex-1 grid grid-cols-12 gap-x-1">
-                          <span className="col-span-12 sm:col-span-6 font-semibold text-gray-700">Registrasi Perjanjian Pisah Harta di</span>
-                          <span className="col-span-6 sm:col-span-3 font-bold text-gray-900">Dukcapil Kota Bandung</span>
-                          <span className="col-span-6 sm:col-span-3 text-gray-500 font-medium text-right sm:text-left sm:pl-1">(untuk Non-Muslim)</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bonus Block */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
-                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
-                        BONUS
-                      </h5>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Layanan Personal Legal Assistance</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>1 Kupon Undian iPhone</span>
-                      </div>
-                    </div>
-
-                    {/* Extra Bonus Block */}
-                    <div className="bg-[#F7F7F7] rounded-2xl p-4.5 space-y-3 shadow-md border border-black/[0.03]">
-                      <h5 className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase mb-1">
-                        EXTRA BONUS
-                      </h5>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Voucher EasyLegal Rp 250.000</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Dokumen SOP Karyawan</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Dokumen SOP Perusahaan</span>
-                      </div>
-                      <div className="flex items-start text-[14px] text-gray-700 font-semibold leading-relaxed">
-                        <Check className="w-4.5 h-4.5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                        <span>Dokumen Kontrak Bisnis</span>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-                {/* Order Button */}
-                <div className="p-6 sm:p-8 pt-0">
-                  <a
-                    href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Registrasi KUA / Dukcapil Perjanjian Perkawinan. Mohon info lengkap biaya dan prosesnya.")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-4 text-center font-black text-[14px] rounded-xl text-gray-800 bg-white hover:bg-gray-50 border border-gray-250 hover:border-gray-400 transition-all duration-200 cursor-pointer shadow-sm"
-                  >
-                    Pilih Registrasi KUA / Dukcapil
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <PricingFooter />
-        </div>
-      </section>
-
-      {/* ─── 6. ALUR PROSES SECTION ─── */}
-      <section className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
-
-          {/* Section Header */}
-          <div className="max-w-3xl mx-auto mb-20 space-y-3">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SKEMA PEMBUATAN</p>
-            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              Alur kerja dari konsultasi sampai registrasi.
-            </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
-              Tim notaris &amp; legal kami pegang seluruh tahapan — Anda cukup datang sekali untuk tanda tangan.
-            </p>
-            {/* Scroll indicator text */}
-            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
-              <span>Geser untuk lihat semua langkah</span>
-              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
-            </div>
-          </div>
-
-          {/* Horizontal Scrollable Row */}
-          <div className="relative max-w-[1240px] mx-auto">
-            
-            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
-              {steps.map((step, idx) => (
-                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
-                  
-                  {/* Number Badge (Centered on top border) */}
-                  <div className="absolute top-0 left-6 w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
-                    {step.no}
-                  </div>
-                  
-                  {/* Card Container */}
-                  <div className="bg-white rounded-[24px] py-6 px-5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
-                    <div className="space-y-3">
-                      
-                      {/* Title */}
-                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
-                        {step.title}
-                      </h4>
-                      
-                      {/* Duration Badge */}
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
-                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                        <span>{step.duration}</span>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
-
-                    </div>
-
-                    <div>
-                      {/* Dotted Divider */}
-                      <div className="border-t border-dashed border-gray-200 my-4"></div>
-
-                      {/* Checklist */}
-                      <ul className="space-y-2">
-                        {step.points.map((point, pIdx) => (
-                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
-                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                            <span dangerouslySetInnerHTML={{ __html: point }} />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── 7. FAQ SECTION ─── */}
+      {/* ─── 9. FAQ SECTION ─── */}
       <FAQ items={faqs} />
 
-      {/* ─── 8. CTA SECTION ─── */}
+      {/* ─── 10. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-150/60">
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
 
@@ -931,8 +805,6 @@ export default function PerjanjianPerkawinan() {
 
         </div>
       </section>
-
-      <MediaCoverage />
     </div>
   );
 }
