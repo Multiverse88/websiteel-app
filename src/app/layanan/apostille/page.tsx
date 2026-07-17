@@ -20,6 +20,7 @@ import Pricing, { PricingPackage } from "@/components/Pricing";
 import FadeIn from "@/components/FadeIn";
 import PricingFooter from "@/components/PricingFooter";
 import { getWhatsAppLink } from "@/lib/config";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
 
 // --- FAQ & pricing data from PDF brief ---
 const faqs = [
@@ -300,131 +301,47 @@ export default function ApostillePage() {
         </div>
       </section>
 
-      {/* ─── 2. APA ITU APOSTILLE ─── */}
-      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      {/* ─── 2. LIPUTAN MEDIA (DENSE SINGLE ROW STRIP) ─── */}
+      <section className="py-12 bg-[#FAF9F9] border-y border-gray-200/50">
+        <div className="max-w-[1280px] mx-auto px-6 sm:px-12">
+          <div className="text-center mb-8">
+            <span className="inline-block text-[14px] font-black text-gray-400 uppercase tracking-widest">
+              LIPUTAN MEDIA EASYLEGAL
+            </span>
+          </div>
 
-            {/* Left: Image + Floating Badge */}
-            <div className="lg:col-span-5 relative w-full flex items-center justify-center">
-              <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
-                <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1]">
-                  <Image
-                    src="/cerita-kami-team.webp"
-                    alt="Tim EasyLegal - Proses Legalisasi Dokumen Apostille"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 480px"
-                    className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
-                  />
-                </div>
-
-                {/* Floating Badge: Dasar Hukum */}
-                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[220px] transition-transform hover:-translate-y-1 duration-300">
-                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
-                    <ShieldCheck className="w-5 h-5 stroke-[2.2]" />
-                  </div>
-                  <div>
-                    <div className="text-[14px] font-black text-gray-900 leading-none">Konvensi Hague</div>
-                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">Sejak 2022 · 129+ negara</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Definition Text */}
-            <div className="lg:col-span-7">
-              <div className="mb-10">
-                <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
-                  APA ITU APOSTILLE?
-                </span>
-                <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[42px] font-extrabold text-gray-950 tracking-tight leading-[1.15] mb-6">
-                  Legalisasi Dokumen <span className="text-[#990202]">Internasional</span>
-                </h2>
-                <p className="text-[15px] text-gray-500 leading-relaxed font-semibold">
-                  Apostille adalah tindakan pengesahan yang memverifikasi keaslian tanda tangan pejabat, cap/segel resmi, serta nama jabatan dan instansi penerbit pada dokumen publik.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                {[
-                  { title: "Berlaku di 129+ Negara", desc: "Termasuk AS, Australia, Jepang, Eropa, dan negara anggota Konvensi Hague lainnya." },
-                  { title: "Untuk Siapa?", desc: "WNI yang akan bekerja, studi, menikah, atau berbisnis di luar negeri." },
-                  { title: "Lebih Ringkas", desc: "Satu langkah di Kemenkumham — tidak perlu legalisir Kemlu atau kedubes." },
-                  { title: "Proses 100% Online", desc: "Melalui Sistem AHU Online (layanan.ahu.go.id) — bisa diurus dari mana saja." }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4 p-4 bg-[#FAF9F9] rounded-2xl border border-gray-100">
-                    <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-4 h-4" strokeWidth={3} />
-                    </div>
-                    <div>
-                      <h3 className="font-heading font-black text-[15px] text-gray-950 mb-1">{item.title}</h3>
-                      <p className="text-[14px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            {[
+              "Detik Finance", "Kontan", "IDN Times", "JPNN",
+              "Jawa Pos", "SindoNews", "Industry.co.id", "Tribunnews Jakarta"
+            ].map((media, idx) => (
+              <span
+                key={idx}
+                className="text-[14px] font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider cursor-default select-none"
+              >
+                {media}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ─── 3. DOKUMEN APA SAJA ─── */}
-      <section className="py-20 sm:py-28 bg-[#F9FAFB] border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
-              DOKUMEN APA SAJA YANG BISA DI-APOSTILLE?
-            </span>
-            <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
-              Jenis Dokumen yang Dapat Diproses
-            </h2>
-          </div>
+      {/* ─── 3. SERTIFIKASI & LEGALITAS (3-COL WITH RULES) ─── */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[900px] mx-auto px-6 sm:px-12 text-center">
+          <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.25em] mb-4">
+            SERTIFIKASI &amp; LEGALITAS EASYLEGAL
+          </span>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 mt-12">
             {[
-              {
-                num: "01",
-                title: "Dokumen Hukum & Notaris",
-                desc: "Surat Kuasa, Akta Pendirian Perusahaan, Sertifikat Saham, Dokumen Kontrak, Dokumen Pengadilan",
-                icon: "📋"
-              },
-              {
-                num: "02",
-                title: "Dokumen Kependudukan & Sipil",
-                desc: "Akta Kelahiran, Akta Perkawinan (Buku Nikah), Akta Perceraian, Akta Kematian, KTP, Kartu Keluarga",
-                icon: "🏠"
-              },
-              {
-                num: "03",
-                title: "Dokumen Pendidikan",
-                desc: "Ijazah, Transkrip Nilai, Surat Keterangan Hasil Ujian (umumnya perlu legalisir Kemendikbud/Notaris terlebih dahulu)",
-                icon: "🎓"
-              },
-              {
-                num: "04",
-                title: "Dokumen Kepolisian & Kesehatan",
-                desc: "SKCK, Surat Keterangan Sehat, Sertifikat Vaksinasi/Karantina",
-                icon: "🏥"
-              },
-              {
-                num: "05",
-                title: "Dokumen Terjemahan",
-                desc: "Dokumen yang telah diterjemahkan oleh Penerjemah Tersumpah (sworn translator)",
-                icon: "🌐"
-              }
+              { title: "ISO 9001:2015", desc: "Sistem Manajemen Mutu" },
+              { title: "ISO 27001:2022", desc: "Sistem Manajemen Keamanan Informasi" },
+              { title: "PSE Kominfo", desc: "Penyelenggara Sistem Elektronik Terdaftar" }
             ].map((item, idx) => (
-              <div key={idx} className="group relative bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:border-[#990202]/20 transition-all duration-300">
-                <div className="text-2xl mb-4">{item.icon}</div>
-                <span className="font-heading font-black text-[14px] text-[#990202]/40 block mb-3 tracking-wider">
-                  {item.num}
-                </span>
-                <h3 className="font-heading font-black text-[15px] text-gray-950 leading-snug mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-[14px] text-gray-500 leading-relaxed font-semibold">
-                  {item.desc}
-                </p>
+              <div key={idx} className="py-6 md:py-0 md:px-6">
+                <h3 className="font-heading font-black text-lg text-gray-950 mb-1">{item.title}</h3>
+                <p className="text-[14px] text-gray-500 font-semibold uppercase tracking-wider">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -479,7 +396,9 @@ export default function ApostillePage() {
 
       {/* ─── 5. BIAYA JASA APOSTILLE (PRICING) ─── */}
       <div id="paket-harga">
-        <Pricing
+        <BottomPromoSection />
+
+      <Pricing hideFooter={true}
           sectionTitleTag="BIAYA JASA APOSTILLE"
           sectionTitle="Paket Jasa Apostille"
           sectionSubtitle={
@@ -491,8 +410,8 @@ export default function ApostillePage() {
         />
       </div>
 
-      {/* ─── 6. ALUR PROSES (SIGNATURE SECTION - FULL BLEED CRIMSON) ─── */}
-      <section ref={railRef} className="py-24 sm:py-32 bg-[#990202] text-white overflow-hidden relative">
+      {/* ─── 6. ALUR PROSES (SIGNATURE SECTION - FULL BLEED) ─── */}
+      <section ref={railRef} className="py-24 sm:py-32 bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] text-white overflow-hidden relative">
         <div className="max-w-[1280px] mx-auto px-6 sm:px-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <span className="inline-block text-[14px] font-black text-white/70 uppercase tracking-[0.25em] mb-4">
@@ -584,7 +503,138 @@ export default function ApostillePage() {
         </div>
       </section>
 
-      {/* ─── 7. SYARAT DOKUMEN ─── */}
+      {/* ─── 7. APA ITU APOSTILLE ─── */}
+      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+            {/* Left: Image + Floating Badge */}
+            <div className="lg:col-span-5 relative w-full flex items-center justify-center">
+              <div className="relative w-full max-w-[480px] lg:max-w-none px-4 sm:px-0">
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white group aspect-[1.1]">
+                  <Image
+                    src="/cerita-kami-team.webp"
+                    alt="Tim EasyLegal - Proses Legalisasi Dokumen Apostille"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
+                  />
+                </div>
+
+                {/* Floating Badge: Dasar Hukum */}
+                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[220px] transition-transform hover:-translate-y-1 duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
+                    <ShieldCheck className="w-5 h-5 stroke-[2.2]" />
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Konvensi Hague</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">Sejak 2022 · 129+ negara</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Definition Text */}
+            <div className="lg:col-span-7">
+              <div className="mb-10">
+                <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
+                  APA ITU APOSTILLE?
+                </span>
+                <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[42px] font-extrabold text-gray-950 tracking-tight leading-[1.15] mb-6">
+                  Legalisasi Dokumen <span className="text-[#990202]">Internasional</span>
+                </h2>
+                <p className="text-[15px] text-gray-500 leading-relaxed font-semibold">
+                  Apostille adalah tindakan pengesahan yang memverifikasi keaslian tanda tangan pejabat, cap/segel resmi, serta nama jabatan dan instansi penerbit pada dokumen publik.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  { title: "Berlaku di 129+ Negara", desc: "Termasuk AS, Australia, Jepang, Eropa, dan negara anggota Konvensi Hague lainnya." },
+                  { title: "Untuk Siapa?", desc: "WNI yang akan bekerja, studi, menikah, atau berbisnis di luar negeri." },
+                  { title: "Lebih Ringkas", desc: "Satu langkah di Kemenkumham — tidak perlu legalisir Kemlu atau kedubes." },
+                  { title: "Proses 100% Online", desc: "Melalui Sistem AHU Online (layanan.ahu.go.id) — bisa diurus dari mana saja." }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-4 p-4 bg-[#FAF9F9] rounded-2xl border border-gray-100">
+                    <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-4 h-4" strokeWidth={3} />
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-black text-[15px] text-gray-950 mb-1">{item.title}</h3>
+                      <p className="text-[14px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 8. DOKUMEN APA SAJA ─── */}
+      <section className="py-20 sm:py-28 bg-[#F9FAFB] border-b border-gray-200/40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
+              DOKUMEN APA SAJA YANG BISA DI-APOSTILLE?
+            </span>
+            <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
+              Jenis Dokumen yang Dapat Diproses
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+            {[
+              {
+                num: "01",
+                title: "Dokumen Hukum & Notaris",
+                desc: "Surat Kuasa, Akta Pendirian Perusahaan, Sertifikat Saham, Dokumen Kontrak, Dokumen Pengadilan",
+                icon: "📋"
+              },
+              {
+                num: "02",
+                title: "Dokumen Kependudukan & Sipil",
+                desc: "Akta Kelahiran, Akta Perkawinan (Buku Nikah), Akta Perceraian, Akta Kematian, KTP, Kartu Keluarga",
+                icon: "🏠"
+              },
+              {
+                num: "03",
+                title: "Dokumen Pendidikan",
+                desc: "Ijazah, Transkrip Nilai, Surat Keterangan Hasil Ujian (umumnya perlu legalisir Kemendikbud/Notaris terlebih dahulu)",
+                icon: "🎓"
+              },
+              {
+                num: "04",
+                title: "Dokumen Kepolisian & Kesehatan",
+                desc: "SKCK, Surat Keterangan Sehat, Sertifikat Vaksinasi/Karantina",
+                icon: "🏥"
+              },
+              {
+                num: "05",
+                title: "Dokumen Terjemahan",
+                desc: "Dokumen yang telah diterjemahkan oleh Penerjemah Tersumpah (sworn translator)",
+                icon: "🌐"
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="group relative bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:border-[#990202]/20 transition-all duration-300">
+                <div className="text-2xl mb-4">{item.icon}</div>
+                <span className="font-heading font-black text-[14px] text-[#990202]/40 block mb-3 tracking-wider">
+                  {item.num}
+                </span>
+                <h3 className="font-heading font-black text-[15px] text-gray-950 leading-snug mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-[14px] text-gray-500 leading-relaxed font-semibold">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 9. SYARAT DOKUMEN ─── */}
       <section className="py-20 sm:py-28 bg-[#F9FAFB] border-b border-gray-200/40">
         <div className="max-w-[1080px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -665,60 +715,6 @@ export default function ApostillePage() {
               <strong className="text-[#990202]">Catatan Pejabat Belum Terdaftar:</strong> Jika data pejabat belum ada di database AHU, terdapat 2 jalur: (1) legalisasi melalui notaris seperti waarmeerking, atau (2) permintaan spesimen tanda tangan, paraf & cap stempel dari instansi pejabat bersangkutan.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* ─── 8. LIPUTAN MEDIA (DENSE SINGLE ROW STRIP) ─── */}
-      <section className="py-12 bg-[#FAF9F9] border-y border-gray-200/50">
-        <div className="max-w-[1280px] mx-auto px-6 sm:px-12">
-          <div className="text-center mb-8">
-            <span className="inline-block text-[14px] font-black text-gray-400 uppercase tracking-widest">
-              LIPUTAN MEDIA EASYLEGAL
-            </span>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            {[
-              "Detik Finance", "Kontan", "IDN Times", "JPNN",
-              "Jawa Pos", "SindoNews", "Industry.co.id", "Tribunnews Jakarta"
-            ].map((media, idx) => (
-              <span
-                key={idx}
-                className="text-[14px] font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider cursor-default select-none"
-              >
-                {media}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── 9. SERTIFIKASI & LEGALITAS (3-COL WITH RULES) ─── */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[900px] mx-auto px-6 sm:px-12 text-center">
-          <span className="inline-block text-[14px] font-black text-[#990202] uppercase tracking-[0.25em] mb-4">
-            SERTIFIKASI &amp; LEGALITAS EASYLEGAL
-          </span>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 mt-12">
-            {[
-              { title: "ISO 9001:2015", desc: "Sistem Manajemen Mutu" },
-              { title: "ISO 27001:2022", desc: "Sistem Manajemen Keamanan Informasi" },
-              { title: "PSE Kominfo", desc: "Penyelenggara Sistem Elektronik Terdaftar" }
-            ].map((item, idx) => (
-              <div key={idx} className="py-6 md:py-0 md:px-6">
-                <h3 className="font-heading font-black text-lg text-gray-950 mb-1">{item.title}</h3>
-                <p className="text-[14px] text-gray-500 font-semibold uppercase tracking-wider">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── 9.5 TRANSAKSI AMAN VIA MARKETPLACE ─── */}
-      <section className="py-16 bg-[#FAF9F9] border-t border-gray-200/50">
-        <div className="max-w-[1240px] mx-auto px-4">
-          <PricingFooter />
         </div>
       </section>
 

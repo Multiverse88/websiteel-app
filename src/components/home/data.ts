@@ -66,6 +66,7 @@ export const heroSlides = [
 
 export const quickTools = [
   {
+    tag: "",
     title: "Cek Nama PT & Merek",
     desc: "Hindari nama yang sudah dipakai sebelum mendaftar.",
     cta: "Cek sekarang",

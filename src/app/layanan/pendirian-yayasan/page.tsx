@@ -15,6 +15,7 @@ import {
   FileText,
   Eye,
   UserCheck,
+  Handshake,
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
@@ -23,7 +24,10 @@ import Pricing, { PricingPackage, FootnoteItem } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
 import Benefits from "@/components/Benefits";
+import Testimonials from "@/components/home/Testimonials";
+import CTA from "@/components/CTA";
 import { getWhatsAppLink } from "@/lib/config";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
 
 export default function PendirianYayasan() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -309,6 +313,13 @@ export default function PendirianYayasan() {
     },
   ];
 
+  const mengapaPilihKamiItems = [
+    { title: "Praktis, Fleksibel & Cepat", desc: "Selesaikan semua urusan legalitas yayasan dari mana saja tanpa perlu mondar-mandir.", icon: <Clock className="w-5 h-5 stroke-[2]" /> },
+    { title: "Biaya Hemat & Transparan", desc: "Tidak ada biaya tersembunyi. Semua biaya yang Anda bayarkan sudah termasuk biaya resmi pemerintah.", icon: <DollarSign className="w-5 h-5 stroke-[2]" /> },
+    { title: "Keamanan Data Terjamin", desc: "Kerahasiaan data yayasan & organ pengurus Anda adalah prioritas utama kami dengan sistem yang sangat aman.", icon: <ShieldCheck className="w-5 h-5 stroke-[2]" /> },
+    { title: "Gratis Konsultasi Legal", desc: "Tim ahli kami siap memberikan panduan hukum terbaik tanpa biaya tambahan untuk klien.", icon: <Handshake className="w-5 h-5 stroke-[2]" /> },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen">
          {/* ─── 1. HERO SECTION ─── */}
@@ -344,7 +355,7 @@ export default function PendirianYayasan() {
               {/* Headline */}
               <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Bangun dampak sosial <br />
-                dengan <span className="text-[#990202]">yayasan yang <br /> sah</span>.
+                dengan <span className="text-[#990202]">yayasan yang <br /> sah</span>
               </h1>
 
               {/* Description */}
@@ -450,10 +461,111 @@ export default function PendirianYayasan() {
         </div>
       </section>
 
-      {/* ─── 2. PENGERTIAN YAYASAN ─── */}
+      {/* ─── 2. MEDIA COVERAGE (TRUST SIGNAL) ─── */}
+      <MediaCoverage />
+
+      {/* ─── 3. MENGAPA PILIH EASYLEGAL (VALUE PROPOSITION) ─── */}
+      <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={mengapaPilihKamiItems} />
+
+      {/* ─── 4. PAKET PRICING ─── */}
+      <BottomPromoSection />
+
+      <Pricing hideFooter={true}
+        sectionTitleTag="BIAYA JASA PENDIRIAN YAYASAN"
+        sectionTitle="Pilih paket sesuai kebutuhan yayasan Anda."
+        sectionSubtitle={
+          <span>
+            Harga sudah include semua biaya — notaris, AHU Kemenkumham, NPWP, dan jasa kami.{" "}
+            <br />
+            Tidak ada tambahan biaya apapun di tengah proses.{" "}
+            <span className="text-[#990202] font-extrabold">Diskon 50% — kuota terbatas!</span>
+          </span>
+        }
+        packages={pricingPackages}
+        footnotes={pricingFootnotes}
+      />
+
+      {/* ─── 5. PROSES PEMBUATAN YAYASAN ─── */}
+      <section className="bg-[#F9FAFB] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES PENDIRIAN YAYASAN</p>
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+              7 langkah pendirian yayasan, kami pandu sampai akta di tangan.
+            </h2>
+            <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium">
+              Dari konsultasi awal sampai dokumen lengkap diterima — estimasi 2 hari kerja untuk akta pendirian, 5–7 hari kerja untuk dokumen lainnya.
+            </p>
+            {/* Scroll indicator text */}
+            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+              <span>Geser untuk lihat semua langkah</span>
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
+            </div>
+          </div>
+
+          {/* Horizontal Scrollable Row */}
+          <div className="relative max-w-[1240px] mx-auto">
+
+            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
+              {steps.map((step, idx) => (
+                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
+
+                  {/* Number Badge (Centered on top border) */}
+                  <div className="absolute top-0 left-6 w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                    {step.no}
+                  </div>
+
+                  {/* Card Container */}
+                  <div className="bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-[24px] py-6 px-5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
+                    <div className="space-y-3">
+
+                      {/* Title */}
+                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
+                        {step.title}
+                      </h4>
+
+                      {/* Duration Badge */}
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
+                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
+                        <span>{step.duration}</span>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+
+                    </div>
+
+                    <div>
+                      {/* Dotted Divider */}
+                      <div className="border-t border-dashed border-gray-200 my-4"></div>
+
+                      {/* Checklist */}
+                      <ul className="space-y-2">
+                        {step.points.map((point, pIdx) => (
+                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
+                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── 6. PENGERTIAN YAYASAN ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
+
           <div className="mb-14">
             <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.18em] mb-2">PENGERTIAN YAYASAN</p>
             <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
@@ -527,7 +639,7 @@ export default function PendirianYayasan() {
         </div>
       </section>
 
-      {/* ─── 2.5. ORGAN YAYASAN ─── */}
+      {/* ─── 7. ORGAN YAYASAN ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
@@ -599,107 +711,27 @@ export default function PendirianYayasan() {
         </div>
       </section>
 
-      {/* ─── 4. PAKET PRICING ─── */}
-      <Pricing
-        sectionTitleTag="BIAYA JASA PENDIRIAN YAYASAN"
-        sectionTitle="Pilih paket sesuai kebutuhan yayasan Anda."
-        sectionSubtitle={
-          <span>
-            Harga sudah include semua biaya — notaris, AHU Kemenkumham, NPWP, dan jasa kami.{" "}
-            <br />
-            Tidak ada tambahan biaya apapun di tengah proses.{" "}
-            <span className="text-[#990202] font-extrabold">Diskon 50% — kuota terbatas!</span>
-          </span>
-        }
-        packages={pricingPackages}
-        footnotes={pricingFootnotes}
-      />
+      {/* ─── 8. TESTIMONIALS ─── */}
+      <Testimonials />
 
-      {/* ─── 5. PROSES PEMBUATAN YAYASAN ─── */}
-      <section className="bg-[#F9FAFB] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES PENDIRIAN YAYASAN</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              7 langkah pendirian yayasan, kami pandu sampai akta di tangan.
-            </h2>
-            <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium">
-              Dari konsultasi awal sampai dokumen lengkap diterima — estimasi 2 hari kerja untuk akta pendirian, 5–7 hari kerja untuk dokumen lainnya.
-            </p>
-            {/* Scroll indicator text */}
-            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
-              <span>Geser untuk lihat semua langkah</span>
-              <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
-            </div>
-          </div>
-
-          {/* Horizontal Scrollable Row */}
-          <div className="relative max-w-[1240px] mx-auto">
-            
-            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
-              {steps.map((step, idx) => (
-                <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
-                  
-                  {/* Number Badge (Centered on top border) */}
-                  <div className="absolute top-0 left-6 w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
-                    {step.no}
-                  </div>
-                  
-                  {/* Card Container */}
-                  <div className="bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-[24px] py-6 px-5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-350 flex flex-col justify-between flex-grow text-left h-full relative">
-                    <div className="space-y-3">
-                      
-                      {/* Title */}
-                      <h4 className="text-[16px] font-black text-gray-950 leading-tight pt-2">
-                        {step.title}
-                      </h4>
-                      
-                      {/* Duration Badge */}
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
-                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                        <span>{step.duration}</span>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
-
-                    </div>
-
-                    <div>
-                      {/* Dotted Divider */}
-                      <div className="border-t border-dashed border-gray-200 my-4"></div>
-
-                      {/* Checklist */}
-                      <ul className="space-y-2">
-                        {step.points.map((point, pIdx) => (
-                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
-                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── 6. FAQ ACCORDION ─── */}
+      {/* ─── 9. FAQ ACCORDION ─── */}
       <FAQ
         title="Pertanyaan seputar pendirian yayasan."
         subtitle="Sebelum mulai, mungkin jawabannya sudah ada di sini."
         items={faqs}
       />
 
-      <MediaCoverage />
+      {/* ─── 10. CTA BANNER ─── */}
+      <CTA
+        title={
+          <h2 className="font-heading text-3xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight">
+            Siap Mendirikan Yayasan Anda?
+          </h2>
+        }
+        description="Konsultasikan kebutuhan pendirian Yayasan Anda sekarang — GRATIS, tanpa komitmen."
+        whatsappLink={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Pendirian Yayasan.")}
+        whatsappText="Hubungi Konsultan EasyLegal Sekarang"
+      />
       </div>
       );
       }

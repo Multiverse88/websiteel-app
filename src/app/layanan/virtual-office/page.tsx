@@ -23,6 +23,9 @@ import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import { getWhatsAppLink } from "@/lib/config";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
+import MediaCoverage from "@/components/MediaCoverage";
+import Testimonials from "@/components/home/Testimonials";
 
 
 const locationsData = [
@@ -324,7 +327,10 @@ export default function VirtualOffice() {
         </div>
       </section>
 
-      {/* ─── 2. ABOUT VIRTUAL OFFICE SECTION ─── */}
+      {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
+      <MediaCoverage />
+
+      {/* ─── 3. ABOUT VIRTUAL OFFICE SECTION ─── */}
       <section className="py-8 sm:py-8 sm:py-8 sm:py-20 bg-white border-b border-gray-100">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
 
@@ -422,7 +428,7 @@ export default function VirtualOffice() {
         </div>
       </section>
 
-      {/* ─── 2.5 MANFAAT SECTION ─── */}
+      {/* ─── 4. MANFAAT SECTION ─── */}
       <section className="py-8 sm:py-8 sm:py-8 sm:py-20 bg-white border-b border-gray-100">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
 
@@ -499,7 +505,9 @@ export default function VirtualOffice() {
         </div>
       </section>
 
-      {/* ─── 3. PRICING SECTION ─── */}
+      {/* ─── 5. PRICING SECTION ─── */}
+      <BottomPromoSection />
+
       <section id="paket-harga" className="py-8 sm:py-8 sm:py-8 sm:py-20 bg-[#F9FAFB] border-b border-gray-100">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
 
@@ -844,7 +852,7 @@ export default function VirtualOffice() {
         </div>
       </section>
 
-      {/* ─── 3.5 DETAIL LOKASI SECTION ─── */}
+      {/* ─── 6. DETAIL LOKASI SECTION ─── */}
       <section className="py-8 sm:py-8 sm:py-8 sm:py-20 bg-[#F9FAFB] border-b border-gray-100 overflow-hidden relative">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative">
           
@@ -996,14 +1004,17 @@ export default function VirtualOffice() {
         </div>
       </section>
 
-      {/* ─── 4. FAQ SECTION ─── */}
+      {/* ─── 7. TESTIMONIALS SECTION ─── */}
+      <Testimonials />
+
+      {/* ─── 8. FAQ SECTION ─── */}
       <FAQ
         title="Pertanyaan seputar Virtual Office."
         subtitle="Sebelum daftar, mungkin jawabannya sudah ada di sini."
         items={faqs}
       />
 
-      {/* ─── 5. CTA SECTION ─── */}
+      {/* ─── 9. CTA SECTION ─── */}
       <CTA 
         title={
           <h2 className="font-heading text-[20px] sm:text-[38px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight tracking-tight max-w-[480px]">

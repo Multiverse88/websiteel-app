@@ -24,9 +24,13 @@ import {
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
 import { getWhatsAppLink } from "@/lib/config";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
+import Benefits from "@/components/Benefits";
+import Testimonials from "@/components/home/Testimonials";
 
 export default function VisaKitas() {
   // State for interactive Pricing filter tabs
@@ -119,6 +123,29 @@ export default function VisaKitas() {
     ]
   };
 
+  const visaKitasBenefits = [
+    {
+      icon: <Clock className="w-5.5 h-5.5 text-[#990202]" />,
+      title: "Proses Cepat & Efisien",
+      desc: "Visa Bisnis selesai dalam 7–10 hari kerja, KITAS 14–21 hari kerja — tanpa perlu bolak-balik ke Kantor Imigrasi."
+    },
+    {
+      icon: <FileText className="w-5.5 h-5.5 text-[#990202]" />,
+      title: "Dokumentasi Lengkap",
+      desc: "Tim kami mengurus RPTKA, IMTA/Notifikasi Kerja, MERP, hingga pendampingan biometrik secara end-to-end."
+    },
+    {
+      icon: <ShieldCheck className="w-5.5 h-5.5 text-[#990202]" />,
+      title: "Konsultan Imigrasi Berpengalaman",
+      desc: "Sesuai UU No. 6/2011 tentang Keimigrasian &mdash; ditangani konsultan yang paham regulasi visa & KITAS terbaru."
+    },
+    {
+      icon: <Award className="w-5.5 h-5.5 text-[#990202]" />,
+      title: "Harga Transparan",
+      desc: "Biaya sudah termasuk PNBP negara, pendampingan dokumen, & konsultasi penuh sampai izin terbit."
+    }
+  ];
+
   const faqs = [
     {
       q: "Apa beda Visa Bisnis dengan KITAS?",
@@ -158,6 +185,43 @@ export default function VisaKitas() {
     }
   ];
 
+
+  const mappedPackages: PricingPackage[] = pricingData[activeCategory as keyof typeof pricingData].map((pkg: any) => ({
+    title: pkg.title,
+    price: pkg.price,
+    strikePrice: pkg.originalPrice,
+    subLabel: pkg.subtitle,
+    isPopular: pkg.isPopular,
+    buttonText: pkg.labelBtn,
+    buttonLink: getWhatsAppLink(pkg.waText),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [{ text: pkg.lamaProses, checked: true }]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [{ text: pkg.yangDiperoleh, checked: true }]
+      },
+      {
+        title: "BONUS",
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "1 Kupon: <strong>Undian iPhone</strong>", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        items: [
+          { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  }));
+
   return (
     <div className="has-service-cta flex flex-col min-h-screen bg-[#FCFBFA] text-gray-900 font-sans">
       
@@ -194,7 +258,7 @@ export default function VisaKitas() {
               {/* Headline */}
               <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
                 Visa Bisnis &amp; <span className="text-[#990202]">KITAS</span> <br />
-                resmi untuk WNA di <br className="hidden sm:block" /> Indonesia.
+                resmi untuk WNA di <br className="hidden sm:block" /> Indonesia
               </h1>
 
               {/* Description */}
@@ -303,7 +367,65 @@ export default function VisaKitas() {
         </div>
       </section>
 
-      {/* ─── 2. PERBEDAAN SECTION ─── */}
+      {/* ─── 2. MEDIA COVERAGE (TRUST SIGNAL) ─── */}
+      <MediaCoverage />
+
+      {/* ─── 3. MENGAPA PILIH EASYLEGAL (VALUE PROPOSITION) ─── */}
+      <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={visaKitasBenefits} />
+      <BottomPromoSection />
+
+      {/* ─── 4. PRICING SECTION ─── */}
+      <Pricing
+        sectionTitleTag="BIAYA PENGURUSAN"
+        sectionTitle="Pilih kategori sesuai kebutuhan."
+        sectionSubtitle={
+          <>
+            Harga sudah include biaya negara (PNBP), pendampingan dokumen, & konsultasi penuh sampai izin terbit.
+          </>
+        }
+        packages={mappedPackages}
+        headerBottomContent={
+          <div className="flex justify-center">
+            <div className="inline-flex p-1.5 bg-gray-200/50 rounded-2xl shadow-md border border-black/[0.04]">
+              <button
+                onClick={() => setActiveCategory("visa")}
+                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                  activeCategory === "visa"
+                    ? "bg-[#990202] text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                }`}
+              >
+                {activeCategory === "visa" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
+                <span>Visa Bisnis</span>
+              </button>
+              <button
+                onClick={() => setActiveCategory("investor")}
+                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                  activeCategory === "investor"
+                    ? "bg-[#990202] text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                }`}
+              >
+                {activeCategory === "investor" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
+                <span>KITAS Investor</span>
+              </button>
+              <button
+                onClick={() => setActiveCategory("tka")}
+                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                  activeCategory === "tka"
+                    ? "bg-[#990202] text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                }`}
+              >
+                {activeCategory === "tka" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
+                <span>KITAS TKA</span>
+              </button>
+            </div>
+          </div>
+        }
+      />
+
+      {/* ─── 5. PERBEDAAN SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
@@ -425,220 +547,13 @@ export default function VisaKitas() {
         </div>
       </section>
 
-      {/* ─── 3. PRICING SECTION ─── */}
-      <section id="paket-harga" className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50 scroll-mt-8 sm:mt-16">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
-          {/* Section Header */}
-          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
-            <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PENGURUSAN</p>
-              <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
-                Pilih kategori sesuai kebutuhan.
-              </h2>
-              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed">
-                Harga sudah include biaya negara (PNBP), pendampingan dokumen, &amp; konsultasi penuh sampai izin terbit.
-              </p>
-            </div>
-            <div className="flex-shrink-0 flex justify-start md:justify-end">
-              <Image 
-                src="/images/badges/promo-50.png" 
-                alt="Promo 50% Off Legal Deals" 
-                width={280} 
-                height={120}
-                className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </div>
+      {/* ─── 6. TESTIMONIALS ─── */}
+      <Testimonials />
 
-          {/* Interactive Toggle Tabs */}
-          <div className="flex justify-center mb-6 sm:mb-12">
-            <div className="inline-flex p-1.5 bg-gray-200/50 rounded-2xl shadow-md border border-black/[0.04]">
-              <button
-                onClick={() => setActiveCategory("visa")}
-                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                  activeCategory === "visa"
-                    ? "bg-[#990202] text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                }`}
-              >
-                {activeCategory === "visa" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
-                <span>Visa Bisnis</span>
-              </button>
-              <button
-                onClick={() => setActiveCategory("investor")}
-                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                  activeCategory === "investor"
-                    ? "bg-[#990202] text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                }`}
-              >
-                {activeCategory === "investor" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
-                <span>KITAS Investor</span>
-              </button>
-              <button
-                onClick={() => setActiveCategory("tka")}
-                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                  activeCategory === "tka"
-                    ? "bg-[#990202] text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                }`}
-              >
-                {activeCategory === "tka" && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
-                <span>KITAS TKA</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Packages Display Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto items-stretch">
-              {pricingData[activeCategory].map((pkg, idx) => {
-                const isFirst = idx === 0;
-                const cardBorder = isFirst
-                  ? "border-[2.5px] border-[#990202] shadow-[0_20px_50px_rgba(0,0,0,0.045)] group-hover:shadow-[0_20px_50px_rgba(153,2,2,0.12)] relative z-10 transition-all duration-300"
-                  : "shadow-[0_4px_16px_rgba(0,0,0,0.06)] group-hover:shadow-[0_12px_40px_rgba(153,2,2,0.05)] transition-all duration-300";
-
-                return (
-                  <div
-                    key={`${activeCategory}-${idx}`}
-                    className="relative group h-full animate-fade-in-up"
-                    style={{ animationDelay: `${idx * 0.12}s` }}
-                  >
-                  {/* Interactive Red Hover Glow behind Card */}
-                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-                  
-                  <div className={`bg-white rounded-[24px] overflow-hidden flex flex-col h-full justify-between ${cardBorder}`}>
-                    <div>
-                      {/* Header */}
-                      <div className={`px-4 py-4 sm:px-6 sm:py-7 text-center text-white relative ${isFirst ? "bg-[#990202]" : "bg-[#1A1A1A]"}`}>
-                        {isFirst && (
-                          <div className="absolute top-0 left-0 right-0 bg-[#7a0101] text-white text-[14px] font-black tracking-widest uppercase py-1 shadow-sm">
-                            PALING POPULER
-                          </div>
-                        )}
-                        <h4 className="text-[14px] font-black tracking-widest uppercase opacity-90 mt-2">
-                          {pkg.title}
-                        </h4>
-                        <div className="mt-4 text-[14px] text-white/50 line-through font-bold">
-                          {pkg.originalPrice}
-                        </div>
-                        <div className="mt-0.5 text-[28px] sm:text-[32px] font-black tracking-tight flex items-start justify-center gap-0.5">
-                          <span className="text-[15px] mt-1.5 font-extrabold">IDR</span>
-                          <span>{pkg.price}</span>
-                        </div>
-                        <p className="text-[14px] font-black text-white/70 tracking-widest uppercase mt-2">
-                          TANPA TAMBAHAN BIAYA APAPUN
-                        </p>
-                      </div>
-
-                      {/* Features Detail */}
-                      <div className="p-4 sm:p-7 space-y-4 sm:space-y-6 text-left">
-                        
-                        {/* Lama Proses */}
-                        <div className="space-y-1">
-                          <h4 className="text-[14px] font-black text-red-800 tracking-wider uppercase">
-                            LAMA PROSES
-                          </h4>
-                          <p className="flex items-center text-[14px] font-bold text-gray-700">
-                            <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" strokeWidth={3} />
-                            <span>{pkg.lamaProses}</span>
-                          </p>
-                        </div>
-
-                        {/* Yang Diperoleh */}
-                        <div className="space-y-1 border-t border-gray-100 pt-4">
-                          <h4 className="text-[14px] font-black text-red-800 tracking-wider uppercase">
-                            YANG DIPEROLEH
-                          </h4>
-                          <p className="flex items-start text-[14px] font-bold text-gray-700 leading-relaxed">
-                            <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <span>{pkg.yangDiperoleh}</span>
-                          </p>
-                        </div>
-
-                        {/* Bonus */}
-                        <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
-                          <h4 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
-                            BONUS
-                          </h4>
-                          <ul className="space-y-1.5">
-                            <li className="flex items-start text-[14px] font-bold text-gray-700">
-                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              <span>Layanan Personal Legal Assistance</span>
-                            </li>
-                            <li className="flex items-start text-[14px] font-bold text-gray-700">
-                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              <span><strong className="font-extrabold text-gray-900">1 Kupon</strong> Undian iPhone</span>
-                            </li>
-                          </ul>
-                        </div>
-
-                        {/* Extra Bonus */}
-                        <div className="bg-[#FAF9F7] rounded-xl p-4 space-y-2 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
-                          <h4 className="text-[14px] font-black text-gray-900 tracking-wider uppercase">
-                            EXTRA BONUS
-                          </h4>
-                          <ul className="space-y-2">
-                            <li className="flex items-start text-[14px] font-bold text-gray-700">
-                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              <span>Voucher EasyLegal <strong className="font-extrabold text-gray-900">Rp 250.000</strong></span>
-                            </li>
-                            <li className="flex items-start text-[14px] font-bold text-gray-700">
-                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              <span>Dokumen SOP Karyawan</span>
-                            </li>
-                            <li className="flex items-start text-[14px] font-bold text-gray-700">
-                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              <span>Dokumen SOP Perusahaan</span>
-                            </li>
-                            <li className="flex items-start text-[14px] font-bold text-gray-700">
-                              <Check className="w-3.5 h-3.5 text-emerald-500 mr-2 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                              <span>Dokumen Kontrak Bisnis</span>
-                            </li>
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    {/* Order Button */}
-                    <div className="p-7 pt-0">
-                      <a
-                        href={getWhatsAppLink(pkg.waText)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`block w-full py-4.5 text-center font-black text-[14px] rounded-xl transition-all duration-250 cursor-pointer ${
-                          isFirst
-                            ? "text-white bg-[#990202] hover:bg-[#800000] shadow-md shadow-red-900/10"
-                            : "text-gray-800 bg-white hover:bg-gray-50 border-2 border-gray-150 hover:border-gray-250"
-                        }`}
-                      >
-                        {pkg.labelBtn}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Pricing Bottom Warning Alert */}
-          <div className="max-w-[960px] mx-auto bg-white rounded-2xl p-5 shadow-md border border-black/[0.04] mt-6 sm:mt-12 flex items-start gap-3.5 shadow-sm text-left">
-            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-            <p className="text-[14px] text-gray-600 font-semibold leading-relaxed">
-              <strong className="font-extrabold text-[#990202]">Visa Bisnis</strong> hanya untuk kegiatan bisnis (meeting, audit, kunjungan klien) dan <strong className="font-extrabold text-gray-950">tidak memberikan izin bekerja</strong> di Indonesia. Untuk bekerja, perlu KITAS TKA. Berlaku 60 hari per kunjungan, bisa diperpanjang.
-            </p>
-          </div>
-
-          <PricingFooter />
-
-        </div>
-      </section>
-
-      {/* ─── 4. FAQ SECTION ─── */}
+      {/* ─── 7. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar Visa &amp; KITAS." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
 
-      {/* ─── 5. CTA SECTION ─── */}
+      {/* ─── 8. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 relative overflow-hidden border-t border-gray-100">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
 
@@ -685,8 +600,6 @@ export default function VisaKitas() {
 
         </div>
       </section>
-
-      <MediaCoverage />
     </div>
   );
 }

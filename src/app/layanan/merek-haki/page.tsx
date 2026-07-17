@@ -29,6 +29,9 @@ import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
+import BottomPromoSection from "@/components/home/BottomPromoSection";
+import Testimonials from "@/components/home/Testimonials";
+import CTA from "@/components/CTA";
 
   interface AdditionalServiceItem {
     text: string;
@@ -564,7 +567,7 @@ export default function MerekHaki() {
               {/* Headline */}
               <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
                 Daftar merek sekali, <br />
-                brand <span className="text-[#990202]">aman 10 tahun</span>.
+                brand <span className="text-[#990202]">aman 10 tahun</span>
               </h1>
 
               {/* Description */}
@@ -672,103 +675,20 @@ export default function MerekHaki() {
         </div>
       </section>
 
-      {/* ─── 2. PENGERTIAN MEREK ─── */}
-      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
-          {/* Section Header */}
-          <div className="mb-14">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN MEREK</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              Apa itu Merek & HAKI?
-            </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
-              Sebelum mulai, kenali dulu apa itu merek dan kenapa pendaftaran resmi penting untuk brand Anda.
-            </p>
-          </div>
+      {/* ─── 2. MEDIA COVERAGE ─── */}
+      <MediaCoverage />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left Column: Image with floating badge */}
-            <div className="lg:col-span-6 relative w-full flex items-center justify-center">
-              <div className="relative w-full max-w-[500px] lg:max-w-none">
-                {/* Image Container */}
-                <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
-                  <Image
-                    src="/images/layanan/merek-2.jpg"
-                    alt="Workspace desainer logo dan merek"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 500px"
-                    className="object-cover object-center"
-                  />
-                </div>
-
-                {/* Floating Badge (Bottom Left) */}
-                <div className="absolute -bottom-6 left-4 bg-white rounded-2xl p-4 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-md border border-black/[0.03] flex items-center space-x-3.5 w-[280px] sm:w-[320px]">
-                  <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-[#990202] text-white flex items-center justify-center flex-shrink-0">
-                    <FileText className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-[14px] font-black text-gray-900 leading-none">Dasar Hukum</div>
-                    <div className="text-[14px] text-gray-400 font-bold mt-1.5 leading-snug">UU No. 20 Tahun 2016 tentang Merek &amp; Indikasi Geografis</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Paragraph and checklist */}
-            <div className="lg:col-span-6 space-y-6">
-              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
-                <strong className="font-extrabold text-gray-900">Merek</strong> adalah tanda yang dapat ditampilkan secara grafis berupa gambar, logo, nama, kata, huruf, angka, susunan warna — atau kombinasinya — yang membedakan barang atau jasa Anda dari yang lain.
-              </p>
-              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
-                Pendaftaran merek di <strong className="font-extrabold text-gray-900">DJKI (Direktorat Jenderal Kekayaan Intelektual)</strong> memberikan Anda hak eksklusif menggunakan merek tersebut selama <strong className="font-extrabold text-gray-900">10 tahun</strong> &amp; bisa diperpanjang terus-menerus — sebagai bentuk perlindungan hukum terhadap brand bisnis Anda.
-              </p>
-
-              <div className="space-y-4 pt-2">
-                <h4 className="text-[18px] font-extrabold text-gray-950">Jenis Merek</h4>
-                
-                <ul className="space-y-3">
-                  <li className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
-                      <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
-                    </div>
-                    <span><strong className="font-extrabold text-gray-900 mr-1.5">Merek Dagang</strong> — untuk produk/barang (Kelas 1–34).</span>
-                  </li>
-                  <li className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
-                      <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
-                    </div>
-                    <span><strong className="font-extrabold text-gray-900 mr-1.5">Merek Jasa</strong> — untuk layanan/jasa (Kelas 35–45).</span>
-                  </li>
-                  <li className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
-                      <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
-                    </div>
-                    <span><strong className="font-extrabold text-gray-900 mr-1.5">Merek Kolektif</strong> — digunakan oleh kelompok/asosiasi untuk barang/jasa sejenis.</span>
-                  </li>
-                  <li className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
-                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
-                      <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
-                    </div>
-                    <span><strong className="font-extrabold text-gray-900 mr-1.5">Indikasi Geografis</strong> — untuk produk khas suatu wilayah (mis. Kopi Gayo, Batik Pekalongan).</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── 2.5 MANFAAT DAFTAR MEREK ─── */}
+      {/* ─── 3. MANFAAT DAFTAR MEREK ─── */}
       <Benefits
         sectionTitleTag="MANFAAT DAFTAR MEREK"
         sectionTitle="Kenapa brand Anda harus didaftarkan?"
         items={hakiBenefits}
       />
 
-      {/* ─── 3. PAKET HARGA (PRICING GRID) ─── */}
-      <Pricing
+      {/* ─── 4. PAKET HARGA (PRICING GRID) ─── */}
+      <BottomPromoSection />
+
+      <Pricing hideFooter={true}
         sectionTitleTag="BIAYA JASA PENDAFTARAN MEREK"
         sectionTitle="4 paket pendaftaran merek di DJKI."
         sectionSubtitle="Harga sudah include biaya resmi DJKI & jasa kami — tidak ada tambahan di tengah proses."
@@ -777,7 +697,7 @@ export default function MerekHaki() {
         promoBadgeSrc="/images/badges/promo-20.png"
       />
 
-      {/* ─── 3.5 LAYANAN TAMBAHAN MEREK (TABBED PRICING) ─── */}
+      {/* ─── 5. LAYANAN TAMBAHAN MEREK (TABBED PRICING) ─── */}
       <section className="bg-[#F9FAFB] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
@@ -928,10 +848,98 @@ export default function MerekHaki() {
         </div>
       </section>
 
-      {/* ─── 3.8 DOKUMEN PERSYARATAN (YANG PERLU DISIAPKAN) ─── */}
+      {/* ─── 6. PENGERTIAN MEREK ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          
+
+          {/* Section Header */}
+          <div className="mb-14">
+            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN MEREK</p>
+            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+              Apa itu Merek & HAKI?
+            </h2>
+            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
+              Sebelum mulai, kenali dulu apa itu merek dan kenapa pendaftaran resmi penting untuk brand Anda.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Left Column: Image with floating badge */}
+            <div className="lg:col-span-6 relative w-full flex items-center justify-center">
+              <div className="relative w-full max-w-[500px] lg:max-w-none">
+                {/* Image Container */}
+                <div className="relative overflow-hidden rounded-[32px] shadow-[0_15px_35px_rgba(0,0,0,0.06)] bg-white aspect-[1.1] sm:aspect-square lg:aspect-[1.1]">
+                  <Image
+                    src="/images/layanan/merek-2.jpg"
+                    alt="Workspace desainer logo dan merek"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 500px"
+                    className="object-cover object-center"
+                  />
+                </div>
+
+                {/* Floating Badge (Bottom Left) */}
+                <div className="absolute -bottom-6 left-4 bg-white rounded-2xl p-4 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-md border border-black/[0.03] flex items-center space-x-3.5 w-[280px] sm:w-[320px]">
+                  <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-[#990202] text-white flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-black text-gray-900 leading-none">Dasar Hukum</div>
+                    <div className="text-[14px] text-gray-400 font-bold mt-1.5 leading-snug">UU No. 20 Tahun 2016 tentang Merek &amp; Indikasi Geografis</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Paragraph and checklist */}
+            <div className="lg:col-span-6 space-y-6">
+              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
+                <strong className="font-extrabold text-gray-900">Merek</strong> adalah tanda yang dapat ditampilkan secara grafis berupa gambar, logo, nama, kata, huruf, angka, susunan warna — atau kombinasinya — yang membedakan barang atau jasa Anda dari yang lain.
+              </p>
+              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
+                Pendaftaran merek di <strong className="font-extrabold text-gray-900">DJKI (Direktorat Jenderal Kekayaan Intelektual)</strong> memberikan Anda hak eksklusif menggunakan merek tersebut selama <strong className="font-extrabold text-gray-900">10 tahun</strong> &amp; bisa diperpanjang terus-menerus — sebagai bentuk perlindungan hukum terhadap brand bisnis Anda.
+              </p>
+
+              <div className="space-y-4 pt-2">
+                <h4 className="text-[18px] font-extrabold text-gray-950">Jenis Merek</h4>
+
+                <ul className="space-y-3">
+                  <li className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
+                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
+                      <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
+                    </div>
+                    <span><strong className="font-extrabold text-gray-900 mr-1.5">Merek Dagang</strong> — untuk produk/barang (Kelas 1–34).</span>
+                  </li>
+                  <li className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
+                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
+                      <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
+                    </div>
+                    <span><strong className="font-extrabold text-gray-900 mr-1.5">Merek Jasa</strong> — untuk layanan/jasa (Kelas 35–45).</span>
+                  </li>
+                  <li className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
+                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
+                      <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
+                    </div>
+                    <span><strong className="font-extrabold text-gray-900 mr-1.5">Merek Kolektif</strong> — digunakan oleh kelompok/asosiasi untuk barang/jasa sejenis.</span>
+                  </li>
+                  <li className="flex items-start text-[14px] font-medium text-gray-700 leading-relaxed">
+                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
+                      <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
+                    </div>
+                    <span><strong className="font-extrabold text-gray-900 mr-1.5">Indikasi Geografis</strong> — untuk produk khas suatu wilayah (mis. Kopi Gayo, Batik Pekalongan).</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── 7. DOKUMEN PERSYARATAN (YANG PERLU DISIAPKAN) ─── */}
+      <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
             <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest text-center">
@@ -1031,10 +1039,19 @@ export default function MerekHaki() {
         </div>
       </section>
 
-      {/* ─── 5. FAQ SECTION ─── */}
+      {/* ─── 8. TESTIMONIALS ─── */}
+      <Testimonials />
+
+      {/* ─── 9. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran merek." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
 
-      <MediaCoverage />
+      {/* ─── 10. CTA SECTION ─── */}
+      <CTA
+        title={<h2 className="font-heading text-3xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight">Siap Mendaftarkan Merek Anda?</h2>}
+        description="Konsultasikan kebutuhan pendaftaran merek Anda sekarang — GRATIS, tanpa komitmen."
+        whatsappLink={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Pendaftaran Merek & HAKI.")}
+        whatsappText="Hubungi Konsultan EasyLegal Sekarang"
+      />
     </div>
   );
 }
