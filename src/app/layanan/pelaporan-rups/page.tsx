@@ -530,7 +530,7 @@ export default function PelaporanRUPS() {
           />
 
           {/* ─── 4. KENAPA INI PENTING ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-white py-16 lg:py-24">
               <div className="max-w-[1000px] mx-auto px-4 sm:px-8 text-center">
                 <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-4">KENAPA INI PENTING</p>
@@ -577,7 +577,7 @@ export default function PelaporanRUPS() {
           </FadeIn>
 
           {/* ─── 5. PAKET HARGA ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <BottomPromoSection />
             <Pricing
               sectionTitleTag="BIAYA JASA PELAPORAN RUPS"
@@ -612,7 +612,7 @@ export default function PelaporanRUPS() {
           </section>
 
           {/* ─── 7. PROSES / TIMELINE ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-[#FAF9F7] py-16 lg:py-24 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
                 
@@ -671,7 +671,7 @@ export default function PelaporanRUPS() {
 
 
           {/* ─── 8. APA ITU RUPS ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-white py-12 lg:py-24 border-b border-gray-200/50">
               <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
@@ -762,7 +762,7 @@ export default function PelaporanRUPS() {
           />
 
           {/* ─── 11. CTA BOTTOM (REPLACED WITH CUSTOM 2-COLUMN) ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-white py-16 lg:py-24">
               <div className="max-w-[1100px] mx-auto px-4 sm:px-8">
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">

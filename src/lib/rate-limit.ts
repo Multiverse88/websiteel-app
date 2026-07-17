@@ -48,23 +48,15 @@ const TWO_FACTOR_MAX_ATTEMPTS = 5;
 const TWO_FACTOR_LOCKOUT_DURATION = 5 * 60 * 1000;
 const TWO_FACTOR_ATTEMPT_WINDOW = 5 * 60 * 1000;
 
-function checkLimit(map: Map<string, RateLimitEntry>, identifier: string, windowMs: number): { allowed: boolean; retryAfter?: number } {
+function checkLimit(map: Map<string, RateLimitEntry>, identifier: string): { allowed: boolean; retryAfter?: number } {
   const now = Date.now();
   const entry = map.get(identifier);
 
-  if (!entry) return { allowed: true };
-
-  if (entry.lockedUntil) {
+  if (entry?.lockedUntil) {
     if (now < entry.lockedUntil) {
       return { allowed: false, retryAfter: Math.ceil((entry.lockedUntil - now) / 1000) };
     }
     map.delete(identifier);
-    return { allowed: true };
-  }
-
-  if (now - entry.lastAttempt > windowMs) {
-    map.delete(identifier);
-    return { allowed: true };
   }
 
   return { allowed: true };
@@ -96,7 +88,7 @@ function recordAttempt(map: Map<string, RateLimitEntry>, identifier: string, max
 
 // Login rate limit
 export function checkRateLimit(identifier: string): { allowed: boolean; retryAfter?: number } {
-  return checkLimit(loginAttempts, identifier, ATTEMPT_WINDOW);
+  return checkLimit(loginAttempts, identifier);
 }
 
 export function recordFailedAttempt(identifier: string): { locked: boolean; retryAfter?: number } {
@@ -115,7 +107,7 @@ export function getRemainingAttempts(identifier: string): number {
 
 // 2FA rate limit
 export function checkTwoFactorRateLimit(identifier: string): { allowed: boolean; retryAfter?: number } {
-  return checkLimit(twoFactorAttempts, identifier, TWO_FACTOR_ATTEMPT_WINDOW);
+  return checkLimit(twoFactorAttempts, identifier);
 }
 
 export function recordTwoFactorFailedAttempt(identifier: string): { locked: boolean; retryAfter?: number } {
