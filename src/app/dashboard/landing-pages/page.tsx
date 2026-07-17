@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/db";
 import { Plus, Settings, Trash2, ExternalLink } from "lucide-react";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -9,7 +9,6 @@ import { DeleteButton } from "./client-components";
 
 export const dynamic = "force-dynamic";
 
-const prisma = new PrismaClient();
 
 export default async function LandingPagesList() {
   const session = await getSession();

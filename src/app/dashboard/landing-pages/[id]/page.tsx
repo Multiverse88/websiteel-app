@@ -1,5 +1,5 @@
 import React from "react";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/db";
 import { notFound, redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import BuilderClient from "./BuilderClient";
@@ -7,7 +7,6 @@ import { SectionData } from "@/types/landing-page";
 
 export const dynamic = "force-dynamic";
 
-const prisma = new PrismaClient();
 
 interface Props {
   params: Promise<{ id: string }>;
