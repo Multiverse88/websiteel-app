@@ -10,11 +10,8 @@ const InformasiHukumSection = dynamic(() => import("@/components/home/InformasiH
   ssr: true,
   loading: () => <div className="h-[600px] w-full animate-pulse bg-gray-50/50" />
 });
-const LayananKami = dynamic(() => import("@/components/home/LayananKami"), { ssr: true });
-const Hero = dynamic(() => import("@/components/home/Hero"), {
-  ssr: true,
-  loading: () => <div className="min-h-[580px] w-full animate-pulse bg-gray-50/50" />
-});
+import LayananKami from "@/components/home/LayananKami";
+import Hero from "@/components/home/Hero";
 const Testimonials = dynamic(() => import("@/components/home/Testimonials"), { ssr: true });
 const BottomPromoSection = dynamic(() => import("@/components/home/BottomPromoSection"), { ssr: true });
 import MediaCoverage from "@/components/MediaCoverage";

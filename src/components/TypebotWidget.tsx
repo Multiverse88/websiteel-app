@@ -21,41 +21,45 @@ export function TypebotWidget() {
   useEffect(() => {
     if (!TYPEBOT_BOT_ID) return
 
-    const script = document.createElement('script')
-    script.src = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@latest/dist/web.js'
-    script.type = 'module'
-    script.async = true
+    const timer = setTimeout(() => {
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@latest/dist/web.js'
+      script.type = 'module'
+      script.async = true
 
-    script.onload = () => {
-      const typebot = (window as unknown as TypebotWindow).Typebot;
-      if (typebot) {
-        typebot.initBubble({
-          typebot: TYPEBOT_BOT_ID,
-          apiHost: TYPEBOT_HOST,
-          theme: {
-            button: {
-              backgroundColor: '#D62828',
-              iconColor: '#FFFFFF',
-              size: '72px',
-              bottom: 24,
-              right: 24,
-            },
-            chatWindow: {
-              backgroundColor: '#FFFFFF',
-              bubbles: {
-                user: { backgroundColor: '#D62828', color: '#FFFFFF' },
-                bot: { backgroundColor: '#F5F5F5', color: '#1A1A1A' },
+      script.onload = () => {
+        const typebot = (window as unknown as TypebotWindow).Typebot;
+        if (typebot) {
+          typebot.initBubble({
+            typebot: TYPEBOT_BOT_ID,
+            apiHost: TYPEBOT_HOST,
+            theme: {
+              button: {
+                backgroundColor: '#D62828',
+                iconColor: '#FFFFFF',
+                size: '72px',
+                bottom: 24,
+                right: 24,
+              },
+              chatWindow: {
+                backgroundColor: '#FFFFFF',
+                bubbles: {
+                  user: { backgroundColor: '#D62828', color: '#FFFFFF' },
+                  bot: { backgroundColor: '#F5F5F5', color: '#1A1A1A' },
+                },
               },
             },
-          },
-        })
+          })
+        }
       }
-    }
 
-    document.head.appendChild(script)
+      document.head.appendChild(script)
+    }, 4000);
 
     return () => {
-      document.head.removeChild(script)
+      clearTimeout(timer);
+      const script = document.querySelector('script[src="https://cdn.jsdelivr.net/npm/@typebot.io/js@latest/dist/web.js"]');
+      if (script) document.head.removeChild(script);
     }
   }, [])
 
