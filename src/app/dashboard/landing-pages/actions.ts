@@ -1,11 +1,10 @@
 "use server";
 
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth"; // Assume a getSession helper exists from previous code, or write a custom one.
 
-const prisma = new PrismaClient();
 
 export async function createLandingPage(formData: FormData) {
   const session = await getSession();

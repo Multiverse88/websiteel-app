@@ -386,12 +386,12 @@ export default function PelaporanLKPM() {
           <MediaCoverage />
 
           {/* ─── 3. BENEFITS SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={lkpmBenefits} />
           </FadeIn>
 
           {/* ─── 4. SANKSI JIKA TIDAK LAPOR SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-[#FAF9F7] py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
                 <div className="max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
@@ -462,7 +462,7 @@ export default function PelaporanLKPM() {
           </FadeIn>
 
           {/* ─── 5. BIAYA JASA SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <BottomPromoSection />
             <Pricing
               sectionTitleTag="BIAYA JASA PELAPORAN LKPM"
@@ -477,7 +477,7 @@ export default function PelaporanLKPM() {
           </FadeIn>
 
           {/* ─── 6. ALUR PELAPORAN SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-[#FAF9F6] py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
                 <div className="max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
@@ -508,7 +508,7 @@ export default function PelaporanLKPM() {
           </FadeIn>
 
           {/* ─── 7. PENGERTIAN SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-white py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
@@ -644,7 +644,7 @@ export default function PelaporanLKPM() {
           </FadeIn>
 
           {/* ─── 8. PERIODE & BATAS WAKTU SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-[#FAF9F7] py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
@@ -729,7 +729,7 @@ export default function PelaporanLKPM() {
           </FadeIn>
 
           {/* ─── 9. DATA YANG DILAPORKAN SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-white py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
                 <div className="max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
@@ -798,17 +798,17 @@ export default function PelaporanLKPM() {
           </FadeIn>
 
           {/* ─── 10. TESTIMONIALS SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <Testimonials />
           </FadeIn>
 
           {/* ─── 11. FAQ SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <FAQ items={faqs} />
           </FadeIn>
 
           {/* ─── 12. CTA SECTION ─── */}
-          <FadeIn direction="up" delay={0.2}>
+          <FadeIn delay={0.2}>
             <section className="bg-white py-10 lg:py-20 border-t border-gray-100">
               <div className="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">

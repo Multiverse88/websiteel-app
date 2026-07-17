@@ -4,7 +4,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { Calendar, Clock, Home, Tag } from "lucide-react";
-import ShareButton from "@/components/ShareButton";
 import SocialShare from "@/components/SocialShare";
 import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";

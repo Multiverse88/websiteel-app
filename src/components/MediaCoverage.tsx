@@ -5,7 +5,7 @@ import FadeIn from "@/components/FadeIn";
 
 export default function MediaCoverage() {
   return (
-    <FadeIn direction="up" delay={0.2}>
+    <FadeIn delay={0.2}>
       <section className="bg-white border-t border-gray-100/60 pb-4 pt-8">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-8 flex flex-col items-center justify-center">
           <div className="text-[14px] sm:text-[14px] font-black text-gray-400 tracking-[0.2em] uppercase mb-10 sm:mb-12 text-center">
