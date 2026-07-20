@@ -18,6 +18,7 @@ import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import FadeIn from "@/components/FadeIn";
+import MediaCoverage from "@/components/MediaCoverage";
 import PricingFooter from "@/components/PricingFooter";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
@@ -301,30 +302,8 @@ export default function ApostillePage() {
         </div>
       </section>
 
-      {/* ─── 2. LIPUTAN MEDIA (DENSE SINGLE ROW STRIP) ─── */}
-      <section className="py-12 bg-[#FAF9F9] border-y border-gray-200/50">
-        <div className="max-w-[1280px] mx-auto px-6 sm:px-12">
-          <div className="text-center mb-8">
-            <span className="inline-block text-[14px] font-black text-gray-400 uppercase tracking-widest">
-              LIPUTAN MEDIA EASYLEGAL
-            </span>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            {[
-              "Detik Finance", "Kontan", "IDN Times", "JPNN",
-              "Jawa Pos", "SindoNews", "Industry.co.id", "Tribunnews Jakarta"
-            ].map((media, idx) => (
-              <span
-                key={idx}
-                className="text-[14px] font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-wider cursor-default select-none"
-              >
-                {media}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ─── 2. LIPUTAN MEDIA ─── */}
+      <MediaCoverage />
 
       {/* ─── 3. SERTIFIKASI & LEGALITAS (3-COL WITH RULES) ─── */}
       <section className="py-24 bg-white">
