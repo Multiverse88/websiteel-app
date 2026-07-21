@@ -54,19 +54,19 @@ export default function InformasiHukumSection({ articles }: { articles: ArticleI
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-6 sm:mb-12 gap-4">
           <div className="text-left">
-            <span className="text-[14px] sm:text-[14px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
+            <span className="text-[16px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
               INFORMASI HUKUM
             </span>
-            <h2 className="text-[20px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] mt-1.5 sm:mt-3 tracking-[-0.02em] leading-[1.25] sm:leading-tight">
+            <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] mt-1.5 sm:mt-3 tracking-[-0.02em] leading-[1.25] sm:leading-tight">
               Panduan & update hukum untuk<br className="hidden sm:inline" /> pelaku usaha.
             </h2>
-            <p className="text-[14px] sm:text-[14.5px] text-[#6B7280] mt-2 max-w-[540px] leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] text-[#6B7280] mt-2 max-w-[540px] leading-relaxed">
               Insight terbaru tentang regulasi, perizinan, dan tips legalitas — supaya bisnis Anda tumbuh aman &amp; compliant.
             </p>
           </div>
           <Link
             href="/artikel"
-            className="w-full sm:w-auto text-center justify-center inline-flex items-center gap-1.5 px-5 py-2.5 bg-white shadow-md border border-black/[0.04] text-[14px] sm:text-[14px] font-bold text-gray-800 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm flex-shrink-0"
+            className="w-full sm:w-auto text-center justify-center inline-flex items-center gap-1.5 px-5 py-2.5 bg-white shadow-md border border-black/[0.04] text-[16px] sm:text-[16px] font-bold text-gray-800 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm flex-shrink-0"
           >
             <span>Lihat semua</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -93,17 +93,17 @@ export default function InformasiHukumSection({ articles }: { articles: ArticleI
               <div className="p-4 sm:p-6 flex-grow flex flex-col justify-between">
                 <div>
                   <div className="flex items-center">
-                    <span className="bg-[#FEF2F2] text-[#B91C1C] px-2.5 py-0.5 rounded-lg text-[14px] font-black tracking-wider uppercase border border-[#FEE2E2]">
+                    <span className="bg-[#FEF2F2] text-[#B91C1C] px-2.5 py-0.5 rounded-lg text-[16px] font-black tracking-wider uppercase border border-[#FEE2E2]">
                       {formatCategory(featured.category)}
                     </span>
-                    <span className="text-[14px] sm:text-[14px] text-gray-500 font-bold ml-3.5">
+                    <span className="text-[16px] sm:text-[16px] text-gray-500 font-bold ml-3.5">
                       {formatDate(featured.createdAt)} - {featured.readTime}
                     </span>
                   </div>
-                  <h3 className="text-sm sm:text-[18px] lg:text-[20px] font-black text-[#111827] mt-3 sm:mt-3.5 leading-snug group-hover:text-[#B91C1C] transition-colors">
+                  <h3 className="text-[16px] sm:text-[16px] lg:text-[16px] font-black text-[#111827] mt-3 sm:mt-3.5 leading-snug group-hover:text-[#B91C1C] transition-colors">
                     {featured.title}
                   </h3>
-                  <p className="text-[14px] sm:text-[14px] text-[#6B7280] leading-relaxed mt-2 sm:mt-3 font-medium line-clamp-3">
+                  <p className="text-[16px] sm:text-[16px] text-[#6B7280] leading-relaxed mt-2 sm:mt-3 font-medium line-clamp-3">
                     {featured.excerpt}
                   </p>
                 </div>
@@ -131,14 +131,14 @@ export default function InformasiHukumSection({ articles }: { articles: ArticleI
                 <div className="p-4 flex-grow flex flex-col justify-between">
                   <div>
                     <div className="flex items-center">
-                      <span className="bg-[#FEF2F2] text-[#B91C1C] px-2 py-0.5 rounded-lg text-[14px] font-black tracking-wider uppercase border border-[#FEE2E2]">
+                      <span className="bg-[#FEF2F2] text-[#B91C1C] px-2 py-0.5 rounded-lg text-[16px] font-black tracking-wider uppercase border border-[#FEE2E2]">
                         {formatCategory(article.category)}
                       </span>
-                      <span className="text-[14px] text-gray-500 font-bold ml-2.5">
+                      <span className="text-[16px] text-gray-500 font-bold ml-2.5">
                         {formatDate(article.createdAt)} - {article.readTime}
                       </span>
                     </div>
-                    <h3 className="text-[14px] sm:text-[14px] lg:text-[14.5px] font-black text-[#111827] mt-2 sm:mt-3 leading-snug group-hover:text-[#B91C1C] transition-colors line-clamp-2">
+                    <h3 className="text-[16px] sm:text-[16px] lg:text-[16px] font-black text-[#111827] mt-2 sm:mt-3 leading-snug group-hover:text-[#B91C1C] transition-colors line-clamp-2">
                       {article.title}
                     </h3>
                   </div>

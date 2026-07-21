@@ -30,10 +30,10 @@ export default function LayananKami() {
       <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
         {/* Header */}
         <div className="mb-5 sm:mb-10">
-          <span className="text-[14px] sm:text-[14px] font-bold text-primary uppercase tracking-[0.15em]">
+          <span className="text-[16px] sm:text-[16px] font-bold text-primary uppercase tracking-[0.15em]">
             Solusi EasyLegal
           </span>
-          <h2 className="text-[20px] sm:text-[40px] font-extrabold text-dark mt-1 sm:mt-2 tracking-tight leading-[1.25] sm:leading-[1.1]">
+          <h2 className="text-[16px] sm:text-[40px] font-extrabold text-dark mt-1 sm:mt-2 tracking-tight leading-[1.25] sm:leading-[1.1]">
             Temukan layanan legal yang<br className="hidden sm:inline" /> paling tepat untuk bisnis Anda.
           </h2>
         </div>
@@ -44,11 +44,11 @@ export default function LayananKami() {
           <div className="shadow-sm border border-black/[0.03] rounded-2xl p-4 sm:p-6 bg-white shadow-sm md:shadow-none">
             <div className="flex items-center gap-2 sm:gap-2.5 mb-4 sm:mb-5">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-primary-light flex items-center justify-center flex-shrink-0">
-                <span className="text-[14px] sm:text-[14px] text-primary font-bold leading-none">⊞</span>
+                <span className="text-[16px] sm:text-[16px] text-primary font-bold leading-none">⊞</span>
               </div>
               <div>
-                <h3 className="text-[14px] sm:text-[15px] font-bold text-dark leading-tight">Layanan Individual</h3>
-                <p className="text-[14px] sm:text-[14px] text-muted leading-tight mt-0.5">Layanan siap pakai untuk berbagai kebutuhan legalitas bisnis</p>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-dark leading-tight">Layanan Individual</h3>
+                <p className="text-[16px] sm:text-[16px] text-muted leading-tight mt-0.5">Layanan siap pakai untuk berbagai kebutuhan legalitas bisnis</p>
               </div>
             </div>
 
@@ -65,7 +65,7 @@ export default function LayananKami() {
                     }}
                   >
                     <div className="flex-grow flex items-center">
-                      <h4 className="text-[16px] sm:text-[17px] font-bold text-dark leading-snug">{item.name}</h4>
+                      <h4 className="text-[16px] sm:text-[16px] font-bold text-dark leading-snug">{item.name}</h4>
                     </div>
 
                     <div className="flex justify-center mt-2 sm:mt-4">
@@ -99,8 +99,8 @@ export default function LayananKami() {
                 <Building2 className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-primary" strokeWidth={2} />
               </div>
               <div>
-                <h3 className="text-sm sm:text-[17px] font-extrabold text-dark leading-tight">Solusi Korporat</h3>
-                <p className="text-[14px] sm:text-[14px] text-muted leading-snug mt-0.5">
+                <h3 className="text-[16px] sm:text-[16px] font-extrabold text-dark leading-tight">Solusi Korporat</h3>
+                <p className="text-[16px] sm:text-[16px] text-muted leading-snug mt-0.5">
                   Dirancang untuk kebutuhan perusahaan & partnership B2B
                 </p>
               </div>
@@ -118,14 +118,14 @@ export default function LayananKami() {
                 />
               </div>
               <div className="flex items-center gap-0.5 sm:gap-1">
-                <span className="text-[14px] sm:text-[14px] font-extrabold text-[#D62828] tracking-tight">Easy</span>
-                <span className="text-[14px] sm:text-[14px] font-bold text-[#111827] tracking-tight">Legal</span>
+                <span className="text-[16px] sm:text-[16px] font-extrabold text-[#D62828] tracking-tight">Easy</span>
+                <span className="text-[16px] sm:text-[16px] font-bold text-[#111827] tracking-tight">Legal</span>
               </div>
               <div className="w-px h-3.5 bg-border mx-1" />
-              <span className="text-[14px] sm:text-[14px] font-bold text-dark/40 uppercase tracking-[0.15em]">CORPORATE</span>
+              <span className="text-[16px] sm:text-[16px] font-bold text-dark/40 uppercase tracking-[0.15em]">CORPORATE</span>
             </div>
 
-            <p className="text-[14px] sm:text-[14px] text-muted leading-relaxed mb-4 sm:mb-5">
+            <p className="text-[16px] sm:text-[16px] text-muted leading-relaxed mb-4 sm:mb-5">
               Solusi kustom oleh tim partnership EasyLegal yang dirancang sesuai kebutuhan korporasi — dari volume tinggi, integrasi sistem, sampai dedicated support.
             </p>
 
@@ -136,7 +136,7 @@ export default function LayananKami() {
                 "Volume discount & branded partner portal",
                 "Priority processing & co-marketing support",
               ].map((feat, i) => (
-                <li key={i} className="flex items-center gap-2 sm:gap-2.5 text-[14px] sm:text-[14px] text-dark/85">
+                <li key={i} className="flex items-center gap-2 sm:gap-2.5 text-[16px] sm:text-[16px] text-dark/85">
                   <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#DCFCE7] flex items-center justify-center flex-shrink-0">
                     <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#16A34A]" strokeWidth={3} />
                   </div>
@@ -147,7 +147,7 @@ export default function LayananKami() {
 
             <Link
               href="/kontak"
-              className="w-full sm:w-auto text-center inline-flex items-center justify-center px-5 sm:px-7 py-2.5 sm:py-3 bg-primary text-white text-[14px] sm:text-[14px] font-bold rounded-xl hover:bg-primary-hover transition-colors self-start shadow-sm hover:shadow-md"
+              className="w-full sm:w-auto text-center inline-flex items-center justify-center px-5 sm:px-7 py-2.5 sm:py-3 bg-primary text-white text-[16px] sm:text-[16px] font-bold rounded-xl hover:bg-primary-hover transition-colors self-start shadow-sm hover:shadow-md"
             >
               Pelajari lebih lanjut
             </Link>
@@ -183,12 +183,12 @@ export default function LayananKami() {
 
               <div className="absolute bottom-3 left-3 bg-white rounded-lg px-3 py-1.5 shadow-md shadow-sm border border-black/[0.03] flex items-center gap-1.5">
                 <Users className="w-3.5 h-3.5 text-muted" strokeWidth={2} />
-                <span className="text-[14px] font-bold text-dark">50+ Mitra</span>
+                <span className="text-[16px] font-bold text-dark">50+ Mitra</span>
               </div>
 
               <div className="absolute bottom-3 right-3 bg-white rounded-lg px-3 py-1.5 shadow-md shadow-sm border border-black/[0.03] flex items-center gap-1.5">
                 <Check className="w-3 h-3 text-primary" strokeWidth={3} />
-                <span className="text-[14px] font-bold text-dark">MOU Aktif</span>
+                <span className="text-[16px] font-bold text-dark">MOU Aktif</span>
               </div>
             </div>
           </div>

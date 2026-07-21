@@ -64,7 +64,7 @@ export default async function DashboardArticlesPage(
         </div>
         <Link
           href="/dashboard/artikel/tambah"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-sm hover:shadow-md transition-all"
         >
           <FileText className="w-4 h-4" />
           <span>Tulis Baru</span>
@@ -76,15 +76,15 @@ export default async function DashboardArticlesPage(
           <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
             <FileText className="w-8 h-8 text-[#990202]" />
           </div>
-          <h3 className="text-[18px] font-extrabold text-gray-900 mb-2">
+          <h3 className="text-[16px] font-extrabold text-gray-900 mb-2">
             Belum ada artikel
           </h3>
-          <p className="text-[14px] text-gray-500 mb-6">
+          <p className="text-[16px] text-gray-500 mb-6">
             Mulai tulis artikel pertama untuk klien EasyLegal.
           </p>
           <Link
             href="/dashboard/artikel/tambah"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-sm hover:shadow-md transition-all"
           >
             <FileText className="w-4 h-4" />
             <span>Tulis Artikel Pertama</span>
@@ -96,13 +96,13 @@ export default async function DashboardArticlesPage(
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="py-4 px-6 font-semibold text-sm text-gray-600">Gambar</th>
-                <th className="py-4 px-6 font-semibold text-sm text-gray-600">Judul & Slug</th>
-                <th className="py-4 px-6 font-semibold text-sm text-gray-600">Kategori</th>
-                <th className="py-4 px-6 font-semibold text-sm text-gray-600 text-center">Views</th>
-                <th className="py-4 px-6 font-semibold text-sm text-gray-600">Tanggal</th>
-                <th className="py-4 px-6 font-semibold text-sm text-gray-600">Waktu Baca</th>
-                <th className="py-4 px-6 font-semibold text-sm text-gray-600 text-right">Aksi</th>
+                <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Gambar</th>
+                <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Judul & Slug</th>
+                <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Kategori</th>
+                <th className="py-4 px-6 font-semibold text-[16px] text-gray-600 text-center">Views</th>
+                <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Tanggal</th>
+                <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Waktu Baca</th>
+                <th className="py-4 px-6 font-semibold text-[16px] text-gray-600 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -121,26 +121,26 @@ export default async function DashboardArticlesPage(
                     </td>
                     <td className="py-4 px-6">
                       <div className="font-bold text-gray-900 line-clamp-1">{article.title}</div>
-                      <div className="text-[14px] text-gray-500 mt-1 font-mono">/artikel/{article.slug}</div>
+                      <div className="text-[16px] text-gray-500 mt-1 font-mono">/artikel/{article.slug}</div>
                     </td>
                     <td className="py-4 px-6">
-                      <span className="inline-flex px-2.5 py-1 rounded-md text-[14px] font-bold bg-red-50 text-[#990202] border border-red-100/50">
+                      <span className="inline-flex px-2.5 py-1 rounded-md text-[16px] font-bold bg-red-50 text-[#990202] border border-red-100/50">
                         {article.category}
                       </span>
                     </td>
-                    <td className="py-4 px-6 text-center text-sm font-semibold text-gray-700">
+                    <td className="py-4 px-6 text-center text-[16px] font-semibold text-gray-700">
                       <div className="flex items-center justify-center gap-1">
                         <Eye className="w-3.5 h-3.5 text-gray-400" />
                         <span>{article.viewCount.toLocaleString("id-ID")}</span>
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-500">
+                    <td className="py-4 px-6 text-[16px] text-gray-500">
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 text-gray-400" />
                         <span>{date}</span>
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-500">
+                    <td className="py-4 px-6 text-[16px] text-gray-500">
                       <div className="flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5 text-gray-400" />
                         <span>{article.readTime}</span>

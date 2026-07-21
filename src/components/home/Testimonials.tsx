@@ -19,7 +19,7 @@ function ReviewCard({ item }: { item: typeof row1Reviews[0] }) {
             <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />
           ))}
         </div>
-        <p className="text-[14px] sm:text-[14px] text-gray-700 font-medium leading-relaxed mb-4 sm:mb-5">
+        <p className="text-[16px] sm:text-[16px] text-gray-700 font-medium leading-relaxed mb-4 sm:mb-5">
           &quot;{item.text}&quot;
         </p>
       </div>
@@ -35,19 +35,19 @@ function ReviewCard({ item }: { item: typeof row1Reviews[0] }) {
             referrerPolicy="no-referrer"
           />
         ) : (
-          <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full ${item.bg} flex items-center justify-center text-white text-[14px] sm:text-[14px] font-black flex-shrink-0 shadow-sm`}>
+          <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full ${item.bg} flex items-center justify-center text-white text-[16px] sm:text-[16px] font-black flex-shrink-0 shadow-sm`}>
             {item.initials}
           </div>
         )}
         <div className="min-w-0">
-          <div className="text-[14px] sm:text-[14px] font-black text-[#111827] leading-tight truncate">
+          <div className="text-[16px] sm:text-[16px] font-black text-[#111827] leading-tight truncate">
             {item.name}
           </div>
-          <div className="text-[14px] sm:text-[14px] text-[#6B7280] font-semibold mt-0.5 truncate">
+          <div className="text-[16px] sm:text-[16px] text-[#6B7280] font-semibold mt-0.5 truncate">
             {item.role}
           </div>
         </div>
-        <div className="flex items-center gap-1 bg-[#E8F5E9] text-[#2E7D32] px-2 py-0.5 rounded-md sm:rounded-lg text-[14px] sm:text-[14px] font-black border border-emerald-100/30 ml-auto flex-shrink-0">
+        <div className="flex items-center gap-1 bg-[#E8F5E9] text-[#2E7D32] px-2 py-0.5 rounded-md sm:rounded-lg text-[16px] sm:text-[16px] font-black border border-emerald-100/30 ml-auto flex-shrink-0">
           <Check className="w-2.5 h-2.5" strokeWidth={4} />
           <span>Google</span>
         </div>
@@ -83,13 +83,13 @@ export default function Testimonials() {
             ref={headerRef}
             className="mb-6 sm:mb-14 opacity-100 translate-y-0"
           >
-            <span className="text-[14px] sm:text-[14px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
+            <span className="text-[16px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
               TESTIMONI
             </span>
-            <h2 className="text-[20px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] mt-1.5 sm:mt-3 tracking-[-0.02em] leading-[1.25] sm:leading-tight">
+            <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] mt-1.5 sm:mt-3 tracking-[-0.02em] leading-[1.25] sm:leading-tight">
               Kata mereka yang sudah jalan<br className="hidden sm:inline" /> duluan.
             </h2>
-            <p className="text-[14px] sm:text-[14.5px] text-[#6B7280] mt-2 sm:mt-4 max-w-[620px] sm:mx-auto leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] text-[#6B7280] mt-2 sm:mt-4 max-w-[620px] sm:mx-auto leading-relaxed">
               Dari UMKM kuliner sampai startup teknologi — semua percayakan urusan legalnya ke EasyLegal.
             </p>
           </div>

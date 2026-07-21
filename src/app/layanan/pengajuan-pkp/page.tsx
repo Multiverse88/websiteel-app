@@ -34,6 +34,7 @@ import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Testimonials from "@/components/home/Testimonials";
@@ -75,6 +76,29 @@ export default function PengajuanPkp() {
     {
       q: "Apakah pengajuan saya pasti disetujui DJP?",
       a: "Persetujuan sepenuhnya merupakan kewenangan KPP setempat berdasarkan kelengkapan berkas fisik dan hasil survei lapangan. Namun, dengan layanan EasyLegal, kami memastikan seluruh <strong class=\"font-extrabold text-gray-950\">dokumen dan persyaratan valid</strong> sebelum diajukan, sehingga persentase keberhasilan sangat tinggi."
+    }
+  ];
+
+  const easyLegalPkpBenefits = [
+    {
+      icon: <ShieldCheck className="w-6 h-6 text-[#990202]" />,
+      title: "100% Lolos Survei KPP",
+      desc: "Tim kami memastikan seluruh berkas dan kondisi lapangan memenuhi standar sebelum disurvei petugas pajak."
+    },
+    {
+      icon: <Clock className="w-6 h-6 text-[#990202]" />,
+      title: "Proses Ekstra Cepat",
+      desc: "Tidak perlu bolak-balik KPP. Pengurusan selesai dalam 5-7 hari kerja hingga e-Faktur aktif."
+    },
+    {
+      icon: <FileText className="w-6 h-6 text-[#990202]" />,
+      title: "Pendampingan Full A-Z",
+      desc: "Dari pengumpulan berkas, pendaftaran DJP online, sampai aktivasi sertifikat elektronik kami bantu."
+    },
+    {
+      icon: <Briefcase className="w-6 h-6 text-[#990202]" />,
+      title: "Konsultan Berpengalaman",
+      desc: "Ditangani langsung oleh ahli pajak yang paham regulasi terbaru terkait pengukuhan PKP."
     }
   ];
 
@@ -164,7 +188,7 @@ export default function PengajuanPkp() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] sm:text-[14px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[16px] sm:text-[16px] sm:text-[16px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -172,13 +196,13 @@ export default function PengajuanPkp() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[14px] font-bold text-gray-900">Pengukuhan PKP</span>
+                <span className="text-[16px] font-bold text-gray-900">Pengukuhan PKP</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100/60 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Pajak Perusahaan · e-Faktur</span>
+                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Pajak Perusahaan · e-Faktur</span>
               </div>
 
               {/* Headline */}
@@ -188,7 +212,7 @@ export default function PengajuanPkp() {
               </h1>
 
               {/* Description */}
-              <p className="text-[15.5px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-medium">
+              <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-medium">
                 Dapatkan status Pengusaha Kena Pajak (PKP) resmi untuk menerbitkan Faktur Pajak, bertransaksi dengan korporasi/BUMN, dan memenangkan tender besar perpajakan. Mulai Rp 1.499.000.
               </p>
 
@@ -198,7 +222,7 @@ export default function PengajuanPkp() {
                   href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan pengukuhan PKP perusahaan.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
                 >
                   <span>Konsultasi Gratis</span>
                   <span className="ml-1.5 transition-transform group-hover:translate-x-0.5">→</span>
@@ -206,7 +230,7 @@ export default function PengajuanPkp() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-305 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer bg-white"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-gray-55 hover:border-gray-305 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer bg-white"
                 >
                   Lihat Paket Harga
                 </a>
@@ -221,8 +245,8 @@ export default function PengajuanPkp() {
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[14px] font-black text-gray-950 leading-tight">3-7 hari</p>
-                    <p className="text-[14px] font-bold text-gray-400">Lama proses</p>
+                    <p className="text-[16px] font-black text-gray-950 leading-tight">3-7 hari</p>
+                    <p className="text-[16px] font-bold text-gray-400">Lama proses</p>
                   </div>
                 </div>
 
@@ -232,8 +256,8 @@ export default function PengajuanPkp() {
                     <span className="text-[16px] font-black leading-none">%</span>
                   </div>
                   <div>
-                    <p className="text-[14px] font-black text-gray-950 leading-tight">Faktur Pajak</p>
-                    <p className="text-[14px] font-bold text-gray-400">Siap terbitkan</p>
+                    <p className="text-[16px] font-black text-gray-950 leading-tight">Faktur Pajak</p>
+                    <p className="text-[16px] font-bold text-gray-400">Siap terbitkan</p>
                   </div>
                 </div>
 
@@ -245,8 +269,8 @@ export default function PengajuanPkp() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[14px] font-black text-gray-950 leading-tight">100% Lolos</p>
-                    <p className="text-[14px] font-bold text-gray-400">Survey KPP pajak</p>
+                    <p className="text-[16px] font-black text-gray-950 leading-tight">100% Lolos</p>
+                    <p className="text-[16px] font-bold text-gray-400">Survey KPP pajak</p>
                   </div>
                 </div>
 
@@ -278,8 +302,8 @@ export default function PengajuanPkp() {
                     </svg>
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[14px] font-black text-gray-950">SPPKP Terbit</p>
-                    <p className="text-[14px] font-bold text-gray-400">Resmi Ditjen Pajak</p>
+                    <p className="text-[16px] font-black text-gray-950">SPPKP Terbit</p>
+                    <p className="text-[16px] font-bold text-gray-400">Resmi Ditjen Pajak</p>
                   </div>
                 </div>
 
@@ -291,8 +315,8 @@ export default function PengajuanPkp() {
                     </svg>
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[14px] font-black text-gray-950">e-Faktur Aktif</p>
-                    <p className="text-[14px] font-bold text-gray-400">Siap transaksi</p>
+                    <p className="text-[16px] font-black text-gray-950">e-Faktur Aktif</p>
+                    <p className="text-[16px] font-bold text-gray-400">Siap transaksi</p>
                   </div>
                 </div>
 
@@ -312,11 +336,11 @@ export default function PengajuanPkp() {
 
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">MANFAAT JADI PKP</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">MANFAAT JADI PKP</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Kenapa daftar PKP penting untuk bisnis Anda?
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
               Status PKP membuka akses ke pasar &amp; peluang yang tidak dimiliki non-PKP.
             </p>
           </div>
@@ -330,8 +354,8 @@ export default function PengajuanPkp() {
                 <div className="w-8 h-8 sm:w-11 sm:h-11 bg-[#FFF5F5] text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                   <CreditCard className="w-5.5 h-5.5" />
                 </div>
-                <h3 className="text-[15.5px] font-bold text-gray-900 leading-tight">Terbitkan Faktur Pajak</h3>
-                <p className="text-[14px] text-gray-500 leading-relaxed font-medium">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Terbitkan Faktur Pajak</h3>
+                <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
                   Bisa keluarkan e-Faktur resmi untuk setiap transaksi — wajib untuk B2B dengan klien korporat.
                 </p>
               </div>
@@ -343,8 +367,8 @@ export default function PengajuanPkp() {
                 <div className="w-8 h-8 sm:w-11 sm:h-11 bg-[#FFF5F5] text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                   <Clock className="w-5.5 h-5.5" />
                 </div>
-                <h3 className="text-[15.5px] font-bold text-gray-900 leading-tight">Klaim PPN Masukan</h3>
-                <p className="text-[14px] text-gray-500 leading-relaxed font-medium">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Klaim PPN Masukan</h3>
+                <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
                   PPN yang Anda bayar ke supplier bisa dikreditkan — hemat cash flow signifikan untuk bisnis dengan banyak vendor.
                 </p>
               </div>
@@ -356,8 +380,8 @@ export default function PengajuanPkp() {
                 <div className="w-8 h-8 sm:w-11 sm:h-11 bg-[#FFF5F5] text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                   <Star className="w-5.5 h-5.5" />
                 </div>
-                <h3 className="text-[15.5px] font-bold text-gray-900 leading-tight">Win Tender Korporat</h3>
-                <p className="text-[14px] text-gray-500 leading-relaxed font-medium">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Win Tender Korporat</h3>
+                <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
                   Banyak tender pemerintah &amp; BUMN mensyaratkan supplier sudah berstatus PKP untuk verifikasi pajak.
                 </p>
               </div>
@@ -369,8 +393,8 @@ export default function PengajuanPkp() {
                 <div className="w-8 h-8 sm:w-11 sm:h-11 bg-[#FFF5F5] text-[#990202] rounded-xl flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5.5 h-5.5" />
                 </div>
-                <h3 className="text-[15.5px] font-bold text-gray-900 leading-tight">Kredibilitas Bisnis</h3>
-                <p className="text-[14px] text-gray-500 leading-relaxed font-medium">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Kredibilitas Bisnis</h3>
+                <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
                   Status PKP menunjukkan bisnis Anda matang, taat pajak, &amp; siap bekerjasama dengan perusahaan besar.
                 </p>
               </div>
@@ -380,6 +404,49 @@ export default function PengajuanPkp() {
         </div>
       </section>
 
+      {/* ─── 3.5 MENGAPA PILIH EASYLEGAL ─── */}
+      <section className="bg-white py-16 sm:py-24 relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left text */}
+            <div className="lg:col-span-5 space-y-6">
+              <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">
+                KEUNGGULAN KAMI
+              </p>
+              <h2 className="font-heading text-[32px] sm:text-[46px] font-extrabold text-gray-950 leading-[1.15]">
+                Mengapa Pilih EasyLegal untuk Urus PKP?
+              </h2>
+              <p className="text-[16px] sm:text-[16px] text-gray-500 font-medium leading-relaxed max-w-lg">
+                Jangan ambil risiko dalam pengajuan PKP. Pengajuan yang ditolak akan memperlambat operasional bisnis Anda. Kami memastikan proses lancar 100% dengan transparan.
+              </p>
+            </div>
+
+            {/* Right grid */}
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                {easyLegalPkpBenefits.map((item, idx) => (
+                  <div key={idx} className="bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] rounded-3xl p-6 sm:p-8 transition-shadow duration-300 group">
+                    <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-[16px] font-bold text-gray-900 mb-2 leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <BottomPromoSection />
+      
       {/* ─── 4. PRICING SECTION ─── */}
       <Pricing
         sectionTitleTag="BIAYA JASA DAFTAR PKP"
@@ -390,6 +457,7 @@ export default function PengajuanPkp() {
           </>
         }
         packages={pricingPackages}
+        hideFooter={true}
       />
 
       {/* ─── 5. APA ITU PKP & PENGUKUHAN PENGUSAHA KENA PAJAK ─── */}
@@ -398,11 +466,11 @@ export default function PengajuanPkp() {
           
           {/* Header */}
           <div className="text-left mb-8 sm:mb-16 space-y-3">
-            <p className="text-[14px] font-black text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN PKP & PPN</p>
+            <p className="text-[16px] font-black text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN PKP & PPN</p>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Pengusaha Kena Pajak (PKP)?
             </h2>
-            <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
+            <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
               Sebelum mulai, kenali dulu sistem PKP & PPN yang berlaku di Indonesia.
             </p>
           </div>
@@ -430,8 +498,8 @@ export default function PengajuanPkp() {
                     <FileText className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[14px] font-bold text-gray-900">Dasar Hukum</p>
-                    <p className="text-[14px] font-medium text-gray-500">UU No. 42 Tahun 2009 tentang PPN</p>
+                    <p className="text-[16px] font-bold text-gray-900">Dasar Hukum</p>
+                    <p className="text-[16px] font-medium text-gray-500">UU No. 42 Tahun 2009 tentang PPN</p>
                   </div>
                 </div>
 
@@ -445,9 +513,9 @@ export default function PengajuanPkp() {
               <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <User className="w-4.5 h-4.5" />
-                  <h4 className="text-[14px] font-extrabold tracking-wider uppercase">PENGERTIAN PKP</h4>
+                  <h4 className="text-[16px] font-extrabold tracking-wider uppercase">PENGERTIAN PKP</h4>
                 </div>
-                <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-medium">
+                <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
                   <strong className="font-bold text-gray-900">PKP (Pengusaha Kena Pajak)</strong> adalah status pengusaha — perorangan maupun badan — yang melakukan penyerahan Barang/Jasa Kena Pajak. PKP <strong className="font-bold text-gray-900">wajib memungut, menyetor, dan melaporkan PPN</strong> kepada negara melalui sistem DJP.
                 </p>
               </div>
@@ -456,9 +524,9 @@ export default function PengajuanPkp() {
               <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <DollarSign className="w-4.5 h-4.5" />
-                  <h4 className="text-[14px] font-extrabold tracking-wider uppercase">PENGERTIAN PPN</h4>
+                  <h4 className="text-[16px] font-extrabold tracking-wider uppercase">PENGERTIAN PPN</h4>
                 </div>
-                <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-medium">
+                <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
                   <strong className="font-bold text-gray-900">PPN (Pajak Pertambahan Nilai)</strong> adalah pajak konsumsi yang dikenakan pada barang/jasa yang diserahkan. Tarif PPN saat ini <strong className="font-bold text-gray-900">11%</strong> (akan jadi 12% mulai 2026). PKP wajib menerbitkan <strong className="font-bold text-gray-900">e-Faktur</strong> untuk setiap transaksi kena PPN.
                 </p>
               </div>
@@ -467,9 +535,9 @@ export default function PengajuanPkp() {
               <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <Clock className="w-4.5 h-4.5" />
-                  <h4 className="text-[14px] font-extrabold tracking-wider uppercase">KEWAJIBAN WAJIB PAJAK</h4>
+                  <h4 className="text-[16px] font-extrabold tracking-wider uppercase">KEWAJIBAN WAJIB PAJAK</h4>
                 </div>
-                <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-medium">
+                <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
                   Setelah jadi PKP, Anda wajib: <strong className="font-bold text-gray-900">(1) memungut PPN</strong> dari pelanggan, <strong className="font-bold text-gray-900">(2) menerbitkan e-Faktur</strong> untuk setiap transaksi, <strong className="font-bold text-gray-900">(3) melaporkan SPT Masa PPN</strong> setiap bulan, dan <strong className="font-bold text-gray-900">(4) menyetorkan PPN</strong> ke kas negara tepat waktu.
                 </p>
               </div>
@@ -486,11 +554,11 @@ export default function PengajuanPkp() {
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">KAPAN DAFTAR PKP?</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">KAPAN DAFTAR PKP?</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Wajib vs Sukarela.
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
               Pendaftaran PKP bisa wajib (jika omset sudah memenuhi syarat) atau sukarela (kalau ingin klaim PPN masukan).
             </p>
           </div>
@@ -502,14 +570,14 @@ export default function PengajuanPkp() {
             <div className="bg-white rounded-3xl p-8 border-[2px] border-[#990202] shadow-[0_12px_45px_rgba(153,2,2,0.03)] hover:shadow-lg transition-all duration-300 flex flex-col justify-between text-left space-y-6">
               <div className="space-y-5">
                 {/* Tag */}
-                <div className="bg-[#990202] text-white py-1 px-3 rounded-full text-[14px] font-black uppercase tracking-wider flex items-center gap-1.5 w-fit">
+                <div className="bg-[#990202] text-white py-1 px-3 rounded-full text-[16px] font-black uppercase tracking-wider flex items-center gap-1.5 w-fit">
                   <Clock className="w-3 h-3" />
                   <span>WAJIB DAFTAR</span>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-sm sm:text-[17px] sm:text-[22px] font-black text-gray-950">Omset &gt; Rp 4,8 Miliar/Tahun</h3>
-                  <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-medium">
+                  <h3 className="text-[16px] sm:text-[16px] sm:text-[16px] font-black text-gray-950">Omset &gt; Rp 4,8 Miliar/Tahun</h3>
+                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
                     Sesuai PMK 197/2013, pengusaha dengan omset bruto melebihi <strong className="font-extrabold text-gray-900">Rp 4,8 Miliar dalam 1 tahun pajak</strong> wajib didaftarkan sebagai PKP.
                   </p>
                 </div>
@@ -521,8 +589,8 @@ export default function PengajuanPkp() {
                     "Denda jika telat: 2% dari PPN tertunggak",
                     "Berlaku untuk perorangan & badan usaha"
                   ].map((item, i) => (
-                    <li key={i} className="flex items-start text-[14px] font-semibold text-gray-800 leading-relaxed">
-                      <span className="text-[#990202] text-[15px] font-black mr-2">✓</span>
+                    <li key={i} className="flex items-start text-[16px] font-semibold text-gray-800 leading-relaxed">
+                      <span className="text-[#990202] text-[16px] font-black mr-2">✓</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -534,14 +602,14 @@ export default function PengajuanPkp() {
             <div className="bg-white rounded-3xl p-8 shadow-md border border-black/[0.04] shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-lg transition-all duration-300 flex flex-col justify-between text-left space-y-6">
               <div className="space-y-5">
                 {/* Tag */}
-                <div className="bg-gray-100 text-gray-500 py-1 px-3 rounded-full text-[14px] font-black uppercase tracking-wider flex items-center gap-1.5 w-fit">
+                <div className="bg-gray-100 text-gray-500 py-1 px-3 rounded-full text-[16px] font-black uppercase tracking-wider flex items-center gap-1.5 w-fit">
                   <Clock className="w-3 h-3 text-gray-400" />
                   <span>SUKARELA</span>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-sm sm:text-[17px] sm:text-[22px] font-black text-gray-950">Omset di Bawah Rp 4,8 Miliar</h3>
-                  <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-medium">
+                  <h3 className="text-[16px] sm:text-[16px] sm:text-[16px] font-black text-gray-950">Omset di Bawah Rp 4,8 Miliar</h3>
+                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
                     Pengusaha kecil bisa <strong className="font-extrabold text-gray-900">daftar sukarela</strong> agar bisa keluarkan e-Faktur &amp; klaim PPN masukan — strategi bagus jika klien Anda adalah PKP juga.
                   </p>
                 </div>
@@ -553,8 +621,8 @@ export default function PengajuanPkp() {
                     "Bisa kreditkan PPN masukan dari supplier",
                     "Meningkatkan kredibilitas bisnis Anda"
                   ].map((item, i) => (
-                    <li key={i} className="flex items-start text-[14px] font-semibold text-gray-800 leading-relaxed">
-                      <span className="text-[#990202] text-[15px] font-black mr-2">✓</span>
+                    <li key={i} className="flex items-start text-[16px] font-semibold text-gray-800 leading-relaxed">
+                      <span className="text-[#990202] text-[16px] font-black mr-2">✓</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -572,11 +640,11 @@ export default function PengajuanPkp() {
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DOKUMEN PERSYARATAN</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DOKUMEN PERSYARATAN</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Yang perlu Anda siapkan.
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
               Berikut dokumen yang dibutuhkan untuk pendaftaran PKP. Tim kami akan memandu pengumpulan &amp; verifikasi sebelum diajukan ke KPP.
             </p>
           </div>
@@ -590,8 +658,8 @@ export default function PengajuanPkp() {
                 <FileText className="w-5 h-5" />
               </div>
               <div className="space-y-1 text-left">
-                <h3 className="text-[14px] font-bold text-gray-900 leading-tight">Akta Pendirian Perusahaan</h3>
-                <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Akta Pendirian Perusahaan</h3>
+                <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                   Akta notaris pendirian PT/CV beserta SK Kemenkumham &amp; akta perubahan terakhir.
                 </p>
               </div>
@@ -603,8 +671,8 @@ export default function PengajuanPkp() {
                 <CreditCard className="w-5 h-5" />
               </div>
               <div className="space-y-1 text-left">
-                <h3 className="text-[14px] font-bold text-gray-900 leading-tight">NPWP Perusahaan &amp; Direktur</h3>
-                <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">NPWP Perusahaan &amp; Direktur</h3>
+                <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                   Kartu NPWP badan usaha &amp; NPWP direktur/pemilik (untuk PT perorangan).
                 </p>
               </div>
@@ -616,8 +684,8 @@ export default function PengajuanPkp() {
                 <User className="w-5 h-5" />
               </div>
               <div className="space-y-1 text-left">
-                <h3 className="text-[14px] font-bold text-gray-900 leading-tight">KTP Direktur / Pemilik</h3>
-                <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">KTP Direktur / Pemilik</h3>
+                <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                   Fotokopi KTP yang masih berlaku dari seluruh direktur &amp; komisaris.
                 </p>
               </div>
@@ -629,8 +697,8 @@ export default function PengajuanPkp() {
                 <Home className="w-5 h-5" />
               </div>
               <div className="space-y-1 text-left">
-                <h3 className="text-[14px] font-bold text-gray-900 leading-tight">Bukti Kepemilikan / Sewa Kantor</h3>
-                <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Bukti Kepemilikan / Sewa Kantor</h3>
+                <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                   Sertifikat / PBB / surat sewa kantor + surat keterangan domisili dari kelurahan.
                 </p>
               </div>
@@ -642,8 +710,8 @@ export default function PengajuanPkp() {
                 <Clipboard className="w-5 h-5" />
               </div>
               <div className="space-y-1 text-left">
-                <h3 className="text-[14px] font-bold text-gray-900 leading-tight">NIB / SIUP</h3>
-                <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">NIB / SIUP</h3>
+                <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                   Nomor Induk Berusaha (NIB) dari OSS RBA atau SIUP lama (jika belum punya NIB).
                 </p>
               </div>
@@ -655,8 +723,8 @@ export default function PengajuanPkp() {
                 <UploadCloud className="w-5 h-5" />
               </div>
               <div className="space-y-1 text-left">
-                <h3 className="text-[14px] font-bold text-gray-900 leading-tight">Laporan Keuangan Terbaru</h3>
-                <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Laporan Keuangan Terbaru</h3>
+                <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                   Neraca, laba/rugi, &amp; daftar piutang/utang dari periode terakhir.
                 </p>
               </div>
@@ -668,8 +736,8 @@ export default function PengajuanPkp() {
                 <Briefcase className="w-5 h-5" />
               </div>
               <div className="space-y-1 text-left">
-                <h3 className="text-[14px] font-bold text-gray-900 leading-tight">Foto Kantor &amp; Kegiatan Usaha</h3>
-                <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Foto Kantor &amp; Kegiatan Usaha</h3>
+                <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                   Foto tampak depan kantor, ruang kerja, papan nama, &amp; aktivitas operasional.
                 </p>
               </div>
@@ -681,8 +749,8 @@ export default function PengajuanPkp() {
                 <MapPin className="w-5 h-5" />
               </div>
               <div className="space-y-1 text-left">
-                <h3 className="text-[14px] font-bold text-gray-900 leading-tight">Koordinat Lokasi (Google Maps)</h3>
-                <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                <h3 className="text-[16px] font-bold text-gray-900 leading-tight">Koordinat Lokasi (Google Maps)</h3>
+                <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                   Titik koordinat lokasi kantor untuk verifikasi survei lapangan oleh petugas DJP.
                 </p>
               </div>
@@ -693,7 +761,7 @@ export default function PengajuanPkp() {
           {/* Bottom Alert Note */}
           <div className="max-w-[960px] mx-auto bg-[#FFF5F5] rounded-xl p-5 border border-red-100 flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-[#990202] flex-shrink-0 mt-0.5" />
-            <p className="text-[14px] text-gray-700 font-medium leading-relaxed text-left">
+            <p className="text-[16px] text-gray-700 font-medium leading-relaxed text-left">
               <strong className="font-bold text-gray-900">Tidak perlu repot urus sendiri.</strong> Tim kami akan kirim checklist lengkap &amp; bantu verifikasi setiap dokumen sebelum diajukan, sehingga peluang disetujui DJP maksimal. Dokumen kurang? Kami pandu cara melengkapinya.
             </p>
           </div>
@@ -712,10 +780,10 @@ export default function PengajuanPkp() {
           
           {/* Left Column */}
           <div className="space-y-4 max-w-2xl text-left">
-            <h2 className="font-heading text-[20px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
+            <h2 className="font-heading text-[16px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
               Siap jadi <span className="text-[#990202]">PKP resmi?</span>
             </h2>
-            <p className="text-[14px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
               Konsultasi gratis untuk cek status pajak &amp; rekomendasi paket — tanpa komitmen.
             </p>
           </div>
@@ -727,7 +795,7 @@ export default function PengajuanPkp() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Pengurusan PKP. Mohon info lengkap biaya dan prosesnya.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.588 1.977 14.122.953 11.5.953c-5.439 0-9.859 4.37-9.864 9.8-.001 1.73.457 3.41 1.32 4.927l-.982 3.58 3.673-.956zm11.517-5.595c-.3-.15-1.774-.875-2.048-.975-.274-.1-.474-.15-.674.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.794-1.49-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.491-.508-.674-.518-.174-.01-.374-.012-.574-.012-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.22 5.116 4.52 1.228.531 2.186.848 2.93 1.083.755.238 1.44.205 1.984.124.606-.091 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
@@ -740,14 +808,14 @@ export default function PengajuanPkp() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin konsultasi mengenai layanan pengukuhan PKP perusahaan.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <span>Hubungi Tim Kami</span>
-              <span className="text-[15px] font-normal">→</span>
+              <span className="text-[16px] font-normal">→</span>
             </a>
 
             {/* Fast Response Badge */}
-            <div className="flex items-center gap-1.5 text-[14px] text-gray-500 font-medium pt-1 px-1">
+            <div className="flex items-center gap-1.5 text-[16px] text-gray-500 font-medium pt-1 px-1">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>

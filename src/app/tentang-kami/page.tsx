@@ -48,12 +48,12 @@ const MemberCard = ({ member }: { member: { name: string; role: string; bio: str
     <div className="p-4 sm:p-6 flex-grow flex flex-col justify-between">
       <div className="space-y-2">
         <div className="inline-flex items-center bg-[#FFF5F5] px-2 py-0.5 rounded-md border border-red-100/50">
-          <span className="text-[14px] sm:text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">{member.role}</span>
+          <span className="text-[16px] sm:text-[16px] font-extrabold text-[#990202] tracking-wider uppercase">{member.role}</span>
         </div>
-        <h3 className="font-heading text-sm sm:text-[17px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
+        <h3 className="font-heading text-[16px] sm:text-[16px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
           {member.name}
         </h3>
-        <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal line-clamp-2">
+        <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-normal line-clamp-2">
           {member.bio}
         </p>
       </div>
@@ -66,7 +66,7 @@ export default function TentangKami() {
     { value: "12.500+", label: "Bisnis terlayani" },
     { value: "15+", label: "Jenis layanan legal" },
     { value: "4.9 ★", label: "Rating Google" },
-    { value: "3 kota", label: "Office presence" },
+    { value: "3 Kota", label: "Kantor Representatif" },
   ];
 
   const values = [
@@ -133,19 +133,19 @@ export default function TentangKami() {
             {/* Left text */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[16px] sm:text-[16px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
                 </Link>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[14px] sm:text-[14px] font-bold text-gray-900">Tentang Kami</span>
+                <span className="text-[16px] sm:text-[16px] font-bold text-gray-900">Tentang Kami</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Tentang Kami</span>
+                <span className="text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Tentang Kami</span>
               </div>
 
               {/* Headline */}
@@ -158,7 +158,7 @@ export default function TentangKami() {
               </h1>
 
               {/* Description */}
-              <p className="text-[14px] sm:text-[18px] text-gray-600 leading-relaxed max-w-2xl font-normal">
+              <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed max-w-2xl font-normal">
                 EasyLegal hadir karena kami believe legalitas bisnis tidak harus mahal, lama, atau ribet. Sejak 2020, kami sudah membantu lebih dari 12.500 UMKM mengurus PT, perizinan, sampai sertifikasi ISO.
               </p>
 
@@ -166,14 +166,14 @@ export default function TentangKami() {
               <div className="flex flex-row gap-3 pt-2">
                 <Link
                   href="/kontak"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center"
                 >
                   <span>Konsultasi Gratis</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-1.5 sm:ml-2" />
                 </Link>
                 <Link
                   href="/"
-                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
+                  className="flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm"
                 >
                   Lihat Layanan
                 </Link>
@@ -202,8 +202,8 @@ export default function TentangKami() {
                     <User className="w-4 h-4 sm:w-5.5 sm:h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[20px] font-black text-[#990202] leading-none">12.500+</div>
-                    <div className="text-[14px] sm:text-[14px] text-[#990202]/85 font-bold mt-1">Bisnis terlayani</div>
+                    <div className="text-[16px] sm:text-[16px] font-black text-[#990202] leading-none">12.500+</div>
+                    <div className="text-[16px] sm:text-[16px] text-[#990202]/85 font-bold mt-1">Bisnis terlayani</div>
                   </div>
                 </div>
 
@@ -213,8 +213,8 @@ export default function TentangKami() {
                     <Star className="w-4 h-4 sm:w-5.5 sm:h-5.5 fill-[#D62828] text-[#D62828]" />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[20px] font-black text-[#990202] leading-none">4.9 / 5</div>
-                    <div className="text-[14px] sm:text-[14px] text-[#990202]/85 font-bold mt-1">Rating Google</div>
+                    <div className="text-[16px] sm:text-[16px] font-black text-[#990202] leading-none">4.9 / 5</div>
+                    <div className="text-[16px] sm:text-[16px] text-[#990202]/85 font-bold mt-1">Rating Google</div>
                   </div>
                 </div>
 
@@ -250,8 +250,8 @@ export default function TentangKami() {
                     <Calendar className="w-4 h-4 sm:w-5.5 sm:h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[15px] font-black text-gray-900 leading-none">Berdiri 2023</div>
-                    <div className="text-[14px] sm:text-[14px] text-gray-500 font-bold mt-1">4 tahun melayani UMKM</div>
+                    <div className="text-[16px] sm:text-[16px] font-black text-gray-900 leading-none">Berdiri 2023</div>
+                    <div className="text-[16px] sm:text-[16px] text-gray-500 font-bold mt-1">4 tahun melayani UMKM</div>
                   </div>
                 </div>
 
@@ -260,20 +260,20 @@ export default function TentangKami() {
 
             {/* Right: Story Text */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-              <p className="text-[14px] sm:text-[14px] font-extrabold text-[#990202] uppercase tracking-wider">Cerita Kami</p>
+              <p className="text-[16px] sm:text-[16px] font-extrabold text-[#990202] uppercase tracking-wider">Cerita Kami</p>
 
-              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
+              <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
                 Lahir dari pengalaman{" "}
                 <span className="text-[#990202]">
                   mengurus PT sendiri
                 </span>
               </h2>
 
-              <p className="text-[14px] sm:text-[15.5px] text-gray-600 leading-relaxed font-normal">
+              <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
                 Founder kami pernah mengalaminya — bolak-balik ke notaris, antre panjang di kantor pemerintah, dan kebingungan dengan biaya yang tidak transparan. Kami pikir, kalau kami yang punya akses dan jaringan saja kesulitan, bagaimana dengan pelaku UMKM lain?
               </p>
 
-              <p className="text-[14px] sm:text-[15.5px] text-gray-600 leading-relaxed font-normal">
+              <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
                 Dari sanalah <strong className="font-extrabold text-gray-900">EasyLegal.id</strong> dibangun: sebuah platform yang memudahkan akses legalitas untuk semua pengusaha Indonesia. Lebih dari 12.500 UMKM mengurus perizinan, pendirian badan usaha, hingga sertifikasi ISO — semua bisa diurus online dengan harga yang transparan.
               </p>
 
@@ -284,7 +284,7 @@ export default function TentangKami() {
                   { bold: "Tim 30+ konsultan hukum", text: " dari berbagai latar industri." },
                   { bold: "Bermitra resmi", text: " dengan KEMENKUMHAM, BKPM, DJKI, dan PSE Kominfo." }
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-start space-x-2 sm:space-x-3 text-[14px] sm:text-[14.5px] text-gray-600">
+                  <div key={idx} className="flex items-start space-x-2 sm:space-x-3 text-[16px] sm:text-[16px] text-gray-600">
                     <Check className="w-4 h-4 sm:w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
                     <span>
                       <strong className="font-extrabold text-gray-950">{item.bold}</strong>
@@ -299,46 +299,70 @@ export default function TentangKami() {
         </div>
       </section>
 
-      {/* ─── 3. STATS ROW ─── */}
-      <section className="bg-white py-8 sm:py-14 border-b border-border/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+      {/* ─── 3. STATS & NILAI KAMI UNIFIED SECTION ─── */}
+      <section className="relative bg-white py-16 sm:py-24 border-b border-gray-100 overflow-hidden">
+        {/* Background Decorative Element */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gray-100/50 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/4" />
+
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
+          
+          {/* STATS ROW */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-20 sm:mb-32">
             {stats.map((stat, idx) => (
-              <div key={idx} className="text-center space-y-1 sm:space-y-2 py-4 sm:py-6 shadow-sm border border-black/[0.03] rounded-2xl bg-bg-light transition-all duration-300 hover:border-red-100 hover:shadow-md">
-                <div className="text-[26px] sm:text-[44px] font-extrabold text-[#990202] tracking-tight">{stat.value}</div>
-                <div className="text-[14px] sm:text-[14px] font-bold text-[#990202]/85">{stat.label}</div>
+              <div 
+                key={idx} 
+                className="group relative flex flex-col items-center justify-center text-center py-8 sm:py-12 px-4 rounded-[24px] sm:rounded-[32px] bg-white border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-red-100 hover:shadow-[0_20px_40px_rgba(214,40,40,0.08)]"
+              >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-b from-red-50/0 to-red-50/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative z-10 text-[36px] sm:text-[52px] font-extrabold text-[#990202] tracking-tight leading-none mb-3 flex items-center justify-center gap-1.5 sm:gap-2">
+                  {stat.label === "Rating Google" && (
+                    <Star className="w-8 h-8 sm:w-11 sm:h-11 text-amber-400 fill-amber-400" />
+                  )}
+                  <span>{stat.value.replace(" ★", "")}</span>
+                </div>
+                <div className="relative z-10 text-[16px] sm:text-[16px] font-bold text-gray-500 uppercase tracking-[0.15em]">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ─── 4. NILAI KAMI ─── */}
-      <section className="bg-bg-light py-8 sm:py-20 border-b border-border/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14 space-y-2 sm:space-y-3">
-            <p className="text-[14px] sm:text-[14px] font-bold text-primary uppercase tracking-wider">Nilai Kami</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-dark leading-[1.25] sm:leading-tight">
+          {/* NILAI KAMI */}
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-3 sm:space-y-4">
+            <div className="inline-flex items-center justify-center px-4 py-1.5 bg-red-50 border border-red-100 text-[#990202] rounded-full text-[16px] font-extrabold tracking-widest uppercase">
+              Nilai Kami
+            </div>
+            <h2 className="font-heading text-[28px] sm:text-[44px] lg:text-[48px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
               6 prinsip yang menjadi fondasi kerja kami.
             </h2>
-            <p className="text-[14px] sm:text-[16.5px] text-muted leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-xl mx-auto">
               Setiap proses, harga, dan komunikasi kami dipandu oleh nilai-nilai ini — bukan sekadar slogan.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
             {values.map((val, idx) => (
-              <div key={idx} className="bg-white rounded-xl p-4 sm:p-7 shadow-sm border border-black/[0.03] hover:border-primary/20 hover:shadow-sm transition-all duration-200 flex space-x-3.5 sm:space-x-4">
-                <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl bg-primary-light flex items-center justify-center flex-shrink-0">
-                  <val.Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+              <div 
+                key={idx} 
+                className="group bg-white rounded-[24px] sm:rounded-[32px] p-6 sm:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-gray-100 hover:border-red-100/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-red-50/50 to-transparent rounded-full blur-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-[16px] sm:rounded-[20px] bg-gradient-to-br from-red-50 to-white border border-red-100/50 flex items-center justify-center flex-shrink-0 mb-5 sm:mb-6 group-hover:scale-110 group-hover:shadow-[0_8px_16px_rgba(214,40,40,0.1)] transition-all duration-300">
+                  <val.Icon className="w-6 h-6 sm:w-8 sm:h-8 text-[#990202]" />
                 </div>
-                <div>
-                  <h3 className="text-sm sm:text-[17px] font-bold text-dark mb-1 sm:mb-2">{val.title}</h3>
-                  <p className="text-[14px] sm:text-[14px] text-muted leading-relaxed">{val.desc}</p>
+                
+                <div className="relative z-10">
+                  <h3 className="text-[16px] sm:text-[16px] font-extrabold text-gray-950 mb-2 sm:mb-3">{val.title}</h3>
+                  <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">{val.desc}</p>
                 </div>
               </div>
             ))}
           </div>
+          
         </div>
       </section>
 
@@ -346,15 +370,15 @@ export default function TentangKami() {
       <section className="bg-white py-8 sm:py-20 border-b border-border/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14 space-y-2 sm:space-y-3">
-            <p className="text-[14px] sm:text-[14px] font-extrabold text-[#990202] uppercase tracking-wider">Tim Kami</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
+            <p className="text-[16px] sm:text-[16px] font-extrabold text-[#990202] uppercase tracking-wider">Tim Kami</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-[1.25] sm:leading-tight">
               Tim di balik setiap proses Anda.
             </h2>
           </div>
 
           {/* Legal Officer Team */}
           <div className="mb-12 sm:mb-20">
-            <h3 className="text-center text-lg font-black text-gray-950 mb-8 sm:mb-10 uppercase tracking-widest">Legal Officer (LO)</h3>
+            <h3 className="text-center text-[16px] font-black text-gray-950 mb-8 sm:mb-10 uppercase tracking-widest">Legal Officer (LO)</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
               {[
                 { name: "Akmal Abdul Arik", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Akmal Abdul Arik, S.H..jpg" },
@@ -370,7 +394,7 @@ export default function TentangKami() {
 
           {/* PLA Team */}
           <div>
-            <h3 className="text-center text-lg font-black text-gray-950 mb-8 sm:mb-10 uppercase tracking-widest">Personal Legal Assistant (PLA)</h3>
+            <h3 className="text-center text-[16px] font-black text-gray-950 mb-8 sm:mb-10 uppercase tracking-widest">Personal Legal Assistant (PLA)</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
               {[
                 { name: "Mohammad Faddly Argahari", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/Mohammad Faddly Argahari, S.H..jpg" },

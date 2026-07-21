@@ -39,11 +39,11 @@ export default async function LandingPagesList() {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200">
-              <th className="py-4 px-6 font-semibold text-sm text-gray-600">Judul & Slug</th>
-              <th className="py-4 px-6 font-semibold text-sm text-gray-600">Status</th>
-              <th className="py-4 px-6 font-semibold text-sm text-gray-600">Dibuat Oleh</th>
-              <th className="py-4 px-6 font-semibold text-sm text-gray-600">Leads</th>
-              <th className="py-4 px-6 font-semibold text-sm text-gray-600 text-right">Aksi</th>
+              <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Judul & Slug</th>
+              <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Status</th>
+              <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Dibuat Oleh</th>
+              <th className="py-4 px-6 font-semibold text-[16px] text-gray-600">Leads</th>
+              <th className="py-4 px-6 font-semibold text-[16px] text-gray-600 text-right">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -58,7 +58,7 @@ export default async function LandingPagesList() {
                 <tr key={page.id} className="hover:bg-gray-50 transition-colors group">
                   <td className="py-4 px-6">
                     <div className="font-bold text-gray-900">{page.title}</div>
-                    <div className="text-[14px] text-gray-500 mt-1 flex items-center gap-1">
+                    <div className="text-[16px] text-gray-500 mt-1 flex items-center gap-1">
                       <span>/lp/{page.slug}</span>
                       <a href={`/lp/${page.slug}`} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
                         <ExternalLink className="w-3 h-3" />
@@ -66,16 +66,16 @@ export default async function LandingPagesList() {
                     </div>
                   </td>
                   <td className="py-4 px-6">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[14px] font-medium ${
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[16px] font-medium ${
                       page.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                     }`}>
                       {page.status === 'published' ? 'Published' : 'Draft'}
                     </span>
                   </td>
-                  <td className="py-4 px-6 text-sm text-gray-600">
+                  <td className="py-4 px-6 text-[16px] text-gray-600">
                     {page.author?.name || 'Unknown'}
                   </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900">
+                  <td className="py-4 px-6 text-[16px] font-medium text-gray-900">
                     0 {/* TODO: Count leads */}
                   </td>
                   <td className="py-4 px-6 text-right space-x-2">

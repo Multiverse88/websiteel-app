@@ -276,7 +276,7 @@ export default function PelaporanLKPM() {
                 <div className="lg:col-span-7 space-y-6 text-left">
                   
                   {/* Breadcrumb */}
-                  <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
+                  <nav className="flex items-center space-x-2 text-[16px] font-medium text-gray-500">
                     <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                       <Home className="w-3.5 h-3.5 text-gray-400" strokeWidth={2} />
                       <span>Beranda</span>
@@ -284,13 +284,13 @@ export default function PelaporanLKPM() {
                     <span className="text-gray-300 font-normal">&gt;</span>
                     <span className="text-gray-500 font-medium">Layanan</span>
                     <span className="text-gray-300 font-normal">&gt;</span>
-                    <span className="text-[14px] font-bold text-gray-900">Pelaporan LKPM</span>
+                    <span className="text-[16px] font-bold text-gray-900">Pelaporan LKPM</span>
                   </nav>
 
                   {/* Pill Badge */}
                   <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100/50 shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                    <span className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">BKPM - OSS RBA</span>
+                    <span className="text-[16px] font-extrabold text-[#990202] tracking-wider uppercase">BKPM - OSS RBA</span>
                   </div>
 
                   {/* Headline */}
@@ -299,7 +299,7 @@ export default function PelaporanLKPM() {
                   </h1>
 
                   {/* Description */}
-                  <p className="text-[14px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+                  <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
                     Pelaporan Laporan Kegiatan Penanaman Modal (LKPM) lewat OSS RBA — tepat waktu, akurat, &amp; sesuai format BKPM. Proses cepat 1–3 hari kerja.
                   </p>
 
@@ -308,7 +308,7 @@ export default function PelaporanLKPM() {
                     <a
                       href="#paket-harga"
                       onClick={scrollToPricing}
-                      className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
+                      className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
                     >
                       Lihat Paket LKPM
                     </a>
@@ -316,28 +316,28 @@ export default function PelaporanLKPM() {
                       href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pelaporan LKPM Online.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-7 py-4 border border-gray-250 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                      className="inline-flex items-center justify-center px-7 py-4 border border-gray-250 text-gray-800 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                     >
                       Konsultasi Gratis
                     </a>
                   </div>
 
                   {/* Checkpoints Row */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-gray-150 max-w-[650px]">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 max-w-[650px]">
                     {/* Checkpoint 1 */}
-                    <div className="flex items-center space-x-3 bg-[#FFF5F5] p-2.5 rounded-xl border border-red-50/50 shadow-sm">
-                      <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm border border-red-100">
+                    <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-transparent">
+                      <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                         <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                       </div>
                       <div>
-                        <div className="text-[14px] font-black text-gray-900">1–3 Hari</div>
-                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Proses cepat</div>
+                        <div className="text-[16px] font-black text-gray-900">1–3 Hari</div>
+                        <div className="text-[16px] text-gray-500 font-semibold mt-1">Proses cepat</div>
                       </div>
                     </div>
 
                     {/* Checkpoint 2 */}
-                    <div className="flex items-center space-x-3 bg-[#FFF5F5] p-2.5 rounded-xl border border-red-50/50 shadow-sm">
-                      <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm border border-red-100">
+                    <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-transparent">
+                      <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                         <svg className="w-4 h-4 text-[#990202]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                           <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -346,19 +346,19 @@ export default function PelaporanLKPM() {
                         </svg>
                       </div>
                       <div>
-                        <div className="text-[14px] font-black text-gray-900">Mulai Rp 1,49jt</div>
-                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Untuk UMK</div>
+                        <div className="text-[16px] font-black text-gray-900">Mulai Rp 1,49jt</div>
+                        <div className="text-[16px] text-gray-500 font-semibold mt-1">Untuk UMK</div>
                       </div>
                     </div>
 
                     {/* Checkpoint 3 */}
-                    <div className="flex items-center space-x-3 bg-[#FFF5F5] p-2.5 rounded-xl border border-red-50/50 shadow-sm">
-                      <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-sm border border-red-100">
+                    <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-transparent">
+                      <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                         <Check className="w-4 h-4 text-[#990202]" strokeWidth={3.5} />
                       </div>
                       <div>
-                        <div className="text-[14px] font-black text-gray-900">100% Tanda Terima</div>
-                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Bukti pelaporan</div>
+                        <div className="text-[16px] font-black text-gray-900">100% Tanda Terima</div>
+                        <div className="text-[16px] text-gray-500 font-semibold mt-1">Bukti pelaporan</div>
                       </div>
                     </div>
                   </div>
@@ -395,11 +395,11 @@ export default function PelaporanLKPM() {
             <section className="bg-[#FAF9F7] py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
                 <div className="max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
-                  <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SANKSI JIKA TIDAK LAPOR</p>
+                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.22em] font-sans">SANKSI JIKA TIDAK LAPOR</p>
                   <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
                     Konsekuensi telat / tidak lapor LKPM.
                   </h2>
-                  <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
                     BKPM mengenakan sanksi bertahap mulai dari peringatan sampai pencabutan izin usaha.
                   </p>
                 </div>
@@ -412,7 +412,7 @@ export default function PelaporanLKPM() {
                         <AlertTriangle className="w-5 h-5 text-[#990202]" />
                       </div>
                       <h4 className="text-[16px] font-black text-gray-900 leading-tight">Peringatan Tertulis</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                         Surat peringatan dari BKPM dengan tenggat waktu untuk segera memenuhi kewajiban lapor.
                       </p>
                     </div>
@@ -425,7 +425,7 @@ export default function PelaporanLKPM() {
                         <Layers className="w-5 h-5 text-[#990202]" />
                       </div>
                       <h4 className="text-[16px] font-black text-gray-900 leading-tight">Penghentian Sementara</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                         Suspensi (pembekuan) NIB &amp; izin usaha — perusahaan tidak bisa beroperasi resmi.
                       </p>
                     </div>
@@ -438,7 +438,7 @@ export default function PelaporanLKPM() {
                         <Shield className="w-5 h-5 text-[#990202]" />
                       </div>
                       <h4 className="text-[16px] font-black text-gray-900 leading-tight">Pencabutan Izin</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                         Pencabutan permanen NIB &amp; izin berusaha jika peringatan diabaikan terus-menerus.
                       </p>
                     </div>
@@ -451,7 +451,7 @@ export default function PelaporanLKPM() {
                         <Award className="w-5 h-5 text-[#990202]" />
                       </div>
                       <h4 className="text-[16px] font-black text-gray-900 leading-tight">Compliance Rating Turun</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
                         Rating kepatuhan turun — mempengaruhi pengajuan izin lain, tender, &amp; insentif.
                       </p>
                     </div>
@@ -473,6 +473,7 @@ export default function PelaporanLKPM() {
                 </>
               }
               packages={pricingPackages}
+              hideFooter={true}
             />
           </FadeIn>
 
@@ -481,11 +482,11 @@ export default function PelaporanLKPM() {
             <section className="bg-[#FAF9F6] py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
                 <div className="max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
-                  <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">ALUR PELAPORAN DI OSS RBA</p>
+                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">ALUR PELAPORAN DI OSS RBA</p>
                   <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
                     5 langkah submit laporan LKPM.
                   </h2>
-                  <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
                     Kami pegang seluruh alur dari pengumpulan data sampai submit ke OSS — Anda terima Tanda Terima resmi.
                   </p>
                 </div>
@@ -494,11 +495,11 @@ export default function PelaporanLKPM() {
                   {steps.map((step, idx) => (
                     <div key={idx} className="flex items-center space-x-4 sm:space-x-6">
                       <div className="w-[50px] h-[50px] rounded-full bg-white border-2 border-[#990202] flex items-center justify-center flex-shrink-0 shadow-sm">
-                        <span className="text-[14px] font-black text-[#990202] font-mono leading-none">{step.no}</span>
+                        <span className="text-[16px] font-black text-[#990202] font-mono leading-none">{step.no}</span>
                       </div>
                       <div className="flex-1 bg-white shadow-md border border-black/[0.03] rounded-[20px] p-5 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-shadow duration-300">
-                        <h4 className="text-[16.5px] font-black text-gray-900 leading-tight">{step.title}</h4>
-                        <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed mt-2 font-normal">{step.desc}</p>
+                        <h4 className="text-[16px] font-black text-gray-900 leading-tight">{step.title}</h4>
+                        <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed mt-2 font-normal">{step.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -512,11 +513,11 @@ export default function PelaporanLKPM() {
             <section className="bg-white py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
-                  <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PENGERTIAN</p>
+                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PENGERTIAN</p>
                   <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
                     Apa itu LKPM &amp; kenapa wajib lapor?
                   </h2>
-                  <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
                     Pelaporan rutin yang wajib untuk perusahaan dengan NIB &amp; izin usaha — bagian dari pengawasan investasi BKPM.
                   </p>
                 </div>
@@ -525,7 +526,7 @@ export default function PelaporanLKPM() {
                   
                   {/* Left Column: Unified Pink Container */}
                   <div className="lg:col-span-5 bg-[#FFF6F6] rounded-[32px] p-6 sm:p-7.5 space-y-3.5 text-left border border-red-100/40 shadow-[0_10px_35px_rgba(153,2,2,0.025)]">
-                    <h3 className="text-[14px] sm:text-[14px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
+                    <h3 className="text-[16px] sm:text-[16px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
                       SIAPA WAJIB LAPOR LKPM
                     </h3>
 
@@ -541,8 +542,8 @@ export default function PelaporanLKPM() {
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-[14px] font-black text-gray-900 leading-tight">PMA &amp; PMDN</h4>
-                        <p className="text-[14px] text-gray-450 font-bold mt-0.5 leading-snug">Wajib bagi semua perusahaan ber-NIB</p>
+                        <h4 className="text-[16px] font-black text-gray-900 leading-tight">PMA &amp; PMDN</h4>
+                        <p className="text-[16px] text-gray-450 font-bold mt-0.5 leading-snug">Wajib bagi semua perusahaan ber-NIB</p>
                       </div>
                     </div>
 
@@ -554,8 +555,8 @@ export default function PelaporanLKPM() {
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-[14px] font-black text-gray-900 leading-tight">Mikro &amp; Kecil (UMK)</h4>
-                        <p className="text-[14px] text-gray-450 font-bold mt-0.5 leading-snug">Lapor per 6 bulan (semester)</p>
+                        <h4 className="text-[16px] font-black text-gray-900 leading-tight">Mikro &amp; Kecil (UMK)</h4>
+                        <p className="text-[16px] text-gray-450 font-bold mt-0.5 leading-snug">Lapor per 6 bulan (semester)</p>
                       </div>
                     </div>
 
@@ -567,8 +568,8 @@ export default function PelaporanLKPM() {
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-[14px] font-black text-gray-900 leading-tight">Menengah &amp; Besar</h4>
-                        <p className="text-[14px] text-gray-450 font-bold mt-0.5 leading-snug">Lapor per 3 bulan (kuartal)</p>
+                        <h4 className="text-[16px] font-black text-gray-900 leading-tight">Menengah &amp; Besar</h4>
+                        <p className="text-[16px] text-gray-450 font-bold mt-0.5 leading-snug">Lapor per 3 bulan (kuartal)</p>
                       </div>
                     </div>
 
@@ -582,8 +583,8 @@ export default function PelaporanLKPM() {
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-[14px] font-black text-gray-900 leading-tight">Konstruksi &amp; Operasi</h4>
-                        <p className="text-[14px] text-gray-450 font-bold mt-0.5 leading-snug">Mulai konstruksi sampai operasional</p>
+                        <h4 className="text-[16px] font-black text-gray-900 leading-tight">Konstruksi &amp; Operasi</h4>
+                        <p className="text-[16px] text-gray-450 font-bold mt-0.5 leading-snug">Mulai konstruksi sampai operasional</p>
                       </div>
                     </div>
 
@@ -594,8 +595,8 @@ export default function PelaporanLKPM() {
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-[14px] font-black text-white leading-tight">Dasar Hukum</h4>
-                        <p className="text-[14px] text-gray-400 font-bold mt-0.5 leading-snug">Peraturan BKPM No. 5/2021 &amp; UU Cipta Kerja</p>
+                        <h4 className="text-[16px] font-black text-white leading-tight">Dasar Hukum</h4>
+                        <p className="text-[16px] text-gray-400 font-bold mt-0.5 leading-snug">Peraturan BKPM No. 5/2021 &amp; UU Cipta Kerja</p>
                       </div>
                     </div>
                   </div>
@@ -610,9 +611,9 @@ export default function PelaporanLKPM() {
                           <line x1="8" y1="2" x2="8" y2="6"></line>
                           <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
-                        <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">LKPM</h4>
+                        <h4 className="text-[16px] sm:text-[16px] font-black tracking-wider uppercase">LKPM</h4>
                       </div>
-                      <p className="text-[14px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
+                      <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
                         <strong className="text-gray-900 font-extrabold">LKPM (Laporan Kegiatan Penanaman Modal)</strong> adalah laporan berkala yang wajib disampaikan oleh pelaku usaha mengenai perkembangan realisasi penanaman modal dan kendala yang dihadapi. Pelaporan dilakukan secara online terintegrasi melalui portal <strong className="text-gray-900 font-extrabold">OSS RBA (Online Single Submission Risk Based Approach)</strong> di bawah naungan Kementerian Investasi/BKPM.
                       </p>
                     </div>
@@ -620,9 +621,9 @@ export default function PelaporanLKPM() {
                     <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                       <div className="flex items-center space-x-2.5 text-[#990202]">
                         <ShieldCheck className="w-4.5 h-4.5 text-[#990202]" strokeWidth={2.5} />
-                        <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">WAJIB LAPOR</h4>
+                        <h4 className="text-[16px] sm:text-[16px] font-black tracking-wider uppercase">WAJIB LAPOR</h4>
                       </div>
-                      <p className="text-[14px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
+                      <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
                         Setiap pelaku usaha dengan nilai investasi <strong className="text-gray-900 font-extrabold">di atas Rp 1 Miliar</strong> wajib menyampaikan LKPM secara berkala. Ini mencakup perusahaan berbadan hukum (PT, CV, Yayasan) maupun perseorangan (UMK), baik Penanaman Modal Dalam Negeri (PMDN) maupun Penanaman Modal Asing (PMA) yang terdaftar di OSS.
                       </p>
                     </div>
@@ -630,9 +631,9 @@ export default function PelaporanLKPM() {
                     <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                       <div className="flex items-center space-x-2.5 text-[#990202]">
                         <TrendingUp className="w-4.5 h-4.5 text-[#990202]" strokeWidth={2.5} />
-                        <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">MANFAAT LAPOR TEPAT WAKTU</h4>
+                        <h4 className="text-[16px] sm:text-[16px] font-black tracking-wider uppercase">MANFAAT LAPOR TEPAT WAKTU</h4>
                       </div>
-                      <p className="text-[14px] sm:text-[14px] text-gray-600 leading-relaxed font-normal">
+                      <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
                         Kepatuhan pelaporan LKPM memastikan status perizinan perusahaan Anda tetap <strong className="text-gray-900 font-extrabold">Aktif dan Valid</strong>. Menghindari pembekuan izin operasional secara mendadak oleh sistem OSS RBA, menjaga tingkat reputasi kepatuhan (*compliance rating*) investasi perusahaan, serta mempermudah akses ke fasilitas perpajakan atau insentif investasi pemerintah.
                       </p>
                     </div>
@@ -648,11 +649,11 @@ export default function PelaporanLKPM() {
             <section className="bg-[#FAF9F7] py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
-                  <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PERIODE &amp; BATAS WAKTU</p>
+                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PERIODE &amp; BATAS WAKTU</p>
                   <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
                     Kapan harus lapor LKPM?
                   </h2>
-                  <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
                     Frekuensi pelaporan tergantung skala usaha. Telat lapor = risiko sanksi BKPM.
                   </p>
                 </div>
@@ -663,22 +664,22 @@ export default function PelaporanLKPM() {
                   <div className="bg-[#FFF8F8] rounded-[28px] p-6 sm:p-8 border-2 border-[#990202] shadow-sm flex flex-col justify-between text-left">
                     <div className="space-y-6">
                       <div className="inline-flex items-center space-x-2 bg-[#990202] py-1.5 px-4 rounded-full self-start">
-                        <span className="text-[14px] font-black text-white tracking-wider uppercase">MIKRO &amp; KECIL (UMK)</span>
+                        <span className="text-[16px] font-black text-white tracking-wider uppercase">MIKRO &amp; KECIL (UMK)</span>
                       </div>
-                      <h3 className="text-[20px] font-black text-gray-900 leading-tight">
+                      <h3 className="text-[16px] font-black text-gray-900 leading-tight">
                         2× Setahun · Semesteran
                       </h3>
-                      <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
+                      <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-normal">
                         Perusahaan dengan skala mikro &amp; kecil wajib lapor <strong className="font-extrabold text-gray-900">setiap 6-bulan</strong>. Tergolong UMK jika modal usaha &lt; Rp 5 miliar (di luar tanah &amp; bangunan).
                       </p>
                       <div className="space-y-3 pt-2">
-                        <h4 className="text-[14px] font-black text-[#990202] tracking-widest uppercase block mt-3">DEADLINE PELAPORAN</h4>
+                        <h4 className="text-[16px] font-black text-[#990202] tracking-widest uppercase block mt-3">DEADLINE PELAPORAN</h4>
                         <div className="bg-white rounded-xl p-4.5 border border-red-100/50 space-y-3.5 mt-3 shadow-sm">
-                          <div className="flex items-start space-x-2.5 text-[14px] sm:text-[14px] text-gray-700 font-semibold leading-normal">
+                          <div className="flex items-start space-x-2.5 text-[16px] sm:text-[16px] text-gray-700 font-semibold leading-normal">
                             <Clock className="w-4 h-4 text-[#990202] mt-0.5 flex-shrink-0" />
                             <span>Semester I: <strong className="font-extrabold text-gray-900">paling lambat 10 Juli</strong></span>
                           </div>
-                          <div className="flex items-start space-x-2.5 text-[14px] sm:text-[14px] text-gray-700 font-semibold leading-normal">
+                          <div className="flex items-start space-x-2.5 text-[16px] sm:text-[16px] text-gray-700 font-semibold leading-normal">
                             <Clock className="w-4 h-4 text-[#990202] mt-0.5 flex-shrink-0" />
                             <span>Semester II: <strong className="font-extrabold text-gray-900">paling lambat 10 Januari</strong></span>
                           </div>
@@ -691,30 +692,30 @@ export default function PelaporanLKPM() {
                   <div className="bg-white rounded-[28px] p-6 sm:p-8 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between text-left">
                     <div className="space-y-6">
                       <div className="inline-flex items-center space-x-2 bg-gray-100 py-1.5 px-4 rounded-full self-start">
-                        <span className="text-[14px] font-black text-gray-600 tracking-wider uppercase">MENENGAH &amp; BESAR</span>
+                        <span className="text-[16px] font-black text-gray-600 tracking-wider uppercase">MENENGAH &amp; BESAR</span>
                       </div>
-                      <h3 className="text-[20px] font-black text-gray-900 leading-tight">
+                      <h3 className="text-[16px] font-black text-gray-900 leading-tight">
                         4× Setahun · Kuartalan
                       </h3>
-                      <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-normal">
+                      <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-normal">
                         Perusahaan skala menengah-besar wajib lapor <strong className="font-extrabold text-gray-900">setiap 3 bulan</strong>. Termasuk semua PMA &amp; PMDN dengan modal usaha &gt; Rp 5 miliar.
                       </p>
                       <div className="space-y-3 pt-2">
-                        <h4 className="text-[14px] font-black text-[#990202] tracking-widest uppercase block mt-3">DEADLINE PELAPORAN</h4>
+                        <h4 className="text-[16px] font-black text-[#990202] tracking-widest uppercase block mt-3">DEADLINE PELAPORAN</h4>
                         <div className="bg-[#F8F9FA] rounded-xl p-4.5 shadow-sm border border-black/[0.02] space-y-3.5 mt-3">
-                          <div className="flex items-start space-x-2.5 text-[14px] sm:text-[14px] text-gray-700 font-semibold leading-normal">
+                          <div className="flex items-start space-x-2.5 text-[16px] sm:text-[16px] text-gray-700 font-semibold leading-normal">
                             <Clock className="w-4 h-4 text-[#990202] mt-0.5 flex-shrink-0" />
                             <span>Triwulan I: <strong className="font-extrabold text-gray-900">paling lambat 10 April</strong></span>
                           </div>
-                          <div className="flex items-start space-x-2.5 text-[14px] sm:text-[14px] text-gray-700 font-semibold leading-normal">
+                          <div className="flex items-start space-x-2.5 text-[16px] sm:text-[16px] text-gray-700 font-semibold leading-normal">
                             <Clock className="w-4 h-4 text-[#990202] mt-0.5 flex-shrink-0" />
                             <span>Triwulan II: <strong className="font-extrabold text-gray-900">paling lambat 10 Juli</strong></span>
                           </div>
-                          <div className="flex items-start space-x-2.5 text-[14px] sm:text-[14px] text-gray-700 font-semibold leading-normal">
+                          <div className="flex items-start space-x-2.5 text-[16px] sm:text-[16px] text-gray-700 font-semibold leading-normal">
                             <Clock className="w-4 h-4 text-[#990202] mt-0.5 flex-shrink-0" />
                             <span>Triwulan III: <strong className="font-extrabold text-gray-900">paling lambat 10 Oktober</strong></span>
                           </div>
-                          <div className="flex items-start space-x-2.5 text-[14px] sm:text-[14px] text-gray-700 font-semibold leading-normal">
+                          <div className="flex items-start space-x-2.5 text-[16px] sm:text-[16px] text-gray-700 font-semibold leading-normal">
                             <Clock className="w-4 h-4 text-[#990202] mt-0.5 flex-shrink-0" />
                             <span>Triwulan IV: <strong className="font-extrabold text-gray-900">paling lambat 10 Januari</strong></span>
                           </div>
@@ -733,11 +734,11 @@ export default function PelaporanLKPM() {
             <section className="bg-white py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
                 <div className="max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
-                  <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DATA YANG DILAPORKAN</p>
+                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DATA YANG DILAPORKAN</p>
                   <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
                     Apa saja isi laporan LKPM?
                   </h2>
-                  <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
                     5 kategori data utama yang harus diisi setiap periode pelaporan ke BKPM.
                   </p>
                 </div>
@@ -748,8 +749,8 @@ export default function PelaporanLKPM() {
                       <DollarSign className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
                     </div>
                     <div className="space-y-1">
-                      <h4 className="text-[14.5px] font-black text-gray-900 leading-tight">Realisasi Investasi</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">Nilai investasi yang sudah direalisasikan (modal tetap &amp; modal kerja).</p>
+                      <h4 className="text-[16px] font-black text-gray-900 leading-tight">Realisasi Investasi</h4>
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">Nilai investasi yang sudah direalisasikan (modal tetap &amp; modal kerja).</p>
                     </div>
                   </div>
 
@@ -758,8 +759,8 @@ export default function PelaporanLKPM() {
                       <Users className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
                     </div>
                     <div className="space-y-1">
-                      <h4 className="text-[14.5px] font-black text-gray-900 leading-tight">Tenaga Kerja</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">Jumlah karyawan WNI &amp; WNA (penyerapan tenaga kerja lokal).</p>
+                      <h4 className="text-[16px] font-black text-gray-900 leading-tight">Tenaga Kerja</h4>
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">Jumlah karyawan WNI &amp; WNA (penyerapan tenaga kerja lokal).</p>
                     </div>
                   </div>
 
@@ -768,8 +769,8 @@ export default function PelaporanLKPM() {
                       <Activity className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
                     </div>
                     <div className="space-y-1">
-                      <h4 className="text-[14.5px] font-black text-gray-900 leading-tight">Produksi / Penjualan</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">Volume &amp; nilai produksi barang atau jasa yang dihasilkan.</p>
+                      <h4 className="text-[16px] font-black text-gray-900 leading-tight">Produksi / Penjualan</h4>
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">Volume &amp; nilai produksi barang atau jasa yang dihasilkan.</p>
                     </div>
                   </div>
 
@@ -778,8 +779,8 @@ export default function PelaporanLKPM() {
                       <FileText className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
                     </div>
                     <div className="space-y-1">
-                      <h4 className="text-[14.5px] font-black text-gray-900 leading-tight">Perizinan</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">Progress perolehan izin terkait (izin lingkungan, bangunan, dll).</p>
+                      <h4 className="text-[16px] font-black text-gray-900 leading-tight">Perizinan</h4>
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">Progress perolehan izin terkait (izin lingkungan, bangunan, dll).</p>
                     </div>
                   </div>
 
@@ -788,8 +789,8 @@ export default function PelaporanLKPM() {
                       <AlertCircle className="w-5 h-5 text-[#990202]" strokeWidth={2.5} />
                     </div>
                     <div className="space-y-1">
-                      <h4 className="text-[14.5px] font-black text-gray-900 leading-tight">Kendala Usaha</h4>
-                      <p className="text-[14px] text-gray-500 font-medium leading-relaxed">Hambatan yang dihadapi dalam pengoperasian investasi (jika ada).</p>
+                      <h4 className="text-[16px] font-black text-gray-900 leading-tight">Kendala Usaha</h4>
+                      <p className="text-[16px] text-gray-500 font-medium leading-relaxed">Hambatan yang dihadapi dalam pengoperasian investasi (jika ada).</p>
                     </div>
                   </div>
                 </div>
@@ -816,7 +817,7 @@ export default function PelaporanLKPM() {
                     <h2 className="font-heading text-[32px] sm:text-[38px] font-black text-gray-900 leading-[1.2] tracking-tight">
                       Mau lapor LKPM <span className="text-[#990202]">tanpa ribet?</span>
                     </h2>
-                    <p className="text-[14.5px] sm:text-[15.5px] text-gray-500 leading-relaxed font-normal max-w-xl">
+                    <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-normal max-w-xl">
                       Konsultasi gratis untuk cek kewajiban &amp; periode pelaporan perusahaan Anda — tanpa komitmen.
                     </p>
                   </div>
@@ -826,7 +827,7 @@ export default function PelaporanLKPM() {
                       href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pelaporan LKPM.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer text-center w-full"
+                      className="inline-flex items-center justify-center px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer text-center w-full"
                     >
                       <svg className="w-5 h-5 mr-2 text-white fill-current" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.864.002-2.637-1.023-5.115-2.883-6.978C16.63 1.899 14.16 .871 11.53.871c-5.44 0-9.865 4.42-9.869 9.865-.001 1.836.486 3.633 1.408 5.204l-1.015 3.705 3.805-.998zm11.238-6.82c-.3-.15-1.77-.875-2.045-.975-.275-.1-.475-.15-.675.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.79-1.49-1.77-1.665-2.07-.175-.3-.02-.46.13-.61.135-.135.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.244-.588-.48-.508-.66-.513-.17-.007-.365-.008-.56-.008-.195 0-.515.075-.785.375-.27.3-1.03 1.01-1.03 2.46s1.045 2.84 1.19 3.04c.145.2 2.055 3.14 4.975 4.4 1.12.485 1.995.775 2.68.995.7.225 1.335.195 1.84.12.56-.085 1.77-.725 2.02-1.39.25-.665.25-1.235.175-1.35-.075-.115-.275-.19-.575-.34z"/>
@@ -838,13 +839,13 @@ export default function PelaporanLKPM() {
                       href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pelaporan LKPM.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[15px] bg-white hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow transition-all duration-200 cursor-pointer text-center w-full rounded-xl"
+                      className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[16px] bg-white hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow transition-all duration-200 cursor-pointer text-center w-full rounded-xl"
                     >
                       <span>Hubungi Tim Kami</span>
                       <ArrowRight className="w-4 h-4 ml-2" strokeWidth={3.5} />
                     </a>
 
-                    <div className="flex items-center space-x-1.5 pt-1 text-gray-500 font-semibold text-[14px] sm:text-[14px] leading-none pl-1">
+                    <div className="flex items-center space-x-1.5 pt-1 text-gray-500 font-semibold text-[16px] sm:text-[16px] leading-none pl-1">
                       <Check className="w-3.5 h-3.5 text-emerald-500" strokeWidth={3.5} />
                       <span>Reminder otomatis tiap periode · Senin–Sabtu 08:00–20:00</span>
                     </div>

@@ -14,6 +14,7 @@ import {
   Users,
   Lock,
   Headphones,
+  MapPin,
 } from "lucide-react";
 
 export const heroSlides = [
@@ -96,6 +97,7 @@ export const layananIndividual = [
   { name: "Pendirian Badan Usaha", desc: "Badan Usaha & Legal", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha" },
   { name: "Daftar Merek", desc: "HAKI & Brand", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki" },
   { name: "NIB & OSS", desc: "Perizinan Usaha", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss" },
+  { name: "Tata Ruang • PKKPR", desc: "Kesesuaian Tata Ruang", icon: MapPin, circleBg: "#059669", cardTint: "#ECFDF5", href: "/layanan/pkkpr" },
   { name: "Sertifikasi ISO", desc: "Standar Internasional", icon: Award, circleBg: "#16A34A", cardTint: "#F0FDF4", href: "/layanan/sertifikasi-iso" },
   { name: "Pengajuan PKP", desc: "Perpajakan & E-Faktur", icon: FileText, circleBg: "#EA580C", cardTint: "#FFF7ED", href: "/layanan/pengajuan-pkp" },
   { name: "Visa & KITAS", desc: "Imigrasi WNA", icon: Globe, circleBg: "#1E3A5F", cardTint: "#F0F4FF", href: "/layanan/visa-kitas" },
@@ -103,6 +105,7 @@ export const layananIndividual = [
   { name: "Press Release", desc: "PR & Media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/press-release" },
   { name: "Apostille", desc: "Legalisasi 129+ Negara", icon: Globe, circleBg: "#0891B2", cardTint: "#ECFEFF", href: "/layanan/apostille" },
   { name: "Pelaporan LKPM", desc: "Lapor BKPM Rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA", href: "/layanan/pelaporan-lkpm" },
+  { name: "Kontrak Bisnis", desc: "Perjanjian & Legal Drafting", icon: FileText, circleBg: "#4F46E5", cardTint: "#EEF2FF", href: "/layanan/kontrak-bisnis" },
 ];
 
 

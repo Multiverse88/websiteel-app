@@ -27,7 +27,7 @@ export default function NewLandingPage() {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <form action={createLandingPage} className="space-y-5">
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1.5">Judul Internal</label>
+            <label className="block text-[16px] font-bold text-gray-700 mb-1.5">Judul Internal</label>
             <input 
               type="text" 
               name="title" 
@@ -39,9 +39,9 @@ export default function NewLandingPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1.5">URL Slug</label>
+            <label className="block text-[16px] font-bold text-gray-700 mb-1.5">URL Slug</label>
             <div className="flex">
-              <span className="inline-flex items-center px-4 rounded-l-lg border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm">
+              <span className="inline-flex items-center px-4 rounded-l-lg border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-[16px]">
                 /lp/
               </span>
               <input 
