@@ -42,10 +42,10 @@ export default async function NewsletterSettingsPage() {
                 <Settings className="w-5 h-5" />
               </div>
               <div>
-                <h1 className="text-lg font-black text-gray-900 tracking-tight leading-none">
+                <h1 className="text-[16px] font-black text-gray-900 tracking-tight leading-none">
                   Pengaturan Otomatisasi
                 </h1>
-                <p className="text-[14px] text-gray-500 font-medium mt-1">
+                <p className="text-[16px] text-gray-500 font-medium mt-1">
                   Atur alur pengiriman email otomatis newsletter
                 </p>
               </div>
@@ -53,7 +53,7 @@ export default async function NewsletterSettingsPage() {
           </div>
           <Link
             href="/dashboard"
-            className="text-[14px] font-bold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-3.5 py-2 rounded-lg transition-all"
+            className="text-[16px] font-bold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-3.5 py-2 rounded-lg transition-all"
           >
             Dashboard Utama
           </Link>
@@ -74,13 +74,13 @@ export default async function NewsletterSettingsPage() {
 
           {/* Ringkasan Status Otomatisasi */}
           <div className="bg-white rounded-xl shadow-md border border-black/[0.03] p-6 shadow-sm flex flex-col gap-4">
-            <h3 className="font-bold text-gray-900 text-sm border-b border-gray-100 pb-2 flex items-center gap-1.5">
+            <h3 className="font-bold text-gray-900 text-[16px] border-b border-gray-100 pb-2 flex items-center gap-1.5">
               <ToggleRight className="w-4 h-4 text-[#990202]" /> Ringkasan Newsletter
             </h3>
 
             <div className="flex flex-col gap-3.5">
               {/* Stat 1 */}
-              <div className="flex items-center justify-between text-[14px]">
+              <div className="flex items-center justify-between text-[16px]">
                 <span className="text-gray-500 font-medium flex items-center gap-1.5">
                   <Users className="w-3.5 h-3.5 text-gray-400" /> Subscriber Aktif
                 </span>
@@ -90,7 +90,7 @@ export default async function NewsletterSettingsPage() {
               </div>
 
               {/* Stat 2 */}
-              <div className="flex items-center justify-between text-[14px]">
+              <div className="flex items-center justify-between text-[16px]">
                 <span className="text-gray-500 font-medium flex items-center gap-1.5">
                   <Mail className="w-3.5 h-3.5 text-gray-400" /> Total Broadcast Sent
                 </span>
@@ -102,8 +102,8 @@ export default async function NewsletterSettingsPage() {
           </div>
 
           {/* Panduan Placeholder Tagging */}
-          <div className="bg-white rounded-xl shadow-md border border-black/[0.03] p-6 shadow-sm flex flex-col gap-3 text-[14px] leading-relaxed text-gray-600">
-            <h3 className="font-bold text-gray-900 text-sm border-b border-gray-100 pb-2">
+          <div className="bg-white rounded-xl shadow-md border border-black/[0.03] p-6 shadow-sm flex flex-col gap-3 text-[16px] leading-relaxed text-gray-600">
+            <h3 className="font-bold text-gray-900 text-[16px] border-b border-gray-100 pb-2">
               💡 Panduan Placeholder Tagging
             </h3>
             <p>
@@ -117,7 +117,7 @@ export default async function NewsletterSettingsPage() {
                 <code className="text-[#990202] font-semibold">{"{{category}}"}</code>: Menyisipkan kategori artikel (contoh: Legalitas).
               </li>
             </ul>
-            <div className="p-3 bg-red-50/50 rounded-lg text-[14px] text-gray-500 border border-red-100/50 mt-1">
+            <div className="p-3 bg-red-50/50 rounded-lg text-[16px] text-gray-500 border border-red-100/50 mt-1">
               <b>Catatan:</b> Pastikan penulisan placeholder menggunakan kurung kurawal ganda persis seperti di atas agar dibaca sempurna oleh sistem.
             </div>
           </div>

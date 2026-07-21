@@ -29,7 +29,7 @@ export default async function EditLinkPage({ params }: { params: Promise<{ id: s
           <div className="flex items-center gap-3 mb-4">
             <Link
               href="/dashboard/links"
-              className="inline-flex items-center gap-1.5 text-[14px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
+              className="inline-flex items-center gap-1.5 text-[16px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Redirect Links

@@ -96,7 +96,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                   key={idx}
                   className="w-full h-full flex-shrink-0 flex flex-col justify-center px-1"
                 >
-                  <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-red-100 bg-white text-[#D62828] text-[14px] sm:text-[14px] font-bold tracking-wide mb-4 sm:mb-6 w-fit ${tagClass}`}>
+                  <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-red-100 bg-white text-[#D62828] text-[16px] sm:text-[16px] font-bold tracking-wide mb-4 sm:mb-6 w-fit ${tagClass}`}>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#D62828]" />
                     <span>{slide.tag}</span>
                   </div>
@@ -110,14 +110,14 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                     ))}
                   </h1>
 
-                  <p className={`mt-4 sm:mt-6 text-[16px] sm:text-[18px] text-[#555555] leading-relaxed max-w-[540px] ${descClass}`}>
+                  <p className={`mt-4 sm:mt-6 text-[16px] sm:text-[16px] text-[#555555] leading-relaxed max-w-[540px] ${descClass}`}>
                     {slide.desc}
                   </p>
 
                   <div className={`mt-8 sm:mt-10 flex flex-row gap-3 ${ctaClass}`}>
                     <Link
                       href="/kontak"
-                      className="flex-1 sm:flex-initial text-center justify-center inline-flex items-center gap-2 px-6 sm:px-10 py-4 sm:py-4 bg-[#9B1C1C] hover:bg-[#8B0000] active:scale-[0.98] text-white font-black text-[16px] sm:text-[18px] tracking-wide rounded-[10px] sm:rounded-[14px] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
+                      className="flex-1 sm:flex-initial text-center justify-center inline-flex items-center gap-2 px-6 sm:px-10 py-4 sm:py-4 bg-[#9B1C1C] hover:bg-[#8B0000] active:scale-[0.98] text-white font-black text-[16px] sm:text-[16px] tracking-wide rounded-[10px] sm:rounded-[14px] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
                     >
                       <span>Konsultasi Gratis</span>
                       <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" strokeWidth={3} />
@@ -126,7 +126,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
 
                   <div className={`mt-6 sm:mt-8 flex flex-wrap gap-x-3 sm:gap-x-5 gap-y-2 ${badgesClass}`}>
                     {slide.trustBadges.map((badge, bidx) => (
-                      <span key={bidx} className="inline-flex items-center space-x-1 sm:space-x-1.5 text-[14px] sm:text-[14px] font-semibold text-[#444444]">
+                      <span key={bidx} className="inline-flex items-center space-x-1 sm:space-x-1.5 text-[16px] sm:text-[16px] font-semibold text-[#444444]">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-[12px] h-[12px] sm:w-[14px] sm:h-[14px] text-emerald-600 flex-shrink-0">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -171,8 +171,8 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
               <Users className="w-3.5 h-3.5 md:w-5 md:h-5" />
             </div>
             <div>
-              <div className="text-[14px] md:text-[16px] font-black text-[#1A1A1A] leading-tight">12.500+</div>
-              <div className="text-[14px] md:text-[14px] text-[#6B7280] font-bold md:mt-0.5">Bisnis terlayani</div>
+              <div className="text-[16px] md:text-[16px] font-black text-[#1A1A1A] leading-tight">12.500+</div>
+              <div className="text-[16px] md:text-[16px] text-[#6B7280] font-bold md:mt-0.5">Bisnis terlayani</div>
             </div>
           </div>
 
@@ -181,7 +181,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
               <Check className="w-3.5 h-3.5 md:w-5 md:h-5" strokeWidth={3} />
             </div>
             <div>
-              <div className="text-[14px] md:text-[16px] font-black text-[#1A1A1A] leading-tight">4.9<span className="text-[14px] md:text-[14px] font-bold text-gray-500">/5</span></div>
+              <div className="text-[16px] md:text-[16px] font-black text-[#1A1A1A] leading-tight">4.9<span className="text-[16px] md:text-[16px] font-bold text-gray-500">/5</span></div>
               <div className="flex space-x-0.5 mt-0.5">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <Star key={s} className="w-2.5 h-2.5 md:w-3 md:h-3 fill-amber-400 text-amber-400" />

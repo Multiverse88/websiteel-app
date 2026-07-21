@@ -20,7 +20,7 @@ export default async function LinksPage() {
           <div className="flex items-center gap-3 mb-4">
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-1.5 text-[14px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
+              className="inline-flex items-center gap-1.5 text-[16px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Dashboard
@@ -31,13 +31,13 @@ export default async function LinksPage() {
               <h1 className="font-heading text-[30px] sm:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 Redirect Links
               </h1>
-              <p className="text-[14px] text-gray-500 mt-1">
+              <p className="text-[16px] text-gray-500 mt-1">
                 Kelola link pendek untuk dialihkan ke URL eksternal.
               </p>
             </div>
             <Link
               href="/dashboard/links/tambah"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-sm hover:shadow-md transition-all"
             >
               <Plus className="w-4 h-4" />
               <span>Buat Link Baru</span>
@@ -54,15 +54,15 @@ export default async function LinksPage() {
               <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
                 <Link2 className="w-8 h-8 text-[#990202]" />
               </div>
-              <h3 className="text-[18px] font-extrabold text-gray-900 mb-2">
+              <h3 className="text-[16px] font-extrabold text-gray-900 mb-2">
                 Belum ada redirect link
               </h3>
-              <p className="text-[14px] text-gray-500 mb-6">
+              <p className="text-[16px] text-gray-500 mb-6">
                 Buat link pendek pertama untuk mulai mengarahkan pengunjung.
               </p>
               <Link
                 href="/dashboard/links/tambah"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-sm hover:shadow-md transition-all"
               >
                 <Plus className="w-4 h-4" />
                 <span>Buat Link Baru</span>
@@ -71,7 +71,7 @@ export default async function LinksPage() {
           ) : (
             <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
               {/* Table Header */}
-              <div className="grid grid-cols-12 gap-4 px-6 py-3 bg-gray-50 border-b border-gray-100 text-[14px] font-extrabold text-gray-400 uppercase tracking-wider">
+              <div className="grid grid-cols-12 gap-4 px-6 py-3 bg-gray-50 border-b border-gray-100 text-[16px] font-extrabold text-gray-400 uppercase tracking-wider">
                 <div className="col-span-3">Slug</div>
                 <div className="col-span-4">Tujuan</div>
                 <div className="col-span-2 text-center">Klik</div>
@@ -88,9 +88,9 @@ export default async function LinksPage() {
                   {/* Slug */}
                   <div className="col-span-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-[14px] font-bold text-gray-900">{link.slug}</span>
+                      <span className="text-[16px] font-bold text-gray-900">{link.slug}</span>
                     </div>
-                    <p className="text-[14px] text-gray-400 font-mono mt-0.5">
+                    <p className="text-[16px] text-gray-400 font-mono mt-0.5">
                       /{link.slug}
                     </p>
                   </div>
@@ -99,7 +99,7 @@ export default async function LinksPage() {
                   <div className="col-span-4">
                     <div className="flex items-center gap-1.5">
                       <ExternalLink className="w-3 h-3 text-gray-400 flex-shrink-0" />
-                      <span className="text-[14px] text-gray-600 truncate block">
+                      <span className="text-[16px] text-gray-600 truncate block">
                         {link.destination}
                       </span>
                     </div>
@@ -107,7 +107,7 @@ export default async function LinksPage() {
 
                   {/* Clicks */}
                   <div className="col-span-2 text-center">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gray-50 text-[14px] font-bold text-gray-700">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gray-50 text-[16px] font-bold text-gray-700">
                       <MousePointerClick className="w-3.5 h-3.5 text-gray-400" />
                       {link.clicks.toLocaleString("id-ID")}
                     </div>
@@ -115,7 +115,7 @@ export default async function LinksPage() {
 
                   {/* Date */}
                   <div className="col-span-2">
-                    <div className="flex items-center gap-1.5 text-[14px] text-gray-500">
+                    <div className="flex items-center gap-1.5 text-[16px] text-gray-500">
                       <Calendar className="w-3 h-3 text-gray-400" />
                       <span>
                         {new Date(link.createdAt).toLocaleDateString("id-ID", {

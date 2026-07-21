@@ -90,7 +90,7 @@ export const dataPT: BadanUsahaContent = {
     { text: "dengan " },
     { text: "legalitas yang", highlight: true },
     { break: true },
-    { text: "benar." },
+    { text: "benar" },
   ],
   heroDescription:
     "PT, PT PMA, PT Perorangan, CV, Firma, Yayasan, sampai Koperasi — kami pandu Anda pilih struktur yang tepat & urus prosesnya sampai akta di tangan.",
@@ -135,10 +135,10 @@ export const dataPT: BadanUsahaContent = {
   hukumLaw: "UU No. 40 Tahun 2007 tentang Perseroan Terbatas",
   pengertianDetail: (
     <>
-      <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+      <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
         <strong className="font-extrabold text-gray-900">Perseroan Terbatas (PT)</strong> adalah badan hukum yang merupakan persekutuan modal, didirikan berdasarkan perjanjian, melakukan kegiatan usaha dengan modal dasar yang seluruhnya terbagi dalam saham — sesuai dengan Undang-Undang No. 40 Tahun 2007.
       </p>
-      <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+      <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
         Berbeda dengan CV atau Firma, PT adalah <strong className="font-extrabold text-gray-900">entitas hukum mandiri</strong> yang terpisah dari pendirinya. Artinya, harta perusahaan terpisah dari harta pribadi pendiri — memberikan perlindungan hukum yang kuat sekaligus kredibilitas yang lebih tinggi di mata partner & klien.
       </p>
     </>
@@ -259,9 +259,8 @@ export const dataPT: BadanUsahaContent = {
       buttonText: "Pilih Paket Express",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pembuatan PT. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
-        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
         </div>
       ),
       groups: [
@@ -354,7 +353,7 @@ const dataCV: BadanUsahaContent = {
     { text: "dengan " },
     { text: "badan usaha CV", highlight: true },
     { break: true },
-    { text: "yang fleksibel." },
+    { text: "yang fleksibel" },
   ],
   heroDescription:
     "CV adalah pilihan tepat untuk usaha kecil-menengah yang ingin struktur jelas tanpa kompleksitas PT. Proses cepat, biaya terjangkau, dan cocok untuk bisnis keluarga.",
@@ -398,7 +397,7 @@ const dataCV: BadanUsahaContent = {
   hukumTitle: "Dasar Hukum",
   hukumLaw: "Kitab Undang-Undang Hukum Dagang (KUHD) & UU No. 3 Tahun 1982",
   pengertianDetail: (
-    <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+    <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
       <strong className="font-extrabold text-gray-900">Perseroan Komanditer (CV)</strong> adalah persekutuan yang didirikan oleh satu orang atau lebih yang mempercayakan uang atau barang mereka kepada satu orang atau lebih yang menjalankan perusahaan dan bertindak sebagai pemimpin. CV memiliki dua sekutu, yaitu Sekutu Aktif (yang menjalankan bisnis dan bertanggung jawab penuh secara pribadi) dan Sekutu Pasif/Komanditer (yang hanya menyetorkan modal).
     </p>
   ),
@@ -496,9 +495,8 @@ const dataCV: BadanUsahaContent = {
       buttonText: "Pilih Paket Express",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pembuatan CV. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
-        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
         </div>
       ),
       groups: [
@@ -574,7 +572,7 @@ const dataPMA: BadanUsahaContent = {
     { text: "ke Indonesia " },
     { text: "dengan PT PMA", highlight: true },
     { break: true },
-    { text: "yang sesuai regulasi." },
+    { text: "yang sesuai regulasi" },
   ],
   heroDescription:
     "PT PMA adalah badan hukum untuk perusahaan dengan pemodal asing. Kami pandu seluruh proses — dari perizinan BKPM sampai akta pendirian — sesuai aturan investasi Indonesia.",
@@ -618,7 +616,7 @@ const dataPMA: BadanUsahaContent = {
   hukumTitle: "Dasar Hukum",
   hukumLaw: "UU No. 25 Tahun 2007 tentang Penanaman Modal & Peraturan BKPM",
   pengertianDetail: (
-    <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+    <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
       <strong className="font-extrabold text-gray-900">PT Penanaman Modal Asing (PT PMA)</strong> adalah Perseroan Terbatas yang didirikan berdasarkan hukum di Indonesia, di mana pemegang sahamnya dapat berupa Warga Negara Asing (WNA), perusahaan asing, atau pemerintah asing. PT PMA tunduk pada ketentuan UU No. 25 Tahun 2007 tentang Penanaman Modal dan diawasi langsung oleh BKPM.
     </p>
   ),
@@ -715,9 +713,8 @@ const dataPMA: BadanUsahaContent = {
       buttonText: "Pilih Paket Express",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
-        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
         </div>
       ),
       groups: [
@@ -797,7 +794,7 @@ const dataPTPerorangan: BadanUsahaContent = {
     { text: "Pilih " },
     { text: "PT Perorangan", highlight: true },
     { break: true },
-    { text: "solusi legal UMKM." },
+    { text: "solusi legal UMKM" },
   ],
   heroDescription:
     "PT Perorangan adalah badan hukum untuk 1 pendiri — proses mudah, modal kecil, dan legalitas penuh. Cocok untuk solopreneur & UMKM yang ingin naik kelas.",
@@ -841,7 +838,7 @@ const dataPTPerorangan: BadanUsahaContent = {
   hukumTitle: "Dasar Hukum",
   hukumLaw: "UU No. 6 Tahun 2023 (Cipta Kerja) & PP No. 8 Tahun 2021",
   pengertianDetail: (
-    <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+    <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
       <strong className="font-extrabold text-gray-900">Perseroan Perorangan (PT Perorangan)</strong> adalah bentuk badan hukum yang didirikan oleh hanya satu orang Warga Negara Indonesia (WNI) untuk memenuhi kriteria Usaha Mikro dan Kecil (UMK) sesuai dengan UU Cipta Kerja. Pendiri bertindak sekaligus sebagai pemegang saham tunggal dan direktur perusahaan.
     </p>
   ),
@@ -932,9 +929,8 @@ const dataPTPerorangan: BadanUsahaContent = {
       buttonText: "Pilih Paket Express",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
-        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
         </div>
       ),
       groups: [
@@ -1007,7 +1003,7 @@ const dataFirma: BadanUsahaContent = {
     { text: "Pilih " },
     { text: "Firma sebagai", highlight: true },
     { break: true },
-    { text: "badan usaha resmi." },
+    { text: "badan usaha resmi" },
   ],
   heroDescription:
     "Firma adalah badan usaha yang didirikan oleh 2 orang atau lebih dengan tanggung jawab penuh bersama. Cocok untuk bisnis profesional & jasa yang mengutamakan kepercayaan.",
@@ -1052,7 +1048,7 @@ const dataFirma: BadanUsahaContent = {
   hukumTitle: "Dasar Hukum",
   hukumLaw: "Kitab Undang-Undang Hukum Dagang (KUHD) Pasal 16–35",
   pengertianDetail: (
-    <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+    <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
       <strong className="font-extrabold text-gray-900">Firma (Fa)</strong> adalah suatu bentuk persekutuan bisnis yang didirikan oleh dua orang atau lebih dengan kesepakatan untuk menjalankan usaha bersama di bawah satu nama yang sama. Setiap anggota Firma (pesero) memiliki tanggung jawab yang tidak terbatas dan bersifat tanggung renteng atas seluruh kewajiban dan utang perusahaan.
     </p>
   ),
@@ -1231,7 +1227,7 @@ const dataYayasan: BadanUsahaContent = {
     { text: "dengan " },
     { text: "yayasan yang", highlight: true },
     { break: true },
-    { text: "legal & terpercaya." },
+    { text: "legal & terpercaya" },
   ],
   heroDescription:
     "Yayasan adalah badan hukum nirlaba untuk bidang sosial, keagamaan, dan kemanusiaan. Kami pandu pendiriannya dari akta notaris sampai SK Kemenkumham.",
@@ -1275,7 +1271,7 @@ const dataYayasan: BadanUsahaContent = {
   hukumTitle: "Dasar Hukum",
   hukumLaw: "UU No. 16 Tahun 2001 jo. UU No. 28 Tahun 2004 tentang Yayasan",
   pengertianDetail: (
-    <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+    <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
       <strong className="font-extrabold text-gray-900">Yayasan</strong> adalah badan hukum yang terdiri atas kekayaan yang dipisahkan dan diperuntukkan untuk mencapai tujuan tertentu di bidang sosial, keagamaan, dan kemanusiaan, yang tidak mempunyai anggota. Yayasan diatur oleh UU No. 16 Tahun 2001 tentang Yayasan sebagaimana telah diubah dengan UU No. 28 Tahun 2004.
     </p>
   ),
@@ -1363,9 +1359,8 @@ const dataYayasan: BadanUsahaContent = {
       buttonText: "Pilih Paket Prestige",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
-        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
         </div>
       ),
       groups: [
@@ -1436,7 +1431,7 @@ const dataPerkumpulan: BadanUsahaContent = {
     { text: "dengan " },
     { text: "badan hukum", highlight: true },
     { break: true },
-    { text: "perkumpulan resmi." },
+    { text: "perkumpulan resmi" },
   ],
   heroDescription:
     "Perkumpulan adalah badan hukum nirlaba berbasis keanggotaan untuk organisasi komunitas, profesi, dan advokasi. Proses pendirian mudah dan cepat.",
@@ -1480,7 +1475,7 @@ const dataPerkumpulan: BadanUsahaContent = {
   hukumTitle: "Dasar Hukum",
   hukumLaw: "UU No. 16 Tahun 2001 jo. UU No. 28 Tahun 2004 (sama dengan Yayasan) & Keputusan Menteri Hukum",
   pengertianDetail: (
-    <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+    <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
       <strong className="font-extrabold text-gray-900">Perkumpulan</strong> adalah badan hukum yang merupakan kumpulan orang yang didirikan untuk mewujudkan kesamaan maksud dan tujuan tertentu di bidang sosial, keagamaan, kemanusiaan, atau keilmuan, dan tidak membagikan keuntungan kepada anggotanya. Diatur berdasarkan Staatsblad 1870 No. 64 dan peraturan Kemenkumham.
     </p>
   ),
@@ -1564,9 +1559,8 @@ const dataPerkumpulan: BadanUsahaContent = {
       buttonText: "Pilih Paket Express",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Perkumpulan. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
-        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
         </div>
       ),
       groups: [
@@ -1635,7 +1629,7 @@ const dataKoperasi: BadanUsahaContent = {
     { text: "dengan " },
     { text: "koperasi yang", highlight: true },
     { break: true },
-    { text: "sehat & legal." },
+    { text: "sehat & legal" },
   ],
   heroDescription:
     "Koperasi adalah badan hukum yang mengutamakan kesejahteraan anggota berdasarkan prinsip gotong royong. Kami bantu pendiriannya dari akta sampai pengesahan.",
@@ -1679,7 +1673,7 @@ const dataKoperasi: BadanUsahaContent = {
   hukumTitle: "Dasar Hukum",
   hukumLaw: "UU No. 25 Tahun 1992 tentang Perkoperasian & PP No. 7 Tahun 2021",
   pengertianDetail: (
-    <p className="text-[15px] text-gray-600 leading-relaxed font-normal">
+    <p className="text-[16px] text-gray-600 leading-relaxed font-normal">
       <strong className="font-extrabold text-gray-900">Koperasi</strong> adalah badan usaha yang beranggotakan orang-seorang atau badan hukum koperasi dengan melandaskan kegiatannya berdasarkan prinsip koperasi sekaligus sebagai gerakan ekonomi rakyat yang berdasarkan atas asas kekeluargaan. Koperasi bertujuan memajukan kesejahteraan anggota pada khususnya dan masyarakat pada umumnya.
     </p>
   ),
@@ -1762,9 +1756,8 @@ const dataKoperasi: BadanUsahaContent = {
       buttonText: "Pilih Paket Express",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Koperasi. Mohon info lengkap biaya dan prosesnya."),
       customHeaderOverlay: (
-        <div className="absolute right-6 -bottom-6 bg-gradient-to-br from-[#E6B342] via-[#D4A017] to-[#996515] w-12 h-12 rounded-full flex flex-col items-center justify-center border-2 border-white shadow-md rotate-12 transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase">FAST</span>
-          <span className="text-[14px] font-black leading-none text-white tracking-widest uppercase mt-0.5">TRACK</span>
+        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
         </div>
       ),
       groups: [

@@ -51,16 +51,16 @@ export default async function UnsubscribePage({ searchParams }: Props) {
               <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-5">
                 <CheckCircle2 className="w-8 h-8 text-emerald-600" />
               </div>
-              <h1 className="font-heading text-[24px] font-extrabold text-gray-950 mb-3">
+              <h1 className="font-heading text-[16px] font-extrabold text-gray-950 mb-3">
                 Berhasil Unsubscribe
               </h1>
-              <p className="text-[14px] text-gray-500 leading-relaxed mb-6">
+              <p className="text-[16px] text-gray-500 leading-relaxed mb-6">
                 Email <strong className="text-gray-900">{email}</strong> tidak akan menerima newsletter lagi.
                 Anda dapat subscribe ulang kapan saja.
               </p>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all w-full justify-center"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-sm hover:shadow-md transition-all w-full justify-center"
               >
                 <Home className="w-4 h-4" />
                 Kembali ke Beranda
@@ -71,23 +71,23 @@ export default async function UnsubscribePage({ searchParams }: Props) {
               <div className="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center mx-auto mb-5">
                 <AlertTriangle className="w-8 h-8 text-amber-600" />
               </div>
-              <h1 className="font-heading text-[24px] font-extrabold text-gray-950 mb-3">
+              <h1 className="font-heading text-[16px] font-extrabold text-gray-950 mb-3">
                 Konfirmasi Batal
               </h1>
-              <p className="text-[14px] text-gray-500 leading-relaxed mb-6">
+              <p className="text-[16px] text-gray-500 leading-relaxed mb-6">
                 Apakah Anda yakin ingin berhenti berlangganan newsletter dari EasyLegal untuk email <strong className="text-gray-900">{email}</strong>?
               </p>
               <form action={handleUnsubscribe} className="space-y-3">
                 <input type="hidden" name="email" value={email} />
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
                 >
                   Ya, Batalkan Langganan
                 </button>
                 <Link
                   href="/"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold text-[14px] rounded-xl border border-gray-200 transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold text-[16px] rounded-xl border border-gray-200 transition-all"
                 >
                   Tidak, Tetap Berlangganan
                 </Link>
@@ -98,15 +98,15 @@ export default async function UnsubscribePage({ searchParams }: Props) {
               <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-5">
                 <MailX className="w-8 h-8 text-[#990202]" />
               </div>
-              <h1 className="font-heading text-[24px] font-extrabold text-gray-950 mb-3">
+              <h1 className="font-heading text-[16px] font-extrabold text-gray-950 mb-3">
                 Email Tidak Ditemukan
               </h1>
-              <p className="text-[14px] text-gray-500 leading-relaxed mb-6">
+              <p className="text-[16px] text-gray-500 leading-relaxed mb-6">
                 Email yang Anda masukkan tidak terdaftar di newsletter kami.
               </p>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all w-full justify-center"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-sm hover:shadow-md transition-all w-full justify-center"
               >
                 <Home className="w-4 h-4" />
                 Kembali ke Beranda
@@ -117,15 +117,15 @@ export default async function UnsubscribePage({ searchParams }: Props) {
               <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-5">
                 <MailX className="w-8 h-8 text-[#990202]" />
               </div>
-              <h1 className="font-heading text-[24px] font-extrabold text-gray-950 mb-3">
+              <h1 className="font-heading text-[16px] font-extrabold text-gray-950 mb-3">
                 Link Tidak Valid
               </h1>
-              <p className="text-[14px] text-gray-500 leading-relaxed mb-6">
+              <p className="text-[16px] text-gray-500 leading-relaxed mb-6">
                 Link unsubscribe ini tidak valid. Pastikan Anda menggunakan link dari email newsletter.
               </p>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[14px] rounded-xl shadow-sm hover:shadow-md transition-all w-full justify-center"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-sm hover:shadow-md transition-all w-full justify-center"
               >
                 <Home className="w-4 h-4" />
                 Kembali ke Beranda

@@ -30,10 +30,10 @@ export default async function ProfileDashboardPage() {
                 <UserCircle className="w-5 h-5" />
               </div>
               <div>
-                <h1 className="text-lg font-black text-gray-900 tracking-tight leading-none">
+                <h1 className="text-[16px] font-black text-gray-900 tracking-tight leading-none">
                   Edit Profil Penulis
                 </h1>
-                <p className="text-[14px] text-gray-500 font-medium mt-1">
+                <p className="text-[16px] text-gray-500 font-medium mt-1">
                   Kelola nama, foto, bio, dan peran Anda yang dipajang di artikel
                 </p>
               </div>
@@ -41,7 +41,7 @@ export default async function ProfileDashboardPage() {
           </div>
           <Link
             href="/dashboard"
-            className="text-[14px] font-bold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-3.5 py-2 rounded-lg transition-all"
+            className="text-[16px] font-bold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-3.5 py-2 rounded-lg transition-all"
           >
             Dashboard
           </Link>

@@ -71,14 +71,14 @@ export default function Pricing({
         {/* Section Header */}
         <FadeIn className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
           <div className="max-w-2xl space-y-2 sm:space-y-3">
-            <p className="text-[14px] sm:text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">
+            <p className="text-[16px] sm:text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">
               {sectionTitleTag}
             </p>
-            <h2 className="font-heading text-[20px] sm:text-[38px] lg:text-[42px] font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="font-heading text-[16px] sm:text-[38px] lg:text-[42px] font-extrabold text-gray-950 leading-tight tracking-tight">
               {sectionTitle}
             </h2>
             {sectionSubtitle && (
-              <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium leading-relaxed">
+              <p className="text-[16px] sm:text-[16px] text-gray-500 font-medium leading-relaxed">
                 {sectionSubtitle}
               </p>
             )}
@@ -126,7 +126,7 @@ export default function Pricing({
                 <div key={pIdx} className={wrapperClass}>
                   {/* Popular Badge */}
                   {isPopular && (
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[11px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] z-10">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[16px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] z-10">
                       {pkg.badgeText || "PALING POPULER"}
                     </div>
                   )}
@@ -136,7 +136,7 @@ export default function Pricing({
                     
                     {/* Title */}
                     <div className="text-center mb-[18px]">
-                      <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">
+                      <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">
                         {pkg.title}
                       </div>
                     </div>
@@ -144,7 +144,7 @@ export default function Pricing({
                     {/* Pricing */}
                     <div className="text-center mb-[20px]">
                       {pkg.strikePrice && (
-                        <div className={`text-[14px] line-through mb-[2px] ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
+                        <div className={`text-[16px] line-through mb-[2px] ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
                           {pkg.strikePrice}
                         </div>
                       )}
@@ -152,7 +152,7 @@ export default function Pricing({
                         {pkg.price}
                       </div>
                       {pkg.subLabel && (
-                        <div className={`text-[11px] font-[700] tracking-[0.03em] mt-[6px] uppercase ${isPopular ? "text-[oklch(0.85_0.1_70)]" : "text-[oklch(0.62_0.15_25)]"}`}>
+                        <div className={`text-[16px] font-[700] tracking-[0.03em] mt-[6px] uppercase ${isPopular ? "text-[oklch(0.85_0.1_70)]" : "text-[oklch(0.62_0.15_25)]"}`}>
                           {pkg.subLabel}
                         </div>
                       )}
@@ -163,7 +163,7 @@ export default function Pricing({
                       href={pkg.buttonLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`w-full p-[12px] rounded-[10px] border-none text-[14px] font-[700] cursor-pointer block text-center transition-transform hover:scale-[1.02] ${
+                      className={`w-full p-[12px] rounded-[10px] border-none text-[16px] font-[700] cursor-pointer block text-center transition-transform hover:scale-[1.02] ${
                         isPopular
                           ? "bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] shadow-lg"
                           : "bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)]"
@@ -181,14 +181,14 @@ export default function Pricing({
                         const isLastGroup = gIdx === pkg.groups.length - 1;
                         return (
                           <div key={gIdx} className={!isLastGroup ? "mb-[22px]" : ""}>
-                            <div className={`text-[11px] font-[800] tracking-[0.06em] mb-[12px] uppercase ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
+                            <div className={`text-[16px] font-[800] tracking-[0.06em] mb-[12px] uppercase ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
                               {group.title}
                             </div>
                             <div className="flex flex-col gap-[10px]">
                               {group.items.map((item, iIdx) => {
                                 const isActive = item.checked;
                                 
-                                let itemClass = "flex items-start gap-[8px] text-[13.5px] leading-[1.4] ";
+                                let itemClass = "flex items-start gap-[8px] text-[16px] leading-[1.4] ";
                                 let iconColor = "";
                                 let iconText = "";
 
@@ -235,7 +235,7 @@ export default function Pricing({
 
         {/* Footnotes Box */}
         {footnotes && footnotes.length > 0 && (
-          <div className="mt-12 bg-gray-55 shadow-md border border-black/[0.03] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed max-w-full font-medium">
+          <div className="mt-12 bg-gray-55 shadow-md border border-black/[0.03] rounded-2xl p-5 text-[16px] text-gray-500 leading-relaxed max-w-full font-medium">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             {footnotes.map((fn, idx) => {
               const label = typeof fn === "string" ? `(${idx + 1})` : `(${fn.label || idx + 1})`;

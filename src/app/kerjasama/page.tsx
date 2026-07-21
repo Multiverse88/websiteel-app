@@ -157,7 +157,7 @@ export default function KerjasamaPage() {
           {/* Badge Pill */}
           <div className="inline-flex items-center space-x-2 bg-white py-1.5 px-4 rounded-full shadow-md border border-black/[0.03] shadow-[0_2px_12px_rgba(0,0,0,0.015)] mb-1">
             <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-            <span className="text-[14px] font-black text-[#990202] tracking-wider">Program Kerjasama B2B</span>
+            <span className="text-[16px] font-black text-[#990202] tracking-wider">Program Kerjasama B2B</span>
           </div>
 
           {/* Headline */}
@@ -166,7 +166,7 @@ export default function KerjasamaPage() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-[15px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+          <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
             Buka peluang kemitraan strategis dengan EasyLegal — dirancang untuk perusahaan, agency, &amp; partner institusional.
           </p>
 
@@ -175,7 +175,7 @@ export default function KerjasamaPage() {
             <a
               href="#formulir-mitra"
               onClick={scrollToForm}
-              className="inline-flex items-center justify-center px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-center cursor-pointer"
+              className="inline-flex items-center justify-center px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-center cursor-pointer"
             >
               Ajukan Kerjasama
             </a>
@@ -188,7 +188,7 @@ export default function KerjasamaPage() {
                   element.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="inline-flex items-center justify-center px-7 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 text-center shadow-sm cursor-pointer"
+              className="inline-flex items-center justify-center px-7 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 text-center shadow-sm cursor-pointer"
             >
               Lihat Jenis Mitra
             </a>
@@ -198,17 +198,17 @@ export default function KerjasamaPage() {
           <div className="pt-6">
             <div className="inline-flex flex-col sm:flex-row items-center sm:space-x-8 space-y-2 sm:space-y-0 bg-white shadow-md border border-black/[0.03] py-3.5 px-8 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.015)]">
               {/* Checkpoint 1 */}
-              <div className="flex items-center space-x-1.5 text-[14px] sm:text-[14px] text-gray-500 font-semibold">
+              <div className="flex items-center space-x-1.5 text-[16px] sm:text-[16px] text-gray-500 font-semibold">
                 <Check className="w-3.5 h-3.5 text-[#990202]" strokeWidth={4} />
                 <span><strong className="font-extrabold text-gray-900">50+</strong> mitra aktif</span>
               </div>
               {/* Checkpoint 2 */}
-              <div className="flex items-center space-x-1.5 text-[14px] sm:text-[14px] text-gray-500 font-semibold">
+              <div className="flex items-center space-x-1.5 text-[16px] sm:text-[16px] text-gray-500 font-semibold">
                 <Check className="w-3.5 h-3.5 text-[#990202]" strokeWidth={4} />
                 <span>Respons <strong className="font-extrabold text-gray-900">1–3 hari</strong></span>
               </div>
               {/* Checkpoint 3 */}
-              <div className="flex items-center space-x-1.5 text-[14px] sm:text-[14px] text-gray-500 font-semibold">
+              <div className="flex items-center space-x-1.5 text-[16px] sm:text-[16px] text-gray-500 font-semibold">
                 <Check className="w-3.5 h-3.5 text-[#990202]" strokeWidth={4} />
                 <span><strong className="font-extrabold text-gray-900">MOU</strong> resmi</span>
               </div>
@@ -223,7 +223,7 @@ export default function KerjasamaPage() {
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">JENIS KERJASAMA</p>
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">JENIS KERJASAMA</p>
             <h2 className="font-heading text-[34px] sm:text-[40px] font-black text-gray-900 leading-tight tracking-tight">
               4 model <span className="text-[#990202]">kemitraan.</span>
             </h2>
@@ -240,8 +240,8 @@ export default function KerjasamaPage() {
                   <Building className="w-5 h-5 text-[#990202]" />
                 </div>
               </div>
-              <h3 className="text-[15.5px] font-black text-gray-900 mt-4">Corporate Partnership</h3>
-              <p className="text-[14px] text-gray-500 font-normal leading-relaxed mt-2 max-w-[210px]">
+              <h3 className="text-[16px] font-black text-gray-900 mt-4">Corporate Partnership</h3>
+              <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-2 max-w-[210px]">
                 Layanan B2B untuk korporasi volume tinggi.
               </p>
             </div>
@@ -254,8 +254,8 @@ export default function KerjasamaPage() {
                   <User className="w-5 h-5 text-[#990202]" />
                 </div>
               </div>
-              <h3 className="text-[15.5px] font-black text-gray-900 mt-4">Reseller Agency</h3>
-              <p className="text-[14px] text-gray-500 font-normal leading-relaxed mt-2 max-w-[210px]">
+              <h3 className="text-[16px] font-black text-gray-900 mt-4">Reseller Agency</h3>
+              <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-2 max-w-[210px]">
                 Untuk konsultan / agency dengan basis klien aktif.
               </p>
             </div>
@@ -268,8 +268,8 @@ export default function KerjasamaPage() {
                   <Code className="w-5 h-5 text-[#990202]" />
                 </div>
               </div>
-              <h3 className="text-[15.5px] font-black text-gray-900 mt-4">API &amp; Integration</h3>
-              <p className="text-[14px] text-gray-500 font-normal leading-relaxed mt-2 max-w-[210px]">
+              <h3 className="text-[16px] font-black text-gray-900 mt-4">API &amp; Integration</h3>
+              <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-2 max-w-[210px]">
                 Embed layanan legal ke platform SaaS via API.
               </p>
             </div>
@@ -282,8 +282,8 @@ export default function KerjasamaPage() {
                   <Activity className="w-5 h-5 text-[#990202]" />
                 </div>
               </div>
-              <h3 className="text-[15.5px] font-black text-gray-900 mt-4">Co-Marketing</h3>
-              <p className="text-[14px] text-gray-500 font-normal leading-relaxed mt-2 max-w-[210px]">
+              <h3 className="text-[16px] font-black text-gray-900 mt-4">Co-Marketing</h3>
+              <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-2 max-w-[210px]">
                 Kolaborasi konten, webinar, &amp; brand campaign.
               </p>
             </div>
@@ -298,7 +298,7 @@ export default function KerjasamaPage() {
           
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-16 space-y-3">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">CARA KERJA</p>
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">CARA KERJA</p>
             <h2 className="font-heading text-[34px] sm:text-[38px] font-black text-gray-900 leading-tight tracking-tight">
               3 langkah, <span className="text-[#990202]">kolaborasi dimulai.</span>
             </h2>
@@ -312,8 +312,8 @@ export default function KerjasamaPage() {
               <div className="w-12 h-12 rounded-full bg-[#990202] text-white flex items-center justify-center font-black text-[16px] shadow-[0_5px_15px_rgba(153,2,2,0.35)] mb-5">
                 1
               </div>
-              <h3 className="text-[15.5px] font-black text-gray-900 leading-tight">Submit Form</h3>
-              <p className="text-[14px] text-gray-500 font-normal leading-relaxed mt-2.5 max-w-[210px]">
+              <h3 className="text-[16px] font-black text-gray-900 leading-tight">Submit Form</h3>
+              <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-2.5 max-w-[210px]">
                 Isi formulir dengan detail bisnis &amp; proposal.
               </p>
             </div>
@@ -331,8 +331,8 @@ export default function KerjasamaPage() {
               <div className="w-12 h-12 rounded-full bg-[#990202] text-white flex items-center justify-center font-black text-[16px] shadow-[0_5px_15px_rgba(153,2,2,0.35)] mb-5">
                 2
               </div>
-              <h3 className="text-[15.5px] font-black text-gray-900 leading-tight">Diskusi Tim</h3>
-              <p className="text-[14px] text-gray-500 font-normal leading-relaxed mt-2.5 max-w-[210px]">
+              <h3 className="text-[16px] font-black text-gray-900 leading-tight">Diskusi Tim</h3>
+              <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-2.5 max-w-[210px]">
                 Discovery meeting &amp; negosiasi terms dalam 1 minggu.
               </p>
             </div>
@@ -350,8 +350,8 @@ export default function KerjasamaPage() {
               <div className="w-12 h-12 rounded-full bg-[#990202] text-white flex items-center justify-center font-black text-[16px] shadow-[0_5px_15px_rgba(153,2,2,0.35)] mb-5">
                 3
               </div>
-              <h3 className="text-[15.5px] font-black text-gray-900 leading-tight">Sign MOU</h3>
-              <p className="text-[14px] text-gray-500 font-normal leading-relaxed mt-2.5 max-w-[210px]">
+              <h3 className="text-[16px] font-black text-gray-900 leading-tight">Sign MOU</h3>
+              <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-2.5 max-w-[210px]">
                 Tanda tangan MOU resmi &amp; mulai onboarding.
               </p>
             </div>
@@ -366,11 +366,11 @@ export default function KerjasamaPage() {
           
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">FORMULIR PENGAJUAN</p>
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">FORMULIR PENGAJUAN</p>
             <h2 className="font-heading text-[34px] sm:text-[38px] font-black text-gray-900 leading-tight tracking-tight">
               Ajukan kerjasama.
             </h2>
-            <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed">
+            <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
               Tim partnership respons dalam <strong className="font-extrabold text-gray-900">1–3 hari kerja</strong>.
             </p>
           </div>
@@ -387,24 +387,24 @@ export default function KerjasamaPage() {
                 <div className="flex items-center justify-center mb-10 mt-2">
                   <div className="flex items-center">
                     <div className="flex flex-col items-center">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[15px] ${step >= 1 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[16px] ${step >= 1 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
                         {step > 1 ? <Check className="w-5 h-5 text-white" strokeWidth={3} /> : '1'}
                       </div>
-                      <span className={`text-[14px] font-bold mt-2.5 uppercase tracking-widest ${step === 1 ? 'text-[#990202]' : step > 1 ? 'text-gray-900' : 'text-gray-400'}`}>TENTANG ANDA</span>
+                      <span className={`text-[16px] font-bold mt-2.5 uppercase tracking-widest ${step === 1 ? 'text-[#990202]' : step > 1 ? 'text-gray-900' : 'text-gray-400'}`}>TENTANG ANDA</span>
                     </div>
                     <div className={`w-12 sm:w-20 h-[1.5px] mx-1 sm:mx-3 mb-6 ${step >= 2 ? 'bg-[#990202]' : 'bg-gray-300'}`} />
                     <div className="flex flex-col items-center">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[15px] ${step >= 2 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[16px] ${step >= 2 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
                         {step > 2 ? <Check className="w-5 h-5 text-white" strokeWidth={3} /> : '2'}
                       </div>
-                      <span className={`text-[14px] font-bold mt-2.5 uppercase tracking-widest ${step === 2 ? 'text-[#990202]' : step > 2 ? 'text-gray-900' : 'text-gray-400'}`}>TENTANG USAHA</span>
+                      <span className={`text-[16px] font-bold mt-2.5 uppercase tracking-widest ${step === 2 ? 'text-[#990202]' : step > 2 ? 'text-gray-900' : 'text-gray-400'}`}>TENTANG USAHA</span>
                     </div>
                     <div className={`w-12 sm:w-20 h-[1.5px] mx-1 sm:mx-3 mb-6 ${step >= 3 ? 'bg-[#990202]' : 'bg-gray-300'}`} />
                     <div className="flex flex-col items-center">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[15px] ${step >= 3 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-[16px] ${step >= 3 ? 'bg-[#990202] text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
                         3
                       </div>
-                      <span className={`text-[14px] font-bold mt-2.5 uppercase tracking-widest ${step === 3 ? 'text-[#990202]' : 'text-gray-400'}`}>DETAIL KERJASAMA</span>
+                      <span className={`text-[16px] font-bold mt-2.5 uppercase tracking-widest ${step === 3 ? 'text-[#990202]' : 'text-gray-400'}`}>DETAIL KERJASAMA</span>
                     </div>
                   </div>
                 </div>
@@ -415,7 +415,7 @@ export default function KerjasamaPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {/* Nama Lengkap */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="name" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="name" className="text-[16px] font-bold text-gray-900">
                           Nama Lengkap<span className="text-[#990202]">*</span>
                         </label>
                         <input
@@ -426,15 +426,15 @@ export default function KerjasamaPage() {
                           onChange={handleInputChange}
                           className={`w-full px-4 py-3 rounded-xl border ${
                             errors.name ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
-                          } text-[14px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          } text-[16px] font-medium text-gray-900 focus:outline-none transition-colors`}
                           placeholder="Nama lengkap"
                         />
-                        {errors.name && <span className="text-[14px] font-bold text-red-500">{errors.name}</span>}
+                        {errors.name && <span className="text-[16px] font-bold text-red-500">{errors.name}</span>}
                       </div>
 
                       {/* Jabatan */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="role" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="role" className="text-[16px] font-bold text-gray-900">
                           Jabatan<span className="text-[#990202]">*</span>
                         </label>
                         <input
@@ -445,15 +445,15 @@ export default function KerjasamaPage() {
                           onChange={handleInputChange}
                           className={`w-full px-4 py-3 rounded-xl border ${
                             errors.role ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
-                          } text-[14px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          } text-[16px] font-medium text-gray-900 focus:outline-none transition-colors`}
                           placeholder="Direktur / Notaris / Founder ..."
                         />
-                        {errors.role && <span className="text-[14px] font-bold text-red-500">{errors.role}</span>}
+                        {errors.role && <span className="text-[16px] font-bold text-red-500">{errors.role}</span>}
                       </div>
 
                       {/* Alamat Email */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="email" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="email" className="text-[16px] font-bold text-gray-900">
                           Alamat Email<span className="text-[#990202]">*</span>
                         </label>
                         <input
@@ -464,15 +464,15 @@ export default function KerjasamaPage() {
                           onChange={handleInputChange}
                           className={`w-full px-4 py-3 rounded-xl border ${
                             errors.email ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
-                          } text-[14px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          } text-[16px] font-medium text-gray-900 focus:outline-none transition-colors`}
                           placeholder="nama@email.com"
                         />
-                        {errors.email && <span className="text-[14px] font-bold text-red-500">{errors.email}</span>}
+                        {errors.email && <span className="text-[16px] font-bold text-red-500">{errors.email}</span>}
                       </div>
 
                       {/* No. WhatsApp */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="whatsapp" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="whatsapp" className="text-[16px] font-bold text-gray-900">
                           Nomor WhatsApp<span className="text-[#990202]">*</span>
                         </label>
                         <input
@@ -483,17 +483,17 @@ export default function KerjasamaPage() {
                           onChange={handleInputChange}
                           className={`w-full px-4 py-3 rounded-xl border ${
                             errors.whatsapp ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
-                          } text-[14px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          } text-[16px] font-medium text-gray-900 focus:outline-none transition-colors`}
                           placeholder="0812xxxxxxxx"
                         />
-                        {errors.whatsapp && <span className="text-[14px] font-bold text-red-500">{errors.whatsapp}</span>}
+                        {errors.whatsapp && <span className="text-[16px] font-bold text-red-500">{errors.whatsapp}</span>}
                       </div>
                     </div>
 
                     <button
                       type="button"
                       onClick={nextStep}
-                      className="w-full mt-6 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-md transition-all flex justify-center items-center gap-2 group"
+                      className="w-full mt-6 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-md transition-all flex justify-center items-center gap-2 group"
                     >
                       Lanjut <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </button>
@@ -506,7 +506,7 @@ export default function KerjasamaPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {/* Nama Pendirian / Perusahaan */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="companyName" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="companyName" className="text-[16px] font-bold text-gray-900">
                           Nama Pendirian / Perusahaan<span className="text-[#990202]">*</span>
                         </label>
                         <input
@@ -517,15 +517,15 @@ export default function KerjasamaPage() {
                           onChange={handleInputChange}
                           className={`w-full px-4 py-3 rounded-xl border ${
                             errors.companyName ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
-                          } text-[14px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          } text-[16px] font-medium text-gray-900 focus:outline-none transition-colors`}
                           placeholder="PT / CV / Kantor Notaris ..."
                         />
-                        {errors.companyName && <span className="text-[14px] font-bold text-red-500">{errors.companyName}</span>}
+                        {errors.companyName && <span className="text-[16px] font-bold text-red-500">{errors.companyName}</span>}
                       </div>
 
                       {/* Nama Kegiatan Usaha */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="businessActivity" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="businessActivity" className="text-[16px] font-bold text-gray-900">
                           Nama Kegiatan Usaha<span className="text-[#990202]">*</span>
                         </label>
                         <input
@@ -536,15 +536,15 @@ export default function KerjasamaPage() {
                           onChange={handleInputChange}
                           className={`w-full px-4 py-3 rounded-xl border ${
                             errors.businessActivity ? "border-red-500 bg-red-50/5" : "border-transparent bg-[#F9F9F9] focus:border-gray-200 focus:bg-white"
-                          } text-[14px] font-medium text-gray-900 focus:outline-none transition-colors`}
+                          } text-[16px] font-medium text-gray-900 focus:outline-none transition-colors`}
                           placeholder="mis. Notaris / Jasa Legalitas"
                         />
-                        {errors.businessActivity && <span className="text-[14px] font-bold text-red-500">{errors.businessActivity}</span>}
+                        {errors.businessActivity && <span className="text-[16px] font-bold text-red-500">{errors.businessActivity}</span>}
                       </div>
 
                       {/* Alamat Website */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="website" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="website" className="text-[16px] font-bold text-gray-900">
                           Alamat Website
                         </label>
                         <input
@@ -553,14 +553,14 @@ export default function KerjasamaPage() {
                           name="website"
                           value={formData.website}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-xl border border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white text-[14px] font-medium text-gray-900 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 rounded-xl border border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white text-[16px] font-medium text-gray-900 focus:outline-none transition-colors"
                           placeholder="https://usaha-anda.com"
                         />
                       </div>
 
                       {/* Alamat Kantor */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="officeAddress" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="officeAddress" className="text-[16px] font-bold text-gray-900">
                           Alamat Kantor
                         </label>
                         <input
@@ -569,7 +569,7 @@ export default function KerjasamaPage() {
                           name="officeAddress"
                           value={formData.officeAddress}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-xl border border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white text-[14px] font-medium text-gray-900 focus:outline-none transition-colors"
+                          className="w-full px-4 py-3 rounded-xl border border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white text-[16px] font-medium text-gray-900 focus:outline-none transition-colors"
                           placeholder="Kota / alamat lengkap"
                         />
                       </div>
@@ -579,7 +579,7 @@ export default function KerjasamaPage() {
                       <button
                         type="button"
                         onClick={prevStep}
-                        className="w-1/3 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 font-bold text-[15px] rounded-xl shadow-sm transition-all flex justify-center items-center gap-2 group"
+                        className="w-1/3 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 font-bold text-[16px] rounded-xl shadow-sm transition-all flex justify-center items-center gap-2 group"
                       >
                         <ArrowRight className="w-5 h-5 transform rotate-180 transition-transform group-hover:-translate-x-1" />
                         Kembali
@@ -587,7 +587,7 @@ export default function KerjasamaPage() {
                       <button
                         type="button"
                         onClick={nextStep}
-                        className="w-2/3 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-md transition-all flex justify-center items-center gap-2 group"
+                        className="w-2/3 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-md transition-all flex justify-center items-center gap-2 group"
                       >
                         Lanjut <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                       </button>
@@ -601,7 +601,7 @@ export default function KerjasamaPage() {
                     <div className="space-y-5">
                       {/* Jenis Kerjasama */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="partnershipType" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="partnershipType" className="text-[16px] font-bold text-gray-900">
                           Jenis Kerjasama<span className="text-[#990202]">*</span>
                         </label>
                         <div className="relative">
@@ -612,7 +612,7 @@ export default function KerjasamaPage() {
                             onChange={handleInputChange}
                             className={`w-full px-4 py-3 rounded-xl border appearance-none cursor-pointer ${
                               errors.partnershipType ? "border-red-500 bg-red-50/5" : "border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white"
-                            } text-[14px] font-medium text-gray-900 focus:outline-none`}
+                            } text-[16px] font-medium text-gray-900 focus:outline-none`}
                           >
                             <option value="Pilih Jenis Kerjasama">Pilih Jenis Kerjasama</option>
                             <option value="Corporate Partnership">Corporate Partnership</option>
@@ -626,12 +626,12 @@ export default function KerjasamaPage() {
                             </svg>
                           </div>
                         </div>
-                        {errors.partnershipType && <span className="text-[14px] font-bold text-red-500">{errors.partnershipType}</span>}
+                        {errors.partnershipType && <span className="text-[16px] font-bold text-red-500">{errors.partnershipType}</span>}
                       </div>
 
                       {/* Pesan Tambahan */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="proposal" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="proposal" className="text-[16px] font-bold text-gray-900">
                           Pesan Tambahan<span className="text-[#990202]">*</span>
                         </label>
                         <textarea
@@ -642,29 +642,29 @@ export default function KerjasamaPage() {
                           rows={4}
                           className={`w-full px-4 py-3 rounded-xl border ${
                             errors.proposal ? "border-red-500 bg-red-50/5" : "border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white"
-                          } text-[14px] font-medium text-gray-900 focus:outline-none resize-none transition-colors`}
+                          } text-[16px] font-medium text-gray-900 focus:outline-none resize-none transition-colors`}
                           placeholder="Pesan untuk kerjasama & value yang ingin disampaikan (singkat saja)..."
                         />
-                        {errors.proposal && <span className="text-[14px] font-bold text-red-500">{errors.proposal}</span>}
+                        {errors.proposal && <span className="text-[16px] font-bold text-red-500">{errors.proposal}</span>}
                       </div>
 
                       {/* Upload Berkas Kerjasama */}
                       <div className="space-y-1.5 text-left">
-                        <label className="text-[14px] font-bold text-gray-900">
+                        <label className="text-[16px] font-bold text-gray-900">
                           Upload Berkas Kerjasama / Proposal
                         </label>
                         <div className="w-full border border-dashed border-gray-400 bg-[#F9F9F9] rounded-xl p-5 flex items-center gap-4 cursor-pointer hover:bg-gray-50 transition-colors">
                           <Upload className="w-6 h-6 text-[#990202]" />
                           <div className="flex flex-col">
-                            <span className="text-[14px] font-bold text-gray-900">Klik untuk upload berkas</span>
-                            <span className="text-[14px] text-gray-500">PDF, DOC, atau gambar — maks 10MB</span>
+                            <span className="text-[16px] font-bold text-gray-900">Klik untuk upload berkas</span>
+                            <span className="text-[16px] text-gray-500">PDF, DOC, atau gambar — maks 10MB</span>
                           </div>
                         </div>
                       </div>
 
                       {/* Dari mana Anda mengetahui EasyLegal? */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="source" className="text-[14px] font-bold text-gray-900">
+                        <label htmlFor="source" className="text-[16px] font-bold text-gray-900">
                           Dari mana Anda mengetahui EasyLegal?<span className="text-[#990202]">*</span>
                         </label>
                         <div className="relative">
@@ -675,7 +675,7 @@ export default function KerjasamaPage() {
                             onChange={handleInputChange}
                             className={`w-full px-4 py-3 rounded-xl border appearance-none cursor-pointer ${
                               errors.source ? "border-red-500 bg-red-50/5" : "border-transparent focus:border-gray-200 bg-[#F9F9F9] focus:bg-white"
-                            } text-[14px] font-medium text-gray-900 focus:outline-none`}
+                            } text-[16px] font-medium text-gray-900 focus:outline-none`}
                           >
                             <option value="Pilih">Pilih</option>
                             <option value="Pencarian Google">Pencarian Google</option>
@@ -690,13 +690,13 @@ export default function KerjasamaPage() {
                             </svg>
                           </div>
                         </div>
-                        {errors.source && <span className="text-[14px] font-bold text-red-500">{errors.source}</span>}
+                        {errors.source && <span className="text-[16px] font-bold text-red-500">{errors.source}</span>}
                       </div>
                     </div>
 
                     {/* Privacy Disclaimer */}
                     <div className="bg-[#F9F9F9] rounded-xl p-4 border border-gray-100 text-left mt-2">
-                      <p className="text-[14px] sm:text-[14px] text-gray-500 font-medium leading-relaxed">
+                      <p className="text-[16px] sm:text-[16px] text-gray-500 font-medium leading-relaxed">
                         Saya menyetujui EasyLegal memproses data ini untuk follow-up kerjasama sesuai <span className="font-bold text-[#990202]">Kebijakan Privasi</span>.
                       </p>
                     </div>
@@ -705,7 +705,7 @@ export default function KerjasamaPage() {
                       <button
                         type="button"
                         onClick={prevStep}
-                        className="w-1/3 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 font-bold text-[15px] rounded-xl shadow-sm transition-all flex justify-center items-center gap-2 group"
+                        className="w-1/3 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 font-bold text-[16px] rounded-xl shadow-sm transition-all flex justify-center items-center gap-2 group"
                       >
                         <ArrowRight className="w-5 h-5 transform rotate-180 transition-transform group-hover:-translate-x-1" />
                         Kembali
@@ -713,7 +713,7 @@ export default function KerjasamaPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-2/3 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_12px_rgba(153,2,2,0.2)] hover:shadow-[0_6px_16px_rgba(153,2,2,0.3)] transition-all flex justify-center items-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-2/3 py-4 bg-[#990202] hover:bg-[#800000] text-white font-bold text-[16px] rounded-xl shadow-[0_4px_12px_rgba(153,2,2,0.2)] hover:shadow-[0_6px_16px_rgba(153,2,2,0.3)] transition-all flex justify-center items-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? (
                           <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -737,15 +737,15 @@ export default function KerjasamaPage() {
                 </div>
                 
                 <div className="space-y-3">
-                  <h3 className="text-[24px] sm:text-[28px] font-black text-gray-900 tracking-tight leading-tight">
+                  <h3 className="text-[16px] sm:text-[28px] font-black text-gray-900 tracking-tight leading-tight">
                     Pengajuan Berhasil Dikirim!
                   </h3>
-                  <p className="text-[14px] text-gray-500 leading-relaxed max-w-lg mx-auto font-normal">
+                  <p className="text-[16px] text-gray-500 leading-relaxed max-w-lg mx-auto font-normal">
                     Terima kasih atas ketertarikan Anda untuk berkolaborasi bersama kami, <strong className="text-gray-950 font-extrabold">{formData.name}</strong>. Data kemitraan Anda telah kami terima secara aman.
                   </p>
                 </div>
 
-                <div className="bg-[#FAF9F7] rounded-2xl p-5 shadow-md border border-black/[0.03] text-left max-w-md mx-auto space-y-2 text-[14px] sm:text-[14px] text-gray-650 font-semibold">
+                <div className="bg-[#FAF9F7] rounded-2xl p-5 shadow-md border border-black/[0.03] text-left max-w-md mx-auto space-y-2 text-[16px] sm:text-[16px] text-gray-650 font-semibold">
                   <div className="flex justify-between border-b border-gray-200/50 pb-2">
                     <span className="text-gray-400">Program</span>
                     <span className="text-gray-900 font-extrabold text-right">{formData.partnershipType}</span>
@@ -760,7 +760,7 @@ export default function KerjasamaPage() {
                   </div>
                 </div>
 
-                <p className="text-[14px] sm:text-[14px] text-gray-500 max-w-md mx-auto leading-relaxed">
+                <p className="text-[16px] sm:text-[16px] text-gray-500 max-w-md mx-auto leading-relaxed">
                   Partnership Manager kami akan segera menghubungi Anda melalui nomor WhatsApp di atas dalam waktu <strong className="text-[#990202] font-black">1-2 jam</strong> untuk mendiskusikan rencana kerja sama secara mendalam.
                 </p>
 
@@ -769,7 +769,7 @@ export default function KerjasamaPage() {
                     href={getWhatsAppLink(`Halo Partnership Manager EasyLegal, saya ${formData.name} baru saja mengajukan kemitraan ${formData.partnershipType} via formulir website.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14px] rounded-xl shadow-md hover:shadow-lg transition-colors cursor-pointer text-center flex-1"
+                    className="inline-flex items-center justify-center px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-colors cursor-pointer text-center flex-1"
                   >
                     <span>Hubungi WA Sekarang</span>
                   </a>
@@ -791,7 +791,7 @@ export default function KerjasamaPage() {
                         source: "Pilih"
                       });
                     }}
-                    className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[14px] rounded-xl bg-white hover:bg-gray-50 transition-colors cursor-pointer text-center flex-1"
+                    className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 transition-colors cursor-pointer text-center flex-1"
                   >
                     Kirim Ulang
                   </button>

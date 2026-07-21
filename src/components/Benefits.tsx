@@ -27,14 +27,14 @@ export default function Benefits({
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">
+          <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">
             {sectionTitleTag}
           </p>
           <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight">
             {sectionTitle}
           </h2>
           {sectionSubtitle && (
-            <p className="text-[14.5px] text-gray-500 font-medium leading-relaxed">
+            <p className="text-[16px] text-gray-500 font-medium leading-relaxed">
               {sectionSubtitle}
             </p>
           )}
@@ -53,10 +53,10 @@ export default function Benefits({
               </div>
               
               <div className="space-y-1.5">
-                <h3 className="text-[16.5px] font-extrabold text-gray-950 leading-tight">
+                <h3 className="text-[16px] font-extrabold text-gray-950 leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
+                <p className="text-[16px] text-gray-500 leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>

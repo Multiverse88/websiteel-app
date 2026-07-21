@@ -13,7 +13,7 @@ export default function HeroSection({ data }: { data: HeroSectionData }) {
               {data.headline}
             </h1>
             {data.subheadline && (
-              <p className="text-lg text-gray-600">
+              <p className="text-[16px] text-gray-600">
                 {data.subheadline}
               </p>
             )}

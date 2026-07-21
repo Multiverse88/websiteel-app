@@ -57,7 +57,7 @@ export default function LayananTemplate({ content }: Props) {
       <section className="relative py-8 sm:py-20 overflow-hidden bg-white">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-[14px] sm:text-[14px] text-gray-600 pt-0 pb-1 mb-1 font-medium">
+          <nav className="flex items-center gap-2 text-[16px] sm:text-[16px] text-gray-600 pt-0 pb-1 mb-1 font-medium">
             <Link href="/" className="flex items-center gap-1 hover:text-gray-900 transition-colors">
               <Home className="w-3.5 h-3.5 text-gray-600" />
               <span>Beranda</span>
@@ -72,7 +72,7 @@ export default function LayananTemplate({ content }: Props) {
             <div className="lg:w-[55%] text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FEF2F2] border border-[#FEE2E2] mb-4 sm:mb-6">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#B91C1C]" />
-                <span className="text-[14px] sm:text-[14px] font-extrabold text-[#B91C1C]">
+                <span className="text-[16px] sm:text-[16px] font-extrabold text-[#B91C1C]">
                   {c.heroBadge}
                 </span>
               </div>
@@ -81,7 +81,7 @@ export default function LayananTemplate({ content }: Props) {
                 {c.heroTitle}
               </h1>
 
-              <p className="text-[14px] sm:text-[16px] text-gray-500 mt-4 sm:mt-5 leading-relaxed max-w-[580px] font-medium font-sans">
+              <p className="text-[16px] sm:text-[16px] text-gray-500 mt-4 sm:mt-5 leading-relaxed max-w-[580px] font-medium font-sans">
                 {c.heroDescription}
               </p>
 
@@ -90,7 +90,7 @@ export default function LayananTemplate({ content }: Props) {
                   href={getWhatsAppLink(c.ctaWhatsAppMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold rounded-xl text-[14px] sm:text-[14px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1.5 sm:gap-2"
+                  className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold rounded-xl text-[16px] sm:text-[16px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1.5 sm:gap-2"
                 >
                   <span>Konsultasi Gratis</span>
                   <svg className="w-3.5 h-3.5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
@@ -99,7 +99,7 @@ export default function LayananTemplate({ content }: Props) {
                 </a>
                 <button
                   onClick={scrollToPricing}
-                  className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-white shadow-md border border-black/[0.04] text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold rounded-xl text-[14px] sm:text-[14px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200 flex items-center"
+                  className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-white shadow-md border border-black/[0.04] text-gray-800 hover:bg-gray-50 hover:border-gray-300 font-extrabold rounded-xl text-[16px] sm:text-[16px] shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-200 flex items-center"
                 >
                   Lihat Paket
                 </button>
@@ -115,8 +115,8 @@ export default function LayananTemplate({ content }: Props) {
                         <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                       </div>
                       <div>
-                        <div className="text-[14px] sm:text-[14px] font-extrabold text-gray-950">{stat.value}</div>
-                        <div className="text-[14px] sm:text-[14px] text-gray-600 font-medium">{stat.label}</div>
+                        <div className="text-[16px] sm:text-[16px] font-extrabold text-gray-950">{stat.value}</div>
+                        <div className="text-[16px] sm:text-[16px] text-gray-600 font-medium">{stat.label}</div>
                       </div>
                     </div>
                   );
@@ -144,10 +144,10 @@ export default function LayananTemplate({ content }: Props) {
       <section className="py-8 sm:py-16 bg-gray-50 border-y border-gray-100">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-            <h2 className="text-[20px] sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+            <h2 className="text-[16px] sm:text-3xl font-extrabold text-gray-900 tracking-tight">
               {c.benefitsTitle}
             </h2>
-            <p className="text-[14px] sm:text-base text-gray-500 mt-2 sm:mt-3 font-medium">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 mt-2 sm:mt-3 font-medium">
               {c.benefitsSubtitle}
             </p>
           </div>
@@ -160,8 +160,8 @@ export default function LayananTemplate({ content }: Props) {
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#FEF2F2] flex items-center justify-center text-[#990202] mb-4 sm:mb-5">
                     <Icon className="w-5.5 h-5.5 sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-sm sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2">{b.title}</h3>
-                  <p className="text-[14px] sm:text-sm text-gray-500 leading-relaxed font-medium">{b.desc}</p>
+                  <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 mb-1 sm:mb-2">{b.title}</h3>
+                  <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">{b.desc}</p>
                 </div>
               );
             })}
@@ -173,10 +173,10 @@ export default function LayananTemplate({ content }: Props) {
       <section id="paket-harga" className="py-8 sm:py-16">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-            <h2 className="text-[20px] sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+            <h2 className="text-[16px] sm:text-3xl font-extrabold text-gray-900 tracking-tight">
               {c.pricingTitle}
             </h2>
-            <p className="text-[14px] sm:text-base text-gray-500 mt-2 sm:mt-3 font-medium">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 mt-2 sm:mt-3 font-medium">
               {c.pricingSubtitle}
             </p>
           </div>

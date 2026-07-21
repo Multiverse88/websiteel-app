@@ -14,13 +14,13 @@ export default function PricingFooter({ hidePromoCard = false }: { hidePromoCard
             <Truck className="w-8 h-8 sm:w-10 sm:h-10 text-gray-900" strokeWidth={1.5} />
           </div>
           <div className="flex flex-col pt-1 text-left">
-            <span className="text-[14px] sm:text-[14px] font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2 block">
+            <span className="text-[16px] sm:text-[16px] font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2 block">
               Jangkauan Nasional
             </span>
-            <h3 className="text-[18px] sm:text-[22px] font-black text-gray-900 leading-[1.2] mb-2 sm:mb-3">
+            <h3 className="text-[16px] sm:text-[16px] font-black text-gray-900 leading-[1.2] mb-2 sm:mb-3">
               Melayani Seluruh Indonesia
             </h3>
-            <p className="text-[14px] sm:text-[14px] text-gray-500 leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed">
               Semua biaya tertera di awal — termasuk jasa kami dan biaya pemerintah. Tidak ada add-on mendadak di tengah proses.
             </p>
           </div>
@@ -33,14 +33,14 @@ export default function PricingFooter({ hidePromoCard = false }: { hidePromoCard
               <Image src="/images/iphone-mockup.png" alt="iPhone" fill sizes="(max-width: 640px) 64px, 80px" className="object-cover object-center" />
             </div>
             <div className="flex flex-col pt-1 text-left">
-              <span className="text-[14px] sm:text-[14px] font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2 block">
+              <span className="text-[16px] sm:text-[16px] font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2 block">
                 Legal Festival Special
               </span>
-              <h3 className="text-[18px] sm:text-[22px] font-black text-gray-900 leading-[1.2] mb-1 sm:mb-2">
+              <h3 className="text-[16px] sm:text-[16px] font-black text-gray-900 leading-[1.2] mb-1 sm:mb-2">
                 Menangkan iPhone &amp; Hadiah senilai Rp 12.000.000
               </h3>
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1.5 rounded-full mt-2 text-[13px] sm:text-[14px] font-bold tracking-wide shadow-sm text-left">
+                <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1.5 rounded-full mt-2 text-[16px] sm:text-[16px] font-bold tracking-wide shadow-sm text-left">
                   <Gift className="w-3.5 h-3.5 text-yellow-400 flex-shrink-0" strokeWidth={2.5} /> 
                   <span>Setiap pembuatan PT berkesempatan dapat iPhone</span>
                 </div>
@@ -67,7 +67,7 @@ export default function PricingFooter({ hidePromoCard = false }: { hidePromoCard
 
         {/* Content Side */}
         <div className="max-w-[400px] text-center md:text-left flex flex-col items-center md:items-start">
-          <h3 className="text-[24px] sm:text-[30px] font-black text-gray-900 leading-[1.2] mb-3 sm:mb-4 tracking-tight">
+          <h3 className="text-[16px] sm:text-[30px] font-black text-gray-900 leading-[1.2] mb-3 sm:mb-4 tracking-tight">
             Transaksi Aman Via Marketplace
           </h3>
           
@@ -80,7 +80,7 @@ export default function PricingFooter({ hidePromoCard = false }: { hidePromoCard
             />
           </div>
           
-          <p className="text-[14px] sm:text-[15px] text-gray-500 leading-[1.7]">
+          <p className="text-[16px] sm:text-[16px] text-gray-500 leading-[1.7]">
             Masih ragu bertransaksi online? Tenang, layanan pendirian perusahaan, perizinan usaha, dan pendaftaran HAKI kami tersedia di marketplace <strong className="text-gray-800 font-extrabold">(Shopee)</strong> dengan jaminan transaksi yang aman dan terpercaya.
           </p>
         </div>

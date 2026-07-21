@@ -187,7 +187,7 @@ export default function NibOss() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] sm:text-[14px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[16px] sm:text-[16px] sm:text-[16px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -195,13 +195,13 @@ export default function NibOss() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[14px] font-bold text-gray-900">Perizinan Usaha (NIB & OSS)</span>
+                <span className="text-[16px] font-bold text-gray-900">Perizinan Usaha (NIB & OSS)</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100/60 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Perizinan Usaha · OSS RBA</span>
+                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Perizinan Usaha · OSS RBA</span>
               </div>
 
               {/* Headline */}
@@ -211,7 +211,7 @@ export default function NibOss() {
               </h1>
 
               {/* Description */}
-              <p className="text-[15.5px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-medium">
+              <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-medium">
                 Pengurusan NIB, OSS RBA, perubahan KBLI, sampai sertifikat standar — semua kami pandu sesuai tingkat risiko usaha Anda. Mulai dari Rp 499.000.
               </p>
 
@@ -221,7 +221,7 @@ export default function NibOss() {
                   href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembuatan NIB dan izin OSS RBA.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
                 >
                   <span>Konsultasi Gratis</span>
                   <span className="ml-1.5 transition-transform group-hover:translate-x-0.5">→</span>
@@ -229,7 +229,7 @@ export default function NibOss() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-55 hover:border-gray-305 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer bg-white"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-gray-55 hover:border-gray-305 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer bg-white"
                 >
                   Lihat Paket Harga
                 </a>
@@ -244,8 +244,8 @@ export default function NibOss() {
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[14px] font-black text-gray-950 leading-tight">1-3 hari</p>
-                    <p className="text-[14px] font-bold text-gray-400">Lama proses</p>
+                    <p className="text-[16px] font-black text-gray-950 leading-tight">1-3 hari</p>
+                    <p className="text-[16px] font-bold text-gray-400">Lama proses</p>
                   </div>
                 </div>
 
@@ -255,8 +255,8 @@ export default function NibOss() {
                     <span className="text-[16px] font-black leading-none">$</span>
                   </div>
                   <div>
-                    <p className="text-[14px] font-black text-gray-950 leading-tight">Mulai Rp 499rb</p>
-                    <p className="text-[14px] font-bold text-gray-400">Harga transparan</p>
+                    <p className="text-[16px] font-black text-gray-950 leading-tight">Mulai Rp 499rb</p>
+                    <p className="text-[16px] font-bold text-gray-400">Harga transparan</p>
                   </div>
                 </div>
 
@@ -268,8 +268,8 @@ export default function NibOss() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[14px] font-black text-gray-950 leading-tight">OSS RBA</p>
-                    <p className="text-[14px] font-bold text-gray-400">Resmi BKPM</p>
+                    <p className="text-[16px] font-black text-gray-950 leading-tight">OSS RBA</p>
+                    <p className="text-[16px] font-bold text-gray-400">Resmi BKPM</p>
                   </div>
                 </div>
 
@@ -301,8 +301,8 @@ export default function NibOss() {
                     </svg>
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[14px] font-black text-gray-950">NIB Terbit</p>
-                    <p className="text-[14px] font-bold text-gray-400">Resmi · 2 hari kerja</p>
+                    <p className="text-[16px] font-black text-gray-950">NIB Terbit</p>
+                    <p className="text-[16px] font-bold text-gray-400">Resmi · 2 hari kerja</p>
                   </div>
                 </div>
 
@@ -314,8 +314,8 @@ export default function NibOss() {
                     </svg>
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[14px] font-black text-gray-950">OSS RBA Aktif</p>
-                    <p className="text-[14px] font-bold text-gray-400">Siap operasional</p>
+                    <p className="text-[16px] font-black text-gray-950">OSS RBA Aktif</p>
+                    <p className="text-[16px] font-bold text-gray-400">Siap operasional</p>
                   </div>
               </div>
             </div>
@@ -337,11 +337,11 @@ export default function NibOss() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
             <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
-              <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+              <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
+              <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
                 4 paket sesuai jenis usaha Anda.
               </h2>
-              <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium">
+              <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium">
                 Harga sudah include semua biaya — pengurusan NIB, NPWP, OSS RBA, & sertifikat standar. Tanpa tambahan biaya apapun.
               </p>
             </div>
@@ -364,53 +364,53 @@ export default function NibOss() {
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
                 <div className="text-center mb-[18px]">
-                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB PERORANGAN</div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">USAHA PERSEORANGAN</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB PERORANGAN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">USAHA PERSEORANGAN</div>
                 </div>
                 <div className="text-center mb-[20px]">
-                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 1.000.000</div>
+                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 1.000.000</div>
                   <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 499.000</div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perorangan. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                  className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih NIB Perorangan</a>
                 <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
-                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] mb-[22px]">
                   <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
                   <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
                 </div>
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
                 <div className="flex flex-col gap-[10px] flex-1">
                   {["5 KBLI Bidang Usaha","NPWP & SKT Pajak","Akun Gmail & OSS","NIB","Akun OSS RBA","K3L/SPUMKTTR & SPPL"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
                     <span>Sertifikat Standar <sup className="text-[oklch(0.62_0.15_25)]">(2)</sup></span>
                   </div>
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
                     <span>Angka Pengenal Impor <sup className="text-[oklch(0.62_0.15_25)]">(3)</sup></span>
                   </div>
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
@@ -420,58 +420,58 @@ export default function NibOss() {
 
             {/* Paket 2: NIB PT Perorangan (FAVORIT) */}
             <div className="relative group h-full pt-[16px]">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[11px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[16px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
                 UMKM FAVORIT
               </div>
               <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)] lg:-translate-y-[10px]">
                 <div className="text-center mb-[18px]">
-                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB PT PERORANGAN</div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">PT PERORANGAN UMKM</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB PT PERORANGAN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">PT PERORANGAN UMKM</div>
                 </div>
                 <div className="text-center mb-[20px]">
-                  <div className="text-[14px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 1.000.000</div>
+                  <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 1.000.000</div>
                   <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 499.000</div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB PT Perorangan. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
+                  className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
                 >Pilih NIB PT Perorangan</a>
                 <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[20px]" />
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">LAMA PROSES</div>
-                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] mb-[22px]">
                   <span className="text-[oklch(0.78_0.15_145)] font-[700]">✓</span>
                   <span>1-3 Hari Kerja <sup className="text-[oklch(0.85_0.1_70)]">(1)</sup></span>
                 </div>
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">YANG DIPEROLEH</div>
                 <div className="flex flex-col gap-[10px] flex-1">
                   {["5 KBLI Bidang Usaha","NPWP & SKT Pajak","Akun Gmail & OSS","NIB","Akun OSS RBA","K3L/SPUMKTTR & SPPL"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span>
                     <span>Sertifikat Standar <sup className="text-[oklch(0.85_0.1_70)]">(2)</sup></span>
                   </div>
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span>
                     <span>Angka Pengenal Impor <sup className="text-[oklch(0.85_0.1_70)]">(3)</sup></span>
                   </div>
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
@@ -484,53 +484,53 @@ export default function NibOss() {
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
                 <div className="text-center mb-[18px]">
-                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB BADAN</div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PT, PMA, CV, FIRMA, YAYASAN, KOPERASI</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">NIB BADAN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PT, PMA, CV, FIRMA, YAYASAN, KOPERASI</div>
                 </div>
                 <div className="text-center mb-[20px]">
-                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 3.000.000</div>
+                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 3.000.000</div>
                   <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 1.499.000</div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                  className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih NIB Badan</a>
                 <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
-                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] mb-[22px]">
                   <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
                   <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
                 </div>
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
                 <div className="flex flex-col gap-[10px] flex-1">
                   {["5 KBLI Bidang Usaha","NPWP & SKT Pajak","Akun Gmail & OSS","NIB","Akun OSS RBA","K3L/SPUMKTTR & SPPL"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
                     <span>Sertifikat Standar <sup className="text-[oklch(0.62_0.15_25)]">(2)</sup></span>
                   </div>
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
                     <span>Angka Pengenal Impor <sup className="text-[oklch(0.62_0.15_25)]">(3)</sup></span>
                   </div>
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 250.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
@@ -543,43 +543,43 @@ export default function NibOss() {
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
                 <div className="text-center mb-[18px]">
-                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT NIB</div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PENCABUTAN NIB DARI OSS</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT NIB</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PENCABUTAN NIB DARI OSS</div>
                 </div>
                 <div className="text-center mb-[20px]">
-                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 2.000.000</div>
+                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 2.000.000</div>
                   <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 999.000</div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
                   href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Cabut NIB. Mohon info lengkap biaya dan prosesnya.")}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                  className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih Cabut NIB</a>
                 <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
-                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] mb-[22px]">
                   <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
                   <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
                 </div>
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
                 <div className="flex flex-col gap-[10px] flex-1">
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>Pencabutan NIB dari OSS</span>
                   </div>
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 250.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
@@ -590,7 +590,7 @@ export default function NibOss() {
           </div>
 
           {/* Footnote disclaimers */}
-          <div className="max-w-[1400px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed font-medium">
+          <div className="max-w-[1400px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[16px] text-gray-500 leading-relaxed font-medium">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS. (2) Untuk risiko menengah rendah. (3) Opsional, jika usaha melakukan impor.</span>
           </div>
@@ -604,11 +604,11 @@ export default function NibOss() {
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-12 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">LAYANAN TAMBAHAN</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">LAYANAN TAMBAHAN</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Perubahan KBLI & data usaha.
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium">
               Ubah, tambah, atau cabut KBLI yang ada di NIB Anda — pilih tab sesuai jenis perubahan yang dibutuhkan.
             </p>
           </div>
@@ -619,7 +619,7 @@ export default function NibOss() {
             {/* Tab 1: Perorangan */}
             <button
               onClick={() => setActiveSubTab("perorangan")}
-              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[16px] sm:text-[16px] font-extrabold transition-all duration-200 ${
                 activeSubTab === "perorangan"
                   ? "bg-[#990202] text-white shadow-sm"
                   : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
@@ -632,7 +632,7 @@ export default function NibOss() {
             {/* Tab 2: Badan */}
             <button
               onClick={() => setActiveSubTab("badan")}
-              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[16px] sm:text-[16px] font-extrabold transition-all duration-200 ${
                 activeSubTab === "badan"
                   ? "bg-[#990202] text-white shadow-sm"
                   : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
@@ -645,7 +645,7 @@ export default function NibOss() {
             {/* Tab 3: OSS RBA */}
             <button
               onClick={() => setActiveSubTab("oss-rba")}
-              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[16px] sm:text-[16px] font-extrabold transition-all duration-200 ${
                 activeSubTab === "oss-rba"
                   ? "bg-[#990202] text-white shadow-sm"
                   : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
@@ -658,7 +658,7 @@ export default function NibOss() {
             {/* Tab 4: PT Perorangan */}
             <button
               onClick={() => setActiveSubTab("pt-perorangan")}
-              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[14px] sm:text-[14px] font-extrabold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-3 rounded-full text-[16px] sm:text-[16px] font-extrabold transition-all duration-200 ${
                 activeSubTab === "pt-perorangan"
                   ? "bg-[#990202] text-white shadow-sm"
                   : "bg-white text-gray-700 shadow-md border border-black/[0.04] hover:border-gray-300 cursor-pointer"
@@ -678,46 +678,46 @@ export default function NibOss() {
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
                 <div className="text-center mb-[18px]">
-                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT KBLI</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT KBLI</div>
                 </div>
                 <div className="text-center mb-[20px]">
-                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">
+                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">
                     {activeSubTab === "perorangan" ? "Rp 800.000" : activeSubTab === "badan" ? "Rp 1.500.000" : "Rp 1.000.000"}
                   </div>
                   <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">
                     {activeSubTab === "perorangan" ? "Rp 399.000" : activeSubTab === "badan" ? "Rp 799.000" : "Rp 499.000"}
                   </div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
                   href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut KBLI (${activeSubTab}).`)}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                  className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih Cabut KBLI</a>
                 <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
-                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] mb-[22px]">
                   <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
                   <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
                 </div>
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
                 <div className="flex flex-col gap-[10px] flex-1">
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>Pencabutan 1 s/d 5 buah KBLI</span>
                   </div>
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
@@ -727,51 +727,51 @@ export default function NibOss() {
 
             {/* Card 2: Tambah KBLI (FAVORIT) */}
             <div className="relative group h-full pt-[16px]">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[11px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[16px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
                 PALING POPULER
               </div>
               <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)] lg:-translate-y-[10px]">
                 <div className="text-center mb-[18px]">
-                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">TAMBAH KBLI</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">TAMBAH KBLI</div>
                 </div>
                 <div className="text-center mb-[20px]">
-                  <div className="text-[14px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">
+                  <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">
                     {activeSubTab === "perorangan" ? "Rp 1.000.000" : activeSubTab === "badan" ? "Rp 1.800.000" : "Rp 1.200.000"}
                   </div>
                   <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">
                     {activeSubTab === "perorangan" ? "Rp 499.000" : activeSubTab === "badan" ? "Rp 999.000" : "Rp 599.000"}
                   </div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
                   href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Tambah KBLI (${activeSubTab}).`)}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
+                  className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
                 >Pilih Tambah KBLI</a>
                 <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[20px]" />
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">LAMA PROSES</div>
-                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] mb-[22px]">
                   <span className="text-[oklch(0.78_0.15_145)] font-[700]">✓</span>
                   <span>1-3 Hari Kerja <sup className="text-[oklch(0.85_0.1_70)]">(1)</sup></span>
                 </div>
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">YANG DIPEROLEH</div>
                 <div className="flex flex-col gap-[10px] flex-1">
-                  <div className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                  <div className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                     <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>Penambahan 1 s/d 5 buah KBLI</span>
                   </div>
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
@@ -784,48 +784,48 @@ export default function NibOss() {
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
                 <div className="text-center mb-[18px]">
-                  <div className="text-[15px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT &amp; TAMBAH</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">CABUT &amp; TAMBAH</div>
                 </div>
                 <div className="text-center mb-[20px]">
-                  <div className="text-[14px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">
+                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">
                     {activeSubTab === "perorangan" ? "Rp 1.700.000" : activeSubTab === "badan" ? "Rp 2.800.000" : "Rp 2.000.000"}
                   </div>
                   <div className="text-[27px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">
                     {activeSubTab === "perorangan" ? "Rp 849.000" : activeSubTab === "badan" ? "Rp 1.499.000" : "Rp 999.000"}
                   </div>
-                  <div className="text-[11px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
                   href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut & Tambah KBLI (${activeSubTab}).`)}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[12px] rounded-[10px] text-[14px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                  className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih Cabut &amp; Tambah</a>
                 <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
-                <div className="flex items-center gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] mb-[22px]">
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                <div className="flex items-center gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] mb-[22px]">
                   <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
                   <span>1-3 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
                 </div>
-                <div className="text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                <div className="text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
                 <div className="flex flex-col gap-[10px] flex-1">
                   {["Pencabutan 1 s/d 5 buah KBLI","Penambahan 1 s/d 5 buah KBLI"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {["Personal Legal Assistance","1 Kupon Undian iPhone"].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[20px] text-[11px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
+                <div className="mt-[20px] text-[16px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">EXTRA BONUS</div>
                 <div className="flex flex-col gap-[10px]">
                   {[<span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 50.000</strong></span>,"Dokumen SOP Karyawan","Dokumen SOP Perusahaan","Dokumen Kontrak Bisnis",<span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[8px] text-[13.5px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                    <div key={i} className="flex items-start gap-[8px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
                     </div>
                   ))}
@@ -836,7 +836,7 @@ export default function NibOss() {
           </div>
 
           {/* Footnote disclaimers */}
-          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[14px] text-gray-500 leading-relaxed font-medium text-left">
+          <div className="max-w-[1140px] mx-auto mt-6 sm:mt-12 bg-white shadow-md border border-black/[0.04] rounded-2xl p-5 text-[16px] text-gray-500 leading-relaxed font-medium text-left">
             <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
             <span>(1) Jika tidak terdapat kendala pada sistem AHU &amp; OSS.</span>
           </div>
@@ -851,11 +851,11 @@ export default function NibOss() {
           
           {/* Header */}
           <div className="text-left mb-8 sm:mb-16 space-y-3">
-            <p className="text-[14px] font-black text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN NIB & OSS RBA</p>
+            <p className="text-[16px] font-black text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN NIB & OSS RBA</p>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu NIB & Perizinan Berbasis Risiko?
             </h2>
-            <p className="text-[15px] text-gray-500 leading-relaxed font-medium">
+            <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
               Sebelum mulai, kenali dulu sistem perizinan usaha online yang berlaku di Indonesia.
             </p>
           </div>
@@ -883,8 +883,8 @@ export default function NibOss() {
                     <FileText className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left leading-tight">
-                    <p className="text-[14px] font-bold text-gray-900">Dasar Hukum</p>
-                    <p className="text-[14px] font-medium text-gray-500">PP No. 5/2021 & PP No. 24/2018</p>
+                    <p className="text-[16px] font-bold text-gray-900">Dasar Hukum</p>
+                    <p className="text-[16px] font-medium text-gray-500">PP No. 5/2021 & PP No. 24/2018</p>
                   </div>
                 </div>
 
@@ -898,9 +898,9 @@ export default function NibOss() {
               <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <BookOpen className="w-4.5 h-4.5" />
-                  <h4 className="text-[14px] font-extrabold tracking-wider uppercase">PENGERTIAN NIB</h4>
+                  <h4 className="text-[16px] font-extrabold tracking-wider uppercase">PENGERTIAN NIB</h4>
                 </div>
-                <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-medium">
+                <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
                   <strong className="font-bold text-gray-900">NIB (Nomor Induk Berusaha)</strong> adalah identitas pelaku usaha yang diterbitkan oleh BKPM melalui sistem OSS (Online Single Submission), berfungsi sebagai tanda pengenal & akses untuk berbagai izin usaha. Dasar hukumnya adalah <strong className="font-bold text-gray-900">Peraturan Pemerintah No. 24 Tahun 2018</strong>.
                 </p>
               </div>
@@ -909,9 +909,9 @@ export default function NibOss() {
               <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <Compass className="w-4.5 h-4.5" />
-                  <h4 className="text-[14px] font-extrabold tracking-wider uppercase">PENGERTIAN OSS RBA</h4>
+                  <h4 className="text-[16px] font-extrabold tracking-wider uppercase">PENGERTIAN OSS RBA</h4>
                 </div>
-                <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-medium">
+                <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
                   <strong className="font-bold text-gray-900">OSS RBA (Risk Based Approach)</strong> adalah sistem perizinan berusaha berdasarkan tingkat risiko kegiatan usaha — berbeda dari OSS 1.1 yang lama, dengan mempertimbangkan risiko dan skala usaha. Dasar hukumnya adalah <strong className="font-bold text-gray-900">Peraturan Pemerintah No. 5 Tahun 2021</strong>.
                 </p>
               </div>
@@ -920,9 +920,9 @@ export default function NibOss() {
               <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-200 text-left space-y-3">
                 <div className="flex items-center gap-2.5 text-[#990202]">
                   <Shield className="w-4.5 h-4.5" />
-                  <h4 className="text-[14px] font-extrabold tracking-wider uppercase">PERIZINAN USAHA BERBASIS RISIKO</h4>
+                  <h4 className="text-[16px] font-extrabold tracking-wider uppercase">PERIZINAN USAHA BERBASIS RISIKO</h4>
                 </div>
-                <p className="text-[14px] sm:text-[14px] sm:text-[14px] text-gray-500 leading-relaxed font-medium">
+                <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
                   Perizinan Usaha Berbasis Risiko menentukan jenis perizinan berdasarkan <strong className="font-bold text-gray-900">tingkat risiko usaha</strong>. Usaha dengan risiko rendah cukup dengan NIB. Risiko menengah memerlukan Sertifikat Standar. Risiko tinggi butuh persetujuan instansi terkait — didasarkan pada <strong className="font-bold text-gray-900">KBLI 2020</strong>.
                 </p>
               </div>
@@ -939,11 +939,11 @@ export default function NibOss() {
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">4 TINGKAT RISIKO USAHA</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">4 TINGKAT RISIKO USAHA</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Jenis perizinan sesuai tingkat risiko.
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
               Tingkat risiko ditentukan oleh KBLI usaha Anda. Kami bantu identifikasi tingkat risiko & perizinan yang dibutuhkan.
             </p>
           </div>
@@ -954,14 +954,14 @@ export default function NibOss() {
             {/* Level 1 */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col">
               <div className="bg-[#0F9D58] p-5 text-white text-center">
-                <p className="text-[14px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 1</p>
+                <p className="text-[16px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 1</p>
                 <p className="text-[16px] font-black mt-1">Risiko Rendah (R)</p>
               </div>
               <div className="p-6 flex-1 space-y-4 text-left">
-                <p className="text-[14px] font-extrabold text-gray-400 tracking-wider uppercase">PERIZINAN BERUSAHA</p>
+                <p className="text-[16px] font-extrabold text-gray-400 tracking-wider uppercase">PERIZINAN BERUSAHA</p>
                 <ul className="space-y-2.5">
-                  <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                    <span className="text-[#0F9D58] text-[15px] font-black mr-2">✓</span>
+                  <li className="flex items-start text-[16px] sm:text-[16px] font-semibold text-gray-700 leading-relaxed">
+                    <span className="text-[#0F9D58] text-[16px] font-black mr-2">✓</span>
                     <span>Nomor Induk Berusaha (NIB)</span>
                   </li>
                 </ul>
@@ -971,18 +971,18 @@ export default function NibOss() {
             {/* Level 2 */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col">
               <div className="bg-[#E67E22] p-5 text-white text-center">
-                <p className="text-[14px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 2</p>
+                <p className="text-[16px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 2</p>
                 <p className="text-[16px] font-black mt-1">Menengah Rendah (MR)</p>
               </div>
               <div className="p-6 flex-1 space-y-4 text-left">
-                <p className="text-[14px] font-extrabold text-gray-400 tracking-wider uppercase">PERIZINAN BERUSAHA</p>
+                <p className="text-[16px] font-extrabold text-gray-400 tracking-wider uppercase">PERIZINAN BERUSAHA</p>
                 <ul className="space-y-2.5">
-                  <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                    <span className="text-[#E67E22] text-[15px] font-black mr-2">✓</span>
+                  <li className="flex items-start text-[16px] sm:text-[16px] font-semibold text-gray-700 leading-relaxed">
+                    <span className="text-[#E67E22] text-[16px] font-black mr-2">✓</span>
                     <span>NIB</span>
                   </li>
-                  <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                    <span className="text-[#E67E22] text-[15px] font-black mr-2">✓</span>
+                  <li className="flex items-start text-[16px] sm:text-[16px] font-semibold text-gray-700 leading-relaxed">
+                    <span className="text-[#E67E22] text-[16px] font-black mr-2">✓</span>
                     <span>Sertifikat Standar (pernyataan mandiri)</span>
                   </li>
                 </ul>
@@ -992,18 +992,18 @@ export default function NibOss() {
             {/* Level 3 */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col">
               <div className="bg-[#D35400] p-5 text-white text-center">
-                <p className="text-[14px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 3</p>
+                <p className="text-[16px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 3</p>
                 <p className="text-[16px] font-black mt-1">Menengah Tinggi (MT)</p>
               </div>
               <div className="p-6 flex-1 space-y-4 text-left">
-                <p className="text-[14px] font-extrabold text-gray-400 tracking-wider uppercase">PERIZINAN BERUSAHA</p>
+                <p className="text-[16px] font-extrabold text-gray-400 tracking-wider uppercase">PERIZINAN BERUSAHA</p>
                 <ul className="space-y-2.5">
-                  <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                    <span className="text-[#D35400] text-[15px] font-black mr-2">✓</span>
+                  <li className="flex items-start text-[16px] sm:text-[16px] font-semibold text-gray-700 leading-relaxed">
+                    <span className="text-[#D35400] text-[16px] font-black mr-2">✓</span>
                     <span>NIB</span>
                   </li>
-                  <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                    <span className="text-[#D35400] text-[15px] font-black mr-2">✓</span>
+                  <li className="flex items-start text-[16px] sm:text-[16px] font-semibold text-gray-700 leading-relaxed">
+                    <span className="text-[#D35400] text-[16px] font-black mr-2">✓</span>
                     <span>Sertifikat Standar diverifikasi Kementerian/Lembaga</span>
                   </li>
                 </ul>
@@ -1013,22 +1013,22 @@ export default function NibOss() {
             {/* Level 4 */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col">
               <div className="bg-[#990202] p-5 text-white text-center">
-                <p className="text-[14px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 4</p>
+                <p className="text-[16px] font-extrabold tracking-widest uppercase opacity-75">TINGKAT 4</p>
                 <p className="text-[16px] font-black mt-1">Risiko Tinggi (T)</p>
               </div>
               <div className="p-6 flex-1 space-y-4 text-left">
-                <p className="text-[14px] font-extrabold text-gray-400 tracking-wider uppercase">PERIZINAN BERUSAHA</p>
+                <p className="text-[16px] font-extrabold text-gray-400 tracking-wider uppercase">PERIZINAN BERUSAHA</p>
                 <ul className="space-y-2.5">
-                  <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                    <span className="text-[#990202] text-[15px] font-black mr-2">✓</span>
+                  <li className="flex items-start text-[16px] sm:text-[16px] font-semibold text-gray-700 leading-relaxed">
+                    <span className="text-[#990202] text-[16px] font-black mr-2">✓</span>
                     <span>NIB</span>
                   </li>
-                  <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                    <span className="text-[#990202] text-[15px] font-black mr-2">✓</span>
+                  <li className="flex items-start text-[16px] sm:text-[16px] font-semibold text-gray-700 leading-relaxed">
+                    <span className="text-[#990202] text-[16px] font-black mr-2">✓</span>
                     <span>Izin disetujui Kementerian/Lembaga</span>
                   </li>
-                  <li className="flex items-start text-[14px] sm:text-[14px] font-semibold text-gray-700 leading-relaxed">
-                    <span className="text-[#990202] text-[15px] font-black mr-2">✓</span>
+                  <li className="flex items-start text-[16px] sm:text-[16px] font-semibold text-gray-700 leading-relaxed">
+                    <span className="text-[#990202] text-[16px] font-black mr-2">✓</span>
                     <span>Sertifikat Standar (jika perlu)</span>
                   </li>
                 </ul>
@@ -1051,10 +1051,10 @@ export default function NibOss() {
           
           {/* Left Column */}
           <div className="space-y-4 max-w-2xl text-left">
-            <h2 className="font-heading text-[20px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
+            <h2 className="font-heading text-[16px] sm:text-[40px] font-bold leading-tight tracking-tight text-gray-900">
               Siap urus <span className="text-[#990202]">NIB & izin usaha Anda?</span>
             </h2>
-            <p className="text-[14px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
               Konsultasi gratis untuk identifikasi KBLI & tingkat risiko usaha — tanpa komitmen.
             </p>
           </div>
@@ -1066,7 +1066,7 @@ export default function NibOss() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Pembuatan NIB dan OSS RBA. Mohon info lengkap biaya dan prosesnya.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.588 1.977 14.122.953 11.5.953c-5.439 0-9.859 4.37-9.864 9.8-.001 1.73.457 3.41 1.32 4.927l-.982 3.58 3.673-.956zm11.517-5.595c-.3-.15-1.774-.875-2.048-.975-.274-.1-.474-.15-.674.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.794-1.49-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.491-.508-.674-.518-.174-.01-.374-.012-.574-.012-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.22 5.116 4.52 1.228.531 2.186.848 2.93 1.083.755.238 1.44.205 1.984.124.606-.091 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
@@ -1079,14 +1079,14 @@ export default function NibOss() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan NIB dan OSS RBA.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <span>Hubungi Tim Kami</span>
-              <span className="text-[15px] font-normal">→</span>
+              <span className="text-[16px] font-normal">→</span>
             </a>
 
             {/* Fast Response Badge */}
-            <div className="flex items-center gap-1.5 text-[14px] text-gray-500 font-medium pt-1 px-1">
+            <div className="flex items-center gap-1.5 text-[16px] text-gray-500 font-medium pt-1 px-1">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>

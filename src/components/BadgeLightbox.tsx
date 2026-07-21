@@ -21,7 +21,7 @@ export default function BadgeLightbox() {
   return (
     <>
       <div className="flex flex-col items-center md:items-end">
-        <div className="text-[14px] font-bold text-gray-400 uppercase tracking-wider mb-2">Terdaftar resmi di</div>
+        <div className="text-[16px] font-bold text-gray-400 uppercase tracking-wider mb-2">Terdaftar resmi di</div>
         <div className="flex items-center gap-5">
           {badges.map((badge, idx) => (
             <button 

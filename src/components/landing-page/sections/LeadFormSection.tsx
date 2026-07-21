@@ -96,31 +96,31 @@ export default function LeadFormSection({ data, landingPageId }: { data: LeadFor
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 text-left">
               {errorMsg && (
-                <div className="p-3.5 bg-red-50 text-red-700 rounded-xl font-medium border border-red-100 text-sm">
+                <div className="p-3.5 bg-red-50 text-red-700 rounded-xl font-medium border border-red-100 text-[16px]">
                   {errorMsg}
                 </div>
               )}
               {data.fields.includes('nama') && (
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1.5">Nama Lengkap</label>
+                  <label className="block text-[16px] font-bold text-gray-700 mb-1.5">Nama Lengkap</label>
                   <input type="text" name="nama" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#990202]/20 focus:border-[#990202]" placeholder="Nama Anda" />
                 </div>
               )}
               {data.fields.includes('email') && (
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1.5">Alamat Email</label>
+                  <label className="block text-[16px] font-bold text-gray-700 mb-1.5">Alamat Email</label>
                   <input type="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#990202]/20 focus:border-[#990202]" placeholder="email@contoh.com" />
                 </div>
               )}
               {data.fields.includes('no_hp') && (
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1.5">Nomor WhatsApp</label>
+                  <label className="block text-[16px] font-bold text-gray-700 mb-1.5">Nomor WhatsApp</label>
                   <input type="tel" name="no_hp" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#990202]/20 focus:border-[#990202]" placeholder="0812xxxx" />
                 </div>
               )}
               {data.fields.includes('perusahaan') && (
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-1.5">Nama Perusahaan / Usaha</label>
+                  <label className="block text-[16px] font-bold text-gray-700 mb-1.5">Nama Perusahaan / Usaha</label>
                   <input type="text" name="perusahaan" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#990202]/20 focus:border-[#990202]" placeholder="PT / CV / Toko Anda" />
                 </div>
               )}
