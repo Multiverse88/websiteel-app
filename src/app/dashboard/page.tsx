@@ -69,7 +69,7 @@ export default async function DashboardOverviewPage() {
           {/* Card 1 */}
           <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200">
             <div className="flex justify-between items-start mb-4">
-              <p className="text-sm font-semibold text-gray-500">Total Artikel</p>
+              <p className="text-[16px] font-semibold text-gray-500">Total Artikel</p>
               <div className="bg-red-50 p-2 rounded-lg text-[#d62828]"><FileText className="w-5 h-5" /></div>
             </div>
             <h3 className="text-3xl font-bold text-gray-900">{totalArticles}</h3>
@@ -77,7 +77,7 @@ export default async function DashboardOverviewPage() {
           {/* Card 2 */}
           <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200">
             <div className="flex justify-between items-start mb-4">
-              <p className="text-sm font-semibold text-gray-500">Total Views</p>
+              <p className="text-[16px] font-semibold text-gray-500">Total Views</p>
               <div className="bg-blue-50 p-2 rounded-lg text-blue-600"><Eye className="w-5 h-5" /></div>
             </div>
             <h3 className="text-3xl font-bold text-gray-900">{totalViews.toLocaleString("id-ID")}</h3>
@@ -85,7 +85,7 @@ export default async function DashboardOverviewPage() {
           {/* Card 3 */}
           <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-200">
             <div className="flex justify-between items-start mb-4">
-              <p className="text-sm font-semibold text-gray-500">Subscriber Aktif</p>
+              <p className="text-[16px] font-semibold text-gray-500">Subscriber Aktif</p>
               <div className="bg-green-50 p-2 rounded-lg text-[#25D366]"><Users className="w-5 h-5" /></div>
             </div>
             <h3 className="text-3xl font-bold text-gray-900">{subscriberCount}</h3>
@@ -93,7 +93,7 @@ export default async function DashboardOverviewPage() {
           {/* Card 4 (Highlighted/Urgent) */}
           <div className="bg-red-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-red-200">
             <div className="flex justify-between items-start mb-4">
-              <p className="text-sm font-bold text-[#d62828]">Total Prospek</p>
+              <p className="text-[16px] font-bold text-[#d62828]">Total Prospek</p>
               <div className="bg-white p-2 rounded-lg text-[#d62828] shadow-sm"><BarChart2 className="w-5 h-5" /></div>
             </div>
             <h3 className="text-3xl font-bold text-[#d62828]">{totalLeads}</h3>
@@ -103,28 +103,28 @@ export default async function DashboardOverviewPage() {
         {/* Right: Quick Actions (Span 1 col) */}
         <div className="bg-white rounded-xl p-6 shadow-sm flex flex-col h-full border border-gray-200">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-bold text-gray-900">Aksi Cepat</h3>
+            <h3 className="text-[16px] font-bold text-gray-900">Aksi Cepat</h3>
             <Zap className="w-5 h-5 text-gray-400" />
           </div>
           <div className="space-y-3 flex-1 flex flex-col justify-center">
             <Link href="/dashboard/artikel/tambah" className="w-full flex items-center justify-between p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group">
               <div className="flex items-center gap-3 text-gray-700 group-hover:text-[#d62828] transition-colors">
                 <FilePlus className="w-5 h-5" />
-                <span className="text-sm font-bold">Buat Artikel Baru</span>
+                <span className="text-[16px] font-bold">Buat Artikel Baru</span>
               </div>
               <ChevronRight className="w-5 h-5 text-gray-400" />
             </Link>
             <Link href="/dashboard/newsletter" className="w-full flex items-center justify-between p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group">
               <div className="flex items-center gap-3 text-gray-700 group-hover:text-[#d62828] transition-colors">
                 <Megaphone className="w-5 h-5" />
-                <span className="text-sm font-bold">Kirim Newsletter</span>
+                <span className="text-[16px] font-bold">Kirim Newsletter</span>
               </div>
               <ChevronRight className="w-5 h-5 text-gray-400" />
             </Link>
             <Link href="/dashboard/landing-pages" className="w-full flex items-center justify-between p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group">
               <div className="flex items-center gap-3 text-gray-700 group-hover:text-[#d62828] transition-colors">
                 <Layers className="w-5 h-5" />
-                <span className="text-sm font-bold">Kelola Landing Page</span>
+                <span className="text-[16px] font-bold">Kelola Landing Page</span>
               </div>
               <ChevronRight className="w-5 h-5 text-gray-400" />
             </Link>
@@ -136,7 +136,7 @@ export default async function DashboardOverviewPage() {
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column: Platform Health / System Activity (Span 1) */}
         <div className="bg-white rounded-xl shadow-sm p-6 flex flex-col lg:col-span-1 border border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Aktivitas Sistem</h3>
+          <h3 className="text-[16px] font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Aktivitas Sistem</h3>
           <div className="flex-1 flex flex-col gap-6">
             {/* Mock Chart Area */}
             <div className="w-full h-48 bg-white rounded-lg border border-gray-200 flex items-center justify-center p-4 relative overflow-hidden">
@@ -146,8 +146,8 @@ export default async function DashboardOverviewPage() {
                 </svg>
               </div>
               <div className="relative z-10 text-center">
-                <p className="text-xl font-bold text-[#d62828]">Kesehatan Sistem</p>
-                <p className="text-sm text-gray-500 mt-1">Beroperasi Normal</p>
+                <p className="text-[16px] font-bold text-[#d62828]">Kesehatan Sistem</p>
+                <p className="text-[16px] text-gray-500 mt-1">Beroperasi Normal</p>
               </div>
             </div>
             {/* Activity Timeline */}
@@ -158,8 +158,8 @@ export default async function DashboardOverviewPage() {
                   <div className="w-px h-full bg-gray-200 mt-1"></div>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Pembaruan Database Selesai</p>
-                  <p className="text-[14px] text-gray-500 mt-0.5">10:30 AM</p>
+                  <p className="text-[16px] font-semibold text-gray-900">Pembaruan Database Selesai</p>
+                  <p className="text-[16px] text-gray-500 mt-0.5">10:30 AM</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -168,8 +168,8 @@ export default async function DashboardOverviewPage() {
                   <div className="w-px h-full bg-gray-200 mt-1"></div>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Database Backup Auto</p>
-                  <p className="text-[14px] text-gray-500 mt-0.5">09:15 AM</p>
+                  <p className="text-[16px] font-semibold text-gray-900">Database Backup Auto</p>
+                  <p className="text-[16px] text-gray-500 mt-0.5">09:15 AM</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -177,8 +177,8 @@ export default async function DashboardOverviewPage() {
                   <div className="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Sinkronisasi CDN</p>
-                  <p className="text-[14px] text-gray-500 mt-0.5">02:00 AM</p>
+                  <p className="text-[16px] font-semibold text-gray-900">Sinkronisasi CDN</p>
+                  <p className="text-[16px] text-gray-500 mt-0.5">02:00 AM</p>
                 </div>
               </div>
             </div>
@@ -189,18 +189,18 @@ export default async function DashboardOverviewPage() {
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Table 1: Prospek Terbaru */}
           <div className="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-gray-200">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Prospek Terbaru</h3>
+            <h3 className="text-[16px] font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Prospek Terbaru</h3>
             <div className="flex-1 overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-200 text-[14px] font-semibold text-gray-500 uppercase">
+                  <tr className="border-b border-gray-200 text-[16px] font-semibold text-gray-500 uppercase">
                     <th className="py-3 px-2">Nama</th>
                     <th className="py-3 px-2">Landing Page</th>
                     <th className="py-3 px-2">Waktu</th>
                     <th className="py-3 px-2 text-right">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="text-sm">
+                <tbody className="text-[16px]">
                   {latestLeads.length === 0 ? (
                     <tr>
                       <td colSpan={4} className="py-8 text-center text-gray-500">Belum ada prospek yang masuk.</td>
@@ -221,12 +221,12 @@ export default async function DashboardOverviewPage() {
                                 href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366] text-white rounded-lg text-[14px] font-bold hover:bg-[#1ea760] transition-colors shadow-sm"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366] text-white rounded-lg text-[16px] font-bold hover:bg-[#1ea760] transition-colors shadow-sm"
                               >
                                 <MessageCircle className="w-4 h-4" /> WA
                               </a>
                             ) : (
-                              <span className="text-[14px] text-gray-400">No WA</span>
+                              <span className="text-[16px] text-gray-400">No WA</span>
                             )}
                           </td>
                         </tr>
@@ -240,18 +240,18 @@ export default async function DashboardOverviewPage() {
 
           {/* Table 2: Artikel Populer */}
           <div className="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-gray-200">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Artikel Populer</h3>
+            <h3 className="text-[16px] font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Artikel Populer</h3>
             <div className="flex-1 overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-200 text-[14px] font-semibold text-gray-500 uppercase">
+                  <tr className="border-b border-gray-200 text-[16px] font-semibold text-gray-500 uppercase">
                     <th className="py-3 px-2 w-12 text-center">Rank</th>
                     <th className="py-3 px-2">Judul</th>
                     <th className="py-3 px-2">Kategori</th>
                     <th className="py-3 px-2 text-right">Views</th>
                   </tr>
                 </thead>
-                <tbody className="text-sm">
+                <tbody className="text-[16px]">
                   {popularArticles.length === 0 ? (
                     <tr>
                       <td colSpan={4} className="py-8 text-center text-gray-500">Belum ada artikel terbit.</td>
@@ -262,7 +262,7 @@ export default async function DashboardOverviewPage() {
                         <td className="py-4 px-2 text-center font-bold text-[#d62828]">{idx + 1}</td>
                         <td className="py-4 px-2 font-medium text-gray-900 truncate max-w-[200px]">{article.title}</td>
                         <td className="py-4 px-2">
-                          <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[14px] font-bold tracking-wider uppercase">
+                          <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[16px] font-bold tracking-wider uppercase">
                             {article.category}
                           </span>
                         </td>

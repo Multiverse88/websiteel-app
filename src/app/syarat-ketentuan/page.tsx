@@ -72,17 +72,17 @@ export default function SyaratKetentuanPage() {
         <h1 className="font-heading text-3xl sm:text-4xl md:text-[42px] font-extrabold text-gray-950 tracking-tight leading-tight mb-4">
           Syarat & Ketentuan
         </h1>
-        <p className="text-[14px] sm:text-sm text-gray-400 mb-10">
+        <p className="text-[16px] sm:text-[16px] text-gray-400 mb-10">
           Terakhir diperbarui: 29 Juni 2025
         </p>
 
         <div className="space-y-10">
           {sections.map((section) => (
             <section key={section.title}>
-              <h2 className="font-heading text-lg sm:text-xl font-bold text-gray-950 mb-3">
+              <h2 className="font-heading text-[16px] sm:text-[16px] font-bold text-gray-950 mb-3">
                 {section.title}
               </h2>
-              <div className="text-[14px] sm:text-[15px] text-gray-600 leading-relaxed whitespace-pre-line">
+              <div className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed whitespace-pre-line">
                 {section.content}
               </div>
             </section>

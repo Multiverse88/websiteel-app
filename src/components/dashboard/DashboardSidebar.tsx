@@ -27,12 +27,12 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
     <aside className="fixed left-0 top-0 h-screen w-[80px] hover:w-[280px] transition-[width] duration-300 bg-white border-r border-gray-200 shadow-sm flex flex-col py-6 z-30 group overflow-hidden">
       {/* Header Logo */}
       <div className="px-5 mb-8 flex items-center gap-3 overflow-hidden shrink-0">
-        <div className="w-10 h-10 rounded-lg bg-[#d62828] flex items-center justify-center text-white font-bold text-xl shrink-0">
+        <div className="w-10 h-10 rounded-lg bg-[#d62828] flex items-center justify-center text-white font-bold text-[16px] shrink-0">
           EL
         </div>
         <div className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200">
           <h1 className="text-2xl font-bold text-[#b20112] leading-tight">EasyLegal</h1>
-          <p className="text-sm text-gray-500">Legal Admin</p>
+          <p className="text-[16px] text-gray-500">Legal Admin</p>
         </div>
       </div>
 
@@ -60,7 +60,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
                     {item.name}
                   </span>
                   {item.badge !== undefined && item.badge > 0 && (
-                    <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 ml-auto px-1.5 py-0.5 rounded-md text-[14px] font-bold bg-[#b20112] text-white">
+                    <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 ml-auto px-1.5 py-0.5 rounded-md text-[16px] font-bold bg-[#b20112] text-white">
                       {item.badge}
                     </span>
                   )}
@@ -74,7 +74,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
       {/* Bottom Actions */}
       <div className="px-5 mt-auto space-y-4 overflow-hidden shrink-0">
         <button
-          className="w-[40px] group-hover:w-full py-2 bg-[#d62828] text-white rounded-lg text-sm font-semibold hover:bg-[#b20112] transition-all flex items-center justify-center gap-2"
+          className="w-[40px] group-hover:w-full py-2 bg-[#d62828] text-white rounded-lg text-[16px] font-semibold hover:bg-[#b20112] transition-all flex items-center justify-center gap-2"
           title="Bantuan Support"
         >
           <HelpCircle className="w-5 h-5 shrink-0" />

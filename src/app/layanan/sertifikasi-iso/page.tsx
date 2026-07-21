@@ -494,7 +494,7 @@ export default function SertifikasiIso() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[14px] sm:text-[14px] sm:text-[14px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[16px] sm:text-[16px] sm:text-[16px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -502,13 +502,13 @@ export default function SertifikasiIso() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <Link href="/layanan" className="text-gray-500 font-medium hover:text-[#990202] transition-colors">Layanan</Link>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[14px] font-bold text-gray-900">Sertifikasi ISO</span>
+                <span className="text-[16px] font-bold text-gray-900">Sertifikasi ISO</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Sertifikasi ISO · UAF Accredited</span>
+                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Sertifikasi ISO · UAF Accredited</span>
               </div>
 
               {/* Headline */}
@@ -518,7 +518,7 @@ export default function SertifikasiIso() {
               </h1>
 
               {/* Description */}
-              <p className="text-[15.5px] sm:text-[16.5px] text-gray-505 leading-relaxed max-w-2xl font-normal">
+              <p className="text-[16px] sm:text-[16px] text-gray-505 leading-relaxed max-w-2xl font-normal">
                 ISO 9001, 14001, 27001, 37001, 45001, sampai 22000 — dengan auditor terakreditasi UAF (United Accreditation Foundation). Pendampingan A–Z dari konsultasi sampai sertifikat resmi terbit.
               </p>
 
@@ -528,7 +528,7 @@ export default function SertifikasiIso() {
                   href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Sertifikasi ISO dengan auditor UAF.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
                 >
                   <span>Konsultasi Gratis</span>
                   <span className="ml-1.5 transition-transform group-hover:translate-x-0.5">→</span>
@@ -536,7 +536,7 @@ export default function SertifikasiIso() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[14px] sm:text-[15px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 shadow-md border border-black/[0.04] text-gray-800 font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Lihat Paket Harga
                 </a>
@@ -550,8 +550,8 @@ export default function SertifikasiIso() {
                     <Award className="w-5 h-5 text-amber-600 animate-pulse-subtle" />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[14px] font-extrabold text-gray-950 leading-tight">UAF Accredited</div>
-                    <div className="text-[14px] text-gray-500 mt-0.5">Diakui internasional</div>
+                    <div className="text-[16px] sm:text-[16px] font-extrabold text-gray-950 leading-tight">UAF Accredited</div>
+                    <div className="text-[16px] text-gray-500 mt-0.5">Diakui internasional</div>
                   </div>
                 </div>
 
@@ -561,8 +561,8 @@ export default function SertifikasiIso() {
                     <Building className="w-5 h-5 text-[#990202]" />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[14px] font-extrabold text-gray-950 leading-tight">8+ Standar ISO</div>
-                    <div className="text-[14px] text-gray-500 mt-0.5">Pilihan lengkap</div>
+                    <div className="text-[16px] sm:text-[16px] font-extrabold text-gray-950 leading-tight">8+ Standar ISO</div>
+                    <div className="text-[16px] text-gray-500 mt-0.5">Pilihan lengkap</div>
                   </div>
                 </div>
 
@@ -572,8 +572,8 @@ export default function SertifikasiIso() {
                     <Clock className="w-5 h-5 text-[#990202]" />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[14px] font-extrabold text-gray-950 leading-tight">Valid 3 tahun</div>
-                    <div className="text-[14px] text-gray-500 mt-0.5">+ surveillance yearly</div>
+                    <div className="text-[16px] sm:text-[16px] font-extrabold text-gray-950 leading-tight">Valid 3 tahun</div>
+                    <div className="text-[16px] text-gray-500 mt-0.5">+ surveillance yearly</div>
                   </div>
                 </div>
               </div>
@@ -601,8 +601,8 @@ export default function SertifikasiIso() {
                     <Award className="w-5.5 h-5.5 text-amber-600" />
                   </div>
                   <div>
-                    <div className="text-[14px] font-extrabold text-gray-950 leading-none">ISO 9001:2015</div>
-                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">UAF Accredited · Valid 3 thn</div>
+                    <div className="text-[16px] font-extrabold text-gray-950 leading-none">ISO 9001:2015</div>
+                    <div className="text-[16px] text-gray-400 font-bold mt-1.5">UAF Accredited · Valid 3 thn</div>
                   </div>
                 </div>
 
@@ -612,8 +612,8 @@ export default function SertifikasiIso() {
                     <CheckCircle className="w-5.5 h-5.5 text-[#990202]" />
                   </div>
                   <div>
-                    <div className="text-[14px] font-extrabold text-gray-950 leading-none">500+ Sertifikat</div>
-                    <div className="text-[14px] text-gray-400 font-bold mt-1.5">diterbitkan tahun ini</div>
+                    <div className="text-[16px] font-extrabold text-gray-950 leading-none">500+ Sertifikat</div>
+                    <div className="text-[16px] text-gray-400 font-bold mt-1.5">diterbitkan tahun ini</div>
                   </div>
                 </div>
 
@@ -646,6 +646,7 @@ export default function SertifikasiIso() {
         packages={mappedPackages}
         footnotes={["Harga belum termasuk PPN. Biaya & estimasi ruangan lapangan dilakukan terpisah, all-in-cost.", "Estimasi pelaksanaan Audit."]}
         promoBadgeSrc="/images/badges/promo-50.png"
+        hideFooter={true}
       />
 
       {/* ─── 3. PROSES SERTIFIKASI ISO (7 Langkah) ─── */}
@@ -654,15 +655,15 @@ export default function SertifikasiIso() {
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES SERTIFIKASI ISO</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES SERTIFIKASI ISO</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               7 langkah sertifikasi ISO, kami pandu A–Z.
             </h2>
-            <p className="text-[14px] sm:text-[15px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
               Dari gap analysis sampai sertifikat resmi terbit — semua tahap kami pendampingi dengan auditor UAF accredited.
             </p>
             {/* Scroll indicator text */}
-            <div className="pt-4 text-[14px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
+            <div className="pt-4 text-[16px] font-black text-[#990202] tracking-widest uppercase flex items-center justify-center gap-1.5 animate-pulse">
               <span>Geser untuk lihat semua langkah</span>
               <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
             </div>
@@ -676,7 +677,7 @@ export default function SertifikasiIso() {
                 <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
                   
                   {/* Number Badge (Centered on top border) */}
-                  <div className="absolute top-0 left-6 w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[14.5px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                  <div className="absolute top-0 left-6 w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full border-2 border-[#990202] text-[#990202] bg-white flex items-center justify-center font-black text-[16px] z-20 shadow-sm transition-transform duration-300 group-hover:scale-110">
                     {String(idx + 1).padStart(2, "0")}
                   </div>
                   
@@ -690,13 +691,13 @@ export default function SertifikasiIso() {
                       </h4>
                       
                       {/* Duration Badge */}
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[14px] font-black uppercase py-1 px-3 rounded-full">
+                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[16px] font-black uppercase py-1 px-3 rounded-full">
                         <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
                         <span>{step.duration}</span>
                       </div>
 
                       {/* Description */}
-                      <p className="text-[14px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
+                      <p className="text-[16px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
 
                     </div>
 
@@ -707,7 +708,7 @@ export default function SertifikasiIso() {
                       {/* Checklist */}
                       <ul className="space-y-2">
                         {step.checklist.map((item, pIdx) => (
-                          <li key={pIdx} className="flex items-start text-[14px] font-bold text-gray-700 leading-tight">
+                          <li key={pIdx} className="flex items-start text-[16px] font-bold text-gray-700 leading-tight">
                             <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
                             <span dangerouslySetInnerHTML={{ __html: item }} />
                           </li>
@@ -731,11 +732,11 @@ export default function SertifikasiIso() {
           
           {/* Section Header */}
           <div className="mb-14">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN ISO &amp; UAF</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN ISO &amp; UAF</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Apa itu Sertifikasi ISO?
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 mt-3 font-normal max-w-2xl">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 mt-3 font-normal max-w-2xl">
               Sebelum mulai, kenali standar internasional yang dipakai jutaan organisasi di seluruh dunia.
             </p>
           </div>
@@ -761,8 +762,8 @@ export default function SertifikasiIso() {
                     <Award className="w-5.5 h-5.5 text-amber-600" />
                   </div>
                   <div>
-                    <div className="text-[14px] font-black text-gray-900 leading-none">UAF Accreditation</div>
-                    <div className="text-[14px] text-gray-400 font-bold mt-1.5 leading-snug">United Accreditation Foundation · Member IAF</div>
+                    <div className="text-[16px] font-black text-gray-900 leading-none">UAF Accreditation</div>
+                    <div className="text-[16px] text-gray-400 font-bold mt-1.5 leading-snug">United Accreditation Foundation · Member IAF</div>
                   </div>
                 </div>
               </div>
@@ -770,36 +771,36 @@ export default function SertifikasiIso() {
 
             {/* Right Column: Explanation */}
             <div className="lg:col-span-6 space-y-6">
-              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
+              <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
                 <strong className="font-extrabold text-gray-905">ISO (International Organization for Standardization)</strong> adalah organisasi internasional independen yang mengembangkan standar global untuk kualitas, keamanan, efisiensi, dan kompatibilitas — saat ini diadopsi di lebih dari <strong className="font-extrabold text-gray-905">167 negara</strong>.
               </p>
-              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
+              <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
                 Sertifikasi ISO yang kami terbitkan adalah <strong className="font-extrabold text-gray-905">UAF Accredited</strong> — dari badan akreditasi yang merupakan member IAF (International Accreditation Forum). Sertifikat Anda diakui &amp; bisa diverifikasi secara internasional.
               </p>
 
               <div className="space-y-4 pt-2">
-                <h4 className="text-[17.5px] font-extrabold text-gray-950">Karakteristik Sertifikasi ISO Kami</h4>
+                <h4 className="text-[16px] font-extrabold text-gray-950">Karakteristik Sertifikasi ISO Kami</h4>
                 
                 <ul className="space-y-3.5">
-                  <li className="flex items-start text-[14.5px] font-medium text-gray-700 leading-relaxed">
+                  <li className="flex items-start text-[16px] font-medium text-gray-700 leading-relaxed">
                     <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
                       <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
                     </div>
                     <span><strong className="font-extrabold text-gray-905 mr-1.5">Standar internasional</strong> — diakui di lebih dari 167 negara.</span>
                   </li>
-                  <li className="flex items-start text-[14.5px] font-medium text-gray-700 leading-relaxed">
+                  <li className="flex items-start text-[16px] font-medium text-gray-700 leading-relaxed">
                     <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
                       <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
                     </div>
                     <span><strong className="font-extrabold text-gray-905 mr-1.5">UAF Accredited</strong> — member IAF, traceable di database internasional.</span>
                   </li>
-                  <li className="flex items-start text-[14.5px] font-medium text-gray-700 leading-relaxed">
+                  <li className="flex items-start text-[16px] font-medium text-gray-700 leading-relaxed">
                     <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
                       <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
                     </div>
                     <span><strong className="font-extrabold text-gray-905 mr-1.5">Berlaku 3 tahun</strong> — dengan surveillance audit tahunan untuk maintain.</span>
                   </li>
-                  <li className="flex items-start text-[14.5px] font-medium text-gray-700 leading-relaxed">
+                  <li className="flex items-start text-[16px] font-medium text-gray-700 leading-relaxed">
                     <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
                       <Check className="w-3.5 h-3.5" strokeWidth={3.5} />
                     </div>
@@ -825,11 +826,11 @@ export default function SertifikasiIso() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-widest">PILIHAN LAYANAN</p>
-            <h2 className="font-heading text-[20px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">PILIHAN LAYANAN</p>
+            <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Pilihan Layanan Sertifikasi ISO UAF.
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
               7 standar ISO terakreditasi UAF (United Accreditation Foundation) — pilih sesuai industri &amp; kebutuhan compliance bisnis Anda. Setiap layanan include audit, training, &amp; dokumentasi sistem.
             </p>
           </div>
@@ -848,7 +849,7 @@ export default function SertifikasiIso() {
                   className={`bg-white rounded-[24px] p-7.5 flex flex-col justify-between ${cardBorder}`}
                 >
                   {isPopular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#7B0101] text-white text-[14px] font-black uppercase tracking-widest px-4 py-1.5 rounded-[6px] shadow-sm whitespace-nowrap">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#7B0101] text-white text-[16px] font-black uppercase tracking-widest px-4 py-1.5 rounded-[6px] shadow-sm whitespace-nowrap">
                       PALING POPULER
                     </div>
                   )}
@@ -856,35 +857,35 @@ export default function SertifikasiIso() {
                   <div className="space-y-5">
                     {/* Top Row: Gold circular number & Category Tag */}
                     <div className="flex items-center justify-between">
-                      <div className="w-8 h-8 sm:w-11 sm:h-11 bg-[#DCA764] rounded-full flex items-center justify-center text-white font-black text-[14px] shadow-sm">
+                      <div className="w-8 h-8 sm:w-11 sm:h-11 bg-[#DCA764] rounded-full flex items-center justify-center text-white font-black text-[16px] shadow-sm">
                         {service.code}
                       </div>
-                      <span className="bg-gray-100 text-gray-500 text-[14px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full">
+                      <span className="bg-gray-100 text-gray-500 text-[16px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full">
                         {service.tag}
                       </span>
                     </div>
 
                     {/* Titles */}
                     <div>
-                      <h3 className="text-[19px] font-black text-gray-950 leading-none">{service.title}</h3>
-                      <p className="text-[14px] text-gray-450 font-bold mt-2 uppercase tracking-wide">{service.subtitle}</p>
+                      <h3 className="text-[16px] font-black text-gray-950 leading-none">{service.title}</h3>
+                      <p className="text-[16px] text-gray-450 font-bold mt-2 uppercase tracking-wide">{service.subtitle}</p>
                     </div>
 
                     {/* Description */}
-                    <p className="text-[14px] text-gray-550 leading-relaxed font-normal">
+                    <p className="text-[16px] text-gray-550 leading-relaxed font-normal">
                       {service.desc}
                     </p>
 
                     {/* Cocok Untuk */}
                     <div className="space-y-2.5 pt-1">
-                      <div className="text-[14px] font-black text-gray-400 tracking-widest uppercase">
+                      <div className="text-[16px] font-black text-gray-400 tracking-widest uppercase">
                         COCOK UNTUK
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {service.cocok.map((tag) => (
                           <span
                             key={tag}
-                            className="bg-gray-50 shadow-md border border-black/[0.03] rounded-md px-2.5 py-1 text-[14px] font-medium text-gray-600"
+                            className="bg-gray-50 shadow-md border border-black/[0.03] rounded-md px-2.5 py-1 text-[16px] font-medium text-gray-600"
                           >
                             {tag}
                           </span>
@@ -895,7 +896,7 @@ export default function SertifikasiIso() {
 
                   {/* Bottom pricing row */}
                   <div className="pt-5 flex items-center justify-between mt-7 border-t border-gray-100/80">
-                    <div className="text-[14px] font-bold text-gray-500">
+                    <div className="text-[16px] font-bold text-gray-500">
                       Mulai <span className="text-[#990202] font-black text-[16px] ml-1">Rp {service.price}</span>
                     </div>
                     
@@ -903,7 +904,7 @@ export default function SertifikasiIso() {
                       href={service.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-gray-950 hover:text-[#990202] font-extrabold text-[14px] transition-colors group gap-1 cursor-pointer"
+                      className="inline-flex items-center text-gray-950 hover:text-[#990202] font-extrabold text-[16px] transition-colors group gap-1 cursor-pointer"
                     >
                       <span>Lihat Harga</span>
                       <span className="transition-transform group-hover:translate-x-0.5 font-bold">→</span>
@@ -929,10 +930,10 @@ export default function SertifikasiIso() {
           
           {/* Left Column */}
           <div className="space-y-4 max-w-2xl text-left">
-            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
+            <h2 className="font-heading text-[16px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
               Siap dapatkan <span className="text-[#990202]">sertifikasi ISO UAF Accredited?</span>
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 leading-relaxed font-medium">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-medium">
               Konsultasikan standar ISO yang sesuai industri & skala bisnis Anda — gratis, tanpa komitmen.
             </p>
           </div>
@@ -944,7 +945,7 @@ export default function SertifikasiIso() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO perusahaan. Mohon info penawaran khusus.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.588 1.977 14.122.953 11.5.953c-5.439 0-9.859 4.37-9.864 9.8-.001 1.73.457 3.41 1.32 4.927l-.982 3.58 3.673-.956zm11.517-5.595c-.3-.15-1.774-.875-2.048-.975-.274-.1-.474-.15-.674.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.794-1.49-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.491-.508-.674-.518-.174-.01-.374-.012-.574-.012-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.22 5.116 4.52 1.228.531 2.186.848 2.93 1.083.755.238 1.44.205 1.984.124.606-.091 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
@@ -957,14 +958,14 @@ export default function SertifikasiIso() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Sertifikasi ISO perusahaan. Mohon info penawaran khusus.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-4 bg-white hover:bg-gray-50 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-4 bg-white hover:bg-gray-50 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <span>Hubungi Tim Kami</span>
-              <span className="text-[15px] font-normal">→</span>
+              <span className="text-[16px] font-normal">→</span>
             </a>
 
             {/* Fast Response Badge */}
-            <div className="flex items-center justify-center gap-1.5 text-[14px] text-gray-500 font-medium pt-0.5">
+            <div className="flex items-center justify-center gap-1.5 text-[16px] text-gray-500 font-medium pt-0.5">
               <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>

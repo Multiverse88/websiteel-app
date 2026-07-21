@@ -27,7 +27,7 @@ export default function SocialShare({ title }: { title: string }) {
 
   return (
     <div className="bg-[#FAFAFA] border border-gray-100 rounded-[20px] p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div className="text-[14px] text-gray-500">
+      <div className="text-[16px] text-gray-500">
         Artikel ini bermanfaat? <strong className="text-gray-900 font-extrabold">Share ke teman bisnismu</strong>
       </div>
       <div className="flex items-center gap-2">

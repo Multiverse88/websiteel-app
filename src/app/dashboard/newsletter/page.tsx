@@ -73,7 +73,7 @@ export default async function NewsletterDashboardPage() {
           <div className="flex items-center gap-3 mb-4">
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-1.5 text-[14px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
+              className="inline-flex items-center gap-1.5 text-[16px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Dashboard
@@ -84,14 +84,14 @@ export default async function NewsletterDashboardPage() {
               <h1 className="font-heading text-[30px] sm:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 Newsletter
               </h1>
-              <p className="text-[14px] text-gray-500 mt-1">
+              <p className="text-[16px] text-gray-500 mt-1">
                 Kelola subscriber dan kirim broadcast artikel terbaru.
               </p>
             </div>
             <div>
               <Link
                 href="/dashboard/newsletter/settings"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[14px] font-bold bg-white text-gray-700 hover:text-gray-900 shadow-md border border-black/[0.04] hover:bg-gray-50 shadow-sm transition-all"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[16px] font-bold bg-white text-gray-700 hover:text-gray-900 shadow-md border border-black/[0.04] hover:bg-gray-50 shadow-sm transition-all"
               >
                 <Settings className="w-4 h-4 text-gray-500" />
                 Atur Otomatisasi
@@ -106,8 +106,8 @@ export default async function NewsletterDashboardPage() {
                 <Users className="w-5 h-5 text-[#990202]" />
               </div>
               <div>
-                <div className="text-[24px] font-extrabold text-gray-950 leading-none">{activeCount}</div>
-                <div className="text-[14px] text-gray-500 mt-1 font-medium">Subscriber Aktif</div>
+                <div className="text-[16px] font-extrabold text-gray-950 leading-none">{activeCount}</div>
+                <div className="text-[16px] text-gray-500 mt-1 font-medium">Subscriber Aktif</div>
               </div>
             </div>
             <div className="bg-[#FAFAFA] rounded-xl shadow-md border border-black/[0.04] p-5 flex items-center gap-4">
@@ -115,8 +115,8 @@ export default async function NewsletterDashboardPage() {
                 <Mail className="w-5 h-5 text-gray-500" />
               </div>
               <div>
-                <div className="text-[24px] font-extrabold text-gray-950 leading-none">{subscribers.length}</div>
-                <div className="text-[14px] text-gray-500 mt-1 font-medium">Total Subscriber</div>
+                <div className="text-[16px] font-extrabold text-gray-950 leading-none">{subscribers.length}</div>
+                <div className="text-[16px] text-gray-500 mt-1 font-medium">Total Subscriber</div>
               </div>
             </div>
             <div className="bg-[#FAFAFA] rounded-xl shadow-md border border-black/[0.04] p-5 flex items-center gap-4">
@@ -124,8 +124,8 @@ export default async function NewsletterDashboardPage() {
                 <Send className="w-5 h-5 text-emerald-600" />
               </div>
               <div>
-                <div className="text-[24px] font-extrabold text-gray-950 leading-none">{broadcasts.length}</div>
-                <div className="text-[14px] text-gray-500 mt-1 font-medium">Broadcast Terkirim</div>
+                <div className="text-[16px] font-extrabold text-gray-950 leading-none">{broadcasts.length}</div>
+                <div className="text-[16px] text-gray-500 mt-1 font-medium">Broadcast Terkirim</div>
               </div>
             </div>
           </div>
@@ -140,10 +140,10 @@ export default async function NewsletterDashboardPage() {
             {/* LEFT: Subscribers List */}
             <div className="lg:col-span-7">
               <div className="flex items-center justify-between mb-5">
-                <h2 className="text-[18px] font-extrabold text-gray-900">
+                <h2 className="text-[16px] font-extrabold text-gray-900">
                   Daftar Subscriber
                 </h2>
-                <span className="text-[14px] font-bold text-gray-400">
+                <span className="text-[16px] font-bold text-gray-400">
                   {activeCount} aktif · {inactiveCount} nonaktif
                 </span>
               </div>
@@ -154,14 +154,14 @@ export default async function NewsletterDashboardPage() {
                     <Mail className="w-7 h-7 text-[#990202]" />
                   </div>
                   <h3 className="text-[16px] font-extrabold text-gray-900 mb-2">Belum ada subscriber</h3>
-                  <p className="text-[14px] text-gray-500">
+                  <p className="text-[16px] text-gray-500">
                     Subscriber akan muncul di sini ketika pengunjung mendaftar newsletter.
                   </p>
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
                   {/* Table Header */}
-                  <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[14px] font-extrabold text-gray-400 uppercase tracking-wider">
+                  <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[16px] font-extrabold text-gray-400 uppercase tracking-wider">
                     <div className="col-span-5">Email</div>
                     <div className="col-span-3">Tanggal Daftar</div>
                     <div className="col-span-2 text-center">Status</div>
@@ -177,10 +177,10 @@ export default async function NewsletterDashboardPage() {
                       {/* Email */}
                       <div className="col-span-5">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-[14px] font-black text-[#990202] flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-[16px] font-black text-[#990202] flex-shrink-0">
                             {subscriber.email.charAt(0).toUpperCase()}
                           </div>
-                          <span className="text-[14px] font-bold text-gray-900 truncate">
+                          <span className="text-[16px] font-bold text-gray-900 truncate">
                             {subscriber.email}
                           </span>
                         </div>
@@ -188,7 +188,7 @@ export default async function NewsletterDashboardPage() {
 
                       {/* Date */}
                       <div className="col-span-3">
-                        <div className="flex items-center gap-1.5 text-[14px] text-gray-500">
+                        <div className="flex items-center gap-1.5 text-[16px] text-gray-500">
                           <Calendar className="w-3 h-3 text-gray-400" />
                           <span>
                             {new Date(subscriber.subscribedAt).toLocaleDateString("id-ID", {
@@ -203,7 +203,7 @@ export default async function NewsletterDashboardPage() {
                       {/* Status */}
                       <div className="col-span-2 flex justify-center">
                         <span
-                          className={`inline-flex px-2.5 py-1 rounded-md text-[14px] font-bold ${
+                          className={`inline-flex px-2.5 py-1 rounded-md text-[16px] font-bold ${
                             subscriber.isActive
                               ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
                               : "bg-gray-100 text-gray-500 shadow-md border border-black/[0.04]"
@@ -226,16 +226,16 @@ export default async function NewsletterDashboardPage() {
             {/* RIGHT: Broadcast Panel */}
             <div className="lg:col-span-5">
               {/* Send Broadcast */}
-              <h2 className="text-[18px] font-extrabold text-gray-900 mb-5">
+              <h2 className="text-[16px] font-extrabold text-gray-900 mb-5">
                 Kirim Broadcast
               </h2>
               <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-5 mb-6">
-                <p className="text-[14px] text-gray-500 mb-4 leading-relaxed">
+                <p className="text-[16px] text-gray-500 mb-4 leading-relaxed">
                   Pilih artikel untuk dikirim ke <strong className="text-gray-900">{activeCount} subscriber</strong> aktif:
                 </p>
 
                 {articles.length === 0 ? (
-                  <p className="text-[14px] text-gray-400 italic">Belum ada artikel.</p>
+                  <p className="text-[16px] text-gray-400 italic">Belum ada artikel.</p>
                 ) : (
                   <div className="space-y-3">
                     {articles.map((article: { id: string; title: string; slug: string; category: string; createdAt: Date }) => {
@@ -247,20 +247,20 @@ export default async function NewsletterDashboardPage() {
                         >
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="inline-flex px-2 py-0.5 rounded text-[14px] font-bold bg-red-50 text-[#990202] border border-red-100/50">
+                              <span className="inline-flex px-2 py-0.5 rounded text-[16px] font-bold bg-red-50 text-[#990202] border border-red-100/50">
                                 {article.category}
                               </span>
                               {alreadySent && (
-                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[14px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-200/50">
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[16px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-200/50">
                                   <CheckCircle2 className="w-2.5 h-2.5" />
                                   Terkirim {broadcastCountMap.get(article.id) || 0}x
                                 </span>
                               )}
                             </div>
-                            <p className="text-[14px] font-bold text-gray-900 line-clamp-1">
+                            <p className="text-[16px] font-bold text-gray-900 line-clamp-1">
                               {article.title}
                             </p>
-                            <div className="flex items-center gap-1.5 text-[14px] text-gray-400 mt-1">
+                            <div className="flex items-center gap-1.5 text-[16px] text-gray-400 mt-1">
                               <Calendar className="w-3 h-3" />
                               <span>
                                 {new Date(article.createdAt).toLocaleDateString("id-ID", {
@@ -280,12 +280,12 @@ export default async function NewsletterDashboardPage() {
               </div>
 
               {/* Broadcast History */}
-              <h2 className="text-[18px] font-extrabold text-gray-900 mb-5">
+              <h2 className="text-[16px] font-extrabold text-gray-900 mb-5">
                 Riwayat Broadcast
               </h2>
               {broadcasts.length === 0 ? (
                 <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-6 text-center">
-                  <p className="text-[14px] text-gray-400">Belum ada broadcast yang dikirim.</p>
+                  <p className="text-[16px] text-gray-400">Belum ada broadcast yang dikirim.</p>
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
@@ -300,10 +300,10 @@ export default async function NewsletterDashboardPage() {
                         <Send className="w-4 h-4 text-emerald-600" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[14px] font-bold text-gray-900 line-clamp-1">
+                        <p className="text-[16px] font-bold text-gray-900 line-clamp-1">
                           {broadcast.articleTitle}
                         </p>
-                        <div className="flex items-center gap-3 text-[14px] text-gray-400 mt-0.5">
+                        <div className="flex items-center gap-3 text-[16px] text-gray-400 mt-0.5">
                           <span className="flex items-center gap-1">
                             <Users className="w-3 h-3" />
                             {broadcast.totalSent} subscriber
@@ -326,17 +326,17 @@ export default async function NewsletterDashboardPage() {
               )}
 
               {/* Email Delivery Logs */}
-              <h2 className="text-[18px] font-extrabold text-gray-900 mt-8 mb-5">
+              <h2 className="text-[16px] font-extrabold text-gray-900 mt-8 mb-5">
                 Log Pengiriman
               </h2>
               {emailLogs.length === 0 ? (
                 <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-6 text-center">
-                  <p className="text-[14px] text-gray-400">Belum ada log pengiriman email.</p>
+                  <p className="text-[16px] text-gray-400">Belum ada log pengiriman email.</p>
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
                   {/* Table Header */}
-                  <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[14px] font-extrabold text-gray-400 uppercase tracking-wider">
+                  <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[16px] font-extrabold text-gray-400 uppercase tracking-wider">
                     <div className="col-span-4">Email</div>
                     <div className="col-span-2 text-center">Status</div>
                     <div className="col-span-2 text-center">Sumber</div>
@@ -353,7 +353,7 @@ export default async function NewsletterDashboardPage() {
                       <div className="grid grid-cols-12 gap-3 items-center">
                         {/* Email */}
                         <div className="col-span-4">
-                          <span className="text-[14px] font-bold text-gray-900 truncate block">
+                          <span className="text-[16px] font-bold text-gray-900 truncate block">
                             {log.recipient}
                           </span>
                         </div>
@@ -361,7 +361,7 @@ export default async function NewsletterDashboardPage() {
                         {/* Status Badge */}
                         <div className="col-span-2 flex justify-center">
                           <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[14px] font-bold ${
+                            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[16px] font-bold ${
                               log.status === "sent"
                                 ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
                                 : log.status === "simulated"
@@ -382,14 +382,14 @@ export default async function NewsletterDashboardPage() {
 
                         {/* Source */}
                         <div className="col-span-2 flex justify-center">
-                          <span className="inline-flex px-2 py-0.5 rounded text-[14px] font-bold bg-gray-100 text-gray-600 shadow-md border border-black/[0.04]">
+                          <span className="inline-flex px-2 py-0.5 rounded text-[16px] font-bold bg-gray-100 text-gray-600 shadow-md border border-black/[0.04]">
                             {log.source === "broadcast" ? "Manual" : "Otomatis"}
                           </span>
                         </div>
 
                         {/* Date */}
                         <div className="col-span-4">
-                          <div className="flex items-center gap-1.5 text-[14px] text-gray-500">
+                          <div className="flex items-center gap-1.5 text-[16px] text-gray-500">
                             <Clock className="w-3 h-3 text-gray-400" />
                             <span>
                               {new Date(log.sentAt).toLocaleDateString("id-ID", {
@@ -407,7 +407,7 @@ export default async function NewsletterDashboardPage() {
                       {/* Error message if failed */}
                       {log.status === "failed" && log.errorMessage && (
                         <div className="mt-2 ml-1 p-2 rounded-md bg-red-50 border border-red-100">
-                          <p className="text-[14px] text-red-600 font-medium">
+                          <p className="text-[16px] text-red-600 font-medium">
                             {log.errorMessage}
                           </p>
                         </div>

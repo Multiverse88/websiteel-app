@@ -55,17 +55,6 @@ const steps = [
 
 const rupsFaqs = [
   {
-    q: "Apa bedanya paket \"Pendirian di EasyLegal\" dan \"No EasyLegal\"?",
-    a: "Perbedaan harga berdasarkan status PT Anda. Jika PT didirikan melalui EasyLegal, seluruh data legalitas sudah tersimpan di sistem kami sehingga proses lebih efisien dan harganya lebih terjangkau."
-  },
-  {
-    q: "Kapan RUPS Tahunan wajib dilaksanakan?",
-    a: "Sesuai dengan UU No. 40/2007 tentang Perseroan Terbatas, RUPS Tahunan wajib diselenggarakan paling lambat 6 (enam) bulan setelah tahun buku perseroan ditutup."
-  }
-];
-
-const faqs = [
-  {
     q: "Apa itu RUPS dan kapan wajib diselenggarakan?",
     a: "RUPS (Rapat Umum Pemegang Saham) adalah forum pengambilan keputusan tertinggi di dalam suatu PT. RUPS Tahunan wajib diselenggarakan paling lambat 6 bulan setelah tahun buku berakhir (biasanya Juni tiap tahun) untuk menyetujui laporan keuangan dan menetapkan penggunaan laba. RUPS Luar Biasa (RUPSLB) diadakan sewaktu-waktu jika ada keputusan mendesak seperti pergantian direksi, penambahan modal, atau perubahan anggaran dasar.",
   },
@@ -390,7 +379,7 @@ export default function PelaporanRUPS() {
                 {/* Left Column */}
                 <div className="lg:col-span-7 space-y-6 text-left">
                   {/* Breadcrumb */}
-                  <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
+                  <nav className="flex items-center space-x-2 text-[16px] font-medium text-gray-500">
                     <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                       <Home className="w-3.5 h-3.5 text-gray-400" strokeWidth={2} />
                       <span>Beranda</span>
@@ -398,13 +387,13 @@ export default function PelaporanRUPS() {
                     <span className="text-gray-300 font-normal">&gt;</span>
                     <span className="text-gray-500 font-medium">Layanan</span>
                     <span className="text-gray-300 font-normal">&gt;</span>
-                    <span className="text-[14px] font-bold text-gray-900">Pelaporan RUPS</span>
+                    <span className="text-[16px] font-bold text-gray-900">Pelaporan RUPS</span>
                   </nav>
 
                   {/* Badge */}
                   <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100/50 shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                    <span className="text-[14px] font-extrabold text-[#990202] tracking-wider uppercase">Pelaporan RUPS</span>
+                    <span className="text-[16px] font-extrabold text-[#990202] tracking-wider uppercase">Pelaporan RUPS</span>
                   </div>
 
                   {/* Headline */}
@@ -414,7 +403,7 @@ export default function PelaporanRUPS() {
                   </h1>
 
                   {/* Description */}
-                  <p className="text-[14px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+                  <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
                     Setiap PT wajib menyelenggarakan RUPS Tahunan &amp; melaporkannya ke Kemenkumham. Telat atau salah prosedur bisa berujung sanksi administratif. EasyLegal membantu dalam pengurusan mulai dari susun laporan, buat akta penegasan, dan daftarkan.
                   </p>
 
@@ -424,7 +413,7 @@ export default function PelaporanRUPS() {
                       href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pengurusan RUPS Tahunan perusahaan saya.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
+                      className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
                     >
                       Konsultasi Gratis
                       <ArrowRight className="w-4 h-4" />
@@ -432,7 +421,7 @@ export default function PelaporanRUPS() {
                     <a
                       href="#paket-harga"
                       onClick={scrollToPricing}
-                      className="inline-flex items-center justify-center px-7 py-4 border border-gray-250 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                      className="inline-flex items-center justify-center px-7 py-4 border border-gray-250 text-gray-800 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                     >
                       Lihat Paket Harga
                     </a>
@@ -445,8 +434,8 @@ export default function PelaporanRUPS() {
                         <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                       </div>
                       <div>
-                        <div className="text-[14px] font-black text-gray-900">Durasi 7–10</div>
-                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Hari kerja</div>
+                        <div className="text-[16px] font-black text-gray-900">Durasi 7–10</div>
+                        <div className="text-[16px] text-gray-500 font-semibold mt-1">Hari kerja</div>
                       </div>
                     </div>
 
@@ -458,8 +447,8 @@ export default function PelaporanRUPS() {
                         </svg>
                       </div>
                       <div>
-                        <div className="text-[14px] font-black text-gray-900">Diskon 50%</div>
-                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Promo terbatas</div>
+                        <div className="text-[16px] font-black text-gray-900">Diskon 50%</div>
+                        <div className="text-[16px] text-gray-500 font-semibold mt-1">Promo terbatas</div>
                       </div>
                     </div>
 
@@ -472,8 +461,8 @@ export default function PelaporanRUPS() {
                         </svg>
                       </div>
                       <div>
-                        <div className="text-[14px] font-black text-gray-900">100% Online</div>
-                        <div className="text-[14px] text-gray-500 font-semibold mt-1">Tanpa keluar rumah</div>
+                        <div className="text-[16px] font-black text-gray-900">100% Online</div>
+                        <div className="text-[16px] text-gray-500 font-semibold mt-1">Tanpa keluar rumah</div>
                       </div>
                     </div>
                   </div>
@@ -497,8 +486,8 @@ export default function PelaporanRUPS() {
                         <FileText className="w-5 h-5 text-[#990202]" strokeWidth={2} />
                       </div>
                       <div className="text-left">
-                        <div className="text-[14px] font-black text-gray-900 leading-none">Pelaporan RUPS</div>
-                        <div className="text-[14px] text-gray-400 font-semibold mt-1.5 block">3 Dokumen resmi</div>
+                        <div className="text-[16px] font-black text-gray-900 leading-none">Pelaporan RUPS</div>
+                        <div className="text-[16px] text-gray-400 font-semibold mt-1.5 block">3 Dokumen resmi</div>
                       </div>
                     </div>
 
@@ -508,8 +497,8 @@ export default function PelaporanRUPS() {
                         <ShieldCheck className="w-5 h-5 text-[#5e430a]" strokeWidth={2.5} />
                       </div>
                       <div className="text-left">
-                        <div className="text-[14px] font-black text-gray-900 leading-none">Personal Legal Assistant</div>
-                        <div className="text-[14px] text-gray-400 font-semibold mt-1.5 block">Dibantu tim profesional</div>
+                        <div className="text-[16px] font-black text-gray-900 leading-none">Personal Legal Assistant</div>
+                        <div className="text-[16px] text-gray-400 font-semibold mt-1.5 block">Dibantu tim profesional</div>
                       </div>
                     </div>
                   </div>
@@ -533,41 +522,41 @@ export default function PelaporanRUPS() {
           <FadeIn delay={0.2}>
             <section className="bg-white py-16 lg:py-24">
               <div className="max-w-[1000px] mx-auto px-4 sm:px-8 text-center">
-                <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-4">KENAPA INI PENTING</p>
+                <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-4">KENAPA INI PENTING</p>
                 <h2 className="font-heading text-[26px] sm:text-[32px] lg:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight mb-4">
                   Bukan Sekadar Formalitas, Ini Kewajiban Hukum
                 </h2>
-                <p className="text-[14.5px] text-gray-600 font-normal leading-relaxed mb-12 sm:mb-16">
+                <p className="text-[16px] text-gray-600 font-normal leading-relaxed mb-12 sm:mb-16">
                   RUPS Tahunan &amp; pelaporannya adalah bagian dari kepatuhan legalitas PT yang aktif — bukan cukup didirikan sekali lalu dibiarkan.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 text-left">
                   <div className="bg-[#f8f9fa] rounded-[24px] p-7 sm:p-8 border border-gray-100 hover:shadow-md transition-shadow duration-300">
                     <div className="bg-white rounded-xl w-12 h-10 flex items-center justify-center shadow-sm mb-6 border border-gray-100">
-                      <span className="text-[15px] font-black text-[#990202]">01</span>
+                      <span className="text-[16px] font-black text-[#990202]">01</span>
                     </div>
                     <h3 className="text-[16px] font-black text-gray-950 mb-3 leading-snug">Wajib Setiap Tahun</h3>
-                    <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
+                    <p className="text-[16px] text-gray-500 leading-relaxed font-normal">
                       Setiap PT wajib menyelenggarakan RUPS Tahunan paling lambat 6 bulan setelah tahun buku berakhir, tanpa terkecuali.
                     </p>
                   </div>
 
                   <div className="bg-[#f8f9fa] rounded-[24px] p-7 sm:p-8 border border-gray-100 hover:shadow-md transition-shadow duration-300">
                     <div className="bg-white rounded-xl w-12 h-10 flex items-center justify-center shadow-sm mb-6 border border-gray-100">
-                      <span className="text-[15px] font-black text-[#990202]">02</span>
+                      <span className="text-[16px] font-black text-[#990202]">02</span>
                     </div>
                     <h3 className="text-[16px] font-black text-gray-950 mb-3 leading-snug">Bukan Cuma Rapat</h3>
-                    <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
+                    <p className="text-[16px] text-gray-500 leading-relaxed font-normal">
                       Perlu dituangkan dalam Akta Penegasan RUPS dan dilaporkan resmi ke Kemenkumham — bukan cukup notulen internal.
                     </p>
                   </div>
 
                   <div className="bg-[#f8f9fa] rounded-[24px] p-7 sm:p-8 border border-gray-100 hover:shadow-md transition-shadow duration-300">
                     <div className="bg-white rounded-xl w-12 h-10 flex items-center justify-center shadow-sm mb-6 border border-gray-100">
-                      <span className="text-[15px] font-black text-[#990202]">03</span>
+                      <span className="text-[16px] font-black text-[#990202]">03</span>
                     </div>
                     <h3 className="text-[16px] font-black text-gray-950 mb-3 leading-snug">Risiko Bila Diabaikan</h3>
-                    <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
+                    <p className="text-[16px] text-gray-500 leading-relaxed font-normal">
                       Status legalitas PT yang tidak terupdate dapat menyulitkan proses perbankan, tender, hingga perpanjangan izin usaha.
                     </p>
                   </div>
@@ -589,27 +578,9 @@ export default function PelaporanRUPS() {
               }
               packages={pricingPackages}
               footnotes={["(1) Setelah Tanda Tangan Draft Akta dan Payment"]}
+              hideFooter={true}
             />
           </FadeIn>
-
-          {/* ─── 6. PROMO BANNER ─── */}
-          <section className="relative flex w-full items-center justify-center overflow-hidden bg-gradient-to-br from-crimson to-[#6b0101] py-16 sm:py-20 md:py-24">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute h-[340px] w-[340px] rounded-full"
-              style={{
-                background:
-                  "radial-gradient(70.71% 70.71% at 50% 50%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.00) 60%)",
-              }}
-            />
-            <div className="relative flex w-full max-w-3xl justify-center px-6">
-              <img
-                src="/images/promo-rups.png"
-                alt="Promo RUPS"
-                className="w-full max-w-[486px] object-contain"
-              />
-            </div>
-          </section>
 
           {/* ─── 7. PROSES / TIMELINE ─── */}
           <FadeIn delay={0.2}>
@@ -618,19 +589,19 @@ export default function PelaporanRUPS() {
                 
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-                  <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-1.5">
+                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em] mb-1.5">
                     ALUR KERJA
                   </p>
                   <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
                     4 Langkah, Anda Tinggal Tanda Tangan
                   </h2>
-                  <p className="text-[14px] sm:text-[14.5px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
                     Tim Legal Officer EasyLegal yang menyusun, PLA Anda yang mendampingi dari awal sampai laporan terbit.
                   </p>
                 </div>
 
                 {/* Gesture Indicator */}
-                <div className="flex items-center justify-center gap-1.5 mb-12 text-[14px] font-black text-[#990202] tracking-[0.15em] uppercase">
+                <div className="flex items-center justify-center gap-1.5 mb-12 text-[16px] font-black text-[#990202] tracking-[0.15em] uppercase">
                   <span>GESER UNTUK LIHAT SEMUA LANGKAH</span>
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </div>
@@ -648,16 +619,16 @@ export default function PelaporanRUPS() {
                         className="w-[250px] sm:w-[265px] flex flex-col items-center text-center flex-shrink-0"
                       >
                         {/* Circle Badge */}
-                        <div className="w-10 h-10 rounded-full border-2 border-[#990202] bg-white flex items-center justify-center font-extrabold text-[14.5px] text-[#990202] mb-6 shadow-sm z-10">
+                        <div className="w-10 h-10 rounded-full border-2 border-[#990202] bg-white flex items-center justify-center font-extrabold text-[16px] text-[#990202] mb-6 shadow-sm z-10">
                           {step.no}
                         </div>
 
                         {/* Card Body */}
                         <div className="w-full bg-white rounded-2xl p-6 border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] flex flex-col hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-shadow duration-300 text-left min-h-[140px]">
-                          <h3 className="text-[14.5px] font-extrabold text-gray-950 mb-2">
+                          <h3 className="text-[16px] font-extrabold text-gray-950 mb-2">
                             {step.title}
                           </h3>
-                          <p className="text-[14px] text-gray-500 leading-relaxed font-normal">
+                          <p className="text-[16px] text-gray-500 leading-relaxed font-normal">
                             {step.desc}
                           </p>
                         </div>
@@ -679,11 +650,11 @@ export default function PelaporanRUPS() {
                   {/* Left: Text & Image */}
                   <div className="space-y-8">
                     <div>
-                      <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-3">PENGERTIAN RUPS</p>
+                      <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-3">PENGERTIAN RUPS</p>
                       <h2 className="font-heading text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold text-gray-950 leading-tight tracking-tight">
                         Apa itu RUPS?
                       </h2>
-                      <p className="text-[14.5px] text-gray-500 font-normal leading-relaxed mt-3 max-w-md">
+                      <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-3 max-w-md">
                         Sebelum urus pelaporannya, pahami dulu kedudukan RUPS sebagai organ tertinggi dalam struktur PT Anda.
                       </p>
                     </div>
@@ -703,8 +674,8 @@ export default function PelaporanRUPS() {
                           <FileText className="w-4.5 h-4.5 text-white" strokeWidth={2.5} />
                         </div>
                         <div className="text-left">
-                          <div className="text-[14px] font-black text-gray-900 leading-none mb-1">Dasar Hukum</div>
-                          <div className="text-[14px] text-gray-500 font-medium leading-snug">UU No. 40 Tahun 2007<br/>tentang Perseroan Terbatas</div>
+                          <div className="text-[16px] font-black text-gray-900 leading-none mb-1">Dasar Hukum</div>
+                          <div className="text-[16px] text-gray-500 font-medium leading-snug">UU No. 40 Tahun 2007<br/>tentang Perseroan Terbatas</div>
                         </div>
                       </div>
                     </div>
@@ -713,33 +684,33 @@ export default function PelaporanRUPS() {
                   {/* Right: Explanation & Characteristics */}
                   <div className="space-y-8 pt-2">
                     <div className="space-y-5">
-                      <p className="text-[14px] text-gray-700 leading-relaxed font-normal">
+                      <p className="text-[16px] text-gray-700 leading-relaxed font-normal">
                         <strong className="font-extrabold text-gray-900">RUPS (Rapat Umum Pemegang Saham)</strong> adalah organ perseroan yang memegang kewenangan tertinggi dalam PT — mencakup wewenang yang tidak diberikan kepada Direksi maupun Dewan Komisaris, sebagaimana diatur dalam <strong className="font-extrabold text-gray-900">UU No. 40 Tahun 2007</strong> tentang Perseroan Terbatas.
                       </p>
-                      <p className="text-[14px] text-gray-700 leading-relaxed font-normal">
+                      <p className="text-[16px] text-gray-700 leading-relaxed font-normal">
                         Setiap keputusan strategis, mulai dari pengesahan laporan tahunan hingga perubahan anggaran dasar, secara hukum harus melalui forum ini agar sah dan mengikat perusahaan.
                       </p>
                     </div>
 
                     <div className="pt-2">
-                      <h3 className="text-[17px] font-extrabold text-gray-950 mb-4">Karakteristik RUPS</h3>
+                      <h3 className="text-[16px] font-extrabold text-gray-950 mb-4">Karakteristik RUPS</h3>
                       <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-black/[0.04]">
                         <ul className="space-y-3.5">
                           <li className="flex items-start gap-3">
                             <Check className="w-4.5 h-4.5 text-[#10b981] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <p className="text-[14px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Organ tertinggi PT</strong> — pemegang kewenangan yang tidak diserahkan ke Direksi/Dewan Komisaris.</p>
+                            <p className="text-[16px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Organ tertinggi PT</strong> — pemegang kewenangan yang tidak diserahkan ke Direksi/Dewan Komisaris.</p>
                           </li>
                           <li className="flex items-start gap-3">
                             <Check className="w-4.5 h-4.5 text-[#10b981] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <p className="text-[14px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Dua jenis RUPS</strong> — RUPS Tahunan (wajib tiap tahun) &amp; RUPS Luar Biasa (sewaktu-waktu bila diperlukan).</p>
+                            <p className="text-[16px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Dua jenis RUPS</strong> — RUPS Tahunan (wajib tiap tahun) &amp; RUPS Luar Biasa (sewaktu-waktu bila diperlukan).</p>
                           </li>
                           <li className="flex items-start gap-3">
                             <Check className="w-4.5 h-4.5 text-[#10b981] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <p className="text-[14px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Wajib diselenggarakan</strong> — paling lambat 6 bulan setelah tahun buku perusahaan berakhir.</p>
+                            <p className="text-[16px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Wajib diselenggarakan</strong> — paling lambat 6 bulan setelah tahun buku perusahaan berakhir.</p>
                           </li>
                           <li className="flex items-start gap-3">
                             <Check className="w-4.5 h-4.5 text-[#10b981] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                            <p className="text-[14px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Hasil dituangkan dalam akta</strong> — dikuatkan melalui Akta Penegasan RUPS agar punya kekuatan hukum &amp; dapat dilaporkan resmi.</p>
+                            <p className="text-[16px] text-gray-600 leading-snug font-normal"><strong className="font-extrabold text-gray-900">Hasil dituangkan dalam akta</strong> — dikuatkan melalui Akta Penegasan RUPS agar punya kekuatan hukum &amp; dapat dilaporkan resmi.</p>
                           </li>
                         </ul>
                       </div>
@@ -773,7 +744,7 @@ export default function PelaporanRUPS() {
                       Selesaikan Kewajiban RUPS <br />
                       <span className="text-[#990202]">PT Anda Sekarang?</span>
                     </h2>
-                    <p className="text-[14px] sm:text-[15px] text-gray-500 font-normal leading-relaxed">
+                    <p className="text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed">
                       Konsultasikan gratis dengan Personal Legal Assistant kami — cek paket mana yang sesuai dengan status PT Anda.
                     </p>
                   </div>
@@ -784,7 +755,7 @@ export default function PelaporanRUPS() {
                       href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi RUPS.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-[280px] inline-flex items-center justify-center gap-2.5 px-6 py-4 bg-[#990202] hover:bg-[#800101] text-white font-extrabold text-[14.5px] rounded-xl shadow-md transition-colors"
+                      className="w-full sm:w-[280px] inline-flex items-center justify-center gap-2.5 px-6 py-4 bg-[#990202] hover:bg-[#800101] text-white font-extrabold text-[16px] rounded-xl shadow-md transition-colors"
                     >
                       <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.863-9.864.002-2.637-1.019-5.117-2.875-6.976C16.594 1.91 14.12 1.152 11.488 1.15c-5.443 0-9.87 4.421-9.873 9.863 0 1.902.5 3.758 1.458 5.358l-.993 3.629 3.722-.977zm11.567-7.82c-.329-.165-1.955-.967-2.257-1.077-.302-.11-.522-.165-.742.165-.22.33-.853 1.077-1.045 1.297-.193.22-.385.242-.714.077-1.745-.873-2.906-1.536-4.062-3.52-.303-.52.303-.483.867-1.607.094-.187.047-.352-.023-.517-.07-.165-.632-1.524-.867-2.09-.228-.548-.46-.473-.632-.48l-.54-.008c-.187 0-.49.07-.747.352-.257.282-1.045 1.022-1.045 2.493 0 1.47 1.07 2.89 1.218 3.09.15.2 2.106 3.2 5.097 4.494.712.308 1.267.493 1.701.63.717.227 1.37.195 1.885.118.574-.085 1.956-.8 2.232-1.57.275-.77.275-1.43.192-1.57-.083-.14-.303-.22-.632-.385z"/>
@@ -796,7 +767,7 @@ export default function PelaporanRUPS() {
                       href={getWhatsAppLink("Halo EasyLegal, saya ingin menghubungi tim.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-[280px] inline-flex items-center justify-center gap-1.5 px-6 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-800 font-extrabold text-[14.5px] rounded-xl shadow-sm transition-colors"
+                      className="w-full sm:w-[280px] inline-flex items-center justify-center gap-1.5 px-6 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-800 font-extrabold text-[16px] rounded-xl shadow-sm transition-colors"
                     >
                       <span>Hubungi Tim Kami</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -804,7 +775,7 @@ export default function PelaporanRUPS() {
                       </svg>
                     </a>
 
-                    <div className="flex items-center gap-2 text-[14px] text-gray-400 font-medium mt-1">
+                    <div className="flex items-center gap-2 text-[16px] text-gray-400 font-medium mt-1">
                       <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>

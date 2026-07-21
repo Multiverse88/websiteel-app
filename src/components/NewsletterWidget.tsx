@@ -54,10 +54,10 @@ export default function NewsletterWidget() {
       </div>
 
       {/* Heading */}
-      <h3 className="text-[17px] font-extrabold text-gray-950 leading-snug mb-2">
+      <h3 className="text-[16px] font-extrabold text-gray-950 leading-snug mb-2">
         Update legalitas tiap minggu
       </h3>
-      <p className="text-[14px] text-gray-500 leading-relaxed mb-6">
+      <p className="text-[16px] text-gray-500 leading-relaxed mb-6">
         Subscribe newsletter EasyLegal — dapat insight regulasi bisnis terbaru langsung ke inbox.
       </p>
 
@@ -70,12 +70,12 @@ export default function NewsletterWidget() {
           placeholder="email@kamu.com"
           required
           disabled={status === "loading" || status === "success"}
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#FAFAFA] text-[14px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#990202]/20 focus:border-[#990202] transition-all disabled:opacity-60"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#FAFAFA] text-[16px] text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#990202]/20 focus:border-[#990202] transition-all disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={status === "loading" || status === "success"}
-          className={`w-full py-3 rounded-xl text-[14px] font-extrabold transition-all duration-200 flex items-center justify-center gap-2 ${
+          className={`w-full py-3 rounded-xl text-[16px] font-extrabold transition-all duration-200 flex items-center justify-center gap-2 ${
             status === "success"
               ? "bg-emerald-600 text-white cursor-default"
               : status === "loading"
@@ -96,7 +96,7 @@ export default function NewsletterWidget() {
       {/* Status Message */}
       {message && (
         <div
-          className={`flex items-start gap-2 mt-3 p-3 rounded-lg text-[14px] font-medium leading-relaxed ${
+          className={`flex items-start gap-2 mt-3 p-3 rounded-lg text-[16px] font-medium leading-relaxed ${
             status === "success"
               ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
               : "bg-red-50 text-red-700 border border-red-200/60"
@@ -112,7 +112,7 @@ export default function NewsletterWidget() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-[14px] text-gray-500 mt-3.5 text-center leading-relaxed">
+      <p className="text-[16px] text-gray-500 mt-3.5 text-center leading-relaxed">
         Tidak ada spam. Unsubscribe kapan saja.
       </p>
     </div>

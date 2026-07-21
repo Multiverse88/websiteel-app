@@ -311,7 +311,7 @@ export default function PressRelease() {
             <div className="lg:col-span-7 space-y-6 text-left">
 
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[16px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -319,13 +319,13 @@ export default function PressRelease() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[14px] font-bold text-gray-900">Press Release</span>
+                <span className="text-[16px] font-bold text-gray-900">Press Release</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100/50 shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">PR &amp; Media</span>
+                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">PR &amp; Media</span>
               </div>
 
               {/* Headline */}
@@ -335,7 +335,7 @@ export default function PressRelease() {
               </h1>
 
               {/* Description */}
-              <p className="text-[14px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
+              <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
                 Tingkatkan kredibilitas brand &amp; jangkau jutaan pembaca lewat publikasi press release di 100+ media online terpercaya. Garansi 100% terbit.
               </p>
 
@@ -344,7 +344,7 @@ export default function PressRelease() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-extrabold text-[15px] rounded-xl hover:bg-[#800000] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
+                  className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-extrabold text-[16px] rounded-xl hover:bg-[#800000] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
                 >
                   Lihat Paket Press Release
                 </a>
@@ -352,7 +352,7 @@ export default function PressRelease() {
                   href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Press Release.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-900 text-gray-950 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-950 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-900 text-gray-950 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-950 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Konsultasi Gratis
                 </a>
@@ -366,8 +366,8 @@ export default function PressRelease() {
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[14px] font-black text-gray-950">1–3 Hari</div>
-                    <div className="text-[14px] sm:text-[14px] text-gray-500 font-semibold">Berita terbit</div>
+                    <div className="text-[16px] sm:text-[16px] font-black text-gray-950">1–3 Hari</div>
+                    <div className="text-[16px] sm:text-[16px] text-gray-500 font-semibold">Berita terbit</div>
                   </div>
                 </div>
 
@@ -377,8 +377,8 @@ export default function PressRelease() {
                     <Menu className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[14px] font-black text-gray-950">100+ Media</div>
-                    <div className="text-[14px] sm:text-[14px] text-gray-500 font-semibold">Pilihan publikasi</div>
+                    <div className="text-[16px] sm:text-[16px] font-black text-gray-950">100+ Media</div>
+                    <div className="text-[16px] sm:text-[16px] text-gray-500 font-semibold">Pilihan publikasi</div>
                   </div>
                 </div>
 
@@ -388,8 +388,8 @@ export default function PressRelease() {
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[14px] sm:text-[14px] font-black text-gray-950">100% Garansi</div>
-                    <div className="text-[14px] sm:text-[14px] text-gray-500 font-semibold">Berita tayang</div>
+                    <div className="text-[16px] sm:text-[16px] font-black text-gray-950">100% Garansi</div>
+                    <div className="text-[16px] sm:text-[16px] text-gray-500 font-semibold">Berita tayang</div>
                   </div>
                 </div>
               </div>
@@ -414,23 +414,23 @@ export default function PressRelease() {
 
                   {/* Mockup Body Content - News Preview */}
                   <div className="relative z-10 text-left space-y-4 sm:space-y-5">
-                    <h4 className="text-[22px] sm:text-[25px] font-black text-white leading-[1.3] tracking-tight">
+                    <h4 className="text-[16px] sm:text-[25px] font-black text-white leading-[1.3] tracking-tight">
                       &quot;Startup UMKM Indonesia Catat Pertumbuhan Pesat di Kuartal Pertama 2026&quot;
                     </h4>
-                    <p className="text-[14px] sm:text-[14px] text-gray-300 leading-relaxed font-semibold max-w-[90%]">
+                    <p className="text-[16px] sm:text-[16px] text-gray-300 leading-relaxed font-semibold max-w-[90%]">
                       Liputan eksklusif tentang ekspansi bisnis Anda — terbit permanen di media nasional pilihan dengan jangkauan jutaan pembaca.
                     </p>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
                       {["#Bisnis", "#Startup", "#UMKM", "#Inovasi"].map((tag) => (
-                        <span key={tag} className="text-[14px] sm:text-[14px] font-bold text-gray-300 bg-white/10 px-2.5 py-1 rounded-md border border-white/5 backdrop-blur-sm">
+                        <span key={tag} className="text-[16px] sm:text-[16px] font-bold text-gray-300 bg-white/10 px-2.5 py-1 rounded-md border border-white/5 backdrop-blur-sm">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="pt-4 sm:pt-6 flex items-center text-[14px] sm:text-[14px] font-bold text-gray-400">
+                    <div className="pt-4 sm:pt-6 flex items-center text-[16px] sm:text-[16px] font-bold text-gray-400">
                       <strong className="text-white mr-1.5">EasyPress</strong> - Dipublikasi di Detik, Kontan, Tribun &amp; 100+ media lainnya
                     </div>
                   </div>
@@ -443,8 +443,8 @@ export default function PressRelease() {
                     <Megaphone className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[14px] font-black text-gray-950 leading-none">100+ Media Nasional</div>
-                    <div className="text-[14px] text-gray-500 font-semibold mt-1">Detik · Kontan · Industry.co.id</div>
+                    <div className="text-[16px] font-black text-gray-950 leading-none">100+ Media Nasional</div>
+                    <div className="text-[16px] text-gray-500 font-semibold mt-1">Detik · Kontan · Industry.co.id</div>
                   </div>
                 </div>
 
@@ -454,8 +454,8 @@ export default function PressRelease() {
                     <Clock className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[14px] font-black text-gray-950 leading-none">Permanen Online</div>
-                    <div className="text-[14px] text-gray-500 font-semibold mt-1">Berita tidak akan dihapus</div>
+                    <div className="text-[16px] font-black text-gray-950 leading-none">Permanen Online</div>
+                    <div className="text-[16px] text-gray-500 font-semibold mt-1">Berita tidak akan dihapus</div>
                   </div>
                 </div>
 
@@ -475,11 +475,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KENAPA PRESS RELEASE</p>
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KENAPA PRESS RELEASE</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Investasi sekali — manfaat jangka panjang.
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Berbeda dari iklan yang hilang setelah budget habis, press release tetap online &amp; bisa diakses bertahun-tahun.
             </p>
           </div>
@@ -493,8 +493,8 @@ export default function PressRelease() {
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Heart className="w-5 h-5 text-[#990202]" />
                 </div>
-                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Bangun Kepercayaan</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Bangun Kepercayaan</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Konsumen lebih percaya berita media kredibel dibanding iklan langsung dari brand.
                 </p>
               </div>
@@ -506,8 +506,8 @@ export default function PressRelease() {
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Award className="w-5 h-5 text-[#990202]" />
                 </div>
-                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Reputasi &amp; Otoritas</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Reputasi &amp; Otoritas</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Liputan media kredibel naikkan persepsi brand sebagai pemain serius di industri.
                 </p>
               </div>
@@ -519,8 +519,8 @@ export default function PressRelease() {
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <TrendingUp className="w-5 h-5 text-[#990202]" />
                 </div>
-                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Boost Promosi</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Boost Promosi</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Berita media jadi materi promosi multi-channel — share di sosmed, kirim ke calon klien.
                 </p>
               </div>
@@ -532,8 +532,8 @@ export default function PressRelease() {
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Check className="w-5 h-5 text-[#990202]" strokeWidth={3} />
                 </div>
-                <h4 className="text-[14px] font-black text-gray-950 leading-tight">Kredibilitas Tinggi</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Kredibilitas Tinggi</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Bukti konkret bisnismu aktif &amp; berkembang — penting untuk audit investor &amp; partner.
                 </p>
               </div>
@@ -545,8 +545,8 @@ export default function PressRelease() {
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Globe className="w-5 h-5 text-[#990202]" />
                 </div>
-                <h4 className="text-[14px] font-black text-gray-950">Jangkauan Luas</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950">Jangkauan Luas</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Akses jutaan pembaca media nasional — efektivitas yang sulit dicapai dengan iklan organik.
                 </p>
               </div>
@@ -558,8 +558,8 @@ export default function PressRelease() {
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Activity className="w-5 h-5 text-[#990202]" />
                 </div>
-                <h4 className="text-[14px] font-black text-gray-950">SEO &amp; Brand Search</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950">SEO &amp; Brand Search</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Artikel media indeks di Google — naikkan visibilitas saat orang search nama brand.
                 </p>
               </div>
@@ -571,8 +571,8 @@ export default function PressRelease() {
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5 h-5 text-[#990202]" />
                 </div>
-                <h4 className="text-[14px] font-black text-gray-950">Permanen Online</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950">Permanen Online</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Berita terbit permanen — tidak akan dihapus, bisa diakses 5–10 tahun ke depan.
                 </p>
               </div>
@@ -584,8 +584,8 @@ export default function PressRelease() {
                 <div className="w-9 h-9 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <BarChart className="w-5 h-5 text-[#990202]" />
                 </div>
-                <h4 className="text-[14px] font-black text-gray-950">Kompetitif vs Iklan</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950">Kompetitif vs Iklan</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Biaya 1x publikasi jauh lebih hemat dibanding iklan berbayar dengan jangkauan setara.
                 </p>
               </div>
@@ -602,11 +602,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DAFTAR MEDIA PARTNER</p>
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">DAFTAR MEDIA PARTNER</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Publikasi di 100+ media online terpercaya.
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Pilih media yang sesuai target audiens — ekonomi, lifestyle, teknologi, hingga media daerah.
             </p>
           </div>
@@ -621,14 +621,14 @@ export default function PressRelease() {
                 {media.icon ? (
                   <img src={media.icon} alt={media.label} className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full object-cover" />
                 ) : (
-                  <span className="text-gray-500 font-bold text-[14px]">{media.label}</span>
+                  <span className="text-gray-500 font-bold text-[16px]">{media.label}</span>
                 )}
               </div>
             ))}
           </div>
 
           {/* Small footer text */}
-          <p className="text-[14px] text-gray-500 font-bold mt-8 max-w-4xl mx-auto">
+          <p className="text-[16px] text-gray-500 font-bold mt-8 max-w-4xl mx-auto">
             Daftar lengkap media tersedia saat konsultasi — termasuk media nasional, ekonomi-bisnis, lifestyle, teknologi, &amp; media daerah dengan tier rate berbeda.
           </p>
 
@@ -647,6 +647,7 @@ export default function PressRelease() {
         }
         packages={pricingPackages}
         footnotes={["Daftar lengkap media tersedia saat konsultasi — termasuk media nasional, ekonomi-bisnis, lifestyle, teknologi, & media daerah dengan tier rate berbeda."]}
+        hideFooter={true}
       />
 
       {/* ─── 6. PERBEDAAN / PENJELASAN SECTION ─── */}
@@ -655,11 +656,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">MENGENAL PRESS RELEASE</p>
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">MENGENAL PRESS RELEASE</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Press Release &amp; kenapa penting untuk bisnis?
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Cara tercepat &amp; paling efektif membangun kredibilitas bisnis lewat liputan media kredibel — bukan iklan biasa.
             </p>
           </div>
@@ -668,7 +669,7 @@ export default function PressRelease() {
 
             {/* Left Column: KONTEN YANG COCOK (Unified soft-pink card container) */}
             <div className="lg:col-span-5 bg-[#FFF5F5] rounded-[32px] p-6 sm:p-7.5 space-y-3.5 text-left shadow-[0_10px_35px_rgba(153,2,2,0.06)]">
-              <h3 className="text-[14px] sm:text-[14px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
+              <h3 className="text-[16px] sm:text-[16px] font-black text-[#990202] tracking-wider uppercase mb-5 pl-1.5 mt-1.5">
                 KONTEN YANG COCOK UNTUK PRESS RELEASE
               </h3>
 
@@ -678,8 +679,8 @@ export default function PressRelease() {
                   <ShoppingBag className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-900 leading-tight">Peluncuran Produk Baru</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Soft / hard launch produk &amp; layanan</p>
+                  <h4 className="text-[16px] font-black text-gray-900 leading-tight">Peluncuran Produk Baru</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5 leading-snug">Soft / hard launch produk &amp; layanan</p>
                 </div>
               </div>
 
@@ -689,8 +690,8 @@ export default function PressRelease() {
                   <Calendar className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-900 leading-tight">Liputan Event</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Seminar, grand opening, gathering</p>
+                  <h4 className="text-[16px] font-black text-gray-900 leading-tight">Liputan Event</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5 leading-snug">Seminar, grand opening, gathering</p>
                 </div>
               </div>
 
@@ -700,8 +701,8 @@ export default function PressRelease() {
                   <Check className="w-5 h-5 text-[#990202]" strokeWidth={3.5} />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-900 leading-tight">Centang Biru Sosmed</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Syarat verifikasi Instagram &amp; X</p>
+                  <h4 className="text-[16px] font-black text-gray-900 leading-tight">Centang Biru Sosmed</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5 leading-snug">Syarat verifikasi Instagram &amp; X</p>
                 </div>
               </div>
 
@@ -711,8 +712,8 @@ export default function PressRelease() {
                   <ShoppingCart className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-900 leading-tight">Syarat Shopee Mall</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Salah satu syarat naik tier marketplace</p>
+                  <h4 className="text-[16px] font-black text-gray-900 leading-tight">Syarat Shopee Mall</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5 leading-snug">Salah satu syarat naik tier marketplace</p>
                 </div>
               </div>
 
@@ -722,8 +723,8 @@ export default function PressRelease() {
                   <Layers className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-900 leading-tight">Brand Building</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Bangun otoritas &amp; positioning</p>
+                  <h4 className="text-[16px] font-black text-gray-900 leading-tight">Brand Building</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5 leading-snug">Bangun otoritas &amp; positioning</p>
                 </div>
               </div>
 
@@ -733,8 +734,8 @@ export default function PressRelease() {
                   <AlertCircle className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-900 leading-tight">Klarifikasi Publik</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5 leading-snug">Respons resmi atas isu / hoaks</p>
+                  <h4 className="text-[16px] font-black text-gray-900 leading-tight">Klarifikasi Publik</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5 leading-snug">Respons resmi atas isu / hoaks</p>
                 </div>
               </div>
             </div>
@@ -746,9 +747,9 @@ export default function PressRelease() {
               <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Megaphone className="w-5 h-5" />
-                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">PRESS RELEASE</h4>
+                  <h4 className="text-[16px] sm:text-[16px] font-black tracking-wider uppercase">PRESS RELEASE</h4>
                 </div>
-                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                <p className="text-[16px] text-gray-600 leading-relaxed font-semibold">
                   Press release (siaran pers) adalah <strong className="font-extrabold text-gray-900">publikasi resmi dari perusahaan</strong> berbentuk artikel berita yang dimuat di media online jurnalistik. Berbeda dari iklan, press release ditulis dengan gaya jurnalistik &amp; punya kredibilitas tinggi karena terbit di media terpercaya.
                 </p>
               </div>
@@ -757,9 +758,9 @@ export default function PressRelease() {
               <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Layers className="w-5 h-5" />
-                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">MANFAAT UNTUK BISNIS</h4>
+                  <h4 className="text-[16px] sm:text-[16px] font-black tracking-wider uppercase">MANFAAT UNTUK BISNIS</h4>
                 </div>
-                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                <p className="text-[16px] text-gray-600 leading-relaxed font-semibold">
                   Press release membantu <strong className="font-extrabold text-gray-900">membangun trust di mata konsumen</strong>, memperkuat positioning brand, &amp; jadi salah satu syarat verifikasi akun media sosial (centang biru), marketplace tier premium (Shopee Mall, Tokopedia Official), serta syarat tender korporat.
                 </p>
               </div>
@@ -768,9 +769,9 @@ export default function PressRelease() {
               <div className="bg-white rounded-2xl p-6 sm:p-7.5 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-4">
                 <div className="flex items-center space-x-2.5 text-[#990202]">
                   <Clock className="w-5 h-5" />
-                  <h4 className="text-[14px] sm:text-[14px] font-black tracking-wider uppercase">YANG MEMBEDAKAN EASYPRESS</h4>
+                  <h4 className="text-[16px] sm:text-[16px] font-black tracking-wider uppercase">YANG MEMBEDAKAN EASYPRESS</h4>
                 </div>
-                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                <p className="text-[16px] text-gray-600 leading-relaxed font-semibold">
                   Kami fokus pada <strong className="font-extrabold text-gray-900">produk jurnalistik, bukan advertorial</strong> — artikel ditulis dengan sudut pandang berita, bukan promosi terselubung. <strong className="font-extrabold text-gray-900">Garansi 100% terbit</strong> di media yang Anda pilih, berita <strong className="font-extrabold text-gray-900">permanen online</strong>, &amp; ada laporan publikasi lengkap.
                 </p>
               </div>
@@ -787,11 +788,11 @@ export default function PressRelease() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KEBUTUHAN PRESS RELEASE</p>
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KEBUTUHAN PRESS RELEASE</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Kapan kamu butuh press release?
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Bukan cuma untuk perusahaan besar — UMKM &amp; startup juga butuh press release di momen-momen kritis ini.
             </p>
           </div>
@@ -805,8 +806,8 @@ export default function PressRelease() {
                 <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Megaphone className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
-                <h4 className="text-[15px] font-black text-gray-950 leading-tight">Launching Produk / Brand</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Launching Produk / Brand</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Bangun awareness saat soft / hard launch — pastikan target market tahu produkmu rilis lewat media yang mereka baca.
                 </p>
               </div>
@@ -818,8 +819,8 @@ export default function PressRelease() {
                 <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Calendar className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
-                <h4 className="text-[15px] font-black text-gray-950 leading-tight">Liputan Event &amp; Aktivitas</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Liputan Event &amp; Aktivitas</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Seminar, grand opening, gathering, peluncuran kerjasama — liputan media buat acara tersebut terdokumentasi permanen.
                 </p>
               </div>
@@ -831,8 +832,8 @@ export default function PressRelease() {
                 <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
-                <h4 className="text-[15px] font-black text-gray-950 leading-tight">Verifikasi Centang Biru</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Verifikasi Centang Biru</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Salah satu syarat verifikasi akun bisnis di Instagram, X, &amp; Facebook adalah liputan minimal 3–5 media kredibel.
                 </p>
               </div>
@@ -844,8 +845,8 @@ export default function PressRelease() {
                 <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <ShoppingCart className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
-                <h4 className="text-[15px] font-black text-gray-950 leading-tight">Syarat Shopee Mall &amp; Marketplace</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Syarat Shopee Mall &amp; Marketplace</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Shopee Mall, Tokopedia Official Store, &amp; Lazada Mall butuh seller dengan kredibilitas media — press release jadi bukti.
                 </p>
               </div>
@@ -857,8 +858,8 @@ export default function PressRelease() {
                 <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <Layers className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
-                <h4 className="text-[15px] font-black text-gray-950 leading-tight">Brand Building Jangka Panjang</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Brand Building Jangka Panjang</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Tampil rutin di media membangun otoritas brand — calon klien akan lebih percaya bisnis yang sering diliput pers.
                 </p>
               </div>
@@ -870,8 +871,8 @@ export default function PressRelease() {
                 <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                   <AlertCircle className="w-5.5 h-5.5 text-[#990202]" />
                 </div>
-                <h4 className="text-[15px] font-black text-gray-950 leading-tight">Klarifikasi Publik / Hoaks</h4>
-                <p className="text-[14px] text-gray-500 font-semibold leading-relaxed">
+                <h4 className="text-[16px] font-black text-gray-950 leading-tight">Klarifikasi Publik / Hoaks</h4>
+                <p className="text-[16px] text-gray-500 font-semibold leading-relaxed">
                   Saat ada isu negatif / hoaks tentang brand, klarifikasi resmi via media kredibel adalah cara paling efektif menetralisir.
                 </p>
               </div>
@@ -894,10 +895,10 @@ export default function PressRelease() {
 
           {/* Left Column */}
           <div className="space-y-3 max-w-2xl">
-            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-900">
+            <h2 className="font-heading text-[16px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-900">
               Siap <span className="text-[#990202]">tayang</span> di media nasional?
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 leading-relaxed font-normal">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-normal">
               Konsultasi gratis untuk pilih paket &amp; rekomendasi media — tanpa komitmen.
             </p>
           </div>
@@ -909,7 +910,7 @@ export default function PressRelease() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai publikasi Press Release.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
+              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
             >
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.588 1.977 14.122.953 11.5.953c-5.439 0-9.859 4.37-9.864 9.8-.001 1.73.457 3.41 1.32 4.927l-.982 3.58 3.673-.956zm11.517-5.595c-.3-.15-1.774-.875-2.048-.975-.274-.1-.474-.15-.674.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.794-1.49-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.491-.508-.674-.518-.174-.01-.374-.012-.574-.012-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.22 5.116 4.52 1.228.531 2.186.848 2.93 1.083.755.238 1.44.205 1.984.124.606-.091 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z" />
@@ -922,14 +923,14 @@ export default function PressRelease() {
               href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Publikasi Press Release Media. Mohon info lengkap biaya dan prosesnya.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-50 text-gray-900 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[14px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
+              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-50 text-gray-900 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
             >
               <span>Hubungi Tim Kami</span>
-              <span className="text-[15px] font-bold">→</span>
+              <span className="text-[16px] font-bold">→</span>
             </a>
 
             {/* Response Info */}
-            <div className="flex items-center justify-center gap-1.5 text-[14px] sm:text-[14px] text-gray-500 font-medium pt-1 px-1">
+            <div className="flex items-center justify-center gap-1.5 text-[16px] sm:text-[16px] text-gray-500 font-medium pt-1 px-1">
               <span className="text-emerald-500 font-bold">✓</span>
               <span>Respons dalam 5 menit · Senin–Sabtu 08:00–20:00</span>
             </div>

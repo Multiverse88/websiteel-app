@@ -60,7 +60,7 @@ function SortableSection({ section, onSelect, onDelete }: { section: SectionData
         <GripVertical className="w-5 h-5 text-gray-500" />
       </div>
       <div className="absolute top-2 right-2 z-20 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button onClick={onSelect} className="bg-white shadow rounded px-3 py-1 text-sm font-bold text-gray-700 hover:text-red-600">Edit</button>
+        <button onClick={onSelect} className="bg-white shadow rounded px-3 py-1 text-[16px] font-bold text-gray-700 hover:text-red-600">Edit</button>
         <button onClick={onDelete} className="bg-white shadow rounded p-1 text-gray-500 hover:text-red-600">
           <Trash2 className="w-5 h-5" />
         </button>
@@ -150,7 +150,7 @@ export default function BuilderClient({ pageId, initialSections, pageSettings }:
             <button
               key={type}
               onClick={() => addSection(type)}
-              className="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-red-50 border border-gray-200 rounded-lg transition-colors text-left text-sm font-medium text-gray-700"
+              className="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-red-50 border border-gray-200 rounded-lg transition-colors text-left text-[16px] font-medium text-gray-700"
             >
               <span className="capitalize">{type}</span>
               <Plus className="w-4 h-4 text-gray-400" />
@@ -158,7 +158,7 @@ export default function BuilderClient({ pageId, initialSections, pageSettings }:
           ))}
         </div>
         <div className="mt-4 pt-4 border-t border-gray-200">
-          <a href={`/lp/${pageSettings.slug}`} target="_blank" rel="noreferrer" className="block w-full text-center py-2 bg-gray-900 text-white rounded-lg text-sm font-bold">
+          <a href={`/lp/${pageSettings.slug}`} target="_blank" rel="noreferrer" className="block w-full text-center py-2 bg-gray-900 text-white rounded-lg text-[16px] font-bold">
             Preview Publik
           </a>
         </div>
@@ -167,7 +167,7 @@ export default function BuilderClient({ pageId, initialSections, pageSettings }:
       {/* Center Canvas */}
       <div className="flex-1 overflow-y-auto bg-gray-100 p-8 relative">
         <div className="max-w-[1280px] mx-auto shadow-2xl rounded-2xl overflow-hidden bg-white min-h-[800px]">
-          {isPending && <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded shadow text-[14px] font-bold text-gray-500">Menyimpan...</div>}
+          {isPending && <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded shadow text-[16px] font-bold text-gray-500">Menyimpan...</div>}
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
             <SortableContext items={sections.map(s => s.id)} strategy={verticalListSortingStrategy}>
               {sections.length === 0 && (
@@ -204,7 +204,7 @@ export default function BuilderClient({ pageId, initialSections, pageSettings }:
                 saveSections(updated);
               }}
             />
-            <button onClick={() => setActiveId(null)} className="text-sm text-red-600 font-bold mt-4">
+            <button onClick={() => setActiveId(null)} className="text-[16px] text-red-600 font-bold mt-4">
               ← Kembali ke Settings
             </button>
           </div>
@@ -215,32 +215,32 @@ export default function BuilderClient({ pageId, initialSections, pageSettings }:
             });
           }} className="space-y-4">
             <div>
-              <label className="block text-[14px] font-bold text-gray-700 mb-1">Judul Halaman</label>
-              <input type="text" name="title" defaultValue={pageSettings.title} className="w-full text-sm px-3 py-2 border rounded" />
+              <label className="block text-[16px] font-bold text-gray-700 mb-1">Judul Halaman</label>
+              <input type="text" name="title" defaultValue={pageSettings.title} className="w-full text-[16px] px-3 py-2 border rounded" />
             </div>
             <div>
-              <label className="block text-[14px] font-bold text-gray-700 mb-1">URL Slug</label>
-              <input type="text" name="slug" defaultValue={pageSettings.slug} className="w-full text-sm px-3 py-2 border rounded" />
+              <label className="block text-[16px] font-bold text-gray-700 mb-1">URL Slug</label>
+              <input type="text" name="slug" defaultValue={pageSettings.slug} className="w-full text-[16px] px-3 py-2 border rounded" />
             </div>
             <div>
-              <label className="block text-[14px] font-bold text-gray-700 mb-1">Status</label>
-              <select name="status" defaultValue={pageSettings.status} className="w-full text-sm px-3 py-2 border rounded bg-white">
+              <label className="block text-[16px] font-bold text-gray-700 mb-1">Status</label>
+              <select name="status" defaultValue={pageSettings.status} className="w-full text-[16px] px-3 py-2 border rounded bg-white">
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
               </select>
             </div>
             <div>
-              <label className="block text-[14px] font-bold text-gray-700 mb-1">Meta Description</label>
-              <textarea name="description" defaultValue={pageSettings.description} className="w-full text-sm px-3 py-2 border rounded h-20" />
+              <label className="block text-[16px] font-bold text-gray-700 mb-1">Meta Description</label>
+              <textarea name="description" defaultValue={pageSettings.description} className="w-full text-[16px] px-3 py-2 border rounded h-20" />
             </div>
             <div>
-              <label className="block text-[14px] font-bold text-gray-700 mb-1">Pixel ID (Meta/GTM)</label>
-              <input type="text" name="pixelId" defaultValue={pageSettings.pixelId} className="w-full text-sm px-3 py-2 border rounded" />
+              <label className="block text-[16px] font-bold text-gray-700 mb-1">Pixel ID (Meta/GTM)</label>
+              <input type="text" name="pixelId" defaultValue={pageSettings.pixelId} className="w-full text-[16px] px-3 py-2 border rounded" />
             </div>
             
             <div className="border-t pt-4 space-y-3">
-              <h3 className="text-[14px] font-bold text-gray-900">Pengaturan Redirect Lead</h3>
-              <label className="flex items-center gap-2 text-[14px] font-medium text-gray-700">
+              <h3 className="text-[16px] font-bold text-gray-900">Pengaturan Redirect Lead</h3>
+              <label className="flex items-center gap-2 text-[16px] font-medium text-gray-700">
                 <input
                   type="checkbox"
                   checked={redirectEnabled}
@@ -254,28 +254,28 @@ export default function BuilderClient({ pageId, initialSections, pageSettings }:
               {redirectEnabled && (
                 <div className="space-y-3 pl-5 border-l-2 border-gray-100">
                   <div>
-                    <label className="block text-[14px] font-bold text-gray-600 mb-1">Redirect URL (WhatsApp / Thank You Page)</label>
+                    <label className="block text-[16px] font-bold text-gray-600 mb-1">Redirect URL (WhatsApp / Thank You Page)</label>
                     <input
                       type="text"
                       name="redirectUrl"
                       value={redirectUrl}
                       onChange={(e) => setRedirectUrl(e.target.value)}
                       placeholder="https://wa.me/..."
-                      className="w-full text-[14px] px-3 py-2 border rounded"
+                      className="w-full text-[16px] px-3 py-2 border rounded"
                     />
                   </div>
                   <div>
-                    <label className="block text-[14px] font-bold text-gray-600 mb-1">Delay Redirect (Detik)</label>
+                    <label className="block text-[16px] font-bold text-gray-600 mb-1">Delay Redirect (Detik)</label>
                     <input
                       type="number"
                       name="redirectDelay"
                       value={redirectDelay}
                       onChange={(e) => setRedirectDelay(parseInt(e.target.value || "0", 10))}
                       min={0}
-                      className="w-full text-[14px] px-3 py-2 border rounded"
+                      className="w-full text-[16px] px-3 py-2 border rounded"
                     />
                   </div>
-                  <label className="flex items-center gap-2 text-[14px] font-medium text-gray-700">
+                  <label className="flex items-center gap-2 text-[16px] font-medium text-gray-700">
                     <input
                       type="checkbox"
                       checked={redirectPassUtm}

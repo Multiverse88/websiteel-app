@@ -238,7 +238,7 @@ export default function VisaKitas() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500">
+              <nav className="flex items-center space-x-2 text-[16px] font-medium text-gray-500">
                 <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
                   <Home className="w-3.5 h-3.5" />
                   <span>Beranda</span>
@@ -246,13 +246,13 @@ export default function VisaKitas() {
                 <span className="text-gray-300 font-normal">&gt;</span>
                 <span className="text-gray-500 font-medium">Layanan</span>
                 <span className="text-gray-300 font-normal">&gt;</span>
-                <span className="text-[14px] font-bold text-gray-900">Visa &amp; KITAS</span>
+                <span className="text-[16px] font-bold text-gray-900">Visa &amp; KITAS</span>
               </nav>
 
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[14px] sm:text-[14px] sm:text-[14px] font-bold text-[#990202] tracking-wide">Imigrasi - WNA</span>
+                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Imigrasi - WNA</span>
               </div>
 
               {/* Headline */}
@@ -262,7 +262,7 @@ export default function VisaKitas() {
               </h1>
 
               {/* Description */}
-              <p className="text-[14px] sm:text-[16.5px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
+              <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
                 Bantuan pengurusan visa bisnis, KITAS investor &amp; KITAS Tenaga Kerja Asing — proses cepat, dokumentasi lengkap, &amp; sesuai regulasi Direktorat Jenderal Imigrasi.
               </p>
 
@@ -271,7 +271,7 @@ export default function VisaKitas() {
                 <a
                   href="#paket-harga"
                   onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-extrabold text-[15px] rounded-xl hover:bg-[#800000] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
+                  className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-extrabold text-[16px] rounded-xl hover:bg-[#800000] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
                 >
                   Lihat Paket Visa &amp; KITAS
                 </a>
@@ -279,22 +279,22 @@ export default function VisaKitas() {
                   href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai pembuatan Visa atau KITAS.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-150 text-gray-800 font-extrabold text-[15px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-150 text-gray-800 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
                 >
                   Konsultasi Gratis
                 </a>
               </div>
 
               {/* Checkpoints Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-gray-150 max-w-[620px]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 max-w-[620px]">
                 {/* Checkpoint 1 */}
                 <div className="flex items-center space-x-3 bg-gray-50/50 p-2.5 rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                   <div className="w-8 h-8 rounded-full bg-[#FFF5F5] flex items-center justify-center flex-shrink-0">
                     <Clock className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[14px] font-black text-gray-950">3-10 Hari</div>
-                    <div className="text-[14px] text-gray-500 font-semibold">Proses cepat</div>
+                    <div className="text-[16px] font-black text-gray-950">3-10 Hari</div>
+                    <div className="text-[16px] text-gray-500 font-semibold">Proses cepat</div>
                   </div>
                 </div>
 
@@ -304,8 +304,8 @@ export default function VisaKitas() {
                     <MapPin className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[14px] font-black text-gray-950">3 Kategori</div>
-                    <div className="text-[14px] text-gray-500 font-semibold">Bisnis - Investor - TKA</div>
+                    <div className="text-[16px] font-black text-gray-950">3 Kategori</div>
+                    <div className="text-[16px] text-gray-500 font-semibold">Bisnis - Investor - TKA</div>
                   </div>
                 </div>
 
@@ -315,8 +315,8 @@ export default function VisaKitas() {
                     <Check className="w-4 h-4 text-[#990202]" strokeWidth={3} />
                   </div>
                   <div>
-                    <div className="text-[14px] font-black text-gray-950">100% Resmi</div>
-                    <div className="text-[14px] text-gray-500 font-semibold">Sesuai Ditjen Imigrasi</div>
+                    <div className="text-[16px] font-black text-gray-950">100% Resmi</div>
+                    <div className="text-[16px] text-gray-500 font-semibold">Sesuai Ditjen Imigrasi</div>
                   </div>
                 </div>
               </div>
@@ -344,8 +344,8 @@ export default function VisaKitas() {
                     <Check className="w-4.5 h-4.5" strokeWidth={3} />
                   </div>
                   <div className="text-left">
-                    <div className="text-[14px] font-black text-gray-950 leading-none">e-Visa Digital</div>
-                    <div className="text-[14px] text-gray-500 font-semibold mt-1">Tanpa antri di kedutaan</div>
+                    <div className="text-[16px] font-black text-gray-950 leading-none">e-Visa Digital</div>
+                    <div className="text-[16px] text-gray-500 font-semibold mt-1">Tanpa antri di kedutaan</div>
                   </div>
                 </div>
 
@@ -355,8 +355,8 @@ export default function VisaKitas() {
                     <Home className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[14px] font-black text-gray-950 leading-none">Untuk Bisnis &amp; PMA</div>
-                    <div className="text-[14px] text-gray-500 font-semibold mt-1">PT PMA, investor, ekspat</div>
+                    <div className="text-[16px] font-black text-gray-950 leading-none">Untuk Bisnis &amp; PMA</div>
+                    <div className="text-[16px] text-gray-500 font-semibold mt-1">PT PMA, investor, ekspat</div>
                   </div>
                 </div>
 
@@ -389,7 +389,7 @@ export default function VisaKitas() {
             <div className="inline-flex p-1.5 bg-gray-200/50 rounded-2xl shadow-md border border-black/[0.04]">
               <button
                 onClick={() => setActiveCategory("visa")}
-                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                className={`px-5 py-2.5 rounded-xl text-[16px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                   activeCategory === "visa"
                     ? "bg-[#990202] text-white shadow-md"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
@@ -400,7 +400,7 @@ export default function VisaKitas() {
               </button>
               <button
                 onClick={() => setActiveCategory("investor")}
-                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                className={`px-5 py-2.5 rounded-xl text-[16px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                   activeCategory === "investor"
                     ? "bg-[#990202] text-white shadow-md"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
@@ -411,7 +411,7 @@ export default function VisaKitas() {
               </button>
               <button
                 onClick={() => setActiveCategory("tka")}
-                className={`px-5 py-2.5 rounded-xl text-[14px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                className={`px-5 py-2.5 rounded-xl text-[16px] font-extrabold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                   activeCategory === "tka"
                     ? "bg-[#990202] text-white shadow-md"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
@@ -423,6 +423,7 @@ export default function VisaKitas() {
             </div>
           </div>
         }
+        hideFooter={true}
       />
 
       {/* ─── 5. PERBEDAAN SECTION ─── */}
@@ -431,11 +432,11 @@ export default function VisaKitas() {
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-            <p className="text-[14px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Visa &amp; KITAS — apa bedanya?
             </h2>
-            <p className="text-[14px] sm:text-[14px] sm:text-[14.5px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Penting untuk memilih jenis izin yang tepat sesuai tujuan &amp; lama tinggal WNA di Indonesia.
             </p>
           </div>
@@ -444,7 +445,7 @@ export default function VisaKitas() {
             
             {/* Left Column: KATEGORI VISA & KITAS */}
             <div className="lg:col-span-5 space-y-4 text-left">
-              <h3 className="text-[14px] font-black text-[#990202] tracking-widest uppercase mb-4 pl-1">KATEGORI VISA &amp; KITAS</h3>
+              <h3 className="text-[16px] font-black text-[#990202] tracking-widest uppercase mb-4 pl-1">KATEGORI VISA &amp; KITAS</h3>
               
               {/* Item 1 */}
               <div className="bg-[#FAF9F7]/70 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center space-x-3.5">
@@ -452,8 +453,8 @@ export default function VisaKitas() {
                   <FileText className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-950">Visa Bisnis</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5">Kunjungan bisnis 60 hari - single/multiple entry</p>
+                  <h4 className="text-[16px] font-black text-gray-950">Visa Bisnis</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5">Kunjungan bisnis 60 hari - single/multiple entry</p>
                 </div>
               </div>
 
@@ -463,8 +464,8 @@ export default function VisaKitas() {
                   <TrendingUp className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-950">KITAS Investor</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5">Penanam modal PT PMA · 1-2 tahun</p>
+                  <h4 className="text-[16px] font-black text-gray-950">KITAS Investor</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5">Penanam modal PT PMA · 1-2 tahun</p>
                 </div>
               </div>
 
@@ -474,8 +475,8 @@ export default function VisaKitas() {
                   <User className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-950">KITAS Tenaga Kerja Asing</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5">WNA bekerja di Indonesia · 6-24 bulan</p>
+                  <h4 className="text-[16px] font-black text-gray-950">KITAS Tenaga Kerja Asing</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5">WNA bekerja di Indonesia · 6-24 bulan</p>
                 </div>
               </div>
 
@@ -485,8 +486,8 @@ export default function VisaKitas() {
                   <Compass className="w-5 h-5 text-[#990202]" />
                 </div>
                 <div>
-                  <h4 className="text-[14px] font-black text-gray-950">MERP Re-Entry Permit</h4>
-                  <p className="text-[14px] text-gray-500 font-semibold mt-0.5">Bebas keluar-masuk Indonesia selama KITAS aktif</p>
+                  <h4 className="text-[16px] font-black text-gray-950">MERP Re-Entry Permit</h4>
+                  <p className="text-[16px] text-gray-500 font-semibold mt-0.5">Bebas keluar-masuk Indonesia selama KITAS aktif</p>
                 </div>
               </div>
 
@@ -496,8 +497,8 @@ export default function VisaKitas() {
                   <Check className="w-4.5 h-4.5 text-white" strokeWidth={3.5} />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-[14px] font-black text-white">Layanan Imigrasi EasyLegal</h4>
-                  <p className="text-[14px] text-gray-400 font-semibold mt-0.5">
+                  <h4 className="text-[16px] font-black text-white">Layanan Imigrasi EasyLegal</h4>
+                  <p className="text-[16px] text-gray-400 font-semibold mt-0.5">
                     Dasar Hukum: UU No. 6/2011 tentang Keimigrasian
                   </p>
                 </div>
@@ -512,9 +513,9 @@ export default function VisaKitas() {
               <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-3 text-[#990202]">
                   <FileText className="w-5 h-5" />
-                  <h4 className="text-[14.5px] font-black tracking-wider uppercase">VISA</h4>
+                  <h4 className="text-[16px] font-black tracking-wider uppercase">VISA</h4>
                 </div>
-                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                <p className="text-[16px] text-gray-600 leading-relaxed font-semibold">
                   Visa adalah <strong className="font-extrabold text-gray-900">izin masuk &amp; tinggal sementara</strong> bagi WNA di Indonesia untuk tujuan bisnis atau wisata. Visa bisnis berlaku <strong className="font-extrabold text-gray-900">60 hari</strong> per kunjungan &amp; <strong className="font-extrabold text-gray-900">tidak memberikan izin bekerja</strong>. Bisa diperpanjang atau dikonversi ke KITAS jika ingin tinggal lebih lama.
                 </p>
               </div>
@@ -523,9 +524,9 @@ export default function VisaKitas() {
               <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-3 text-[#990202]">
                   <Check className="w-5 h-5" strokeWidth={3} />
-                  <h4 className="text-[14.5px] font-black tracking-wider uppercase">KITAS / ITAS</h4>
+                  <h4 className="text-[16px] font-black tracking-wider uppercase">KITAS / ITAS</h4>
                 </div>
-                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                <p className="text-[16px] text-gray-600 leading-relaxed font-semibold">
                   <strong className="font-extrabold text-gray-900">KITAS (Kartu Izin Tinggal Terbatas)</strong> atau ITAS adalah izin tinggal jangka menengah untuk WNA di Indonesia. Berlaku <strong className="font-extrabold text-gray-900">6–24 bulan</strong> tergantung kategori — investor, tenaga kerja asing, pelajar, atau pasangan WNI. Pemegang KITAS bisa <strong className="font-extrabold text-gray-900">tinggal &amp; beraktivitas resmi</strong> sesuai izin.
                 </p>
               </div>
@@ -534,9 +535,9 @@ export default function VisaKitas() {
               <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-300 space-y-3.5">
                 <div className="flex items-center space-x-3 text-[#990202]">
                   <Clock className="w-5 h-5" />
-                  <h4 className="text-[14.5px] font-black tracking-wider uppercase">YANG DIURUS EASYLEGAL</h4>
+                  <h4 className="text-[16px] font-black tracking-wider uppercase">YANG DIURUS EASYLEGAL</h4>
                 </div>
-                <p className="text-[14px] text-gray-600 leading-relaxed font-semibold">
+                <p className="text-[16px] text-gray-600 leading-relaxed font-semibold">
                   Kami handle end-to-end: <strong className="font-bold text-gray-950">Visa Bisnis</strong> (single &amp; multiple entry), <strong className="font-bold text-gray-950">KITAS Investor</strong> (1–2 tahun untuk pemegang saham PT PMA), &amp; <strong className="font-bold text-gray-950">KITAS TKA</strong> (untuk WNA bekerja di perusahaan Indonesia, termasuk RPTKA &amp; IMTA). Plus MERP, biometrik, &amp; surat keterangan tempat tinggal.
                 </p>
               </div>
@@ -560,10 +561,10 @@ export default function VisaKitas() {
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
           
           <div className="space-y-4 max-w-2xl">
-            <h2 className="font-heading text-[20px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
+            <h2 className="font-heading text-[16px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-gray-950">
               Butuh konsultasi <span className="text-[#990202]">Visa atau KITAS?</span>
             </h2>
-            <p className="text-[14.5px] sm:text-[15.5px] text-gray-500 leading-relaxed font-semibold">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed font-semibold">
               Konsultasi gratis untuk pilih jenis izin yang tepat &amp; cek kelayakan dokumen WNA Anda — tanpa komitmen.
             </p>
           </div>
@@ -574,7 +575,7 @@ export default function VisaKitas() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai pembuatan Visa atau KITAS.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[15px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+              className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
             >
               <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.588 1.977 14.122.953 11.5.953c-5.439 0-9.859 4.37-9.864 9.8-.001 1.73.457 3.41 1.32 4.927l-.982 3.58 3.673-.956zm11.517-5.595c-.3-.15-1.774-.875-2.048-.975-.274-.1-.474-.15-.674.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.794-1.49-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.625-.924-2.225-.244-.588-.491-.508-.674-.518-.174-.01-.374-.012-.574-.012-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.22 5.116 4.52 1.228.531 2.186.848 2.93 1.083.755.238 1.44.205 1.984.124.606-.091 1.774-.725 2.024-1.425.25-.7.25-1.299.175-1.425-.076-.125-.275-.2-.575-.35z"/>
@@ -586,13 +587,13 @@ export default function VisaKitas() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai layanan keimigrasian.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-150 hover:border-gray-250 font-extrabold text-[14.5px] rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
+              className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-150 hover:border-gray-250 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[16px] font-normal">→</span>
             </a>
 
-            <div className="flex items-center gap-1.5 text-[14px] text-gray-500 font-semibold pt-1 px-1">
+            <div className="flex items-center gap-1.5 text-[16px] text-gray-500 font-semibold pt-1 px-1">
               <span className="text-emerald-500">✓</span>
               <span>Respons dalam 5 menit · Senin–Sabtu 08:00–20:00</span>
             </div>

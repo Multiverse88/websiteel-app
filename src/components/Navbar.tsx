@@ -57,12 +57,14 @@ export default function Navbar() {
       ],
     },
     { name: "NIB & OSS", desc: "NIB, OSS RBA & Perizinan Usaha", href: "/layanan/nib-oss" },
+    { name: "Tata Ruang • PKKPR", desc: "Persetujuan Kesesuaian Kegiatan Pemanfaatan Ruang", href: "/layanan/pkkpr" },
     { name: "Apostille", desc: "Legalitas dokumen untuk luar negeri", href: "/layanan/apostille" },
     { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 27001 & lainnya", href: "/layanan/sertifikasi-iso" },
     { name: "Pengajuan PKP", desc: "Pengusaha Kena Pajak", href: "/layanan/pengajuan-pkp" },
     { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/layanan/visa-kitas" },
     { name: "PR & Media", desc: "Publikasi Media Online", href: "/layanan/pr-media" },
     { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/layanan/perjanjian-perkawinan" },
+    { name: "Kontrak Bisnis", desc: "Perjanjian & Legal Drafting", href: "/layanan/kontrak-bisnis" },
     { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/layanan/pelaporan-lkpm" },
     { name: "Pelaporan RUPS", desc: "RUPS Tahunan & Luar Biasa", href: "/layanan/pelaporan-rups" },
     { name: "Referensi & Reseller", desc: "Program Kemitraan & Komisi", href: "/referral-reseller" },
@@ -109,7 +111,7 @@ export default function Navbar() {
             <Link
               href="/home-gads"
               onClick={handleLinkClick}
-              className={`text-[14px] font-medium transition-colors ${
+              className={`text-[16px] font-medium transition-colors ${
                 pathname === "/" || pathname === "/home-gads"
                   ? "text-dark font-semibold"
                   : "text-muted hover:text-dark"
@@ -126,7 +128,7 @@ export default function Navbar() {
             >
               <button
                 onClick={() => setIsLayananOpen(!isLayananOpen)}
-                className={`flex items-center space-x-1 text-[14px] font-medium transition-colors ${
+                className={`flex items-center space-x-1 text-[16px] font-medium transition-colors ${
                   isLayananOpen
                     ? "text-dark font-semibold"
                     : "text-muted hover:text-dark"
@@ -151,10 +153,10 @@ export default function Navbar() {
                           >
                             <div className="h-2 w-2 rounded-full bg-primary/30 mt-1.5 mr-3 transition-colors flex-shrink-0" />
                             <div className="flex-1 min-w-0">
-                              <div className="text-[14px] font-bold text-dark transition-colors">
+                              <div className="text-[16px] font-bold text-dark transition-colors">
                                 {item.name}
                               </div>
-                              <div className="text-[14px] text-muted mt-0.5 line-clamp-1">
+                              <div className="text-[16px] text-muted mt-0.5 line-clamp-1">
                                 {item.desc}
                               </div>
                             </div>
@@ -168,7 +170,7 @@ export default function Navbar() {
                                     key={subIdx}
                                     href={sub.href}
                                     onClick={handleLinkClick}
-                                    className="block px-3 py-2 text-[14px] font-medium text-muted hover:text-primary hover:bg-primary-light rounded-lg transition-colors"
+                                    className="block px-3 py-2 text-[16px] font-medium text-muted hover:text-primary hover:bg-primary-light rounded-lg transition-colors"
                                   >
                                     {sub.name}
                                   </Link>
@@ -186,10 +188,10 @@ export default function Navbar() {
                         >
                           <div className="h-2 w-2 rounded-full bg-primary/30 group-hover:bg-primary mt-1.5 mr-3 transition-colors flex-shrink-0" />
                           <div>
-                            <div className="text-[14px] font-bold text-dark group-hover:text-primary transition-colors">
+                            <div className="text-[16px] font-bold text-dark group-hover:text-primary transition-colors">
                               {item.name}
                             </div>
-                            <div className="text-[14px] text-muted mt-0.5 line-clamp-1">
+                            <div className="text-[16px] text-muted mt-0.5 line-clamp-1">
                               {item.desc}
                             </div>
                           </div>
@@ -204,7 +206,7 @@ export default function Navbar() {
             <Link
               href="/cek-kbli"
               onClick={handleLinkClick}
-              className="text-[14px] font-medium text-muted hover:text-dark transition-colors"
+              className="text-[16px] font-medium text-muted hover:text-dark transition-colors"
             >
               Cek KBLI
             </Link>
@@ -212,7 +214,7 @@ export default function Navbar() {
             <Link
               href="/layanan/virtual-office"
               onClick={handleLinkClick}
-              className="text-[14px] font-medium text-muted hover:text-dark transition-colors"
+              className="text-[16px] font-medium text-muted hover:text-dark transition-colors"
             >
               Virtual Office
             </Link>
@@ -220,7 +222,7 @@ export default function Navbar() {
             <Link
               href="/artikel"
               onClick={handleLinkClick}
-              className={`text-[14px] font-medium transition-colors ${
+              className={`text-[16px] font-medium transition-colors ${
                 pathname.startsWith("/artikel")
                   ? "text-dark font-semibold"
                   : "text-muted hover:text-dark"
@@ -232,7 +234,7 @@ export default function Navbar() {
             <Link
               href="/testimoni"
               onClick={handleLinkClick}
-              className={`text-[14px] font-medium transition-colors ${
+              className={`text-[16px] font-medium transition-colors ${
                 pathname === "/testimoni"
                   ? "text-dark font-semibold"
                   : "text-muted hover:text-dark"
@@ -244,7 +246,7 @@ export default function Navbar() {
             <Link
               href="/tentang-kami"
               onClick={handleLinkClick}
-              className={`text-[14px] font-medium transition-colors ${
+              className={`text-[16px] font-medium transition-colors ${
                 pathname === "/tentang-kami"
                   ? "text-dark font-semibold"
                   : "text-muted hover:text-dark"
@@ -256,7 +258,7 @@ export default function Navbar() {
             <Link
               href="/kontak"
               onClick={handleLinkClick}
-              className={`text-[14px] font-medium transition-colors ${
+              className={`text-[16px] font-medium transition-colors ${
                 pathname === "/kontak"
                   ? "text-dark font-semibold"
                   : "text-muted hover:text-dark"
@@ -270,7 +272,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
             <Link
               href="/cek-nama"
-              className="px-5 py-2.5 border border-dark rounded-full text-[14px] font-bold text-dark hover:bg-dark hover:text-white transition-all duration-200"
+              className="px-5 py-2.5 border border-dark rounded-full text-[16px] font-bold text-dark hover:bg-dark hover:text-white transition-all duration-200"
             >
               Cek Nama PT
             </Link>
@@ -278,7 +280,7 @@ export default function Navbar() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 bg-primary rounded-full text-[14px] font-bold text-white hover:bg-primary-hover shadow-sm hover:shadow transition-all duration-200"
+              className="px-5 py-2.5 bg-primary rounded-full text-[16px] font-bold text-white hover:bg-primary-hover shadow-sm hover:shadow transition-all duration-200"
             >
               Konsultasi Gratis
             </a>
@@ -319,7 +321,7 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   onClick={handleLinkClick}
-                  className={`block px-3 py-2.5 rounded-lg text-[15px] font-medium ${
+                  className={`block px-3 py-2.5 rounded-lg text-[16px] font-medium ${
                     isActive
                       ? "bg-primary-light text-primary font-semibold"
                       : "text-muted hover:bg-bg-light hover:text-dark"
@@ -334,7 +336,7 @@ export default function Navbar() {
             <div className="border-t border-border pt-2 mt-2">
               <button
                 onClick={() => setIsLayananOpen(!isLayananOpen)}
-                className="w-full flex justify-between items-center px-3 py-2.5 text-[15px] font-medium text-muted hover:text-dark"
+                className="w-full flex justify-between items-center px-3 py-2.5 text-[16px] font-medium text-muted hover:text-dark"
               >
                 <span>Layanan</span>
                 <ChevronDown
@@ -353,7 +355,7 @@ export default function Navbar() {
                           <Link
                             href={item.href}
                             onClick={handleLinkClick}
-                            className="text-[14px] font-bold text-muted hover:text-primary flex-1"
+                            className="text-[16px] font-bold text-muted hover:text-primary flex-1"
                           >
                             {item.name}
                           </Link>
@@ -365,7 +367,7 @@ export default function Navbar() {
                               key={subIdx}
                               href={sub.href}
                               onClick={handleLinkClick}
-                              className="block px-3 py-1 text-[14px] font-medium text-muted hover:text-primary"
+                              className="block px-3 py-1 text-[16px] font-medium text-muted hover:text-primary"
                             >
                               {sub.name}
                             </Link>
@@ -377,7 +379,7 @@ export default function Navbar() {
                         key={idx}
                         href={item.href}
                         onClick={handleLinkClick}
-                        className="block px-3 py-1.5 text-[14px] font-medium text-muted hover:text-primary"
+                        className="block px-3 py-1.5 text-[16px] font-medium text-muted hover:text-primary"
                       >
                         {item.name}
                       </Link>
@@ -391,7 +393,7 @@ export default function Navbar() {
               <Link
                 href="/cek-nama"
                 onClick={handleLinkClick}
-                className="w-full text-center py-2.5 border border-dark rounded-full text-[14px] font-bold text-dark hover:bg-dark hover:text-white transition-colors duration-200"
+                className="w-full text-center py-2.5 border border-dark rounded-full text-[16px] font-bold text-dark hover:bg-dark hover:text-white transition-colors duration-200"
               >
                 Cek Nama PT
               </Link>
@@ -400,7 +402,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleLinkClick}
-                className="w-full text-center py-2.5 bg-primary rounded-full text-[14px] font-bold text-white hover:bg-primary-hover transition-colors duration-200"
+                className="w-full text-center py-2.5 bg-primary rounded-full text-[16px] font-bold text-white hover:bg-primary-hover transition-colors duration-200"
               >
                 Konsultasi Gratis
               </a>

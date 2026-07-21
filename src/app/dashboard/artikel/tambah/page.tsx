@@ -407,7 +407,7 @@ export default function TambahArtikelPage() {
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-red-500/5 rounded-full blur-[60px] pointer-events-none" />
 
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
-          <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500 mb-6">
+          <nav className="flex items-center space-x-2 text-[16px] font-medium text-gray-500 mb-6">
             <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
               <Home className="w-3.5 h-3.5" />
               <span>Beranda</span>
@@ -417,14 +417,14 @@ export default function TambahArtikelPage() {
               Dashboard
             </Link>
             <span className="text-gray-300 font-normal">&gt;</span>
-            <span className="text-[14px] font-bold text-gray-900">Tambah Artikel</span>
+            <span className="text-[16px] font-bold text-gray-900">Tambah Artikel</span>
           </nav>
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div>
               <div className="inline-flex items-center space-x-2 bg-red-50 py-1.5 px-3.5 rounded-full border border-red-100/50 shadow-sm mb-4">
                 <Sparkles className="w-3.5 h-3.5 text-[#990202]" />
-                <span className="text-[14px] font-bold text-[#990202] tracking-wide">CMS Panel</span>
+                <span className="text-[16px] font-bold text-[#990202] tracking-wide">CMS Panel</span>
               </div>
               <h1 className="font-heading text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
                 Tulis Artikel Baru
@@ -433,7 +433,7 @@ export default function TambahArtikelPage() {
 
             <Link
               href="/dashboard/artikel"
-              className="inline-flex items-center justify-center px-5 py-3 shadow-md border border-black/[0.04] text-gray-700 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] font-bold text-[14px] rounded-xl transition-all duration-200 bg-white shadow-sm flex-shrink-0"
+              className="inline-flex items-center justify-center px-5 py-3 shadow-md border border-black/[0.04] text-gray-700 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] font-bold text-[16px] rounded-xl transition-all duration-200 bg-white shadow-sm flex-shrink-0"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               <span>Batal & Kembali</span>
@@ -452,7 +452,7 @@ export default function TambahArtikelPage() {
             <div className="lg:col-span-7 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.03)] rounded-[28px] shadow-md border border-black/[0.04] p-6 sm:p-8">
 
               {error && (
-                <div className="mb-6 p-4.5 bg-red-50 border border-red-200 rounded-2xl text-[14px] text-[#990202] font-semibold flex items-center gap-2">
+                <div className="mb-6 p-4.5 bg-red-50 border border-red-200 rounded-2xl text-[16px] text-[#990202] font-semibold flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#990202] flex-shrink-0 animate-ping" />
                   <span>{error}</span>
                 </div>
@@ -462,7 +462,7 @@ export default function TambahArtikelPage() {
 
                 {/* Title */}
                 <div className="space-y-2">
-                  <label htmlFor="title" className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                  <label htmlFor="title" className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
                     Judul Artikel <span className="text-[#990202]">*</span>
                   </label>
                   <input
@@ -473,14 +473,14 @@ export default function TambahArtikelPage() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Contoh: Panduan Lengkap Cara Mengurus NIB di OSS RBA 2026"
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[14.5px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                   />
                 </div>
 
                 {/* Category & Read Time */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label htmlFor="category" className="text-[14px] font-extrabold text-gray-900">
+                    <label htmlFor="category" className="text-[16px] font-extrabold text-gray-900">
                       Kategori <span className="text-[#990202]">*</span>
                     </label>
                     <select
@@ -488,7 +488,7 @@ export default function TambahArtikelPage() {
                       name="category"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[14.5px] focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-semibold text-gray-800"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-semibold text-gray-800"
                     >
                       <optgroup label="Pendirian Usaha">
                         <option value="Legalitas PT">Legalitas PT</option>
@@ -510,7 +510,7 @@ export default function TambahArtikelPage() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="readTime" className="text-[14px] font-extrabold text-gray-900">
+                    <label htmlFor="readTime" className="text-[16px] font-extrabold text-gray-900">
                       Estimasi Waktu Baca <span className="text-[#990202]">*</span>
                     </label>
                     <input
@@ -521,14 +521,14 @@ export default function TambahArtikelPage() {
                       value={readTime}
                       onChange={(e) => setReadTime(e.target.value)}
                       placeholder="Contoh: 5 menit baca"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[14.5px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                     />
                   </div>
                 </div>
 
                 {/* Cover Image - Tab Mode */}
                 <div className="space-y-3">
-                  <label className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                  <label className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
                     Gambar Sampul (Cover Image)
                   </label>
 
@@ -537,7 +537,7 @@ export default function TambahArtikelPage() {
                     <button
                       type="button"
                       onClick={switchToUpload}
-                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[14px] font-bold transition-all ${
+                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[16px] font-bold transition-all ${
                         coverMode === "upload"
                           ? "bg-white text-[#990202] shadow-sm shadow-md border border-black/[0.04]"
                           : "text-gray-500 hover:text-gray-700"
@@ -549,7 +549,7 @@ export default function TambahArtikelPage() {
                     <button
                       type="button"
                       onClick={switchToUrl}
-                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[14px] font-bold transition-all ${
+                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[16px] font-bold transition-all ${
                         coverMode === "url"
                           ? "bg-white text-[#990202] shadow-sm shadow-md border border-black/[0.04]"
                           : "text-gray-500 hover:text-gray-700"
@@ -583,21 +583,21 @@ export default function TambahArtikelPage() {
                           />
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                             <div className="flex items-center justify-between">
-                              <div className="text-white text-[14px] font-bold truncate max-w-[70%]">
+                              <div className="text-white text-[16px] font-bold truncate max-w-[70%]">
                                 {coverFile.name}
                               </div>
                               <div className="flex gap-2">
                                 <button
                                   type="button"
                                   onClick={() => fileInputRef.current?.click()}
-                                  className="px-3 py-1.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-[14px] font-bold rounded-lg transition-colors"
+                                  className="px-3 py-1.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-[16px] font-bold rounded-lg transition-colors"
                                 >
                                   Ganti
                                 </button>
                                 <button
                                   type="button"
                                   onClick={removeFile}
-                                  className="px-3 py-1.5 bg-red-500/80 hover:bg-red-500 backdrop-blur-sm text-white text-[14px] font-bold rounded-lg transition-colors flex items-center gap-1"
+                                  className="px-3 py-1.5 bg-red-500/80 hover:bg-red-500 backdrop-blur-sm text-white text-[16px] font-bold rounded-lg transition-colors flex items-center gap-1"
                                 >
                                   <X className="w-3 h-3" />
                                   Hapus
@@ -627,10 +627,10 @@ export default function TambahArtikelPage() {
                               <Upload className={`w-6 h-6 ${isDragging ? "text-[#990202]" : "text-gray-400"}`} />
                             </div>
                             <div>
-                              <p className="text-[14px] font-bold text-gray-700">
+                              <p className="text-[16px] font-bold text-gray-700">
                                 {isDragging ? "Lepaskan gambar di sini" : "Klik atau seret gambar ke sini"}
                               </p>
-                              <p className="text-[14px] text-gray-400 mt-1">
+                              <p className="text-[16px] text-gray-400 mt-1">
                                 JPG, PNG, WebP, atau GIF (maks. 5MB)
                               </p>
                             </div>
@@ -640,7 +640,7 @@ export default function TambahArtikelPage() {
 
                       {/* Presets */}
                       <div className="pt-1">
-                        <div className="text-[14px] font-extrabold text-gray-400 mb-2 flex items-center gap-1">
+                        <div className="text-[16px] font-extrabold text-gray-400 mb-2 flex items-center gap-1">
                           <ImageIcon className="w-3.5 h-3.5" />
                           <span>Atau gunakan gambar preset:</span>
                         </div>
@@ -655,7 +655,7 @@ export default function TambahArtikelPage() {
                                 setCoverUrl(preset.url);
                                 if (fileInputRef.current) fileInputRef.current.value = "";
                               }}
-                              className={`px-3 py-1.5 text-[14px] font-bold rounded-lg border transition-all flex items-center gap-1 ${
+                              className={`px-3 py-1.5 text-[16px] font-bold rounded-lg border transition-all flex items-center gap-1 ${
                                 coverPreview === preset.url && !coverFile
                                   ? "bg-red-50 text-[#990202] border-[#990202]/30 shadow-sm"
                                   : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
@@ -682,12 +682,12 @@ export default function TambahArtikelPage() {
                           setCoverPreview(e.target.value);
                         }}
                         placeholder="https://images.unsplash.com/photo-..."
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[14.5px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                       />
 
                       {/* Presets */}
                       <div className="pt-1">
-                        <div className="text-[14px] font-extrabold text-gray-400 mb-2 flex items-center gap-1">
+                        <div className="text-[16px] font-extrabold text-gray-400 mb-2 flex items-center gap-1">
                           <ImageIcon className="w-3.5 h-3.5" />
                           <span>Atau gunakan gambar preset:</span>
                         </div>
@@ -700,7 +700,7 @@ export default function TambahArtikelPage() {
                                 setCoverUrl(preset.url);
                                 setCoverPreview(preset.url);
                               }}
-                              className={`px-3 py-1.5 text-[14px] font-bold rounded-lg border transition-all flex items-center gap-1 ${
+                              className={`px-3 py-1.5 text-[16px] font-bold rounded-lg border transition-all flex items-center gap-1 ${
                                 coverUrl === preset.url
                                   ? "bg-red-50 text-[#990202] border-[#990202]/30 shadow-sm"
                                   : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
@@ -718,7 +718,7 @@ export default function TambahArtikelPage() {
 
                 {/* Excerpt */}
                 <div className="space-y-2">
-                  <label htmlFor="excerpt" className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                  <label htmlFor="excerpt" className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
                     Kutipan Singkat (Excerpt) <span className="text-[#990202]">*</span>
                   </label>
                   <textarea
@@ -730,9 +730,9 @@ export default function TambahArtikelPage() {
                     value={excerpt}
                     onChange={(e) => setExcerpt(e.target.value)}
                     placeholder="Tuliskan rangkuman artikel singkat (maksimal 200 karakter)..."
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[14.5px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950 resize-none"
+                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950 resize-none"
                   />
-                  <div className="text-right text-[14px] font-bold text-gray-400">
+                  <div className="text-right text-[16px] font-bold text-gray-400">
                     {excerpt.length} / 200 karakter
                   </div>
                 </div>
@@ -740,7 +740,7 @@ export default function TambahArtikelPage() {
                 {/* Content */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <label className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                    <label className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
                       Isi Lengkap Artikel <span className="text-[#990202]">*</span>
                     </label>
                   </div>
@@ -751,27 +751,27 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("formatBlock", "<h3>")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Ubah menjadi Sub-judul (H3)"
                     >
-                      <span className="font-mono text-[14px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">H3</span>
+                      <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">H3</span>
                       <span>Sub-judul</span>
                     </button>
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("bold")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Jadikan Teks Tebal"
                     >
-                      <span className="font-mono text-[14px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">B</span>
+                      <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">B</span>
                       <span>Tebal</span>
                     </button>
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleOpenLinkModal}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Link"
                     >
                       <ExternalLink className="w-3 h-3 text-[#990202]" />
@@ -781,17 +781,17 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleRemoveLink}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Hapus Link dari Teks"
                     >
-                      <span className="font-mono text-[14px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">~</span>
+                      <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">~</span>
                       <span>Hapus Link</span>
                     </button>
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleOpenImageModal}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Gambar"
                     >
                       <ImageIcon className="w-3 h-3 text-[#990202]" />
@@ -801,30 +801,30 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertUnorderedList")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan List Poin"
                     >
-                      <span className="font-mono text-[14px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">•</span>
+                      <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">•</span>
                       <span>List Poin</span>
                     </button>
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertOrderedList")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan List Angka"
                     >
-                      <span className="font-mono text-[14px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">1.</span>
+                      <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">1.</span>
                       <span>List Angka</span>
                     </button>
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertHorizontalRule")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Garis Pembatas"
                     >
-                      <span className="font-mono text-[14px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">―</span>
+                      <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">―</span>
                       <span>Pembatas</span>
                     </button>
                   </div>
@@ -837,7 +837,7 @@ export default function TambahArtikelPage() {
                       onInput={handleEditorInput}
                       onClick={handleEditorClick}
                       data-placeholder="Tuliskan isi lengkap artikel Anda di sini. Klik tombol di atas untuk memformat secara langsung..."
-                      className="w-full bg-white px-4 py-3.5 text-[14.5px] focus:outline-none transition-all font-medium text-gray-950 min-h-[350px] max-h-[600px] overflow-y-auto prose-editor"
+                      className="w-full bg-white px-4 py-3.5 text-[16px] focus:outline-none transition-all font-medium text-gray-950 min-h-[350px] max-h-[600px] overflow-y-auto prose-editor"
                     />
                   </div>
 
@@ -847,7 +847,7 @@ export default function TambahArtikelPage() {
                       <div className="bg-white rounded-2xl shadow-2xl shadow-md border border-black/[0.04] p-5 w-full max-w-md mx-4">
                         <div className="flex items-center gap-2 mb-4">
                           <ExternalLink className="w-4 h-4 text-[#990202]" />
-                          <h3 className="text-[14px] font-extrabold text-gray-900">Sisipkan Link</h3>
+                          <h3 className="text-[16px] font-extrabold text-gray-900">Sisipkan Link</h3>
                         </div>
                         <input
                           type="url"
@@ -856,13 +856,13 @@ export default function TambahArtikelPage() {
                           onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleApplyLink(); } }}
                           placeholder="https://example.com"
                           autoFocus
-                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[14px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                         />
                         <div className="flex justify-end gap-2 mt-4">
                           <button
                             type="button"
                             onClick={() => { setShowLinkModal(false); setLinkUrl(""); }}
-                            className="px-4 py-2 text-[14px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
+                            className="px-4 py-2 text-[16px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
                           >
                             Batal
                           </button>
@@ -870,7 +870,7 @@ export default function TambahArtikelPage() {
                             type="button"
                             onClick={handleApplyLink}
                             disabled={!linkUrl.trim()}
-                            className="px-4 py-2 bg-[#990202] text-white text-[14px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                            className="px-4 py-2 bg-[#990202] text-white text-[16px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                           >
                             Pasang Link
                           </button>
@@ -885,12 +885,12 @@ export default function TambahArtikelPage() {
                       <div className="bg-white rounded-2xl shadow-2xl shadow-md border border-black/[0.04] p-5 w-full max-w-md mx-4">
                         <div className="flex items-center gap-2 mb-4">
                           <ImageIcon className="w-4 h-4 text-[#990202]" />
-                          <h3 className="text-[14px] font-extrabold text-gray-900">{isEditingImage ? "Ganti Gambar" : "Sisipkan Gambar"}</h3>
+                          <h3 className="text-[16px] font-extrabold text-gray-900">{isEditingImage ? "Ganti Gambar" : "Sisipkan Gambar"}</h3>
                         </div>
 
                         {/* Upload option */}
                         <div className="mb-4">
-                          <label className="text-[14px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Upload File</label>
+                          <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Upload File</label>
                           <input
                             ref={imageFileInputRef}
                             type="file"
@@ -902,7 +902,7 @@ export default function TambahArtikelPage() {
                             type="button"
                             onClick={() => imageFileInputRef.current?.click()}
                             disabled={isCompressing || isUploadingImage}
-                            className="w-full py-2.5 border-2 border-dashed border-gray-200 rounded-xl text-[14px] font-bold text-gray-500 hover:border-[#990202] hover:text-[#990202] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full py-2.5 border-2 border-dashed border-gray-200 rounded-xl text-[16px] font-bold text-gray-500 hover:border-[#990202] hover:text-[#990202] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             {isUploadingImage ? (
                               <>
@@ -925,27 +925,27 @@ export default function TambahArtikelPage() {
 
                         {/* URL option */}
                         <div className="mb-4">
-                          <label className="text-[14px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Atau Input URL</label>
+                          <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Atau Input URL</label>
                           <input
                             type="url"
                             value={imageUrl.startsWith("blob:") ? "" : imageUrl}
                             onChange={(e) => setImageUrl(e.target.value)}
                             onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInsertImage(); } }}
                             placeholder="https://example.com/gambar.jpg"
-                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                           />
                         </div>
 
                         {/* Alt text */}
                         <div className="mb-4">
-                          <label className="text-[14px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Alt Text (Opsional)</label>
+                          <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Alt Text (Opsional)</label>
                           <input
                             type="text"
                             value={imageAlt}
                             onChange={(e) => setImageAlt(e.target.value)}
                             onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInsertImage(); } }}
                             placeholder="Deskripsi singkat gambar"
-                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                           />
                         </div>
 
@@ -965,7 +965,7 @@ export default function TambahArtikelPage() {
                           <button
                             type="button"
                             onClick={() => { setShowImageModal(false); setImageUrl(""); setImageAlt(""); }}
-                            className="px-4 py-2 text-[14px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
+                            className="px-4 py-2 text-[16px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
                           >
                             Batal
                           </button>
@@ -973,7 +973,7 @@ export default function TambahArtikelPage() {
                             type="button"
                             onClick={handleInsertImage}
                             disabled={!imageUrl.trim()}
-                            className="px-4 py-2 bg-[#990202] text-white text-[14px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                            className="px-4 py-2 bg-[#990202] text-white text-[16px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                           >
                             {isEditingImage ? "Ganti Gambar" : "Pasang Gambar"}
                           </button>
@@ -1098,7 +1098,7 @@ export default function TambahArtikelPage() {
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[15px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
+                    className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[16px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
                   >
                     {isPending ? (
                       <>
@@ -1121,7 +1121,7 @@ export default function TambahArtikelPage() {
             <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
 
               <div className="bg-white/40 shadow-md border border-black/[0.04] rounded-2xl py-3 px-4 flex items-center justify-between">
-                <div className="text-[14px] font-extrabold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                <div className="text-[16px] font-extrabold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-500" />
                   <span>Pratinjau Langsung (Live Preview)</span>
                 </div>
@@ -1138,7 +1138,7 @@ export default function TambahArtikelPage() {
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-102"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="inline-flex px-3 py-1.5 rounded-lg text-[14px] font-black uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">
+                    <span className="inline-flex px-3 py-1.5 rounded-lg text-[16px] font-black uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">
                       {category}
                     </span>
                   </div>
@@ -1146,7 +1146,7 @@ export default function TambahArtikelPage() {
 
                 <div className="p-6 flex-grow flex flex-col justify-between">
                   <div className="space-y-4">
-                    <div className="flex items-center space-x-4 text-[14px] font-bold text-gray-400">
+                    <div className="flex items-center space-x-4 text-[16px] font-bold text-gray-400">
                       <div className="flex items-center space-x-1.5">
                         <span className="w-2 h-2 rounded-full bg-[#990202]/30" />
                         <span>Hari ini</span>
@@ -1156,22 +1156,22 @@ export default function TambahArtikelPage() {
                         <span>{readTime || "5 menit baca"}</span>
                       </div>
                     </div>
-                    <h3 className="font-heading text-[18px] sm:text-[20px] font-extrabold text-gray-950 leading-snug line-clamp-2">
+                    <h3 className="font-heading text-[16px] sm:text-[16px] font-extrabold text-gray-950 leading-snug line-clamp-2">
                       {title || "Judul artikel Anda akan tampil di sini..."}
                     </h3>
-                    <p className="text-[14px] text-gray-500 leading-relaxed font-normal line-clamp-3">
+                    <p className="text-[16px] text-gray-500 leading-relaxed font-normal line-clamp-3">
                       {excerpt || "Tulis kutipan singkat pada form di sebelah kiri untuk melihat gambaran pratinjau cuplikan artikel di sini..."}
                     </p>
                   </div>
-                  <div className="flex items-center text-[14px] font-extrabold text-[#990202] mt-6 pt-4 border-t border-gray-100">
+                  <div className="flex items-center text-[16px] font-extrabold text-[#990202] mt-6 pt-4 border-t border-gray-100">
                     <span>Baca Selengkapnya</span>
                     <span className="ml-1.5">→</span>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-amber-50/50 rounded-2xl border border-amber-100 p-5 leading-relaxed text-[14px] text-amber-800 font-medium">
-                <div className="font-extrabold text-[14px] mb-1.5 text-amber-900 flex items-center gap-1.5">
+              <div className="bg-amber-50/50 rounded-2xl border border-amber-100 p-5 leading-relaxed text-[16px] text-amber-800 font-medium">
+                <div className="font-extrabold text-[16px] mb-1.5 text-amber-900 flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-600" />
                   <span>Tips Menulis Artikel Populer</span>
                 </div>
@@ -1182,25 +1182,25 @@ export default function TambahArtikelPage() {
               <div className="bg-white rounded-3xl shadow-md border border-black/[0.04] p-5 shadow-[0_12px_30px_rgba(0,0,0,0.03)] space-y-4">
                 <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
                   <FileText className="w-5 h-5 text-[#990202]" />
-                  <span className="text-[14px] font-extrabold text-gray-900">
+                  <span className="text-[16px] font-extrabold text-gray-900">
                     Contoh Hasil Tampilan Format
                   </span>
                 </div>
 
-                <div className="space-y-4 text-[14px] leading-relaxed text-gray-600">
+                <div className="space-y-4 text-[16px] leading-relaxed text-gray-600">
                   {/* Heading H3 */}
                   <div className="space-y-1">
-                    <div className="text-[14px] font-extrabold text-gray-400 uppercase tracking-wide">
+                    <div className="text-[16px] font-extrabold text-gray-400 uppercase tracking-wide">
                       Sub-judul (H3)
                     </div>
-                    <div className="border-l-4 border-[#990202] pl-3 py-0.5 font-extrabold text-gray-950 text-[14.5px]">
+                    <div className="border-l-4 border-[#990202] pl-3 py-0.5 font-extrabold text-gray-950 text-[16px]">
                       Contoh Judul Sub-bab
                     </div>
                   </div>
 
                   {/* Bold text */}
                   <div className="space-y-1">
-                    <div className="text-[14px] font-extrabold text-gray-400 uppercase tracking-wide">
+                    <div className="text-[16px] font-extrabold text-gray-400 uppercase tracking-wide">
                       Teks Tebal
                     </div>
                     <div className="bg-gray-50/50 p-2.5 rounded-lg shadow-sm border border-black/[0.02] font-medium">
@@ -1210,7 +1210,7 @@ export default function TambahArtikelPage() {
 
                   {/* Bullet points */}
                   <div className="space-y-1">
-                    <div className="text-[14px] font-extrabold text-gray-400 uppercase tracking-wide">
+                    <div className="text-[16px] font-extrabold text-gray-400 uppercase tracking-wide">
                       Daftar Poin (Bullet List)
                     </div>
                     <ul className="bg-gray-50/50 p-2.5 rounded-lg shadow-sm border border-black/[0.02] list-none pl-0 space-y-1.5 font-medium">
@@ -1227,16 +1227,16 @@ export default function TambahArtikelPage() {
 
                   {/* Numbered List */}
                   <div className="space-y-1">
-                    <div className="text-[14px] font-extrabold text-gray-400 uppercase tracking-wide">
+                    <div className="text-[16px] font-extrabold text-gray-400 uppercase tracking-wide">
                       Daftar Angka (Numbered List)
                     </div>
                     <ol className="bg-gray-50/50 p-2.5 rounded-lg shadow-sm border border-black/[0.02] list-none pl-0 space-y-1.5 font-medium">
                       <li className="flex items-center">
-                        <span className="w-4.5 h-4.5 bg-red-50 text-[#990202] text-[14px] font-black rounded flex items-center justify-center mr-2 border border-red-100/40">1</span>
+                        <span className="w-4.5 h-4.5 bg-red-50 text-[#990202] text-[16px] font-black rounded flex items-center justify-center mr-2 border border-red-100/40">1</span>
                         <span>Registrasi akun OSS</span>
                       </li>
                       <li className="flex items-center">
-                        <span className="w-4.5 h-4.5 bg-red-50 text-[#990202] text-[14px] font-black rounded flex items-center justify-center mr-2 border border-red-100/40">2</span>
+                        <span className="w-4.5 h-4.5 bg-red-50 text-[#990202] text-[16px] font-black rounded flex items-center justify-center mr-2 border border-red-100/40">2</span>
                         <span>Penerbitan NIB</span>
                       </li>
                     </ol>
@@ -1244,7 +1244,7 @@ export default function TambahArtikelPage() {
 
                   {/* Horizontal Rule */}
                   <div className="space-y-1">
-                    <div className="text-[14px] font-extrabold text-gray-400 uppercase tracking-wide">
+                    <div className="text-[16px] font-extrabold text-gray-400 uppercase tracking-wide">
                       Garis Pembatas
                     </div>
                     <div className="bg-gray-50/50 py-2.5 px-2 rounded-lg shadow-sm border border-black/[0.02] flex items-center justify-center">
@@ -1290,7 +1290,7 @@ function renderMarkdownContent(text: string) {
         <h3
           key={idx}
           id={headingId}
-          className="font-heading text-[17px] sm:text-[18px] font-extrabold text-gray-950 mt-6 mb-3 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-2.5"
+          className="font-heading text-[16px] sm:text-[16px] font-extrabold text-gray-950 mt-6 mb-3 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-2.5"
         >
           {headingText}
         </h3>
@@ -1305,7 +1305,7 @@ function renderMarkdownContent(text: string) {
           {items.map((item, itemIdx) => {
             const parsedItem = parseBoldText(item);
             return (
-              <li key={itemIdx} className="text-[14px] leading-relaxed text-gray-600 relative pl-5 flex items-start">
+              <li key={itemIdx} className="text-[16px] leading-relaxed text-gray-600 relative pl-5 flex items-start">
                 <span className="absolute left-0 top-[7px] w-1.5 h-1.5 rounded-full bg-[#990202]/70" />
                 <span className="flex-1">{parsedItem}</span>
               </li>
@@ -1323,8 +1323,8 @@ function renderMarkdownContent(text: string) {
           {items.map((item, itemIdx) => {
             const parsedItem = parseBoldText(item);
             return (
-              <li key={itemIdx} className="text-[14px] leading-relaxed text-gray-600 flex items-start">
-                <span className="flex items-center justify-center w-5 h-5 rounded-lg bg-red-50 text-[#990202] text-[14px] font-black mr-2.5 flex-shrink-0 mt-0.5 border border-red-100/40">
+              <li key={itemIdx} className="text-[16px] leading-relaxed text-gray-600 flex items-start">
+                <span className="flex items-center justify-center w-5 h-5 rounded-lg bg-red-50 text-[#990202] text-[16px] font-black mr-2.5 flex-shrink-0 mt-0.5 border border-red-100/40">
                   {itemIdx + 1}
                 </span>
                 <span className="flex-1">{parsedItem}</span>
@@ -1337,7 +1337,7 @@ function renderMarkdownContent(text: string) {
 
     // Default Paragraph with Bold text parser
     return (
-      <p key={idx} className="text-[14px] leading-[1.7] text-gray-600 font-normal my-3">
+      <p key={idx} className="text-[16px] leading-[1.7] text-gray-600 font-normal my-3">
         {parseBoldText(trimmed)}
       </p>
     );

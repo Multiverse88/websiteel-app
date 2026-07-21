@@ -296,19 +296,19 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
 
         <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-[14px] font-medium text-gray-500 mb-8">
+          <nav className="flex items-center space-x-2 text-[16px] font-medium text-gray-500 mb-8">
             <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
               <Home className="w-3.5 h-3.5" />
               <span>Beranda</span>
             </Link>
             <span className="text-gray-300 font-normal">&gt;</span>
-            <span className="text-[14px] font-bold text-gray-900">Artikel &amp; Edukasi</span>
+            <span className="text-[16px] font-bold text-gray-900">Artikel &amp; Edukasi</span>
           </nav>
 
           {/* Pill Badge / Section Indicator */}
           <div className="flex items-center space-x-2 mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-            <span className="text-[14px] font-black uppercase tracking-widest text-[#990202]">
+            <span className="text-[16px] font-black uppercase tracking-widest text-[#990202]">
               BLOG &amp; ARTIKEL
             </span>
           </div>
@@ -319,7 +319,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
               <br />
               <span className="text-[#990202]">Anda</span>.
             </h1>
-            <p className="text-[15px] sm:text-[16px] text-gray-500 leading-relaxed mt-5 max-w-2xl font-normal">
+            <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed mt-5 max-w-2xl font-normal">
               Panduan praktis seputar pendirian usaha, pajak, HAKI, ISO, perizinan &amp; branding — ditulis tim legal EasyLegal, update tiap minggu.
             </p>
           </div>
@@ -335,11 +335,11 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                 name="q"
                 defaultValue={q}
                 placeholder="Cari artikel... (mis. NIB, PKP, merek)"
-                className="w-full pl-2 pr-4 py-3 bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none text-[14px] sm:text-[15px]"
+                className="w-full pl-2 pr-4 py-3 bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none text-[16px] sm:text-[16px]"
               />
               <button
                 type="submit"
-                className="bg-[#990202] hover:bg-[#800000] text-white px-6 py-2.5 rounded-xl font-bold text-[14.5px] transition-colors shadow-sm whitespace-nowrap mr-0.5 cursor-pointer"
+                className="bg-[#990202] hover:bg-[#800000] text-white px-6 py-2.5 rounded-xl font-bold text-[16px] transition-colors shadow-sm whitespace-nowrap mr-0.5 cursor-pointer"
               >
                 Cari
               </button>
@@ -347,7 +347,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
 
             {/* Search feedback & reset button */}
             {q && (
-              <div className="mt-4 flex items-center space-x-2 text-[14px] text-gray-500">
+              <div className="mt-4 flex items-center space-x-2 text-[16px] text-gray-500">
                 <span>Hasil pencarian untuk: <strong>&quot;{q}&quot;</strong></span>
                 <span className="text-gray-300">•</span>
                 <Link href="/artikel" className="text-[#990202] hover:underline font-semibold flex items-center gap-0.5">
@@ -375,14 +375,14 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                 <Link
                   key={cat}
                   href={getCategoryHref(cat)}
-                  className={`px-4.5 py-2 rounded-full text-[14px] font-extrabold transition-all duration-200 ${
+                  className={`px-4.5 py-2 rounded-full text-[16px] font-extrabold transition-all duration-200 ${
                     isActive
                       ? "bg-[#990202] text-white shadow-sm"
                       : "bg-[#F3F4F6] text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   }`}
                 >
                   {cat}{" "}
-                  <span className={`text-[14px] font-medium ml-0.5 ${isActive ? "text-red-200" : "text-gray-400"}`}>
+                  <span className={`text-[16px] font-medium ml-0.5 ${isActive ? "text-red-200" : "text-gray-400"}`}>
                     ({count})
                   </span>
                 </Link>
@@ -407,7 +407,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                       className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-full text-[14px] font-extrabold uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">
+                      <span className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-full text-[16px] font-extrabold uppercase tracking-wider bg-white text-[#990202] shadow-sm border border-red-50">
                         <span className="text-red-600 font-bold">★</span> <span>ARTIKEL PILIHAN</span>
                       </span>
                     </div>
@@ -416,20 +416,20 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                   {/* Content Column */}
                   <div className="flex flex-col justify-between py-2">
                     <div>
-                      <span className="text-[#990202] text-[14px] font-black tracking-widest uppercase block mb-3">
+                      <span className="text-[#990202] text-[16px] font-black tracking-widest uppercase block mb-3">
                         {CATEGORY_MAP[featuredArticle.category] || featuredArticle.category}
                       </span>
-                      <h2 className="font-heading text-[24px] sm:text-[30px] font-extrabold text-gray-950 leading-tight group-hover:text-[#990202] transition-colors duration-200">
+                      <h2 className="font-heading text-[16px] sm:text-[30px] font-extrabold text-gray-950 leading-tight group-hover:text-[#990202] transition-colors duration-200">
                         <Link href={`/artikel/${featuredArticle.slug}`}>
                           {featuredArticle.title}
                         </Link>
                       </h2>
-                      <p className="text-[14.5px] sm:text-[15px] text-gray-500 leading-relaxed mt-4 line-clamp-4">
+                      <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed mt-4 line-clamp-4">
                         {featuredArticle.excerpt}
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-2 text-[14px] font-medium text-gray-400 mt-6 pt-4 border-t border-gray-100">
+                    <div className="flex items-center space-x-2 text-[16px] font-medium text-gray-400 mt-6 pt-4 border-t border-gray-100">
                       <div className="flex items-center text-[#990202]">
                         <Clock className="w-3.5 h-3.5" />
                       </div>
@@ -471,20 +471,20 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                   {/* Details */}
                   <div className="px-2 pb-2 flex-grow flex flex-col justify-between">
                     <div>
-                      <span className="text-[#990202] text-[14px] font-black tracking-widest uppercase block mb-2">
+                      <span className="text-[#990202] text-[16px] font-black tracking-widest uppercase block mb-2">
                         {CATEGORY_MAP[article.category] || article.category}
                       </span>
-                      <h3 className="font-heading text-[17px] sm:text-[18px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug mb-2 line-clamp-2">
+                      <h3 className="font-heading text-[16px] sm:text-[16px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug mb-2 line-clamp-2">
                         <Link href={`/artikel/${article.slug}`} className="focus:outline-none">
                           {article.title}
                         </Link>
                       </h3>
-                      <p className="text-[14px] text-gray-500 leading-relaxed font-normal line-clamp-3 mb-4">
+                      <p className="text-[16px] text-gray-500 leading-relaxed font-normal line-clamp-3 mb-4">
                         {article.excerpt}
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-2 text-[14px] font-medium text-gray-400 pt-4 border-t border-gray-100 mt-2">
+                    <div className="flex items-center space-x-2 text-[16px] font-medium text-gray-400 pt-4 border-t border-gray-100 mt-2">
                       <div className="flex items-center text-[#990202]">
                         <Clock className="w-3.5 h-3.5" />
                       </div>
@@ -511,13 +511,13 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
                 <Link
                   href={getLoadMoreHref()}
                   scroll={false}
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white shadow-md border border-black/[0.04] hover:border-gray-300 hover:bg-gray-50 text-gray-800 rounded-full font-bold text-[14px] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] cursor-pointer"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white shadow-md border border-black/[0.04] hover:border-gray-300 hover:bg-gray-50 text-gray-800 rounded-full font-bold text-[16px] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] cursor-pointer"
                 >
                   <span>Muat Lebih Banyak</span>
                   <ChevronDown className="w-4.5 h-4.5 text-gray-500" />
                 </Link>
               )}
-              <p className="text-[14px] text-gray-400 font-bold tracking-wide">
+              <p className="text-[16px] text-gray-400 font-bold tracking-wide">
                 Menampilkan {articles.length} dari {totalMatchingCount} artikel
               </p>
             </div>
@@ -527,8 +527,8 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
           {articles.length === 0 && (
             <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-black/[0.02] shadow-sm max-w-xl mx-auto">
               <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-[18px] font-extrabold text-gray-900 mb-2">Belum ada artikel</h3>
-              <p className="text-[14px] text-gray-500 px-6">
+              <h3 className="text-[16px] font-extrabold text-gray-900 mb-2">Belum ada artikel</h3>
+              <p className="text-[16px] text-gray-500 px-6">
                 Kami sedang menyiapkan konten-konten edukasi berkualitas untuk Anda. Kunjungi beberapa saat lagi!
               </p>
             </div>
