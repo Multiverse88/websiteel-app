@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { prisma } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: {
     default: "Dashboard Admin | EasyLegal",

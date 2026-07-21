@@ -507,6 +507,7 @@ const CATEGORY_MAP: Record<string, string> = {
   "Sertifikasi ISO": "ISO",
   "KBLI": "Perizinan",
   "Perizinan": "Perizinan",
+  "NIB": "NIB",
   "Pajak": "Pajak",
   "Branding": "Branding",
 };

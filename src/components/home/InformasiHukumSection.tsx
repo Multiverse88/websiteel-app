@@ -27,6 +27,7 @@ const CATEGORIES = [
   "UMKM",
   "KBLI",
   "Perizinan",
+  "NIB",
   "Merek & HAKI",
 ];
 
