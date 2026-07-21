@@ -504,6 +504,7 @@ export default function TambahArtikelPage() {
                       <optgroup label="Lainnya">
                         <option value="Merek & HAKI">Merek & HAKI</option>
                         <option value="Sertifikasi ISO">Sertifikasi ISO</option>
+                        <option value="NIB">NIB</option>
                         <option value="Pajak Bisnis">Pajak Bisnis</option>
                         <option value="Virtual Office">Virtual Office</option>
                       </optgroup>

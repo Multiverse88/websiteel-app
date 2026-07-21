@@ -158,6 +158,7 @@ const CATEGORY_MAP: Record<string, string> = {
   "Sertifikasi ISO": "ISO",
   "KBLI": "Perizinan",
   "Perizinan": "Perizinan",
+  "NIB": "NIB",
   "Pajak": "Pajak",
   "Branding": "Branding",
 };
@@ -168,6 +169,7 @@ const DB_CATEGORIES_MAP: Record<string, string[]> = {
   "Haki": ["Merek & HAKI"],
   "ISO": ["Sertifikasi ISO"],
   "Perizinan": ["Perizinan", "KBLI"],
+  "NIB": ["NIB"],
   "Pajak": ["Pajak"],
   "Branding": ["Branding"],
 };
@@ -188,7 +190,7 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
   });
 
   // Standard categories to display in order
-  const displayCategories = ["All", "Pendirian Usaha", "Pajak", "Haki", "ISO", "Perizinan", "Branding"];
+  const displayCategories = ["All", "Pendirian Usaha", "Pajak", "Haki", "ISO", "Perizinan", "NIB", "Branding"];
 
   // Initialize counts
   const counts: Record<string, number> = {
