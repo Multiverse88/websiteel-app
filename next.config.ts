@@ -85,7 +85,11 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
+    const minioInternal = process.env.MINIO_ENDPOINT || "http://host.docker.internal:9000";
     return [
+      // Proxy /images/ to MinIO for uploaded articles (Cloudflare → Next.js doesn't have these files)
+      { source: "/images/:path*", destination: `${minioInternal}/images/:path*` },
+
       // Home & General
       { source: "/home-gads", destination: "/" },
 
