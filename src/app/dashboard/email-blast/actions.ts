@@ -308,3 +308,27 @@ export async function toggleAllContactsStatusAction(isActive: boolean) {
     return { error: error.message };
   }
 }
+
+export async function getEmailBlastTemplateAction(type: "header" | "footer") {
+  try {
+    const setting = await prisma.systemSetting.findUnique({
+      where: { key: `email_blast_${type}_template` }
+    });
+    return setting?.value || "";
+  } catch (error) {
+    return "";
+  }
+}
+
+export async function saveEmailBlastTemplateAction(type: "header" | "footer", content: string) {
+  try {
+    await prisma.systemSetting.upsert({
+      where: { key: `email_blast_${type}_template` },
+      update: { value: content },
+      create: { key: `email_blast_${type}_template`, value: content },
+    });
+    return { success: true };
+  } catch (error: any) {
+    return { error: error.message };
+  }
+}
