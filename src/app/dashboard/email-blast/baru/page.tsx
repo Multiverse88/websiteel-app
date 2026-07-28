@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import EmailBlastForm from "./EmailBlastForm";
 
+import { getEmailBlastTemplateAction } from "../actions";
+
 export const dynamic = "force-dynamic";
 
 export default async function NewEmailBlastPage() {
@@ -13,6 +15,9 @@ export default async function NewEmailBlastPage() {
   if (!session) {
     redirect("/login");
   }
+
+  const defaultHeader = await getEmailBlastTemplateAction("header");
+  const defaultFooter = await getEmailBlastTemplateAction("footer");
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
@@ -43,7 +48,7 @@ export default async function NewEmailBlastPage() {
       <section className="py-10 flex-grow">
         <div className="max-w-[800px] mx-auto px-6 sm:px-8">
           <div className="bg-white rounded-2xl shadow-sm border border-black/[0.04] p-8">
-            <EmailBlastForm />
+            <EmailBlastForm initialHeader={defaultHeader} initialFooter={defaultFooter} />
           </div>
         </div>
       </section>
