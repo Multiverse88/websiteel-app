@@ -1,7 +1,7 @@
 "use client";
 import React, { useTransition, useRef, useState } from "react";
-import { Check, X, Trash2, PowerOff, Upload, FileSpreadsheet, Loader2, Settings } from "lucide-react";
-import { toggleContactStatusAction, deleteContactAction, importContactsAction, saveSmtpSettingsAction } from "./actions";
+import { Check, X, Trash2, PowerOff, Upload, FileSpreadsheet, Loader2, Settings, ToggleLeft, ToggleRight } from "lucide-react";
+import { toggleContactStatusAction, deleteContactAction, importContactsAction, saveSmtpSettingsAction, toggleAllContactsStatusAction } from "./actions";
 import Papa from "papaparse";
 
 // ... skipped unmodified code up to ImportCsvButton ...
@@ -183,5 +183,44 @@ export function ImportCsvButton() {
         Import CSV
       </button>
     </div>
+  );
+}
+
+export function ToggleAllContactsButton({ action }: { action: 'activate' | 'deactivate' }) {
+  const [isPending, startTransition] = useTransition();
+
+  const handleToggleAll = () => {
+    const message = action === 'activate' 
+      ? "Yakin ingin MENGAKTIFKAN semua kontak?" 
+      : "Yakin ingin MENONAKTIFKAN semua kontak?";
+      
+    if (confirm(message)) {
+      startTransition(async () => {
+        await toggleAllContactsStatusAction(action === 'activate');
+      });
+    }
+  };
+
+  const isActiveBtn = action === 'activate';
+
+  return (
+    <button
+      onClick={handleToggleAll}
+      disabled={isPending}
+      className={`px-4 py-2 font-bold rounded-lg transition-colors flex items-center gap-1.5 text-[14px] border disabled:opacity-50 ${
+        isActiveBtn 
+          ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-200"
+          : "bg-amber-50 text-amber-700 hover:bg-amber-100 border-amber-200"
+      }`}
+    >
+      {isPending ? (
+        <Loader2 className="w-4 h-4 animate-spin" />
+      ) : isActiveBtn ? (
+        <ToggleRight className="w-4 h-4" />
+      ) : (
+        <ToggleLeft className="w-4 h-4" />
+      )}
+      {isActiveBtn ? "Aktifkan Semua" : "Nonaktifkan Semua"}
+    </button>
   );
 }
