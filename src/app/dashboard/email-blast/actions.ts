@@ -165,7 +165,7 @@ export async function createCampaignAction(formData: FormData) {
   }
   
   revalidatePath("/dashboard/email-blast");
-  redirect("/dashboard/email-blast");
+  return { success: true };
 }
 
 export async function importContactsAction(contacts: { email: string, name?: string, tags?: string }[]) {
