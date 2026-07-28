@@ -1,19 +1,56 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Settings } from "lucide-react";
+import { Send, Settings, Loader2 } from "lucide-react";
 import RichTextEditor from "@/components/dashboard/RichTextEditor";
 import { createCampaignAction } from "../actions";
+import { useFormStatus } from "react-dom";
+
+import { useRouter } from "next/navigation";
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[16px] font-bold bg-[#d62828] text-white hover:bg-[#b20112] shadow-md transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+    >
+      {pending ? (
+        <>
+          <Loader2 className="w-5 h-5 animate-spin" />
+          Memproses...
+        </>
+      ) : (
+        <>
+          <Send className="w-5 h-5" />
+          Kirim / Simpan Campaign
+        </>
+      )}
+    </button>
+  );
+}
 
 export default function EmailBlastForm() {
   const [bodyHtml, setBodyHtml] = useState("");
   const [showSmtp, setShowSmtp] = useState(false);
+  const router = useRouter();
 
   return (
-    <form action={async (formData) => {
-      formData.set("bodyHtml", bodyHtml);
-      await createCampaignAction(formData);
-    }} className="space-y-6">
+    <form 
+      action={async (formData) => {
+        formData.set("bodyHtml", bodyHtml);
+        const result = await createCampaignAction(formData);
+        if (result?.error) {
+          alert(`Gagal: ${result.error}`);
+        } else if (result?.success) {
+          alert("Berhasil! Campaign email telah diproses/dikirim.");
+          router.push("/dashboard/email-blast");
+        }
+      }} 
+      className="space-y-6"
+    >
       
       {/* Subject */}
       <div>
@@ -131,13 +168,7 @@ export default function EmailBlastForm() {
 
       {/* Submit */}
       <div className="pt-4 border-t border-gray-100 flex justify-end">
-        <button
-          type="submit"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[16px] font-bold bg-[#d62828] text-white hover:bg-[#b20112] shadow-md transition-all"
-        >
-          <Send className="w-5 h-5" />
-          Kirim / Simpan Campaign
-        </button>
+        <SubmitButton />
       </div>
 
     </form>
