@@ -102,9 +102,25 @@ export async function createCampaignAction(formData: FormData) {
     });
 
     if (!scheduledAt) {
-      // Setup custom transporter if provided
+      // Setup custom transporter from System Settings if provided
       let customTransporter = null;
-      if (customSmtpHost && customSmtpUser && customSmtpPass) {
+      let smtpFrom = null;
+      const smtpConfig = await getSmtpSettingsAction();
+      
+      if (smtpConfig && smtpConfig.host && smtpConfig.user && smtpConfig.pass) {
+        const nodemailer = require("nodemailer");
+        customTransporter = nodemailer.createTransport({
+          host: smtpConfig.host,
+          port: parseInt(smtpConfig.port || "587"),
+          secure: parseInt(smtpConfig.port) === 465,
+          auth: {
+            user: smtpConfig.user,
+            pass: smtpConfig.pass,
+          },
+        });
+        smtpFrom = smtpConfig.from || smtpConfig.user;
+      } else if (customSmtpHost && customSmtpUser && customSmtpPass) {
+        // Fallback to custom form data if provided
         const nodemailer = require("nodemailer");
         customTransporter = nodemailer.createTransport({
           host: customSmtpHost,
@@ -115,6 +131,7 @@ export async function createCampaignAction(formData: FormData) {
             pass: customSmtpPass,
           },
         });
+        smtpFrom = customSmtpFrom || customSmtpUser;
       }
 
       // Send immediately
@@ -124,7 +141,7 @@ export async function createCampaignAction(formData: FormData) {
         try {
           if (customTransporter) {
             await customTransporter.sendMail({
-              from: customSmtpFrom || customSmtpUser,
+              from: smtpFrom,
               to: contact.email,
               subject,
               html: bodyHtml,
@@ -240,5 +257,41 @@ export async function uploadInlineImageAction(formData: FormData): Promise<{ url
   } catch (error: any) {
     console.error("Error uploading image:", error);
     return { error: "Gagal mengunggah gambar." };
+  }
+}
+
+export async function getSmtpSettingsAction() {
+  try {
+    const setting = await prisma.systemSetting.findUnique({
+      where: { key: "email_blast_smtp" }
+    });
+    if (setting) {
+      return JSON.parse(setting.value);
+    }
+  } catch (error) {
+    console.error("Failed to load SMTP setting", error);
+  }
+  return null;
+}
+
+export async function saveSmtpSettingsAction(formData: FormData) {
+  const host = formData.get("host") as string;
+  const port = formData.get("port") as string;
+  const user = formData.get("user") as string;
+  const pass = formData.get("pass") as string;
+  const from = formData.get("from") as string;
+
+  const config = { host, port, user, pass, from };
+
+  try {
+    await prisma.systemSetting.upsert({
+      where: { key: "email_blast_smtp" },
+      update: { value: JSON.stringify(config) },
+      create: { key: "email_blast_smtp", value: JSON.stringify(config) },
+    });
+    revalidatePath("/dashboard/email-blast");
+    return { success: true };
+  } catch (error: any) {
+    return { error: error.message };
   }
 }
