@@ -295,3 +295,16 @@ export async function saveSmtpSettingsAction(formData: FormData) {
     return { error: error.message };
   }
 }
+
+export async function toggleAllContactsStatusAction(isActive: boolean) {
+  try {
+    await prisma.blastContact.updateMany({
+      data: { isActive }
+    });
+    revalidatePath("/dashboard/email-blast");
+    revalidatePath("/dashboard/email-blast/kontak");
+    return { success: true };
+  } catch (error: any) {
+    return { error: error.message };
+  }
+}
