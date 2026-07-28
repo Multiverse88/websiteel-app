@@ -63,6 +63,12 @@ export async function createCampaignAction(formData: FormData) {
   const scheduledAt = formData.get("scheduledAt") as string;
   const sendToAll = formData.get("sendToAll") === "on";
 
+  const customSmtpFrom = formData.get("customSmtpFrom") as string;
+  const customSmtpHost = formData.get("customSmtpHost") as string;
+  const customSmtpPort = formData.get("customSmtpPort") as string;
+  const customSmtpUser = formData.get("customSmtpUser") as string;
+  const customSmtpPass = formData.get("customSmtpPass") as string;
+
   if (!subject || !bodyHtml) {
     return { error: "Subject dan Body wajib diisi" };
   }
@@ -96,18 +102,44 @@ export async function createCampaignAction(formData: FormData) {
     });
 
     if (!scheduledAt) {
+      // Setup custom transporter if provided
+      let customTransporter = null;
+      if (customSmtpHost && customSmtpUser && customSmtpPass) {
+        const nodemailer = require("nodemailer");
+        customTransporter = nodemailer.createTransport({
+          host: customSmtpHost,
+          port: parseInt(customSmtpPort || "587"),
+          secure: parseInt(customSmtpPort) === 465,
+          auth: {
+            user: customSmtpUser,
+            pass: customSmtpPass,
+          },
+        });
+      }
+
       // Send immediately
       for (const contact of activeContacts) {
         let status = "failed";
         let errorMessage: string | null = null;
         try {
-          const result = await sendEmail({
-            to: contact.email,
-            subject,
-            html: bodyHtml,
-            text: bodyHtml.replace(/<[^>]+>/g, ""), // basic strip html
-          });
-          status = result?.simulated ? "sent" : "sent"; 
+          if (customTransporter) {
+            await customTransporter.sendMail({
+              from: customSmtpFrom || customSmtpUser,
+              to: contact.email,
+              subject,
+              html: bodyHtml,
+              text: bodyHtml.replace(/<[^>]+>/g, ""),
+            });
+            status = "sent";
+          } else {
+            const result = await sendEmail({
+              to: contact.email,
+              subject,
+              html: bodyHtml,
+              text: bodyHtml.replace(/<[^>]+>/g, ""), 
+            });
+            status = result?.simulated ? "sent" : "sent"; 
+          }
         } catch (err: any) {
           errorMessage = err.message || "Unknown error";
         }
@@ -134,4 +166,34 @@ export async function createCampaignAction(formData: FormData) {
   
   revalidatePath("/dashboard/email-blast");
   redirect("/dashboard/email-blast");
+}
+
+export async function importContactsAction(contacts: { email: string, name?: string, tags?: string }[]) {
+  if (!contacts || contacts.length === 0) return { error: "Data kontak kosong" };
+
+  try {
+    let imported = 0;
+    // Insert one by one to gracefully handle duplicates
+    for (const c of contacts) {
+      try {
+        await prisma.blastContact.create({
+          data: {
+            email: c.email,
+            name: c.name || null,
+            tags: c.tags || null,
+          }
+        });
+        imported++;
+      } catch (e: any) {
+        // Skip duplicate emails (P2002)
+        if (e.code !== "P2002") {
+          console.error("Error importing contact:", e);
+        }
+      }
+    }
+    revalidatePath("/dashboard/email-blast");
+    return { success: true, count: imported };
+  } catch (error: any) {
+    return { error: error.message };
+  }
 }
