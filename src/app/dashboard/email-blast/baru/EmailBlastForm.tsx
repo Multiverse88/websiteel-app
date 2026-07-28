@@ -34,9 +34,23 @@ export default function EmailBlastForm() {
         <label className="block text-[14px] font-bold text-gray-900 mb-2">
           Isi Email
         </label>
-        <RichTextEditor content={bodyHtml} onChange={setBodyHtml} />
+        <RichTextEditor 
+          content={bodyHtml} 
+          onChange={setBodyHtml} 
+          onImageUpload={async (file) => {
+            const formData = new FormData();
+            formData.append("image", file);
+            const { uploadInlineImageAction } = await import("../actions");
+            const result = await uploadInlineImageAction(formData);
+            if (result.error) {
+              alert(result.error);
+              return null;
+            }
+            return result.url || null;
+          }}
+        />
         <p className="text-[14px] text-gray-500 mt-2">
-          Gunakan editor di atas untuk mengatur format tulisan dan menyisipkan gambar.
+          Gunakan editor di atas untuk mengatur format tulisan dan menyisipkan gambar (bisa via Drag & Drop atau klik tombol gambar).
         </p>
       </div>
 
