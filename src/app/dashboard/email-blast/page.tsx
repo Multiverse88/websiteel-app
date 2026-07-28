@@ -4,8 +4,8 @@ import { ArrowLeft, Send, Users, UserPlus, Clock, CheckCircle2, AlertCircle } fr
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { ContactActions, ImportCsvButton } from "./client-components";
-import { addContactAction } from "./actions";
+import { ContactActions, ImportCsvButton, SmtpSettingsModal } from "./client-components";
+import { addContactAction, getSmtpSettingsAction } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +14,8 @@ export default async function EmailBlastDashboardPage() {
   if (!session) {
     redirect("/login");
   }
+
+  const initialSmtpConfig = await getSmtpSettingsAction();
 
   // Fetch all contacts
   const contacts = await prisma.blastContact.findMany({
@@ -85,6 +87,7 @@ export default async function EmailBlastDashboardPage() {
                   <span className="text-[16px] font-bold text-gray-400">
                     {activeCount} aktif · {inactiveCount} nonaktif
                   </span>
+                  <SmtpSettingsModal initialConfig={initialSmtpConfig} />
                   <ImportCsvButton />
                 </div>
               </div>
