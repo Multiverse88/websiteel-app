@@ -120,52 +120,6 @@ export default function EmailBlastForm() {
         </label>
       </div>
 
-      {/* Custom SMTP Config Toggle */}
-      <div className="border border-gray-200 rounded-xl overflow-hidden">
-        <button
-          type="button"
-          onClick={() => setShowSmtp(!showSmtp)}
-          className="w-full bg-gray-50 flex items-center justify-between p-4 hover:bg-gray-100 transition-colors"
-        >
-          <div className="flex items-center gap-2">
-            <Settings className="w-5 h-5 text-gray-600" />
-            <span className="font-bold text-[14px] text-gray-900">Pengaturan Pengirim & SMTP (Opsional)</span>
-          </div>
-          <span className="text-[14px] font-bold text-[#d62828]">
-            {showSmtp ? "Tutup" : "Buka"}
-          </span>
-        </button>
-        {showSmtp && (
-          <div className="p-5 space-y-4 bg-white border-t border-gray-200">
-            <p className="text-[13px] text-gray-500 mb-4">
-              Isi bagian ini HANYA jika Anda ingin menggunakan email pengirim yang berbeda dari default `.env` Anda.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">Email Pengirim (Sender Email)</label>
-                <input type="text" name="customSmtpFrom" placeholder='"EasyLegal Promo" <promo@easylegal.id>' className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
-              </div>
-              <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">SMTP Host</label>
-                <input type="text" name="customSmtpHost" placeholder="smtp.gmail.com" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
-              </div>
-              <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">SMTP Port</label>
-                <input type="number" name="customSmtpPort" placeholder="465" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
-              </div>
-              <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">SMTP Username</label>
-                <input type="text" name="customSmtpUser" placeholder="email@gmail.com" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
-              </div>
-              <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">SMTP Password</label>
-                <input type="password" name="customSmtpPass" placeholder="App Password" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
       {/* Submit */}
       <div className="pt-4 border-t border-gray-100 flex justify-end">
         <SubmitButton />
