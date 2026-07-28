@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FileText, Layers, Link2, Mail, UserCog, HelpCircle, LogOut } from "lucide-react";
+import { LayoutDashboard, FileText, Layers, Link2, Mail, UserCog, HelpCircle, LogOut, Send } from "lucide-react";
 import { logoutAction } from "@/app/dashboard/actions";
 
 interface DashboardSidebarProps {
@@ -20,6 +20,7 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
     { name: "Landing Pages", href: "/dashboard/landing-pages", icon: Layers },
     { name: "Redirect Links", href: "/dashboard/links", icon: Link2, badge: linksCount },
     { name: "Newsletter", href: "/dashboard/newsletter", icon: Mail, badge: subscriberCount },
+    { name: "Email Blast", href: "/dashboard/email-blast", icon: Send },
     { name: "Edit Profil", href: "/dashboard/profile", icon: UserCog },
   ];
 
