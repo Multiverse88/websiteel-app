@@ -197,3 +197,48 @@ export async function importContactsAction(contacts: { email: string, name?: str
     return { error: error.message };
   }
 }
+
+import { isMinioConfigured, uploadToMinio } from "@/lib/s3";
+import { getSession } from "@/lib/auth";
+
+export async function uploadInlineImageAction(formData: FormData): Promise<{ url?: string; error?: string }> {
+  const session = await getSession();
+  if (!session) {
+    return { error: "Sesi tidak valid!" };
+  }
+
+  const file = formData.get("image") as File | null;
+  if (!file || file.size === 0) {
+    return { error: "Tidak ada file yang dipilih." };
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    return { error: "Ukuran gambar maksimal 2MB!" };
+  }
+
+  try {
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const filename = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+
+    let url = "";
+    if (isMinioConfigured()) {
+      url = await uploadToMinio(buffer, filename, file.type, "uploads/email-blasts");
+    } else {
+      const fs = await import("fs/promises");
+      const path = await import("path");
+      
+      const uploadDir = path.join(process.cwd(), "public", "uploads", "email-blasts");
+      await fs.mkdir(uploadDir, { recursive: true });
+      const filepath = path.join(uploadDir, filename);
+      await fs.writeFile(filepath, buffer);
+      
+      url = `/uploads/email-blasts/${filename}`;
+    }
+
+    return { url };
+  } catch (error: any) {
+    console.error("Error uploading image:", error);
+    return { error: "Gagal mengunggah gambar." };
+  }
+}
