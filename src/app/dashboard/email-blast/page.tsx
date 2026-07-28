@@ -4,7 +4,7 @@ import { ArrowLeft, Send, Users, UserPlus, Clock, CheckCircle2, AlertCircle } fr
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { ContactActions } from "./client-components";
+import { ContactActions, ImportCsvButton } from "./client-components";
 import { addContactAction } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -81,9 +81,12 @@ export default async function EmailBlastDashboardPage() {
                   <Users className="w-5 h-5 text-gray-500" />
                   Daftar Kontak
                 </h2>
-                <span className="text-[16px] font-bold text-gray-400">
-                  {activeCount} aktif · {inactiveCount} nonaktif
-                </span>
+                <div className="flex items-center gap-4">
+                  <span className="text-[16px] font-bold text-gray-400">
+                    {activeCount} aktif · {inactiveCount} nonaktif
+                  </span>
+                  <ImportCsvButton />
+                </div>
               </div>
 
               {/* Form Tambah Kontak */}
