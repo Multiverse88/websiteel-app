@@ -178,7 +178,7 @@ export async function GET() {
           }
           await prisma.emailCampaign.update({
             where: { id: camp.id },
-            data: { attachments: null }
+            data: { attachments: Prisma.JsonNull }
           });
           cleanedCampaigns++;
         }
