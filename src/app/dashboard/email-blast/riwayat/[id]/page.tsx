@@ -29,6 +29,7 @@ export default async function CampaignDetailPage({
           sentAt: "desc",
         },
       },
+      links: true,
     },
   });
 

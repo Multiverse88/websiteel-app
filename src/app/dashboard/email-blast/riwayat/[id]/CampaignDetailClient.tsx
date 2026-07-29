@@ -61,6 +61,9 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
   const openRate = totalSent > 0 ? Math.round((totalOpened / totalSent) * 100) : 0;
   const clickRate = totalOpened > 0 ? Math.round((totalClicked / totalOpened) * 100) : 0;
 
+  const links = campaign.links ? [...campaign.links].sort((a: any, b: any) => b.clicks - a.clicks) : [];
+  const maxClick = Math.max(...links.map((l: any) => l.clicks), 1);
+
   // CSV Export Logic
   const handleExportCSV = () => {
     const headers = ["Nama", "Email", "Status", "Dikirim Pada", "Buka Pertama", "Jumlah Buka", "Klik Link", "Device"];
@@ -147,6 +150,15 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
         .device-bar-bg { flex:1; background:#EDEAE2; border-radius:4px; height:10px; overflow:hidden; }
         .device-bar-fill { height:100%; border-radius:4px; background:var(--ink); }
         .device-pct { width:38px; text-align:right; font-size:12.5px; font-weight:600; }
+
+        /* link clicks */
+        .link-row { display:flex; align-items:center; gap:12px; padding:10px 0; }
+        .link-info { flex:1; min-width:0; }
+        .link-label { font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .link-url { font-size:11px; color:var(--sub); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .link-count { font-size:13px; font-weight:700; width:34px; text-align:right; }
+        .link-bar-bg { flex:2; background:#EDEAE2; border-radius:4px; height:8px; overflow:hidden; }
+        .link-bar-fill { height:100%; background:var(--gold); border-radius:4px; }
 
         @media (max-width: 880px){
           .two-col { grid-template-columns:1fr; }
@@ -311,8 +323,33 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
             </div>
 
             <div>
-              <div className="section-label" style={{ marginTop: 0 }}>Perangkat Penerima</div>
-              <div className="chart-card">
+              <div className="section-label" style={{ marginTop: 0 }}>Klik & Perangkat</div>
+              
+              <div className="chart-card mb-4">
+                <div className="chart-card-head">
+                  <div className="chart-title">
+                    <div className="icon-badge">
+                      <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    </div>
+                    Link Paling Banyak Diklik
+                  </div>
+                </div>
+                <div>
+                  {links.length > 0 ? links.map((l: any, i: number) => (
+                    <div className="link-row" key={i}>
+                      <div className="link-info">
+                        <div className="link-label" title={l.url}>{l.url.replace(/^https?:\/\//, '')}</div>
+                      </div>
+                      <div className="link-bar-bg"><div className="link-bar-fill" style={{ width: `${(l.clicks / maxClick) * 100}%` }}></div></div>
+                      <div className="link-count">{l.clicks}</div>
+                    </div>
+                  )) : (
+                    <div className="text-[13px] text-[#8A867D] py-4 text-center">Belum ada klik link</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="chart-card mb-4">
                 <div className="chart-card-head">
                   <div className="chart-title">
                     <div className="icon-badge">
@@ -348,11 +385,29 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
             </div>
           </div>
 
-          {/* Recipients Table */}
-          <div className="section-label">Aktivitas Kontak Detail</div>
-          <div className="chart-card" style={{ padding: 0, overflow: 'hidden' }}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse min-w-[700px]">
+          <div className="two-col mb-8">
+            <div className="flex flex-col">
+              <div className="section-label mt-0">Tampilan Email</div>
+              <div className="chart-card p-0 overflow-hidden" style={{ padding: 0 }}>
+                <div className="bg-[#fbfaf8] border-b border-[#E4E1DA] px-6 py-4 flex items-center justify-between">
+                  <div className="text-[13px] font-medium text-[#111]">Preview Pesan</div>
+                  <div className="text-[11px] text-[#8A867D]">Hanya HTML yang berhasil dimuat</div>
+                </div>
+                <div className="w-full bg-white relative">
+                  <iframe 
+                    srcDoc={campaign.bodyHtml} 
+                    className="w-full h-[600px] border-none"
+                    title="Email Preview"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <div className="section-label mt-0">Aktivitas Kontak Detail</div>
+              <div className="chart-card p-0 overflow-hidden" style={{ padding: 0 }}>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse min-w-[700px]">
                 <thead>
                   <tr className="border-b border-[#E4E1DA] bg-[#fbfaf8]">
                     <th className="px-6 py-4 text-[11.5px] font-medium tracking-widest text-[#8A867D] uppercase">Email</th>
