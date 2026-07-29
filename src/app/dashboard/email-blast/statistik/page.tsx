@@ -96,6 +96,7 @@ export default async function StatistikPage() {
     const openedCount = c.recipients.filter(r => r.openedAt !== null).length;
     const clickedCount = c.recipients.filter(r => r.clickedAt !== null).length;
     return {
+      id: c.id,
       name: c.internalName || c.subject.substring(0, 15),
       brand: 'EasyLegal', // Static for now, or could be parsed from subject
       status: c.status,
