@@ -55,6 +55,7 @@ export default function EmailBlastForm({
   const [saveHeader, setSaveHeader] = useState(false);
   const [saveFooter, setSaveFooter] = useState(false);
   const [isTemplate, setIsTemplate] = useState(false);
+  const [fontFamily, setFontFamily] = useState("sans-serif");
   
   const router = useRouter();
 
@@ -75,13 +76,18 @@ export default function EmailBlastForm({
       <form 
         action={async (formData) => {
         // Combine all parts for the final email
+        const fontLink = fontFamily.includes("Poppins") 
+          ? `<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">`
+          : "";
+
         const finalHtml = `
-          <div style="max-w: 600px; margin: 0 auto; font-family: sans-serif; background-color: #ffffff;">
-            ${headerHtml ? `<div>${headerHtml}</div>` : ''}
+          ${fontLink}
+          <div style="max-w: 600px; margin: 0 auto; font-family: ${fontFamily}; background-color: #ffffff;">
+            ${headerHtml ? "<div>" + headerHtml + "</div>" : ""}
             <div style="padding: 20px;">
               ${bodyHtml}
             </div>
-            ${footerHtml ? `<div>${footerHtml}</div>` : ''}
+            ${footerHtml ? "<div>" + footerHtml + "</div>" : ""}
           </div>
         `;
         
@@ -144,6 +150,21 @@ export default function EmailBlastForm({
             placeholder="Teks singkat yang muncul setelah subjek di notifikasi inbox..."
             className="w-full px-4 py-2.5 border border-[#EAEAEA] rounded-[6px] text-[14px] focus:outline-none focus:border-[#111111] transition-colors"
           />
+        </div>
+
+        <div>
+          <label className="block text-[13px] font-semibold text-[#111111] mb-2">
+            Gaya Font Email
+          </label>
+          <select
+            value={fontFamily}
+            onChange={(e) => setFontFamily(e.target.value)}
+            className="w-full px-4 py-2.5 border border-[#EAEAEA] rounded-[6px] text-[14px] focus:outline-none focus:border-[#111111] transition-colors bg-white cursor-pointer"
+          >
+            <option value="sans-serif">System Default (Sans-serif)</option>
+            <option value="'Poppins', sans-serif">Poppins (Modern & Premium)</option>
+            <option value="Georgia, serif">Georgia (Classic Serif)</option>
+          </select>
         </div>
       </div>
 
@@ -274,12 +295,13 @@ export default function EmailBlastForm({
               <head>
                 <meta charset="utf-8">
                 <style>
+                  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
                   body { margin: 0; padding: 0; background-color: #F7F5F1; }
                   img { max-width: 100%; height: auto; }
                 </style>
               </head>
               <body>
-                <div style="max-w: 600px; margin: 0 auto; font-family: sans-serif; background-color: #ffffff; min-height: 100vh;">
+                <div style="max-w: 600px; margin: 0 auto; font-family: ${fontFamily}; background-color: #ffffff; min-height: 100vh;">
                   ${headerHtml ? "<div>" + headerHtml + "</div>" : ""}
                   <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #333333;">
                     ${bodyHtml || '<p style="color: #999; margin: 0;">[Konten Email Kosong]</p>'}
