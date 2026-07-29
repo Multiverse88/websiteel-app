@@ -55,7 +55,6 @@ export default function EmailBlastForm({
   const [saveHeader, setSaveHeader] = useState(false);
   const [saveFooter, setSaveFooter] = useState(false);
   const [isTemplate, setIsTemplate] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
   
   const router = useRouter();
 
@@ -72,8 +71,9 @@ export default function EmailBlastForm({
   };
 
   return (
-    <form 
-      action={async (formData) => {
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_500px] xl:grid-cols-[1fr_600px] gap-8 items-start">
+      <form 
+        action={async (formData) => {
         // Combine all parts for the final email
         const finalHtml = `
           <div style="max-w: 600px; margin: 0 auto; font-family: sans-serif; background-color: #ffffff;">
@@ -102,9 +102,9 @@ export default function EmailBlastForm({
           alert("Berhasil! Campaign email telah disimpan ke antrian.");
           router.push("/dashboard/email-blast");
         }
-      }} 
-      className="space-y-8"
-    >
+        }} 
+        className="space-y-8 bg-white p-8 rounded-[12px] shadow-sm border border-[#EAEAEA]"
+      >
       
       {/* Configuration Group */}
       <div className="space-y-6 bg-[#F7F6F3] p-6 rounded-[8px] border border-[#EAEAEA]">
@@ -250,49 +250,35 @@ export default function EmailBlastForm({
 
       {/* Actions */}
       <div className="pt-4 border-t border-[#EAEAEA] flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button 
-            type="button" 
-            onClick={() => setShowPreview(true)} 
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#111111] border border-[#EAEAEA] rounded-md text-[14px] font-medium hover:bg-[#F7F6F3] transition-all"
-          >
-            <Eye className="w-4 h-4" />
-            Lihat Preview
-          </button>
-          <SubmitButton label="Kirim Test Email" icon={FlaskConical} isTest={true} />
-        </div>
+        <SubmitButton label="Kirim Test Email" icon={FlaskConical} isTest={true} />
         <SubmitButton label="Submit Campaign" icon={Send} />
       </div>
 
-      {showPreview && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4">
-          <div className="bg-[#F7F5F1] w-full max-w-[800px] h-[90vh] rounded-[16px] overflow-hidden flex flex-col shadow-2xl">
-            <div className="flex items-center justify-between p-4 border-b border-[#E8E4DC] bg-white">
-              <h3 className="font-semibold text-[16px] text-[#111111] flex items-center gap-2">
-                <Eye className="w-4 h-4" /> Live Preview Email
-              </h3>
-              <button type="button" onClick={() => setShowPreview(false)} className="text-[#8A867D] hover:text-[#111111] transition-colors p-1 bg-gray-100 rounded-md hover:bg-gray-200">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="flex-1 overflow-y-auto p-6 flex justify-center bg-[#F7F5F1]">
-              <div 
-                className="w-full max-w-[600px] bg-white shadow-sm border border-[#EAEAEA] min-h-[500px]"
-                dangerouslySetInnerHTML={{ __html: `
-                  <div style="max-w: 600px; margin: 0 auto; font-family: sans-serif; background-color: #ffffff;">
-                    ${headerHtml ? `<div>${headerHtml}</div>` : ''}
-                    <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #333333;">
-                      ${bodyHtml || '<p style="color: #999;">[Konten Email Kosong]</p>'}
-                    </div>
-                    ${footerHtml ? `<div>${footerHtml}</div>` : ''}
-                  </div>
-                `}}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
     </form>
+
+    {/* STICKY LIVE PREVIEW ON RIGHT */}
+    <div className="sticky top-8 bg-white border border-[#EAEAEA] rounded-[12px] overflow-hidden flex flex-col shadow-sm h-[calc(100vh-80px)] min-h-[600px]">
+      <div className="flex items-center p-4 border-b border-[#EAEAEA] bg-[#FBFBFA]">
+        <h3 className="font-semibold text-[14px] text-[#111111] flex items-center gap-2">
+          <Eye className="w-4 h-4 text-[#8A867D]" /> Live Preview
+        </h3>
+      </div>
+      <div className="flex-1 overflow-y-auto bg-[#F7F5F1] p-4 lg:p-6 flex justify-center">
+        <div 
+          className="w-full max-w-[600px] bg-white shadow-sm border border-[#EAEAEA] min-h-[400px] overflow-hidden"
+          style={{ alignSelf: 'flex-start' }}
+          dangerouslySetInnerHTML={{ __html: `
+            <div style="max-w: 600px; margin: 0 auto; font-family: sans-serif; background-color: #ffffff;">
+              ${headerHtml ? `<div>${headerHtml}</div>` : ''}
+              <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #333333;">
+                ${bodyHtml || '<p style="color: #999; margin: 0;">[Konten Email Kosong]</p>'}
+              </div>
+              ${footerHtml ? `<div>${footerHtml}</div>` : ''}
+            </div>
+          `}}
+        />
+      </div>
+    </div>
+  </div>
   );
 }
