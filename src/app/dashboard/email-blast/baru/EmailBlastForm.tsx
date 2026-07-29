@@ -263,19 +263,32 @@ export default function EmailBlastForm({
           <Eye className="w-4 h-4 text-[#8A867D]" /> Live Preview
         </h3>
       </div>
-      <div className="flex-1 overflow-y-auto bg-[#F7F5F1] p-4 lg:p-6 flex justify-center">
-        <div 
-          className="w-full max-w-[600px] bg-white shadow-sm border border-[#EAEAEA] min-h-[400px] overflow-hidden"
+      <div className="flex-1 bg-[#F7F5F1] p-4 lg:p-6 flex justify-center">
+        <iframe 
+          title="Email Preview"
+          className="w-full max-w-[600px] bg-white shadow-sm border border-[#EAEAEA] min-h-[400px] h-full"
           style={{ alignSelf: 'flex-start' }}
-          dangerouslySetInnerHTML={{ __html: `
-            <div style="max-w: 600px; margin: 0 auto; font-family: sans-serif; background-color: #ffffff;">
-              ${headerHtml ? `<div>${headerHtml}</div>` : ''}
-              <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #333333;">
-                ${bodyHtml || '<p style="color: #999; margin: 0;">[Konten Email Kosong]</p>'}
-              </div>
-              ${footerHtml ? `<div>${footerHtml}</div>` : ''}
-            </div>
-          `}}
+          srcDoc={`
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <meta charset="utf-8">
+                <style>
+                  body { margin: 0; padding: 0; background-color: #F7F5F1; }
+                  img { max-width: 100%; height: auto; }
+                </style>
+              </head>
+              <body>
+                <div style="max-w: 600px; margin: 0 auto; font-family: sans-serif; background-color: #ffffff; min-height: 100vh;">
+                  ${headerHtml ? "<div>" + headerHtml + "</div>" : ""}
+                  <div style="padding: 20px; font-size: 14px; line-height: 1.6; color: #333333;">
+                    ${bodyHtml || '<p style="color: #999; margin: 0;">[Konten Email Kosong]</p>'}
+                  </div>
+                  ${footerHtml ? "<div>" + footerHtml + "</div>" : ""}
+                </div>
+              </body>
+            </html>
+          `}
         />
       </div>
     </div>
