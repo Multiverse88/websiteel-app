@@ -62,120 +62,53 @@ export async function createCampaignAction(formData: FormData) {
   const bodyHtml = formData.get("bodyHtml") as string;
   const scheduledAt = formData.get("scheduledAt") as string;
   const sendToAll = formData.get("sendToAll") === "on";
-
-  const customSmtpFrom = formData.get("customSmtpFrom") as string;
-  const customSmtpHost = formData.get("customSmtpHost") as string;
-  const customSmtpPort = formData.get("customSmtpPort") as string;
-  const customSmtpUser = formData.get("customSmtpUser") as string;
-  const customSmtpPass = formData.get("customSmtpPass") as string;
+  const segments = formData.getAll("segments") as string[];
+  const internalName = formData.get("internalName") as string;
+  const previewText = formData.get("previewText") as string;
+  const isTemplate = formData.get("isTemplate") === "true";
 
   if (!subject || !bodyHtml) {
     return { error: "Subject dan Body wajib diisi" };
   }
 
   try {
-    // Determine recipients
     let activeContacts: any[] = [];
-    let recipientsData: any[] = [];
+    
     if (sendToAll) {
       activeContacts = await prisma.blastContact.findMany({
         where: { isActive: true },
-        select: { id: true, email: true },
+        select: { id: true },
       });
-      recipientsData = activeContacts.map((c: any) => ({
-        contactId: c.id,
-      }));
+    } else if (segments.length > 0) {
+      activeContacts = await prisma.blastContact.findMany({
+        where: {
+          isActive: true,
+          segments: { some: { id: { in: segments } } }
+        },
+        select: { id: true },
+      });
     }
 
-    const campaignStatus = scheduledAt ? "scheduled" : "completed";
+    // Deduplicate
+    const uniqueContactIds = Array.from(new Set(activeContacts.map(c => c.id)));
+    const recipientsData = uniqueContactIds.map(id => ({ contactId: id }));
 
-    const campaign = await prisma.emailCampaign.create({
+    const campaignStatus = isTemplate ? "draft" : (scheduledAt ? "scheduled" : "processing");
+
+    await prisma.emailCampaign.create({
       data: {
+        internalName: internalName || null,
         subject,
+        previewText: previewText || null,
         bodyHtml,
         status: campaignStatus,
+        isTemplate,
         scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
         recipients: {
           create: recipientsData,
         },
-      },
+      }
     });
-
-    if (!scheduledAt) {
-      // Setup custom transporter from System Settings if provided
-      let customTransporter = null;
-      let smtpFrom = null;
-      const smtpConfig = await getSmtpSettingsAction();
-      
-      if (smtpConfig && smtpConfig.host && smtpConfig.user && smtpConfig.pass) {
-        const nodemailer = require("nodemailer");
-        customTransporter = nodemailer.createTransport({
-          host: smtpConfig.host,
-          port: parseInt(smtpConfig.port || "587"),
-          secure: parseInt(smtpConfig.port) === 465,
-          auth: {
-            user: smtpConfig.user,
-            pass: smtpConfig.pass,
-          },
-        });
-        smtpFrom = smtpConfig.from || smtpConfig.user;
-      } else if (customSmtpHost && customSmtpUser && customSmtpPass) {
-        // Fallback to custom form data if provided
-        const nodemailer = require("nodemailer");
-        customTransporter = nodemailer.createTransport({
-          host: customSmtpHost,
-          port: parseInt(customSmtpPort || "587"),
-          secure: parseInt(customSmtpPort) === 465,
-          auth: {
-            user: customSmtpUser,
-            pass: customSmtpPass,
-          },
-        });
-        smtpFrom = customSmtpFrom || customSmtpUser;
-      }
-
-      // Send immediately
-      for (const contact of activeContacts) {
-        let status = "failed";
-        let errorMessage: string | null = null;
-        try {
-          if (customTransporter) {
-            await customTransporter.sendMail({
-              from: smtpFrom,
-              to: contact.email,
-              subject,
-              html: bodyHtml,
-              text: bodyHtml.replace(/<[^>]+>/g, ""),
-            });
-            status = "sent";
-          } else {
-            const result = await sendEmail({
-              to: contact.email,
-              subject,
-              html: bodyHtml,
-              text: bodyHtml.replace(/<[^>]+>/g, ""), 
-            });
-            status = result?.simulated ? "sent" : "sent"; 
-          }
-        } catch (err: any) {
-          errorMessage = err.message || "Unknown error";
-        }
-        
-        await prisma.campaignRecipient.update({
-          where: {
-            campaignId_contactId: {
-              campaignId: campaign.id,
-              contactId: contact.id,
-            }
-          },
-          data: {
-            status,
-            errorMessage,
-            sentAt: new Date(),
-          }
-        });
-      }
-    }
 
   } catch (error: any) {
     return { error: error.message || "Terjadi kesalahan saat membuat campaign" };
@@ -183,6 +116,55 @@ export async function createCampaignAction(formData: FormData) {
   
   revalidatePath("/dashboard/email-blast");
   return { success: true };
+}
+
+export async function testSendCampaignAction(formData: FormData) {
+  const testEmail = formData.get("testEmail") as string;
+  const subject = formData.get("subject") as string;
+  const bodyHtml = formData.get("bodyHtml") as string;
+  const previewText = formData.get("previewText") as string;
+
+  if (!testEmail || !subject || !bodyHtml) {
+    return { error: "Email, Subject, dan Body wajib diisi" };
+  }
+
+  try {
+    const smtpConfig = await getSmtpSettingsAction();
+    if (!smtpConfig || !smtpConfig.host) {
+      return { error: "SMTP belum dikonfigurasi di pengaturan." };
+    }
+
+    const nodemailer = require("nodemailer");
+    const customTransporter = nodemailer.createTransport({
+      host: smtpConfig.host,
+      port: parseInt(smtpConfig.port || "587"),
+      secure: parseInt(smtpConfig.port) === 465,
+      auth: {
+        user: smtpConfig.user,
+        pass: smtpConfig.pass,
+      },
+    });
+
+    const smtpFrom = smtpConfig.from || smtpConfig.user;
+    
+    // Replace merge tags for test
+    let finalHtml = bodyHtml.replace(/\{\{nama\}\}/g, "Test User").replace(/\{\{email\}\}/g, testEmail);
+    if (previewText) {
+      finalHtml = `<div style="display:none;font-size:1px;color:#333333;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">${previewText}</div>` + finalHtml;
+    }
+
+    await customTransporter.sendMail({
+      from: smtpFrom,
+      to: testEmail,
+      subject: `[TEST] ${subject}`,
+      html: finalHtml,
+      text: finalHtml.replace(/<[^>]+>/g, ""),
+    });
+
+    return { success: true };
+  } catch (err: any) {
+    return { error: err.message || "Unknown error saat mengirim test" };
+  }
 }
 
 export async function importContactsAction(contacts: { email: string, name?: string, tags?: string }[]) {
@@ -327,6 +309,60 @@ export async function saveEmailBlastTemplateAction(type: "header" | "footer", co
       update: { value: content },
       create: { key: `email_blast_${type}_template`, value: content },
     });
+    return { success: true };
+  } catch (error: any) {
+    return { error: error.message };
+  }
+}
+
+export async function deleteCampaignAction(id: string) {
+  try {
+    await prisma.emailCampaign.delete({
+      where: { id },
+    });
+    revalidatePath("/dashboard/email-blast/riwayat");
+    return { success: true };
+  } catch (error: any) {
+    return { error: error.message };
+  }
+}
+
+export async function cancelCampaignAction(id: string) {
+  try {
+    await prisma.emailCampaign.update({
+      where: { id },
+      data: { status: "failed" },
+    });
+    await prisma.campaignRecipient.updateMany({
+      where: { campaignId: id, status: "pending" },
+      data: { status: "failed", errorMessage: "Dibatalkan oleh pengguna" },
+    });
+    revalidatePath(`/dashboard/email-blast/riwayat/${id}`);
+    revalidatePath("/dashboard/email-blast/riwayat");
+    return { success: true };
+  } catch (error: any) {
+    return { error: error.message };
+  }
+}
+
+export async function updateCampaignAction(id: string, formData: FormData) {
+  const subject = formData.get("subject") as string;
+  const bodyHtml = formData.get("bodyHtml") as string;
+  const internalName = formData.get("internalName") as string;
+  const previewText = formData.get("previewText") as string;
+
+  try {
+    await prisma.emailCampaign.update({
+      where: { id },
+      data: {
+        subject,
+        bodyHtml,
+        internalName: internalName || null,
+        previewText: previewText || null,
+      },
+    });
+    revalidatePath(`/dashboard/email-blast/riwayat/${id}`);
+    revalidatePath("/dashboard/email-blast/riwayat");
     return { success: true };
   } catch (error: any) {
     return { error: error.message };

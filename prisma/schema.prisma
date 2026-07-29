@@ -157,6 +157,21 @@ model LandingPageLead {
   @@index([createdAt])
 }
 
+model ContactSegment {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  contacts  BlastContact[]
+}
+
+model CampaignLink {
+  id         String   @id @default(cuid())
+  campaignId String
+  url        String
+  clicks     Int      @default(0)
+  campaign   EmailCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+}
+
 model BlastContact {
   id        String   @id @default(cuid())
   email     String   @unique
@@ -165,6 +180,7 @@ model BlastContact {
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
 
+  segments  ContactSegment[]
   campaignRecipients CampaignRecipient[]
 
   @@index([isActive])
@@ -172,15 +188,19 @@ model BlastContact {
 
 model EmailCampaign {
   id           String   @id @default(cuid())
+  internalName String?
   subject      String
+  previewText  String?
   bodyHtml     String
   status       String   @default("draft") // "draft", "scheduled", "processing", "completed", "failed"
+  isTemplate   Boolean  @default(false)
   scheduledAt  DateTime?
   attachments  Json?    // Array of { filename, url }
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   recipients   CampaignRecipient[]
+  links        CampaignLink[]
 
   @@index([status])
   @@index([scheduledAt])
@@ -193,6 +213,11 @@ model CampaignRecipient {
   status       String   @default("pending") // "pending", "sent", "failed"
   errorMessage String?
   sentAt       DateTime?
+  openedAt     DateTime?
+  openCount    Int      @default(0)
+  clickedAt    DateTime?
+  bouncedAt    DateTime?
+  device       String?
 
   campaign     EmailCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   contact      BlastContact  @relation(fields: [contactId], references: [id], onDelete: Cascade)

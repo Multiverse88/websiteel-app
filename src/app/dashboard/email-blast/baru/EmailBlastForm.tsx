@@ -1,44 +1,59 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Settings, Loader2 } from "lucide-react";
+import { Send, Loader2, Save, FileText, FlaskConical } from "lucide-react";
 import RichTextEditor from "@/components/dashboard/RichTextEditor";
-import { createCampaignAction } from "../actions";
+import { createCampaignAction, testSendCampaignAction } from "../actions";
 import { useFormStatus } from "react-dom";
-
 import { useRouter } from "next/navigation";
 
-function SubmitButton() {
+function SubmitButton({ label, icon: Icon, isTest = false }: { label: string, icon: any, isTest?: boolean }) {
   const { pending } = useFormStatus();
-  
   return (
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[16px] font-bold bg-[#d62828] text-white hover:bg-[#b20112] shadow-md transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+      formAction={isTest ? async (fd) => {
+        const testEmail = prompt("Masukkan email untuk test send:");
+        if (testEmail) {
+          fd.append("testEmail", testEmail);
+          const result = await testSendCampaignAction(fd);
+          if (result.error) alert(result.error);
+          else alert("Test email berhasil dikirim!");
+        }
+      } : undefined}
+      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-[14px] font-medium transition-all disabled:opacity-70 disabled:cursor-not-allowed ${
+        isTest 
+        ? "bg-[#F7F6F3] text-[#111111] hover:bg-[#EAEAEA] border border-[#EAEAEA]"
+        : "bg-[#111111] text-white hover:bg-[#333333] active:scale-[0.98]"
+      }`}
     >
-      {pending ? (
-        <>
-          <Loader2 className="w-5 h-5 animate-spin" />
-          Memproses...
-        </>
+      {pending && !isTest ? (
+        <Loader2 className="w-4 h-4 animate-spin" />
       ) : (
-        <>
-          <Send className="w-5 h-5" />
-          Kirim / Simpan Campaign
-        </>
+        <Icon className="w-4 h-4" />
       )}
+      {label}
     </button>
   );
 }
 
-export default function EmailBlastForm({ initialHeader = "", initialFooter = "" }: { initialHeader?: string; initialFooter?: string }) {
+export default function EmailBlastForm({ 
+  initialHeader = "", 
+  initialFooter = "", 
+  segments = [] 
+}: { 
+  initialHeader?: string; 
+  initialFooter?: string;
+  segments?: any[];
+}) {
   const [headerHtml, setHeaderHtml] = useState(initialHeader);
   const [bodyHtml, setBodyHtml] = useState("");
   const [footerHtml, setFooterHtml] = useState(initialFooter);
   
   const [saveHeader, setSaveHeader] = useState(false);
   const [saveFooter, setSaveFooter] = useState(false);
+  const [isTemplate, setIsTemplate] = useState(false);
   
   const router = useRouter();
 
@@ -69,6 +84,7 @@ export default function EmailBlastForm({ initialHeader = "", initialFooter = "" 
         `;
         
         formData.set("bodyHtml", finalHtml);
+        formData.set("isTemplate", isTemplate ? "true" : "false");
         
         // Save templates if requested
         if (saveHeader || saveFooter) {
@@ -81,113 +97,144 @@ export default function EmailBlastForm({ initialHeader = "", initialFooter = "" 
         if (result?.error) {
           alert(`Gagal: ${result.error}`);
         } else if (result?.success) {
-          alert("Berhasil! Campaign email telah diproses/dikirim.");
+          alert("Berhasil! Campaign email telah disimpan ke antrian.");
           router.push("/dashboard/email-blast");
         }
       }} 
       className="space-y-8"
     >
       
-      {/* Subject */}
-      <div>
-        <label className="block text-[14px] font-bold text-gray-900 mb-2">
-          Subjek Email
-        </label>
-        <input
-          type="text"
-          name="subject"
-          required
-          placeholder="Contoh: Promo Spesial Pendaftaran Merek Bulan Ini!"
-          className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[16px] focus:outline-none focus:border-[#d62828] focus:ring-1 focus:ring-[#d62828] transition-colors"
-        />
+      {/* Configuration Group */}
+      <div className="space-y-6 bg-[#F7F6F3] p-6 rounded-[8px] border border-[#EAEAEA]">
+        <div>
+          <label className="block text-[13px] font-semibold text-[#111111] mb-2">
+            Nama Internal (Hanya untuk tracking)
+          </label>
+          <input
+            type="text"
+            name="internalName"
+            required
+            placeholder="Contoh: Promo Merek Q3 - Gelombang 1"
+            className="w-full px-4 py-2.5 border border-[#EAEAEA] rounded-[6px] text-[14px] focus:outline-none focus:border-[#111111] transition-colors"
+          />
+        </div>
+
+        <div>
+          <label className="block text-[13px] font-semibold text-[#111111] mb-2">
+            Subjek Email
+          </label>
+          <input
+            type="text"
+            name="subject"
+            required
+            placeholder="Contoh: Promo Spesial Pendaftaran Merek Bulan Ini!"
+            className="w-full px-4 py-2.5 border border-[#EAEAEA] rounded-[6px] text-[14px] focus:outline-none focus:border-[#111111] transition-colors"
+          />
+        </div>
+
+        <div>
+          <label className="block text-[13px] font-semibold text-[#111111] mb-2">
+            Preview Text (Preheader)
+          </label>
+          <input
+            type="text"
+            name="previewText"
+            placeholder="Teks singkat yang muncul setelah subjek di notifikasi inbox..."
+            className="w-full px-4 py-2.5 border border-[#EAEAEA] rounded-[6px] text-[14px] focus:outline-none focus:border-[#111111] transition-colors"
+          />
+        </div>
       </div>
 
-      {/* Header */}
-      <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-        <div className="flex items-center justify-between mb-2">
-          <label className="block text-[14px] font-bold text-gray-900">
-            Header Email (Banner / Logo)
+      {/* Editor Group */}
+      <div className="space-y-6">
+        {/* Header */}
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-[13px] font-semibold text-[#111111]">
+              Header Banner
+            </label>
+            <label className="flex items-center gap-2 text-[12px] text-[#787774] cursor-pointer">
+              <input type="checkbox" checked={saveHeader} onChange={(e) => setSaveHeader(e.target.checked)} className="w-3.5 h-3.5 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
+              Simpan sbg default
+            </label>
+          </div>
+          <div className="border border-[#EAEAEA] rounded-[6px] overflow-hidden">
+            <RichTextEditor content={headerHtml} onChange={setHeaderHtml} onImageUpload={handleImageUpload} />
+          </div>
+        </div>
+
+        {/* Body */}
+        <div>
+          <label className="block text-[13px] font-semibold text-[#111111] mb-2 flex items-center justify-between">
+            <span>Konten Email</span>
+            <span className="font-mono text-[11px] bg-[#EAEAEA] px-2 py-0.5 rounded text-[#111111]">Merge Tags: {"{{nama}}"}, {"{{email}}"}</span>
           </label>
-          <label className="flex items-center gap-2 text-[13px] font-bold text-gray-600 cursor-pointer">
-            <input type="checkbox" checked={saveHeader} onChange={(e) => setSaveHeader(e.target.checked)} className="w-4 h-4 rounded text-[#d62828] focus:ring-[#d62828]" />
-            Simpan sebagai template default
+          <div className="border border-[#EAEAEA] rounded-[6px] overflow-hidden">
+            <RichTextEditor content={bodyHtml} onChange={setBodyHtml} onImageUpload={handleImageUpload} />
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-[13px] font-semibold text-[#111111]">
+              Footer (Disclaimer & Sosial)
+            </label>
+            <label className="flex items-center gap-2 text-[12px] text-[#787774] cursor-pointer">
+              <input type="checkbox" checked={saveFooter} onChange={(e) => setSaveFooter(e.target.checked)} className="w-3.5 h-3.5 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
+              Simpan sbg default
+            </label>
+          </div>
+          <div className="border border-[#EAEAEA] rounded-[6px] overflow-hidden">
+            <RichTextEditor content={footerHtml} onChange={setFooterHtml} onImageUpload={handleImageUpload} />
+          </div>
+        </div>
+      </div>
+
+      {/* Target & Schedule Group */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#FBFBFA] p-6 rounded-[8px] border border-[#EAEAEA]">
+        <div>
+          <label className="block text-[13px] font-semibold text-[#111111] mb-2">
+            Target Segmen Penerima
+          </label>
+          <div className="space-y-2 max-h-[150px] overflow-y-auto pr-2">
+            <label className="flex items-center gap-2 text-[14px] text-[#111111] cursor-pointer p-2 hover:bg-[#F7F6F3] rounded-md transition-colors">
+              <input type="checkbox" name="sendToAll" defaultChecked className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
+              Semua Kontak Aktif
+            </label>
+            {segments.map((s) => (
+              <label key={s.id} className="flex items-center gap-2 text-[14px] text-[#111111] cursor-pointer p-2 hover:bg-[#F7F6F3] rounded-md transition-colors">
+                <input type="checkbox" name="segments" value={s.id} className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
+                {s.name} <span className="text-[#787774] text-[12px]">({s._count.contacts})</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-[13px] font-semibold text-[#111111] mb-2">
+            Jadwal Kirim
+          </label>
+          <input
+            type="datetime-local"
+            name="scheduledAt"
+            className="w-full px-4 py-2.5 border border-[#EAEAEA] rounded-[6px] text-[14px] focus:outline-none focus:border-[#111111] transition-colors"
+          />
+          <p className="text-[12px] text-[#787774] mt-2">
+            Biarkan kosong untuk langsung masuk antrian pengiriman (Throttled processing).
+          </p>
+
+          <label className="flex items-center gap-2 mt-4 text-[13px] font-medium text-[#111111] cursor-pointer">
+            <input type="checkbox" checked={isTemplate} onChange={(e) => setIsTemplate(e.target.checked)} className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
+            Simpan sebagai Template Campaign (Draft)
           </label>
         </div>
-        <RichTextEditor 
-          content={headerHtml} 
-          onChange={setHeaderHtml} 
-          onImageUpload={handleImageUpload}
-        />
-        <p className="text-[13px] text-gray-500 mt-2">
-          Gunakan untuk mengunggah gambar banner F1 atau kop surat (Drag & Drop gambar ke sini).
-        </p>
       </div>
 
-      {/* Body */}
-      <div>
-        <label className="block text-[14px] font-bold text-gray-900 mb-2">
-          Isi Utama Email (Pesan Anda)
-        </label>
-        <RichTextEditor 
-          content={bodyHtml} 
-          onChange={setBodyHtml} 
-          onImageUpload={handleImageUpload}
-        />
-      </div>
-
-      {/* Footer */}
-      <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-        <div className="flex items-center justify-between mb-2">
-          <label className="block text-[14px] font-bold text-gray-900">
-            Footer Email (Informasi & Social Media)
-          </label>
-          <label className="flex items-center gap-2 text-[13px] font-bold text-gray-600 cursor-pointer">
-            <input type="checkbox" checked={saveFooter} onChange={(e) => setSaveFooter(e.target.checked)} className="w-4 h-4 rounded text-[#d62828] focus:ring-[#d62828]" />
-            Simpan sebagai template default
-          </label>
-        </div>
-        <RichTextEditor 
-          content={footerHtml} 
-          onChange={setFooterHtml} 
-          onImageUpload={handleImageUpload}
-        />
-        <p className="text-[13px] text-gray-500 mt-2">
-          Cocok untuk disclaimer, alamat kantor, tombol unsubscribe, atau deretan logo media sosial.
-        </p>
-      </div>
-
-      {/* Schedule */}
-      <div>
-        <label className="block text-[14px] font-bold text-gray-900 mb-2">
-          Jadwal Pengiriman (Opsional)
-        </label>
-        <input
-          type="datetime-local"
-          name="scheduledAt"
-          className="w-full sm:w-[300px] px-4 py-3 border border-gray-200 rounded-xl text-[16px] focus:outline-none focus:border-[#d62828] focus:ring-1 focus:ring-[#d62828] transition-colors"
-        />
-        <p className="text-[14px] text-gray-500 mt-2">
-          Kosongkan jika ingin segera dikirim (Pastikan SMTP sudah diset).
-        </p>
-      </div>
-
-      {/* Recipient Choice */}
-      <div className="flex items-center gap-3 bg-gray-50 p-4 rounded-xl border border-gray-100">
-        <input
-          type="checkbox"
-          id="sendToAll"
-          name="sendToAll"
-          defaultChecked
-          className="w-5 h-5 rounded text-[#d62828] focus:ring-[#d62828] cursor-pointer"
-        />
-        <label htmlFor="sendToAll" className="text-[16px] font-bold text-gray-900 cursor-pointer select-none">
-          Kirim ke semua Kontak Blast aktif
-        </label>
-      </div>
-
-      {/* Submit */}
-      <div className="pt-4 border-t border-gray-100 flex justify-end">
-        <SubmitButton />
+      {/* Actions */}
+      <div className="pt-4 border-t border-[#EAEAEA] flex items-center justify-between">
+        <SubmitButton label="Kirim Test Email" icon={FlaskConical} isTest={true} />
+        <SubmitButton label="Submit Campaign" icon={Send} />
       </div>
 
     </form>

@@ -37,6 +37,7 @@ export default function RichTextEditor({ content, onChange, onImageUpload }: Ric
         allowBase64: true,
       }),
     ],
+    immediatelyRender: false,
     content,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
@@ -93,11 +94,11 @@ export default function RichTextEditor({ content, onChange, onImageUpload }: Ric
     }
   }, [content, editor]);
 
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
   if (!editor) {
     return null;
   }
-
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const addImage = () => {
     if (onImageUpload) {
