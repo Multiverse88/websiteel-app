@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 interface Props {
@@ -12,8 +13,8 @@ interface Props {
   totalBounced: number;
   totalFailed: number;
   activityData: { day: string; sent: number; open: number }[];
-  campaignsTrend: { name: string; brand: string; status: string; sent: number; open: number; click: number }[];
-  campaignRows: { name: string; brand: string; status: string; sent: number; open: number; click: number }[];
+  campaignsTrend: { id: string; name: string; brand: string; status: string; sent: number; open: number; click: number }[];
+  campaignRows: { id: string; name: string; brand: string; status: string; sent: number; open: number; click: number }[];
   topContacts: { name: string; meta: string; stat: string }[];
   coldContacts: { name: string; meta: string }[];
   links: { label: string; url: string; count: number }[];
@@ -38,6 +39,7 @@ export default function StatistikClient({
   hourly
 }: Props) {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -501,7 +503,12 @@ export default function StatistikClient({
                 </thead>
                 <tbody>
                   {campaignRows.map((c, i) => (
-                    <tr key={i}>
+                    <tr 
+                      key={i} 
+                      onClick={() => router.push(`/dashboard/email-blast/statistik/${c.id}`)}
+                      style={{ cursor: "pointer" }}
+                      className="hover:bg-[#F9F9F8] transition-colors"
+                    >
                       <td style={{ paddingLeft: 12 }}>
                         <div className="campaign-name">{c.name}</div>
                         <div className="campaign-brand">{c.brand}</div>
