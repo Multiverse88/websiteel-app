@@ -27,7 +27,7 @@ export default async function NewEmailBlastPage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FBFBFA] text-[#111111] font-sans">
       {/* HEADER */}
-      <header className="px-8 pt-16 pb-8 max-w-4xl mx-auto w-full">
+      <header className="px-8 pt-16 pb-8 max-w-[1400px] mx-auto w-full">
         <div className="flex items-center justify-between mb-4">
           <Link
             href="/dashboard/email-blast"
@@ -46,10 +46,8 @@ export default async function NewEmailBlastPage() {
       </header>
 
       {/* CONTENT */}
-      <main className="px-8 pb-24 max-w-4xl mx-auto w-full flex-grow">
-        <div className="bg-white rounded-[12px] shadow-sm border border-[#EAEAEA] p-8">
-          <EmailBlastForm initialHeader={defaultHeader} initialFooter={defaultFooter} segments={segments} />
-        </div>
+      <main className="px-8 pb-24 max-w-[1400px] mx-auto w-full flex-grow">
+        <EmailBlastForm initialHeader={defaultHeader} initialFooter={defaultFooter} segments={segments} />
       </main>
     </div>
   );
