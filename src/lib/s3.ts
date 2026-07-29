@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 const endpoint = process.env.MINIO_ENDPOINT;
 const accessKeyId = process.env.MINIO_ACCESS_KEY;
@@ -50,4 +50,22 @@ export async function uploadToMinio(
 
   const cleanPublicUrl = publicUrl.replace(/\/+$/, "");
   return `${cleanPublicUrl}/${key}`;
+}
+
+export async function deleteFromMinio(url: string): Promise<void> {
+  if (!s3Client || !url) return;
+  try {
+    const cleanPublicUrl = publicUrl.replace(/\/+$/, "");
+    if (url.startsWith(cleanPublicUrl)) {
+      const key = url.replace(cleanPublicUrl + "/", "");
+      await s3Client.send(
+        new DeleteObjectCommand({
+          Bucket: bucketName,
+          Key: key,
+        })
+      );
+    }
+  } catch (error) {
+    console.error("Error deleting from MinIO:", error);
+  }
 }
