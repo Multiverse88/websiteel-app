@@ -93,9 +93,10 @@ export default function Footer() {
               <Image
                 src="/Logo EL.png"
                 alt="EasyLegal Logo"
-                width={160}
-                height={60}
+                width={200}
+                height={70}
                 className="object-contain"
+                style={{ width: "auto" }}
                 priority
               />
             </Link>
