@@ -4,7 +4,7 @@ import { ArrowLeft, Users, UserPlus } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { ContactActions, ImportCsvButton, ToggleAllContactsButton } from "../client-components";
+import { ContactActions, ImportCsvButton, ToggleAllContactsButton, ActivateLimitedContactsForm } from "../client-components";
 import { addContactAction } from "../actions";
 
 export const dynamic = "force-dynamic";
@@ -54,34 +54,38 @@ export default async function EmailBlastKontakPage() {
       <section className="py-8 flex-grow">
         <div className="max-w-[1200px] mx-auto px-6 space-y-6">
           
-          {/* Form Tambah Kontak */}
-          <div className="bg-white rounded-2xl shadow-sm border border-black/[0.04] p-5">
-            <h3 className="text-[14px] font-bold text-gray-700 mb-3">Tambah Kontak Cepat</h3>
-            <form action={async (formData) => {
-              "use server";
-              await addContactAction(formData);
-            }} className="flex gap-3">
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="Email Address"
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#d62828] focus:ring-1 focus:ring-[#d62828]"
-              />
-              <input
-                type="text"
-                name="name"
-                placeholder="Nama (Opsional)"
-                className="w-[200px] px-4 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#d62828] focus:ring-1 focus:ring-[#d62828]"
-              />
-              <button
-                type="submit"
-                className="px-6 py-2 bg-gray-900 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors flex items-center gap-1.5 text-[14px]"
-              >
-                <UserPlus className="w-4 h-4" />
-                Tambah
-              </button>
-            </form>
+          {/* Form Tambah Kontak dan Form Aktivasi Terbatas */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white rounded-2xl shadow-sm border border-black/[0.04] p-5">
+              <h3 className="text-[14px] font-bold text-gray-700 mb-3">Tambah Kontak Cepat</h3>
+              <form action={async (formData) => {
+                "use server";
+                await addContactAction(formData);
+              }} className="flex gap-3">
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Email Address"
+                  className="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#d62828] focus:ring-1 focus:ring-[#d62828]"
+                />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Nama (Opsional)"
+                  className="w-[150px] px-4 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#d62828] focus:ring-1 focus:ring-[#d62828]"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-gray-900 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors flex items-center gap-1.5 text-[14px]"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  Tambah
+                </button>
+              </form>
+            </div>
+
+            <ActivateLimitedContactsForm />
           </div>
 
           {contacts.length === 0 ? (

@@ -1,5 +1,6 @@
 "use client";
-import React, { useTransition, useRef, useState } from "react";
+import React, { useTransition, useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Check, X, Trash2, PowerOff, Upload, FileSpreadsheet, Loader2, Settings, ToggleLeft, ToggleRight } from "lucide-react";
 import { toggleContactStatusAction, deleteContactAction, importContactsAction, saveSmtpSettingsAction, toggleAllContactsStatusAction } from "./actions";
 import Papa from "papaparse";
@@ -9,6 +10,11 @@ import Papa from "papaparse";
 export function SmtpSettingsModal({ initialConfig }: { initialConfig: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,8 +40,8 @@ export function SmtpSettingsModal({ initialConfig }: { initialConfig: any }) {
         Setting SMTP
       </button>
 
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      {mounted && isOpen && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-[500px] overflow-hidden">
             <div className="p-5 border-b border-gray-100 flex items-center justify-between">
               <h3 className="font-extrabold text-[16px] text-gray-900">Setting SMTP Blast</h3>
@@ -73,7 +79,8 @@ export function SmtpSettingsModal({ initialConfig }: { initialConfig: any }) {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
@@ -222,5 +229,56 @@ export function ToggleAllContactsButton({ action }: { action: 'activate' | 'deac
       )}
       {isActiveBtn ? "Aktifkan Semua" : "Nonaktifkan Semua"}
     </button>
+  );
+}
+
+export function ActivateLimitedContactsForm() {
+  const [isPending, startTransition] = useTransition();
+
+  const handleActivateLimited = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const limit = parseInt(formData.get("limit") as string, 10);
+    
+    if (isNaN(limit) || limit <= 0) {
+      alert("Masukkan jumlah yang valid (minimal 1)");
+      return;
+    }
+
+    if (confirm(`Yakin ingin mengaktifkan tepat ${limit} kontak dan menonaktifkan sisanya?`)) {
+      startTransition(async () => {
+        const { activateLimitedContactsAction } = await import("./actions");
+        const res = await activateLimitedContactsAction(limit);
+        if (res?.success) {
+          alert(`Berhasil mengaktifkan ${res.count} kontak!`);
+        } else {
+          alert(`Gagal: ${res?.error}`);
+        }
+      });
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-2xl shadow-sm border border-black/[0.04] p-5">
+      <h3 className="text-[14px] font-bold text-gray-700 mb-3">Aktivasi Target Otomatis</h3>
+      <form onSubmit={handleActivateLimited} className="flex gap-3">
+        <input
+          type="number"
+          name="limit"
+          min="1"
+          required
+          placeholder="Jml Kontak (Cth: 100)"
+          className="w-[200px] px-4 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#d62828] focus:ring-1 focus:ring-[#d62828]"
+        />
+        <button
+          type="submit"
+          disabled={isPending}
+          className="px-6 py-2 bg-emerald-50 text-emerald-700 font-bold rounded-lg hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center gap-1.5 text-[14px] disabled:opacity-50"
+        >
+          {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <ToggleRight className="w-4 h-4" />}
+          Aktifkan Otomatis
+        </button>
+      </form>
+    </div>
   );
 }

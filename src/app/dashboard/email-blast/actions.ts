@@ -291,6 +291,37 @@ export async function toggleAllContactsStatusAction(isActive: boolean) {
   }
 }
 
+export async function activateLimitedContactsAction(limit: number) {
+  try {
+    // Nonaktifkan semua kontak dulu
+    await prisma.blastContact.updateMany({
+      data: { isActive: false }
+    });
+    
+    // Ambil sejumlah limit kontak terbaru
+    const contactsToActivate = await prisma.blastContact.findMany({
+      take: limit,
+      orderBy: { createdAt: "desc" },
+      select: { id: true }
+    });
+    
+    const ids = contactsToActivate.map(c => c.id);
+    
+    if (ids.length > 0) {
+      await prisma.blastContact.updateMany({
+        where: { id: { in: ids } },
+        data: { isActive: true }
+      });
+    }
+
+    revalidatePath("/dashboard/email-blast");
+    revalidatePath("/dashboard/email-blast/kontak");
+    return { success: true, count: ids.length };
+  } catch (error: any) {
+    return { error: error.message };
+  }
+}
+
 export async function getEmailBlastTemplateAction(type: "header" | "footer") {
   try {
     const setting = await prisma.systemSetting.findUnique({
