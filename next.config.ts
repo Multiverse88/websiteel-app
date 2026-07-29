@@ -76,6 +76,11 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   output: "standalone",
   serverExternalPackages: ["@prisma/client"],
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
+  },
   async headers() {
     return [
       {
@@ -85,7 +90,10 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
-    const minioInternal = process.env.MINIO_ENDPOINT || "http://host.docker.internal:9000";
+    let minioInternal = process.env.MINIO_ENDPOINT || "http://host.docker.internal:9000";
+    if (!minioInternal.includes("://")) {
+      minioInternal = `https://${minioInternal}`;
+    }
     return [
       // Proxy /images/ to MinIO for uploaded articles (Cloudflare → Next.js doesn't have these files)
       { source: "/images/:path*", destination: `${minioInternal}/images/:path*` },
