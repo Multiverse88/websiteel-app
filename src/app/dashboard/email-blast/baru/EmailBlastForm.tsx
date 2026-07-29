@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Loader2, Save, FileText, FlaskConical, Eye, X } from "lucide-react";
+import { Send, Loader2, Save, FileText, FlaskConical, Eye, X, Paperclip } from "lucide-react";
 import RichTextEditor from "@/components/dashboard/RichTextEditor";
 import { createCampaignAction, testSendCampaignAction } from "../actions";
 import { useFormStatus } from "react-dom";
@@ -58,7 +58,34 @@ export default function EmailBlastForm({
   const [fontFamily, setFontFamily] = useState("sans-serif");
   const [footerMode, setFooterMode] = useState<'visual'|'html'>('visual');
   
+  const [attachments, setAttachments] = useState<{url: string; filename: string}[]>([]);
+  const [isUploadingAttachment, setIsUploadingAttachment] = useState(false);
+
   const router = useRouter();
+
+  const handleAttachmentUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    setIsUploadingAttachment(true);
+    
+    const { uploadAttachmentAction } = await import("../actions");
+    const files = Array.from(e.target.files);
+    const newAttachments = [...attachments];
+    
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await uploadAttachmentAction(formData);
+      if (res.url && res.filename) {
+        newAttachments.push({ url: res.url, filename: res.filename });
+      } else {
+        alert(`Gagal upload ${file.name}: ${res.error}`);
+      }
+    }
+    
+    setAttachments(newAttachments);
+    setIsUploadingAttachment(false);
+    e.target.value = ''; // Reset file input
+  };
 
   const handleImageUpload = async (file: File) => {
     const formData = new FormData();
@@ -122,6 +149,7 @@ export default function EmailBlastForm({
         
         formData.set("bodyHtml", finalHtml);
         formData.set("isTemplate", isTemplate ? "true" : "false");
+        formData.set("attachments", JSON.stringify(attachments));
         
         // Save templates if requested
         if (saveHeader || saveFooter) {
@@ -269,6 +297,50 @@ export default function EmailBlastForm({
                 placeholder="<!-- Paste your custom HTML here -->"
               />
             )}
+          </div>
+        </div>
+
+        {/* Attachments Group */}
+        <div className="pt-4 border-t border-[#EAEAEA]">
+          <label className="block text-[13px] font-semibold text-[#111111] mb-2 flex items-center gap-2">
+            <Paperclip className="w-4 h-4 text-[#787774]" />
+            Attachments (Lampiran File)
+          </label>
+          <div className="flex flex-col gap-3">
+            {attachments.length > 0 && (
+              <ul className="space-y-2 mb-2">
+                {attachments.map((att, idx) => (
+                  <li key={idx} className="flex items-center justify-between p-3 bg-[#F7F6F3] rounded-[6px] border border-[#EAEAEA] text-[13px]">
+                    <span className="truncate max-w-[250px] font-medium text-[#111111]">{att.filename}</span>
+                    <button 
+                      type="button" 
+                      onClick={() => setAttachments(attachments.filter((_, i) => i !== idx))}
+                      className="text-[#990202] hover:bg-[#FEF2F2] p-1 rounded"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+            
+            <div className="relative">
+              <input
+                type="file"
+                multiple
+                onChange={handleAttachmentUpload}
+                disabled={isUploadingAttachment}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
+              />
+              <div className={`flex items-center justify-center gap-2 border-2 border-dashed border-[#EAEAEA] rounded-[6px] p-4 text-center transition-colors ${isUploadingAttachment ? 'bg-gray-50 opacity-50' : 'hover:bg-gray-50 bg-white'}`}>
+                {isUploadingAttachment ? (
+                  <><Loader2 className="w-4 h-4 animate-spin text-[#787774]" /><span className="text-[13px] text-[#787774]">Mengunggah...</span></>
+                ) : (
+                  <><Paperclip className="w-4 h-4 text-[#787774]" /><span className="text-[13px] font-medium text-[#111111]">Pilih atau seret file ke sini</span></>
+                )}
+              </div>
+            </div>
+            <p className="text-[12px] text-[#787774]">Max 10MB per file. (PDF, DOCX, JPG, PNG, dll)</p>
           </div>
         </div>
       </div>
