@@ -141,10 +141,56 @@ export async function GET() {
       }
     }
 
+    // Cleanup attachments for campaigns older than 5 days
+    let cleanedCampaigns = 0;
+    try {
+      const fiveDaysAgo = new Date();
+      fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
+      
+      const oldCampaigns = await prisma.emailCampaign.findMany({
+        where: {
+          status: "completed",
+          createdAt: { lt: fiveDaysAgo },
+          attachments: { not: null }
+        },
+        take: 10 // process in small batches
+      });
+
+      if (oldCampaigns.length > 0) {
+        const { deleteFromMinio } = await import("@/lib/s3");
+        const fs = await import("fs/promises");
+        const path = await import("path");
+
+        for (const camp of oldCampaigns) {
+          if (camp.attachments && Array.isArray(camp.attachments)) {
+            for (const att of camp.attachments as any[]) {
+              if (att.url) {
+                if (att.url.startsWith("http")) {
+                  await deleteFromMinio(att.url);
+                } else if (att.url.startsWith("/uploads/")) {
+                  try {
+                    await fs.unlink(path.join(process.cwd(), "public", att.url));
+                  } catch (e) {}
+                }
+              }
+            }
+          }
+          await prisma.emailCampaign.update({
+            where: { id: camp.id },
+            data: { attachments: null }
+          });
+          cleanedCampaigns++;
+        }
+      }
+    } catch (cleanupErr) {
+      console.error("Error cleaning up attachments:", cleanupErr);
+    }
+
     return NextResponse.json({
       message: `Processed ${pendingRecipients.length} emails`,
       sentCount,
-      failCount
+      failCount,
+      cleanedCampaigns
     });
 
   } catch (error: any) {
