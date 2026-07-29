@@ -81,15 +81,46 @@ export default function EmailBlastForm({
           ? `<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">`
           : "";
 
+        // Function to safely inject max-width to raw img tags (fallback for clients that strip <style>)
+        const enforceImageConstraints = (html: string) => {
+          if (!html) return "";
+          return html.replace(/<img\s+([^>]*?)>/gi, (match, p1) => {
+            if (!p1.includes("style=")) {
+              return `<img ${p1} style="max-width: 100%; height: auto;">`;
+            } else if (!p1.includes("max-width")) {
+              return `<img ${p1.replace(/style=['"]([^'"]*)['"]/, 'style="max-width: 100%; height: auto; $1"')}>`;
+            }
+            return match;
+          });
+        };
+
         const finalHtml = `
-          ${fontLink}
-          <div style="max-w: 600px; margin: 0 auto; font-family: ${fontFamily}; background-color: #ffffff;">
-            ${headerHtml ? "<div>" + headerHtml + "</div>" : ""}
-            <div style="padding: 20px;">
-              ${bodyHtml}
-            </div>
-            ${footerHtml ? "<div>" + footerHtml + "</div>" : ""}
-          </div>
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              ${fontLink}
+              <style>
+                body { margin: 0; padding: 0; background-color: #F7F5F1; }
+                img { max-width: 100%; height: auto; border: 0; }
+                .email-wrapper { width: 100%; background-color: #F7F5F1; padding: 20px 0; }
+                .email-container { max-width: 600px; margin: 0 auto; font-family: ${fontFamily}; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+                .email-body { padding: 30px; font-size: 14px; line-height: 1.6; color: #333333; }
+              </style>
+            </head>
+            <body>
+              <div class="email-wrapper">
+                <div class="email-container">
+                  ${headerHtml ? `<div style="max-width: 100%; text-align: center;">${enforceImageConstraints(headerHtml)}</div>` : ""}
+                  <div class="email-body">
+                    ${enforceImageConstraints(bodyHtml)}
+                  </div>
+                  ${footerHtml ? `<div style="max-width: 100%;">${enforceImageConstraints(footerHtml)}</div>` : ""}
+                </div>
+              </div>
+            </body>
+          </html>
         `;
         
         formData.set("bodyHtml", finalHtml);
