@@ -56,6 +56,7 @@ export default function EmailBlastForm({
   const [saveFooter, setSaveFooter] = useState(false);
   const [isTemplate, setIsTemplate] = useState(false);
   const [fontFamily, setFontFamily] = useState("sans-serif");
+  const [footerMode, setFooterMode] = useState<'visual'|'html'>('visual');
   
   const router = useRouter();
 
@@ -215,16 +216,31 @@ export default function EmailBlastForm({
         {/* Footer */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-[13px] font-semibold text-[#111111]">
-              Footer (Disclaimer & Sosial)
-            </label>
+            <div className="flex items-center gap-3">
+              <label className="block text-[13px] font-semibold text-[#111111]">
+                Footer (Disclaimer & Sosial)
+              </label>
+              <div className="flex bg-[#EAEAEA] p-0.5 rounded text-[11px]">
+                <button type="button" onClick={() => setFooterMode('visual')} className={`px-2 py-0.5 rounded transition-all ${footerMode === 'visual' ? 'bg-white shadow-sm font-medium text-[#111111]' : 'text-[#787774] hover:text-[#111111]'}`}>Visual</button>
+                <button type="button" onClick={() => setFooterMode('html')} className={`px-2 py-0.5 rounded transition-all ${footerMode === 'html' ? 'bg-white shadow-sm font-medium text-[#111111]' : 'text-[#787774] hover:text-[#111111]'}`}>HTML Code</button>
+              </div>
+            </div>
             <label className="flex items-center gap-2 text-[12px] text-[#787774] cursor-pointer">
               <input type="checkbox" checked={saveFooter} onChange={(e) => setSaveFooter(e.target.checked)} className="w-3.5 h-3.5 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
               Simpan sbg default
             </label>
           </div>
           <div className="border border-[#EAEAEA] rounded-[6px] overflow-hidden">
-            <RichTextEditor content={footerHtml} onChange={setFooterHtml} onImageUpload={handleImageUpload} />
+            {footerMode === 'visual' ? (
+              <RichTextEditor content={footerHtml} onChange={setFooterHtml} onImageUpload={handleImageUpload} />
+            ) : (
+              <textarea 
+                value={footerHtml} 
+                onChange={(e) => setFooterHtml(e.target.value)}
+                className="w-full h-[180px] p-3 font-mono text-[12.5px] text-[#111111] focus:outline-none bg-[#FDFDFC] resize-y"
+                placeholder="<!-- Paste your custom HTML here -->"
+              />
+            )}
           </div>
         </div>
       </div>
