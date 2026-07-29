@@ -128,7 +128,7 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
 
       {/* Header */}
       <div className="sticky top-0 z-40 bg-[#ECEAE5]/80 backdrop-blur-md border-b border-[#E4E1DA]">
-        <div className="max-w-[1000px] mx-auto px-6 h-[70px] flex flex-wrap items-center justify-between gap-4">
+        <div className="w-full mx-auto px-10 h-[70px] flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Link href="/dashboard/email-blast/riwayat" className="w-8 h-8 rounded-full border border-[#E4E1DA] flex items-center justify-center text-[#15151B] hover:bg-white transition-colors bg-[#Fbfaf8]">
               <ArrowLeft className="w-4 h-4" />
@@ -202,7 +202,7 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
         </div>
       </div>
 
-      <div className="max-w-[1000px] mx-auto px-6 mt-8">
+      <div className="w-full mx-auto px-10 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           
           <div className="bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg p-5 flex flex-col justify-between h-[120px]">
