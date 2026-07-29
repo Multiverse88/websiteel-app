@@ -104,16 +104,13 @@ export default function EmailBlastForm({
               <style>
                 body { margin: 0; padding: 0; background-color: #F7F5F1; }
                 img { max-width: 100%; height: auto; border: 0; }
-                .email-wrapper { width: 100%; background-color: #F7F5F1; padding: 20px 0; }
-                .email-container { max-width: 600px; margin: 0 auto; font-family: ${fontFamily}; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-                .email-body { padding: 30px; font-size: 14px; line-height: 1.6; color: #333333; }
               </style>
             </head>
-            <body>
-              <div class="email-wrapper">
-                <div class="email-container">
+            <body style="margin: 0; padding: 0; background-color: #F7F5F1;">
+              <div style="width: 100%; background-color: #F7F5F1; padding: 20px 0;">
+                <div style="max-width: 600px; margin: 0 auto; font-family: ${fontFamily.replace(/"/g, "'")}; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                   ${headerHtml ? `<div style="max-width: 100%; text-align: center;">${enforceImageConstraints(headerHtml)}</div>` : ""}
-                  <div class="email-body">
+                  <div style="padding: 30px; font-size: 14px; line-height: 1.6; color: #333333;">
                     ${enforceImageConstraints(bodyHtml)}
                   </div>
                   ${footerHtml ? `<div style="max-width: 100%;">${enforceImageConstraints(footerHtml)}</div>` : ""}
