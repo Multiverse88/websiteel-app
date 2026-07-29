@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 import nodemailer from "nodemailer";
 
 export const dynamic = "force-dynamic";
@@ -151,7 +152,7 @@ export async function GET() {
         where: {
           status: "completed",
           createdAt: { lt: fiveDaysAgo },
-          attachments: { not: null }
+          attachments: { not: Prisma.DbNull }
         },
         take: 10 // process in small batches
       });
