@@ -12,16 +12,9 @@ function SubmitButton({ label, icon: Icon, isTest = false }: { label: string, ic
   return (
     <button
       type="submit"
+      name="actionType"
+      value={isTest ? "test" : "submit"}
       disabled={pending}
-      formAction={isTest ? async (fd) => {
-        const testEmail = prompt("Masukkan email untuk test send:");
-        if (testEmail) {
-          fd.append("testEmail", testEmail);
-          const result = await testSendCampaignAction(fd);
-          if (result.error) alert(result.error);
-          else alert("Test email berhasil dikirim!");
-        }
-      } : undefined}
       className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-[14px] font-medium transition-all disabled:opacity-70 disabled:cursor-not-allowed ${
         isTest 
         ? "bg-[#F7F6F3] text-[#111111] hover:bg-[#EAEAEA] border border-[#EAEAEA]"
@@ -169,6 +162,19 @@ export default function EmailBlastForm({
         formData.set("isTemplate", isTemplate ? "true" : "false");
         formData.set("attachments", JSON.stringify(attachments));
         
+        const actionType = formData.get("actionType");
+
+        if (actionType === "test") {
+          const testEmail = prompt("Masukkan email untuk test send:");
+          if (!testEmail) return;
+          formData.set("testEmail", testEmail);
+          
+          const result = await testSendCampaignAction(formData);
+          if (result?.error) alert(`Gagal: ${result.error}`);
+          else alert("Test email berhasil dikirim (dengan attachment jika ada)!");
+          return;
+        }
+
         // Save templates if requested
         if (saveHeader || saveFooter) {
           const { saveEmailBlastTemplateAction } = await import("../actions");
