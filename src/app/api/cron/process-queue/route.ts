@@ -96,13 +96,22 @@ export async function GET() {
       });
 
       try {
-        await transporter.sendMail({
+        const mailOptions: any = {
           from: smtpFrom,
           to: contact.email,
           subject: campaign.subject,
           html: finalHtml,
           text: finalHtml.replace(/<[^>]+>/g, ""),
-        });
+        };
+
+        if (campaign.attachments && Array.isArray(campaign.attachments) && campaign.attachments.length > 0) {
+          mailOptions.attachments = campaign.attachments.map((a: any) => ({
+            filename: a.filename,
+            path: a.url.startsWith("http") ? a.url : `http://localhost:3000${a.url}`
+          }));
+        }
+
+        await transporter.sendMail(mailOptions);
         
         await prisma.campaignRecipient.update({
           where: { id: recipient.id },

@@ -66,6 +66,12 @@ export async function createCampaignAction(formData: FormData) {
   const internalName = formData.get("internalName") as string;
   const previewText = formData.get("previewText") as string;
   const isTemplate = formData.get("isTemplate") === "true";
+  const attachmentsJson = formData.get("attachments") as string;
+  
+  let attachments = [];
+  try {
+    if (attachmentsJson) attachments = JSON.parse(attachmentsJson);
+  } catch (e) {}
 
   if (!subject || !bodyHtml) {
     return { error: "Subject dan Body wajib diisi" };
@@ -104,6 +110,7 @@ export async function createCampaignAction(formData: FormData) {
         status: campaignStatus,
         isTemplate,
         scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
+        attachments: attachments.length > 0 ? attachments : null,
         recipients: {
           create: recipientsData,
         },
@@ -123,6 +130,12 @@ export async function testSendCampaignAction(formData: FormData) {
   const subject = formData.get("subject") as string;
   const bodyHtml = formData.get("bodyHtml") as string;
   const previewText = formData.get("previewText") as string;
+  const attachmentsJson = formData.get("attachments") as string;
+
+  let attachments = [];
+  try {
+    if (attachmentsJson) attachments = JSON.parse(attachmentsJson);
+  } catch (e) {}
 
   if (!testEmail || !subject || !bodyHtml) {
     return { error: "Email, Subject, dan Body wajib diisi" };
@@ -153,13 +166,22 @@ export async function testSendCampaignAction(formData: FormData) {
       finalHtml = `<div style="display:none;font-size:1px;color:#333333;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">${previewText}</div>` + finalHtml;
     }
 
-    await customTransporter.sendMail({
+    const mailOptions: any = {
       from: smtpFrom,
       to: testEmail,
       subject: `[TEST] ${subject}`,
       html: finalHtml,
       text: finalHtml.replace(/<[^>]+>/g, ""),
-    });
+    };
+
+    if (attachments && attachments.length > 0) {
+      mailOptions.attachments = attachments.map((a: any) => ({
+        filename: a.filename,
+        path: a.url.startsWith("http") ? a.url : `http://localhost:3000${a.url}` 
+      }));
+    }
+
+    await customTransporter.sendMail(mailOptions);
 
     return { success: true };
   } catch (err: any) {
@@ -239,6 +261,49 @@ export async function uploadInlineImageAction(formData: FormData): Promise<{ url
   } catch (error: any) {
     console.error("Error uploading image:", error);
     return { error: "Gagal mengunggah gambar." };
+  }
+}
+
+export async function uploadAttachmentAction(formData: FormData): Promise<{ url?: string; filename?: string; error?: string }> {
+  const session = await getSession();
+  if (!session) {
+    return { error: "Sesi tidak valid!" };
+  }
+
+  const file = formData.get("file") as File | null;
+  if (!file || file.size === 0) {
+    return { error: "Tidak ada file yang dipilih." };
+  }
+
+  // Max size 10MB for general attachments
+  if (file.size > 10 * 1024 * 1024) {
+    return { error: "Ukuran file maksimal 10MB!" };
+  }
+
+  try {
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const filename = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+
+    let url = "";
+    if (isMinioConfigured()) {
+      url = await uploadToMinio(buffer, filename, file.type, "uploads/email-blasts/attachments");
+    } else {
+      const fs = await import("fs/promises");
+      const path = await import("path");
+      
+      const uploadDir = path.join(process.cwd(), "public", "uploads", "email-blasts", "attachments");
+      await fs.mkdir(uploadDir, { recursive: true });
+      const filepath = path.join(uploadDir, filename);
+      await fs.writeFile(filepath, buffer);
+      
+      url = `/uploads/email-blasts/attachments/${filename}`;
+    }
+
+    return { url, filename: file.name };
+  } catch (error: any) {
+    console.error("Error uploading attachment:", error);
+    return { error: "Gagal mengunggah attachment." };
   }
 }
 
