@@ -28,12 +28,8 @@ export default function MinimalistDashboardClient({
   return (
     <div className="flex flex-col min-h-screen bg-[#FBFBFA] text-[#111111] font-sans">
       {/* HEADER SECTION */}
-      <header className="px-8 pt-16 pb-8 max-w-5xl mx-auto w-full">
-        <div 
-          className={`flex flex-col gap-4 transition-all duration-700 ease-out transform ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-        >
+      <header className="relative z-50 px-8 pt-16 pb-8 max-w-5xl mx-auto w-full">
+        <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <Link
               href="/dashboard"
@@ -69,12 +65,7 @@ export default function MinimalistDashboardClient({
       {/* DASHBOARD CONTENT */}
       <main className="px-8 pb-24 max-w-5xl mx-auto w-full flex-grow">
         {/* STATS LINK CARD */}
-        <div 
-          className={`bg-white border border-[#EAEAEA] rounded-[12px] p-8 mb-6 flex flex-col sm:flex-row items-center justify-between transition-all duration-700 ease-out transform ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-          style={{ transitionDelay: "100ms" }}
-        >
+        <div className="bg-white border border-[#EAEAEA] rounded-[12px] p-8 mb-6 flex flex-col sm:flex-row items-center justify-between">
           <div>
             <h3 className="text-[18px] font-semibold text-[#111111] mb-1">Statistik & Analitik</h3>
             <p className="text-[14px] text-[#787774]">Pantau laporan pengiriman, tingkat open rate, dan click rate dari campaign Anda.</p>
@@ -91,12 +82,7 @@ export default function MinimalistDashboardClient({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           {/* Card: Contacts */}
-          <div 
-            className={`bg-white border border-[#EAEAEA] rounded-[12px] p-8 flex flex-col justify-between min-h-[280px] transition-all duration-700 ease-out transform ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-            }`}
-            style={{ transitionDelay: "200ms" }}
-          >
+          <div className="bg-white border border-[#EAEAEA] rounded-[12px] p-8 flex flex-col justify-between min-h-[280px]">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-10 h-10 bg-[#F7F6F3] border border-[#EAEAEA] rounded-lg flex items-center justify-center text-[#111111]">
@@ -132,12 +118,7 @@ export default function MinimalistDashboardClient({
           </div>
 
           {/* Card: Campaigns */}
-          <div 
-            className={`bg-white border border-[#EAEAEA] rounded-[12px] p-8 flex flex-col justify-between min-h-[280px] transition-all duration-700 ease-out transform ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-            }`}
-            style={{ transitionDelay: "300ms" }}
-          >
+          <div className="bg-white border border-[#EAEAEA] rounded-[12px] p-8 flex flex-col justify-between min-h-[280px]">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-10 h-10 bg-[#F7F6F3] border border-[#EAEAEA] rounded-lg flex items-center justify-center text-[#111111]">
