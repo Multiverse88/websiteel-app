@@ -1,22 +1,21 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, Clock, MailOpen, AlertCircle, CheckCircle2, User, MousePointerClick, Download, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2, Download } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { deleteCampaignAction, cancelCampaignAction } from "../../actions";
-import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
 export default function CampaignDetailClient({ campaign, totalRecipients, totalSent, totalOpened, totalClicked }: any) {
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
   const totalPending = campaign.recipients.filter((r: any) => r.status === "pending").length;
+  const totalFailed = campaign.recipients.filter((r: any) => r.status === "failed").length;
+  const totalBounced = campaign.recipients.filter((r: any) => r.bouncedAt !== null).length;
 
   useEffect(() => {
     setMounted(true);
-    
-    // Auto-refresh every 3 seconds if there are pending recipients
     if (totalPending > 0) {
       const interval = setInterval(() => {
         router.refresh();
@@ -25,20 +24,59 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
     }
   }, [totalPending, router]);
 
+  // Chart setup
+  const w = 600;
+  const h = 180;
+  const padX = 20;
+  const padY = 20;
+
+  // Generate hourly path
+  const hourly = new Array(24).fill(0);
+  campaign.recipients.forEach((r: any) => {
+    if (r.openedAt) {
+      const hour = new Date(r.openedAt).getHours();
+      hourly[hour]++;
+    }
+  });
+
+  let hourlyPath = "";
+  const maxHourly = Math.max(...hourly, 1);
+  if (hourly.length > 0) {
+    hourly.forEach((val, i) => {
+      const step = (w - padX * 2) / 23;
+      const x = padX + i * step;
+      const y = h - padY - (val / maxHourly) * (h - padY * 2);
+      if (i === 0) hourlyPath += `M ${x},${y} `;
+      else hourlyPath += `L ${x},${y} `;
+    });
+  }
+
+  // Device Breakdown
+  const deviceMap: Record<string, number> = {};
+  campaign.recipients.forEach((r: any) => {
+    if (r.device) {
+      deviceMap[r.device] = (deviceMap[r.device] || 0) + 1;
+    }
+  });
+  
+  const totalDeviceCount = Object.values(deviceMap).reduce((a, b) => a + b, 0);
+  const devices = totalDeviceCount > 0 
+    ? Object.entries(deviceMap).map(([label, count]) => ({
+        label,
+        pct: Math.round((count as number / totalDeviceCount) * 100)
+      })).sort((a, b) => b.pct - a.pct).slice(0, 4)
+    : [
+        { label: 'Belum ada data', pct: 0 }
+      ];
+
+  // Tooltip
+  const [ttip, setTtip] = useState({ show: false, x: 0, y: 0, text: '' });
+  const showTooltip = (e: any, text: string) => setTtip({ show: true, x: e.clientX, y: e.clientY, text });
+  const hideTooltip = () => setTtip({ show: false, x: 0, y: 0, text: '' });
+  const moveTooltip = (e: any) => setTtip(prev => ({ ...prev, x: e.clientX, y: e.clientY }));
+
   const openRate = totalSent > 0 ? Math.round((totalOpened / totalSent) * 100) : 0;
   const clickRate = totalOpened > 0 ? Math.round((totalClicked / totalOpened) * 100) : 0;
-
-  // Prepare Chart Data (group opens by hour)
-  const hourlyData = campaign.recipients.reduce((acc: any, r: any) => {
-    if (r.openedAt) {
-      const hour = new Date(r.openedAt).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
-      if (!acc[hour]) acc[hour] = { time: hour, Opens: 0 };
-      acc[hour].Opens++;
-    }
-    return acc;
-  }, {});
-  
-  const chartData = Object.values(hourlyData).sort((a: any, b: any) => a.time.localeCompare(b.time));
 
   // CSV Export Logic
   const handleExportCSV = () => {
@@ -64,17 +102,57 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
     URL.revokeObjectURL(url);
   };
 
+  if (!mounted) return null;
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#FBFBFA] text-[#111111] font-sans">
-      <header className="px-8 pt-16 pb-8 max-w-5xl mx-auto w-full">
-        <div className="flex flex-wrap items-center justify-between mb-4 gap-4">
-          <Link
-            href="/dashboard/email-blast/riwayat"
-            className="inline-flex items-center gap-2 text-[13px] font-medium text-[#787774] hover:text-[#111111] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Kembali ke Riwayat
-          </Link>
+    <div className="bg-[#ECEAE5] min-h-screen text-[#15151B] font-['Inter',sans-serif] selection:bg-[#15151B] selection:text-white pb-20">
+      
+      {ttip.show && (
+        <div style={{
+          position: 'fixed',
+          top: ttip.y - 10,
+          left: ttip.x + 15,
+          background: '#15151b',
+          color: '#fff',
+          padding: '6px 10px',
+          fontSize: '11px',
+          borderRadius: '4px',
+          pointerEvents: 'none',
+          zIndex: 9999,
+          whiteSpace: 'pre-wrap',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+        }}>
+          {ttip.text}
+        </div>
+      )}
+
+      {/* Header */}
+      <div className="sticky top-0 z-40 bg-[#ECEAE5]/80 backdrop-blur-md border-b border-[#E4E1DA]">
+        <div className="max-w-[1000px] mx-auto px-6 h-[70px] flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <Link href="/dashboard/email-blast/riwayat" className="w-8 h-8 rounded-full border border-[#E4E1DA] flex items-center justify-center text-[#15151B] hover:bg-white transition-colors bg-[#Fbfaf8]">
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+            <div>
+              <div className="text-[11px] font-bold tracking-widest text-[#8A867D] uppercase mb-0.5 flex items-center gap-2">
+                Riwayat Campaign
+                <span className={`px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase rounded-full border ${
+                  campaign.status === 'completed' || campaign.status === 'sent' 
+                    ? 'border-[#25D366]/30 text-[#128C7E] bg-[#25D366]/10' 
+                    : 'border-[#E4E1DA] text-[#8A867D] bg-white'
+                }`}>
+                  {campaign.status}
+                </span>
+                {totalPending > 0 && (
+                  <span className="flex items-center gap-1 px-2 py-0.5 bg-[#FBFBFA] border border-[#EAEAEA] text-[#111111] text-[9px] font-semibold rounded-full shadow-sm">
+                    <Loader2 className="w-3 h-3 animate-spin text-[#d62828]" />
+                    Memproses ({totalPending})
+                  </span>
+                )}
+              </div>
+              <div className="text-[16px] font-semibold tracking-tight">{campaign.internalName || campaign.subject}</div>
+            </div>
+          </div>
           <div className="flex items-center gap-2">
             {totalPending > 0 && (
               <button 
@@ -83,7 +161,7 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
                     await cancelCampaignAction(campaign.id);
                   }
                 }}
-                className="inline-flex items-center gap-2 text-[13px] font-medium text-amber-700 bg-amber-50 border border-amber-200 px-4 py-2 rounded-md hover:bg-amber-100 transition-colors"
+                className="inline-flex items-center gap-2 text-[12px] font-medium text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-md hover:bg-amber-100 transition-colors"
               >
                 Batalkan
               </button>
@@ -92,7 +170,7 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
               <>
                 <Link
                   href={`/dashboard/email-blast/riwayat/${campaign.id}/edit`}
-                  className="inline-flex items-center gap-2 text-[13px] font-medium text-[#111111] bg-white border border-[#EAEAEA] px-4 py-2 rounded-md hover:bg-[#F7F6F3] transition-colors"
+                  className="inline-flex items-center gap-2 text-[12px] font-medium text-[#111111] bg-[#fbfaf8] border border-[#E4E1DA] px-3 py-1.5 rounded-md hover:bg-white transition-colors"
                 >
                   Edit
                 </Link>
@@ -107,7 +185,7 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
                       }
                     }
                   }}
-                  className="inline-flex items-center gap-2 text-[13px] font-medium text-red-700 bg-red-50 border border-red-200 px-4 py-2 rounded-md hover:bg-red-100 transition-colors"
+                  className="inline-flex items-center gap-2 text-[12px] font-medium text-[#980203] bg-red-50 border border-red-200 px-3 py-1.5 rounded-md hover:bg-red-100 transition-colors"
                 >
                   Hapus
                 </button>
@@ -115,158 +193,198 @@ export default function CampaignDetailClient({ campaign, totalRecipients, totalS
             )}
             <button 
               onClick={handleExportCSV}
-              className="inline-flex items-center gap-2 text-[13px] font-medium text-[#111111] bg-white border border-[#EAEAEA] px-4 py-2 rounded-md hover:bg-[#F7F6F3] transition-colors"
+              className="inline-flex items-center gap-2 text-[12px] font-medium text-[#111111] bg-[#111] text-white px-3 py-1.5 rounded-md hover:bg-[#333] transition-colors"
             >
-              <Download className="w-4 h-4" />
-              Export CSV
+              <Download className="w-3 h-3" />
+              Export
             </button>
           </div>
         </div>
-        <h1 className="text-[32px] font-semibold tracking-tight text-[#111111] leading-tight flex items-center gap-3">
-          {campaign.internalName || campaign.subject}
-          {totalPending > 0 && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FBFBFA] border border-[#EAEAEA] text-[#111111] text-[13px] font-semibold rounded-full shadow-sm mt-1">
-              <Loader2 className="w-4 h-4 animate-spin text-[#d62828]" />
-              Sedang Memproses ({totalPending} tersisa)
-            </span>
-          )}
-        </h1>
-        <p className="text-[15px] text-[#787774] mt-2 max-w-xl leading-relaxed">
-          {campaign.previewText || "Laporan performa campaign email."}
-        </p>
-      </header>
+      </div>
 
-      <main className="px-8 pb-24 max-w-5xl mx-auto w-full flex-grow space-y-8">
-        
-        {/* FUNNEL ACCENT */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white border border-[#EAEAEA] rounded-[12px] p-5">
-            <p className="text-[13px] text-[#787774] font-medium">Antrian</p>
-            <h3 className="text-[24px] font-semibold text-[#111111] leading-none mt-2">{totalRecipients}</h3>
+      <div className="max-w-[1000px] mx-auto px-6 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          
+          <div className="bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg p-5 flex flex-col justify-between h-[120px]">
+            <div className="text-[12px] font-medium text-[#8A867D]">Total Terkirim</div>
+            <div className="flex items-end justify-between">
+              <div className="text-[32px] font-semibold tracking-tighter leading-none">{totalSent}</div>
+            </div>
           </div>
-          <div className="bg-white border border-[#EAEAEA] rounded-[12px] p-5">
-            <p className="text-[13px] text-[#787774] font-medium">Terkirim</p>
-            <h3 className="text-[24px] font-semibold text-[#111111] leading-none mt-2">{totalSent}</h3>
+
+          <div className="bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg p-5 flex flex-col justify-between h-[120px]">
+            <div className="text-[12px] font-medium text-[#8A867D]">Total Dibuka</div>
+            <div className="flex items-end justify-between">
+              <div className="text-[32px] font-semibold tracking-tighter leading-none">{totalOpened}</div>
+              <div className="text-[13px] font-medium text-[#8A867D] mb-1">{openRate}%</div>
+            </div>
+            <div className="w-full h-1 bg-[#E4E1DA] mt-3 rounded-full overflow-hidden">
+              <div className="h-full bg-[#15151B]" style={{ width: `${openRate}%` }}></div>
+            </div>
           </div>
-          <div className="bg-white border border-[#EAEAEA] rounded-[12px] p-5">
-            <p className="text-[13px] text-[#787774] font-medium">Open Rate</p>
-            <h3 className="text-[24px] font-semibold text-[#111111] leading-none mt-2">
-              {openRate}% <span className="text-[14px] text-[#787774] font-normal">({totalOpened})</span>
-            </h3>
+
+          <div className="bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg p-5 flex flex-col justify-between h-[120px]">
+            <div className="text-[12px] font-medium text-[#8A867D]">Total Diklik</div>
+            <div className="flex items-end justify-between">
+              <div className="text-[32px] font-semibold tracking-tighter leading-none">{totalClicked}</div>
+              <div className="text-[13px] font-medium text-[#8A867D] mb-1">{clickRate}%</div>
+            </div>
+            <div className="w-full h-1 bg-[#E4E1DA] mt-3 rounded-full overflow-hidden">
+              <div className="h-full bg-[#FFD96A]" style={{ width: `${clickRate}%` }}></div>
+            </div>
           </div>
-          <div className="bg-white border border-[#EAEAEA] rounded-[12px] p-5">
-            <p className="text-[13px] text-[#787774] font-medium">Click-to-Open</p>
-            <h3 className="text-[24px] font-semibold text-[#111111] leading-none mt-2">
-              {clickRate}% <span className="text-[14px] text-[#787774] font-normal">({totalClicked})</span>
-            </h3>
+
+          <div className="bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg p-5 flex flex-col justify-between h-[120px]">
+            <div className="text-[12px] font-medium text-[#8A867D]">Gagal / Bounced</div>
+            <div className="flex items-end justify-between">
+              <div className="text-[32px] font-semibold tracking-tighter leading-none text-[#980203]">{totalFailed + totalBounced}</div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Info detail */}
+        <div className="bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg p-6 mb-8">
+          <div className="text-[11px] font-bold tracking-widest text-[#8A867D] uppercase mb-4">Informasi Campaign</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div className="text-[12px] text-[#8A867D] mb-1">Subjek Email</div>
+              <div className="text-[14px] font-medium">{campaign.subject}</div>
+            </div>
+            <div>
+              <div className="text-[12px] text-[#8A867D] mb-1">Dibuat Pada</div>
+              <div className="text-[14px] font-medium">{new Date(campaign.createdAt).toLocaleString('id-ID')}</div>
+            </div>
           </div>
         </div>
 
-        {/* CHART TIMELINE */}
-        {mounted && chartData.length > 0 && (
-          <div className="bg-white border border-[#EAEAEA] rounded-[12px] p-8">
-            <h3 className="text-[14px] font-semibold text-[#111111] mb-6">Timeline Pembukaan Email</h3>
-            <div className="h-[250px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="colorOpens" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#111111" stopOpacity={0.1}/>
-                      <stop offset="95%" stopColor="#111111" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#EAEAEA" />
-                  <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: "#787774" }} dy={10} />
-                  <Tooltip cursor={{ fill: "#F7F6F3" }} contentStyle={{ borderRadius: "8px", border: "1px solid #EAEAEA", boxShadow: "0 4px 12px rgba(0,0,0,0.05)", fontSize: "13px" }} />
-                  <Area type="monotone" dataKey="Opens" stroke="#111111" strokeWidth={2} fillOpacity={1} fill="url(#colorOpens)" />
-                </AreaChart>
-              </ResponsiveContainer>
+        {/* Heatmap & Devices */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          
+          <div className="lg:col-span-2 bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg p-6">
+            <div className="text-[11px] font-bold tracking-widest text-[#8A867D] uppercase mb-6 flex items-center justify-between">
+              <span>Waktu Pembukaan (24 Jam)</span>
+            </div>
+            <div className="relative w-full overflow-hidden">
+              <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="200" style={{ overflow: 'visible' }}>
+                {/* Grid */}
+                {[0, 1, 2, 3].map(i => {
+                  const y = padY + i * ((h - padY * 2) / 3);
+                  return <line key={i} x1={padX} y1={y} x2={w - padX} y2={y} stroke="#E4E1DA" strokeWidth="1" strokeDasharray="4 4" />;
+                })}
+                <path d={hourlyPath} fill="none" stroke="#15151B" strokeWidth="2.5" />
+                
+                {hourly.map((val, i) => {
+                  if (val === 0) return null;
+                  const step = (w - padX * 2) / 23;
+                  const x = padX + i * step;
+                  const y = h - padY - (val / maxHourly) * (h - padY * 2);
+                  return (
+                    <circle 
+                      key={i} 
+                      cx={x} 
+                      cy={y} 
+                      r="4" 
+                      fill="#FFD96A" 
+                      stroke="#15151B" 
+                      strokeWidth="1.5"
+                      style={{ cursor: 'pointer', pointerEvents: 'all' }}
+                      onMouseEnter={(e) => showTooltip(e, `Jam ${String(i).padStart(2,'0')}:00\n${val} kali dibuka`)} 
+                      onMouseLeave={hideTooltip} 
+                      onMouseMove={moveTooltip}
+                    />
+                  );
+                })}
+
+                {/* X axis labels (0, 6, 12, 18, 23) */}
+                {[0, 6, 12, 18, 23].map(hour => {
+                  const step = (w - padX * 2) / 23;
+                  const x = padX + hour * step;
+                  return (
+                    <text key={hour} x={x} y={h - 2} fontSize="10" fill="#8A867D" textAnchor="middle" fontFamily="Inter">
+                      {String(hour).padStart(2,'0')}:00
+                    </text>
+                  );
+                })}
+              </svg>
             </div>
           </div>
-        )}
 
-        {/* LIST SECTION */}
-        <div className="bg-white border border-[#EAEAEA] rounded-[12px] overflow-hidden">
-          <div className="px-6 py-4 border-b border-[#EAEAEA] bg-[#F7F6F3]">
-            <h3 className="text-[14px] font-semibold text-[#111111]">Laporan Pengiriman Detail</h3>
+          <div className="bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg p-6">
+            <div className="text-[11px] font-bold tracking-widest text-[#8A867D] uppercase mb-6">Perangkat Penerima</div>
+            <div className="flex flex-col gap-4">
+              {devices.map((d, i) => (
+                <div key={i}>
+                  <div className="flex justify-between text-[13px] mb-1.5">
+                    <span className="font-medium">{d.label}</span>
+                    <span className="text-[#8A867D]">{d.pct}%</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-[#E4E1DA] rounded-full overflow-hidden">
+                    <div className="h-full bg-[#15151B]" style={{ width: `${d.pct}%` }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          
+
+        </div>
+
+        {/* Recipients Table */}
+        <div className="bg-[#fbfaf8] border border-[#E4E1DA] rounded-lg overflow-hidden">
+          <div className="p-5 border-b border-[#E4E1DA]">
+            <div className="text-[11px] font-bold tracking-widest text-[#8A867D] uppercase">Aktivitas Penerima</div>
+          </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+            <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
-                <tr className="border-b border-[#EAEAEA]">
-                  <th className="px-6 py-3 text-[12px] font-medium text-[#787774] uppercase tracking-widest">Penerima</th>
-                  <th className="px-6 py-3 text-[12px] font-medium text-[#787774] uppercase tracking-widest text-center">Status</th>
-                  <th className="px-6 py-3 text-[12px] font-medium text-[#787774] uppercase tracking-widest text-center">Dibuka (Total)</th>
-                  <th className="px-6 py-3 text-[12px] font-medium text-[#787774] uppercase tracking-widest text-center">Interaksi Link</th>
-                  <th className="px-6 py-3 text-[12px] font-medium text-[#787774] uppercase tracking-widest text-center">Perangkat</th>
+                <tr className="border-b border-[#E4E1DA]">
+                  <th className="px-5 py-3 text-[11px] font-medium tracking-wider text-[#8A867D] uppercase">Email</th>
+                  <th className="px-5 py-3 text-[11px] font-medium tracking-wider text-[#8A867D] uppercase">Status</th>
+                  <th className="px-5 py-3 text-[11px] font-medium tracking-wider text-[#8A867D] uppercase">Opened</th>
+                  <th className="px-5 py-3 text-[11px] font-medium tracking-wider text-[#8A867D] uppercase">Clicked</th>
+                  <th className="px-5 py-3 text-[11px] font-medium tracking-wider text-[#8A867D] uppercase">Total Buka</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#EAEAEA]">
-                {campaign.recipients.map((recipient: any) => (
-                  <tr key={recipient.id} className="hover:bg-[#FBFBFA] transition-colors">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-[#EAEAEA] flex items-center justify-center text-[#787774]">
-                          <User className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-[14px] font-medium text-[#111111]">
-                            {recipient.contact.email}
-                          </div>
-                          {recipient.contact.name && (
-                            <div className="text-[12px] text-[#787774]">
-                              {recipient.contact.name}
-                            </div>
-                          )}
-                        </div>
-                      </div>
+              <tbody className="divide-y divide-[#E4E1DA]/50">
+                {campaign.recipients.length > 0 ? campaign.recipients.map((r: any, i: number) => (
+                  <tr key={i} className="hover:bg-[#F9F9F8] transition-colors">
+                    <td className="px-5 py-4">
+                      <div className="text-[14px] font-medium text-[#111]">{r.contact.email}</div>
+                      <div className="text-[12px] text-[#8A867D]">{r.contact.name || "Unknown"}</div>
                     </td>
-                    <td className="px-6 py-4 text-center">
-                      {recipient.status === "sent" ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#EDF3EC] text-[#346538] text-[11px] font-semibold tracking-widest uppercase rounded-full">
-                          <CheckCircle2 className="w-3.5 h-3.5" /> Terkirim
-                        </span>
-                      ) : recipient.status === "failed" ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FDEBEC] text-[#9F2F2D] text-[11px] font-semibold tracking-widest uppercase rounded-full">
-                          <AlertCircle className="w-3.5 h-3.5" /> Gagal
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FFFBEA] text-[#B8860B] border border-[#FBE5A1] text-[11px] font-semibold tracking-widest uppercase rounded-full">
-                          <Loader2 className="w-3.5 h-3.5 animate-spin" /> Pending
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 text-center">
-                      {recipient.openedAt ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#E1F3FE] text-[#1F6C9F] text-[11px] font-semibold tracking-widest uppercase rounded-full">
-                          <MailOpen className="w-3.5 h-3.5" /> {recipient.openCount}x Dibuka
-                        </span>
-                      ) : (
-                        <span className="text-[13px] text-[#787774] italic">-</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 text-center">
-                      {recipient.clickedAt ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FDF0E1] text-[#98530B] text-[11px] font-semibold tracking-widest uppercase rounded-full">
-                          <MousePointerClick className="w-3.5 h-3.5" /> Diklik
-                        </span>
-                      ) : (
-                        <span className="text-[13px] text-[#787774] italic">-</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 text-center max-w-[120px] truncate">
-                      <span className="text-[12px] text-[#787774]" title={recipient.device}>
-                        {recipient.device ? (recipient.device.length > 20 ? recipient.device.substring(0,20)+'...' : recipient.device) : "-"}
+                    <td className="px-5 py-4">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium uppercase tracking-wider ${
+                        r.status === 'sent' ? 'bg-[#25D366]/10 text-[#128C7E]' : 
+                        r.status === 'failed' ? 'bg-[#980203]/10 text-[#980203]' : 
+                        'bg-[#E4E1DA] text-[#8A867D]'
+                      }`}>
+                        {r.status}
                       </span>
                     </td>
+                    <td className="px-5 py-4">
+                      <div className="text-[13px]">{r.openedAt ? new Date(r.openedAt).toLocaleString('id-ID', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'}) : '—'}</div>
+                      {r.openedAt && <div className="text-[11px] text-[#8A867D] mt-0.5">{r.device}</div>}
+                    </td>
+                    <td className="px-5 py-4 text-[13px] text-[#111]">
+                      {r.clickedAt ? new Date(r.clickedAt).toLocaleString('id-ID', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'}) : '—'}
+                    </td>
+                    <td className="px-5 py-4 text-[13px] font-medium text-[#111]">
+                      {r.openCount > 0 ? `${r.openCount}x` : '—'}
+                    </td>
                   </tr>
-                ))}
+                )) : (
+                  <tr>
+                    <td colSpan={5} className="px-5 py-8 text-center text-[13px] text-[#8A867D]">
+                      Belum ada penerima
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
         </div>
-      </main>
+
+      </div>
     </div>
   );
 }
