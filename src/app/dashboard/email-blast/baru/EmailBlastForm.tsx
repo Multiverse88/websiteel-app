@@ -133,16 +133,34 @@ export default function EmailBlastForm({
                 img { max-width: 100%; height: auto; border: 0; }
               </style>
             </head>
-            <body style="margin: 0; padding: 0; background-color: #F7F5F1;">
-              <div style="width: 100%; background-color: #F7F5F1; padding: 20px 0;">
-                <div style="max-width: 600px; margin: 0 auto; font-family: ${fontFamily.replace(/"/g, "'")}; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                  ${headerHtml ? `<div style="max-width: 100%; text-align: center;">${enforceImageConstraints(headerHtml)}</div>` : ""}
-                  <div style="padding: 30px; font-size: 14px; line-height: 1.6; color: #333333;">
-                    ${enforceImageConstraints(bodyHtml)}
-                  </div>
-                  ${footerHtml ? `<div style="max-width: 100%;">${enforceImageConstraints(footerHtml)}</div>` : ""}
-                </div>
-              </div>
+            <body style="margin: 0; padding: 0; background-color: #F7F5F1; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F7F5F1; margin: 0; padding: 20px 0; width: 100%;">
+                <tr>
+                  <td align="center">
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%; background-color: #ffffff; font-family: ${fontFamily.replace(/"/g, "'")}; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); table-layout: fixed; word-wrap: break-word; overflow-wrap: break-word;">
+                      ${headerHtml ? `
+                      <tr>
+                        <td style="text-align: center; width: 100%; max-width: 600px; overflow: hidden;">
+                          ${enforceImageConstraints(headerHtml)}
+                        </td>
+                      </tr>` : ""}
+                      
+                      <tr>
+                        <td style="padding: 30px; font-size: 14px; line-height: 1.6; color: #333333; text-align: left; width: 100%; max-width: 600px; overflow: hidden;">
+                          ${enforceImageConstraints(bodyHtml)}
+                        </td>
+                      </tr>
+                      
+                      ${footerHtml ? `
+                      <tr>
+                        <td style="width: 100%; max-width: 600px; overflow: hidden;">
+                          ${enforceImageConstraints(footerHtml)}
+                        </td>
+                      </tr>` : ""}
+                    </table>
+                  </td>
+                </tr>
+              </table>
             </body>
           </html>
         `;
