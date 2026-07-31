@@ -30,7 +30,7 @@ export default async function DashboardLayout({
   return (
     <div className="dashboard-shell h-screen overflow-hidden bg-gray-50 text-gray-900">
       <DashboardSidebar subscriberCount={subscriberCount} linksCount={linksCount} />
-      <main className="ml-[80px] h-screen overflow-y-auto p-8">
+      <main className="ml-[260px] h-screen overflow-y-auto">
         {children}
       </main>
     </div>
