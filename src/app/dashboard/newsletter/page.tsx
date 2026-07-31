@@ -1,10 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Mail, Users, Send, Calendar, Clock, CheckCircle2, Settings, AlertCircle, XCircle } from "lucide-react";
+import { Mail, Users, Send, Calendar, Clock, CheckCircle2, Settings, AlertCircle, XCircle } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { BroadcastButton, SubscriberActions } from "./client-components";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import DashboardHeader from "@/components/dashboard/ui/DashboardHeader";
+import DashboardCard from "@/components/dashboard/ui/DashboardCard";
+import DashboardButton from "@/components/dashboard/ui/DashboardButton";
+import DashboardBadge from "@/components/dashboard/ui/DashboardBadge";
+import DashboardEmpty from "@/components/dashboard/ui/DashboardEmpty";
 
 export const dynamic = "force-dynamic";
 
@@ -65,131 +70,74 @@ export default async function NewsletterDashboardPage() {
   const activeCount = subscribers.filter((s: { isActive: boolean }) => s.isActive).length;
   const inactiveCount = subscribers.length - activeCount;
 
+  const stats = [
+    { label: "Subscriber Aktif", value: activeCount, icon: Users, color: "text-green-600", bg: "bg-green-50" },
+    { label: "Total Subscriber", value: subscribers.length, icon: Mail, color: "text-[#990202]", bg: "bg-red-50" },
+    { label: "Broadcast Terkirim", value: broadcasts.length, icon: Send, color: "text-amber-600", bg: "bg-amber-50" },
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
-      {/* HEADER */}
-      <section className="bg-white pt-8 lg:pt-12 pb-10 border-b border-gray-100">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-1.5 text-[16px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Dashboard
-            </Link>
-          </div>
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <h1 className="font-heading text-[30px] sm:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight">
-                Newsletter
-              </h1>
-              <p className="text-[16px] text-gray-500 mt-1">
-                Kelola subscriber dan kirim broadcast artikel terbaru.
-              </p>
-            </div>
-            <div>
-              <Link
-                href="/dashboard/newsletter/settings"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[16px] font-bold bg-white text-gray-700 hover:text-gray-900 shadow-md border border-black/[0.04] hover:bg-gray-50 shadow-sm transition-all"
-              >
-                <Settings className="w-4 h-4 text-gray-500" />
-                Atur Otomatisasi
-              </Link>
-            </div>
-          </div>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-            <div className="bg-[#FAFAFA] rounded-xl shadow-md border border-black/[0.04] p-5 flex items-center gap-4">
-              <div className="w-11 h-11 rounded-xl bg-[#FFF5F5] border border-red-100/50 flex items-center justify-center flex-shrink-0">
-                <Users className="w-5 h-5 text-[#990202]" />
+    <div>
+      <DashboardHeader
+        title="Newsletter"
+        description="Kelola subscriber dan kirim broadcast artikel terbaru."
+        action={
+          <Link href="/dashboard/newsletter/settings">
+            <DashboardButton variant="secondary" icon={Settings}>Atur Otomatisasi</DashboardButton>
+          </Link>
+        }
+      />
+      <div className="p-8 max-w-6xl mx-auto space-y-8">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {stats.map((stat) => (
+            <DashboardCard key={stat.label} hover className="p-6 flex items-center gap-4">
+              <div className={`w-12 h-12 rounded-lg ${stat.bg} flex items-center justify-center flex-shrink-0`}>
+                <stat.icon className={`w-6 h-6 ${stat.color}`} />
               </div>
               <div>
-                <div className="text-[16px] font-extrabold text-gray-950 leading-none">{activeCount}</div>
-                <div className="text-[16px] text-gray-500 mt-1 font-medium">Subscriber Aktif</div>
+                <div className="text-2xl font-bold text-gray-900 leading-none">{stat.value.toLocaleString("id-ID")}</div>
+                <div className="text-[13px] text-gray-500 mt-1.5 font-medium">{stat.label}</div>
               </div>
-            </div>
-            <div className="bg-[#FAFAFA] rounded-xl shadow-md border border-black/[0.04] p-5 flex items-center gap-4">
-              <div className="w-11 h-11 rounded-xl bg-gray-100 shadow-md border border-black/[0.04] flex items-center justify-center flex-shrink-0">
-                <Mail className="w-5 h-5 text-gray-500" />
-              </div>
-              <div>
-                <div className="text-[16px] font-extrabold text-gray-950 leading-none">{subscribers.length}</div>
-                <div className="text-[16px] text-gray-500 mt-1 font-medium">Total Subscriber</div>
-              </div>
-            </div>
-            <div className="bg-[#FAFAFA] rounded-xl shadow-md border border-black/[0.04] p-5 flex items-center gap-4">
-              <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200/50 flex items-center justify-center flex-shrink-0">
-                <Send className="w-5 h-5 text-emerald-600" />
-              </div>
-              <div>
-                <div className="text-[16px] font-extrabold text-gray-950 leading-none">{broadcasts.length}</div>
-                <div className="text-[16px] text-gray-500 mt-1 font-medium">Broadcast Terkirim</div>
-              </div>
-            </div>
-          </div>
+            </DashboardCard>
+          ))}
         </div>
-      </section>
 
-      {/* CONTENT */}
-      <section className="py-10 flex-grow">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* LEFT: Subscribers List */}
+          <div className="lg:col-span-7">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-900">Daftar Subscriber</h2>
+              <span className="text-[13px] text-gray-500">
+                {activeCount} aktif · {inactiveCount} nonaktif
+              </span>
+            </div>
 
-            {/* LEFT: Subscribers List */}
-            <div className="lg:col-span-7">
-              <div className="flex items-center justify-between mb-5">
-                <h2 className="text-[16px] font-extrabold text-gray-900">
-                  Daftar Subscriber
-                </h2>
-                <span className="text-[16px] font-bold text-gray-400">
-                  {activeCount} aktif · {inactiveCount} nonaktif
-                </span>
-              </div>
-
-              {subscribers.length === 0 ? (
-                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-10 text-center">
-                  <div className="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
-                    <Mail className="w-7 h-7 text-[#990202]" />
-                  </div>
-                  <h3 className="text-[16px] font-extrabold text-gray-900 mb-2">Belum ada subscriber</h3>
-                  <p className="text-[16px] text-gray-500">
-                    Subscriber akan muncul di sini ketika pengunjung mendaftar newsletter.
-                  </p>
-                </div>
-              ) : (
-                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
-                  {/* Table Header */}
-                  <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[16px] font-extrabold text-gray-400 uppercase tracking-wider">
-                    <div className="col-span-5">Email</div>
-                    <div className="col-span-3">Tanggal Daftar</div>
-                    <div className="col-span-2 text-center">Status</div>
-                    <div className="col-span-2 text-right">Aksi</div>
-                  </div>
-
-                  {/* Table Rows */}
+            {subscribers.length === 0 ? (
+              <DashboardCard className="p-12">
+                <DashboardEmpty
+                  icon={Mail}
+                  title="Belum ada subscriber"
+                  description="Subscriber akan muncul di sini ketika pengunjung mendaftar newsletter."
+                />
+              </DashboardCard>
+            ) : (
+              <DashboardCard className="overflow-hidden">
+                <div className="divide-y divide-gray-100">
                   {subscribers.map((subscriber: { id: string; email: string; isActive: boolean; subscribedAt: Date }) => (
                     <div
                       key={subscriber.id}
-                      className="grid grid-cols-12 gap-3 px-5 py-3.5 border-b border-gray-50 hover:bg-gray-50/50 transition-colors items-center"
+                      className="flex items-center gap-4 px-5 py-4 hover:bg-gray-50 transition-colors"
                     >
-                      {/* Email */}
-                      <div className="col-span-5">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-[16px] font-black text-[#990202] flex-shrink-0">
-                            {subscriber.email.charAt(0).toUpperCase()}
-                          </div>
-                          <span className="text-[16px] font-bold text-gray-900 truncate">
-                            {subscriber.email}
-                          </span>
-                        </div>
+                      <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-[13px] font-bold text-gray-700 flex-shrink-0">
+                        {subscriber.email.charAt(0).toUpperCase()}
                       </div>
-
-                      {/* Date */}
-                      <div className="col-span-3">
-                        <div className="flex items-center gap-1.5 text-[16px] text-gray-500">
-                          <Calendar className="w-3 h-3 text-gray-400" />
+                      <div className="flex-1 min-w-0">
+                        <span className="text-[14px] font-medium text-gray-900 truncate block">
+                          {subscriber.email}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-[12px] text-gray-500 mt-0.5">
+                          <Calendar className="w-3.5 h-3.5" />
                           <span>
                             {new Date(subscriber.subscribedAt).toLocaleDateString("id-ID", {
                               day: "numeric",
@@ -199,43 +147,29 @@ export default async function NewsletterDashboardPage() {
                           </span>
                         </div>
                       </div>
-
-                      {/* Status */}
-                      <div className="col-span-2 flex justify-center">
-                        <span
-                          className={`inline-flex px-2.5 py-1 rounded-md text-[16px] font-bold ${
-                            subscriber.isActive
-                              ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
-                              : "bg-gray-100 text-gray-500 shadow-md border border-black/[0.04]"
-                          }`}
-                        >
-                          {subscriber.isActive ? "Aktif" : "Nonaktif"}
-                        </span>
-                      </div>
-
-                      {/* Actions */}
-                      <div className="col-span-2 flex justify-end">
-                        <SubscriberActions id={subscriber.id} isActive={subscriber.isActive} />
-                      </div>
+                      <DashboardBadge variant={subscriber.isActive ? "success" : "neutral"}>
+                        {subscriber.isActive ? "Aktif" : "Nonaktif"}
+                      </DashboardBadge>
+                      <SubscriberActions id={subscriber.id} isActive={subscriber.isActive} />
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
+              </DashboardCard>
+            )}
+          </div>
 
-            {/* RIGHT: Broadcast Panel */}
-            <div className="lg:col-span-5">
-              {/* Send Broadcast */}
-              <h2 className="text-[16px] font-extrabold text-gray-900 mb-5">
-                Kirim Broadcast
-              </h2>
-              <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-5 mb-6">
-                <p className="text-[16px] text-gray-500 mb-4 leading-relaxed">
+          {/* RIGHT: Broadcast Panel */}
+          <div className="lg:col-span-5 space-y-8">
+            {/* Send Broadcast */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Kirim Broadcast</h2>
+              <DashboardCard className="p-6">
+                <p className="text-[14px] text-gray-500 mb-4">
                   Pilih artikel untuk dikirim ke <strong className="text-gray-900">{activeCount} subscriber</strong> aktif:
                 </p>
 
                 {articles.length === 0 ? (
-                  <p className="text-[16px] text-gray-400 italic">Belum ada artikel.</p>
+                  <p className="text-[14px] text-gray-500 italic">Belum ada artikel.</p>
                 ) : (
                   <div className="space-y-3">
                     {articles.map((article: { id: string; title: string; slug: string; category: string; createdAt: Date }) => {
@@ -243,25 +177,23 @@ export default async function NewsletterDashboardPage() {
                       return (
                         <div
                           key={article.id}
-                          className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#FAFAFA] shadow-sm border border-black/[0.02]"
+                          className="flex items-center justify-between gap-3 p-4 rounded-lg border border-gray-100 bg-gray-50 hover:bg-white transition-colors"
                         >
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="inline-flex px-2 py-0.5 rounded text-[16px] font-bold bg-red-50 text-[#990202] border border-red-100/50">
-                                {article.category}
-                              </span>
+                            <div className="flex items-center gap-2 mb-1.5">
+                              <DashboardBadge variant="neutral">{article.category}</DashboardBadge>
                               {alreadySent && (
-                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[16px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-200/50">
-                                  <CheckCircle2 className="w-2.5 h-2.5" />
+                                <DashboardBadge variant="success">
+                                  <CheckCircle2 className="w-3 h-3 mr-1" />
                                   Terkirim {broadcastCountMap.get(article.id) || 0}x
-                                </span>
+                                </DashboardBadge>
                               )}
                             </div>
-                            <p className="text-[16px] font-bold text-gray-900 line-clamp-1">
+                            <p className="text-[14px] font-medium text-gray-900 line-clamp-1">
                               {article.title}
                             </p>
-                            <div className="flex items-center gap-1.5 text-[16px] text-gray-400 mt-1">
-                              <Calendar className="w-3 h-3" />
+                            <div className="flex items-center gap-1.5 text-[12px] text-gray-500 mt-1">
+                              <Calendar className="w-3.5 h-3.5" />
                               <span>
                                 {new Date(article.createdAt).toLocaleDateString("id-ID", {
                                   day: "numeric",
@@ -277,122 +209,36 @@ export default async function NewsletterDashboardPage() {
                     })}
                   </div>
                 )}
-              </div>
+              </DashboardCard>
+            </div>
 
-              {/* Broadcast History */}
-              <h2 className="text-[16px] font-extrabold text-gray-900 mb-5">
-                Riwayat Broadcast
-              </h2>
+            {/* Broadcast History */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Riwayat Broadcast</h2>
               {broadcasts.length === 0 ? (
-                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-6 text-center">
-                  <p className="text-[16px] text-gray-400">Belum ada broadcast yang dikirim.</p>
-                </div>
+                <DashboardCard className="p-8 text-center">
+                  <p className="text-[14px] text-gray-500">Belum ada broadcast yang dikirim.</p>
+                </DashboardCard>
               ) : (
-                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
-                  {broadcasts.map((broadcast: { id: string; articleId: string; articleTitle: string; totalSent: number; sentAt: Date }, idx: number) => (
-                    <div
-                      key={broadcast.id}
-                      className={`flex items-center gap-3.5 px-5 py-3.5 ${
-                        idx < broadcasts.length - 1 ? "border-b border-gray-50" : ""
-                      }`}
-                    >
-                      <div className="w-9 h-9 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                        <Send className="w-4 h-4 text-emerald-600" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[16px] font-bold text-gray-900 line-clamp-1">
-                          {broadcast.articleTitle}
-                        </p>
-                        <div className="flex items-center gap-3 text-[16px] text-gray-400 mt-0.5">
-                          <span className="flex items-center gap-1">
-                            <Users className="w-3 h-3" />
-                            {broadcast.totalSent} subscriber
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {new Date(broadcast.sentAt).toLocaleDateString("id-ID", {
-                              day: "numeric",
-                              month: "short",
-                              year: "numeric",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
-                          </span>
+                <DashboardCard className="overflow-hidden">
+                  <div className="divide-y divide-gray-100">
+                    {broadcasts.map((broadcast: { id: string; articleId: string; articleTitle: string; totalSent: number; sentAt: Date }) => (
+                      <div key={broadcast.id} className="flex items-center gap-4 px-5 py-4">
+                        <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center flex-shrink-0">
+                          <Send className="w-5 h-5 text-[#990202]" />
                         </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Email Delivery Logs */}
-              <h2 className="text-[16px] font-extrabold text-gray-900 mt-8 mb-5">
-                Log Pengiriman
-              </h2>
-              {emailLogs.length === 0 ? (
-                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-6 text-center">
-                  <p className="text-[16px] text-gray-400">Belum ada log pengiriman email.</p>
-                </div>
-              ) : (
-                <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
-                  {/* Table Header */}
-                  <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[16px] font-extrabold text-gray-400 uppercase tracking-wider">
-                    <div className="col-span-4">Email</div>
-                    <div className="col-span-2 text-center">Status</div>
-                    <div className="col-span-2 text-center">Sumber</div>
-                    <div className="col-span-4">Tanggal</div>
-                  </div>
-
-                  {emailLogs.map((log: { id: string; recipient: string; subject: string; status: string; errorMessage: string | null; source: string; sentAt: Date }, idx: number) => (
-                    <div
-                      key={log.id}
-                      className={`px-5 py-3.5 ${
-                        idx < emailLogs.length - 1 ? "border-b border-gray-50" : ""
-                      } hover:bg-gray-50/50 transition-colors`}
-                    >
-                      <div className="grid grid-cols-12 gap-3 items-center">
-                        {/* Email */}
-                        <div className="col-span-4">
-                          <span className="text-[16px] font-bold text-gray-900 truncate block">
-                            {log.recipient}
-                          </span>
-                        </div>
-
-                        {/* Status Badge */}
-                        <div className="col-span-2 flex justify-center">
-                          <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[16px] font-bold ${
-                              log.status === "sent"
-                                ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60"
-                                : log.status === "simulated"
-                                ? "bg-amber-50 text-amber-700 border border-amber-200/60"
-                                : "bg-red-50 text-red-700 border border-red-200/60"
-                            }`}
-                          >
-                            {log.status === "sent" ? (
-                              <CheckCircle2 className="w-2.5 h-2.5" />
-                            ) : log.status === "simulated" ? (
-                              <AlertCircle className="w-2.5 h-2.5" />
-                            ) : (
-                              <XCircle className="w-2.5 h-2.5" />
-                            )}
-                            {log.status === "sent" ? "Terkirim" : log.status === "simulated" ? "Simulasi" : "Gagal"}
-                          </span>
-                        </div>
-
-                        {/* Source */}
-                        <div className="col-span-2 flex justify-center">
-                          <span className="inline-flex px-2 py-0.5 rounded text-[16px] font-bold bg-gray-100 text-gray-600 shadow-md border border-black/[0.04]">
-                            {log.source === "broadcast" ? "Manual" : "Otomatis"}
-                          </span>
-                        </div>
-
-                        {/* Date */}
-                        <div className="col-span-4">
-                          <div className="flex items-center gap-1.5 text-[16px] text-gray-500">
-                            <Clock className="w-3 h-3 text-gray-400" />
-                            <span>
-                              {new Date(log.sentAt).toLocaleDateString("id-ID", {
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[14px] font-medium text-gray-900 line-clamp-1">
+                            {broadcast.articleTitle}
+                          </p>
+                          <div className="flex items-center gap-4 text-[12px] text-gray-500 mt-1">
+                            <span className="flex items-center gap-1.5">
+                              <Users className="w-3.5 h-3.5" />
+                              {broadcast.totalSent} subscriber
+                            </span>
+                            <span className="flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5" />
+                              {new Date(broadcast.sentAt).toLocaleDateString("id-ID", {
                                 day: "numeric",
                                 month: "short",
                                 year: "numeric",
@@ -403,23 +249,63 @@ export default async function NewsletterDashboardPage() {
                           </div>
                         </div>
                       </div>
+                    ))}
+                  </div>
+                </DashboardCard>
+              )}
+            </div>
 
-                      {/* Error message if failed */}
-                      {log.status === "failed" && log.errorMessage && (
-                        <div className="mt-2 ml-1 p-2 rounded-md bg-red-50 border border-red-100">
-                          <p className="text-[16px] text-red-600 font-medium">
-                            {log.errorMessage}
-                          </p>
+            {/* Email Delivery Logs */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Log Pengiriman</h2>
+              {emailLogs.length === 0 ? (
+                <DashboardCard className="p-8 text-center">
+                  <p className="text-[14px] text-gray-500">Belum ada log pengiriman email.</p>
+                </DashboardCard>
+              ) : (
+                <DashboardCard className="overflow-hidden">
+                  <div className="divide-y divide-gray-100 max-h-[400px] overflow-y-auto">
+                    {emailLogs.map((log: { id: string; recipient: string; subject: string; status: string; errorMessage: string | null; source: string; sentAt: Date }) => (
+                      <div key={log.id} className="px-5 py-4 hover:bg-gray-50 transition-colors">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="text-[13px] font-medium text-gray-900 truncate flex-1">
+                            {log.recipient}
+                          </span>
+                          <DashboardBadge variant={
+                            log.status === "sent" ? "success" :
+                            log.status === "simulated" ? "warning" : "error"
+                          }>
+                            {log.status === "sent" ? "Terkirim" : log.status === "simulated" ? "Simulasi" : "Gagal"}
+                          </DashboardBadge>
                         </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+                        <div className="flex items-center gap-4 mt-1.5">
+                          <DashboardBadge variant="neutral">
+                            {log.source === "broadcast" ? "Manual" : "Otomatis"}
+                          </DashboardBadge>
+                          <span className="flex items-center gap-1.5 text-[11px] text-gray-500">
+                            <Clock className="w-3 h-3" />
+                            {new Date(log.sentAt).toLocaleDateString("id-ID", {
+                              day: "numeric",
+                              month: "short",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
+                        </div>
+                        {log.status === "failed" && log.errorMessage && (
+                          <div className="mt-2 p-2 rounded-lg bg-red-50 border border-red-100">
+                            <p className="text-[12px] text-red-600">{log.errorMessage}</p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </DashboardCard>
               )}
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
