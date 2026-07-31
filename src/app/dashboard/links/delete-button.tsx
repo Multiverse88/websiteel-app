@@ -17,7 +17,7 @@ export default function DeleteLinkButton({ id, slug }: { id: string; slug: strin
     <button
       onClick={handleDelete}
       disabled={isPending}
-      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+      className="p-2 text-[var(--color-text-muted)] hover:text-[var(--color-error)] hover:bg-[#FEF2F2] rounded-[8px] transition-colors disabled:opacity-50"
       title="Hapus link"
     >
       <Trash2 className="w-4 h-4" />

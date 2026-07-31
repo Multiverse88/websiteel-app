@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Loader2, Save, FileText, FlaskConical, Eye, X, Paperclip } from "lucide-react";
+import { Send, Loader2, FlaskConical, Eye, X, Paperclip } from "lucide-react";
 import RichTextEditor from "@/components/dashboard/RichTextEditor";
 import { createCampaignAction, testSendCampaignAction } from "../actions";
 import { useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
+import SmartContactList from "../SmartContactList";
+import type { ContactWithEngagement } from "../types";
 
 function SubmitButton({ label, icon: Icon, isTest = false }: { label: string, icon: any, isTest?: boolean }) {
   const { pending } = useFormStatus();
@@ -34,11 +36,13 @@ function SubmitButton({ label, icon: Icon, isTest = false }: { label: string, ic
 export default function EmailBlastForm({ 
   initialHeader = "", 
   initialFooter = "", 
-  segments = [] 
+  segments = [],
+  contactsWithEngagement = [],
 }: { 
   initialHeader?: string; 
   initialFooter?: string;
   segments?: any[];
+  contactsWithEngagement?: ContactWithEngagement[];
 }) {
   const [headerHtml, setHeaderHtml] = useState(initialHeader);
   const [headerMode, setHeaderMode] = useState<'visual'|'html'>('visual');
@@ -53,6 +57,8 @@ export default function EmailBlastForm({
   
   const [attachments, setAttachments] = useState<{url: string; filename: string}[]>([]);
   const [isUploadingAttachment, setIsUploadingAttachment] = useState(false);
+  const [selectedContactIds, setSelectedContactIds] = useState<Set<string>>(new Set());
+  const [contactMode, setContactMode] = useState<"all" | "smart">("all");
 
   const router = useRouter();
 
@@ -161,6 +167,10 @@ export default function EmailBlastForm({
         formData.set("bodyHtml", finalHtml);
         formData.set("isTemplate", isTemplate ? "true" : "false");
         formData.set("attachments", JSON.stringify(attachments));
+        
+        if (contactMode === "smart" && selectedContactIds.size > 0) {
+          formData.set("contactIds", JSON.stringify(Array.from(selectedContactIds)));
+        }
         
         const actionType = formData.get("actionType");
 
@@ -370,42 +380,64 @@ export default function EmailBlastForm({
       </div>
 
       {/* Target & Schedule Group */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#FBFBFA] p-6 rounded-[8px] border border-[#EAEAEA]">
+      <div className="space-y-6 bg-gray-50 p-6 rounded-[8px] border border-[#EAEAEA]">
         <div>
-          <label className="block text-[13px] font-semibold text-[#111111] mb-2">
-            Target Segmen Penerima
-          </label>
-          <div className="space-y-2 max-h-[150px] overflow-y-auto pr-2">
-            <label className="flex items-center gap-2 text-[14px] text-[#111111] cursor-pointer p-2 hover:bg-[#F7F6F3] rounded-md transition-colors">
-              <input type="checkbox" name="sendToAll" defaultChecked className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
-              Semua Kontak Aktif
+          <div className="flex items-center gap-3 mb-4">
+            <label className="block text-[13px] font-semibold text-[#111111]">
+              Target Penerima
             </label>
-            {segments.map((s) => (
-              <label key={s.id} className="flex items-center gap-2 text-[14px] text-[#111111] cursor-pointer p-2 hover:bg-[#F7F6F3] rounded-md transition-colors">
-                <input type="checkbox" name="segments" value={s.id} className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
-                {s.name} <span className="text-[#787774] text-[12px]">({s._count.contacts})</span>
-              </label>
-            ))}
+            <div className="flex bg-[#EAEAEA] p-0.5 rounded text-[11px]">
+              <button type="button" onClick={() => setContactMode("all")} className={`px-3 py-1 rounded transition-all ${contactMode === "all" ? "bg-white shadow-sm font-medium text-[#111111]" : "text-[#787774] hover:text-[#111111]"}`}>
+                Semua
+              </button>
+              <button type="button" onClick={() => setContactMode("smart")} className={`px-3 py-1 rounded transition-all ${contactMode === "smart" ? "bg-white shadow-sm font-medium text-[#111111]" : "text-[#787774] hover:text-[#111111]"}`}>
+                Smart Filter
+              </button>
+            </div>
           </div>
+
+          {contactMode === "all" ? (
+            <div className="space-y-2 max-h-[150px] overflow-y-auto pr-2">
+              <label className="flex items-center gap-2 text-[14px] text-[#111111] cursor-pointer p-2 hover:bg-[#F7F6F3] rounded-md transition-colors">
+                <input type="checkbox" name="sendToAll" defaultChecked className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
+                Semua Kontak Aktif
+              </label>
+              {segments.map((s) => (
+                <label key={s.id} className="flex items-center gap-2 text-[14px] text-[#111111] cursor-pointer p-2 hover:bg-[#F7F6F3] rounded-md transition-colors">
+                  <input type="checkbox" name="segments" value={s.id} className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
+                  {s.name} <span className="text-[#787774] text-[12px]">({s._count.contacts})</span>
+                </label>
+              ))}
+            </div>
+          ) : (
+            <SmartContactList
+              contacts={contactsWithEngagement}
+              selectedIds={selectedContactIds}
+              onSelectionChange={setSelectedContactIds}
+            />
+          )}
         </div>
 
-        <div>
-          <label className="block text-[13px] font-semibold text-[#111111] mb-2">
-            Jadwal Kirim
-          </label>
-          <input
-            type="datetime-local"
-            name="scheduledAt"
-            className="w-full px-4 py-2.5 border border-[#EAEAEA] rounded-[6px] text-[14px] focus:outline-none focus:border-[#111111] transition-colors"
-          />
-          <p className="text-[12px] text-[#787774] mt-2">
-            Biarkan kosong untuk langsung masuk antrian pengiriman (Throttled processing).
-          </p>
-
-          <label className="flex items-center gap-2 mt-4 text-[13px] font-medium text-[#111111] cursor-pointer">
-            <input type="checkbox" checked={isTemplate} onChange={(e) => setIsTemplate(e.target.checked)} className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
-            Simpan sebagai Template Campaign (Draft)
-          </label>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#EAEAEA]">
+          <div>
+            <label className="block text-[13px] font-semibold text-[#111111] mb-2">
+              Jadwal Kirim
+            </label>
+            <input
+              type="datetime-local"
+              name="scheduledAt"
+              className="w-full px-4 py-2.5 border border-[#EAEAEA] rounded-[6px] text-[14px] focus:outline-none focus:border-[#111111] transition-colors"
+            />
+            <p className="text-[12px] text-[#787774] mt-2">
+              Biarkan kosong untuk langsung masuk antrian pengiriman (Throttled processing).
+            </p>
+          </div>
+          <div className="flex items-end">
+            <label className="flex items-center gap-2 text-[13px] font-medium text-[#111111] cursor-pointer">
+              <input type="checkbox" checked={isTemplate} onChange={(e) => setIsTemplate(e.target.checked)} className="w-4 h-4 rounded border-[#EAEAEA] text-[#111111] focus:ring-[#111111]" />
+              Simpan sebagai Template Campaign (Draft)
+            </label>
+          </div>
         </div>
       </div>
 
@@ -419,7 +451,7 @@ export default function EmailBlastForm({
 
     {/* STICKY LIVE PREVIEW ON RIGHT */}
     <div className="sticky top-8 bg-white border border-[#EAEAEA] rounded-[12px] overflow-hidden flex flex-col shadow-sm h-[calc(100vh-80px)] min-h-[600px]">
-      <div className="flex items-center p-4 border-b border-[#EAEAEA] bg-[#FBFBFA]">
+      <div className="flex items-center p-4 border-b border-[#EAEAEA] bg-gray-50">
         <h3 className="font-semibold text-[14px] text-[#111111] flex items-center gap-2">
           <Eye className="w-4 h-4 text-[#8A867D]" /> Live Preview
         </h3>

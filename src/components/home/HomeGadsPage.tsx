@@ -158,7 +158,7 @@ function CaraKerjaSection() {
               Cara Kerja
             </span>
             <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.12] tracking-[-0.02em]">
-              Empat Langkah, Semua Beres<br className="hidden sm:inline" /> Tanpa Pusing.
+              Empat Langkah Semua<br /> Beres Tanpa Pusing.
             </h2>
             <p className="mt-2 sm:mt-4 text-[16px] sm:text-[16px] text-[#6B7280] leading-relaxed max-w-[460px]">
               Proses transparan dari konsultasi sampai dokumen di tangan Anda — semua bisa dipantau dari satu dashboard.
@@ -368,8 +368,8 @@ function CaraKerjaSection() {
                     <span className="absolute text-[16px] font-black text-gray-800">72%</span>
                   </div>
                   <div className="leading-tight min-w-0">
-                    <div className="text-[16px] font-black text-gray-800 truncate">Pendirian PT — proses</div>
-                    <div className="text-[16px] text-gray-500 font-bold mt-1 truncate">Tahap 3/4 · 2 hari lagi</div>
+                    <div className="text-[16px] font-black text-gray-800 truncate">Pendirian PT</div>
+                    <div className="text-[16px] text-gray-500 font-bold mt-1 truncate">7 - 14 hari</div>
                   </div>
                 </div>
               </div>
@@ -918,13 +918,13 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                 "pabriek-kuweh.png", "power-computerindo.png", "satoshi.png", 
                 "sumber-aneka-wangi.png", "tantri.png", "vidichi.png"
               ].map((logo, idx) => (
-                <div key={`${groupIndex}-${idx}`} className="flex-shrink-0 w-24 sm:w-32 h-10 sm:h-12 relative transition-all duration-300 hover:scale-105 cursor-pointer">
+                <div key={`${groupIndex}-${idx}`} className="flex-shrink-0 w-28 sm:w-36 h-14 sm:h-16 relative transition-all duration-300 hover:scale-105 cursor-pointer">
                   <Image
                     src={`/images/logo-klien/${logo}`}
                     alt={`Client Logo ${idx + 1}`}
                     fill
                     className="object-contain"
-                    sizes="128px"
+                    sizes="144px"
                   />
                 </div>
               ))}
@@ -936,25 +936,25 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
         </div>
 
         {/* Premium Statistics Redesign */}
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8 mt-16 sm:mt-24 mb-10">
-          <div className="bg-gradient-to-br from-[#9B1C1C] to-[#6A0D0D] rounded-[24px] sm:rounded-[32px] p-1 sm:p-2 shadow-[0_20px_50px_rgba(155,28,28,0.15)] relative overflow-hidden group">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-8 mt-10 sm:mt-16 mb-10">
+          <div className="bg-gradient-to-br from-[#9B1C1C] to-[#6A0D0D] rounded-[16px] sm:rounded-[20px] p-0.5 sm:p-1 shadow-[0_12px_30px_rgba(155,28,28,0.12)] relative overflow-hidden group">
             {/* Ambient Background Flares */}
-            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-white/10 rounded-full blur-[100px] pointer-events-none transition-transform duration-1000 group-hover:translate-x-10" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-black/20 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-white/10 rounded-full blur-[80px] pointer-events-none transition-transform duration-1000 group-hover:translate-x-10" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[300px] h-[300px] bg-black/20 rounded-[60px] blur-[60px] pointer-events-none" />
             
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[20px] sm:rounded-[28px] p-8 sm:p-14 relative z-10">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-12 sm:gap-y-16 lg:gap-y-0 gap-x-6 sm:gap-x-10 lg:gap-x-0 lg:divide-x lg:divide-white/15">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[14px] sm:rounded-[18px] py-5 sm:py-8 px-4 sm:px-10 relative z-10">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 sm:gap-y-8 lg:gap-y-0 gap-x-4 sm:gap-x-8 lg:gap-x-0 lg:divide-x lg:divide-white/15">
                 {[
                   { value: "12.500+", label: "Bisnis Terlayani" },
                   { value: "15+", label: "Jenis Layanan Legal" },
                   { value: "4.9 ★", label: "Rating Google" },
                   { value: "3 Kota", label: "Kantor Representatif" }
                 ].map((stat, idx) => (
-                  <div key={idx} className="flex flex-col items-center justify-center text-center px-4 md:px-6 cursor-default">
-                    <div className="text-[36px] sm:text-[46px] lg:text-[56px] font-black text-white tracking-tighter leading-none mb-3 sm:mb-4 hover:scale-105 transition-transform duration-500 ease-out origin-center">
+                  <div key={idx} className="flex flex-col items-center justify-center text-center px-3 md:px-5 cursor-default">
+                    <div className="text-[28px] sm:text-[36px] lg:text-[42px] font-black text-white tracking-tighter leading-none mb-2 sm:mb-3 hover:scale-105 transition-transform duration-500 ease-out origin-center">
                       {stat.value}
                     </div>
-                    <div className="text-[16px] sm:text-[16px] font-bold text-red-100/70 tracking-[0.1em] uppercase hover:text-white transition-colors duration-300">
+                    <div className="text-[11px] sm:text-[12px] font-bold text-red-100/70 tracking-[0.1em] uppercase hover:text-white transition-colors duration-300">
                       {stat.label}
                     </div>
                   </div>

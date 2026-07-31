@@ -1,8 +1,11 @@
 "use server";
 
 import { sendEmail } from "@/lib/mail";
-import { escapeHtml } from "@/lib/utils";
 import { trackMetric } from "@/lib/metrics";
+
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
 
 export async function submitPartnershipForm(data: any) {
   const {

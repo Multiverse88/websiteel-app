@@ -2,24 +2,31 @@ import { config } from "./config";
 
 const SITE_URL = config.baseUrl;
 
+const COMPANY_BASE = {
+  name: "EasyLegal",
+  alternateName: "EasyLegal.id",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
+  description:
+    "Layanan hukum dan legalitas bisnis terpercaya — Pendirian PT, Pendaftaran Merek, NIB & OSS, Sertifikasi ISO, dan lainnya.",
+  address: {
+    "@type": "PostalAddress" as const,
+    addressCountry: "ID",
+  },
+  areaServed: { "@type": "Country" as const, name: "Indonesia" },
+  sameAs: [
+    "https://www.instagram.com/id.easylegal",
+    "https://www.facebook.com/easylegal.id",
+    "https://www.youtube.com/@easylegal.official",
+    "https://id.linkedin.com/company/easylegal-id",
+  ],
+};
+
 export function getLocalBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "LegalService",
-    name: "EasyLegal",
-    alternateName: "EasyLegal.id",
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
-    description:
-      "Layanan hukum dan legalitas bisnis terpercaya — Pendirian PT, Pendaftaran Merek, NIB & OSS, Sertifikasi ISO, dan lainnya.",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "ID",
-    },
-    areaServed: {
-      "@type": "Country",
-      name: "Indonesia",
-    },
+    ...COMPANY_BASE,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.9",
@@ -28,12 +35,6 @@ export function getLocalBusinessJsonLd() {
     },
     priceRange: "$$",
     telephone: "+6281123456789",
-    sameAs: [
-      "https://www.instagram.com/id.easylegal",
-      "https://www.facebook.com/easylegal.id",
-      "https://www.youtube.com/@easylegal.official",
-      "https://id.linkedin.com/company/easylegal-id",
-    ],
   };
 }
 
@@ -48,8 +49,8 @@ export function getServiceJsonLd(service: {
     "@type": "Service",
     provider: {
       "@type": "LegalService",
-      name: "EasyLegal",
-      url: SITE_URL,
+      name: COMPANY_BASE.name,
+      url: COMPANY_BASE.url,
     },
     name: service.name,
     description: service.description,
@@ -138,9 +139,7 @@ export function getOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "EasyLegal",
-    alternateName: "EasyLegal.id",
-    url: SITE_URL,
+    ...COMPANY_BASE,
     logo: `${SITE_URL}/Logo%20EL.png`,
     description:
       "Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Layanan pendirian PT, pendaftaran merek, NIB & OSS, sertifikasi ISO, dan lainnya.",
@@ -158,12 +157,6 @@ export function getOrganizationJsonLd() {
       contactType: "customer service",
       availableLanguage: "Indonesian",
     },
-    sameAs: [
-      "https://www.instagram.com/id.easylegal",
-      "https://www.facebook.com/easylegal.id",
-      "https://id.linkedin.com/company/easylegal-id",
-      "https://www.youtube.com/@easylegal.official",
-    ],
   };
 }
 

@@ -1,11 +1,11 @@
 import React from "react";
-import Link from "next/link";
-import { ArrowLeft, Users, UserPlus } from "lucide-react";
+import { Users, UserPlus } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { ContactActions, ImportCsvButton, ToggleAllContactsButton, ActivateLimitedContactsForm } from "../client-components";
 import { addContactAction } from "../actions";
+import DashboardHeader from "@/components/dashboard/ui/DashboardHeader";
 
 export const dynamic = "force-dynamic";
 
@@ -24,31 +24,13 @@ export default async function EmailBlastKontakPage() {
   const inactiveCount = contacts.length - activeCount;
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* HEADER */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-40">
-        <div className="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/dashboard/email-blast"
-              className="p-2 rounded-lg bg-gray-50 text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Link>
-            <div>
-              <h1 className="text-[22px] font-extrabold text-gray-900 tracking-tight">Kelola Kontak Blast</h1>
-              <p className="text-[14px] text-gray-500 mt-1 font-medium">
-                {activeCount} aktif · {inactiveCount} nonaktif
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <ToggleAllContactsButton action="activate" />
-            <ToggleAllContactsButton action="deactivate" />
-            <ImportCsvButton />
-          </div>
-        </div>
-      </header>
+      <DashboardHeader
+        title="Kelola Kontak Blast"
+        description={`${activeCount} aktif · ${inactiveCount} nonaktif`}
+        backHref="/dashboard/email-blast"
+      />
 
       {/* CONTENT */}
       <section className="py-8 flex-grow">
@@ -56,7 +38,7 @@ export default async function EmailBlastKontakPage() {
           
           {/* Form Tambah Kontak dan Form Aktivasi Terbatas */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white rounded-2xl shadow-sm border border-black/[0.04] p-5">
+            <div className="bg-white rounded-xl shadow-sm border border-black/[0.04] p-5">
               <h3 className="text-[14px] font-bold text-gray-700 mb-3">Tambah Kontak Cepat</h3>
               <form action={async (formData) => {
                 "use server";
@@ -89,14 +71,14 @@ export default async function EmailBlastKontakPage() {
           </div>
 
           {contacts.length === 0 ? (
-            <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-10 text-center">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-10 text-center">
               <h3 className="text-[16px] font-extrabold text-gray-900 mb-2">Belum ada kontak</h3>
               <p className="text-[16px] text-gray-500">
                 Silakan tambahkan kontak email untuk mulai mengirim blast.
               </p>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
               <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[14px] font-extrabold text-gray-400 uppercase tracking-wider">
                 <div className="col-span-4">Email</div>
                 <div className="col-span-3">Nama</div>

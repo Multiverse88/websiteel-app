@@ -42,7 +42,7 @@ export interface FootnoteItem {
 
 export interface PricingProps {
   sectionTitleTag?: string;
-  sectionTitle: string;
+  sectionTitle: React.ReactNode;
   sectionSubtitle?: React.ReactNode;
   packages: PricingPackage[];
   footnotes?: string[] | FootnoteItem[];
@@ -70,7 +70,7 @@ export default function Pricing({
         
         {/* Section Header */}
         <FadeIn className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
-          <div className="max-w-2xl space-y-2 sm:space-y-3">
+          <div className="flex-1 w-full max-w-[800px] space-y-2 sm:space-y-3">
             <p className="text-[16px] sm:text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">
               {sectionTitleTag}
             </p>
@@ -126,7 +126,7 @@ export default function Pricing({
                 <div key={pIdx} className={wrapperClass}>
                   {/* Popular Badge */}
                   {isPopular && (
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[16px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] z-10">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[11px] sm:text-[12px] font-[800] tracking-[0.06em] px-[14px] py-[5px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] z-10">
                       {pkg.badgeText || "PALING POPULER"}
                     </div>
                   )}

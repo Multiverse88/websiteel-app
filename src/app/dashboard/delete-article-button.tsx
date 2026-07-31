@@ -30,10 +30,10 @@ export default function DeleteArticleButton({ articleId, articleTitle }: DeleteA
     <>
       <button
         onClick={() => setShowConfirm(true)}
-        className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+        className="inline-flex p-2 text-[var(--color-text-muted)] hover:text-[var(--color-error)] hover:bg-[#FEF2F2] rounded-[8px] transition-colors"
         title="Hapus artikel"
       >
-        <Trash2 className="w-4 h-4" />
+        <Trash2 className="w-4 h-4 text-current" />
       </button>
 
       {/* Confirmation Modal */}
@@ -41,40 +41,40 @@ export default function DeleteArticleButton({ articleId, articleTitle }: DeleteA
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => !isPending && setShowConfirm(false)}
           />
           
           {/* Modal */}
-          <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+          <div className="relative bg-[var(--color-surface)] rounded-[8px] shadow-large border border-[var(--color-border)] max-w-md w-full mx-4 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <h3 className="text-[16px] font-extrabold text-gray-900">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)]">
+              <h3 className="text-xl font-semibold text-[var(--color-text-main)]">
                 Hapus Artikel
               </h3>
               <button
                 onClick={() => !isPending && setShowConfirm(false)}
-                className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                className="p-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] hover:bg-[#F8FAFC] rounded-[8px] transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Content */}
             <div className="px-6 py-5">
               {error ? (
-                <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-[16px] text-red-700 font-medium">
+                <div className="p-4 bg-[#FEF2F2] border border-[#FECACA] rounded-[8px] text-[14px] text-[var(--color-error)] font-semibold">
                   {error}
                 </div>
               ) : (
                 <>
-                  <p className="text-[16px] text-gray-600 leading-relaxed">
+                  <p className="text-[15px] text-[var(--color-text-muted)] leading-relaxed">
                     Apakah Anda yakin ingin menghapus artikel berikut?
                   </p>
-                  <p className="mt-2 text-[16px] font-bold text-gray-900 line-clamp-2">
+                  <p className="mt-2 text-[15px] font-semibold text-[var(--color-text-main)] line-clamp-2">
                     &ldquo;{articleTitle}&rdquo;
                   </p>
-                  <p className="mt-2 text-[16px] text-gray-400">
+                  <p className="mt-4 text-[13px] text-[var(--color-text-disabled)] italic">
                     Tindakan ini tidak dapat dibatalkan.
                   </p>
                 </>
@@ -82,27 +82,27 @@ export default function DeleteArticleButton({ articleId, articleTitle }: DeleteA
             </div>
 
             {/* Actions */}
-            <div className="flex items-center justify-end gap-3 px-6 py-4 bg-gray-50 border-t border-gray-100">
+            <div className="flex items-center justify-end gap-3 px-6 py-5 bg-[#F8FAFC] border-t border-[var(--color-border)]">
               <button
                 onClick={() => !isPending && setShowConfirm(false)}
                 disabled={isPending}
-                className="px-4 py-2.5 text-[16px] font-bold text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-colors disabled:opacity-50"
+                className="px-5 py-2.5 text-[14px] font-semibold text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] hover:bg-[#F1F5F9] rounded-[8px] transition-colors disabled:opacity-50 min-h-[44px]"
               >
                 Batal
               </button>
               <button
                 onClick={handleDelete}
                 disabled={isPending}
-                className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white text-[16px] font-bold rounded-xl transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-6 py-2.5 bg-[var(--color-error)] hover:bg-[#B91C1C] text-white text-[14px] font-semibold rounded-[8px] transition-colors disabled:opacity-50 flex items-center gap-2 min-h-[44px]"
               >
                 {isPending ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin text-current" />
                     <span>Menghapus...</span>
                   </>
                 ) : (
                   <>
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-4 h-4 text-current" />
                     <span>Ya, Hapus</span>
                   </>
                 )}

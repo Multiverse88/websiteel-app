@@ -34,45 +34,45 @@ export function SmtpSettingsModal({ initialConfig }: { initialConfig: any }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="px-4 py-2 bg-gray-50 text-gray-700 font-bold rounded-lg hover:bg-gray-100 transition-colors flex items-center gap-1.5 text-[14px] border border-gray-200"
+        className="px-5 py-2.5 bg-[#F8FAFC] text-[var(--color-text-main)] font-semibold rounded-[8px] hover:bg-[#FEF2F2] hover:text-[var(--color-primary)] transition-colors flex items-center gap-1.5 text-[14px] border border-[var(--color-border)] min-h-[44px]"
       >
-        <Settings className="w-4 h-4" />
+        <Settings className="w-4 h-4 text-current" />
         Setting SMTP
       </button>
 
       {mounted && isOpen && createPortal(
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-[500px] overflow-hidden">
-            <div className="p-5 border-b border-gray-100 flex items-center justify-between">
-              <h3 className="font-extrabold text-[16px] text-gray-900">Setting SMTP Blast</h3>
-              <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-red-500 transition-colors">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-[var(--color-surface)] rounded-[8px] shadow-large border border-[var(--color-border)] w-full max-w-[500px] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-[var(--color-border)] flex items-center justify-between">
+              <h3 className="font-semibold text-xl text-[var(--color-text-main)]">Setting SMTP Blast</h3>
+              <button onClick={() => setIsOpen(false)} className="text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] hover:bg-[#F8FAFC] p-1.5 rounded-[8px] transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <form onSubmit={handleSave} className="p-5 space-y-4">
+            <form onSubmit={handleSave} className="p-6 space-y-5">
               <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">Email Pengirim (Sender Email)</label>
-                <input type="text" name="from" defaultValue={initialConfig?.from || ""} placeholder='"Promo" <promo@easylegal.id>' className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
+                <label className="block text-[14px] font-semibold text-[var(--color-text-main)] mb-1.5">Email Pengirim (Sender Email)</label>
+                <input type="text" name="from" defaultValue={initialConfig?.from || ""} placeholder='"Promo" <promo@easylegal.id>' className="w-full px-4 py-2.5 bg-white border border-[var(--color-border)] rounded-[8px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-[var(--color-primary)] transition-all shadow-subtle" />
               </div>
               <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">SMTP Host</label>
-                <input type="text" name="host" defaultValue={initialConfig?.host || ""} required placeholder="smtp.gmail.com" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
+                <label className="block text-[14px] font-semibold text-[var(--color-text-main)] mb-1.5">SMTP Host</label>
+                <input type="text" name="host" defaultValue={initialConfig?.host || ""} required placeholder="smtp.gmail.com" className="w-full px-4 py-2.5 bg-white border border-[var(--color-border)] rounded-[8px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-[var(--color-primary)] transition-all shadow-subtle" />
               </div>
               <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">SMTP Port</label>
-                <input type="number" name="port" defaultValue={initialConfig?.port || "465"} required placeholder="465" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
+                <label className="block text-[14px] font-semibold text-[var(--color-text-main)] mb-1.5">SMTP Port</label>
+                <input type="number" name="port" defaultValue={initialConfig?.port || "465"} required placeholder="465" className="w-full px-4 py-2.5 bg-white border border-[var(--color-border)] rounded-[8px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-[var(--color-primary)] transition-all shadow-subtle" />
               </div>
               <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">SMTP Username</label>
-                <input type="text" name="user" defaultValue={initialConfig?.user || ""} required placeholder="email@gmail.com" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
+                <label className="block text-[14px] font-semibold text-[var(--color-text-main)] mb-1.5">SMTP Username</label>
+                <input type="text" name="user" defaultValue={initialConfig?.user || ""} required placeholder="email@gmail.com" className="w-full px-4 py-2.5 bg-white border border-[var(--color-border)] rounded-[8px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-[var(--color-primary)] transition-all shadow-subtle" />
               </div>
               <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1">SMTP Password</label>
-                <input type="password" name="pass" defaultValue={initialConfig?.pass || ""} required placeholder="App Password" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[14px]" />
+                <label className="block text-[14px] font-semibold text-[var(--color-text-main)] mb-1.5">SMTP Password</label>
+                <input type="password" name="pass" defaultValue={initialConfig?.pass || ""} required placeholder="App Password" className="w-full px-4 py-2.5 bg-white border border-[var(--color-border)] rounded-[8px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-[var(--color-primary)] transition-all shadow-subtle" />
               </div>
-              <div className="pt-4 border-t border-gray-100 flex justify-end gap-2">
-                <button type="button" onClick={() => setIsOpen(false)} className="px-4 py-2 rounded-lg text-gray-500 font-bold hover:bg-gray-50">Batal</button>
-                <button type="submit" disabled={isPending} className="px-4 py-2 bg-[#d62828] text-white font-bold rounded-lg flex items-center gap-2">
+              <div className="pt-5 border-t border-[var(--color-border)] flex justify-end gap-3 mt-2">
+                <button type="button" onClick={() => setIsOpen(false)} className="px-5 py-2.5 rounded-[8px] text-[14px] font-semibold text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] hover:bg-[#F8FAFC] transition-all min-h-[44px]">Batal</button>
+                <button type="submit" disabled={isPending} className="px-6 py-2.5 bg-[var(--color-primary)] text-white font-semibold rounded-[8px] flex items-center gap-2 hover:bg-[#B91C1C] transition-all disabled:opacity-50 min-h-[44px]">
                   {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
                   Simpan Pengaturan
                 </button>
@@ -104,26 +104,26 @@ export function ContactActions({ id, isActive }: { id: string; isActive: boolean
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       <button
         onClick={handleToggle}
         disabled={isPending}
-        className={`p-2 rounded-lg transition-colors ${
+        className={`p-2 rounded-[8px] transition-colors ${
           isActive
-            ? "bg-amber-50 text-amber-600 hover:bg-amber-100 border border-amber-200"
-            : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border border-emerald-200"
+            ? "bg-[#FFFBEB] text-[var(--color-warning)] hover:bg-[#FEF3C7] border border-[#FDE68A]"
+            : "bg-[#ECFDF5] text-[var(--color-success)] hover:bg-[#D1FAE5] border border-[#A7F3D0]"
         } disabled:opacity-50`}
         title={isActive ? "Nonaktifkan" : "Aktifkan"}
       >
-        <PowerOff className="w-4 h-4" />
+        <PowerOff className="w-4 h-4 text-current" />
       </button>
       <button
         onClick={handleDelete}
         disabled={isPending}
-        className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 transition-colors disabled:opacity-50"
+        className="p-2 rounded-[8px] bg-[#FEF2F2] text-[var(--color-error)] hover:bg-[#FEE2E2] border border-[#FECACA] transition-colors disabled:opacity-50"
         title="Hapus"
       >
-        <Trash2 className="w-4 h-4" />
+        <Trash2 className="w-4 h-4 text-current" />
       </button>
     </div>
   );
@@ -180,12 +180,12 @@ export function ImportCsvButton() {
         type="button"
         disabled={isPending}
         onClick={() => fileInputRef.current?.click()}
-        className="px-4 py-2 bg-emerald-50 text-emerald-700 font-bold rounded-lg hover:bg-emerald-100 transition-colors flex items-center gap-1.5 text-[14px] border border-emerald-200 disabled:opacity-50"
+        className="px-5 py-2.5 bg-[#ECFDF5] text-[var(--color-success)] font-semibold rounded-[8px] hover:bg-[#D1FAE5] transition-colors flex items-center gap-1.5 text-[14px] border border-[#A7F3D0] disabled:opacity-50 min-h-[44px]"
       >
         {isPending ? (
-          <Loader2 className="w-4 h-4 animate-spin" />
+          <Loader2 className="w-4 h-4 animate-spin text-current" />
         ) : (
-          <FileSpreadsheet className="w-4 h-4" />
+          <FileSpreadsheet className="w-4 h-4 text-current" />
         )}
         Import CSV
       </button>
@@ -214,18 +214,18 @@ export function ToggleAllContactsButton({ action }: { action: 'activate' | 'deac
     <button
       onClick={handleToggleAll}
       disabled={isPending}
-      className={`px-4 py-2 font-bold rounded-lg transition-colors flex items-center gap-1.5 text-[14px] border disabled:opacity-50 ${
+      className={`px-5 py-2.5 font-semibold rounded-[8px] transition-colors flex items-center gap-1.5 text-[14px] border disabled:opacity-50 min-h-[44px] ${
         isActiveBtn 
-          ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-200"
-          : "bg-amber-50 text-amber-700 hover:bg-amber-100 border-amber-200"
+          ? "bg-[#ECFDF5] text-[var(--color-success)] hover:bg-[#D1FAE5] border-[#A7F3D0]"
+          : "bg-[#FFFBEB] text-[var(--color-warning)] hover:bg-[#FEF3C7] border-[#FDE68A]"
       }`}
     >
       {isPending ? (
-        <Loader2 className="w-4 h-4 animate-spin" />
+        <Loader2 className="w-4 h-4 animate-spin text-current" />
       ) : isActiveBtn ? (
-        <ToggleRight className="w-4 h-4" />
+        <ToggleRight className="w-5 h-5 text-current" />
       ) : (
-        <ToggleLeft className="w-4 h-4" />
+        <ToggleLeft className="w-5 h-5 text-current" />
       )}
       {isActiveBtn ? "Aktifkan Semua" : "Nonaktifkan Semua"}
     </button>
@@ -259,8 +259,8 @@ export function ActivateLimitedContactsForm() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-black/[0.04] p-5">
-      <h3 className="text-[14px] font-bold text-gray-700 mb-3">Aktivasi Target Otomatis</h3>
+    <div className="bg-[var(--color-surface)] rounded-[8px] shadow-subtle border border-[var(--color-border)] p-6">
+      <h3 className="text-[15px] font-semibold text-[var(--color-text-main)] mb-4">Aktivasi Target Otomatis</h3>
       <form onSubmit={handleActivateLimited} className="flex gap-3">
         <input
           type="number"
@@ -268,14 +268,14 @@ export function ActivateLimitedContactsForm() {
           min="1"
           required
           placeholder="Jml Kontak (Cth: 100)"
-          className="w-[200px] px-4 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#d62828] focus:ring-1 focus:ring-[#d62828]"
+          className="w-[220px] px-4 py-2.5 border border-[var(--color-border)] bg-white rounded-[8px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-[var(--color-primary)] shadow-subtle"
         />
         <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-2 bg-emerald-50 text-emerald-700 font-bold rounded-lg hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center gap-1.5 text-[14px] disabled:opacity-50"
+          className="px-6 py-2.5 bg-[#ECFDF5] text-[var(--color-success)] font-semibold rounded-[8px] hover:bg-[#D1FAE5] border border-[#A7F3D0] transition-colors flex items-center gap-1.5 text-[14px] disabled:opacity-50 min-h-[44px]"
         >
-          {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <ToggleRight className="w-4 h-4" />}
+          {isPending ? <Loader2 className="w-4 h-4 animate-spin text-current" /> : <ToggleRight className="w-5 h-5 text-current" />}
           Aktifkan Otomatis
         </button>
       </form>
