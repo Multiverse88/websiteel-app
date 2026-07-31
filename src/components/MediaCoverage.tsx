@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 
 export default function MediaCoverage() {
@@ -11,20 +10,20 @@ export default function MediaCoverage() {
           <div className="text-[16px] sm:text-[16px] font-black text-gray-400 tracking-[0.2em] uppercase mb-10 sm:mb-12 text-center">
             Liputan Media EasyLegal
           </div>
-          <div className="flex flex-nowrap items-center justify-start xl:justify-center gap-10 sm:gap-16 w-full overflow-x-auto pb-6 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="flex flex-nowrap items-center justify-between sm:justify-center gap-2 sm:gap-8 w-full overflow-hidden pb-6 pt-4 px-2 sm:px-4">
             {[
-              { id: 1, scale: "scale-[1.7]" },
-              { id: 2, scale: "scale-[0.85]" },
-              { id: 3, scale: "scale-[1.1]" },
-              { id: 4, scale: "scale-[1.1]" },
-              { id: 5, scale: "scale-[1.7]" },
-              { id: 6, scale: "scale-[1.1]" },
+              { id: 1, class: "h-[50px] sm:h-[80px]" },  // JPNN
+              { id: 2, class: "h-[20px] sm:h-[32px]" },  // Industry
+              { id: 3, class: "h-[26px] sm:h-[40px]" },  // Detik
+              { id: 4, class: "h-[22px] sm:h-[36px]" },  // IDN
+              { id: 5, class: "h-[50px] sm:h-[80px]" },  // Sindo
+              { id: 6, class: "h-[22px] sm:h-[36px]" },  // Kontan
             ].map((item) => (
-              <div key={item.id} className="relative h-10 sm:h-12 w-28 sm:w-36 flex-shrink-0 flex items-center justify-center">
-                <img 
-                  src={`/logo-berita/logo${item.id}.png`} 
-                  alt={`Media Liputan ${item.id}`} 
-                  className={`w-full h-full object-contain origin-center ${item.scale}`} 
+              <div key={item.id} className="flex items-center justify-center shrink min-w-0">
+                <img
+                  src={`/logo-berita/logo${item.id}.png`}
+                  alt={`Media Liputan ${item.id}`}
+                  className={`w-auto max-w-full object-contain ${item.class}`}
                   loading="lazy"
                 />
               </div>

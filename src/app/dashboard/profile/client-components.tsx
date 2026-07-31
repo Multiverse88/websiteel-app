@@ -42,9 +42,9 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
   return (
     <form action={formAction} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Left Column - Avatar Upload & Quick Info */}
-      <div className="bg-white shadow-md border border-black/[0.03] rounded-xl p-6 shadow-sm flex flex-col items-center text-center gap-4 h-fit">
+      <div className="bg-white border border-[#E5E5E5] rounded-xl p-6 flex flex-col items-center text-center gap-4 h-fit">
         <div className="relative group">
-          <div className="w-28 h-28 rounded-full shadow-md border border-black/[0.04] overflow-hidden bg-gray-50 flex items-center justify-center relative">
+          <div className="w-28 h-28 rounded-full border border-[#E5E5E5] overflow-hidden bg-[#F2F2F2] flex items-center justify-center relative">
             {avatarPreview ? (
               <Image
                 src={avatarPreview}
@@ -54,7 +54,7 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
                 className="object-cover"
               />
             ) : (
-              <User className="w-12 h-12 text-gray-300" />
+              <User className="w-12 h-12 text-[#606060]" />
             )}
           </div>
 
@@ -72,26 +72,26 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
         </div>
 
         <div>
-          <h2 className="font-bold text-gray-900 text-[16px]">{name || "Nama Admin"}</h2>
-          <p className="text-[16px] text-gray-400 font-semibold uppercase tracking-wider mt-0.5">{role}</p>
-          <p className="text-[16px] text-gray-500 mt-1">{user.email}</p>
+          <h2 className="font-bold text-[#0F0F0F] text-[16px]">{name || "Nama Admin"}</h2>
+          <p className="text-[14px] text-[#606060] font-bold uppercase tracking-wider mt-0.5">{role}</p>
+          <p className="text-[14px] text-[#606060] mt-1">{user.email}</p>
         </div>
 
-        <div className="w-full border-t border-gray-100 pt-3 text-[16px] text-gray-400">
+        <div className="w-full border-t border-[#E5E5E5] pt-3 text-[12px] text-[#606060]">
           * Klik foto di atas untuk mengunggah gambar profil baru secara langsung.
         </div>
       </div>
 
       {/* Right Column - Edit Form Details */}
-      <div className="lg:col-span-2 bg-white shadow-md border border-black/[0.03] rounded-xl p-6 shadow-sm flex flex-col gap-5">
-        <div className="border-b border-gray-100 pb-3">
-          <h3 className="font-bold text-gray-900 text-[16px]">Informasi Profil</h3>
-          <p className="text-[16px] text-gray-500">Sesuaikan data profil penulis Anda untuk dipajang di artikel</p>
+      <div className="lg:col-span-2 bg-white border border-[#E5E5E5] rounded-xl p-6 flex flex-col gap-5">
+        <div className="border-b border-[#E5E5E5] pb-3">
+          <h3 className="font-bold text-[#0F0F0F] text-[16px]">Informasi Profil</h3>
+          <p className="text-[14px] text-[#606060]">Sesuaikan data profil penulis Anda untuk dipajang di artikel</p>
         </div>
 
         {/* Input Name */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-[16px] font-bold text-gray-700">Nama Lengkap</label>
+          <label className="text-[14px] font-bold text-[#0F0F0F]">Nama Lengkap</label>
           <input 
             type="text"
             name="name"
@@ -99,13 +99,13 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
             onChange={(e) => setName(e.target.value)}
             placeholder="Masukkan nama lengkap Anda..."
             required
-            className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[16px] focus:outline-none focus:ring-2 focus:ring-[#990202]/10 focus:border-[#990202] transition-colors"
+            className="w-full px-3.5 py-2 border border-[#E5E5E5] rounded-none text-[14px] focus:outline-none focus:ring-0 focus:border-[#0F0F0F] transition-colors"
           />
         </div>
 
         {/* Input Role */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-[16px] font-bold text-gray-700">Peran / Jabatan (Role)</label>
+          <label className="text-[14px] font-bold text-[#0F0F0F]">Peran / Jabatan (Role)</label>
           <input 
             type="text"
             name="role"
@@ -113,13 +113,13 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
             onChange={(e) => setRole(e.target.value)}
             placeholder="Contoh: Senior Legal Consultant, Writer..."
             required
-            className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[16px] focus:outline-none focus:ring-2 focus:ring-[#990202]/10 focus:border-[#990202] transition-colors"
+            className="w-full px-3.5 py-2 border border-[#E5E5E5] rounded-none text-[14px] focus:outline-none focus:ring-0 focus:border-[#0F0F0F] transition-colors"
           />
         </div>
 
         {/* Input Avatar URL (Optional) */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-[16px] font-bold text-gray-700">Foto Profil URL (Alternatif)</label>
+          <label className="text-[14px] font-bold text-[#0F0F0F]">Foto Profil URL (Alternatif)</label>
           <input 
             type="text"
             name="avatarUrl"
@@ -129,20 +129,20 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
               if (!fileInput) setAvatarPreview(e.target.value);
             }}
             placeholder="https://images.unsplash.com/... atau kosongkan untuk unggah"
-            className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[16px] focus:outline-none focus:ring-2 focus:ring-[#990202]/10 focus:border-[#990202] transition-colors"
+            className="w-full px-3.5 py-2 border border-[#E5E5E5] rounded-none text-[14px] focus:outline-none focus:ring-0 focus:border-[#0F0F0F] transition-colors"
           />
         </div>
 
         {/* Input Bio */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-[16px] font-bold text-gray-700">Bio Singkat</label>
+          <label className="text-[14px] font-bold text-[#0F0F0F]">Bio Singkat</label>
           <textarea 
             name="bio"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             placeholder="Tulis deskripsi singkat profil Anda yang akan ditampilkan di bawah artikel..."
             rows={4}
-            className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[16px] focus:outline-none focus:ring-2 focus:ring-[#990202]/10 focus:border-[#990202] transition-colors resize-none"
+            className="w-full px-3.5 py-2 border border-[#E5E5E5] rounded-none text-[14px] focus:outline-none focus:ring-0 focus:border-[#0F0F0F] transition-colors resize-none"
           />
         </div>
 
@@ -161,10 +161,10 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
         )}
 
         {/* Footer buttons */}
-        <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-1">
+        <div className="flex items-center justify-between border-t border-[#E5E5E5] pt-4 mt-1">
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[16px] font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[14px] font-bold text-[#606060] hover:text-[#0F0F0F] hover:bg-[#F2F2F2] transition-all"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Kembali ke Dashboard
@@ -173,7 +173,7 @@ export function ProfileForm({ user }: { user: UserProfileData }) {
           <button
             type="submit"
             disabled={isPending}
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-[16px] font-bold bg-[#990202] text-white hover:bg-[#800000] border border-[#990202] transition-all disabled:opacity-50 shadow-sm"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[14px] font-bold bg-[#FF0000] text-white hover:bg-[#CC0000] transition-all disabled:opacity-50"
           >
             {isPending ? (
               <>

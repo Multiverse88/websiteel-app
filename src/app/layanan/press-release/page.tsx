@@ -438,7 +438,7 @@ export default function PressRelease() {
                 </div>
 
                 {/* Floating Badge 1: Top Left */}
-                <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[220px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                <div className="absolute -top-14 -left-6 sm:-top-16 sm:-left-24 lg:-top-20 lg:-left-32 xl:-left-40 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[220px] hover:-translate-y-1 transition-transform duration-300 z-20">
                   <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Megaphone className="w-4.5 h-4.5" />
                   </div>
@@ -449,7 +449,7 @@ export default function PressRelease() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Right */}
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                <div className="absolute -bottom-12 -right-6 sm:-bottom-16 sm:-right-24 lg:-bottom-16 lg:-right-32 xl:-right-40 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
                   <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Clock className="w-4.5 h-4.5" />
                   </div>
@@ -477,7 +477,8 @@ export default function PressRelease() {
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-4">
             <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">KENAPA PRESS RELEASE</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
-              Investasi sekali — manfaat jangka panjang.
+              Investasi sekali<br />
+              Manfaat jangka panjang.
             </h2>
             <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-bold leading-relaxed max-w-2xl mx-auto">
               Berbeda dari iklan yang hilang setelah budget habis, press release tetap online &amp; bisa diakses bertahun-tahun.

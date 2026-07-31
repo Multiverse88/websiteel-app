@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Send, Clock, CheckCircle2, AlertCircle, Users } from "lucide-react";
+import { Send, Clock, CheckCircle2, AlertCircle, Users } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import DashboardHeader from "@/components/dashboard/ui/DashboardHeader";
 
 export const dynamic = "force-dynamic";
 
@@ -27,49 +28,36 @@ export default async function EmailBlastRiwayatPage() {
   const scheduledCount = campaigns.filter((c: any) => c.status === "scheduled").length;
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* HEADER */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-40">
-        <div className="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/dashboard/email-blast"
-              className="p-2 rounded-lg bg-gray-50 text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Link>
-            <div>
-              <h1 className="text-[22px] font-extrabold text-gray-900 tracking-tight">Riwayat Campaign</h1>
-              <p className="text-[14px] text-gray-500 mt-1 font-medium">
-                {campaigns.length} total · {completedCount} selesai · {scheduledCount} terjadwal
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/dashboard/email-blast/baru"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[14px] font-bold bg-[#d62828] text-white hover:bg-[#b20112] shadow-sm transition-all"
-            >
-              <Send className="w-4 h-4" />
-              Buat Baru
-            </Link>
-          </div>
-        </div>
-      </header>
+      <DashboardHeader
+        title="Riwayat Campaign"
+        description={`${campaigns.length} total · ${completedCount} selesai · ${scheduledCount} terjadwal`}
+        backHref="/dashboard/email-blast"
+        action={
+          <Link
+            href="/dashboard/email-blast/baru"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[14px] font-bold bg-[#990202] text-white hover:bg-[#7A0101] shadow-sm transition-all"
+          >
+            <Send className="w-4 h-4" />
+            Buat Baru
+          </Link>
+        }
+      />
 
       {/* CONTENT */}
       <section className="py-8 flex-grow">
         <div className="max-w-[1200px] mx-auto px-6 space-y-6">
           
           {campaigns.length === 0 ? (
-            <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-10 text-center">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-10 text-center">
               <h3 className="text-[16px] font-extrabold text-gray-900 mb-2">Belum ada campaign</h3>
               <p className="text-[16px] text-gray-500">
                 Silakan buat campaign email baru untuk mulai mengirim blast.
               </p>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] overflow-hidden">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
               <div className="grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-[14px] font-extrabold text-gray-400 uppercase tracking-wider">
                 <div className="col-span-5">Subject Campaign</div>
                 <div className="col-span-3">Tanggal</div>

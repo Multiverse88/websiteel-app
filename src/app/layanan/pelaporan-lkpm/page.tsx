@@ -295,7 +295,7 @@ export default function PelaporanLKPM() {
 
                   {/* Headline */}
                   <h1 className="font-heading text-[28px] sm:text-[42px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
-                    Lapor LKPM tepat waktu, <span className="text-[#990202]">hindari sanksi BKPM</span>
+                    Lapor LKPM tepat waktu <span className="text-[#990202]">hindari sanksi BKPM</span>
                   </h1>
 
                   {/* Description */}

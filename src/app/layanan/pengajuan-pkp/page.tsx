@@ -207,7 +207,7 @@ export default function PengajuanPkp() {
 
               {/* Headline */}
               <h1 className="font-heading text-[26px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
-                Pengurusan PKP resmi,<br />
+                Pengurusan PKP resmi<br />
                 <span className="text-[#990202]">cepat & bergaransi</span>
               </h1>
 

@@ -156,13 +156,9 @@ export default function ApostillePage() {
                 <span className="text-[#990202]">Internasional</span>
               </h1>
 
-              {/* Subtitle Line 3 from HTML Mockup */}
-              <p className="text-[16px] font-medium tracking-tight text-gray-500 mt-2">
-                Dokumen Anda sah di 129+ Negara Anggota Konvensi Hague.
-              </p>
-
               {/* Description */}
-              <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
+              <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-medium mt-3">
+                Dokumen Anda sah di 129+ Negara Anggota Konvensi Hague.<br />
                 Proses mudah, cepat, dan bisa 100% online — tanpa perlu datang ke kantor.
               </p>
 
@@ -559,9 +555,6 @@ export default function ApostillePage() {
       <section className="py-20 sm:py-28 bg-[#F9FAFB] border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block text-[16px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
-              DOKUMEN APA SAJA YANG BISA DI-APOSTILLE?
-            </span>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
               Jenis Dokumen yang Dapat Diproses
             </h2>
@@ -709,7 +702,7 @@ export default function ApostillePage() {
               TESTIMONI KLIEN
             </span>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
-              Mereka Sudah Merasakannya!
+              Klien Yang Sudah Menggunakan Layanan Kami
             </h2>
           </div>
 

@@ -117,7 +117,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                 <span className="text-[16px] font-bold text-[#990202] tracking-wide">{c.heroBadge}</span>
               </div>
 
-              <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
+              <h1 className={`font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight ${c.titleClassName || ""}`}>
                 {c.heroTitle.map((segment, i) => {
                   if ("break" in segment) {
                     return <br key={i} />;

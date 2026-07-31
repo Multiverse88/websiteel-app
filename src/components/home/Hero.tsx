@@ -64,7 +64,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
   const floatClass = gsapClasses?.float || "";
 
   return (
-    <section ref={ref} className={`relative overflow-hidden ${className || ""}`}>
+    <section ref={ref} className={`relative ${className || ""}`}>
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[580px] relative">
         {/* Left Arrow - hidden on mobile */}
         <button
