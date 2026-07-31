@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FileText, Layers, Link2, Mail, UserCog, HelpCircle, LogOut, Send } from "lucide-react";
+import { LayoutDashboard, FileText, Layers, Link2, Mail, Send, UserCog, HelpCircle, LogOut } from "lucide-react";
 import { logoutAction } from "@/app/dashboard/actions";
 
 interface DashboardSidebarProps {
@@ -25,43 +25,41 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-[80px] hover:w-[280px] transition-[width] duration-300 bg-white border-r border-gray-200 shadow-sm flex flex-col py-6 z-30 group overflow-hidden">
-      {/* Header Logo */}
-      <div className="px-5 mb-8 flex items-center gap-3 overflow-hidden shrink-0">
-        <div className="w-10 h-10 rounded-lg bg-[#d62828] flex items-center justify-center text-white font-bold text-[16px] shrink-0">
+    <aside className="fixed left-0 top-0 h-screen w-[260px] bg-white border-r border-gray-200 shadow-sm flex flex-col z-30">
+      {/* Logo */}
+      <div className="px-5 py-6 flex items-center gap-3 border-b border-gray-100">
+        <div className="w-10 h-10 rounded-xl bg-[#990202] flex items-center justify-center text-white font-bold text-[16px] shrink-0">
           EL
         </div>
-        <div className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200">
-          <h1 className="text-2xl font-bold text-[#b20112] leading-tight">EasyLegal</h1>
-          <p className="text-[16px] text-gray-500">Legal Admin</p>
+        <div>
+          <h1 className="text-[18px] font-bold text-[#990202] leading-tight">EasyLegal</h1>
+          <p className="text-[12px] text-gray-500">Admin Panel</p>
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 overflow-y-auto overflow-x-hidden" role="navigation">
+      <div className="flex-1 overflow-y-auto px-3 py-4" role="navigation">
         <ul className="space-y-1">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = item.exact
               ? pathname === item.href
-              : pathname.startsWith(item.href) && (item.href === "/dashboard" ? pathname === "/dashboard" : true);
+              : pathname.startsWith(item.href);
 
             return (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`flex items-center gap-3 px-5 py-3 border-l-4 transition-colors ${
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors ${
                     isActive
-                      ? "text-[#b20112] font-bold border-[#b20112] bg-red-50"
-                      : "text-gray-600 hover:bg-gray-100 border-transparent"
+                      ? "bg-red-50 text-[#990202] font-semibold border-l-3 border-[#990202]"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
                   <Icon className="w-5 h-5 shrink-0" />
-                  <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 font-medium">
-                    {item.name}
-                  </span>
+                  <span className="font-medium text-[14px]">{item.name}</span>
                   {item.badge !== undefined && item.badge > 0 && (
-                    <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 ml-auto px-1.5 py-0.5 rounded-md text-[16px] font-bold bg-[#b20112] text-white">
+                    <span className="ml-auto px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#990202] text-white">
                       {item.badge}
                     </span>
                   )}
@@ -73,26 +71,18 @@ export default function DashboardSidebar({ subscriberCount, linksCount }: Dashbo
       </div>
 
       {/* Bottom Actions */}
-      <div className="px-5 mt-auto space-y-4 overflow-hidden shrink-0">
-        <button
-          className="w-[40px] group-hover:w-full py-2 bg-[#d62828] text-white rounded-lg text-[16px] font-semibold hover:bg-[#b20112] transition-all flex items-center justify-center gap-2"
-          title="Bantuan Support"
-        >
+      <div className="px-3 py-4 border-t border-gray-100 space-y-1">
+        <button className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors text-[14px] font-medium">
           <HelpCircle className="w-5 h-5 shrink-0" />
-          <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 hidden group-hover:block">
-            Bantuan Support
-          </span>
+          <span>Bantuan Support</span>
         </button>
-        <form action={logoutAction} className="w-[40px] group-hover:w-full">
+        <form action={logoutAction}>
           <button
             type="submit"
-            className="w-full flex items-center gap-3 py-3 px-2 text-gray-600 hover:bg-gray-100 transition-colors rounded-lg justify-center group-hover:justify-start"
-            title="Logout"
+            className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors text-[14px] font-medium"
           >
             <LogOut className="w-5 h-5 shrink-0" />
-            <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 font-medium hidden group-hover:block">
-              Logout
-            </span>
+            <span>Logout</span>
           </button>
         </form>
       </div>
