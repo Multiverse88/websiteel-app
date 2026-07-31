@@ -1,15 +1,4 @@
-import * as Sentry from "@sentry/nextjs";
-
-export function trackMetric(name: string, value: number = 1, attributes?: Record<string, string>) {
-  try {
-    if (process.env.NODE_ENV !== "production") return;
-    Sentry.metrics.count(name, value, { attributes });
-  } catch {}
-}
-
-export function trackDistribution(name: string, value: number, attributes?: Record<string, string>) {
-  try {
-    if (process.env.NODE_ENV !== "production") return;
-    Sentry.metrics.distribution(name, value, { attributes });
-  } catch {}
-}
+// ponytail: Sentry Metrics API was deprecated and removed.
+// All tracking calls are now no-ops. Delete this file and its imports when convenient.
+export function trackMetric(_name?: string, _value?: number, _attributes?: Record<string, string>) {}
+export function trackDistribution(_name?: string, _value?: number, _attributes?: Record<string, string>) {}

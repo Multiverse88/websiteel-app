@@ -2,8 +2,11 @@
 
 import { prisma } from "@/lib/db";
 import { sendEmail } from "@/lib/mail";
-import { escapeHtml } from "@/lib/utils";
 import { trackMetric } from "@/lib/metrics";
+
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
 
 export async function submitContactForm(prevState: Record<string, unknown> | null, formData: FormData) {
   const name = formData.get("name") as string;

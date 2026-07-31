@@ -3,9 +3,11 @@
 import React, { useState, useRef, useTransition, useEffect } from "react";
 import Link from "next/link";
 import ImageComponent from "next/image";
-import { ArrowLeft, Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, HelpCircle, Loader2, ExternalLink, Cloud } from "lucide-react";
+import { Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2, ExternalLink, Cloud, Activity, CheckCircle, AlertTriangle, XCircle, Table as TableIcon } from "lucide-react";
 import { createArticle, uploadInlineImage } from "./actions";
 import { compressImageFile } from "@/lib/compress-image";
+import DashboardHeader from "@/components/dashboard/ui/DashboardHeader";
+import DashboardButton from "@/components/dashboard/ui/DashboardButton";
 
 // Image Presets for premium aesthetics
 const IMAGE_PRESETS = [
@@ -66,6 +68,7 @@ export default function TambahArtikelPage() {
   const [readTime, setReadTime] = useState("5 menit baca");
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
+  const [focusKeyword, setFocusKeyword] = useState("");
 
   // Link insertion state
   const [showLinkModal, setShowLinkModal] = useState(false);
@@ -79,6 +82,121 @@ export default function TambahArtikelPage() {
   const imageFileInputRef = useRef<HTMLInputElement>(null);
   const editingImageRef = useRef<HTMLImageElement | null>(null);
   const [isEditingImage, setIsEditingImage] = useState(false);
+
+  const analyzeSEO = () => {
+    const checks = [];
+    let score = 0;
+    let totalChecks = 7;
+
+    const keyword = focusKeyword.trim().toLowerCase();
+    const contentText = content.toLowerCase();
+    const titleText = title.toLowerCase();
+    const excerptText = excerpt.toLowerCase();
+
+    // 1. Content length
+    const wordCount = contentText.split(/\s+/).filter(w => w.length > 0).length;
+    if (wordCount >= 300) {
+      checks.push({ type: "success", text: `Panjang konten bagus (${wordCount} kata). Minimal 300 kata direkomendasikan.` });
+      score++;
+    } else {
+      checks.push({ type: "error", text: `Panjang konten hanya ${wordCount} kata. Disarankan minimal 300 kata.` });
+    }
+
+    // 2. Title length
+    if (title.length >= 30 && title.length <= 60) {
+      checks.push({ type: "success", text: `Panjang judul sangat baik (${title.length} karakter).` });
+      score++;
+    } else if (title.length > 0) {
+      checks.push({ type: "warning", text: `Panjang judul ${title.length} karakter. Disarankan antara 30-60 karakter.` });
+    } else {
+      checks.push({ type: "error", text: "Judul belum diisi." });
+    }
+
+    // 3. Excerpt length
+    if (excerpt.length >= 120 && excerpt.length <= 160) {
+      checks.push({ type: "success", text: `Panjang kutipan (meta deskripsi) sangat baik (${excerpt.length} karakter).` });
+      score++;
+    } else if (excerpt.length > 0) {
+      checks.push({ type: "warning", text: `Panjang kutipan ${excerpt.length} karakter. Disarankan antara 120-160 karakter.` });
+    } else {
+      checks.push({ type: "error", text: "Kutipan belum diisi." });
+    }
+
+    // 4. Keyword presence
+    if (keyword) {
+      totalChecks += 3;
+      
+      if (titleText.includes(keyword)) {
+         checks.push({ type: "success", text: "Kata kunci utama ditemukan pada Judul." });
+         score++;
+      } else {
+         checks.push({ type: "error", text: "Kata kunci utama tidak ditemukan pada Judul." });
+      }
+
+      if (excerptText.includes(keyword)) {
+         checks.push({ type: "success", text: "Kata kunci utama ditemukan pada Kutipan (Excerpt)." });
+         score++;
+      } else {
+         checks.push({ type: "error", text: "Kata kunci utama tidak ditemukan pada Kutipan (Excerpt)." });
+      }
+
+      const keywordCount = (contentText.match(new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+      if (keywordCount > 0) {
+         checks.push({ type: "success", text: `Kata kunci utama ditemukan di dalam konten (${keywordCount} kali).` });
+         score++;
+      } else {
+         checks.push({ type: "error", text: "Kata kunci utama tidak ditemukan di dalam isi artikel." });
+      }
+    } else {
+      checks.push({ type: "warning", text: "Tentukan Kata Kunci Utama (Focus Keyword) untuk analisis lebih dalam." });
+    }
+
+    // 5. Headings
+    if (content.includes("### ") || content.includes("<h3")) {
+      checks.push({ type: "success", text: "Artikel memiliki sub-judul (H3) yang baik untuk struktur." });
+      score++;
+    } else {
+      checks.push({ type: "warning", text: "Gunakan sub-judul (H3) untuk menstruktur artikel." });
+    }
+
+    // 6. Links
+    if (content.includes("](") || content.includes("<a ")) {
+      checks.push({ type: "success", text: "Artikel memiliki tautan (link)." });
+      score++;
+    } else {
+      checks.push({ type: "warning", text: "Disarankan untuk menambahkan tautan internal/eksternal." });
+    }
+
+    // 7. Images (Inline or Cover)
+    if (content.includes("![") || content.includes("<img ") || coverFile || coverUrl) {
+      checks.push({ type: "success", text: "Artikel memiliki gambar (cover/inline)." });
+      score++;
+    } else {
+      checks.push({ type: "warning", text: "Tambahkan gambar agar artikel lebih menarik." });
+    }
+
+    const percentage = Math.round((score / totalChecks) * 100);
+    let status = "Buruk";
+    let statusColor = "text-red-600";
+    let bgIconColor = "bg-red-100 text-red-600";
+    let bgCardColor = "bg-white border-red-200";
+
+    if (percentage >= 80) {
+      status = "Sangat Baik";
+      statusColor = "text-emerald-600";
+      bgIconColor = "bg-emerald-100 text-emerald-600";
+      bgCardColor = "bg-white border-emerald-200";
+    } else if (percentage >= 50) {
+      status = "Cukup";
+      statusColor = "text-amber-600";
+      bgIconColor = "bg-amber-100 text-amber-600";
+      bgCardColor = "bg-white border-amber-200";
+    }
+
+    return { checks, percentage, status, statusColor, bgIconColor, bgCardColor };
+  };
+
+  const seoData = analyzeSEO();
 
   useEffect(() => {
     if (editorRef.current && !editorRef.current.innerHTML) {
@@ -400,47 +518,14 @@ export default function TambahArtikelPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
+    <div className="flex flex-col min-h-screen bg-gray-50">
 
       {/* HEADER */}
-      <section className="bg-white pt-8 lg:pt-12 pb-10 border-b border-gray-100 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-red-500/5 rounded-full blur-[60px] pointer-events-none" />
-
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8 relative z-10">
-          <nav className="flex items-center space-x-2 text-[16px] font-medium text-gray-500 mb-6">
-            <Link href="/" className="flex items-center hover:text-[#990202] transition-colors gap-1">
-              <Home className="w-3.5 h-3.5" />
-              <span>Beranda</span>
-            </Link>
-            <span className="text-gray-300 font-normal">&gt;</span>
-            <Link href="/dashboard/artikel" className="hover:text-[#990202] transition-colors">
-              Dashboard
-            </Link>
-            <span className="text-gray-300 font-normal">&gt;</span>
-            <span className="text-[16px] font-bold text-gray-900">Tambah Artikel</span>
-          </nav>
-
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-            <div>
-              <div className="inline-flex items-center space-x-2 bg-red-50 py-1.5 px-3.5 rounded-full border border-red-100/50 shadow-sm mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-[#990202]" />
-                <span className="text-[16px] font-bold text-[#990202] tracking-wide">CMS Panel</span>
-              </div>
-              <h1 className="font-heading text-[34px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
-                Tulis Artikel Baru
-              </h1>
-            </div>
-
-            <Link
-              href="/dashboard/artikel"
-              className="inline-flex items-center justify-center px-5 py-3 shadow-md border border-black/[0.04] text-gray-700 hover:text-[#990202] hover:border-red-200 hover:bg-[#FFF5F5] font-bold text-[16px] rounded-xl transition-all duration-200 bg-white shadow-sm flex-shrink-0"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              <span>Batal & Kembali</span>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <DashboardHeader
+        title="Tulis Artikel Baru"
+        description="Buat artikel baru untuk dipublikasikan"
+        backHref="/dashboard/artikel"
+      />
 
       {/* MAIN CONTENT */}
       <section className="py-14 flex-grow">
@@ -449,7 +534,7 @@ export default function TambahArtikelPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
             {/* FORM */}
-            <div className="lg:col-span-7 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.03)] rounded-[28px] shadow-md border border-black/[0.04] p-6 sm:p-8">
+            <div className="lg:col-span-7 bg-white shadow-sm rounded-xl border border-gray-200 p-6 sm:p-8">
 
               {error && (
                 <div className="mb-6 p-4.5 bg-red-50 border border-red-200 rounded-2xl text-[16px] text-[#990202] font-semibold flex items-center gap-2">
@@ -540,7 +625,7 @@ export default function TambahArtikelPage() {
                       onClick={switchToUpload}
                       className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[16px] font-bold transition-all ${
                         coverMode === "upload"
-                          ? "bg-white text-[#990202] shadow-sm shadow-md border border-black/[0.04]"
+                          ? "bg-white text-[#990202] shadow-sm shadow-sm border border-gray-200"
                           : "text-gray-500 hover:text-gray-700"
                       }`}
                     >
@@ -552,7 +637,7 @@ export default function TambahArtikelPage() {
                       onClick={switchToUrl}
                       className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[16px] font-bold transition-all ${
                         coverMode === "url"
-                          ? "bg-white text-[#990202] shadow-sm shadow-md border border-black/[0.04]"
+                          ? "bg-white text-[#990202] shadow-sm shadow-sm border border-gray-200"
                           : "text-gray-500 hover:text-gray-700"
                       }`}
                     >
@@ -574,7 +659,7 @@ export default function TambahArtikelPage() {
 
                       {coverFile ? (
                         /* File selected preview */
-                        <div className="relative shadow-md border border-black/[0.04] rounded-xl overflow-hidden">
+                        <div className="relative shadow-sm border border-gray-200 rounded-xl overflow-hidden">
                           <ImageComponent
                             src={coverPreview}
                             alt="Preview"
@@ -738,6 +823,24 @@ export default function TambahArtikelPage() {
                   </div>
                 </div>
 
+                {/* Focus Keyword (SEO) */}
+                <div className="space-y-2">
+                  <label htmlFor="focusKeyword" className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                    Kata Kunci Utama (Focus Keyword) SEO
+                  </label>
+                  <input
+                    id="focusKeyword"
+                    type="text"
+                    value={focusKeyword}
+                    onChange={(e) => setFocusKeyword(e.target.value)}
+                    placeholder="Contoh: cara mengurus NIB"
+                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                  />
+                  <p className="text-[14px] text-gray-500 font-medium mt-1">
+                    Masukkan kata kunci utama yang ingin dioptimalkan (tidak disimpan ke database, hanya untuk panduan penulisan).
+                  </p>
+                </div>
+
                 {/* Content */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -747,12 +850,12 @@ export default function TambahArtikelPage() {
                   </div>
 
                   {/* Format Helper Toolbar */}
-                  <div className="flex flex-wrap items-center gap-2 p-1.5 bg-gray-50 shadow-md border border-black/[0.04] rounded-xl">
+                  <div className="flex flex-wrap items-center gap-2 p-1.5 bg-gray-50 shadow-sm border border-gray-200 rounded-xl">
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("formatBlock", "<h3>")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Ubah menjadi Sub-judul (H3)"
                     >
                       <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">H3</span>
@@ -762,7 +865,7 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("bold")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Jadikan Teks Tebal"
                     >
                       <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">B</span>
@@ -772,7 +875,7 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleOpenLinkModal}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Link"
                     >
                       <ExternalLink className="w-3 h-3 text-[#990202]" />
@@ -782,7 +885,7 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleRemoveLink}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Hapus Link dari Teks"
                     >
                       <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">~</span>
@@ -792,7 +895,7 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleOpenImageModal}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Gambar"
                     >
                       <ImageIcon className="w-3 h-3 text-[#990202]" />
@@ -802,7 +905,7 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertUnorderedList")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan List Poin"
                     >
                       <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">•</span>
@@ -812,7 +915,7 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertOrderedList")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan List Angka"
                     >
                       <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">1.</span>
@@ -822,16 +925,26 @@ export default function TambahArtikelPage() {
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("insertHorizontalRule")}
-                      className="px-2.5 py-1.5 bg-white shadow-md border border-black/[0.04] hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
                       title="Sisipkan Garis Pembatas"
                     >
                       <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">―</span>
                       <span>Pembatas</span>
                     </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => handleFormat("insertHTML", `<table style="width:100%; border-collapse:collapse; margin:16px 0;"><thead><tr><th style="border:1px solid #e5e7eb; padding:8px;">Header 1</th><th style="border:1px solid #e5e7eb; padding:8px;">Header 2</th></tr></thead><tbody><tr><td style="border:1px solid #e5e7eb; padding:8px;">Isi 1</td><td style="border:1px solid #e5e7eb; padding:8px;">Isi 2</td></tr></tbody></table>`)}
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Sisipkan Tabel"
+                    >
+                      <TableIcon className="w-3 h-3 text-[#990202]" />
+                      <span>Tabel</span>
+                    </button>
                   </div>
 
                   {/* WYSIWYG Content Editor */}
-                  <div className="relative shadow-md border border-black/[0.04] rounded-xl overflow-hidden shadow-inner">
+                  <div className="relative shadow-sm border border-gray-200 rounded-xl overflow-hidden shadow-inner">
                     <div
                       ref={editorRef}
                       contentEditable={true}
@@ -845,7 +958,7 @@ export default function TambahArtikelPage() {
                   {/* Link Insertion Modal */}
                   {showLinkModal && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" onMouseDown={(e) => { if (e.target === e.currentTarget) { setShowLinkModal(false); setLinkUrl(""); } }}>
-                      <div className="bg-white rounded-2xl shadow-2xl shadow-md border border-black/[0.04] p-5 w-full max-w-md mx-4">
+                      <div className="bg-white rounded-2xl shadow-2xl shadow-sm border border-gray-200 p-5 w-full max-w-md mx-4">
                         <div className="flex items-center gap-2 mb-4">
                           <ExternalLink className="w-4 h-4 text-[#990202]" />
                           <h3 className="text-[16px] font-extrabold text-gray-900">Sisipkan Link</h3>
@@ -883,7 +996,7 @@ export default function TambahArtikelPage() {
                   {/* Image Insertion Modal */}
                   {showImageModal && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" onMouseDown={(e) => { if (e.target === e.currentTarget) { setShowImageModal(false); setImageUrl(""); setImageAlt(""); } }}>
-                      <div className="bg-white rounded-2xl shadow-2xl shadow-md border border-black/[0.04] p-5 w-full max-w-md mx-4">
+                      <div className="bg-white rounded-2xl shadow-2xl shadow-sm border border-gray-200 p-5 w-full max-w-md mx-4">
                         <div className="flex items-center gap-2 mb-4">
                           <ImageIcon className="w-4 h-4 text-[#990202]" />
                           <h3 className="text-[16px] font-extrabold text-gray-900">{isEditingImage ? "Ganti Gambar" : "Sisipkan Gambar"}</h3>
@@ -1073,15 +1186,24 @@ export default function TambahArtikelPage() {
                       margin-top: 20px !important;
                       margin-bottom: 20px !important;
                     }
-                    .prose-editor a {
-                      color: #990202 !important;
-                      text-decoration: underline !important;
-                      text-underline-offset: 2px !important;
-                      font-weight: 600 !important;
-                      transition: color 0.15s !important;
-                    }
                     .prose-editor a:hover {
                       color: #B91C1C !important;
+                    }
+                    .prose-editor table {
+                      width: 100% !important;
+                      border-collapse: collapse !important;
+                      margin-top: 16px !important;
+                      margin-bottom: 16px !important;
+                    }
+                    .prose-editor th, .prose-editor td {
+                      border: 1px solid #e5e7eb !important;
+                      padding: 8px !important;
+                      font-size: 14px !important;
+                    }
+                    .prose-editor th {
+                      background-color: #f9fafb !important;
+                      font-weight: 700 !important;
+                      color: #111827 !important;
                     }
                   `}</style>
 
@@ -1096,23 +1218,13 @@ export default function TambahArtikelPage() {
 
                 {/* Submit */}
                 <div className="pt-4 border-t border-gray-100">
-                  <button
+                  <DashboardButton
                     type="submit"
-                    disabled={isPending}
-                    className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[16px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
+                    loading={isPending}
+                    className="w-full py-4 text-[16px] font-extrabold rounded-xl"
                   >
-                    {isPending ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        <span>Menyimpan Artikel...</span>
-                      </>
-                    ) : (
-                      <>
-                        <FileText className="w-5 h-5" />
-                        <span>Terbitkan Artikel Baru</span>
-                      </>
-                    )}
-                  </button>
+                    {isPending ? "Menyimpan Artikel..." : "Terbitkan Artikel Baru"}
+                  </DashboardButton>
                 </div>
 
               </form>
@@ -1121,7 +1233,7 @@ export default function TambahArtikelPage() {
             {/* LIVE PREVIEW */}
             <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
 
-              <div className="bg-white/40 shadow-md border border-black/[0.04] rounded-2xl py-3 px-4 flex items-center justify-between">
+              <div className="bg-white shadow-sm border border-gray-200 rounded-2xl py-3 px-4 flex items-center justify-between">
                 <div className="text-[16px] font-extrabold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-500" />
                   <span>Pratinjau Langsung (Live Preview)</span>
@@ -1129,7 +1241,7 @@ export default function TambahArtikelPage() {
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
               </div>
 
-              <div className="bg-white rounded-3xl shadow-md border border-black/[0.04] overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.03)] flex flex-col group transition-all duration-300">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.03)] flex flex-col group transition-all duration-300">
                 <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
                   <ImageComponent
                     src={getPreviewImage()}
@@ -1179,8 +1291,36 @@ export default function TambahArtikelPage() {
                 Gunakan judul yang memancing rasa ingin tahu, lengkapi dengan kutipan pendek yang persuasif, dan tulislah sub-bab menggunakan format heading <code className="bg-amber-100/60 px-1.5 py-0.5 rounded font-black text-amber-950">###</code> agar artikel tersusun secara rapi dan mudah dibaca oleh klien.
               </div>
 
+              {/* SEO Analysis Card */}
+              <div className={`bg-white rounded-xl shadow-md border p-5 shadow-[0_12px_30px_rgba(0,0,0,0.03)] space-y-4 transition-colors ${seoData.bgCardColor}`}>
+                <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <Activity className={`w-5 h-5 ${seoData.statusColor}`} />
+                    <span className="text-[16px] font-extrabold text-gray-900">
+                      Analisis SEO (Yoast Style)
+                    </span>
+                  </div>
+                  <div className={`px-2.5 py-1 rounded-lg text-[14px] font-black uppercase tracking-wide border ${seoData.bgIconColor} border-current/20`}>
+                    {seoData.status} ({seoData.percentage}%)
+                  </div>
+                </div>
+
+                <div className="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
+                  {seoData.checks.map((check, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-[15px] font-medium leading-snug text-gray-700">
+                      <div className="mt-0.5 flex-shrink-0">
+                        {check.type === "success" && <CheckCircle className="w-4.5 h-4.5 text-emerald-500" />}
+                        {check.type === "warning" && <AlertTriangle className="w-4.5 h-4.5 text-amber-500" />}
+                        {check.type === "error" && <XCircle className="w-4.5 h-4.5 text-red-500" />}
+                      </div>
+                      <span>{check.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Format Cheat Sheet Card */}
-              <div className="bg-white rounded-3xl shadow-md border border-black/[0.04] p-5 shadow-[0_12px_30px_rgba(0,0,0,0.03)] space-y-4">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 shadow-[0_12px_30px_rgba(0,0,0,0.03)] space-y-4">
                 <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
                   <FileText className="w-5 h-5 text-[#990202]" />
                   <span className="text-[16px] font-extrabold text-gray-900">
@@ -1383,6 +1523,31 @@ function markdownToHtml(markdown: string): string {
       return `<img src="${imgMatch[2]}" alt="${imgMatch[1]}" style="max-width:100%;border-radius:12px;margin:16px 0;display:block" />`;
     }
     
+    // Table
+    if (trimmed.startsWith("|") && trimmed.includes("|\n|")) {
+      const rows = trimmed.split("\n").filter(r => r.trim() !== "");
+      let html = '<table style="width:100%; border-collapse:collapse; margin:16px 0;">';
+      rows.forEach((row, idx) => {
+        if (row.match(/^\|\s*:?-+:?\s*\|/)) return; // Skip separator row
+        const cells = row.split("|").filter((_, i, arr) => i !== 0 && i !== arr.length - 1);
+        if (idx === 0) {
+          html += '<thead><tr>';
+          cells.forEach(cell => {
+            html += `<th style="border:1px solid #e5e7eb; padding:8px; font-weight:700; background-color:#f9fafb;">${parseMarkdownInlineHtml(cell.trim())}</th>`;
+          });
+          html += '</tr></thead><tbody>';
+        } else {
+          html += '<tr>';
+          cells.forEach(cell => {
+            html += `<td style="border:1px solid #e5e7eb; padding:8px;">${parseMarkdownInlineHtml(cell.trim())}</td>`;
+          });
+          html += '</tr>';
+        }
+      });
+      html += '</tbody></table>';
+      return html;
+    }
+    
     // Headings
     if (trimmed.startsWith("### ")) {
       const text = trimmed.substring(4);
@@ -1495,6 +1660,27 @@ function htmlToMarkdown(html: string): string {
         });
         if (items.length > 0) {
           markdownBlocks.push(items.join("\n"));
+        }
+      } else if (nodeName === "TABLE") {
+        const tableLines: string[] = [];
+        const rows = Array.from(el.querySelectorAll("tr"));
+        rows.forEach((row, idx) => {
+          const cells = Array.from(row.querySelectorAll("th, td"));
+          if (cells.length === 0) return;
+          const rowMd = "| " + cells.map(cell => getInlineMarkdown(cell as HTMLElement).trim()).join(" | ") + " |";
+          tableLines.push(rowMd);
+          
+          const inThead = row.closest("thead");
+          const isOnlyTh = cells.every(c => c.tagName === "TH");
+          
+          if (idx === 0 && (inThead || isOnlyTh)) {
+             tableLines.push("|" + cells.map(() => "---").join("|") + "|");
+          } else if (idx === 0 && tableLines.length === 1 && !inThead) {
+             tableLines.push("|" + cells.map(() => "---").join("|") + "|");
+          }
+        });
+        if (tableLines.length > 0) {
+          markdownBlocks.push(tableLines.join("\n"));
         }
       } else if (nodeName === "HR") {
         markdownBlocks.push("---");

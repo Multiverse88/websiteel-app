@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 interface Props {
+  campaignName: string;
+  campaignStatus: string;
   sentThisWeek: number;
   totalSent: number;
   totalOpened: number;
@@ -13,8 +14,7 @@ interface Props {
   totalBounced: number;
   totalFailed: number;
   activityData: { day: string; sent: number; open: number }[];
-  campaignsTrend: { id: string; name: string; brand: string; status: string; sent: number; open: number; click: number }[];
-  campaignRows: { id: string; name: string; brand: string; status: string; sent: number; open: number; click: number }[];
+  dailyTrend: { day: string; openRate: number; clickRate: number }[];
   topContacts: { name: string; meta: string; stat: string }[];
   coldContacts: { name: string; meta: string }[];
   links: { label: string; url: string; count: number }[];
@@ -22,7 +22,9 @@ interface Props {
   hourly: number[];
 }
 
-export default function StatistikClient({
+export default function CampaignStatistikClient({
+  campaignName,
+  campaignStatus,
   sentThisWeek,
   totalSent,
   totalOpened,
@@ -30,64 +32,54 @@ export default function StatistikClient({
   totalBounced,
   totalFailed,
   activityData,
-  campaignsTrend,
-  campaignRows,
+  dailyTrend,
   topContacts,
   coldContacts,
   links,
   devices,
-  hourly
+  hourly,
 }: Props) {
   const [mounted, setMounted] = useState(false);
-  const router = useRouter();
+  useEffect(() => { setMounted(true); }, []);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const [tooltip, setTooltip] = useState<{ visible: boolean; x: number; y: number; content: string }>({ visible: false, x: 0, y: 0, content: '' });
-
-  const showTooltip = (e: React.MouseEvent, content: string) => {
-    setTooltip({ visible: true, x: e.clientX, y: e.clientY, content });
-  };
-  const hideTooltip = () => setTooltip(prev => ({ ...prev, visible: false }));
-  const moveTooltip = (e: React.MouseEvent) => {
-    if (tooltip.visible) setTooltip(prev => ({ ...prev, x: e.clientX, y: e.clientY }));
-  };
+  const [tooltip, setTooltip] = useState<{ visible: boolean; x: number; y: number; content: string }>({ visible: false, x: 0, y: 0, content: "" });
+  const showTooltip = (e: React.MouseEvent, content: string) => setTooltip({ visible: true, x: e.clientX, y: e.clientY, content });
+  const hideTooltip = () => setTooltip((p) => ({ ...p, visible: false }));
+  const moveTooltip = (e: React.MouseEvent) => { if (tooltip.visible) setTooltip((p) => ({ ...p, x: e.clientX, y: e.clientY })); };
 
   const openRate = totalSent > 0 ? Math.round((totalOpened / totalSent) * 100) : 0;
   const clickRate = totalOpened > 0 ? Math.round((totalClicked / totalOpened) * 100) : 0;
   const bounceRate = totalSent > 0 ? Math.round((totalBounced / totalSent) * 100) : 0;
   const ctoRate = openRate > 0 ? Math.round((clickRate / openRate) * 100) : 0;
-  
-  const maxSent = Math.max(...activityData.map(d => d.sent), 1);
 
-  const w = 1090, h = 190, padX = 40, padY = 24;
-  const maxTrend = Math.max(
-    ...campaignsTrend.map(d => Math.max(d.open, d.click)),
-    10
-  );
-  // Round up to nearest 10 for clean axis labels
-  const trendMax = Math.ceil(maxTrend / 10) * 10;
-  const buildLineSVG = (key: 'open'|'click') => {
-    if (campaignsTrend.length === 0) return '';
-    if (campaignsTrend.length === 1) {
-      const x = padX;
-      const y = h - padY - (campaignsTrend[0][key] / trendMax) * (h - padY * 2);
-      return `${x},${y} ${w-padX},${y}`;
-    }
-    return campaignsTrend.map((d, i) => {
-      const step = (w - padX * 2) / (campaignsTrend.length - 1);
-      const x = padX + i * step;
-      const y = h - padY - (d[key] / trendMax) * (h - padY * 2);
-      return `${x},${y}`;
-    }).join(' ');
-  };
-
-  const maxClick = Math.max(...links.map(l => l.count), 1);
+  const maxSent = Math.max(...activityData.map((d) => d.sent), 1);
+  const maxClick = Math.max(...links.map((l) => l.count), 1);
   const maxHour = Math.max(...hourly, 1);
 
-  const initials = (name: string) => name.split(' ').map(n=>n[0]).slice(0,2).join('').toUpperCase();
+  // Trend line chart
+  const w = 1090, h = 190, padX = 40, padY = 24;
+  const maxTrend = Math.max(...dailyTrend.map((d) => Math.max(d.openRate, d.clickRate)), 10);
+  const trendMax = Math.ceil(maxTrend / 10) * 10;
+  const buildLineSVG = (key: "openRate" | "clickRate") => {
+    if (dailyTrend.length === 0) return "";
+    if (dailyTrend.length === 1) {
+      const x = padX;
+      const y = h - padY - (dailyTrend[0][key] / trendMax) * (h - padY * 2);
+      return `${x},${y} ${w - padX},${y}`;
+    }
+    return dailyTrend
+      .map((d, i) => {
+        const step = (w - padX * 2) / (dailyTrend.length - 1);
+        const x = padX + i * step;
+        const y = h - padY - (d[key] / trendMax) * (h - padY * 2);
+        return `${x},${y}`;
+      })
+      .join(" ");
+  };
+
+  const initials = (name: string) => name.split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase();
+
+  const statusLabel: Record<string, string> = { sent: "Terkirim", completed: "Selesai", scheduled: "Terjadwal", processing: "Proses", draft: "Draft", failed: "Gagal" };
 
   return (
     <>
@@ -111,34 +103,31 @@ export default function StatistikClient({
           font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
           min-height: 100vh;
           -webkit-font-smoothing: antialiased;
-          /* bleed out of the dashboard layout's p-8 (32px) */
           margin: -32px -32px -32px -32px;
         }
         .stat-wrap { max-width: 1180px; margin: 0 auto; padding: 32px 32px 80px; }
 
-        /* header */
         .page-header {
           display:flex; justify-content:space-between; align-items:flex-end;
           margin-bottom: 28px; gap:20px; flex-wrap:wrap;
         }
         .page-header h1 { font-size:22px; font-weight:700; letter-spacing:-0.01em; margin:0; }
         .page-header p { color:var(--sub); font-size:13px; margin-top:4px; }
-        .controls { display:flex; gap:8px; align-self:flex-start; }
-        .select-pill {
-          background:var(--card); border:1px solid var(--border); border-radius:9px;
-          padding:9px 14px; font-size:13px; font-weight:600; color:var(--ink);
-          display:flex; align-items:center; gap:7px; cursor:pointer;
+        .campaign-badge {
+          display:inline-flex; align-items:center; gap:6px;
+          font-size:11px; font-weight:700; padding:4px 10px; border-radius:99px; letter-spacing:.03em;
         }
-        .select-pill:hover { border-color:#D4D4D8; background:#FAFAFA; }
-        .select-pill .dot { width:6px; height:6px; border-radius:50%; background:var(--ink); flex-shrink:0; }
+        .campaign-badge.sent, .campaign-badge.completed { background:var(--green-bg); color:var(--green); }
+        .campaign-badge.scheduled { background:#F1EFEA; color:var(--sub); }
+        .campaign-badge.draft { background:#F1EFEA; color:var(--faint); }
+        .campaign-badge.processing { background:var(--red-bg); color:var(--red); }
+        .campaign-badge.failed { background:var(--red-bg); color:var(--red); }
 
-        /* section label */
         .section-label {
           font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em;
           color:var(--sub); margin: 28px 0 12px;
         }
 
-        /* metric grid */
         .metric-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
         .metric-card {
           background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
@@ -156,17 +145,14 @@ export default function StatistikClient({
         .metric-bar-fill { height:100%; border-radius:99px; }
         .metric-card.warn .metric-value { color: var(--red); }
 
-        /* chart card */
         .chart-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
         .chart-card-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
         .chart-title { font-size:13px; font-weight:700; display:flex; align-items:center; gap:8px; margin:0; }
-        .legend { display:flex; gap:14px; font-size:12px; color:var(--sub); }
-        .legend-item { display:flex; align-items:center; gap:5px; }
-        .legend-dot { width:8px; height:8px; border-radius:2px; flex-shrink:0; }
 
         .two-col { display:grid; grid-template-columns:1.3fr 1fr; gap:14px; align-items:start; }
 
-        /* bars */
+        .trend-wrap { width:100%; overflow:hidden; }
+
         .bar-row { display:flex; align-items:flex-end; gap:14px; height:170px; padding-top:10px; }
         .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:8px; }
         .bar-stack { width:100%; max-width:34px; display:flex; flex-direction:column-reverse; align-items:center; border-radius:6px 6px 3px 3px; overflow:hidden; }
@@ -174,31 +160,6 @@ export default function StatistikClient({
         .bar-seg-open { width:100%; background:var(--red); }
         .bar-col .day-label { font-size:11px; color:var(--sub); }
 
-        /* trend */
-        .trend-wrap { width:100%; overflow:hidden; }
-
-        /* table */
-        .stat-page table { width:100%; border-collapse:collapse; font-size:13px; }
-        .stat-page thead th {
-          text-align:left; font-weight:700; color:var(--faint); font-size:10.5px;
-          text-transform:uppercase; letter-spacing:0.05em; padding:0 10px 10px; border-bottom:1px solid var(--border);
-        }
-        .stat-page tbody td { padding:13px 10px; border-bottom:1px solid #F2F2F4; vertical-align:middle; }
-        .stat-page tbody tr:last-child td { border-bottom:none; }
-        .stat-page tbody tr:hover td { background:#FAFAFA; }
-        .campaign-name { font-weight:600; font-size:13px; }
-        .campaign-brand { font-size:11.5px; color:var(--sub); margin-top:2px; }
-        .badge { font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:99px; letter-spacing:.03em; }
-        .badge.sent { background:var(--green-bg); color:var(--green); }
-        .badge.scheduled { background:#F1EFEA; color:var(--sub); }
-        .badge.draft { background:#F1EFEA; color:var(--faint); }
-        .badge.processing { background:var(--red-bg); color:var(--red); }
-        .mini-bar-bg { background:#F0F0F2; border-radius:4px; height:5px; width:70px; overflow:hidden; }
-        .mini-bar-fill { height:100%; background:var(--red); border-radius:4px; }
-        .rate-cell { display:flex; align-items:center; gap:8px; }
-        .rate-num { font-weight:600; width:36px; }
-
-        /* contact lists */
         .contact-list { display:flex; flex-direction:column; gap:2px; }
         .contact-row { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid #F2F2F4; }
         .contact-row:last-child { border-bottom:none; }
@@ -215,7 +176,6 @@ export default function StatistikClient({
         .contact-stat.hot { color:var(--green); }
         .contact-stat.cold { color:var(--red); }
 
-        /* link clicks */
         .link-row { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #F2F2F4; }
         .link-row:last-child { border-bottom:none; }
         .link-info { flex:1; min-width:0; }
@@ -225,14 +185,12 @@ export default function StatistikClient({
         .link-bar-bg { flex:2; background:#F0F0F2; border-radius:4px; height:6px; overflow:hidden; }
         .link-bar-fill { height:100%; background:var(--gold); border-radius:4px; }
 
-        /* hourly heatmap */
         .hour-grid { display:grid; grid-template-columns:repeat(24,1fr); gap:3px; align-items:end; height:90px; }
         .hour-bar { background:var(--red); border-radius:3px 3px 1px 1px; }
         .hour-labels { display:grid; grid-template-columns:repeat(24,1fr); gap:3px; margin-top:6px; }
         .hour-labels span { font-size:8.5px; color:var(--faint); text-align:center; }
         .peak-note { margin-top:14px; padding:10px 14px; background:#FFF8E8; border:1px solid #FBE7B4; border-radius:10px; font-size:12.5px; color:#7A5B00; line-height:1.5; }
 
-        /* device breakdown */
         .device-row { display:flex; align-items:center; gap:12px; padding:9px 0; border-bottom:1px solid #F2F2F4; }
         .device-row:last-child { border-bottom:none; }
         .device-label { width:90px; font-size:12.5px; font-weight:500; color:var(--sub); flex-shrink:0; }
@@ -246,27 +204,31 @@ export default function StatistikClient({
           .hour-grid, .hour-labels { grid-template-columns:repeat(12,1fr); }
         }
       `}</style>
-      
+
       <div className={`stat-page transition-all duration-700 ease-out transform ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
         <div className="stat-wrap">
 
-          {/* Back + Header */}
+          {/* Back */}
           <Link
-            href="/dashboard/email-blast"
+            href="/dashboard/email-blast/statistik"
             className="inline-flex items-center gap-2 text-[12px] font-medium text-[#71717A] hover:text-[#18181B] transition-colors mb-5"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            Kembali
+            Kembali ke Statistik
           </Link>
 
+          {/* Header */}
           <div className="page-header">
             <div>
-              <h1>Statistik Campaign</h1>
-              <p>Pantau performa email blast Anda secara mendetail.</p>
-            </div>
-            <div className="controls">
-              <div className="select-pill"><span className="dot"></span> Semua Brand</div>
-              <div className="select-pill"><span className="dot"></span> 7 Hari Terakhir</div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[11px] font-bold tracking-widest uppercase" style={{ color: "var(--sub)" }}>
+                  STATISTIK CAMPAIGN
+                </span>
+                <span className={`campaign-badge ${campaignStatus}`}>
+                  {statusLabel[campaignStatus] || campaignStatus}
+                </span>
+              </div>
+              <h1>{campaignName}</h1>
             </div>
           </div>
 
@@ -371,11 +333,7 @@ export default function StatistikClient({
           <div className="section-label">Aktivitas</div>
           <div className="chart-card">
             <div className="chart-card-head">
-              <div className="chart-title">🕐 Aktivitas Keseluruhan (7 Hari Terakhir)</div>
-              <div className="legend">
-                <div className="legend-item"><span className="legend-dot" style={{ background: '#EDEAE2' }}></span> Terkirim</div>
-                <div className="legend-item"><span className="legend-dot" style={{ background: 'var(--red)' }}></span> Dibuka</div>
-              </div>
+              <div className="chart-title">🕐 Aktivitas Campaign (7 Hari Terakhir)</div>
             </div>
             <div className="bar-row">
               {activityData.map((d, i) => {
@@ -383,9 +341,9 @@ export default function StatistikClient({
                 const sentH = Math.max((d.sent / maxSent) * totalH, d.sent > 0 ? 6 : 0);
                 const openH = d.sent > 0 ? Math.max((d.open / maxSent) * totalH, d.open > 0 ? 4 : 0) : 0;
                 return (
-                  <div 
-                    key={i} 
-                    className="bar-col" 
+                  <div
+                    key={i}
+                    className="bar-col"
                     onMouseEnter={(e) => showTooltip(e, `${d.day}\nTerkirim: ${d.sent}\nDibuka: ${d.open}`)}
                     onMouseLeave={hideTooltip}
                     onMouseMove={moveTooltip}
@@ -401,22 +359,19 @@ export default function StatistikClient({
             </div>
           </div>
 
-          {/* Trend antar campaign */}
+          {/* Trend harian */}
           <div className="section-label">Tren Performa</div>
           <div className="chart-card">
             <div className="chart-card-head">
-              <div className="chart-title">
-                📈 Open Rate & Click Rate — {campaignsTrend.length || 6} Campaign Terakhir
-              </div>
+              <div className="chart-title">📈 Open Rate & Click Rate Harian</div>
               <div className="legend">
                 <div className="legend-item"><span className="legend-dot" style={{ background: 'var(--red)', borderRadius: '50%' }}></span> Open Rate</div>
                 <div className="legend-item"><span className="legend-dot" style={{ background: 'var(--gold)', borderRadius: '50%' }}></span> Click Rate</div>
               </div>
             </div>
             <div className="trend-wrap">
-              {campaignsTrend.length > 0 ? (
+              {dailyTrend.length > 0 ? (
                 <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="200">
-                  {/* Y-axis labels */}
                   {[0, 0.25, 0.5, 0.75, 1].map((frac, i) => {
                     const y = h - padY - frac * (h - padY * 2);
                     const val = Math.round(trendMax * frac);
@@ -427,51 +382,50 @@ export default function StatistikClient({
                       </React.Fragment>
                     );
                   })}
-                  <polyline points={buildLineSVG('open')} fill="none" stroke="var(--red)" strokeWidth="2.2" />
-                  <polyline points={buildLineSVG('click')} fill="none" stroke="#FFD96A" strokeWidth="2.2" />
-                  {campaignsTrend.length === 1 ? (
+                  <polyline points={buildLineSVG("openRate")} fill="none" stroke="var(--red)" strokeWidth="2.2" />
+                  <polyline points={buildLineSVG("clickRate")} fill="none" stroke="#FFD96A" strokeWidth="2.2" />
+                  {dailyTrend.length === 1 ? (
                     <>
-                      <rect x={0} y={0} width={w} height={h} fill="transparent" style={{ cursor: 'pointer' }} onMouseEnter={(e) => showTooltip(e, `${campaignsTrend[0].name}\nOpen: ${campaignsTrend[0].open}% | Click: ${campaignsTrend[0].click}%`)} onMouseLeave={hideTooltip} onMouseMove={moveTooltip} />
-                      <circle cx={padX} cy={h - padY - (campaignsTrend[0].open / trendMax) * (h - padY * 2)} r="4" fill="var(--red)" />
-                      <circle cx={w-padX} cy={h - padY - (campaignsTrend[0].open / trendMax) * (h - padY * 2)} r="4" fill="var(--red)" />
-                      <circle cx={padX} cy={h - padY - (campaignsTrend[0].click / trendMax) * (h - padY * 2)} r="4" fill="#FFD96A" stroke="var(--red)" strokeWidth="1" />
-                      <circle cx={w-padX} cy={h - padY - (campaignsTrend[0].click / trendMax) * (h - padY * 2)} r="4" fill="#FFD96A" stroke="var(--red)" strokeWidth="1" />
-                      <text x={padX} y={h - 2} fontSize="11" fill="#A1A1AA" textAnchor="middle" fontFamily="'Segoe UI', sans-serif">{campaignsTrend[0].name}</text>
+                      <rect x={0} y={0} width={w} height={h} fill="transparent" style={{ cursor: "pointer" }} onMouseEnter={(e) => showTooltip(e, `${dailyTrend[0].day}\nOpen: ${dailyTrend[0].openRate}% | Click: ${dailyTrend[0].clickRate}%`)} onMouseLeave={hideTooltip} onMouseMove={moveTooltip} />
+                      <circle cx={padX} cy={h - padY - (dailyTrend[0].openRate / trendMax) * (h - padY * 2)} r="4" fill="var(--red)" />
+                      <circle cx={w - padX} cy={h - padY - (dailyTrend[0].openRate / trendMax) * (h - padY * 2)} r="4" fill="var(--red)" />
+                      <circle cx={padX} cy={h - padY - (dailyTrend[0].clickRate / trendMax) * (h - padY * 2)} r="4" fill="#FFD96A" stroke="var(--red)" strokeWidth="1" />
+                      <circle cx={w - padX} cy={h - padY - (dailyTrend[0].clickRate / trendMax) * (h - padY * 2)} r="4" fill="#FFD96A" stroke="var(--red)" strokeWidth="1" />
+                      <text x={padX} y={h - 2} fontSize="11" fill="#A1A1AA" textAnchor="middle" fontFamily="'Segoe UI', sans-serif">{dailyTrend[0].day}</text>
                     </>
                   ) : (
                     <>
-                      {campaignsTrend.map((d, i) => {
-                        const step = (w - padX * 2) / (campaignsTrend.length - 1);
+                      {dailyTrend.map((d, i) => {
+                        const step = (w - padX * 2) / (dailyTrend.length - 1);
                         const x = padX + i * step;
-                        const y = h - padY - (d.open / trendMax) * (h - padY * 2);
-                        return <circle key={`o-${i}`} cx={x} cy={y} r="4" fill="var(--red)" style={{ pointerEvents: 'none' }} />;
+                        const y = h - padY - (d.openRate / trendMax) * (h - padY * 2);
+                        return <circle key={`o-${i}`} cx={x} cy={y} r="4" fill="var(--red)" style={{ pointerEvents: "none" }} />;
                       })}
-                      {campaignsTrend.map((d, i) => {
-                        const step = (w - padX * 2) / (campaignsTrend.length - 1);
+                      {dailyTrend.map((d, i) => {
+                        const step = (w - padX * 2) / (dailyTrend.length - 1);
                         const x = padX + i * step;
-                        const y = h - padY - (d.click / trendMax) * (h - padY * 2);
-                        return <circle key={`c-${i}`} cx={x} cy={y} r="4" fill="#FFD96A" stroke="var(--red)" strokeWidth="1" style={{ pointerEvents: 'none' }} />;
+                        const y = h - padY - (d.clickRate / trendMax) * (h - padY * 2);
+                        return <circle key={`c-${i}`} cx={x} cy={y} r="4" fill="#FFD96A" stroke="var(--red)" strokeWidth="1" style={{ pointerEvents: "none" }} />;
                       })}
-                      {campaignsTrend.map((d, i) => {
-                        const step = (w - padX * 2) / (campaignsTrend.length - 1);
+                      {dailyTrend.map((d, i) => {
+                        const step = (w - padX * 2) / (dailyTrend.length - 1);
                         const x = padX + i * step;
-                        const label = d.name.length > 12 ? d.name.slice(0, 10) + '…' : d.name;
                         return (
-                          <text key={`t-${i}`} x={x} y={h - 2} fontSize="10" fill="#A1A1AA" textAnchor="middle" fontFamily="'Segoe UI', sans-serif" style={{ pointerEvents: 'none' }}>
-                            {label}
+                          <text key={`t-${i}`} x={x} y={h - 2} fontSize="10" fill="#A1A1AA" textAnchor="middle" fontFamily="'Segoe UI', sans-serif" style={{ pointerEvents: "none" }}>
+                            {d.day}
                           </text>
                         );
                       })}
-                      {campaignsTrend.map((d, i) => {
-                        const step = (w - padX * 2) / (campaignsTrend.length - 1);
+                      {dailyTrend.map((d, i) => {
+                        const step = (w - padX * 2) / (dailyTrend.length - 1);
                         const x = padX + i * step;
                         return (
-                          <rect 
-                            key={`hitbox-${i}`} 
-                            x={x - step / 2} y={0} width={step} height={h} 
-                            fill="transparent" style={{ cursor: 'pointer' }}
-                            onMouseEnter={(e) => showTooltip(e, `${d.name}\nOpen: ${d.open}% | Click: ${d.click}%`)} 
-                            onMouseLeave={hideTooltip} onMouseMove={moveTooltip} 
+                          <rect
+                            key={`hitbox-${i}`}
+                            x={x - step / 2} y={0} width={step} height={h}
+                            fill="transparent" style={{ cursor: "pointer" }}
+                            onMouseEnter={(e) => showTooltip(e, `${d.day}\nOpen: ${d.openRate}% | Click: ${d.clickRate}%`)}
+                            onMouseLeave={hideTooltip} onMouseMove={moveTooltip}
                           />
                         );
                       })}
@@ -479,61 +433,9 @@ export default function StatistikClient({
                   )}
                 </svg>
               ) : (
-                <div style={{ textAlign: 'center', color: 'var(--sub)', fontSize: '13px', padding: '40px 0' }}>Belum ada campaign</div>
+                <div style={{ textAlign: "center", color: "var(--sub)", fontSize: "13px", padding: "40px 0" }}>Belum ada data</div>
               )}
             </div>
-          </div>
-
-          {/* Ranking campaign */}
-          <div className="section-label">Ranking Campaign</div>
-          <div className="chart-card" style={{ padding: '20px 12px 8px', overflowX: 'auto' }}>
-            {campaignRows.length > 0 ? (
-              <table>
-                <thead>
-                  <tr>
-                    <th style={{ paddingLeft: 12 }}>Campaign</th>
-                    <th>Status</th>
-                    <th>Terkirim</th>
-                    <th>Open Rate</th>
-                    <th>Click Rate</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {campaignRows.map((c, i) => (
-                    <tr 
-                      key={i} 
-                      onClick={() => router.push(`/dashboard/email-blast/statistik/${c.id}`)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <td style={{ paddingLeft: 12 }}>
-                        <div className="campaign-name">{c.name}</div>
-                        <div className="campaign-brand">{c.brand}</div>
-                      </td>
-                      <td>
-                        <span className={`badge ${c.status}`}>
-                          {c.status === 'sent' ? 'Terkirim' : c.status === 'scheduled' ? 'Terjadwal' : c.status === 'processing' ? 'Proses' : c.status === 'draft' ? 'Draft' : c.status}
-                        </span>
-                      </td>
-                      <td>{c.sent > 0 ? c.sent : '—'}</td>
-                      <td>
-                        <div className="rate-cell">
-                          <span className="rate-num">{c.open}%</span>
-                          <div className="mini-bar-bg"><div className="mini-bar-fill" style={{ width: `${c.open}%` }}></div></div>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="rate-cell">
-                          <span className="rate-num">{c.click}%</span>
-                          <div className="mini-bar-bg"><div className="mini-bar-fill" style={{ width: `${c.click * 2}%`, background: 'var(--gold)' }}></div></div>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <div style={{ textAlign: 'center', color: 'var(--sub)', fontSize: '13px', padding: '24px 0' }}>Belum ada data campaign</div>
-            )}
           </div>
 
           {/* Engagement level */}
@@ -570,7 +472,7 @@ export default function StatistikClient({
                     </div>
                     <div className="contact-stat cold">●</div>
                   </div>
-                )) : <div style={{ fontSize: '13px', color: 'var(--sub)', padding: '8px 0' }}>Belum ada data.</div>}
+                )) : <div style={{ fontSize: '13px', color: 'var(--sub)', padding: '8px 0' }}>Semua kontak sudah membuka email.</div>}
               </div>
             </div>
           </div>
@@ -629,16 +531,16 @@ export default function StatistikClient({
             </div>
             <div className="hour-grid">
               {hourly.map((v, i) => (
-                <div 
-                  key={i} 
-                  className="hour-bar" 
+                <div
+                  key={i}
+                  className="hour-bar"
                   onMouseEnter={(e) => showTooltip(e, `Pukul ${String(i).padStart(2, '0')}:00\nJumlah Dibuka: ${v}`)}
                   onMouseLeave={hideTooltip}
                   onMouseMove={moveTooltip}
-                  style={{ 
-                    height: Math.max((v / maxHour) * 80, 3) + 'px', 
+                  style={{
+                    height: Math.max((v / maxHour) * 80, 3) + 'px',
                     opacity: (0.15 + (v / maxHour) * 0.85) as any
-                  }} 
+                  }}
                 />
               ))}
             </div>
@@ -656,7 +558,7 @@ export default function StatistikClient({
       </div>
 
       {mounted && tooltip.visible && (
-        <div 
+        <div
           style={{
             position: 'fixed',
             top: tooltip.y - 10,

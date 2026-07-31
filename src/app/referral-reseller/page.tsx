@@ -222,31 +222,7 @@ export default function ReferralResellerPage() {
 
                 </div>
 
-                {/* 2. Floating Badge: Transfer 3 Hari (Centered on Top Right corner) */}
-                <div className="absolute -top-8 -right-16 sm:-right-24 bg-white rounded-2xl p-3 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_15px_35px_rgba(0,0,0,0.04)] flex items-center space-x-3 max-w-[190px] z-20 hover:scale-[1.02] transition-transform duration-300">
-                  <div className="w-9 h-9 bg-[#990202] rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm">
-                    <Check className="w-5 h-5 text-white" strokeWidth={3.5} />
-                  </div>
-                  <div>
-                    <div className="font-black text-[16px] text-gray-900 leading-tight">Transfer 3 Hari</div>
-                    <div className="text-[16px] text-gray-450 font-semibold mt-0.5">Setelah klien bayar</div>
-                  </div>
-                </div>
 
-                {/* 3. Floating Badge: Unlimited Income (Centered on Bottom Left corner) */}
-                <div className="absolute -bottom-8 -left-16 sm:-left-24 bg-white rounded-2xl p-3 shadow-[0_0_0_1px_rgba(0,0,0,0.03),_0_15px_35px_rgba(0,0,0,0.04)] flex items-center space-x-3 max-w-[190px] z-20 hover:scale-[1.02] transition-transform duration-300">
-                  <div className="w-9 h-9 bg-[#990202] rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm">
-                    <svg className="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                      <line x1="18" y1="20" x2="18" y2="10" />
-                      <line x1="12" y1="20" x2="12" y2="4" />
-                      <line x1="6" y1="20" x2="6" y2="14" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="font-black text-[16px] text-gray-900 leading-tight">Unlimited Income</div>
-                    <div className="text-[16px] text-gray-450 font-semibold mt-0.5">Tidak ada batas komisi</div>
-                  </div>
-                </div>
               </div>
             </div>
 

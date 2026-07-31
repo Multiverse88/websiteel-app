@@ -15,6 +15,7 @@ export interface BadanUsahaContent {
   heroBreadcrumbText: string;
   heroBadge: string;
   heroTitle: TitleSegment[];
+  titleClassName?: string;
   heroDescription: string;
   heroImage: string;
   heroImageAlt: string;
@@ -49,14 +50,14 @@ export interface BadanUsahaContent {
 
   // Pricing
   pricingTag: string;
-  pricingTitle: string;
+  pricingTitle: React.ReactNode;
   pricingSubtitle: string;
   pricingPackages: PricingPackage[];
   pricingFootnotes: FootnoteItem[];
 
   // Steps
   stepsTag: string;
-  stepsTitle: string;
+  stepsTitle: React.ReactNode;
   stepsSubtitle: string;
   steps: {
     no: string;
@@ -310,7 +311,7 @@ export const dataPT: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN PT",
-  stepsTitle: "7 langkah pembuatan PT, semua kami pandu.",
+  stepsTitle: <>7 langkah pembuatan PT<br />semua kami pandu.</>,
   stepsSubtitle:
     "Dari konsultasi awal sampai dokumen lengkap di tangan Anda — total estimasi 7–14 hari kerja, semua transparan di dashboard.",
   steps: [
@@ -418,7 +419,7 @@ const dataCV: BadanUsahaContent = {
   ],
 
   pricingTag: "BIAYA JASA PEMBUATAN CV",
-  pricingTitle: "Pilih paket pendirian CV sesuai kebutuhan.",
+  pricingTitle: <>Pilih paket pendirian CV<br />sesuai kebutuhan.</>,
   pricingSubtitle:
     "Harga sudah termasuk semua biaya — notaris, pendaftaran Pengadilan Negeri, NPWP, dan jasa kami. Tanpa biaya tersembunyi.",
   pricingPackages: [
@@ -566,11 +567,12 @@ const dataPMA: BadanUsahaContent = {
 
   heroBreadcrumbText: "Pendirian PT PMA",
   heroBadge: "Pendirian PT PMA",
+  titleClassName: "lg:text-[42px] xl:text-[46px]",
   heroTitle: [
     { text: "Ekspansi bisnis Anda " },
     { break: true },
-    { text: "ke Indonesia " },
-    { text: "dengan PT PMA", highlight: true },
+    { text: "ke Indonesia dengan " },
+    { text: "PT\u00A0PMA", highlight: true },
     { break: true },
     { text: "yang sesuai regulasi" },
   ],

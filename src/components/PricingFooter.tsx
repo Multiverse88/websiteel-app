@@ -40,7 +40,7 @@ export default function PricingFooter({ hidePromoCard = false }: { hidePromoCard
                 Menangkan iPhone &amp; Hadiah senilai Rp 12.000.000
               </h3>
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1.5 rounded-full mt-2 text-[16px] sm:text-[16px] font-bold tracking-wide shadow-sm text-left">
+                <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1.5 rounded-full mt-2 text-[12px] sm:text-[13px] font-bold tracking-wide shadow-sm text-left">
                   <Gift className="w-3.5 h-3.5 text-yellow-400 flex-shrink-0" strokeWidth={2.5} /> 
                   <span>Setiap pembuatan PT berkesempatan dapat iPhone</span>
                 </div>

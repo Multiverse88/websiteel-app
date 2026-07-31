@@ -691,7 +691,7 @@ export default function MerekHaki() {
 
       <Pricing hideFooter={true}
         sectionTitleTag="BIAYA JASA PENDAFTARAN MEREK"
-        sectionTitle="4 paket pendaftaran merek di DJKI."
+        sectionTitle={<span className="whitespace-nowrap">4 paket pendaftaran merek di DJKI.</span>}
         sectionSubtitle="Harga sudah include biaya resmi DJKI & jasa kami — tidak ada tambahan di tengah proses."
         packages={pricingPackages}
         footnotes={pricingFootnotes}

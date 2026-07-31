@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { sendEmail } from "@/lib/mail";
+import type { ContactWithEngagement } from "./types";
 
 export async function addContactAction(formData: FormData) {
   const email = formData.get("email") as string;
@@ -62,7 +63,9 @@ export async function createCampaignAction(formData: FormData) {
   const bodyHtml = formData.get("bodyHtml") as string;
   const scheduledAt = formData.get("scheduledAt") as string;
   const sendToAll = formData.get("sendToAll") === "on";
+  const contactIdsRaw = formData.get("contactIds") as string | null;
   const segments = formData.getAll("segments") as string[];
+  const selectedContactIds = contactIdsRaw ? JSON.parse(contactIdsRaw) as string[] : [];
   const internalName = formData.get("internalName") as string;
   const previewText = formData.get("previewText") as string;
   const isTemplate = formData.get("isTemplate") === "true";
@@ -80,7 +83,12 @@ export async function createCampaignAction(formData: FormData) {
   try {
     let activeContacts: any[] = [];
     
-    if (sendToAll) {
+    if (selectedContactIds.length > 0) {
+      activeContacts = await prisma.blastContact.findMany({
+        where: { id: { in: selectedContactIds }, isActive: true },
+        select: { id: true },
+      });
+    } else if (sendToAll) {
       activeContacts = await prisma.blastContact.findMany({
         where: { isActive: true },
         select: { id: true },
@@ -409,6 +417,107 @@ export async function saveEmailBlastTemplateAction(type: "header" | "footer", co
   } catch (error: any) {
     return { error: error.message };
   }
+}
+
+export async function getContactsWithEngagement(): Promise<ContactWithEngagement[]> {
+  const contacts = await prisma.blastContact.findMany({
+    where: { isActive: true },
+    select: { id: true, email: true, name: true, tags: true },
+  });
+
+  if (contacts.length === 0) return [];
+
+  const contactIds = contacts.map((c) => c.id);
+
+  const recipients = await prisma.campaignRecipient.groupBy({
+    by: ["contactId"],
+    where: { contactId: { in: contactIds } },
+    _count: { id: true },
+    _sum: { openCount: true },
+    _max: { openedAt: true, sentAt: true },
+    _avg: { openCount: true },
+  });
+
+  const recipientDetails = await prisma.campaignRecipient.findMany({
+    where: {
+      contactId: { in: contactIds },
+      status: "sent",
+    },
+    select: {
+      contactId: true,
+      openedAt: true,
+      openCount: true,
+      clickedAt: true,
+      bouncedAt: true,
+      sentAt: true,
+    },
+  });
+
+  const timingByContact = new Map<
+    string,
+    { hours: number[]; days: number[]; totalSent: number; totalBounced: number; totalOpened: number; totalClicked: number }
+  >();
+
+  for (const r of recipientDetails) {
+    if (!timingByContact.has(r.contactId)) {
+      timingByContact.set(r.contactId, { hours: [], days: [], totalSent: 0, totalBounced: 0, totalOpened: 0, totalClicked: 0 });
+    }
+    const t = timingByContact.get(r.contactId)!;
+    t.totalSent++;
+    if (r.bouncedAt) t.totalBounced++;
+    if (r.openedAt) {
+      t.totalOpened++;
+      t.hours.push(r.openedAt.getHours());
+      t.days.push(r.openedAt.getDay());
+    }
+    if (r.clickedAt) t.totalClicked++;
+  }
+
+  const groupMap = new Map(
+    recipients.map((r) => [
+      r.contactId,
+      {
+        totalCampaigns: r._count.id,
+        avgOpenCount: r._avg.openCount ?? 0,
+        lastOpenedAt: r._max.openedAt,
+        lastSentAt: r._max.sentAt,
+      },
+    ])
+  );
+
+  return contacts.map((c) => {
+    const g = groupMap.get(c.id);
+    const t = timingByContact.get(c.id);
+
+    let avgOpenHour: number | null = null;
+    let favoriteDayOfWeek: number | null = null;
+
+    if (t && t.hours.length > 0) {
+      avgOpenHour = Math.round(t.hours.reduce((a, b) => a + b, 0) / t.hours.length);
+
+      const dayCount = new Map<number, number>();
+      for (const d of t.days) dayCount.set(d, (dayCount.get(d) ?? 0) + 1);
+      favoriteDayOfWeek = [...dayCount.entries()].sort((a, b) => b[1] - a[1])[0][0];
+    }
+
+    return {
+      id: c.id,
+      email: c.email,
+      name: c.name,
+      tags: c.tags,
+      totalSent: g?.totalCampaigns ?? 0,
+      totalBounced: t?.totalBounced ?? 0,
+      totalCampaigns: g?.totalCampaigns ?? 0,
+      totalOpened: t?.totalOpened ?? 0,
+      totalClicked: t?.totalClicked ?? 0,
+      avgOpenCount: Math.round((g?.avgOpenCount ?? 0) * 100) / 100,
+      avgOpenHour,
+      favoriteDayOfWeek,
+      lastOpenedAt: g?.lastOpenedAt ?? null,
+      lastSentAt: g?.lastSentAt ?? null,
+      clickedNotOpened: (t?.totalClicked ?? 0) > 0 && (t?.totalOpened ?? 0) === 0,
+    };
+  });
 }
 
 export async function deleteCampaignAction(id: string) {

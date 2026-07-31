@@ -40,16 +40,16 @@ export function ArticleControls({
   const totalPages = Math.ceil(totalItems / pageSize) || 1;
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 px-6 bg-white border-b border-gray-100">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 px-5 bg-white border-b border-[var(--color-border)]">
       {/* Left: Controls */}
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 shadow-sm">
-          <Filter className="w-5 h-5 text-gray-500" />
-          <span className="text-[16px] font-semibold text-gray-700">Urutkan:</span>
+        <div className="flex items-center gap-2 bg-[#F8FAFC] border border-[var(--color-border)] rounded-[8px] px-4 py-2 shadow-subtle">
+          <Filter className="w-4 h-4 text-[var(--color-text-muted)]" />
+          <span className="text-[14px] font-semibold text-[var(--color-text-muted)]">Urutkan:</span>
           <select
             value={currentSort}
             onChange={handleSortChange}
-            className="bg-transparent border-none text-[16px] font-bold text-gray-900 focus:ring-0 cursor-pointer outline-none pr-8 py-1"
+            className="bg-transparent border-none text-[14px] font-semibold text-[var(--color-text-main)] focus:ring-0 cursor-pointer outline-none pr-6 py-1"
           >
             <option value="newest">Terbaru</option>
             <option value="oldest">Terlama</option>
@@ -58,12 +58,12 @@ export function ArticleControls({
           </select>
         </div>
 
-        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 shadow-sm">
-          <span className="text-[16px] font-semibold text-gray-700">Tampilkan:</span>
+        <div className="flex items-center gap-2 bg-[#F8FAFC] border border-[var(--color-border)] rounded-[8px] px-4 py-2 shadow-subtle">
+          <span className="text-[14px] font-semibold text-[var(--color-text-muted)]">Tampilkan:</span>
           <select
             value={pageSize.toString()}
             onChange={handlePageSizeChange}
-            className="bg-transparent border-none text-[16px] font-bold text-gray-900 focus:ring-0 cursor-pointer outline-none pr-8 py-1"
+            className="bg-transparent border-none text-[14px] font-semibold text-[var(--color-text-main)] focus:ring-0 cursor-pointer outline-none pr-6 py-1"
           >
             <option value="10">10</option>
             <option value="20">20</option>
@@ -73,27 +73,27 @@ export function ArticleControls({
       </div>
 
       {/* Right: Pagination Info & Buttons */}
-      <div className="flex items-center gap-5">
-        <div className="text-[16px] font-semibold text-gray-500">
-          Halaman <span className="text-gray-900">{currentPage}</span> dari{" "}
-          <span className="text-gray-900">{totalPages}</span>
+      <div className="flex items-center gap-4">
+        <div className="text-[14px] font-medium text-[var(--color-text-muted)]">
+          Halaman <span className="font-semibold text-[var(--color-text-main)]">{currentPage}</span> dari{" "}
+          <span className="font-semibold text-[var(--color-text-main)]">{totalPages}</span>
         </div>
         <div className="flex items-center gap-2">
           <button
             type="button"
             disabled={currentPage <= 1}
             onClick={() => handlePageChange(currentPage - 1)}
-            className="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+            className="w-10 h-10 flex items-center justify-center rounded-[8px] border border-[var(--color-border)] bg-white text-[var(--color-text-muted)] hover:bg-[#F8FAFC] hover:text-[var(--color-text-main)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-subtle"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             type="button"
             disabled={currentPage >= totalPages}
             onClick={() => handlePageChange(currentPage + 1)}
-            className="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+            className="w-10 h-10 flex items-center justify-center rounded-[8px] border border-[var(--color-border)] bg-white text-[var(--color-text-muted)] hover:bg-[#F8FAFC] hover:text-[var(--color-text-main)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-subtle"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>

@@ -140,9 +140,10 @@ function cleanArticleUrl(url: string, articleTitle: string): string {
 }
 
 interface Block {
-  type: "paragraph" | "heading" | "ul" | "ol" | "hr" | "image";
+  type: "paragraph" | "heading" | "ul" | "ol" | "hr" | "image" | "table";
   content?: string; // for single lines
   items?: string[]; // for lists
+  rows?: string[][]; // for tables
 }
 
 // Simple custom markdown renderer to ensure clean semantic HTML with premium styling
@@ -196,6 +197,22 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
       if (currentBlock) parsedBlocks.push(currentBlock);
       parsedBlocks.push({ type: "image", content: trimmed });
       currentBlock = null;
+      continue;
+    }
+
+    const isTable = trimmed.startsWith("|") && trimmed.endsWith("|") && trimmed.includes("|");
+    if (isTable) {
+      if (currentBlock && currentBlock.type !== "table") {
+        parsedBlocks.push(currentBlock);
+        currentBlock = null;
+      }
+      if (!currentBlock) {
+        currentBlock = { type: "table", rows: [] };
+      }
+      if (!/^\|\s*:?-+:?\s*\|/.test(trimmed)) {
+        const cells = trimmed.split("|").filter((_, i, arr) => i !== 0 && i !== arr.length - 1).map(c => c.trim());
+        currentBlock.rows!.push(cells);
+      }
       continue;
     }
 
@@ -324,6 +341,34 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
               );
             })}
           </ol>
+        );
+
+      case "table":
+        return (
+          <div key={idx} className="overflow-x-auto my-8">
+            <table className="w-full text-left border-collapse rounded-xl overflow-hidden shadow-sm border border-gray-200">
+              <thead className="bg-gray-50 border-b border-gray-200">
+                <tr>
+                  {block.rows![0]?.map((cell, cellIdx) => (
+                    <th key={cellIdx} className="py-3 px-4 font-bold text-[15px] text-gray-700 whitespace-nowrap border-r border-gray-100 last:border-0">
+                      {parseBoldText(cell, articleTitle)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 bg-white">
+                {block.rows!.slice(1).map((row, rowIdx) => (
+                  <tr key={rowIdx} className="hover:bg-gray-50/50 transition-colors">
+                    {row.map((cell, cellIdx) => (
+                      <td key={cellIdx} className="py-3 px-4 text-[15px] text-gray-600 border-r border-gray-50 last:border-0">
+                        {parseBoldText(cell, articleTitle)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         );
 
       case "paragraph":

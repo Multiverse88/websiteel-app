@@ -2,8 +2,8 @@
 
 import React, { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Link2, Loader2 } from "lucide-react";
 import { updateLink } from "./actions";
+import DashboardButton from "@/components/dashboard/ui/DashboardButton";
 
 export default function EditLinkForm({ id, slug: initialSlug, destination: initialDest }: { id: string; slug: string; destination: string }) {
   const router = useRouter();
@@ -76,17 +76,13 @@ export default function EditLinkForm({ id, slug: initialSlug, destination: initi
         />
       </div>
 
-      <button
+      <DashboardButton
         type="submit"
-        disabled={isPending}
-        className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[16px] shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:pointer-events-none"
+        loading={isPending}
+        className="w-full py-4 text-[16px] font-extrabold rounded-xl"
       >
-        {isPending ? (
-          <><Loader2 className="w-5 h-5 animate-spin" /><span>Menyimpan...</span></>
-        ) : (
-          <><Link2 className="w-5 h-5" /><span>Simpan Perubahan</span></>
-        )}
-      </button>
+        {isPending ? "Menyimpan..." : "Simpan Perubahan"}
+      </DashboardButton>
     </form>
   );
 }

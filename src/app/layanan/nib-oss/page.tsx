@@ -206,7 +206,7 @@ export default function NibOss() {
 
               {/* Headline */}
               <h1 className="font-heading text-[26px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
-                NIB & izin usaha resmi,<br />
+                NIB & izin usaha resmi<br />
                 <span className="text-[#990202]">cepat & lengkap.</span>
               </h1>
 

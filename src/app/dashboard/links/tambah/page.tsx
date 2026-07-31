@@ -3,8 +3,10 @@
 
 import React, { useState, useTransition } from "react";
 import Link from "next/link";
-import { ArrowLeft, Link2, Loader2, Check } from "lucide-react";
+import { Link2, Check } from "lucide-react";
 import { createLink } from "./actions";
+import DashboardHeader from "@/components/dashboard/ui/DashboardHeader";
+import DashboardButton from "@/components/dashboard/ui/DashboardButton";
 
 export default function TambahLinkPage() {
   const [isPending, startTransition] = useTransition();
@@ -53,9 +55,9 @@ export default function TambahLinkPage() {
 
   if (success) {
     return (
-      <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
+      <div className="flex flex-col min-h-screen bg-gray-50">
         <section className="flex-grow flex items-center justify-center">
-          <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-12 text-center max-w-md mx-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center max-w-md mx-6">
             <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">
               <Check className="w-8 h-8 text-emerald-600" />
             </div>
@@ -86,29 +88,18 @@ export default function TambahLinkPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAFAFA]">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       {/* HEADER */}
-      <section className="bg-white pt-8 lg:pt-12 pb-10 border-b border-gray-100">
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Link
-              href="/dashboard/links"
-              className="inline-flex items-center gap-1.5 text-[16px] font-bold text-gray-500 hover:text-[#990202] transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Redirect Links
-            </Link>
-          </div>
-          <h1 className="font-heading text-[30px] sm:text-[36px] font-extrabold text-gray-950 leading-tight tracking-tight">
-            Buat Redirect Link Baru
-          </h1>
-        </div>
-      </section>
+      <DashboardHeader
+        title="Buat Redirect Link Baru"
+        description="Buat link redirect baru"
+        backHref="/dashboard/links"
+      />
 
       {/* FORM */}
       <section className="py-10 flex-grow">
         <div className="max-w-[640px] mx-auto px-6 sm:px-8">
-          <div className="bg-white rounded-2xl shadow-md border border-black/[0.04] p-6 sm:p-8">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sm:p-8">
             {error && (
               <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-[16px] text-[#990202] font-semibold">
                 {error}
@@ -154,23 +145,13 @@ export default function TambahLinkPage() {
               </div>
 
               {/* Submit */}
-              <button
+              <DashboardButton
                 type="submit"
-                disabled={isPending}
-                className="w-full bg-[#990202] hover:bg-[#800000] text-white font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 text-[16px] shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:pointer-events-none"
+                loading={isPending}
+                className="w-full py-4 text-[16px] font-extrabold rounded-xl"
               >
-                {isPending ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Menyimpan...</span>
-                  </>
-                ) : (
-                  <>
-                    <Link2 className="w-5 h-5" />
-                    <span>Buat Redirect Link</span>
-                  </>
-                )}
-              </button>
+                {isPending ? "Menyimpan..." : "Buat Redirect Link"}
+              </DashboardButton>
             </form>
           </div>
         </div>
