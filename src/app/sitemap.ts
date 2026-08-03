@@ -1,5 +1,4 @@
 import { MetadataRoute } from "next";
-import { prisma } from "@/lib/db";
 
 const BASE_URL = "https://easylegal.my.id";
 
@@ -94,26 +93,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Article pages from database
+  // Article pages from API
   let articlePages: MetadataRoute.Sitemap = [];
   try {
-    const articles = await prisma.article.findMany({
-      select: {
-        slug: true,
-        updatedAt: true,
-      },
-      orderBy: { updatedAt: "desc" },
-    });
-
-    articlePages = articles.map((article) => ({
-      url: `${BASE_URL}/artikel/${article.slug}`,
-      lastModified: article.updatedAt,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    }));
-  } catch {
-    // If database is not available, return static pages only
-    console.warn("Failed to fetch articles for sitemap");
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/sitemap/all`;
+    const res = await fetch(apiUrl, { next: { revalidate: 3600 } });
+    
+    if (res.ok) {
+      const json = await res.json();
+      articlePages = json.data.map((article: any) => ({
+        url: `${BASE_URL}/artikel/${article.slug}`,
+        lastModified: new Date(article.updatedAt),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      }));
+    } else {
+      console.warn("Failed to fetch articles for sitemap, status:", res.status);
+    }
+  } catch (error) {
+    // If API is not available, return static pages only
+    console.warn("Failed to fetch articles for sitemap", error);
   }
 
   return [...staticPages, ...servicePages, ...articlePages];
