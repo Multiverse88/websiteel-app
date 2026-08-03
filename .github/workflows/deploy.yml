@@ -3,25 +3,13 @@ on:
   push:
     branches: [main]
 jobs:
-  test-ssh:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DOKKU_SSH_KEY }}" > ~/.ssh/id_main
-          chmod 600 ~/.ssh/id_main
-          ssh-keyscan -H ${{ secrets.DOKKU_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
-
-      - name: Test SSH connection
-        run: |
-          echo "Testing SSH to ${{ secrets.DOKKU_HOST }}"
-          ssh -i ~/.ssh/id_main -o StrictHostKeyChecking=no dokku@${{ secrets.DOKKU_HOST }} "apps:list" 2>&1
-
-      - name: Deploy to Dokku
-        uses: dokku/github-action@v1
+      - uses: dokku/github-action@v1
         with:
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           ssh_host: ${{ secrets.DOKKU_HOST }}
           git_remote_url: ssh://dokku@${{ secrets.DOKKU_HOST }}/easylegal
+          command: deploy
           trace: "true"
