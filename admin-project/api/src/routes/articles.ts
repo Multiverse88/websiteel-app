@@ -75,6 +75,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET /api/v1/articles/sitemap/all
+router.get("/sitemap/all", async (req, res) => {
+  try {
+    const articles = await prisma.article.findMany({
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+      orderBy: { updatedAt: "desc" },
+    });
+    res.json({ data: articles });
+  } catch (error) {
+    console.error("Error fetching articles for sitemap:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // GET /api/v1/articles/:slug
 router.get("/:slug", async (req, res) => {
   try {
