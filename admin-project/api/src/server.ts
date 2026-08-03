@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth';
 import articleRoutes from './routes/articles';
 import landingPageRoutes from './routes/landing-pages';
+import contactRoutes from './routes/contacts';
+import redirectRoutes from './routes/redirects';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -22,6 +24,8 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/v1/articles', articleRoutes);
 app.use('/api/v1/landing-pages', landingPageRoutes);
+app.use('/api/v1/contacts', contactRoutes);
+app.use('/api/v1/redirects', redirectRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
