@@ -3,16 +3,25 @@ on:
   push:
     branches: [main]
 jobs:
-  deploy:
+  test-ssh:
     runs-on: ubuntu-latest
     steps:
-      - name: SSH test
-        uses: appleboy/ssh-action@v1.7.0
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DOKKU_SSH_KEY }}" > ~/.ssh/id_main
+          chmod 600 ~/.ssh/id_main
+          ssh-keyscan -H ${{ secrets.DOKKU_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Test SSH connection
+        run: |
+          echo "Testing SSH to ${{ secrets.DOKKU_HOST }}"
+          ssh -i ~/.ssh/id_main -o StrictHostKeyChecking=no dokku@${{ secrets.DOKKU_HOST }} "apps:list" 2>&1
+
+      - name: Deploy to Dokku
+        uses: dokku/github-action@v1
         with:
-          host: ${{ secrets.DOKKU_HOST }}
-          username: dokku
-          key: ${{ secrets.DOKKU_SSH_KEY }}
-          envs: TEST
-          script: |
-            echo "SSH connected OK"
-            echo "Running: git-receive-pack"
+          ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
+          ssh_host: ${{ secrets.DOKKU_HOST }}
+          git_remote_url: ssh://dokku@${{ secrets.DOKKU_HOST }}/easylegal
+          trace: "true"
