@@ -6,10 +6,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: dokku/github-action@v1
         with:
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
-          ssh_host_key: "157.10.252.77 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHwrChL78Hb1eqF9OhinjEQTzdxeJr6mtcSYxl3G2tQloYideB51RGT8avCk/NR4ENbT7FfSczZgyOvALQXGJWI="
+          ssh_host_key: ${{ secrets.DOKKU_HOST }}
           git_remote_url: ssh://dokku@${{ secrets.DOKKU_HOST }}/easylegal
           command: deploy
           branch: main
