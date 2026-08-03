@@ -1,6 +1,5 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { prisma } from '@/lib/db';
 import SectionRenderer from '@/components/landing-page/SectionRenderer';
 import { SectionData } from '@/types/landing-page';
 
@@ -11,9 +10,17 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const page = await prisma.landingPage.findUnique({
-    where: { slug, status: 'published' }
-  });
+  let page = null;
+  try {
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/landing-pages/${slug}`;
+    const res = await fetch(apiUrl, { next: { revalidate: 60 } });
+    if (res.ok) {
+      const json = await res.json();
+      page = json.data;
+    }
+  } catch (e) {
+    console.error("Error fetching landing page for metadata:", e);
+  }
 
   if (!page) {
     return { title: 'Halaman Tidak Ditemukan' };
@@ -32,9 +39,17 @@ export default async function LandingPage({ params }: PageProps) {
   const { slug } = await params;
   
   // Hanya render page yang sudah di-publish
-  const page = await prisma.landingPage.findUnique({
-    where: { slug, status: 'published' }
-  });
+  let page = null;
+  try {
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/landing-pages/${slug}`;
+    const res = await fetch(apiUrl, { next: { revalidate: 60 } });
+    if (res.ok) {
+      const json = await res.json();
+      page = json.data;
+    }
+  } catch (e) {
+    console.error("Error fetching landing page:", e);
+  }
 
   if (!page) {
     notFound();
