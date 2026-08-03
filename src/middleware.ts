@@ -10,23 +10,17 @@ export async function middleware(request: NextRequest) {
 
     if (slug) {
       try {
-        // Dynamic import — PrismaClient is Node-only, can't be top-level import in Edge runtime
-        const { prisma } = await import("@/lib/db");
-        const redirect = await prisma.redirect.findUnique({
-          where: { slug },
-          select: { destination: true },
-        });
-
-        if (redirect) {
-          // Fire-and-forget click count — don't block response
-          prisma.redirect
-            .update({ where: { slug }, data: { clicks: { increment: 1 } } })
-            .catch(() => {});
-
-          return NextResponse.redirect(redirect.destination);
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/redirects/${slug}`;
+        const res = await fetch(apiUrl);
+        
+        if (res.ok) {
+          const json = await res.json();
+          if (json.data && json.data.destination) {
+            return NextResponse.redirect(json.data.destination);
+          }
         }
       } catch {
-        // DB or Edge runtime reject — fall through, site keeps working
+        // API error or network issue — fall through, site keeps working
       }
     }
   }
