@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { prisma } from "@/lib/db";
 import { Calendar, Clock, Home, Tag } from "lucide-react";
 import SocialShare from "@/components/SocialShare";
 import NewsletterWidget from "@/components/NewsletterWidget";
@@ -48,23 +47,23 @@ type Props = {
 };
 
 async function getArticle(slug: string) {
-  return prisma.article.findUnique({
-    where: { slug },
-    select: {
-      id: true,
-      title: true,
-      excerpt: true,
-      content: true,
-      coverImage: true,
-      category: true,
-      readTime: true,
-      slug: true,
-      createdAt: true,
-      author: {
-        select: { name: true, avatar: true, bio: true, role: true }
-      }
-    }
-  });
+  try {
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/${slug}`;
+    const res = await fetch(apiUrl, { next: { revalidate: 60 } });
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (!json.data) return null;
+    
+    // Parse dates to string/Date appropriately since they come from JSON
+    const article = json.data;
+    article.createdAt = new Date(article.createdAt);
+    if (article.updatedAt) article.updatedAt = new Date(article.updatedAt);
+    
+    return article;
+  } catch (e) {
+    console.error("Error fetching article by slug:", e);
+    return null;
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -590,15 +589,21 @@ export default async function ArtikelDetailPage({ params }: Props) {
     .filter(w => w.length >= 4 && !STOPWORDS.has(w));
 
   // Ambil semua artikel kandidat (same category + recent lainnya), lalu score
-  const candidatePool = await prisma.article.findMany({
-    where: { slug: { not: article.slug } },
-    orderBy: { createdAt: "desc" },
-    take: 60,
-    select: { id: true, title: true, slug: true, coverImage: true, category: true, readTime: true }
-  });
+  // Fetch candidate pool via API
+  let candidatePool: any[] = [];
+  try {
+    const poolUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles?limit=60`;
+    const res = await fetch(poolUrl, { next: { revalidate: 60 } });
+    if (res.ok) {
+      const json = await res.json();
+      candidatePool = json.data.filter((a: any) => a.slug !== article.slug);
+    }
+  } catch (e) {
+    console.error("Error fetching candidate pool:", e);
+  }
 
   // Scoring: +3 per keyword match di judul, +2 jika same category
-  const scored = candidatePool.map(a => {
+  const scored = candidatePool.map((a: any) => {
     const titleLower = a.title.toLowerCase();
     const keywordScore = titleKeywords.filter(kw => titleLower.includes(kw)).length * 3;
     const categoryScore = a.category === article.category ? 2 : 0;

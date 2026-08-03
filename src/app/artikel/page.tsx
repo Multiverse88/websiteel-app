@@ -1,9 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { prisma } from "@/lib/db";
-import type { Article } from "@prisma/client";
 import { Clock, BookOpen, Home, Search, X, ChevronDown } from "lucide-react";
+
+interface Article {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  coverImage: string;
+  category: string;
+  readTime: string;
+  viewCount: number;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+}
 
 export const revalidate = 60;
 
@@ -184,10 +196,28 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
   const activeCategory = resolvedSearchParams.category || "All";
   const limit = resolvedSearchParams.limit ? parseInt(resolvedSearchParams.limit, 10) : 7;
 
-  // Fetch all articles to dynamically build category counts
-  const allArticlesForCounting = await prisma.article.findMany({
-    select: { category: true },
-  });
+  // Fetch articles from our new Express API
+  const apiUrl = new URL(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles`);
+  if (q) apiUrl.searchParams.set("q", q);
+  if (activeCategory !== "All") apiUrl.searchParams.set("category", activeCategory);
+  apiUrl.searchParams.set("limit", limit.toString());
+  apiUrl.searchParams.set("includeCounts", "true");
+
+  let articles: Article[] = [];
+  let totalMatchingCount = 0;
+  let allArticlesForCounting: { category: string }[] = [];
+
+  try {
+    const res = await fetch(apiUrl.toString(), { next: { revalidate: 60 } });
+    if (res.ok) {
+      const data = await res.json();
+      articles = data.data;
+      totalMatchingCount = data.meta.totalMatchingCount;
+      allArticlesForCounting = data.meta.allCategories || [];
+    }
+  } catch (error) {
+    console.error("Error fetching articles:", error);
+  }
 
   // Standard categories to display in order
   const displayCategories = ["All", "Pendirian Usaha", "Pajak", "Haki", "ISO", "Perizinan", "NIB", "Branding"];
@@ -217,42 +247,6 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
     if (!finalCategories.includes(cat)) {
       finalCategories.push(cat);
     }
-  });
-
-  // Build Prisma query filter for active view
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const whereClause: Record<string, any> = {};
-
-  if (q) {
-    whereClause.OR = [
-      { title: { contains: q, mode: "insensitive" } },
-      { excerpt: { contains: q, mode: "insensitive" } },
-      { category: { contains: q, mode: "insensitive" } },
-      { content: { contains: q, mode: "insensitive" } },
-    ];
-  }
-
-  if (activeCategory !== "All") {
-    const dbCategories = DB_CATEGORIES_MAP[activeCategory];
-    if (dbCategories) {
-      whereClause.category = { in: dbCategories };
-    } else {
-      whereClause.category = { equals: activeCategory, mode: "insensitive" };
-    }
-  }
-
-  // Get total matching count before applying limit
-  const totalMatchingCount = await prisma.article.count({
-    where: whereClause,
-  });
-
-  // Fetch articles up to current limit
-  const articles = await prisma.article.findMany({
-    where: whereClause,
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: limit,
   });
 
   // Split featured and regular articles
