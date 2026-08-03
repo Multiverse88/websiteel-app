@@ -1,6 +1,5 @@
 "use server";
 
-import { prisma } from "@/lib/db";
 import { sendEmail } from "@/lib/mail";
 import { trackMetric } from "@/lib/metrics";
 
@@ -39,16 +38,23 @@ export async function submitContactForm(prevState: Record<string, unknown> | nul
   }
 
   try {
-    await prisma.contactSubmission.create({
-      data: {
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/contacts`;
+    const res = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         name: name.trim(),
         businessName: businessName?.trim() || null,
         email: email.trim(),
         whatsapp: whatsapp.trim(),
         topic,
         message: message.trim(),
-      },
+      }),
     });
+    
+    if (!res.ok) {
+      throw new Error("Failed to save contact submission to API");
+    }
 
     const adminEmail = process.env.SMTP_FROM || "info@easylegal.id";
     const subject = `[EasyLegal] Pesan Baru: ${topic}`;
