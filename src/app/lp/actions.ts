@@ -1,7 +1,5 @@
 "use server";
 
-import { prisma } from "@/lib/db";
-
 interface SubmitLeadInput {
   landingPageId: string;
   name: string;
@@ -12,45 +10,27 @@ interface SubmitLeadInput {
 }
 
 export async function submitLandingPageLead(input: SubmitLeadInput) {
-  const { landingPageId, name, phone, email, company, utmParams } = input;
+  const { landingPageId, name, phone } = input;
 
   if (!landingPageId || !name || !phone) {
     return { success: false, error: "Nama dan Nomor WhatsApp wajib diisi." };
   }
 
   try {
-    // 1. Save lead to database
-    const lead = await prisma.landingPageLead.create({
-      data: {
-        landingPageId,
-        name,
-        phone,
-        email: email || null,
-        data: {
-          company: company || null,
-          utm: utmParams || {},
-        },
-      },
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/landing-pages/leads`;
+    const res = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
     });
 
-    // 2. Fetch landing page redirect settings
-    const lp = await prisma.landingPage.findUnique({
-      where: { id: landingPageId },
-      select: { redirectSettings: true }
-    });
-
-    let redirectSettings = null;
-    if (lp?.redirectSettings) {
-      redirectSettings = typeof lp.redirectSettings === "string" 
-        ? JSON.parse(lp.redirectSettings) 
-        : lp.redirectSettings;
+    if (!res.ok) {
+      const errorData = await res.json();
+      return { success: false, error: errorData.error || "Terjadi kesalahan pada server. Silakan coba lagi." };
     }
 
-    return { 
-      success: true, 
-      leadId: lead.id,
-      redirectSettings 
-    };
+    const data = await res.json();
+    return data;
   } catch (error: unknown) {
     console.error("Failed to submit landing page lead:", error);
     return { success: false, error: "Terjadi kesalahan pada server. Silakan coba lagi." };
