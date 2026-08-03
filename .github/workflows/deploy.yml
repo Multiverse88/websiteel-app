@@ -1,0 +1,18 @@
+name: Deploy to Dokku
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Dokku
+        uses: dokku/github-action@v21
+        with:
+          ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
+          ssh_host: ${{ secrets.DOKKU_HOST }}
+          ssh_user: ${{ secrets.DOKKU_USER }}
+          app: easylegal
