@@ -1,6 +1,5 @@
 "use server";
 
-import { prisma } from "@/lib/db";
 import { trackMetric } from "@/lib/metrics";
 
 export async function subscribeNewsletter(email: string) {
@@ -9,33 +8,20 @@ export async function subscribeNewsletter(email: string) {
   }
 
   try {
-    // Check if already subscribed
-    const existing = await prisma.newsletterSubscriber.findUnique({
-      where: { email: email.toLowerCase().trim() },
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/newsletter/subscribe`;
+    const res = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
     });
-
-    if (existing) {
-      if (existing.isActive) {
-        return { success: false, error: "Email sudah terdaftar." };
-      }
-      // Re-activate if previously unsubscribed
-      await prisma.newsletterSubscriber.update({
-        where: { email: email.toLowerCase().trim() },
-        data: { isActive: true },
-      });
-      trackMetric("newsletter_subscribe", 1, { type: "reactivate" });
-      return { success: true, message: "Selamat datang kembali! Email berhasil diaktifkan ulang." };
+    
+    const data = await res.json();
+    
+    if (res.ok && data.success) {
+      trackMetric("newsletter_subscribe", 1, { type: data.type || "new" });
     }
-
-    // Create new subscriber
-    await prisma.newsletterSubscriber.create({
-      data: {
-        email: email.toLowerCase().trim(),
-      },
-    });
-
-    trackMetric("newsletter_subscribe", 1, { type: "new" });
-    return { success: true, message: "Berhasil terdaftar! Anda akan menerima update artikel terbaru." };
+    
+    return data;
   } catch (error) {
     console.error("Newsletter subscribe error:", error);
     return { success: false, error: "Terjadi kesalahan. Silakan coba lagi." };
@@ -48,11 +34,14 @@ export async function unsubscribeNewsletter(email: string) {
   }
 
   try {
-    await prisma.newsletterSubscriber.update({
-      where: { email: email.toLowerCase().trim() },
-      data: { isActive: false },
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/newsletter/unsubscribe`;
+    const res = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
     });
-    return { success: true, message: "Berhasil unsubscribe." };
+    
+    return await res.json();
   } catch {
     return { success: false, error: "Email tidak ditemukan." };
   }
