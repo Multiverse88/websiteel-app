@@ -7,5 +7,10 @@ export default defineConfig({
   base: '/dashboard/',
   server: {
     port: 5173
+  },
+  build: {
+    rollupOptions: {
+      input: './index.html'
+    }
   }
 })
