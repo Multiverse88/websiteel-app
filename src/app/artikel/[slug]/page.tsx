@@ -586,7 +586,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
-    .filter(w => w.length >= 4 && !STOPWORDS.has(w));
+    .filter((w: string) => w.length >= 4 && !STOPWORDS.has(w));
 
   // Ambil semua artikel kandidat (same category + recent lainnya), lalu score
   // Fetch candidate pool via API
@@ -605,7 +605,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
   // Scoring: +3 per keyword match di judul, +2 jika same category
   const scored = candidatePool.map((a: any) => {
     const titleLower = a.title.toLowerCase();
-    const keywordScore = titleKeywords.filter(kw => titleLower.includes(kw)).length * 3;
+    const keywordScore = titleKeywords.filter((kw: string) => titleLower.includes(kw)).length * 3;
     const categoryScore = a.category === article.category ? 2 : 0;
     return { ...a, score: keywordScore + categoryScore };
   });
