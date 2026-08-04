@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type ReactNode } from 'react'
 import { AuthProvider, useAuth } from './lib/auth'
 import Layout from './components/Layout'
 import Login from './pages/Login'
@@ -31,7 +31,7 @@ function Router() {
 
   const route = hash.replace('#', '') || '/dashboard'
 
-  const pages: Record<string, JSX.Element> = {
+  const pages: Record<string, ReactNode> = {
     '/dashboard': <Dashboard />,
     '/articles': <Articles />,
     '/contacts': <Contacts />,
