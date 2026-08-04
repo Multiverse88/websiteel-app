@@ -16,7 +16,6 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@gsap/react": "^2.1.2",
-    "@prisma/client": "^6.19.3",
     "@sentry/nextjs": "^10.62.0",
     "@tiptap/extension-image": "^3.29.1",
     "@tiptap/pm": "^3.29.1",
@@ -28,7 +27,6 @@
     "jose": "^6.2.3",
     "lucide-react": "^1.16.0",
     "next": "^16.2.9",
-    "nodemailer": "^9.0.1",
     "otplib": "^13.4.0",
     "papaparse": "^5.5.4",
     "qrcode": "^1.5.4",
@@ -51,7 +49,6 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "knip": "^6.26.0",
-    "prisma": "^6.19.3",
     "tailwindcss": "^4",
     "tsx": "^4.22.3",
     "typescript": "^5.9.3"

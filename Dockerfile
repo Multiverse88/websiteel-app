@@ -4,12 +4,8 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 
-# Install openssl (needed by Prisma)
-RUN apk add --no-cache openssl
-
-# Copy package files + prisma schema (needed by postinstall: prisma generate)
+# Copy package files
 COPY package.json package-lock.json ./
-COPY prisma/schema.prisma ./prisma/schema.prisma
 RUN npm ci
 
 # ============================================
@@ -18,22 +14,17 @@ RUN npm ci
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Install openssl
-RUN apk add --no-cache openssl
-
 # Build-time env vars for NEXT_PUBLIC_* variables
 ARG NEXT_PUBLIC_TYPEBOT_BOT_ID
 ENV NEXT_PUBLIC_TYPEBOT_BOT_ID=${NEXT_PUBLIC_TYPEBOT_BOT_ID}
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build Next.js (skip prisma migrate deploy - hanya jalan saat container start)
+# Build Next.js
 RUN npx next build
-
-# Compile typescript seed script to Javascript
-RUN npx tsc prisma/seed.ts --module commonjs --target es2020 --moduleResolution node --skipLibCheck --outDir prisma/
-
 
 # ============================================
 # Stage 3: Production
@@ -44,21 +35,16 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN apk add --no-cache openssl
-
 # Copy necessary files
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=builder /app/scripts ./scripts
+COPY --from=builder /app/node_modules ./node_modules
 
 # Create uploads directory
 RUN mkdir -p public/uploads/articles public/uploads/avatars
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npx prisma@6.19.3 migrate deploy && node scripts/sync-images.js && node server.js"]
-
+CMD ["sh", "-c", "node scripts/sync-images.js && node server.js"]
