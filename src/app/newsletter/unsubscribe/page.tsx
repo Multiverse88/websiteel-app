@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Home, MailX, CheckCircle2, AlertTriangle } from "lucide-react";
-import { prisma } from "@/lib/db";
+
 import { unsubscribeNewsletter } from "../actions";
 
 type Props = {
@@ -15,15 +15,19 @@ export default async function UnsubscribePage({ searchParams }: Props) {
 
   if (email) {
     try {
-      const subscriber = await prisma.newsletterSubscriber.findUnique({
-        where: { email: email.toLowerCase().trim() },
-      });
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/newsletter/subscriber/${encodeURIComponent(email)}`;
+      const res = await fetch(apiUrl);
 
-      if (subscriber) {
-        if (unsubscribed === "true") {
-          status = "success";
+      if (res.ok) {
+        const json = await res.json();
+        if (json.data) {
+          if (unsubscribed === "true") {
+            status = "success";
+          } else {
+            status = "confirm";
+          }
         } else {
-          status = "confirm";
+          status = "not-found";
         }
       } else {
         status = "not-found";

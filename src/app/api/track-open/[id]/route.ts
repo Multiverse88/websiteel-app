@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
+
 import { headers } from "next/headers";
 
 export async function GET(
@@ -11,20 +11,12 @@ export async function GET(
   const userAgent = headersList.get("user-agent") || "Unknown Device";
 
   try {
-    const recipient = await prisma.campaignRecipient.findUnique({
-      where: { id },
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/tracking/open/${id}`;
+    await fetch(apiUrl, {
+      headers: {
+        "User-Agent": userAgent
+      }
     });
-
-    if (recipient) {
-      await prisma.campaignRecipient.update({
-        where: { id },
-        data: {
-          openedAt: recipient.openedAt || new Date(),
-          openCount: { increment: 1 },
-          device: recipient.device || userAgent, // Only store the first detected device
-        },
-      });
-    }
   } catch (error) {
     // Silently fail to not break the pixel rendering
     console.error("Tracking pixel error:", error);
