@@ -1,6 +1,39 @@
 services:
   # ============================================
-  # Next.js Application
+  # Express API (Admin)
+  # ============================================
+  admin-api:
+    build:
+      context: ./admin-project/api
+      dockerfile: Dockerfile
+    container_name: easylegal-admin-api
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - MINIO_ENDPOINT=http://host.docker.internal:9000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - easylegal
+    ports:
+      - "4000:4000"
+
+  # ============================================
+  # Vite Dashboard (Admin)
+  # ============================================
+  admin-dashboard:
+    build:
+      context: ./admin-project/dashboard
+      dockerfile: Dockerfile
+    container_name: easylegal-admin-dashboard
+    restart: unless-stopped
+    networks:
+      - easylegal
+
+  # ============================================
+  # Next.js Application (Public Site)
   # ============================================
   app:
     build:
@@ -8,6 +41,7 @@ services:
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_TYPEBOT_BOT_ID=easylegal-assistant
+        - NEXT_PUBLIC_API_URL=https://easylegal.my.id
     container_name: easylegal-app
     restart: unless-stopped
     env_file:
@@ -15,6 +49,7 @@ services:
     environment:
       - HOSTNAME=0.0.0.0
       - MINIO_ENDPOINT=http://host.docker.internal:9000
+      - NEXT_PUBLIC_API_URL=https://easylegal.my.id
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
