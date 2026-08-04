@@ -91,7 +91,7 @@ router.post("/process-queue", async (req, res) => {
     let failCount = 0;
 
     // Update campaigns status safely
-    const campaignsToProcess = Array.from(new Set(pendingRecipients.map(r => r.campaignId)));
+    const campaignsToProcess = Array.from(new Set(pendingRecipients.map((r: any) => r.campaignId)));
     for (const cid of campaignsToProcess) {
       await prisma.emailCampaign.updateMany({
         where: { id: cid, status: "scheduled" },
@@ -100,7 +100,7 @@ router.post("/process-queue", async (req, res) => {
     }
 
     // Process them concurrently
-    await Promise.all(pendingRecipients.map(async (recipient) => {
+    await Promise.all(pendingRecipients.map(async (recipient: any) => {
       const campaign = recipient.campaign;
       const contact = recipient.contact;
 
@@ -116,7 +116,7 @@ router.post("/process-queue", async (req, res) => {
       const pixelUrl = `https://easylegal.my.id/api/track-open/${recipient.id}`;
       finalHtml += `<img src="${pixelUrl}" width="1" height="1" alt="" style="display:none;" />`;
 
-      finalHtml = finalHtml.replace(/href="([^"]+)"/g, (match, url) => {
+      finalHtml = finalHtml.replace(/href="([^"]+)"/g, (match: string, url: string) => {
         if (url.startsWith("mailto:") || url.startsWith("tel:") || url.startsWith("#")) {
           return match;
         }
@@ -157,7 +157,7 @@ router.post("/process-queue", async (req, res) => {
     }));
 
     // Check if campaign is completed
-    const campaignsToComplete = Array.from(new Set(pendingRecipients.map(r => r.campaignId)));
+    const campaignsToComplete = Array.from(new Set(pendingRecipients.map((r: any) => r.campaignId)));
     for (const cid of campaignsToComplete) {
       const pendingLeft = await prisma.campaignRecipient.count({
         where: { campaignId: cid, status: "pending" }
