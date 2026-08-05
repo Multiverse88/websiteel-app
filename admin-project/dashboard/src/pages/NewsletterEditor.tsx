@@ -65,6 +65,9 @@ export default function NewsletterEditor() {
   // Form states for Live Preview
   const [subject, setSubject] = useState("");
   const [segment, setSegment] = useState("all");
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("Legalitas PT");
+  const [readTime, setReadTime] = useState("5 menit baca");
   
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
@@ -196,7 +199,7 @@ export default function NewsletterEditor() {
     return { checks, percentage, status, statusColor, bgIconColor, bgCardColor };
   };
 
-  const seoData = analyzeSEO();
+  const _seoData = analyzeSEO();
 
   useEffect(() => {
     if (editorRef.current && !editorRef.current.innerHTML) {
@@ -489,7 +492,7 @@ export default function NewsletterEditor() {
     setCoverPreview(coverUrl);
   };
 
-  const getPreviewImage = () => {
+  const _getPreviewImage = () => {
     if (coverMode === "upload" && coverFile) return coverPreview;
     return coverUrl || IMAGE_PRESETS[0].url;
   };
@@ -1275,7 +1278,8 @@ export default function NewsletterEditor() {
 }
 
 // Simple custom markdown renderer to ensure clean semantic HTML with premium styling
-function renderMarkdownContent(text: string) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function _renderMarkdownContent(text: string) {
   const blocks = text.split("\n\n");
   let headingCounter = 0;
 

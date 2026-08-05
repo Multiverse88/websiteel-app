@@ -9,5 +9,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "exclude": ["prisma"]
+  "exclude": ["prisma", "test-db.ts", "test-smtp.ts", "seed-smtp.ts"]
 }
