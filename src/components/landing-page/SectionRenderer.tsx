@@ -6,6 +6,9 @@ import FeaturesSection from './sections/FeaturesSection';
 import TestimonialsSection from './sections/TestimonialsSection';
 import LeadFormSection from './sections/LeadFormSection';
 import RichTextSection from './sections/RichTextSection';
+import PromoCardsSection from './sections/PromoCardsSection';
+import MarketplaceTrustSection from './sections/MarketplaceTrustSection';
+import BottomPromoSection from './sections/BottomPromoSection';
 
 interface Props {
   section: SectionData;
@@ -13,20 +16,30 @@ interface Props {
 }
 
 export default function SectionRenderer({ section, landingPageId }: Props) {
-  switch (section.type) {
+  const type = (section.type || '').toLowerCase();
+  const anySection = section as any;
+
+  switch (type) {
     case 'hero':
-      return <HeroSection data={section} />;
+      return <HeroSection data={anySection} />;
     case 'banner':
-      return <BannerSection data={section} />;
+      return <BannerSection data={anySection} />;
     case 'features':
-      return <FeaturesSection data={section} />;
+      return <FeaturesSection data={anySection} />;
     case 'testimonials':
-      return <TestimonialsSection data={section} />;
-    case 'leadForm':
-      return <LeadFormSection data={section} landingPageId={landingPageId} />;
-    case 'richText':
-      return <RichTextSection data={section} />;
+      return <TestimonialsSection data={anySection} />;
+    case 'leadform':
+      return <LeadFormSection data={anySection} landingPageId={landingPageId} />;
+    case 'richtext':
+    case 'text':
+      return <RichTextSection data={anySection} />;
+    case 'promocards':
+      return <PromoCardsSection data={anySection} />;
+    case 'marketplacetrust':
+      return <MarketplaceTrustSection data={anySection} />;
+    case 'bottompromo':
+      return <BottomPromoSection data={anySection} />;
     default:
-      return <div>Unknown section type</div>;
+      return null;
   }
 }
