@@ -54,9 +54,63 @@ export type LeadFormSectionData = {
 };
 
 export type RichTextSectionData = {
-  type: "richText";
-  id: string;
-  html: string;
+  type: "richText" | "text";
+  id?: string;
+  html?: string;
+  content?: any;
+};
+
+export type PromoCardsSectionData = {
+  type: "promoCards" | "PromoCards";
+  id?: string;
+  content?: any;
+  card1Tag?: string;
+  card1Title?: string;
+  card1Desc?: string;
+  card1Icon?: string;
+  card2Tag?: string;
+  card2Title?: string;
+  card2Badge?: string;
+  card2Image?: string;
+};
+
+export type MarketplaceTrustSectionData = {
+  type: "marketplaceTrust" | "MarketplaceTrust";
+  id?: string;
+  content?: any;
+  headline?: string;
+  marketplaceName?: string;
+  marketplaceLogo?: string;
+  image?: string;
+  description?: string;
+  buttonText?: string;
+  buttonLink?: string;
+};
+
+export type BottomPromoSectionData = {
+  type: "bottomPromo" | "BottomPromo";
+  id?: string;
+  content?: any;
+  card1Tag?: string;
+  card1Title?: string;
+  card1Desc?: string;
+  card2Tag?: string;
+  card2Title?: string;
+  card2Badge?: string;
+  card2Image?: string;
+  marketplaceTitle?: string;
+  marketplaceLogo?: string;
+  marketplaceImage?: string;
+  marketplaceDesc?: string;
+  marketplaceLink?: string;
+};
+
+export type GenericSectionData = {
+  type: string;
+  id?: string;
+  content?: Record<string, any>;
+  styles?: Record<string, any>;
+  [key: string]: any;
 };
 
 export type SectionData =
@@ -65,4 +119,8 @@ export type SectionData =
   | FeaturesSectionData
   | TestimonialsSectionData
   | LeadFormSectionData
-  | RichTextSectionData;
+  | RichTextSectionData
+  | PromoCardsSectionData
+  | MarketplaceTrustSectionData
+  | BottomPromoSectionData
+  | GenericSectionData;
