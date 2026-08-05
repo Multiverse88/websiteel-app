@@ -271,13 +271,21 @@ export default function ArticleEditor() {
       sel.addRange(saved.range);
     }
 
-    // Wrap selection with <a> tag
-    const range = saved.range;
-    const a = document.createElement("a");
-    a.href = url;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    range.surroundContents(a);
+    if (sel && sel.toString().length === 0) {
+      // If nothing is selected, insert the URL as text inside an <a> tag
+      const a = document.createElement("a");
+      a.href = url;
+      a.textContent = url;
+      saved.range.insertNode(a);
+      // Move cursor after the inserted node
+      saved.range.setStartAfter(a);
+      saved.range.setEndAfter(a);
+      sel.removeAllRanges();
+      sel.addRange(saved.range);
+    } else {
+      // Wrap selection safely using execCommand
+      document.execCommand("createLink", false, url);
+    }
 
     setShowLinkModal(false);
     setLinkUrl("");
@@ -1235,6 +1243,11 @@ export default function ArticleEditor() {
                       border-top: 1px solid #e5e7eb !important;
                       margin-top: 20px !important;
                       margin-bottom: 20px !important;
+                    }
+                    .prose-editor a {
+                      color: #2563eb !important;
+                      text-decoration: underline !important;
+                      cursor: pointer !important;
                     }
                     .prose-editor a:hover {
                       color: #B91C1C !important;
