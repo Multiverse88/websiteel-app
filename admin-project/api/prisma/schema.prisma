@@ -23,6 +23,26 @@ model User {
   landingPages     LandingPage[]
 }
 
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  articles  Article[]
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  articles  Article[]
+}
+
 model Article {
   id         String   @id @default(cuid())
   slug       String   @unique
@@ -30,7 +50,20 @@ model Article {
   excerpt    String
   content    String
   coverImage String
-  category   String
+  
+  // Relations
+  categoryId String?
+  categoryRel Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  tags       Tag[]
+  category   String // Preserved for backward compatibility
+
+  // Status & SEO
+  status     String    @default("draft") // "draft" | "published" | "scheduled" | "archived"
+  seoTitle   String?
+  seoDesc    String?
+  ogImage    String?
+  publishedAt DateTime?
+
   readTime   String
   viewCount  Int      @default(0)
   createdAt  DateTime @default(now())
@@ -38,7 +71,8 @@ model Article {
   authorId   String?
   author     User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
 
-  @@index([category])
+  @@index([categoryId])
+  @@index([status])
   @@index([createdAt])
   @@index([authorId])
 }

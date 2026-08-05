@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { api } from '../lib/api'
 import Modal from '../components/Modal'
 import ImagePicker from '../components/ImagePicker'
-import TiptapEditor from '../components/TiptapEditor'
-import ArticleLivePreview from '../components/ArticleLivePreview'
+
+
 import { Image as ImageIcon, Upload, Loader2, X, Save } from 'lucide-react'
 
 interface Article {
@@ -18,6 +18,8 @@ interface Article {
   viewCount: number
   createdAt: string
   status?: string
+  seoTitle?: string
+  seoDesc?: string
 }
 
 const slugify = (text: string) => {
@@ -29,6 +31,41 @@ const slugify = (text: string) => {
     .replace(/^-+|-+$/g, '')
 }
 
+// Helper to simulate Yoast SEO Score based on article fields (Sync with ArticleEditor analyzeSEO)
+function getSeoScore(article: Article): { score: number, color: string, dot: string, label: string } {
+  let score = 0;
+  let totalChecks = 7;
+  
+  const contentText = (article.content || "").toLowerCase();
+  const titleText = (article.title || "").toLowerCase();
+  const excerptText = (article.excerpt || "").toLowerCase();
+
+  // 1. Content length
+  const wordCount = contentText.split(/\s+/).filter(w => w.length > 0).length;
+  if (wordCount >= 300) score++;
+
+  // 2. Title length
+  if (titleText.length >= 30 && titleText.length <= 60) score++;
+
+  // 3. Excerpt length
+  if (excerptText.length >= 120 && excerptText.length <= 160) score++;
+
+  // 4. Headings
+  if (contentText.includes("### ") || contentText.includes("<h3")) score++;
+
+  // 5. Links
+  if (contentText.includes("](") || contentText.includes("<a ")) score++;
+
+  // 6. Images
+  if (contentText.includes("![") || contentText.includes("<img ") || article.coverImage) score++;
+
+  const percentage = Math.round((score / totalChecks) * 100);
+
+  if (percentage >= 80) return { score: percentage, color: 'text-emerald-700 bg-emerald-50 border-emerald-200', dot: 'bg-emerald-500', label: 'Good' };
+  if (percentage >= 50) return { score: percentage, color: 'text-amber-700 bg-amber-50 border-amber-200', dot: 'bg-amber-500', label: 'OK' };
+  return { score: percentage, color: 'text-red-700 bg-red-50 border-red-200', dot: 'bg-red-500', label: 'Needs Imprv' };
+}
+
 const emptyForm = { title: '', slug: '', excerpt: '', content: '', category: '', coverImage: '', readTime: '5 min read', status: 'published' }
 
 export default function Articles() {
@@ -37,6 +74,7 @@ export default function Articles() {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedStatus, setSelectedStatus] = useState('')
+  const [sortView, setSortView] = useState('newest')
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Article | null>(null)
   const [form, setForm] = useState(emptyForm)
@@ -73,7 +111,7 @@ export default function Articles() {
 
   useEffect(() => { load() }, [])
 
-  const filtered = articles.filter((a) => {
+  let filtered = articles.filter((a) => {
     const matchesSearch =
       a.title?.toLowerCase().includes(search.toLowerCase()) ||
       a.slug?.toLowerCase().includes(search.toLowerCase())
@@ -82,10 +120,22 @@ export default function Articles() {
     return matchesSearch && matchesCategory && matchesStatus
   })
 
+  filtered = filtered.sort((a, b) => {
+    if (sortView === 'views_desc') {
+      return (b.viewCount || 0) - (a.viewCount || 0)
+    } else if (sortView === 'views_asc') {
+      return (a.viewCount || 0) - (b.viewCount || 0)
+    } else if (sortView === 'seo_desc') {
+      return getSeoScore(b).score - getSeoScore(a).score
+    } else if (sortView === 'seo_asc') {
+      return getSeoScore(a).score - getSeoScore(b).score
+    }
+    // fallback or 'newest'
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  })
+
   const openCreate = () => {
-    setEditing(null)
-    setForm(emptyForm)
-    setModalOpen(true)
+    window.location.hash = "#/articles/tambah"
   }
 
   const handleTitleChange = (newTitle: string) => {
@@ -105,18 +155,8 @@ export default function Articles() {
   }
 
   const openEdit = (article: Article) => {
-    setEditing(article)
-    setForm({
-      title: article.title || '',
-      slug: article.slug || '',
-      excerpt: article.excerpt || '',
-      content: article.content || '',
-      category: article.category || '',
-      coverImage: article.coverImage || '',
-      readTime: article.readTime || '5 min read',
-      status: article.status || 'published',
-    })
-    setModalOpen(true)
+    // Navigate to editor with ID (to be handled in editor)
+    window.location.hash = `#/articles/tambah?id=${article.id}`
   }
 
   const handleSave = async () => {
@@ -212,6 +252,20 @@ export default function Articles() {
               </select>
               <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
             </div>
+            <div className="relative w-full md:w-52">
+              <select 
+                value={sortView}
+                onChange={(e) => setSortView(e.target.value)}
+                className="w-full pl-4 pr-10 py-2 border border-gray-200 rounded-lg bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] text-[14px] text-gray-700 cursor-pointer"
+              >
+                <option value="newest">Terbaru</option>
+                <option value="views_desc">Views Tertinggi</option>
+                <option value="views_asc">Views Terendah</option>
+                <option value="seo_desc">SEO Score Tertinggi</option>
+                <option value="seo_asc">SEO Score Terendah</option>
+              </select>
+              <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">sort</span>
+            </div>
           </div>
         </div>
 
@@ -223,6 +277,7 @@ export default function Articles() {
                 <th className="py-3.5 px-6 font-medium">Judul Artikel</th>
                 <th className="py-3.5 px-6 font-medium">Kategori</th>
                 <th className="py-3.5 px-6 font-medium">Status</th>
+                <th className="py-3.5 px-6 font-medium">SEO Score</th>
                 <th className="py-3.5 px-6 font-medium">Waktu Baca</th>
                 <th className="py-3.5 px-6 font-medium">Views</th>
                 <th className="py-3.5 px-6 font-medium text-right">Aksi</th>
@@ -231,14 +286,14 @@ export default function Articles() {
             <tbody className="divide-y divide-gray-200 text-[14px]">
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-gray-400">
+                  <td colSpan={7} className="py-12 text-center text-gray-400">
                     <span className="material-symbols-outlined animate-spin text-2xl">progress_activity</span>
                     <p className="mt-2 text-sm">Memuat artikel...</p>
                   </td>
                 </tr>
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-gray-400">
+                  <td colSpan={7} className="py-12 text-center text-gray-400">
                     <span className="material-symbols-outlined text-4xl mb-2 opacity-40">description</span>
                     <p>Tidak ada artikel yang ditemukan.</p>
                   </td>
@@ -260,7 +315,18 @@ export default function Articles() {
                         {item.status || 'PUBLISHED'}
                       </span>
                     </td>
-                    <td className="py-3 px-6 text-gray-500 whitespace-nowrap">
+                    <td className="py-3 px-6 whitespace-nowrap">
+                      {(() => {
+                        const seo = getSeoScore(item);
+                        return (
+                          <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border ${seo.color}`}>
+                            <span className={`w-2 h-2 rounded-full ${seo.dot}`}></span>
+                            {seo.score}/100
+                          </div>
+                        )
+                      })()}
+                    </td>
+                    <td className="py-3 px-6 text-gray-500 text-[13px] whitespace-nowrap">
                       {item.readTime || '5 min read'}
                     </td>
                     <td className="py-3 px-6 text-gray-700 font-mono text-sm whitespace-nowrap">
@@ -268,6 +334,15 @@ export default function Articles() {
                     </td>
                     <td className="py-3 px-6 text-right whitespace-nowrap">
                       <div className="flex items-center justify-end gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <a 
+                          href={`https://easylegal.my.id/artikel/${item.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 text-gray-500 hover:text-blue-600 rounded hover:bg-blue-50 transition-colors" 
+                          title="Lihat Artikel"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">visibility</span>
+                        </a>
                         <button 
                           onClick={() => openEdit(item)}
                           className="p-1.5 text-gray-500 hover:text-[#6f0000] rounded hover:bg-gray-100 transition-colors" 
@@ -307,117 +382,6 @@ export default function Articles() {
           </div>
         </div>
       </section>
-
-      {/* Edit/Create Fullscreen Studio */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-gray-100 flex flex-col overflow-hidden">
-          {/* Top Navbar & Metadata Form */}
-          <div className="border-b border-gray-200 bg-white p-4 shrink-0 shadow-sm z-20 flex flex-col gap-3">
-             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                   <button onClick={() => setModalOpen(false)} className="p-1.5 hover:bg-gray-100 rounded-lg text-gray-500 transition-colors">
-                     <X size={20} />
-                   </button>
-                   <h2 className="font-semibold text-lg text-gray-800">{editing ? 'Edit Artikel' : 'Buat Artikel Baru'}</h2>
-                </div>
-                <div className="flex items-center gap-3">
-                   <button onClick={() => setModalOpen(false)} className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Batal</button>
-                   <button onClick={handleSave} disabled={saving} className="px-4 py-2 bg-[#6f0000] hover:bg-[#7A0101] text-white rounded-lg text-sm font-semibold transition flex items-center gap-2 shadow-sm">
-                      <Save size={16} />
-                      {saving ? 'Menyimpan...' : 'Simpan Artikel'}
-                   </button>
-                </div>
-             </div>
-             
-             <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-4">
-                  <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Judul Artikel</label>
-                  <input className="w-full p-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] transition-all" value={form.title} onChange={e => handleTitleChange(e.target.value)} placeholder="Masukkan judul artikel..." />
-                </div>
-                <div className="col-span-3">
-                  <label className="block text-xs font-semibold uppercase text-gray-500 mb-1 flex justify-between">
-                    Slug 
-                    <button type="button" onClick={regenerateSlug} className="text-[10px] text-[#6f0000] hover:underline flex items-center gap-1" title="Generate ulang slug dari judul">
-                      <span className="material-symbols-outlined text-[13px]">sync</span> Auto
-                    </button>
-                  </label>
-                  <input className="w-full p-2.5 border border-gray-200 rounded-lg text-sm font-mono outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] transition-all" value={form.slug} onChange={e => setForm({...form, slug: e.target.value})} placeholder="slug-artikel" />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Kategori</label>
-                  <select className="w-full p-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] transition-all cursor-pointer bg-white" value={form.category} onChange={e => setForm({...form, category: e.target.value})}>
-                    <option value="">Pilih Kategori</option>
-                    <option value="Pendirian PT">Pendirian PT</option>
-                    <option value="Legalitas PT">Legalitas PT</option>
-                    <option value="Merek & HAKI">Merek & HAKI</option>
-                    <option value="Sertifikasi ISO">Sertifikasi ISO</option>
-                    <option value="Perizinan">Perizinan</option>
-                    <option value="NIB">NIB</option>
-                    <option value="Pajak">Pajak</option>
-                    <option value="Branding">Branding</option>
-                  </select>
-                </div>
-                <div className="col-span-3">
-                  <label className="block text-xs font-semibold uppercase text-gray-500 mb-1 flex justify-between">
-                    Cover Image URL
-                    <span className="text-[10px] font-semibold text-[#990202]">MinIO CDN</span>
-                  </label>
-                  <div className="flex gap-1.5 items-center">
-                    <input className="w-full p-2.5 border border-gray-200 rounded-lg text-xs font-mono outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] transition-all" value={form.coverImage} onChange={e => setForm({...form, coverImage: e.target.value})} placeholder="https://cdn..." />
-                    <button type="button" onClick={() => setIsImagePickerOpen(true)} className="p-2.5 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 transition-colors shrink-0" title="Media Library CDN"><ImageIcon size={16} /></button>
-                    <label className={`p-2.5 bg-red-50 border border-red-200 text-[#990202] rounded-lg cursor-pointer hover:bg-red-100 flex items-center justify-center transition-colors shrink-0 ${uploadingImage ? 'opacity-70 pointer-events-none' : ''}`} title="Upload & Kompres ke MinIO CDN">
-                      {uploadingImage ? <Loader2 size={16} className="animate-spin text-[#990202]" /> : <Upload size={16} />}
-                      <input type="file" accept="image/*" className="hidden" onChange={e => { const f = e.target.files?.[0]; if(f) handleDirectUpload(f); }} />
-                    </label>
-                  </div>
-                </div>
-             </div>
-             
-             <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-9">
-                  <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Excerpt / Ringkasan</label>
-                  <input className="w-full p-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] transition-all" value={form.excerpt} onChange={e => setForm({...form, excerpt: e.target.value})} placeholder="Ringkasan singkat artikel..." />
-                </div>
-                <div className="col-span-3">
-                  <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Waktu Baca</label>
-                  <input className="w-full p-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] transition-all" value={form.readTime} onChange={e => setForm({...form, readTime: e.target.value})} placeholder="e.g. 5 min read" />
-                </div>
-             </div>
-          </div>
-
-          {/* Split Pane: Editor and Preview */}
-          <div className="flex-1 flex overflow-hidden">
-             <div className="w-1/2 border-r border-gray-200 bg-white flex flex-col relative z-10 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
-                <div className="p-2.5 bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-500 uppercase tracking-widest flex justify-between items-center shrink-0">
-                   <div className="flex items-center gap-2">
-                     <span className="material-symbols-outlined text-[16px]">edit_document</span>
-                     Editor Konten
-                   </div>
-                </div>
-                <div className="flex-1 overflow-y-auto">
-                   <TiptapEditor content={form.content} onChange={(content) => setForm({ ...form, content })} />
-                </div>
-             </div>
-             <div className="w-1/2 bg-[#f8f9fa] flex flex-col relative">
-                <div className="p-2.5 bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-500 uppercase tracking-widest flex justify-between items-center shrink-0">
-                   <div className="flex items-center gap-2">
-                     <span className="material-symbols-outlined text-[16px]">preview</span>
-                     Live Preview
-                   </div>
-                </div>
-                <div className="flex-1 overflow-y-auto relative">
-                   <ArticleLivePreview 
-                      title={form.title} 
-                      content={form.content} 
-                      coverImage={form.coverImage} 
-                      category={form.category} 
-                      readTime={form.readTime} 
-                   />
-                </div>
-             </div>
-          </div>
-        </div>
-      )}
 
       {/* Delete Confirmation Modal */}
       <Modal isOpen={!!deleteConfirm} onClose={() => setDeleteConfirm(null)} title="Hapus Artikel">

@@ -1,5 +1,6 @@
 // Simplified port of renderMarkdownContent from Next.js
 function renderMarkdownContent(text: string) {
+  if (!text) return '';
   let html = text.replace(/\r\n/g, '\n');
   
   // Images
@@ -22,13 +23,39 @@ function renderMarkdownContent(text: string) {
 }
 
 interface Props {
-  markdown: string;
+  title?: string;
+  content?: string;
+  coverImage?: string;
+  category?: string;
+  readTime?: string;
 }
 
-export default function ArticleLivePreview({ markdown }: Props) {
+export default function ArticleLivePreview({ title, content, coverImage, category, readTime }: Props) {
   return (
-    <div className="prose prose-lg max-w-none px-8 py-10 bg-white">
-      <div dangerouslySetInnerHTML={{ __html: renderMarkdownContent(markdown) }} />
+    <div className="bg-white min-h-full pb-20">
+      {/* Hero Header */}
+      <div className="w-full max-w-4xl mx-auto px-8 pt-12 pb-8">
+        <div className="flex items-center gap-3 text-sm font-semibold text-[#D62828] mb-4">
+          <span>{category || 'Uncategorized'}</span>
+          <span className="text-gray-300">•</span>
+          <span className="text-gray-500">{readTime || '5 min read'}</span>
+        </div>
+        <h1 className="text-[36px] leading-[1.2] font-extrabold text-gray-900 tracking-[-0.02em] mb-8 font-sans">
+          {title || 'Judul Artikel Kosong'}
+        </h1>
+        {coverImage ? (
+          <img src={coverImage} alt={title || 'Cover'} className="w-full aspect-[2/1] object-cover rounded-2xl shadow-sm border border-gray-100" />
+        ) : (
+          <div className="w-full aspect-[2/1] bg-gray-100 rounded-2xl flex items-center justify-center text-gray-400 border border-gray-200 border-dashed">
+            Tidak ada gambar cover
+          </div>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="prose prose-lg max-w-3xl mx-auto px-8 py-4">
+        <div dangerouslySetInnerHTML={{ __html: renderMarkdownContent(content || '') }} />
+      </div>
     </div>
   );
 }

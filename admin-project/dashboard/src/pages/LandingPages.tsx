@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api } from '../lib/api'
-import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
+import PageBuilder from '../components/PageBuilder'
 
 interface LandingPage {
   id: string
@@ -9,7 +9,17 @@ interface LandingPage {
   slug: string
   description: string
   status: string
+  sections?: any
   createdAt: string
+}
+
+const slugify = (text: string) => {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 }
 
 const emptyForm = { title: '', slug: '', description: '', status: 'draft' }
@@ -23,6 +33,7 @@ export default function LandingPages() {
   const [form, setForm] = useState(emptyForm)
   const [saving, setSaving] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState<LandingPage | null>(null)
+  const [designingPage, setDesigningPage] = useState<LandingPage | null>(null)
 
   const load = async () => {
     setLoading(true)
@@ -50,9 +61,25 @@ export default function LandingPages() {
     setModalOpen(true)
   }
 
+  const handleTitleChange = (newTitle: string) => {
+    if (!editing) {
+      setForm((prev) => ({
+        ...prev,
+        title: newTitle,
+        slug: slugify(newTitle),
+      }))
+    } else {
+      setForm((prev) => ({ ...prev, title: newTitle }))
+    }
+  }
+
+  const regenerateSlug = () => {
+    setForm((prev) => ({ ...prev, slug: slugify(prev.title) }))
+  }
+
   const openEdit = (page: LandingPage) => {
     setEditing(page)
-    setForm({ title: page.title, slug: page.slug, description: page.description, status: page.status })
+    setForm({ title: page.title, slug: page.slug, description: page.description || '', status: page.status || 'draft' })
     setModalOpen(true)
   }
 
@@ -84,66 +111,241 @@ export default function LandingPages() {
     }
   }
 
-  const columns = [
-    { key: 'title', label: 'Title' },
-    { key: 'slug', label: 'Slug' },
-    { key: 'status', label: 'Status', render: (v: string) => <span className={`badge badge--${v === 'published' ? 'success' : 'warning'}`}>{v}</span> },
-  ]
+  const handleSaveDesign = async (blocks: any[], status?: string) => {
+    if (!designingPage) return
+    try {
+      const payload: any = { sections: blocks }
+      if (status) payload.status = status
+      await api.updateLandingPage(designingPage.id, payload)
+      // Update local state without kicking user out immediately if they are still editing
+      setDesigningPage((prev) => (prev ? { ...prev, sections: blocks, status: status || prev.status } : null))
+      load()
+    } catch (e: any) {
+      alert("Gagal menyimpan desain: " + (e?.message || e))
+    }
+  }
+
+  const handleDuplicate = async (page: LandingPage) => {
+    try {
+      const newSlug = `${page.slug}-copy-${Date.now().toString().slice(-4)}`
+      await api.createLandingPage({
+        title: `${page.title} (Salinan)`,
+        slug: newSlug,
+        description: page.description || '',
+        status: 'draft',
+        sections: page.sections || []
+      })
+      load()
+    } catch (e: any) {
+      alert("Gagal menduplikat halaman: " + (e?.message || e))
+    }
+  }
+
+  if (designingPage) {
+    return (
+      <PageBuilder 
+        initialBlocks={designingPage.sections}
+        onSave={handleSaveDesign}
+        onCancel={() => {
+          setDesigningPage(null)
+          load()
+        }}
+      />
+    )
+  }
 
   return (
-    <div className="page">
-      <div className="page-header">
-        <input
-          type="text"
-          className="form-input form-input--search"
-          placeholder="Search landing pages..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button className="btn btn--primary" onClick={openCreate}>+ New Landing Page</button>
-      </div>
-      <DataTable
-        columns={columns}
-        data={filtered}
-        loading={loading}
-        emptyMessage="No landing pages found"
-        onEdit={openEdit}
-        onDelete={setDeleteConfirm}
-      />
+    <div className="max-w-7xl mx-auto space-y-[32px] pb-12">
+      {/* Page Header */}
+      <section className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <h1 className="text-[24px] leading-[32px] font-semibold tracking-[-0.01em] font-sans text-gray-900">Landing Page Builder</h1>
+          <p className="text-[14px] leading-[22px] font-sans text-gray-500 mt-1">Buat, kustomisasi visual drag-and-drop, dan publikasikan halaman penawaran khusus.</p>
+        </div>
+        <button 
+          onClick={openCreate}
+          className="bg-[#6f0000] hover:bg-[#7A0101] text-white px-5 py-2.5 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm text-sm"
+        >
+          <span className="material-symbols-outlined text-[18px]">add</span>
+          Buat Halaman Baru
+        </button>
+      </section>
 
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Edit Landing Page' : 'New Landing Page'}>
-        <div className="form-group">
-          <label className="form-label">Title</label>
-          <input className="form-input" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+      {/* Data Table Panel */}
+      <section className="bg-white border border-gray-200 rounded-xl flex flex-col flex-1 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+        {/* Toolbar */}
+        <div className="p-5 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#f8f9fa]">
+          <div className="relative w-full sm:w-80">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">search</span>
+            <input 
+              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg bg-white text-sm focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] outline-none" 
+              placeholder="Cari landing page atau slug..." 
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <label className="form-label">Slug</label>
-          <input className="form-input" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead className="bg-[#f8f9fa] text-[12px] font-bold text-gray-500 uppercase border-b border-gray-200 tracking-wider">
+              <tr>
+                <th className="py-3.5 px-6 font-medium">Judul Halaman</th>
+                <th className="py-3.5 px-6 font-medium">URL Slug</th>
+                <th className="py-3.5 px-6 font-medium">Status</th>
+                <th className="py-3.5 px-6 font-medium">Visual Builder</th>
+                <th className="py-3.5 px-6 font-medium text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200 text-[14px]">
+              {loading ? (
+                <tr>
+                  <td colSpan={5} className="py-12 text-center text-gray-400">
+                    <span className="material-symbols-outlined animate-spin text-2xl">progress_activity</span>
+                    <p className="mt-2 text-sm">Memuat halaman...</p>
+                  </td>
+                </tr>
+              ) : filtered.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="py-12 text-center text-gray-400">
+                    <span className="material-symbols-outlined text-4xl mb-2 opacity-40">web</span>
+                    <p>Belum ada landing page yang dibuat.</p>
+                  </td>
+                </tr>
+              ) : (
+                filtered.map((item) => (
+                  <tr key={item.id} className="hover:bg-[#FEF2F2]/30 transition-colors h-[52px] group">
+                    <td className="py-3.5 px-6 font-semibold text-gray-900">
+                      {item.title}
+                      {item.description && <p className="text-xs font-normal text-gray-400 line-clamp-1">{item.description}</p>}
+                    </td>
+                    <td className="py-3.5 px-6 font-mono text-xs text-gray-600">
+                      /lp/{item.slug}
+                    </td>
+                    <td className="py-3.5 px-6">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold uppercase ${item.status === 'published' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-gray-100 text-gray-600 border border-gray-200'}`}>
+                        {item.status || 'DRAFT'}
+                      </span>
+                    </td>
+                    <td className="py-3.5 px-6">
+                      <button 
+                        onClick={() => setDesigningPage(item)}
+                        className="flex items-center gap-1.5 text-[#6f0000] bg-[#FEF2F2] hover:bg-[#6f0000] hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow-xs"
+                      >
+                        <span className="material-symbols-outlined text-sm">view_quilt</span> Buka Visual Builder
+                      </button>
+                    </td>
+                    <td className="py-3.5 px-6 text-right">
+                      <div className="flex items-center justify-end gap-1">
+                        <button 
+                          onClick={() => {
+                            navigator.clipboard.writeText(`https://easylegal.my.id/lp/${item.slug}`)
+                            alert(`Link disalin: https://easylegal.my.id/lp/${item.slug}`)
+                          }}
+                          className="p-1.5 text-gray-400 hover:text-gray-700 rounded hover:bg-gray-100" 
+                          title="Salin Link Publik"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">content_copy</span>
+                        </button>
+                        <button 
+                          onClick={() => handleDuplicate(item)}
+                          className="p-1.5 text-gray-400 hover:text-gray-700 rounded hover:bg-gray-100" 
+                          title="Duplikat Halaman"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">file_copy</span>
+                        </button>
+                        <button 
+                          onClick={() => openEdit(item)}
+                          className="p-1.5 text-gray-400 hover:text-gray-700 rounded hover:bg-gray-100" 
+                          title="Edit Pengaturan"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">edit</span>
+                        </button>
+                        <button 
+                          onClick={() => setDeleteConfirm(item)}
+                          className="p-1.5 text-gray-400 hover:text-red-600 rounded hover:bg-red-50" 
+                          title="Hapus Halaman"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">delete</span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
-        <div className="form-group">
-          <label className="form-label">Description</label>
-          <input className="form-input" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+
+        {/* Footer */}
+        <div className="p-4 border-t border-gray-200 bg-[#f8f9fa] flex items-center justify-between">
+          <span className="text-sm text-gray-500">
+            Total {pages.length} landing pages
+          </span>
         </div>
-        <div className="form-group">
-          <label className="form-label">Status</label>
-          <select className="form-input" value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-          </select>
-        </div>
-        <div className="modal-actions">
-          <button className="btn btn--outline" onClick={() => setModalOpen(false)}>Cancel</button>
-          <button className="btn btn--primary" onClick={handleSave} disabled={saving}>
-            {saving ? 'Saving...' : 'Save'}
-          </button>
+      </section>
+
+      {/* Edit/Create Modal */}
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Edit Info Landing Page' : 'Buat Landing Page Baru'}>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Judul Halaman</label>
+            <input 
+              className="w-full p-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] outline-none" 
+              value={form.title} 
+              onChange={(e) => handleTitleChange(e.target.value)} 
+              placeholder="Contoh: Promo Pendirian PT Kilat" 
+            />
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-semibold uppercase text-gray-500">Slug URL</label>
+              <button 
+                type="button" 
+                onClick={regenerateSlug} 
+                className="text-[11px] text-[#6f0000] hover:underline flex items-center gap-1"
+                title="Generate ulang slug dari judul"
+              >
+                <span className="material-symbols-outlined text-[14px]">sync</span> Auto-generate
+              </button>
+            </div>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-xs">/</span>
+              <input 
+                className="w-full pl-6 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm font-mono focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] outline-none" 
+                value={form.slug} 
+                onChange={(e) => setForm({ ...form, slug: e.target.value })} 
+                placeholder="promo-pendirian-pt-kilat" 
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Deskripsi Singkat</label>
+            <input className="w-full p-2.5 border border-gray-200 rounded-lg text-sm" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Deskripsi untuk internal admin atau meta description" />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Status Publikasi</label>
+            <select className="w-full p-2.5 border border-gray-200 rounded-lg text-sm" value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>
+              <option value="draft">Draft (Private)</option>
+              <option value="published">Published (Publik)</option>
+            </select>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+            <button className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700" onClick={() => setModalOpen(false)}>Batal</button>
+            <button className="px-4 py-2 bg-[#6f0000] text-white rounded-lg text-sm font-semibold" onClick={handleSave} disabled={saving}>
+              {saving ? 'Menyimpan...' : 'Simpan'}
+            </button>
+          </div>
         </div>
       </Modal>
 
-      <Modal isOpen={!!deleteConfirm} onClose={() => setDeleteConfirm(null)} title="Delete Landing Page">
-        <p>Are you sure you want to delete <strong>{deleteConfirm?.title}</strong>?</p>
-        <div className="modal-actions">
-          <button className="btn btn--outline" onClick={() => setDeleteConfirm(null)}>Cancel</button>
-          <button className="btn btn--danger" onClick={handleDelete}>Delete</button>
+      {/* Delete Modal */}
+      <Modal isOpen={!!deleteConfirm} onClose={() => setDeleteConfirm(null)} title="Hapus Landing Page">
+        <p className="text-sm text-gray-600">Apakah Anda yakin ingin menghapus halaman <strong>{deleteConfirm?.title}</strong>?</p>
+        <div className="flex justify-end gap-3 pt-4 mt-4 border-t border-gray-200">
+          <button className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700" onClick={() => setDeleteConfirm(null)}>Batal</button>
+          <button className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold" onClick={handleDelete}>Hapus</button>
         </div>
       </Modal>
     </div>

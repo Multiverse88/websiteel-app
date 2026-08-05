@@ -295,9 +295,9 @@ router.post("/campaigns/test-send", async (req, res) => {
     });
 
     res.json({ success: true, message: "Email berhasil dikirim" });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error sending test email:", error);
-    res.status(500).json({ error: "Gagal mengirim email" });
+    res.status(500).json({ error: error.message || "Gagal mengirim email" });
   }
 });
 

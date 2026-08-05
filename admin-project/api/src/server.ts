@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -10,6 +12,9 @@ import newsletterRoutes from './routes/newsletter';
 import emailBlastRoutes from './routes/email-blast';
 import trackingRoutes from './routes/tracking';
 import cronRoutes from './routes/cron';
+import mediaRoutes from './routes/media';
+
+import path from 'path';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -20,6 +25,12 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
+
+// Serve static images and uploads from public folder
+const publicDir = path.resolve(__dirname, '../../../public');
+app.use('/images', express.static(path.join(publicDir, 'images')));
+app.use('/uploads', express.static(path.join(publicDir, 'uploads')));
+app.use(express.static(publicDir));
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
@@ -34,6 +45,7 @@ app.use('/api/v1/newsletter', newsletterRoutes);
 app.use('/api/v1/email-blast', emailBlastRoutes);
 app.use('/api/v1/tracking', trackingRoutes);
 app.use('/api/v1/cron', cronRoutes);
+app.use('/api/v1/media', mediaRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
