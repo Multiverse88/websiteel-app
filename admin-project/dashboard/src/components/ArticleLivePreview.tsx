@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Simplified port of renderMarkdownContent from Next.js
 function renderMarkdownContent(text: string) {
   let html = text.replace(/\r\n/g, '\n');
