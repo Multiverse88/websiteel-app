@@ -4,19 +4,20 @@ import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
 
 interface Redirect {
-  _id: string
-  from: string
-  to: string
-  statusCode: number
+  id: string
+  slug: string
+  destination: string
+  clicks: number
   createdAt: string
 }
 
-const emptyForm = { from: '', to: '', statusCode: 301 }
+const emptyForm = { slug: '', destination: '' }
 
 export default function Redirects() {
   const [redirects, setRedirects] = useState<Redirect[]>([])
   const [loading, setLoading] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
+  const [editing, setEditing] = useState<Redirect | null>(null)
   const [form, setForm] = useState(emptyForm)
   const [saving, setSaving] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState<Redirect | null>(null)
@@ -38,8 +39,13 @@ export default function Redirects() {
   const handleSave = async () => {
     setSaving(true)
     try {
-      await api.createRedirect({ ...form, statusCode: Number(form.statusCode) })
+      if (editing) {
+        await api.updateRedirect(editing.id, form)
+      } else {
+        await api.createRedirect(form)
+      }
       setModalOpen(false)
+      setEditing(null)
       setForm(emptyForm)
       load()
     } catch (e: any) {
@@ -52,7 +58,7 @@ export default function Redirects() {
   const handleDelete = async () => {
     if (!deleteConfirm) return
     try {
-      await api.deleteRedirect(deleteConfirm._id)
+      await api.deleteRedirect(deleteConfirm.id)
       setDeleteConfirm(null)
       load()
     } catch (e: any) {
@@ -60,17 +66,29 @@ export default function Redirects() {
     }
   }
 
+  const openCreate = () => {
+    setEditing(null)
+    setForm(emptyForm)
+    setModalOpen(true)
+  }
+
+  const openEdit = (redirect: Redirect) => {
+    setEditing(redirect)
+    setForm({ slug: redirect.slug, destination: redirect.destination })
+    setModalOpen(true)
+  }
+
   const columns = [
-    { key: 'from', label: 'From' },
-    { key: 'to', label: 'To' },
-    { key: 'statusCode', label: 'Status Code' },
+    { key: 'slug', label: 'Slug' },
+    { key: 'destination', label: 'Destination' },
+    { key: 'clicks', label: 'Clicks' },
   ]
 
   return (
     <div className="page">
       <div className="page-header">
         <div />
-        <button className="btn btn--primary" onClick={() => { setForm(emptyForm); setModalOpen(true) }}>
+        <button className="btn btn--primary" onClick={openCreate}>
           + New Redirect
         </button>
       </div>
@@ -79,35 +97,29 @@ export default function Redirects() {
         data={redirects}
         loading={loading}
         emptyMessage="No redirects found"
+        onEdit={openEdit}
         onDelete={setDeleteConfirm}
       />
 
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="New Redirect">
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Edit Redirect' : 'New Redirect'}>
         <div className="form-group">
-          <label className="form-label">From Path</label>
-          <input className="form-input" placeholder="/old-path" value={form.from} onChange={(e) => setForm({ ...form, from: e.target.value })} />
+          <label className="form-label">Slug / From Path</label>
+          <input className="form-input" placeholder="/old-path" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
         </div>
         <div className="form-group">
-          <label className="form-label">To URL</label>
-          <input className="form-input" placeholder="/new-path or https://..." value={form.to} onChange={(e) => setForm({ ...form, to: e.target.value })} />
-        </div>
-        <div className="form-group">
-          <label className="form-label">Status Code</label>
-          <select className="form-input" value={form.statusCode} onChange={(e) => setForm({ ...form, statusCode: Number(e.target.value) })}>
-            <option value={301}>301 - Permanent</option>
-            <option value={302}>302 - Temporary</option>
-          </select>
+          <label className="form-label">Destination / To URL</label>
+          <input className="form-input" placeholder="/new-path or https://..." value={form.destination} onChange={(e) => setForm({ ...form, destination: e.target.value })} />
         </div>
         <div className="modal-actions">
           <button className="btn btn--outline" onClick={() => setModalOpen(false)}>Cancel</button>
           <button className="btn btn--primary" onClick={handleSave} disabled={saving}>
-            {saving ? 'Saving...' : 'Create'}
+            {saving ? 'Saving...' : editing ? 'Update' : 'Create'}
           </button>
         </div>
       </Modal>
 
       <Modal isOpen={!!deleteConfirm} onClose={() => setDeleteConfirm(null)} title="Delete Redirect">
-        <p>Are you sure you want to delete the redirect from <strong>{deleteConfirm?.from}</strong>?</p>
+        <p>Are you sure you want to delete the redirect {deleteConfirm?.slug}?</p>
         <div className="modal-actions">
           <button className="btn btn--outline" onClick={() => setDeleteConfirm(null)}>Cancel</button>
           <button className="btn btn--danger" onClick={handleDelete}>Delete</button>

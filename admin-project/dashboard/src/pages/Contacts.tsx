@@ -4,7 +4,7 @@ import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
 
 interface Contact {
-  _id: string
+  id: string
   name: string
   email: string
   phone: string
@@ -41,7 +41,7 @@ export default function Contacts() {
   const handleDelete = async () => {
     if (!deleteConfirm) return
     try {
-      await api.deleteContact(deleteConfirm._id)
+      await api.deleteContact(deleteConfirm.id)
       setDeleteConfirm(null)
       load()
     } catch (e: any) {

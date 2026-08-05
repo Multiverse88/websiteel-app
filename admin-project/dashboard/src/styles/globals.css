@@ -561,6 +561,51 @@ input, textarea, select { font-family: inherit; }
   color: #DC2626;
 }
 
+.badge--info {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563EB;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
+
+.tab {
+  padding: 8px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.tab--active {
+  border-bottom-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+.form-section h3 {
+  margin-bottom: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+
 /* Modal */
 .modal-overlay {
   position: fixed;

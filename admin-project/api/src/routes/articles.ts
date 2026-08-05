@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   try {
     const q = req.query.q as string || "";
     const activeCategory = req.query.category as string || "All";
-    const limit = parseInt(req.query.limit as string) || 7;
+    const limit = parseInt(req.query.limit as string) || 500;
     const includeCounts = req.query.includeCounts === "true";
 
     // Build where clause
@@ -123,6 +123,91 @@ router.post("/:slug/view", async (req, res) => {
   } catch (error) {
     // If not found, ignore error for tracking
     console.error("Error updating view count:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// POST /api/v1/articles
+router.post("/", async (req, res) => {
+  try {
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId } = req.body;
+
+    if (!slug || !title || !excerpt || !content || !category) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const article = await prisma.article.create({
+      data: {
+        slug,
+        title,
+        excerpt,
+        content,
+        coverImage: coverImage || "",
+        category,
+        readTime: readTime || "5 min read",
+        authorId: authorId || null,
+      },
+    });
+
+    res.status(201).json({ data: article });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return res.status(409).json({ error: "Article with this slug already exists" });
+    }
+    console.error("Error creating article:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// PUT /api/v1/articles/:id
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId } = req.body;
+
+    const existing = await prisma.article.findUnique({ where: { id } });
+    if (!existing) {
+      return res.status(404).json({ error: "Article not found" });
+    }
+
+    const article = await prisma.article.update({
+      where: { id },
+      data: {
+        slug: slug || existing.slug,
+        title: title || existing.title,
+        excerpt: excerpt || existing.excerpt,
+        content: content || existing.content,
+        coverImage: coverImage !== undefined ? coverImage : existing.coverImage,
+        category: category || existing.category,
+        readTime: readTime || existing.readTime,
+        authorId: authorId || existing.authorId,
+      },
+    });
+
+    res.json({ data: article });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return res.status(409).json({ error: "Article with this slug already exists" });
+    }
+    console.error("Error updating article:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// DELETE /api/v1/articles/:id
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const existing = await prisma.article.findUnique({ where: { id } });
+    if (!existing) {
+      return res.status(404).json({ error: "Article not found" });
+    }
+
+    await prisma.article.delete({ where: { id } });
+    res.json({ success: true, message: "Article deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting article:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

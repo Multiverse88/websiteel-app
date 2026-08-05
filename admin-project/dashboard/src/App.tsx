@@ -8,6 +8,7 @@ import Contacts from './pages/Contacts'
 import Newsletter from './pages/Newsletter'
 import LandingPages from './pages/LandingPages'
 import Redirects from './pages/Redirects'
+import EmailBlast from './pages/EmailBlast'
 
 function Router() {
   const { isAuthenticated } = useAuth()
@@ -38,6 +39,7 @@ function Router() {
     '/newsletter': <Newsletter />,
     '/landing-pages': <LandingPages />,
     '/redirects': <Redirects />,
+    '/email-blast': <EmailBlast />,
   }
 
   return <Layout>{pages[route] || <Dashboard />}</Layout>

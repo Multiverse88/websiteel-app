@@ -77,3 +77,28 @@ router.post("/unsubscribe", async (req, res) => {
 });
 
 export default router;
+
+// GET /api/v1/newsletter
+router.get("/", async (req, res) => {
+  try {
+    const subscribers = await prisma.newsletterSubscriber.findMany({
+      orderBy: { subscribedAt: "desc" },
+    });
+    res.json({ data: subscribers });
+  } catch (error) {
+    console.error("Error fetching subscribers:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// DELETE /api/v1/newsletter/:id
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await prisma.newsletterSubscriber.delete({ where: { id } });
+    res.json({ success: true, message: "Subscriber deleted" });
+  } catch (error) {
+    console.error("Failed to delete subscriber:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});

@@ -30,4 +30,29 @@ router.post("/", async (req, res) => {
   }
 });
 
+// GET /api/v1/contacts
+router.get("/", async (req, res) => {
+  try {
+    const submissions = await prisma.contactSubmission.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+    res.json({ data: submissions });
+  } catch (error) {
+    console.error("Failed to fetch contacts:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// DELETE /api/v1/contacts/:id
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await prisma.contactSubmission.delete({ where: { id } });
+    res.json({ success: true, message: "Contact deleted" });
+  } catch (error) {
+    console.error("Failed to delete contact:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 export default router;

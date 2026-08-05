@@ -9,6 +9,7 @@ const pageTitles: Record<string, string> = {
   '/newsletter': 'Newsletter',
   '/landing-pages': 'Landing Pages',
   '/redirects': 'Redirects',
+  '/email-blast': 'Email Blast',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

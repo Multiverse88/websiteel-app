@@ -26,14 +26,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const res = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email: username, password }),
     })
     if (!res.ok) {
       const err = await res.json().catch(() => ({ error: 'Login failed' }))
       throw new Error(err.error || 'Login failed')
     }
     const data = await res.json()
-    const userData: User = { username: data.username || username, token: data.token }
+    const userData: User = { username: data.email || username, token: data.token || 'authenticated' }
     localStorage.setItem('admin_user', JSON.stringify(userData))
     localStorage.setItem('admin_token', userData.token)
     setUser(userData)

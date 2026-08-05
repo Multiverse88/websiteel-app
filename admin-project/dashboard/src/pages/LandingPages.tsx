@@ -4,15 +4,15 @@ import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
 
 interface LandingPage {
-  _id: string
+  id: string
   title: string
   slug: string
-  content: string
+  description: string
   status: string
   createdAt: string
 }
 
-const emptyForm = { title: '', slug: '', content: '', status: 'draft' }
+const emptyForm = { title: '', slug: '', description: '', status: 'draft' }
 
 export default function LandingPages() {
   const [pages, setPages] = useState<LandingPage[]>([])
@@ -52,7 +52,7 @@ export default function LandingPages() {
 
   const openEdit = (page: LandingPage) => {
     setEditing(page)
-    setForm({ title: page.title, slug: page.slug, content: page.content, status: page.status })
+    setForm({ title: page.title, slug: page.slug, description: page.description, status: page.status })
     setModalOpen(true)
   }
 
@@ -60,7 +60,7 @@ export default function LandingPages() {
     setSaving(true)
     try {
       if (editing) {
-        await api.updateLandingPage(editing._id, form)
+        await api.updateLandingPage(editing.id, form)
       } else {
         await api.createLandingPage(form)
       }
@@ -76,7 +76,7 @@ export default function LandingPages() {
   const handleDelete = async () => {
     if (!deleteConfirm) return
     try {
-      await api.deleteLandingPage(deleteConfirm._id)
+      await api.deleteLandingPage(deleteConfirm.id)
       setDeleteConfirm(null)
       load()
     } catch (e: any) {
@@ -121,8 +121,8 @@ export default function LandingPages() {
           <input className="form-input" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
         </div>
         <div className="form-group">
-          <label className="form-label">Content</label>
-          <textarea className="form-textarea" rows={6} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} />
+          <label className="form-label">Description</label>
+          <input className="form-input" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
         </div>
         <div className="form-group">
           <label className="form-label">Status</label>

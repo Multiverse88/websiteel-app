@@ -7,6 +7,7 @@ const navItems = [
   { label: 'Newsletter', icon: '📰', hash: '#/newsletter' },
   { label: 'Landing Pages', icon: '🌐', hash: '#/landing-pages' },
   { label: 'Redirects', icon: '🔀', hash: '#/redirects' },
+  { label: 'Email Blast', icon: '📧', hash: '#/email-blast' },
 ]
 
 export default function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {

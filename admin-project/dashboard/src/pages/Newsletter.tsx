@@ -4,7 +4,7 @@ import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
 
 interface Subscriber {
-  _id: string
+  id: string
   email: string
   name: string
   createdAt: string
@@ -39,7 +39,7 @@ export default function Newsletter() {
   const handleDelete = async () => {
     if (!deleteConfirm) return
     try {
-      await api.deleteSubscriber(deleteConfirm._id)
+      await api.deleteSubscriber(deleteConfirm.id)
       setDeleteConfirm(null)
       load()
     } catch (e: any) {

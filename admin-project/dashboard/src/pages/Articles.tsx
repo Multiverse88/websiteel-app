@@ -4,15 +4,19 @@ import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
 
 interface Article {
-  _id: string
+  id: string
   title: string
   slug: string
   content: string
-  status: string
+  excerpt: string
+  category: string
+  coverImage: string
+  readTime: string
+  viewCount: number
   createdAt: string
 }
 
-const emptyForm = { title: '', slug: '', content: '', status: 'draft' }
+const emptyForm = { title: '', slug: '', excerpt: '', content: '', category: '', coverImage: '', readTime: '5 min read' }
 
 export default function Articles() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -52,7 +56,15 @@ export default function Articles() {
 
   const openEdit = (article: Article) => {
     setEditing(article)
-    setForm({ title: article.title, slug: article.slug, content: article.content, status: article.status })
+    setForm({
+      title: article.title,
+      slug: article.slug,
+      excerpt: article.excerpt,
+      content: article.content,
+      category: article.category,
+      coverImage: article.coverImage,
+      readTime: article.readTime,
+    })
     setModalOpen(true)
   }
 
@@ -60,7 +72,7 @@ export default function Articles() {
     setSaving(true)
     try {
       if (editing) {
-        await api.updateArticle(editing._id, form)
+        await api.updateArticle(editing.id, form)
       } else {
         await api.createArticle(form)
       }
@@ -76,7 +88,7 @@ export default function Articles() {
   const handleDelete = async () => {
     if (!deleteConfirm) return
     try {
-      await api.deleteArticle(deleteConfirm._id)
+      await api.deleteArticle(deleteConfirm.id)
       setDeleteConfirm(null)
       load()
     } catch (e: any) {
@@ -86,7 +98,9 @@ export default function Articles() {
 
   const columns = [
     { key: 'title', label: 'Title' },
-    { key: 'status', label: 'Status', render: (v: string) => <span className={`badge badge--${v === 'published' ? 'success' : 'warning'}`}>{v}</span> },
+    { key: 'category', label: 'Category' },
+    { key: 'readTime', label: 'Read Time' },
+    { key: 'viewCount', label: 'Views' },
     { key: 'createdAt', label: 'Date', render: (v: string) => new Date(v).toLocaleDateString() },
   ]
 
@@ -121,15 +135,34 @@ export default function Articles() {
           <input className="form-input" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
         </div>
         <div className="form-group">
-          <label className="form-label">Content</label>
-          <textarea className="form-textarea" rows={6} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} />
+          <label className="form-label">Excerpt</label>
+          <input className="form-input" value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} />
         </div>
         <div className="form-group">
-          <label className="form-label">Status</label>
-          <select className="form-input" value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
+          <label className="form-label">Category</label>
+          <select className="form-input" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
+            <option value="">Select Category</option>
+            <option value="Pendirian PT">Pendirian PT</option>
+            <option value="Legalitas PT">Legalitas PT</option>
+            <option value="Merek & HAKI">Merek & HAKI</option>
+            <option value="Sertifikasi ISO">Sertifikasi ISO</option>
+            <option value="Perizinan">Perizinan</option>
+            <option value="NIB">NIB</option>
+            <option value="Pajak">Pajak</option>
+            <option value="Branding">Branding</option>
           </select>
+        </div>
+        <div className="form-group">
+          <label className="form-label">Cover Image URL</label>
+          <input className="form-input" value={form.coverImage} onChange={(e) => setForm({ ...form, coverImage: e.target.value })} />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Read Time</label>
+          <input className="form-input" value={form.readTime} onChange={(e) => setForm({ ...form, readTime: e.target.value })} placeholder="e.g. 5 min read" />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Content</label>
+          <textarea className="form-textarea" rows={8} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} />
         </div>
         <div className="modal-actions">
           <button className="btn btn--outline" onClick={() => setModalOpen(false)}>Cancel</button>
