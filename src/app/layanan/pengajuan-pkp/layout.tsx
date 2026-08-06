@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Pengurusan pengukuhan Pengusaha Kena Pajak (PKP) untuk UMKM & korporasi. Proses cepat 3-5 hari kerja.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/pengajuan-pkp",
+    canonical: "https://easylegal.biz.id/layanan/pengajuan-pkp",
   },
 };
 

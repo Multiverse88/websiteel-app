@@ -35,7 +35,7 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const BASE_URL = "https://easylegal.my.id";
+const BASE_URL = "https://easylegal.biz.id";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 
-const TYPEBOT_HOST = 'https://typebot.easylegal.my.id'
+const TYPEBOT_HOST = 'https://typebot.easylegal.biz.id'
 const TYPEBOT_BOT_ID = process.env.NEXT_PUBLIC_TYPEBOT_BOT_ID || ''
 
 interface TypebotWindow {

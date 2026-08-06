@@ -21,7 +21,7 @@ export async function generateMetadata({
     title: `Pendirian ${content.nama} — ${content.namaFormal}`,
     description: `Pendirian ${content.namaFormal} (${content.nama}) resmi notaris & Kemenkumham. Proses 2-3 minggu.`,
     alternates: {
-      canonical: `https://easylegal.my.id/layanan/pendirian-badan-usaha/${jenis}`,
+      canonical: `https://easylegal.biz.id/layanan/pendirian-badan-usaha/${jenis}`,
     },
   };
 }

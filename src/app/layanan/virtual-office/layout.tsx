@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Sewa virtual office Bandung, Jakarta, & Bekasi untuk domisili PT, NPWP, PKP. Harga mulai Rp1,5jt/tahun + meeting room 70 jam.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/virtual-office",
+    canonical: "https://easylegal.biz.id/layanan/virtual-office",
   },
 };
 

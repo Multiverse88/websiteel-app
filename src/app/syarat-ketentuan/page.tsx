@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const sections = [
   {
     title: "1. Penerimaan Syarat",
-    content: `Dengan mengakses atau menggunakan website easylegal.my.id dan layanan yang tersedia, Anda menyetujui untuk terikat oleh Syarat & Ketentuan ini. Jika Anda tidak menyetujui salah satu ketentuan ini, mohon untuk tidak menggunakan layanan kami.`,
+    content: `Dengan mengakses atau menggunakan website easylegal.biz.id dan layanan yang tersedia, Anda menyetujui untuk terikat oleh Syarat & Ketentuan ini. Jika Anda tidak menyetujui salah satu ketentuan ini, mohon untuk tidak menggunakan layanan kami.`,
   },
   {
     title: "2. Deskripsi Layanan",
@@ -41,7 +41,7 @@ const sections = [
   },
   {
     title: "7. Hak Kekayaan Intelektual",
-    content: `• Semua konten di website easylegal.my.id (teks, logo, grafik, desain) adalah milik EasyLegal dan dilindungi undang-undang.\n• Klien tidak diperkenankan menyalin, mendistribusikan, atau menggunakan konten kami tanpa izin tertulis.\n• Dokumen legal yang dihasilkan atas nama klien menjadi milik klien setelah layanan selesai.`,
+    content: `• Semua konten di website easylegal.biz.id (teks, logo, grafik, desain) adalah milik EasyLegal dan dilindungi undang-undang.\n• Klien tidak diperkenankan menyalin, mendistribusikan, atau menggunakan konten kami tanpa izin tertulis.\n• Dokumen legal yang dihasilkan atas nama klien menjadi milik klien setelah layanan selesai.`,
   },
   {
     title: "8. Batasan Tanggung Jawab",

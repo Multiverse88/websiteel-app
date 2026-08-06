@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Jasa pendaftaran merek dagang & HAKI di DJKI. Cek merek, perpanjangan, pengalihan, & tanggapan penolakan. Mulai dari Rp279rb.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/merek-haki",
+    canonical: "https://easylegal.biz.id/layanan/merek-haki",
   },
 };
 
