@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Pembuatan perjanjian perkawinan (prenupial) dengan akta notaris. Lindungi aset bisnis & pribadi sebelum menikah.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/perjanjian-perkawinan",
+    canonical: "https://easylegal.biz.id/layanan/perjanjian-perkawinan",
   },
 };
 

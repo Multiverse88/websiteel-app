@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Jasa pembuatan kontrak & perjanjian profesional untuk bisnis, UMKM, dan individu. Disusun oleh ahli hukum berpengalaman, sah secara hukum, dan sesuai regulasi di Indonesia.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/kontrak-bisnis",
+    canonical: "https://easylegal.biz.id/layanan/kontrak-bisnis",
   },
 };
 

@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Layanan press release & rilis berita profesional. Distribusi ke media nasional, SEO-optimized, laporanreach & clipping.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/press-release",
+    canonical: "https://easylegal.biz.id/layanan/press-release",
   },
 };
 
