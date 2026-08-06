@@ -195,7 +195,15 @@ const nextConfig: NextConfig = {
       { source: "/konsultasi-legal-bisnis", destination: "/kontak" }, // Arahkan langsung ke form Kontak
       { source: "/terima-kasih-konsultasi-legalitas-bisnis-metaads", destination: "/testimoni" },
       { source: "/testimoni-klien-gads", destination: "/testimoni" },
-      { source: "/lp-produk-layanan-dads", destination: "/layanan/virtual-office" }
+      { source: "/lp-produk-layanan-dads", destination: "/layanan/virtual-office" },
+
+      // Tambahan URL Iklan Baru (Rewrites agar URL tetap tidak berubah di Ads)
+      { source: "/jasa-pembuatan-koperasi", destination: "/layanan/pendirian-badan-usaha/koperasi" },
+      { source: "/jasa-pengurusan-pkp-2", destination: "/layanan/pengajuan-pkp" },
+      { source: "/lp-produk-iso", destination: "/layanan/sertifikasi-iso" },
+      { source: "/firma", destination: "/layanan/pendirian-badan-usaha/firma" },
+      { source: "/jasa-pendaftaran-pt-pma-terpercaya", destination: "/layanan/pendirian-badan-usaha/pt-pma" },
+      { source: "/jasa-pembuatan-pendirian-pt-indonesia", destination: "/layanan/pendirian-badan-usaha/pt" }
     ];
   },
   async redirects() {
