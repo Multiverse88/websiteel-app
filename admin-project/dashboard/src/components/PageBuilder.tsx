@@ -269,11 +269,7 @@ const defaultBlockPresets: Record<BlockType, { content: Record<string, any>; sty
  */
 function toPreviewSrc(src: string | undefined | null): string {
   if (!src) return '';
-  const CDN_PREFIX = 'https://cdn.easylegal.my.id/images/';
-  if (src.startsWith(CDN_PREFIX)) {
-    return '/images/' + src.slice(CDN_PREFIX.length);
-  }
-  return src; // already relative or external URL
+  return src;
 }
 
 // Helper to normalize imported blocks

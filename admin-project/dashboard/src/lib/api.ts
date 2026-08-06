@@ -86,14 +86,14 @@ export const api = {
 
   // Settings / Templates (Mapping to SystemSetting for now or placeholders)
   getSmtpSettings: async () => {
-    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
+    const backendUrl = import.meta.env.VITE_API_URL || '/api/v1';
     const res = await fetch(`${backendUrl}/email-blast/smtp-settings`);
     if (!res.ok) throw new Error('Gagal memuat pengaturan SMTP');
     const json = await res.json();
     return json.data;
   },
   saveSmtpSettings: async (data: any) => {
-    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
+    const backendUrl = import.meta.env.VITE_API_URL || '/api/v1';
     const res = await fetch(`${backendUrl}/email-blast/smtp-settings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -103,7 +103,7 @@ export const api = {
     return await res.json();
   },
   testSendEmail: async (data: any) => {
-    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
+    const backendUrl = import.meta.env.VITE_API_URL || '/api/v1';
     const res = await fetch(`${backendUrl}/email-blast/campaigns/test-send`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -116,7 +116,7 @@ export const api = {
     return await res.json();
   },
   sendNewsletterBroadcast: async (data: any) => {
-    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
+    const backendUrl = import.meta.env.VITE_API_URL || '/api/v1';
     const res = await fetch(`${backendUrl}/newsletter/broadcast`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -134,7 +134,7 @@ export const api = {
   // Media / MinIO CDN
   getMedia: async () => {
     try {
-      const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
+      const backendUrl = import.meta.env.VITE_API_URL || '/api/v1';
       const res = await fetch(`${backendUrl}/media`);
       if (res.ok) {
         return await res.json();
@@ -145,7 +145,7 @@ export const api = {
     return null;
   },
   uploadMedia: async (file: File) => {
-    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
+    const backendUrl = import.meta.env.VITE_API_URL || '/api/v1';
     const formData = new FormData();
     formData.append('file', file);
     const res = await fetch(`${backendUrl}/media/upload`, {
@@ -159,7 +159,7 @@ export const api = {
     return await res.json();
   },
   deleteMedia: async (fullKey: string) => {
-    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
+    const backendUrl = import.meta.env.VITE_API_URL || '/api/v1';
     const res = await fetch(`${backendUrl}/media/${encodeURIComponent(fullKey)}`, {
       method: 'DELETE',
     });

@@ -19,8 +19,18 @@ import path from 'path';
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const allowedOrigins = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(',').map(o => o.trim())
+  : ['https://easylegal.my.id', 'https://admin.easylegal.my.id', 'https://easylegal.biz.id'];
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:3000', 'https://easylegal.my.id', 'https://admin.easylegal.my.id'], // Allow Next.js as well
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());

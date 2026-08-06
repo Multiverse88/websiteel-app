@@ -276,7 +276,7 @@ export default function ImagePicker({ isOpen, onClose, onSelect }: ImagePickerPr
                 >
                   <div className="h-36 bg-gray-100 flex items-center justify-center relative overflow-hidden">
                     <img
-                      src={asset.url}
+                      src={asset.cdnUrl}
                       alt={asset.name}
                       className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
