@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Artikel Tidak Ditemukan — EasyLegal" };
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.my.id";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.biz.id";
 
   return {
     title: `${article.title} — EasyLegal`,
@@ -124,12 +124,12 @@ function cleanArticleUrl(url: string, articleTitle: string): string {
   }
 
   // 2. Old product pages redirect to new router structure
-  if (url.includes("/lp-produk-koperasi") || url.includes("easylegal.id/lp-produk-koperasi") || url.includes("easylegal.my.id/lp-produk-koperasi")) {
+  if (url.includes("/lp-produk-koperasi") || url.includes("easylegal.id/lp-produk-koperasi") || url.includes("easylegal.biz.id/lp-produk-koperasi")) {
     return "/layanan/pendirian-badan-usaha/koperasi";
   }
 
   // 3. Absolute easylegal.id links converted to local relative paths
-  if (url.includes("easylegal.id") || url.includes("easylegal.my.id")) {
+  if (url.includes("easylegal.id") || url.includes("easylegal.biz.id")) {
     // Replace domain to make it relative
     const relativePath = url.replace(/^https?:\/\/(www\.)?(easylegal\.id|easylegal\.my\.id)/, "");
     return relativePath || "/";

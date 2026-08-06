@@ -6,7 +6,7 @@ export const config = {
   defaultWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.",
   
   // Website URL
-  baseUrl: process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.my.id",
+  baseUrl: process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.biz.id",
   
   // Company info
   company: {

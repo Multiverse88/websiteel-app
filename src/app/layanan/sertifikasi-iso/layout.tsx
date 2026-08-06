@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Jasa sertifikasi ISO terakreditasi UAF untuk berbagai standar. Pendampingan A-Z dari konsultasi sampai sertifikat terbit. Mulai dari Rp9,9jt.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/sertifikasi-iso",
+    canonical: "https://easylegal.biz.id/layanan/sertifikasi-iso",
   },
 };
 

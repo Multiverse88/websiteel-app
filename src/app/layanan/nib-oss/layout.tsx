@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Pengurusan NIB, OSS RBA, perubahan KBLI, & sertifikat standar. Proses 1-3 hari kerja. Mulai dari Rp499rb.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/nib-oss",
+    canonical: "https://easylegal.biz.id/layanan/nib-oss",
   },
 };
 

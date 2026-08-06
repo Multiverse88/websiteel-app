@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Layanan Apostille dokumen resmi Indonesia untuk 129+ negara anggota Konvensi Hague. Proses cepat, mudah, & bisa 100% online. Mulai dari Rp1,3jt termasuk PNBP.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/apostille",
+    canonical: "https://easylegal.biz.id/layanan/apostille",
   },
 };
 

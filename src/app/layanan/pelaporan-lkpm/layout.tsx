@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Pengurusan laporan LKPM wajib tahunan untuk badan usaha PMA & PMDN. Konsultasi gratis, proses 3-7 hari kerja.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/pelaporan-lkpm",
+    canonical: "https://easylegal.biz.id/layanan/pelaporan-lkpm",
   },
 };
 

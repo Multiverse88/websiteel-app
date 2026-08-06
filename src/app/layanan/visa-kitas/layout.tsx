@@ -5,7 +5,7 @@ export const metadata = {
   description:
     "Pengurusan visa bisnis, KITAS investor, & KITAS tenaga kerja asing. Proses cepat, 100% resmi Ditjen Imigrasi.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/visa-kitas",
+    canonical: "https://easylegal.biz.id/layanan/visa-kitas",
   },
 };
 

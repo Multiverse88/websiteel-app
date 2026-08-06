@@ -7,7 +7,7 @@ export const metadata = {
   description:
     "Jasa pendirian PT, CV, Firma, Yayasan, dan Koperasi dengan proses cepat, harga transparan, dan tuntas. Mulai dari Rp2,5jt.",
   alternates: {
-    canonical: "https://easylegal.my.id/layanan/pendirian-badan-usaha",
+    canonical: "https://easylegal.biz.id/layanan/pendirian-badan-usaha",
   },
 };
 
