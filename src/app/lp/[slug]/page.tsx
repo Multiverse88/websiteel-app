@@ -1,4 +1,5 @@
 import React from 'react';
+import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import SectionRenderer from '@/components/landing-page/SectionRenderer';
 import { SectionData } from '@/types/landing-page';
@@ -69,10 +70,11 @@ export default async function LandingPage({ params }: PageProps) {
     <main className="flex flex-col min-h-screen bg-white">
       {/* Render pixel / tracking script if any */}
       {page.pixelId && (
-        <script
+        <Script
+          id="pixel-tracking"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              // Placeholder for Pixel tracking code
               console.log("Pixel ID Loaded:", "${page.pixelId}");
             `,
           }}
