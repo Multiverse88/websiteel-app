@@ -13,6 +13,7 @@ export default function Navbar() {
   const [isPendirianOpen, setIsPendirianOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ticking = false;
@@ -26,14 +27,25 @@ export default function Navbar() {
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
+    
     const handleOpenPendirian = () => {
       setIsLayananOpen(true);
       setIsPendirianOpen(true);
     };
     window.addEventListener("open-pendirian", handleOpenPendirian);
+    
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsLayananOpen(false);
+        setIsPendirianOpen(false);
+      }
+    };
+    window.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("open-pendirian", handleOpenPendirian);
+      window.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -124,8 +136,7 @@ export default function Navbar() {
             {/* Layanan Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setIsLayananOpen(true)}
-              onMouseLeave={() => { setIsLayananOpen(false); setIsPendirianOpen(false); }}
+              ref={dropdownRef}
             >
               <button
                 onClick={() => setIsLayananOpen(!isLayananOpen)}
