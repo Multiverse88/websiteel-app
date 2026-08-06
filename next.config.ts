@@ -246,6 +246,14 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'easylegal.biz.id',
+      },
+      {
+        protocol: 'http',
+        hostname: 'easylegal.biz.id',
+      },
+      {
+        protocol: 'https',
         hostname: 'easylegal.id',
       },
       {
