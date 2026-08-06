@@ -240,8 +240,8 @@ export default function LandingPages() {
                       <div className="flex items-center justify-end gap-1">
                         <button 
                           onClick={() => {
-                            navigator.clipboard.writeText(`https://easylegal.my.id/lp/${item.slug}`)
-                            alert(`Link disalin: https://easylegal.my.id/lp/${item.slug}`)
+                            navigator.clipboard.writeText(`https://easylegal.biz.id/lp/${item.slug}`)
+                            alert(`Link disalin: https://easylegal.biz.id/lp/${item.slug}`)
                           }}
                           className="p-1.5 text-gray-400 hover:text-gray-700 rounded hover:bg-gray-100" 
                           title="Salin Link Publik"
