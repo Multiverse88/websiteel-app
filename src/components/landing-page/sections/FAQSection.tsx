@@ -1,4 +1,5 @@
 import React from 'react';
+import { posStyle, sectionScale } from '../utils';
 import { HelpCircle } from 'lucide-react';
 
 interface FAQItem {
@@ -16,21 +17,33 @@ interface Props {
   };
 }
 
+;
+
 export default function FAQSection({ data }: Props) {
   const styles = data.styles || {};
   const items = data.items || [];
+  const pos = styles.positions;
 
-  return (
+  
+  
+
+return (
     <section
       className="bg-white py-16 sm:py-24"
-      style={{ paddingTop: styles.paddingTop, paddingBottom: styles.paddingBottom }}
+      style={{ ...(data.styles?.sectionHeight ? { minHeight: data.styles.sectionHeight } : {}),  paddingTop: styles.paddingTop, paddingBottom: styles.paddingBottom, ...(styles.height ? { minHeight: styles.height } : {}) }}
     >
-      <div className="max-w-[800px] mx-auto px-4 sm:px-8">
+      <div style={sectionScale(data.styles) !== 1 ? { transform: `scale(${sectionScale(data.styles)})`, transformOrigin: "top center", width: "100%" } : {}}>
+
+      <div className="max-w-[800px] mx-auto px-4 sm:px-8 relative">
         {data.title && (
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">{data.title}</h2>
+          <div style={posStyle(pos, 'title')}>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">{data.title}</h2>
+          </div>
         )}
         {data.subtitle && (
-          <p className="text-center text-sm sm:text-base text-gray-500 max-w-xl mx-auto mb-12">{data.subtitle}</p>
+          <div style={posStyle(pos, 'subtitle')}>
+            <p className="text-center text-sm sm:text-base text-gray-500 max-w-xl mx-auto mb-12">{data.subtitle}</p>
+          </div>
         )}
         <div className="space-y-4">
           {items.map((faq, idx) => (
@@ -46,6 +59,8 @@ export default function FAQSection({ data }: Props) {
           ))}
         </div>
       </div>
+      </div>
+
     </section>
   );
 }

@@ -15,7 +15,6 @@ import CTASection from './sections/CTASection';
 
 interface Props {
   section: SectionData;
-  landingPageId?: string;
 }
 
 function unwrapContent(raw: any): any {
@@ -25,7 +24,7 @@ function unwrapContent(raw: any): any {
   return raw;
 }
 
-export default function SectionRenderer({ section, landingPageId }: Props) {
+export default function SectionRenderer({ section }: Props) {
   const type = (section.type || '').toLowerCase();
   const data = unwrapContent(section);
 
@@ -39,7 +38,7 @@ export default function SectionRenderer({ section, landingPageId }: Props) {
     case 'testimonials':
       return <TestimonialsSection data={data} />;
     case 'leadform':
-      return <LeadFormSection data={data} landingPageId={landingPageId} />;
+      return <LeadFormSection data={data} />;
     case 'richtext':
     case 'text':
       return <RichTextSection data={data} />;
