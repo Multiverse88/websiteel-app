@@ -55,11 +55,13 @@ export const api = {
     method: 'POST', 
     body: JSON.stringify({
       createdBy: 'cmppip4tf0000o47yzniv6ft8',
+      id: 'c' + Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9),
+      updatedAt: new Date().toISOString(),
       sections: '[]',
       ...data
     }) 
   }),
-  updateLandingPage: (id: string, data: any) => request(`/LandingPage?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  updateLandingPage: (id: string, data: any) => request(`/LandingPage?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ ...data, updatedAt: new Date().toISOString() }) }),
   deleteLandingPage: (id: string) => request(`/LandingPage?id=eq.${id}`, { method: 'DELETE' }),
 
   // Redirects
@@ -74,7 +76,6 @@ export const api = {
   updateBlastContact: (id: string, data: any) => request(`/BlastContact?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
   deleteBlastContact: (id: string) => request(`/BlastContact?id=eq.${id}`, { method: 'DELETE' }),
   importBlastContacts: (contacts: any[]) => request('/BlastContact', { method: 'POST', body: JSON.stringify(contacts) }), // Bulk insert
-  toggleAllContactsStatus: (isActive: boolean) => request('/BlastContact', { method: 'PATCH', body: JSON.stringify({ isActive }) }),
 
   // Newsletter Broadcast & Logs
   getNewsletterBroadcasts: () => request('/NewsletterBroadcast?select=*&order=sentAt.desc&limit=10'),

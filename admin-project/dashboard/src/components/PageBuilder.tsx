@@ -1,4 +1,6 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import Moveable from 'react-moveable';
+import InlineEditText from './InlineEditText';
 import { 
   DndContext, 
   closestCenter,
@@ -77,6 +79,7 @@ export interface BlockData {
     textColor?: string;
     buttonColor?: string;
     colors?: Record<string, string>;
+    [key: string]: any;
   };
 }
 
@@ -267,13 +270,8 @@ const defaultBlockPresets: Record<BlockType, { content: Record<string, any>; sty
  * Production pages receive the original CDN URL stored in block.content.
  * The builder proxies /images → Express API → disk, so local paths always load.
  */
-function toPreviewSrc(src: string | undefined | null): string {
-  if (!src) return '';
-  return src;
-}
-
 // Helper to normalize imported blocks
-export function normalizeBlocks(rawSections: any): BlockData[] {
+function normalizeBlocks(rawSections: any): BlockData[] {
   if (!rawSections) return [];
   let parsed = rawSections;
   if (typeof rawSections === 'string') {
@@ -500,6 +498,8 @@ const SortableBlock = ({
   viewport,
   onDragBlockStart,
   onDragBlockEnd,
+  onUpdateStyles,
+  onUpdateContent,
 }: {
   block: BlockData;
   index: number;
@@ -515,7 +515,28 @@ const SortableBlock = ({
   viewport: 'desktop' | 'tablet' | 'mobile';
   onDragBlockStart?: (e: React.DragEvent, index: number, id: string) => void;
   onDragBlockEnd?: () => void;
+  onUpdateStyles?: (key: string, value: any) => void;
+  onUpdateContent?: (key: string, value: string) => void;
 }) => {
+  
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [target, setTarget] = useState<HTMLElement | null>(null);
+  const [selectedElement, setSelectedElement] = useState<string | null>(null);
+  const [refAttached, setRefAttached] = useState(false);
+  const [toolbarPos, setToolbarPos] = useState<{ top: number; left: number } | null>(null);
+
+  useEffect(() => {
+    if (isActive && contentRef.current) {
+      setTarget(contentRef.current);
+    } else {
+      setTarget(null);
+    }
+  }, [isActive, refAttached]);
+
+  useEffect(() => {
+    if (!isActive) setSelectedElement(null);
+  }, [isActive]);
+
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: block.id });
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -539,13 +560,77 @@ const SortableBlock = ({
   const paddingStyle = {
     paddingTop: block.styles?.paddingTop || '48px',
     paddingBottom: block.styles?.paddingBottom || '48px',
+    // ponytail: sectionHeight re-applied — section resize handle now works
+    ...(block.styles?.sectionHeight ? { minHeight: block.styles.sectionHeight } : {}),
+    overflow: 'clip',
     ...(block.styles?.textColor ? { '--override-text': block.styles.textColor } : {}),
-    ...(block.styles?.buttonColor ? { '--override-btn': block.styles.buttonColor } : {})
+    ...(block.styles?.buttonColor ? { '--override-btn': block.styles.buttonColor } : {}),
+    ...(block.styles?.maxWidth ? { maxWidth: block.styles.maxWidth } : {})
   } as React.CSSProperties;
 
   const c = (key: string) => block.styles?.colors?.[key] ? { color: block.styles.colors[key] } : {};
   const bg = (key: string) => block.styles?.colors?.[key] ? { backgroundColor: block.styles.colors[key], borderColor: block.styles.colors[key] } : {};
+  const fs = (key: string) => block.styles?.[key] ? { fontSize: block.styles[key] } : {};
+  const elSelected = (element: string) => selectedElement === element;
+  const elClass = (element: string) =>
+    `builder-element ${elSelected(element) ? 'outline outline-2 outline-offset-2 outline-[#6f0000] bg-[#6f0000]/5 rounded' : 'transition-all'}`;
 
+  // ponytail: reads saved drag/resize/scale positions from block.styles.positions
+  const getPosStyle = (element: string): React.CSSProperties => {
+    const p = block.styles?.positions?.[element];
+    if (!p) return {};
+    const s: React.CSSProperties = {};
+    const sx = p.sx !== undefined ? p.sx : 1;
+    const sy = p.sy !== undefined ? p.sy : 1;
+    const tx = p.tx || 0;
+    const ty = p.ty || 0;
+    const hasTransform = tx || ty || sx !== 1 || sy !== 1;
+    if (hasTransform) s.transform = `translate(${tx}px, ${ty}px) scale(${sx}, ${sy})`;
+    if (p.w) s.width = p.w;
+    if (p.h) s.height = p.h;
+    return s;
+  };
+
+  // ponytail: image elements resize via width/height; text elements scale via transform
+  const isImageElement = (el: string) =>
+    el === 'image' || el === 'banner' || el === 'logo' ||
+    el.includes('image') || el.includes('Image') || el.includes('logo') || el.includes('Logo');
+
+  const updateContent = (key: string, value: string) => {
+    if (onUpdateContent) onUpdateContent(key, value);
+  };
+
+  const getDefaultOrder = (type: string): string[] => {
+    const orders: Record<string, string[]> = {
+      Hero: ['badge', 'headline', 'subheadline', 'ctaButton', 'secondaryCta'],
+      CTA: ['badge', 'title', 'description', 'ctaButton'],
+      Text: ['title', 'text'],
+      Button: ['button'],
+      Image: ['image', 'caption'],
+      Banner: ['banner'],
+      Features: ['title', 'subtitle'],
+      Testimonials: ['title', 'subtitle'],
+      Pricing: ['title', 'subtitle'],
+      FAQ: ['title', 'subtitle'],
+      LeadForm: ['title', 'subtitle'],
+      MarketplaceTrust: ['headline', 'description', 'button'],
+      PromoCards: ['card1Title', 'card2Title'],
+      BottomPromo: ['card1Title', 'card2Title', 'marketplaceTitle'],
+    };
+    return orders[type] || [];
+  };
+
+  const moveElement = (element: string, direction: 'up' | 'down') => {
+    if (!onUpdateStyles) return;
+    const order: string[] = block.styles?.elementOrder || getDefaultOrder(block.type);
+    const idx = order.indexOf(element);
+    if (idx === -1) return;
+    const newIdx = direction === 'up' ? idx - 1 : idx + 1;
+    if (newIdx < 0 || newIdx >= order.length) return;
+    const newOrder = [...order];
+    [newOrder[idx], newOrder[newIdx]] = [newOrder[newIdx], newOrder[idx]];
+    onUpdateStyles('elementOrder', newOrder);
+  };
   return (
     <div
       ref={setNodeRef}
@@ -574,17 +659,6 @@ const SortableBlock = ({
           <div 
             {...attributes} 
             {...listeners} 
-            draggable={!previewMode}
-            onDragStart={(e) => {
-              const payload = JSON.stringify({ source: 'canvas', id: block.id, index });
-              e.dataTransfer.setData('application/json', payload);
-              e.dataTransfer.setData('text/plain', payload);
-              e.dataTransfer.effectAllowed = 'move';
-              if (onDragBlockStart) onDragBlockStart(e, index, block.id);
-            }}
-            onDragEnd={() => {
-              if (onDragBlockEnd) onDragBlockEnd();
-            }}
             className="cursor-grab active:cursor-grabbing hover:bg-white/20 px-1.5 py-0.5 rounded flex items-center gap-1 touch-none select-none" 
             title="Tahan dan geser untuk pindah urutan"
           >
@@ -631,52 +705,87 @@ const SortableBlock = ({
       )}
 
       {/* Render Component Content */}
-      <div className={`${bgClasses} transition-colors`} style={paddingStyle}>
+      <div ref={(el) => { contentRef.current = el; if (el) setRefAttached(true); }} className={`${bgClasses} transition-colors`} style={paddingStyle}>
+        <div className="section-content-wrapper w-full">
         {/* HERO SECTION */}
-        {block.type === 'Hero' && (
-          <div className="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
-            {block.content.badge && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-5 bg-[#6f0000]/10 text-[#6f0000] border border-[#6f0000]/20" style={c('badge')}>
-                <Sparkles size={13} /> {block.content.badge}
+        {block.type === 'Hero' && (() => {
+          const order = block.styles?.elementOrder || getDefaultOrder('Hero');
+          const elements: Record<string, React.ReactNode> = {
+            badge: block.content.badge ? (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-5 bg-[#6f0000]/10 text-[#6f0000] border border-[#6f0000]/20" style={{ ...c('badge'), ...fs('badgeFontSize') }}>
+                <Sparkles size={13} /> <InlineEditText value={block.content.badge} onChange={(v) => updateContent('badge', v)} disabled={previewMode} />
               </span>
-            )}
-            <h1 className={`font-extrabold tracking-tight leading-tight ${r('text-2xl', 'text-3xl', 'text-5xl')}`} style={c('headline')}>
-              {block.content.headline || 'Headline Landing Page'}
-            </h1>
-            <p className={`mt-4 opacity-80 max-w-2xl ${r('text-sm', 'text-base', 'text-lg')}`} style={c('subheadline')}>
-              {block.content.subheadline || 'Subheadline penjelas penawaran Anda secara detail dan menarik.'}
-            </p>
-            <div className={`mt-8 flex flex-wrap gap-4 justify-center ${r('flex-col items-stretch w-full px-4', 'flex-row', 'flex-row')}`}>
-              {block.content.ctaText && (
-                <a
-                  href={block.content.ctaLink || '#'}
-                  onClick={e => previewMode ? undefined : e.preventDefault()}
-                  className="px-6 py-3.5 bg-[#6f0000] text-white font-bold rounded-xl shadow-md hover:bg-[#850000] transition inline-flex items-center gap-2"
-                  style={{ ...c('ctaText'), ...bg('ctaText') }}
-                >
-                  <MessageSquare size={18} /> {block.content.ctaText}
-                </a>
-              )}
-              {block.content.secondaryCtaText && (
-                <a
-                  href={block.content.secondaryCtaLink || '#'}
-                  onClick={e => previewMode ? undefined : e.preventDefault()}
-                  className="px-6 py-3.5 bg-white text-gray-800 border border-gray-300 font-bold rounded-xl shadow-sm hover:bg-gray-50 transition"
-                  style={{ ...c('secondaryCtaText'), ...bg('secondaryCtaText') }}
-                >
-                  {block.content.secondaryCtaText}
-                </a>
+            ) : null,
+            headline: (
+              <h1 className={`font-extrabold tracking-tight leading-tight ${r('text-2xl', 'text-3xl', 'text-5xl')}`} style={{ ...c('headline'), ...fs('headlineFontSize') }}>
+                <InlineEditText value={block.content.headline || 'Headline Landing Page'} onChange={(v) => updateContent('headline', v)} disabled={previewMode} tagName="span" />
+              </h1>
+            ),
+            subheadline: (
+              <p className={`mt-4 opacity-80 max-w-2xl ${r('text-sm', 'text-base', 'text-lg')}`} style={{ ...c('subheadline'), ...fs('subheadlineFontSize') }}>
+                <InlineEditText value={block.content.subheadline || 'Subheadline penjelas penawaran Anda secara detail dan menarik.'} onChange={(v) => updateContent('subheadline', v)} disabled={previewMode} tagName="span" />
+              </p>
+            ),
+            ctaButton: block.content.ctaText ? (
+              <a href={block.content.ctaLink || '#'} onClick={e => previewMode ? undefined : e.preventDefault()} className="px-6 py-3.5 bg-[#6f0000] text-white font-bold rounded-xl shadow-md hover:bg-[#850000] transition inline-flex items-center gap-2" style={{ ...c('ctaText'), ...bg('ctaText'), ...fs('buttonFontSize') }}>
+                <MessageSquare size={18} /> <InlineEditText value={block.content.ctaText} onChange={(v) => updateContent('ctaText', v)} disabled={previewMode} tagName="span" />
+              </a>
+            ) : null,
+            secondaryCta: block.content.secondaryCtaText ? (
+              <a href={block.content.secondaryCtaLink || '#'} onClick={e => previewMode ? undefined : e.preventDefault()} className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-gray-800 border border-gray-300 font-bold rounded-xl shadow-sm hover:bg-gray-50 transition" style={{ ...c('secondaryCtaText'), ...bg('secondaryCtaText'), ...fs('buttonFontSize') }}>
+                <InlineEditText value={block.content.secondaryCtaText} onChange={(v) => updateContent('secondaryCtaText', v)} disabled={previewMode} tagName="span" />
+              </a>
+            ) : null,
+          };
+          const isButton = (key: string) => key === 'ctaButton' || key === 'secondaryCta';
+          return (
+            <div className="max-w-4xl mx-auto px-6 text-center flex flex-col items-center relative">
+              {order.map((key: string) => {
+                const el = elements[key];
+                if (!el) return null;
+                if (isButton(key)) return null;
+                return (
+                  <div key={key} data-element={key} onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === key ? null : key); }} className={elClass(key)} style={{ position: 'relative', ...getPosStyle(key) }}>
+                    {el}
+                    {elSelected(key) && !previewMode && (
+                      <div className="absolute -right-7 top-1/2 -translate-y-1/2 flex flex-col gap-0.5 z-30">
+                        <button type="button" onClick={(ev) => { ev.stopPropagation(); moveElement(key, 'up'); }} className="w-5 h-5 bg-[#6f0000] text-white rounded text-[9px] flex items-center justify-center hover:bg-[#850000]" title="Naik">↑</button>
+                        <button type="button" onClick={(ev) => { ev.stopPropagation(); moveElement(key, 'down'); }} className="w-5 h-5 bg-[#6f0000] text-white rounded text-[9px] flex items-center justify-center hover:bg-[#850000]" title="Turun">↓</button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              {order.some((k: string) => isButton(k) && elements[k]) && (
+                <div className={`mt-8 flex flex-wrap gap-4 justify-center ${r('flex-col items-stretch w-full px-4', 'flex-row', 'flex-row')}`}>
+                  {order.filter((k: string) => isButton(k) && elements[k]).map((key: string) => (
+                    <div key={key} data-element={key} onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === key ? null : key); }} className={elClass(key)} style={{ position: 'relative', ...getPosStyle(key) }}>
+                      {elements[key]}
+                      {elSelected(key) && !previewMode && (
+                        <div className="absolute -right-7 top-1/2 -translate-y-1/2 flex flex-col gap-0.5 z-30">
+                          <button type="button" onClick={(ev) => { ev.stopPropagation(); moveElement(key, 'up'); }} className="w-5 h-5 bg-[#6f0000] text-white rounded text-[9px] flex items-center justify-center hover:bg-[#850000]" title="Naik">↑</button>
+                          <button type="button" onClick={(ev) => { ev.stopPropagation(); moveElement(key, 'down'); }} className="w-5 h-5 bg-[#6f0000] text-white rounded text-[9px] flex items-center justify-center hover:bg-[#850000]" title="Turun">↓</button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* BANNER SECTION */}
         {block.type === 'Banner' && (
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-200/50 relative">
+          <div className="max-w-5xl mx-auto px-6 relative">
+            <div
+              data-element="banner"
+              onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'banner' ? null : 'banner'); }}
+              className={`builder-element rounded-2xl overflow-hidden shadow-sm border border-gray-200/50 relative ${selectedElement === 'banner' ? 'ring-2 ring-[#6f0000] ring-offset-2' : ''}`}
+              style={{ position: 'relative', ...getPosStyle('banner') }}
+            >
               <img
-                src={toPreviewSrc(block.content.url) || 'https://placehold.co/1200x400/fee2e2/991b1b?text=Banner+Image'}
+                src={block.content.url || 'https://placehold.co/1200x400/fee2e2/991b1b?text=Banner+Image'}
                 alt={block.content.alt || 'Banner'}
                 className="w-full h-auto max-h-[420px] object-cover"
                 onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/1200x400/fee2e2/991b1b?text=Banner+Image' }}
@@ -692,7 +801,7 @@ const SortableBlock = ({
 
         {/* PROMO CARDS (JANGKAUAN NASIONAL & LEGAL FESTIVAL) */}
         {block.type === 'PromoCards' && (
-          <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-5xl mx-auto px-6 relative">
             <div className={`grid gap-6 ${r('grid-cols-1', 'grid-cols-2', 'grid-cols-2')}`}>
               {/* Card 1: Jangkauan Nasional */}
               <div className={`bg-white border border-gray-100 rounded-3xl p-6 flex gap-5 items-start shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all ${r('flex-col text-center items-center', 'flex-row text-left', 'flex-row text-left')}`}>
@@ -703,9 +812,16 @@ const SortableBlock = ({
                   <span className="text-xs font-black text-gray-400 tracking-[0.18em] uppercase mb-1.5">
                     {block.content.card1Tag || 'JANGKAUAN NASIONAL'}
                   </span>
-                  <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight mb-2">
-                    {block.content.card1Title || 'Melayani Seluruh Indonesia'}
-                  </h3>
+                  <div
+                    data-element="card1Title"
+                    onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'card1Title' ? null : 'card1Title'); }}
+                    className={elClass('card1Title')}
+                    style={{ position: 'relative', ...getPosStyle('card1Title') }}
+                  >
+                    <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight mb-2">
+                      {block.content.card1Title || 'Melayani Seluruh Indonesia'}
+                    </h3>
+                  </div>
                   <p className="text-xs sm:text-sm text-gray-500 leading-relaxed max-w-[290px]">
                     {block.content.card1Desc || 'Semua biaya tertera di awal — termasuk jasa kami dan biaya pemerintah. Tidak ada add-on mendadak di tengah proses.'}
                   </p>
@@ -716,7 +832,7 @@ const SortableBlock = ({
               <div className={`bg-white border border-gray-100 rounded-3xl p-6 flex gap-5 items-start shadow-[0_4px_20px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all ${r('flex-col text-center items-center', 'flex-row text-left', 'flex-row text-left')}`}>
                 <div className="w-14 h-14 flex-shrink-0 relative rounded-2xl overflow-hidden shadow-xs border border-black/5 bg-gray-50 flex items-center justify-center">
                   <img 
-                    src={toPreviewSrc(block.content.card2Image) || '/images/iphone-mockup.png'} 
+                    src={block.content.card2Image || '/images/iphone-mockup.png'} 
                     alt="iPhone Promo" 
                     className="w-full h-full object-cover" 
                     onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/fee2e2/991b1b?text=Gift' }}
@@ -726,9 +842,16 @@ const SortableBlock = ({
                   <span className="text-xs font-black text-gray-400 tracking-[0.18em] uppercase mb-1.5">
                     {block.content.card2Tag || 'LEGAL FESTIVAL SPECIAL'}
                   </span>
-                  <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight mb-2">
-                    {block.content.card2Title || 'Menangkan iPhone & Hadiah senilai Rp 12.000.000'}
-                  </h3>
+                  <div
+                    data-element="card2Title"
+                    onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'card2Title' ? null : 'card2Title'); }}
+                    className={elClass('card2Title')}
+                    style={{ position: 'relative', ...getPosStyle('card2Title') }}
+                  >
+                    <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight mb-2">
+                      {block.content.card2Title || 'Menangkan iPhone & Hadiah senilai Rp 12.000.000'}
+                    </h3>
+                  </div>
                   {block.content.card2Badge && (
                     <div>
                       <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1 rounded-full mt-1 text-[11px] sm:text-xs font-bold tracking-wide shadow-xs text-left">
@@ -745,12 +868,12 @@ const SortableBlock = ({
 
         {/* MARKETPLACE TRUST SECTION */}
         {block.type === 'MarketplaceTrust' && (
-          <div className="max-w-4xl mx-auto px-6">
+          <div className="max-w-4xl mx-auto px-6 relative">
             <div className={`flex items-center justify-center gap-8 ${r('flex-col text-center', 'flex-row text-left', 'flex-row text-left')}`}>
               {/* Image Side */}
               <div className="relative w-64 h-48 flex-shrink-0 flex items-center justify-center">
                 <img 
-                  src={toPreviewSrc(block.content.image) || '/images/transaksi-shopee.png'} 
+                  src={block.content.image || '/images/transaksi-shopee.png'} 
                   alt="Transaksi Aman Marketplace" 
                   className="w-full h-full object-contain drop-shadow-md hover:scale-105 transition-transform duration-500" 
                   onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/400x300/fff/ee4d2d?text=Shopee+Payment' }}
@@ -759,14 +882,21 @@ const SortableBlock = ({
 
               {/* Content Side */}
               <div className={`max-w-md flex flex-col ${r('items-center text-center', 'items-start text-left', 'items-start text-left')}`}>
-                <h3 className={`font-black text-gray-900 leading-[1.2] mb-3 tracking-tight ${r('text-xl', 'text-2xl', 'text-3xl')}`}>
-                  {block.content.headline || 'Transaksi Aman Via Marketplace'}
-                </h3>
+                <div
+                  data-element="headline"
+                  onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'headline' ? null : 'headline'); }}
+                  className={elClass('headline')}
+                  style={{ position: 'relative', ...getPosStyle('headline') }}
+                >
+                  <h3 className={`font-black text-gray-900 leading-[1.2] mb-3 tracking-tight ${r('text-xl', 'text-2xl', 'text-3xl')}`}>
+                    {block.content.headline || 'Transaksi Aman Via Marketplace'}
+                  </h3>
+                </div>
                 
                 {block.content.marketplaceLogo && (
                   <div className="h-9 mb-4 flex items-center">
                     <img 
-                      src={toPreviewSrc(block.content.marketplaceLogo) || '/images/shopee.svg'} 
+                      src={block.content.marketplaceLogo || '/images/shopee.svg'} 
                       alt={block.content.marketplaceName || 'Shopee'} 
                       className="h-8 object-contain"
                       onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
@@ -774,22 +904,36 @@ const SortableBlock = ({
                   </div>
                 )}
                 
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">
-                  {block.content.description || 'Masih ragu bertransaksi online? Tenang, layanan pendirian perusahaan, perizinan usaha, dan pendaftaran HAKI kami tersedia di marketplace (Shopee) dengan jaminan transaksi yang aman dan terpercaya.'}
-                </p>
+                <div
+                  data-element="description"
+                  onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'description' ? null : 'description'); }}
+                  className={elClass('description')}
+                  style={{ position: 'relative', ...getPosStyle('description') }}
+                >
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">
+                    {block.content.description || 'Masih ragu bertransaksi online? Tenang, layanan pendirian perusahaan, perizinan usaha, dan pendaftaran HAKI kami tersedia di marketplace (Shopee) dengan jaminan transaksi yang aman dan terpercaya.'}
+                  </p>
+                </div>
 
                 {block.content.buttonText && (
-                  <a
-                    href={block.content.buttonLink || 'https://shopee.co.id/easylegal'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={e => previewMode ? undefined : e.preventDefault()}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#EE4D2D] hover:bg-[#D73211] text-white rounded-xl text-xs font-bold shadow-md transition"
+                  <div
+                    data-element="button"
+                    onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'button' ? null : 'button'); }}
+                    className={`builder-element inline-flex ${selectedElement === 'button' ? 'ring-2 ring-[#6f0000] ring-offset-2 rounded' : ''}`}
+                    style={{ position: 'relative', ...getPosStyle('button') }}
                   >
-                    <ShoppingBag size={14} />
-                    <span>{block.content.buttonText}</span>
-                    <ExternalLink size={12} className="opacity-80" />
-                  </a>
+                    <a
+                      href={block.content.buttonLink || 'https://shopee.co.id/easylegal'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={e => previewMode ? undefined : e.preventDefault()}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#EE4D2D] hover:bg-[#D73211] text-white rounded-xl text-xs font-bold shadow-md transition"
+                    >
+                      <ShoppingBag size={14} />
+                      <span>{block.content.buttonText}</span>
+                      <ExternalLink size={12} className="opacity-80" />
+                    </a>
+                  </div>
                 )}
               </div>
             </div>
@@ -798,7 +942,7 @@ const SortableBlock = ({
 
         {/* BOTTOM PROMO (COMBINED CARDS + MARKETPLACE) */}
         {block.type === 'BottomPromo' && (
-          <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-5xl mx-auto px-6 relative">
             {/* Top Cards */}
             <div className={`grid gap-6 mb-12 ${r('grid-cols-1', 'grid-cols-2', 'grid-cols-2')}`}>
               <div className={`bg-white border border-gray-100 rounded-3xl p-6 flex gap-5 items-start shadow-[0_4px_20px_rgba(0,0,0,0.015)] ${r('flex-col text-center items-center', 'flex-row text-left', 'flex-row text-left')}`}>
@@ -809,9 +953,16 @@ const SortableBlock = ({
                   <span className="text-xs font-black text-gray-400 tracking-[0.18em] uppercase mb-1.5">
                     {block.content.card1Tag || 'JANGKAUAN NASIONAL'}
                   </span>
-                  <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight mb-2">
-                    {block.content.card1Title || 'Melayani Seluruh Indonesia'}
-                  </h3>
+                  <div
+                    data-element="card1Title"
+                    onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'card1Title' ? null : 'card1Title'); }}
+                    className={elClass('card1Title')}
+                    style={{ position: 'relative', ...getPosStyle('card1Title') }}
+                  >
+                    <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight mb-2">
+                      {block.content.card1Title || 'Melayani Seluruh Indonesia'}
+                    </h3>
+                  </div>
                   <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
                     {block.content.card1Desc || 'Semua biaya tertera di awal — termasuk jasa kami dan biaya pemerintah.'}
                   </p>
@@ -821,7 +972,7 @@ const SortableBlock = ({
               <div className={`bg-white border border-gray-100 rounded-3xl p-6 flex gap-5 items-start shadow-[0_4px_20px_rgba(0,0,0,0.015)] ${r('flex-col text-center items-center', 'flex-row text-left', 'flex-row text-left')}`}>
                 <div className="w-14 h-14 flex-shrink-0 relative rounded-2xl overflow-hidden shadow-xs border border-black/5 bg-gray-50 flex items-center justify-center">
                   <img 
-                    src={toPreviewSrc(block.content.card2Image) || '/images/iphone-mockup.png'} 
+                    src={block.content.card2Image || '/images/iphone-mockup.png'} 
                     alt="iPhone Promo" 
                     className="w-full h-full object-cover" 
                     onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/fee2e2/991b1b?text=Gift' }}
@@ -831,9 +982,16 @@ const SortableBlock = ({
                   <span className="text-xs font-black text-gray-400 tracking-[0.18em] uppercase mb-1.5">
                     {block.content.card2Tag || 'LEGAL FESTIVAL SPECIAL'}
                   </span>
-                  <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight mb-2">
-                    {block.content.card2Title || 'Menangkan iPhone & Hadiah senilai Rp 12.000.000'}
-                  </h3>
+                  <div
+                    data-element="card2Title"
+                    onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'card2Title' ? null : 'card2Title'); }}
+                    className={elClass('card2Title')}
+                    style={{ position: 'relative', ...getPosStyle('card2Title') }}
+                  >
+                    <h3 className="text-base sm:text-lg font-black text-gray-900 leading-tight mb-2">
+                      {block.content.card2Title || 'Menangkan iPhone & Hadiah senilai Rp 12.000.000'}
+                    </h3>
+                  </div>
                   {block.content.card2Badge && (
                     <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1 rounded-full mt-1 text-xs font-bold tracking-wide shadow-xs text-left">
                       <Gift className="w-3.5 h-3.5 text-yellow-400 flex-shrink-0" strokeWidth={2.5} /> 
@@ -848,7 +1006,7 @@ const SortableBlock = ({
             <div className={`pt-10 border-t border-gray-100 flex items-center justify-center gap-8 ${r('flex-col text-center', 'flex-row text-left', 'flex-row text-left')}`}>
               <div className="relative w-64 h-48 flex-shrink-0 flex items-center justify-center">
                 <img 
-                  src={toPreviewSrc(block.content.marketplaceImage) || '/images/transaksi-shopee.png'} 
+                  src={block.content.marketplaceImage || '/images/transaksi-shopee.png'} 
                   alt="Transaksi Aman via Shopee" 
                   className="w-full h-full object-contain drop-shadow-md hover:scale-105 transition-transform duration-500" 
                   onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/400x300/fff/ee4d2d?text=Shopee' }}
@@ -856,13 +1014,20 @@ const SortableBlock = ({
               </div>
 
               <div className={`max-w-md flex flex-col ${r('items-center text-center', 'items-start text-left', 'items-start text-left')}`}>
-                <h3 className={`font-black text-gray-900 leading-[1.2] mb-3 tracking-tight ${r('text-xl', 'text-2xl', 'text-3xl')}`}>
-                  {block.content.marketplaceTitle || 'Transaksi Aman Via Marketplace'}
-                </h3>
+                <div
+                  data-element="marketplaceTitle"
+                  onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'marketplaceTitle' ? null : 'marketplaceTitle'); }}
+                  className={elClass('marketplaceTitle')}
+                  style={{ position: 'relative', ...getPosStyle('marketplaceTitle') }}
+                >
+                  <h3 className={`font-black text-gray-900 leading-[1.2] mb-3 tracking-tight ${r('text-xl', 'text-2xl', 'text-3xl')}`}>
+                    {block.content.marketplaceTitle || 'Transaksi Aman Via Marketplace'}
+                  </h3>
+                </div>
                 
                 <div className="h-8 mb-4">
                   <img 
-                    src={toPreviewSrc(block.content.marketplaceLogo) || '/images/shopee.svg'} 
+                    src={block.content.marketplaceLogo || '/images/shopee.svg'} 
                     alt="Shopee Logo" 
                     className="h-7 object-contain"
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
@@ -879,12 +1044,28 @@ const SortableBlock = ({
 
         {/* FEATURES SECTION */}
         {block.type === 'Features' && (
-          <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-5xl mx-auto px-6 relative">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className={`font-bold tracking-tight ${r('text-2xl', 'text-3xl', 'text-3xl')}`} style={c('title')}>{block.content.title}</h2>
-              {block.content.subtitle && <p className={`mt-2 opacity-75 ${r('text-sm', 'text-base', 'text-base')}`} style={c('subtitle')}>{block.content.subtitle}</p>}
+              <div
+                data-element="title"
+                onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'title' ? null : 'title'); }}
+                className={elClass('title')}
+                style={{ position: 'relative', ...getPosStyle('title') }}
+              >
+                <h2 className={`font-bold tracking-tight ${r('text-2xl', 'text-3xl', 'text-3xl')}`} style={c('title')}>{block.content.title}</h2>
+              </div>
+              {block.content.subtitle && (
+                <div
+                  data-element="subtitle"
+                  onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'subtitle' ? null : 'subtitle'); }}
+                  className={elClass('subtitle')}
+                  style={{ position: 'relative', ...getPosStyle('subtitle') }}
+                >
+                  <p className={`mt-2 opacity-75 ${r('text-sm', 'text-base', 'text-base')}`} style={c('subtitle')}>{block.content.subtitle}</p>
+                </div>
+              )}
             </div>
-            <div className={`grid gap-6 ${r('grid-cols-1', 'grid-cols-2', `grid-cols-${block.content.columns || 3}`)}`}>
+            <div className={`grid gap-6 ${r('grid-cols-1', 'grid-cols-2', ({ 1: 'grid-cols-1', 2: 'grid-cols-2', 3: 'grid-cols-3', 4: 'grid-cols-4' } as Record<number, string>)[block.content.columns || 3] || 'grid-cols-3')}`}>
               {(block.content.items || []).map((item: any, i: number) => (
                 <div key={i} className="bg-white/80 backdrop-blur p-6 rounded-xl border border-gray-200/80 shadow-sm flex flex-col items-start text-left">
                   <div className="w-12 h-12 rounded-lg bg-[#FEF2F2] text-[#6f0000] flex items-center justify-center mb-4">
@@ -900,10 +1081,26 @@ const SortableBlock = ({
 
         {/* TESTIMONIALS SECTION */}
         {block.type === 'Testimonials' && (
-          <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-5xl mx-auto px-6 relative">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className={`font-bold tracking-tight ${r('text-2xl', 'text-3xl', 'text-3xl')}`}>{block.content.title}</h2>
-              {block.content.subtitle && <p className="mt-2 text-sm opacity-75" style={c('subtitle')}>{block.content.subtitle}</p>}
+              <div
+                data-element="title"
+                onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'title' ? null : 'title'); }}
+                className={elClass('title')}
+                style={{ position: 'relative', ...getPosStyle('title') }}
+              >
+                <h2 className={`font-bold tracking-tight ${r('text-2xl', 'text-3xl', 'text-3xl')}`}>{block.content.title}</h2>
+              </div>
+              {block.content.subtitle && (
+                <div
+                  data-element="subtitle"
+                  onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'subtitle' ? null : 'subtitle'); }}
+                  className={elClass('subtitle')}
+                  style={{ position: 'relative', ...getPosStyle('subtitle') }}
+                >
+                  <p className="mt-2 text-sm opacity-75" style={c('subtitle')}>{block.content.subtitle}</p>
+                </div>
+              )}
             </div>
             <div className={`grid gap-6 ${r('grid-cols-1', 'grid-cols-2', 'grid-cols-2')}`}>
               {(block.content.items || []).map((t: any, i: number) => (
@@ -931,10 +1128,26 @@ const SortableBlock = ({
 
         {/* PRICING SECTION */}
         {block.type === 'Pricing' && (
-          <div className="max-w-5xl mx-auto px-6">
+          <div className="max-w-5xl mx-auto px-6 relative">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className={`font-bold tracking-tight ${r('text-2xl', 'text-3xl', 'text-3xl')}`}>{block.content.title}</h2>
-              {block.content.subtitle && <p className="mt-2 text-sm opacity-75" style={c('subtitle')}>{block.content.subtitle}</p>}
+              <div
+                data-element="title"
+                onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'title' ? null : 'title'); }}
+                className={elClass('title')}
+                style={{ position: 'relative', ...getPosStyle('title') }}
+              >
+                <h2 className={`font-bold tracking-tight ${r('text-2xl', 'text-3xl', 'text-3xl')}`}>{block.content.title}</h2>
+              </div>
+              {block.content.subtitle && (
+                <div
+                  data-element="subtitle"
+                  onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'subtitle' ? null : 'subtitle'); }}
+                  className={elClass('subtitle')}
+                  style={{ position: 'relative', ...getPosStyle('subtitle') }}
+                >
+                  <p className="mt-2 text-sm opacity-75" style={c('subtitle')}>{block.content.subtitle}</p>
+                </div>
+              )}
             </div>
             <div className={`grid gap-8 max-w-4xl mx-auto ${r('grid-cols-1', 'grid-cols-2', 'grid-cols-2')}`}>
               {(block.content.plans || []).map((p: any, i: number) => (
@@ -985,11 +1198,27 @@ const SortableBlock = ({
 
         {/* LEAD FORM SECTION */}
         {block.type === 'LeadForm' && (
-          <div className="max-w-xl mx-auto px-6">
+          <div className="max-w-xl mx-auto px-6 relative">
             <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-md">
               <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900" style={c('title')}>{block.content.title}</h2>
-                {block.content.subtitle && <p className="text-xs text-gray-500 mt-1.5" style={c('subtitle')}>{block.content.subtitle}</p>}
+                <div
+                  data-element="title"
+                  onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'title' ? null : 'title'); }}
+                  className={elClass('title')}
+                  style={{ position: 'relative', ...getPosStyle('title') }}
+                >
+                  <h2 className="text-2xl font-bold text-gray-900" style={c('title')}>{block.content.title}</h2>
+                </div>
+                {block.content.subtitle && (
+                  <div
+                    data-element="subtitle"
+                    onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'subtitle' ? null : 'subtitle'); }}
+                    className={elClass('subtitle')}
+                    style={{ position: 'relative', ...getPosStyle('subtitle') }}
+                  >
+                    <p className="text-xs text-gray-500 mt-1.5" style={c('subtitle')}>{block.content.subtitle}</p>
+                  </div>
+                )}
               </div>
               <div className="space-y-4">
                 {block.content.showName && (
@@ -1035,10 +1264,26 @@ const SortableBlock = ({
 
         {/* FAQ SECTION */}
         {block.type === 'FAQ' && (
-          <div className="max-w-3xl mx-auto px-6">
+          <div className="max-w-3xl mx-auto px-6 relative">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold tracking-tight" style={c('title')}>{block.content.title}</h2>
-              {block.content.subtitle && <p className="text-sm opacity-75 mt-1" style={c('subtitle')}>{block.content.subtitle}</p>}
+              <div
+                data-element="title"
+                onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'title' ? null : 'title'); }}
+                className={elClass('title')}
+                style={{ position: 'relative', ...getPosStyle('title') }}
+              >
+                <h2 className="text-2xl font-bold tracking-tight" style={c('title')}>{block.content.title}</h2>
+              </div>
+              {block.content.subtitle && (
+                <div
+                  data-element="subtitle"
+                  onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'subtitle' ? null : 'subtitle'); }}
+                  className={elClass('subtitle')}
+                  style={{ position: 'relative', ...getPosStyle('subtitle') }}
+                >
+                  <p className="text-sm opacity-75 mt-1" style={c('subtitle')}>{block.content.subtitle}</p>
+                </div>
+              )}
             </div>
             <div className="space-y-3">
               {(block.content.items || []).map((faq: any, i: number) => (
@@ -1057,63 +1302,262 @@ const SortableBlock = ({
         )}
 
         {/* CTA SECTION */}
-        {block.type === 'CTA' && (
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            {block.content.badge && (
-              <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 bg-white/20 text-white" style={c('badge')}>
-                {block.content.badge}
+        {block.type === 'CTA' && (() => {
+          const order = block.styles?.elementOrder || getDefaultOrder('CTA');
+          const elements: Record<string, React.ReactNode> = {
+            badge: block.content.badge ? (
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 bg-white/20 text-white" style={{ ...c('badge'), ...fs('badgeFontSize') }}>
+                <InlineEditText value={block.content.badge} onChange={(v) => updateContent('badge', v)} disabled={previewMode} />
               </span>
-            )}
-            <h2 className={`font-extrabold tracking-tight ${r('text-2xl', 'text-3xl', 'text-3xl')}`} style={c('title')}>{block.content.title}</h2>
-            {block.content.description && <p className={`mt-3 opacity-90 max-w-xl mx-auto ${r('text-sm', 'text-base', 'text-base')}`} style={c('description')}>{block.content.description}</p>}
-            <div className="mt-6">
-              <a
-                href={block.content.buttonLink || '#'}
-                onClick={e => previewMode ? undefined : e.preventDefault()}
-                className="px-8 py-3.5 bg-white text-[#6f0000] font-bold rounded-xl shadow-lg hover:bg-gray-100 transition inline-block text-sm"
-                style={{ ...c('buttonText'), ...bg('buttonText') }}
-              >
-                {block.content.buttonText || 'Hubungi Kami'}
+            ) : null,
+            title: (
+              <h2 className={`font-extrabold tracking-tight ${r('text-2xl', 'text-3xl', 'text-3xl')}`} style={{ ...c('title'), ...fs('titleFontSize') }}>
+                <InlineEditText value={block.content.title} onChange={(v) => updateContent('title', v)} disabled={previewMode} tagName="span" />
+              </h2>
+            ),
+            description: block.content.description ? (
+              <p className={`mt-3 opacity-90 max-w-xl mx-auto ${r('text-sm', 'text-base', 'text-base')}`} style={{ ...c('description'), ...fs('descFontSize') }}>
+                <InlineEditText value={block.content.description} onChange={(v) => updateContent('description', v)} disabled={previewMode} tagName="span" />
+              </p>
+            ) : null,
+            ctaButton: (
+              <a href={block.content.buttonLink || '#'} onClick={e => previewMode ? undefined : e.preventDefault()} className="px-8 py-3.5 bg-white text-[#6f0000] font-bold rounded-xl shadow-lg hover:bg-gray-100 transition inline-block text-sm" style={{ ...c('buttonText'), ...bg('buttonText'), ...fs('buttonFontSize') }}>
+                <InlineEditText value={block.content.buttonText || 'Hubungi Kami'} onChange={(v) => updateContent('buttonText', v)} disabled={previewMode} tagName="span" />
               </a>
+            ),
+          };
+          return (
+            <div className="max-w-4xl mx-auto px-6 text-center relative">
+              {order.map((key: string) => {
+                const el = elements[key];
+                if (!el) return null;
+                return (
+                  <div key={key} data-element={key} onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === key ? null : key); }} className={elClass(key)} style={{ position: 'relative', ...getPosStyle(key) }}>
+                    {el}
+                    {elSelected(key) && !previewMode && (
+                      <div className="absolute -right-7 top-1/2 -translate-y-1/2 flex flex-col gap-0.5 z-30">
+                        <button type="button" onClick={(ev) => { ev.stopPropagation(); moveElement(key, 'up'); }} className="w-5 h-5 bg-[#6f0000] text-white rounded text-[9px] flex items-center justify-center hover:bg-[#850000]" title="Naik">↑</button>
+                        <button type="button" onClick={(ev) => { ev.stopPropagation(); moveElement(key, 'down'); }} className="w-5 h-5 bg-[#6f0000] text-white rounded text-[9px] flex items-center justify-center hover:bg-[#850000]" title="Turun">↓</button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* TEXT / RICHTEXT SECTION */}
         {block.type === 'Text' && (
-          <div className="max-w-3xl mx-auto px-6 text-left">
-            {block.content.title && <h3 className="text-xl font-bold mb-3" style={c('title')}>{block.content.title}</h3>}
-            <div className="text-sm leading-relaxed text-gray-700 whitespace-pre-wrap" style={c('text')}>
-              {block.content.text}
+          <div className="max-w-3xl mx-auto px-6 text-left relative">
+            {block.content.title && (
+              <div
+                data-element="title"
+                onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'title' ? null : 'title'); }}
+                className={elClass('title')}
+                style={{ position: 'relative', ...getPosStyle('title') }}
+              >
+                <h3 className="text-xl font-bold mb-3" style={{ ...c('title'), ...fs('titleFontSize') }}>
+                  <InlineEditText value={block.content.title} onChange={(v) => updateContent('title', v)} disabled={previewMode} tagName="span" />
+                </h3>
+              </div>
+            )}
+            <div
+              data-element="text"
+              onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'text' ? null : 'text'); }}
+              className={elClass('text')}
+              style={{ position: 'relative', ...getPosStyle('text') }}
+            >
+              <div className="text-sm leading-relaxed text-gray-700 whitespace-pre-wrap" style={c('text')}>
+                <InlineEditText value={block.content.text} onChange={(v) => updateContent('text', v)} disabled={previewMode} tagName="span" />
+              </div>
             </div>
           </div>
         )}
 
         {/* BUTTON SECTION */}
         {block.type === 'Button' && (
-          <div className="max-w-xl mx-auto px-6 text-center">
-            <a
-              href={block.content.link || '#'}
-              onClick={e => previewMode ? undefined : e.preventDefault()}
-              className="px-8 py-3 bg-[#6f0000] text-white font-bold rounded-xl shadow hover:bg-[#850000] transition inline-block text-sm"
+          <div className="max-w-xl mx-auto px-6 text-center relative">
+            <div
+              data-element="button"
+              onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'button' ? null : 'button'); }}
+              className={`builder-element inline-block ${selectedElement === 'button' ? 'ring-2 ring-[#6f0000] ring-offset-2 rounded' : ''}`}
+              style={{ position: 'relative', ...getPosStyle('button') }}
             >
-              {block.content.text || 'Klik Disini'}
-            </a>
+              <a
+                href={block.content.link || '#'}
+                onClick={e => previewMode ? undefined : e.preventDefault()}
+                className="px-8 py-3 bg-[#6f0000] text-white font-bold rounded-xl shadow hover:bg-[#850000] transition inline-block text-sm"
+              >
+                <InlineEditText value={block.content.text || 'Klik Disini'} onChange={(v) => updateContent('text', v)} disabled={previewMode} tagName="span" />
+              </a>
+            </div>
           </div>
         )}
 
         {/* IMAGE SECTION */}
         {block.type === 'Image' && (
-          <div className="max-w-3xl mx-auto px-6 text-center">
-            <img
-              src={toPreviewSrc(block.content.url) || 'https://placehold.co/800x400/fee2e2/991b1b?text=Image'}
-              alt={block.content.alt || 'Image'}
-              className="w-full h-auto rounded-xl shadow-sm border border-gray-100 mx-auto"
-              onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/800x400/fee2e2/991b1b?text=Image' }}
-            />
-            {block.content.caption && <p className="text-xs text-gray-500 mt-2">{block.content.caption}</p>}
+          <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center relative">
+            <div
+              data-element="image"
+              onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'image' ? null : 'image'); }}
+              className={elClass('image')}
+              style={{ width: block.styles?.imgWidth || '100%', height: block.styles?.imgHeight || 'auto', position: 'relative', ...getPosStyle('image') }}
+            >
+              <img
+                src={block.content.url || 'https://placehold.co/800x400/fee2e2/991b1b?text=Image'}
+                alt={block.content.alt || 'Image'}
+                className="w-full h-full rounded-xl shadow-sm border border-gray-100 mx-auto object-cover"
+                style={{ objectFit: block.styles?.objectFit || 'cover' }}
+                onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/800x400/fee2e2/991b1b?text=Image' }}
+              />
+
+            </div>
+            {block.content.caption && (
+              <div
+                data-element="caption"
+                onDoubleClick={(e) => { e.stopPropagation(); setSelectedElement(selectedElement === 'caption' ? null : 'caption'); }}
+                className={elClass('caption')}
+                style={{ position: 'relative', ...getPosStyle('caption') }}
+              >
+                <p className="text-xs text-gray-500 mt-2">{block.content.caption}</p>
+              </div>
+            )}
           </div>
         )}
+
+        {/* ELEMENT FREE POSITIONING MOVEABLE */}
+        {selectedElement && target && isActive && !previewMode && (() => {
+          const el = target.querySelector(`[data-element="${selectedElement}"]`) as HTMLElement;
+          if (!el) return null;
+          const pos = block.styles?.positions?.[selectedElement] || {};
+          const hasPosition = !!block.styles?.positions?.[selectedElement];
+          // Calculate toolbar position via getBoundingClientRect
+          const elRect = el.getBoundingClientRect();
+          const wrapperRect = target.getBoundingClientRect();
+          const top = elRect.top - wrapperRect.top - 36;
+          const left = elRect.left - wrapperRect.left + elRect.width / 2;
+          return (
+            <>
+              {/* Element Moveable — targets the data-element div */}
+              <Moveable
+                target={el}
+                draggable={true}
+                resizable={true}
+                scalable={false}
+                keepRatio={isImageElement(selectedElement)}
+                origin={false}
+                throttleDrag={0}
+                renderDirections={["nw","ne","sw","se","e","w","n","s"]}
+                onDragStart={() => { el.style.zIndex = '50'; }}
+                onDrag={(e) => {
+                  e.target.style.transform = e.transform;
+                }}
+                onDragEnd={(e) => {
+                  el.style.zIndex = '';
+                  if (onUpdateStyles) {
+                    const t = e.target.style.transform || '';
+                    const m = t.match(/translate\((.+?)px,\s*(.+?)px\)/);
+                    const positions = { ...(block.styles?.positions || {}), [selectedElement]: { ...(block.styles?.positions?.[selectedElement] || {}), tx: m ? parseFloat(m[1]) : 0, ty: m ? parseFloat(m[2]) : 0 } };
+                    onUpdateStyles('positions', positions);
+                  }
+                }}
+                onResize={(e) => {
+                  e.target.style.width = `${e.width}px`;
+                  if (isImageElement(selectedElement)) {
+                    e.target.style.height = `${e.height}px`;
+                  }
+                  e.target.style.transform = e.drag.transform;
+                }}
+                onResizeEnd={(e) => {
+                  if (onUpdateStyles) {
+                    const t = e.target as HTMLElement;
+                    const tf = t.style.transform || '';
+                    const m = tf.match(/translate\((.+?)px,\s*(.+?)px\)/);
+                    const positions = {
+                      ...(block.styles?.positions || {}),
+                      [selectedElement]: {
+                        ...(block.styles?.positions?.[selectedElement] || {}),
+                        w: t.offsetWidth,
+                        ...(isImageElement(selectedElement) ? { h: t.offsetHeight } : {}),
+                        tx: m ? parseFloat(m[1]) : 0,
+                        ty: m ? parseFloat(m[2]) : 0,
+                      }
+                    };
+                    onUpdateStyles('positions', positions);
+                  }
+                }}
+              />
+              {/* Element Toolbar — positioned via getBoundingClientRect */}
+              <div
+                className="absolute bg-[#6f0000] text-white rounded-md px-2 py-1 flex items-center gap-2 text-[10px] font-semibold shadow-lg z-50 whitespace-nowrap pointer-events-auto"
+                style={{ top, left, transform: 'translateX(-50%)' }}
+              >
+                <span className="uppercase tracking-wider bg-white/20 px-1.5 py-0.5 rounded">{selectedElement}</span>
+                {hasPosition && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onUpdateStyles) {
+                        const positions = { ...(block.styles?.positions || {}) };
+                        delete positions[selectedElement];
+                        onUpdateStyles('positions', positions);
+                      }
+                      setSelectedElement(null);
+                    }}
+                    className="hover:bg-white/20 px-1.5 py-0.5 rounded transition"
+                    title="Kembalikan ke posisi awal"
+                  >
+                    Reset
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setSelectedElement(null)}
+                  className="hover:bg-white/20 px-1.5 py-0.5 rounded transition"
+                >
+                  ✕
+                </button>
+              </div>
+            </>
+          );
+        })()}
+
+        </div>{/* end section-content-wrapper */}
+
+        {/* SECTION HEIGHT RESIZE (all block types) */}
+        {target && isActive && !previewMode && (() => {
+          return (
+            <Moveable
+              target={target}
+              resizable={true}
+              origin={false}
+              renderDirections={["s"]}
+              throttleResize={0}
+              onResizeStart={(e) => {
+                // BYPASS LOCK: temporarily neutralize minHeight so the element can freely shrink
+                // We set height so it doesn't collapse immediately if content is smaller
+                e.target.style.height = `${e.target.offsetHeight}px`;
+                e.target.style.minHeight = '0px';
+              }}
+              onResize={(e) => {
+                // Now we can safely resize height up and down
+                e.target.style.height = `${e.height}px`;
+              }}
+              onResizeEnd={(e) => {
+                if (onUpdateStyles) {
+                  const finalHeight = e.target.style.height;
+                  // Clear our inline styles so React can take over
+                  e.target.style.height = '';
+                  e.target.style.minHeight = '';
+                  // Save the final height as sectionHeight (which React will apply as minHeight)
+                  onUpdateStyles('sectionHeight', finalHeight);
+                }
+              }}
+            />
+          );
+        })()}
+
       </div>
     </div>
   );
@@ -1166,25 +1610,41 @@ export default function PageBuilder({
 
   const updateBlocksWithHistory = (newBlocks: BlockData[]) => {
     setBlocks(newBlocks);
-    const newHistory = history.slice(0, historyIndex + 1);
-    newHistory.push(newBlocks);
-    if (newHistory.length > 20) newHistory.shift();
-    setHistory(newHistory);
-    setHistoryIndex(newHistory.length - 1);
+    setHistoryIndex((idx) => {
+      setHistory((prev) => {
+        const newHistory = prev.slice(0, idx + 1);
+        newHistory.push(newBlocks);
+        if (newHistory.length > 20) newHistory.shift();
+        return newHistory;
+      });
+      return historyIndex; // will be updated by setHistory
+    });
   };
 
   const handleUndo = () => {
-    if (historyIndex > 0) {
-      setHistoryIndex(historyIndex - 1);
-      setBlocks(history[historyIndex - 1]);
-    }
+    setHistoryIndex((idx) => {
+      if (idx > 0) {
+        const newIndex = idx - 1;
+        setHistory((prev) => {
+          setBlocks(prev[newIndex]);
+          return prev;
+        });
+      }
+      return idx;
+    });
   };
 
   const handleRedo = () => {
-    if (historyIndex < history.length - 1) {
-      setHistoryIndex(historyIndex + 1);
-      setBlocks(history[historyIndex + 1]);
-    }
+    setHistoryIndex((idx) => {
+      setHistory((prev) => {
+        if (idx < prev.length - 1) {
+          const newIndex = idx + 1;
+          setBlocks(prev[newIndex]);
+        }
+        return prev;
+      });
+      return idx;
+    });
   };
 
   // Image Picker & Direct MinIO Upload State
@@ -1622,7 +2082,17 @@ export default function PageBuilder({
                             setIsDraggingAny(true);
                             setActiveDropIndex(null);
                           }}
-                          onDragBlockEnd={() => {
+                              onUpdateStyles={(key, val) => {
+                                    const updated = { ...block, styles: { ...(block.styles || {}), [key]: val } };
+                                    const newBlocks = blocks.map(b => b.id === block.id ? updated : b);
+                                    updateBlocksWithHistory(newBlocks);
+                                  }}
+                              onUpdateContent={(key, val) => {
+                                    const updated = { ...block, content: { ...(block.content || {}), [key]: val } };
+                                    const newBlocks = blocks.map(b => b.id === block.id ? updated : b);
+                                    updateBlocksWithHistory(newBlocks);
+                                  }}
+                              onDragBlockEnd={() => {
                             setIsDraggingAny(false);
                             setActiveDropIndex(null);
                           }}
@@ -2047,9 +2517,84 @@ export default function PageBuilder({
                                 }}
                                 className="absolute -top-2 -left-2 w-12 h-12 cursor-pointer"
                               />
-                            </div>
-                          </div>
+                    </div>
+                  </div>
+
+                  <hr className="border-gray-100" />
+
+                  {/* Font Size Controls */}
+                  <div>
+                    <label className="block font-bold uppercase text-gray-600 mb-2">Ukuran Font</label>
+                    <div className="space-y-2">
+                      {[
+                        { key: 'headlineFontSize', label: 'Headline', default: '48px' },
+                        { key: 'subheadlineFontSize', label: 'Subheadline', default: '16px' },
+                        { key: 'badgeFontSize', label: 'Badge', default: '12px' },
+                        { key: 'buttonFontSize', label: 'Tombol', default: '14px' },
+                        { key: 'titleFontSize', label: 'Title', default: '24px' },
+                        { key: 'descFontSize', label: 'Deskripsi', default: '14px' },
+                      ].map(f => (
+                        <div key={f.key} className="flex items-center gap-2">
+                          <span className="text-[10px] text-gray-400 w-20 shrink-0">{f.label}</span>
+                          <input
+                            type="text"
+                            defaultValue={(selectedBlock.styles?.[f.key] || '').replace(/px$/, '')}
+                            placeholder={f.default}
+                            onBlur={(e) => {
+                              let val = e.target.value.trim();
+                              if (val && !isNaN(Number(val))) val = `${val}px`;
+                              updateStyles(f.key, val || undefined);
+                            }}
+                            onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }}
+                            className="flex-1 p-1.5 border border-gray-200 rounded text-xs font-mono"
+                          />
+                          {selectedBlock.styles?.[f.key] && (
+                            <button type="button" onClick={() => updateStyles(f.key, undefined)} className="text-[10px] text-red-500 hover:underline">✕</button>
+                          )}
                         </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <hr className="border-gray-100" />
+
+                  {/* Content Size Controls */}
+                  <div>
+                    <label className="block font-bold uppercase text-gray-600 mb-2">Ukuran Konten</label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <span className="text-[10px] text-gray-400 block mb-1">Lebar Maks</span>
+                        <input
+                          type="text"
+                          defaultValue={selectedBlock.styles?.maxWidth || ''}
+                          placeholder="auto"
+                          onBlur={(e) => {
+                            let val = e.target.value.trim();
+                            if (val && !isNaN(Number(val))) val = `${val}px`;
+                            updateStyles('maxWidth', val || undefined);
+                          }}
+                          onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }}
+                          className="w-full p-2 border border-gray-200 rounded-lg text-xs font-mono"
+                        />
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-gray-400 block mb-1">Tinggi Min</span>
+                        <input
+                          type="text"
+                          defaultValue={selectedBlock.styles?.sectionHeight || ''}
+                          placeholder="auto"
+                          onBlur={(e) => {
+                            let val = e.target.value.trim();
+                            if (val && !isNaN(Number(val))) val = `${val}px`;
+                            updateStyles('sectionHeight', val || undefined);
+                          }}
+                          onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }}
+                          className="w-full p-2 border border-gray-200 rounded-lg text-xs font-mono"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
                       );
                     }
 

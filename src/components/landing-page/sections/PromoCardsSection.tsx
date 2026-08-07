@@ -1,14 +1,17 @@
+import { posStyle, sectionScale } from '../utils';
 import React from "react";
-import Image from "next/image";
 import { Truck, Gift } from "lucide-react";
 
 interface Props {
   data: any;
 }
 
+;
+
 export default function PromoCardsSection({ data }: Props) {
   const content = data.content || data;
   const styles = data.styles || {};
+  const pos = styles.positions;
 
   const card1Tag = content.card1Tag || "JANGKAUAN NASIONAL";
   const card1Title = content.card1Title || "Melayani Seluruh Indonesia";
@@ -24,8 +27,13 @@ export default function PromoCardsSection({ data }: Props) {
     paddingBottom: styles.paddingBottom || "40px",
   };
 
-  return (
+  
+  
+
+return (
     <section className="bg-white relative overflow-hidden" style={paddingStyle}>
+      <div style={sectionScale(data.styles) !== 1 ? { transform: `scale(${sectionScale(data.styles)})`, transformOrigin: "top center", width: "100%" } : {}}>
+
       <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           
@@ -38,9 +46,11 @@ export default function PromoCardsSection({ data }: Props) {
               <span className="text-xs sm:text-sm font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2">
                 {card1Tag}
               </span>
-              <h3 className="text-base sm:text-lg font-black text-gray-900 leading-[1.2] mb-2 sm:mb-3">
-                {card1Title}
-              </h3>
+              <div style={posStyle(pos, 'card1Title')}>
+                <h3 className="text-base sm:text-lg font-black text-gray-900 leading-[1.2] mb-2 sm:mb-3">
+                  {card1Title}
+                </h3>
+              </div>
               <p className="text-sm sm:text-base text-gray-500 leading-relaxed max-w-[280px]">
                 {card1Desc}
               </p>
@@ -60,9 +70,11 @@ export default function PromoCardsSection({ data }: Props) {
               <span className="text-xs sm:text-sm font-extrabold text-gray-400 tracking-[0.2em] uppercase mb-1.5 sm:mb-2">
                 {card2Tag}
               </span>
-              <h3 className="text-base sm:text-lg font-black text-gray-900 leading-[1.2] mb-1 sm:mb-2">
-                {card2Title}
-              </h3>
+              <div style={posStyle(pos, 'card2Title')}>
+                <h3 className="text-base sm:text-lg font-black text-gray-900 leading-[1.2] mb-1 sm:mb-2">
+                  {card2Title}
+                </h3>
+              </div>
               {card2Badge && (
                 <div>
                   <div className="inline-flex items-center gap-1.5 bg-[#990202] text-white px-3 py-1.5 rounded-full mt-2 text-[12px] sm:text-[13px] font-bold tracking-wide shadow-sm text-left">
@@ -76,6 +88,8 @@ export default function PromoCardsSection({ data }: Props) {
 
         </div>
       </div>
+      </div>
+
     </section>
   );
 }

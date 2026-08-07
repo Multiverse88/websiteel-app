@@ -209,6 +209,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // Catch-all untuk variasi kata kunci organik (jasa-pendirian, jasa-pembuatan, dll)
+        // secara otomatis di-redirect ke halaman layanan aslinya.
+        // Contoh: /jasa-pendirian-cv -> /layanan/pendirian-badan-usaha/cv
+        source: "/:prefix(jasa-pendirian|jasa-pembuatan|pendirian|pembuatan)-:type(pt|pt-pma|pt-perorangan|cv|yayasan|firma|koperasi|perkumpulan)",
+        destination: "/layanan/pendirian-badan-usaha/:type",
+        permanent: true,
+      },
+      {
         source: "/layanan/pendirian-yayasan",
         destination: "/layanan/pendirian-badan-usaha/yayasan",
         permanent: true,

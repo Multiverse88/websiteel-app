@@ -1,4 +1,5 @@
 import React from 'react';
+import { posStyle, sectionScale } from '../utils';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
 
@@ -23,9 +24,12 @@ interface Props {
   };
 }
 
+;
+
 export default function PricingSection({ data }: Props) {
   const styles = data.styles || {};
   const plans = data.plans || [];
+  const pos = styles.positions;
 
   const bgClass =
     styles.bgTheme === 'dark'
@@ -34,17 +38,26 @@ export default function PricingSection({ data }: Props) {
         ? 'bg-[#990202] text-white'
         : 'bg-white text-gray-900';
 
-  return (
+  
+  
+
+return (
     <section
       className={`${bgClass} py-16 sm:py-24`}
-      style={{ paddingTop: styles.paddingTop, paddingBottom: styles.paddingBottom }}
+      style={{ ...(data.styles?.sectionHeight ? { minHeight: data.styles.sectionHeight } : {}),  paddingTop: styles.paddingTop, paddingBottom: styles.paddingBottom, ...(styles.height ? { minHeight: styles.height } : {}) }}
     >
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+      <div style={sectionScale(data.styles) !== 1 ? { transform: `scale(${sectionScale(data.styles)})`, transformOrigin: "top center", width: "100%" } : {}}>
+
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative">
         {data.title && (
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-4">{data.title}</h2>
+          <div style={posStyle(pos, 'title')}>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-4">{data.title}</h2>
+          </div>
         )}
         {data.subtitle && (
-          <p className="text-center text-sm sm:text-base opacity-80 max-w-xl mx-auto mb-12">{data.subtitle}</p>
+          <div style={posStyle(pos, 'subtitle')}>
+            <p className="text-center text-sm sm:text-base opacity-80 max-w-xl mx-auto mb-12">{data.subtitle}</p>
+          </div>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {plans.map((plan, idx) => (
@@ -98,6 +111,8 @@ export default function PricingSection({ data }: Props) {
           ))}
         </div>
       </div>
+      </div>
+
     </section>
   );
 }

@@ -1,7 +1,5 @@
 "use server";
 
-import { trackMetric } from "@/lib/metrics";
-
 export async function subscribeNewsletter(email: string) {
   if (!email || !email.includes("@")) {
     return { success: false, error: "Email tidak valid." };
@@ -16,10 +14,6 @@ export async function subscribeNewsletter(email: string) {
     });
     
     const data = await res.json();
-    
-    if (res.ok && data.success) {
-      trackMetric("newsletter_subscribe", 1, { type: data.type || "new" });
-    }
     
     return data;
   } catch (error) {
