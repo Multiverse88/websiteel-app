@@ -1,0 +1,56 @@
+{
+  "id": "conv-1786069123426-iifa75994",
+  "providerId": "codex",
+  "title": "tes",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1786069123426,
+  "updatedAt": 1786069138205,
+  "lastResponseAt": 1786069123577,
+  "sessionId": null,
+  "model": "gpt-5.5",
+  "messages": [
+    {
+      "id": "msg-1786069123405-0ityj6d",
+      "role": "user",
+      "content": "tes",
+      "displayContent": "tes",
+      "timestamp": 1786069123405,
+      "completedAt": 1786069123405
+    },
+    {
+      "id": "msg-1786069123500-2ofih7d",
+      "role": "assistant",
+      "content": "",
+      "timestamp": 1786069123500,
+      "toolCalls": [],
+      "contentBlocks": [
+        {
+          "type": "text",
+          "content": "\n\n**Error:** Failed to start \"codex\": command not found. Set an absolute CLI path in the provider settings — desktop apps do not inherit the shell PATH."
+        }
+      ],
+      "responseMetadata": {
+        "providerId": "codex",
+        "providerLabel": "Codex",
+        "model": "gpt-5.5",
+        "modelLabel": "GPT-5.5",
+        "effort": "high",
+        "effortLabel": "High"
+      },
+      "completedAt": 1786069123575
+    }
+  ],
+  "assistantResponseMetadata": [
+    {
+      "assistantMessageIndex": 0,
+      "metadata": {
+        "providerId": "codex",
+        "providerLabel": "Codex",
+        "model": "gpt-5.5",
+        "modelLabel": "GPT-5.5",
+        "effort": "high",
+        "effortLabel": "High"
+      }
+    }
+  ]
+}
