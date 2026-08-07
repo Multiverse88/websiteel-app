@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { unstable_cache } from "next/cache";
 import { Calendar, Clock, Home, Tag } from "lucide-react";
 import SocialShare from "@/components/SocialShare";
 import NewsletterWidget from "@/components/NewsletterWidget";
@@ -46,19 +47,36 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+async function fetchArticleFromApi(slug: string) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/${slug}`;
+  const res = await fetch(apiUrl, { next: { revalidate: 60, tags: [`article-${slug}`] } });
+  if (!res.ok) return null;
+  const json = await res.json();
+  if (!json.data) return null;
+  return json.data;
+}
+
+const getCachedArticle = unstable_cache(
+  async (slug: string) => {
+    try {
+      return await fetchArticleFromApi(slug);
+    } catch (e) {
+      console.error("Error fetching article (cached):", e);
+      return null;
+    }
+  },
+  ["article-by-slug"],
+  { revalidate: 300, tags: ["articles"] }
+);
+
 async function getArticle(slug: string) {
   try {
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/${slug}`;
-    const res = await fetch(apiUrl, { next: { revalidate: 60 } });
-    if (!res.ok) return null;
-    const json = await res.json();
-    if (!json.data) return null;
-    
-    // Parse dates to string/Date appropriately since they come from JSON
-    const article = json.data;
+    const article = await getCachedArticle(slug);
+    if (!article) return null;
+
     article.createdAt = new Date(article.createdAt);
     if (article.updatedAt) article.updatedAt = new Date(article.updatedAt);
-    
+
     return article;
   } catch (e) {
     console.error("Error fetching article by slug:", e);

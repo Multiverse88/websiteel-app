@@ -567,6 +567,18 @@ export default function ArticleEditor() {
         } else {
           await api.createArticle(articleData);
         }
+
+        // Trigger ISR revalidation on public site
+        try {
+          await fetch("https://easylegal.biz.id/api/revalidate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-revalidate-secret": "easylegal-reval-2026",
+            },
+            body: JSON.stringify({ slug: articleData.slug }),
+          });
+        } catch (_) {}
         
         window.location.hash = "#/articles";
       } catch (err: any) {
