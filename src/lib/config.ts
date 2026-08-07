@@ -10,9 +10,7 @@ export const config = {
   
   // Company info
   company: {
-    name: "EasyLegal",
     email: "info@easylegal.id",
-    phone: "(022) 1234-5678",
     whatsapp: "0811-2345-6789",
   },
 } as const;

@@ -8,7 +8,6 @@ import SocialShare from "@/components/SocialShare";
 import NewsletterWidget from "@/components/NewsletterWidget";
 import ViewTracker from "./view-tracker";
 import TableOfContents from "./table-of-contents";
-import { trackMetric } from "@/lib/metrics";
 import { getWhatsAppLink } from "@/lib/config";
 import { getArticleJsonLd } from "@/lib/structured-data";
 import type { Metadata } from "next";
@@ -590,9 +589,6 @@ export default async function ArtikelDetailPage({ params }: Props) {
   if (!article) {
     notFound();
   }
-
-  trackMetric("article_read", 1, { category: article.category, slug });
-
   // ── Smart Related Articles: keyword + category matching ──────────────────
   // Ekstrak kata kunci bermakna dari judul artikel (min 4 karakter, skip stopwords)
   const STOPWORDS = new Set(["yang", "untuk", "dengan", "dalam", "dari", "pada", "oleh", "atau",

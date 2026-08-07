@@ -83,7 +83,7 @@ export default async function LandingPage({ params }: PageProps) {
 
       {/* Render All Sections in Order */}
       {sections.map((section, idx) => (
-        <SectionRenderer key={section.id || idx} section={section} landingPageId={page.id} />
+        <SectionRenderer key={section.id || idx} section={section} />
       ))}
     </main>
   );
