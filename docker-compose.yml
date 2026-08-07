@@ -12,6 +12,7 @@ services:
       - .env.production
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@host.docker.internal:5432/postgres?schema=easylegal
+      - DIRECT_URL=postgresql://postgres:postgres@host.docker.internal:5432/postgres?schema=easylegal
       - MINIO_ENDPOINT=cdn-storage
       - MINIO_PORT=9000
       - MINIO_USE_SSL=false
@@ -52,6 +53,7 @@ services:
       - HOSTNAME=0.0.0.0
       - MINIO_ENDPOINT=http://host.docker.internal:9000
       - NEXT_PUBLIC_API_URL=https://admin.easylegal.my.id
+      - REVALIDATION_SECRET=easylegal-reval-2026
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
