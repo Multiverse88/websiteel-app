@@ -34,7 +34,10 @@ export const api = {
   // Articles
   getArticles: () => request('/Article?select=*'),
   getArticle: (id: string) => request(`/Article?id=eq.${id}&limit=1`).then(res => (Array.isArray(res) ? res[0] : res)),
-  createArticle: (data: any) => request('/Article', { method: 'POST', body: JSON.stringify(data) }),
+  createArticle: (data: any) => {
+    const withId = { ...data, id: data.id || crypto.randomUUID().replace(/-/g, '').slice(0, 25) };
+    return request('/Article', { method: 'POST', body: JSON.stringify(withId) });
+  },
   updateArticle: (id: string, data: any) => request(`/Article?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
   deleteArticle: (id: string) => request(`/Article?id=eq.${id}`, { method: 'DELETE' }),
 
