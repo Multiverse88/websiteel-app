@@ -88,6 +88,13 @@ export const api = {
   deleteCampaign: (id: string) => request(`/EmailCampaign?id=eq.${id}`, { method: 'DELETE' }),
   getCampaignRecipients: (id: string) => request(`/EmailLog?campaignId=eq.${id}`),
 
+
+  // Tracking Projects
+  getTrackingProjects: () => request('/TrackingProject?order=createdAt.desc'),
+  createTrackingProject: (data: any) => request('/TrackingProject', { method: 'POST', body: JSON.stringify(data) }),
+  updateTrackingProject: (id: string, data: any) => request(`/TrackingProject?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  deleteTrackingProject: (id: string) => request(`/TrackingProject?id=eq.${id}`, { method: 'DELETE' }),
+
   // Settings / Templates (Mapping to SystemSetting for now or placeholders)
   getSmtpSettings: async () => {
     const backendUrl = import.meta.env.VITE_API_URL || '/api/v1';

@@ -12,6 +12,7 @@ import EmailBlast from './pages/EmailBlast'
 import ArticleEditor from './pages/ArticleEditor'
 import NewsletterEditor from './pages/NewsletterEditor'
 import NewsletterSettings from './pages/NewsletterSettings'
+import Tracking from './pages/Tracking'
 
 
 function Router() {
@@ -48,6 +49,7 @@ function Router() {
     '/email-blast': <EmailBlast />,
     '/email-blast/tambah': <NewsletterEditor />,
     '/newsletter/settings': <NewsletterSettings />,
+    '/tracking': <Tracking />,
   }
 
   return <Layout>{pages[route] || <Dashboard />}</Layout>

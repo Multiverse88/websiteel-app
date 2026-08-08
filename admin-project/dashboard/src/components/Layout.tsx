@@ -6,6 +6,7 @@ const navItems = [
   { icon: 'mail_outline', label: 'Newsletter', path: '#/newsletter' },
   { icon: 'campaign', label: 'Email Blasting', path: '#/email-blast' },
   { icon: 'web', label: 'Landing Pages', path: '#/landing-pages' },
+  { icon: 'place', label: 'Tracking Project', path: '#/tracking' },
   { icon: 'group', label: 'Subscriber', path: '#/contacts' },
   { icon: 'settings', label: 'Settings', path: '#/settings' },
 ]
