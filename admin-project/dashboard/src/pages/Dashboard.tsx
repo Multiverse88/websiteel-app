@@ -1,4 +1,115 @@
+import { useState, useEffect } from 'react';
+import { api } from '../lib/api';
+
+interface TrackingProject {
+  id: string;
+  trackingCode: string;
+  clientName: string;
+  serviceType: string;
+  timelineData: any[];
+  isCompleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface DashboardStats {
+  totalArticles: number;
+  totalSubscribers: number;
+  activeCampaigns: number;
+  totalProjects: number;
+  activeProjects: number;
+  completedProjects: number;
+}
+
 export default function Dashboard() {
+  const [stats, setStats] = useState<DashboardStats>({
+    totalArticles: 0,
+    totalSubscribers: 0,
+    activeCampaigns: 0,
+    totalProjects: 0,
+    activeProjects: 0,
+    completedProjects: 0,
+  });
+  const [recentProjects, setRecentProjects] = useState<TrackingProject[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true);
+      
+      const [articles, subscribers, campaigns, projects] = await Promise.all([
+        api.getArticles().catch(() => []),
+        api.getNewsletter().catch(() => []),
+        api.getCampaigns().catch(() => []),
+        api.getTrackingProjects().catch(() => []),
+      ]);
+
+      const projectsArray = Array.isArray(projects) ? projects : [];
+      const activeProjects = projectsArray.filter((p: TrackingProject) => 
+        !p.isCompleted && p.timelineData?.some((s: any) => s.status === 'current' || s.status === 'pending')
+      ).length;
+      const completedProjects = projectsArray.filter((p: TrackingProject) => p.isCompleted).length;
+
+      setStats({
+        totalArticles: Array.isArray(articles) ? articles.length : 0,
+        totalSubscribers: Array.isArray(subscribers) ? subscribers.length : 0,
+        activeCampaigns: Array.isArray(campaigns) ? campaigns.length : 0,
+        totalProjects: projectsArray.length,
+        activeProjects,
+        completedProjects,
+      });
+
+      setRecentProjects(projectsArray.slice(0, 5));
+    } catch (err) {
+      console.error('Failed to fetch dashboard data:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '-';
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+  };
+
+  const getProjectProgress = (project: TrackingProject) => {
+    const doneCount = project.timelineData?.filter((s: any) => s.status === 'done').length || 0;
+    const total = project.timelineData?.length || 0;
+    return total > 0 ? Math.round((doneCount / total) * 100) : 0;
+  };
+
+  const getCurrentStep = (project: TrackingProject) => {
+    return project.timelineData?.find((s: any) => s.status === 'current') 
+        || project.timelineData?.find((s: any) => s.status === 'pending');
+  };
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto space-y-[32px]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <h2 className="text-[24px] leading-[32px] font-semibold tracking-[-0.01em] font-sans text-gray-900">Overview</h2>
+            <p className="text-[14px] leading-[22px] font-sans text-gray-500 mt-1">Key metrics and recent activity across your legal ecosystem.</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="bg-white rounded-xl border border-gray-200 p-[20px] animate-pulse">
+              <div className="h-4 bg-gray-200 rounded w-20 mb-4"></div>
+              <div className="h-8 bg-gray-200 rounded w-16 mb-2"></div>
+              <div className="h-3 bg-gray-200 rounded w-24"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto space-y-[32px]">
       {/* Page Header */}
@@ -8,10 +119,16 @@ export default function Dashboard() {
           <p className="text-[14px] leading-[22px] font-sans text-gray-500 mt-1">Key metrics and recent activity across your legal ecosystem.</p>
         </div>
         <div className="flex gap-3">
-          <button className="bg-white border border-gray-200 font-semibold text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors shadow-sm text-sm flex items-center gap-2">
-            <span className="material-symbols-outlined text-[18px]">download</span> Export Report
+          <button 
+            onClick={() => window.location.hash = '#/tracking'}
+            className="bg-white border border-gray-200 font-semibold text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors shadow-sm text-sm flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[18px]">location_on</span> Tracking Project
           </button>
-          <button className="bg-[#6f0000] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#7A0101] transition-colors shadow-sm text-sm flex items-center gap-2">
+          <button 
+            onClick={() => window.location.hash = '#/email-blast/tambah'}
+            className="bg-[#6f0000] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#7A0101] transition-colors shadow-sm text-sm flex items-center gap-2"
+          >
             <span className="material-symbols-outlined text-[18px]">add</span> New Campaign
           </button>
         </div>
@@ -19,7 +136,7 @@ export default function Dashboard() {
 
       {/* Bento Grid: Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Stat Card 1 */}
+        {/* Total Articles */}
         <div className="bg-white rounded-xl border border-gray-200 p-[20px] flex flex-col justify-between group hover:shadow-[0_4px_24px_rgba(0,0,0,0.02)] transition-shadow">
           <div className="flex justify-between items-start mb-4">
             <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-widest font-mono">Total Articles</span>
@@ -28,15 +145,14 @@ export default function Dashboard() {
             </div>
           </div>
           <div>
-            <div className="text-[32px] leading-[40px] font-bold tracking-[-0.02em] font-sans text-gray-900">142</div>
+            <div className="text-[32px] leading-[40px] font-bold tracking-[-0.02em] font-sans text-gray-900">{stats.totalArticles}</div>
             <div className="flex items-center gap-1 mt-1 text-sm">
-              <span className="text-emerald-600 flex items-center"><span className="material-symbols-outlined text-[14px]">arrow_upward</span> 12%</span>
-              <span className="text-gray-500">vs last month</span>
+              <span className="text-gray-500">articles published</span>
             </div>
           </div>
         </div>
 
-        {/* Stat Card 2 */}
+        {/* Total Subscribers */}
         <div className="bg-white rounded-xl border border-gray-200 p-[20px] flex flex-col justify-between group hover:shadow-[0_4px_24px_rgba(0,0,0,0.02)] transition-shadow">
           <div className="flex justify-between items-start mb-4">
             <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-widest font-mono">Total Subscribers</span>
@@ -45,44 +161,43 @@ export default function Dashboard() {
             </div>
           </div>
           <div>
-            <div className="text-[32px] leading-[40px] font-bold tracking-[-0.02em] font-sans text-gray-900">8,204</div>
+            <div className="text-[32px] leading-[40px] font-bold tracking-[-0.02em] font-sans text-gray-900">{stats.totalSubscribers.toLocaleString()}</div>
             <div className="flex items-center gap-1 mt-1 text-sm">
-              <span className="text-emerald-600 flex items-center"><span className="material-symbols-outlined text-[14px]">arrow_upward</span> 5.4%</span>
-              <span className="text-gray-500">vs last month</span>
+              <span className="text-gray-500">active subscribers</span>
             </div>
           </div>
         </div>
 
-        {/* Stat Card 3 */}
+        {/* Active Campaigns */}
         <div className="bg-white rounded-xl border border-gray-200 p-[20px] flex flex-col justify-between group hover:shadow-[0_4px_24px_rgba(0,0,0,0.02)] transition-shadow">
           <div className="flex justify-between items-start mb-4">
-            <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-widest font-mono">Campaigns Sent</span>
+            <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-widest font-mono">Campaigns</span>
             <div className="w-10 h-10 rounded-full bg-[#FEF2F2] flex items-center justify-center text-[#6f0000] group-hover:bg-[#6f0000] group-hover:text-white transition-colors">
               <span className="material-symbols-outlined">campaign</span>
             </div>
           </div>
           <div>
-            <div className="text-[32px] leading-[40px] font-bold tracking-[-0.02em] font-sans text-gray-900">12</div>
+            <div className="text-[32px] leading-[40px] font-bold tracking-[-0.02em] font-sans text-gray-900">{stats.activeCampaigns}</div>
             <div className="flex items-center gap-1 mt-1 text-sm">
-              <span className="text-gray-500 flex items-center"><span className="material-symbols-outlined text-[14px]">horizontal_rule</span> 0%</span>
-              <span className="text-gray-500">vs last month</span>
+              <span className="text-gray-500">email campaigns</span>
             </div>
           </div>
         </div>
 
-        {/* Stat Card 4 */}
+        {/* Total Projects */}
         <div className="bg-white rounded-xl border border-gray-200 p-[20px] flex flex-col justify-between group hover:shadow-[0_4px_24px_rgba(0,0,0,0.02)] transition-shadow">
           <div className="flex justify-between items-start mb-4">
-            <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-widest font-mono">Active Pages</span>
+            <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-widest font-mono">Tracking Projects</span>
             <div className="w-10 h-10 rounded-full bg-[#FEF2F2] flex items-center justify-center text-[#6f0000] group-hover:bg-[#6f0000] group-hover:text-white transition-colors">
-              <span className="material-symbols-outlined">web</span>
+              <span className="material-symbols-outlined">location_on</span>
             </div>
           </div>
           <div>
-            <div className="text-[32px] leading-[40px] font-bold tracking-[-0.02em] font-sans text-gray-900">5</div>
-            <div className="flex items-center gap-1 mt-1 text-sm">
-              <span className="text-red-600 flex items-center"><span className="material-symbols-outlined text-[14px]">arrow_downward</span> 1</span>
-              <span className="text-gray-500">vs last month</span>
+            <div className="text-[32px] leading-[40px] font-bold tracking-[-0.02em] font-sans text-gray-900">{stats.totalProjects}</div>
+            <div className="flex items-center gap-2 mt-1 text-sm">
+              <span className="text-emerald-600 font-medium">{stats.completedProjects} selesai</span>
+              <span className="text-gray-400">•</span>
+              <span className="text-amber-600 font-medium">{stats.activeProjects} aktif</span>
             </div>
           </div>
         </div>
@@ -90,123 +205,176 @@ export default function Dashboard() {
 
       {/* Main Layout Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-12">
-        {/* Chart Panel (Spans 8 cols on large screens) */}
+        {/* Recent Tracking Projects (Spans 8 cols on large screens) */}
         <div className="lg:col-span-8 bg-white rounded-[32px] border border-gray-200 p-6 md:p-8 flex flex-col">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-[18px] leading-[24px] font-semibold font-sans text-gray-900">Subscriber Growth</h3>
-            <select className="bg-[#f8f9fa] border border-gray-200 font-semibold text-sm rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000]/50 outline-none">
-              <option>Last 30 Days</option>
-              <option>This Quarter</option>
-              <option>This Year</option>
-            </select>
+            <h3 className="text-[18px] leading-[24px] font-semibold font-sans text-gray-900">Recent Tracking Projects</h3>
+            <button 
+              onClick={() => window.location.hash = '#/tracking'}
+              className="text-[11px] font-semibold tracking-widest font-mono text-[#6f0000] hover:text-[#990202] uppercase"
+            >
+              View All
+            </button>
           </div>
-          {/* Pseudo Chart Area */}
-          <div className="flex-1 w-full min-h-[300px] relative mt-4 border-b border-l border-gray-200/50 pl-2 pb-2 flex items-end">
-            {/* Y-axis labels */}
-            <div className="absolute -left-8 top-0 h-full flex flex-col justify-between text-[11px] font-semibold tracking-widest font-mono text-gray-500 pb-6">
-              <span>10k</span>
-              <span>7.5k</span>
-              <span>5k</span>
-              <span>2.5k</span>
-              <span>0</span>
-            </div>
-            {/* Grid lines */}
-            <div className="absolute inset-0 w-full h-full flex flex-col justify-between pointer-events-none pb-6 pl-2">
-              <div className="w-full border-b border-gray-200/30 border-dashed h-0"></div>
-              <div className="w-full border-b border-gray-200/30 border-dashed h-0"></div>
-              <div className="w-full border-b border-gray-200/30 border-dashed h-0"></div>
-              <div className="w-full border-b border-gray-200/30 border-dashed h-0"></div>
-              <div className="w-full h-0"></div>
-            </div>
-            {/* Bars */}
-            <div className="w-full h-full flex items-end justify-between px-2 pb-6 gap-2 relative z-10 pt-8">
-              <div className="w-full bg-[#e1e3e4] hover:bg-[#6f0000]/20 rounded-t-sm transition-colors relative group" style={{ height: '45%' }}>
-                <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap transition-opacity">4,500</div>
-              </div>
-              <div className="w-full bg-[#e1e3e4] hover:bg-[#6f0000]/20 rounded-t-sm transition-colors relative group" style={{ height: '52%' }}>
-                <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap transition-opacity">5,200</div>
-              </div>
-              <div className="w-full bg-[#e1e3e4] hover:bg-[#6f0000]/20 rounded-t-sm transition-colors relative group" style={{ height: '48%' }}></div>
-              <div className="w-full bg-[#e1e3e4] hover:bg-[#6f0000]/20 rounded-t-sm transition-colors relative group" style={{ height: '60%' }}></div>
-              <div className="w-full bg-[#6f0000]/60 hover:bg-[#6f0000]/80 rounded-t-sm transition-colors relative group" style={{ height: '75%' }}>
-                <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap transition-opacity">7,500</div>
-              </div>
-              <div className="w-full bg-[#6f0000] rounded-t-sm transition-colors shadow-[0_0_12px_rgba(153,2,2,0.3)] relative group" style={{ height: '82%' }}>
-                <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap transition-opacity">8,204</div>
+          
+          {recentProjects.length === 0 ? (
+            <div className="flex-1 flex items-center justify-center text-gray-500">
+              <div className="text-center">
+                <span className="material-symbols-outlined text-4xl text-gray-300 mb-2">location_on</span>
+                <p className="text-sm">Belum ada project tracking</p>
+                <button 
+                  onClick={() => window.location.hash = '#/tracking'}
+                  className="mt-2 text-sm text-[#6f0000] font-medium hover:underline"
+                >
+                  Buat Project Baru
+                </button>
               </div>
             </div>
-            {/* X-axis labels */}
-            <div className="absolute bottom-0 left-2 w-full flex justify-between text-[11px] font-semibold tracking-widest font-mono text-gray-500 pr-2 pt-2">
-              <span className="w-full text-center">Jan</span>
-              <span className="w-full text-center">Feb</span>
-              <span className="w-full text-center">Mar</span>
-              <span className="w-full text-center">Apr</span>
-              <span className="w-full text-center">May</span>
-              <span className="w-full text-center text-[#6f0000] font-bold">Jun</span>
+          ) : (
+            <div className="flex-1 overflow-y-auto pr-2 space-y-4">
+              {recentProjects.map((project) => {
+                const progress = getProjectProgress(project);
+                const currentStep = getCurrentStep(project);
+                
+                return (
+                  <div 
+                    key={project.id}
+                    className="p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-[#6f0000]/30 transition cursor-pointer"
+onClick={() => window.location.hash = '#/tracking'}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-mono text-xs font-semibold text-[#6f0000] bg-[#6f0000]/10 px-2 py-0.5 rounded">
+                            {project.trackingCode}
+                          </span>
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                            project.isCompleted 
+                              ? 'bg-green-100 text-green-700' 
+                              : 'bg-amber-100 text-amber-700'
+                          }`}>
+                            {project.isCompleted ? 'SELESAI' : 'AKTIF'}
+                          </span>
+                        </div>
+                        <h4 className="font-semibold text-gray-900 text-sm truncate">{project.clientName}</h4>
+                        <p className="text-xs text-gray-500 mt-0.5">{project.serviceType}</p>
+                      </div>
+                      
+                      <div className="text-right flex-shrink-0">
+                        <div className="text-lg font-bold text-gray-900">{progress}%</div>
+                        <div className="w-20 bg-gray-200 rounded-full h-1.5 mt-1">
+                          <div 
+                            className="bg-[#6f0000] h-full rounded-full transition-all duration-500" 
+                            style={{ width: `${progress}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {currentStep && !project.isCompleted && (
+                      <div className="mt-2 text-xs text-gray-500 flex items-center gap-1">
+                        <span className="text-[#6f0000]">→</span>
+                        <span>{currentStep.title}</span>
+                      </div>
+                    )}
+                    
+                    <div className="mt-2 text-[10px] text-gray-400">
+                      {formatDate(project.createdAt)}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
+          )}
         </div>
 
-        {/* Recent Activities Panel (Spans 4 cols on large screens) */}
+        {/* Quick Stats Panel (Spans 4 cols on large screens) */}
         <div className="lg:col-span-4 bg-white rounded-[32px] border border-gray-200 p-6 md:p-8 flex flex-col h-full">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-[18px] leading-[24px] font-semibold font-sans text-gray-900">Recent Activity</h3>
-            <button className="text-[11px] font-semibold tracking-widest font-mono text-[#6f0000] hover:text-[#990202] uppercase">View All</button>
+            <h3 className="text-[18px] leading-[24px] font-semibold font-sans text-gray-900">Project Summary</h3>
           </div>
-          <div className="flex-1 overflow-y-auto pr-2 space-y-6">
-            {/* Activity Item 1 */}
-            <div className="flex gap-4 relative">
-              <div className="absolute left-[19px] top-10 bottom-[-24px] w-px bg-gray-200 z-0"></div>
-              <div className="w-10 h-10 rounded-full bg-[#edeeef] flex items-center justify-center flex-shrink-0 z-10 border border-white">
-                <span className="material-symbols-outlined text-gray-500 text-[20px]">description</span>
+          <div className="flex-1 space-y-6">
+            {/* Active Projects Breakdown */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-600">Sedang Diproses</span>
+                <span className="text-sm font-bold text-amber-600">{stats.activeProjects}</span>
               </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900">New article published</p>
-                <p className="text-sm text-gray-500 mt-0.5">"Corporate Compliance 2024 Guidelines"</p>
-                <span className="text-xs text-gray-400 block mt-1">2 hours ago</span>
-              </div>
-            </div>
-
-            {/* Activity Item 2 */}
-            <div className="flex gap-4 relative">
-              <div className="absolute left-[19px] top-10 bottom-[-24px] w-px bg-gray-200 z-0"></div>
-              <div className="w-10 h-10 rounded-full bg-[#FEF2F2] flex items-center justify-center flex-shrink-0 z-10 border border-white">
-                <span className="material-symbols-outlined text-[#6f0000] text-[20px]">campaign</span>
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900">Campaign sent successfully</p>
-                <p className="text-sm text-gray-500 mt-0.5">"Q3 Legal Updates Newsletter" sent to 7,540 subscribers.</p>
-                <span className="text-xs text-gray-400 block mt-1">Yesterday, 14:30</span>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div 
+                  className="bg-amber-500 h-full rounded-full transition-all duration-500" 
+                  style={{ width: stats.totalProjects > 0 ? `${(stats.activeProjects / stats.totalProjects) * 100}%` : '0%' }}
+                />
               </div>
             </div>
 
-            {/* Activity Item 3 */}
-            <div className="flex gap-4 relative">
-              <div className="absolute left-[19px] top-10 bottom-[-24px] w-px bg-gray-200 z-0"></div>
-              <div className="w-10 h-10 rounded-full bg-[#edeeef] flex items-center justify-center flex-shrink-0 z-10 border border-white">
-                <span className="material-symbols-outlined text-emerald-600 text-[20px]">person_add</span>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-600">Selesai</span>
+                <span className="text-sm font-bold text-emerald-600">{stats.completedProjects}</span>
               </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900">Subscriber milestone reached</p>
-                <p className="text-sm text-gray-500 mt-0.5">Crossed 8,000 total active subscribers.</p>
-                <span className="text-xs text-gray-400 block mt-1">Oct 12, 09:15</span>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div 
+                  className="bg-emerald-500 h-full rounded-full transition-all duration-500" 
+                  style={{ width: stats.totalProjects > 0 ? `${(stats.completedProjects / stats.totalProjects) * 100}%` : '0%' }}
+                />
               </div>
             </div>
 
-            {/* Activity Item 4 */}
-            <div className="flex gap-4 relative">
-              <div className="w-10 h-10 rounded-full bg-[#edeeef] flex items-center justify-center flex-shrink-0 z-10 border border-white">
-                <span className="material-symbols-outlined text-amber-500 text-[20px]">edit</span>
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900">Landing page updated</p>
-                <p className="text-sm text-gray-500 mt-0.5">"Consultation Booking" layout modified.</p>
-                <span className="text-xs text-gray-400 block mt-1">Oct 10, 16:45</span>
-              </div>
+            {/* Divider */}
+            <div className="border-t border-gray-200" />
+
+            {/* Quick Actions */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Quick Actions</h4>
+              <button 
+                onClick={() => window.location.hash = '#/tracking'}
+                className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-left hover:border-[#6f0000]/30 hover:bg-[#6f0000]/5 transition group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#6f0000]/10 flex items-center justify-center text-[#6f0000] group-hover:bg-[#6f0000] group-hover:text-white transition">
+                    <span className="material-symbols-outlined text-lg">add</span>
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">Buat Project Baru</div>
+                    <div className="text-xs text-gray-500">Tambah tracking project klien</div>
+                  </div>
+                </div>
+              </button>
+              
+              <button 
+                onClick={() => window.location.hash = '#/articles/tambah'}
+                className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-left hover:border-[#6f0000]/30 hover:bg-[#6f0000]/5 transition group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#6f0000]/10 flex items-center justify-center text-[#6f0000] group-hover:bg-[#6f0000] group-hover:text-white transition">
+                    <span className="material-symbols-outlined text-lg">edit</span>
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">Tulis Artikel Baru</div>
+                    <div className="text-xs text-gray-500">Buat konten hukum terbaru</div>
+                  </div>
+                </div>
+              </button>
+              
+              <button 
+                onClick={() => window.location.hash = '#/email-blast'}
+                className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-left hover:border-[#6f0000]/30 hover:bg-[#6f0000]/5 transition group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#6f0000]/10 flex items-center justify-center text-[#6f0000] group-hover:bg-[#6f0000] group-hover:text-white transition">
+                    <span className="material-symbols-outlined text-lg">campaign</span>
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">Kirim Email Blast</div>
+                    <div className="text-xs text-gray-500">Broadcast ke subscriber</div>
+                  </div>
+                </div>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

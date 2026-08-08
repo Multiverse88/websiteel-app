@@ -1450,10 +1450,10 @@ const SortableBlock = ({
                 throttleDrag={0}
                 renderDirections={["nw","ne","sw","se","e","w","n","s"]}
                 onDragStart={() => { el.style.zIndex = '50'; }}
-                onDrag={(e) => {
+                onDrag={(e: any) => {
                   e.target.style.transform = e.transform;
                 }}
-                onDragEnd={(e) => {
+                onDragEnd={(e: any) => {
                   el.style.zIndex = '';
                   if (onUpdateStyles) {
                     const t = e.target.style.transform || '';
@@ -1462,14 +1462,14 @@ const SortableBlock = ({
                     onUpdateStyles('positions', positions);
                   }
                 }}
-                onResize={(e) => {
+                onResize={(e: any) => {
                   e.target.style.width = `${e.width}px`;
                   if (isImageElement(selectedElement)) {
                     e.target.style.height = `${e.height}px`;
                   }
                   e.target.style.transform = e.drag.transform;
                 }}
-                onResizeEnd={(e) => {
+onResizeEnd={(e: any) => {
                   if (onUpdateStyles) {
                     const t = e.target as HTMLElement;
                     const tf = t.style.transform || '';
@@ -1534,17 +1534,17 @@ const SortableBlock = ({
               origin={false}
               renderDirections={["s"]}
               throttleResize={0}
-              onResizeStart={(e) => {
+              onResizeStart={(e: any) => {
                 // BYPASS LOCK: temporarily neutralize minHeight so the element can freely shrink
                 // We set height so it doesn't collapse immediately if content is smaller
                 e.target.style.height = `${e.target.offsetHeight}px`;
                 e.target.style.minHeight = '0px';
               }}
-              onResize={(e) => {
+              onResize={(e: any) => {
                 // Now we can safely resize height up and down
                 e.target.style.height = `${e.height}px`;
               }}
-              onResizeEnd={(e) => {
+              onResizeEnd={(e: any) => {
                 if (onUpdateStyles) {
                   const finalHeight = e.target.style.height;
                   // Clear our inline styles so React can take over

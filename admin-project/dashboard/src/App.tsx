@@ -15,9 +15,40 @@ import NewsletterSettings from './pages/NewsletterSettings'
 import Tracking from './pages/Tracking'
 
 
+function normalizePathToHash() {
+  const { pathname, hash } = window.location
+  const base = '/dashboard/'
+  if (pathname.startsWith(base)) {
+    const sub = pathname.slice(base.length).replace(/\/$/, '')
+    if (sub && !hash) {
+      window.location.replace(base + '#/' + sub)
+      return
+    }
+  }
+  const baseNoSlash = '/dashboard'
+  if (pathname === baseNoSlash && !hash) {
+    window.location.replace(baseNoSlash + '#/dashboard')
+  }
+}
+
+function ensureCorrectDomain() {
+  const host = window.location.hostname
+  const correctHosts = ['admin.easylegal.my.id', 'localhost', '127.0.0.1']
+  if (!correctHosts.includes(host) && !host.endsWith('.local')) {
+    window.location.replace('https://admin.easylegal.my.id/dashboard/')
+    return true
+  }
+  return false
+}
+
 function Router() {
   const { isAuthenticated } = useAuth()
   const [hash, setHash] = useState(window.location.hash || '#/dashboard')
+
+  useEffect(() => {
+    if (ensureCorrectDomain()) return
+    normalizePathToHash()
+  }, [])
 
   useEffect(() => {
     const onHashChange = () => setHash(window.location.hash || '#/dashboard')
