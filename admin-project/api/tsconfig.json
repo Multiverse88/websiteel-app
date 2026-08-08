@@ -9,5 +9,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "exclude": ["prisma", "test-db.ts", "test-smtp.ts", "seed-smtp.ts"]
+  "exclude": ["prisma", "test-db.ts", "test-smtp.ts", "seed-smtp.ts", "seed-tracking.ts", "reload-postgrest.ts"]
 }
