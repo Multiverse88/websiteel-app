@@ -2,6 +2,8 @@ import { MetadataRoute } from "next";
 
 const BASE_URL = "https://easylegal.biz.id";
 
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
