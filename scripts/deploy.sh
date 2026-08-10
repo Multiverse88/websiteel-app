@@ -41,6 +41,16 @@ bash scripts/backup-db.sh || echo -e "${YELLOW}Warning: DB backup failed, contin
 echo -e "\n${YELLOW}[2/6] Pulling latest code...${NC}"
 git pull origin main
 
+# Pull admin-api and admin-dashboard (separate repos, cloned as siblings of this repo)
+for repo in easylegal-admin-api easylegal-admin-dashboard; do
+    if [ -d "../$repo/.git" ]; then
+        (cd "../$repo" && git pull origin main)
+    else
+        echo -e "${YELLOW}../$repo not found — cloning...${NC}"
+        git clone "https://github.com/Multiverse88/$repo.git" "../$repo"
+    fi
+done
+
 # 3. Clean local build cache
 echo -e "\n${YELLOW}[3/6] Cleaning local build cache...${NC}"
 rm -rf .next .turbo node_modules/.cache

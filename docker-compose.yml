@@ -4,7 +4,7 @@ services:
   # ============================================
   admin-api:
     build:
-      context: ./admin-project/api
+      context: ../easylegal-admin-api
       dockerfile: Dockerfile
     container_name: easylegal-admin-api
     restart: unless-stopped
@@ -28,7 +28,7 @@ services:
   # ============================================
   admin-dashboard:
     build:
-      context: ./admin-project/dashboard
+      context: ../easylegal-admin-dashboard
       dockerfile: Dockerfile
     container_name: easylegal-admin-dashboard
     restart: unless-stopped
