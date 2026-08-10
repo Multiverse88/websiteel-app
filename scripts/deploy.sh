@@ -47,7 +47,12 @@ for repo in easylegal-admin-api easylegal-admin-dashboard; do
         (cd "../$repo" && git pull origin main)
     else
         echo -e "${YELLOW}../$repo not found — cloning...${NC}"
-        git clone "https://github.com/Multiverse88/$repo.git" "../$repo"
+        git clone "https://github.com/Multiverse88/$repo.git" "../$repo" || {
+            echo -e "${RED}Error: failed to clone $repo.${NC}"
+            echo "It's a private repo — make sure this VPS has git credentials"
+            echo "(SSH deploy key or a cached HTTPS token) with read access to it."
+            exit 1
+        }
     fi
 done
 
