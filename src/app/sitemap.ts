@@ -86,6 +86,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "pelaporan-lkpm",
     "perjanjian-perkawinan",
     "pr-media",
+    "apostille",
+    "pelaporan-rups",
+    "kontrak-bisnis",
+    "pkkpr",
   ].map((slug) => ({
     url: `${BASE_URL}/layanan/${slug}`,
     lastModified: new Date(),
