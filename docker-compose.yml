@@ -1,3 +1,9 @@
+# NOTE (2026-08-11): production actually deploys via docker-compose.dokploy.yml
+# (Dokploy + Traefik, per-service subdomains: easylegal.biz.id, api.easylegal.my.id,
+# admin.easylegal.my.id). This file is the pre-Dokploy nginx-based setup — keep it
+# working for local/manual `docker compose up`, but it is NOT what's running in
+# production. If you're debugging a live-site issue, check docker-compose.dokploy.yml
+# on the VPS first.
 services:
   # ============================================
   # Express API (Admin)
@@ -46,7 +52,7 @@ services:
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_TYPEBOT_BOT_ID=easylegal-assistant
-        - NEXT_PUBLIC_API_URL=https://admin.easylegal.my.id
+        - NEXT_PUBLIC_API_URL=https://api.easylegal.my.id
     container_name: easylegal-app
     restart: unless-stopped
     env_file:
@@ -54,8 +60,8 @@ services:
     environment:
       - HOSTNAME=0.0.0.0
       - MINIO_ENDPOINT=http://host.docker.internal:9000
-      - NEXT_PUBLIC_API_URL=https://admin.easylegal.my.id
-      - REVALIDATION_SECRET=easylegal-reval-2026
+      - NEXT_PUBLIC_API_URL=https://api.easylegal.my.id
+      - REVALIDATION_SECRET=${REVALIDATION_SECRET}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
@@ -138,7 +144,7 @@ services:
     environment:
       - DATABASE_URL=${TYPEBOT_DATABASE_URL}
       - NEXTAUTH_URL=https://typebot.easylegal.biz.id
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-Ub1Ir6felK890zb8uj7Le93nxZvyXL1JGa7S0jo05sB}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
       - NEXT_PUBLIC_APP_URL=https://typebot.easylegal.biz.id
       - NEXT_PUBLIC_VIEWER_URL=https://typebot.easylegal.biz.id
       - ENCRYPTION_SECRET=${TYPEBOT_ENCRYPTION_SECRET}
