@@ -1,10 +1,18 @@
 // PostgREST JWT Token Generator
-// Usage: node generate-token.js [role]
+// Usage: PGRST_JWT_SECRET=xxx node generate-token.js [role]
 // Role: anon (default) atau writer
+//
+// SECURITY (2026-08-11): this used to hardcode the actual signing secret —
+// that secret was committed to git and must be treated as leaked/rotated.
+// Never hardcode a real secret here again; pass it via env var instead.
 
 const crypto = require('crypto');
 
-const SECRET = '***REDACTED-JWT-SECRET***';
+const SECRET = process.env.PGRST_JWT_SECRET;
+if (!SECRET) {
+  console.error('Error: set PGRST_JWT_SECRET env var first (matches PostgREST\'s jwt-secret).');
+  process.exit(1);
+}
 const role = process.argv[2] || 'writer';
 
 function base64url(buf) {

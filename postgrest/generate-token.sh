@@ -1,10 +1,18 @@
 #!/bin/bash
 # Generate JWT token untuk PostgREST CRUD access
-# Usage: ./generate-token.sh [role]
+# Usage: PGRST_JWT_SECRET=xxx ./generate-token.sh [role]
 # Role: anon (default) atau writer
+#
+# SECURITY (2026-08-11): this used to hardcode the actual signing secret —
+# that secret was committed to git and must be treated as leaked/rotated.
+# Never hardcode a real secret here again; pass it via env var instead.
 
 ROLE=${1:-writer}
-SECRET="***REDACTED-JWT-SECRET***"
+if [ -z "$PGRST_JWT_SECRET" ]; then
+  echo "Error: set PGRST_JWT_SECRET env var first (matches PostgREST's jwt-secret)." >&2
+  exit 1
+fi
+SECRET="$PGRST_JWT_SECRET"
 
 # Header
 HEADER=$(echo -n '{"alg":"HS256","typ":"JWT"}' | openssl dgst -sha256 -hmac "$SECRET" -binary | base64 | tr '+/' '-_' | tr -d '=')
