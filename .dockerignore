@@ -14,3 +14,4 @@ nginx/
 public/uploads/2fa/
 *.tsbuildinfo
 next-env.d.ts
+infra/
