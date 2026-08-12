@@ -1,77 +1,11 @@
+# Public site only — split 2026-08-12 from a single monolithic compose
+# file that also had postgres/postgrest/admin-api/admin-dashboard/adminer.
+# Reason: Dokploy treats one compose file as one deploy unit, so pushing an
+# unrelated change (e.g. adding Adminer) was redeploying easylegal.biz.id
+# too. See docker-compose.infra.dokploy.yml for everything else, and
+# notes/easylegal-checklist-2026-08-12.md for the VPS-side setup this
+# split requires (shared external `easylegal` network, second Dokploy app).
 services:
-  postgres:                          # DB — port 5432 exposed untuk development
-    image: postgres:16
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: easylegal
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - easylegal
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  admin-api:                         # api.easylegal.my.id
-    build:
-      context: /home/it_easylegal26/easylegal-admin-api
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    depends_on:
-      postgres:
-        condition: service_healthy
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - DIRECT_URL=${DIRECT_URL}
-      - JWT_SECRET=${JWT_SECRET}
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=${SMTP_PORT}
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASS=${SMTP_PASS}
-      - SMTP_FROM=${SMTP_FROM}
-      - NEXT_PUBLIC_APP_URL=https://easylegal.biz.id
-      - MINIO_ENDPOINT=cdn-storage
-      - MINIO_PORT=9000
-      - MINIO_USE_SSL=false
-      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
-      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
-      - MINIO_BUCKET=images
-      - SENTRY_DSN=${SENTRY_DSN}
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    networks:
-      - dokploy-network
-      - easylegal
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.admin-api.rule=Host(`api.easylegal.my.id`)"
-      - "traefik.http.routers.admin-api.entrypoints=websecure"
-      - "traefik.http.routers.admin-api.tls.certResolver=letsencrypt"
-      - "traefik.http.services.admin-api.loadbalancer.server.port=4000"
-
-  admin-dashboard:                   # admin.easylegal.my.id
-    build:
-      context: /home/it_easylegal26/easylegal-admin-dashboard
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    networks:
-      - dokploy-network
-      - easylegal
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.admin-dashboard.rule=Host(`admin.easylegal.my.id`) && PathPrefix(`/dashboard`)"
-      - "traefik.http.routers.admin-dashboard.entrypoints=websecure"
-      - "traefik.http.routers.admin-dashboard.tls.certResolver=letsencrypt"
-      - "traefik.http.routers.admin-dashboard.middlewares=admin-dashboard-strip"
-      - "traefik.http.middlewares.admin-dashboard-strip.stripprefix.prefixes=/dashboard"
-      - "traefik.http.services.admin-dashboard.loadbalancer.server.port=80"
-
   app:                               # easylegal.biz.id
     build:
       context: /home/it_easylegal26/easylegal
@@ -80,14 +14,12 @@ services:
         - NEXT_PUBLIC_TYPEBOT_BOT_ID=easylegal-assistant
         - NEXT_PUBLIC_API_URL=https://api.easylegal.my.id
     restart: unless-stopped
-    depends_on:
-      postgres:
-        condition: service_healthy
     environment:
       - HOSTNAME=0.0.0.0
       - DATABASE_URL=${DATABASE_URL}
       - DIRECT_URL=${DIRECT_URL}
       - JWT_SECRET=${JWT_SECRET}
+      - CRON_SECRET=${CRON_SECRET}
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=${SMTP_PORT}
       - SMTP_USER=${SMTP_USER}
@@ -131,62 +63,14 @@ services:
       - "traefik.http.routers.app.tls.certResolver=letsencrypt"
       - "traefik.http.services.app.loadbalancer.server.port=3000"
 
-  postgrest:                         # admin.easylegal.my.id/db
-    image: postgrest/postgrest:v12.2.3
-    restart: unless-stopped
-    depends_on:
-      postgres:
-        condition: service_healthy
-    environment:
-      PGRST_DB_URI: postgresql://postgres:${DB_PASSWORD}@postgres:5432/easylegal
-      PGRST_DB_SCHEMAS: easylegal,public
-      PGRST_DB_ANON_ROLE: postgrest_anonymous
-      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
-      PGRST_SERVER_PORT: "3001"
-      PGRST_DB_USE_LEGACY_GUC: "false"
-    networks:
-      - dokploy-network
-      - easylegal
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.postgrest.rule=Host(`admin.easylegal.my.id`) && PathPrefix(`/db`)"
-      - "traefik.http.routers.postgrest.entrypoints=websecure"
-      - "traefik.http.routers.postgrest.tls.certResolver=letsencrypt"
-      - "traefik.http.routers.postgrest.middlewares=postgrest-strip"
-      - "traefik.http.middlewares.postgrest-strip.stripprefix.prefixes=/db"
-      - "traefik.http.services.postgrest.loadbalancer.server.port=3001"
-
-  adminer:                            # db.easylegal.my.id
-    image: adminer:latest
-    restart: unless-stopped
-    environment:
-      ADMINER_DEFAULT_SERVER: postgres
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - dokploy-network
-      - easylegal
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.adminer.rule=Host(`db.easylegal.my.id`)"
-      - "traefik.http.routers.adminer.entrypoints=websecure"
-      - "traefik.http.routers.adminer.tls.certResolver=letsencrypt"
-      # Basic auth on top of app-level login — this gives full read/write DB
-      # access, don't leave it open to just Adminer's own login screen.
-      # Credentials generated 2026-08-12; rotate by re-running:
-      #   openssl passwd -apr1 '<new password>'
-      # and swapping the hash below (escape every $ as $$ for docker-compose).
-      - "traefik.http.routers.adminer.middlewares=adminer-auth"
-      - "traefik.http.middlewares.adminer-auth.basicauth.users=admin:$$apr1$$3rrEIQ7G$$lXy4HNHQlmTeccyUoFrYA0"
-      - "traefik.http.services.adminer.loadbalancer.server.port=8080"
-
 volumes:
   uploads:
-  postgres_data:
 
 networks:
   dokploy-network:
     external: true
+  # Shared with docker-compose.infra.dokploy.yml so `app` can still reach
+  # `postgres` by hostname even though they're now separate Compose
+  # projects. Create once on the VPS: `docker network create easylegal`
   easylegal:
-    driver: bridge
+    external: true
