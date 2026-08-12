@@ -1,5 +1,9 @@
 const POSTGREST_URL = 'https://admin.easylegal.my.id/db'
-const POSTGREST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXN0X3dyaXRlciJ9.qZEdA1A7--18iPXC4z0xp_RKE0373AiyxrNt0J0kKZM'
+// Regenerated 2026-08-12 after PGRST_JWT_SECRET was rotated (see
+// notes/easylegal-checklist-2026-08-12.md). If PGRST_JWT_SECRET changes
+// again, regenerate with:
+//   PGRST_JWT_SECRET=<new secret> ./postgrest/generate-token.sh writer
+const POSTGREST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXN0X3dyaXRlciJ9.nlNheyavwShMcqjiT5ZcGwvhcjfn9m3lPStVxgMZ4dU'
 // Express admin-api (media/email-blast/newsletter-broadcast — things PostgREST
 // can't do). Was `import.meta.env.VITE_API_URL || '/api/v1'`, but VITE_API_URL
 // is never set at build time, so it always fell back to the relative path
