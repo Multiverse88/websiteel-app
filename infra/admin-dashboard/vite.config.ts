@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  root: '.',
   plugins: [react()],
   // NOTE (2026-08-11, take 2): Traefik now routes admin.easylegal.my.id with
   // PathPrefix(`/dashboard`) + a stripPrefix middleware (see
