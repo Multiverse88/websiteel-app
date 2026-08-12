@@ -1,10 +1,16 @@
 import { MetadataRoute } from "next";
-
-const BASE_URL = "https://easylegal.biz.id";
+import { headers } from "next/headers";
+import { getDomainConfig } from "@/lib/domains";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Multi-tenant: sitemap.xml must declare URLs on whichever domain it was
+  // fetched from (e.g. Google Search Console treats each domain as its own
+  // property) — see src/lib/domains.ts.
+  const host = (await headers()).get("host");
+  const BASE_URL = getDomainConfig(host).baseUrl;
+
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     {

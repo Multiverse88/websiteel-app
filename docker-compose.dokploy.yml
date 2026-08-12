@@ -118,12 +118,15 @@ services:
       start_period: 30s
     labels:
       - "traefik.enable=true"
-      # easylegal.my.id (apex) added 2026-08-11 as a second public tenant for
-      # domain-locked landing pages (Domain model / LandingPage.domainId).
+      # Multi-tenant: this app also serves easylegal.my.id (apex, added
+      # 2026-08-11 for domain-locked landing pages — Domain model /
+      # LandingPage.domainId) and easylegal.co.id (added 2026-08-12, see
+      # src/lib/domains.ts for its per-domain SEO/WhatsApp config).
       # NOTE: easylegal.my.id currently has a Cloudflare-level redirect to
       # easylegal.biz.id — that redirect must be removed at Cloudflare or
-      # requests never reach Traefik/this container at all.
-      - "traefik.http.routers.app.rule=Host(`easylegal.biz.id`) || Host(`www.easylegal.biz.id`) || Host(`easylegal.my.id`) || Host(`www.easylegal.my.id`)"
+      # requests never reach Traefik/this container at all. Also make sure
+      # DNS for easylegal.co.id actually points at this VPS.
+      - "traefik.http.routers.app.rule=Host(`easylegal.biz.id`) || Host(`www.easylegal.biz.id`) || Host(`easylegal.my.id`) || Host(`www.easylegal.my.id`) || Host(`easylegal.co.id`) || Host(`www.easylegal.co.id`)"
       - "traefik.http.routers.app.entrypoints=websecure"
       - "traefik.http.routers.app.tls.certResolver=letsencrypt"
       - "traefik.http.services.app.loadbalancer.server.port=3000"

@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { Suspense } from "react";
 import { GtmHead, GtmNoscript } from "@/components/GoogleTagManager";
+import { getDomainConfig } from "@/lib/domains";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -14,60 +16,73 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const BASE_URL = "https://easylegal.biz.id";
+// Multi-tenant: this app serves more than one domain (see src/lib/domains.ts
+// + docker-compose.dokploy.yml Traefik rules). Metadata is generated
+// per-request from the Host header so canonical/OG URLs match whichever
+// domain the visitor is actually on, instead of always saying
+// easylegal.biz.id. Note: reading headers() here makes every page under
+// this layout dynamically rendered (no static/ISR caching for metadata) —
+// an accepted tradeoff for correct per-domain SEO. Individual pages that
+// hardcode their own absolute canonical URL (most /layanan/* pages) aren't
+// affected by this and still need their own fix if they should vary by
+// domain too.
+export async function generateMetadata(): Promise<Metadata> {
+  const host = (await headers()).get("host");
+  const { baseUrl } = getDomainConfig(host);
 
-export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
-  title: {
-    default: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
-    template: "%s | EasyLegal",
-  },
-  description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
-  openGraph: {
-    type: "website",
-    locale: "id_ID",
-    siteName: "EasyLegal",
-    title: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
+  return {
+    metadataBase: new URL(baseUrl),
+    title: {
+      default: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
+      template: "%s | EasyLegal",
+    },
     description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
-    url: BASE_URL,
-    images: [
-      {
-        url: "/Logo EL.png",
-        width: 1200,
-        height: 630,
-        alt: "EasyLegal",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
-    description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
-    images: ["/Logo EL.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    openGraph: {
+      type: "website",
+      locale: "id_ID",
+      siteName: "EasyLegal",
+      title: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
+      description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
+      url: baseUrl,
+      images: [
+        {
+          url: "/Logo EL.png",
+          width: 1200,
+          height: 630,
+          alt: "EasyLegal",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
+      description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
+      images: ["/Logo EL.png"],
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  alternates: {
-    canonical: BASE_URL,
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "32x32" },
-      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
-    ],
-    apple: "/apple-touch-icon.png",
-  },
-};
+    alternates: {
+      canonical: baseUrl,
+    },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "32x32" },
+        { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+        { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+      ],
+      apple: "/apple-touch-icon.png",
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#990202",
