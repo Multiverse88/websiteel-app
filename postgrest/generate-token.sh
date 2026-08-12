@@ -14,14 +14,17 @@ if [ -z "$PGRST_JWT_SECRET" ]; then
 fi
 SECRET="$PGRST_JWT_SECRET"
 
-# Header
-HEADER=$(echo -n '{"alg":"HS256","typ":"JWT"}' | openssl dgst -sha256 -hmac "$SECRET" -binary | base64 | tr '+/' '-_' | tr -d '=')
+# Header and payload are just base64url(JSON) — NOT HMAC'd. (A previous
+# version of this script incorrectly ran them through `openssl dgst -hmac`,
+# producing a garbage token that PostgREST would always reject regardless
+# of the secret. Only the signature is an HMAC, over "header.payload".)
+HEADER=$(echo -n '{"alg":"HS256","typ":"JWT"}' | openssl base64 -A | tr '+/' '-_' | tr -d '=')
 
 # Payload (role = postgrest_writer untuk CRUD)
-PAYLOAD=$(echo -n "{\"role\":\"postgrest_${ROLE}\"}" | openssl dgst -sha256 -hmac "$SECRET" -binary | base64 | tr '+/' '-_' | tr -d '=')
+PAYLOAD=$(echo -n "{\"role\":\"postgrest_${ROLE}\"}" | openssl base64 -A | tr '+/' '-_' | tr -d '=')
 
 # Signature
-SIGNATURE=$(echo -n "${HEADER}.${PAYLOAD}" | openssl dgst -sha256 -hmac "$SECRET" -binary | base64 | tr '+/' '-_' | tr -d '=')
+SIGNATURE=$(echo -n "${HEADER}.${PAYLOAD}" | openssl dgst -sha256 -hmac "$SECRET" -binary | openssl base64 -A | tr '+/' '-_' | tr -d '=')
 
 TOKEN="${HEADER}.${PAYLOAD}.${SIGNATURE}"
 
