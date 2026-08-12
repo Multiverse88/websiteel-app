@@ -3,7 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { TypebotWidget } from "@/components/TypebotWidget";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { Suspense } from "react";
 import { GtmHead, GtmNoscript } from "@/components/GoogleTagManager";
 
@@ -101,7 +101,7 @@ export default function RootLayout({
         </Suspense>
         <main id="main-content" className="flex-grow flex flex-col">{children}</main>
         <Footer />
-        <TypebotWidget />
+        <FloatingWhatsApp />
       </body>
     </html>
   );
