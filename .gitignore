@@ -104,7 +104,6 @@ public/logo-berita/*.msi
 *.docx
 *.pdf
 *.csv
-*.html
 COPYWRITING_AUDIT.md
 
 # Daily logs and reports
