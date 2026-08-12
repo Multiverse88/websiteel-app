@@ -1,8 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-
-const WHATSAPP_LINK = 'https://mauorder.online/easylegalbiz-2'
+import { getDomainConfig } from '@/lib/domains'
 
 export function FloatingWhatsApp() {
   const pathname = usePathname()
@@ -10,9 +9,15 @@ export function FloatingWhatsApp() {
 
   if (isDashboard) return null
 
+  // Client-side only (this component doesn't render server-side content
+  // that needs to match), so window.location.hostname is fine here —
+  // simpler than plumbing the Host header down as a prop.
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : undefined
+  const { whatsappLink } = getDomainConfig(hostname)
+
   return (
     <a
-      href={WHATSAPP_LINK}
+      href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat via WhatsApp"
