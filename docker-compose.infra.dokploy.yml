@@ -9,40 +9,30 @@
 #   docker network create easylegal
 # Both this file and docker-compose.dokploy.yml reference `easylegal` as
 # an EXTERNAL network so containers in either stack can still reach each
-# other by service name (e.g. `app` -> `postgres`), even though they're
-# now two separate `docker compose` projects.
+# other by service name, even though they're now two separate
+# `docker compose` projects. (The actual Postgres database lives in a
+# separate Dokploy-managed resource, reached via `dokploy-network` — see
+# the note below.)
 #
 # In Dokploy: create a second "Docker Compose" application pointing at
 # this file (same repo/branch as the existing one, different compose
 # file path).
 services:
-  postgres:                          # DB — port 5432 exposed untuk development
-    image: postgres:16
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: easylegal
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - easylegal
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
+  # NOTE (2026-08-12): this compose does NOT run its own Postgres container.
+  # The real database is a separately-managed Dokploy "Database" resource
+  # (container name `easylegal-easylegal-qdpg8d-postgres-1`, on
+  # `dokploy-network`) that already holds production data — 200 seeded
+  # articles, contacts, etc. An earlier version of this file defined its own
+  # `postgres:` service with a fresh empty volume, which would have been a
+  # second, disconnected, empty database (Adminer would've shown nothing;
+  # admin-api's DATABASE_URL never pointed at it anyway). Removed to avoid
+  # that confusion — everything below talks to the existing Dokploy database
+  # directly via DATABASE_URL / PGRST_DB_URI env vars.
   admin-api:                         # api.easylegal.my.id
     build:
       context: ./infra/admin-api
       dockerfile: Dockerfile
     restart: unless-stopped
-    depends_on:
-      postgres:
-        condition: service_healthy
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - DIRECT_URL=${DIRECT_URL}
@@ -94,11 +84,11 @@ services:
   postgrest:                         # admin.easylegal.my.id/db
     image: postgrest/postgrest:v12.2.3
     restart: unless-stopped
-    depends_on:
-      postgres:
-        condition: service_healthy
     environment:
-      PGRST_DB_URI: postgresql://postgres:${DB_PASSWORD}@postgres:5432/easylegal
+      # Set PGRST_DB_URI in the Dokploy Environment tab to the full
+      # connection string for the real Dokploy-managed database, e.g.
+      # postgresql://postgres:<password>@easylegal-easylegal-qdpg8d-postgres-1:5432/easylegal
+      PGRST_DB_URI: ${PGRST_DB_URI}
       PGRST_DB_SCHEMAS: easylegal,public
       PGRST_DB_ANON_ROLE: postgrest_anonymous
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
@@ -120,10 +110,10 @@ services:
     image: adminer:latest
     restart: unless-stopped
     environment:
-      ADMINER_DEFAULT_SERVER: postgres
-    depends_on:
-      postgres:
-        condition: service_healthy
+      # Points at the real Dokploy-managed Postgres container name directly
+      # (see note at the top of this file) — not a `postgres` service
+      # defined in this compose file, there isn't one.
+      ADMINER_DEFAULT_SERVER: easylegal-easylegal-qdpg8d-postgres-1
     networks:
       - dokploy-network
       - easylegal
@@ -140,9 +130,6 @@ services:
       - "traefik.http.routers.adminer.middlewares=adminer-auth"
       - "traefik.http.middlewares.adminer-auth.basicauth.users=admin:$$apr1$$3rrEIQ7G$$lXy4HNHQlmTeccyUoFrYA0"
       - "traefik.http.services.adminer.loadbalancer.server.port=8080"
-
-volumes:
-  postgres_data:
 
 networks:
   dokploy-network:
