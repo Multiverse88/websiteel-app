@@ -8,7 +8,7 @@
 services:
   app:                               # easylegal.biz.id
     build:
-      context: /home/it_easylegal26/easylegal
+      context: .
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_TYPEBOT_BOT_ID=easylegal-assistant
