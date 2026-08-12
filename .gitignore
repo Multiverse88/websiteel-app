@@ -124,6 +124,12 @@ tasks-completed-*.csv
 # Accidental uploads
 Telegram Desktop/
 
+# Infra subdirectories (admin-api, admin-dashboard)
+infra/*/node_modules/
+infra/*/.env*
+infra/*/dist/
+infra/*/.next/
+
 # Media files (local only, not needed on VPS)
 *.mp3
 *.mp4

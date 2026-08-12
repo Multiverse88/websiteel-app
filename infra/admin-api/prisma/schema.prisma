@@ -1,0 +1,284 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id               String        @id @default(cuid())
+  email            String        @unique
+  password         String
+  name             String        @default("Admin")
+  avatar           String?
+  bio              String?
+  role             String        @default("Legal Specialist")
+  createdAt        DateTime      @default(now())
+  twoFactorEnabled Boolean       @default(false)
+  twoFactorSecret  String?
+  articles         Article[]
+  landingPages     LandingPage[]
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  articles  Article[]
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  articles  Article[] @relation("ArticleToTag")
+}
+
+model Article {
+  id          String    @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
+  slug        String    @unique
+  title       String
+  excerpt     String
+  content     String
+  coverImage  String
+  category    String
+  readTime    String
+  viewCount   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  authorId    String?
+  categoryId  String?
+  ogImage     String?
+  publishedAt DateTime?
+  seoDesc     String?
+  seoTitle    String?
+  status      String    @default("draft")
+  author      User?     @relation(fields: [authorId], references: [id])
+  categoryRel Category? @relation(fields: [categoryId], references: [id])
+  tags        Tag[]     @relation("ArticleToTag")
+
+  @@index([categoryId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([authorId])
+}
+
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  isActive     Boolean  @default(true)
+  subscribedAt DateTime @default(now())
+
+  @@index([isActive])
+  @@index([subscribedAt])
+}
+
+model NewsletterBroadcast {
+  id           String     @id @default(cuid())
+  articleId    String
+  articleTitle String
+  totalSent    Int        @default(0)
+  sentAt       DateTime   @default(now())
+  emailLogs    EmailLog[]
+
+  @@index([articleId])
+  @@index([sentAt])
+}
+
+model EmailLog {
+  id           String               @id @default(cuid())
+  recipient    String
+  subject      String
+  status       String
+  errorMessage String?
+  broadcastId  String?
+  source       String
+  sentAt       DateTime             @default(now())
+  broadcast    NewsletterBroadcast? @relation(fields: [broadcastId], references: [id])
+
+  @@index([broadcastId])
+  @@index([recipient])
+  @@index([status])
+  @@index([sentAt])
+}
+
+model SystemSetting {
+  key   String @id
+  value String
+}
+
+model ContactSubmission {
+  id           String   @id @default(cuid())
+  name         String
+  businessName String?
+  email        String
+  whatsapp     String
+  topic        String
+  message      String
+  status       String   @default("new")
+  createdAt    DateTime @default(now())
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Redirect {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  destination String
+  clicks      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+}
+
+model LandingPage {
+  id                 String               @id @default(cuid())
+  slug               String               @unique
+  title              String
+  description        String?
+  ogImage            String?
+  pixelId            String?
+  sections           Json?
+  redirectSettings   Json?
+  status             String               @default("draft")
+  createdBy          String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  content            Json?
+  domainId           String?
+  publishedAt        DateTime?
+  seoMeta            Json?
+  author             User                 @relation(fields: [createdBy], references: [id])
+  Domain             Domain?              @relation(fields: [domainId], references: [id])
+  leads              LandingPageLead[]
+  LandingPageVersion LandingPageVersion[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([createdBy])
+  @@index([domainId])
+}
+
+model LandingPageLead {
+  id            String      @id @default(cuid())
+  landingPageId String
+  name          String?
+  email         String?
+  phone         String?
+  data          Json?
+  createdAt     DateTime    @default(now())
+  landingPage   LandingPage @relation(fields: [landingPageId], references: [id], onDelete: Cascade)
+
+  @@index([landingPageId])
+  @@index([createdAt])
+}
+
+model ContactSegment {
+  id        String         @id @default(cuid())
+  name      String
+  createdAt DateTime       @default(now())
+  contacts  BlastContact[] @relation("BlastContactToContactSegment")
+}
+
+model CampaignLink {
+  id         String        @id @default(cuid())
+  campaignId String
+  url        String
+  clicks     Int           @default(0)
+  campaign   EmailCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+}
+
+model BlastContact {
+  id                 String              @id @default(cuid())
+  email              String              @unique
+  name               String?
+  tags               String?
+  isActive           Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  campaignRecipients CampaignRecipient[]
+  segments           ContactSegment[]    @relation("BlastContactToContactSegment")
+
+  @@index([isActive])
+}
+
+model EmailCampaign {
+  id           String              @id @default(cuid())
+  subject      String
+  bodyHtml     String
+  status       String              @default("draft")
+  scheduledAt  DateTime?
+  attachments  Json?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  internalName String?
+  isTemplate   Boolean             @default(false)
+  previewText  String?
+  links        CampaignLink[]
+  recipients   CampaignRecipient[]
+
+  @@index([status])
+  @@index([scheduledAt])
+}
+
+model CampaignRecipient {
+  id           String        @id @default(cuid())
+  campaignId   String
+  contactId    String
+  status       String        @default("pending")
+  errorMessage String?
+  sentAt       DateTime?
+  openedAt     DateTime?
+  bouncedAt    DateTime?
+  clickedAt    DateTime?
+  device       String?
+  openCount    Int           @default(0)
+  campaign     EmailCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  contact      BlastContact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, contactId])
+  @@index([status])
+}
+
+model Domain {
+  id          String        @id
+  name        String
+  hostname    String        @unique
+  description String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime
+  LandingPage LandingPage[]
+}
+
+model LandingPageVersion {
+  id            String      @id
+  landingPageId String
+  content       Json
+  seoMeta       Json?
+  publishedAt   DateTime    @default(now())
+  LandingPage   LandingPage @relation(fields: [landingPageId], references: [id], onDelete: Cascade)
+
+  @@index([landingPageId])
+  @@index([publishedAt])
+}
+
+model TrackingProject {
+  id           String   @id @default(cuid())
+  trackingCode String   @unique // Resi (misal: EL-2026-001)
+  clientName   String   // Nama Klien / Perusahaan
+  serviceType  String   // Jenis Layanan (misal: Pendirian PT)
+  timelineData Json     // JSONB berisi array langkah-langkah
+  isCompleted  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@index([trackingCode])
+}

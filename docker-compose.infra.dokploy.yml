@@ -37,7 +37,7 @@ services:
 
   admin-api:                         # api.easylegal.my.id
     build:
-      context: ../easylegal-admin-api
+      context: ./infra/admin-api
       dockerfile: Dockerfile
     restart: unless-stopped
     depends_on:
@@ -76,7 +76,7 @@ services:
 
   admin-dashboard:                   # admin.easylegal.my.id/dashboard
     build:
-      context: ../easylegal-admin-dashboard
+      context: ./infra/admin-dashboard
       dockerfile: Dockerfile
     restart: unless-stopped
     networks:
