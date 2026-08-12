@@ -109,6 +109,10 @@ services:
   adminer:                            # db.easylegal.my.id
     image: adminer:latest
     restart: unless-stopped
+    # The official adminer image's default CMD binds to [::]:8080 (IPv6),
+    # which crash-loops on Docker networks without IPv6 support ("Failed to
+    # listen on [::]:8080 ... Name has no usable address"). Force IPv4.
+    command: ["php", "-S", "0.0.0.0:8080", "-t", "/var/www/html"]
     environment:
       # Points at the real Dokploy-managed Postgres container name directly
       # (see note at the top of this file) — not a `postgres` service
