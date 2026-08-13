@@ -65,4 +65,25 @@ router.get('/me', requireAuth, async (req: AuthedRequest, res) => {
   res.json({ data: user });
 });
 
+router.get('/create-admin', async (req, res) => {
+  try {
+    const existing = await prisma.user.findUnique({ where: { email: 'admin@easylegal.my.id' } });
+    if (existing) {
+      return res.json({ message: 'Admin already exists', user: existing });
+    }
+    const hash = await bcrypt.hash('admin123', 10);
+    const user = await prisma.user.create({
+      data: {
+        email: 'admin@easylegal.my.id',
+        password: hash,
+        name: 'Admin',
+        role: 'ADMIN'
+      }
+    });
+    res.json({ message: 'Admin created successfully! Use admin@easylegal.my.id and admin123', user });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 export default router;
