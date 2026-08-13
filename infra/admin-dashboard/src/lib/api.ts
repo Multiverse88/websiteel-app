@@ -122,6 +122,9 @@ export const api = {
       return Promise.reject(new Error("Sesi tidak valid, wajib relogin."));
     }
     
+    const cleanData = { ...data };
+    if (cleanData.domainId === '') cleanData.domainId = null;
+
     return request('/LandingPage', {
       method: 'POST',
       body: JSON.stringify({
@@ -129,7 +132,7 @@ export const api = {
         id: 'c' + Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9),
         updatedAt: new Date().toISOString(),
         sections: '[]',
-        ...data
+        ...cleanData
       })
     }).catch(err => {
       if (err.message && err.message.includes('createdBy_fkey')) {
@@ -142,7 +145,11 @@ export const api = {
       throw err;
     });
   },
-  updateLandingPage: (id: string, data: any) => request(`/LandingPage?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ ...data, updatedAt: new Date().toISOString() }) }),
+  updateLandingPage: (id: string, data: any) => {
+    const cleanData = { ...data };
+    if (cleanData.domainId === '') cleanData.domainId = null;
+    return request(`/LandingPage?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ ...cleanData, updatedAt: new Date().toISOString() }) });
+  },
   deleteLandingPage: (id: string) => request(`/LandingPage?id=eq.${id}`, { method: 'DELETE' }),
 
   // Redirects
