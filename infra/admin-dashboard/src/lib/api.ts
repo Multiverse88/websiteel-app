@@ -116,11 +116,16 @@ export const api = {
         }
       }
     }
+    if (!userId || userId === 'undefined' || userId === 'system') {
+      alert("⚠️ SESI LAMA TERDETEKSI! Anda WAJIB klik tombol LOGOUT lalu LOGIN kembali agar pembuatan Landing Page bisa berhasil.");
+      window.location.href = '/dashboard/login';
+      return Promise.reject(new Error("Sesi tidak valid, wajib relogin."));
+    }
     
     return request('/LandingPage', {
       method: 'POST',
       body: JSON.stringify({
-        createdBy: userId || 'system',
+        createdBy: userId,
         id: 'c' + Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9),
         updatedAt: new Date().toISOString(),
         sections: '[]',
