@@ -100,7 +100,18 @@ export const api = {
     let userId = 'system';
     const token = localStorage.getItem('admin_jwt');
     if (token) {
-      try { userId = JSON.parse(atob(token.split('.')[1])).userId || 'system'; } catch (e) {}
+      try { 
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const pad = base64.length % 4;
+        const paddedBase64 = pad ? base64 + new Array(5 - pad).join('=') : base64;
+        const jsonPayload = decodeURIComponent(window.atob(paddedBase64).split('').map(c => 
+          '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join(''));
+        userId = JSON.parse(jsonPayload).userId || 'system'; 
+      } catch (e) {
+        console.error('Failed to parse JWT for userId:', e);
+      }
     }
     return request('/LandingPage', {
       method: 'POST',
