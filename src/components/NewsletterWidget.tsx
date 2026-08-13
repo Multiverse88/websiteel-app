@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Mail, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
-import { subscribeNewsletter } from "@/app/newsletter/actions";
+import { subscribeNewsletter } from "@/app/(site)/newsletter/actions";
 
 export default function NewsletterWidget() {
   const [email, setEmail] = useState("");

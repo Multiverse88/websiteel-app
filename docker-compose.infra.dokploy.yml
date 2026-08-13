@@ -135,6 +135,58 @@ services:
       - "traefik.http.middlewares.adminer-auth.basicauth.users=admin:$$apr1$$3rrEIQ7G$$lXy4HNHQlmTeccyUoFrYA0"
       - "traefik.http.services.adminer.loadbalancer.server.port=8080"
 
+  # ============================================
+  # Instatic CMS (Landing Page Designer)
+  # instatic.easylegal.my.id
+  # ============================================
+  # Visual editor untuk membuat landing pages.
+  # SQLite default, bisa upgrade ke Postgres kalau perlu multi-user.
+  # Plugin easylegal-integration akan connect ke admin-api untuk
+  # import/export sections dan lead capture.
+  #
+  # First-time setup:
+  #   1. Akses https://instatic.easylegal.my.id
+  #   2. Buat owner account
+  #   3. Install easylegal plugin (opsional, untuk Phase 2)
+  #
+  # Backup: cukup backup volume instatic-data (SQLite file + uploads)
+  instatic:
+    image: ghcr.io/corebunch/instatic:latest
+    container_name: easylegal-instatic
+    restart: unless-stopped
+    environment:
+      # SQLite — simple, no extra DB container needed
+      # Data stored in /app/data/instatic.db
+      - DATABASE_URL=file:/app/data/instatic.db
+      # Secret key untuk session encryption — generate baru untuk production:
+      #   openssl rand -hex 32
+      - SECRET_KEY=${INSTATIC_SECRET_KEY:-change-me-in-production}
+      # Public URL untuk akses admin
+      - PUBLIC_URL=https://instatic.easylegal.my.id
+      # Port internal (Traefik proxy ke port ini)
+      - PORT=3001
+      # AI Agent (opsional — isi API key untuk fitur AI)
+      # - AI_PROVIDER=openai
+      # - AI_API_KEY=${OPENAI_API_KEY}
+      # - AI_MODEL=gpt-4
+    volumes:
+      # Persist SQLite database + uploaded media
+      - instatic-data:/app/data
+      - instatic-uploads:/app/uploads
+    networks:
+      - dokploy-network
+      - easylegal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.instatic.rule=Host(`instatic.easylegal.my.id`)"
+      - "traefik.http.routers.instatic.entrypoints=websecure"
+      - "traefik.http.routers.instatic.tls.certResolver=letsencrypt"
+      - "traefik.http.services.instatic.loadbalancer.server.port=3001"
+
+volumes:
+  instatic-data:
+  instatic-uploads:
+
 networks:
   dokploy-network:
     external: true
