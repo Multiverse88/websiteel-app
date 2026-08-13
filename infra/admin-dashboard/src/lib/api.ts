@@ -96,16 +96,23 @@ export const api = {
 
   // Landing Pages
   getLandingPages: () => request('/LandingPage?select=*,Domain(*)'),
-  createLandingPage: (data: any) => request('/LandingPage', { 
-    method: 'POST', 
-    body: JSON.stringify({
-      createdBy: 'cmppip4tf0000o47yzniv6ft8',
-      id: 'c' + Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9),
-      updatedAt: new Date().toISOString(),
-      sections: '[]',
-      ...data
-    }) 
-  }),
+  createLandingPage: (data: any) => {
+    let userId = 'system';
+    const token = localStorage.getItem('admin_jwt');
+    if (token) {
+      try { userId = JSON.parse(atob(token.split('.')[1])).userId || 'system'; } catch (e) {}
+    }
+    return request('/LandingPage', {
+      method: 'POST',
+      body: JSON.stringify({
+        createdBy: userId,
+        id: 'c' + Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9),
+        updatedAt: new Date().toISOString(),
+        sections: '[]',
+        ...data
+      })
+    })
+  },
   updateLandingPage: (id: string, data: any) => request(`/LandingPage?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ ...data, updatedAt: new Date().toISOString() }) }),
   deleteLandingPage: (id: string) => request(`/LandingPage?id=eq.${id}`, { method: 'DELETE' }),
 
