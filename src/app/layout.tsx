@@ -2,17 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
-import { Suspense } from "react";
 import { GtmHead, GtmNoscript } from "@/components/GoogleTagManager";
 import { getDomainConfig } from "@/lib/domains";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -102,21 +97,10 @@ export default function RootLayout({
       <head>
         <GtmHead />
       </head>
-      <body className="min-h-full flex flex-col pt-[72px] bg-white text-dark font-sans">
+      <body className="min-h-full bg-white text-dark font-sans flex flex-col">
         <GtmNoscript />
         <div className="noise-overlay" />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-[16px] focus:font-bold focus:shadow-lg focus:outline-none"
-        >
-          Lewati ke konten utama
-        </a>
-        <Suspense fallback={null}>
-          <Navbar />
-        </Suspense>
-        <main id="main-content" className="flex-grow flex flex-col">{children}</main>
-        <Footer />
-        <FloatingWhatsApp />
+        {children}
       </body>
     </html>
   );
