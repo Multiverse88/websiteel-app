@@ -39,12 +39,21 @@ router.post('/login', async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000 // 1 day
   });
 
-  res.json({ message: 'Logged in successfully', token: token });
+  res.json({ message: 'Logged in successfully', token: token, userId: user.id });
 });
 
 router.post('/logout', (_req, res) => {
   res.clearCookie('admin_token');
   res.json({ message: 'Logged out successfully' });
+});
+
+router.post('/plugin-token', requireAuth, (req: AuthedRequest, res) => {
+  if (!req.userId) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  // Generate a non-expiring token for the plugin
+  const token = jwt.sign({ userId: req.userId, isPlugin: true }, JWT_SECRET as string);
+  res.json({ message: 'Plugin token generated successfully', token });
 });
 
 router.get('/me', requireAuth, async (req: AuthedRequest, res) => {
