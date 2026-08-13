@@ -13,6 +13,7 @@ import emailBlastRoutes from './routes/email-blast';
 import trackingRoutes from './routes/tracking';
 import cronRoutes from './routes/cron';
 import mediaRoutes from './routes/media';
+import domainRoutes from './routes/domains';
 
 import path from 'path';
 
@@ -56,6 +57,7 @@ app.use('/api/v1/email-blast', emailBlastRoutes);
 app.use('/api/v1/tracking', trackingRoutes);
 app.use('/api/v1/cron', cronRoutes);
 app.use('/api/v1/media', mediaRoutes);
+app.use('/api/v1/domains', domainRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
