@@ -131,7 +131,16 @@ export const api = {
         sections: '[]',
         ...data
       })
-    })
+    }).catch(err => {
+      if (err.message && err.message.includes('createdBy_fkey')) {
+        localStorage.removeItem('admin_userId');
+        localStorage.removeItem('admin_jwt');
+        localStorage.removeItem('admin_token');
+        alert("🚨 DATABASE TIDAK SINKRON: ID Anda sudah kadaluarsa (Ghost ID). Anda dikeluarkan secara otomatis. SILAKAN LOGIN KEMBALI!");
+        window.location.href = '/dashboard/login';
+      }
+      throw err;
+    });
   },
   updateLandingPage: (id: string, data: any) => request(`/LandingPage?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ ...data, updatedAt: new Date().toISOString() }) }),
   deleteLandingPage: (id: string) => request(`/LandingPage?id=eq.${id}`, { method: 'DELETE' }),
