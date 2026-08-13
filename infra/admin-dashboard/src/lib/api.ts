@@ -62,6 +62,7 @@ export const api = {
     }
     const json = await res.json()
     localStorage.setItem('admin_jwt', json.token)
+    localStorage.setItem('admin_userId', json.userId)
     // Still needed for PostgREST-backed reads/writes (Article, LandingPage,
     // etc.) — a separate backend from admin-api, not migrated yet.
     localStorage.setItem('admin_token', POSTGREST_TOKEN)
@@ -97,26 +98,29 @@ export const api = {
   // Landing Pages
   getLandingPages: () => request('/LandingPage?select=*,Domain(*)'),
   createLandingPage: (data: any) => {
-    let userId = 'system';
-    const token = localStorage.getItem('admin_jwt');
-    if (token) {
-      try { 
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const pad = base64.length % 4;
-        const paddedBase64 = pad ? base64 + new Array(5 - pad).join('=') : base64;
-        const jsonPayload = decodeURIComponent(window.atob(paddedBase64).split('').map(c => 
-          '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-        ).join(''));
-        userId = JSON.parse(jsonPayload).userId || 'system'; 
-      } catch (e) {
-        console.error('Failed to parse JWT for userId:', e);
+    let userId = localStorage.getItem('admin_userId');
+    if (!userId || userId === 'undefined') {
+      const token = localStorage.getItem('admin_jwt');
+      if (token) {
+        try { 
+          const base64Url = token.split('.')[1];
+          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          const pad = base64.length % 4;
+          const paddedBase64 = pad ? base64 + new Array(5 - pad).join('=') : base64;
+          const jsonPayload = decodeURIComponent(window.atob(paddedBase64).split('').map(c => 
+            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+          ).join(''));
+          userId = JSON.parse(jsonPayload).userId; 
+        } catch (e) {
+          console.error('Failed to parse JWT for userId:', e);
+        }
       }
     }
+    
     return request('/LandingPage', {
       method: 'POST',
       body: JSON.stringify({
-        createdBy: userId,
+        createdBy: userId || 'system',
         id: 'c' + Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9),
         updatedAt: new Date().toISOString(),
         sections: '[]',
