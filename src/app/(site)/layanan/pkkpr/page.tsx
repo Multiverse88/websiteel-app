@@ -23,9 +23,11 @@ import {
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
@@ -454,7 +456,7 @@ export default function PKKPRPage() {
             </div>
           </section>
         {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
-          <MediaCoverage />
+          <TrustStatsBar />
 
           {/* ─── 3. BENEFITS SECTION ─── */}
           <FadeIn delay={0.2}>
@@ -477,6 +479,10 @@ export default function PKKPRPage() {
             />
           </FadeIn>
 
+      {/* ─── OFFICES ─── */}
+      <Offices />
+
+
           {/* ─── 5. ALUR PROSES SECTION ─── */}
           <FadeIn delay={0.2}>
             <AlurProsesPKKPR />
@@ -484,6 +490,7 @@ export default function PKKPRPage() {
 
           {/* ─── 6. TESTIMONIALS SECTION ─── */}
           <FadeIn delay={0.2}>
+            <MediaCoverage />
             <Testimonials />
           </FadeIn>
 
@@ -505,6 +512,7 @@ export default function PKKPRPage() {
           {/* ─── 11. FAQ SECTION ─── */}
           <FadeIn delay={0.2}>
             <FAQ items={faqs} />
+
           </FadeIn>
 
           {/* ─── 12. CTA SECTION ─── */}

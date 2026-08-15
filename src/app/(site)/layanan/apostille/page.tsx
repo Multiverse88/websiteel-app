@@ -16,9 +16,11 @@ import {
 import Image from "next/image";
 import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import FadeIn from "@/components/FadeIn";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import PricingFooter from "@/components/PricingFooter";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
@@ -299,6 +301,7 @@ export default function ApostillePage() {
       </section>
 
       {/* ─── 2. LIPUTAN MEDIA ─── */}
+      <TrustStatsBar />
       <MediaCoverage />
 
       {/* ─── 3. SERTIFIKASI & LEGALITAS (3-COL WITH RULES) ─── */}
@@ -388,6 +391,9 @@ export default function ApostillePage() {
           packages={pricingPackages}
         />
       </div>
+
+
+      <Offices />
 
       {/* ─── 6. ALUR PROSES (SIGNATURE SECTION - FULL BLEED) ─── */}
       <section ref={railRef} className="py-24 sm:py-32 bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] text-white overflow-hidden relative">
@@ -766,6 +772,8 @@ export default function ApostillePage() {
         subtitle="Temukan jawaban atas beberapa pertanyaan umum seputar pengurusan Apostille dokumen."
         items={faqs}
       />
+
+      {/* ─── OFFICES ─── */}
 
       {/* ─── 12. CTA ─── */}
       <CTA

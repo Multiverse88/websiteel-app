@@ -30,9 +30,11 @@ import {
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
@@ -337,7 +339,7 @@ export default function KontrakBisnis() {
 
 
       {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. BENEFITS SECTION ─── */}
       <Benefits
@@ -349,6 +351,8 @@ export default function KontrakBisnis() {
       {/* ─── 4. HARGA & PAKET SECTION ─── */}
       <BottomPromoSection />
       <PricingKontrak />
+
+      <Offices />
 
       {/* ─── 4.5 KATEGORI KONTRAK SECTION ─── */}
       <KategoriKontrak />
@@ -512,6 +516,7 @@ export default function KontrakBisnis() {
       </section>
 
             {/* ─── 8. TESTIMONIALS SECTION ─── */}
+      <MediaCoverage />
       <Testimonials />
 
 
@@ -521,6 +526,8 @@ export default function KontrakBisnis() {
         title="Pertanyaan yang Sering Ditanyakan"
         subtitle="Sebelum mulai, mungkin jawabannya sudah ada di sini."
       />
+
+      {/* ─── OFFICES ─── */}
 
       {/* ─── 10. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20">

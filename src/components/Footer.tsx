@@ -97,7 +97,7 @@ export default function Footer() {
                 width={200}
                 height={70}
                 className="object-contain brightness-0 invert"
-                style={{ width: "auto" }}
+                style={{ width: "auto", height: "auto" }}
                 priority
               />
             </Link>

@@ -63,7 +63,7 @@ const MemberCard = ({ member }: { member: { name: string; role: string; bio: str
 
 export default function TentangKami() {
   const stats = [
-    { value: "12.500+", label: "Bisnis terlayani" },
+    { value: "13.000+", label: "Bisnis terlayani" },
     { value: "15+", label: "Jenis layanan legal" },
     { value: "4.9 ★", label: "Rating Google" },
     { value: "3 Kota", label: "Kantor Representatif" },
@@ -159,7 +159,7 @@ export default function TentangKami() {
 
               {/* Description */}
               <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed max-w-2xl font-normal">
-                EasyLegal hadir karena kami believe legalitas bisnis tidak harus mahal, lama, atau ribet. Sejak 2020, kami sudah membantu lebih dari 12.500 UMKM mengurus PT, perizinan, sampai sertifikasi ISO.
+                EasyLegal hadir karena kami believe legalitas bisnis tidak harus mahal, lama, atau ribet. Sejak 2020, kami sudah membantu lebih dari 13.000 UMKM mengurus PT, perizinan, sampai sertifikasi ISO.
               </p>
 
               {/* Action Buttons */}
@@ -202,7 +202,7 @@ export default function TentangKami() {
                     <User className="w-4 h-4 sm:w-5.5 sm:h-5.5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-[16px] sm:text-[16px] font-black text-[#990202] leading-none">12.500+</div>
+                    <div className="text-[16px] sm:text-[16px] font-black text-[#990202] leading-none">13.000+</div>
                     <div className="text-[16px] sm:text-[16px] text-[#990202]/85 font-bold mt-1">Bisnis terlayani</div>
                   </div>
                 </div>
@@ -274,7 +274,7 @@ export default function TentangKami() {
               </p>
 
               <p className="text-[16px] sm:text-[16px] text-gray-600 leading-relaxed font-normal">
-                Dari sanalah <strong className="font-extrabold text-gray-900">EasyLegal.id</strong> dibangun: sebuah platform yang memudahkan akses legalitas untuk semua pengusaha Indonesia. Lebih dari 12.500 UMKM mengurus perizinan, pendirian badan usaha, hingga sertifikasi ISO — semua bisa diurus online dengan harga yang transparan.
+                Dari sanalah <strong className="font-extrabold text-gray-900">EasyLegal.id</strong> dibangun: sebuah platform yang memudahkan akses legalitas untuk semua pengusaha Indonesia. Lebih dari 13.000 UMKM mengurus perizinan, pendirian badan usaha, hingga sertifikasi ISO — semua bisa diurus online dengan harga yang transparan.
               </p>
 
               {/* Trust points list */}

@@ -1,7 +1,9 @@
+"use client";
+
 import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Building2, Check, Users } from "lucide-react";
+import { Building2, Check, Users, FileCheck, ShieldCheck, Files, Scale, Globe, Award } from "lucide-react";
 import { layananIndividual } from "./data";
 
 export default function LayananKami() {
@@ -22,7 +24,7 @@ export default function LayananKami() {
 
   return (
     <section 
-      className="py-8 sm:py-20 bg-white relative" 
+      className="py-12 sm:py-24 bg-[#FAF9F6] relative" 
       id="layanan"
       ref={sectionRef}
     >
@@ -39,51 +41,94 @@ export default function LayananKami() {
         </div>
 
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-4 sm:gap-5">
-          {/* LEFT: Layanan Individual */}
-          <div className="shadow-sm border border-black/[0.03] rounded-2xl p-4 sm:p-6 bg-white shadow-sm md:shadow-none">
-            <div className="flex items-center gap-2 sm:gap-2.5 mb-4 sm:mb-5">
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-primary-light flex items-center justify-center flex-shrink-0">
-                <span className="text-[16px] sm:text-[16px] text-primary font-bold leading-none">⊞</span>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-4 sm:gap-5">
+          {/* LEFT: Layanan Individual Grid */}
+          <div className="flex flex-col gap-4 sm:gap-5">
+            
+            {/* Header Card */}
+            <div className="flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl border border-black/5 bg-[#FBF9F6]">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary-light flex items-center justify-center flex-shrink-0">
+                <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-[4px] border-2 border-primary"></div>
               </div>
               <div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-dark leading-tight">Layanan Individual</h3>
-                <p className="text-[16px] sm:text-[16px] text-muted leading-tight mt-0.5">Layanan siap pakai untuk berbagai kebutuhan legalitas bisnis</p>
+                <h3 className="text-[15px] sm:text-[17px] font-bold text-dark leading-tight">Layanan Individual</h3>
+                <p className="text-[13px] sm:text-[14px] text-gray-500 leading-tight mt-0.5">Layanan siap pakai untuk berbagai kebutuhan legalitas bisnis</p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-              {layananIndividual.map((item, idx) => {
+            {/* Cards Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {[
+                { name: "Pendirian & Pembubaran Badan Usaha", desc: "PT, PT PMA, PT Perorangan, CV, Yayasan, Firma, Koperasi", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha" },
+                { name: "Perizinan Usaha", desc: "NIB, OSS, PKP, PSE, PKKPR, LKPM", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss" },
+                { name: "Pendaftaran HKI", desc: "Merek, Paten, Desain Industri, Hak Cipta", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki" },
+                { name: "Pengurusan Dokumen Perusahaan", desc: "Perubahan Anggaran Dasar, RUPS, Akta Jual Beli/Akuisisi", icon: Files, circleBg: "#4B5563", cardTint: "#F3F4F6", href: "/layanan/perubahan-akta" },
+                { name: "Penyusunan & Review Perjanjian", desc: "Kontrak Bisnis, Kerja Sama, Perjanjian Pisah Harta/Perkawinan", icon: Scale, circleBg: "#15803D", cardTint: "#DCFCE7", href: "/layanan/kontrak-bisnis" },
+                { name: "Apostille", desc: "Legalisasi dokumen lintas negara", icon: Globe, circleBg: "#6D28D9", cardTint: "#F3E8FF", href: "/layanan/apostille" },
+                { name: "Layanan Imigrasi", desc: "Visa, KITAS", icon: Globe, circleBg: "#0284C7", cardTint: "#E0F2FE", href: "/layanan/visa-kitas" },
+                { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 45001, 27001, dan standar lainnya", icon: Award, circleBg: "#BE123C", cardTint: "#FFE4E6", href: "/layanan/sertifikasi-iso", brandPrefix: "Easy", brandSuffix: "ISO" },
+              ].map((item, idx) => {
                 const Icon = item.icon;
                 return (
                   <Link
                     key={idx}
                     href={item.href}
-                    className="group layanan-card rounded-xl sm:rounded-2xl p-3 sm:p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden min-h-[140px] sm:min-h-[175px]"
+                    className="group layanan-card rounded-xl sm:rounded-2xl p-4 sm:p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden min-h-[160px] sm:min-h-[190px]"
                     style={{
                       background: `linear-gradient(180deg, #ffffff 30%, ${item.cardTint} 100%)`,
                     }}
                   >
-                    <div className="flex-grow flex items-center">
-                      <h4 className="text-[16px] sm:text-[16px] font-bold text-dark leading-snug">{item.name}</h4>
+                    <div className="flex-grow flex flex-col items-start">
+                      {item.brandPrefix ? (
+                        <div className="flex items-center mb-2">
+                           <span className="flex items-center text-[10px] sm:text-[11px] font-bold border border-gray-200 rounded-[4px] overflow-hidden shadow-sm">
+                             <span className="bg-white text-dark px-1.5 py-0.5">{item.brandPrefix}</span>
+                             <span className="bg-primary text-white px-1.5 py-0.5">{item.brandSuffix}</span>
+                           </span>
+                        </div>
+                      ) : null}
+                      <h4 className="text-[14px] sm:text-[15px] font-bold text-dark leading-snug">{item.name}</h4>
+                      <p className="text-[11px] sm:text-[12px] text-gray-500 mt-1.5 line-clamp-2 leading-snug hidden sm:block">{item.desc}</p>
                     </div>
 
-                    <div className="flex justify-center mt-2 sm:mt-4">
+                    <div className="flex justify-center mt-3 sm:mt-4">
                       <div
-                        className="w-[48px] h-[48px] sm:w-[72px] sm:h-[72px] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                        className="w-[42px] h-[42px] sm:w-[56px] sm:h-[56px] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
                         style={{ backgroundColor: `${item.cardTint}` }}
                       >
                         <div
-                          className="w-[34px] h-[34px] sm:w-[50px] sm:h-[50px] rounded-full flex items-center justify-center shadow-md"
+                          className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] rounded-full flex items-center justify-center shadow-sm"
                           style={{ backgroundColor: item.circleBg }}
                         >
-                          <Icon className="w-[15px] h-[15px] sm:w-[22px] sm:h-[22px] text-white" strokeWidth={2} />
+                          <Icon className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] text-white" strokeWidth={2} />
                         </div>
                       </div>
                     </div>
                   </Link>
                 );
               })}
+
+              {/* 9th Card: Lihat Semua / Trigger Navbar */}
+              <Link
+                href="/layanan"
+                className="group layanan-card rounded-xl sm:rounded-2xl p-4 sm:p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden min-h-[160px] sm:min-h-[190px] bg-gradient-to-b from-dark to-dark border border-gray-800"
+              >
+                <div className="flex-grow flex flex-col items-start">
+                  <h4 className="text-[14px] sm:text-[15px] font-bold text-white leading-snug">Jelajahi Semua Layanan</h4>
+                  <p className="text-[11px] sm:text-[12px] text-gray-400 mt-1.5 line-clamp-2 leading-snug hidden sm:block">Lihat 20+ layanan legalitas lengkap kami di direktori layanan.</p>
+                </div>
+
+                <div className="flex justify-center mt-3 sm:mt-4">
+                  <div className="w-[42px] h-[42px] sm:w-[56px] sm:h-[56px] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-gray-800">
+                    <div className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] rounded-full flex items-center justify-center shadow-sm bg-primary">
+                      <svg className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
             </div>
           </div>
 

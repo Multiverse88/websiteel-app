@@ -20,10 +20,12 @@ import {
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
@@ -509,7 +511,7 @@ export default function PelaporanRUPS() {
           </section>
 
           {/* ─── 2. MEDIA COVERAGE ─── */}
-          <MediaCoverage />
+          <TrustStatsBar />
 
           {/* ─── 3. BENEFITS ─── */}
           <Benefits
@@ -581,6 +583,10 @@ export default function PelaporanRUPS() {
               hideFooter={true}
             />
           </FadeIn>
+
+      {/* ─── OFFICES ─── */}
+      <Offices />
+
 
           {/* ─── 7. PROSES / TIMELINE ─── */}
           <FadeIn delay={0.2}>
@@ -723,6 +729,7 @@ export default function PelaporanRUPS() {
           </FadeIn>
 
           {/* ─── 9. TESTIMONIALS ─── */}
+          <MediaCoverage />
           <Testimonials />
 
           {/* ─── 10. FAQ ─── */}
@@ -731,6 +738,7 @@ export default function PelaporanRUPS() {
             subtitle="Sebelum mulai, mungkin jawabannya sudah ada di sini."
             items={rupsFaqs}
           />
+
 
           {/* ─── 11. CTA BOTTOM (REPLACED WITH CUSTOM 2-COLUMN) ─── */}
           <FadeIn delay={0.2}>

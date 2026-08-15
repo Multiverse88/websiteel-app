@@ -24,9 +24,11 @@ import {
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Benefits from "@/components/Benefits";
@@ -368,7 +370,7 @@ export default function VisaKitas() {
       </section>
 
       {/* ─── 2. MEDIA COVERAGE (TRUST SIGNAL) ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. MENGAPA PILIH EASYLEGAL (VALUE PROPOSITION) ─── */}
       <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={visaKitasBenefits} />
@@ -425,6 +427,8 @@ export default function VisaKitas() {
         }
         hideFooter={true}
       />
+
+      <Offices />
 
       {/* ─── 5. PERBEDAAN SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
@@ -549,10 +553,12 @@ export default function VisaKitas() {
       </section>
 
       {/* ─── 6. TESTIMONIALS ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 7. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar Visa &amp; KITAS." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
 
       {/* ─── 8. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 relative overflow-hidden border-t border-gray-100">

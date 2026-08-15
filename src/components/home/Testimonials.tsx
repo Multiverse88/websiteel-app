@@ -77,7 +77,7 @@ export default function Testimonials() {
 
   return (
     <>
-      <section className="py-8 sm:py-20 bg-[#F9FAFB] overflow-hidden relative">
+      <section className="py-12 sm:py-24 bg-[#FAF9F6] overflow-hidden relative">
         <div className="max-w-[1440px] mx-auto px-4 lg:px-8 text-left sm:text-center relative z-10">
           <div
             ref={headerRef}
@@ -87,7 +87,7 @@ export default function Testimonials() {
               TESTIMONI
             </span>
             <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] mt-1.5 sm:mt-3 tracking-[-0.02em] leading-[1.25] sm:leading-tight">
-              Kata mereka yang sudah jalan<br className="hidden sm:inline" /> duluan.
+              Pengalaman dari mereka yang<br className="hidden sm:inline" /> sudah kami layani.
             </h2>
             <p className="text-[16px] sm:text-[16px] text-[#6B7280] mt-2 sm:mt-4 max-w-[620px] sm:mx-auto leading-relaxed">
               Dari UMKM kuliner sampai startup teknologi — semua percayakan urusan legalnya ke EasyLegal.

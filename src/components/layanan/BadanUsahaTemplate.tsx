@@ -31,6 +31,7 @@ import FAQ from "@/components/FAQ";
 import Pricing, { PricingPackage, FootnoteItem } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Testimonials from "@/components/home/Testimonials";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Benefits from "@/components/Benefits";
@@ -176,6 +177,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                     src={c.heroImage}
                     alt={c.heroImageAlt}
                     fill
+                    priority
                     sizes="(max-width: 768px) 100vw, 480px"
                     className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
                   />
@@ -206,7 +208,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
       
       
       {/* ─── 2. TRUST SIGNALS & MEDIA COVERAGE ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. VALUE PROPOSITION ─── */}
       <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={mengapaPilihKamiItems} />
@@ -222,8 +224,11 @@ export default function BadanUsahaTemplate({ content }: Props) {
         hideFooter={true}
       />
 
-      
-      
+      {/* ─── 4.5 OFFICES ─── */}
+      <Offices />
+
+
+
       {/* ─── 5. PROSES ─── */}
       <section className="bg-[#F9FAFB] py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -259,15 +264,17 @@ export default function BadanUsahaTemplate({ content }: Props) {
                         {step.title}
                       </h4>
                       
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[16px] font-black uppercase py-1 px-3 rounded-full">
-                        <span>{step.duration}</span>
-                      </div>
+                      {step.duration && (
+                        <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[16px] font-black uppercase py-1 px-3 rounded-full">
+                          <span>{step.duration}</span>
+                        </div>
+                      )}
 
                       <p className="text-[16px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
 
                     </div>
 
-                    <div>
+                    {step.points.length > 0 && <div>
                       <div className="border-t border-dashed border-gray-200 my-4"></div>
 
                       <ul className="space-y-2">
@@ -278,7 +285,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </div>}
 
                   </div>
                 </div>
@@ -293,6 +300,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
       
 
       {/* ─── 7. TESTIMONIALS ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 2. PENGERTIAN ─── */}
@@ -399,15 +407,8 @@ export default function BadanUsahaTemplate({ content }: Props) {
       {/* ─── 6. FAQ ─── */}
       <FAQ title={c.faqTitle} items={c.faqs} />
 
-      
-      
-      {/* ─── 6.5 OFFICES ─── */}
-      {!["yayasan", "perkumpulan", "koperasi"].includes(c.id) && (
-        <Offices />
-      )}
 
-      
-      
+
       {/* ─── 7. CTA BANNER ─── */}
       <section className="bg-white py-24 border-t border-gray-100/60 relative">
         <div className="max-w-[1140px] mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">

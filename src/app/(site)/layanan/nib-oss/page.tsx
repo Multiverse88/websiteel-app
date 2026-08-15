@@ -25,7 +25,9 @@ import {
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
@@ -326,7 +328,7 @@ export default function NibOss() {
     </section>
 
       {/* ─── 2. TRUST SIGNALS & MEDIA COVERAGE ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. VALUE PROPOSITION ─── */}
       <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={nibBenefits} />
@@ -1039,11 +1041,17 @@ export default function NibOss() {
         </div>
       </section>
 
+      <Offices />
+
       {/* ─── 7. TESTIMONIALS ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 8. FAQ SECTION ─── */}
+
       <FAQ title="Pertanyaan seputar NIB & OSS RBA." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
+      {/* ─── OFFICES ─── */}
 
       {/* ─── 9. CTA BANNER (Mockup Clean White) ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100/60 relative">

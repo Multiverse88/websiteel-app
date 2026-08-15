@@ -86,20 +86,20 @@ export const dataPT: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian PT",
   heroBadge: "Pendirian PT",
   heroTitle: [
-    { text: "Mulai bisnis Anda " },
+    { text: "Buat bisnis Anda lebih " },
     { break: true },
-    { text: "dengan " },
-    { text: "legalitas yang", highlight: true },
+    { text: "profesional dan " },
+    { text: "terpercaya", highlight: true },
     { break: true },
-    { text: "benar" },
+    { text: "dengan PT" },
   ],
   heroDescription:
-    "PT, PT PMA, PT Perorangan, CV, Firma, Yayasan, sampai Koperasi — kami pandu Anda pilih struktur yang tepat & urus prosesnya sampai akta di tangan.",
+    "Dirikan PT tanpa ribet antre di notaris. 100% online hingga akta di tangan Anda.",
   heroImage:
     "/images/layanan/pt-1.jpg",
   heroImageAlt: "Penandatanganan akta pendirian badan usaha",
   heroStats: [
-    { icon: "Clock", value: "7–14 hari", label: "SLA kerja" },
+    { icon: "Clock", value: "6–12 hari", label: "SLA kerja" },
     { icon: "DollarSign", value: "Mulai Rp2,99jt", label: "Harga transparan" },
     { icon: "Upload", value: "100% Online", label: "Upload paperless" },
   ],
@@ -311,23 +311,22 @@ export const dataPT: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN PT",
-  stepsTitle: <>7 langkah pembuatan PT<br />semua kami pandu.</>,
+  stepsTitle: <>6 langkah pembuatan PT<br />semua kami pandu.</>,
   stepsSubtitle:
-    "Dari konsultasi awal sampai dokumen lengkap di tangan Anda — total estimasi 7–14 hari kerja, semua transparan di dashboard.",
+    "Dari konsultasi awal sampai dokumen lengkap di tangan Anda — estimasi 6–12 hari kerja.",
   steps: [
-    { no: "01", title: "Konsultasi & Perencanaan", duration: "1 HARI KERJA", desc: "Konsultasi gratis dengan tim legal kami untuk menentukan struktur bisnis yang sesuai dengan visi & rencana Anda.", points: ["Identifikasi visi, modal awal & rencana bisnis", "Pemilihan struktur saham & pemegang", "Penentuan KBLI (Klasifikasi Lapangan Usaha)"] },
-    { no: "02", title: "Cek & Pemesanan Nama PT", duration: "1 HARI KERJA", desc: "Kami verifikasi nama PT yang Anda inginkan di database AHU Kemenkumham, lalu pesan secara resmi.", points: ["Pengecekan ketersediaan nama di AHU", "Pemesanan nama resmi (berlaku 60 hari)", "Konfirmasi nama final & alternatif jika ditolak"] },
-    { no: "03", title: "Persiapan Dokumen Pendiri", duration: "1-2 HARI KERJA", desc: "Pengumpulan dokumen pendukung dari semua pendiri & pengurus. Bisa di-upload via portal aman kami.", points: ["KTP & NPWP semua pendiri, komisaris, direksi", "Pas foto, alamat domisili, rincian modal", "Review & validasi oleh tim legal kami"] },
-    { no: "04", title: "Penyusunan Akta Pendirian", duration: "2 HARI KERJA", desc: "Notaris menyusun & menandatangani akta pendirian — bisa via e-Notary (tanpa harus datang).", points: ["Drafting akta oleh notaris partner", "Penandatanganan akta (tatap muka atau e-Notary)", "Penyerahan Minuta Akta resmi"] },
-    { no: "05", title: "Pengesahan SK Kemenkumham", duration: "1-2 HARI KERJA", desc: "Akta pendirian disahkan menjadi badan hukum resmi oleh Kementerian Hukum & HAM.", points: ["Pengajuan ke AHU Online", "Verifikasi otomatis sistem AHU", "Penerbitan SK Pengesahan Badan Hukum"] },
-    { no: "06", title: "NPWP Badan & SKT Pajak", duration: "1-2 HARI KERJA", desc: "Registrasi PT sebagai wajib pajak badan ke Direktorat Jenderal Pajak (DJP).", points: ["Pendaftaran NPWP perusahaan via Coretax", "Penerbitan Surat Keterangan Terdaftar (SKT)", "Aktivasi akun pajak online perusahaan"] },
-    { no: "07", title: "NIB & Akun OSS RBA", duration: "1-2 HARI KERJA", desc: "Aktivasi izin berusaha berbasis risiko (RBA) di sistem OSS — PT siap beroperasi penuh!", points: ["Pendaftaran akun OSS RBA", "Penerbitan Nomor Induk Berusaha (NIB)", "Penyerahan semua dokumen ke alamat Anda"] },
+    { no: "01", title: "Konsultasi & Perencanaan", duration: "", desc: "Mengidentifikasi kebutuhan dasar bersama tim kami supaya sesuai visi bisnis Anda.", points: [] },
+    { no: "02", title: "Siapkan Dokumen Pendirian", duration: "", desc: "Menyiapkan kebutuhan dokumen sebagai persyaratan dalam pendirian PT.", points: [] },
+    { no: "03", title: "Penyusunan Akta Pendirian", duration: "", desc: "Notaris menyusun & menandatangani akta pendirian — bisa via e-Notary tanpa harus datang.", points: [] },
+    { no: "04", title: "Pengesahan SK Kemenkumham", duration: "", desc: "Akta pendirian disahkan menjadi badan hukum resmi oleh Kemenkumham.", points: [] },
+    { no: "05", title: "NPWP Badan & SKT Pajak", duration: "", desc: "Registrasi PT sebagai wajib pajak badan ke Direktorat Jenderal Pajak (DJP).", points: [] },
+    { no: "06", title: "NIB & Akun OSS RBA", duration: "", desc: "Aktivasi izin berusaha berbasis risiko (RBA) di sistem OSS — PT siap beroperasi penuh!", points: [] },
   ],
 
   faqTitle: "Pertanyaan seputar pendirian PT.",
   faqs: [
     { q: "Mana yang lebih cocok: PT, CV, atau PT Perorangan?", a: "Tergantung skala bisnis. PT Perorangan cocok untuk solopreneur/UMKM mikro (1 pendiri, modal kecil). CV cocok untuk usaha kecil-menengah dengan 2 sekutu, tanpa modal minimum. PT cocok kalau bisnis Anda serius, butuh kredibilitas tinggi, atau ingin ikut tender — modal min. Rp25jt disetor, liability terpisah dari pribadi." },
-    { q: "Berapa lama proses pendirian PT?", a: "Proses lengkap pendirian PT all-in berkisar antara 7 hingga 14 hari kerja. Hal ini bergantung pada kecepatan penandatanganan akta oleh notaris partner dan tidak adanya kendala teknis pada sistem AHU Kemenkumham." },
+    { q: "Berapa lama proses pendirian PT?", a: "Proses lengkap pendirian PT all-in berkisar antara 6 hingga 12 hari kerja. Hal ini bergantung pada kecepatan penandatanganan akta oleh notaris partner dan tidak adanya kendala teknis pada sistem AHU Kemenkumham." },
     { q: "Apakah harga sudah termasuk biaya notaris & pemerintah?", a: "Ya, semua paket harga EasyLegal bersifat all-in. Sudah mencakup jasa notaris partner, biaya resmi PNBP/AHU Kemenkumham, pendaftaran NPWP perusahaan, dan seluruh proses pendaftaran izin di sistem OSS RBA hingga dokumen terbit." },
     { q: "Bisa pakai alamat rumah sebagai domisili PT?", a: "Berdasarkan regulasi zonasi daerah (terutama di kota besar seperti Jakarta), alamat rumah tinggal umumnya tidak diperkenankan untuk domisili PT biasa. Namun, Anda dapat menggunakan layanan Virtual Office kami sebagai solusi alamat kantor legal yang sah dan hemat biaya." },
     { q: "Apakah saya harus datang ke notaris secara fisik?", a: "Tidak wajib. Penandatanganan akta pendirian dapat dilakukan secara tatap muka dengan notaris partner kami atau dilakukan secara elektronik (e-Notary) dengan verifikasi aman, sehingga Anda dapat menyelesaikan proses ini dari mana saja secara online." },
@@ -349,12 +348,12 @@ const dataCV: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian CV",
   heroBadge: "Pendirian CV",
   heroTitle: [
-    { text: "Wujudkan usaha Anda " },
+    { text: "Pengurusan CV, " },
     { break: true },
-    { text: "dengan " },
-    { text: "badan usaha CV", highlight: true },
+    { text: "badan usaha yang " },
+    { text: "fleksibel", highlight: true },
     { break: true },
-    { text: "yang fleksibel" },
+    { text: "untuk bisnis Anda" },
   ],
   heroDescription:
     "CV adalah pilihan tepat untuk usaha kecil-menengah yang ingin struktur jelas tanpa kompleksitas PT. Proses cepat, biaya terjangkau, dan cocok untuk bisnis keluarga.",
@@ -362,7 +361,7 @@ const dataCV: BadanUsahaContent = {
     "/images/layanan/cv-1.jpg",
   heroImageAlt: "Tim kecil mendirikan CV",
   heroStats: [
-    { icon: "Clock", value: "3–7 hari", label: "SLA kerja" },
+    { icon: "Clock", value: "6–12 hari", label: "SLA kerja" },
     { icon: "DollarSign", value: "Mulai Rp1,99jt", label: "Harga transparan" },
     { icon: "Upload", value: "100% Online", label: "Upload paperless" },
   ],
@@ -534,15 +533,14 @@ const dataCV: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN CV",
-  stepsTitle: "5 langkah mudah pendirian CV.",
+  stepsTitle: "4 langkah mudah pendirian CV.",
   stepsSubtitle:
-    "Dari konsultasi sampai dokumen resmi di tangan — estimasi 3–7 hari kerja.",
+    "Dari konsultasi sampai dokumen resmi di tangan — estimasi 6–12 hari kerja.",
   steps: [
     { no: "01", title: "Konsultasi & Persiapan", duration: "1 HARI KERJA", desc: "Konsultasi gratis untuk menentukan struktur CV, jenis usaha, dan dokumen yang diperlukan.", points: ["Diskusi tujuan bisnis & struktur CV", "Penentuan Sekutu Aktif & Pasif", "Persiapan dokumen para pihak"] },
     { no: "02", title: "Pembuatan Akta Notaris", duration: "1-2 HARI KERJA", desc: "Notaris menyusun akta pendirian CV yang memuat anggaran dasar dan kesepakatan para pihak.", points: ["Drafting akta pendirian CV", "Penandatanganan akta oleh para pihak", "Pengesahan akta oleh notaris"] },
-    { no: "03", title: "Pendaftaran ke Pengadilan Negeri", duration: "1-2 HARI KERJA", desc: "Akta didaftarkan ke Pengadilan Negeri setempat untuk mendapatkan Surat Keterangan Terdaftar.", points: ["Pengajuan dokumen ke Pengadilan Negeri", "Verifikasi & pengesahan", "Penerbitan Surat Keterangan Terdaftar"] },
-    { no: "04", title: "NPWP & SKT Pajak", duration: "1-2 HARI KERJA", desc: "Registrasi CV sebagai wajib pajak badan ke DJP.", points: ["Pendaftaran NPWP badan", "Penerbitan SKT Pajak", "Aktivasi akun pajak"] },
-    { no: "05", title: "NIB & Perizinan OSS", duration: "1-2 HARI KERJA", desc: "Penerbitan NIB dan akses OSS RBA untuk perizinan berusaha.", points: ["Pendaftaran akun OSS RBA", "Penerbitan NIB & SPPL", "Penyerahan dokumen lengkap"] },
+    { no: "03", title: "NPWP & SKT Pajak", duration: "", desc: "Registrasi CV sebagai wajib pajak badan ke DJP.", points: [] },
+    { no: "04", title: "NIB & Perizinan OSS", duration: "", desc: "Penerbitan NIB dan akses OSS RBA untuk perizinan berusaha.", points: [] },
   ],
 
   faqTitle: "Pertanyaan seputar pendirian CV.",
@@ -760,12 +758,12 @@ const dataPMA: BadanUsahaContent = {
   stepsSubtitle:
     "Dari konsultasi BKPM sampai dokumen lengkap — estimasi 4–8 minggu, semua kami urus.",
   steps: [
-    { no: "01", title: "Konsultasi & Kesesuaian DNI", duration: "1-2 HARI KERJA", desc: "Tim kami review bidang usaha Anda terhadap Daftar Negatif Investasi (DNI) & sampaikan rekomendasi.", points: ["Review bidang usaha terhadap DNI", "Penentuan struktur modal & saham", "Persiapan dokumen investor asing"] },
-    { no: "02", title: "Izin Prinsip BKPM", duration: "5-7 HARI KERJA", desc: "Pengajuan Izin Prinsip Penanaman Modal ke BKPM melalui sistem OSS-RBA.", points: ["Pendaftaran akun investor OSS", "Pengajuan Izin Prinsip BKPM", "Penerbitan Izin Prinsip"] },
-    { no: "03", title: "Pembuatan Akta Notaris", duration: "2-3 HARI KERJA", desc: "Notaris menyusun akta pendirian PT PMA sesuai Izin Prinsip BKPM.", points: ["Drafting akta pendirian PT PMA", "Penandatanganan akta oleh para pihak", "Pengesahan akta oleh notaris"] },
-    { no: "04", title: "SK Kemenkumham", duration: "1-2 HARI KERJA", desc: "Pengesahan badan hukum PT PMA oleh Kementerian Hukum & HAM.", points: ["Pengajuan SK Kemenkumham via AHU", "Verifikasi dokumen", "Penerbitan SK Pengesahan"] },
-    { no: "05", title: "NPWP & NIB", duration: "3-5 HARI KERJA", desc: "Pendaftaran NPWP badan dan penerbitan NIB melalui OSS RBA.", points: ["Pendaftaran NPWP & SKT Pajak", "Penerbitan NIB & SPPL", "Aktivasi akun OSS RBA"] },
-    { no: "06", title: "IMTA & KITAS (Opsional)", duration: "7-14 HARI KERJA", desc: "Pengurusan izin kerja bagi tenaga kerja asing (TKA) jika diperlukan.", points: ["Pengajuan RPTKA ke Kemenaker", "Proses IMTA & KITAS", "Penyerahan semua dokumen"] },
+    { no: "01", title: "Konsultasi & Perencanaan", duration: "", desc: "Mengidentifikasi kebutuhan dasar bersama tim kami supaya sesuai visi bisnis Anda.", points: [] },
+    { no: "02", title: "Siapkan Dokumen Pendirian", duration: "", desc: "Tim kami membantu menyiapkan dokumen yang dibutuhkan untuk pendirian PT PMA.", points: [] },
+    { no: "03", title: "Penyusunan Akta Pendirian", duration: "", desc: "Notaris menyusun akta pendirian PT PMA sesuai struktur investasi yang disepakati.", points: [] },
+    { no: "04", title: "Pengesahan SK Kemenkumham", duration: "", desc: "Pengesahan badan hukum PT PMA oleh Kementerian Hukum & HAM.", points: [] },
+    { no: "05", title: "NPWP Badan & NIB", duration: "", desc: "Pendaftaran NPWP badan dan penerbitan NIB melalui OSS RBA.", points: [] },
+    { no: "06", title: "IMTA & KITAS", duration: "", desc: "Pengurusan izin kerja bagi tenaga kerja asing (TKA) jika diperlukan.", points: [] },
   ],
 
   faqTitle: "Pertanyaan seputar pendirian PT PMA.",
@@ -791,12 +789,12 @@ const dataPTPerorangan: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian PT Perorangan",
   heroBadge: "Pendirian PT Perorangan",
   heroTitle: [
-    { text: "Bisnis sendiri tanpa ribet? " },
+    { text: "Bisnis sendiri namun " },
     { break: true },
-    { text: "Pilih " },
+    { text: "ingin profesional? " },
     { text: "PT Perorangan", highlight: true },
     { break: true },
-    { text: "solusi legal UMKM" },
+    { text: "solusinya" },
   ],
   heroDescription:
     "PT Perorangan adalah badan hukum untuk 1 pendiri — proses mudah, modal kecil, dan legalitas penuh. Cocok untuk solopreneur & UMKM yang ingin naik kelas.",
@@ -967,14 +965,16 @@ const dataPTPerorangan: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN PT PERORANGAN",
-  stepsTitle: "4 langkah mudah PT Perorangan.",
+  stepsTitle: "6 langkah mudah PT Perorangan.",
   stepsSubtitle:
     "Daftar online, tanpa notaris, tanpa ribet — estimasi 3–7 hari kerja.",
   steps: [
-    { no: "01", title: "Persiapan Data Diri", duration: "1 HARI KERJA", desc: "Siapkan data kependudukan Anda untuk pendaftaran — KTP, NPWP, dan bidang usaha.", points: ["Siapkan KTP & NPWP pribadi", "Tentukan bidang usaha (KBLI)", "Siapkan alamat domisili usaha"] },
-    { no: "02", title: "Pendaftaran via SABH", duration: "1-2 HARI KERJA", desc: "Pembuatan akun & pengisian pernyataan pendirian elektronik melalui sistem SABH Kemenkumham.", points: ["Pendaftaran akun SABH", "Pengisian pernyataan pendirian", "Pengecekan & validasi nama PT"] },
-    { no: "03", title: "SK Kemenkumham", duration: "1 HARI KERJA", desc: "Pengesahan PT Perorangan sebagai badan hukum resmi.", points: ["Verifikasi otomatis sistem", "Penerbitan SK Pengesahan", "Unduh sertifikat elektronik"] },
-    { no: "04", title: "NPWP & NIB", duration: "2-3 HARI KERJA", desc: "Pendaftaran NPWP badan dan penerbitan NIB untuk perizinan berusaha.", points: ["Pendaftaran NPWP via Coretax", "Penerbitan NIB & SPPL", "Semua dokumen siap digunakan"] },
+    { no: "01", title: "Mencantumkan Identitas Diri", duration: "", desc: "Mengirimkan foto KTP dan NPWP.", points: [] },
+    { no: "02", title: "Pengecekan Kelengkapan Dokumen", duration: "", desc: "Tim kami memeriksa kelengkapan dokumen pendirian Anda.", points: [] },
+    { no: "03", title: "Proses Pendirian di Kemenkumham", duration: "", desc: "Pendirian PT Perorangan diproses melalui sistem Kementerian Hukum & HAM.", points: [] },
+    { no: "04", title: "Konfirmasi dan Persetujuan", duration: "", desc: "Konfirmasi pendaftaran Sertifikat Pendirian dari Kementerian Hukum & HAM.", points: [] },
+    { no: "05", title: "Penerbitan Dokumen", duration: "", desc: "Penerbitan Sertifikat Pendirian dan Surat Pernyataan Pendirian PT dari Kemenkumham.", points: [] },
+    { no: "06", title: "NPWP & NIB", duration: "", desc: "Pendaftaran NPWP badan dan penerbitan NIB melalui OSS RBA.", points: [] },
   ],
 
   faqTitle: "Pertanyaan seputar PT Perorangan.",
@@ -1013,7 +1013,7 @@ const dataFirma: BadanUsahaContent = {
     "/images/layanan/firma-1.jpg",
   heroImageAlt: "Rekan bisnis mendirikan Firma",
   heroStats: [
-    { icon: "Clock", value: "3–7 hari", label: "SLA kerja" },
+    { icon: "Clock", value: "6–12 hari", label: "SLA kerja" },
     { icon: "DollarSign", value: "Mulai Rp1,99jt", label: "Harga transparan" },
     { icon: "Users", value: "2+ Pendiri", label: "Kerja sama" },
   ],
@@ -1191,15 +1191,14 @@ const dataFirma: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN FIRMA",
-  stepsTitle: "5 langkah pendirian Firma.",
+  stepsTitle: "4 langkah pendirian Firma.",
   stepsSubtitle:
-    "Dari konsultasi sampai dokumen resmi — estimasi 3–7 hari kerja.",
+    "Dari konsultasi sampai dokumen resmi — estimasi 6–12 hari kerja.",
   steps: [
     { no: "01", title: "Konsultasi & Perjanjian Sekutu", duration: "1 HARI KERJA", desc: "Diskusi dengan tim legal untuk menyusun perjanjian antar sekutu dan menentukan struktur Firma.", points: ["Diskusi peran & kontribusi setiap sekutu", "Penyusunan kesepakatan usaha", "Penentuan nama Firma"] },
     { no: "02", title: "Pembuatan Akta Notaris", duration: "1-2 HARI KERJA", desc: "Notaris menyusun akta pendirian Firma yang memuat anggaran dasar & kesepakatan para sekutu.", points: ["Drafting akta pendirian Firma", "Penandatanganan akta oleh para sekutu", "Pengesahan akta notaris"] },
-    { no: "03", title: "Pendaftaran ke Pengadilan Negeri", duration: "1-2 HARI KERJA", desc: "Akta Firma didaftarkan ke Pengadilan Negeri setempat.", points: ["Pengajuan dokumen", "Verifikasi & pencatatan", "Penerbitan bukti pendaftaran"] },
-    { no: "04", title: "NPWP Badan", duration: "1-2 HARI KERJA", desc: "Registrasi NPWP atas nama Firma ke DJP.", points: ["Pendaftaran NPWP badan", "Penerbitan SKT Pajak", "Aktivasi akun pajak"] },
-    { no: "05", title: "NIB & Perizinan OSS", duration: "1-2 HARI KERJA", desc: "Penerbitan NIB dan izin usaha melalui OSS RBA.", points: ["Pendaftaran akun OSS RBA", "Penerbitan NIB & SPPL", "Penyerahan dokumen lengkap"] },
+    { no: "03", title: "NPWP & SKT Pajak", duration: "", desc: "Registrasi Firma sebagai wajib pajak badan ke DJP.", points: [] },
+    { no: "04", title: "NIB & Perizinan OSS", duration: "", desc: "Penerbitan NIB dan akses OSS RBA untuk perizinan berusaha.", points: [] },
   ],
 
   faqTitle: "Pertanyaan seputar pendirian Firma.",
@@ -1224,12 +1223,12 @@ const dataYayasan: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian Yayasan",
   heroBadge: "Pendirian Yayasan",
   heroTitle: [
-    { text: "Wujudkan misi sosial " },
+    { text: "Yayasan untuk Anda " },
     { break: true },
-    { text: "dengan " },
-    { text: "yayasan yang", highlight: true },
+    { text: "yang akan segera " },
+    { text: "menjalankan", highlight: true },
     { break: true },
-    { text: "legal & terpercaya" },
+    { text: "misi sosial" },
   ],
   heroDescription:
     "Yayasan adalah badan hukum nirlaba untuk bidang sosial, keagamaan, dan kemanusiaan. Kami pandu pendiriannya dari akta notaris sampai SK Kemenkumham.",
@@ -1237,7 +1236,7 @@ const dataYayasan: BadanUsahaContent = {
     "/images/layanan/yayasan-1.jpg",
   heroImageAlt: "Kegiatan sosial yayasan",
   heroStats: [
-    { icon: "Clock", value: "7–14 hari", label: "SLA kerja" },
+    { icon: "Clock", value: "14–30 hari", label: "SLA kerja" },
     { icon: "DollarSign", value: "Mulai Rp2,99jt", label: "Harga transparan" },
     { icon: "Heart", value: "Nirlaba", label: "Non-profit" },
   ],
@@ -1396,11 +1395,11 @@ const dataYayasan: BadanUsahaContent = {
   stepsTag: "PROSES PEMBUATAN YAYASAN",
   stepsTitle: "6 langkah pendirian Yayasan.",
   stepsSubtitle:
-    "Dari konsultasi sampai SK Kemenkumham — estimasi 7–14 hari kerja.",
+    "Dari konsultasi sampai dokumen resmi di tangan — estimasi 14–30 hari kerja (syarat berlaku).",
   steps: [
     { no: "01", title: "Konsultasi & Persiapan", duration: "1 HARI KERJA", desc: "Konsultasi gratis untuk menentukan tujuan yayasan, struktur organ, dan program kerja.", points: ["Penentuan visi & misi yayasan", "Identifikasi program sosial", "Persiapan data Pembina, Pengurus, Pengawas"] },
-    { no: "02", title: "Pembuatan Akta Notaris", duration: "2-3 HARI KERJA", desc: "Notaris menyusun akta pendirian yayasan yang memuat Anggaran Dasar & susunan organ.", points: ["Drafting akta pendirian yayasan", "Penandatanganan akta oleh Pembina & Pengurus", "Pengesahan akta notaris"] },
-    { no: "03", title: "SK Pengesahan Kemenkumham", duration: "3-5 HARI KERJA", desc: "Pengajuan pengesahan yayasan sebagai badan hukum ke Kemenkumham.", points: ["Pengajuan via AHU Online", "Verifikasi dokumen", "Penerbitan SK Pengesahan"] },
+    { no: "02", title: "Pemesanan Nama ke AHU", duration: "", desc: "Waktu persetujuan nama bergantung pada AHU.", points: [] },
+    { no: "03", title: "SK Kemenkumham", duration: "", desc: "Verifikasi dokumen dan penerbitan SK Pengesahan.", points: [] },
     { no: "04", title: "NPWP Yayasan", duration: "1-2 HARI KERJA", desc: "Pendaftaran NPWP atas nama yayasan ke DJP.", points: ["Pendaftaran NPWP yayasan", "Penerbitan SKT Pajak", "Aktivasi akun pajak"] },
     { no: "05", title: "NIB & Perizinan OSS", duration: "1-2 HARI KERJA", desc: "Penerbitan NIB dan akses OSS RBA untuk kegiatan operasional.", points: ["Pendaftaran akun OSS", "Penerbitan NIB"] },
     { no: "06", title: "Penyerahan Dokumen", duration: "1 HARI KERJA", desc: "Penyerahan semua dokumen resmi yayasan ke alamat Anda.", points: ["Paket dokumen lengkap", "Saran operasional yayasan"] },
@@ -1441,7 +1440,7 @@ const dataPerkumpulan: BadanUsahaContent = {
     "/images/layanan/perkumpulan-1.jpg",
   heroImageAlt: "Komunitas perkumpulan",
   heroStats: [
-    { icon: "Clock", value: "7–14 hari", label: "SLA kerja" },
+    { icon: "Clock", value: "14–30 hari", label: "SLA kerja" },
     { icon: "DollarSign", value: "Mulai Rp2,49jt", label: "Harga transparan" },
     { icon: "Users", value: "Berbasis Anggota", label: "Komunitas" },
   ],
@@ -1593,15 +1592,16 @@ const dataPerkumpulan: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN PERKUMPULAN",
-  stepsTitle: "5 langkah pendirian Perkumpulan.",
+  stepsTitle: "6 langkah pendirian Perkumpulan.",
   stepsSubtitle:
-    "Dari konsultasi sampai badan hukum resmi — estimasi 7–14 hari kerja.",
+    "Dari konsultasi sampai badan hukum resmi — estimasi 14–30 hari kerja (syarat berlaku).",
   steps: [
-    { no: "01", title: "Persiapan & Rapat Anggota", duration: "2 HARI KERJA", desc: "Persiapan visi, misi, dan penyelenggaraan Rapat Anggota untuk memilih pengurus.", points: ["Pembentukan panitia pendiri", "Penyusunan AD/ART awal", "Rapat anggota & pemilihan pengurus"] },
-    { no: "02", title: "Pembuatan Akta Notaris", duration: "2-3 HARI KERJA", desc: "Notaris menyusun akta pendirian perkumpulan berdasarkan AD/ART.", points: ["Drafting akta pendirian", "Penandatanganan akta", "Pengesahan notaris"] },
-    { no: "03", title: "Pengesahan Kemenkumham", duration: "3-5 HARI KERJA", desc: "Pengajuan pengesahan badan hukum ke Kemenkumham.", points: ["Pengajuan via AHU", "Verifikasi dokumen", "SK Pengesahan badan hukum"] },
-    { no: "04", title: "NPWP & Perizinan", duration: "2-3 HARI KERJA", desc: "Pendaftaran NPWP dan perizinan dasar.", points: ["NPWP atas nama perkumpulan", "SKT Pajak", "NIB & OSS"] },
-    { no: "05", title: "Penyerahan Dokumen", duration: "1 HARI KERJA", desc: "Penyerahan semua dokumen lengkap ke alamat Anda.", points: ["Paket dokumen resmi", "AD/ART final", "Panduan administrasi perkumpulan"] },
+    { no: "01", title: "Konsultasi Persiapan", duration: "", desc: "Melengkapi data persyaratan formulir perkumpulan dan mengirimkan ART perkumpulan.", points: [] },
+    { no: "02", title: "Pemesanan Nama ke AHU", duration: "", desc: "Lama waktu verifikasi bergantung pada pihak AHU.", points: [] },
+    { no: "03", title: "Menunggu SK Kemenkumham", duration: "", desc: "Verifikasi dokumen dan penerbitan SK Pengesahan.", points: [] },
+    { no: "04", title: "NPWP Perkumpulan", duration: "", desc: "Pendaftaran NPWP atas nama perkumpulan ke DJP.", points: [] },
+    { no: "05", title: "NIB & OSS", duration: "", desc: "Penerbitan NIB dan akses OSS RBA untuk kegiatan operasional.", points: [] },
+    { no: "06", title: "Penyerahan Dokumen", duration: "", desc: "Penyerahan semua dokumen resmi perkumpulan ke alamat Anda.", points: [] },
   ],
 
   faqTitle: "Pertanyaan seputar pendirian Perkumpulan.",
@@ -1790,16 +1790,15 @@ const dataKoperasi: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN KOPERASI",
-  stepsTitle: "6 langkah pendirian Koperasi.",
+  stepsTitle: "5 langkah pendirian Koperasi.",
   stepsSubtitle:
-    "Dari Rapat Anggota sampai SK Kemenkumham — estimasi 2–4 minggu.",
+    "Estimasi 14–30 hari kerja bila tidak ada kendala kekurangan persyaratan.",
   steps: [
-    { no: "01", title: "Pembentukan Panitia Pendiri", duration: "2 HARI KERJA", desc: "Pembentukan panitia dan sosialisasi rencana pendirian koperasi kepada calon anggota.", points: ["Pembentukan panitia pendiri", "Sosialisasi ke calon anggota", "Pengumpulan data calon anggota (min. 20 orang)"] },
-    { no: "02", title: "Rapat Anggota Pendiri", duration: "1 HARI KERJA", desc: "Penyelenggaraan Rapat Anggota untuk membahas AD/ART, rencana kerja, dan pemilihan pengurus.", points: ["Pembahasan & pengesahan AD/ART", "Rencana awal kegiatan koperasi", "Pemilihan Pengurus & Pengawas"] },
-    { no: "03", title: "Pembuatan Akta Notaris", duration: "2-3 HARI KERJA", desc: "Notaris menyusun akta pendirian koperasi berdasarkan hasil Rapat Anggota.", points: ["Drafting akta pendirian koperasi", "Penandatanganan akta", "Pengesahan notaris"] },
-    { no: "04", title: "SK Pengesahan Kemenkumham", duration: "5-7 HARI KERJA", desc: "Pengajuan pengesahan koperasi sebagai badan hukum ke Kemenkumham.", points: ["Pengajuan via AHU", "Verifikasi dokumen", "Penerbitan SK Pengesahan"] },
-    { no: "05", title: "NPWP & Perizinan", duration: "3-5 HARI KERJA", desc: "Pendaftaran NPWP koperasi dan perizinan dasar.", points: ["NPWP koperasi & SKT Pajak", "NIB & OSS", "Izin usaha koperasi (jika diperlukan)"] },
-    { no: "06", title: "Penyerahan Dokumen", duration: "1 HARI KERJA", desc: "Penyerahan dokumen lengkap koperasi ke pengurus.", points: ["Paket dokumen resmi", "AD/ART final", "Panduan administrasi koperasi"] },
+    { no: "01", title: "Pesan Nama ke AHU", duration: "", desc: "Lama waktu verifikasi bergantung pada pihak AHU.", points: [] },
+    { no: "02", title: "Draft Akta", duration: "", desc: "Lengkapi persyaratan supaya tidak ada revisi karena akan berpengaruh terhadap waktu persetujuan.", points: [] },
+    { no: "03", title: "Finalisasi Akta dan SKNIK", duration: "", desc: "Finalisasi akta pendirian dan penerbitan SKNIK.", points: [] },
+    { no: "04", title: "NPWP & NIB", duration: "", desc: "Pendaftaran NPWP koperasi dan perizinan dasar.", points: [] },
+    { no: "05", title: "Penyerahan Dokumen", duration: "", desc: "Dokumen diserahkan kepada pengurus koperasi.", points: [] },
   ],
 
   faqTitle: "Pertanyaan seputar pendirian Koperasi.",
@@ -1826,4 +1825,3 @@ export const contentMap: Record<string, BadanUsahaContent> = {
   "perkumpulan": dataPerkumpulan,
   "koperasi": dataKoperasi,
 };
-

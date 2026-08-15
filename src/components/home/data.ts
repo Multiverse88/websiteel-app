@@ -6,7 +6,7 @@ import {
   ShieldCheck,
   FileCheck,
   Award,
-  FileText,
+  FileText, Files,
   Globe,
   Scale,
   TrendingUp,
@@ -94,18 +94,25 @@ export const quickTools = [
 export const partnerLogos = ["KEMENKUMHAM", "OSS BKPM", "DJKI", "KEMENPERIN", "PSE Kominfo"];
 
 export const layananIndividual = [
-  { name: "Pendirian Badan Usaha", desc: "Badan Usaha & Legal", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha" },
-  { name: "Daftar Merek", desc: "HAKI & Brand", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki" },
-  { name: "NIB & OSS", desc: "Perizinan Usaha", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss" },
-  { name: "Tata Ruang • PKKPR", desc: "Kesesuaian Tata Ruang", icon: MapPin, circleBg: "#059669", cardTint: "#ECFDF5", href: "/layanan/pkkpr" },
-  { name: "Sertifikasi ISO", desc: "Standar Internasional", icon: Award, circleBg: "#16A34A", cardTint: "#F0FDF4", href: "/layanan/sertifikasi-iso" },
-  { name: "Pengajuan PKP", desc: "Perpajakan & E-Faktur", icon: FileText, circleBg: "#EA580C", cardTint: "#FFF7ED", href: "/layanan/pengajuan-pkp" },
-  { name: "Visa & KITAS", desc: "Imigrasi WNA", icon: Globe, circleBg: "#1E3A5F", cardTint: "#F0F4FF", href: "/layanan/visa-kitas" },
-  { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Legal", icon: Scale, circleBg: "#7C3AED", cardTint: "#F5F3FF", href: "/layanan/perjanjian-perkawinan" },
-  { name: "Press Release", desc: "PR & Media 100+", icon: MessageCircle, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/press-release" },
-  { name: "Apostille", desc: "Legalisasi 129+ Negara", icon: Globe, circleBg: "#0891B2", cardTint: "#ECFEFF", href: "/layanan/apostille" },
-  { name: "Pelaporan LKPM", desc: "Lapor BKPM Rutin", icon: TrendingUp, circleBg: "#0D9488", cardTint: "#F0FDFA", href: "/layanan/pelaporan-lkpm" },
-  { name: "Kontrak Bisnis", desc: "Perjanjian & Legal Drafting", icon: FileText, circleBg: "#4F46E5", cardTint: "#EEF2FF", href: "/layanan/kontrak-bisnis" },
+  // PERIZINAN & PENDIRIAN
+  { name: "Pendirian & Pembubaran Badan Usaha", desc: "PT, PT PMA, PT Perorangan, CV, Yayasan, Perkumpulan, Firma, Koperasi", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha", category: "PERIZINAN & PENDIRIAN" },
+  { name: "Perizinan Usaha", desc: "NIB, OSS, PKP, PSE, PKKPR, LKPM", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss", category: "PERIZINAN & PENDIRIAN" },
+  { name: "Pengurusan Dokumen Perusahaan", desc: "Perubahan Anggaran Dasar, Data Perusahaan, Cabang, Akta Jual Beli/Akuisisi", icon: Files, circleBg: "#059669", cardTint: "#ECFDF5", href: "/layanan/perubahan-akta", category: "PERIZINAN & PENDIRIAN" },
+  { name: "Penyusunan & Review Perjanjian", desc: "Kontrak Bisnis, Kerja Sama", icon: Scale, circleBg: "#EA580C", cardTint: "#FFF7ED", href: "/layanan/kontrak-bisnis", category: "PERIZINAN & PENDIRIAN" },
+
+  // PERIZINAN KHUSUS
+  { name: "Pendaftaran HKI", desc: "Merek, Paten, Desain Industri, Hak Cipta", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki", category: "PERIZINAN KHUSUS" },
+  { name: "Apostille", desc: "Legalisasi dokumen lintas negara", icon: Globe, circleBg: "#0891B2", cardTint: "#ECFEFF", href: "/layanan/apostille", category: "PERIZINAN KHUSUS" },
+  { name: "Layanan Imigrasi", desc: "Visa, KITAS", icon: Globe, circleBg: "#1E3A5F", cardTint: "#F0F4FF", href: "/layanan/visa-kitas", category: "PERIZINAN KHUSUS" },
+  { name: "Perjanjian Pisah Harta", desc: "Perjanjian Perkawinan", icon: Scale, circleBg: "#7C3AED", cardTint: "#F5F3FF", href: "/layanan/perjanjian-perkawinan", category: "PERIZINAN KHUSUS" },
+  { name: "Pelaporan RUPS", desc: "RUPS Tahunan & Luar Biasa", icon: Users, circleBg: "#DC2626", cardTint: "#FEF2F2", href: "/layanan/pelaporan-rups", category: "PERIZINAN KHUSUS" },
+
+  // BRAND & UNIT EKOSISTEM
+  { name: "Virtual Office", desc: "Alamat Bisnis Prestisius, Layanan Resepsionis, Ruang Meeting", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/virtual-office", category: "BRAND & UNIT EKOSISTEM", brandPrefix: "Easy", brandSuffix: "Office" },
+  { name: "Layanan Perpajakan", desc: "Laporan SPT Tahunan Badan, Konsultasi Pajak, Kode Billing Pajak", icon: FileText, Files, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "#", category: "BRAND & UNIT EKOSISTEM", brandPrefix: "Easy", brandSuffix: "Tax" },
+  { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 45001, 27001, dan standar lainnya", icon: Award, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/sertifikasi-iso", category: "BRAND & UNIT EKOSISTEM", brandPrefix: "Easy", brandSuffix: "ISO" },
+  { name: "PR & Media", desc: "Publikasi Media Nasional, Siaran Pers", icon: MessageCircle, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pr-media", category: "BRAND & UNIT EKOSISTEM", brandPrefix: "Easy", brandSuffix: "Press" },
+  { name: "Branding & Company Profile", desc: "Desain Logo, Company Profile, Website, Marketing Kit", icon: FileText, Files, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "#", category: "BRAND & UNIT EKOSISTEM", brandPrefix: "Easy", brandSuffix: "Branding" }
 ];
 
 

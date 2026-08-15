@@ -23,9 +23,11 @@ import {
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
@@ -383,7 +385,7 @@ export default function PelaporanLKPM() {
           </section>
 
           {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
-          <MediaCoverage />
+          <TrustStatsBar />
 
           {/* ─── 3. BENEFITS SECTION ─── */}
           <FadeIn delay={0.2}>
@@ -476,6 +478,10 @@ export default function PelaporanLKPM() {
               hideFooter={true}
             />
           </FadeIn>
+
+      {/* ─── OFFICES ─── */}
+      <Offices />
+
 
           {/* ─── 6. ALUR PELAPORAN SECTION ─── */}
           <FadeIn delay={0.2}>
@@ -800,12 +806,14 @@ export default function PelaporanLKPM() {
 
           {/* ─── 10. TESTIMONIALS SECTION ─── */}
           <FadeIn delay={0.2}>
+            <MediaCoverage />
             <Testimonials />
           </FadeIn>
 
           {/* ─── 11. FAQ SECTION ─── */}
           <FadeIn delay={0.2}>
             <FAQ items={faqs} />
+
           </FadeIn>
 
           {/* ─── 12. CTA SECTION ─── */}
