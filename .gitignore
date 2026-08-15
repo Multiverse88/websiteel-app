@@ -172,3 +172,7 @@ planning-landing-page-builder.md
 design-md-*.md
 .graphify
 _graphify
+
+# Reference/scratch material — not pageview app code, not needed to deploy
+*-extracted/
+TODO_MISSING_PAGES.md

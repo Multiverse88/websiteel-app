@@ -9,6 +9,7 @@ jobs:
       - name: Deploy via webhook
         run: |
           curl -fsSL -X POST \
-            -H "Authorization: Bearer ${{ secrets.DOKKU_DEPLOY_TOKEN }}" \
-            https://panel.easylegal.my.id/easylegal-deploy \
-            -d '{}'
+            https://panel.easylegal.my.id/api/deploy/Ge2Au_0IMXd2bRNdAJSSp \
+            -H "Content-Type: application/json" \
+            -H "X-GitHub-Event: push" \
+            -d '{"ref":"refs/heads/main","repository":{"full_name":"Multiverse88/websiteel-app"}}'
