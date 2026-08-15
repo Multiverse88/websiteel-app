@@ -447,14 +447,14 @@ export default function KontrakBisnis() {
       {/* ─── 8.5 PENGERTIAN SECTION ─── */}
       <section className="py-8 sm:py-20 bg-white border-b border-gray-200/50">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          <div className="mb-8 sm:mb-12">
-            <span className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.1em]">
+          <div className="mb-8 sm:mb-12 text-center max-w-3xl mx-auto flex flex-col items-center">
+            <span className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em]">
               PENGERTIAN
             </span>
             <h2 className="text-[28px] sm:text-[36px] lg:text-[40px] font-black text-gray-950 mt-2 mb-4 tracking-tight leading-tight">
               Apa itu Kontrak & Perjanjian?
             </h2>
-            <p className="text-[16px] sm:text-[16px] text-gray-600 max-w-3xl leading-relaxed">
+            <p className="text-[16px] sm:text-[16px] text-gray-600 max-w-3xl leading-relaxed text-center">
               Kontrak & perjanjian adalah dokumen hukum tertulis yang mengatur hak, kewajiban, dan tanggung jawab para pihak dalam suatu hubungan bisnis atau transaksi.
             </p>
           </div>

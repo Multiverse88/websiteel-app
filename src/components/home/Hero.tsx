@@ -13,6 +13,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { heroSlides } from "./data";
+import ImageLightbox from "../ImageLightbox";
 
 interface HeroProps {
   className?: string;
@@ -34,6 +35,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [hasNavigated, setHasNavigated] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -138,23 +140,41 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         ))}
       </div>
 
-      {/* Floating Badges — Static over the slider container */}
-      <div className={`absolute top-4 right-4 md:top-8 md:right-8 bg-white rounded-xl md:rounded-2xl px-3 py-2 md:px-5 md:py-3.5 shadow-[0_4px_15px_rgba(0,0,0,0.04)] md:shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-2 md:space-x-3.5 z-20 animate-float-slow ${floatClass}`}>
-        <div className="w-[28px] h-[28px] md:w-[38px] md:h-[38px] bg-amber-50 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 text-amber-600">
-          <ShieldCheck className="w-3.5 h-3.5 md:w-5 md:h-5" />
-        </div>
-        <div>
-          <div className="text-[16px] md:text-[16px] font-black text-[#1A1A1A] leading-tight">SK Kemenkumham</div>
-          <div className="text-[16px] md:text-[16px] text-[#6B7280] font-bold md:mt-0.5">Terdaftar resmi</div>
-        </div>
-      </div>
 
       {/* Trust Badges - Positioned Right */}
       <div className={`absolute bottom-[5%] md:bottom-[40px] right-2 md:right-10 bg-white/90 backdrop-blur-sm rounded-lg md:rounded-[20px] px-2 py-1.5 md:px-6 md:py-3.5 shadow-md md:shadow-[0_8px_25px_rgba(0,0,0,0.06)] border border-white/60 flex items-center space-x-2 md:space-x-5 z-20 animate-float-medium ${floatClass}`}>
-        <img src="/ISO-27001-2022.webp" alt="ISO 27001" className="h-[18px] sm:h-[24px] md:h-[36px] w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
-        <img src="/ISO-sertifikat-scaled.jpg" alt="ISO Sertifikat" className="h-[18px] sm:h-[24px] md:h-[36px] w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
-        <img src="/images/badges/pse-terdaftar.png" alt="PSE Terdaftar" className="h-[18px] sm:h-[24px] md:h-[36px] w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
+        <Image
+          src="/ISO-27001-2022.webp"
+          alt="ISO 27001"
+          width={4241}
+          height={1352}
+          className="h-[18px] sm:h-[24px] md:h-[56px] w-auto object-contain drop-shadow-sm cursor-pointer hover:scale-105 transition-transform"
+          onClick={() => setLightboxImage({ src: "/ISO-27001-2022.webp", alt: "ISO 27001" })}
+        />
+        <Image
+          src="/ISO-sertifikat-scaled.jpg"
+          alt="ISO Sertifikat"
+          width={2560}
+          height={816}
+          className="h-[18px] sm:h-[24px] md:h-[56px] w-auto object-contain drop-shadow-sm cursor-pointer hover:scale-105 transition-transform"
+          onClick={() => setLightboxImage({ src: "/ISO-sertifikat-scaled.jpg", alt: "ISO Sertifikat" })}
+        />
+        <Image
+          src="/images/badges/pse-terdaftar.png"
+          alt="PSE Terdaftar"
+          width={4296}
+          height={1614}
+          className="h-[18px] sm:h-[24px] md:h-[56px] w-auto object-contain drop-shadow-sm cursor-pointer hover:scale-105 transition-transform"
+          onClick={() => setLightboxImage({ src: "/images/badges/pse-terdaftar.png", alt: "PSE Terdaftar" })}
+        />
       </div>
+
+      <ImageLightbox 
+        isOpen={!!lightboxImage}
+        src={lightboxImage?.src || ""}
+        alt={lightboxImage?.alt || ""}
+        onClose={() => setLightboxImage(null)}
+      />
 
     </section>
   );

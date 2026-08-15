@@ -29,6 +29,7 @@ import Offices from "@/components/Offices";
 import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
+import IsoPseBadges from "@/components/IsoPseBadges";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
@@ -280,7 +281,7 @@ export default function NibOss() {
             </div>
 
             {/* Right Column: Hero Graphic/Stats */}
-            <div className="lg:col-span-5 relative flex justify-center">
+            <div className="lg:col-span-5 relative flex flex-col items-center justify-center mt-8 lg:mt-0">
               <div className="relative w-full max-w-[460px] aspect-[4/3] sm:aspect-square md:aspect-[4/3] lg:aspect-[4/3]">
                 
                 {/* Photo container */}
@@ -319,13 +320,18 @@ export default function NibOss() {
                     <p className="text-[16px] font-black text-gray-950">OSS RBA Aktif</p>
                     <p className="text-[16px] font-bold text-gray-400">Siap operasional</p>
                   </div>
+                </div>
+              </div>
+
+              {/* ISO and PSE Badges */}
+              <div className="mt-12 flex justify-center w-full relative z-20">
+                <IsoPseBadges />
               </div>
             </div>
 
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* ─── 2. TRUST SIGNALS & MEDIA COVERAGE ─── */}
       <TrustStatsBar />
@@ -852,12 +858,12 @@ export default function NibOss() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
           {/* Header */}
-          <div className="text-left mb-8 sm:mb-16 space-y-3">
-            <p className="text-[16px] font-black text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN NIB & OSS RBA</p>
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3 flex flex-col items-center">
+            <p className="text-[16px] font-black text-[#990202] uppercase tracking-[0.15em]">PENGERTIAN NIB & OSS RBA</p>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu NIB & Perizinan Berbasis Risiko?
             </h2>
-            <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
+            <p className="text-[16px] text-gray-500 leading-relaxed font-medium text-center">
               Sebelum mulai, kenali dulu sistem perizinan usaha online yang berlaku di Indonesia.
             </p>
           </div>

@@ -94,7 +94,7 @@ export default function MediaCoverage() {
           
           {/* OUR CLIENTS */}
           <div className="w-full relative">
-            <div className="text-[12px] font-bold text-gray-800 uppercase tracking-widest mb-6 pl-4 sm:pl-8">
+            <div className="text-[14px] sm:text-[16px] font-bold text-gray-800 uppercase tracking-[0.15em] mb-10 text-center ml-[0.15em]">
               OUR CLIENTS
             </div>
             <div className="relative w-full flex overflow-hidden group">
@@ -122,7 +122,7 @@ export default function MediaCoverage() {
 
           {/* SUPPORTED BY */}
           <div className="w-full relative">
-            <div className="text-[12px] font-bold text-gray-800 uppercase tracking-widest mb-6 pl-4 sm:pl-8">
+            <div className="text-[14px] sm:text-[16px] font-bold text-gray-800 uppercase tracking-[0.15em] mb-10 text-center ml-[0.15em]">
               SUPPORTED BY
             </div>
             <div className="relative w-full flex overflow-hidden group">
@@ -150,7 +150,7 @@ export default function MediaCoverage() {
 
           {/* LIPUTAN MEDIA (Static, Centered) */}
           <div className="w-full relative mt-8 sm:mt-12 pt-12 sm:pt-16 border-t border-[#EAE8E3]">
-            <div className="text-[14px] sm:text-[16px] font-bold text-gray-800 uppercase tracking-[0.15em] mb-10 text-center">
+            <div className="text-[14px] sm:text-[16px] font-bold text-gray-800 uppercase tracking-[0.15em] mb-10 text-center ml-[0.15em]">
               LIPUTAN MEDIA EASYLEGAL
             </div>
             <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-6 sm:gap-10 px-4 sm:px-8 w-full">

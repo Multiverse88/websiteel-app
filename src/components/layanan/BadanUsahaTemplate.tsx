@@ -32,6 +32,7 @@ import Pricing, { PricingPackage, FootnoteItem } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
+import IsoPseBadges from "@/components/IsoPseBadges";
 import Testimonials from "@/components/home/Testimonials";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Benefits from "@/components/Benefits";
@@ -198,6 +199,11 @@ export default function BadanUsahaTemplate({ content }: Props) {
                   </div>
                 ))}
 
+                {/* ISO and PSE Badges */}
+                <div className="mt-8 flex justify-center w-full relative z-20">
+                  <IsoPseBadges />
+                </div>
+
               </div>
             </div>
 
@@ -307,12 +313,12 @@ export default function BadanUsahaTemplate({ content }: Props) {
       <section className="bg-white py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="mb-14">
-            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">{c.pengertianTag}</p>
+          <div className="mb-14 text-center max-w-3xl mx-auto flex flex-col items-center">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-2">{c.pengertianTag}</p>
             <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               {c.pengertianTitle}
             </h2>
-            <p className="text-[16px] text-gray-500 mt-3 font-normal max-w-2xl">
+            <p className="text-[16px] text-gray-500 mt-3 font-normal max-w-2xl text-center">
               {c.pengertianIntro}
             </p>
           </div>
@@ -330,7 +336,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                   />
                 </div>
 
-                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[250px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute bottom-[76px] left-2 sm:left-6 bg-white rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[250px] transition-transform hover:-translate-y-1 duration-300">
                   <div className={`w-10 h-10 rounded-xl ${c.hukumIconBg} flex items-center justify-center ${c.hukumIconColor} flex-shrink-0`}>
                     {React.createElement(iconMap[c.hukumIcon] || FileText, { className: "w-5 h-5 stroke-[2.2]" })}
                   </div>

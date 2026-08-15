@@ -44,6 +44,7 @@ import TrustStatsBar from "@/components/TrustStatsBar";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Testimonials from "@/components/home/Testimonials";
+import IsoPseBadges from "@/components/IsoPseBadges";
 
 const pricingData = {
     populer: [
@@ -399,7 +400,7 @@ export default function PressRelease() {
             </div>
 
             {/* Right Column */}
-            <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-8 lg:mt-0">
+            <div className="lg:col-span-5 relative w-full flex flex-col items-center justify-center mt-8 lg:mt-0">
               <div className="relative w-full max-w-[460px] aspect-[1.05] sm:aspect-square lg:aspect-[1.05]">
 
                 {/* Main Dark Backdrop Graphic */}
@@ -451,7 +452,7 @@ export default function PressRelease() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Right */}
-                <div className="absolute -bottom-12 -right-6 sm:-bottom-16 sm:-right-24 lg:-bottom-16 lg:-right-32 xl:-right-40 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                <div className="absolute bottom-[76px]2 -right-6 sm:bottom-[76px]6 sm:-right-24 lg:bottom-[76px]6 lg:-right-32 xl:-right-40 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
                   <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Clock className="w-4.5 h-4.5" />
                   </div>
@@ -462,6 +463,12 @@ export default function PressRelease() {
                 </div>
 
               </div>
+
+              {/* ISO and PSE Badges */}
+              <div className="mt-16 flex justify-center w-full relative z-20">
+                <IsoPseBadges />
+              </div>
+
             </div>
 
           </div>
@@ -622,7 +629,7 @@ export default function PressRelease() {
                 className="bg-white rounded-xl py-4 px-3 shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center justify-center min-h-[68px] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-shadow duration-200"
               >
                 {media.icon ? (
-                  <img src={media.icon} alt={media.label} className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full object-cover" />
+                  <Image src={media.icon} alt={media.label} width={40} height={40} className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-full object-cover" />
                 ) : (
                   <span className="text-gray-500 font-bold text-[16px]">{media.label}</span>
                 )}

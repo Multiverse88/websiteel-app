@@ -178,6 +178,14 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
 
+    const handleOpenMegaMenu = () => {
+      setIsLayananOpen(true);
+      if (window.innerWidth < 1024) {
+        setIsOpen(true);
+      }
+    };
+    window.addEventListener("open-layanan-mega-menu", handleOpenMegaMenu);
+
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsLayananOpen(false);
@@ -589,15 +597,6 @@ export default function Navbar() {
                             <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
                             <span>{item.title}</span>
                           </Link>
-                          {item.subItems && (
-                            <div className="pl-9 pr-3 pb-1 flex flex-col space-y-2 mt-0.5 mb-1.5 border-l border-slate-200 ml-5">
-                              {item.subItems.map((sub, sIdx) => (
-                                <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[13px] font-medium text-slate-500 hover:text-primary transition-colors flex items-center before:content-[''] before:w-1.5 before:h-[1px] before:bg-slate-300 before:mr-2 before:-ml-4">
-                                  {sub.label}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
                         </div>
                       ))}
                     </div>
@@ -615,15 +614,6 @@ export default function Navbar() {
                             <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
                             <span>{item.title}</span>
                           </Link>
-                          {item.subItems && (
-                            <div className="pl-9 pr-3 pb-1 flex flex-col space-y-2 mt-0.5 mb-1.5 border-l border-slate-200 ml-5">
-                              {item.subItems.map((sub, sIdx) => (
-                                <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[13px] font-medium text-slate-500 hover:text-primary transition-colors flex items-center before:content-[''] before:w-1.5 before:h-[1px] before:bg-slate-300 before:mr-2 before:-ml-4">
-                                  {sub.label}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
                         </div>
                       ))}
                     </div>

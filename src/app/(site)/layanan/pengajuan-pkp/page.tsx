@@ -471,12 +471,12 @@ export default function PengajuanPkp() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
           {/* Header */}
-          <div className="text-left mb-8 sm:mb-16 space-y-3">
-            <p className="text-[16px] font-black text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN PKP & PPN</p>
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3 flex flex-col items-center">
+            <p className="text-[16px] font-black text-[#990202] uppercase tracking-[0.15em]">PENGERTIAN PKP & PPN</p>
             <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Pengusaha Kena Pajak (PKP)?
             </h2>
-            <p className="text-[16px] text-gray-500 leading-relaxed font-medium">
+            <p className="text-[16px] text-gray-500 leading-relaxed font-medium text-center">
               Sebelum mulai, kenali dulu sistem PKP & PPN yang berlaku di Indonesia.
             </p>
           </div>

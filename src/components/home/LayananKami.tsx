@@ -56,31 +56,34 @@ export default function LayananKami() {
               </div>
             </div>
 
-            {/* Cards Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {/* Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {[
-                { name: "Pendirian & Pembubaran Badan Usaha", desc: "PT, PT PMA, PT Perorangan, CV, Yayasan, Firma, Koperasi", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2", href: "/layanan/pendirian-badan-usaha" },
-                { name: "Perizinan Usaha", desc: "NIB, OSS, PKP, PSE, PKKPR, LKPM", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF", href: "/layanan/nib-oss" },
-                { name: "Pendaftaran HKI", desc: "Merek, Paten, Desain Industri, Hak Cipta", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB", href: "/layanan/merek-haki" },
-                { name: "Pengurusan Dokumen Perusahaan", desc: "Perubahan Anggaran Dasar, RUPS, Akta Jual Beli/Akuisisi", icon: Files, circleBg: "#4B5563", cardTint: "#F3F4F6", href: "/layanan/perubahan-akta" },
-                { name: "Penyusunan & Review Perjanjian", desc: "Kontrak Bisnis, Kerja Sama, Perjanjian Pisah Harta/Perkawinan", icon: Scale, circleBg: "#15803D", cardTint: "#DCFCE7", href: "/layanan/kontrak-bisnis" },
-                { name: "Apostille", desc: "Legalisasi dokumen lintas negara", icon: Globe, circleBg: "#6D28D9", cardTint: "#F3E8FF", href: "/layanan/apostille" },
-                { name: "Layanan Imigrasi", desc: "Visa, KITAS", icon: Globe, circleBg: "#0284C7", cardTint: "#E0F2FE", href: "/layanan/visa-kitas" },
-                { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 45001, 27001, dan standar lainnya", icon: Award, circleBg: "#BE123C", cardTint: "#FFE4E6", href: "/layanan/sertifikasi-iso", brandPrefix: "Easy", brandSuffix: "ISO" },
+                { name: "Pendirian & Pembubaran Badan Usaha", desc: "PT, PT PMA, PT Perorangan, CV, Yayasan, Firma, Koperasi", icon: Building2, circleBg: "#B91C1C", cardTint: "#FEF2F2" },
+                { name: "Perizinan Usaha", desc: "NIB, OSS, PKP, PSE, PKKPR, LKPM", icon: FileCheck, circleBg: "#2563EB", cardTint: "#EFF6FF" },
+                { name: "Pendaftaran HKI", desc: "Merek, Paten, Desain Industri, Hak Cipta", icon: ShieldCheck, circleBg: "#D97706", cardTint: "#FFFBEB" },
+                { name: "Pengurusan Dokumen Perusahaan", desc: "Perubahan Anggaran Dasar, RUPS, Akta Jual Beli/Akuisisi", icon: Files, circleBg: "#4B5563", cardTint: "#F3F4F6" },
+                { name: "Penyusunan & Review Perjanjian", desc: "Kontrak Bisnis, Kerja Sama, Perjanjian Pisah Harta/Perkawinan", icon: Scale, circleBg: "#15803D", cardTint: "#DCFCE7" },
+                { name: "Apostille", desc: "Legalisasi dokumen lintas negara", icon: Globe, circleBg: "#6D28D9", cardTint: "#F3E8FF" },
+                { name: "Layanan Imigrasi", desc: "Visa, KITAS", icon: Globe, circleBg: "#0284C7", cardTint: "#E0F2FE" },
+                { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 45001, 27001, dan standar lainnya", icon: Award, circleBg: "#BE123C", cardTint: "#FFE4E6", brandPrefix: "Easy", brandSuffix: "ISO" },
               ].map((item, idx) => {
                 const Icon = item.icon;
                 return (
-                  <Link
+                  <button
                     key={idx}
-                    href={item.href}
-                    className="group layanan-card rounded-xl sm:rounded-2xl p-4 sm:p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden min-h-[160px] sm:min-h-[190px]"
+                    onClick={() => {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                      window.dispatchEvent(new CustomEvent('open-layanan-mega-menu'));
+                    }}
+                    className="group layanan-card rounded-xl sm:rounded-2xl p-4 sm:p-5 hover:shadow-md shadow-sm transition-all duration-200 flex sm:flex-col items-center sm:items-start justify-between overflow-hidden min-h-[110px] sm:min-h-[190px] text-left gap-4 sm:gap-0"
                     style={{
-                      background: `linear-gradient(180deg, #ffffff 30%, ${item.cardTint} 100%)`,
+                      background: `linear-gradient(to bottom right, #ffffff 30%, ${item.cardTint} 120%)`,
                     }}
                   >
-                    <div className="flex-grow flex flex-col items-start">
+                    <div className="flex-grow flex flex-col items-start w-full order-2 sm:order-1">
                       {item.brandPrefix ? (
-                        <div className="flex items-center mb-2">
+                        <div className="flex items-center mb-1.5 sm:mb-2">
                            <span className="flex items-center text-[10px] sm:text-[11px] font-bold border border-gray-200 rounded-[4px] overflow-hidden shadow-sm">
                              <span className="bg-white text-dark px-1.5 py-0.5">{item.brandPrefix}</span>
                              <span className="bg-primary text-white px-1.5 py-0.5">{item.brandSuffix}</span>
@@ -88,46 +91,49 @@ export default function LayananKami() {
                         </div>
                       ) : null}
                       <h4 className="text-[14px] sm:text-[15px] font-bold text-dark leading-snug">{item.name}</h4>
-                      <p className="text-[11px] sm:text-[12px] text-gray-500 mt-1.5 line-clamp-2 leading-snug hidden sm:block">{item.desc}</p>
+                      <p className="text-[12px] sm:text-[12px] text-gray-500 mt-1 sm:mt-1.5 line-clamp-2 leading-snug">{item.desc}</p>
                     </div>
 
-                    <div className="flex justify-center mt-3 sm:mt-4">
+                    <div className="flex justify-center mt-0 sm:mt-4 w-auto sm:w-full order-1 sm:order-2 flex-shrink-0">
                       <div
-                        className="w-[42px] h-[42px] sm:w-[56px] sm:h-[56px] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                        className="w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
                         style={{ backgroundColor: `${item.cardTint}` }}
                       >
                         <div
-                          className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] rounded-full flex items-center justify-center shadow-sm"
+                          className="w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] rounded-full flex items-center justify-center shadow-sm"
                           style={{ backgroundColor: item.circleBg }}
                         >
-                          <Icon className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] text-white" strokeWidth={2} />
+                          <Icon className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] text-white" strokeWidth={2} />
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </button>
                 );
               })}
 
               {/* 9th Card: Lihat Semua / Trigger Navbar */}
-              <Link
-                href="/layanan"
-                className="group layanan-card rounded-xl sm:rounded-2xl p-4 sm:p-5 hover:shadow-md shadow-sm transition-all duration-200 flex flex-col justify-between overflow-hidden min-h-[160px] sm:min-h-[190px] bg-gradient-to-b from-dark to-dark border border-gray-800"
+              <button
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  window.dispatchEvent(new CustomEvent('open-layanan-mega-menu'));
+                }}
+                className="group layanan-card rounded-xl sm:rounded-2xl p-4 sm:p-5 hover:shadow-md shadow-sm transition-all duration-200 flex sm:flex-col items-center sm:items-start justify-between overflow-hidden min-h-[110px] sm:min-h-[190px] bg-gradient-to-br from-dark to-dark border border-gray-800 text-left gap-4 sm:gap-0"
               >
-                <div className="flex-grow flex flex-col items-start">
+                <div className="flex-grow flex flex-col items-start w-full order-2 sm:order-1">
                   <h4 className="text-[14px] sm:text-[15px] font-bold text-white leading-snug">Jelajahi Semua Layanan</h4>
-                  <p className="text-[11px] sm:text-[12px] text-gray-400 mt-1.5 line-clamp-2 leading-snug hidden sm:block">Lihat 20+ layanan legalitas lengkap kami di direktori layanan.</p>
+                  <p className="text-[12px] sm:text-[12px] text-gray-400 mt-1 sm:mt-1.5 line-clamp-2 leading-snug">Lihat 20+ layanan legalitas lengkap kami di direktori layanan.</p>
                 </div>
 
-                <div className="flex justify-center mt-3 sm:mt-4">
-                  <div className="w-[42px] h-[42px] sm:w-[56px] sm:h-[56px] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-gray-800">
-                    <div className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] rounded-full flex items-center justify-center shadow-sm bg-primary">
-                      <svg className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <div className="flex justify-center mt-0 sm:mt-4 w-auto sm:w-full order-1 sm:order-2 flex-shrink-0">
+                  <div className="w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-gray-800">
+                    <div className="w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] rounded-full flex items-center justify-center shadow-sm bg-primary">
+                      <svg className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </div>
                   </div>
                 </div>
-              </Link>
+              </button>
 
             </div>
           </div>

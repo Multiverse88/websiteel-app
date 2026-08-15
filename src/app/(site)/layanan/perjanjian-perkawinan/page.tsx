@@ -520,12 +520,12 @@ export default function PerjanjianPerkawinan() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
 
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
-            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">PENGERTIAN</p>
+          <div className="text-center max-w-3xl mx-auto mb-20 space-y-3 flex flex-col items-center">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em]">PENGERTIAN</p>
             <h2 className="font-heading text-[36px] sm:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
               Apa itu Perjanjian Perkawinan / Pisah Harta?
             </h2>
-            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto text-center">
               Perjanjian resmi antara suami-istri untuk mengatur pemisahan harta &amp; tanggung jawab masing-masing — dilindungi hukum.
             </p>
           </div>

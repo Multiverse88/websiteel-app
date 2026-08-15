@@ -1,24 +1,40 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
-const PROMOS = [
+const FALLBACK_PROMOS = [
   {
     id: 1,
-    title: "Promo Semarak Kemerdekaan",
-    image: "/promo/promo-kemerdekaan.jpg",
+    title: "Super Hot Deal - Promo Terbatas",
+    image: "/promo/super-hot-deal.jpg",
     link: "/layanan/pendirian-badan-usaha",
     whatsappLink: "https://wa.me/6281234567890",
   },
   {
     id: 2,
+    title: "Hot Deal - Jangan Sampai Terlewat",
+    image: "/promo/hot-deal.jpg",
+    link: "/layanan/pendirian-badan-usaha",
+    whatsappLink: "https://wa.me/6281234567890",
+  },
+  {
+    id: 3,
     title: "Menangkan iPhone & Hadiah Rp12.000.000",
     image: "/promo/iphone.jpg",
     link: "/layanan/pendirian-badan-usaha",
     whatsappLink: "https://wa.me/6281234567890",
   },
   {
-    id: 3,
+    id: 4,
+    title: "Promo Semarak Kemerdekaan",
+    image: "/promo/promo-kemerdekaan.jpg",
+    link: "/layanan/pendirian-badan-usaha",
+    whatsappLink: "https://wa.me/6281234567890",
+  },
+  {
+    id: 5,
     title: "Melayani Seluruh Indonesia",
     image: "/promo/melayani-seluruh-indonesia.jpg",
     link: "/layanan/pendirian-badan-usaha",
@@ -27,6 +43,74 @@ const PROMOS = [
 ];
 
 export default function BottomPromoSection() {
+  const [promos, setPromos] = useState<any[]>([]);
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+    async function fetchPromos() {
+      try {
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/settings/PROMOS`;
+        const res = await fetch(apiUrl);
+        if (res.ok) {
+          const json = await res.json();
+          if (json.data && json.data.value) {
+            setPromos(JSON.parse(json.data.value));
+            return;
+          }
+        }
+      } catch (e) {
+        // silently fallback
+      }
+      setPromos(FALLBACK_PROMOS);
+    }
+    fetchPromos();
+  }, []);
+
+  const displayPromos = promos.length > 0 ? promos : FALLBACK_PROMOS;
+
+  const updatePagination = () => {
+    if (!scrollContainerRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    
+    // Total pages is the total scrollable width divided by the visible width
+    // We use Math.max(1, ...) to ensure at least 1 page
+    const pages = Math.max(1, Math.ceil(scrollWidth / clientWidth));
+    setTotalPages(pages);
+
+    // If we are at the very end, activate the last page
+    if (scrollLeft + clientWidth >= scrollWidth - 10) {
+      setActiveIndex(pages - 1);
+    } else {
+      const index = Math.round(scrollLeft / clientWidth);
+      setActiveIndex(Math.min(index, pages - 1));
+    }
+  };
+
+  useEffect(() => {
+    updatePagination();
+    window.addEventListener('resize', updatePagination);
+    return () => window.removeEventListener('resize', updatePagination);
+  }, [displayPromos]);
+
+  const handleScroll = () => {
+    updatePagination();
+  };
+
+  const scrollTo = (index: number) => {
+    if (!scrollContainerRef.current) return;
+    const { clientWidth, scrollWidth } = scrollContainerRef.current;
+    
+    // If it's the last index, scroll to the absolute end to avoid partial clipping
+    const targetLeft = index === totalPages - 1 ? scrollWidth - clientWidth : index * clientWidth;
+    
+    scrollContainerRef.current.scrollTo({
+      left: targetLeft,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <section className="pt-5 sm:pt-6 pb-16 sm:pb-24 bg-white relative overflow-hidden">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
@@ -45,14 +129,31 @@ export default function BottomPromoSection() {
                 Nikmati berbagai promo pilihan untuk membantu proses legalitas dan manajemen bisnis Anda menjadi lebih efisien.
               </p>
             </div>
-            <a href="/promo" className="inline-flex items-center justify-center gap-2 bg-[#D62828] hover:bg-[#B91C1C] text-white px-6 py-3.5 rounded-full font-extrabold text-[15px] sm:text-[16px] transition-colors shrink-0 w-fit group">
-              Lihat Semua Promo <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
-            </a>
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              <button onClick={() => scrollTo(Math.max(0, activeIndex - 1))} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors bg-white">
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 rotate-180 text-gray-600" />
+              </button>
+              <button onClick={() => scrollTo(Math.min(totalPages - 1, activeIndex + 1))} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors bg-white">
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
+              </button>
+              <a href="/promo" className="inline-flex items-center justify-center gap-2 bg-[#D62828] hover:bg-[#B91C1C] text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-extrabold text-[14px] sm:text-[16px] transition-colors shrink-0 w-fit group ml-auto sm:ml-0">
+                Lihat Semua Promo <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
+              </a>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {PROMOS.map((promo) => (
-              <div key={promo.id} className="bg-white rounded-3xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.015)] border border-gray-100 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col group p-3 sm:p-4">
+          <div 
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 sm:gap-8 pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            <style jsx>{`
+              div::-webkit-scrollbar { display: none; }
+            `}</style>
+            
+            {displayPromos.map((promo: any) => (
+              <div key={promo.id} className="w-[85vw] sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.5rem)] shrink-0 snap-start bg-white rounded-3xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.015)] border border-gray-100 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col group p-3 sm:p-4">
                 <div className="relative aspect-square w-full bg-gray-50 rounded-2xl overflow-hidden mb-5 sm:mb-6">
                   <Image src={promo.image} alt={promo.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                 </div>
@@ -72,11 +173,15 @@ export default function BottomPromoSection() {
           </div>
           
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-10 sm:mt-12">
-            <div className="w-6 sm:w-8 h-2 sm:h-2.5 rounded-full bg-[#D62828]"></div>
-            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-gray-200"></div>
-            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-gray-200"></div>
-            <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-gray-200"></div>
+          <div className="flex justify-center gap-2 mt-4 sm:mt-8">
+            {Array.from({ length: totalPages }).map((_, idx) => (
+              <button 
+                key={idx}
+                onClick={() => scrollTo(idx)}
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-6 sm:w-8 bg-[#D62828]' : 'w-2 sm:w-2.5 bg-gray-200 hover:bg-gray-300'}`}
+                aria-label={`Go to slide ${idx + 1}`}
+              ></button>
+            ))}
           </div>
         </div>
 

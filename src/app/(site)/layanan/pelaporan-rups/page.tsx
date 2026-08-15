@@ -651,19 +651,21 @@ export default function PelaporanRUPS() {
           <FadeIn delay={0.2}>
             <section className="bg-white py-12 lg:py-24 border-b border-gray-200/50">
               <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+                {/* Section Header */}
+                <div className="text-center max-w-3xl mx-auto mb-16 space-y-3 flex flex-col items-center">
+                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-3">PENGERTIAN RUPS</p>
+                  <h2 className="font-heading text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold text-gray-950 leading-tight tracking-tight">
+                    Apa itu RUPS?
+                  </h2>
+                  <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-3 max-w-md text-center">
+                    Sebelum urus pelaporannya, pahami dulu kedudukan RUPS sebagai organ tertinggi dalam struktur PT Anda.
+                  </p>
+                </div>
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
                   
                   {/* Left: Text & Image */}
                   <div className="space-y-8">
-                    <div>
-                      <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-3">PENGERTIAN RUPS</p>
-                      <h2 className="font-heading text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold text-gray-950 leading-tight tracking-tight">
-                        Apa itu RUPS?
-                      </h2>
-                      <p className="text-[16px] text-gray-500 font-normal leading-relaxed mt-3 max-w-md">
-                        Sebelum urus pelaporannya, pahami dulu kedudukan RUPS sebagai organ tertinggi dalam struktur PT Anda.
-                      </p>
-                    </div>
 
                     <div className="relative w-full aspect-[4/3] rounded-[24px]">
                       <Image

@@ -109,7 +109,7 @@ export const dataPT: BadanUsahaContent = {
       iconBg: "bg-red-50",
       iconColor: "text-[#990202]",
       title: "Akta PT diterbitkan",
-      subtitle: "Selesai · 10 hari kerja",
+      subtitle: "Selesai · 2 hari kerja",
       position: "-top-6 -left-2 sm:-left-6",
     },
     {
@@ -118,7 +118,7 @@ export const dataPT: BadanUsahaContent = {
       iconColor: "text-amber-600",
       title: "SK Kemenkumham",
       subtitle: "Terdaftar resmi",
-      position: "-bottom-6 -right-2 sm:-right-4",
+      position: "bottom-[76px] -right-2 sm:-right-4",
     },
   ],
 
@@ -380,7 +380,7 @@ const dataCV: BadanUsahaContent = {
       iconColor: "text-amber-600",
       title: "Legalitas Resmi",
       subtitle: "Terdaftar di Pengadilan",
-      position: "-bottom-6 -right-2 sm:-right-4",
+      position: "bottom-[76px] -right-2 sm:-right-4",
     },
   ],
 
@@ -599,7 +599,7 @@ const dataPMA: BadanUsahaContent = {
       iconColor: "text-amber-600",
       title: "SK Kemenkumham",
       subtitle: "Badan hukum resmi",
-      position: "-bottom-6 -right-2 sm:-right-4",
+      position: "bottom-[76px] -right-2 sm:-right-4",
     },
   ],
 
@@ -821,7 +821,7 @@ const dataPTPerorangan: BadanUsahaContent = {
       iconColor: "text-amber-600",
       title: "Badan Hukum Resmi",
       subtitle: "SK Kemenkumham",
-      position: "-bottom-6 -right-2 sm:-right-4",
+      position: "bottom-[76px] -right-2 sm:-right-4",
     },
   ],
 
@@ -1033,7 +1033,7 @@ const dataFirma: BadanUsahaContent = {
       iconColor: "text-amber-600",
       title: "Terdaftar Resmi",
       subtitle: "Legalitas terjamin",
-      position: "-bottom-6 -right-2 sm:-right-4",
+      position: "bottom-[76px] -right-2 sm:-right-4",
     },
   ],
 
@@ -1255,7 +1255,7 @@ const dataYayasan: BadanUsahaContent = {
       iconColor: "text-amber-600",
       title: "Akta Notaris",
       subtitle: "Terbit & disahkan",
-      position: "-bottom-6 -right-2 sm:-right-4",
+      position: "bottom-[76px] -right-2 sm:-right-4",
     },
   ],
 
@@ -1459,7 +1459,7 @@ const dataPerkumpulan: BadanUsahaContent = {
       iconColor: "text-amber-600",
       title: "Terdaftar Resmi",
       subtitle: "Legalitas diakui",
-      position: "-bottom-6 -right-2 sm:-right-4",
+      position: "bottom-[76px] -right-2 sm:-right-4",
     },
   ],
 
@@ -1658,7 +1658,7 @@ const dataKoperasi: BadanUsahaContent = {
       iconColor: "text-amber-600",
       title: "SK Kemenkumham",
       subtitle: "Badan hukum resmi",
-      position: "-bottom-6 -right-2 sm:-right-4",
+      position: "bottom-[76px] -right-2 sm:-right-4",
     },
   ],
 

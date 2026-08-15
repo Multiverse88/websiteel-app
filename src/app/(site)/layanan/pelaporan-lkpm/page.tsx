@@ -518,12 +518,12 @@ export default function PelaporanLKPM() {
           <FadeIn delay={0.2}>
             <section className="bg-white py-10 lg:py-20 border-b border-gray-200/50">
               <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3">
-                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em] font-sans">PENGERTIAN</p>
+                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3 flex flex-col items-center">
+                  <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em] font-sans">PENGERTIAN</p>
                   <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[44px] font-extrabold text-gray-950 leading-tight tracking-tight">
                     Apa itu LKPM &amp; kenapa wajib lapor?
                   </h2>
-                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto">
+                  <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 font-normal leading-relaxed max-w-2xl mx-auto text-center">
                     Pelaporan rutin yang wajib untuk perusahaan dengan NIB &amp; izin usaha — bagian dari pengawasan investasi BKPM.
                   </p>
                 </div>
