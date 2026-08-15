@@ -4,13 +4,161 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronDown, Building2, FileCheck2, Award, FileSignature, Files, ShieldCheck, Globe, ArrowRight, FileText, Users, BadgeCheck } from "lucide-react";
 import { getWhatsAppLink } from "@/lib/config";
+
+// ponytail: "Hak Cipta" and "KITAS" reuse an existing page's content
+// (/layanan/merek-haki, /layanan/visa-kitas) — there's no dedicated route
+// for them yet. Give them their own page when that content exists.
+const megaMenuData = {
+  leftColumn: {
+    header: "PERIZINAN & PENDIRIAN",
+    subHeader: "Layanan inti legalitas bisnis",
+    items: [
+      {
+        title: "Pendirian & Pembubaran Badan Usaha",
+        description: "PT, PT PMA, PT Perorangan, CV, Yayasan, Perkumpulan, Firma, Koperasi",
+        icon: Building2,
+        href: "/layanan/pendirian-badan-usaha",
+        subItems: [
+          { label: "Pendirian PT", href: "/layanan/pendirian-badan-usaha" },
+          { label: "PT PMA", href: "/layanan/pendirian-badan-usaha/pt-pma" },
+          { label: "PT Perorangan", href: "/layanan/pendirian-badan-usaha/pt-perorangan" },
+          { label: "CV", href: "/layanan/pendirian-badan-usaha/cv" },
+          { label: "Yayasan", href: "/layanan/pendirian-badan-usaha/yayasan" },
+          { label: "Perkumpulan", href: "/layanan/pendirian-badan-usaha/perkumpulan" },
+          { label: "Firma", href: "/layanan/pendirian-badan-usaha/firma" },
+          { label: "Koperasi", href: "/layanan/pendirian-badan-usaha/koperasi" },
+          { label: "Pembubaran Perusahaan", href: "/layanan/pembubaran-perusahaan" },
+        ]
+      },
+      {
+        title: "Perizinan Usaha",
+        description: "NIB, OSS, PKP, PSE, PKKPR, LKPM",
+        icon: FileCheck2,
+        href: "/layanan/nib-oss",
+        subItems: [
+          { label: "NIB & OSS", href: "/layanan/nib-oss" },
+          { label: "Pengajuan PKP", href: "/layanan/pengajuan-pkp" },
+          { label: "Pengurusan PSE", href: "/layanan/pengurusan-pse" },
+          { label: "PKKPR", href: "/layanan/pkkpr" },
+          { label: "Pelaporan LKPM", href: "/layanan/pelaporan-lkpm" },
+        ]
+      },
+      {
+        title: "Pengurusan Dokumen Perusahaan",
+        description: "Perubahan Anggaran Dasar, Data Perusahaan, Cabang, Akta Jual Beli/Akuisisi",
+        icon: Files,
+        href: "/layanan/perubahan-akta",
+        subItems: [
+          { label: "Perubahan Akta & AD", href: "/layanan/perubahan-akta" },
+          { label: "Pembubaran Perusahaan", href: "/layanan/pembubaran-perusahaan" },
+        ]
+      },
+      {
+        title: "Penyusunan & Review Perjanjian",
+        description: "Kontrak Bisnis, Kerja Sama",
+        icon: FileSignature,
+        href: "/layanan/kontrak-bisnis",
+        subItems: [
+          { label: "Kontrak Bisnis", href: "/layanan/kontrak-bisnis" },
+          { label: "Kerja Sama", href: "/layanan/kontrak-bisnis" },
+        ]
+      }
+    ]
+  },
+  middleColumn: {
+    header: "PERIZINAN KHUSUS",
+    subHeader: "Layanan perizinan dan dokumen khusus",
+    items: [
+      {
+        title: "Pendaftaran HKI",
+        description: "Merek, Paten, Desain Industri, Hak Cipta",
+        icon: ShieldCheck,
+        href: "/layanan/merek-haki",
+        subItems: [
+          { label: "Merek", href: "/layanan/merek-haki" },
+          { label: "Paten", href: "/layanan/merek-haki" },
+          { label: "Desain Industri", href: "/layanan/merek-haki" },
+          { label: "Hak Cipta", href: "/layanan/merek-haki" },
+        ]
+      },
+      {
+        title: "Apostille",
+        description: "Legalisasi dokumen lintas negara",
+        icon: FileText,
+        href: "/layanan/apostille",
+      },
+      {
+        title: "Layanan Imigrasi",
+        description: "Visa, KITAS",
+        icon: Globe,
+        href: "/layanan/visa-kitas",
+        subItems: [
+          { label: "Visa", href: "/layanan/visa-kitas" },
+          { label: "KITAS", href: "/layanan/visa-kitas" },
+        ]
+      },
+      {
+        title: "Perjanjian Pisah Harta",
+        description: "Perjanjian Perkawinan",
+        icon: FileSignature,
+        href: "/layanan/perjanjian-perkawinan",
+      },
+      {
+        title: "Pelaporan RUPS",
+        description: "RUPS Tahunan & Luar Biasa",
+        icon: Users,
+        href: "/layanan/pelaporan-rups",
+      }
+    ]
+  },
+  rightColumn: {
+    header: "BRAND & UNIT EKOSISTEM",
+    subHeader: "Ekosistem terintegrasi via EasyCorp",
+    items: [
+      {
+        brandPrefix: "Easy",
+        brandSuffix: "Office",
+        title: "Virtual Office",
+        description: "Alamat Bisnis Prestisius, Layanan Resepsionis, Ruang Meeting",
+        href: "/layanan/virtual-office",
+      },
+      {
+        brandPrefix: "Easy",
+        brandSuffix: "Tax",
+        title: "Layanan Perpajakan",
+        description: "Laporan SPT Tahunan Badan, Konsultasi Pajak, Kode Billing Pajak",
+        href: "#",
+      },
+      {
+        brandPrefix: "Easy",
+        brandSuffix: "ISO",
+        title: "Sertifikasi ISO",
+        description: "ISO 9001, 14001, 45001, 27001, dan standar lainnya",
+        href: "/layanan/sertifikasi-iso",
+      },
+      {
+        brandPrefix: "Easy",
+        brandSuffix: "Press",
+        title: "PR & Media",
+        description: "Publikasi Media Nasional, Siaran Pers",
+        href: "/layanan/pr-media",
+      },
+      {
+        brandPrefix: "Easy",
+        brandSuffix: "Branding",
+        title: "Branding & Company Profile",
+        description: "Desain Logo, Company Profile, Website, Marketing Kit",
+        href: "#",
+      }
+    ]
+  }
+};
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLayananOpen, setIsLayananOpen] = useState(false);
-  const [isPendirianOpen, setIsPendirianOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -27,67 +175,25 @@ export default function Navbar() {
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
-    const handleOpenPendirian = () => {
-      setIsLayananOpen(true);
-      setIsPendirianOpen(true);
-    };
-    window.addEventListener("open-pendirian", handleOpenPendirian);
-    
+
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsLayananOpen(false);
-        setIsPendirianOpen(false);
       }
     };
     window.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("open-pendirian", handleOpenPendirian);
       window.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const services = [
-    { name: "Merek & HAKI", desc: "Pendaftaran Merek & HAKI DJKI", href: "/layanan/merek-haki" },
-    {
-      name: "Pendirian Badan Usaha",
-      desc: "Pendirian PT, CV, Yayasan, dsb",
-      href: "/layanan/pendirian-badan-usaha",
-      sublinks: [
-        { name: "PT", href: "/layanan/pendirian-badan-usaha/pt" },
-        { name: "CV", href: "/layanan/pendirian-badan-usaha/cv" },
-        { name: "PT PMA", href: "/layanan/pendirian-badan-usaha/pt-pma" },
-        { name: "PT Perorangan", href: "/layanan/pendirian-badan-usaha/pt-perorangan" },
-        { name: "Firma", href: "/layanan/pendirian-badan-usaha/firma" },
-        { name: "Yayasan", href: "/layanan/pendirian-badan-usaha/yayasan" },
-        { name: "Perkumpulan", href: "/layanan/pendirian-badan-usaha/perkumpulan" },
-        { name: "Koperasi", href: "/layanan/pendirian-badan-usaha/koperasi" },
-      ],
-    },
-    { name: "NIB & OSS", desc: "NIB, OSS RBA & Perizinan Usaha", href: "/layanan/nib-oss" },
-    { name: "Tata Ruang • PKKPR", desc: "Persetujuan Kesesuaian Kegiatan Pemanfaatan Ruang", href: "/layanan/pkkpr" },
-    { name: "Apostille", desc: "Legalitas dokumen untuk luar negeri", href: "/layanan/apostille" },
-    { name: "Sertifikasi ISO", desc: "ISO 9001, 14001, 27001 & lainnya", href: "/layanan/sertifikasi-iso" },
-    { name: "Pengajuan PKP", desc: "Pengusaha Kena Pajak", href: "/layanan/pengajuan-pkp" },
-    { name: "Visa & KITAS", desc: "Izin Kerja & Visa Bisnis", href: "/layanan/visa-kitas" },
-    { name: "PR & Media", desc: "Publikasi Media Online", href: "/layanan/pr-media" },
-    { name: "Perjanjian Perkawinan", desc: "Pisah Harta & Perjanjian", href: "/layanan/perjanjian-perkawinan" },
-    { name: "Kontrak Bisnis", desc: "Perjanjian & Legal Drafting", href: "/layanan/kontrak-bisnis" },
-    { name: "Pelaporan LKPM", desc: "Pelaporan LKPM Online", href: "/layanan/pelaporan-lkpm" },
-    { name: "Pelaporan RUPS", desc: "RUPS Tahunan & Luar Biasa", href: "/layanan/pelaporan-rups" },
-    { name: "Referensi & Reseller", desc: "Program Kemitraan & Komisi", href: "/referral-reseller" },
-    { name: "Cek Nama PT", desc: "Cek Ketersediaan Nama PT", href: "/cek-nama" },
-  ];
-
-
   const handleLinkClick = () => {
     setIsOpen(false);
     setIsLayananOpen(false);
-    setIsPendirianOpen(false);
   };
 
   return (
@@ -113,7 +219,7 @@ export default function Navbar() {
                 width={150}
                 height={52}
                 className="object-contain"
-                style={{ width: "auto" }}
+                style={{ width: "auto", height: "auto" }}
                 priority
               />
             </div>
@@ -151,65 +257,132 @@ export default function Navbar() {
               </button>
 
               {isLayananOpen && (
-                <div className="absolute top-full -left-20 w-[560px] mt-0 pt-3 bg-transparent animate-slide-down">
-                  <div className="bg-white rounded-xl shadow-xl shadow-sm border border-black/[0.03] p-5 grid grid-cols-2 gap-1">
-                    {services.map((item, idx) => 
-                      "sublinks" in item ? (
-                        <div
-                          key={idx}
-                          className="relative"
-                        >
-                          <button
-                            onClick={() => setIsPendirianOpen(!isPendirianOpen)}
-                            className="flex items-start p-3 rounded-lg hover:bg-primary-light transition-colors w-full text-left"
-                          >
-                            <div className="h-2 w-2 rounded-full bg-primary/30 mt-1.5 mr-3 transition-colors flex-shrink-0" />
-                            <div className="flex-1 min-w-0">
-                              <div className="text-[16px] font-bold text-dark transition-colors">
-                                {item.name}
+                <div className="fixed top-20 left-1/2 -translate-x-1/2 w-[1150px] max-w-[calc(100vw-2rem)] mt-0 pt-4 bg-transparent animate-slide-down">
+                  <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-slate-100 p-6 grid grid-cols-[1fr_1fr_1.15fr] gap-6">
+                    
+                    {/* Left Column */}
+                    <div className="flex flex-col border-r border-slate-100 pr-5">
+                      <div className="mb-4 px-3">
+                        <h3 className="text-[12px] font-bold text-primary tracking-wider uppercase mb-1.5">{megaMenuData.leftColumn.header}</h3>
+                        <p className="text-[14px] font-semibold text-slate-800 leading-snug">{megaMenuData.leftColumn.subHeader}</p>
+                      </div>
+                      <div className="flex flex-col space-y-1">
+                        {megaMenuData.leftColumn.items.map((item, idx) => (
+                          <div key={idx} className="group relative">
+                            <Link href={item.href} onClick={handleLinkClick} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                              <div className="flex-shrink-0 mt-0.5">
+                                <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                                  <item.icon className="w-4 h-4" />
+                                </div>
                               </div>
-                              <div className="text-[16px] text-muted mt-0.5 line-clamp-1">
-                                {item.desc}
+                              <div className="ml-3 flex-1">
+                                <div className="flex items-center justify-between">
+                                  <h4 className="text-[14.5px] font-bold text-slate-900 group-hover:text-primary transition-colors">
+                                    {item.title}
+                                  </h4>
+                                  <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0" />
+                                </div>
+                                <p className="mt-0.5 text-[13px] text-slate-500 leading-snug pr-2">
+                                  {item.description}
+                                </p>
                               </div>
-                            </div>
-                            <ChevronRight className={`w-4 h-4 text-muted/40 flex-shrink-0 self-center ml-2 transition-all duration-200 ${isPendirianOpen ? "rotate-180 translate-x-0.5 text-primary/60" : ""}`} />
-                          </button>
-                          {isPendirianOpen && (
-                            <div className="absolute left-full top-0 ml-2 bg-transparent">
-                              <div className="bg-white rounded-xl shadow-xl shadow-sm border border-black/[0.03] p-3 min-w-[200px]">
-                                {item.sublinks!.map((sub, subIdx) => (
-                                  <Link
-                                    key={subIdx}
-                                    href={sub.href}
-                                    onClick={handleLinkClick}
-                                    className="block px-3 py-2 text-[16px] font-medium text-muted hover:text-primary hover:bg-primary-light rounded-lg transition-colors"
-                                  >
-                                    {sub.name}
-                                  </Link>
-                                ))}
+                            </Link>
+                            
+                            {/* Sub items pop up */}
+                            {item.subItems && (
+                              <div className="absolute left-full top-0 ml-1 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
+                                <div className="flex flex-wrap gap-2">
+                                  {item.subItems.map((sub, sIdx) => (
+                                    <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
+                                      {sub.label}
+                                    </Link>
+                                  ))}
+                                </div>
                               </div>
-                            </div>
-                          )}
-                        </div>
-                      ) : (
-                        <Link
-                          key={idx}
-                          href={item.href}
-                          onClick={handleLinkClick}
-                          className="group flex items-start p-3 rounded-lg hover:bg-primary-light transition-colors"
-                        >
-                          <div className="h-2 w-2 rounded-full bg-primary/30 group-hover:bg-primary mt-1.5 mr-3 transition-colors flex-shrink-0" />
-                          <div>
-                            <div className="text-[16px] font-bold text-dark group-hover:text-primary transition-colors">
-                              {item.name}
-                            </div>
-                            <div className="text-[16px] text-muted mt-0.5 line-clamp-1">
-                              {item.desc}
-                            </div>
+                            )}
                           </div>
-                        </Link>
-                      )
-                    )}
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Middle Column */}
+                    <div className="flex flex-col border-r border-slate-100 pr-5 pl-1">
+                      <div className="mb-4 px-3">
+                        <h3 className="text-[12px] font-bold text-primary tracking-wider uppercase mb-1.5">{megaMenuData.middleColumn.header}</h3>
+                        <p className="text-[14px] font-semibold text-slate-800 leading-snug">{megaMenuData.middleColumn.subHeader}</p>
+                      </div>
+                      <div className="flex flex-col space-y-1">
+                        {megaMenuData.middleColumn.items.map((item, idx) => (
+                          <div key={idx} className="group relative">
+                            <Link href={item.href} onClick={handleLinkClick} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                              <div className="flex-shrink-0 mt-0.5">
+                                <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                                  <item.icon className="w-4 h-4" />
+                                </div>
+                              </div>
+                              <div className="ml-3 flex-1">
+                                <div className="flex items-center justify-between">
+                                  <h4 className="text-[14.5px] font-bold text-slate-900 group-hover:text-primary transition-colors">
+                                    {item.title}
+                                  </h4>
+                                  <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0" />
+                                </div>
+                                <p className="mt-0.5 text-[13px] text-slate-500 leading-snug pr-2">
+                                  {item.description}
+                                </p>
+                              </div>
+                            </Link>
+
+                            {/* Sub items pop up */}
+                            {item.subItems && (
+                              <div className="absolute left-full top-0 ml-1 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
+                                <div className="flex flex-wrap gap-2">
+                                  {item.subItems.map((sub, sIdx) => (
+                                    <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
+                                      {sub.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Right Column */}
+                    <div className="flex flex-col pl-2">
+                      <div className="mb-4 px-3">
+                        <h3 className="text-[12px] font-bold text-primary tracking-wider uppercase mb-1.5">{megaMenuData.rightColumn.header}</h3>
+                        <p className="text-[14px] font-semibold text-slate-800 leading-snug">{megaMenuData.rightColumn.subHeader}</p>
+                      </div>
+                      <div className="flex flex-col space-y-1">
+                        {megaMenuData.rightColumn.items.map((item, idx) => (
+                          <Link key={idx} href={item.href} onClick={handleLinkClick} className="group flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                            <div className="flex-shrink-0 mt-0.5 w-[76px]">
+                              <div className="flex items-center justify-center text-[11px] font-black tracking-tight border border-slate-200 rounded overflow-hidden">
+                                <span className="bg-white text-slate-800 px-1.5 py-0.5">{item.brandPrefix}</span>
+                                <span className="bg-primary text-white px-1.5 py-0.5 flex-1 text-center">{item.brandSuffix}</span>
+                              </div>
+                            </div>
+                            <div className="ml-3 flex-1">
+                              <div className="flex items-center justify-between">
+                                <h4 className="text-[14.5px] font-bold text-slate-900 group-hover:text-primary transition-colors leading-tight">
+                                  {item.title}
+                                </h4>
+                                <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 ml-2" />
+                              </div>
+                              <p className="mt-1 text-[13px] text-slate-500 leading-snug">
+                                {item.description}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               )}
@@ -359,44 +532,78 @@ export default function Navbar() {
               </button>
 
               {isLayananOpen && (
-                <div className="pl-4 pr-2 mt-1 py-1 bg-bg-light/50 rounded-lg grid grid-cols-1 gap-0.5">
-                  {services.map((item, idx) =>
-                    "sublinks" in item ? (
-                      <div key={idx} className="space-y-0.5">
-                        <div className="flex items-center px-3 py-1.5">
-                          <Link
-                            href={item.href}
-                            onClick={handleLinkClick}
-                            className="text-[16px] font-bold text-muted hover:text-primary flex-1"
-                          >
-                            {item.name}
+                <div className="pl-4 pr-2 mt-1 py-1 bg-bg-light/50 rounded-lg space-y-4 max-h-[60vh] overflow-y-auto">
+                  
+                  {/* Left Column */}
+                  <div className="space-y-2 pt-2">
+                    <div className="px-3 py-1 text-[12px] font-bold text-primary uppercase tracking-wider">
+                      {megaMenuData.leftColumn.header}
+                    </div>
+                    <div className="space-y-1">
+                      {megaMenuData.leftColumn.items.map((item, idx) => (
+                        <div key={idx} className="flex flex-col">
+                          <Link href={item.href} onClick={handleLinkClick} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                            <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
+                            <span>{item.title}</span>
                           </Link>
-                          <ChevronRight className="w-3.5 h-3.5 text-muted/40 flex-shrink-0" />
+                          {item.subItems && (
+                            <div className="pl-9 pr-3 pb-1 flex flex-col space-y-2 mt-0.5 mb-1.5 border-l border-slate-200 ml-5">
+                              {item.subItems.map((sub, sIdx) => (
+                                <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[13px] font-medium text-slate-500 hover:text-primary transition-colors flex items-center before:content-[''] before:w-1.5 before:h-[1px] before:bg-slate-300 before:mr-2 before:-ml-4">
+                                  {sub.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                        <div className="pl-4 border-l-2 border-primary/20 ml-3 space-y-0.5">
-                          {item.sublinks!.map((sub, subIdx) => (
-                            <Link
-                              key={subIdx}
-                              href={sub.href}
-                              onClick={handleLinkClick}
-                              className="block px-3 py-1 text-[16px] font-medium text-muted hover:text-primary"
-                            >
-                              {sub.name}
-                            </Link>
-                          ))}
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Middle Column */}
+                  <div className="space-y-2 pt-2 border-t border-slate-200">
+                    <div className="px-3 py-1 text-[12px] font-bold text-primary uppercase tracking-wider">
+                      {megaMenuData.middleColumn.header}
+                    </div>
+                    <div className="space-y-1">
+                      {megaMenuData.middleColumn.items.map((item, idx) => (
+                        <div key={idx} className="flex flex-col">
+                          <Link href={item.href} onClick={handleLinkClick} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                            <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
+                            <span>{item.title}</span>
+                          </Link>
+                          {item.subItems && (
+                            <div className="pl-9 pr-3 pb-1 flex flex-col space-y-2 mt-0.5 mb-1.5 border-l border-slate-200 ml-5">
+                              {item.subItems.map((sub, sIdx) => (
+                                <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[13px] font-medium text-slate-500 hover:text-primary transition-colors flex items-center before:content-[''] before:w-1.5 before:h-[1px] before:bg-slate-300 before:mr-2 before:-ml-4">
+                                  {sub.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                      </div>
-                    ) : (
-                      <Link
-                        key={idx}
-                        href={item.href}
-                        onClick={handleLinkClick}
-                        className="block px-3 py-1.5 text-[16px] font-medium text-muted hover:text-primary"
-                      >
-                        {item.name}
-                      </Link>
-                    )
-                  )}
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="space-y-2 pt-2 border-t border-slate-200">
+                    <div className="px-3 py-1 text-[12px] font-bold text-primary uppercase tracking-wider">
+                      {megaMenuData.rightColumn.header}
+                    </div>
+                    <div className="space-y-1">
+                      {megaMenuData.rightColumn.items.map((item, idx) => (
+                        <Link key={idx} href={item.href} onClick={handleLinkClick} className="flex items-start px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                          <span className="text-[10px] font-black tracking-tight border border-slate-200 rounded overflow-hidden mr-2.5 mt-0.5 flex-shrink-0 flex">
+                            <span className="bg-white text-slate-800 px-1 py-0.5">{item.brandPrefix}</span>
+                            <span className="bg-primary text-white px-1 py-0.5">{item.brandSuffix}</span>
+                          </span>
+                          <span className="leading-snug">{item.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               )}
             </div>

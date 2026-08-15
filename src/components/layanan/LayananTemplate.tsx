@@ -15,9 +15,11 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import { getWhatsAppLink } from "@/lib/config";
 import type { LayananContent } from "@/data/layanan-lainnya";
 
@@ -140,6 +142,8 @@ export default function LayananTemplate({ content }: Props) {
         </div>
       </section>
 
+      <TrustStatsBar />
+
       {/* ─── 2. BENEFITS SECTION ─── */}
       <section className="py-8 sm:py-16 bg-gray-50 border-y border-gray-100">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
@@ -186,8 +190,11 @@ export default function LayananTemplate({ content }: Props) {
             sectionSubtitle={c.pricingSubtitle}
             packages={pricingPackagesWithLinks}
           />
+
         </div>
       </section>
+
+      <Offices />
 
       {/* ─── 4. FAQ SECTION ─── */}
       {c.faqs?.length > 0 && <FAQ items={c.faqs} />}

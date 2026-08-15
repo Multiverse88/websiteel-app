@@ -10,6 +10,7 @@ import {
   Users,
   Check,
   Star,
+  ShieldCheck,
 } from "lucide-react";
 import { heroSlides } from "./data";
 
@@ -65,24 +66,6 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
 
   return (
     <section ref={ref} className={`relative overflow-hidden ${className || ""}`}>
-      {/* Left Arrow - hidden on mobile */}
-      <button
-        onClick={prevSlide}
-        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-black/[0.02] items-center justify-center transition-all hover:scale-105 active:scale-95"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-
-      {/* Right Arrow - hidden on mobile */}
-      <button
-        onClick={nextSlide}
-        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-white shadow-md text-[#1A1A1A] hover:text-[#D62828] border border-black/[0.02] items-center justify-center transition-all hover:scale-105 active:scale-95"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-
       {/* Main Slider Track */}
       <div 
         className="flex w-full transition-transform duration-1000 ease-in-out h-full"
@@ -157,47 +140,22 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
 
       {/* Floating Badges — Static over the slider container */}
       <div className={`absolute top-4 right-4 md:top-8 md:right-8 bg-white rounded-xl md:rounded-2xl px-3 py-2 md:px-5 md:py-3.5 shadow-[0_4px_15px_rgba(0,0,0,0.04)] md:shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-2 md:space-x-3.5 z-20 animate-float-slow ${floatClass}`}>
-        <div className="w-[28px] h-[28px] md:w-[38px] md:h-[38px] bg-red-50 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 text-[#D62828]">
-          <Users className="w-3.5 h-3.5 md:w-5 md:h-5" />
+        <div className="w-[28px] h-[28px] md:w-[38px] md:h-[38px] bg-amber-50 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 text-amber-600">
+          <ShieldCheck className="w-3.5 h-3.5 md:w-5 md:h-5" />
         </div>
         <div>
-          <div className="text-[16px] md:text-[16px] font-black text-[#1A1A1A] leading-tight">12.500+</div>
-          <div className="text-[16px] md:text-[16px] text-[#6B7280] font-bold md:mt-0.5">Bisnis terlayani</div>
+          <div className="text-[16px] md:text-[16px] font-black text-[#1A1A1A] leading-tight">SK Kemenkumham</div>
+          <div className="text-[16px] md:text-[16px] text-[#6B7280] font-bold md:mt-0.5">Terdaftar resmi</div>
         </div>
       </div>
 
-      <div className={`absolute bottom-[35%] right-4 md:bottom-10 md:right-auto md:left-[calc(50%+2rem)] bg-white rounded-xl md:rounded-2xl px-3 py-2 md:px-5 md:py-3.5 shadow-[0_4px_15px_rgba(0,0,0,0.04)] md:shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-black/[0.03] flex items-center space-x-2 md:space-x-3.5 z-20 animate-float-medium ${floatClass}`}>
-        <div className="w-[28px] h-[28px] md:w-[38px] md:h-[38px] bg-emerald-50 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 text-[#16A34A]">
-          <Check className="w-3.5 h-3.5 md:w-5 md:h-5" strokeWidth={3} />
-        </div>
-        <div>
-          <div className="text-[16px] md:text-[16px] font-black text-[#1A1A1A] leading-tight">4.9<span className="text-[16px] md:text-[16px] font-bold text-gray-500">/5</span></div>
-          <div className="flex space-x-0.5 mt-0.5">
-            {[1, 2, 3, 4, 5].map((s) => (
-              <Star key={s} className="w-2.5 h-2.5 md:w-3 md:h-3 fill-amber-400 text-amber-400" />
-            ))}
-          </div>
-        </div>
+      {/* Centered Trust Badges replacing 4.9 rating */}
+      <div className={`absolute bottom-[10%] md:bottom-[100px] left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-xl md:rounded-[20px] px-5 py-3 md:px-8 md:py-5 shadow-[0_8px_25px_rgba(0,0,0,0.06)] border border-white/60 flex items-center space-x-5 md:space-x-8 z-20 animate-float-medium ${floatClass}`}>
+        <img src="/ISO-27001-2022.webp" alt="ISO 27001" className="h-8 sm:h-10 md:h-14 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
+        <img src="/ISO-sertifikat-scaled.jpg" alt="ISO Sertifikat" className="h-8 sm:h-10 md:h-14 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
+        <img src="/images/badges/pse-terdaftar.png" alt="PSE Terdaftar" className="h-8 sm:h-10 md:h-14 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
       </div>
 
-      {/* Dot Indicators — hidden on mobile */}
-      <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 items-center space-x-2 z-30">
-        {heroSlides.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => {
-              setIsAutoPlaying(false);
-              setHasNavigated(true);
-              setCurrentSlide(idx);
-            }}
-            className={`min-w-3 min-h-3 rounded-full transition-all duration-300 ${
-              currentSlide === idx ? "w-6 bg-[#D62828]" : "w-2 bg-black/20 hover:bg-black/40"
-            }`}
-            aria-label={`Pergi ke slide ${idx + 1}`}
-            aria-current={currentSlide === idx ? "step" : undefined}
-          />
-        ))}
-      </div>
     </section>
   );
 });

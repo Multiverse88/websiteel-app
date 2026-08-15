@@ -21,10 +21,12 @@ import {
 import Image from "next/image";
 import CTA from "@/components/CTA";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Testimonials from "@/components/home/Testimonials";
 
 
@@ -261,8 +263,8 @@ export default function VirtualOffice() {
                 className="animate-fade-in-up font-heading text-[26px] sm:text-[48px] lg:text-[54px] font-black text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight"
                 style={{ animationDelay: "0.1s" }}
               >
-                Alamat bisnis prestisius,<br />
-                <span className="text-[#990202]">tanpa sewa kantor fisik.</span>
+                Alamat kantor prestisius agar<br />
+                <span className="text-[#990202]">bisnis semakin terlihat serius.</span>
               </h1>
 
               <p 
@@ -381,7 +383,7 @@ export default function VirtualOffice() {
       </section>
 
       {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. ABOUT VIRTUAL OFFICE SECTION ─── */}
       <section className="py-8 sm:py-8 sm:py-8 sm:py-20 bg-white border-b border-gray-100">
@@ -576,6 +578,9 @@ export default function VirtualOffice() {
         hideFooter={true}
       />
 
+      {/* ─── OFFICES ─── */}
+      <Offices />
+
       {/* ─── 6. DETAIL LOKASI SECTION ─── */}
       <section className="py-8 sm:py-8 sm:py-8 sm:py-20 bg-[#F9FAFB] border-b border-gray-100 overflow-hidden relative">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative">
@@ -739,6 +744,7 @@ export default function VirtualOffice() {
       </section>
 
       {/* ─── 7. TESTIMONIALS SECTION ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 8. FAQ SECTION ─── */}
@@ -747,6 +753,7 @@ export default function VirtualOffice() {
         subtitle="Sebelum daftar, mungkin jawabannya sudah ada di sini."
         items={faqs}
       />
+
 
       {/* ─── 9. CTA SECTION ─── */}
       <CTA 
@@ -762,4 +769,3 @@ export default function VirtualOffice() {
       </div>
       );
       }
-

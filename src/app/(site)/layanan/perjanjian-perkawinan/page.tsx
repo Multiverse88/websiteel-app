@@ -29,9 +29,11 @@ import {
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
@@ -408,7 +410,7 @@ export default function PerjanjianPerkawinan() {
       </section>
 
       {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. BENEFITS SECTION ─── */}
       <Benefits
@@ -431,6 +433,10 @@ export default function PerjanjianPerkawinan() {
         footnotes={["(1) Estimasi waktu untuk drafting perjanjian & penandatanganan di hadapan notaris.", "(2) Estimasi waktu pendaftaran setelah Akta Notaris selesai. Tergantung jadwal KUA/Dukcapil setempat."]}
         hideFooter={true}
       />
+
+      {/* ─── OFFICES ─── */}
+      <Offices />
+
 
       {/* ─── 5. ALUR PROSES SECTION ─── */}
       <section className="bg-[#FAF9F7] py-8 sm:py-8 sm:py-20 border-b border-gray-200/50">
@@ -752,10 +758,12 @@ export default function PerjanjianPerkawinan() {
       </section>
 
       {/* ─── 8. TESTIMONIALS SECTION ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ items={faqs} />
+
 
       {/* ─── 10. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20">

@@ -8,7 +8,7 @@ export default function TestimoniPage() {
   const stats = [
     { value: "4.9/5", label: "Rating Google" },
     { value: "500+", label: "Review positif" },
-    { value: "12.500+", label: "Bisnis terlayani" },
+    { value: "13.000+", label: "Bisnis terlayani" },
     { value: "98%", label: "Client puas" },
   ];
 
@@ -39,7 +39,7 @@ export default function TestimoniPage() {
               <h1 className="font-heading text-[26px] sm:text-[52px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.2] sm:leading-[1.12] tracking-tight">
                 Apa kata{" "}
                 <span className="relative inline-block text-[#990202] px-2 py-0.5 bg-red-500/5 rounded-lg border border-red-100/40">
-                  12.500+ pengusaha
+                  13.000+ pengusaha
                 </span>{" "}
                 tentang kami.
               </h1>
@@ -144,7 +144,7 @@ export default function TestimoniPage() {
                   <h2 className="font-heading text-[30px] sm:text-[44px] lg:text-[50px] font-extrabold text-white leading-[1.1] mb-5 tracking-tight">
                     Siap bergabung dengan <br className="hidden lg:block" />
                     <span className="text-red-100">
-                      12.500+ pengusaha
+                      13.000+ pengusaha
                     </span> lainnya?
                   </h2>
                   <p className="text-[16px] sm:text-[16px] text-white/90 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">

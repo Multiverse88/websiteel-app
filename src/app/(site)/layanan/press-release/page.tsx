@@ -36,9 +36,11 @@ import {
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Testimonials from "@/components/home/Testimonials";
@@ -330,8 +332,8 @@ export default function PressRelease() {
 
               {/* Headline */}
               <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
-                Bisnismu <span className="text-[#990202]">tayang</span> di <br />
-                media nasional dalam 1–3 hari
+                Kenalkan bisnis Anda melalui <br />
+                tayangan di <span className="text-[#990202]">media nasional</span>
               </h1>
 
               {/* Description */}
@@ -467,7 +469,7 @@ export default function PressRelease() {
       </section>
 
       {/* ─── 2. MEDIA COVERAGE SECTION ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. KENAPA PRESS RELEASE SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20">
@@ -650,6 +652,10 @@ export default function PressRelease() {
         footnotes={["Daftar lengkap media tersedia saat konsultasi — termasuk media nasional, ekonomi-bisnis, lifestyle, teknologi, & media daerah dengan tier rate berbeda."]}
         hideFooter={true}
       />
+
+      {/* ─── OFFICES ─── */}
+      <Offices />
+
 
       {/* ─── 6. PERBEDAAN / PENJELASAN SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20">
@@ -885,10 +891,12 @@ export default function PressRelease() {
       </section>
 
       {/* ─── 8. TESTIMONIALS SECTION ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ items={faqs} />
+
 
       {/* ─── 10. CTA SECTION ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100">

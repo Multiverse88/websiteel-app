@@ -20,9 +20,11 @@ import {
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import PricingFooter from "@/components/PricingFooter";
 import Pricing from "@/components/Pricing";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
@@ -344,7 +346,7 @@ export default function SertifikasiIso() {
     {
       title: "Konsultasi & Gap Analysis",
       desc: "Konsultan kami riset sistem saat ini vs standar ISO yang dipilih. Identifikasi gap yang harus ditutup sebelum audit.",
-      duration: "1 MINGGU",
+      duration: "",
       checklist: [
         "Walkthrough proses bisnis & struktur organisasi",
         "Identifikasi gap vs requirement ISO",
@@ -354,7 +356,7 @@ export default function SertifikasiIso() {
     {
       title: "Pelatihan & Awareness Tim",
       desc: "Training seluruh karyawan tentang ISO standard & bagaimana sistem akan diterapkan dalam operasional sehari-hari.",
-      duration: "1-2 MINGGU",
+      duration: "",
       checklist: [
         "ISO awareness training (online + on-site)",
         "Pembentukan tim ISO & PIC per departemen",
@@ -364,7 +366,7 @@ export default function SertifikasiIso() {
     {
       title: "Penyusunan Dokumentasi",
       desc: "Penyusunan dokumentasi sistem manajemen — manual mutu, prosedur, instruksi kerja, & formulir. Custom sesuai bisnis Anda.",
-      duration: "3-4 MINGGU",
+      duration: "",
       checklist: [
         "Manual Mutu (Quality Manual)",
         "Prosedur operasional (SOP) per departemen",
@@ -372,19 +374,9 @@ export default function SertifikasiIso() {
       ]
     },
     {
-      title: "Implementasi Sistem",
-      desc: "Sistem diterapkan di operasional sehari-hari. Tim kami pendamping & monitoring berkala untuk memastikan smooth implementation.",
-      duration: "4-6 MINGGU",
-      checklist: [
-        "Sistem berjalan di seluruh proses bisnis",
-        "Monitoring kunci performance indicator",
-        "Tindakan korektif jika ada deviasi"
-      ]
-    },
-    {
       title: "Internal Audit",
       desc: "Audit internal sebelum audit eksternal — pastikan sistem berjalan & siap untuk diaudit oleh badan sertifikasi UAF.",
-      duration: "1-2 MINGGU",
+      duration: "",
       checklist: [
         "Audit internal oleh tim kami",
         "Management Review meeting",
@@ -394,7 +386,7 @@ export default function SertifikasiIso() {
     {
       title: "Audit Sertifikasi (Stage 1 + 2)",
       desc: "Audit eksternal oleh badan sertifikasi UAF — 2 tahap: review dokumentasi (Stage 1) & audit on-site (Stage 2).",
-      duration: "2-3 MINGGU",
+      duration: "",
       checklist: [
         "Stage 1: Review dokumentasi & readiness",
         "Stage 2: On-site audit oleh auditor UAF",
@@ -404,7 +396,7 @@ export default function SertifikasiIso() {
     {
       title: "Sertifikat Terbit & Surveillance",
       desc: "E-Sertifikat ISO UAF Accredited terbit — valid 3 tahun. Surveillance audit yearly untuk maintain sertifikasi.",
-      duration: "VALID 3 TAHUN",
+      duration: "",
       checklist: [
         "E-Sertifikat ISO + fisik dikirim ke alamat",
         "Surveillance audit setiap tahun",
@@ -625,7 +617,7 @@ export default function SertifikasiIso() {
       </section>
 
       {/* ─── 1.5 TRUST SIGNALS & MEDIA COVERAGE ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 1.6 VALUE PROPOSITION ─── */}
       <Benefits sectionTitleTag="KEUNGGULAN KAMI" sectionTitle="Mengapa Pilih EasyLegal?" items={isoBenefits} />
@@ -640,6 +632,9 @@ export default function SertifikasiIso() {
         sectionSubtitle={
           <>
             Semua paket include audit, training, sertifikasi resmi UAF, & dokumen mutu (SOP ISO).<br />
+
+      {/* ─── OFFICES ─── */}
+      <Offices />
             Tanpa tambahan biaya proses.
           </>
         }
@@ -657,7 +652,7 @@ export default function SertifikasiIso() {
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 space-y-3">
             <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-widest">PROSES SERTIFIKASI ISO</p>
             <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-              7 langkah sertifikasi ISO, kami pandu A–Z.
+              6 langkah sertifikasi ISO, kami pandu A–Z.
             </h2>
             <p className="text-[16px] sm:text-[16px] text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
               Dari gap analysis sampai sertifikat resmi terbit — semua tahap kami pendampingi dengan auditor UAF accredited.
@@ -691,10 +686,12 @@ export default function SertifikasiIso() {
                       </h4>
                       
                       {/* Duration Badge */}
-                      <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[16px] font-black uppercase py-1 px-3 rounded-full">
-                        <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
-                        <span>{step.duration}</span>
-                      </div>
+                      {step.duration && (
+                        <div className="inline-flex items-center gap-1.5 bg-[#FFF0F0] text-[#990202] text-[16px] font-black uppercase py-1 px-3 rounded-full">
+                          <Clock className="w-3.5 h-3.5 text-[#990202]" strokeWidth={3.5} />
+                          <span>{step.duration}</span>
+                        </div>
+                      )}
 
                       {/* Description */}
                       <p className="text-[16px] text-gray-500 font-semibold leading-relaxed" dangerouslySetInnerHTML={{ __html: step.desc }} />
@@ -919,10 +916,12 @@ export default function SertifikasiIso() {
       </section>
 
       {/* ─── 6. TESTIMONIALS (Social Proof) ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 7. FAQ SECTION (6 Tanya-Jawab Mockup) ─── */}
       <FAQ title="Pertanyaan seputar sertifikasi ISO." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
 
       {/* ─── 8. CTA BANNER (Mockup Clean White) ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100/60 relative">

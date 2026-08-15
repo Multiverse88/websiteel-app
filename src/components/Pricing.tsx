@@ -126,9 +126,9 @@ export default function Pricing({
             <Image 
               src={promoBadgeSrc} 
               alt="Promo Discount Badge" 
-              width={280} 
+              width={280}
               height={120}
-              className="w-[220px] sm:w-[280px] object-contain hover:scale-105 transition-transform duration-300"
+              className="w-[220px] sm:w-[280px] h-auto object-contain hover:scale-105 transition-transform duration-300"
             />
           </div>
         </FadeIn>

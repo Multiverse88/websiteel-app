@@ -28,6 +28,8 @@ import {
   Building2,
   MessageCircle,
   ShieldCheck,
+  Zap,
+  Sparkles,
   FileText,
   Award,
   Lock,
@@ -108,11 +110,11 @@ function CaraKerjaSection() {
     {
       num: "01",
       title: "Pilih Layanan",
-      description: "Browse 15+ jenis layanan legal sesuai kebutuhan bisnis Anda.",
+      description: "Dapatkan 30+ jenis layanan legal sesuai kebutuhan bisnis Anda.",
       features: [
-        "Harga transparan di awal — termasuk biaya pemerintah dan jasa kami.",
-        "15+ kategori: PT, NIB, Merek, ISO, Virtual Office, dan banyak lagi.",
-        "Konsultasi gratis sebelum mulai — tanpa komitmen.",
+        "Transparansi harga sejak awal",
+        "Biaya sudah termasuk pendaftaran dan PNBP",
+        "Gratis konsultasi tanpa syarat apapun.",
       ],
     },
     {
@@ -272,7 +274,7 @@ function CaraKerjaSection() {
                       <Image className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" alt="User 3" width={28} height={28} />
                     </div>
                     <div className="leading-tight">
-                      <div className="text-[16px] font-black text-gray-800">11.000+</div>
+                      <div className="text-[16px] font-black text-gray-800">13.000+</div>
                       <div className="text-[16px] font-bold text-gray-500 mt-0.5">bisnis terbantu</div>
                     </div>
                   </div>
@@ -297,7 +299,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* Main FLOATING card "01 Pilih Layanan" */}
-                <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[70%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
                   <div className="flex items-center gap-3 mb-3.5">
                     <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[16px] shadow-lg shadow-red-500/30">
@@ -318,18 +320,7 @@ function CaraKerjaSection() {
                       </div>
                       <div className="min-w-0">
                         <div className="text-[16px] font-black text-[#B91C1C] leading-tight truncate">Pendirian PT</div>
-                        <div className="text-[16px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Mulai Rp2,5jt</div>
-                      </div>
-                    </div>
-
-                    {/* Option Box: NIB & OSS */}
-                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
-                      <div className="w-7 h-7 rounded-[8px] bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
-                        <FileText className="w-3.5 h-3.5 text-gray-400" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-[16px] font-bold text-gray-700 leading-tight truncate">NIB & OSS</div>
-                        <div className="text-[16px] font-semibold text-gray-400 mt-0.5 leading-none">Mulai Rp500rb</div>
+                        <div className="text-[16px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">6-12 hari kerja</div>
                       </div>
                     </div>
 
@@ -340,39 +331,14 @@ function CaraKerjaSection() {
                       </div>
                       <div className="min-w-0">
                         <div className="text-[16px] font-bold text-gray-700 leading-tight truncate">Daftar Merek</div>
-                        <div className="text-[16px] font-semibold text-gray-400 mt-0.5 leading-none">Mulai Rp1,5jt</div>
+                        <div className="text-[16px] font-semibold text-gray-400 mt-0.5 leading-none">1 hari</div>
                       </div>
                     </div>
 
-                    {/* Option Box: ISO 9001 */}
-                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
-                      <div className="w-7 h-7 rounded-[8px] bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
-                        <Award className="w-3.5 h-3.5 text-gray-400" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-[16px] font-bold text-gray-700 leading-tight truncate">ISO 9001</div>
-                        <div className="text-[16px] font-semibold text-gray-400 mt-0.5 leading-none">Konsultasi</div>
-                      </div>
                     </div>
-                  </div>
                 </div>
 
-                {/* Floating "Pendirian PT - proses" Circular Badge */}
-                <div className="absolute -bottom-[108px] right-[5%] bg-white rounded-[20px] p-2.5 shadow-[0_20px_40px_rgba(0,0,0,0.1)] border border-gray-100 flex items-center gap-2.5 z-50 w-[205px] animate-float-medium">
-                  {/* Circular progress */}
-                  <div className="relative w-9 h-9 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                      <path className="text-gray-100" strokeWidth="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                      <path className="text-[#B91C1C]" strokeDasharray="72, 100" strokeWidth="3.5" strokeLinecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                    </svg>
-                    <span className="absolute text-[16px] font-black text-gray-800">72%</span>
-                  </div>
-                  <div className="leading-tight min-w-0">
-                    <div className="text-[16px] font-black text-gray-800 truncate">Pendirian PT</div>
-                    <div className="text-[16px] text-gray-500 font-bold mt-1 truncate">7 - 14 hari</div>
-                  </div>
-                </div>
-              </div>
+                              </div>
             )}
 
             {/* Step 2 Visual Container */}
@@ -427,7 +393,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* "02 Hubungi Ahli" Card */}
-                <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[70%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
                   <div className="flex items-center gap-3 mb-3.5">
                     <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[16px] shadow-lg shadow-red-500/30">
@@ -533,7 +499,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* "03 Upload Dokumen" Card — bottom */}
-                <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[70%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
                   <div className="flex items-center gap-3 mb-3.5">
                     <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[16px] shadow-lg shadow-red-500/30">
@@ -654,7 +620,7 @@ function CaraKerjaSection() {
                 </div>
 
                 {/* "04 Terima Hasil" Card — bottom */}
-                <div className="absolute -bottom-[124px] left-[0%] w-[62%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[70%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
                   {/* Card Header */}
                   <div className="flex items-center gap-3 mb-3.5">
                     <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[16px] shadow-lg shadow-red-500/30">
@@ -732,6 +698,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
   const partnersRef = useRef<HTMLElement>(null);
   const whyChooseHeaderRef = useRef<HTMLDivElement>(null);
   const videoProfilHeaderRef = useRef<HTMLDivElement>(null);
+  const trackingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Quick Tools Observer
@@ -773,6 +740,19 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
       whyChooseObs.observe(whyChooseEl);
     }
 
+    // Tracking Section Observer
+    const trackingEl = trackingRef.current;
+    let trackingObs: IntersectionObserver | null = null;
+    if (trackingEl) {
+      trackingObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          trackingEl.classList.add("revealed");
+          trackingObs?.unobserve(trackingEl);
+        }
+      }, { rootMargin: "0px 0px -20% 0px" });
+      trackingObs.observe(trackingEl);
+    }
+
     // Why Choose Header Observer
     const whyChooseHeaderEl = whyChooseHeaderRef.current;
     let whyChooseHeaderObs: IntersectionObserver | null = null;
@@ -805,6 +785,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
       whyChooseObs?.disconnect();
       whyChooseHeaderObs?.disconnect();
       videoProfilHeaderObs?.disconnect();
+      trackingObs?.disconnect();
     };
   }, []);
 
@@ -826,117 +807,13 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
       />
 
       {/* ═══════════════════════════════════════════
-          QUICK TOOLS — floating strip overlapping hero
+          QUICK TOOLS & STATS
           ═══════════════════════════════════════════ */}
-      <div
-        className="relative z-20 -mt-6 sm:-mt-10 animate-scroll-reveal"
-        ref={quickToolsRef}
-      >
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="bg-white md:border md:border-[#EAEAEA] rounded-none md:rounded-[24px] md:shadow-[0_8px_30px_rgba(0,0,0,0.03)] overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-0">
-              {quickTools.map((tool, idx) => {
-                const Icon = tool.icon;
-                return (
-                  <div 
-                    key={idx} 
-                    className="group flex items-start gap-3 sm:gap-5 p-4 sm:p-8 transition-colors duration-300 hover:bg-neutral-50/40 border border-[#eee] md:border-0 rounded-2xl md:rounded-none md:border-r md:last:border-r-0 border-[#F0F0F0] bg-white shadow-sm md:shadow-none"
-                  >
-                    {/* Rounded Icon Box */}
-                    <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-[14px] bg-[#FFF5F5] text-[#8B1E1E] flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105 active:scale-95 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
-                      <Icon className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5" strokeWidth={2} />
-                    </div>
-                    {/* Content Block */}
-                    <div className="flex flex-col flex-grow min-w-0">
-                      {tool.tag && (
-                        <span className="text-[16px] sm:text-[16px] font-black text-[#9B1C1C] tracking-[0.1em] mb-1 sm:mb-1.5 uppercase block">
-                          {tool.tag}
-                        </span>
-                      )}
-                      <h3 className="text-[16px] sm:text-[16px] font-bold text-[#1A1A1A] group-hover:text-[#D62828] transition-colors leading-tight">
-                        {tool.title}
-                      </h3>
-                      <p className="text-[16px] sm:text-[16px] text-[#666666] leading-relaxed mt-1 sm:mt-2">
-                        {tool.desc}
-                      </p>
-                      <div className="mt-2 sm:mt-4">
-                        {tool.external ? (
-                          <a
-                            href={tool.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-[16px] sm:text-[16px] font-bold text-[#9B1C1C] hover:text-[#8B0000] active:scale-[0.98] space-x-1 group/link"
-                          >
-                            <span>{tool.cta}</span>
-                            <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform group-hover/link:translate-x-0.5" strokeWidth={2.5} />
-                          </a>
-                        ) : (
-                          <Link
-                            href={tool.href}
-                            className="inline-flex items-center text-[16px] sm:text-[16px] font-bold text-[#9B1C1C] hover:text-[#8B0000] active:scale-[0.98] space-x-1 group/link"
-                          >
-                            <span>{tool.cta}</span>
-                            <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform group-hover/link:translate-x-0.5" strokeWidth={2.5} />
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
+      <section className="bg-transparent relative z-20">
 
-      {/* ═══════════════════════════════════════════
-          PARTNER BAR
-          ═══════════════════════════════════════════ */}
-      <section
-        className="bg-white py-8 sm:py-12 border-b border-[#F0F0F0] overflow-hidden"
-        ref={partnersRef}
-      >
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 mb-6 sm:mb-10 text-center">
-          <span className="text-[16px] sm:text-[16px] font-bold text-[#9B1C1C] uppercase tracking-[0.15em]">
-            Dipercaya oleh 12.500+ pelaku bisnis :
-          </span>
-        </div>
-        
-        {/* Marquee Container */}
-        <div className="relative w-full flex overflow-hidden group">
-          {/* Duplicate the logo array 2 times to ensure smooth infinite scroll */}
-          {[1, 2].map((groupIndex) => (
-            <div 
-              key={groupIndex} 
-              className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-4 sm:px-8"
-            >
-              {[
-                "akiha.png", "arava-tour.png", "artave.png", "beeskin.png", 
-                "bss.png", "callme.png", "daingsuper.png", "dewa-rackindo.png", 
-                "gmk-door.png", "guri-senbei.png", "happyeats.png", "javarudraksha.png", 
-                "kafeel.netz.png", "kms.png", "moonbow.png", "oseal.png", 
-                "pabriek-kuweh.png", "power-computerindo.png", "satoshi.png", 
-                "sumber-aneka-wangi.png", "tantri.png", "vidichi.png"
-              ].map((logo, idx) => (
-                <div key={`${groupIndex}-${idx}`} className="flex-shrink-0 w-28 sm:w-36 h-14 sm:h-16 relative transition-all duration-300 hover:scale-105 cursor-pointer">
-                  <Image
-                    src={`/images/logo-klien/${logo}`}
-                    alt={`Client Logo ${idx + 1}`}
-                    fill
-                    className="object-contain"
-                    sizes="144px"
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
-          {/* Gradient Overlays for smooth fade out at edges */}
-          <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
-          <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
-        </div>
 
         {/* Premium Statistics Redesign */}
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8 mt-10 sm:mt-16 mb-10">
+        <div className="relative z-20 -mt-6 sm:-mt-10 max-w-[1240px] mx-auto px-4 sm:px-8 mb-10">
           <div className="bg-gradient-to-br from-[#9B1C1C] to-[#6A0D0D] rounded-[16px] sm:rounded-[20px] p-0.5 sm:p-1 shadow-[0_12px_30px_rgba(155,28,28,0.12)] relative overflow-hidden group">
             {/* Ambient Background Flares */}
             <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-white/10 rounded-full blur-[80px] pointer-events-none transition-transform duration-1000 group-hover:translate-x-10" />
@@ -945,9 +822,9 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[14px] sm:rounded-[18px] py-5 sm:py-8 px-4 sm:px-10 relative z-10">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 sm:gap-y-8 lg:gap-y-0 gap-x-4 sm:gap-x-8 lg:gap-x-0 lg:divide-x lg:divide-white/15">
                 {[
-                  { value: "12.500+", label: "Bisnis Terlayani" },
-                  { value: "15+", label: "Jenis Layanan Legal" },
-                  { value: "4.9 ★", label: "Rating Google" },
+                  { value: "13.000+", label: "Bisnis Terlayani" },
+                  { value: "30+", label: "Jenis Layanan Legal" },
+                  { value: "4.9 ★", label: "600+ Rating Google" },
                   { value: "3 Kota", label: "Kantor Representatif" }
                 ].map((stat, idx) => (
                   <div key={idx} className="flex flex-col items-center justify-center text-center px-3 md:px-5 cursor-default">
@@ -966,29 +843,115 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
       </section>
 
       {/* ═══════════════════════════════════════════
-          LIPUTAN MEDIA
+          QUICK TOOLS — floating strip overlapping hero
           ═══════════════════════════════════════════ */}
-      <MediaCoverage />
+      {/* ═══════════════════════════════════════════
+          TAGLINE CARDS
+          ═══════════════════════════════════════════ */}
+      <div
+        className="relative z-20 mb-6 sm:mb-8 animate-scroll-reveal"
+        ref={quickToolsRef}
+      >
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 sm:mb-16 text-center flex flex-col items-center animate-scroll-reveal" ref={whyChooseHeaderRef}>
+            <span className="text-[14px] sm:text-[16px] font-extrabold text-[#9B1C1C] tracking-[0.2em] uppercase mb-2 sm:mb-3 inline-block">
+              KENAPA EASYLEGAL
+            </span>
+            <h2 className="text-[28px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.15] tracking-tight max-w-2xl mb-4">
+              Fondasi kokoh untuk legalitas bisnis Anda.
+            </h2>
+            <p className="text-[15px] sm:text-[16px] text-gray-500 max-w-3xl leading-relaxed">
+              Bukan sekadar urus dokumen — kami partner legal yang menyederhanakan proses, transparan dalam biaya, dan responsif kapan saja.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            
+            {/* Card 1: CEPAT */}
+            <div className="bg-white rounded-[24px] p-8 lg:p-10 border border-[#F0F0F0] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300">
+              <div className="w-12 h-12 rounded-[14px] bg-red-50 flex items-center justify-center mb-8">
+                <Zap className="w-[22px] h-[22px] text-[#9B1C1C]" strokeWidth={2.5} />
+              </div>
+              
+              <h3 className="text-[26px] font-bold text-gray-900 tracking-tight mb-8 uppercase">
+                CEPAT
+              </h3>
+              
+              <ul className="space-y-5">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#9B1C1C] mt-0.5 text-[15px]">→</span>
+                  <span className="text-[15px] font-medium text-gray-600 leading-relaxed">
+                    Drafting akta perusahaan tanpa menunggu lama
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#9B1C1C] mt-0.5 text-[15px]">→</span>
+                  <span className="text-[15px] font-medium text-gray-600 leading-relaxed">
+                    Riset kode KBLI bidang usaha langsung tuntas
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Card 2: MUDAH */}
+            <div className="bg-[#4A0404] rounded-[24px] p-8 lg:p-10 shadow-[0_20px_40px_-15px_rgba(74,4,4,0.4)] transition-transform duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-[14px] bg-white/10 flex items-center justify-center mb-8">
+                <Sparkles className="w-[22px] h-[22px] text-white" strokeWidth={2.5} />
+              </div>
+              
+              <h3 className="text-[26px] font-bold text-white tracking-tight mb-8 uppercase">
+                MUDAH
+              </h3>
+              
+              <ul className="space-y-5">
+                <li className="flex items-start gap-3">
+                  <span className="text-white/80 mt-0.5 text-[15px]">→</span>
+                  <span className="text-[15px] font-medium text-white/90 leading-relaxed">
+                    Didampingi 1 on 1 oleh paralegal pribadi
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Card 3: TERPERCAYA */}
+            <div className="bg-white rounded-[24px] p-8 lg:p-10 border border-[#F0F0F0] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300">
+              <div className="w-12 h-12 rounded-[14px] bg-red-50 flex items-center justify-center mb-8">
+                <Zap className="w-[22px] h-[22px] text-[#9B1C1C]" strokeWidth={2.5} />
+              </div>
+              
+              <h3 className="text-[26px] font-bold text-gray-900 tracking-tight mb-8 uppercase flex items-center">
+                <span className="font-light text-gray-400 mr-[2px]">TER</span>PERCAYA
+              </h3>
+              
+              <ul className="space-y-5">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#9B1C1C] mt-0.5 text-[15px]">→</span>
+                  <span className="text-[15px] font-medium text-gray-600 leading-relaxed">
+                    Sudah dipercaya 13.000+ klien
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#9B1C1C] mt-0.5 text-[15px]">→</span>
+                  <span className="text-[15px] font-medium text-gray-600 leading-relaxed">
+                    Melayani klien dari 12 negara
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            </div>
+          </div>
+        </div>
 
       {/* ═══════════════════════════════════════════
           WHY CHOOSE EL PARTNERS
           ═══════════════════════════════════════════ */}
       <section
-        className="py-8 sm:pt-12 sm:pb-0 bg-white"
+        className="pt-12 sm:pt-20 pb-12 sm:pb-24 bg-[#FAF9F6]"
         ref={whyChooseRef}
       >
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
-          <div className="mb-6 sm:mb-16 animate-scroll-reveal" ref={whyChooseHeaderRef}>
-            <span className="text-[16px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3 inline-block">
-              KENAPA EASYLEGAL
-            </span>
-            <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.15] tracking-[-0.02em] max-w-2xl">
-              Fondasi kokoh untuk legalitas bisnis Anda.
-            </h2>
-            <p className="mt-2 sm:mt-4 text-[16px] sm:text-[16px] text-gray-500 max-w-3xl">
-              Bukan sekadar urus dokumen — kami partner legal yang menyederhanakan proses, transparan dalam biaya, dan responsif kapan saja.
-            </p>
-          </div>
+
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             
@@ -1014,7 +977,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                   </svg>
                 </div>
                 <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Konsultan hukum berpengalaman</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">Ditangani lawyer yang sudah menangani ribuan kasus UMKM.</p>
+                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">Ditangani Personal Legal Assistant yang sudah menangani ribuan kasus UMKM.</p>
               </div>
             </div>
 
@@ -1044,23 +1007,32 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
               </div>
             </div>
 
-            {/* Row 2, Col 1-2: Pendirian PT (dashed border card) */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 border border-dashed border-[#e0b0b0] sm:border-gray-300 shadow-[0_4px_20px_rgba(0,0,0,0.015)] group flex flex-col justify-center min-h-[120px] sm:min-h-[220px] text-left sm:text-center">
-              <span className="text-[16px] sm:text-[16px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pendirian PT</span>
-              <div className="text-[16px] sm:text-2xl font-black text-[#B91C1C] sm:text-gray-900">Rp 2.500.000</div>
-              <div className="mt-2 sm:mt-4 space-y-1 text-left sm:inline-block">
-                <div className="flex items-center gap-1.5 text-[16px] sm:text-[16px] text-gray-600">
-                  <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#10B981] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            {/* Row 2, Col 1-2: Bullet points card with icon and heading */}
+            <div className="sm:col-span-2 lg:col-span-2 bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+              <div>
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>
-                  <span>Jasa kami</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[16px] sm:text-[16px] text-gray-600">
-                  <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#10B981] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Biaya AHU</span>
-                </div>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-3 sm:mb-4">Kualitas & Garansi Terjamin</h3>
+                <ul className="space-y-3 sm:space-y-4 text-left">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+                    <span className="text-[15px] sm:text-[15px] text-gray-500 leading-relaxed">
+                      Bekerja sama dengan notaris berpengalaman
+                    </span>
+                  </li>
+                  <li className="flex flex-col gap-1">
+                    <div className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+                      <span className="text-[15px] sm:text-[15px] text-gray-500 leading-relaxed">
+                        Garansi uang kembali*
+                      </span>
+                    </div>
+                    <span className="text-[13px] text-gray-400 italic ml-[20px] sm:ml-[22px]">(*Syarat berlaku)</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -1077,8 +1049,55 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
               </div>
             </div>
 
+            {/* Row 2, Col 4: CS responsif 24/7 */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+              <div>
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] mb-3 sm:mb-6 flex-shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                </div>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">CS Responsif</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">WhatsApp akan dijawab dengan cepat dan tanggap oleh tim kami.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          PROMO & MARKETPLACE
+          ═══════════════════════════════════════════ */}
+      <BottomPromoSection />
+
+      {/* ═══════════════════════════════════════════
+          LAYANAN KAMI
+          ═══════════════════════════════════════════ */}
+      <LayananKami />
+
+      {/* ═══════════════════════════════════════════
+          CARA KERJA
+          ═══════════════════════════════════════════ */}
+      <CaraKerjaSection />
+
+      {/* ═══════════════════════════════════════════
+          TRACKING REAL-TIME SECTION
+          ═══════════════════════════════════════════ */}
+      <section className="py-12 sm:py-24 bg-[#FAF9F6] animate-scroll-reveal" ref={trackingRef}>
+        <div className="max-w-[800px] mx-auto px-4 sm:px-8">
+          <div className="mb-6 sm:mb-10 text-center">
+            <span className="text-[14px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-2 sm:mb-3 inline-block">
+              TRANSPARANSI PENUH
+            </span>
+            <h2 className="text-[28px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.15] tracking-tight mb-4">
+              Pantau progress legalitas<br className="hidden sm:inline" /> dari HP Anda.
+            </h2>
+          </div>
+          
+          <div>
             {/* Row 2, Col 4 (Span vertical / Full on mobile): Tracking real-time mockup card */}
-            <div className="bg-[#FAF9F6]/30 rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group col-span-2 lg:row-span-2 flex flex-col justify-between">
+            <div className="bg-[#FAF9F6]/30 rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group w-full flex flex-col justify-between">
               <div>
                 {/* Mockup Header on Mobile */}
                 <div className="flex items-center gap-2 sm:gap-3 mb-4">
@@ -1145,42 +1164,16 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
               </div>
             </div>
 
-            {/* Row 3, Col 1 (Full on mobile): CS responsif 24/7 */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group col-span-2 lg:col-span-2 flex flex-col justify-center items-center text-center min-h-[120px] sm:min-h-[200px]">
-              <div className="flex flex-col items-center">
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1">CS responsif 24/7</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">WhatsApp dijawab rata-rata &lt; 5 menit.</p>
-              </div>
-            </div>
 
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          PROMO & MARKETPLACE
-          ═══════════════════════════════════════════ */}
-      <BottomPromoSection />
-
-      {/* ═══════════════════════════════════════════
-          LAYANAN KAMI
-          ═══════════════════════════════════════════ */}
-      <LayananKami />
-
-      {/* ═══════════════════════════════════════════
-          CARA KERJA
-          ═══════════════════════════════════════════ */}
-      <CaraKerjaSection />
 
       {/* ═══════════════════════════════════════════
           VIDEO PROFILE
           ═══════════════════════════════════════════ */}
-      <section className="py-8 sm:py-24 bg-gray-50/70">
+      <section className="py-12 sm:py-24 bg-white">
         <div className="max-w-[1000px] mx-auto px-4 sm:px-8">
           <div 
             className="text-left sm:text-center mb-6 sm:mb-16 animate-scroll-reveal"
@@ -1196,6 +1189,59 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
           <VideoEmbedSection />
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════
+          PARTNER BAR
+          ═══════════════════════════════════════════ */}
+      <section
+        className="bg-white py-8 sm:py-12 border-b border-[#F0F0F0] overflow-hidden"
+        ref={partnersRef}
+      >
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 mb-6 sm:mb-10 text-center">
+          <span className="text-[16px] sm:text-[16px] font-bold text-[#9B1C1C] uppercase tracking-[0.15em]">
+            Dipercaya oleh 13.000+ pelaku bisnis :
+          </span>
+        </div>
+        
+        {/* Marquee Container */}
+        <div className="relative w-full flex overflow-hidden group">
+          {/* Duplicate the logo array 2 times to ensure smooth infinite scroll */}
+          {[1, 2].map((groupIndex) => (
+            <div 
+              key={groupIndex} 
+              className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-4 sm:px-8"
+            >
+              {[
+                "akiha.png", "arava-tour.png", "artave.png", "beeskin.png", 
+                "bss.png", "callme.png", "daingsuper.png", "dewa-rackindo.png", 
+                "gmk-door.png", "guri-senbei.png", "happyeats.png", "javarudraksha.png", 
+                "kafeel.netz.png", "kms.png", "moonbow.png", "oseal.png", 
+                "pabriek-kuweh.png", "power-computerindo.png", "satoshi.png", 
+                "sumber-aneka-wangi.png", "tantri.png", "vidichi.png"
+              ].map((logo, idx) => (
+                <div key={`${groupIndex}-${idx}`} className="flex-shrink-0 w-28 sm:w-36 h-14 sm:h-16 relative transition-all duration-300 hover:scale-105 cursor-pointer">
+                  <Image
+                    src={`/images/logo-klien/${logo}`}
+                    alt={`Client Logo ${idx + 1}`}
+                    fill
+                    className="object-contain"
+                    sizes="144px"
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
+          {/* Gradient Overlays for smooth fade out at edges */}
+          <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+          <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
+        </div>
+      </section>
+
+
+      {/* ═══════════════════════════════════════════
+          LIPUTAN MEDIA
+          ═══════════════════════════════════════════ */}
+      <MediaCoverage />
 
       {/* ═══════════════════════════════════════════
           TESTIMONIALS

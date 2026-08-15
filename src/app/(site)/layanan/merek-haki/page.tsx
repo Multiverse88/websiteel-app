@@ -24,9 +24,11 @@ import {
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
@@ -677,7 +679,7 @@ export default function MerekHaki() {
       </section>
 
       {/* ─── 2. MEDIA COVERAGE ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. MANFAAT DAFTAR MEREK ─── */}
       <Benefits
@@ -697,6 +699,9 @@ export default function MerekHaki() {
         footnotes={pricingFootnotes}
         promoBadgeSrc="/images/badges/promo-20.png"
       />
+
+      {/* ─── OFFICES ─── */}
+      <Offices />
 
       {/* ─── 5. LAYANAN TAMBAHAN MEREK (TABBED PRICING) ─── */}
       <section className="bg-[#F9FAFB] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
@@ -1070,10 +1075,12 @@ export default function MerekHaki() {
       </section>
 
       {/* ─── 8. TESTIMONIALS ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran merek." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
 
       {/* ─── 10. CTA SECTION ─── */}
       <CTA

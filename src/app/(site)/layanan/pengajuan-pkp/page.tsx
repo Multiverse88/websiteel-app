@@ -31,9 +31,11 @@ import {
 import FadeIn from "@/components/FadeIn";
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
+import Offices from "@/components/Offices";
 import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
+import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
@@ -328,7 +330,7 @@ export default function PengajuanPkp() {
       </section>
 
       {/* ─── 2. MEDIA COVERAGE ─── */}
-      <MediaCoverage />
+      <TrustStatsBar />
 
       {/* ─── 3. BENEFITS SECTION (Kenapa daftar PKP penting) ─── */}
       <section className="bg-[#FAF9F9] py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
@@ -459,6 +461,10 @@ export default function PengajuanPkp() {
         packages={pricingPackages}
         hideFooter={true}
       />
+
+      {/* ─── OFFICES ─── */}
+      <Offices />
+
 
       {/* ─── 5. APA ITU PKP & PENGUKUHAN PENGUSAHA KENA PAJAK ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
@@ -769,10 +775,12 @@ export default function PengajuanPkp() {
       </section>
 
       {/* ─── 8. TESTIMONIALS SECTION ─── */}
+      <MediaCoverage />
       <Testimonials />
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran PKP." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
 
       {/* ─── 10. CTA BANNER (Mockup Clean White) ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-t border-gray-100/60 relative">
