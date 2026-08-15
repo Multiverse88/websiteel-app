@@ -364,7 +364,7 @@ export default function VirtualOffice() {
               </div>
 
               {/* Bottom Overlay Card */}
-              <div className="absolute -bottom-6 right-0 sm:right-4 z-20 hidden sm:flex items-center gap-4 p-4.5 bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] max-w-[265px] hover:scale-105 transition-transform duration-300">
+              <div className="absolute bottom-[76px] right-0 sm:right-4 z-20 hidden sm:flex items-center gap-4 p-4.5 bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] max-w-[265px] hover:scale-105 transition-transform duration-300">
                 <div className="w-8 h-8 sm:w-11 sm:h-11 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5.5 h-5.5 text-amber-600" />
                 </div>
@@ -376,7 +376,7 @@ export default function VirtualOffice() {
 
               {/* Decorative background glow */}
               <div className="absolute -top-10 -right-10 w-[300px] h-[300px] bg-red-500/5 blur-[100px] rounded-full" />
-              <div className="absolute -bottom-10 -left-10 w-[300px] h-[300px] bg-amber-500/5 blur-[100px] rounded-full" />
+              <div className="absolute bottom-[76px]0 -left-10 w-[300px] h-[300px] bg-amber-500/5 blur-[100px] rounded-full" />
             </div>
           </div>
         </div>

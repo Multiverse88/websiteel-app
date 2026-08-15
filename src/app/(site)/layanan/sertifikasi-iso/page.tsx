@@ -599,7 +599,7 @@ export default function SertifikasiIso() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Right */}
-                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white rounded-2xl p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.06)] flex items-center space-x-3.5 w-[215px] transition-transform hover:-translate-y-1 duration-300 z-20">
+                <div className="absolute bottom-[76px] -right-2 sm:-right-4 bg-white rounded-2xl p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.06)] flex items-center space-x-3.5 w-[215px] transition-transform hover:-translate-y-1 duration-300 z-20">
                   <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                     <CheckCircle className="w-5.5 h-5.5 text-[#990202]" />
                   </div>
@@ -728,12 +728,12 @@ export default function SertifikasiIso() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           
           {/* Section Header */}
-          <div className="mb-14">
-            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-wider mb-2">PENGERTIAN ISO &amp; UAF</p>
+          <div className="mb-14 text-center max-w-3xl mx-auto flex flex-col items-center">
+            <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.15em] mb-2">PENGERTIAN ISO &amp; UAF</p>
             <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
               Apa itu Sertifikasi ISO?
             </h2>
-            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 mt-3 font-normal max-w-2xl">
+            <p className="text-[16px] sm:text-[16px] sm:text-[16px] text-gray-500 mt-3 font-normal max-w-2xl text-center">
               Sebelum mulai, kenali standar internasional yang dipakai jutaan organisasi di seluruh dunia.
             </p>
           </div>
@@ -754,7 +754,7 @@ export default function SertifikasiIso() {
                 </div>
 
                 {/* Floating Badge (Bottom Left) */}
-                <div className="absolute -bottom-6 left-4 bg-white rounded-2xl p-4 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-md border border-black/[0.03] flex items-center space-x-3.5 w-[290px] sm:w-[320px]">
+                <div className="absolute bottom-[76px] left-4 bg-white rounded-2xl p-4 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-md border border-black/[0.03] flex items-center space-x-3.5 w-[290px] sm:w-[320px]">
                   <div className="w-8.5 h-8.5 sm:w-10 sm:h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 flex-shrink-0">
                     <Award className="w-5.5 h-5.5 text-amber-600" />
                   </div>

@@ -824,8 +824,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                 {[
                   { value: "13.000+", label: "Bisnis Terlayani" },
                   { value: "30+", label: "Jenis Layanan Legal" },
-                  { value: "4.9 ★", label: "600+ Rating Google" },
-                  { value: "3 Kota", label: "Kantor Representatif" }
+                  { value: "4.9 ★", label: "Rating Google (700+ Ulasan)" },
+                  { value: "3", label: "Kantor Cabang" }
                 ].map((stat, idx) => (
                   <div key={idx} className="flex flex-col items-center justify-center text-center px-3 md:px-5 cursor-default">
                     <div className="text-[28px] sm:text-[36px] lg:text-[42px] font-black text-white tracking-tighter leading-none mb-2 sm:mb-3 hover:scale-105 transition-transform duration-500 ease-out origin-center">
@@ -858,85 +858,43 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
               KENAPA EASYLEGAL
             </span>
             <h2 className="text-[28px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.15] tracking-tight max-w-2xl mb-4">
-              Fondasi kokoh untuk legalitas bisnis Anda.
+              Fondasi legalitas bisnis
             </h2>
             <p className="text-[15px] sm:text-[16px] text-gray-500 max-w-3xl leading-relaxed">
-              Bukan sekadar urus dokumen — kami partner legal yang menyederhanakan proses, transparan dalam biaya, dan responsif kapan saja.
+              Bukan sekadar urus dokumen. EasyLegal jadi mitra legalitas bisnis yang mendampingi lewat Personal Legal Assistant dari awal hingga tuntas, dengan biaya transparan dan respons cepat kapan saja dibutuhkan.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             
-            {/* Card 1: CEPAT */}
-            <div className="bg-white rounded-[24px] p-8 lg:p-10 border border-[#F0F0F0] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300">
-              <div className="w-12 h-12 rounded-[14px] bg-red-50 flex items-center justify-center mb-8">
-                <Zap className="w-[22px] h-[22px] text-[#9B1C1C]" strokeWidth={2.5} />
+            {/* Card 1: MUDAH */}
+            <div className="bg-white rounded-[24px] p-8 lg:p-10 border border-[#F0F0F0] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[180px]">
+              <div className="w-14 h-14 rounded-[16px] bg-red-50 flex items-center justify-center mb-5">
+                <Sparkles className="w-[26px] h-[26px] text-[#9B1C1C]" strokeWidth={2.5} />
               </div>
-              
-              <h3 className="text-[26px] font-bold text-gray-900 tracking-tight mb-8 uppercase">
-                CEPAT
-              </h3>
-              
-              <ul className="space-y-5">
-                <li className="flex items-start gap-3">
-                  <span className="text-[#9B1C1C] mt-0.5 text-[15px]">→</span>
-                  <span className="text-[15px] font-medium text-gray-600 leading-relaxed">
-                    Drafting akta perusahaan tanpa menunggu lama
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-[#9B1C1C] mt-0.5 text-[15px]">→</span>
-                  <span className="text-[15px] font-medium text-gray-600 leading-relaxed">
-                    Riset kode KBLI bidang usaha langsung tuntas
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Card 2: MUDAH */}
-            <div className="bg-[#4A0404] rounded-[24px] p-8 lg:p-10 shadow-[0_20px_40px_-15px_rgba(74,4,4,0.4)] transition-transform duration-300 hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-[14px] bg-white/10 flex items-center justify-center mb-8">
-                <Sparkles className="w-[22px] h-[22px] text-white" strokeWidth={2.5} />
-              </div>
-              
-              <h3 className="text-[26px] font-bold text-white tracking-tight mb-8 uppercase">
+              <h3 className="text-[24px] font-black text-gray-900 tracking-tight uppercase">
                 MUDAH
               </h3>
-              
-              <ul className="space-y-5">
-                <li className="flex items-start gap-3">
-                  <span className="text-white/80 mt-0.5 text-[15px]">→</span>
-                  <span className="text-[15px] font-medium text-white/90 leading-relaxed">
-                    Didampingi 1 on 1 oleh paralegal pribadi
-                  </span>
-                </li>
-              </ul>
+            </div>
+
+            {/* Card 2: CEPAT */}
+            <div className="bg-[#4A0404] rounded-[24px] p-8 lg:p-10 shadow-[0_20px_40px_-15px_rgba(74,4,4,0.4)] transition-transform duration-300 hover:-translate-y-1 flex flex-col items-center justify-center text-center min-h-[180px]">
+              <div className="w-14 h-14 rounded-[16px] bg-white/10 flex items-center justify-center mb-5">
+                <Zap className="w-[26px] h-[26px] text-white" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-[24px] font-black text-white tracking-tight uppercase">
+                CEPAT
+              </h3>
             </div>
 
             {/* Card 3: TERPERCAYA */}
-            <div className="bg-white rounded-[24px] p-8 lg:p-10 border border-[#F0F0F0] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300">
-              <div className="w-12 h-12 rounded-[14px] bg-red-50 flex items-center justify-center mb-8">
-                <Zap className="w-[22px] h-[22px] text-[#9B1C1C]" strokeWidth={2.5} />
+            <div className="bg-white rounded-[24px] p-8 lg:p-10 border border-[#F0F0F0] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[180px]">
+              <div className="w-14 h-14 rounded-[16px] bg-red-50 flex items-center justify-center mb-5">
+                <ShieldCheck className="w-[26px] h-[26px] text-[#9B1C1C]" strokeWidth={2.5} />
               </div>
-              
-              <h3 className="text-[26px] font-bold text-gray-900 tracking-tight mb-8 uppercase flex items-center">
+              <h3 className="text-[24px] font-black text-gray-900 tracking-tight uppercase flex items-center justify-center">
                 <span className="font-light text-gray-400 mr-[2px]">TER</span>PERCAYA
               </h3>
-              
-              <ul className="space-y-5">
-                <li className="flex items-start gap-3">
-                  <span className="text-[#9B1C1C] mt-0.5 text-[15px]">→</span>
-                  <span className="text-[15px] font-medium text-gray-600 leading-relaxed">
-                    Sudah dipercaya 13.000+ klien
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-[#9B1C1C] mt-0.5 text-[15px]">→</span>
-                  <span className="text-[15px] font-medium text-gray-600 leading-relaxed">
-                    Melayani klien dari 12 negara
-                  </span>
-                </li>
-              </ul>
             </div>
 
             </div>
@@ -953,64 +911,64 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
 
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             
-            {/* Row 1, Col 1: Proses cepat & terlacak */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            {/* Card 1: Proses cepat & terlacak */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
                 <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses cepat & terlacak</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">SLA 7–14 hari kerja dengan progress yang dipantau real-time.</p>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Mulai dari 12 jam kerja untuk layanan tercepat, dengan progres yang dipantau secara real-time. (Estimasi waktu bervariasi tergantung jenis layanan)</p>
               </div>
             </div>
 
-            {/* Row 1, Col 2: Konsultan hukum berpengalaman */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            {/* Card 2: Personal Legal Assistant (PLA) */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Konsultan hukum berpengalaman</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">Ditangani Personal Legal Assistant yang sudah menangani ribuan kasus UMKM.</p>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Personal Legal Assistant (PLA)</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Didampingi PLA bergelar Sarjana Hukum (S.H.), dengan dukungan Tim Legal Officer yang membantu pengurusan legalitas ribuan pelaku usaha.</p>
               </div>
             </div>
 
-            {/* Row 1, Col 3: Resmi terdaftar PSE Kominfo */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            {/* Card 3: Legalitas & sertifikasi resmi */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Resmi terdaftar PSE Kominfo</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">Data Anda aman & terlindungi sesuai regulasi.</p>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Legalitas & sertifikasi resmi</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Terdaftar PSE Kominfo, tersertifikasi ISO 9001 untuk manajemen mutu dan ISO 27001 untuk keamanan informasi.</p>
               </div>
             </div>
 
-            {/* Row 1, Col 4: Harga transparan, tanpa kejutan */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            {/* Card 4: Harga transparan, tanpa kejutan */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Harga transparan, tanpa kejutan</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">Semua biaya tertera di awal. Tidak ada add-on mendadak.</p>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Semua biaya tertera jelas di awal, tanpa ada biaya tambahan di kemudian hari.</p>
               </div>
             </div>
 
-            {/* Row 2, Col 1-2: Bullet points card with icon and heading */}
-            <div className="sm:col-span-2 lg:col-span-2 bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            {/* Card 5: Kualitas & Garansi Terjamin */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>
@@ -1027,38 +985,24 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <div className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
                       <span className="text-[15px] sm:text-[15px] text-gray-500 leading-relaxed">
-                        Garansi uang kembali*
+                        Garansi uang kembali (Syarat & ketentuan berlaku)
                       </span>
                     </div>
-                    <span className="text-[13px] text-gray-400 italic ml-[20px] sm:ml-[22px]">(*Syarat berlaku)</span>
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* Row 2, Col 3: 100% online & paperless */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
+            {/* Card 6: Proses fleksibel, Offline atau 100% Online */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
               <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
                 </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">100% online & paperless</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">Upload aman dari mana saja, tanpa harus ke kantor.</p>
-              </div>
-            </div>
-
-            {/* Row 2, Col 4: CS responsif 24/7 */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-between min-h-[170px] sm:min-h-[220px]">
-              <div>
-                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] mb-3 sm:mb-6 flex-shrink-0">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">CS Responsif</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[16px] sm:text-[16px] leading-relaxed">WhatsApp akan dijawab dengan cepat dan tanggap oleh tim kami.</p>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses fleksibel, Offline atau 100% Online</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Bisa diurus dari mana saja secara online, atau tatap muka langsung sesuai kebutuhan.</p>
               </div>
             </div>
 

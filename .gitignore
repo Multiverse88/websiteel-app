@@ -176,3 +176,7 @@ _graphify
 # Reference/scratch material — not pageview app code, not needed to deploy
 *-extracted/
 TODO_MISSING_PAGES.md
+
+# QA Reports and Scripts
+qa_script.js
+qa_audit_report.md

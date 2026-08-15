@@ -282,7 +282,7 @@ export default function ApostillePage() {
                 </div>
 
                 {/* Floating Badge 2: Bottom Right */}
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
+                <div className="absolute bottom-[76px] -right-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
                   <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
                     <Globe className="w-4.5 h-4.5" />
                   </div>
@@ -507,7 +507,7 @@ export default function ApostillePage() {
                 </div>
 
                 {/* Floating Badge: Dasar Hukum */}
-                <div className="absolute -bottom-6 left-2 sm:left-6 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[220px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute bottom-[76px] left-2 sm:left-6 bg-white rounded-2xl p-3.5 pr-6 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[220px] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-[#990202] flex-shrink-0">
                     <ShieldCheck className="w-5 h-5 stroke-[2.2]" />
                   </div>

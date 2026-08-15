@@ -7,14 +7,14 @@ export default function PengertianPKKPR() {
       <div className="max-w-[1140px] mx-auto px-4 sm:px-8">
         
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <p className="text-[16px] font-black text-[#990202] uppercase tracking-[0.2em] mb-3">
+        <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center">
+          <p className="text-[16px] font-black text-[#990202] uppercase tracking-[0.15em] mb-3">
             PENGERTIAN
           </p>
           <h2 className="text-[28px] sm:text-[40px] font-extrabold text-gray-900 leading-tight tracking-tight mb-5">
             Apa itu PKKPR?
           </h2>
-          <p className="text-[16px] sm:text-[16px] text-gray-500 font-medium leading-relaxed">
+          <p className="text-[16px] sm:text-[16px] text-gray-500 font-medium leading-relaxed text-center">
             PKKPR adalah dokumen konfirmasi dari pemerintah bahwa lokasi usaha Anda sesuai peruntukan dalam tata ruang wilayah. Menggantikan sistem Izin Lokasi lama, kini terintegrasi penuh dalam sistem OSS.
           </p>
         </div>

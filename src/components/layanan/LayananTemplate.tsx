@@ -20,6 +20,7 @@ import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
+import IsoPseBadges from "@/components/IsoPseBadges";
 import { getWhatsAppLink } from "@/lib/config";
 import type { LayananContent } from "@/data/layanan-lainnya";
 
@@ -126,7 +127,7 @@ export default function LayananTemplate({ content }: Props) {
               </div>
             </div>
 
-            <div className="lg:w-[45%] relative mt-8 lg:mt-0">
+            <div className="lg:w-[45%] relative mt-8 lg:mt-0 flex flex-col items-center">
               <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] z-10 aspect-[4/3] w-full">
                 <Image
                   src={c.heroImage}
@@ -137,6 +138,12 @@ export default function LayananTemplate({ content }: Props) {
                   sizes="(max-width: 960px) 100vw, 45vw"
                 />
               </div>
+
+              {/* ISO and PSE Badges */}
+              <div className="mt-8 flex justify-center w-full relative z-20">
+                <IsoPseBadges />
+              </div>
+
             </div>
           </div>
         </div>

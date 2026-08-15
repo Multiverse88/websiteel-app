@@ -92,7 +92,7 @@ export default function Footer() {
             {/* Col 1: Description & Contacts */}
             <div className="lg:col-span-4 flex flex-col space-y-7">
               <p className="text-[16px] leading-relaxed text-white/80 max-w-[320px]">
-                Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Proses mudah, harga transparan, hasil terjamin.
+                EasyLegal, mitra legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Proses mudah, harga transparan, didampingi Personal Legal Assistant hingga tuntas.
               </p>
               
               <div className="space-y-3">
