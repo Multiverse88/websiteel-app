@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getWhatsAppLink } from "@/lib/config";
 import { Building2, Search, MessageCircle, Check } from "lucide-react";
 
@@ -17,6 +17,15 @@ export default function CekNama() {
     namaAnda: "",
     whatsapp: "",
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("tab") === "merek") {
+        setActiveTab("merek");
+      }
+    }
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

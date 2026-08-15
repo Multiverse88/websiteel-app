@@ -159,9 +159,11 @@ const megaMenuData = {
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLayananOpen, setIsLayananOpen] = useState(false);
+  const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const dropdownRef = React.useRef<HTMLDivElement>(null);
+  const toolsDropdownRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ticking = false;
@@ -180,6 +182,9 @@ export default function Navbar() {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsLayananOpen(false);
       }
+      if (toolsDropdownRef.current && !toolsDropdownRef.current.contains(event.target as Node)) {
+        setIsToolsOpen(false);
+      }
     };
     window.addEventListener("mousedown", handleClickOutside);
 
@@ -194,6 +199,7 @@ export default function Navbar() {
   const handleLinkClick = () => {
     setIsOpen(false);
     setIsLayananOpen(false);
+    setIsToolsOpen(false);
   };
 
   return (
@@ -388,21 +394,37 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link
-              href="/cek-kbli"
-              onClick={handleLinkClick}
-              className="text-[16px] font-medium text-muted hover:text-dark transition-colors"
+            {/* Tools Dropdown */}
+            <div
+              className="relative"
+              ref={toolsDropdownRef}
             >
-              Cek KBLI
-            </Link>
+              <button
+                onClick={() => setIsToolsOpen(!isToolsOpen)}
+                className={`flex items-center space-x-1 text-[16px] font-medium transition-colors ${
+                  isToolsOpen
+                    ? "text-dark font-semibold"
+                    : "text-muted hover:text-dark"
+                }`}
+              >
+                <span>Tools</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isToolsOpen ? "rotate-180" : ""}`} />
+              </button>
 
-            <Link
-              href="/layanan/virtual-office"
-              onClick={handleLinkClick}
-              className="text-[16px] font-medium text-muted hover:text-dark transition-colors"
-            >
-              Virtual Office
-            </Link>
+              {isToolsOpen && (
+                <div className="absolute top-full right-0 mt-6 w-48 bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-slate-100 py-2 animate-slide-down">
+                  <Link href="/cek-nama" onClick={handleLinkClick} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
+                    Cek Nama PT
+                  </Link>
+                  <Link href="/cek-nama?tab=merek" onClick={handleLinkClick} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
+                    Cek Nama Merek
+                  </Link>
+                  <Link href="/cek-kbli" onClick={handleLinkClick} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
+                    Cek KBLI
+                  </Link>
+                </div>
+              )}
+            </div>
 
             <Link
               href="/artikel"
@@ -413,7 +435,7 @@ export default function Navbar() {
                   : "text-muted hover:text-dark"
               }`}
             >
-              Blog
+              Artikel
             </Link>
 
             <Link
@@ -455,12 +477,6 @@ export default function Navbar() {
 
           {/* Desktop CTAs - Right */}
           <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
-            <Link
-              href="/cek-nama"
-              className="px-5 py-2.5 border border-dark rounded-full text-[16px] font-bold text-dark hover:bg-dark hover:text-white transition-all duration-200"
-            >
-              Cek Nama PT
-            </Link>
             <a
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
               target="_blank"
@@ -490,9 +506,7 @@ export default function Navbar() {
           <div className="px-4 pt-2 pb-6 space-y-1">
             {[
               { name: "Home", href: "/home-gads" },
-              { name: "Cek KBLI", href: "/cek-kbli" },
-              { name: "Virtual Office", href: "/layanan/virtual-office" },
-              { name: "Blog", href: "/artikel" },
+              { name: "Artikel", href: "/artikel" },
               { name: "Testimoni", href: "/testimoni" },
               { name: "Tentang Kami", href: "/tentang-kami" },
               { name: "Kontak", href: "/kontak" },
@@ -516,6 +530,35 @@ export default function Navbar() {
                 </Link>
               );
             })}
+
+            {/* Tools accordion */}
+            <div className="border-t border-border pt-2 mt-2">
+              <button
+                onClick={() => setIsToolsOpen(!isToolsOpen)}
+                className="w-full flex justify-between items-center px-3 py-2.5 text-[16px] font-medium text-muted hover:text-dark"
+              >
+                <span>Tools</span>
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    isToolsOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {isToolsOpen && (
+                <div className="pl-4 pr-2 mt-1 py-1 bg-bg-light/50 rounded-lg space-y-1">
+                  <Link href="/cek-nama" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                    Cek Nama PT
+                  </Link>
+                  <Link href="/cek-nama?tab=merek" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                    Cek Nama Merek
+                  </Link>
+                  <Link href="/cek-kbli" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                    Cek KBLI
+                  </Link>
+                </div>
+              )}
+            </div>
 
             {/* Services accordion */}
             <div className="border-t border-border pt-2 mt-2">
@@ -609,13 +652,6 @@ export default function Navbar() {
             </div>
 
             <div className="border-t border-border pt-4 mt-4 flex flex-col space-y-3 px-3">
-              <Link
-                href="/cek-nama"
-                onClick={handleLinkClick}
-                className="w-full text-center py-2.5 border border-dark rounded-full text-[16px] font-bold text-dark hover:bg-dark hover:text-white transition-colors duration-200"
-              >
-                Cek Nama PT
-              </Link>
               <a
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.")}
                 target="_blank"
