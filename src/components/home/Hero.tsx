@@ -149,11 +149,11 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         </div>
       </div>
 
-      {/* Centered Trust Badges replacing 4.9 rating */}
-      <div className={`absolute bottom-[10%] md:bottom-[100px] left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-xl md:rounded-[20px] px-5 py-3 md:px-8 md:py-5 shadow-[0_8px_25px_rgba(0,0,0,0.06)] border border-white/60 flex items-center space-x-5 md:space-x-8 z-20 animate-float-medium ${floatClass}`}>
-        <img src="/ISO-27001-2022.webp" alt="ISO 27001" className="h-8 sm:h-10 md:h-14 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
-        <img src="/ISO-sertifikat-scaled.jpg" alt="ISO Sertifikat" className="h-8 sm:h-10 md:h-14 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
-        <img src="/images/badges/pse-terdaftar.png" alt="PSE Terdaftar" className="h-8 sm:h-10 md:h-14 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
+      {/* Trust Badges - Positioned Right */}
+      <div className={`absolute bottom-[5%] md:bottom-[40px] right-2 md:right-10 bg-white/90 backdrop-blur-sm rounded-lg md:rounded-[20px] px-2 py-1.5 md:px-6 md:py-3.5 shadow-md md:shadow-[0_8px_25px_rgba(0,0,0,0.06)] border border-white/60 flex items-center space-x-2 md:space-x-5 z-20 animate-float-medium ${floatClass}`}>
+        <img src="/ISO-27001-2022.webp" alt="ISO 27001" className="h-[18px] sm:h-[24px] md:h-[36px] w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
+        <img src="/ISO-sertifikat-scaled.jpg" alt="ISO Sertifikat" className="h-[18px] sm:h-[24px] md:h-[36px] w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
+        <img src="/images/badges/pse-terdaftar.png" alt="PSE Terdaftar" className="h-[18px] sm:h-[24px] md:h-[36px] w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" />
       </div>
 
     </section>

@@ -83,54 +83,37 @@ export default function Footer() {
   return (
     <>
 
-      <footer className="bg-[#161616] border-t border-white/10 pt-14 pb-8 md:pt-20 md:pb-10">
+      <footer className="bg-[#550000] border-t border-white/10 pt-14 pb-8 md:pt-20 md:pb-10">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
           
-          {/* ─── HEADER ROW (Logo) ───
-              ISO/PSE badges moved to Hero (see Hero.tsx "Centered Trust
-              Badges") — no longer duplicated here. */}
-          <div className="flex justify-center md:justify-start mb-12 w-full">
-            <Link href="/" className="inline-block flex-shrink-0">
-              <Image
-                src="/Logo EL.png"
-                alt="EasyLegal Logo"
-                width={200}
-                height={70}
-                className="object-contain brightness-0 invert"
-                style={{ width: "auto", height: "auto" }}
-                priority
-              />
-            </Link>
-          </div>
-
-          {/* ─── MAIN LINKS GRID ─── */}
+          {/* ─── HEADER ROW ─── (Logo removed per request) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14">
             
             {/* Col 1: Description & Contacts */}
             <div className="lg:col-span-4 flex flex-col space-y-7">
-              <p className="text-[16px] leading-relaxed text-gray-400 max-w-[320px]">
+              <p className="text-[16px] leading-relaxed text-white/80 max-w-[320px]">
                 Platform legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Proses mudah, harga transparan, hasil terjamin.
               </p>
               
               <div className="space-y-3">
-                <a href="mailto:care@easylegal.id" className="flex items-center space-x-3 text-[16px] font-bold text-gray-200 hover:text-red-400 transition-colors">
-                  <Mail className="w-[15px] h-[15px] text-red-500" />
+                <a href="mailto:care@easylegal.id" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
+                  <Mail className="w-[15px] h-[15px] text-white/70" />
                   <span>care@easylegal.id</span>
                 </a>
-                <a href="tel:02232093292" className="flex items-center space-x-3 text-[16px] font-bold text-gray-200 hover:text-red-400 transition-colors">
-                  <Phone className="w-[15px] h-[15px] text-red-500" />
+                <a href="tel:02232093292" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
+                  <Phone className="w-[15px] h-[15px] text-white/70" />
                   <span>022 3209 3292</span>
                 </a>
-                <a href="https://wa.me/62817770048" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-gray-200 hover:text-red-400 transition-colors">
-                  <WaIcon className="w-[15px] h-[15px] text-red-500" />
+                <a href="https://wa.me/62817770048" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
+                  <WaIcon className="w-[15px] h-[15px] text-white/70" />
                   <span>0817 770 048</span>
                 </a>
-                <a href="https://wa.me/62817321162" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-gray-200 hover:text-red-400 transition-colors">
-                  <WaIcon className="w-[15px] h-[15px] text-red-500" />
+                <a href="https://wa.me/62817321162" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
+                  <WaIcon className="w-[15px] h-[15px] text-white/70" />
                   <span>0817 321 162</span>
                 </a>
-                <a href="https://wa.me/62818818090" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-gray-200 hover:text-red-400 transition-colors">
-                  <WaIcon className="w-[15px] h-[15px] text-red-500" />
+                <a href="https://wa.me/62818818090" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
+                  <WaIcon className="w-[15px] h-[15px] text-white/70" />
                   <span>0818 818 090</span>
                 </a>
               </div>
@@ -144,7 +127,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 {virtualOfficeLinks.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href} className="text-[16px] text-gray-400 hover:text-red-400 transition-colors">
+                    <Link href={link.href} className="text-[16px] text-white/80 hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -160,7 +143,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 {layananLinks.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href} className="text-[16px] text-gray-400 hover:text-red-400 transition-colors">
+                    <Link href={link.href} className="text-[16px] text-white/80 hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -176,7 +159,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 {perusahaanLinks.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href} className="text-[16px] text-gray-400 hover:text-red-400 transition-colors">
+                    <Link href={link.href} className="text-[16px] text-white/80 hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -192,7 +175,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 {toolsLinks.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href} className="text-[16px] text-gray-400 hover:text-red-400 transition-colors">
+                    <Link href={link.href} className="text-[16px] text-white/80 hover:text-white transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -202,7 +185,7 @@ export default function Footer() {
             
           </div>
 
-          <div className="w-full h-px bg-white/10 mb-10" />
+          <div className="w-full h-px bg-white/20 mb-10" />
 
           {/* ─── ADDRESSES ROW ─── */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12">
@@ -227,22 +210,22 @@ export default function Footer() {
               }
             ].map((addr, idx) => (
               <div key={idx} className="flex items-start space-x-3">
-                <MapPin className="w-[16px] h-[16px] text-red-500 flex-shrink-0 mt-0.5" />
+                <MapPin className="w-[16px] h-[16px] text-white/70 flex-shrink-0 mt-0.5" />
                 <div className="flex flex-col">
                   <span className="text-[16px] font-bold text-white mb-1.5">{addr.title}</span>
-                  <span className="text-[16px] text-gray-400 leading-relaxed">{addr.building}</span>
-                  <span className="text-[16px] text-gray-400 leading-relaxed">{addr.street1}</span>
-                  <span className="text-[16px] text-gray-400 leading-relaxed">{addr.street2}</span>
+                  <span className="text-[16px] text-white/80 leading-relaxed">{addr.building}</span>
+                  <span className="text-[16px] text-white/80 leading-relaxed">{addr.street1}</span>
+                  <span className="text-[16px] text-white/80 leading-relaxed">{addr.street2}</span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="w-full h-px bg-white/10 mb-8" />
+          <div className="w-full h-px bg-white/20 mb-8" />
 
           {/* ─── COPYRIGHT & SOCIALS ─── */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-            <p className="text-[16px] font-medium text-gray-500 text-center sm:text-left">
+            <p className="text-[16px] font-medium text-white/60 text-center sm:text-left">
               © 2026 EasyLegal.id — Terdaftar PSE Kominfo. All rights reserved.
             </p>
 
@@ -259,7 +242,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-[34px] h-[34px] bg-white/5 border border-white/10 rounded-[8px] flex items-center justify-center text-gray-300 hover:text-red-400 hover:border-red-400/40 transition-all duration-200"
+                  className="w-[34px] h-[34px] bg-white/10 border border-white/20 rounded-[8px] flex items-center justify-center text-white/80 hover:text-white hover:border-white/50 transition-all duration-200"
                 >
                   <Icon />
                 </a>

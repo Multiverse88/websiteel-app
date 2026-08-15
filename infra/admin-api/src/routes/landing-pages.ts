@@ -4,6 +4,37 @@ import { requireAuth } from "../middleware/auth";
 
 const router = Router();
 
+// GET /api/v1/landing-pages/sitemap/all?hostname=easylegal.biz.id
+// Public, minimal response used only to build the frontend sitemap.
+router.get("/sitemap/all", async (req, res) => {
+  try {
+    const hostname =
+      typeof req.query.hostname === "string"
+        ? req.query.hostname.split(":")[0]
+        : undefined;
+
+    const pages = await prisma.landingPage.findMany({
+      where: { status: "published" },
+      select: {
+        slug: true,
+        updatedAt: true,
+        domainId: true,
+        Domain: { select: { hostname: true } },
+      },
+      orderBy: { updatedAt: "desc" },
+    });
+
+    const visiblePages = pages
+      .filter((page) => !page.domainId || page.Domain?.hostname === hostname)
+      .map(({ slug, updatedAt }) => ({ slug, updatedAt }));
+
+    res.json({ data: visiblePages });
+  } catch (error) {
+    console.error("Error fetching landing pages for sitemap:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // GET /api/v1/landing-pages
 router.get("/", requireAuth, async (req, res) => {
   try {

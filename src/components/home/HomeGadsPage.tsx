@@ -1191,54 +1191,6 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
       </section>
 
       {/* ═══════════════════════════════════════════
-          PARTNER BAR
-          ═══════════════════════════════════════════ */}
-      <section
-        className="bg-white py-8 sm:py-12 border-b border-[#F0F0F0] overflow-hidden"
-        ref={partnersRef}
-      >
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 mb-6 sm:mb-10 text-center">
-          <span className="text-[16px] sm:text-[16px] font-bold text-[#9B1C1C] uppercase tracking-[0.15em]">
-            Dipercaya oleh 13.000+ pelaku bisnis :
-          </span>
-        </div>
-        
-        {/* Marquee Container */}
-        <div className="relative w-full flex overflow-hidden group">
-          {/* Duplicate the logo array 2 times to ensure smooth infinite scroll */}
-          {[1, 2].map((groupIndex) => (
-            <div 
-              key={groupIndex} 
-              className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-4 sm:px-8"
-            >
-              {[
-                "akiha.png", "arava-tour.png", "artave.png", "beeskin.png", 
-                "bss.png", "callme.png", "daingsuper.png", "dewa-rackindo.png", 
-                "gmk-door.png", "guri-senbei.png", "happyeats.png", "javarudraksha.png", 
-                "kafeel.netz.png", "kms.png", "moonbow.png", "oseal.png", 
-                "pabriek-kuweh.png", "power-computerindo.png", "satoshi.png", 
-                "sumber-aneka-wangi.png", "tantri.png", "vidichi.png"
-              ].map((logo, idx) => (
-                <div key={`${groupIndex}-${idx}`} className="flex-shrink-0 w-28 sm:w-36 h-14 sm:h-16 relative transition-all duration-300 hover:scale-105 cursor-pointer">
-                  <Image
-                    src={`/images/logo-klien/${logo}`}
-                    alt={`Client Logo ${idx + 1}`}
-                    fill
-                    className="object-contain"
-                    sizes="144px"
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
-          {/* Gradient Overlays for smooth fade out at edges */}
-          <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
-          <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
-        </div>
-      </section>
-
-
-      {/* ═══════════════════════════════════════════
           LIPUTAN MEDIA
           ═══════════════════════════════════════════ */}
       <MediaCoverage />
