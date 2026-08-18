@@ -537,8 +537,8 @@ const dataCV: BadanUsahaContent = {
   stepsSubtitle:
     "Dari konsultasi sampai dokumen resmi di tangan — estimasi 6–12 hari kerja.",
   steps: [
-    { no: "01", title: "Konsultasi & Persiapan", duration: "1 HARI KERJA", desc: "Konsultasi gratis untuk menentukan struktur CV, jenis usaha, dan dokumen yang diperlukan.", points: ["Diskusi tujuan bisnis & struktur CV", "Penentuan Sekutu Aktif & Pasif", "Persiapan dokumen para pihak"] },
-    { no: "02", title: "Pembuatan Akta Notaris", duration: "1-2 HARI KERJA", desc: "Notaris menyusun akta pendirian CV yang memuat anggaran dasar dan kesepakatan para pihak.", points: ["Drafting akta pendirian CV", "Penandatanganan akta oleh para pihak", "Pengesahan akta oleh notaris"] },
+    { no: "01", title: "Konsultasi & Persiapan", duration: "", desc: "Konsultasi gratis untuk menentukan struktur CV, jenis usaha, dan dokumen yang diperlukan.", points: [] },
+    { no: "02", title: "Pembuatan Akta Notaris", duration: "", desc: "Notaris menyusun akta pendirian CV yang memuat anggaran dasar dan kesepakatan para pihak.", points: [] },
     { no: "03", title: "NPWP & SKT Pajak", duration: "", desc: "Registrasi CV sebagai wajib pajak badan ke DJP.", points: [] },
     { no: "04", title: "NIB & Perizinan OSS", duration: "", desc: "Penerbitan NIB dan akses OSS RBA untuk perizinan berusaha.", points: [] },
   ],
