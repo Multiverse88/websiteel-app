@@ -165,7 +165,7 @@ export default function LayananKami() {
                   fill
                   sizes="24px"
                   className="object-cover scale-150" 
-                  style={{ objectPosition: "center 22%", width: "auto", height: "auto" }}
+                  style={{ objectPosition: "center 22%" }}
                 />
               </div>
               <div className="flex items-center gap-0.5 sm:gap-1">
