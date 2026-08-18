@@ -48,7 +48,7 @@ if (!endpoint || !accessKeyId || !secretAccessKey) {
 const s3Client = new S3Client({
   endpoint: endpoint.includes("://") ? endpoint : `https://${endpoint}`,
   credentials: { accessKeyId, secretAccessKey },
-  region: "us-east-1",
+  region: process.env.MINIO_REGION || "id-jkt-1",
   forcePathStyle: true,
   requestHandler: { requestTimeout: 10_000 },
 });
