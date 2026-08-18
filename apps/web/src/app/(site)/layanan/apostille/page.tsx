@@ -89,10 +89,10 @@ const pricingPackages: PricingPackage[] = [
 ];
 
 const apostilleBenefits = [
-  { icon: <Zap className="w-6 h-6 text-[#990202]" />, title: "Praktis & Cepat", description: "Proses online penuh, tidak perlu antre ke kantor" },
-  { icon: <Clock className="w-6 h-6 text-[#990202]" />, title: "Efisien Waktu", description: "Serahkan ke tim profesional EasyLegal" },
-  { icon: <ShieldCheck className="w-6 h-6 text-[#990202]" />, title: "Data Aman", description: "Keamanan dokumen dan data klien terjamin" },
-  { icon: <MessageCircle className="w-6 h-6 text-[#990202]" />, title: "Konsultasi Gratis", description: "Didampingi PLA sebelum & selama proses" }
+  { icon: <Zap className="w-6 h-6 text-[#990202]" />, title: "Praktis & Cepat", desc: "Proses online penuh, tidak perlu antre ke kantor" },
+  { icon: <Clock className="w-6 h-6 text-[#990202]" />, title: "Efisien Waktu", desc: "Serahkan ke tim profesional EasyLegal" },
+  { icon: <ShieldCheck className="w-6 h-6 text-[#990202]" />, title: "Data Aman", desc: "Keamanan dokumen dan data klien terjamin" },
+  { icon: <MessageCircle className="w-6 h-6 text-[#990202]" />, title: "Konsultasi Gratis", desc: "Didampingi PLA sebelum & selama proses" }
 ];
 
 export default function ApostillePage() {
