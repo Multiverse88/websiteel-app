@@ -76,6 +76,11 @@ export const dataPembubaran: BadanUsahaContent = {
       title: "Kepastian Kreditur",
       desc: "Proses pengumuman koran memastikan hak dan kewajiban dengan pihak ketiga/kreditur diselesaikan secara tertib.",
       Icon: "Star"
+    },
+    {
+      title: "Pencabutan Legalitas",
+      desc: "Perusahaan resmi dihapus dari sistem AHU Kemenkumham, menjamin entitas benar-benar berhenti beroperasi secara legal.",
+      Icon: "Target"
     }
   ],
 
