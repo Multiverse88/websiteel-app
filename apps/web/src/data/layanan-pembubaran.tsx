@@ -9,11 +9,12 @@ export const dataPembubaran: BadanUsahaContent = {
 
   heroBreadcrumbText: "Pembubaran Perusahaan",
   heroBadge: "Jasa Likuidasi",
-  heroTitle: (
-    <>
-      Pembubaran PT & CV secara <span className="text-[#990202]">Resmi</span> & <span className="text-[#990202]">Tuntas</span>.
-    </>
-  ),
+  heroTitle: [
+    { text: "Pembubaran PT & CV secara " },
+    { text: "Resmi", highlight: true },
+    { text: " & " },
+    { text: "Tuntas.", highlight: true }
+  ],
   heroDescription:
     "Urus proses likuidasi, pencabutan status badan hukum Kemenkumham, pengumuman koran, hingga penutupan NPWP perusahaan secara sah dan berkekuatan hukum.",
   heroImage: "/cerita-kami-team.webp",
@@ -23,9 +24,15 @@ export const dataPembubaran: BadanUsahaContent = {
     { icon: "Clock", value: "Proses Teratur", label: "Sesuai undang-undang perseroan" },
     { icon: "Upload", value: "Bebas Masalah", label: "Tutup NPWP & pajak tertib" }
   ],
-  heroFloatingCard: [
-    { title: "Dasar Hukum", subtitle: "UU No. 40 Tahun 2007", position: "top-10 -right-8" },
-    { title: "Kemenkumham", subtitle: "Pencabutan Status Resmi", position: "-bottom-10 -left-6" }
+  floatingBadges: [
+    { 
+      icon: "Scale", iconBg: "bg-red-50", iconColor: "text-red-700",
+      title: "Dasar Hukum", subtitle: "UU No. 40 Tahun 2007", position: "top-10 -right-8" 
+    },
+    { 
+      icon: "ShieldCheck", iconBg: "bg-red-50", iconColor: "text-red-700",
+      title: "Kemenkumham", subtitle: "Pencabutan Status Resmi", position: "-bottom-10 -left-6" 
+    }
   ],
 
   pengertianTag: "PENGERTIAN PEMBUBARAN",
