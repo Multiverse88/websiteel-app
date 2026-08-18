@@ -14,7 +14,7 @@ import trackingRoutes from './routes/tracking';
 import cronRoutes from './routes/cron';
 import mediaRoutes from './routes/media';
 import domainRoutes from './routes/domains';
-
+import settingsRoutes from './routes/settings';
 import path from 'path';
 
 const app = express();
@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(',').map(o => o.trim())
-  : ['https://easylegal.my.id', 'https://admin.easylegal.my.id', 'https://easylegal.biz.id'];
+  : ['https://easylegal.my.id', 'https://admin.easylegal.my.id', 'https://easylegal.biz.id', 'http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -58,6 +58,7 @@ app.use('/api/v1/tracking', trackingRoutes);
 app.use('/api/v1/cron', cronRoutes);
 app.use('/api/v1/media', mediaRoutes);
 app.use('/api/v1/domains', domainRoutes);
+app.use('/api/v1/settings', settingsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
