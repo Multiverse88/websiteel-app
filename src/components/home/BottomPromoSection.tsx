@@ -55,12 +55,18 @@ export default function BottomPromoSection() {
         const res = await fetch(apiUrl);
         if (res.ok) {
           const json = await res.json();
-          if (json.data && json.data.value) {
-            setPromos(JSON.parse(json.data.value));
+          // API returns the parsed JSON array directly in json.data
+          if (json.data && Array.isArray(json.data)) {
+            setPromos(json.data);
             return;
+          } else if (json.data && typeof json.data === 'string') {
+            try {
+              setPromos(JSON.parse(json.data));
+              return;
+            } catch (e) {}
           }
         }
-      } catch (e) {
+      } catch (error) {
         // silently fallback
       }
       setPromos(FALLBACK_PROMOS);
@@ -155,7 +161,7 @@ export default function BottomPromoSection() {
             {displayPromos.map((promo: any) => (
               <div key={promo.id} className="w-[85vw] sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.5rem)] shrink-0 snap-start bg-white rounded-3xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.015)] border border-gray-100 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col group p-3 sm:p-4">
                 <div className="relative aspect-square w-full bg-gray-50 rounded-2xl overflow-hidden mb-5 sm:mb-6">
-                  <Image src={promo.image} alt={promo.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                  <Image src={promo.image} alt={promo.title} fill sizes="(max-width: 640px) 85vw, (max-width: 768px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                 </div>
                 <div className="px-2 pb-2 flex flex-col flex-1">
                   <h3 className="text-[18px] sm:text-[20px] font-black text-gray-900 leading-snug mb-5">{promo.title}</h3>
@@ -194,7 +200,7 @@ export default function BottomPromoSection() {
               src="/images/transaksi-shopee.png" 
               alt="Transaksi Aman via Shopee" 
               fill 
-              sizes="(max-width: 768px) 300px, 380px"
+              sizes="(max-width: 640px) 300px, 380px"
               className="object-contain drop-shadow-sm hover:scale-105 transition-transform duration-700" 
             />
           </div>
@@ -210,6 +216,7 @@ export default function BottomPromoSection() {
                 src="/images/shopee.svg" 
                 alt="Shopee Logo" 
                 fill 
+                sizes="(max-width: 640px) 128px, 160px"
                 className="object-contain object-center md:object-left"
               />
             </div>

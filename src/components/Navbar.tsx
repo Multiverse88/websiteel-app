@@ -232,8 +232,7 @@ export default function Navbar() {
                 alt="EasyLegal Logo" 
                 width={150}
                 height={52}
-                className="object-contain"
-                style={{ width: "auto", height: "auto" }}
+                className="w-auto h-[52px] object-contain"
                 priority
               />
             </div>
