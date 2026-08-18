@@ -1397,12 +1397,12 @@ const dataYayasan: BadanUsahaContent = {
   stepsSubtitle:
     "Dari konsultasi sampai dokumen resmi di tangan — estimasi 14–30 hari kerja (syarat berlaku).",
   steps: [
-    { no: "01", title: "Konsultasi & Persiapan", duration: "1 HARI KERJA", desc: "Konsultasi gratis untuk menentukan tujuan yayasan, struktur organ, dan program kerja.", points: ["Penentuan visi & misi yayasan", "Identifikasi program sosial", "Persiapan data Pembina, Pengurus, Pengawas"] },
+    { no: "01", title: "Konsultasi & Persiapan", duration: "", desc: "Konsultasi gratis untuk menentukan tujuan yayasan, struktur organ, dan program kerja.", points: [] },
     { no: "02", title: "Pemesanan Nama ke AHU", duration: "", desc: "Waktu persetujuan nama bergantung pada AHU.", points: [] },
     { no: "03", title: "SK Kemenkumham", duration: "", desc: "Verifikasi dokumen dan penerbitan SK Pengesahan.", points: [] },
-    { no: "04", title: "NPWP Yayasan", duration: "1-2 HARI KERJA", desc: "Pendaftaran NPWP atas nama yayasan ke DJP.", points: ["Pendaftaran NPWP yayasan", "Penerbitan SKT Pajak", "Aktivasi akun pajak"] },
-    { no: "05", title: "NIB & Perizinan OSS", duration: "1-2 HARI KERJA", desc: "Penerbitan NIB dan akses OSS RBA untuk kegiatan operasional.", points: ["Pendaftaran akun OSS", "Penerbitan NIB"] },
-    { no: "06", title: "Penyerahan Dokumen", duration: "1 HARI KERJA", desc: "Penyerahan semua dokumen resmi yayasan ke alamat Anda.", points: ["Paket dokumen lengkap", "Saran operasional yayasan"] },
+    { no: "04", title: "NPWP Yayasan", duration: "", desc: "Pendaftaran NPWP atas nama yayasan ke DJP.", points: [] },
+    { no: "05", title: "NIB & Perizinan OSS", duration: "", desc: "Penerbitan NIB dan akses OSS RBA untuk kegiatan operasional.", points: [] },
+    { no: "06", title: "Penyerahan Dokumen", duration: "", desc: "Penyerahan semua dokumen resmi yayasan ke alamat Anda.", points: [] },
   ],
 
   faqTitle: "Pertanyaan seputar pendirian Yayasan.",
