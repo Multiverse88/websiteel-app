@@ -145,6 +145,7 @@ async function sync() {
     // Skip if already exists (check via HEAD)
     if (await fileExists(key)) {
       skipped++;
+      fs.unlinkSync(filePath); // delete local file
       continue;
     }
 
@@ -162,6 +163,7 @@ async function sync() {
 
       console.log(`  \u2713 ${relPath} \u2192 ${key}`);
       uploaded++;
+      fs.unlinkSync(filePath); // delete local file
     } catch (err) {
       console.error(`  \u2717 ${relPath} \u2192 ${key}: ${err.message}`);
       errors++;
