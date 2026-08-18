@@ -340,11 +340,11 @@ body:has(.has-service-cta) #footer-cta {
   100% { transform: translate3d(0, 0, 0); }
 }
 .animate-marquee-left {
-  animation: marquee-left 35s linear infinite;
+  animation: marquee-left 120s linear infinite;
   will-change: transform;
 }
 .animate-marquee-right {
-  animation: marquee-right 35s linear infinite;
+  animation: marquee-right 120s linear infinite;
   will-change: transform;
 }
 
