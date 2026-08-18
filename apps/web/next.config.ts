@@ -90,7 +90,7 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
-    let minioInternal = process.env.MINIO_ENDPOINT || "http://172.17.0.1:9000";
+    let minioInternal = process.env.MINIO_ENDPOINT || "http://157.10.252.77:9000";
     if (!minioInternal.includes("://")) {
       minioInternal = `https://${minioInternal}`;
     }
