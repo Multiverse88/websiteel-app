@@ -820,10 +820,11 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
             <div className="absolute bottom-[-20%] right-[-10%] w-[300px] h-[300px] bg-black/20 rounded-[60px] blur-[60px] pointer-events-none" />
             
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[14px] sm:rounded-[18px] py-5 sm:py-8 px-4 sm:px-10 relative z-10">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 sm:gap-y-8 lg:gap-y-0 gap-x-4 sm:gap-x-8 lg:gap-x-0 lg:divide-x lg:divide-white/15">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 sm:gap-y-8 lg:gap-y-0 gap-x-4 sm:gap-x-8 lg:gap-x-0 lg:divide-x lg:divide-white/15">
                 {[
                   { value: "13.000+", label: "Bisnis Terlayani" },
                   { value: "30+", label: "Jenis Layanan Legal" },
+                  { value: "4.9", label: "Rating Google (700+ Ulasan)" },
                   { value: "3", label: "Kantor Cabang" }
                 ].map((stat, idx) => (
                   <div key={idx} className="flex flex-col items-center justify-center text-center px-3 md:px-5 cursor-default">
