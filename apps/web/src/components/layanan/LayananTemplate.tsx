@@ -181,25 +181,11 @@ export default function LayananTemplate({ content }: Props) {
       </section>
 
       {/* ─── 3. PRICING SECTION ─── */}
-      <section id="paket-harga" className="py-8 sm:py-16">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-            <h2 className="text-[16px] sm:text-3xl font-extrabold text-gray-900 tracking-tight">
-              {c.pricingTitle}
-            </h2>
-            <p className="text-[16px] sm:text-[16px] text-gray-500 mt-2 sm:mt-3 font-medium">
-              {c.pricingSubtitle}
-            </p>
-          </div>
-
-          <Pricing
-            sectionTitle={c.pricingTitle}
-            sectionSubtitle={c.pricingSubtitle}
-            packages={pricingPackagesWithLinks}
-          />
-
-        </div>
-      </section>
+      <Pricing
+        sectionTitle={c.pricingTitle}
+        sectionSubtitle={c.pricingSubtitle}
+        packages={pricingPackagesWithLinks}
+      />
 
       <Offices />
 
