@@ -10,7 +10,7 @@ services:
   # ============================================
   admin-api:
     build:
-      context: ../easylegal-admin-api
+      context: ./apps/api
       dockerfile: Dockerfile
     container_name: easylegal-admin-api
     restart: unless-stopped
@@ -48,7 +48,7 @@ services:
   # ============================================
   app:
     build:
-      context: .
+      context: ./apps/web
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_TYPEBOT_BOT_ID=easylegal-assistant
