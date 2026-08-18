@@ -95,8 +95,35 @@ const nextConfig: NextConfig = {
       minioInternal = `https://${minioInternal}`;
     }
     return [
-      // Proxy /images/ to MinIO for uploaded articles (Cloudflare → Next.js doesn't have these files)
+            // Proxy CDN directories to MinIO
       { source: "/images/:path*", destination: `${minioInternal}/images/:path*` },
+      { source: "/icon-brand/:path*", destination: `${minioInternal}/images/icon-brand/:path*` },
+      { source: "/logo-berita/:path*", destination: `${minioInternal}/images/logo-berita/:path*` },
+      { source: "/promo/:path*", destination: `${minioInternal}/images/promo/:path*` },
+      { source: "/teamplalo/:path*", destination: `${minioInternal}/images/teamplalo/:path*` },
+      { source: "/testimoni/:path*", destination: `${minioInternal}/images/testimoni/:path*` },
+      { source: "/uploads/:path*", destination: `${minioInternal}/images/uploads/:path*` },
+
+      // Proxy top-level files to MinIO
+      { source: "/Logo EL.png", destination: `${minioInternal}/images/Logo EL.png` },
+      { source: "/Logo%20EL.png", destination: `${minioInternal}/images/Logo EL.png` },
+      { source: "/ISO-27001-2022.webp", destination: `${minioInternal}/images/ISO-27001-2022.webp` },
+      { source: "/ISO-sertifikat-scaled.jpg", destination: `${minioInternal}/images/ISO-sertifikat-scaled.jpg` },
+      { source: "/cerita-kami-team.webp", destination: `${minioInternal}/images/cerita-kami-team.webp` },
+      { source: "/Container.png", destination: `${minioInternal}/images/Container.png` },
+      { source: "/cta-bg-glow.jpg", destination: `${minioInternal}/images/cta-bg-glow.jpg` },
+      { source: "/EasyLegal.id_-scaled.jpg", destination: `${minioInternal}/images/EasyLegal.id_-scaled.jpg` },
+      { source: "/EasyLegal-Shopee.png", destination: `${minioInternal}/images/EasyLegal-Shopee.png` },
+      { source: "/Fast Track.png", destination: `${minioInternal}/images/Fast Track.png` },
+      { source: "/Fast%20Track.png", destination: `${minioInternal}/images/Fast Track.png` },
+      { source: "/hero-tentang-kami.webp", destination: `${minioInternal}/images/hero-tentang-kami.webp` },
+      { source: "/nib-desk-mockup.webp", destination: `${minioInternal}/images/nib-desk-mockup.webp` },
+      { source: "/Main big photo_ business person workingconsulting.png", destination: `${minioInternal}/images/Main big photo_ business person workingconsulting.png` },
+      { source: "/Main%20big%20photo_%20business%20person%20workingconsulting.png", destination: `${minioInternal}/images/Main big photo_ business person workingconsulting.png` },
+      { source: "/favicon.ico", destination: `${minioInternal}/images/favicon.ico` },
+      { source: "/apple-touch-icon.png", destination: `${minioInternal}/images/apple-touch-icon.png` },
+      { source: "/icon-192.png", destination: `${minioInternal}/images/icon-192.png` },
+      { source: "/icon-512.png", destination: `${minioInternal}/images/icon-512.png` },
 
       // Home & General
       { source: "/home-gads", destination: "/" },
