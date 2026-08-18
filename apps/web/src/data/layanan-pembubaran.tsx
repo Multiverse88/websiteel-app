@@ -39,13 +39,13 @@ export const dataPembubaran: BadanUsahaContent = {
   pengertianTitle: "Apa itu Pembubaran Perusahaan (Likuidasi)?",
   pengertianIntro:
     "Pembubaran perusahaan (likuidasi) adalah proses pengakhiran eksistensi suatu perusahaan secara hukum, yang meliputi penyelesaian seluruh aset, kewajiban, dan utang-piutang perusahaan kepada pihak ketiga, hingga status badan hukumnya resmi dicabut oleh negara.",
-  pengertianImage: "/images/layanan/pt-3.jpg",
+  pengertianImage: "/images/layanan/pt-2.jpg",
   pengertianImageAlt: "Penutupan perusahaan",
   hukumIcon: "Scale",
   hukumIconBg: "bg-red-50",
   hukumIconColor: "text-red-700",
   hukumTitle: "Landasan Hukum Pembubaran PT",
-  hukumLaw: "UU No. 40 Tahun 2007 (UUPT) Bab X Bagian Kesatu, Pasal 142 tentang Pembubaran, Likuidasi, dan Berakhirnya Status Badan Hukum Perseroan.",
+  hukumLaw: "Pasal 142 UU No. 40 Tahun 2007",
   pengertianDetail: (
     <>
       <p className="text-gray-600 mb-4 text-justify">
