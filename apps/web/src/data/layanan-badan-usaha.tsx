@@ -1195,8 +1195,8 @@ const dataFirma: BadanUsahaContent = {
   stepsSubtitle:
     "Dari konsultasi sampai dokumen resmi — estimasi 6–12 hari kerja.",
   steps: [
-    { no: "01", title: "Konsultasi & Perjanjian Sekutu", duration: "1 HARI KERJA", desc: "Diskusi dengan tim legal untuk menyusun perjanjian antar sekutu dan menentukan struktur Firma.", points: ["Diskusi peran & kontribusi setiap sekutu", "Penyusunan kesepakatan usaha", "Penentuan nama Firma"] },
-    { no: "02", title: "Pembuatan Akta Notaris", duration: "1-2 HARI KERJA", desc: "Notaris menyusun akta pendirian Firma yang memuat anggaran dasar & kesepakatan para sekutu.", points: ["Drafting akta pendirian Firma", "Penandatanganan akta oleh para sekutu", "Pengesahan akta notaris"] },
+    { no: "01", title: "Konsultasi & Perjanjian Sekutu", duration: "", desc: "Diskusi dengan tim legal untuk menyusun perjanjian antar sekutu dan menentukan struktur Firma.", points: [] },
+    { no: "02", title: "Pembuatan Akta Notaris", duration: "", desc: "Notaris menyusun akta pendirian Firma yang memuat anggaran dasar & kesepakatan para sekutu.", points: [] },
     { no: "03", title: "NPWP & SKT Pajak", duration: "", desc: "Registrasi Firma sebagai wajib pajak badan ke DJP.", points: [] },
     { no: "04", title: "NIB & Perizinan OSS", duration: "", desc: "Penerbitan NIB dan akses OSS RBA untuk perizinan berusaha.", points: [] },
   ],
