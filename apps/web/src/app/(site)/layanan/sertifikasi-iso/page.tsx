@@ -697,20 +697,7 @@ export default function SertifikasiIso() {
 
                     </div>
 
-                    <div>
-                      {/* Dotted Divider */}
-                      <div className="border-t border-dashed border-gray-200 my-4"></div>
 
-                      {/* Checklist */}
-                      <ul className="space-y-2">
-                        {step.checklist.map((item, pIdx) => (
-                          <li key={pIdx} className="flex items-start text-[16px] font-bold text-gray-700 leading-tight">
-                            <Check className="w-4 h-4 text-[#990202] mr-2 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                            <span dangerouslySetInnerHTML={{ __html: item }} />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
 
                   </div>
                 </div>
