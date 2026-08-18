@@ -30,7 +30,7 @@ services:
   # directly via DATABASE_URL / PGRST_DB_URI env vars.
   admin-api:                         # api.easylegal.my.id
     build:
-      context: ./infra/admin-api
+      context: ./apps/api
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
