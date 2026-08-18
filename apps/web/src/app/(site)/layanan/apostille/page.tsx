@@ -12,6 +12,8 @@ import {
   Globe,
   Info,
   Star,
+  Zap,
+  MessageCircle
 } from "lucide-react";
 import Image from "next/image";
 import CTA from "@/components/CTA";
@@ -22,6 +24,7 @@ import FadeIn from "@/components/FadeIn";
 import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
 import PricingFooter from "@/components/PricingFooter";
+import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 
@@ -83,6 +86,13 @@ const pricingPackages: PricingPackage[] = [
       }
     ]
   }
+];
+
+const apostilleBenefits = [
+  { icon: <Zap className="w-6 h-6 text-[#990202]" />, title: "Praktis & Cepat", description: "Proses online penuh, tidak perlu antre ke kantor" },
+  { icon: <Clock className="w-6 h-6 text-[#990202]" />, title: "Efisien Waktu", description: "Serahkan ke tim profesional EasyLegal" },
+  { icon: <ShieldCheck className="w-6 h-6 text-[#990202]" />, title: "Data Aman", description: "Keamanan dokumen dan data klien terjamin" },
+  { icon: <MessageCircle className="w-6 h-6 text-[#990202]" />, title: "Konsultasi Gratis", description: "Didampingi PLA sebelum & selama proses" }
 ];
 
 export default function ApostillePage() {
@@ -204,94 +214,35 @@ export default function ApostillePage() {
 
             </div>
 
-            {/* Right Column: Apostille Certificate Mockup */}
-            <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-8 lg:mt-0">
-              <div className="relative w-full max-w-[460px] aspect-[1.05] sm:aspect-square lg:aspect-[1.05]">
-
-                {/* Main Dark Backdrop */}
-                <div className="w-full h-full rounded-[36px] bg-gradient-to-br from-[#121E36] via-[#0C1221] to-[#600C0F] p-7 shadow-2xl relative border border-gray-800 flex flex-col justify-between overflow-hidden">
-
-                  {/* Glowing accent */}
-                  <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#990202]/30 rounded-full blur-3xl pointer-events-none" />
-
-                  {/* Mockup Header */}
-                  <div className="flex items-center justify-between border-b border-gray-800 pb-4 relative z-10">
-                    <div className="flex space-x-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    </div>
-                    <span className="text-[16px] font-extrabold text-gray-500 tracking-wider uppercase">KEMENKUMHAM RI</span>
-                  </div>
-
-                  {/* Mockup Body: Certificate */}
-                  <div className="my-6 bg-white/95 backdrop-blur-md rounded-2xl p-6 border border-gray-200/20 shadow-inner text-left relative z-10">
-                    {/* Seal watermark */}
-                    <div className="absolute top-4 right-4 w-14 h-14 rounded-full bg-[#990202]/8 flex items-center justify-center">
-                      <ShieldCheck className="w-7 h-7 text-[#990202]/40" />
-                    </div>
-
-                    <div className="flex items-center space-x-1.5 mb-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-[16px] font-extrabold text-emerald-600 tracking-wider uppercase">SERTIFIKAT APOSTILLE</span>
-                    </div>
-
-                    <h4 className="text-[16px] font-black text-gray-900 leading-snug pr-12">
-                      Convention de La Haye
-                    </h4>
-                    <p className="text-[16px] text-gray-500 leading-relaxed font-semibold mt-2">
-                      Pengesahan dokumen publik untuk keabsahan internasional di 129+ negara anggota Konvensi Hague.
-                    </p>
-
-                    {/* Mini doc details */}
-                    <div className="flex gap-3 mt-4">
-                      <div className="flex-1 bg-gray-50 rounded-lg p-2.5 border border-gray-100">
-                        <div className="text-[16px] font-bold text-gray-400 uppercase tracking-wider">Jenis</div>
-                        <div className="text-[16px] font-black text-gray-900 mt-0.5">Akta Notaris</div>
-                      </div>
-                      <div className="flex-1 bg-gray-50 rounded-lg p-2.5 border border-gray-100">
-                        <div className="text-[16px] font-bold text-gray-400 uppercase tracking-wider">SLA</div>
-                        <div className="text-[16px] font-black text-gray-900 mt-0.5">≤ 3 Hari</div>
-                      </div>
-                      <div className="flex-1 bg-gray-50 rounded-lg p-2.5 border border-gray-100">
-                        <div className="text-[16px] font-bold text-gray-400 uppercase tracking-wider">Negara</div>
-                        <div className="text-[16px] font-black text-gray-900 mt-0.5">129+</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Mockup footer */}
-                  <div className="flex justify-between items-center text-[16px] text-gray-500 font-bold border-t border-gray-800/50 pt-4 relative z-10">
-                    <span>APOSTILLE ONLINE</span>
-                    <span className="flex items-center gap-1.5 text-[#990202]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#990202] animate-pulse" />
-                      AHU Verified
-                    </span>
-                  </div>
+            {/* Right Column: Images */}
+            <div className="lg:col-span-5 relative w-full flex items-center justify-center mt-12 lg:mt-0">
+              <div className="relative w-full max-w-[500px] aspect-square">
+                {/* Main Image */}
+                <div className="absolute inset-0 rounded-[32px] overflow-hidden shadow-2xl">
+                  <Image
+                    src="/images/hero/hero.jpg"
+                    alt="Layanan Apostille"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#990202]/30 to-transparent mix-blend-multiply" />
                 </div>
 
-                {/* Floating Badge 1: Top Left */}
-                <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[220px] hover:-translate-y-1 transition-transform duration-300 z-20">
-                  <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                    <FileText className="w-4.5 h-4.5" />
+                {/* Floating Card */}
+                <div className="absolute -bottom-6 -left-6 sm:-left-12 bg-white p-5 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-gray-100 flex items-center gap-4 max-w-[280px]">
+                  <div className="w-12 h-12 bg-[#FFF5F5] rounded-full flex items-center justify-center flex-shrink-0">
+                    <Check className="w-6 h-6 text-[#990202]" strokeWidth={3} />
                   </div>
-                  <div className="text-left">
-                    <div className="text-[16px] font-black text-gray-950 leading-none">Apostille Resmi</div>
-                    <div className="text-[16px] text-gray-500 font-semibold mt-1">Kemenkumham RI</div>
-                  </div>
-                </div>
-
-                {/* Floating Badge 2: Bottom Right */}
-                <div className="absolute bottom-[76px] -right-6 bg-white rounded-2xl p-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.06)] flex items-center space-x-3 w-[215px] hover:-translate-y-1 transition-transform duration-300 z-20">
-                  <div className="w-8 h-8 rounded-full bg-red-50 text-[#990202] flex items-center justify-center flex-shrink-0">
-                    <Globe className="w-4.5 h-4.5" />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-[16px] font-black text-gray-950 leading-none">129+ Negara</div>
-                    <div className="text-[16px] text-gray-500 font-semibold mt-1">Konvensi Hague</div>
+                  <div>
+                    <div className="text-[16px] font-black text-gray-900 leading-tight mb-1">
+                      129+ Negara
+                    </div>
+                    <div className="text-[16px] text-gray-500 font-semibold leading-snug">
+                      Konvensi Hague.
+                    </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -331,50 +282,7 @@ export default function ApostillePage() {
       </section>
 
       {/* ─── 4. MENGAPA PILIH EASYLEGAL ─── */}
-      <section className="py-20 sm:py-28 bg-white border-b border-gray-200/40">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block text-[16px] font-black text-[#990202] uppercase tracking-[0.2em] mb-4">
-              MENGAPA PILIH EASYLEGAL?
-            </span>
-            <h2 className="font-heading text-[32px] sm:text-[40px] font-extrabold text-gray-950 tracking-tight">
-              Keuntungan Menggunakan Layanan Kami
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: "⚡", title: "Praktis & Cepat", desc: "Proses online penuh, tidak perlu antre ke kantor" },
-              { icon: "⏱", title: "Efisien Waktu", desc: "Serahkan ke tim profesional EasyLegal" },
-              { icon: "🔒", title: "Data Aman", desc: "Keamanan dokumen dan data klien terjamin" },
-              { icon: "💬", title: "Konsultasi Gratis", desc: "Didampingi PLA sebelum & selama proses" },
-            ].map((item, idx) => (
-              <div key={idx} className="group bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:border-[#990202]/20 transition-all duration-300">
-                <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">
-                  {item.icon}
-                </div>
-                <h3 className="font-heading font-black text-[16px] text-gray-950 mb-2">{item.title}</h3>
-                <p className="text-[16px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[660px] mx-auto mt-6">
-            {[
-              { icon: "💰", title: "Biaya Terjangkau", desc: "Transparan, tidak ada biaya tersembunyi" },
-              { icon: "🛡", title: "Transaksi Aman", desc: "Tersedia via marketplace (Tokopedia/Shopee)" }
-            ].map((item, idx) => (
-              <div key={idx} className="group bg-white rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:border-[#990202]/20 transition-all duration-300">
-                <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">
-                  {item.icon}
-                </div>
-                <h3 className="font-heading font-black text-[16px] text-gray-950 mb-2">{item.title}</h3>
-                <p className="text-[16px] text-gray-500 leading-relaxed font-semibold">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Benefits sectionTitleTag="MENGAPA PILIH EASYLEGAL?" sectionTitle="Keuntungan Menggunakan Layanan Kami" items={apostilleBenefits} />
 
       {/* ─── 5. BIAYA JASA APOSTILLE (PRICING) ─── */}
       <div id="paket-harga">
