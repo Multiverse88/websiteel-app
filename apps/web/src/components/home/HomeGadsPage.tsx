@@ -861,7 +861,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
               Fondasi legalitas bisnis
             </h2>
             <p className="text-[15px] sm:text-[16px] text-gray-500 max-w-3xl leading-relaxed">
-              Bukan sekadar urus dokumen. EasyLegal jadi mitra legalitas bisnis yang mendampingi lewat Personal Legal Assistant dari awal hingga tuntas, dengan biaya transparan dan respons cepat kapan saja dibutuhkan.
+              Bukan sekadar urus dokumen. EasyLegal jadi mitra legalitas bisnis yang mendampingi lewat Personal Legal Assistant bergelar Sarjana Hukum dari awal hingga tuntas, dengan biaya transparan dan respons cepat kapan saja dibutuhkan.
             </p>
           </div>
 
@@ -921,7 +921,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses cepat & terlacak</h3>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses Cepat & Terlacak</h3>
                 <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Mulai dari 12 jam kerja untuk layanan tercepat, dengan progres yang dipantau secara real-time. (Estimasi waktu bervariasi tergantung jenis layanan)</p>
               </div>
             </div>
@@ -935,7 +935,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                   </svg>
                 </div>
                 <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Personal Legal Assistant (PLA)</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Didampingi PLA bergelar Sarjana Hukum (S.H.), dengan dukungan Tim Legal Officer yang membantu pengurusan legalitas ribuan pelaku usaha.</p>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Didampingi PLA & Legal Officer bergelar Sarjana Hukum yang responsif dan berpengalaman, dari konsultasi awal hingga seluruh proses legalitas selesai.</p>
               </div>
             </div>
 
@@ -947,8 +947,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Legalitas & sertifikasi resmi</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Terdaftar PSE Kominfo, tersertifikasi ISO 9001 untuk manajemen mutu dan ISO 27001 untuk keamanan informasi.</p>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Legalitas & Sertifikasi Resmi</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Terdaftar PSE Kominfo, tersertifikasi ISO 9001 untuk standar manajemen mutu dan ISO 27001 untuk keamanan data dan informasi klien.</p>
               </div>
             </div>
 
@@ -960,8 +960,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Harga transparan, tanpa kejutan</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Semua biaya tertera jelas di awal, tanpa ada biaya tambahan di kemudian hari.</p>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Biaya All-In, Tanpa Biaya Tersembunyi</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Semua biaya tertera jelas di awal sebelum proses dimulai, tanpa ada biaya tambahan yang muncul di kemudian hari.</p>
               </div>
             </div>
 
@@ -973,23 +973,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>
                 </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-3 sm:mb-4">Kualitas & Garansi Terjamin</h3>
-                <ul className="space-y-3 sm:space-y-4 text-left">
-                  <li className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-                    <span className="text-[15px] sm:text-[15px] text-gray-500 leading-relaxed">
-                      Bekerja sama dengan notaris berpengalaman
-                    </span>
-                  </li>
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-                      <span className="text-[15px] sm:text-[15px] text-gray-500 leading-relaxed">
-                        Garansi uang kembali (Syarat & ketentuan berlaku)
-                      </span>
-                    </div>
-                  </li>
-                </ul>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Kualitas & Garansi Terjamin</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Bekerja sama dengan notaris berpengalaman untuk memastikan dokumen sah secara hukum. Garansi uang kembali jika dokumen legalitas tidak selesai. (Syarat & ketentuan berlaku)</p>
               </div>
             </div>
 
@@ -1001,8 +986,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
                 </div>
-                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses fleksibel, Offline atau 100% Online</h3>
-                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Bisa diurus dari mana saja secara online, atau tatap muka langsung sesuai kebutuhan.</p>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses Fleksibel, Offline Atau 100% Online</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Proses legalitas bisa dilakukan secara tatap muka langsung di kantor EasyLegal, atau sepenuhnya secara online dari mana saja sesuai kebutuhan.</p>
               </div>
             </div>
 
