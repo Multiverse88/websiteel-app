@@ -40,8 +40,8 @@ export default function Benefits({
           )}
         </div>
 
-        {/* Benefits Grid - exactly 4 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Benefits Grid - responsive to item count */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${items.length === 3 ? "lg:grid-cols-3 max-w-5xl mx-auto" : "lg:grid-cols-4"} gap-6`}>
           {items.map((item, idx) => (
             <div
               key={idx}
