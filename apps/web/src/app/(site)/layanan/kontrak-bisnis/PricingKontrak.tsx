@@ -166,90 +166,98 @@ export default function PricingKontrak() {
             onMouseMove={handleMouseMove}
             className={`flex overflow-x-auto gap-6 pb-8 pt-4 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory relative z-10 ${isDown ? 'cursor-grabbing' : 'cursor-grab'}`}
           >
-            {packages.map((pkg, idx) => (
-              <div 
-                key={idx} 
-                className={`relative flex flex-col min-w-[300px] sm:min-w-[340px] max-w-[340px] snap-center bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden text-left flex-shrink-0 ${pkg.isPopular ? 'ring-2 ring-[#990202]' : ''}`}
-              >
-                {/* Dark Header */}
-                <div className={`pt-10 pb-8 px-6 text-center ${pkg.isPopular ? 'bg-[#8B0000]' : 'bg-[#1A1A1A]'} text-white relative`}>
-                  {pkg.isPopular && (
-                    <div className="absolute top-4 left-0 right-0 text-center">
-                      <span className="text-[16px] font-black tracking-widest uppercase text-white/90">
-                        PALING POPULER
-                      </span>
+            {packages.map((pkg, idx) => {
+              const isPopular = pkg.isPopular;
+              const wrapperClass = `relative h-full min-w-[300px] sm:min-w-[340px] max-w-[340px] snap-center flex-shrink-0 group pointer-events-auto ${isPopular ? "pt-[16px] sm:pt-[20px]" : "pt-0"}`;
+              
+              const innerClass = isPopular
+                ? "rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)] transition-transform hover:-translate-y-1"
+                : "rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)] transition-transform hover:-translate-y-1";
+
+              return (
+                <div key={idx} className={wrapperClass}>
+                  {/* Popular Badge */}
+                  {isPopular && (
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[12px] font-[800] tracking-[0.06em] px-[16px] py-[6px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] z-20">
+                      PALING POPULER
                     </div>
                   )}
-                  <h3 className={`text-[16px] font-black tracking-widest uppercase mb-3 ${pkg.isPopular ? 'text-white' : 'text-gray-300'}`}>
-                    {pkg.title}
-                  </h3>
-                  <div className={`text-[16px] line-through font-semibold mb-1 ${pkg.isPopular ? 'text-white/60' : 'text-gray-500'}`}>
-                    {pkg.strikePrice}
-                  </div>
-                  <div className="text-[28px] sm:text-[32px] font-black tracking-tight flex justify-center items-start">
-                    <span className="text-[16px] mt-2 mr-1">Rp</span>
-                    {pkg.price.replace('Rp ', '')}
-                  </div>
-                </div>
 
-                {/* Content */}
-                <div className="p-6 sm:p-8 space-y-6">
+                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
                   
-                  {/* Lama Proses */}
-                  <div>
-                    <h4 className="text-[16px] font-black text-[#990202] tracking-widest uppercase mb-4">LAMA PROSES</h4>
-                    <div className="flex items-start text-[16px] font-medium text-gray-600">
-                      <Check className="w-4 h-4 text-[#10B981] mr-3 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                      <span>{pkg.lamaProses}</span>
+                  <div className={innerClass}>
+                    
+                    {/* Header */}
+                    <div className="text-center mb-[18px]">
+                      <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">
+                        {pkg.title}
+                      </div>
                     </div>
+
+                    <div className="text-center mb-[20px]">
+                      <div className={`text-[16px] line-through mb-[2px] ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
+                        {pkg.strikePrice}
+                      </div>
+                      <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">
+                        {pkg.price}
+                      </div>
+                    </div>
+
+                    <a
+                      href={getWhatsAppLink(pkg.whatsappMsg)}
+                      target="_blank" rel="noopener noreferrer"
+                      className={`w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center transition-transform hover:scale-[1.02] ${
+                        isPopular
+                          ? "bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] shadow-lg"
+                          : "bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)]"
+                      }`}
+                    >
+                      Pilih PAKET
+                    </a>
+
+                    <div className={`h-[1px] my-[24px] ${isPopular ? "bg-[oklch(0.45_0.1_25/0.5)]" : "bg-[oklch(0.35_0.01_90)]"}`} />
+
+                    <div className="flex-1 text-left">
+                      {/* Lama Proses */}
+                      <div className={`text-[14px] font-[800] tracking-[0.06em] mb-[12px] uppercase ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
+                        LAMA PROSES
+                      </div>
+                      <div className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4] mb-[20px]">
+                        <span className={`${isPopular ? "text-[oklch(0.78_0.15_145)]" : "text-[oklch(0.7_0.15_145)]"} font-[700] flex-shrink-0`}>✓</span>
+                        <span>{pkg.lamaProses}</span>
+                      </div>
+
+                      {/* Layanan Terdiri */}
+                      <div className={`text-[14px] font-[800] tracking-[0.06em] mb-[12px] uppercase ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
+                        LAYANAN TERDIRI
+                      </div>
+                      <div className="flex flex-col gap-[12px] mb-[20px]">
+                        {pkg.layanan.map((item, i) => (
+                          <div key={i} className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                            <span className={`${isPopular ? "text-[oklch(0.78_0.15_145)]" : "text-[oklch(0.7_0.15_145)]"} font-[700] flex-shrink-0`}>✓</span>
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Sudah Termasuk */}
+                      <div className={`text-[14px] font-[800] tracking-[0.06em] mb-[12px] uppercase ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
+                        SUDAH TERMASUK
+                      </div>
+                      <div className="flex flex-col gap-[12px]">
+                        {features.map((feature, i) => (
+                          <div key={i} className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                            <span className={`${isPopular ? "text-[oklch(0.78_0.15_145)]" : "text-[oklch(0.7_0.15_145)]"} font-[700] flex-shrink-0`}>✓</span>
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
-
-                  <div className="border-t border-dashed border-gray-200"></div>
-
-                  {/* Layanan Terdiri */}
-                  <div>
-                    <h4 className="text-[16px] font-black text-[#990202] tracking-widest uppercase mb-4">LAYANAN TERDIRI</h4>
-                    <ul className="space-y-3">
-                      {pkg.layanan.map((item, i) => (
-                        <li key={i} className="flex items-start text-[16px] font-medium text-gray-600">
-                          <Check className="w-4 h-4 text-[#10B981] mr-3 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="border-t border-dashed border-gray-200"></div>
-
-                  {/* Sudah Termasuk */}
-                  <div>
-                    <h4 className="text-[16px] font-black text-[#990202] tracking-widest uppercase mb-4">SUDAH TERMASUK</h4>
-                    <ul className="space-y-3">
-                      {features.map((feature, i) => (
-                        <li key={i} className="flex items-start text-[16px] font-medium text-gray-600">
-                          <Check className="w-4 h-4 text-[#10B981] mr-3 flex-shrink-0 mt-0.5" strokeWidth={3.5} />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
                 </div>
-
-                {/* Button */}
-                <div className="p-6 sm:p-8 pt-0 mt-auto">
-                  <a 
-                    href={getWhatsAppLink(pkg.whatsappMsg)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`block w-full py-3.5 rounded-xl text-center text-[16px] font-bold transition-all border ${pkg.isPopular ? 'bg-[#990202] text-white border-[#990202] hover:bg-[#7a0101]' : 'bg-white text-gray-900 border-gray-200 hover:border-gray-300 hover:bg-gray-50'}`}
-                  >
-                    Pilih PAKET
-                  </a>
-                </div>
-
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
