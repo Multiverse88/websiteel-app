@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { S3Client, PutObjectCommand, HeadObjectCommand } = require('@aws-sdk/client-s3');
+const { S3Client, PutObjectCommand, HeadObjectCommand, CreateBucketCommand } = require('@aws-sdk/client-s3');
 
 /**
  * Simple environment variables loader
@@ -113,6 +113,16 @@ async function fileExists(key) {
 async function sync() {
   console.log("\ud83d\ude80 Syncing static files to MinIO (bucket: " + bucketName + ")...");
   console.log("    Endpoint: " + endpoint);
+
+  // Ensure bucket exists
+  try {
+    await s3Client.send(new CreateBucketCommand({ Bucket: bucketName }));
+    console.log("    Bucket created successfully.");
+  } catch (err) {
+    if (err.name !== 'BucketAlreadyExists' && err.name !== 'BucketAlreadyOwnedByYou') {
+      console.log("    (Bucket might already exist or creation failed: " + err.message + ")");
+    }
+  }
 
   const allFiles = getFiles(publicDir);
   const imageFiles = allFiles.filter(f => getMimeType(f) !== 'application/octet-stream');
