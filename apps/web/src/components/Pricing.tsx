@@ -162,7 +162,7 @@ export default function Pricing({
                 : "rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]";
 
               return (
-                <div key={pIdx} className={wrapperClass}>
+                <div key={`pkg-${pIdx}`} className={wrapperClass}>
                   {/* Popular Badge */}
                   {isPopular && (
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[11px] sm:text-[12px] font-[800] tracking-[0.06em] px-[14px] py-[5px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] z-10">
@@ -219,7 +219,7 @@ export default function Pricing({
                       {pkg.groups.map((group, gIdx) => {
                         const isLastGroup = gIdx === pkg.groups.length - 1;
                         return (
-                          <div key={gIdx} className={!isLastGroup ? "mb-[22px]" : ""}>
+                          <div key={`pkg-${pIdx}-group-${gIdx}`} className={!isLastGroup ? "mb-[22px]" : ""}>
                             <div className={`text-[16px] font-[800] tracking-[0.06em] mb-[12px] uppercase ${isPopular ? "text-[oklch(0.8_0.03_25)]" : "text-[oklch(0.62_0.01_90)]"}`}>
                               {group.title}
                             </div>
@@ -242,7 +242,7 @@ export default function Pricing({
                                 }
 
                                 return (
-                                  <div key={iIdx} className={itemClass}>
+                                  <div key={`pkg-${pIdx}-group-${gIdx}-item-${iIdx}`} className={itemClass}>
                                     <span className={`${iconColor} font-[700] shrink-0 mt-[1px]`}>{iconText}</span>
                                     <span>
                                       {item.boldText && (
@@ -280,7 +280,7 @@ export default function Pricing({
               const label = typeof fn === "string" ? `(${idx + 1})` : `(${fn.label || idx + 1})`;
               const text = typeof fn === "string" ? fn : fn.text;
               return (
-                <span key={idx}>
+                <span key={`fn-${idx}`}>
                   {idx > 0 && <span className="mx-2" />}
                   <strong className="font-extrabold text-gray-800 mr-1">{label}</strong>
                   <span dangerouslySetInnerHTML={{ __html: text }} />
