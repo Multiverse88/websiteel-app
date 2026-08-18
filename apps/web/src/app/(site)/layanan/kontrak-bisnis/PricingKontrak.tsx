@@ -274,53 +274,59 @@ export default function PricingKontrak() {
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
             
             {/* Card 1 */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-5 text-left flex-1 min-w-[200px] hover:border-[#00A3FF] hover:shadow-md transition-all">
-              <h4 className="text-[16px] font-black text-[#990202] tracking-wider uppercase mb-1.5">SUPER EXPRESS</h4>
-              <p className="text-[16px] italic text-gray-500 font-medium mb-4 pb-4 border-b border-gray-100 border-dashed">(1 hari kerja)</p>
-              <div className="flex items-end justify-start text-[#990202] font-black tracking-tight">
+            <div className="bg-[oklch(0.2_0.01_90)] rounded-[20px] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)] p-6 text-left flex-1 min-w-[200px] hover:shadow-[0_12px_24px_oklch(0.2_0.02_90/0.2)] hover:-translate-y-1 transition-all">
+              <h4 className="text-[16px] font-[800] text-[oklch(0.98_0.003_90)] tracking-[0.04em] uppercase mb-1.5">SUPER EXPRESS</h4>
+              <p className="text-[14px] italic text-[oklch(0.62_0.01_90)] font-[500] mb-4 pb-4 border-b border-[oklch(0.35_0.01_90)] border-dashed">(1 hari kerja)</p>
+              <div className="flex items-end justify-start text-[oklch(0.98_0.003_90)] font-[800] tracking-tight">
                 <span className="text-[16px] mb-1 mr-1">+ Rp</span>
                 <span className="text-[26px] leading-none">749.000</span>
               </div>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-5 text-left flex-1 min-w-[200px] hover:border-[#00A3FF] hover:shadow-md transition-all">
-              <h4 className="text-[16px] font-black text-[#990202] tracking-wider uppercase mb-1.5">EXPRESS SERVICE</h4>
-              <p className="text-[16px] italic text-gray-500 font-medium mb-4 pb-4 border-b border-gray-100 border-dashed">(2 hari kerja)</p>
-              <div className="flex items-end justify-start text-[#990202] font-black tracking-tight">
+            <div className="bg-[oklch(0.2_0.01_90)] rounded-[20px] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)] p-6 text-left flex-1 min-w-[200px] hover:shadow-[0_12px_24px_oklch(0.2_0.02_90/0.2)] hover:-translate-y-1 transition-all">
+              <h4 className="text-[16px] font-[800] text-[oklch(0.98_0.003_90)] tracking-[0.04em] uppercase mb-1.5">EXPRESS SERVICE</h4>
+              <p className="text-[14px] italic text-[oklch(0.62_0.01_90)] font-[500] mb-4 pb-4 border-b border-[oklch(0.35_0.01_90)] border-dashed">(2 hari kerja)</p>
+              <div className="flex items-end justify-start text-[oklch(0.98_0.003_90)] font-[800] tracking-tight">
                 <span className="text-[16px] mb-1 mr-1">+ Rp</span>
                 <span className="text-[26px] leading-none">499.000</span>
               </div>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-5 text-left flex-1 min-w-[200px] hover:border-[#00A3FF] hover:shadow-md transition-all">
-              <h4 className="text-[16px] font-black text-[#990202] tracking-wider uppercase mb-1.5">REVISI TAMBAHAN</h4>
-              <p className="text-[16px] italic text-gray-500 font-medium mb-4 pb-4 border-b border-gray-100 border-dashed">(Setelah 2x revisi)</p>
-              <div className="flex items-end justify-start text-[#990202] font-black tracking-tight">
+            <div className="bg-[oklch(0.2_0.01_90)] rounded-[20px] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)] p-6 text-left flex-1 min-w-[200px] hover:shadow-[0_12px_24px_oklch(0.2_0.02_90/0.2)] hover:-translate-y-1 transition-all">
+              <h4 className="text-[16px] font-[800] text-[oklch(0.98_0.003_90)] tracking-[0.04em] uppercase mb-1.5">REVISI TAMBAHAN</h4>
+              <p className="text-[14px] italic text-[oklch(0.62_0.01_90)] font-[500] mb-4 pb-4 border-b border-[oklch(0.35_0.01_90)] border-dashed">(Setelah 2x revisi)</p>
+              <div className="flex items-end justify-start text-[oklch(0.98_0.003_90)] font-[800] tracking-tight">
                 <span className="text-[16px] mb-1 mr-1">+ Rp</span>
                 <span className="text-[26px] leading-none">249.000</span>
-                <span className="text-[16px] mb-1 ml-0.5 font-bold">/Revisi</span>
+                <span className="text-[14px] mb-1 ml-1 text-[oklch(0.62_0.01_90)] font-[700]">/Revisi</span>
               </div>
             </div>
 
             {/* Card 4 */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-5 text-left flex-1 min-w-[200px] hover:border-[#00A3FF] hover:shadow-md transition-all">
-              <h4 className="text-[16px] font-black text-[#990202] tracking-wider uppercase mb-1.5">LEGALISASI NOTARIS</h4>
-              <p className="text-[16px] italic text-gray-500 font-medium mb-4 pb-4 border-b border-gray-100 border-dashed">(Setelah 2x revisi)</p>
-              <div className="flex items-end justify-start text-[#990202] font-black tracking-tight">
+            <div className="bg-[oklch(0.2_0.01_90)] rounded-[20px] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)] p-6 text-left flex-1 min-w-[200px] hover:shadow-[0_12px_24px_oklch(0.2_0.02_90/0.2)] hover:-translate-y-1 transition-all">
+              <h4 className="text-[16px] font-[800] text-[oklch(0.98_0.003_90)] tracking-[0.04em] uppercase mb-1.5">LEGALISASI NOTARIS</h4>
+              <p className="text-[14px] italic text-[oklch(0.62_0.01_90)] font-[500] mb-4 pb-4 border-b border-[oklch(0.35_0.01_90)] border-dashed">(Opsional)</p>
+              <div className="flex items-end justify-start text-[oklch(0.98_0.003_90)] font-[800] tracking-tight">
                 <span className="text-[16px] mb-1 mr-1">+ Rp</span>
                 <span className="text-[26px] leading-none">499.000</span>
               </div>
             </div>
 
-            {/* Card 5 */}
-            <div className="bg-white rounded-xl border-2 border-[#00A3FF] shadow-[0_4px_16px_rgba(0,163,255,0.12)] p-5 text-left flex-1 min-w-[200px] hover:shadow-lg transition-all relative">
-              <h4 className="text-[16px] font-black text-[#990202] tracking-wider uppercase mb-1.5">KONSULTASI LEGAL</h4>
-              <p className="text-[16px] italic text-gray-500 font-medium mb-4 pb-4 border-b border-gray-100 border-dashed">(Durasi 1 Jam)</p>
-              <div className="flex items-end justify-start text-[#990202] font-black tracking-tight">
-                <span className="text-[16px] mb-1 mr-1">+ Rp</span>
-                <span className="text-[26px] leading-none">499.000</span>
+            {/* Card 5 (Premium) */}
+            <div className="relative group flex-1 min-w-[200px] hover:-translate-y-1 transition-all h-full">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[12px] font-[800] tracking-[0.06em] px-[14px] py-[4px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase -mt-3">
+                TERLARIS
+              </div>
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              <div className="rounded-[20px] p-6 h-full text-left bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)]">
+                <h4 className="text-[16px] font-[800] text-[oklch(0.98_0.003_90)] tracking-[0.04em] uppercase mb-1.5">KONSULTASI LEGAL</h4>
+                <p className="text-[14px] italic text-[oklch(0.8_0.03_25)] font-[500] mb-4 pb-4 border-b border-[oklch(0.45_0.1_25/0.5)] border-dashed">(Durasi 1 Jam)</p>
+                <div className="flex items-end justify-start text-[oklch(0.98_0.003_90)] font-[800] tracking-tight">
+                  <span className="text-[16px] mb-1 mr-1">+ Rp</span>
+                  <span className="text-[26px] leading-none">499.000</span>
+                </div>
               </div>
             </div>
 
