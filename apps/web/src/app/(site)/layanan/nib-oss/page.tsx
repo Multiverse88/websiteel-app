@@ -606,6 +606,8 @@ export default function NibOss() {
         </div>
       </section>
 
+      <Offices />
+
       {/* ─── 4a. LAYANAN TAMBAHAN (Tabbed interactive section) ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
@@ -1046,8 +1048,6 @@ export default function NibOss() {
           </div>
         </div>
       </section>
-
-      <Offices />
 
       {/* ─── 7. TESTIMONIALS ─── */}
       <MediaCoverage />
