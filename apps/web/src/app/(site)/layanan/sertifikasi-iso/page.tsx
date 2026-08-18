@@ -632,9 +632,6 @@ export default function SertifikasiIso() {
         sectionSubtitle={
           <>
             Semua paket include audit, training, sertifikasi resmi UAF, & dokumen mutu (SOP ISO).<br />
-
-      {/* ─── OFFICES ─── */}
-      <Offices />
             Tanpa tambahan biaya proses.
           </>
         }
@@ -643,6 +640,8 @@ export default function SertifikasiIso() {
         promoBadgeSrc="/images/badges/promo-50.png"
         hideFooter={true}
       />
+
+      <Offices />
 
       {/* ─── 3. PROSES SERTIFIKASI ISO (7 Langkah) ─── */}
       <section className="bg-white py-8 sm:py-8 sm:py-20 border-b border-gray-200/40">
