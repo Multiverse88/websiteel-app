@@ -52,6 +52,27 @@ interface Props {
 }
 
 export default function BadanUsahaTemplate({ content }: Props) {
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [isDown, setIsDown] = React.useState(false);
+  const [startX, setStartX] = React.useState(0);
+  const [scrollLeft, setScrollLeft] = React.useState(0);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDown(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+  const onMouseLeave = () => setIsDown(false);
+  const onMouseUp = () => setIsDown(false);
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDown || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
   const scrollToPricing = (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById("paket-harga");
@@ -253,9 +274,15 @@ export default function BadanUsahaTemplate({ content }: Props) {
             </div>
           </div>
 
-          <div className="relative max-w-[1240px] mx-auto">
-            
-            <div className="flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent snap-x snap-mandatory scroll-smooth relative z-10">
+          <div className="relative max-w-[1240px] mx-auto group/slider">
+            <div 
+              ref={scrollRef}
+              onMouseDown={onMouseDown}
+              onMouseLeave={onMouseLeave}
+              onMouseUp={onMouseUp}
+              onMouseMove={onMouseMove}
+              className={`flex overflow-x-auto gap-6 pb-8 pt-8 -mx-4 px-4 sm:-mx-8 sm:px-8 scrollbar-thin scrollbar-thumb-red-600/20 scrollbar-track-transparent relative z-10 ${isDown ? 'cursor-grabbing select-none' : 'cursor-grab snap-x snap-mandatory scroll-smooth'}`}
+            >
               {c.steps.map((step, idx) => (
                 <div key={idx} className="relative flex flex-col min-w-[280px] sm:min-w-[320px] max-w-[320px] group snap-start pt-5">
                   
