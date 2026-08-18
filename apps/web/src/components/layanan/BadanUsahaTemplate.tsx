@@ -363,7 +363,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
                   />
                 </div>
 
-                <div className="absolute bottom-[76px] left-2 sm:left-6 bg-white rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[250px] transition-transform hover:-translate-y-1 duration-300">
+                <div className="absolute -bottom-6 sm:-bottom-8 left-4 sm:left-6 bg-white rounded-2xl p-4 shadow-[0_15px_35px_rgba(0,0,0,0.06)] shadow-sm border border-black/[0.02] flex items-center space-x-3.5 w-[250px] transition-transform hover:-translate-y-1 duration-300 z-10">
                   <div className={`w-10 h-10 rounded-xl ${c.hukumIconBg} flex items-center justify-center ${c.hukumIconColor} flex-shrink-0`}>
                     {React.createElement(iconMap[c.hukumIcon] || FileText, { className: "w-5 h-5 stroke-[2.2]" })}
                   </div>
