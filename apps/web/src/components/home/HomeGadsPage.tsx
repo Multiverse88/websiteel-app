@@ -150,8 +150,8 @@ function CaraKerjaSection() {
   ];
 
   return (
-    <section className="py-8 sm:py-20 bg-white overflow-hidden relative">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
+    <section className="py-12 sm:py-20 bg-white overflow-hidden relative">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
           
           {/* LEFT: Step-by-Step Accordion Flow */}
@@ -813,13 +813,13 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
 
 
         {/* Premium Statistics Redesign */}
-        <div className="relative z-20 -mt-6 sm:-mt-10 max-w-[1240px] mx-auto px-4 sm:px-8 mb-10">
+        <div className="relative z-20 -mt-6 sm:-mt-10 max-w-[1240px] mx-auto px-5 sm:px-8 mb-10">
           <div className="bg-gradient-to-br from-[#9B1C1C] to-[#6A0D0D] rounded-[16px] sm:rounded-[20px] p-0.5 sm:p-1 shadow-[0_12px_30px_rgba(155,28,28,0.12)] relative overflow-hidden group">
             {/* Ambient Background Flares */}
             <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-white/10 rounded-full blur-[80px] pointer-events-none transition-transform duration-1000 group-hover:translate-x-10" />
             <div className="absolute bottom-[-20%] right-[-10%] w-[300px] h-[300px] bg-black/20 rounded-[60px] blur-[60px] pointer-events-none" />
             
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[14px] sm:rounded-[18px] py-5 sm:py-8 px-4 sm:px-10 relative z-10">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[14px] sm:rounded-[18px] py-5 sm:py-8 px-5 sm:px-10 relative z-10">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 sm:gap-y-8 lg:gap-y-0 gap-x-4 sm:gap-x-8 lg:gap-x-0 lg:divide-x lg:divide-white/15">
                 {[
                   { value: "13.000+", label: "Bisnis Terlayani" },
@@ -852,7 +852,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
         className="relative z-20 mb-6 sm:mb-8 animate-scroll-reveal"
         ref={quickToolsRef}
       >
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-8">
           <div className="mb-10 sm:mb-16 text-center flex flex-col items-center animate-scroll-reveal" ref={whyChooseHeaderRef}>
             <span className="text-[14px] sm:text-[16px] font-extrabold text-[#9B1C1C] tracking-[0.2em] uppercase mb-2 sm:mb-3 inline-block">
               KENAPA EASYLEGAL
@@ -905,10 +905,10 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
           WHY CHOOSE EL PARTNERS
           ═══════════════════════════════════════════ */}
       <section
-        className="pt-12 sm:pt-20 pb-12 sm:pb-24 bg-[#FAF9F6]"
+        className="pt-16 sm:pt-20 pb-16 sm:pb-24 bg-[#FAF9F6]"
         ref={whyChooseRef}
       >
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
 
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -1013,8 +1013,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
       {/* ═══════════════════════════════════════════
           TRACKING REAL-TIME SECTION
           ═══════════════════════════════════════════ */}
-      <section className="py-12 sm:py-24 bg-[#FAF9F6] animate-scroll-reveal" ref={trackingRef}>
-        <div className="max-w-[800px] mx-auto px-4 sm:px-8">
+      <section className="py-16 sm:py-24 bg-[#FAF9F6] animate-scroll-reveal" ref={trackingRef}>
+        <div className="max-w-[800px] mx-auto px-5 sm:px-8">
           <div className="mb-6 sm:mb-10 text-center">
             <span className="text-[14px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-2 sm:mb-3 inline-block">
               TRANSPARANSI PENUH
@@ -1102,8 +1102,8 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
       {/* ═══════════════════════════════════════════
           VIDEO PROFILE
           ═══════════════════════════════════════════ */}
-      <section className="py-12 sm:py-24 bg-white">
-        <div className="max-w-[1000px] mx-auto px-4 sm:px-8">
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="max-w-[1000px] mx-auto px-5 sm:px-8">
           <div 
             className="text-left sm:text-center mb-6 sm:mb-16 animate-scroll-reveal"
             ref={videoProfilHeaderRef}

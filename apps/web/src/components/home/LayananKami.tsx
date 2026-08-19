@@ -29,7 +29,7 @@ export default function LayananKami() {
       ref={sectionRef}
     >
       <div className="ambient-gradient" />
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-8 relative z-10">
         {/* Header */}
         <div className="mb-5 sm:mb-10">
           <span className="text-[16px] sm:text-[16px] font-bold text-primary uppercase tracking-[0.15em]">
