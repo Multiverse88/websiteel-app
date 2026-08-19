@@ -600,12 +600,12 @@ export default function Navbar() {
                         <div key={idx} className="flex flex-col">
                           {item.subItems ? (
                             <details className="group">
-                              <summary className="flex items-center justify-between px-3 py-2 text-[14px] font-semibold text-dark cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:text-primary">
+                              <summary className="flex items-center justify-between px-3 py-2 text-[14px] font-semibold text-dark group-open:text-primary cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:text-primary active:bg-slate-50 rounded-lg">
                                 <div className="flex items-center">
                                   <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
                                   <span>{item.title}</span>
                                 </div>
-                                <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+                                <ChevronDown className="w-4 h-4 text-slate-400 group-open:text-primary group-open:rotate-180 transition-transform" />
                               </summary>
                               <div className="flex flex-col pl-9 pr-3 pb-2 space-y-2 mt-1">
                                 {item.subItems.map((sub, sIdx) => (
@@ -636,12 +636,12 @@ export default function Navbar() {
                         <div key={idx} className="flex flex-col">
                           {item.subItems ? (
                             <details className="group">
-                              <summary className="flex items-center justify-between px-3 py-2 text-[14px] font-semibold text-dark cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:text-primary">
+                              <summary className="flex items-center justify-between px-3 py-2 text-[14px] font-semibold text-dark group-open:text-primary cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:text-primary active:bg-slate-50 rounded-lg">
                                 <div className="flex items-center">
                                   <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
                                   <span>{item.title}</span>
                                 </div>
-                                <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+                                <ChevronDown className="w-4 h-4 text-slate-400 group-open:text-primary group-open:rotate-180 transition-transform" />
                               </summary>
                               <div className="flex flex-col pl-9 pr-3 pb-2 space-y-2 mt-1">
                                 {item.subItems.map((sub, sIdx) => (
