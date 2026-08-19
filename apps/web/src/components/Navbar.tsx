@@ -517,64 +517,20 @@ export default function Navbar() {
       {isOpen && (
         <div ref={mobileDrawerRef} className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg z-40 animate-slide-down max-h-[85vh] overflow-y-auto">
           <div className="px-4 pt-2 pb-6 space-y-1">
-            {[
-              { name: "Home", href: "/home-gads" },
-              { name: "Artikel", href: "/artikel" },
-              { name: "Testimoni", href: "/testimoni" },
-              { name: "Tentang Kami", href: "/tentang-kami" },
-              { name: "Kontak", href: "/kontak" },
-            ].map((item) => {
-              const isActive =
-                item.href === "/home-gads"
-                  ? (pathname === "/" || pathname === "/home-gads")
-                  : pathname.startsWith(item.href);
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={handleLinkClick}
-                  className={`block px-3 py-2.5 rounded-lg text-[16px] font-medium ${
-                    isActive
-                      ? "bg-primary-light text-primary font-semibold"
-                      : "text-muted hover:bg-bg-light hover:text-dark"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
+            <Link
+              href="/home-gads"
+              onClick={handleLinkClick}
+              className={`block px-3 py-2.5 rounded-lg text-[16px] font-medium ${
+                pathname === "/" || pathname === "/home-gads"
+                  ? "bg-primary-light text-primary font-semibold"
+                  : "text-muted hover:bg-bg-light hover:text-dark"
+              }`}
+            >
+              Home
+            </Link>
 
-            {/* Tools accordion */}
-            <div className="border-t border-border pt-2 mt-2">
-              <button
-                onClick={() => setIsToolsOpen(!isToolsOpen)}
-                className="w-full flex justify-between items-center px-3 py-2.5 text-[16px] font-medium text-muted hover:text-dark"
-              >
-                <span>Tools</span>
-                <ChevronDown
-                  className={`w-5 h-5 transition-transform duration-200 ${
-                    isToolsOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {isToolsOpen && (
-                <div className="pl-4 pr-2 mt-1 py-1 bg-bg-light/50 rounded-lg space-y-1">
-                  <Link href="/cek-nama" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
-                    Cek Nama PT
-                  </Link>
-                  <Link href="/cek-nama?tab=merek" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
-                    Cek Nama Merek
-                  </Link>
-                  <Link href="/cek-kbli" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
-                    Cek KBLI
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Services accordion */}
-            <div className="border-t border-border pt-2 mt-2">
+{/* Services accordion */}
+            <div >
               <button
                 onClick={() => setIsLayananOpen(!isLayananOpen)}
                 className="w-full flex justify-between items-center px-3 py-2.5 text-[16px] font-medium text-muted hover:text-dark"
@@ -684,7 +640,64 @@ export default function Navbar() {
               )}
             </div>
 
-            <div className="border-t border-border pt-4 mt-4 flex flex-col space-y-3 px-3">
+
+{/* Tools accordion */}
+            <div >
+              <button
+                onClick={() => setIsToolsOpen(!isToolsOpen)}
+                className="w-full flex justify-between items-center px-3 py-2.5 text-[16px] font-medium text-muted hover:text-dark"
+              >
+                <span>Tools</span>
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    isToolsOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {isToolsOpen && (
+                <div className="pl-4 pr-2 mt-1 py-1 bg-bg-light/50 rounded-lg space-y-1">
+                  <Link href="/cek-nama" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                    Cek Nama PT
+                  </Link>
+                  <Link href="/cek-nama?tab=merek" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                    Cek Nama Merek
+                  </Link>
+                  <Link href="/cek-kbli" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                    Cek KBLI
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            
+            {[
+              { name: "Artikel", href: "/artikel" },
+              { name: "Testimoni", href: "/testimoni" },
+              { name: "Tentang Kami", href: "/tentang-kami" },
+              { name: "Kontak", href: "/kontak" },
+            ].map((item) => {
+              const isActive =
+                item.href === "/home-gads"
+                  ? (pathname === "/" || pathname === "/home-gads")
+                  : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={handleLinkClick}
+                  className={`block px-3 py-2.5 rounded-lg text-[16px] font-medium ${
+                    isActive
+                      ? "bg-primary-light text-primary font-semibold"
+                      : "text-muted hover:bg-bg-light hover:text-dark"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+
+                        <div className="border-t border-border pt-4 mt-4 flex flex-col space-y-3 px-3">
               <a
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.")}
                 target="_blank"
