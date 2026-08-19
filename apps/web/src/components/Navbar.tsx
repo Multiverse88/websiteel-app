@@ -164,6 +164,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const dropdownRef = React.useRef<HTMLDivElement>(null);
   const toolsDropdownRef = React.useRef<HTMLDivElement>(null);
+  const mobileDrawerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ticking = false;
@@ -187,6 +188,10 @@ export default function Navbar() {
     window.addEventListener("open-layanan-mega-menu", handleOpenMegaMenu);
 
     const handleClickOutside = (event: MouseEvent) => {
+      // Ignore if clicking inside the mobile drawer
+      if (mobileDrawerRef.current && mobileDrawerRef.current.contains(event.target as Node)) {
+        return;
+      }
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsLayananOpen(false);
       }
@@ -510,7 +515,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg z-40 animate-slide-down max-h-[85vh] overflow-y-auto">
+        <div ref={mobileDrawerRef} className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg z-40 animate-slide-down max-h-[85vh] overflow-y-auto">
           <div className="px-4 pt-2 pb-6 space-y-1">
             {[
               { name: "Home", href: "/home-gads" },
