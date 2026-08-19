@@ -114,7 +114,7 @@ export default function MediaCoverage() {
       <section className="bg-white border-t border-gray-100/60 py-16 sm:py-24">
         
         {/* Unified Header */}
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-8 flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
           <h2 className="text-[28px] sm:text-[36px] font-black text-[#1A1A1A] mb-4 tracking-tight">
             Mitra Legalitas yang Bisa Diandalkan
           </h2>
@@ -127,7 +127,7 @@ export default function MediaCoverage() {
         </div>
 
         {/* Marquees Container */}
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 flex flex-col space-y-12 sm:space-y-16">
+        <div className="max-w-[1440px] mx-auto flex flex-col space-y-12 sm:space-y-16">
           
           {/* OUR CLIENTS */}
           <div className="w-full relative">
@@ -138,7 +138,7 @@ export default function MediaCoverage() {
               {[1, 2].map((groupIndex) => (
                 <div 
                   key={`clients-${groupIndex}`} 
-                  className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-4 sm:px-8 group-hover:[animation-play-state:paused]"
+                  className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-5 sm:px-8 group-hover:[animation-play-state:paused]"
                 >
                   {CLIENTS.map((client, idx) => (
                     <div key={`client-${groupIndex}-${idx}`} className="flex items-center justify-center flex-shrink-0 w-32 sm:w-48 h-16 sm:h-20 relative transition-transform duration-300 hover:scale-110 cursor-pointer">
@@ -166,7 +166,7 @@ export default function MediaCoverage() {
               {[1, 2].map((groupIndex) => (
                 <div 
                   key={`banks-${groupIndex}`} 
-                  className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-4 sm:px-8 group-hover:[animation-play-state:paused]"
+                  className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-5 sm:px-8 group-hover:[animation-play-state:paused]"
                 >
                   {BANKS.map((bank, idx) => (
                     <div key={`bank-${groupIndex}-${idx}`} className="flex items-center justify-center flex-shrink-0 w-32 sm:w-48 h-16 sm:h-20 relative transition-transform duration-300 hover:scale-110 cursor-pointer">
@@ -190,7 +190,7 @@ export default function MediaCoverage() {
             <div className="text-[14px] sm:text-[16px] font-bold text-gray-800 uppercase tracking-[0.15em] mb-10 text-center ml-[0.15em]">
               LIPUTAN MEDIA EASYLEGAL
             </div>
-            <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-6 sm:gap-10 px-4 sm:px-8 w-full">
+            <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-6 sm:gap-10 px-5 sm:px-8 w-full">
               {MEDIA.map((item) => (
                 <a 
                   key={`media-item-static-${item.id}`} 
