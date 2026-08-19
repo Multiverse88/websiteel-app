@@ -380,11 +380,6 @@ body:has(.has-service-cta) #footer-cta {
 
 /* Mobile performance overrides */
 @media (max-width: 768px) {
-  /* Pause infinite marquee animations */
-  .animate-marquee-left,
-  .animate-marquee-right {
-    animation: none !important;
-  }
   .marquee-container {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
