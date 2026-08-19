@@ -593,10 +593,29 @@ export default function Navbar() {
                     <div className="space-y-1">
                       {megaMenuData.leftColumn.items.map((item, idx) => (
                         <div key={idx} className="flex flex-col">
-                          <Link href={item.href} onClick={handleLinkClick} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
-                            <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
-                            <span>{item.title}</span>
-                          </Link>
+                          {item.subItems ? (
+                            <details className="group">
+                              <summary className="flex items-center justify-between px-3 py-2 text-[14px] font-semibold text-dark cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:text-primary">
+                                <div className="flex items-center">
+                                  <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
+                                  <span>{item.title}</span>
+                                </div>
+                                <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+                              </summary>
+                              <div className="flex flex-col pl-9 pr-3 pb-2 space-y-2 mt-1">
+                                {item.subItems.map((sub, sIdx) => (
+                                  <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[13px] text-slate-600 hover:text-primary">
+                                    {sub.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            </details>
+                          ) : (
+                            <Link href={item.href} onClick={handleLinkClick} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                              <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
+                              <span>{item.title}</span>
+                            </Link>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -610,10 +629,29 @@ export default function Navbar() {
                     <div className="space-y-1">
                       {megaMenuData.middleColumn.items.map((item, idx) => (
                         <div key={idx} className="flex flex-col">
-                          <Link href={item.href} onClick={handleLinkClick} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
-                            <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
-                            <span>{item.title}</span>
-                          </Link>
+                          {item.subItems ? (
+                            <details className="group">
+                              <summary className="flex items-center justify-between px-3 py-2 text-[14px] font-semibold text-dark cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:text-primary">
+                                <div className="flex items-center">
+                                  <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
+                                  <span>{item.title}</span>
+                                </div>
+                                <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+                              </summary>
+                              <div className="flex flex-col pl-9 pr-3 pb-2 space-y-2 mt-1">
+                                {item.subItems.map((sub, sIdx) => (
+                                  <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[13px] text-slate-600 hover:text-primary">
+                                    {sub.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            </details>
+                          ) : (
+                            <Link href={item.href} onClick={handleLinkClick} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                              <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
+                              <span>{item.title}</span>
+                            </Link>
+                          )}
                         </div>
                       ))}
                     </div>
