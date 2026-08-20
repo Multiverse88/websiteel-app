@@ -14,6 +14,47 @@ interface Redirect {
 
 const emptyForm = { domain: 'easylegal.my.id', slug: '', destination: '' }
 
+function shortLinkUrl(redirect: Redirect) {
+  return `https://${redirect.domain}/${redirect.slug.replace(/^\/+/, '')}`
+}
+
+function ShortLinkCell({ redirect }: { redirect: Redirect }) {
+  const [copied, setCopied] = useState(false)
+  const url = shortLinkUrl(redirect)
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      // clipboard API unavailable — silently ignore, link is still clickable
+    }
+  }
+
+  return (
+    <div className="short-link">
+      <a
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+        className="short-link__url"
+        title={url}
+      >
+        {url}
+      </a>
+      <button
+        type="button"
+        className={`short-link__copy${copied ? ' short-link__copy--copied' : ''}`}
+        onClick={copy}
+        title="Copy link"
+      >
+        {copied ? 'Copied!' : 'Copy'}
+      </button>
+    </div>
+  )
+}
+
 export default function Redirects() {
   const [redirects, setRedirects] = useState<Redirect[]>([])
   const [loading, setLoading] = useState(true)
@@ -80,20 +121,27 @@ export default function Redirects() {
   }
 
   const columns = [
-    { key: 'domain', label: 'Domain' },
-    { key: 'slug', label: 'Slug' },
-    { 
-      key: 'destination', 
+    {
+      key: 'link',
+      label: 'Short Link',
+      render: (_val: unknown, row: Redirect) => <ShortLinkCell redirect={row} />,
+    },
+    {
+      key: 'destination',
       label: 'Destination',
       render: (val: string) => (
-        <div className="max-w-xs md:max-w-md lg:max-w-lg truncate" title={val}>
-          <a href={val} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
+        <div className="short-link__url short-link__url--dest" title={val}>
+          <a href={val} target="_blank" rel="noreferrer">
             {val}
           </a>
         </div>
       )
     },
-    { key: 'clicks', label: 'Clicks' },
+    {
+      key: 'clicks',
+      label: 'Clicks',
+      render: (val: number) => <span className="badge-count">{val ?? 0}</span>,
+    },
   ]
 
   return (
