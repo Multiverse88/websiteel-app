@@ -82,7 +82,17 @@ export default function Redirects() {
   const columns = [
     { key: 'domain', label: 'Domain' },
     { key: 'slug', label: 'Slug' },
-    { key: 'destination', label: 'Destination' },
+    { 
+      key: 'destination', 
+      label: 'Destination',
+      render: (val: string) => (
+        <div className="max-w-xs md:max-w-md lg:max-w-lg truncate" title={val}>
+          <a href={val} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
+            {val}
+          </a>
+        </div>
+      )
+    },
     { key: 'clicks', label: 'Clicks' },
   ]
 
