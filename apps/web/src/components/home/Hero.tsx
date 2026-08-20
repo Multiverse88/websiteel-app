@@ -142,7 +142,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
 
 
       {/* Trust Badges - Positioned Right */}
-      <div className={`absolute bottom-[5%] md:bottom-[40px] right-2 md:right-10 bg-white/90 backdrop-blur-sm rounded-lg md:rounded-[20px] px-2 py-1.5 md:px-6 md:py-3.5 shadow-md md:shadow-[0_8px_25px_rgba(0,0,0,0.06)] border border-white/60 flex items-center space-x-2 md:space-x-5 z-20 animate-float-medium ${floatClass}`}>
+      <div className={`absolute bottom-[calc(5%+20px)] md:bottom-[60px] right-2 md:right-10 bg-white/90 backdrop-blur-sm rounded-lg md:rounded-[20px] px-2 py-1.5 md:px-6 md:py-3.5 shadow-md md:shadow-[0_8px_25px_rgba(0,0,0,0.06)] border border-white/60 flex items-center space-x-2 md:space-x-5 z-20 animate-float-medium ${floatClass}`}>
         <Image
           src="/ISO-27001-2022.webp"
           alt="ISO 27001"
