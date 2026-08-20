@@ -3,8 +3,11 @@ import { api } from '../lib/api'
 import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
 
-// cache-bust: 2026-08-20-01 (forces a new Vite content hash so Cloudflare's
-// stale-404-cached asset filename from a prior deploy race doesn't get reused)
+// cache-bust: forces a new Vite content hash so Cloudflare's stale-404-cached
+// asset filename from a prior deploy race doesn't get reused. Actual side
+// effect (not just a comment) since comments are stripped by the minifier
+// and don't change the output hash.
+console.debug('[build] redirects-ui rev 2026-08-20-02')
 
 interface Redirect {
   id: string
