@@ -15,4 +15,4 @@ RUN npx tsc > /dev/null 2>&1 || true
 
 EXPOSE 4000
 
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]
