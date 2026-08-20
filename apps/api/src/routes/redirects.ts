@@ -25,7 +25,7 @@ router.get("/:slug", async (req, res) => {
     const domain = (req.query.domain as string) || "easylegal.my.id";
     const redirect = await prisma.redirect.findUnique({
       where: { domain_slug: { domain, slug } },
-      select: { destination: true },
+      select: { destination: true, description: true },
     });
 
     if (redirect) {
@@ -47,14 +47,14 @@ router.get("/:slug", async (req, res) => {
 // POST /api/v1/redirects
 router.post("/", requireAuth, async (req, res) => {
   try {
-    const { domain = 'easylegal.my.id', slug, destination } = req.body;
+    const { domain = 'easylegal.my.id', slug, destination, description } = req.body;
 
     if (!slug || !destination) {
       return res.status(400).json({ error: "Slug dan destination wajib diisi" });
     }
 
     const redirect = await prisma.redirect.create({
-      data: { domain, slug, destination },
+      data: { domain, slug, destination, description: description || null },
     });
 
     res.status(201).json({ data: redirect });
@@ -71,7 +71,7 @@ router.post("/", requireAuth, async (req, res) => {
 router.put("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
-    const { domain = 'easylegal.my.id', slug, destination } = req.body;
+    const { domain = 'easylegal.my.id', slug, destination, description } = req.body;
 
     const existing = await prisma.redirect.findUnique({ where: { id } });
     if (!existing) {
@@ -84,6 +84,7 @@ router.put("/:id", requireAuth, async (req, res) => {
         domain: domain || existing.domain,
         slug: slug || existing.slug,
         destination: destination || existing.destination,
+        description: description !== undefined ? (description || null) : existing.description,
       },
     });
 
