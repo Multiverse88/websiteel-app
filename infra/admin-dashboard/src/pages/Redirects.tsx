@@ -109,8 +109,7 @@ export default function Redirects() {
           <select className="form-input" value={form.domain} onChange={(e) => setForm({ ...form, domain: e.target.value })}>
             <option value="easylegal.my.id">easylegal.my.id</option>
             <option value="easylegal.biz.id">easylegal.biz.id</option>
-            <option value="easylegal.co.id">easylegal.co.id</option>
-            <option value="easylegal.id">easylegal.id</option>
+            
           </select>
         </div>
         <div className="form-group">
