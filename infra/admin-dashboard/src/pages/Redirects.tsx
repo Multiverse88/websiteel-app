@@ -5,13 +5,14 @@ import Modal from '../components/Modal'
 
 interface Redirect {
   id: string
+  domain: string
   slug: string
   destination: string
   clicks: number
   createdAt: string
 }
 
-const emptyForm = { slug: '', destination: '' }
+const emptyForm = { domain: 'easylegal.my.id', slug: '', destination: '' }
 
 export default function Redirects() {
   const [redirects, setRedirects] = useState<Redirect[]>([])
@@ -74,11 +75,12 @@ export default function Redirects() {
 
   const openEdit = (redirect: Redirect) => {
     setEditing(redirect)
-    setForm({ slug: redirect.slug, destination: redirect.destination })
+    setForm({ domain: redirect.domain || 'easylegal.my.id', slug: redirect.slug, destination: redirect.destination })
     setModalOpen(true)
   }
 
   const columns = [
+    { key: 'domain', label: 'Domain' },
     { key: 'slug', label: 'Slug' },
     { key: 'destination', label: 'Destination' },
     { key: 'clicks', label: 'Clicks' },
@@ -102,6 +104,15 @@ export default function Redirects() {
       />
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Edit Redirect' : 'New Redirect'}>
+        <div className="form-group">
+          <label className="form-label">Domain</label>
+          <select className="form-input" value={form.domain} onChange={(e) => setForm({ ...form, domain: e.target.value })}>
+            <option value="easylegal.my.id">easylegal.my.id</option>
+            <option value="easylegal.biz.id">easylegal.biz.id</option>
+            <option value="easylegal.co.id">easylegal.co.id</option>
+            <option value="easylegal.id">easylegal.id</option>
+          </select>
+        </div>
         <div className="form-group">
           <label className="form-label">Slug / From Path</label>
           <input className="form-input" placeholder="/old-path" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />

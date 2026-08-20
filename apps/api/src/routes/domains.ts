@@ -21,7 +21,7 @@ router.get('/', requireAuth, async (req, res) => {
 router.get('/:id', requireAuth, async (req, res) => {
   try {
     const domain = await prisma.domain.findUnique({
-      where: { id: req.params.id }
+      where: { id: req.params.id as string }
     });
     if (!domain) {
       return res.status(404).json({ error: 'Domain not found' });
@@ -63,7 +63,7 @@ router.put('/:id', requireAuth, async (req, res) => {
     const { name, hostname, description } = req.body;
     
     const updatedDomain = await prisma.domain.update({
-      where: { id: req.params.id },
+      where: { id: req.params.id as string },
       data: {
         ...(name && { name }),
         ...(hostname && { hostname }),
@@ -82,7 +82,7 @@ router.put('/:id', requireAuth, async (req, res) => {
 router.delete('/:id', requireAuth, async (req, res) => {
   try {
     await prisma.domain.delete({
-      where: { id: req.params.id }
+      where: { id: req.params.id as string }
     });
     res.json({ success: true });
   } catch (error: any) {

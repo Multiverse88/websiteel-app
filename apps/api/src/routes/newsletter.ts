@@ -66,7 +66,7 @@ router.get("/", requireAuth, async (req, res) => {
 // DELETE /api/v1/newsletter/:id
 router.delete("/:id", requireAuth, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     await prisma.newsletterSubscriber.delete({ where: { id } });
     res.json({ success: true, message: "Subscriber deleted" });
   } catch (error) {
