@@ -3,6 +3,9 @@ import { api } from '../lib/api'
 import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
 
+// cache-bust: 2026-08-20-01 (forces a new Vite content hash so Cloudflare's
+// stale-404-cached asset filename from a prior deploy race doesn't get reused)
+
 interface Redirect {
   id: string
   domain: string
