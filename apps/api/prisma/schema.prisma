@@ -134,6 +134,7 @@ model Redirect {
   domain      String   @default("easylegal.my.id")
   slug        String
   destination String
+  description String?
   clicks      Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

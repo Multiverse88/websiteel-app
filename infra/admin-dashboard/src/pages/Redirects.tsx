@@ -14,11 +14,12 @@ interface Redirect {
   domain: string
   slug: string
   destination: string
+  description?: string | null
   clicks: number
   createdAt: string
 }
 
-const emptyForm = { domain: 'easylegal.my.id', slug: '', destination: '' }
+const emptyForm = { domain: 'easylegal.my.id', slug: '', destination: '', description: '' }
 
 function shortLinkUrl(redirect: Redirect) {
   return `https://${redirect.domain}/${redirect.slug.replace(/^\/+/, '')}`
@@ -57,6 +58,11 @@ function ShortLinkCell({ redirect }: { redirect: Redirect }) {
       >
         {copied ? 'Copied!' : 'Copy'}
       </button>
+      {redirect.description && (
+        <span className="short-link__preview-badge" title={`Preview: ${redirect.description}`}>
+          📝 Preview
+        </span>
+      )}
     </div>
   )
 }
@@ -122,7 +128,12 @@ export default function Redirects() {
 
   const openEdit = (redirect: Redirect) => {
     setEditing(redirect)
-    setForm({ domain: redirect.domain || 'easylegal.my.id', slug: redirect.slug, destination: redirect.destination })
+    setForm({
+      domain: redirect.domain || 'easylegal.my.id',
+      slug: redirect.slug,
+      destination: redirect.destination,
+      description: redirect.description || '',
+    })
     setModalOpen(true)
   }
 
@@ -183,6 +194,16 @@ export default function Redirects() {
         <div className="form-group">
           <label className="form-label">Destination / To URL</label>
           <input className="form-input" placeholder="/new-path or https://..." value={form.destination} onChange={(e) => setForm({ ...form, destination: e.target.value })} />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Share Preview Description</label>
+          <textarea
+            className="form-textarea"
+            placeholder="Teks yang muncul di preview link saat di-share ke WhatsApp/Facebook/dll. Kosongkan kalau mau pakai preview bawaan halaman tujuan."
+            value={form.description}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            rows={3}
+          />
         </div>
         <div className="modal-actions">
           <button className="btn btn--outline" onClick={() => setModalOpen(false)}>Cancel</button>
