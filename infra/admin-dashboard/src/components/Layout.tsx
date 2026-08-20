@@ -8,6 +8,8 @@ const navItems = [
   { icon: 'web', label: 'Landing Pages', path: '#/landing-pages' },
   { icon: 'place', label: 'Tracking Project', path: '#/tracking' },
   { icon: 'group', label: 'Subscriber', path: '#/contacts' },
+  { icon: 'shuffle', label: 'Redirects', path: '#/redirects' },
+  { icon: 'local_offer', label: 'Promos', path: '#/promos' },
   { icon: 'settings', label: 'Settings', path: '#/settings' },
 ]
 
