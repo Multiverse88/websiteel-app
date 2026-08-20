@@ -88,7 +88,7 @@ router.post("/contacts/import", async (req, res) => {
 
 router.put("/contacts/:id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     const { name, tags, isActive } = req.body;
 
     const contact = await prisma.blastContact.update({
@@ -109,7 +109,7 @@ router.put("/contacts/:id", async (req, res) => {
 
 router.delete("/contacts/:id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     await prisma.blastContact.delete({ where: { id } });
     res.json({ success: true, message: "Contact deleted" });
   } catch (error) {
@@ -174,7 +174,7 @@ router.post("/campaigns", async (req, res) => {
 
 router.put("/campaigns/:id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     const { internalName, subject, previewText, bodyHtml, scheduledAt, status } = req.body;
 
     const campaign = await prisma.emailCampaign.update({
@@ -198,7 +198,7 @@ router.put("/campaigns/:id", async (req, res) => {
 
 router.delete("/campaigns/:id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     await prisma.emailCampaign.delete({ where: { id } });
     res.json({ success: true, message: "Campaign deleted" });
   } catch (error) {
@@ -209,7 +209,7 @@ router.delete("/campaigns/:id", async (req, res) => {
 
 router.get("/campaigns/:id/recipients", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     const recipients = await prisma.campaignRecipient.findMany({
       where: { campaignId: id },
       include: { contact: true },

@@ -5,7 +5,7 @@ const router = Router();
 
 // GET /api/v1/tracking/open/:id
 router.get("/open/:id", async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params as { id: string };
   const userAgent = req.headers["user-agent"] || "Unknown Device";
 
   try {
@@ -43,7 +43,7 @@ router.get("/open/:id", async (req, res) => {
 
 // GET /api/v1/tracking/click/:id
 router.get("/click/:id", async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params as { id: string };
   const targetUrl = req.query.url as string;
 
   if (!targetUrl) {

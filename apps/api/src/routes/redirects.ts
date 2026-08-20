@@ -20,17 +20,18 @@ router.get("/", requireAuth, async (req, res) => {
 // GET /api/v1/redirects/:slug
 router.get("/:slug", async (req, res) => {
   try {
-    const { slug } = req.params;
+    const { slug } = req.params as { slug: string };
     
+    const domain = (req.query.domain as string) || "easylegal.my.id";
     const redirect = await prisma.redirect.findUnique({
-      where: { slug },
+      where: { domain_slug: { domain, slug } },
       select: { destination: true },
     });
 
     if (redirect) {
       // Fire-and-forget click count (won't block response)
       prisma.redirect
-        .update({ where: { slug }, data: { clicks: { increment: 1 } } })
+        .update({ where: { domain_slug: { domain, slug } }, data: { clicks: { increment: 1 } } })
         .catch(() => {});
 
       return res.json({ data: redirect });
@@ -46,14 +47,14 @@ router.get("/:slug", async (req, res) => {
 // POST /api/v1/redirects
 router.post("/", requireAuth, async (req, res) => {
   try {
-    const { slug, destination } = req.body;
+    const { domain = 'easylegal.my.id', slug, destination } = req.body;
 
     if (!slug || !destination) {
       return res.status(400).json({ error: "Slug dan destination wajib diisi" });
     }
 
     const redirect = await prisma.redirect.create({
-      data: { slug, destination },
+      data: { domain, slug, destination },
     });
 
     res.status(201).json({ data: redirect });
@@ -69,8 +70,8 @@ router.post("/", requireAuth, async (req, res) => {
 // PUT /api/v1/redirects/:id
 router.put("/:id", requireAuth, async (req, res) => {
   try {
-    const { id } = req.params;
-    const { slug, destination } = req.body;
+    const { id } = req.params as { id: string };
+    const { domain = 'easylegal.my.id', slug, destination } = req.body;
 
     const existing = await prisma.redirect.findUnique({ where: { id } });
     if (!existing) {
@@ -80,6 +81,7 @@ router.put("/:id", requireAuth, async (req, res) => {
     const redirect = await prisma.redirect.update({
       where: { id },
       data: {
+        domain: domain || existing.domain,
         slug: slug || existing.slug,
         destination: destination || existing.destination,
       },
@@ -98,7 +100,7 @@ router.put("/:id", requireAuth, async (req, res) => {
 // DELETE /api/v1/redirects/:id
 router.delete("/:id", requireAuth, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     await prisma.redirect.delete({ where: { id } });
     res.json({ success: true, message: "Redirect deleted" });
   } catch (error) {

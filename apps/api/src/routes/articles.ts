@@ -96,7 +96,7 @@ router.get("/sitemap/all", async (req, res) => {
 // GET /api/v1/articles/:slug
 router.get("/:slug", async (req, res) => {
   try {
-    const { slug } = req.params;
+    const { slug } = req.params as { slug: string };
     const article = await prisma.article.findUnique({
       where: { slug },
     });
@@ -115,7 +115,7 @@ router.get("/:slug", async (req, res) => {
 // POST /api/v1/articles/:slug/view
 router.post("/:slug/view", async (req, res) => {
   try {
-    const { slug } = req.params;
+    const { slug } = req.params as { slug: string };
     await prisma.article.update({
       where: { slug },
       data: { viewCount: { increment: 1 } },
@@ -141,7 +141,7 @@ router.post("/:slug/revalidate", requireAuth, async (req, res) => {
     return res.status(500).json({ error: "REVALIDATION_SECRET not configured" });
   }
   try {
-    const { slug } = req.params;
+    const { slug } = req.params as { slug: string };
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.biz.id";
     const r = await fetch(`${appUrl}/api/revalidate`, {
       method: "POST",
@@ -191,7 +191,7 @@ router.post("/", requireAuth, async (req, res) => {
 // PUT /api/v1/articles/:id
 router.put("/:id", requireAuth, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     const { slug, title, excerpt, content, coverImage, category, readTime, authorId } = req.body;
 
     const existing = await prisma.article.findUnique({ where: { id } });
@@ -226,7 +226,7 @@ router.put("/:id", requireAuth, async (req, res) => {
 // DELETE /api/v1/articles/:id
 router.delete("/:id", requireAuth, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
 
     const existing = await prisma.article.findUnique({ where: { id } });
     if (!existing) {

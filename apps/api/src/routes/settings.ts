@@ -7,7 +7,7 @@ const router = Router();
 // Get a setting by key
 router.get('/:key', async (req: Request, res: Response) => {
   try {
-    const { key } = req.params;
+    const { key } = req.params as { key: string };
     const setting = await prisma.systemSetting.findUnique({
       where: { key }
     });
@@ -33,7 +33,7 @@ router.get('/:key', async (req: Request, res: Response) => {
 // Update or create a setting by key (admin only)
 router.put('/:key', requireAuth, async (req: Request, res: Response) => {
   try {
-    const { key } = req.params;
+    const { key } = req.params as { key: string };
     const { value } = req.body;
 
     const stringValue = typeof value === 'object' ? JSON.stringify(value) : String(value);

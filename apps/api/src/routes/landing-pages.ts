@@ -55,7 +55,7 @@ router.get("/", requireAuth, async (req, res) => {
 // servable from that domain — otherwise (no domainId set) it's unrestricted.
 router.get("/:slug", async (req, res) => {
   try {
-    const { slug } = req.params;
+    const { slug } = req.params as { slug: string };
     const hostname = typeof req.query.hostname === "string" ? req.query.hostname : undefined;
 
     const page = await prisma.landingPage.findUnique({
@@ -115,7 +115,7 @@ router.post("/", requireAuth, async (req, res) => {
 // PUT /api/v1/landing-pages/:id
 router.put("/:id", requireAuth, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     const { slug, title, description, ogImage, pixelId, sections, redirectSettings, status, domainId } = req.body;
 
     const existing = await prisma.landingPage.findUnique({ where: { id } });
@@ -197,7 +197,7 @@ router.post("/leads", async (req, res) => {
 // DELETE /api/v1/landing-pages/:id
 router.delete("/:id", requireAuth, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     await prisma.landingPage.delete({ where: { id } });
     res.json({ success: true, message: "Landing page deleted" });
   } catch (error) {

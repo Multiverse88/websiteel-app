@@ -13,7 +13,7 @@ import ArticleEditor from './pages/ArticleEditor'
 import NewsletterEditor from './pages/NewsletterEditor'
 import NewsletterSettings from './pages/NewsletterSettings'
 import Tracking from './pages/Tracking'
-
+import Promos from './pages/Promos'
 
 function normalizePathToHash() {
   const { pathname, hash } = window.location
@@ -87,6 +87,7 @@ function Router() {
     '/email-blast/tambah': <NewsletterEditor />,
     '/newsletter/settings': <NewsletterSettings />,
     '/tracking': <Tracking />,
+    '/promos': <Promos />,
   }
 
   return <Layout>{pages[route] || <Dashboard />}</Layout>

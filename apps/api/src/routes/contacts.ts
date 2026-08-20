@@ -47,7 +47,7 @@ router.get("/", requireAuth, async (req, res) => {
 // DELETE /api/v1/contacts/:id
 router.delete("/:id", requireAuth, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     await prisma.contactSubmission.delete({ where: { id } });
     res.json({ success: true, message: "Contact deleted" });
   } catch (error) {
