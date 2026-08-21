@@ -70,11 +70,17 @@ export async function middleware(request: NextRequest) {
             // description → serve OG tags instead of an instant redirect,
             // so the share card shows our text, not the destination page's.
             if (description && PREVIEW_BOT_UA.test(ua)) {
+              // request.url reflects the internal container address
+              // (e.g. http://0.0.0.0:3000/...) behind the Traefik proxy,
+              // not the public domain — rebuild it from the actual
+              // incoming Host header + forwarded protocol instead.
+              const proto = request.headers.get("x-forwarded-proto") || "https";
+              const publicUrl = `${proto}://${host}${pathname}`;
               const html = previewHtml({
                 title: "EasyLegal",
                 description,
                 destination: data.destination,
-                url: request.url,
+                url: publicUrl,
               });
               return new NextResponse(html, {
                 headers: { "content-type": "text/html; charset=utf-8" },
