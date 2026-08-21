@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 import { GtmHead, GtmNoscript } from "@/components/GoogleTagManager";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { getDomainConfig } from "@/lib/domains";
 
 const dmSans = DM_Sans({
@@ -95,6 +96,7 @@ export default function RootLayout({
       className={`${dmSans.variable} h-full antialiased scroll-smooth`}
     >
       <head>
+        <GoogleAnalytics />
         <GtmHead />
       </head>
       <body className="min-h-full bg-white text-dark font-sans flex flex-col">
