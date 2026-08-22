@@ -893,7 +893,7 @@ export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) 
                 <ShieldCheck className="w-[26px] h-[26px] text-[#9B1C1C]" strokeWidth={2.5} />
               </div>
               <h3 className="text-[24px] font-black text-gray-900 tracking-tight uppercase flex items-center justify-center">
-                <span className="font-light text-gray-400 mr-[2px]">TER</span>PERCAYA
+                TERPERCAYA
               </h3>
             </div>
 
