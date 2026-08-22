@@ -343,6 +343,13 @@ body:has(.has-service-cta) #footer-cta {
   animation: marquee-left 120s linear infinite;
   will-change: transform;
 }
+/* Faster variant for the shorter "Supported By" bank-logo row (8 logos) —
+   the shared 120s duration is tuned for the 59-logo client row and crawls
+   too slowly for a much shorter list. */
+.animate-marquee-left-fast {
+  animation: marquee-left 60s linear infinite;
+  will-change: transform;
+}
 .animate-marquee-right {
   animation: marquee-right 120s linear infinite;
   will-change: transform;

@@ -164,9 +164,9 @@ export default function MediaCoverage() {
             </div>
             <div className="relative w-full flex overflow-hidden group">
               {[1, 2].map((groupIndex) => (
-                <div 
-                  key={`banks-${groupIndex}`} 
-                  className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-5 sm:px-8 group-hover:[animation-play-state:paused]"
+                <div
+                  key={`banks-${groupIndex}`}
+                  className="flex items-center justify-around flex-shrink-0 animate-marquee-left-fast min-w-full space-x-8 sm:space-x-16 px-5 sm:px-8 group-hover:[animation-play-state:paused]"
                 >
                   {BANKS.map((bank, idx) => (
                     <div key={`bank-${groupIndex}-${idx}`} className="flex items-center justify-center flex-shrink-0 w-32 sm:w-48 h-16 sm:h-20 relative transition-transform duration-300 hover:scale-110 cursor-pointer">
