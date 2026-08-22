@@ -42,7 +42,56 @@ const WaIcon = ({ className }: { className?: string }) => (
 );
 
 
+interface ContactItem {
+  type: "phone" | "wa" | "email";
+  label: string;
+  href: string;
+}
+
+interface ContactGroup {
+  title: string;
+  items: ContactItem[];
+}
+
 export default function Footer() {
+  const contactGroups: ContactGroup[] = [
+    {
+      title: "Customer Care",
+      items: [
+        { type: "phone", label: "022 3209 3292", href: "tel:02232093292" },
+        { type: "wa", label: "0817 770 048", href: "https://wa.me/62817770048" },
+        { type: "wa", label: "0817 321 162", href: "https://wa.me/62817321162" },
+        { type: "email", label: "care@easylegal.id", href: "mailto:care@easylegal.id" },
+      ],
+    },
+    {
+      title: "Partnership",
+      items: [
+        { type: "wa", label: "0818 818 090", href: "https://wa.me/62818818090" },
+        { type: "email", label: "ceo@easylegal.id", href: "mailto:ceo@easylegal.id" },
+      ],
+    },
+    {
+      title: "Affiliate Program",
+      items: [
+        { type: "wa", label: "0817 770 048", href: "https://wa.me/62817770048" },
+        { type: "email", label: "care@easylegal.id", href: "mailto:care@easylegal.id" },
+      ],
+    },
+    {
+      title: "Call Support",
+      items: [
+        { type: "wa", label: "0817 770 048", href: "https://wa.me/62817770048" },
+      ],
+    },
+  ];
+
+  const contactIcon = (type: ContactItem["type"]) => {
+    if (type === "phone") return <Phone className="w-[15px] h-[15px] text-white/70 flex-shrink-0" />;
+    if (type === "email") return <Mail className="w-[15px] h-[15px] text-white/70 flex-shrink-0" />;
+    return <WaIcon className="w-[15px] h-[15px] text-white/70 flex-shrink-0" />;
+  };
+
   const virtualOfficeLinks = [
     { name: "Jakarta - Sovereign Plaza", href: "/layanan/virtual-office" },
     { name: "Jakarta Selatan - Serpong", href: "/layanan/virtual-office" },
@@ -95,27 +144,28 @@ export default function Footer() {
                 EasyLegal, mitra legalitas bisnis terpercaya untuk UMKM dan pengusaha Indonesia. Proses mudah, harga transparan, didampingi Personal Legal Assistant hingga tuntas.
               </p>
               
-              <div className="space-y-3">
-                <a href="mailto:care@easylegal.id" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
-                  <Mail className="w-[15px] h-[15px] text-white/70" />
-                  <span>care@easylegal.id</span>
-                </a>
-                <a href="tel:02232093292" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
-                  <Phone className="w-[15px] h-[15px] text-white/70" />
-                  <span>022 3209 3292</span>
-                </a>
-                <a href="https://wa.me/62817770048" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
-                  <WaIcon className="w-[15px] h-[15px] text-white/70" />
-                  <span>0817 770 048</span>
-                </a>
-                <a href="https://wa.me/62817321162" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
-                  <WaIcon className="w-[15px] h-[15px] text-white/70" />
-                  <span>0817 321 162</span>
-                </a>
-                <a href="https://wa.me/62818818090" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors">
-                  <WaIcon className="w-[15px] h-[15px] text-white/70" />
-                  <span>0818 818 090</span>
-                </a>
+              <div className="space-y-6">
+                {contactGroups.map((group) => (
+                  <div key={group.title}>
+                    <h4 className="text-[13px] font-black text-white uppercase tracking-wider mb-2.5">
+                      {group.title}
+                    </h4>
+                    <div className="space-y-2">
+                      {group.items.map((item, idx) => (
+                        <a
+                          key={idx}
+                          href={item.href}
+                          target={item.type === "wa" ? "_blank" : undefined}
+                          rel={item.type === "wa" ? "noopener noreferrer" : undefined}
+                          className="flex items-center space-x-3 text-[16px] font-bold text-white hover:text-white/80 transition-colors"
+                        >
+                          {contactIcon(item.type)}
+                          <span>{item.label}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
