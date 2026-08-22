@@ -42,6 +42,7 @@ import BottomPromoSection from "@/components/home/BottomPromoSection";
 import KategoriKontrak from "./KategoriKontrak";
 import DokumenPersyaratanKontrak from "./DokumenPersyaratanKontrak";
 import PricingKontrak from "./PricingKontrak";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 const perjanjianBenefits = [
   {
@@ -526,6 +527,8 @@ export default function KontrakBisnis() {
         title="Pertanyaan yang Sering Ditanyakan"
         subtitle="Sebelum mulai, mungkin jawabannya sudah ada di sini."
       />
+
+      <ArtikelTerkait query="kontrak bisnis" />
 
       {/* ─── OFFICES ─── */}
 

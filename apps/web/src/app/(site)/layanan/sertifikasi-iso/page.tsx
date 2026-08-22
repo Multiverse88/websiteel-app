@@ -29,6 +29,7 @@ import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Testimonials from "@/components/home/Testimonials";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 export default function SertifikasiIso() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -907,6 +908,8 @@ export default function SertifikasiIso() {
 
       {/* ─── 7. FAQ SECTION (6 Tanya-Jawab Mockup) ─── */}
       <FAQ title="Pertanyaan seputar sertifikasi ISO." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
+      <ArtikelTerkait category="ISO" />
 
 
       {/* ─── 8. CTA BANNER (Mockup Clean White) ─── */}

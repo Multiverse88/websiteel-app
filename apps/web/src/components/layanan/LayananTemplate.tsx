@@ -16,6 +16,15 @@ import {
 import Image from "next/image";
 import FAQ from "@/components/FAQ";
 import Offices from "@/components/Offices";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
+
+// No dedicated article category exists for these yet — fall back to a
+// keyword search so "Artikel Terkait" still surfaces something relevant.
+const ARTIKEL_MAP: Record<string, { category?: string; query?: string }> = {
+  "pengurusan-pse": { query: "PSE" },
+  "perubahan-akta": { query: "akta" },
+  pkkpr: { category: "Perizinan" },
+};
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import MediaCoverage from "@/components/MediaCoverage";
@@ -191,6 +200,8 @@ export default function LayananTemplate({ content }: Props) {
 
       {/* ─── 4. FAQ SECTION ─── */}
       {c.faqs?.length > 0 && <FAQ items={c.faqs} />}
+
+      <ArtikelTerkait {...(ARTIKEL_MAP[c.id] || {})} />
 
       {/* ─── 5. CTA SECTION ─── */}
       <CTA

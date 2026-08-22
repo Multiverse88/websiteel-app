@@ -38,6 +38,7 @@ import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 const perjanjianBenefits = [
   {
@@ -763,6 +764,8 @@ export default function PerjanjianPerkawinan() {
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ items={faqs} />
+
+      <ArtikelTerkait query="perkawinan" />
 
 
       {/* ─── 10. CTA SECTION ─── */}

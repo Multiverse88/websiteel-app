@@ -29,6 +29,7 @@ import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 /* ─── DATA ─── */
 
@@ -740,6 +741,8 @@ export default function PelaporanRUPS() {
             subtitle="Sebelum mulai, mungkin jawabannya sudah ada di sini."
             items={rupsFaqs}
           />
+
+          <ArtikelTerkait query="RUPS" />
 
 
           {/* ─── 11. CTA BOTTOM (REPLACED WITH CUSTOM 2-COLUMN) ─── */}

@@ -40,6 +40,7 @@ import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Testimonials from "@/components/home/Testimonials";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 export default function PengajuanPkp() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -780,6 +781,8 @@ export default function PengajuanPkp() {
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran PKP." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
+      <ArtikelTerkait category="Pajak" />
 
 
       {/* ─── 10. CTA BANNER (Mockup Clean White) ─── */}

@@ -27,6 +27,7 @@ import PricingFooter from "@/components/PricingFooter";
 import Benefits from "@/components/Benefits";
 import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 // --- FAQ & pricing data from PDF brief ---
 const faqs = [
@@ -680,6 +681,8 @@ export default function ApostillePage() {
         subtitle="Temukan jawaban atas beberapa pertanyaan umum seputar pengurusan Apostille dokumen."
         items={faqs}
       />
+
+      <ArtikelTerkait query="apostille" />
 
       {/* ─── OFFICES ─── */}
 

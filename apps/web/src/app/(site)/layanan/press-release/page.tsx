@@ -45,6 +45,7 @@ import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Testimonials from "@/components/home/Testimonials";
 import IsoPseBadges from "@/components/IsoPseBadges";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 const pricingData = {
     populer: [
@@ -903,6 +904,8 @@ export default function PressRelease() {
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ items={faqs} />
+
+      <ArtikelTerkait category="Branding" />
 
 
       {/* ─── 10. CTA SECTION ─── */}
