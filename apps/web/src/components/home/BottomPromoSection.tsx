@@ -118,7 +118,7 @@ export default function BottomPromoSection() {
   };
 
   return (
-    <section className="pt-5 sm:pt-6 pb-16 sm:pb-24 bg-white relative overflow-hidden">
+    <section id="promo" className="pt-5 sm:pt-6 pb-16 sm:pb-24 bg-white relative overflow-hidden scroll-mt-24">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Promo Section (Top) */}
