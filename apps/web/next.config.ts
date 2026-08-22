@@ -248,6 +248,13 @@ const nextConfig: NextConfig = {
         destination: "/layanan/pendirian-badan-usaha/yayasan",
         permanent: true,
       },
+      {
+        // Marketing shortlink -> scrolls straight to the promo section on
+        // the homepage (id="promo" in BottomPromoSection.tsx).
+        source: "/promo",
+        destination: "/#promo",
+        permanent: false,
+      },
     ];
   },
   images: {
