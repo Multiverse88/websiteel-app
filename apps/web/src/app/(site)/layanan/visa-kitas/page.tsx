@@ -33,6 +33,7 @@ import { getWhatsAppLink } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 export default function VisaKitas() {
   // State for interactive Pricing filter tabs
@@ -558,6 +559,8 @@ export default function VisaKitas() {
 
       {/* ─── 7. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar Visa &amp; KITAS." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
+      <ArtikelTerkait query="visa" />
 
 
       {/* ─── 8. CTA SECTION ─── */}

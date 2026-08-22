@@ -35,6 +35,7 @@ import BottomPromoSection from "@/components/home/BottomPromoSection";
 import IsoPseBadges from "@/components/IsoPseBadges";
 import Testimonials from "@/components/home/Testimonials";
 import CTA from "@/components/CTA";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
   interface AdditionalServiceItem {
     text: string;
@@ -1086,6 +1087,8 @@ export default function MerekHaki() {
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran merek." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
+      <ArtikelTerkait category="Haki" />
 
 
       {/* ─── 10. CTA SECTION ─── */}

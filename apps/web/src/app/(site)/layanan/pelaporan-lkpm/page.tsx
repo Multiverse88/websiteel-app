@@ -33,6 +33,7 @@ import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
 import { Fraunces, Inter, Space_Mono } from "next/font/google";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 const lkpmBenefits = [
   {
@@ -813,6 +814,8 @@ export default function PelaporanLKPM() {
           {/* ─── 11. FAQ SECTION ─── */}
           <FadeIn delay={0.2}>
             <FAQ items={faqs} />
+
+            <ArtikelTerkait query="LKPM" />
 
           </FadeIn>
 

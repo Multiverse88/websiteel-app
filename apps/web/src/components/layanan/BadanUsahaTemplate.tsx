@@ -37,6 +37,7 @@ import Testimonials from "@/components/home/Testimonials";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Benefits from "@/components/Benefits";
 import Offices from "@/components/Offices";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 import { getWhatsAppLink } from "@/lib/config";
 import { getFAQJsonLd, getServiceJsonLd } from "@/lib/structured-data";
 import type { BadanUsahaContent } from "@/data/layanan-badan-usaha";
@@ -440,7 +441,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
       {/* ─── 6. FAQ ─── */}
       <FAQ title={c.faqTitle} items={c.faqs} />
 
-
+      <ArtikelTerkait category="Pendirian Usaha" />
 
       {/* ─── 7. CTA BANNER ─── */}
       <section className="bg-white py-24 border-t border-gray-100/60 relative">

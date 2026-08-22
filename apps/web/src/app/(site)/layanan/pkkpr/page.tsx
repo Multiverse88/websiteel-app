@@ -37,6 +37,7 @@ import PengertianPKKPR from "./PengertianPKKPR";
 import SiapaWajibPKKPR from "./SiapaWajibPKKPR";
 import AlurProsesPKKPR from "./AlurProsesPKKPR";
 import ManfaatRisikoPKKPR from "./ManfaatRisikoPKKPR";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 const pkkprBenefits = [
   {
@@ -512,6 +513,8 @@ export default function PKKPRPage() {
           {/* ─── 11. FAQ SECTION ─── */}
           <FadeIn delay={0.2}>
             <FAQ items={faqs} />
+
+            <ArtikelTerkait category="Perizinan" />
 
           </FadeIn>
 

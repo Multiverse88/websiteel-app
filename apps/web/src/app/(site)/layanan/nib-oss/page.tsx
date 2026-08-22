@@ -33,6 +33,7 @@ import IsoPseBadges from "@/components/IsoPseBadges";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
 import { getWhatsAppLink } from "@/lib/config";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 const nibBenefits = [
     {
@@ -1056,6 +1057,8 @@ export default function NibOss() {
       {/* ─── 8. FAQ SECTION ─── */}
 
       <FAQ title="Pertanyaan seputar NIB & OSS RBA." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />
+
+      <ArtikelTerkait category="NIB" />
 
       {/* ─── OFFICES ─── */}
 

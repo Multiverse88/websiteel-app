@@ -28,6 +28,7 @@ import BottomPromoSection from "@/components/home/BottomPromoSection";
 import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
 import Testimonials from "@/components/home/Testimonials";
+import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 
 const locationsData = [
@@ -753,6 +754,8 @@ export default function VirtualOffice() {
         subtitle="Sebelum daftar, mungkin jawabannya sudah ada di sini."
         items={faqs}
       />
+
+      <ArtikelTerkait query="virtual office" />
 
 
       {/* ─── 9. CTA SECTION ─── */}
