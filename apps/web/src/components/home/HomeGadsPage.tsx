@@ -320,7 +320,7 @@ function CaraKerjaSection() {
                       </div>
                       <div className="min-w-0">
                         <div className="text-[16px] font-black text-[#B91C1C] leading-tight truncate">Pendirian PT</div>
-                        <div className="text-[16px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">6-12 hari kerja</div>
+                        <div className="text-[16px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">12 jam kerja</div>
                       </div>
                     </div>
 
