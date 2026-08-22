@@ -96,6 +96,19 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Serve trailing-slash URLs (e.g. ad-campaign links like
+  // /jasa-pembuatan-pendirian-pt-indonesia/) directly instead of letting
+  // Next.js's default trailingSlash:false behavior 308-redirect them —
+  // that redirect also emits a `Refresh` header alongside `Location`,
+  // which some browsers render as a visible "Redirecting you to..."
+  // interstitial instead of hopping instantly. An internal rewrite is
+  // invisible to the browser: same URL bar, no flash, one request.
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.slice(0, -1);
+    return NextResponse.rewrite(url);
+  }
+
   return NextResponse.next();
 }
 
