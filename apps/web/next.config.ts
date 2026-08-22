@@ -75,6 +75,13 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // Next.js's default trailingSlash:false behavior 308-redirects any
+  // /path/ -> /path *before* middleware gets a say — this flag hands that
+  // decision to middleware.ts instead (which rewrites trailing-slash URLs
+  // internally, invisibly, avoiding the visible "Redirecting you to..."
+  // interstitial some browsers show on the default redirect+Refresh-header
+  // combo). Without this flag, middleware's rewrite was silently ignored.
+  skipTrailingSlashRedirect: true,
   serverExternalPackages: ["@prisma/client"],
   experimental: {
     serverActions: {
