@@ -141,11 +141,11 @@ export default function MediaCoverage() {
                   className="flex items-center justify-around flex-shrink-0 animate-marquee-left min-w-full space-x-8 sm:space-x-16 px-5 sm:px-8 group-hover:[animation-play-state:paused]"
                 >
                   {CLIENTS.map((client, idx) => (
-                    <div key={`client-${groupIndex}-${idx}`} className="flex items-center justify-center flex-shrink-0 w-32 sm:w-48 h-16 sm:h-20 relative transition-transform duration-300 hover:scale-110 cursor-pointer">
+                    <div key={`client-${groupIndex}-${idx}`} className="flex items-center justify-center flex-shrink-0 w-32 sm:w-48 h-16 sm:h-20 relative transition-transform duration-300 hover:scale-110 cursor-pointer overflow-hidden">
                       <img
                         src={`/images/logo-klien/${client.file}`}
                         alt={`Client Logo ${idx + 1}`}
-                        className={`max-w-full max-h-[48px] sm:max-h-[64px] w-auto h-auto object-contain ${client.scale}`}
+                        className={`max-w-full max-h-[48px] sm:max-h-[64px] w-auto h-auto object-contain scale-[1.9] ${client.scale}`}
                         loading="lazy"
                       />
                     </div>
