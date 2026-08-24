@@ -111,7 +111,6 @@ export default function TentangKami() {
     { name: "Amelia Ingrid Taruna", role: "Legal Officer", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/amelia-ingrid-taruna.jpg" },
 
     // Personal Legal Assistants (PLA)
-    { name: "Mohammad Faddly Argahari", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/mohammad-faddly-argahari.jpg" },
     { name: "Naufal Nandi Pinto", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/naufal-nandi-pinto.jpg" },
     { name: "Ela Yuniar", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/ela-yuniar.jpg" },
     { name: "Mayang Cahyati", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/mayang-cahyati.jpg" },
@@ -397,7 +396,6 @@ export default function TentangKami() {
             <h3 className="text-center text-[16px] font-black text-gray-950 mb-8 sm:mb-10 uppercase tracking-widest">Personal Legal Assistant (PLA)</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
               {[
-                { name: "Mohammad Faddly Argahari", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/mohammad-faddly-argahari.jpg" },
                 { name: "Naufal Nandi Pinto", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/naufal-nandi-pinto.jpg" },
                 { name: "Ela Yuniar", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/ela-yuniar.jpg" },
                 { name: "Mayang Cahyati", role: "Personal Legal Assistant", bio: "Konsultan hukum profesional di EasyLegal.", img: "/teamplalo/mayang-cahyati.jpg" },
