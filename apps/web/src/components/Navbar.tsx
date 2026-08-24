@@ -287,7 +287,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.leftColumn.items.map((item, idx) => (
-                          <div key={idx} className="group relative">
+                          <div key={idx} className="group relative hover:z-[60]">
                             <Link href={item.href} onClick={handleLinkClick} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
@@ -309,7 +309,7 @@ export default function Navbar() {
                             
                             {/* Sub items pop up */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                              <div className="absolute left-full top-0 w-[260px] bg-white before:absolute before:inset-y-0 before:-left-8 before:w-8 before:content-[''] rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
@@ -333,7 +333,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.middleColumn.items.map((item, idx) => (
-                          <div key={idx} className="group relative">
+                          <div key={idx} className="group relative hover:z-[60]">
                             <Link href={item.href} onClick={handleLinkClick} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
@@ -355,7 +355,7 @@ export default function Navbar() {
 
                             {/* Sub items pop up */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                              <div className="absolute left-full top-0 w-[260px] bg-white before:absolute before:inset-y-0 before:-left-8 before:w-8 before:content-[''] rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
