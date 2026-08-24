@@ -287,8 +287,8 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.leftColumn.items.map((item, idx) => (
-                          <div key={idx} className="group relative hover:z-[60]">
-                            <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                          <div key={idx} className="rounded-xl hover:bg-slate-50 transition-colors">
+                            <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="group flex items-start p-3">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                                   <item.icon className="w-4 h-4" />
@@ -306,18 +306,15 @@ export default function Navbar() {
                                 </p>
                               </div>
                             </Link>
-                            
-                            {/* Sub items pop up */}
+
+                            {/* Sub items — always inline, no hover-flyout (used to overlap the middle column and steal clicks) */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 w-[260px] bg-white before:absolute before:inset-y-0 before:-left-8 before:w-8 before:content-[''] rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
-                                <div className="flex flex-wrap gap-2">
-                                  {item.subItems.map((sub, sIdx) => (
-                                    <Link key={sIdx} href={sub.href} onClick={() => setTimeout(handleLinkClick, 150)} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
-                                      {sub.label}
-                                    </Link>
-                                  ))}
-                                </div>
+                              <div className="pl-[60px] pr-3 pb-3 -mt-1 flex flex-wrap gap-1.5">
+                                {item.subItems.map((sub, sIdx) => (
+                                  <Link key={sIdx} href={sub.href} onClick={() => setTimeout(handleLinkClick, 150)} className="text-[11.5px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-2.5 py-1 rounded-lg transition-colors">
+                                    {sub.label}
+                                  </Link>
+                                ))}
                               </div>
                             )}
                           </div>
@@ -333,8 +330,8 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.middleColumn.items.map((item, idx) => (
-                          <div key={idx} className="group relative hover:z-[60]">
-                            <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                          <div key={idx} className="rounded-xl hover:bg-slate-50 transition-colors">
+                            <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="group flex items-start p-3">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                                   <item.icon className="w-4 h-4" />
@@ -353,17 +350,14 @@ export default function Navbar() {
                               </div>
                             </Link>
 
-                            {/* Sub items pop up */}
+                            {/* Sub items — always inline, no hover-flyout */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 w-[260px] bg-white before:absolute before:inset-y-0 before:-left-8 before:w-8 before:content-[''] rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
-                                <div className="flex flex-wrap gap-2">
-                                  {item.subItems.map((sub, sIdx) => (
-                                    <Link key={sIdx} href={sub.href} onClick={() => setTimeout(handleLinkClick, 150)} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
-                                      {sub.label}
-                                    </Link>
-                                  ))}
-                                </div>
+                              <div className="pl-[60px] pr-3 pb-3 -mt-1 flex flex-wrap gap-1.5">
+                                {item.subItems.map((sub, sIdx) => (
+                                  <Link key={sIdx} href={sub.href} onClick={() => setTimeout(handleLinkClick, 150)} className="text-[11.5px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-2.5 py-1 rounded-lg transition-colors">
+                                    {sub.label}
+                                  </Link>
+                                ))}
                               </div>
                             )}
                           </div>
