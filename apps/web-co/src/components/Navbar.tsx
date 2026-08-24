@@ -287,7 +287,11 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.leftColumn.items.map((item, idx) => (
-                          <div key={idx} className="group relative hover:z-[60]">
+                          // z-[90]: must outrank the middle column's own hover:z-[60] rows —
+                          // this flyout's box physically overlaps that column, and on equal
+                          // z-index the later-in-DOM sibling (middle column) was winning
+                          // paint order, silently swallowing clicks on these pills.
+                          <div key={idx} className="group relative hover:z-[90]">
                             <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
