@@ -309,7 +309,7 @@ export default function Navbar() {
                             
                             {/* Sub items pop up */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 ml-1 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
@@ -355,7 +355,7 @@ export default function Navbar() {
 
                             {/* Sub items pop up */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 ml-1 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
