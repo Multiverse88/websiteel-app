@@ -300,7 +300,7 @@ export default function Navbar() {
                           // z-index the later-in-DOM sibling (middle column) was winning
                           // paint order, silently swallowing clicks on these pills.
                           <div key={idx} className="group relative hover:z-[90]">
-                            <Link href={item.href} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                            <Link href={item.href} prefetch={false} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                                   <item.icon className="w-4 h-4" />
@@ -325,7 +325,7 @@ export default function Navbar() {
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
-                                    <Link key={sIdx} href={sub.href} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
+                                    <Link key={sIdx} href={sub.href} prefetch={false} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
                                       {sub.label}
                                     </Link>
                                   ))}
@@ -346,7 +346,7 @@ export default function Navbar() {
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.middleColumn.items.map((item, idx) => (
                           <div key={idx} className="group relative hover:z-[60]">
-                            <Link href={item.href} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                            <Link href={item.href} prefetch={false} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                                   <item.icon className="w-4 h-4" />
@@ -371,7 +371,7 @@ export default function Navbar() {
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
-                                    <Link key={sIdx} href={sub.href} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
+                                    <Link key={sIdx} href={sub.href} prefetch={false} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
                                       {sub.label}
                                     </Link>
                                   ))}
@@ -391,7 +391,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.rightColumn.items.map((item, idx) => (
-                          <Link key={idx} href={item.href} className="group flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                          <Link key={idx} href={item.href} prefetch={false} className="group flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                             <div className="flex-shrink-0 mt-0.5 w-[76px]">
                               <div className="flex items-center justify-center text-[11px] font-black tracking-tight border border-slate-200 rounded overflow-hidden">
                                 <span className="bg-white text-slate-800 px-1.5 py-0.5">{item.brandPrefix}</span>
@@ -572,14 +572,14 @@ export default function Navbar() {
                               </summary>
                               <div className="flex flex-col pl-9 pr-3 pb-2 space-y-2 mt-1">
                                 {item.subItems.map((sub, sIdx) => (
-                                  <Link key={sIdx} href={sub.href} className="text-[13px] text-slate-600 hover:text-primary">
+                                  <Link key={sIdx} href={sub.href} prefetch={false} className="text-[13px] text-slate-600 hover:text-primary">
                                     {sub.label}
                                   </Link>
                                 ))}
                               </div>
                             </details>
                           ) : (
-                            <Link href={item.href} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                            <Link href={item.href} prefetch={false} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                               <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
                               <span>{item.title}</span>
                             </Link>
@@ -608,14 +608,14 @@ export default function Navbar() {
                               </summary>
                               <div className="flex flex-col pl-9 pr-3 pb-2 space-y-2 mt-1">
                                 {item.subItems.map((sub, sIdx) => (
-                                  <Link key={sIdx} href={sub.href} className="text-[13px] text-slate-600 hover:text-primary">
+                                  <Link key={sIdx} href={sub.href} prefetch={false} className="text-[13px] text-slate-600 hover:text-primary">
                                     {sub.label}
                                   </Link>
                                 ))}
                               </div>
                             </details>
                           ) : (
-                            <Link href={item.href} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                            <Link href={item.href} prefetch={false} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                               <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
                               <span>{item.title}</span>
                             </Link>
@@ -632,7 +632,7 @@ export default function Navbar() {
                     </div>
                     <div className="space-y-1">
                       {megaMenuData.rightColumn.items.map((item, idx) => (
-                        <Link key={idx} href={item.href} className="flex items-start px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                        <Link key={idx} href={item.href} prefetch={false} className="flex items-start px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                           <span className="text-[10px] font-black tracking-tight border border-slate-200 rounded overflow-hidden mr-2.5 mt-0.5 flex-shrink-0 flex">
                             <span className="bg-white text-slate-800 px-1 py-0.5">{item.brandPrefix}</span>
                             <span className="bg-primary text-white px-1 py-0.5">{item.brandSuffix}</span>
