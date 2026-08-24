@@ -22,7 +22,22 @@ const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(',').map(o => o.trim())
-  : ['https://easylegal.my.id', 'https://admin.easylegal.my.id', 'https://easylegal.biz.id', 'http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173'];
+  : [
+      'https://easylegal.my.id',
+      'https://admin.easylegal.my.id',
+      'https://easylegal.biz.id',
+      'https://www.easylegal.biz.id',
+      // Multi-tenant public site also serves easylegal.co.id (see
+      // apps/web/src/lib/domains.ts) — missing here caused client-side
+      // fetches from that origin (e.g. BottomPromoSection) to fail CORS
+      // and break page interactivity, including the navbar.
+      'https://easylegal.co.id',
+      'https://www.easylegal.co.id',
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'http://127.0.0.1:3000',
+      'http://127.0.0.1:5173',
+    ];
 
 app.use(cors({
   origin: (origin, callback) => {
