@@ -24,6 +24,10 @@ apps/*/.next/
 # misc
 .DS_Store
 *.pem
+*.key
+secrets.yml
+secrets.yaml
+*.secrets
 
 # debug
 npm-debug.log*
