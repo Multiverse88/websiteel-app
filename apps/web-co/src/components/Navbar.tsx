@@ -228,7 +228,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/home-gads"
-            onClick={handleLinkClick}
+            onClick={() => setTimeout(handleLinkClick, 150)}
             className="flex items-center group flex-shrink-0"
           >
             <div className="navbar-logo">
@@ -248,7 +248,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center space-x-8">
             <Link
               href="/home-gads"
-              onClick={handleLinkClick}
+              onClick={() => setTimeout(handleLinkClick, 150)}
               className={`text-[16px] font-medium transition-colors ${
                 pathname === "/" || pathname === "/home-gads"
                   ? "text-dark font-semibold"
@@ -287,8 +287,8 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.leftColumn.items.map((item, idx) => (
-                          <div key={idx} className="group relative">
-                            <Link href={item.href} onClick={handleLinkClick} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                          <div key={idx} className="group relative hover:z-[60]">
+                            <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                                   <item.icon className="w-4 h-4" />
@@ -309,11 +309,11 @@ export default function Navbar() {
                             
                             {/* Sub items pop up */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                              <div className="absolute left-full top-0 w-[260px] bg-white before:absolute before:inset-y-0 before:-left-8 before:w-8 before:content-[''] rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
-                                    <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
+                                    <Link key={sIdx} href={sub.href} onClick={() => setTimeout(handleLinkClick, 150)} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
                                       {sub.label}
                                     </Link>
                                   ))}
@@ -333,8 +333,8 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.middleColumn.items.map((item, idx) => (
-                          <div key={idx} className="group relative">
-                            <Link href={item.href} onClick={handleLinkClick} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                          <div key={idx} className="group relative hover:z-[60]">
+                            <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                                   <item.icon className="w-4 h-4" />
@@ -355,11 +355,11 @@ export default function Navbar() {
 
                             {/* Sub items pop up */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                              <div className="absolute left-full top-0 w-[260px] bg-white before:absolute before:inset-y-0 before:-left-8 before:w-8 before:content-[''] rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
-                                    <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
+                                    <Link key={sIdx} href={sub.href} onClick={() => setTimeout(handleLinkClick, 150)} className="text-[12px] font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-primary hover:text-white hover:border-primary px-3 py-1.5 rounded-lg transition-colors">
                                       {sub.label}
                                     </Link>
                                   ))}
@@ -379,7 +379,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.rightColumn.items.map((item, idx) => (
-                          <Link key={idx} href={item.href} onClick={handleLinkClick} className="group flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                          <Link key={idx} href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="group flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                             <div className="flex-shrink-0 mt-0.5 w-[76px]">
                               <div className="flex items-center justify-center text-[11px] font-black tracking-tight border border-slate-200 rounded overflow-hidden">
                                 <span className="bg-white text-slate-800 px-1.5 py-0.5">{item.brandPrefix}</span>
@@ -426,13 +426,13 @@ export default function Navbar() {
 
               {isToolsOpen && (
                 <div className="absolute top-full right-0 mt-6 w-48 bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-slate-100 py-2 animate-slide-down">
-                  <Link href="/cek-nama" onClick={handleLinkClick} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
+                  <Link href="/cek-nama" onClick={() => setTimeout(handleLinkClick, 150)} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
                     Cek Nama PT
                   </Link>
-                  <Link href="/cek-nama?tab=merek" onClick={handleLinkClick} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
+                  <Link href="/cek-nama?tab=merek" onClick={() => setTimeout(handleLinkClick, 150)} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
                     Cek Nama Merek
                   </Link>
-                  <Link href="/cek-kbli" onClick={handleLinkClick} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
+                  <Link href="/cek-kbli" onClick={() => setTimeout(handleLinkClick, 150)} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
                     Cek KBLI
                   </Link>
                 </div>
@@ -441,7 +441,7 @@ export default function Navbar() {
 
             <Link
               href="/artikel"
-              onClick={handleLinkClick}
+              onClick={() => setTimeout(handleLinkClick, 150)}
               className={`text-[16px] font-medium transition-colors ${
                 pathname.startsWith("/artikel")
                   ? "text-dark font-semibold"
@@ -453,7 +453,7 @@ export default function Navbar() {
 
             <Link
               href="/testimoni"
-              onClick={handleLinkClick}
+              onClick={() => setTimeout(handleLinkClick, 150)}
               className={`text-[16px] font-medium transition-colors ${
                 pathname === "/testimoni"
                   ? "text-dark font-semibold"
@@ -465,7 +465,7 @@ export default function Navbar() {
 
             <Link
               href="/tentang-kami"
-              onClick={handleLinkClick}
+              onClick={() => setTimeout(handleLinkClick, 150)}
               className={`text-[16px] font-medium transition-colors ${
                 pathname === "/tentang-kami"
                   ? "text-dark font-semibold"
@@ -477,7 +477,7 @@ export default function Navbar() {
 
             <Link
               href="/kontak"
-              onClick={handleLinkClick}
+              onClick={() => setTimeout(handleLinkClick, 150)}
               className={`text-[16px] font-medium transition-colors ${
                 pathname === "/kontak"
                   ? "text-dark font-semibold"
@@ -519,7 +519,7 @@ export default function Navbar() {
           <div className="px-4 pt-2 pb-6 space-y-1">
             <Link
               href="/home-gads"
-              onClick={handleLinkClick}
+              onClick={() => setTimeout(handleLinkClick, 150)}
               className={`block px-3 py-2.5 rounded-lg text-[16px] font-medium ${
                 pathname === "/" || pathname === "/home-gads"
                   ? "bg-primary-light text-primary font-semibold"
@@ -565,14 +565,14 @@ export default function Navbar() {
                               </summary>
                               <div className="flex flex-col pl-9 pr-3 pb-2 space-y-2 mt-1">
                                 {item.subItems.map((sub, sIdx) => (
-                                  <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[13px] text-slate-600 hover:text-primary">
+                                  <Link key={sIdx} href={sub.href} onClick={() => setTimeout(handleLinkClick, 150)} className="text-[13px] text-slate-600 hover:text-primary">
                                     {sub.label}
                                   </Link>
                                 ))}
                               </div>
                             </details>
                           ) : (
-                            <Link href={item.href} onClick={handleLinkClick} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                            <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                               <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
                               <span>{item.title}</span>
                             </Link>
@@ -601,14 +601,14 @@ export default function Navbar() {
                               </summary>
                               <div className="flex flex-col pl-9 pr-3 pb-2 space-y-2 mt-1">
                                 {item.subItems.map((sub, sIdx) => (
-                                  <Link key={sIdx} href={sub.href} onClick={handleLinkClick} className="text-[13px] text-slate-600 hover:text-primary">
+                                  <Link key={sIdx} href={sub.href} onClick={() => setTimeout(handleLinkClick, 150)} className="text-[13px] text-slate-600 hover:text-primary">
                                     {sub.label}
                                   </Link>
                                 ))}
                               </div>
                             </details>
                           ) : (
-                            <Link href={item.href} onClick={handleLinkClick} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                            <Link href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="flex items-center px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                               <item.icon className="w-4 h-4 mr-2 text-primary opacity-80 flex-shrink-0" />
                               <span>{item.title}</span>
                             </Link>
@@ -625,7 +625,7 @@ export default function Navbar() {
                     </div>
                     <div className="space-y-1">
                       {megaMenuData.rightColumn.items.map((item, idx) => (
-                        <Link key={idx} href={item.href} onClick={handleLinkClick} className="flex items-start px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                        <Link key={idx} href={item.href} onClick={() => setTimeout(handleLinkClick, 150)} className="flex items-start px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                           <span className="text-[10px] font-black tracking-tight border border-slate-200 rounded overflow-hidden mr-2.5 mt-0.5 flex-shrink-0 flex">
                             <span className="bg-white text-slate-800 px-1 py-0.5">{item.brandPrefix}</span>
                             <span className="bg-primary text-white px-1 py-0.5">{item.brandSuffix}</span>
@@ -657,13 +657,13 @@ export default function Navbar() {
 
               {isToolsOpen && (
                 <div className="pl-4 pr-2 mt-1 py-1 bg-bg-light/50 rounded-lg space-y-1">
-                  <Link href="/cek-nama" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                  <Link href="/cek-nama" onClick={() => setTimeout(handleLinkClick, 150)} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                     Cek Nama PT
                   </Link>
-                  <Link href="/cek-nama?tab=merek" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                  <Link href="/cek-nama?tab=merek" onClick={() => setTimeout(handleLinkClick, 150)} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                     Cek Nama Merek
                   </Link>
-                  <Link href="/cek-kbli" onClick={handleLinkClick} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
+                  <Link href="/cek-kbli" onClick={() => setTimeout(handleLinkClick, 150)} className="block px-3 py-2 text-[14px] font-semibold text-dark hover:text-primary">
                     Cek KBLI
                   </Link>
                 </div>
@@ -685,7 +685,7 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  onClick={handleLinkClick}
+                  onClick={() => setTimeout(handleLinkClick, 150)}
                   className={`block px-3 py-2.5 rounded-lg text-[16px] font-medium ${
                     isActive
                       ? "bg-primary-light text-primary font-semibold"
@@ -702,7 +702,7 @@ export default function Navbar() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={handleLinkClick}
+                onClick={() => setTimeout(handleLinkClick, 150)}
                 className="w-full text-center py-2.5 bg-primary rounded-full text-[16px] font-bold text-white hover:bg-primary-hover transition-colors duration-200"
               >
                 Konsultasi Gratis
