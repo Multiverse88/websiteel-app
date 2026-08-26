@@ -318,7 +318,7 @@ export default function Navbar() {
                           // this flyout's box physically overlaps that column, and on equal
                           // z-index the later-in-DOM sibling (middle column) was winning
                           // paint order, silently swallowing clicks on these pills.
-                          <div key={idx} className="group relative hover:z-[90] after:absolute after:inset-y-0 after:-right-5 after:w-5 after:content-['']">
+                          <div key={idx} className="group/navitem relative hover:z-[90] after:absolute after:inset-y-0 after:-right-5 after:w-5 after:content-['']">
                             <Link href={item.href} onClick={hardNavigate(item.href)} prefetch={false} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
@@ -327,10 +327,10 @@ export default function Navbar() {
                               </div>
                               <div className="ml-3 flex-1">
                                 <div className="flex items-center justify-between">
-                                  <h4 className="text-[14.5px] font-bold text-slate-900 group-hover:text-primary transition-colors">
+                                  <h4 className="text-[14.5px] font-bold text-slate-900 group-hover/navitem:text-primary transition-colors">
                                     {item.title}
                                   </h4>
-                                  <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0" />
+                                  <ArrowRight className="w-4 h-4 text-slate-300 group-hover/navitem:text-primary transition-all opacity-0 group-hover/navitem:opacity-100 -translate-x-2 group-hover/navitem:translate-x-0" />
                                 </div>
                                 <p className="mt-0.5 text-[13px] text-slate-500 leading-snug pr-2">
                                   {item.description}
@@ -340,7 +340,7 @@ export default function Navbar() {
                             
                             {/* Sub items pop up */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50">
+                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover/navitem:opacity-100 group-hover/navitem:visible z-50">
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
@@ -364,7 +364,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.middleColumn.items.map((item, idx) => (
-                          <div key={idx} className="group relative hover:z-[60] after:absolute after:inset-y-0 after:-right-5 after:w-5 after:content-['']">
+                          <div key={idx} className="group/navitem relative hover:z-[60] after:absolute after:inset-y-0 after:-right-5 after:w-5 after:content-['']">
                             <Link href={item.href} onClick={hardNavigate(item.href)} prefetch={false} className="flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                               <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
@@ -373,10 +373,10 @@ export default function Navbar() {
                               </div>
                               <div className="ml-3 flex-1">
                                 <div className="flex items-center justify-between">
-                                  <h4 className="text-[14.5px] font-bold text-slate-900 group-hover:text-primary transition-colors">
+                                  <h4 className="text-[14.5px] font-bold text-slate-900 group-hover/navitem:text-primary transition-colors">
                                     {item.title}
                                   </h4>
-                                  <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0" />
+                                  <ArrowRight className="w-4 h-4 text-slate-300 group-hover/navitem:text-primary transition-all opacity-0 group-hover/navitem:opacity-100 -translate-x-2 group-hover/navitem:translate-x-0" />
                                 </div>
                                 <p className="mt-0.5 text-[13px] text-slate-500 leading-snug pr-2">
                                   {item.description}
@@ -386,7 +386,7 @@ export default function Navbar() {
 
                             {/* Sub items pop up */}
                             {item.subItems && (
-                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50">
+                              <div className="absolute left-full top-0 w-[260px] bg-white rounded-xl shadow-xl border border-slate-100 p-4 opacity-0 invisible group-hover/navitem:opacity-100 group-hover/navitem:visible z-50">
                                 <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Pilih Layanan:</h5>
                                 <div className="flex flex-wrap gap-2">
                                   {item.subItems.map((sub, sIdx) => (
@@ -410,7 +410,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex flex-col space-y-1">
                         {megaMenuData.rightColumn.items.map((item, idx) => (
-                          <Link key={idx} href={item.href} onClick={hardNavigate(item.href)} prefetch={false} className="group flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                          <Link key={idx} href={item.href} onClick={hardNavigate(item.href)} prefetch={false} className="group/navitem flex items-start p-3 hover:bg-slate-50 rounded-xl transition-colors">
                             <div className="flex-shrink-0 mt-0.5 w-[76px]">
                               <div className="flex items-center justify-center text-[11px] font-black tracking-tight border border-slate-200 rounded overflow-hidden">
                                 <span className="bg-white text-slate-800 px-1.5 py-0.5">{item.brandPrefix}</span>
@@ -419,10 +419,10 @@ export default function Navbar() {
                             </div>
                             <div className="ml-3 flex-1">
                               <div className="flex items-center justify-between">
-                                <h4 className="text-[14.5px] font-bold text-slate-900 group-hover:text-primary transition-colors leading-tight">
+                                <h4 className="text-[14.5px] font-bold text-slate-900 group-hover/navitem:text-primary transition-colors leading-tight">
                                   {item.title}
                                 </h4>
-                                <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 ml-2" />
+                                <ArrowRight className="w-4 h-4 text-slate-300 group-hover/navitem:text-primary transition-all opacity-0 group-hover/navitem:opacity-100 -translate-x-2 group-hover/navitem:translate-x-0 ml-2" />
                               </div>
                               <p className="mt-1 text-[13px] text-slate-500 leading-snug">
                                 {item.description}
