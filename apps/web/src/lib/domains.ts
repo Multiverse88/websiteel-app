@@ -1,7 +1,9 @@
 // Central per-domain config for the multi-tenant public site. One Next.js
 // app serves multiple domains (via Traefik Host rules in
 // docker-compose.dokploy.yml) — this is where per-domain differences
-// (canonical/OG base URL, floating WhatsApp link) are declared.
+// (canonical/OG base URL) are declared. WhatsApp CTAs are domain-agnostic
+// now (one shared number pool, see getWhatsAppLink() in ./config.ts) so
+// there's no per-domain whatsappLink here anymore.
 //
 // To add a new domain: add its entries here (bare + www, same config), and
 // add a matching Host(`...`) rule to the `app` service's Traefik labels in
@@ -9,17 +11,14 @@
 
 export interface DomainConfig {
   baseUrl: string;
-  whatsappLink: string;
 }
 
 const BIZ_ID: DomainConfig = {
   baseUrl: "https://easylegal.biz.id",
-  whatsappLink: "https://mauorder.online/easylegalbiz-2",
 };
 
 const CO_ID: DomainConfig = {
   baseUrl: "https://easylegal.co.id",
-  whatsappLink: "https://mauorder.online/easylegal3",
 };
 
 export const DOMAINS: Record<string, DomainConfig> = {

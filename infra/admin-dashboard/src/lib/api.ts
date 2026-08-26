@@ -183,6 +183,35 @@ export const api = {
   updateTrackingProject: (id: string, data: any) => request(`/TrackingProject?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
   deleteTrackingProject: (id: string) => request(`/TrackingProject?id=eq.${id}`, { method: 'DELETE' }),
 
+  // WhatsApp CTA rotator (in-house, replaces mauorder.online — see
+  // apps/api/src/routes/whatsapp.ts). Traffic/fairness numbers live here.
+  getWaNumbers: async () => {
+    const res = await fetch(`${API_BASE_URL}/wa/numbers`, { headers: authHeaders() });
+    if (!res.ok) throw new Error('Gagal memuat daftar nomor WA');
+    return await res.json();
+  },
+  createWaNumber: async (data: { number: string; label?: string }) => {
+    const res = await fetch(`${API_BASE_URL}/wa/numbers`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...authHeaders() },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Gagal menambah nomor' }));
+      throw new Error(err.error || 'Gagal menambah nomor');
+    }
+    return await res.json();
+  },
+  updateWaNumber: async (id: string, data: { label?: string; isActive?: boolean }) => {
+    const res = await fetch(`${API_BASE_URL}/wa/numbers/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', ...authHeaders() },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error('Gagal memperbarui nomor');
+    return await res.json();
+  },
+
   // Settings / Templates (Mapping to SystemSetting for now or placeholders)
   getSmtpSettings: async () => {
     const backendUrl = API_BASE_URL;

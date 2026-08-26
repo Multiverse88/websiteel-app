@@ -10,6 +10,7 @@ const navItems = [
   { icon: 'group', label: 'Subscriber', path: '#/contacts' },
   { icon: 'shuffle', label: 'Redirects', path: '#/redirects' },
   { icon: 'local_offer', label: 'Promos', path: '#/promos' },
+  { icon: 'phone_in_talk', label: 'Rotator WhatsApp', path: '#/whatsapp-rotator' },
   { icon: 'settings', label: 'Settings', path: '#/settings' },
 ]
 

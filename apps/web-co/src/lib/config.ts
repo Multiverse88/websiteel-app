@@ -15,8 +15,14 @@ export const config = {
   },
 } as const;
 
-// Helper function to generate WhatsApp link via mauorder rotator
+// In-house WhatsApp CTA rotator (replaces the external mauorder.online
+// service — see apps/api/src/routes/whatsapp.ts). This is a real link, not
+// a fetch: clicking it does a full navigation to our API, which picks
+// whichever active number has the fewest clicks so far, logs the click,
+// and 302s to wa.me — same instant UX as before, but the traffic per
+// number is now visible in the admin dashboard.
 export function getWhatsAppLink(message?: string): string {
   const encodedMessage = encodeURIComponent(message || config.defaultWhatsAppMessage);
-  return `https://mauorder.online/easylegal-5?text=${encodedMessage}`;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://api.easylegal.my.id";
+  return `${apiUrl}/api/v1/wa/redirect?text=${encodedMessage}`;
 }

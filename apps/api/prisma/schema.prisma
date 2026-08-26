@@ -115,6 +115,30 @@ model SystemSetting {
   value String
 }
 
+// In-house WhatsApp CTA rotator, replacing the external mauorder.online
+// service — lets us see per-number traffic and enforce fairness (always
+// route to whichever active number has the fewest clicks so far).
+model WhatsAppNumber {
+  id         String          @id @default(cuid())
+  number     String          @unique // digits only, ready for wa.me/<number>
+  label      String?
+  isActive   Boolean         @default(true)
+  clickCount Int             @default(0)
+  createdAt  DateTime        @default(now())
+  clicks     WhatsAppClick[]
+}
+
+model WhatsAppClick {
+  id        String         @id @default(cuid())
+  numberId  String
+  number    WhatsAppNumber @relation(fields: [numberId], references: [id])
+  domain    String?
+  createdAt DateTime       @default(now())
+
+  @@index([numberId])
+  @@index([createdAt])
+}
+
 model ContactSubmission {
   id           String   @id @default(cuid())
   name         String
