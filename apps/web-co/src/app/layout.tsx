@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import "./globals.css";
 import { GtmHead, GtmNoscript } from "@/components/GoogleTagManager";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import AnalyticsEvents from "@/components/AnalyticsEvents";
 import { getDomainConfig } from "@/lib/domains";
 
 const dmSans = DM_Sans({
@@ -101,6 +102,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full bg-white text-dark font-sans flex flex-col">
         <GtmNoscript />
+        <AnalyticsEvents />
         <div className="noise-overlay" />
         {children}
       </body>

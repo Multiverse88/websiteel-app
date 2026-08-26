@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { getWhatsAppLink } from "@/lib/config";
 import { submitContactForm } from "./actions";
+import { trackEvent } from "@/components/AnalyticsEvents";
 
 export default function Kontak() {
   const [isPending, startTransition] = useTransition();
@@ -88,6 +89,7 @@ export default function Kontak() {
       } else if (result && result.success) {
         setSubmittedName(submittedNameValue);
         setFormSubmitted(true);
+        trackEvent("contact_form_submit", { topic: formData.topic });
       }
     });
   };
