@@ -162,8 +162,10 @@ export default function Navbar() {
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const dropdownRef = React.useRef<HTMLDivElement>(null);
-  const toolsDropdownRef = React.useRef<HTMLDivElement>(null);
+  // These are now <details> elements (native open/close, JS-independent) —
+  // .open is a real DOM property, not a React-state mirror.
+  const dropdownRef = React.useRef<HTMLDetailsElement>(null);
+  const toolsDropdownRef = React.useRef<HTMLDetailsElement>(null);
   const mobileDrawerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -180,6 +182,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     const handleOpenMegaMenu = () => {
+      if (dropdownRef.current) dropdownRef.current.open = true;
       setIsLayananOpen(true);
       if (window.innerWidth < 1024) {
         setIsOpen(true);
@@ -193,9 +196,11 @@ export default function Navbar() {
         return;
       }
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        dropdownRef.current.open = false;
         setIsLayananOpen(false);
       }
       if (toolsDropdownRef.current && !toolsDropdownRef.current.contains(event.target as Node)) {
+        toolsDropdownRef.current.open = false;
         setIsToolsOpen(false);
       }
     };
@@ -215,6 +220,8 @@ export default function Navbar() {
     setIsOpen(false);
     setIsLayananOpen(false);
     setIsToolsOpen(false);
+    if (dropdownRef.current) dropdownRef.current.open = false;
+    if (toolsDropdownRef.current) toolsDropdownRef.current.open = false;
   }, [pathname]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -280,25 +287,23 @@ export default function Navbar() {
               Home
             </Link>
 
-            {/* Layanan Dropdown */}
-            <div
-              className="relative"
-              ref={dropdownRef}
-            >
-              <button
-                onClick={() => setIsLayananOpen(!isLayananOpen)}
-                className={`flex items-center space-x-1 text-[16px] font-medium transition-colors ${
-                  isLayananOpen
-                    ? "text-dark font-semibold"
-                    : "text-muted hover:text-dark"
-                }`}
+            {/* Layanan Dropdown — native <details>: opens/closes and links inside
+                navigate via plain browser behavior, no JS/hydration required.
+                Some "use client" page templates (BadanUsahaTemplate and other
+                self-contained /layanan/* pages) were silently breaking this
+                Navbar's React hydration on their route — no thrown error, no
+                console warning, just a dead button. <details> sidesteps that
+                entirely: it works even if this component's JS never runs. */}
+            <details className="relative group" ref={dropdownRef}>
+              <summary
+                className="flex items-center space-x-1 text-[16px] font-medium transition-colors text-muted hover:text-dark group-open:text-dark group-open:font-semibold list-none cursor-pointer marker:content-none [&::-webkit-details-marker]:hidden"
               >
                 <span>Layanan</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isLayananOpen ? "rotate-180" : ""}`} />
-              </button>
+                <ChevronDown className="w-4 h-4 transition-transform duration-200 group-open:rotate-180" />
+              </summary>
 
-              {isLayananOpen && (
-                <div className="fixed top-20 left-1/2 -translate-x-1/2 w-[1150px] max-w-[calc(100vw-2rem)] mt-0 pt-4 bg-transparent animate-slide-down">
+              {(
+                <div className="fixed top-20 left-1/2 -translate-x-1/2 w-[1150px] max-w-[calc(100vw-2rem)] mt-0 pt-4 bg-transparent animate-slide-down hidden group-open:block">
                   <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-slate-100 p-6 grid grid-cols-[1fr_1fr_1.15fr] gap-6">
                     
                     {/* Left Column */}
@@ -431,27 +436,19 @@ export default function Navbar() {
                   </div>
                 </div>
               )}
-            </div>
+            </details>
 
-            {/* Tools Dropdown */}
-            <div
-              className="relative"
-              ref={toolsDropdownRef}
-            >
-              <button
-                onClick={() => setIsToolsOpen(!isToolsOpen)}
-                className={`flex items-center space-x-1 text-[16px] font-medium transition-colors ${
-                  isToolsOpen
-                    ? "text-dark font-semibold"
-                    : "text-muted hover:text-dark"
-                }`}
+            {/* Tools Dropdown — same native <details> approach as Layanan above */}
+            <details className="relative group" ref={toolsDropdownRef}>
+              <summary
+                className="flex items-center space-x-1 text-[16px] font-medium transition-colors text-muted hover:text-dark group-open:text-dark group-open:font-semibold list-none cursor-pointer marker:content-none [&::-webkit-details-marker]:hidden"
               >
                 <span>Tools</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isToolsOpen ? "rotate-180" : ""}`} />
-              </button>
+                <ChevronDown className="w-4 h-4 transition-transform duration-200 group-open:rotate-180" />
+              </summary>
 
-              {isToolsOpen && (
-                <div className="absolute top-full right-0 mt-6 w-48 bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-slate-100 py-2 animate-slide-down">
+              {(
+                <div className="absolute top-full right-0 mt-6 w-48 bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-slate-100 py-2 animate-slide-down hidden group-open:block">
                   <Link href="/cek-nama" onClick={hardNavigate("/cek-nama")} className="block px-4 py-2.5 text-[14px] font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">
                     Cek Nama PT
                   </Link>
@@ -463,7 +460,7 @@ export default function Navbar() {
                   </Link>
                 </div>
               )}
-            </div>
+            </details>
 
             <Link
               href="/artikel"
