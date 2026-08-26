@@ -230,6 +230,18 @@ export const api = {
   getEmailTemplate: (type: string) => request(`/SystemSetting?key=eq.template_${type}`),
   saveEmailTemplate: (type: string, content: string) => request(`/SystemSetting?key=eq.template_${type}`, { method: 'PATCH', body: JSON.stringify({ value: content }) }),
 
+  // Generic SystemSetting key/value (no "template_" prefix) — used for the
+  // article header/footer, read on the public site via
+  // GET /api/v1/settings/:key (apps/api/src/routes/settings.ts). PATCH only
+  // updates an existing row, so on first save (key doesn't exist yet) fall
+  // back to POST to create it.
+  getSetting: (key: string) => request(`/SystemSetting?key=eq.${key}`),
+  saveSetting: async (key: string, value: string) => {
+    const updated = await request(`/SystemSetting?key=eq.${key}`, { method: 'PATCH', body: JSON.stringify({ value }) })
+    if (Array.isArray(updated) && updated.length > 0) return updated
+    return request(`/SystemSetting`, { method: 'POST', body: JSON.stringify({ key, value }) })
+  },
+
   // Triggers ISR revalidation on the public site via admin-api, which holds
   // REVALIDATION_SECRET server-side — this dashboard never sees it.
   revalidateArticle: (slug: string) =>

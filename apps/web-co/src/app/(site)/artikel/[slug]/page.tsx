@@ -6,10 +6,11 @@ import { unstable_cache } from "next/cache";
 import { Calendar, Clock, Home, Tag } from "lucide-react";
 import SocialShare from "@/components/SocialShare";
 import NewsletterWidget from "@/components/NewsletterWidget";
+import FAQ from "@/components/FAQ";
 import ViewTracker from "./view-tracker";
 import TableOfContents from "./table-of-contents";
 import { getWhatsAppLink } from "@/lib/config";
-import { getArticleJsonLd } from "@/lib/structured-data";
+import { getArticleJsonLd, getFAQJsonLd } from "@/lib/structured-data";
 import type { Metadata } from "next";
 
 const IgIcon = ({ className }: { className?: string }) => (
@@ -53,6 +54,22 @@ async function fetchArticleFromApi(slug: string) {
   const json = await res.json();
   if (!json.data) return null;
   return json.data;
+}
+
+// Global header/footer wrapped around every article, edited once in the
+// dashboard (Settings) rather than per-article. Same SystemSetting
+// key/value store used for newsletter templates — see
+// infra/admin-dashboard/src/pages/ArticleSettings.tsx.
+async function fetchArticleTemplateSetting(key: "article_header" | "article_footer") {
+  try {
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/settings/${key}`;
+    const res = await fetch(apiUrl, { next: { revalidate: 300 } });
+    if (!res.ok) return "";
+    const json = await res.json();
+    return typeof json.data === "string" ? json.data : "";
+  } catch {
+    return "";
+  }
 }
 
 const getCachedArticle = unstable_cache(
@@ -633,6 +650,12 @@ export default async function ArtikelDetailPage({ params }: Props) {
   // Generate tag keywords from the article category and title
   const tags = generateTags(article.category, article.title);
 
+  const [articleHeaderHtml, articleFooterHtml] = await Promise.all([
+    fetchArticleTemplateSetting("article_header"),
+    fetchArticleTemplateSetting("article_footer"),
+  ]);
+  const faqItems: { q: string; a: string }[] = Array.isArray(article.faq) ? article.faq : [];
+
   return (
     <div className="flex flex-col min-h-screen bg-white relative overflow-clip blog-detail-container">
       <ViewTracker slug={slug} />
@@ -651,6 +674,16 @@ export default async function ArtikelDetailPage({ params }: Props) {
           ),
         }}
       />
+      {faqItems.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              getFAQJsonLd(faqItems.map((f) => ({ question: f.q, answer: f.a })))
+            ),
+          }}
+        />
+      )}
 
       {/* Radial Glows for premium aesthetics */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[130px] pointer-events-none" />
@@ -658,6 +691,13 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
       {/* ─── MAIN ARTICLE CONTAINER ─── */}
       <main className="flex-grow relative z-10">
+        {/* Global header template — edited once in Dashboard > Settings, wraps every article */}
+        {articleHeaderHtml && (
+          <div
+            className="max-w-[900px] mx-auto px-6 pt-6"
+            dangerouslySetInnerHTML={{ __html: articleHeaderHtml }}
+          />
+        )}
         <article className="max-w-[1240px] mx-auto px-6">
 
           {/* Wrapper for centered header to keep it readable */}
@@ -844,6 +884,17 @@ export default async function ArtikelDetailPage({ params }: Props) {
                   </p>
                 )}
               </div>
+
+              {/* ─── FAQ (per-article, filled in the CMS) ─── */}
+              {faqItems.length > 0 && (
+                <div className="mb-10">
+                  <FAQ
+                    title="Pertanyaan seputar artikel ini."
+                    subtitle="Ringkasan cepat sebelum Anda konsultasi lebih lanjut."
+                    items={faqItems}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Right Column: Sidebar */}
@@ -1002,6 +1053,14 @@ export default async function ArtikelDetailPage({ params }: Props) {
             </div>
           </div>
         </section>
+
+        {/* Global footer template — edited once in Dashboard > Settings, wraps every article */}
+        {articleFooterHtml && (
+          <div
+            className="max-w-[900px] mx-auto px-6 pb-6"
+            dangerouslySetInnerHTML={{ __html: articleFooterHtml }}
+          />
+        )}
       </main>
     </div>
   );

@@ -14,6 +14,7 @@ import NewsletterEditor from './pages/NewsletterEditor'
 import NewsletterSettings from './pages/NewsletterSettings'
 import Tracking from './pages/Tracking'
 import Promos from './pages/Promos'
+import Settings from './pages/Settings'
 
 function normalizePathToHash() {
   const { pathname, hash } = window.location
@@ -88,6 +89,7 @@ function Router() {
     '/newsletter/settings': <NewsletterSettings />,
     '/tracking': <Tracking />,
     '/promos': <Promos />,
+    '/settings': <Settings />,
   }
 
   return <Layout>{pages[route] || <Dashboard />}</Layout>

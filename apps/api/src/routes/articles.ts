@@ -159,7 +159,7 @@ router.post("/:slug/revalidate", requireAuth, async (req, res) => {
 // POST /api/v1/articles
 router.post("/", requireAuth, async (req, res) => {
   try {
-    const { slug, title, excerpt, content, coverImage, category, readTime, authorId } = req.body;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq } = req.body;
 
     if (!slug || !title || !excerpt || !content || !category) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -175,6 +175,7 @@ router.post("/", requireAuth, async (req, res) => {
         category,
         readTime: readTime || "5 min read",
         authorId: authorId || null,
+        faq: Array.isArray(faq) && faq.length > 0 ? faq : undefined,
       },
     });
 
@@ -192,7 +193,7 @@ router.post("/", requireAuth, async (req, res) => {
 router.put("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
-    const { slug, title, excerpt, content, coverImage, category, readTime, authorId } = req.body;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq } = req.body;
 
     const existing = await prisma.article.findUnique({ where: { id } });
     if (!existing) {
@@ -210,6 +211,7 @@ router.put("/:id", requireAuth, async (req, res) => {
         category: category || existing.category,
         readTime: readTime || existing.readTime,
         authorId: authorId || existing.authorId,
+        faq: faq !== undefined ? (Array.isArray(faq) && faq.length > 0 ? faq : null) : existing.faq as any,
       },
     });
 

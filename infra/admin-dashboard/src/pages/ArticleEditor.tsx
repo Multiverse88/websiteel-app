@@ -71,6 +71,11 @@ export default function ArticleEditor() {
   const [content, setContent] = useState("");
   const [focusKeyword, setFocusKeyword] = useState("");
 
+  // FAQ shown at the end of the article on the public site (reuses the
+  // same <FAQ> component as the /layanan pages). Per-article, unlike the
+  // global header/footer which live in Dashboard > Settings.
+  const [faqItems, setFaqItems] = useState<{ q: string; a: string }[]>([]);
+
   // Link insertion state
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
@@ -213,6 +218,7 @@ export default function ArticleEditor() {
           setContent(article.content || "");
           setCoverUrl(article.coverImage || IMAGE_PRESETS[0].url);
           setCoverMode("url");
+          setFaqItems(Array.isArray(article.faq) ? article.faq : []);
           
           if (editorRef.current) {
             editorRef.current.innerHTML = markdownToHtml(article.content || "");
@@ -555,7 +561,8 @@ export default function ArticleEditor() {
           coverImage: finalCoverUrl,
           seoTitle: title,
           seoDesc: excerpt,
-          status: "published" // You can modify this if you add a status dropdown
+          status: "published", // You can modify this if you add a status dropdown
+          faq: faqItems.filter(f => f.q.trim() && f.a.trim()),
         };
 
         if (articleId) {
@@ -880,6 +887,53 @@ export default function ArticleEditor() {
                   <div className="text-right text-[16px] font-bold text-gray-400">
                     {excerpt.length} / 200 karakter
                   </div>
+                </div>
+
+                {/* FAQ — tampil di akhir artikel di website publik */}
+                <div className="space-y-2">
+                  <label className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                    FAQ Artikel (opsional)
+                  </label>
+                  <p className="text-[14px] text-gray-500">
+                    Muncul sebagai accordion di akhir artikel. Kosongkan semua kalau artikel ini tidak perlu FAQ.
+                  </p>
+                  <div className="space-y-3">
+                    {faqItems.map((item, idx) => (
+                      <div key={idx} className="border border-gray-200 rounded-xl p-4 space-y-2 bg-gray-50">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[14px] font-bold text-gray-700">Pertanyaan {idx + 1}</span>
+                          <button
+                            type="button"
+                            onClick={() => setFaqItems(faqItems.filter((_, i) => i !== idx))}
+                            className="text-[13px] font-bold text-[#990202] hover:underline"
+                          >
+                            Hapus
+                          </button>
+                        </div>
+                        <input
+                          type="text"
+                          value={item.q}
+                          onChange={(e) => setFaqItems(faqItems.map((f, i) => i === idx ? { ...f, q: e.target.value } : f))}
+                          placeholder="Pertanyaan..."
+                          className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-[14px] focus:outline-none focus:border-[#990202]"
+                        />
+                        <textarea
+                          value={item.a}
+                          onChange={(e) => setFaqItems(faqItems.map((f, i) => i === idx ? { ...f, a: e.target.value } : f))}
+                          placeholder="Jawaban..."
+                          rows={2}
+                          className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-[14px] focus:outline-none focus:border-[#990202] resize-none"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setFaqItems([...faqItems, { q: "", a: "" }])}
+                    className="px-4 py-2 border border-gray-200 rounded-lg text-[14px] font-bold text-gray-700 hover:bg-gray-50 transition-colors"
+                  >
+                    + Tambah Pertanyaan
+                  </button>
                 </div>
 
                 {/* Focus Keyword (SEO) */}
