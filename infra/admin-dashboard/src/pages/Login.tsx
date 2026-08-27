@@ -55,7 +55,8 @@ export default function Login() {
                 className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] outline-none transition"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="admin@easylegal.id"
+                placeholder="admin@easylegal.my.id"
+                autoComplete="username"
                 required
                 autoFocus
               />
@@ -72,6 +73,7 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
+                autoComplete="current-password"
                 required
               />
             </div>

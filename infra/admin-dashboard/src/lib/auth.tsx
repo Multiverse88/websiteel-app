@@ -25,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
     return readStoredUser()
   })
-  const [isAuthenticated, setIsAuthenticated] = useState(!!user)
+  const isAuthenticated = user !== null
 
   useEffect(() => {
     const handleExpiredSession = () => {
@@ -78,7 +78,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const userData: User = { username, token: res.token }
       localStorage.setItem('admin_user', JSON.stringify(userData))
       setUser(userData)
-      setIsAuthenticated(true)
       window.location.hash = '#/dashboard'
     } catch (err: any) {
       throw new Error(err.message || 'Login failed')

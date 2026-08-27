@@ -71,13 +71,17 @@ async function request(path: string, options: RequestInit = {}) {
 
 export const api = {
   login: async (email?: string, password?: string) => {
+    const normalizedEmail = email?.trim().toLowerCase()
     const res = await fetch(`${AUTH_BASE_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: normalizedEmail, password }),
     })
     if (!res.ok) {
       const err = await res.json().catch(() => ({ error: 'Login gagal' }))
+      if (res.status === 401) {
+        throw new Error('Email atau password tidak sesuai')
+      }
       throw new Error(err.error || 'Login gagal')
     }
     const json = await res.json()
