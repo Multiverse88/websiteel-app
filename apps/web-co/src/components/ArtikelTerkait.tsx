@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Clock } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface Article {
   id: string;
@@ -32,9 +35,7 @@ const CATEGORY_MAP: Record<string, string> = {
   Branding: "Branding",
 };
 
-// Server component: fetches on the server, renders nothing if the API is
-// unreachable or the category has no articles yet — never blocks the page.
-export default async function ArtikelTerkait({
+export default function ArtikelTerkait({
   category,
   query,
   title = "Artikel Terkait",
@@ -43,23 +44,40 @@ export default async function ArtikelTerkait({
   query?: string;
   title?: string;
 }) {
-  let articles: Article[] = [];
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  try {
-    const params = new URLSearchParams({ limit: "4" });
-    if (category) params.set("category", category);
-    if (query) params.set("q", query);
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:4000"}/api/v1/articles?${params.toString()}`;
-    const res = await fetch(apiUrl, { next: { revalidate: 300 } });
-    if (res.ok) {
-      const data = await res.json();
-      articles = Array.isArray(data.data) ? data.data.slice(0, 4) : [];
-    }
-  } catch {
-    // API unreachable — section just doesn't render, rest of the page is fine
-  }
+  useEffect(() => {
+    let mounted = true;
+    const fetchArticles = async () => {
+      try {
+        const params = new URLSearchParams({ limit: "4" });
+        if (category) params.set("category", category);
+        if (query) params.set("q", query);
+        
+        // Use relative URL so it doesn't cross-origin block if on same domain
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:4000"}/api/v1/articles?${params.toString()}`;
+        const res = await fetch(apiUrl);
+        if (res.ok) {
+          const data = await res.json();
+          if (mounted) {
+            setArticles(Array.isArray(data.data) ? data.data.slice(0, 4) : []);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch related articles", err);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
 
-  if (articles.length === 0) return null;
+    fetchArticles();
+    return () => {
+      mounted = false;
+    };
+  }, [category, query]);
+
+  if (loading || articles.length === 0) return null;
 
   return (
     <section className="py-8 sm:py-16 bg-gray-50 border-y border-gray-100">
