@@ -1,5 +1,11 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { api } from './api'
+import {
+  clearSession,
+  getJwtExpirationMs,
+  readStoredUser,
+  SESSION_EXPIRED_EVENT,
+} from './session'
 
 interface User {
   username: string
@@ -17,8 +23,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
-    const saved = localStorage.getItem('admin_user')
-    return saved ? JSON.parse(saved) : null
+    return readStoredUser()
   })
   // Derived, not separate state — logout() used to set user to null without
   // also flipping a standalone isAuthenticated flag, so the Router (which
@@ -27,6 +32,48 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // because isAuthenticated was still stuck at true. Deriving it removes
   // the second source of truth so it can't go out of sync again.
   const isAuthenticated = !!user
+
+  useEffect(() => {
+    const handleExpiredSession = () => {
+      setUser(null)
+      window.location.hash = '#/login'
+    }
+    window.addEventListener(SESSION_EXPIRED_EVENT, handleExpiredSession)
+    return () => window.removeEventListener(SESSION_EXPIRED_EVENT, handleExpiredSession)
+  }, [])
+
+  useEffect(() => {
+    if (!user) return
+
+    const expiresAt = getJwtExpirationMs(user.token)
+    const remainingMs = expiresAt === null ? 0 : expiresAt - Date.now()
+    if (remainingMs <= 0) {
+      clearSession()
+      setUser(null)
+      window.location.hash = '#/login'
+      return
+    }
+
+    const expiryTimer = window.setTimeout(() => {
+      clearSession()
+      setUser(null)
+      window.location.hash = '#/login'
+    }, Math.min(remainingMs, 2_147_483_647))
+
+    const syncSessionAcrossTabs = (event: StorageEvent) => {
+      if (event.key === 'admin_jwt' || event.key === 'admin_user') {
+        const storedUser = readStoredUser()
+        setUser(storedUser)
+        if (!storedUser) window.location.hash = '#/login'
+      }
+    }
+    window.addEventListener('storage', syncSessionAcrossTabs)
+
+    return () => {
+      window.clearTimeout(expiryTimer)
+      window.removeEventListener('storage', syncSessionAcrossTabs)
+    }
+  }, [user])
 
   const login = async (username: string, password: string) => {
     try {
@@ -44,9 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const logout = () => {
-    localStorage.removeItem('admin_user')
-    localStorage.removeItem('admin_token')
-    localStorage.removeItem('admin_jwt')
+    clearSession()
     setUser(null)
     window.location.hash = '#/login'
   }

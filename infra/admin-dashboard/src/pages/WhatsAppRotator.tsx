@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { api } from '../lib/api'
 
 interface WaNumber {
@@ -70,7 +70,7 @@ export default function WhatsAppRotator() {
   const [statusFilter, setStatusFilter] = useState('')
   const [sourceFilter, setSourceFilter] = useState('')
 
-  const load = async () => {
+  const load = useCallback(async () => {
     try {
       setLoading(true)
       const res = await api.getWaNumbers()
@@ -81,9 +81,9 @@ export default function WhatsAppRotator() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  const loadLeads = async () => {
+  const loadLeads = useCallback(async () => {
     try {
       setLeadsLoading(true)
       const res = await api.getWaLeads({ status: statusFilter, source: sourceFilter })
@@ -95,10 +95,10 @@ export default function WhatsAppRotator() {
     } finally {
       setLeadsLoading(false)
     }
-  }
+  }, [sourceFilter, statusFilter])
 
-  useEffect(() => { load() }, [])
-  useEffect(() => { if (tab === 'leads') loadLeads() }, [tab, statusFilter, sourceFilter])
+  useEffect(() => { load() }, [load])
+  useEffect(() => { if (tab === 'leads') loadLeads() }, [loadLeads, tab])
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
