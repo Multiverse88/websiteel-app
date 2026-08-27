@@ -151,9 +151,17 @@ model WhatsAppClick {
   // First-touch — captured client-side on landing, persisted in a cookie so
   // it survives browsing to whichever product page the WA click happens on.
   source    String?
-  // Which product/service page the CTA was clicked from, e.g.
-  // "/layanan/sertifikasi-iso" — lets us see which product the lead is for.
+  // "CTA Location" (see CONTEXT.md) — which page the CTA was clicked from,
+  // e.g. "/layanan/sertifikasi-iso". Coarse: doesn't distinguish between
+  // multiple packages/buttons on the same page.
   product   String?
+  // "Interested Service" (see CONTEXT.md) — the actual WA message text the
+  // CTA carries, e.g. "...saya tertarik dengan Paket PKP Pulau Jawa...".
+  // Every getWhatsAppLink() call site already writes a specific message per
+  // button/package, so this is far more precise than the page path alone —
+  // it's the only signal that tells "Paket Pulau Jawa" from "Paket Luar
+  // Jawa" when both buttons live on the same product page.
+  service   String?
   status    LeadStatus     @default(NEW)
   notes     String?
   createdAt DateTime       @default(now())

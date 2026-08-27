@@ -65,6 +65,12 @@ router.get("/redirect", async (req, res) => {
 
     const source = (req.query.source as string) || null;
     const product = (req.query.product as string) || null;
+    // "Interested Service" — the WA message itself already names the exact
+    // package/button (every getWhatsAppLink() call site writes its own
+    // message), so it's the most specific signal we have without touching
+    // 30+ call sites individually. No separate frontend param needed.
+    const rawText = (req.query.text as string) || "";
+    const service = rawText ? rawText.slice(0, 200) : null;
 
     await prisma.$transaction([
       prisma.whatsAppNumber.update({
@@ -72,7 +78,7 @@ router.get("/redirect", async (req, res) => {
         data: { clickCount: { increment: 1 } },
       }),
       prisma.whatsAppClick.create({
-        data: { numberId: next.id, domain, leadCode, source, product },
+        data: { numberId: next.id, domain, leadCode, source, product, service },
       }),
     ]);
 

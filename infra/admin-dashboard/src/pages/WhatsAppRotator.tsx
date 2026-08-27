@@ -17,6 +17,7 @@ interface WaLead {
   domain: string | null
   source: string | null
   product: string | null
+  service: string | null
   status: string
   notes: string | null
   createdAt: string
@@ -326,7 +327,8 @@ export default function WhatsAppRotator() {
               <thead>
                 <tr className="bg-gray-50 text-left text-gray-500 text-[12px] uppercase tracking-wider">
                   <th className="px-6 py-3">Kode</th>
-                  <th className="px-6 py-3">Produk</th>
+                  <th className="px-6 py-3">Layanan/Paket</th>
+                  <th className="px-6 py-3">Halaman</th>
                   <th className="px-6 py-3">Sumber</th>
                   <th className="px-6 py-3">Nomor Tujuan</th>
                   <th className="px-6 py-3">Tanggal</th>
@@ -335,15 +337,16 @@ export default function WhatsAppRotator() {
               </thead>
               <tbody>
                 {leadsLoading && (
-                  <tr><td colSpan={6} className="px-6 py-8 text-center text-gray-400">Memuat leads...</td></tr>
+                  <tr><td colSpan={7} className="px-6 py-8 text-center text-gray-400">Memuat leads...</td></tr>
                 )}
                 {!leadsLoading && leads.length === 0 && (
-                  <tr><td colSpan={6} className="px-6 py-8 text-center text-gray-400">Belum ada lead yang cocok dengan filter.</td></tr>
+                  <tr><td colSpan={7} className="px-6 py-8 text-center text-gray-400">Belum ada lead yang cocok dengan filter.</td></tr>
                 )}
                 {!leadsLoading && leads.map((lead) => (
                   <tr key={lead.id} className="border-t border-gray-100">
                     <td className="px-6 py-3.5 font-mono font-bold text-gray-900">{lead.leadCode}</td>
-                    <td className="px-6 py-3.5 text-gray-600 max-w-[220px] truncate" title={lead.product || ''}>{lead.product || '—'}</td>
+                    <td className="px-6 py-3.5 text-gray-800 max-w-[260px] truncate font-medium" title={lead.service || ''}>{lead.service || '—'}</td>
+                    <td className="px-6 py-3.5 text-gray-500 max-w-[180px] truncate" title={lead.product || ''}>{lead.product || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-600">{lead.source ? (SOURCE_LABELS[lead.source] || lead.source) : '—'}</td>
                     <td className="px-6 py-3.5 text-gray-600">{lead.number?.label || lead.number?.number || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-500 whitespace-nowrap">{new Date(lead.createdAt).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</td>
