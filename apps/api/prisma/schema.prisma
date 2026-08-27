@@ -128,15 +128,42 @@ model WhatsAppNumber {
   clicks     WhatsAppClick[]
 }
 
+enum LeadStatus {
+  NEW
+  CONTACTED
+  NEGOTIATING
+  CLOSED_WON
+  CLOSED_LOST
+}
+
+// Every rotator click doubles as a lead: leadCode is embedded straight into
+// the pre-filled WhatsApp message text (the only channel that actually
+// carries data from this backend into the real WA conversation), so CS can
+// read it off the incoming chat and staff can look the same lead up here to
+// track it through to closing.
 model WhatsAppClick {
   id        String         @id @default(cuid())
+  leadCode  String         @unique
   numberId  String
   number    WhatsAppNumber @relation(fields: [numberId], references: [id])
   domain    String?
+  // Entry-point attribution: "gads" | "metaads" | "seo" | "direct" | "other".
+  // First-touch — captured client-side on landing, persisted in a cookie so
+  // it survives browsing to whichever product page the WA click happens on.
+  source    String?
+  // Which product/service page the CTA was clicked from, e.g.
+  // "/layanan/sertifikasi-iso" — lets us see which product the lead is for.
+  product   String?
+  status    LeadStatus     @default(NEW)
+  notes     String?
   createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
 
   @@index([numberId])
   @@index([createdAt])
+  @@index([status])
+  @@index([source])
+  @@index([product])
 }
 
 model ContactSubmission {

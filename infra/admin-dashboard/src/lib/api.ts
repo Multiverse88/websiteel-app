@@ -211,6 +211,21 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memperbarui nomor');
     return await res.json();
   },
+  getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string } = {}) => {
+    const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString()
+    const res = await fetch(`${API_BASE_URL}/wa/leads${qs ? `?${qs}` : ''}`, { headers: authHeaders() })
+    if (!res.ok) throw new Error('Gagal memuat leads')
+    return await res.json()
+  },
+  updateWaLead: async (id: string, data: { status?: string; notes?: string }) => {
+    const res = await fetch(`${API_BASE_URL}/wa/leads/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', ...authHeaders() },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) throw new Error('Gagal memperbarui lead')
+    return await res.json()
+  },
 
   // Settings / Templates (Mapping to SystemSetting for now or placeholders)
   getSmtpSettings: async () => {
