@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { api } from '../lib/api'
 
 interface Promo {
   id: number | string;
@@ -22,12 +23,9 @@ export default function Promos() {
   const fetchPromos = async () => {
     try {
       setLoading(true)
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:4000'}/api/v1/settings/PROMOS`)
-      if (res.ok) {
-        const json = await res.json()
-        if (json.data && Array.isArray(json.data)) {
-          setPromos(json.data)
-        }
+      const json = await api.getApiSetting('PROMOS')
+      if (json?.data && Array.isArray(json.data)) {
+        setPromos(json.data)
       } else {
         setPromos([])
       }
@@ -44,19 +42,7 @@ export default function Promos() {
       setError('')
       setSuccess('')
       
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:4000'}/api/v1/settings/PROMOS`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}` // assuming auth token
-        },
-        body: JSON.stringify({ value: updatedPromos })
-      })
-
-      if (!res.ok) {
-        const err = await res.json()
-        throw new Error(err.error || 'Failed to save')
-      }
+      await api.saveApiSetting('PROMOS', updatedPromos)
 
       setSuccess('Promo berhasil disimpan!')
       setTimeout(() => setSuccess(''), 3000)

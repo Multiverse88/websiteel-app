@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { api } from '../lib/api'
 
 interface WaNumber {
@@ -25,7 +25,7 @@ export default function WhatsAppRotator() {
   const [adding, setAdding] = useState(false)
   const [error, setError] = useState('')
 
-  const load = async () => {
+  const load = useCallback(async () => {
     try {
       setLoading(true)
       const res = await api.getWaNumbers()
@@ -36,9 +36,9 @@ export default function WhatsAppRotator() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  useEffect(() => { load() }, [])
+  useEffect(() => { load() }, [load])
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
