@@ -20,7 +20,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem('admin_user')
     return saved ? JSON.parse(saved) : null
   })
-  const [isAuthenticated, setIsAuthenticated] = useState(!!user)
+  // Derived, not separate state — logout() used to set user to null without
+  // also flipping a standalone isAuthenticated flag, so the Router (which
+  // checks isAuthenticated) never noticed the logout: hash briefly became
+  // #/login but its own effect immediately bounced back to #/dashboard
+  // because isAuthenticated was still stuck at true. Deriving it removes
+  // the second source of truth so it can't go out of sync again.
+  const isAuthenticated = !!user
 
   const login = async (username: string, password: string) => {
     try {
@@ -31,7 +37,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const userData: User = { username, token: res.token }
       localStorage.setItem('admin_user', JSON.stringify(userData))
       setUser(userData)
-      setIsAuthenticated(true)
       window.location.hash = '#/dashboard'
     } catch (err: any) {
       throw new Error(err.message || 'Login failed')
