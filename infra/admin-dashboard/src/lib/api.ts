@@ -237,13 +237,16 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memuat leads')
     return await res.json()
   },
-  updateWaLead: async (id: string, data: { status?: string; notes?: string }) => {
+  updateWaLead: async (id: string, data: { status?: string; notes?: string; lostReason?: string; orderValue?: number }) => {
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
-    if (!res.ok) throw new Error('Gagal memperbarui lead')
+    if (!res.ok) {
+      const error = await res.json().catch(() => ({ error: 'Gagal memperbarui lead' }))
+      throw new Error(error.error || 'Gagal memperbarui lead')
+    }
     return await res.json()
   },
 

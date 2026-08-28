@@ -16,6 +16,7 @@ import Tracking from './pages/Tracking'
 import Promos from './pages/Promos'
 import Settings from './pages/Settings'
 import WhatsAppRotator from './pages/WhatsAppRotator'
+import WhatsAppLeads from './pages/WhatsAppLeads'
 
 function normalizePathToHash() {
   const { pathname, hash } = window.location
@@ -92,6 +93,7 @@ function Router() {
     '/promos': <Promos />,
     '/settings': <Settings />,
     '/whatsapp-rotator': <WhatsAppRotator />,
+    '/whatsapp-leads': <WhatsAppLeads />,
   }
 
   return <Layout>{pages[route] || <Dashboard />}</Layout>

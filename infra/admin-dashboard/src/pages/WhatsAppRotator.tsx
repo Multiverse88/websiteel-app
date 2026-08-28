@@ -16,10 +16,15 @@ interface WaLead {
   leadCode: string
   domain: string | null
   source: string | null
+  sourceCode: string
+  channel: string
   product: string | null
   service: string | null
   status: string
   notes: string | null
+  temperature: 'COLD' | 'WARM' | 'HOT'
+  lostReason: string | null
+  orderValue: number | null
   createdAt: string
   number: { number: string; label: string | null }
 }
@@ -27,25 +32,44 @@ interface WaLead {
 const SOURCE_LABELS: Record<string, string> = {
   gads: 'Google Ads',
   metaads: 'Meta Ads',
-  seo: 'SEO/Organik',
+  googleseo: 'Google SEO/Organik',
+  referral: 'Referral',
   direct: 'Langsung',
   other: 'Lainnya',
+  unknown: 'Tidak diketahui',
 }
 
 const STATUS_LABELS: Record<string, string> = {
   NEW: 'Baru',
   CONTACTED: 'Dihubungi',
-  NEGOTIATING: 'Nego',
-  CLOSED_WON: 'Closing',
-  CLOSED_LOST: 'Batal',
+  QUALIFIED: 'Terkualifikasi',
+  PROPOSAL: 'Penawaran/Nego',
+  WON: 'Closing',
+  LOST: 'Tidak Jadi',
 }
 
 const STATUS_COLORS: Record<string, string> = {
   NEW: 'bg-blue-50 text-blue-700',
   CONTACTED: 'bg-amber-50 text-amber-700',
-  NEGOTIATING: 'bg-purple-50 text-purple-700',
-  CLOSED_WON: 'bg-emerald-50 text-emerald-700',
-  CLOSED_LOST: 'bg-gray-100 text-gray-500',
+  QUALIFIED: 'bg-indigo-50 text-indigo-700',
+  PROPOSAL: 'bg-purple-50 text-purple-700',
+  WON: 'bg-emerald-50 text-emerald-700',
+  LOST: 'bg-gray-100 text-gray-500',
+}
+
+const TEMPERATURE_COLORS: Record<string, string> = {
+  COLD: 'bg-sky-50 text-sky-700',
+  WARM: 'bg-amber-50 text-amber-700',
+  HOT: 'bg-red-50 text-red-700',
+}
+
+const NEXT_STAGES: Record<string, string[]> = {
+  NEW: ['NEW', 'CONTACTED', 'LOST'],
+  CONTACTED: ['CONTACTED', 'QUALIFIED', 'LOST'],
+  QUALIFIED: ['QUALIFIED', 'PROPOSAL', 'LOST'],
+  PROPOSAL: ['PROPOSAL', 'WON', 'LOST'],
+  WON: ['WON'],
+  LOST: ['LOST', 'CONTACTED'],
 }
 
 // Manage the in-house WhatsApp CTA rotator (apps/api/src/routes/whatsapp.ts,
@@ -53,8 +77,8 @@ const STATUS_COLORS: Record<string, string> = {
 // click site-wide always goes to whichever active number has the fewest
 // clicks so far. Two tabs: fairness per number, and every click as a
 // trackable lead (source/product/status) up to closing.
-export default function WhatsAppRotator() {
-  const [tab, setTab] = useState<'numbers' | 'leads'>('numbers')
+export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab?: 'numbers' | 'leads' }) {
+  const [tab, setTab] = useState<'numbers' | 'leads'>(initialTab)
 
   const [numbers, setNumbers] = useState<WaNumber[]>([])
   const [totalClicks, setTotalClicks] = useState(0)
@@ -124,15 +148,34 @@ export default function WhatsAppRotator() {
   }
 
   const handleStatusChange = async (lead: WaLead, status: string) => {
+    const payload: { status: string; lostReason?: string; orderValue?: number } = { status }
+    if (status === 'LOST') {
+      const lostReason = window.prompt('Alasan lead tidak jadi:')?.trim()
+      if (!lostReason) return
+      payload.lostReason = lostReason
+    }
+    if (status === 'WON') {
+      const input = window.prompt('Nilai order/closing (Rupiah):')
+      if (input === null) return
+      const orderValue = Number(input.replace(/[^0-9]/g, ''))
+      if (!Number.isFinite(orderValue) || orderValue < 0) return
+      payload.orderValue = orderValue
+    }
+    const previous = leads
     setLeads(leads.map(l => l.id === lead.id ? { ...l, status } : l))
-    await api.updateWaLead(lead.id, { status })
-    await loadLeads()
+    try {
+      await api.updateWaLead(lead.id, payload)
+      await loadLeads()
+    } catch (e: any) {
+      setLeads(previous)
+      setError(e.message)
+    }
   }
 
   const activeCount = numbers.filter(n => n.isActive).length
   const fairSharePercent = activeCount > 0 ? Math.round((100 / activeCount) * 10) / 10 : 0
   const totalLeads = Object.values(funnel).reduce((a, b) => a + b, 0)
-  const closedWon = funnel.CLOSED_WON || 0
+  const closedWon = funnel.WON || 0
   const conversionRate = totalLeads > 0 ? Math.round((closedWon / totalLeads) * 1000) / 10 : 0
 
   if (loading) {
@@ -142,7 +185,7 @@ export default function WhatsAppRotator() {
   return (
     <div className="max-w-6xl mx-auto space-y-[24px] pb-12">
       <div>
-        <h1 className="text-[24px] leading-[32px] font-semibold tracking-[-0.01em] font-sans text-gray-900">Rotator WhatsApp</h1>
+        <h1 className="text-[24px] leading-[32px] font-semibold tracking-[-0.01em] font-sans text-gray-900">{tab === 'leads' ? 'Leads WhatsApp' : 'Rotator WhatsApp'}</h1>
         <p className="text-[14px] leading-[22px] font-sans text-gray-500 mt-1">
           Setiap tombol WA di website (semua domain) selalu diarahkan ke nomor aktif dengan klik paling sedikit — otomatis merata. Tiap klik juga tercatat sebagai lead yang bisa dilacak sampai closing.
         </p>
@@ -270,7 +313,7 @@ export default function WhatsAppRotator() {
         <>
           {/* Funnel + conversion summary */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {(['NEW', 'CONTACTED', 'NEGOTIATING', 'CLOSED_WON', 'CLOSED_LOST'] as const).map((s) => (
+            {(['NEW', 'CONTACTED', 'QUALIFIED', 'PROPOSAL', 'WON', 'LOST'] as const).map((s) => (
               <div key={s} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
                 <div className="text-[12px] font-bold text-gray-500 uppercase tracking-wider">{STATUS_LABELS[s]}</div>
                 <div className="text-[24px] font-black text-gray-900 mt-1">{funnel[s] || 0}</div>
@@ -332,32 +375,36 @@ export default function WhatsAppRotator() {
                   <th className="px-6 py-3">Sumber</th>
                   <th className="px-6 py-3">Nomor Tujuan</th>
                   <th className="px-6 py-3">Tanggal</th>
+                  <th className="px-6 py-3">Temperature</th>
                   <th className="px-6 py-3">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {leadsLoading && (
-                  <tr><td colSpan={7} className="px-6 py-8 text-center text-gray-400">Memuat leads...</td></tr>
+                  <tr><td colSpan={8} className="px-6 py-8 text-center text-gray-400">Memuat leads...</td></tr>
                 )}
                 {!leadsLoading && leads.length === 0 && (
-                  <tr><td colSpan={7} className="px-6 py-8 text-center text-gray-400">Belum ada lead yang cocok dengan filter.</td></tr>
+                  <tr><td colSpan={8} className="px-6 py-8 text-center text-gray-400">Belum ada lead yang cocok dengan filter.</td></tr>
                 )}
                 {!leadsLoading && leads.map((lead) => (
                   <tr key={lead.id} className="border-t border-gray-100">
                     <td className="px-6 py-3.5 font-mono font-bold text-gray-900">{lead.leadCode}</td>
                     <td className="px-6 py-3.5 text-gray-800 max-w-[260px] truncate font-medium" title={lead.service || ''}>{lead.service || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-500 max-w-[180px] truncate" title={lead.product || ''}>{lead.product || '—'}</td>
-                    <td className="px-6 py-3.5 text-gray-600">{lead.source ? (SOURCE_LABELS[lead.source] || lead.source) : '—'}</td>
+                    <td className="px-6 py-3.5 text-gray-600">{SOURCE_LABELS[lead.sourceCode || lead.source || 'unknown'] || lead.sourceCode || lead.source || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-600">{lead.number?.label || lead.number?.number || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-500 whitespace-nowrap">{new Date(lead.createdAt).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</td>
+                    <td className="px-6 py-3.5">
+                      <span className={`px-2 py-1 rounded-full text-[11px] font-bold ${TEMPERATURE_COLORS[lead.temperature] || 'bg-gray-100 text-gray-600'}`}>{lead.temperature}</span>
+                    </td>
                     <td className="px-6 py-3.5">
                       <select
                         value={lead.status}
                         onChange={(e) => handleStatusChange(lead, e.target.value)}
                         className={`px-2 py-1 rounded-full text-[12px] font-bold border-0 ${STATUS_COLORS[lead.status] || 'bg-gray-100 text-gray-600'}`}
                       >
-                        {Object.entries(STATUS_LABELS).map(([val, label]) => (
-                          <option key={val} value={val}>{label}</option>
+                        {(NEXT_STAGES[lead.status] || [lead.status]).map((val) => (
+                          <option key={val} value={val}>{STATUS_LABELS[val] || val}</option>
                         ))}
                       </select>
                     </td>
@@ -368,7 +415,7 @@ export default function WhatsAppRotator() {
           </div>
 
           <p className="text-[13px] text-gray-400">
-            Cocokkan "Kode" di sini dengan kode <code className="font-mono">[Ref: EL-XXXXXX]</code> yang muncul di pesan WhatsApp masuk, lalu update status begitu progres obrolan berubah.
+            Cocokkan "Kode" dan source dengan <code className="font-mono">[Ref: EL-XXXXXX | Source: gads]</code> pada pesan WhatsApp, lalu update status sesuai progres.
           </p>
         </>
       )}

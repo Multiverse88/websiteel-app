@@ -1,24 +1,31 @@
 import { Router } from "express";
+import { randomInt } from "node:crypto";
 import { prisma } from "../lib/prisma";
-import { requireAuth } from "../middleware/auth";
+import { AuthedRequest, requireAuth } from "../middleware/auth";
+import {
+  buildWhatsAppMessage,
+  classifyAttribution,
+  getLeadTemperature,
+  isValidStage,
+  isValidStageTransition,
+  normalizeSourceCode,
+  sourceCodeToChannel,
+} from "../modules/leads/lead-domain";
 
 const router = Router();
 
 function generateLeadCode() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O/1/I — easy to read off a phone screen
   let code = "";
-  for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+  for (let i = 0; i < 6; i++) code += chars[randomInt(chars.length)];
   return `EL-${code}`;
 }
 
-// Human-readable labels for the CS-visible ref line — keep in sync with the
-// SOURCE_LABELS map in apps/web/src/components/AnalyticsEvents.tsx.
-const SOURCE_LABELS: Record<string, string> = {
-  gads: "Google Ads",
-  metaads: "Meta Ads",
-  seo: "Google/SEO Organik",
-  direct: "Langsung/Bookmark",
-};
+function queryText(value: unknown, maxLength = 500): string | null {
+  if (typeof value !== "string") return null;
+  const normalized = value.trim().slice(0, maxLength);
+  return normalized || null;
+}
 
 // GET /api/v1/wa/redirect?text=...&source=...&product=...
 // Public — real site visitors land here when they click any WhatsApp CTA
@@ -30,17 +37,36 @@ const SOURCE_LABELS: Record<string, string> = {
 // a fetch, so no CORS setup is needed here.
 router.get("/redirect", async (req, res) => {
   try {
+    const rawText = queryText(req.query.text, 1000) || "";
+    const suppliedSource = normalizeSourceCode(req.query.source);
+    const classified = suppliedSource
+      ? {
+          sourceCode: suppliedSource,
+          channel: sourceCodeToChannel(suppliedSource),
+          referralCode: queryText(req.query.ref, 80),
+        }
+      : classifyAttribution(req.query, queryText(req.query.referrer, 1000));
+    const sourceCode = classified.sourceCode;
+    const product = queryText(req.query.product, 300);
+    const service = queryText(req.query.service, 300) || (rawText ? rawText.slice(0, 200) : null);
+    const sessionId = queryText(req.query.sid, 80);
+    const ctaId = queryText(req.query.cta_id, 100);
+    const ctaLabel = queryText(req.query.cta_label, 200);
+    const deduplicationKey = sessionId
+      ? [sessionId, product || "", ctaId || service || ""].join(":").slice(0, 500)
+      : null;
+
     const next = await prisma.whatsAppNumber.findFirst({
       where: { isActive: true },
-      orderBy: { clickCount: "asc" },
+      orderBy: [{ clickCount: "asc" }, { createdAt: "asc" }],
     });
 
     if (!next) {
       // No numbers configured — fail open to a plain wa.me link so the
       // CTA never dead-ends, using the same default number the site used
       // before this rotator existed.
-      const text = (req.query.text as string) || "";
-      return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(text)}`);
+      console.error("[WA_TRACKING] No active WhatsApp number");
+      return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(rawText)}`);
     }
 
     // Best-effort domain attribution — this is a top-level navigation, so
@@ -53,50 +79,82 @@ router.get("/redirect", async (req, res) => {
       try { domain = new URL(referer).hostname; } catch { /* ignore malformed referer */ }
     }
 
-    // leadCode is unique; a collision is astronomically unlikely (6 chars,
-    // 33-symbol alphabet) but retry a couple of times rather than 500 the
-    // one-in-a-billion case.
-    let leadCode = generateLeadCode();
-    for (let attempt = 0; attempt < 3; attempt++) {
-      const exists = await prisma.whatsAppClick.findUnique({ where: { leadCode } });
-      if (!exists) break;
+    const duplicateSince = new Date(Date.now() - 30 * 60 * 1000);
+    const duplicate = deduplicationKey
+      ? await prisma.whatsAppClick.findFirst({
+          where: { deduplicationKey, createdAt: { gte: duplicateSince } },
+          include: { number: true },
+          orderBy: { createdAt: "desc" },
+        })
+      : null;
+
+    let leadCode: string;
+    let leadId: string;
+    let destinationNumber: string;
+    if (duplicate) {
+      leadCode = duplicate.leadCode;
+      leadId = duplicate.id;
+      destinationNumber = duplicate.number.number;
+    } else {
       leadCode = generateLeadCode();
+      for (let attempt = 0; attempt < 5; attempt++) {
+        const exists = await prisma.whatsAppClick.findUnique({ where: { leadCode } });
+        if (!exists) break;
+        leadCode = generateLeadCode();
+      }
+
+      const created = await prisma.$transaction(async (tx) => {
+        await tx.whatsAppNumber.update({
+          where: { id: next.id },
+          data: { clickCount: { increment: 1 } },
+        });
+        return tx.whatsAppClick.create({
+          data: {
+            numberId: next.id,
+            domain,
+            leadCode,
+            source: sourceCode,
+            sourceCode,
+            channel: classified.channel,
+            referralCode: classified.referralCode,
+            utmSource: queryText(req.query.utm_source, 120),
+            utmMedium: queryText(req.query.utm_medium, 120),
+            utmCampaign: queryText(req.query.utm_campaign, 200),
+            utmContent: queryText(req.query.utm_content, 200),
+            utmTerm: queryText(req.query.utm_term, 200),
+            gclid: queryText(req.query.gclid, 300),
+            fbclid: queryText(req.query.fbclid, 300),
+            entryUrl: queryText(req.query.entry_url, 1000),
+            entryPath: queryText(req.query.entry_path, 500),
+            referrerUrl: queryText(req.query.referrer, 1000),
+            product,
+            service,
+            ctaId,
+            ctaLabel,
+            anonymousSessionId: sessionId,
+            deduplicationKey,
+            events: {
+              create: {
+                type: "WHATSAPP_CTA_CLICKED",
+                metadata: { product, ctaId, sourceCode },
+              },
+            },
+          },
+        });
+      });
+      leadId = created.id;
+      destinationNumber = next.number;
     }
 
-    const source = (req.query.source as string) || null;
-    const product = (req.query.product as string) || null;
-    // "Interested Service" — the WA message itself already names the exact
-    // package/button (every getWhatsAppLink() call site writes its own
-    // message), so it's the most specific signal we have without touching
-    // 30+ call sites individually. No separate frontend param needed.
-    const rawText = (req.query.text as string) || "";
-    const service = rawText ? rawText.slice(0, 200) : null;
+    await prisma.leadEvent.create({
+      data: { leadId, type: "WHATSAPP_REDIRECTED", metadata: { deduplicated: Boolean(duplicate) } },
+    });
 
-    await prisma.$transaction([
-      prisma.whatsAppNumber.update({
-        where: { id: next.id },
-        data: { clickCount: { increment: 1 } },
-      }),
-      prisma.whatsAppClick.create({
-        data: { numberId: next.id, domain, leadCode, source, product, service },
-      }),
-    ]);
-
-    // leadCode + source/product ride along in the actual WA message — the
-    // only channel that carries data from here into the real conversation —
-    // so CS can read it off the chat and staff can look this exact lead up
-    // in the dashboard.
-    const sourceLabel = source ? SOURCE_LABELS[source] || source : null;
-    const refParts = [`Ref: ${leadCode}`];
-    if (sourceLabel) refParts.push(`Sumber: ${sourceLabel}`);
-    if (product) refParts.push(`Produk: ${product}`);
-
-    const text = (req.query.text as string) || "";
-    const textWithRef = text ? `${text}\n\n[${refParts.join(" | ")}]` : `[${refParts.join(" | ")}]`;
-    res.redirect(`https://wa.me/${next.number}?text=${encodeURIComponent(textWithRef)}`);
+    const textWithRef = buildWhatsAppMessage(rawText, leadCode, sourceCode);
+    res.redirect(`https://wa.me/${destinationNumber}?text=${encodeURIComponent(textWithRef)}`);
   } catch (error) {
-    console.error("Error in WA redirect:", error);
-    const text = (req.query.text as string) || "";
+    console.error("[WA_TRACKING] Redirect failed; using default number:", error);
+    const text = queryText(req.query.text, 1000) || "";
     res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(text)}`);
   }
 });
@@ -182,20 +240,27 @@ router.get("/numbers/:id/clicks", requireAuth, async (req, res) => {
 // filterable by status/number/domain, plus an overall funnel summary.
 router.get("/leads", requireAuth, async (req, res) => {
   try {
-    const { status, numberId, domain, source, product } = req.query as Record<string, string>;
+    const { status, numberId, domain, source, product, search } = req.query as Record<string, string>;
     const where: any = {};
-    if (status) where.status = status;
+    if (status) {
+      if (!isValidStage(status)) return res.status(400).json({ error: "Status Lead tidak valid" });
+      where.status = status;
+    }
     if (numberId) where.numberId = numberId;
     if (domain) where.domain = domain;
     if (source) where.source = source;
     if (product) where.product = product;
+    if (search) where.leadCode = { contains: search.toUpperCase(), mode: "insensitive" };
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
 
     const [leads, statusCounts, sourceCounts] = await Promise.all([
       prisma.whatsAppClick.findMany({
         where,
         include: { number: { select: { number: true, label: true } } },
         orderBy: { createdAt: "desc" },
-        take: 500,
+        skip: (page - 1) * pageSize,
+        take: pageSize,
       }),
       prisma.whatsAppClick.groupBy({
         by: ["status"],
@@ -209,29 +274,90 @@ router.get("/leads", requireAuth, async (req, res) => {
       }),
     ]);
 
+    const total = statusCounts.reduce((sum, row) => sum + row._count.status, 0);
     const funnel = Object.fromEntries(statusCounts.map((s) => [s.status, s._count.status]));
     const bySource = Object.fromEntries(sourceCounts.map((s) => [s.source || "unknown", s._count.source]));
-    res.json({ data: leads, meta: { funnel, bySource } });
+    res.json({
+      data: leads.map((lead) => ({ ...lead, temperature: getLeadTemperature(lead.status) })),
+      meta: { funnel, bySource, total, page, pageSize, totalPages: Math.ceil(total / pageSize) },
+    });
   } catch (error) {
     console.error("Error fetching WA leads:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// PUT /api/v1/wa/leads/:id — admin: update a lead's status/notes as CS
-// follows up the real conversation (matched via the leadCode in the chat).
-router.put("/leads/:id", requireAuth, async (req, res) => {
+router.get("/leads/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
-    const { status, notes } = req.body;
-    const updated = await prisma.whatsAppClick.update({
+    const lead = await prisma.whatsAppClick.findUnique({
       where: { id },
-      data: {
-        ...(status !== undefined && { status }),
-        ...(notes !== undefined && { notes }),
+      include: {
+        number: { select: { number: true, label: true } },
+        events: { orderBy: { createdAt: "asc" } },
+        stageHistory: { orderBy: { createdAt: "asc" } },
       },
     });
-    res.json({ data: updated });
+    if (!lead) return res.status(404).json({ error: "Lead tidak ditemukan" });
+    res.json({ data: { ...lead, temperature: getLeadTemperature(lead.status) } });
+  } catch (error) {
+    console.error("Error fetching WA lead detail:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// PUT /api/v1/wa/leads/:id — admin: update a lead's status/notes as CS
+// follows up the real conversation (matched via the leadCode in the chat).
+router.put("/leads/:id", requireAuth, async (req: AuthedRequest, res) => {
+  try {
+    const { id } = req.params as { id: string };
+    const { status, notes, lostReason, orderValue } = req.body;
+    const current = await prisma.whatsAppClick.findUnique({ where: { id } });
+    if (!current) return res.status(404).json({ error: "Lead tidak ditemukan" });
+    if (status !== undefined && !isValidStage(status)) {
+      return res.status(400).json({ error: "Status Lead tidak valid" });
+    }
+    if (status && !isValidStageTransition(current.status, status)) {
+      return res.status(409).json({ error: `Transisi ${current.status} ke ${status} tidak diizinkan` });
+    }
+    if (status === "LOST" && !queryText(lostReason, 300)) {
+      return res.status(400).json({ error: "Alasan Lead tidak jadi wajib diisi" });
+    }
+    if (status === "WON" && (!Number.isFinite(Number(orderValue)) || Number(orderValue) < 0)) {
+      return res.status(400).json({ error: "Nilai order wajib diisi untuk Lead closing" });
+    }
+
+    const updated = await prisma.$transaction(async (tx) => {
+      const lead = await tx.whatsAppClick.update({
+        where: { id },
+        data: {
+          ...(status !== undefined && { status }),
+          ...(notes !== undefined && { notes: queryText(notes, 5000) }),
+          ...(status === "LOST" && { lostReason: queryText(lostReason, 300), lostAt: new Date() }),
+          ...(status === "WON" && { orderValue: Math.round(Number(orderValue)), wonAt: new Date() }),
+        },
+      });
+      if (status && status !== current.status) {
+        await tx.leadStageHistory.create({
+          data: {
+            leadId: id,
+            fromStage: current.status,
+            toStage: status,
+            changedByUserId: req.userId,
+            reason: status === "LOST" ? queryText(lostReason, 300) : null,
+          },
+        });
+        await tx.leadEvent.create({
+          data: {
+            leadId: id,
+            type: current.status === "LOST" ? "LEAD_REOPENED" : "STAGE_CHANGED",
+            metadata: { from: current.status, to: status },
+          },
+        });
+      }
+      return lead;
+    });
+    res.json({ data: { ...updated, temperature: getLeadTemperature(updated.status) } });
   } catch (error) {
     console.error("Error updating WA lead:", error);
     res.status(500).json({ error: "Internal Server Error" });
