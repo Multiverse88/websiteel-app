@@ -3,42 +3,42 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowRight, MessageCircle } from "lucide-react";
+import { getWhatsAppLink } from "@/lib/config";
 
+// whatsappLink used to be a raw wa.me number per promo (hardcoded here, and
+// separately in the admin Promos editor) — bypassed the rotator entirely.
+// Dropped: the CTA now always builds its link from the promo title via
+// getWhatsAppLink() at render time, same as every other WA CTA site-wide.
 const FALLBACK_PROMOS = [
   {
     id: 1,
     title: "Super Hot Deal - Promo Terbatas",
     image: "/promo/super-hot-deal.jpg",
     link: "/layanan/pendirian-badan-usaha",
-    whatsappLink: "https://wa.me/6281234567890",
   },
   {
     id: 2,
     title: "Hot Deal - Jangan Sampai Terlewat",
     image: "/promo/hot-deal.jpg",
     link: "/layanan/pendirian-badan-usaha",
-    whatsappLink: "https://wa.me/6281234567890",
   },
   {
     id: 3,
     title: "Menangkan iPhone & Hadiah Rp12.000.000",
     image: "/promo/iphone.jpg",
     link: "/layanan/pendirian-badan-usaha",
-    whatsappLink: "https://wa.me/6281234567890",
   },
   {
     id: 4,
     title: "Promo Semarak Kemerdekaan",
     image: "/promo/promo-kemerdekaan.jpg",
     link: "/layanan/pendirian-badan-usaha",
-    whatsappLink: "https://wa.me/6281234567890",
   },
   {
     id: 5,
     title: "Melayani Seluruh Indonesia",
     image: "/promo/melayani-seluruh-indonesia.jpg",
     link: "/layanan/pendirian-badan-usaha",
-    whatsappLink: "https://wa.me/6281234567890",
   },
 ];
 
@@ -169,7 +169,7 @@ export default function BottomPromoSection() {
                     <a href={promo.link} className="flex-1 bg-[#D62828] hover:bg-[#B91C1C] text-white text-center font-extrabold text-[14px] sm:text-[15px] py-3 rounded-full transition-colors flex items-center justify-center gap-2">
                       Selengkapnya <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
                     </a>
-                    <a href={promo.whatsappLink} className="w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 bg-[#D62828] hover:bg-[#B91C1C] text-white rounded-full flex items-center justify-center transition-colors shadow-sm">
+                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promo.title}".`)} className="w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 bg-[#D62828] hover:bg-[#B91C1C] text-white rounded-full flex items-center justify-center transition-colors shadow-sm">
                       <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
                     </a>
                   </div>

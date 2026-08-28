@@ -11,6 +11,7 @@ const navItems = [
   { icon: 'shuffle', label: 'Redirects', path: '#/redirects' },
   { icon: 'local_offer', label: 'Promos', path: '#/promos' },
   { icon: 'phone_in_talk', label: 'Rotator WhatsApp', path: '#/whatsapp-rotator' },
+  { icon: 'group', label: 'Leads WhatsApp', path: '#/whatsapp-leads' },
   { icon: 'settings', label: 'Settings', path: '#/settings' },
 ]
 

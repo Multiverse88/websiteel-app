@@ -235,6 +235,25 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memperbarui nomor');
     return await res.json();
   },
+  getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string } = {}) => {
+    const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString()
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads${qs ? `?${qs}` : ''}`)
+    if (!res.ok) throw new Error('Gagal memuat leads')
+    return await res.json()
+  },
+  updateWaLead: async (id: string, data: { status?: string; notes?: string; lostReason?: string; orderValue?: number }) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) {
+      const error = await res.json().catch(() => ({ error: 'Gagal memperbarui lead' }))
+      throw new Error(error.error || 'Gagal memperbarui lead')
+    }
+    return await res.json()
+  },
+
   // Settings / Templates (Mapping to SystemSetting for now or placeholders)
   getSmtpSettings: async () => {
     const backendUrl = API_BASE_URL;

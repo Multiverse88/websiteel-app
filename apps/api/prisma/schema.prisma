@@ -128,15 +128,122 @@ model WhatsAppNumber {
   clicks     WhatsAppClick[]
 }
 
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  WON
+  LOST
+}
+
+enum AttributionChannel {
+  GOOGLE_ADS
+  META_ADS
+  ORGANIC_SEARCH
+  REFERRAL
+  DIRECT
+  OTHER
+  UNKNOWN
+}
+
+enum LeadEventType {
+  WHATSAPP_CTA_CLICKED
+  WHATSAPP_REDIRECTED
+  CONVERSATION_CONFIRMED
+  STAGE_CHANGED
+  NOTE_ADDED
+  LEAD_REOPENED
+}
+
+// Every rotator click doubles as a lead: leadCode is embedded straight into
+// the pre-filled WhatsApp message text (the only channel that actually
+// carries data from this backend into the real WA conversation), so CS can
+// read it off the incoming chat and staff can look the same lead up here to
+// track it through to closing.
 model WhatsAppClick {
-  id        String         @id @default(cuid())
-  numberId  String
-  number    WhatsAppNumber @relation(fields: [numberId], references: [id])
-  domain    String?
-  createdAt DateTime       @default(now())
+  id                 String             @id @default(cuid())
+  leadCode           String             @unique
+  numberId           String
+  number             WhatsAppNumber     @relation(fields: [numberId], references: [id])
+  domain             String?
+  // Entry-point attribution: "gads" | "metaads" | "seo" | "direct" | "other".
+  // First-touch — captured client-side on landing, persisted in a cookie so
+  // it survives browsing to whichever product page the WA click happens on.
+  source             String?
+  sourceCode         String             @default("unknown")
+  channel            AttributionChannel @default(UNKNOWN)
+  referralCode       String?
+  utmSource          String?
+  utmMedium          String?
+  utmCampaign        String?
+  utmContent         String?
+  utmTerm            String?
+  gclid              String?
+  fbclid             String?
+  entryUrl           String?
+  entryPath          String?
+  referrerUrl        String?
+  ctaId              String?
+  ctaLabel           String?
+  anonymousSessionId String?
+  deduplicationKey   String?
+  // "CTA Location" (see CONTEXT.md) — which page the CTA was clicked from,
+  // e.g. "/layanan/sertifikasi-iso". Coarse: doesn't distinguish between
+  // multiple packages/buttons on the same page.
+  product            String?
+  // "Interested Service" (see CONTEXT.md) — the actual WA message text the
+  // CTA carries, e.g. "...saya tertarik dengan Paket PKP Pulau Jawa...".
+  // Every getWhatsAppLink() call site already writes a specific message per
+  // button/package, so this is far more precise than the page path alone —
+  // it's the only signal that tells "Paket Pulau Jawa" from "Paket Luar
+  // Jawa" when both buttons live on the same product page.
+  service            String?
+  status             LeadStatus         @default(NEW)
+  notes              String?
+  lostReason         String?
+  orderValue         Int?
+  currency           String             @default("IDR")
+  wonAt              DateTime?
+  lostAt             DateTime?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  events             LeadEvent[]
+  stageHistory       LeadStageHistory[]
 
   @@index([numberId])
   @@index([createdAt])
+  @@index([status])
+  @@index([source])
+  @@index([channel, createdAt])
+  @@index([referralCode, createdAt])
+  @@index([deduplicationKey, createdAt])
+  @@index([product])
+}
+
+model LeadEvent {
+  id        String        @id @default(cuid())
+  leadId    String
+  lead      WhatsAppClick @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  type      LeadEventType
+  metadata  Json?
+  createdAt DateTime      @default(now())
+
+  @@index([leadId, createdAt])
+  @@index([type, createdAt])
+}
+
+model LeadStageHistory {
+  id              String        @id @default(cuid())
+  leadId          String
+  lead            WhatsAppClick @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  fromStage       LeadStatus
+  toStage         LeadStatus
+  changedByUserId String?
+  reason          String?
+  createdAt       DateTime      @default(now())
+
+  @@index([leadId, createdAt])
 }
 
 model ContactSubmission {
@@ -301,12 +408,12 @@ model LandingPageVersion {
 model TrackingProject {
   id           String   @id @default(cuid())
   trackingCode String   @unique // Resi (misal: EL-2026-001)
-  clientName   String   // Nama Klien / Perusahaan
-  serviceType  String   // Jenis Layanan (misal: Pendirian PT)
-  timelineData Json     // JSONB berisi array langkah-langkah
+  clientName   String // Nama Klien / Perusahaan
+  serviceType  String // Jenis Layanan (misal: Pendirian PT)
+  timelineData Json // JSONB berisi array langkah-langkah
   isCompleted  Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  
+
   @@index([trackingCode])
 }

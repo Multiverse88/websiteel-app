@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { config } from "@/lib/config";
+import { config, getWhatsAppLink } from "@/lib/config";
 
 // Simple social icon components matching the Figma screenshot's clean line aesthetics
 const IgIcon = () => (
@@ -59,29 +59,29 @@ export default function Footer() {
       title: "Customer Care",
       items: [
         { type: "phone", label: "022 3209 3292", href: "tel:02232093292" },
-        { type: "wa", label: "0817 770 048", href: "https://wa.me/62817770048" },
-        { type: "wa", label: "0817 321 162", href: "https://wa.me/62817321162" },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.") },
+        { type: "wa", label: "0817 321 162", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.") },
         { type: "email", label: "care@easylegal.id", href: "mailto:care@easylegal.id" },
       ],
     },
     {
       title: "Partnership",
       items: [
-        { type: "wa", label: "0818 818 090", href: "https://wa.me/62818818090" },
+        { type: "wa", label: "0818 818 090", href: getWhatsAppLink("Halo EasyLegal, saya ingin membahas partnership.") },
         { type: "email", label: "ceo@easylegal.id", href: "mailto:ceo@easylegal.id" },
       ],
     },
     {
       title: "Affiliate Program",
       items: [
-        { type: "wa", label: "0817 770 048", href: "https://wa.me/62817770048" },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya ingin bertanya tentang Affiliate Program.") },
         { type: "email", label: "care@easylegal.id", href: "mailto:care@easylegal.id" },
       ],
     },
     {
       title: "Call Support",
       items: [
-        { type: "wa", label: "0817 770 048", href: "https://wa.me/62817770048" },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya membutuhkan bantuan Call Support.") },
       ],
     },
   ];

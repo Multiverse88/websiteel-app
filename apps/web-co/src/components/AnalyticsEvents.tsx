@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { appendAttribution, captureFirstTouch, readAttribution } from "@/lib/attribution";
 
 declare global {
   interface Window {
@@ -14,22 +15,40 @@ declare global {
  * tracking (which only sees generic "outbound click", not which CTA or
  * which page it happened on).
  *
+ * Also does two things for the WhatsApp lead-tracking rotator
+ * (apps/api/src/routes/whatsapp.ts):
+ * 1. Captures first-touch entry-point attribution (Google Ads / Meta Ads /
+ *    SEO / direct) into a cookie on landing.
+ * 2. Appends that source + the current page path (as "product") onto every
+ *    WhatsApp CTA link right before navigating, so every rotator click/lead
+ *    carries both — without having to touch the 28+ getWhatsAppLink() call
+ *    sites individually.
+ *
  * One delegated document-level click listener catches every WhatsApp CTA
- * site-wide (all 28+ call sites of getWhatsAppLink() in src/lib/config.ts
- * all resolve to a mauorder.online URL) — cheaper and harder to miss than
- * instrumenting each button individually. Mounted once in the root layout.
+ * site-wide (all resolve to /api/v1/wa/redirect) — cheaper and harder to
+ * miss than instrumenting each button. Mounted once in the root layout.
  */
 export default function AnalyticsEvents() {
   useEffect(() => {
+    captureFirstTouch();
+
     const handleClick = (e: MouseEvent) => {
-      const link = (e.target as HTMLElement).closest("a[href*='mauorder.online']");
+      const link = (e.target as HTMLElement).closest("a[href*='/api/v1/wa/redirect']") as HTMLAnchorElement | null;
       if (!link) return;
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: "cta_whatsapp_click",
         page_path: window.location.pathname,
         link_text: link.textContent?.trim().slice(0, 100) || "",
       });
+
+      const attribution = readAttribution() || captureFirstTouch();
+      const url = new URL(link.href);
+      appendAttribution(url, attribution);
+      if (!url.searchParams.has("product")) url.searchParams.set("product", window.location.pathname);
+      if (!url.searchParams.has("cta_label")) url.searchParams.set("cta_label", link.textContent?.trim().slice(0, 200) || "WhatsApp CTA");
+      link.href = url.toString();
     };
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);

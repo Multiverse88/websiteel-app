@@ -113,7 +113,7 @@ export default function PengajuanPkp() {
     subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
     isPopular: true,
     buttonText: "Pesan Sekarang",
-    buttonLink: "https://wa.me/6281119289191?text=Halo%20EasyLegal%2C%20saya%20tertarik%20dengan%20Paket%20PKP%20Pulau%20Jawa.",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Pulau Jawa."),
     groups: [
       {
         title: "LAMA PROSES",
@@ -147,7 +147,7 @@ export default function PengajuanPkp() {
     subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
     isPopular: false,
     buttonText: "Pesan Sekarang",
-    buttonLink: "https://wa.me/6281119289191?text=Halo%20EasyLegal%2C%20saya%20tertarik%20dengan%20Paket%20PKP%20Luar%20Jawa.",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Luar Jawa."),
     groups: [
       {
         title: "LAMA PROSES",
