@@ -39,15 +39,15 @@ router.get("/redirect", async (req, res) => {
   try {
     const rawText = queryText(req.query.text, 1000) || "";
     const suppliedSource = normalizeSourceCode(req.query.source);
+    const product = queryText(req.query.product, 300);
     const classified = suppliedSource
       ? {
           sourceCode: suppliedSource,
           channel: sourceCodeToChannel(suppliedSource),
           referralCode: queryText(req.query.ref, 80),
         }
-      : classifyAttribution(req.query, queryText(req.query.referrer, 1000));
+      : classifyAttribution(req.query, queryText(req.query.referrer, 1000), product || queryText(req.query.entry_path, 500));
     const sourceCode = classified.sourceCode;
-    const product = queryText(req.query.product, 300);
     const service = queryText(req.query.service, 300) || (rawText ? rawText.slice(0, 200) : null);
     const sessionId = queryText(req.query.sid, 80);
     const ctaId = queryText(req.query.cta_id, 100);
@@ -150,7 +150,7 @@ router.get("/redirect", async (req, res) => {
       data: { leadId, type: "WHATSAPP_REDIRECTED", metadata: { deduplicated: Boolean(duplicate) } },
     });
 
-    const textWithRef = buildWhatsAppMessage(rawText, leadCode, sourceCode);
+    const textWithRef = buildWhatsAppMessage(rawText, leadCode, sourceCode, domain);
     res.redirect(`https://wa.me/${destinationNumber}?text=${encodeURIComponent(textWithRef)}`);
   } catch (error) {
     console.error("[WA_TRACKING] Redirect failed; using default number:", error);

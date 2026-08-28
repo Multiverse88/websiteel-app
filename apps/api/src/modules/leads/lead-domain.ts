@@ -35,6 +35,14 @@ export interface AttributionResult {
 
 const PAID_MEDIA = new Set(["cpc", "ppc", "paid", "paid_social", "display"]);
 
+// Mirrors apps/web/src/lib/attribution.ts's slug fallback — ad-campaign
+// landing pages use these suffixes by convention (next.config.ts rewrites()),
+// and Next.js rewrites don't change the visible URL, so it survives even
+// when gclid/fbclid/utm got stripped before reaching this fallback path
+// (client JS didn't run, cookie was cleared, etc).
+const GOOGLE_AD_SLUG = /-(gads|dads|pmax|ytads)(-|$)/i;
+const META_AD_SLUG = /meta-ads/i;
+
 function clean(value: unknown, maxLength = 200): string | null {
   if (typeof value !== "string") return null;
   const normalized = value.trim().slice(0, maxLength);
@@ -44,18 +52,21 @@ function clean(value: unknown, maxLength = 200): string | null {
 export function classifyAttribution(
   query: Record<string, unknown>,
   referrer: string | null,
+  entryPath: string | null = null,
 ): AttributionResult {
   const utmSource = clean(query.utm_source)?.toLowerCase() ?? null;
   const utmMedium = clean(query.utm_medium)?.toLowerCase() ?? null;
   const referralCode = clean(query.ref, 80);
+  const path = entryPath || "";
 
-  if (clean(query.gclid) || (utmSource === "google" && utmMedium && PAID_MEDIA.has(utmMedium))) {
+  if (clean(query.gclid) || (utmSource === "google" && utmMedium && PAID_MEDIA.has(utmMedium)) || GOOGLE_AD_SLUG.test(path)) {
     return { channel: "GOOGLE_ADS", sourceCode: "gads", referralCode };
   }
   if (
     clean(query.fbclid) ||
     ((utmSource === "facebook" || utmSource === "instagram" || utmSource === "meta") &&
-      (!utmMedium || PAID_MEDIA.has(utmMedium)))
+      (!utmMedium || PAID_MEDIA.has(utmMedium))) ||
+    META_AD_SLUG.test(path)
   ) {
     return { channel: "META_ADS", sourceCode: "metaads", referralCode };
   }
@@ -101,9 +112,11 @@ export function buildWhatsAppMessage(
   message: string,
   leadCode: string,
   sourceCode: LeadSourceCode,
+  domain?: string | null,
 ): string {
   const cleanMessage = message.trim().slice(0, 1000);
-  const trackingReference = `[Ref: ${leadCode} | Source: ${sourceCode}]`;
+  const siteTag = domain ? ` | Situs: ${domain}` : "";
+  const trackingReference = `[Ref: ${leadCode} | Source: ${sourceCode}${siteTag}]`;
   return cleanMessage ? `${cleanMessage}\n\n${trackingReference}` : trackingReference;
 }
 
