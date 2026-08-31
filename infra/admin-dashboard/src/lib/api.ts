@@ -222,7 +222,7 @@ export const api = {
     }
     return await res.json();
   },
-  updateWaNumber: async (id: string, data: { label?: string; isActive?: boolean }) => {
+  updateWaNumber: async (id: string, data: { number?: string; label?: string; isActive?: boolean }) => {
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/numbers/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

@@ -103,6 +103,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [newLabel, setNewLabel] = useState('')
   const [adding, setAdding] = useState(false)
   const [error, setError] = useState('')
+  const [editingNumberId, setEditingNumberId] = useState('')
+  const [editNumberValue, setEditNumberValue] = useState('')
+  const [editLabelValue, setEditLabelValue] = useState('')
+  const [savingNumber, setSavingNumber] = useState(false)
 
   const [leads, setLeads] = useState<WaLead[]>([])
   const [funnel, setFunnel] = useState<Record<string, number>>({})
@@ -175,6 +179,27 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const toggleActive = async (n: WaNumber) => {
     await api.updateWaNumber(n.id, { isActive: !n.isActive })
     await load()
+  }
+
+  const startEditNumber = (n: WaNumber) => {
+    setEditingNumberId(n.id)
+    setEditNumberValue(n.number)
+    setEditLabelValue(n.label || '')
+  }
+
+  const handleSaveNumber = async (id: string) => {
+    setError('')
+    if (!editNumberValue.trim()) return
+    setSavingNumber(true)
+    try {
+      await api.updateWaNumber(id, { number: editNumberValue, label: editLabelValue })
+      setEditingNumberId('')
+      await load()
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setSavingNumber(false)
+    }
   }
 
   const startEditPage = (page?: WaPageConfig) => {
@@ -345,6 +370,43 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 )}
                 {numbers.map((n) => {
                   const isUnfair = n.isActive && activeCount > 1 && Math.abs(n.sharePercent - fairSharePercent) > fairSharePercent * 0.25
+                  const isEditing = editingNumberId === n.id
+                  if (isEditing) {
+                    return (
+                      <tr key={n.id} className="border-t border-gray-100 bg-gray-50">
+                        <td className="px-6 py-2.5">
+                          <input
+                            type="text"
+                            value={editNumberValue}
+                            onChange={(e) => setEditNumberValue(e.target.value)}
+                            className="w-full px-2 py-1.5 border border-gray-200 rounded-lg text-[14px] font-mono focus:outline-none focus:border-[#990202]"
+                          />
+                        </td>
+                        <td className="px-6 py-2.5">
+                          <input
+                            type="text"
+                            value={editLabelValue}
+                            onChange={(e) => setEditLabelValue(e.target.value)}
+                            placeholder="Label (opsional)"
+                            className="w-full px-2 py-1.5 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#990202]"
+                          />
+                        </td>
+                        <td className="px-6 py-3.5 text-gray-400" colSpan={3}>Klik & fairness tidak berubah saat mengedit nomor/label.</td>
+                        <td className="px-6 py-3.5 text-right whitespace-nowrap">
+                          <button
+                            onClick={() => handleSaveNumber(n.id)}
+                            disabled={savingNumber}
+                            className="text-[13px] font-bold text-[#990202] hover:text-[#7a0101] transition-colors mr-3 disabled:opacity-50"
+                          >
+                            {savingNumber ? 'Menyimpan...' : 'Simpan'}
+                          </button>
+                          <button onClick={() => setEditingNumberId('')} className="text-[13px] font-bold text-gray-500 hover:text-gray-800 transition-colors">
+                            Batal
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  }
                   return (
                     <tr key={n.id} className="border-t border-gray-100">
                       <td className="px-6 py-3.5 font-mono font-semibold text-gray-900">{n.number}</td>
@@ -366,7 +428,13 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                           {n.isActive ? 'Aktif' : 'Nonaktif'}
                         </span>
                       </td>
-                      <td className="px-6 py-3.5 text-right">
+                      <td className="px-6 py-3.5 text-right whitespace-nowrap">
+                        <button
+                          onClick={() => startEditNumber(n)}
+                          className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3"
+                        >
+                          Edit
+                        </button>
                         <button
                           onClick={() => toggleActive(n)}
                           className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors"

@@ -206,22 +206,30 @@ router.post("/numbers", requireAuth, async (req, res) => {
   }
 });
 
-// PUT /api/v1/wa/numbers/:id — admin: edit label / toggle active
+// PUT /api/v1/wa/numbers/:id — admin: edit number / label / toggle active
 // Deliberately no DELETE — deactivating keeps click history intact for
 // fairness reporting instead of orphaning/cascading logged clicks.
 router.put("/numbers/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
-    const { label, isActive } = req.body;
+    const { number, label, isActive } = req.body;
+    let cleanedNumber: string | undefined;
+    if (number !== undefined) {
+      cleanedNumber = String(number).replace(/\D/g, "");
+      if (!cleanedNumber) return res.status(400).json({ error: "Nomor tidak valid" });
+    }
     const updated = await prisma.whatsAppNumber.update({
       where: { id },
       data: {
+        ...(cleanedNumber !== undefined && { number: cleanedNumber }),
         ...(label !== undefined && { label }),
         ...(isActive !== undefined && { isActive }),
       },
     });
     res.json({ data: updated });
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === "P2002") return res.status(409).json({ error: "Nomor ini sudah dipakai nomor lain" });
+    if (error.code === "P2025") return res.status(404).json({ error: "Nomor tidak ditemukan" });
     console.error("Error updating WA number:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
