@@ -38,13 +38,19 @@ function queryText(value: unknown, maxLength = 500): string | null {
 router.get("/redirect", async (req, res) => {
   try {
     const product = queryText(req.query.product, 300);
-    // Per-page override (admin-editable, see /pages routes below) — keyed by
-    // the same page-path string every getWhatsAppLink() click already sends
-    // as `product`, so no call-site changes are needed to opt a page in.
-    const pageConfig = product
-      ? await prisma.whatsAppPageConfig.findUnique({ where: { path: product } })
-      : null;
-    const rawText = (pageConfig?.message || queryText(req.query.text, 1000)) || "";
+    const ctaId = queryText(req.query.cta_id, 100);
+    // Per-page/per-button override (admin-editable, see /pages routes below)
+    // — keyed by (path, ctaId). Button-specific row wins over the whole-page
+    // row ("" sentinel) over whatever text the CTA itself sent. path is the
+    // same string every click already sends as `product`; ctaId is a stable
+    // id hand-assigned per button in getWhatsAppLink() calls (opt-in — most
+    // CTAs still have none, and just fall through to the page-level row).
+    const pageConfigRows = product
+      ? await prisma.whatsAppPageConfig.findMany({ where: { path: product, ctaId: { in: Array.from(new Set([ctaId || "", ""])) } } })
+      : [];
+    const buttonConfig = ctaId ? pageConfigRows.find((r) => r.ctaId === ctaId) : undefined;
+    const pageLevelConfig = pageConfigRows.find((r) => r.ctaId === "");
+    const rawText = (buttonConfig?.message || pageLevelConfig?.message || queryText(req.query.text, 1000)) || "";
     const suppliedSource = normalizeSourceCode(req.query.source);
     const classified = suppliedSource
       ? {
@@ -56,14 +62,13 @@ router.get("/redirect", async (req, res) => {
     const sourceCode = classified.sourceCode;
     const service = queryText(req.query.service, 300) || (rawText ? rawText.slice(0, 200) : null);
     const sessionId = queryText(req.query.sid, 80);
-    const ctaId = queryText(req.query.cta_id, 100);
     const ctaLabel = queryText(req.query.cta_label, 200);
     const deduplicationKey = sessionId
       ? [sessionId, product || "", ctaId || service || ""].join(":").slice(0, 500)
       : null;
 
     const numberWhere: { isActive: boolean; id?: { in: string[] } } = { isActive: true };
-    if (pageConfig?.numberIds?.length) numberWhere.id = { in: pageConfig.numberIds };
+    if (pageLevelConfig?.numberIds?.length) numberWhere.id = { in: pageLevelConfig.numberIds };
     const next = await prisma.whatsAppNumber.findFirst({
       where: numberWhere,
       orderBy: [{ clickCount: "asc" }, { createdAt: "asc" }],
@@ -255,7 +260,7 @@ router.get("/numbers/:id/clicks", requireAuth, async (req, res) => {
 // GET /api/v1/wa/pages — admin: list per-page overrides (autotext + number pool)
 router.get("/pages", requireAuth, async (req, res) => {
   try {
-    const pages = await prisma.whatsAppPageConfig.findMany({ orderBy: { path: "asc" } });
+    const pages = await prisma.whatsAppPageConfig.findMany({ orderBy: [{ path: "asc" }, { ctaId: "asc" }] });
     res.json({ data: pages });
   } catch (error) {
     console.error("Error fetching WA page configs:", error);
@@ -287,19 +292,20 @@ router.get("/pages/known-paths", requireAuth, async (req, res) => {
   }
 });
 
-// GET /api/v1/wa/pages/preview?path=... — admin: the actual text a page's
-// button is sending right now (from the most recent lead logged for that
-// path), so "Per Halaman" can start from the real current autotext instead
-// of a blank field. Capped at 200 chars because that's all whatsapp.ts's
-// /redirect handler persists per click (WhatsAppClick.service) — there's no
-// longer copy stored anywhere, so this is a preview, not guaranteed verbatim
-// for longer messages.
+// GET /api/v1/wa/pages/preview?path=...&cta_id=... — admin: the actual text
+// a page (or one specific button, if cta_id given) is sending right now
+// (from the most recent matching lead), so "Per Halaman" can start from the
+// real current autotext instead of a blank field. Capped at 200 chars
+// because that's all whatsapp.ts's /redirect handler persists per click
+// (WhatsAppClick.service) — there's no longer copy stored anywhere, so this
+// is a preview, not guaranteed verbatim for longer messages.
 router.get("/pages/preview", requireAuth, async (req, res) => {
   try {
     const path = queryText(req.query.path, 300);
     if (!path) return res.status(400).json({ error: "Path wajib diisi" });
+    const ctaId = queryText(req.query.cta_id, 100);
     const latest = await prisma.whatsAppClick.findFirst({
-      where: { product: path },
+      where: { product: path, ...(ctaId && { ctaId }) },
       orderBy: { createdAt: "desc" },
       select: { service: true },
     });
@@ -310,22 +316,52 @@ router.get("/pages/preview", requireAuth, async (req, res) => {
   }
 });
 
+// GET /api/v1/wa/pages/known-buttons?path=... — admin: every distinct
+// button (ctaId) that's sent traffic from this page, with a text sample, so
+// "Per Halaman" can offer a per-button pick-list the same way known-paths
+// offers pages — reads data the rotator already logs, no new instrumentation.
+router.get("/pages/known-buttons", requireAuth, async (req, res) => {
+  try {
+    const path = queryText(req.query.path, 300);
+    if (!path) return res.status(400).json({ error: "Path wajib diisi" });
+    const [clicked, configured] = await Promise.all([
+      prisma.whatsAppClick.findMany({
+        where: { product: path, ctaId: { not: null } },
+        select: { ctaId: true, service: true },
+        distinct: ["ctaId"],
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.whatsAppPageConfig.findMany({ where: { path, ctaId: { not: "" } }, select: { ctaId: true } }),
+    ]);
+    const sample = new Map(clicked.map((c) => [c.ctaId as string, c.service]));
+    const ids = Array.from(new Set([...clicked.map((c) => c.ctaId as string), ...configured.map((c) => c.ctaId)]));
+    res.json({ data: ids.sort().map((ctaId) => ({ ctaId, sample: sample.get(ctaId) || null })) });
+  } catch (error) {
+    console.error("Error fetching known WA buttons:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 function cleanNumberIds(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((v): v is string => typeof v === "string" && v.trim().length > 0).slice(0, 50);
 }
 
 // POST /api/v1/wa/pages — admin: create or replace the override for a page
-// path (upsert on path so re-saving the same page never dupes a row).
+// (or one button on it, if ctaId given) — upsert on (path, ctaId) so
+// re-saving the same target never dupes a row. numberIds is ignored for
+// button-level rows (ctaId set) — the rotator pool only makes sense
+// page-wide, see the schema comment.
 router.post("/pages", requireAuth, async (req, res) => {
   try {
     const path = queryText(req.body.path, 300);
     if (!path) return res.status(400).json({ error: "Path halaman wajib diisi" });
+    const ctaId = queryText(req.body.ctaId, 100) || "";
     const message = queryText(req.body.message, 1000);
-    const numberIds = cleanNumberIds(req.body.numberIds);
+    const numberIds = ctaId ? [] : cleanNumberIds(req.body.numberIds);
     const saved = await prisma.whatsAppPageConfig.upsert({
-      where: { path },
-      create: { path, message, numberIds },
+      where: { path_ctaId: { path, ctaId } },
+      create: { path, ctaId, message, numberIds },
       update: { message, numberIds },
     });
     res.status(201).json({ data: saved });

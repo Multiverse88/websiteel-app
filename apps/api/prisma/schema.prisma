@@ -128,20 +128,27 @@ model WhatsAppNumber {
   clicks     WhatsAppClick[]
 }
 
-// Per-page override for the rotator: lets admin set a custom WA autotext
-// and/or restrict which numbers rotate for one specific page, without a
-// code deploy. Keyed by "path" — the same page-path string every
-// getWhatsAppLink() click already sends as `product` (see whatsapp.ts
-// /redirect), so no call-site changes are needed to opt a page in. One
-// config per page path — doesn't distinguish multiple buttons/packages on
-// the same page (see WhatsAppClick.service for that finer grain).
+// Per-page (and optionally per-button) override for the rotator: lets admin
+// set a custom WA autotext and/or restrict which numbers rotate for a page,
+// without a code deploy. Keyed by (path, ctaId) — path is the same page-path
+// string every getWhatsAppLink() click already sends as `product`; ctaId is
+// "" (empty-string sentinel, not null, so the unique constraint actually
+// enforces "one page-wide row") for a whole-page override, or a specific
+// button's stable id (see getWhatsAppLink's ctaId param — hand-assigned per
+// button, NOT derived from its message text, so an override survives the
+// button's copy being edited later) for a single-button override. numberIds
+// (rotator pool restriction) only makes sense at the page level — button-
+// level rows only ever carry a message override.
 model WhatsAppPageConfig {
   id        String   @id @default(cuid())
-  path      String   @unique
+  path      String
+  ctaId     String   @default("")
   message   String? // null/empty = keep whatever text the CTA button sends
-  numberIds String[] @default([]) // subset of WhatsAppNumber.id; empty = all active numbers
+  numberIds String[] @default([]) // subset of WhatsAppNumber.id; empty = all active numbers; page-level (ctaId="") only
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([path, ctaId])
 }
 
 enum LeadStatus {

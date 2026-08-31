@@ -14,9 +14,15 @@ interface WaNumber {
 interface WaPageConfig {
   id: string
   path: string
+  ctaId: string // "" = whole-page override; otherwise a specific button's stable id
   message: string | null
   numberIds: string[]
   updatedAt: string
+}
+
+interface WaKnownButton {
+  ctaId: string
+  sample: string | null
 }
 
 interface WaLead {
@@ -91,7 +97,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [pages, setPages] = useState<WaPageConfig[]>([])
   const [pagesLoading, setPagesLoading] = useState(false)
   const [knownPaths, setKnownPaths] = useState<string[]>([])
+  const [knownButtons, setKnownButtons] = useState<WaKnownButton[]>([])
+  const [buttonsLoading, setButtonsLoading] = useState(false)
   const [editingPath, setEditingPath] = useState('')
+  const [editingCtaId, setEditingCtaId] = useState('')
   const [editingMessage, setEditingMessage] = useState('')
   const [editingNumberIds, setEditingNumberIds] = useState<string[]>([])
   const [savingPage, setSavingPage] = useState(false)
@@ -205,40 +214,65 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
 
   const startEditPage = (page?: WaPageConfig) => {
     setEditingPath(page?.path || '')
+    setEditingCtaId(page?.ctaId || '')
     setEditingMessage(page?.message || '')
     setEditingNumberIds(page?.numberIds || [])
     setMessageNote('')
   }
 
-  // Loads what the page's button is actually sending right now (from the
-  // most recent lead), so the form starts from the real current text
-  // instead of blank — otherwise there's no way to "edit" the existing
-  // autotext, only blindly type a brand new override over it.
-  const loadMessagePreview = async (path: string) => {
+  // Loads what the page (or one specific button, if ctaId given) is
+  // actually sending right now (from the most recent matching lead), so the
+  // form starts from the real current text instead of blank — otherwise
+  // there's no way to "edit" the existing autotext, only blindly type a
+  // brand new override over it.
+  const loadMessagePreview = async (path: string, ctaId: string) => {
     try {
-      const res = await api.getWaPagePreview(path)
+      const res = await api.getWaPagePreview(path, ctaId || undefined)
       const msg = res.data?.message || ''
       setEditingMessage(msg)
       setMessageNote(msg
-        ? 'Ini teks yang sekarang jalan di halaman ini (dari lead terakhir, mungkin terpotong ~200 karakter). Edit lalu Simpan untuk menimpanya.'
-        : 'Belum ada data teks untuk halaman ini (belum pernah diklik) — isi manual kalau mau bikin override.')
+        ? `Ini teks yang sekarang jalan di ${ctaId ? 'tombol ini' : 'halaman ini'} (dari lead terakhir, mungkin terpotong ~200 karakter). Edit lalu Simpan untuk menimpanya.`
+        : `Belum ada data teks untuk ${ctaId ? 'tombol' : 'halaman'} ini — isi manual kalau mau bikin override.`)
     } catch {
       setMessageNote('')
     }
   }
 
-  const handlePathSelect = async (path: string) => {
-    if (!path) { startEditPage(); return }
-    const existing = pages.find((p) => p.path === path)
+  const loadKnownButtons = async (path: string) => {
+    try {
+      setButtonsLoading(true)
+      const res = await api.getWaKnownButtons(path)
+      setKnownButtons(res.data || [])
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setButtonsLoading(false)
+    }
+  }
+
+  const applyTarget = async (path: string, ctaId: string) => {
+    const existing = pages.find((p) => p.path === path && p.ctaId === ctaId)
     if (existing?.message) {
       startEditPage(existing)
-      setMessageNote('Override tersimpan untuk halaman ini.')
+      setMessageNote(ctaId ? 'Override tersimpan untuk tombol ini.' : 'Override tersimpan untuk halaman ini.')
       return
     }
     setEditingPath(path)
-    setEditingNumberIds(existing?.numberIds || [])
+    setEditingCtaId(ctaId)
+    setEditingNumberIds(ctaId ? [] : (existing?.numberIds || []))
     setEditingMessage('')
-    await loadMessagePreview(path)
+    await loadMessagePreview(path, ctaId)
+  }
+
+  const handlePathSelect = async (path: string) => {
+    setKnownButtons([])
+    if (!path) { startEditPage(); return }
+    await applyTarget(path, '')
+    await loadKnownButtons(path)
+  }
+
+  const handleButtonSelect = async (ctaId: string) => {
+    await applyTarget(editingPath, ctaId)
   }
 
   const toggleEditingNumber = (id: string) => {
@@ -251,9 +285,11 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     if (!editingPath.trim()) return
     setSavingPage(true)
     try {
-      await api.saveWaPage({ path: editingPath.trim(), message: editingMessage, numberIds: editingNumberIds })
+      await api.saveWaPage({ path: editingPath.trim(), ctaId: editingCtaId, message: editingMessage, numberIds: editingNumberIds })
+      const path = editingPath
       startEditPage()
       await loadPages()
+      if (path) await loadKnownButtons(path)
     } catch (e: any) {
       setError(e.message)
     } finally {
@@ -494,11 +530,34 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               >
                 <option value="">-- pilih halaman --</option>
                 {knownPaths.map((p) => (
-                  <option key={p} value={p}>{p}{pages.some((cfg) => cfg.path === p) ? ' (sudah dikonfigurasi)' : ''}</option>
+                  <option key={p} value={p}>{p}{pages.some((cfg) => cfg.path === p && cfg.ctaId === '') ? ' (sudah dikonfigurasi)' : ''}</option>
                 ))}
               </select>
               <p className="text-[12px] text-gray-400">Daftar diambil dari halaman yang sudah pernah dapat klik WA — pilih halaman yang mau diatur autotext/nomornya.</p>
             </div>
+            {editingPath && (
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[14px] font-bold text-gray-700">Tombol</label>
+                <select
+                  value={editingCtaId}
+                  onChange={(e) => handleButtonSelect(e.target.value)}
+                  className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[14px] bg-white focus:outline-none focus:border-[#990202]"
+                >
+                  <option value="">Semua tombol (halaman ini)</option>
+                  {knownButtons.map((b) => (
+                    <option key={b.ctaId} value={b.ctaId}>
+                      {b.ctaId}{b.sample ? ` — "${b.sample.slice(0, 60)}${b.sample.length > 60 ? '…' : ''}"` : ''}
+                      {pages.some((cfg) => cfg.path === editingPath && cfg.ctaId === b.ctaId) ? ' (sudah dikonfigurasi)' : ''}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-[12px] text-gray-400">
+                  {buttonsLoading ? 'Memuat daftar tombol...' : knownButtons.length === 0
+                    ? 'Belum ada tombol dengan id spesifik yang tercatat di halaman ini — override berlaku ke semua tombol di halaman.'
+                    : 'Pilih tombol spesifik buat override cuma tombol itu, atau biarkan "Semua tombol" buat override sepanjang halaman.'}
+                </p>
+              </div>
+            )}
             <div className="flex flex-col gap-1.5">
               <label className="text-[14px] font-bold text-gray-700">Autotext WA (opsional)</label>
               <textarea
@@ -511,22 +570,28 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               {messageNote ? (
                 <p className="text-[12px] text-amber-600 font-semibold">{messageNote}</p>
               ) : (
-                <p className="text-[12px] text-gray-400">Kalau diisi, menimpa teks bawaan semua tombol WA di halaman ini (satu teks untuk seluruh halaman, tidak per-paket).</p>
+                <p className="text-[12px] text-gray-400">
+                  {editingCtaId
+                    ? 'Kalau diisi, menimpa teks bawaan tombol ini saja — tombol lain di halaman yang sama gak kepengaruh.'
+                    : 'Kalau diisi, menimpa teks bawaan semua tombol WA di halaman ini (satu teks untuk seluruh halaman, tidak per-paket).'}
+                </p>
               )}
             </div>
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[14px] font-bold text-gray-700">Nomor Rotator (opsional)</label>
-              <div className="flex flex-wrap gap-2">
-                {numbers.length === 0 && <span className="text-[13px] text-gray-400">Belum ada nomor — tambah dulu di tab "Nomor & Fairness".</span>}
-                {numbers.map((n) => (
-                  <label key={n.id} className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold cursor-pointer transition-colors ${editingNumberIds.includes(n.id) ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}>
-                    <input type="checkbox" className="hidden" checked={editingNumberIds.includes(n.id)} onChange={() => toggleEditingNumber(n.id)} />
-                    {n.label || n.number}
-                  </label>
-                ))}
+            {!editingCtaId && (
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[14px] font-bold text-gray-700">Nomor Rotator (opsional)</label>
+                <div className="flex flex-wrap gap-2">
+                  {numbers.length === 0 && <span className="text-[13px] text-gray-400">Belum ada nomor — tambah dulu di tab "Nomor & Fairness".</span>}
+                  {numbers.map((n) => (
+                    <label key={n.id} className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold cursor-pointer transition-colors ${editingNumberIds.includes(n.id) ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}>
+                      <input type="checkbox" className="hidden" checked={editingNumberIds.includes(n.id)} onChange={() => toggleEditingNumber(n.id)} />
+                      {n.label || n.number}
+                    </label>
+                  ))}
+                </div>
+                <p className="text-[12px] text-gray-400">Kosongkan = tetap rotasi ke semua nomor aktif seperti biasa. Dicentang = klik di halaman ini hanya rotasi ke nomor yang dipilih. (Hanya berlaku level halaman, bukan per-tombol.)</p>
               </div>
-              <p className="text-[12px] text-gray-400">Kosongkan = tetap rotasi ke semua nomor aktif seperti biasa. Dicentang = klik di halaman ini hanya rotasi ke nomor yang dipilih.</p>
-            </div>
+            )}
             <div className="flex gap-3">
               <button
                 type="submit"
@@ -566,13 +631,16 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 )}
                 {!pagesLoading && pages.map((p) => (
                   <tr key={p.id} className="border-t border-gray-100">
-                    <td className="px-6 py-3.5 font-mono text-gray-900">{p.path}</td>
+                    <td className="px-6 py-3.5 font-mono text-gray-900">
+                      {p.path}
+                      <div className="text-[11px] font-sans font-normal text-gray-400">{p.ctaId ? `Tombol: ${p.ctaId}` : 'Semua tombol (halaman ini)'}</div>
+                    </td>
                     <td className="px-6 py-3.5 text-gray-600 max-w-[280px] truncate" title={p.message || ''}>{p.message || <span className="text-gray-400">bawaan tombol</span>}</td>
                     <td className="px-6 py-3.5 text-gray-600">
-                      {p.numberIds.length === 0 ? <span className="text-gray-400">semua aktif</span> : p.numberIds.map((id) => numbers.find((n) => n.id === id)?.label || numbers.find((n) => n.id === id)?.number || id).join(', ')}
+                      {p.ctaId ? <span className="text-gray-400">— (level halaman)</span> : p.numberIds.length === 0 ? <span className="text-gray-400">semua aktif</span> : p.numberIds.map((id) => numbers.find((n) => n.id === id)?.label || numbers.find((n) => n.id === id)?.number || id).join(', ')}
                     </td>
                     <td className="px-6 py-3.5 text-right whitespace-nowrap">
-                      <button onClick={() => startEditPage(p)} className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3">Edit</button>
+                      <button onClick={() => { startEditPage(p); loadKnownButtons(p.path) }} className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3">Edit</button>
                       <button onClick={() => handleDeletePage(p)} className="text-[13px] font-bold text-gray-600 hover:text-red-600 transition-colors">Hapus</button>
                     </td>
                   </tr>
