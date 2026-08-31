@@ -238,6 +238,11 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memuat konfigurasi halaman')
     return await res.json()
   },
+  getWaKnownPaths: async () => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/known-paths`)
+    if (!res.ok) throw new Error('Gagal memuat daftar halaman')
+    return await res.json()
+  },
   saveWaPage: async (data: { path: string; message?: string; numberIds?: string[] }) => {
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages`, {
       method: 'POST',

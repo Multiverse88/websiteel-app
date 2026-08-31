@@ -255,6 +255,30 @@ router.get("/pages", requireAuth, async (req, res) => {
   }
 });
 
+// GET /api/v1/wa/pages/known-paths — admin: every page path that's actually
+// seen WA CTA traffic (plus any already-configured path), so the "Per
+// Halaman" editor can offer a pick-list instead of free-text entry that's
+// easy to typo/mismatch against the real page.
+router.get("/pages/known-paths", requireAuth, async (req, res) => {
+  try {
+    const [clicked, configured] = await Promise.all([
+      prisma.whatsAppClick.findMany({
+        where: { product: { not: null } },
+        select: { product: true },
+        distinct: ["product"],
+      }),
+      prisma.whatsAppPageConfig.findMany({ select: { path: true } }),
+    ]);
+    const paths = Array.from(
+      new Set([...clicked.map((c) => c.product as string), ...configured.map((c) => c.path)]),
+    ).sort();
+    res.json({ data: paths });
+  } catch (error) {
+    console.error("Error fetching known WA page paths:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 function cleanNumberIds(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((v): v is string => typeof v === "string" && v.trim().length > 0).slice(0, 50);

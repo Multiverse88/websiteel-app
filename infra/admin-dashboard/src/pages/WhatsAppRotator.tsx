@@ -90,6 +90,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
 
   const [pages, setPages] = useState<WaPageConfig[]>([])
   const [pagesLoading, setPagesLoading] = useState(false)
+  const [knownPaths, setKnownPaths] = useState<string[]>([])
   const [editingPath, setEditingPath] = useState('')
   const [editingMessage, setEditingMessage] = useState('')
   const [editingNumberIds, setEditingNumberIds] = useState<string[]>([])
@@ -140,8 +141,9 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const loadPages = useCallback(async () => {
     try {
       setPagesLoading(true)
-      const res = await api.getWaPages()
-      setPages(res.data || [])
+      const [pagesRes, pathsRes] = await Promise.all([api.getWaPages(), api.getWaKnownPaths()])
+      setPages(pagesRes.data || [])
+      setKnownPaths(pathsRes.data || [])
     } catch (e: any) {
       setError(e.message)
     } finally {
@@ -179,6 +181,12 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     setEditingPath(page?.path || '')
     setEditingMessage(page?.message || '')
     setEditingNumberIds(page?.numberIds || [])
+  }
+
+  const handlePathSelect = (path: string) => {
+    const existing = pages.find((p) => p.path === path)
+    if (existing) startEditPage(existing)
+    else { setEditingPath(path); setEditingMessage(''); setEditingNumberIds([]) }
   }
 
   const toggleEditingNumber = (id: string) => {
@@ -384,14 +392,17 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           <form onSubmit={handleSavePage} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-[14px] font-bold text-gray-700">Path Halaman</label>
-              <input
-                type="text"
+              <select
                 value={editingPath}
-                onChange={(e) => setEditingPath(e.target.value)}
-                placeholder="/layanan/pengajuan-pkp"
-                className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[14px] font-mono focus:outline-none focus:border-[#990202]"
-              />
-              <p className="text-[12px] text-gray-400">Path persis seperti di address bar (case-sensitive), termasuk slug landing page campaign kalau ada.</p>
+                onChange={(e) => handlePathSelect(e.target.value)}
+                className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[14px] font-mono bg-white focus:outline-none focus:border-[#990202]"
+              >
+                <option value="">-- pilih halaman --</option>
+                {knownPaths.map((p) => (
+                  <option key={p} value={p}>{p}{pages.some((cfg) => cfg.path === p) ? ' (sudah dikonfigurasi)' : ''}</option>
+                ))}
+              </select>
+              <p className="text-[12px] text-gray-400">Daftar diambil dari halaman yang sudah pernah dapat klik WA — pilih halaman yang mau diatur autotext/nomornya.</p>
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-[14px] font-bold text-gray-700">Autotext WA (opsional)</label>
