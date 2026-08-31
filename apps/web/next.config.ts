@@ -18,7 +18,7 @@ const ContentSecurityPolicy = isProd
   object-src 'none';
   base-uri 'self';
   form-action 'self' https://www.facebook.com;
-  frame-ancestors 'none';
+  frame-ancestors 'self' https://tagassistant.google.com;
   worker-src 'self' blob:;
 `
   : `
@@ -34,7 +34,7 @@ const ContentSecurityPolicy = isProd
   object-src 'none';
   base-uri 'self';
   form-action 'self';
-  frame-ancestors 'none';
+  frame-ancestors 'self' https://tagassistant.google.com;
   worker-src 'self' blob:;
 `;
 
@@ -43,10 +43,12 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: ContentSecurityPolicy.replace(/\n/g, ""),
   },
-  {
-    key: "X-Frame-Options",
-    value: "DENY",
-  },
+  // No X-Frame-Options header: CSP's frame-ancestors above is the modern
+  // replacement and takes precedence in every evergreen browser when both
+  // are present, so a static XFO: DENY here would just silently override
+  // frame-ancestors' tagassistant.google.com allowance for legacy UAs that
+  // don't understand frame-ancestors — while adding no real protection for
+  // the UAs that matter, which already honor CSP.
   {
     key: "X-Content-Type-Options",
     value: "nosniff",
