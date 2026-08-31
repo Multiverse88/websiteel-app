@@ -38,7 +38,7 @@ export default function CTA({
     return () => obs.disconnect();
   }, []);
 
-  const waLink = whatsappLink || getWhatsAppLink();
+  const waLink = whatsappLink || getWhatsAppLink(undefined, "footer-cta");
 
   return (
     <section id="footer-cta" className="py-8 sm:py-20 bg-white border-t border-gray-100 overflow-hidden relative">

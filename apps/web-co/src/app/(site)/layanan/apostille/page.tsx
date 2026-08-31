@@ -66,7 +66,7 @@ const pricingPackages: PricingPackage[] = [
     isPopular: true,
     badgeText: "POPULER",
     buttonText: "Pesan Sekarang",
-    buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin memesan layanan Jasa Apostille Dokumen. Mohon info biaya dan prosesnya."),
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin memesan layanan Jasa Apostille Dokumen. Mohon info biaya dan prosesnya.", "ingin-memesan-layanan-jasa-apostille-dokumen"),
     groups: [
       {
         title: "BIAYA & PROSES",
@@ -178,7 +178,7 @@ export default function ApostillePage() {
               {/* Action Buttons */}
               <div className="flex flex-row flex-wrap gap-3 pt-2">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Jasa Apostille Dokumen.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Jasa Apostille Dokumen.", "ingin-konsultasi-mengenai-layanan-jasa-apostille-dokumen")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group"
@@ -694,7 +694,7 @@ export default function ApostillePage() {
           </h2>
         }
         description="Konsultasikan kebutuhan apostille Anda sekarang — GRATIS, tanpa komitmen. Hubungi kami melalui WA di wa.me/62817770048 atau via email care@easylegal.id."
-        whatsappLink={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Jasa Apostille Dokumen.")}
+        whatsappLink={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Jasa Apostille Dokumen.", "ingin-konsultasi-mengenai-layanan-jasa-apostille-dokumen-2")}
         whatsappText="Hubungi Konsultan EasyLegal Sekarang"
       />
 

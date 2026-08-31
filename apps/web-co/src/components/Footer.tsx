@@ -59,29 +59,29 @@ export default function Footer() {
       title: "Customer Care",
       items: [
         { type: "phone", label: "022 3209 3292", href: "tel:02232093292" },
-        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.") },
-        { type: "wa", label: "0817 321 162", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.") },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.", "customer-care-saya-ingin-berkonsultasi") },
+        { type: "wa", label: "0817 321 162", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.", "customer-care-saya-ingin-berkonsultasi-2") },
         { type: "email", label: "care@easylegal.id", href: "mailto:care@easylegal.id" },
       ],
     },
     {
       title: "Partnership",
       items: [
-        { type: "wa", label: "0818 818 090", href: getWhatsAppLink("Halo EasyLegal, saya ingin membahas partnership.") },
+        { type: "wa", label: "0818 818 090", href: getWhatsAppLink("Halo EasyLegal, saya ingin membahas partnership.", "ingin-membahas-partnership") },
         { type: "email", label: "ceo@easylegal.id", href: "mailto:ceo@easylegal.id" },
       ],
     },
     {
       title: "Affiliate Program",
       items: [
-        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya ingin bertanya tentang Affiliate Program.") },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya ingin bertanya tentang Affiliate Program.", "ingin-bertanya-tentang-affiliate-program") },
         { type: "email", label: "care@easylegal.id", href: "mailto:care@easylegal.id" },
       ],
     },
     {
       title: "Call Support",
       items: [
-        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya membutuhkan bantuan Call Support.") },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya membutuhkan bantuan Call Support.", "membutuhkan-bantuan-call-support") },
       ],
     },
   ];

@@ -27,6 +27,17 @@ export const config = {
 // `message` (that would break the moment someone edits the button copy,
 // silently detaching any override set against the old text). Omit it for
 // generic/one-off CTAs that don't need per-button overrides.
+// Derives a stable-enough ctaId from a per-item field that already exists in
+// the data (e.g. a pricing package's own title) — for lists rendered from
+// data where hand-assigning a literal id per entry isn't practical. Still
+// independent of the WA message text itself, just not of the title field.
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export function getWhatsAppLink(message?: string, ctaId?: string): string {
   const encodedMessage = encodeURIComponent(message || config.defaultWhatsAppMessage);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://api.easylegal.my.id";

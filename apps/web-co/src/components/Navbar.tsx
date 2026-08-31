@@ -514,7 +514,7 @@ export default function Navbar() {
           {/* Desktop CTAs - Right */}
           <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.", "ingin-konsultasi-mengenai-legalitas-bisnis")}
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2.5 bg-primary rounded-full text-[16px] font-bold text-white hover:bg-primary-hover shadow-sm hover:shadow transition-all duration-200"
@@ -722,7 +722,7 @@ export default function Navbar() {
 
                         <div className="border-t border-border pt-4 mt-4 flex flex-col space-y-3 px-3">
               <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.", "ingin-konsultasi-gratis-mengenai-legalitas-bisnis-saya")}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleLinkClick}

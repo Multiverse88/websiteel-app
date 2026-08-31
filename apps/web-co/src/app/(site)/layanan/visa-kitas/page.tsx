@@ -29,7 +29,7 @@ import Pricing, { PricingPackage } from "@/components/Pricing";
 import PricingFooter from "@/components/PricingFooter";
 import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
-import { getWhatsAppLink } from "@/lib/config";
+import { getWhatsAppLink, slugify } from "@/lib/config";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
@@ -196,7 +196,7 @@ export default function VisaKitas() {
     subLabel: pkg.subtitle,
     isPopular: pkg.isPopular,
     buttonText: pkg.labelBtn,
-    buttonLink: getWhatsAppLink(pkg.waText),
+    buttonLink: getWhatsAppLink(pkg.waText, slugify(pkg.title)),
     groups: [
       {
         title: "LAMA PROSES",
@@ -279,7 +279,7 @@ export default function VisaKitas() {
                   Lihat Paket Visa &amp; KITAS
                 </a>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai pembuatan Visa atau KITAS.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai pembuatan Visa atau KITAS.", "hero-consult")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-150 text-gray-800 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -581,7 +581,7 @@ export default function VisaKitas() {
           <div className="w-full md:w-auto flex flex-col gap-3 min-w-[320px] sm:min-w-[360px]">
             {/* WhatsApp action */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai pembuatan Visa atau KITAS.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai pembuatan Visa atau KITAS.", "bottom-consult")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2.5 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
@@ -593,7 +593,7 @@ export default function VisaKitas() {
             </a>
 
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai layanan keimigrasian.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai layanan keimigrasian.", "bottom-immigration-consult")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-150 hover:border-gray-250 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer"

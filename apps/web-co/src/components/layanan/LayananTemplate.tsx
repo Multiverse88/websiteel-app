@@ -30,7 +30,7 @@ import CTA from "@/components/CTA";
 import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
 import IsoPseBadges from "@/components/IsoPseBadges";
-import { getWhatsAppLink } from "@/lib/config";
+import { getWhatsAppLink, slugify } from "@/lib/config";
 import type { LayananContent } from "@/data/layanan-lainnya";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -57,10 +57,14 @@ export default function LayananTemplate({ content }: Props) {
 
   const c = content;
 
-  // Process pricing packages to inject real WhatsApp links dynamically
+  // Process pricing packages to inject real WhatsApp links dynamically.
+  // ctaId derived from the package's own title (stable per package,
+  // independent of buttonLink text so a copy edit doesn't break an
+  // existing per-button override) — scoped to this page path already, so
+  // it doesn't need to be globally unique across other services' packages.
   const pricingPackagesWithLinks = c.pricingPackages.map((pkg) => ({
     ...pkg,
-    buttonLink: getWhatsAppLink(pkg.buttonLink),
+    buttonLink: getWhatsAppLink(pkg.buttonLink, slugify(pkg.title)),
   }));
 
   return (
@@ -99,7 +103,7 @@ export default function LayananTemplate({ content }: Props) {
 
               <div className="flex flex-row gap-3 mt-6 sm:mt-8">
                 <a
-                  href={getWhatsAppLink(c.ctaWhatsAppMessage)}
+                  href={getWhatsAppLink(c.ctaWhatsAppMessage, "hero-consult")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold rounded-xl text-[16px] sm:text-[16px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1.5 sm:gap-2"
@@ -207,7 +211,7 @@ export default function LayananTemplate({ content }: Props) {
       <CTA
         title={c.ctaTitle}
         description={c.ctaDescription}
-        whatsappLink={getWhatsAppLink(c.ctaWhatsAppMessage)}
+        whatsappLink={getWhatsAppLink(c.ctaWhatsAppMessage, "bottom-consult")}
       />
 
       <MediaCoverage />

@@ -200,7 +200,7 @@ export default function PerjanjianPerkawinan() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Pembuatan Perjanjian",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pembuatan Perjanjian Perkawinan. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pembuatan Perjanjian Perkawinan. Mohon info lengkap biaya dan prosesnya.", "tertarik-dengan-layanan-pembuatan-perjanjian-perkawinan"),
       groups: [
         {
           title: "LAMA PROSES(1)",
@@ -238,7 +238,7 @@ export default function PerjanjianPerkawinan() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: false,
       buttonText: "Pilih Registrasi Saja",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Registrasi Perjanjian Perkawinan. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Registrasi Perjanjian Perkawinan. Mohon info lengkap biaya dan prosesnya.", "tertarik-dengan-layanan-registrasi-perjanjian-perkawinan"),
       groups: [
         {
           title: "LAMA PROSES(2)",
@@ -323,7 +323,7 @@ export default function PerjanjianPerkawinan() {
                   Lihat Paket Perjanjian
                 </a>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Perjanjian Perkawinan.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Perjanjian Perkawinan.", "ingin-konsultasi-mengenai-layanan-perjanjian-perkawinan")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 border border-gray-250 text-gray-800 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -786,7 +786,7 @@ export default function PerjanjianPerkawinan() {
           <div className="w-full md:w-auto flex flex-col gap-3.5 min-w-[320px] sm:min-w-[360px] max-w-[400px]">
             {/* WhatsApp Action */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Perjanjian Perkawinan.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Perjanjian Perkawinan.", "ingin-konsultasi-mengenai-layanan-perjanjian-perkawinan-2")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2.5 px-6 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl transition-all duration-200 cursor-pointer shadow-md shadow-red-950/5"
@@ -799,7 +799,7 @@ export default function PerjanjianPerkawinan() {
 
             {/* Hubungi Tim Kami Action */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi dengan tim spesialis hukum perjanjian.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi dengan tim spesialis hukum perjanjian.", "ingin-konsultasi-dengan-tim-spesialis-hukum-perjanjian")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-55 text-gray-900 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl transition-all duration-200 cursor-pointer shadow-sm"
