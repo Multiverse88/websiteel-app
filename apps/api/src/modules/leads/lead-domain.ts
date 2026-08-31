@@ -108,16 +108,45 @@ export function sourceCodeToChannel(source: LeadSourceCode): AttributionChannel 
   }[source] as AttributionChannel;
 }
 
+// Human-readable label for the "(Source; Domain)" tail — matches the label
+// set already shown in the admin dashboard (WhatsAppRotator.tsx SOURCE_LABELS).
+export const SOURCE_LABELS: Record<LeadSourceCode, string> = {
+  gads: "Google Ads",
+  metaads: "Meta Ads",
+  googleseo: "Google SEO",
+  referral: "Referral",
+  direct: "Langsung",
+  other: "Lainnya",
+  unknown: "Tidak diketahui",
+};
+
+// Most getWhatsAppLink() call sites write a message starting with a generic
+// "Halo <Someone>," greeting (e.g. "Halo EasyLegal,", "Halo EasyOffice
+// Bandung,") baked into the button text — strip that off so it can be
+// replaced with a greeting personalized to the CS agent who'll actually
+// answer, instead of ending up with two greetings back to back.
+const GENERIC_GREETING = /^hal(l)?o\s+[^,]+,\s*/i;
+
+// Builds the actual WhatsApp message text: personalized greeting (the picked
+// number's own label, so the CS agent's name is right there — e.g. "Hallo
+// Kak Naufal"), the button's own message stripped of its generic greeting,
+// then a human-readable "(Source; Domain | Ref: leadCode)" tail. leadCode
+// stays in the tail (not dropped) — it's the only channel CS/admin has to
+// match the live WA chat back to the lead row in the dashboard.
 export function buildWhatsAppMessage(
   message: string,
   leadCode: string,
   sourceCode: LeadSourceCode,
   domain?: string | null,
+  numberLabel?: string | null,
 ): string {
   const cleanMessage = message.trim().slice(0, 1000);
-  const siteTag = domain ? ` | Situs: ${domain}` : "";
-  const trackingReference = `[Ref: ${leadCode} | Source: ${sourceCode}${siteTag}]`;
-  return cleanMessage ? `${cleanMessage}\n\n${trackingReference}` : trackingReference;
+  const body = cleanMessage.replace(GENERIC_GREETING, "").trim();
+  const greeting = numberLabel ? `Hallo Kak ${numberLabel}` : "Hallo";
+  const tailParts = [SOURCE_LABELS[sourceCode] ?? sourceCode];
+  if (domain) tailParts.push(domain);
+  const tail = `(${tailParts.join("; ")} | Ref: ${leadCode})`;
+  return body ? `${greeting} ${body} ${tail}` : `${greeting} ${tail}`;
 }
 
 export function getLeadTemperature(stage: LeadStage): LeadTemperature {

@@ -15,10 +15,20 @@ interface WaPageConfig {
   id: string
   path: string
   ctaId: string // "" = whole-page override; otherwise a specific button's stable id
+  domain: string // "" = applies to every domain; otherwise one hostname (e.g. easylegal.biz.id)
   message: string | null
   numberIds: string[]
   updatedAt: string
 }
+
+// The site only has these two public domains today (see CLAUDE.md) — kept
+// as a short fixed list rather than derived from click data, since "which
+// domains exist" is a deploy-time fact, not something that grows on its own.
+const DOMAINS: { value: string; label: string }[] = [
+  { value: '', label: 'Semua Domain' },
+  { value: 'easylegal.biz.id', label: 'easylegal.biz.id' },
+  { value: 'easylegal.co.id', label: 'easylegal.co.id' },
+]
 
 interface WaKnownButton {
   ctaId: string
@@ -100,6 +110,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [knownButtons, setKnownButtons] = useState<WaKnownButton[]>([])
   const [buttonsLoading, setButtonsLoading] = useState(false)
   const [selectedPath, setSelectedPath] = useState('')
+  const [selectedDomain, setSelectedDomain] = useState('') // "" = Semua Domain
   // "" (empty ctaId) = the "Semua Tombol (Halaman ini)" row; null = nothing expanded.
   const [expandedCtaId, setExpandedCtaId] = useState<string | null>(null)
   const [rowMessage, setRowMessage] = useState('')
@@ -233,37 +244,44 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     ? [{ ctaId: '', sample: null }, ...knownButtons]
     : []
 
-  const rowConfigFor = (ctaId: string) => pages.find((p) => p.path === selectedPath && p.ctaId === ctaId)
+  // Exact match on domain too (not falling back to "") — each domain tab is
+  // its own independent editable slot, distinct from the "Semua Domain" row.
+  const rowConfigFor = (ctaId: string) => pages.find((p) => p.path === selectedPath && p.ctaId === ctaId && p.domain === selectedDomain)
+
+  const rowNoteFor = (ctaId: string, domain: string) => domain
+    ? (ctaId ? 'tombol ini di' : 'halaman ini di') + ` ${domain}`
+    : (ctaId ? 'tombol ini (semua domain)' : 'halaman ini (semua domain)')
 
   // Loads what a row is actually sending right now (from the most recent
   // matching lead), so the editor starts from the real current text instead
   // of blank — otherwise there's no way to "edit" the existing autotext,
   // only blindly type a brand new override over it.
-  const loadRowPreview = async (path: string, ctaId: string) => {
+  const loadRowPreview = async (path: string, ctaId: string, domain: string) => {
     try {
-      const res = await api.getWaPagePreview(path, ctaId || undefined)
+      const res = await api.getWaPagePreview(path, ctaId || undefined, domain || undefined)
       const msg = res.data?.message || ''
       setRowMessage(msg)
       setRowNote(msg
-        ? `Ini teks yang sekarang jalan di ${ctaId ? 'tombol ini' : 'halaman ini'} (dari lead terakhir, mungkin terpotong ~200 karakter). Edit lalu Simpan untuk menimpanya.`
-        : `Belum ada data teks untuk ${ctaId ? 'tombol' : 'halaman'} ini — isi manual kalau mau bikin override.`)
+        ? `Ini teks yang sekarang jalan di ${rowNoteFor(ctaId, domain)} (dari lead terakhir, mungkin terpotong ~200 karakter). Edit lalu Simpan untuk menimpanya.`
+        : `Belum ada data teks untuk ${rowNoteFor(ctaId, domain)} — isi manual kalau mau bikin override.`)
     } catch {
       setRowNote('')
     }
   }
 
-  const openRow = async (path: string, ctaId: string) => {
+  const openRow = async (path: string, ctaId: string, domain: string) => {
     setSelectedPath(path)
+    setSelectedDomain(domain)
     setExpandedCtaId(ctaId)
-    const existing = pages.find((p) => p.path === path && p.ctaId === ctaId)
+    const existing = pages.find((p) => p.path === path && p.ctaId === ctaId && p.domain === domain)
     setRowNumberIds(existing?.numberIds || [])
     if (existing?.message) {
       setRowMessage(existing.message)
-      setRowNote(ctaId ? 'Override tersimpan untuk tombol ini.' : 'Override tersimpan untuk halaman ini.')
+      setRowNote(`Override tersimpan untuk ${rowNoteFor(ctaId, domain)}.`)
       return
     }
     setRowMessage('')
-    await loadRowPreview(path, ctaId)
+    await loadRowPreview(path, ctaId, domain)
   }
 
   const handlePathSelect = async (path: string) => {
@@ -273,9 +291,14 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     if (path) await loadKnownButtons(path)
   }
 
+  const handleDomainSelect = (domain: string) => {
+    setSelectedDomain(domain)
+    setExpandedCtaId(null)
+  }
+
   const toggleRow = async (ctaId: string) => {
     if (expandedCtaId === ctaId) { setExpandedCtaId(null); return }
-    await openRow(selectedPath, ctaId)
+    await openRow(selectedPath, ctaId, selectedDomain)
   }
 
   const toggleRowNumber = (id: string) => {
@@ -287,10 +310,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     setError('')
     setSavingRow(true)
     try {
-      await api.saveWaPage({ path: selectedPath, ctaId: expandedCtaId, message: rowMessage, numberIds: expandedCtaId === '' ? rowNumberIds : [] })
+      await api.saveWaPage({ path: selectedPath, ctaId: expandedCtaId, domain: selectedDomain, message: rowMessage, numberIds: expandedCtaId === '' ? rowNumberIds : [] })
       await loadPages()
       if (expandedCtaId) await loadKnownButtons(selectedPath)
-      setRowNote(expandedCtaId ? 'Override tersimpan untuk tombol ini.' : 'Override tersimpan untuk halaman ini.')
+      setRowNote(`Override tersimpan untuk ${rowNoteFor(expandedCtaId, selectedDomain)}.`)
     } catch (e: any) {
       setError(e.message)
     } finally {
@@ -306,7 +329,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     try {
       await api.deleteWaPage(config.id)
       await loadPages()
-      await loadRowPreview(selectedPath, expandedCtaId)
+      await loadRowPreview(selectedPath, expandedCtaId, selectedDomain)
     } catch (e: any) {
       setError(e.message)
     }
@@ -551,6 +574,25 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               <p className="text-[12px] text-gray-400">Daftar diambil dari halaman yang sudah pernah dapat klik WA. Setelah dipilih, semua tombol/paket di halaman itu muncul di bawah — klik satu buat lihat & edit autotext-nya.</p>
             </div>
 
+            {selectedPath && (
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[14px] font-bold text-gray-700">Domain</label>
+                <div className="flex flex-wrap gap-2">
+                  {DOMAINS.map((d) => (
+                    <button
+                      key={d.value}
+                      type="button"
+                      onClick={() => handleDomainSelect(d.value)}
+                      className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold transition-colors ${selectedDomain === d.value ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                    >
+                      {d.label}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[12px] text-gray-400">"Semua Domain" berlaku ke biz.id & co.id sekaligus kecuali ada override khusus di domain tertentu (override domain spesifik selalu menang).</p>
+              </div>
+            )}
+
             {selectedPath && buttonsLoading && (
               <p className="text-[13px] text-gray-400">Memuat daftar tombol...</p>
             )}
@@ -660,6 +702,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               <thead>
                 <tr className="bg-gray-50 text-left text-gray-500 text-[12px] uppercase tracking-wider">
                   <th className="px-6 py-3">Path</th>
+                  <th className="px-6 py-3">Domain</th>
                   <th className="px-6 py-3">Autotext</th>
                   <th className="px-6 py-3">Nomor</th>
                   <th className="px-6 py-3"></th>
@@ -667,10 +710,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               </thead>
               <tbody>
                 {pagesLoading && (
-                  <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-400">Memuat...</td></tr>
+                  <tr><td colSpan={5} className="px-6 py-8 text-center text-gray-400">Memuat...</td></tr>
                 )}
                 {!pagesLoading && pages.length === 0 && (
-                  <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-400">Belum ada halaman dengan konfigurasi khusus.</td></tr>
+                  <tr><td colSpan={5} className="px-6 py-8 text-center text-gray-400">Belum ada halaman dengan konfigurasi khusus.</td></tr>
                 )}
                 {!pagesLoading && pages.map((p) => (
                   <tr key={p.id} className="border-t border-gray-100">
@@ -678,12 +721,13 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                       {p.path}
                       <div className="text-[11px] font-sans font-normal text-gray-400">{p.ctaId ? `Tombol: ${p.ctaId}` : 'Semua tombol (halaman ini)'}</div>
                     </td>
+                    <td className="px-6 py-3.5 text-gray-600">{p.domain || <span className="text-gray-400">semua domain</span>}</td>
                     <td className="px-6 py-3.5 text-gray-600 max-w-[280px] truncate" title={p.message || ''}>{p.message || <span className="text-gray-400">bawaan tombol</span>}</td>
                     <td className="px-6 py-3.5 text-gray-600">
                       {p.ctaId ? <span className="text-gray-400">— (level halaman)</span> : p.numberIds.length === 0 ? <span className="text-gray-400">semua aktif</span> : p.numberIds.map((id) => numbers.find((n) => n.id === id)?.label || numbers.find((n) => n.id === id)?.number || id).join(', ')}
                     </td>
                     <td className="px-6 py-3.5 text-right whitespace-nowrap">
-                      <button onClick={async () => { await loadKnownButtons(p.path); await openRow(p.path, p.ctaId) }} className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3">Edit</button>
+                      <button onClick={async () => { await loadKnownButtons(p.path); await openRow(p.path, p.ctaId, p.domain) }} className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3">Edit</button>
                       <button onClick={() => handleDeletePage(p)} className="text-[13px] font-bold text-gray-600 hover:text-red-600 transition-colors">Hapus</button>
                     </td>
                   </tr>

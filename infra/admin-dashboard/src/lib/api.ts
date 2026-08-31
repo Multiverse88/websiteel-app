@@ -248,13 +248,13 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memuat daftar tombol')
     return await res.json()
   },
-  getWaPagePreview: async (path: string, ctaId?: string) => {
-    const qs = ctaId ? `&cta_id=${encodeURIComponent(ctaId)}` : ''
+  getWaPagePreview: async (path: string, ctaId?: string, domain?: string) => {
+    const qs = (ctaId ? `&cta_id=${encodeURIComponent(ctaId)}` : '') + (domain ? `&domain=${encodeURIComponent(domain)}` : '')
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/preview?path=${encodeURIComponent(path)}${qs}`)
     if (!res.ok) throw new Error('Gagal memuat preview autotext')
     return await res.json()
   },
-  saveWaPage: async (data: { path: string; ctaId?: string; message?: string; numberIds?: string[] }) => {
+  saveWaPage: async (data: { path: string; ctaId?: string; domain?: string; message?: string; numberIds?: string[] }) => {
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
