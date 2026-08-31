@@ -126,7 +126,7 @@ export default function ReferralResellerPage() {
               {/* Action buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik mendaftar Program Referral & Reseller tanpa modal.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik mendaftar Program Referral & Reseller tanpa modal.", "tertarik-mendaftar-program-referral-reseller-tanpa-modal")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-center space-x-2 shrink-0"
@@ -753,7 +753,7 @@ export default function ReferralResellerPage() {
           {/* Action buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya siap gabung Program Referral & Reseller sekarang.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya siap gabung Program Referral & Reseller sekarang.", "siap-gabung-program-referral-reseller-sekarang")}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 space-x-2.5 cursor-pointer"
@@ -765,7 +765,7 @@ export default function ReferralResellerPage() {
               <span>Daftar Gratis Sekarang</span>
             </a>
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin bertanya mengenai kemitraan referral.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin bertanya mengenai kemitraan referral.", "ingin-bertanya-mengenai-kemitraan-referral")}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 shadow-md border border-black/[0.04] text-gray-850 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 shadow-sm cursor-pointer"

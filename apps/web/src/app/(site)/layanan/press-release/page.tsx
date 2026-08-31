@@ -353,7 +353,7 @@ export default function PressRelease() {
                   Lihat Paket Press Release
                 </a>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Press Release.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Press Release.", "hero-consult")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 border-2 border-gray-900 text-gray-950 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-950 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -926,7 +926,7 @@ export default function PressRelease() {
           <div className="w-full md:w-auto flex flex-col gap-3 min-w-[320px] sm:min-w-[360px] max-w-[400px]">
             {/* WhatsApp Action */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai publikasi Press Release.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai publikasi Press Release.", "bottom-consult")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"

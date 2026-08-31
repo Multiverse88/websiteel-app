@@ -222,7 +222,7 @@ export default function NibOss() {
               {/* Action Buttons */}
               <div className="flex flex-row gap-3 pt-2">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembuatan NIB dan izin OSS RBA.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembuatan NIB dan izin OSS RBA.", "hero-consult")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
@@ -701,7 +701,7 @@ export default function NibOss() {
                   <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
-                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut KBLI (${activeSubTab}).`)}
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut KBLI (${activeSubTab}).`, `paket-cabut-kbli-${activeSubTab.toLowerCase()}`)}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih Cabut KBLI</a>
@@ -755,7 +755,7 @@ export default function NibOss() {
                   <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
-                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Tambah KBLI (${activeSubTab}).`)}
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Tambah KBLI (${activeSubTab}).`, `paket-tambah-kbli-${activeSubTab.toLowerCase()}`)}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
                 >Pilih Tambah KBLI</a>
@@ -807,7 +807,7 @@ export default function NibOss() {
                   <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
-                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut & Tambah KBLI (${activeSubTab}).`)}
+                  href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan Paket Cabut & Tambah KBLI (${activeSubTab}).`, `paket-cabut-tambah-kbli-${activeSubTab.toLowerCase()}`)}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih Cabut &amp; Tambah</a>
@@ -1093,7 +1093,7 @@ export default function NibOss() {
 
             {/* Button Hubungi Tim Kami */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan NIB dan OSS RBA.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan NIB dan OSS RBA.", "bottom-consult")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

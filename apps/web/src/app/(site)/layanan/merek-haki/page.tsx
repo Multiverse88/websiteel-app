@@ -1095,7 +1095,7 @@ export default function MerekHaki() {
       <CTA
         title={<h2 className="font-heading text-3xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight">Siap Mendaftarkan Merek Anda?</h2>}
         description="Konsultasikan kebutuhan pendaftaran merek Anda sekarang — GRATIS, tanpa komitmen."
-        whatsappLink={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Pendaftaran Merek & HAKI.")}
+        whatsappLink={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Pendaftaran Merek & HAKI.", "bottom-consult")}
         whatsappText="Hubungi Konsultan EasyLegal Sekarang"
       />
     </div>

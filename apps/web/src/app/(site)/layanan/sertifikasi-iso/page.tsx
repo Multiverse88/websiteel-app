@@ -518,7 +518,7 @@ export default function SertifikasiIso() {
               {/* Action Buttons */}
               <div className="flex flex-row gap-3 pt-2">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Sertifikasi ISO dengan auditor UAF.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Sertifikasi ISO dengan auditor UAF.", "hero-consult")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
