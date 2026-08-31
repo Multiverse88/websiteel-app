@@ -287,6 +287,29 @@ router.get("/pages/known-paths", requireAuth, async (req, res) => {
   }
 });
 
+// GET /api/v1/wa/pages/preview?path=... — admin: the actual text a page's
+// button is sending right now (from the most recent lead logged for that
+// path), so "Per Halaman" can start from the real current autotext instead
+// of a blank field. Capped at 200 chars because that's all whatsapp.ts's
+// /redirect handler persists per click (WhatsAppClick.service) — there's no
+// longer copy stored anywhere, so this is a preview, not guaranteed verbatim
+// for longer messages.
+router.get("/pages/preview", requireAuth, async (req, res) => {
+  try {
+    const path = queryText(req.query.path, 300);
+    if (!path) return res.status(400).json({ error: "Path wajib diisi" });
+    const latest = await prisma.whatsAppClick.findFirst({
+      where: { product: path },
+      orderBy: { createdAt: "desc" },
+      select: { service: true },
+    });
+    res.json({ data: { message: latest?.service || null } });
+  } catch (error) {
+    console.error("Error fetching WA page preview:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 function cleanNumberIds(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((v): v is string => typeof v === "string" && v.trim().length > 0).slice(0, 50);

@@ -95,6 +95,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [editingMessage, setEditingMessage] = useState('')
   const [editingNumberIds, setEditingNumberIds] = useState<string[]>([])
   const [savingPage, setSavingPage] = useState(false)
+  const [messageNote, setMessageNote] = useState('')
 
   const [numbers, setNumbers] = useState<WaNumber[]>([])
   const [totalClicks, setTotalClicks] = useState(0)
@@ -206,12 +207,38 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     setEditingPath(page?.path || '')
     setEditingMessage(page?.message || '')
     setEditingNumberIds(page?.numberIds || [])
+    setMessageNote('')
   }
 
-  const handlePathSelect = (path: string) => {
+  // Loads what the page's button is actually sending right now (from the
+  // most recent lead), so the form starts from the real current text
+  // instead of blank — otherwise there's no way to "edit" the existing
+  // autotext, only blindly type a brand new override over it.
+  const loadMessagePreview = async (path: string) => {
+    try {
+      const res = await api.getWaPagePreview(path)
+      const msg = res.data?.message || ''
+      setEditingMessage(msg)
+      setMessageNote(msg
+        ? 'Ini teks yang sekarang jalan di halaman ini (dari lead terakhir, mungkin terpotong ~200 karakter). Edit lalu Simpan untuk menimpanya.'
+        : 'Belum ada data teks untuk halaman ini (belum pernah diklik) — isi manual kalau mau bikin override.')
+    } catch {
+      setMessageNote('')
+    }
+  }
+
+  const handlePathSelect = async (path: string) => {
+    if (!path) { startEditPage(); return }
     const existing = pages.find((p) => p.path === path)
-    if (existing) startEditPage(existing)
-    else { setEditingPath(path); setEditingMessage(''); setEditingNumberIds([]) }
+    if (existing?.message) {
+      startEditPage(existing)
+      setMessageNote('Override tersimpan untuk halaman ini.')
+      return
+    }
+    setEditingPath(path)
+    setEditingNumberIds(existing?.numberIds || [])
+    setEditingMessage('')
+    await loadMessagePreview(path)
   }
 
   const toggleEditingNumber = (id: string) => {
@@ -476,12 +503,16 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               <label className="text-[14px] font-bold text-gray-700">Autotext WA (opsional)</label>
               <textarea
                 value={editingMessage}
-                onChange={(e) => setEditingMessage(e.target.value)}
+                onChange={(e) => { setEditingMessage(e.target.value); setMessageNote('') }}
                 placeholder="Kosongkan untuk pakai teks bawaan tombol di halaman"
                 rows={3}
                 className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#990202]"
               />
-              <p className="text-[12px] text-gray-400">Kalau diisi, menimpa teks bawaan semua tombol WA di halaman ini (satu teks untuk seluruh halaman, tidak per-paket).</p>
+              {messageNote ? (
+                <p className="text-[12px] text-amber-600 font-semibold">{messageNote}</p>
+              ) : (
+                <p className="text-[12px] text-gray-400">Kalau diisi, menimpa teks bawaan semua tombol WA di halaman ini (satu teks untuk seluruh halaman, tidak per-paket).</p>
+              )}
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-[14px] font-bold text-gray-700">Nomor Rotator (opsional)</label>
