@@ -11,6 +11,14 @@ interface WaNumber {
   createdAt: string
 }
 
+interface WaPageConfig {
+  id: string
+  path: string
+  message: string | null
+  numberIds: string[]
+  updatedAt: string
+}
+
 interface WaLead {
   id: string
   leadCode: string
@@ -77,8 +85,15 @@ const NEXT_STAGES: Record<string, string[]> = {
 // click site-wide always goes to whichever active number has the fewest
 // clicks so far. Two tabs: fairness per number, and every click as a
 // trackable lead (source/product/status) up to closing.
-export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab?: 'numbers' | 'leads' }) {
-  const [tab, setTab] = useState<'numbers' | 'leads'>(initialTab)
+export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab?: 'numbers' | 'pages' | 'leads' }) {
+  const [tab, setTab] = useState<'numbers' | 'pages' | 'leads'>(initialTab)
+
+  const [pages, setPages] = useState<WaPageConfig[]>([])
+  const [pagesLoading, setPagesLoading] = useState(false)
+  const [editingPath, setEditingPath] = useState('')
+  const [editingMessage, setEditingMessage] = useState('')
+  const [editingNumberIds, setEditingNumberIds] = useState<string[]>([])
+  const [savingPage, setSavingPage] = useState(false)
 
   const [numbers, setNumbers] = useState<WaNumber[]>([])
   const [totalClicks, setTotalClicks] = useState(0)
@@ -122,8 +137,21 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     }
   }, [sourceFilter, statusFilter])
 
+  const loadPages = useCallback(async () => {
+    try {
+      setPagesLoading(true)
+      const res = await api.getWaPages()
+      setPages(res.data || [])
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setPagesLoading(false)
+    }
+  }, [])
+
   useEffect(() => { load() }, [load])
   useEffect(() => { if (tab === 'leads') loadLeads() }, [loadLeads, tab])
+  useEffect(() => { if (tab === 'pages') loadPages() }, [loadPages, tab])
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -145,6 +173,42 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const toggleActive = async (n: WaNumber) => {
     await api.updateWaNumber(n.id, { isActive: !n.isActive })
     await load()
+  }
+
+  const startEditPage = (page?: WaPageConfig) => {
+    setEditingPath(page?.path || '')
+    setEditingMessage(page?.message || '')
+    setEditingNumberIds(page?.numberIds || [])
+  }
+
+  const toggleEditingNumber = (id: string) => {
+    setEditingNumberIds((prev) => prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id])
+  }
+
+  const handleSavePage = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+    if (!editingPath.trim()) return
+    setSavingPage(true)
+    try {
+      await api.saveWaPage({ path: editingPath.trim(), message: editingMessage, numberIds: editingNumberIds })
+      startEditPage()
+      await loadPages()
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setSavingPage(false)
+    }
+  }
+
+  const handleDeletePage = async (page: WaPageConfig) => {
+    if (!window.confirm(`Hapus konfigurasi khusus untuk "${page.path}"? Halaman ini akan kembali pakai teks & rotasi nomor default.`)) return
+    try {
+      await api.deleteWaPage(page.id)
+      await loadPages()
+    } catch (e: any) {
+      setError(e.message)
+    }
   }
 
   const handleStatusChange = async (lead: WaLead, status: string) => {
@@ -197,6 +261,12 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           className={`px-4 py-2.5 text-[14px] font-bold border-b-2 transition-colors ${tab === 'numbers' ? 'border-[#990202] text-[#990202]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
         >
           Nomor & Fairness
+        </button>
+        <button
+          onClick={() => setTab('pages')}
+          className={`px-4 py-2.5 text-[14px] font-bold border-b-2 transition-colors ${tab === 'pages' ? 'border-[#990202] text-[#990202]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+        >
+          Per Halaman
         </button>
         <button
           onClick={() => setTab('leads')}
@@ -306,6 +376,100 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           <p className="text-[13px] text-gray-400">
             Nomor yang dinonaktifkan berhenti menerima klik baru tapi riwayat kliknya tetap tersimpan (tidak dihapus permanen dari halaman ini).
           </p>
+        </>
+      )}
+
+      {tab === 'pages' && (
+        <>
+          <form onSubmit={handleSavePage} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col gap-4">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[14px] font-bold text-gray-700">Path Halaman</label>
+              <input
+                type="text"
+                value={editingPath}
+                onChange={(e) => setEditingPath(e.target.value)}
+                placeholder="/layanan/pengajuan-pkp"
+                className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[14px] font-mono focus:outline-none focus:border-[#990202]"
+              />
+              <p className="text-[12px] text-gray-400">Path persis seperti di address bar (case-sensitive), termasuk slug landing page campaign kalau ada.</p>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[14px] font-bold text-gray-700">Autotext WA (opsional)</label>
+              <textarea
+                value={editingMessage}
+                onChange={(e) => setEditingMessage(e.target.value)}
+                placeholder="Kosongkan untuk pakai teks bawaan tombol di halaman"
+                rows={3}
+                className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#990202]"
+              />
+              <p className="text-[12px] text-gray-400">Kalau diisi, menimpa teks bawaan semua tombol WA di halaman ini (satu teks untuk seluruh halaman, tidak per-paket).</p>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[14px] font-bold text-gray-700">Nomor Rotator (opsional)</label>
+              <div className="flex flex-wrap gap-2">
+                {numbers.length === 0 && <span className="text-[13px] text-gray-400">Belum ada nomor — tambah dulu di tab "Nomor & Fairness".</span>}
+                {numbers.map((n) => (
+                  <label key={n.id} className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold cursor-pointer transition-colors ${editingNumberIds.includes(n.id) ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}>
+                    <input type="checkbox" className="hidden" checked={editingNumberIds.includes(n.id)} onChange={() => toggleEditingNumber(n.id)} />
+                    {n.label || n.number}
+                  </label>
+                ))}
+              </div>
+              <p className="text-[12px] text-gray-400">Kosongkan = tetap rotasi ke semua nomor aktif seperti biasa. Dicentang = klik di halaman ini hanya rotasi ke nomor yang dipilih.</p>
+            </div>
+            <div className="flex gap-3">
+              <button
+                type="submit"
+                disabled={savingPage}
+                className="px-5 py-2.5 rounded-lg text-white font-bold bg-[#990202] hover:bg-[#7a0101] shadow-sm transition-colors disabled:opacity-50 whitespace-nowrap"
+              >
+                {savingPage ? 'Menyimpan...' : editingPath ? 'Simpan Konfigurasi' : '+ Tambah Konfigurasi'}
+              </button>
+              {editingPath && (
+                <button type="button" onClick={() => startEditPage()} className="px-5 py-2.5 rounded-lg font-bold text-gray-600 hover:text-gray-900">
+                  Batal
+                </button>
+              )}
+            </div>
+          </form>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="p-6 border-b border-gray-100">
+              <h3 className="font-bold text-gray-900 text-[16px]">Konfigurasi per Halaman</h3>
+              <p className="text-[14px] text-gray-500 mt-1">Halaman tanpa konfigurasi di sini otomatis pakai teks bawaan tombol + rotasi semua nomor aktif.</p>
+            </div>
+            <table className="w-full text-[14px]">
+              <thead>
+                <tr className="bg-gray-50 text-left text-gray-500 text-[12px] uppercase tracking-wider">
+                  <th className="px-6 py-3">Path</th>
+                  <th className="px-6 py-3">Autotext</th>
+                  <th className="px-6 py-3">Nomor</th>
+                  <th className="px-6 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {pagesLoading && (
+                  <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-400">Memuat...</td></tr>
+                )}
+                {!pagesLoading && pages.length === 0 && (
+                  <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-400">Belum ada halaman dengan konfigurasi khusus.</td></tr>
+                )}
+                {!pagesLoading && pages.map((p) => (
+                  <tr key={p.id} className="border-t border-gray-100">
+                    <td className="px-6 py-3.5 font-mono text-gray-900">{p.path}</td>
+                    <td className="px-6 py-3.5 text-gray-600 max-w-[280px] truncate" title={p.message || ''}>{p.message || <span className="text-gray-400">bawaan tombol</span>}</td>
+                    <td className="px-6 py-3.5 text-gray-600">
+                      {p.numberIds.length === 0 ? <span className="text-gray-400">semua aktif</span> : p.numberIds.map((id) => numbers.find((n) => n.id === id)?.label || numbers.find((n) => n.id === id)?.number || id).join(', ')}
+                    </td>
+                    <td className="px-6 py-3.5 text-right whitespace-nowrap">
+                      <button onClick={() => startEditPage(p)} className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3">Edit</button>
+                      <button onClick={() => handleDeletePage(p)} className="text-[13px] font-bold text-gray-600 hover:text-red-600 transition-colors">Hapus</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </>
       )}
 

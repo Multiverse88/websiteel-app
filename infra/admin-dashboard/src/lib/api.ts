@@ -231,6 +231,29 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memperbarui nomor');
     return await res.json();
   },
+  // Per-page WA rotator override — custom autotext and/or a restricted
+  // number pool for one page, keyed by page path (see whatsapp.ts /pages).
+  getWaPages: async () => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages`)
+    if (!res.ok) throw new Error('Gagal memuat konfigurasi halaman')
+    return await res.json()
+  },
+  saveWaPage: async (data: { path: string; message?: string; numberIds?: string[] }) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Gagal menyimpan konfigurasi halaman' }))
+      throw new Error(err.error || 'Gagal menyimpan konfigurasi halaman')
+    }
+    return await res.json()
+  },
+  deleteWaPage: async (id: string) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/${id}`, { method: 'DELETE' })
+    if (!res.ok && res.status !== 204) throw new Error('Gagal menghapus konfigurasi halaman')
+  },
   getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string } = {}) => {
     const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString()
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads${qs ? `?${qs}` : ''}`)

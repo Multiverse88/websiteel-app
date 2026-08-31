@@ -37,9 +37,15 @@ function queryText(value: unknown, maxLength = 500): string | null {
 // a fetch, so no CORS setup is needed here.
 router.get("/redirect", async (req, res) => {
   try {
-    const rawText = queryText(req.query.text, 1000) || "";
-    const suppliedSource = normalizeSourceCode(req.query.source);
     const product = queryText(req.query.product, 300);
+    // Per-page override (admin-editable, see /pages routes below) — keyed by
+    // the same page-path string every getWhatsAppLink() click already sends
+    // as `product`, so no call-site changes are needed to opt a page in.
+    const pageConfig = product
+      ? await prisma.whatsAppPageConfig.findUnique({ where: { path: product } })
+      : null;
+    const rawText = (pageConfig?.message || queryText(req.query.text, 1000)) || "";
+    const suppliedSource = normalizeSourceCode(req.query.source);
     const classified = suppliedSource
       ? {
           sourceCode: suppliedSource,
@@ -56,8 +62,10 @@ router.get("/redirect", async (req, res) => {
       ? [sessionId, product || "", ctaId || service || ""].join(":").slice(0, 500)
       : null;
 
+    const numberWhere: { isActive: boolean; id?: { in: string[] } } = { isActive: true };
+    if (pageConfig?.numberIds?.length) numberWhere.id = { in: pageConfig.numberIds };
     const next = await prisma.whatsAppNumber.findFirst({
-      where: { isActive: true },
+      where: numberWhere,
       orderBy: [{ clickCount: "asc" }, { createdAt: "asc" }],
     });
 
@@ -232,6 +240,76 @@ router.get("/numbers/:id/clicks", requireAuth, async (req, res) => {
     res.json({ data: clicks });
   } catch (error) {
     console.error("Error fetching WA click log:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// GET /api/v1/wa/pages — admin: list per-page overrides (autotext + number pool)
+router.get("/pages", requireAuth, async (req, res) => {
+  try {
+    const pages = await prisma.whatsAppPageConfig.findMany({ orderBy: { path: "asc" } });
+    res.json({ data: pages });
+  } catch (error) {
+    console.error("Error fetching WA page configs:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+function cleanNumberIds(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((v): v is string => typeof v === "string" && v.trim().length > 0).slice(0, 50);
+}
+
+// POST /api/v1/wa/pages — admin: create or replace the override for a page
+// path (upsert on path so re-saving the same page never dupes a row).
+router.post("/pages", requireAuth, async (req, res) => {
+  try {
+    const path = queryText(req.body.path, 300);
+    if (!path) return res.status(400).json({ error: "Path halaman wajib diisi" });
+    const message = queryText(req.body.message, 1000);
+    const numberIds = cleanNumberIds(req.body.numberIds);
+    const saved = await prisma.whatsAppPageConfig.upsert({
+      where: { path },
+      create: { path, message, numberIds },
+      update: { message, numberIds },
+    });
+    res.status(201).json({ data: saved });
+  } catch (error) {
+    console.error("Error saving WA page config:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// PUT /api/v1/wa/pages/:id — admin: edit an existing override
+router.put("/pages/:id", requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params as { id: string };
+    const { message, numberIds } = req.body;
+    const updated = await prisma.whatsAppPageConfig.update({
+      where: { id },
+      data: {
+        ...(message !== undefined && { message: queryText(message, 1000) }),
+        ...(numberIds !== undefined && { numberIds: cleanNumberIds(numberIds) }),
+      },
+    });
+    res.json({ data: updated });
+  } catch (error: any) {
+    if (error.code === "P2025") return res.status(404).json({ error: "Konfigurasi halaman tidak ditemukan" });
+    console.error("Error updating WA page config:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// DELETE /api/v1/wa/pages/:id — admin: remove an override, page falls back
+// to whatever text/number pool the CTA sends by default.
+router.delete("/pages/:id", requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params as { id: string };
+    await prisma.whatsAppPageConfig.delete({ where: { id } });
+    res.status(204).end();
+  } catch (error: any) {
+    if (error.code === "P2025") return res.status(404).json({ error: "Konfigurasi halaman tidak ditemukan" });
+    console.error("Error deleting WA page config:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

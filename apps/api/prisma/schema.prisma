@@ -128,6 +128,22 @@ model WhatsAppNumber {
   clicks     WhatsAppClick[]
 }
 
+// Per-page override for the rotator: lets admin set a custom WA autotext
+// and/or restrict which numbers rotate for one specific page, without a
+// code deploy. Keyed by "path" — the same page-path string every
+// getWhatsAppLink() click already sends as `product` (see whatsapp.ts
+// /redirect), so no call-site changes are needed to opt a page in. One
+// config per page path — doesn't distinguish multiple buttons/packages on
+// the same page (see WhatsAppClick.service for that finer grain).
+model WhatsAppPageConfig {
+  id        String   @id @default(cuid())
+  path      String   @unique
+  message   String? // null/empty = keep whatever text the CTA button sends
+  numberIds String[] @default([]) // subset of WhatsAppNumber.id; empty = all active numbers
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum LeadStatus {
   NEW
   CONTACTED
