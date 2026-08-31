@@ -187,7 +187,7 @@ export default function PelaporanLKPM() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih LKPM Mikro Kecil",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Mikro Kecil. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Mikro Kecil. Mohon info lengkap biaya dan prosesnya.", "paket-lkpm-mikro-kecil"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -223,7 +223,7 @@ export default function PelaporanLKPM() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: false,
       buttonText: "Pilih LKPM Menengah Besar",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Menengah Besar. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket LKPM Menengah Besar. Mohon info lengkap biaya dan prosesnya.", "paket-lkpm-menengah-besar"),
       groups: [
         {
           title: "LAMA PROSES",

@@ -66,7 +66,7 @@ const pricingPackages = [
       strikePrice: "900.000",
       isPopular: false,
       buttonText: "Pilih NIB Perseorangan",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perseorangan (UMK). Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perseorangan (UMK). Mohon info lengkap biaya dan prosesnya.", "paket-nib-perseorangan-umk"),
       duration: "1-2 Hari Kerja",
       features: [
         "Pendaftaran Hak Akses Akun OSS RBA",
@@ -88,7 +88,7 @@ const pricingPackages = [
       strikePrice: "1.800.000",
       isPopular: true,
       buttonText: "Pilih NIB Badan Usaha",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan Usaha (PT/CV). Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan Usaha (PT/CV). Mohon info lengkap biaya dan prosesnya.", "paket-nib-badan-usaha-pt-cv"),
       duration: "1-2 Hari Kerja",
       features: [
         "Pendaftaran Hak Akses Akun OSS RBA Badan Usaha",
@@ -111,7 +111,7 @@ const pricingPackages = [
       strikePrice: "3.500.000",
       isPopular: false,
       buttonText: "Pilih NIB Risiko Menengah",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB + Sertifikat Standar. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB + Sertifikat Standar. Mohon info lengkap biaya dan prosesnya.", "paket-nib-sertifikat-standar"),
       duration: "3-5 Hari Kerja",
       features: [
         "Semua Layanan NIB Badan Usaha",
@@ -382,7 +382,7 @@ export default function NibOss() {
                   <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perorangan. Mohon info lengkap biaya dan prosesnya.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Perorangan. Mohon info lengkap biaya dan prosesnya.", "paket-nib-perorangan")}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih NIB Perorangan</a>
@@ -443,7 +443,7 @@ export default function NibOss() {
                   <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB PT Perorangan. Mohon info lengkap biaya dan prosesnya.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB PT Perorangan. Mohon info lengkap biaya dan prosesnya.", "paket-nib-pt-perorangan")}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
                 >Pilih NIB PT Perorangan</a>
@@ -502,7 +502,7 @@ export default function NibOss() {
                   <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan. Mohon info lengkap biaya dan prosesnya.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket NIB Badan. Mohon info lengkap biaya dan prosesnya.", "paket-nib-badan")}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih NIB Badan</a>
@@ -561,7 +561,7 @@ export default function NibOss() {
                   <div className="text-[16px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Cabut NIB. Mohon info lengkap biaya dan prosesnya.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Cabut NIB. Mohon info lengkap biaya dan prosesnya.", "paket-cabut-nib")}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[12px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih Cabut NIB</a>
@@ -1080,7 +1080,7 @@ export default function NibOss() {
           <div className="w-full lg:w-auto flex flex-col gap-3 min-w-[340px] sm:min-w-[360px]">
             {/* Button WhatsApp */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Pembuatan NIB dan OSS RBA. Mohon info lengkap biaya dan prosesnya.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Pembuatan NIB dan OSS RBA. Mohon info lengkap biaya dan prosesnya.", "jasa-pembuatan-nib-dan-oss-rba")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

@@ -183,7 +183,7 @@ export default function PKKPRPage() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih PAKET PKKPR",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 0 - 3,9 HA. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 0 - 3,9 HA. Mohon info lengkap biaya dan prosesnya.", "paket-pkkpr-lahan-0-3-9-ha"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -220,7 +220,7 @@ export default function PKKPRPage() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: false,
       buttonText: "Pilih PAKET PKKPR",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 4 - 4,9 HA. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 4 - 4,9 HA. Mohon info lengkap biaya dan prosesnya.", "paket-pkkpr-lahan-4-4-9-ha"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -257,7 +257,7 @@ export default function PKKPRPage() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: false,
       buttonText: "Pilih PAKET PKKPR",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 5 - 9,9 HA. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 5 - 9,9 HA. Mohon info lengkap biaya dan prosesnya.", "paket-pkkpr-lahan-5-9-9-ha"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -294,7 +294,7 @@ export default function PKKPRPage() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: false,
       buttonText: "Pilih PAKET PKKPR",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 10 - 20 HA. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 10 - 20 HA. Mohon info lengkap biaya dan prosesnya.", "paket-pkkpr-lahan-10-20-ha"),
       groups: [
         {
           title: "LAMA PROSES",

@@ -206,7 +206,7 @@ export default function PressRelease() {
       subLabel: "/ SEKALI PUBLIKASI",
       isPopular: false,
       buttonText: "Pilih Paket A",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket A Press Release. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket A Press Release. Mohon info lengkap biaya dan prosesnya.", "paket-a-press-release"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -239,7 +239,7 @@ export default function PressRelease() {
       subLabel: "/ SEKALI PUBLIKASI",
       isPopular: true,
       buttonText: "Pilih Paket B",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket B Press Release. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket B Press Release. Mohon info lengkap biaya dan prosesnya.", "paket-b-press-release"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -272,7 +272,7 @@ export default function PressRelease() {
       subLabel: "/ SEKALI PUBLIKASI",
       isPopular: false,
       buttonText: "Pilih Paket C",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket C Press Release. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket C Press Release. Mohon info lengkap biaya dan prosesnya.", "paket-c-press-release"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -939,7 +939,7 @@ export default function PressRelease() {
 
             {/* Email/Form Action */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Publikasi Press Release Media. Mohon info lengkap biaya dan prosesnya.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Publikasi Press Release Media. Mohon info lengkap biaya dan prosesnya.", "jasa-publikasi-press-release-media")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-50 text-gray-900 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-[14px] transition-all duration-200 cursor-pointer shadow-sm"
