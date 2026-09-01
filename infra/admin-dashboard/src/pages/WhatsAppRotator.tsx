@@ -181,6 +181,16 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   useEffect(() => { if (tab === 'leads') loadLeads() }, [loadLeads, tab])
   useEffect(() => { if (tab === 'pages') loadPages() }, [loadPages, tab])
 
+  // Auto-refresh the two live-data tabs every 15s while they're active.
+  useEffect(() => {
+    if (tab !== 'numbers' && tab !== 'leads') return
+    const id = setInterval(() => {
+      if (tab === 'numbers') load()
+      else loadLeads()
+    }, 15000)
+    return () => clearInterval(id)
+  }, [tab, load, loadLeads])
+
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
