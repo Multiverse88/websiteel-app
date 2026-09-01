@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 
-const GTM_ID = "GTM-TVHZW45Q";
+const GTM_ID = "GTM-THBW6RTF";
 const EXCLUDED_PREFIXES = ["/login", "/dashboard"];
 
 export function GtmHead() {
