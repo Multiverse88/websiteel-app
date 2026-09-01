@@ -154,7 +154,7 @@ function cleanArticleUrl(url: string, articleTitle: string): string {
 
   // 1. WhatsApp link router (mauorder.online, wa.me, api.whatsapp.com)
   if (url.includes("mauorder.online") || url.includes("wa.me") || url.includes("api.whatsapp.com")) {
-    return getWhatsAppLink(`Halo EasyLegal, saya membaca artikel "${articleTitle || 'Legalitas'}" dan ingin berkonsultasi.`);
+    return getWhatsAppLink(`Halo EasyLegal, saya membaca artikel "${articleTitle || 'Legalitas'}" dan ingin berkonsultasi.`, "article-consult");
   }
 
   // 2. Old product pages redirect to new router structure
@@ -841,7 +841,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                       : "Konsultasi gratis dengan tim legal EasyLegal. Proses cepat, aman, dan harga transparan."}
                   </p>
                   <a
-                    href={getWhatsAppLink(`Halo EasyLegal, saya tertarik konsultasi layanan ${article.category}.`)}
+                    href={getWhatsAppLink(`Halo EasyLegal, saya tertarik konsultasi layanan ${article.category}.`, "article-category-consult")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center bg-white text-gray-950 font-bold text-[16px] px-5 py-3 rounded-xl hover:bg-gray-100 transition-colors shadow-sm"
@@ -910,7 +910,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
               {/* Ad Card (Card Iklan) */}
               <a
-                href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan promo Diskon 50% Layanan Pendirian PT & CV.")}
+                href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan promo Diskon 50% Layanan Pendirian PT & CV.", "tertarik-dengan-promo-diskon-50-layanan-pendirian-pt-cv")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block group relative overflow-hidden rounded-[24px] bg-[#990202] p-6 text-white hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 border border-[#800000] shadow-md"

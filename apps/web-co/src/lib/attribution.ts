@@ -30,12 +30,26 @@ function writeCookie(name: string, value: string, maxAge: number) {
   document.cookie = `${name}=${encodeURIComponent(value)}; Max-Age=${maxAge}; Path=/; SameSite=Lax${secure}`;
 }
 
-function classify(params: URLSearchParams, referrer: string): LeadSourceCode {
+// Ad-campaign landing pages already use these slug suffixes by convention
+// (see next.config.ts rewrites() — 50+ aliases like /jasa-pendirian-pt-gads,
+// /lp-produk-cv-dads, /meta-ads-merek). Next.js rewrites don't change the
+// browser's visible URL, so pathname still carries this even if gclid/fbclid
+// or utm params got stripped, weren't auto-tagged, or the link was
+// bookmarked/reshared — a free, more durable corroborating signal.
+const GOOGLE_AD_SLUG = /-(gads|dads|pmax|ytads)(-|$)/i;
+const META_AD_SLUG = /meta-ads/i;
+
+function classify(params: URLSearchParams, referrer: string, pathname: string): LeadSourceCode {
   const source = params.get("utm_source")?.toLowerCase() || "";
   const medium = params.get("utm_medium")?.toLowerCase() || "";
   const paid = ["cpc", "ppc", "paid", "paid_social", "display"].includes(medium);
-  if (params.has("gclid") || (source === "google" && paid)) return "gads";
-  if (params.has("fbclid") || (["facebook", "instagram", "meta"].includes(source) && (!medium || paid))) return "metaads";
+  if (params.has("gclid") || (source === "google" && paid) || GOOGLE_AD_SLUG.test(pathname)) return "gads";
+  // Note: fbclid alone isn't proof of a paid ad — Facebook/Instagram append it
+  // to any outbound click from their app, organic shares included. Paired
+  // with the meta-ads-* slug or a paid utm_medium it's a much safer signal;
+  // fbclid on its own is kept as a fallback since we still don't have a
+  // separate "organic social" bucket to fall back to.
+  if (params.has("fbclid") || (["facebook", "instagram", "meta"].includes(source) && (!medium || paid)) || META_AD_SLUG.test(pathname)) return "metaads";
   if (params.get("ref")) return "referral";
   if (!referrer) return "direct";
   try {
@@ -62,8 +76,8 @@ export function captureFirstTouch(): AttributionSnapshot {
   const legacy = readLegacySource();
   const sessionId = readCookie(SESSION_COOKIE) || crypto.randomUUID();
   writeCookie(SESSION_COOKIE, sessionId, MAX_AGE_SECONDS);
-  const snapshot: AttributionSnapshot = {
-    source: legacy?.source || classify(params, document.referrer),
+  const snapshot: AttributionSnapshot = {\
+    source: legacy?.source || classify(params, document.referrer, window.location.pathname),
     entryUrl: window.location.href.slice(0, 1000),
     entryPath: `${window.location.pathname}${window.location.search}`.slice(0, 500),
     referrer: document.referrer.slice(0, 1000),

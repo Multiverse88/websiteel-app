@@ -11,7 +11,7 @@ export function FloatingWhatsApp() {
 
   return (
     <a
-      href={getWhatsAppLink()}
+      href={getWhatsAppLink(undefined, "floating-whatsapp")}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat via WhatsApp"

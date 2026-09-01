@@ -105,7 +105,7 @@ const additionalTabs: AdditionalServiceTab[] = [
           strikePrice: "Rp 375.000",
           subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
           buttonText: "Pilih Cek Manual",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Cek Merek Manual. Mohon info biaya dan prosesnya."),
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Cek Merek Manual. Mohon info biaya dan prosesnya.", "layanan-cek-merek-manual"),
           groups: [
             {
               title: "LAMA PROSES",
@@ -131,7 +131,7 @@ const additionalTabs: AdditionalServiceTab[] = [
           isPopular: true,
           badgeText: "REKOMENDASI",
           buttonText: "Pilih Cek AI",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Cek Merek AI. Mohon info biaya dan prosesnya."),
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Cek Merek AI. Mohon info biaya dan prosesnya.", "layanan-cek-merek-ai"),
           groups: [
             {
               title: "LAMA PROSES",
@@ -166,7 +166,7 @@ const additionalTabs: AdditionalServiceTab[] = [
           strikePrice: "Rp 3.500.000",
           subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
           buttonText: "Pilih Perpanjangan UMKM",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek UMKM. Mohon info biaya dan prosesnya."),
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek UMKM. Mohon info biaya dan prosesnya.", "layanan-perpanjangan-merek-umkm"),
           groups: [
             {
               title: "LAMA PROSES",
@@ -193,7 +193,7 @@ const additionalTabs: AdditionalServiceTab[] = [
           isPopular: true,
           badgeText: "REKOMENDASI",
           buttonText: "Pilih Perpanjangan Umum",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek Umum. Mohon info biaya dan prosesnya."),
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek Umum. Mohon info biaya dan prosesnya.", "layanan-perpanjangan-merek-umum"),
           groups: [
             {
               title: "LAMA PROSES",
@@ -228,7 +228,7 @@ const additionalTabs: AdditionalServiceTab[] = [
           isPopular: true,
           badgeText: "REKOMENDASI",
           buttonText: "Pilih Pengalihan Hak",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pengalihan Hak Merek. Mohon info biaya dan prosesnya."),
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pengalihan Hak Merek. Mohon info biaya dan prosesnya.", "layanan-pengalihan-hak-merek"),
           groups: [
             {
               title: "LAMA PROSES",
@@ -263,7 +263,7 @@ const additionalTabs: AdditionalServiceTab[] = [
           isPopular: true,
           badgeText: "REKOMENDASI",
           buttonText: "Pilih Tanggapan Penolakan",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Tanggapan Penolakan DJKI. Mohon info biaya dan prosesnya."),
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Tanggapan Penolakan DJKI. Mohon info biaya dan prosesnya.", "layanan-tanggapan-penolakan-djki"),
           groups: [
             {
               title: "LAMA PROSES",
@@ -293,7 +293,7 @@ const pricingPackages: PricingPackage[] = [
       strikePrice: "Rp 3.500.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pendaftaran-merek"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -340,7 +340,7 @@ const pricingPackages: PricingPackage[] = [
       strikePrice: "Rp 4.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Basic + AI",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic plus AI Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic plus AI Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya.", "paket-basic-plus-ai-pendaftaran-merek"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -389,7 +389,7 @@ const pricingPackages: PricingPackage[] = [
       isPopular: true,
       badgeText: "PALING POPULER",
       buttonText: "Pilih Premium",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Premium Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Premium Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya.", "paket-premium-pendaftaran-merek"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -436,7 +436,7 @@ const pricingPackages: PricingPackage[] = [
       strikePrice: "Rp 5.500.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Ultimate",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Ultimate Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Ultimate Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya.", "paket-ultimate-pendaftaran-merek"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -1095,7 +1095,7 @@ export default function MerekHaki() {
       <CTA
         title={<h2 className="font-heading text-3xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight">Siap Mendaftarkan Merek Anda?</h2>}
         description="Konsultasikan kebutuhan pendaftaran merek Anda sekarang — GRATIS, tanpa komitmen."
-        whatsappLink={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Pendaftaran Merek & HAKI.")}
+        whatsappLink={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Pendaftaran Merek & HAKI.", "bottom-consult")}
         whatsappText="Hubungi Konsultan EasyLegal Sekarang"
       />
     </div>

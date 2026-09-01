@@ -37,7 +37,42 @@ function queryText(value: unknown, maxLength = 500): string | null {
 // a fetch, so no CORS setup is needed here.
 router.get("/redirect", async (req, res) => {
   try {
-    const rawText = queryText(req.query.text, 1000) || "";
+    const product = queryText(req.query.product, 300);
+    const ctaId = queryText(req.query.cta_id, 100);
+
+    // Best-effort domain attribution — this is a top-level navigation, so
+    // Referer is same-origin-policy-safe to read, but referrer-policy
+    // (strict-origin-when-cross-origin) means only the origin survives
+    // cross-origin, not the full path. That's all we need here. Computed
+    // before the override lookup below since domain is now also part of the
+    // override's match key (easylegal.biz.id and easylegal.co.id serve the
+    // same relative paths, so path alone can't tell them apart).
+    let domain: string | null = null;
+    const referer = req.headers.referer;
+    if (referer) {
+      try { domain = new URL(referer).hostname; } catch { /* ignore malformed referer */ }
+    }
+
+    // Per-page/per-button/per-domain override (admin-editable, see /pages
+    // routes below) — keyed by (path, ctaId, domain), each axis "" meaning
+    // "matches anything". Picks the most specific matching row: exact ctaId
+    // + exact domain beats either falling back to "" — see scoreConfig().
+    // numberIds (rotator pool restriction) only ever comes from a ctaId=""
+    // row, scored by domain specificity alone.
+    const wantedCtaIds = Array.from(new Set([ctaId || "", ""]));
+    const wantedDomains = Array.from(new Set([domain || "", ""]));
+    const pageConfigRows = product
+      ? await prisma.whatsAppPageConfig.findMany({ where: { path: product, ctaId: { in: wantedCtaIds }, domain: { in: wantedDomains } } })
+      : [];
+    const scoreConfig = (row: { ctaId: string; domain: string }) =>
+      (ctaId && row.ctaId === ctaId ? 2 : 0) + (domain && row.domain === domain ? 1 : 0);
+    const messageConfig = pageConfigRows
+      .filter((r) => r.ctaId === (ctaId || "") || r.ctaId === "")
+      .sort((a, b) => scoreConfig(b) - scoreConfig(a))[0];
+    const numberConfig = pageConfigRows
+      .filter((r) => r.ctaId === "")
+      .sort((a, b) => scoreConfig(b) - scoreConfig(a))[0];
+    const rawText = (messageConfig?.message || queryText(req.query.text, 1000)) || "";
     const suppliedSource = normalizeSourceCode(req.query.source);
     const classified = suppliedSource
       ? {
@@ -45,19 +80,19 @@ router.get("/redirect", async (req, res) => {
           channel: sourceCodeToChannel(suppliedSource),
           referralCode: queryText(req.query.ref, 80),
         }
-      : classifyAttribution(req.query, queryText(req.query.referrer, 1000));
+      : classifyAttribution(req.query, queryText(req.query.referrer, 1000), product || queryText(req.query.entry_path, 500));
     const sourceCode = classified.sourceCode;
-    const product = queryText(req.query.product, 300);
     const service = queryText(req.query.service, 300) || (rawText ? rawText.slice(0, 200) : null);
     const sessionId = queryText(req.query.sid, 80);
-    const ctaId = queryText(req.query.cta_id, 100);
     const ctaLabel = queryText(req.query.cta_label, 200);
     const deduplicationKey = sessionId
       ? [sessionId, product || "", ctaId || service || ""].join(":").slice(0, 500)
       : null;
 
+    const numberWhere: { isActive: boolean; id?: { in: string[] } } = { isActive: true };
+    if (numberConfig?.numberIds?.length) numberWhere.id = { in: numberConfig.numberIds };
     const next = await prisma.whatsAppNumber.findFirst({
-      where: { isActive: true },
+      where: numberWhere,
       orderBy: [{ clickCount: "asc" }, { createdAt: "asc" }],
     });
 
@@ -67,16 +102,6 @@ router.get("/redirect", async (req, res) => {
       // before this rotator existed.
       console.error("[WA_TRACKING] No active WhatsApp number");
       return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(rawText)}`);
-    }
-
-    // Best-effort domain attribution — this is a top-level navigation, so
-    // Referer is same-origin-policy-safe to read, but referrer-policy
-    // (strict-origin-when-cross-origin) means only the origin survives
-    // cross-origin, not the full path. That's all we need here.
-    let domain: string | null = null;
-    const referer = req.headers.referer;
-    if (referer) {
-      try { domain = new URL(referer).hostname; } catch { /* ignore malformed referer */ }
     }
 
     const duplicateSince = new Date(Date.now() - 30 * 60 * 1000);
@@ -91,10 +116,12 @@ router.get("/redirect", async (req, res) => {
     let leadCode: string;
     let leadId: string;
     let destinationNumber: string;
+    let destinationLabel: string | null;
     if (duplicate) {
       leadCode = duplicate.leadCode;
       leadId = duplicate.id;
       destinationNumber = duplicate.number.number;
+      destinationLabel = duplicate.number.label;
     } else {
       leadCode = generateLeadCode();
       for (let attempt = 0; attempt < 5; attempt++) {
@@ -144,13 +171,14 @@ router.get("/redirect", async (req, res) => {
       });
       leadId = created.id;
       destinationNumber = next.number;
+      destinationLabel = next.label;
     }
 
     await prisma.leadEvent.create({
       data: { leadId, type: "WHATSAPP_REDIRECTED", metadata: { deduplicated: Boolean(duplicate) } },
     });
 
-    const textWithRef = buildWhatsAppMessage(rawText, leadCode, sourceCode);
+    const textWithRef = buildWhatsAppMessage(rawText, leadCode, sourceCode, domain, destinationLabel);
     res.redirect(`https://wa.me/${destinationNumber}?text=${encodeURIComponent(textWithRef)}`);
   } catch (error) {
     console.error("[WA_TRACKING] Redirect failed; using default number:", error);
@@ -198,22 +226,30 @@ router.post("/numbers", requireAuth, async (req, res) => {
   }
 });
 
-// PUT /api/v1/wa/numbers/:id — admin: edit label / toggle active
+// PUT /api/v1/wa/numbers/:id — admin: edit number / label / toggle active
 // Deliberately no DELETE — deactivating keeps click history intact for
 // fairness reporting instead of orphaning/cascading logged clicks.
 router.put("/numbers/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
-    const { label, isActive } = req.body;
+    const { number, label, isActive } = req.body;
+    let cleanedNumber: string | undefined;
+    if (number !== undefined) {
+      cleanedNumber = String(number).replace(/\D/g, "");
+      if (!cleanedNumber) return res.status(400).json({ error: "Nomor tidak valid" });
+    }
     const updated = await prisma.whatsAppNumber.update({
       where: { id },
       data: {
+        ...(cleanedNumber !== undefined && { number: cleanedNumber }),
         ...(label !== undefined && { label }),
         ...(isActive !== undefined && { isActive }),
       },
     });
     res.json({ data: updated });
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === "P2002") return res.status(409).json({ error: "Nomor ini sudah dipakai nomor lain" });
+    if (error.code === "P2025") return res.status(404).json({ error: "Nomor tidak ditemukan" });
     console.error("Error updating WA number:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -232,6 +268,157 @@ router.get("/numbers/:id/clicks", requireAuth, async (req, res) => {
     res.json({ data: clicks });
   } catch (error) {
     console.error("Error fetching WA click log:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// GET /api/v1/wa/pages — admin: list per-page overrides (autotext + number pool)
+router.get("/pages", requireAuth, async (req, res) => {
+  try {
+    const pages = await prisma.whatsAppPageConfig.findMany({ orderBy: [{ path: "asc" }, { ctaId: "asc" }, { domain: "asc" }] });
+    res.json({ data: pages });
+  } catch (error) {
+    console.error("Error fetching WA page configs:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// GET /api/v1/wa/pages/known-paths — admin: every page path that's actually
+// seen WA CTA traffic (plus any already-configured path), so the "Per
+// Halaman" editor can offer a pick-list instead of free-text entry that's
+// easy to typo/mismatch against the real page.
+router.get("/pages/known-paths", requireAuth, async (req, res) => {
+  try {
+    const [clicked, configured] = await Promise.all([
+      prisma.whatsAppClick.findMany({
+        where: { product: { not: null } },
+        select: { product: true },
+        distinct: ["product"],
+      }),
+      prisma.whatsAppPageConfig.findMany({ select: { path: true } }),
+    ]);
+    const paths = Array.from(
+      new Set([...clicked.map((c) => c.product as string), ...configured.map((c) => c.path)]),
+    ).sort();
+    res.json({ data: paths });
+  } catch (error) {
+    console.error("Error fetching known WA page paths:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// GET /api/v1/wa/pages/preview?path=...&cta_id=...&domain=... — admin: the
+// actual text a page (or one specific button, and/or one specific domain,
+// if given) is sending right now (from the most recent matching lead), so
+// "Per Halaman" can start from the real current autotext instead of a blank
+// field. Capped at 200 chars because that's all whatsapp.ts's /redirect
+// handler persists per click (WhatsAppClick.service) — there's no longer
+// copy stored anywhere, so this is a preview, not guaranteed verbatim for
+// longer messages.
+router.get("/pages/preview", requireAuth, async (req, res) => {
+  try {
+    const path = queryText(req.query.path, 300);
+    if (!path) return res.status(400).json({ error: "Path wajib diisi" });
+    const ctaId = queryText(req.query.cta_id, 100);
+    const domain = queryText(req.query.domain, 200);
+    const latest = await prisma.whatsAppClick.findFirst({
+      where: { product: path, ...(ctaId && { ctaId }), ...(domain && { domain }) },
+      orderBy: { createdAt: "desc" },
+      select: { service: true },
+    });
+    res.json({ data: { message: latest?.service || null } });
+  } catch (error) {
+    console.error("Error fetching WA page preview:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// GET /api/v1/wa/pages/known-buttons?path=... — admin: every distinct
+// button (ctaId) that's sent traffic from this page, with a text sample, so
+// "Per Halaman" can offer a per-button pick-list the same way known-paths
+// offers pages — reads data the rotator already logs, no new instrumentation.
+router.get("/pages/known-buttons", requireAuth, async (req, res) => {
+  try {
+    const path = queryText(req.query.path, 300);
+    if (!path) return res.status(400).json({ error: "Path wajib diisi" });
+    const [clicked, configured] = await Promise.all([
+      prisma.whatsAppClick.findMany({
+        where: { product: path, ctaId: { not: null } },
+        select: { ctaId: true, service: true },
+        distinct: ["ctaId"],
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.whatsAppPageConfig.findMany({ where: { path, ctaId: { not: "" } }, select: { ctaId: true } }),
+    ]);
+    const sample = new Map(clicked.map((c) => [c.ctaId as string, c.service]));
+    const ids = Array.from(new Set([...clicked.map((c) => c.ctaId as string), ...configured.map((c) => c.ctaId)]));
+    res.json({ data: ids.sort().map((ctaId) => ({ ctaId, sample: sample.get(ctaId) || null })) });
+  } catch (error) {
+    console.error("Error fetching known WA buttons:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+function cleanNumberIds(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((v): v is string => typeof v === "string" && v.trim().length > 0).slice(0, 50);
+}
+
+// POST /api/v1/wa/pages — admin: create or replace the override for a page
+// (or one button on it, if ctaId given, and/or one domain, if domain given)
+// — upsert on (path, ctaId, domain) so re-saving the same target never dupes
+// a row. numberIds is ignored for button-level rows (ctaId set) — the
+// rotator pool only makes sense page-wide, see the schema comment.
+router.post("/pages", requireAuth, async (req, res) => {
+  try {
+    const path = queryText(req.body.path, 300);
+    if (!path) return res.status(400).json({ error: "Path halaman wajib diisi" });
+    const ctaId = queryText(req.body.ctaId, 100) || "";
+    const domain = queryText(req.body.domain, 200) || "";
+    const message = queryText(req.body.message, 1000);
+    const numberIds = ctaId ? [] : cleanNumberIds(req.body.numberIds);
+    const saved = await prisma.whatsAppPageConfig.upsert({
+      where: { path_ctaId_domain: { path, ctaId, domain } },
+      create: { path, ctaId, domain, message, numberIds },
+      update: { message, numberIds },
+    });
+    res.status(201).json({ data: saved });
+  } catch (error) {
+    console.error("Error saving WA page config:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// PUT /api/v1/wa/pages/:id — admin: edit an existing override
+router.put("/pages/:id", requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params as { id: string };
+    const { message, numberIds } = req.body;
+    const updated = await prisma.whatsAppPageConfig.update({
+      where: { id },
+      data: {
+        ...(message !== undefined && { message: queryText(message, 1000) }),
+        ...(numberIds !== undefined && { numberIds: cleanNumberIds(numberIds) }),
+      },
+    });
+    res.json({ data: updated });
+  } catch (error: any) {
+    if (error.code === "P2025") return res.status(404).json({ error: "Konfigurasi halaman tidak ditemukan" });
+    console.error("Error updating WA page config:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// DELETE /api/v1/wa/pages/:id — admin: remove an override, page falls back
+// to whatever text/number pool the CTA sends by default.
+router.delete("/pages/:id", requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params as { id: string };
+    await prisma.whatsAppPageConfig.delete({ where: { id } });
+    res.status(204).end();
+  } catch (error: any) {
+    if (error.code === "P2025") return res.status(404).json({ error: "Konfigurasi halaman tidak ditemukan" });
+    console.error("Error deleting WA page config:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

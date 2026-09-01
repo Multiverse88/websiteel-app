@@ -108,7 +108,7 @@ export default function PerubahanAktaPage() {
               {/* Action Buttons */}
               <div className="flex flex-row gap-3 pt-2">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai perubahan akta perusahaan.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai perubahan akta perusahaan.", "ingin-konsultasi-mengenai-perubahan-akta-perusahaan")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
@@ -264,7 +264,7 @@ export default function PerubahanAktaPage() {
                 </div>
 
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin melakukan Perubahan Data PT. Mohon info prosesnya.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin melakukan Perubahan Data PT. Mohon info prosesnya.", "ingin-melakukan-perubahan-data-pt")}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
                 >Pilih Perubahan Data</a>
@@ -307,7 +307,7 @@ export default function PerubahanAktaPage() {
                 </div>
 
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin melakukan Perubahan Anggaran Dasar PT. Mohon info prosesnya.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin melakukan Perubahan Anggaran Dasar PT. Mohon info prosesnya.", "ingin-melakukan-perubahan-anggaran-dasar-pt")}
                   target="_blank" rel="noopener noreferrer"
                   className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
                 >Pilih Perubahan AD</a>
@@ -361,7 +361,7 @@ export default function PerubahanAktaPage() {
           <div className="w-full lg:w-auto flex flex-col gap-3 min-w-[340px] sm:min-w-[360px]">
             {/* Button WhatsApp */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai perubahan akta perusahaan.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin berkonsultasi mengenai perubahan akta perusahaan.", "ingin-berkonsultasi-mengenai-perubahan-akta-perusahaan")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
@@ -374,7 +374,7 @@ export default function PerubahanAktaPage() {
 
             {/* Button Hubungi Tim Kami */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan perubahan akta.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan perubahan akta.", "ingin-konsultasi-mengenai-layanan-perubahan-akta")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

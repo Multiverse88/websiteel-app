@@ -243,7 +243,7 @@ export default function KontrakBisnis() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Kontrak Bisnis.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Kontrak Bisnis.", "ingin-konsultasi-mengenai-layanan-kontrak-bisnis")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer gap-2"
@@ -550,7 +550,7 @@ export default function KontrakBisnis() {
           <div className="w-full md:w-auto flex flex-col gap-3.5 min-w-[320px] sm:min-w-[360px] max-w-[400px]">
             {/* WhatsApp Action */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Perjanjian Perkawinan.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan Perjanjian Perkawinan.", "ingin-konsultasi-mengenai-layanan-perjanjian-perkawinan")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2.5 px-6 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl transition-all duration-200 cursor-pointer shadow-md shadow-red-950/5"
@@ -563,7 +563,7 @@ export default function KontrakBisnis() {
 
             {/* Hubungi Tim Kami Action */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi dengan tim spesialis hukum perjanjian.")}
+              href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi dengan tim spesialis hukum perjanjian.", "ingin-konsultasi-dengan-tim-spesialis-hukum-perjanjian")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-55 text-gray-900 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl transition-all duration-200 cursor-pointer shadow-sm"

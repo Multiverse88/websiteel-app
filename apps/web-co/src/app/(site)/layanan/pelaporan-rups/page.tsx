@@ -28,7 +28,7 @@ import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
 import Benefits from "@/components/Benefits";
 import Testimonials from "@/components/home/Testimonials";
-import { getWhatsAppLink } from "@/lib/config";
+import { getWhatsAppLink, slugify } from "@/lib/config";
 import ArtikelTerkait from "@/components/ArtikelTerkait";
 
 /* ─── DATA ─── */
@@ -343,7 +343,7 @@ export default function PelaporanRUPS() {
     subLabel: pkg.badge,
     isPopular: index === 1,
     buttonText: pkg.buttonText,
-    buttonLink: getWhatsAppLink(pkg.waText),
+    buttonLink: getWhatsAppLink(pkg.waText, slugify(pkg.name)),
     groups: [
       {
         title: "LAMA PROSES",
@@ -413,7 +413,7 @@ export default function PelaporanRUPS() {
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4 pt-2">
                     <a
-                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pengurusan RUPS Tahunan perusahaan saya.")}
+                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Pengurusan RUPS Tahunan perusahaan saya.", "hero-consult")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer"
@@ -765,7 +765,7 @@ export default function PelaporanRUPS() {
                   {/* Right Column */}
                   <div className="w-full lg:w-auto flex-shrink-0 flex flex-col sm:items-start gap-4">
                     <a
-                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi RUPS.")}
+                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi RUPS.", "bottom-consult")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full sm:w-[280px] inline-flex items-center justify-center gap-2.5 px-6 py-4 bg-[#990202] hover:bg-[#800101] text-white font-extrabold text-[16px] rounded-xl shadow-md transition-colors"
@@ -777,7 +777,7 @@ export default function PelaporanRUPS() {
                     </a>
                     
                     <a
-                      href={getWhatsAppLink("Halo EasyLegal, saya ingin menghubungi tim.")}
+                      href={getWhatsAppLink("Halo EasyLegal, saya ingin menghubungi tim.", "bottom-contact-team")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full sm:w-[280px] inline-flex items-center justify-center gap-1.5 px-6 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-800 font-extrabold text-[16px] rounded-xl shadow-sm transition-colors"

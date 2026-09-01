@@ -207,7 +207,7 @@ export default function CekKBLI() {
   const handleWhatsAppConsult = (e: React.MouseEvent) => {
     e.preventDefault();
     const message = `Halo EasyLegal, saya tidak menemukan kode KBLI yang cocok. Mohon bantu mencarikan kode KBLI untuk bisnis saya.\n\nKata kunci: ${searchQuery || "-"}`;
-    const waUrl = getWhatsAppLink(message);
+    const waUrl = getWhatsAppLink(message, "search-help");
     window.open(waUrl, "_blank");
   };
 
@@ -217,7 +217,7 @@ export default function CekKBLI() {
                     `- Judul KBLI: ${item.title}\n` +
                     `- Tingkat Risiko: ${item.risk}\n\n` +
                     `Apakah KBLI ini sudah sesuai dengan rencana bisnis saya?`;
-    const waUrl = getWhatsAppLink(message);
+    const waUrl = getWhatsAppLink(message, "kbli-consult");
     window.open(waUrl, "_blank");
   };
 

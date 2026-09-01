@@ -766,7 +766,7 @@ export default function KerjasamaPage() {
 
                 <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto">
                   <a
-                    href={getWhatsAppLink(`Halo Partnership Manager EasyLegal, saya ${formData.name} baru saja mengajukan kemitraan ${formData.partnershipType} via formulir website.`)}
+                    href={getWhatsAppLink(`Halo Partnership Manager EasyLegal, saya ${formData.name} baru saja mengajukan kemitraan ${formData.partnershipType} via formulir website.`, "form-follow-up")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-colors cursor-pointer text-center flex-1"

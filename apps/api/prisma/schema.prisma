@@ -128,6 +128,34 @@ model WhatsAppNumber {
   clicks     WhatsAppClick[]
 }
 
+// Per-page (and optionally per-button, and optionally per-domain) override
+// for the rotator: lets admin set a custom WA autotext and/or restrict which
+// numbers rotate for a page, without a code deploy. Keyed by (path, ctaId,
+// domain) — path is the same page-path string every getWhatsAppLink() click
+// already sends as `product` (both easylegal.biz.id and easylegal.co.id
+// serve the same relative paths, so path alone doesn't disambiguate them);
+// ctaId is "" for a whole-page override or a specific button's stable id
+// (see getWhatsAppLink's ctaId param); domain is "" for "applies to every
+// domain" or a specific hostname (e.g. "easylegal.biz.id") to override just
+// that site. "" is used as the sentinel on both axes (not null) so the
+// unique constraint actually enforces one row per specificity level — /redirect
+// picks the most specific matching row (exact ctaId + exact domain beats
+// either falling back to "", see whatsapp.ts). numberIds (rotator pool
+// restriction) only makes sense on ctaId="" rows — button-level rows only
+// ever carry a message override.
+model WhatsAppPageConfig {
+  id        String   @id @default(cuid())
+  path      String
+  ctaId     String   @default("")
+  domain    String   @default("")
+  message   String? // null/empty = keep whatever text the CTA button sends
+  numberIds String[] @default([]) // subset of WhatsAppNumber.id; empty = all active numbers; ctaId="" rows only
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([path, ctaId, domain])
+}
+
 enum LeadStatus {
   NEW
   CONTACTED

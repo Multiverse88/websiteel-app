@@ -11,6 +11,30 @@ interface WaNumber {
   createdAt: string
 }
 
+interface WaPageConfig {
+  id: string
+  path: string
+  ctaId: string // "" = whole-page override; otherwise a specific button's stable id
+  domain: string // "" = applies to every domain; otherwise one hostname (e.g. easylegal.biz.id)
+  message: string | null
+  numberIds: string[]
+  updatedAt: string
+}
+
+// The site only has these two public domains today (see CLAUDE.md) — kept
+// as a short fixed list rather than derived from click data, since "which
+// domains exist" is a deploy-time fact, not something that grows on its own.
+const DOMAINS: { value: string; label: string }[] = [
+  { value: '', label: 'Semua Domain' },
+  { value: 'easylegal.biz.id', label: 'easylegal.biz.id' },
+  { value: 'easylegal.co.id', label: 'easylegal.co.id' },
+]
+
+interface WaKnownButton {
+  ctaId: string
+  sample: string | null
+}
+
 interface WaLead {
   id: string
   leadCode: string
@@ -77,8 +101,22 @@ const NEXT_STAGES: Record<string, string[]> = {
 // click site-wide always goes to whichever active number has the fewest
 // clicks so far. Two tabs: fairness per number, and every click as a
 // trackable lead (source/product/status) up to closing.
-export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab?: 'numbers' | 'leads' }) {
-  const [tab, setTab] = useState<'numbers' | 'leads'>(initialTab)
+export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab?: 'numbers' | 'pages' | 'leads' }) {
+  const [tab, setTab] = useState<'numbers' | 'pages' | 'leads'>(initialTab)
+
+  const [pages, setPages] = useState<WaPageConfig[]>([])
+  const [pagesLoading, setPagesLoading] = useState(false)
+  const [knownPaths, setKnownPaths] = useState<string[]>([])
+  const [knownButtons, setKnownButtons] = useState<WaKnownButton[]>([])
+  const [buttonsLoading, setButtonsLoading] = useState(false)
+  const [selectedPath, setSelectedPath] = useState('')
+  const [selectedDomain, setSelectedDomain] = useState('') // "" = Semua Domain
+  // "" (empty ctaId) = the "Semua Tombol (Halaman ini)" row; null = nothing expanded.
+  const [expandedCtaId, setExpandedCtaId] = useState<string | null>(null)
+  const [rowMessage, setRowMessage] = useState('')
+  const [rowNumberIds, setRowNumberIds] = useState<string[]>([])
+  const [rowNote, setRowNote] = useState('')
+  const [savingRow, setSavingRow] = useState(false)
 
   const [numbers, setNumbers] = useState<WaNumber[]>([])
   const [totalClicks, setTotalClicks] = useState(0)
@@ -87,6 +125,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [newLabel, setNewLabel] = useState('')
   const [adding, setAdding] = useState(false)
   const [error, setError] = useState('')
+  const [editingNumberId, setEditingNumberId] = useState('')
+  const [editNumberValue, setEditNumberValue] = useState('')
+  const [editLabelValue, setEditLabelValue] = useState('')
+  const [savingNumber, setSavingNumber] = useState(false)
 
   const [leads, setLeads] = useState<WaLead[]>([])
   const [funnel, setFunnel] = useState<Record<string, number>>({})
@@ -122,8 +164,32 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     }
   }, [sourceFilter, statusFilter])
 
+  const loadPages = useCallback(async () => {
+    try {
+      setPagesLoading(true)
+      const [pagesRes, pathsRes] = await Promise.all([api.getWaPages(), api.getWaKnownPaths()])
+      setPages(pagesRes.data || [])
+      setKnownPaths(pathsRes.data || [])
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setPagesLoading(false)
+    }
+  }, [])
+
   useEffect(() => { load() }, [load])
   useEffect(() => { if (tab === 'leads') loadLeads() }, [loadLeads, tab])
+  useEffect(() => { if (tab === 'pages') loadPages() }, [loadPages, tab])
+
+  // Auto-refresh the two live-data tabs every 15s while they're active.
+  useEffect(() => {
+    if (tab !== 'numbers' && tab !== 'leads') return
+    const id = setInterval(() => {
+      if (tab === 'numbers') load()
+      else loadLeads()
+    }, 15000)
+    return () => clearInterval(id)
+  }, [tab, load, loadLeads])
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -145,6 +211,148 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const toggleActive = async (n: WaNumber) => {
     await api.updateWaNumber(n.id, { isActive: !n.isActive })
     await load()
+  }
+
+  const startEditNumber = (n: WaNumber) => {
+    setEditingNumberId(n.id)
+    setEditNumberValue(n.number)
+    setEditLabelValue(n.label || '')
+  }
+
+  const handleSaveNumber = async (id: string) => {
+    setError('')
+    if (!editNumberValue.trim()) return
+    setSavingNumber(true)
+    try {
+      await api.updateWaNumber(id, { number: editNumberValue, label: editLabelValue })
+      setEditingNumberId('')
+      await load()
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setSavingNumber(false)
+    }
+  }
+
+  const loadKnownButtons = async (path: string) => {
+    try {
+      setButtonsLoading(true)
+      const res = await api.getWaKnownButtons(path)
+      setKnownButtons(res.data || [])
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setButtonsLoading(false)
+    }
+  }
+
+  // Every button on the selected page, "Semua Tombol" pinned first — the
+  // whole list renders at once so admin can compare/edit every package's
+  // autotext side by side instead of hunting through a dropdown one at a
+  // time. Reads what's already logged (known-buttons), no new instrumentation.
+  const pageRows: WaKnownButton[] = selectedPath
+    ? [{ ctaId: '', sample: null }, ...knownButtons]
+    : []
+
+  // Exact match on domain too (not falling back to "") — each domain tab is
+  // its own independent editable slot, distinct from the "Semua Domain" row.
+  const rowConfigFor = (ctaId: string) => pages.find((p) => p.path === selectedPath && p.ctaId === ctaId && p.domain === selectedDomain)
+
+  const rowNoteFor = (ctaId: string, domain: string) => domain
+    ? (ctaId ? 'tombol ini di' : 'halaman ini di') + ` ${domain}`
+    : (ctaId ? 'tombol ini (semua domain)' : 'halaman ini (semua domain)')
+
+  // Loads what a row is actually sending right now (from the most recent
+  // matching lead), so the editor starts from the real current text instead
+  // of blank — otherwise there's no way to "edit" the existing autotext,
+  // only blindly type a brand new override over it.
+  const loadRowPreview = async (path: string, ctaId: string, domain: string) => {
+    try {
+      const res = await api.getWaPagePreview(path, ctaId || undefined, domain || undefined)
+      const msg = res.data?.message || ''
+      setRowMessage(msg)
+      setRowNote(msg
+        ? `Ini teks yang sekarang jalan di ${rowNoteFor(ctaId, domain)} (dari lead terakhir, mungkin terpotong ~200 karakter). Edit lalu Simpan untuk menimpanya.`
+        : `Belum ada data teks untuk ${rowNoteFor(ctaId, domain)} — isi manual kalau mau bikin override.`)
+    } catch {
+      setRowNote('')
+    }
+  }
+
+  const openRow = async (path: string, ctaId: string, domain: string) => {
+    setSelectedPath(path)
+    setSelectedDomain(domain)
+    setExpandedCtaId(ctaId)
+    const existing = pages.find((p) => p.path === path && p.ctaId === ctaId && p.domain === domain)
+    setRowNumberIds(existing?.numberIds || [])
+    if (existing?.message) {
+      setRowMessage(existing.message)
+      setRowNote(`Override tersimpan untuk ${rowNoteFor(ctaId, domain)}.`)
+      return
+    }
+    setRowMessage('')
+    await loadRowPreview(path, ctaId, domain)
+  }
+
+  const handlePathSelect = async (path: string) => {
+    setSelectedPath(path)
+    setExpandedCtaId(null)
+    setKnownButtons([])
+    if (path) await loadKnownButtons(path)
+  }
+
+  const handleDomainSelect = (domain: string) => {
+    setSelectedDomain(domain)
+    setExpandedCtaId(null)
+  }
+
+  const toggleRow = async (ctaId: string) => {
+    if (expandedCtaId === ctaId) { setExpandedCtaId(null); return }
+    await openRow(selectedPath, ctaId, selectedDomain)
+  }
+
+  const toggleRowNumber = (id: string) => {
+    setRowNumberIds((prev) => prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id])
+  }
+
+  const handleSaveRow = async () => {
+    if (expandedCtaId === null) return
+    setError('')
+    setSavingRow(true)
+    try {
+      await api.saveWaPage({ path: selectedPath, ctaId: expandedCtaId, domain: selectedDomain, message: rowMessage, numberIds: expandedCtaId === '' ? rowNumberIds : [] })
+      await loadPages()
+      if (expandedCtaId) await loadKnownButtons(selectedPath)
+      setRowNote(`Override tersimpan untuk ${rowNoteFor(expandedCtaId, selectedDomain)}.`)
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setSavingRow(false)
+    }
+  }
+
+  const handleDeleteRowOverride = async () => {
+    if (expandedCtaId === null) return
+    const config = rowConfigFor(expandedCtaId)
+    if (!config) return
+    if (!window.confirm('Hapus override ini? Akan kembali pakai teks bawaan tombol.')) return
+    try {
+      await api.deleteWaPage(config.id)
+      await loadPages()
+      await loadRowPreview(selectedPath, expandedCtaId, selectedDomain)
+    } catch (e: any) {
+      setError(e.message)
+    }
+  }
+
+  const handleDeletePage = async (page: WaPageConfig) => {
+    if (!window.confirm(`Hapus konfigurasi khusus untuk "${page.path}"? Halaman ini akan kembali pakai teks & rotasi nomor default.`)) return
+    try {
+      await api.deleteWaPage(page.id)
+      await loadPages()
+    } catch (e: any) {
+      setError(e.message)
+    }
   }
 
   const handleStatusChange = async (lead: WaLead, status: string) => {
@@ -197,6 +405,12 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           className={`px-4 py-2.5 text-[14px] font-bold border-b-2 transition-colors ${tab === 'numbers' ? 'border-[#990202] text-[#990202]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
         >
           Nomor & Fairness
+        </button>
+        <button
+          onClick={() => setTab('pages')}
+          className={`px-4 py-2.5 text-[14px] font-bold border-b-2 transition-colors ${tab === 'pages' ? 'border-[#990202] text-[#990202]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+        >
+          Per Halaman
         </button>
         <button
           onClick={() => setTab('leads')}
@@ -267,6 +481,43 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 )}
                 {numbers.map((n) => {
                   const isUnfair = n.isActive && activeCount > 1 && Math.abs(n.sharePercent - fairSharePercent) > fairSharePercent * 0.25
+                  const isEditing = editingNumberId === n.id
+                  if (isEditing) {
+                    return (
+                      <tr key={n.id} className="border-t border-gray-100 bg-gray-50">
+                        <td className="px-6 py-2.5">
+                          <input
+                            type="text"
+                            value={editNumberValue}
+                            onChange={(e) => setEditNumberValue(e.target.value)}
+                            className="w-full px-2 py-1.5 border border-gray-200 rounded-lg text-[14px] font-mono focus:outline-none focus:border-[#990202]"
+                          />
+                        </td>
+                        <td className="px-6 py-2.5">
+                          <input
+                            type="text"
+                            value={editLabelValue}
+                            onChange={(e) => setEditLabelValue(e.target.value)}
+                            placeholder="Label (opsional)"
+                            className="w-full px-2 py-1.5 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-[#990202]"
+                          />
+                        </td>
+                        <td className="px-6 py-3.5 text-gray-400" colSpan={3}>Klik & fairness tidak berubah saat mengedit nomor/label.</td>
+                        <td className="px-6 py-3.5 text-right whitespace-nowrap">
+                          <button
+                            onClick={() => handleSaveNumber(n.id)}
+                            disabled={savingNumber}
+                            className="text-[13px] font-bold text-[#990202] hover:text-[#7a0101] transition-colors mr-3 disabled:opacity-50"
+                          >
+                            {savingNumber ? 'Menyimpan...' : 'Simpan'}
+                          </button>
+                          <button onClick={() => setEditingNumberId('')} className="text-[13px] font-bold text-gray-500 hover:text-gray-800 transition-colors">
+                            Batal
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  }
                   return (
                     <tr key={n.id} className="border-t border-gray-100">
                       <td className="px-6 py-3.5 font-mono font-semibold text-gray-900">{n.number}</td>
@@ -288,7 +539,13 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                           {n.isActive ? 'Aktif' : 'Nonaktif'}
                         </span>
                       </td>
-                      <td className="px-6 py-3.5 text-right">
+                      <td className="px-6 py-3.5 text-right whitespace-nowrap">
+                        <button
+                          onClick={() => startEditNumber(n)}
+                          className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3"
+                        >
+                          Edit
+                        </button>
                         <button
                           onClick={() => toggleActive(n)}
                           className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors"
@@ -306,6 +563,188 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           <p className="text-[13px] text-gray-400">
             Nomor yang dinonaktifkan berhenti menerima klik baru tapi riwayat kliknya tetap tersimpan (tidak dihapus permanen dari halaman ini).
           </p>
+        </>
+      )}
+
+      {tab === 'pages' && (
+        <>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col gap-4">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[14px] font-bold text-gray-700">Path Halaman</label>
+              <select
+                value={selectedPath}
+                onChange={(e) => handlePathSelect(e.target.value)}
+                className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[14px] font-mono bg-white focus:outline-none focus:border-[#990202]"
+              >
+                <option value="">-- pilih halaman --</option>
+                {knownPaths.map((p) => (
+                  <option key={p} value={p}>{p}{pages.some((cfg) => cfg.path === p && cfg.ctaId === '') ? ' (sudah dikonfigurasi)' : ''}</option>
+                ))}
+              </select>
+              <p className="text-[12px] text-gray-400">Daftar diambil dari halaman yang sudah pernah dapat klik WA. Setelah dipilih, semua tombol/paket di halaman itu muncul di bawah — klik satu buat lihat & edit autotext-nya.</p>
+            </div>
+
+            {selectedPath && (
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[14px] font-bold text-gray-700">Domain</label>
+                <div className="flex flex-wrap gap-2">
+                  {DOMAINS.map((d) => (
+                    <button
+                      key={d.value}
+                      type="button"
+                      onClick={() => handleDomainSelect(d.value)}
+                      className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold transition-colors ${selectedDomain === d.value ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                    >
+                      {d.label}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[12px] text-gray-400">"Semua Domain" berlaku ke biz.id & co.id sekaligus kecuali ada override khusus di domain tertentu (override domain spesifik selalu menang).</p>
+              </div>
+            )}
+
+            {selectedPath && buttonsLoading && (
+              <p className="text-[13px] text-gray-400">Memuat daftar tombol...</p>
+            )}
+
+            {selectedPath && !buttonsLoading && (
+              <div className="flex flex-col gap-2">
+                {pageRows.map((row) => {
+                  const isWholePage = row.ctaId === ''
+                  const config = rowConfigFor(row.ctaId)
+                  const isExpanded = expandedCtaId === row.ctaId
+                  const hasOverride = !!config?.message
+                  return (
+                    <div key={row.ctaId || '__page__'} className={`border rounded-lg overflow-hidden transition-colors ${isExpanded ? 'border-[#990202]' : 'border-gray-200'}`}>
+                      <button
+                        type="button"
+                        onClick={() => toggleRow(row.ctaId)}
+                        className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left bg-white hover:bg-gray-50 transition-colors"
+                      >
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-gray-900 text-[14px]">{isWholePage ? 'Semua Tombol (Halaman ini)' : row.ctaId}</span>
+                            <span className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${hasOverride ? 'bg-emerald-50 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
+                              {hasOverride ? 'Override tersimpan' : 'Pakai teks bawaan'}
+                            </span>
+                          </div>
+                          <p className="text-[13px] text-gray-500 truncate mt-0.5">
+                            {config?.message || row.sample || (isWholePage ? 'Belum ada override level-halaman' : 'Belum ada data teks tercatat')}
+                          </p>
+                        </div>
+                        <span className="text-gray-400 text-[18px] shrink-0">{isExpanded ? '−' : '+'}</span>
+                      </button>
+
+                      {isExpanded && (
+                        <div className="border-t border-gray-100 bg-gray-50 p-4 flex flex-col gap-3">
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-[13px] font-bold text-gray-700">Autotext WA (opsional)</label>
+                            <textarea
+                              value={rowMessage}
+                              onChange={(e) => { setRowMessage(e.target.value); setRowNote('') }}
+                              placeholder="Kosongkan untuk pakai teks bawaan tombol"
+                              rows={3}
+                              className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[14px] bg-white focus:outline-none focus:border-[#990202]"
+                            />
+                            {rowNote ? (
+                              <p className="text-[12px] text-amber-600 font-semibold">{rowNote}</p>
+                            ) : (
+                              <p className="text-[12px] text-gray-400">
+                                {isWholePage
+                                  ? 'Kalau diisi, menimpa teks bawaan semua tombol WA di halaman ini (tombol dengan override sendiri tetap menang).'
+                                  : 'Kalau diisi, menimpa teks bawaan tombol ini saja — tombol lain di halaman yang sama gak kepengaruh.'}
+                              </p>
+                            )}
+                          </div>
+
+                          {isWholePage && (
+                            <div className="flex flex-col gap-1.5">
+                              <label className="text-[13px] font-bold text-gray-700">Nomor Rotator (opsional)</label>
+                              <div className="flex flex-wrap gap-2">
+                                {numbers.length === 0 && <span className="text-[13px] text-gray-400">Belum ada nomor — tambah dulu di tab "Nomor & Fairness".</span>}
+                                {numbers.map((n) => (
+                                  <label key={n.id} className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold cursor-pointer transition-colors ${rowNumberIds.includes(n.id) ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}>
+                                    <input type="checkbox" className="hidden" checked={rowNumberIds.includes(n.id)} onChange={() => toggleRowNumber(n.id)} />
+                                    {n.label || n.number}
+                                  </label>
+                                ))}
+                              </div>
+                              <p className="text-[12px] text-gray-400">Kosongkan = tetap rotasi ke semua nomor aktif seperti biasa. Dicentang = klik di halaman ini hanya rotasi ke nomor yang dipilih.</p>
+                            </div>
+                          )}
+
+                          <div className="flex gap-3">
+                            <button
+                              type="button"
+                              onClick={handleSaveRow}
+                              disabled={savingRow}
+                              className="px-4 py-2 rounded-lg text-white font-bold text-[13px] bg-[#990202] hover:bg-[#7a0101] shadow-sm transition-colors disabled:opacity-50"
+                            >
+                              {savingRow ? 'Menyimpan...' : 'Simpan'}
+                            </button>
+                            {config && (
+                              <button type="button" onClick={handleDeleteRowOverride} className="px-4 py-2 rounded-lg font-bold text-[13px] text-gray-600 hover:text-red-600 transition-colors">
+                                Hapus Override
+                              </button>
+                            )}
+                            <button type="button" onClick={() => setExpandedCtaId(null)} className="px-4 py-2 rounded-lg font-bold text-[13px] text-gray-500 hover:text-gray-800 transition-colors">
+                              Tutup
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+                {pageRows.length === 1 && (
+                  <p className="text-[13px] text-gray-400">Belum ada tombol dengan id spesifik yang tercatat di halaman ini — cuma bisa atur override level-halaman ("Semua Tombol") dulu.</p>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="p-6 border-b border-gray-100">
+              <h3 className="font-bold text-gray-900 text-[16px]">Konfigurasi per Halaman</h3>
+              <p className="text-[14px] text-gray-500 mt-1">Halaman tanpa konfigurasi di sini otomatis pakai teks bawaan tombol + rotasi semua nomor aktif.</p>
+            </div>
+            <table className="w-full text-[14px]">
+              <thead>
+                <tr className="bg-gray-50 text-left text-gray-500 text-[12px] uppercase tracking-wider">
+                  <th className="px-6 py-3">Path</th>
+                  <th className="px-6 py-3">Domain</th>
+                  <th className="px-6 py-3">Autotext</th>
+                  <th className="px-6 py-3">Nomor</th>
+                  <th className="px-6 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {pagesLoading && (
+                  <tr><td colSpan={5} className="px-6 py-8 text-center text-gray-400">Memuat...</td></tr>
+                )}
+                {!pagesLoading && pages.length === 0 && (
+                  <tr><td colSpan={5} className="px-6 py-8 text-center text-gray-400">Belum ada halaman dengan konfigurasi khusus.</td></tr>
+                )}
+                {!pagesLoading && pages.map((p) => (
+                  <tr key={p.id} className="border-t border-gray-100">
+                    <td className="px-6 py-3.5 font-mono text-gray-900">
+                      {p.path}
+                      <div className="text-[11px] font-sans font-normal text-gray-400">{p.ctaId ? `Tombol: ${p.ctaId}` : 'Semua tombol (halaman ini)'}</div>
+                    </td>
+                    <td className="px-6 py-3.5 text-gray-600">{p.domain || <span className="text-gray-400">semua domain</span>}</td>
+                    <td className="px-6 py-3.5 text-gray-600 max-w-[280px] truncate" title={p.message || ''}>{p.message || <span className="text-gray-400">bawaan tombol</span>}</td>
+                    <td className="px-6 py-3.5 text-gray-600">
+                      {p.ctaId ? <span className="text-gray-400">— (level halaman)</span> : p.numberIds.length === 0 ? <span className="text-gray-400">semua aktif</span> : p.numberIds.map((id) => numbers.find((n) => n.id === id)?.label || numbers.find((n) => n.id === id)?.number || id).join(', ')}
+                    </td>
+                    <td className="px-6 py-3.5 text-right whitespace-nowrap">
+                      <button onClick={async () => { await loadKnownButtons(p.path); await openRow(p.path, p.ctaId, p.domain) }} className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3">Edit</button>
+                      <button onClick={() => handleDeletePage(p)} className="text-[13px] font-bold text-gray-600 hover:text-red-600 transition-colors">Hapus</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </>
       )}
 

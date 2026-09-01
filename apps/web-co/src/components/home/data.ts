@@ -85,7 +85,7 @@ export const quickTools = [
     title: "Konsultasi via WhatsApp",
     desc: "Tanya tim legal kami langsung — gratis, tanpa komitmen.",
     cta: "Mulai chat",
-    href: getWhatsAppLink(),
+    href: getWhatsAppLink(undefined, "home-service-whatsapp"),
     external: true,
     icon: MessageCircle,
   },
@@ -165,4 +165,3 @@ export const row2Reviews = [
     url: "/testimoni",
   },
 ];
-

@@ -205,7 +205,7 @@ export default function Kontak() {
 
               {/* Action Link */}
               <a
-                href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.")}
+                href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.", "ingin-konsultasi-mengenai-legalitas-bisnis")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 sm:mt-6 flex items-center text-[16px] sm:text-[16px] font-extrabold text-[#990202] hover:text-[#800000] hover:translate-x-1 transition-all duration-200"

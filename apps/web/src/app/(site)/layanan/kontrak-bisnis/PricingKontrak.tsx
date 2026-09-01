@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { Check } from "lucide-react";
-import { getWhatsAppLink } from "@/lib/config";
+import { getWhatsAppLink, slugify } from "@/lib/config";
 
 const packages = [
   {
@@ -204,7 +204,7 @@ export default function PricingKontrak() {
                     </div>
 
                     <a
-                      href={getWhatsAppLink(pkg.whatsappMsg)}
+                      href={getWhatsAppLink(pkg.whatsappMsg, slugify(pkg.title))}
                       target="_blank" rel="noopener noreferrer"
                       className={`w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center transition-transform hover:scale-[1.02] ${
                         isPopular

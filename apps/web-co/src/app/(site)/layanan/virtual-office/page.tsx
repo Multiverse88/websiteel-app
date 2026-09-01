@@ -40,7 +40,7 @@ const locationsData = [
     cardTitle: "EasyOffice Bandung",
     cardSubtitle: "Cihampelas, Coblong",
     address: "Jl. Cihampelas No. 201A, RT/RW 01/02 Cipaganti, Kec Coblong, Kota Bandung, Jawa Barat 40131",
-    whatsappLink: getWhatsAppLink("Halo EasyOffice Bandung, saya ingin tanya mengenai Virtual Office."),
+    whatsappLink: getWhatsAppLink("Halo EasyOffice Bandung, saya ingin tanya mengenai Virtual Office.", "vo-tanya-bandung"),
   },
   {
     id: "bekasi",
@@ -50,7 +50,7 @@ const locationsData = [
     cardTitle: "EasyOffice Bekasi",
     cardSubtitle: "Summarecon, Bekasi",
     address: "Emerald Commercial Summarecon Bekasi Blok UF No. 10\nJl. Bulevar Selatan, Marga Mulya, Bekasi Utara, Kota Bekasi, Jawa Barat 17142",
-    whatsappLink: getWhatsAppLink("Halo EasyOffice Bekasi, saya ingin tanya mengenai Virtual Office."),
+    whatsappLink: getWhatsAppLink("Halo EasyOffice Bekasi, saya ingin tanya mengenai Virtual Office.", "vo-tanya-bekasi"),
   },
   {
     id: "jakarta",
@@ -60,7 +60,7 @@ const locationsData = [
     cardTitle: "EasyOffice Jakarta",
     cardSubtitle: "Cilandak, Jakarta Selatan",
     address: "Dewata Office, Sovereign Plaza, 12th Floor\nJl. TB Simatupang No. 36, Cilandak Barat, Cilandak, Jakarta Selatan 12430",
-    whatsappLink: getWhatsAppLink("Halo EasyOffice Jakarta, saya ingin tanya mengenai Virtual Office."),
+    whatsappLink: getWhatsAppLink("Halo EasyOffice Jakarta, saya ingin tanya mengenai Virtual Office.", "vo-tanya-jakarta"),
   },
 ];
 
@@ -81,7 +81,7 @@ export default function VirtualOffice() {
       price: "Rp3.500.000",
       subLabel: "PER TAHUN · CILANDAK, JAKARTA SELATAN",
       buttonText: "Pilih Jakarta",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Jakarta."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Jakarta.", "vo-tertarik-jakarta"),
       groups: [
         {
           title: "ALAMAT LENGKAP",
@@ -124,7 +124,7 @@ export default function VirtualOffice() {
       isPopular: true,
       badgeText: "PALING POPULER",
       buttonText: "Pilih Bandung",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Bandung."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Bandung.", "vo-tertarik-bandung"),
       groups: [
         {
           title: "ALAMAT LENGKAP",
@@ -165,7 +165,7 @@ export default function VirtualOffice() {
       price: "Rp2.500.000",
       subLabel: "PER TAHUN · SUMMARECON, BEKASI",
       buttonText: "Pilih Bekasi",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Bekasi."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan EasyOffice Bekasi.", "vo-tertarik-bekasi"),
       groups: [
         {
           title: "ALAMAT LENGKAP",
@@ -280,7 +280,7 @@ export default function VirtualOffice() {
                 style={{ animationDelay: "0.3s" }}
               >
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Virtual Office.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Virtual Office.", "vo-konsultasi")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3.5 sm:py-4 bg-[#990202] hover:bg-[#800000] text-white font-extrabold rounded-xl text-[16px] sm:text-[16px] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1.5 sm:gap-2"

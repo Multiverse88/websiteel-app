@@ -113,7 +113,7 @@ export default function PengajuanPkp() {
     subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
     isPopular: true,
     buttonText: "Pesan Sekarang",
-    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Pulau Jawa."),
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Pulau Jawa.", "pkp-pulau-jawa"),
     groups: [
       {
         title: "LAMA PROSES",
@@ -147,7 +147,7 @@ export default function PengajuanPkp() {
     subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
     isPopular: false,
     buttonText: "Pesan Sekarang",
-    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Luar Jawa."),
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKP Luar Jawa.", "pkp-luar-jawa"),
     groups: [
       {
         title: "LAMA PROSES",
@@ -222,7 +222,7 @@ export default function PengajuanPkp() {
               {/* Action Buttons */}
               <div className="flex flex-row gap-3 pt-2">
                 <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan pengukuhan PKP perusahaan.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai layanan pengukuhan PKP perusahaan.", "hero-consult")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center flex-1 sm:flex-initial text-center justify-center px-4 sm:px-7 py-3 sm:py-4 bg-[#990202] text-white font-bold text-[16px] sm:text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
@@ -803,7 +803,7 @@ export default function PengajuanPkp() {
           <div className="w-full lg:w-auto flex flex-col gap-3 min-w-[340px] sm:min-w-[360px]">
             {/* Button WhatsApp */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Pengurusan PKP. Mohon info lengkap biaya dan prosesnya.")}
+                      href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Jasa Pengurusan PKP. Mohon info lengkap biaya dan prosesnya.", "bottom-order")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
@@ -816,7 +816,7 @@ export default function PengajuanPkp() {
 
             {/* Button Hubungi Tim Kami */}
             <a
-              href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin konsultasi mengenai layanan pengukuhan PKP perusahaan.")}
+                      href={getWhatsAppLink("Halo EasyLegal, saya tertarik ingin konsultasi mengenai layanan pengukuhan PKP perusahaan.", "bottom-consult")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-55 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

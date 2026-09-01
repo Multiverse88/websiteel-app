@@ -226,7 +226,7 @@ export const api = {
     }
     return await res.json();
   },
-  updateWaNumber: async (id: string, data: { label?: string; isActive?: boolean }) => {
+  updateWaNumber: async (id: string, data: { number?: string; label?: string; isActive?: boolean }) => {
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/numbers/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -234,6 +234,45 @@ export const api = {
     });
     if (!res.ok) throw new Error('Gagal memperbarui nomor');
     return await res.json();
+  },
+  // Per-page WA rotator override — custom autotext and/or a restricted
+  // number pool for one page, keyed by page path (see whatsapp.ts /pages).
+  getWaPages: async () => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages`)
+    if (!res.ok) throw new Error('Gagal memuat konfigurasi halaman')
+    return await res.json()
+  },
+  getWaKnownPaths: async () => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/known-paths`)
+    if (!res.ok) throw new Error('Gagal memuat daftar halaman')
+    return await res.json()
+  },
+  getWaKnownButtons: async (path: string) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/known-buttons?path=${encodeURIComponent(path)}`)
+    if (!res.ok) throw new Error('Gagal memuat daftar tombol')
+    return await res.json()
+  },
+  getWaPagePreview: async (path: string, ctaId?: string, domain?: string) => {
+    const qs = (ctaId ? `&cta_id=${encodeURIComponent(ctaId)}` : '') + (domain ? `&domain=${encodeURIComponent(domain)}` : '')
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/preview?path=${encodeURIComponent(path)}${qs}`)
+    if (!res.ok) throw new Error('Gagal memuat preview autotext')
+    return await res.json()
+  },
+  saveWaPage: async (data: { path: string; ctaId?: string; domain?: string; message?: string; numberIds?: string[] }) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Gagal menyimpan konfigurasi halaman' }))
+      throw new Error(err.error || 'Gagal menyimpan konfigurasi halaman')
+    }
+    return await res.json()
+  },
+  deleteWaPage: async (id: string) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/${id}`, { method: 'DELETE' })
+    if (!res.ok && res.status !== 204) throw new Error('Gagal menghapus konfigurasi halaman')
   },
   getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string } = {}) => {
     const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString()

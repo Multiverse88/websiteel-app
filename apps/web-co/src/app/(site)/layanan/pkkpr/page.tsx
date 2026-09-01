@@ -183,7 +183,7 @@ export default function PKKPRPage() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih PAKET PKKPR",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 0 - 3,9 HA. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 0 - 3,9 HA. Mohon info lengkap biaya dan prosesnya.", "paket-pkkpr-lahan-0-3-9-ha"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -220,7 +220,7 @@ export default function PKKPRPage() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: false,
       buttonText: "Pilih PAKET PKKPR",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 4 - 4,9 HA. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 4 - 4,9 HA. Mohon info lengkap biaya dan prosesnya.", "paket-pkkpr-lahan-4-4-9-ha"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -257,7 +257,7 @@ export default function PKKPRPage() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: false,
       buttonText: "Pilih PAKET PKKPR",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 5 - 9,9 HA. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 5 - 9,9 HA. Mohon info lengkap biaya dan prosesnya.", "paket-pkkpr-lahan-5-9-9-ha"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -294,7 +294,7 @@ export default function PKKPRPage() {
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: false,
       buttonText: "Pilih PAKET PKKPR",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 10 - 20 HA. Mohon info lengkap biaya dan prosesnya."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket PKKPR Lahan 10 - 20 HA. Mohon info lengkap biaya dan prosesnya.", "paket-pkkpr-lahan-10-20-ha"),
       groups: [
         {
           title: "LAMA PROSES",
@@ -388,7 +388,7 @@ export default function PKKPRPage() {
                       Lihat Paket PKKPR
                     </a>
                     <a
-                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Tata Ruang • PKKPR Online.")}
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Tata Ruang • PKKPR Online.", "hero-consult")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center px-7 py-4 border border-gray-250 text-gray-800 font-extrabold text-[16px] rounded-xl bg-white hover:bg-gray-50 hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-center shadow-sm cursor-pointer"
@@ -534,7 +534,7 @@ export default function PKKPRPage() {
 
                   <div className="lg:col-span-5 flex flex-col items-stretch space-y-4 max-w-[380px] w-full lg:ml-auto text-left">
                     <a
-                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Tata Ruang • PKKPR.")}
+                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Tata Ruang • PKKPR.", "bottom-consult")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center px-6 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer text-center w-full"
@@ -546,7 +546,7 @@ export default function PKKPRPage() {
                     </a>
 
                     <a
-                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Tata Ruang • PKKPR.")}
+                      href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai Tata Ruang • PKKPR.", "bottom-consult-secondary")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center px-6 py-3.5 shadow-md border border-black/[0.04] text-gray-800 font-extrabold text-[16px] bg-white hover:bg-gray-50 hover:border-gray-300 shadow-sm hover:shadow transition-all duration-200 cursor-pointer text-center w-full rounded-xl"

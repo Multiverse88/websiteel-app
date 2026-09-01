@@ -93,7 +93,7 @@ export const dataPembubaran: BadanUsahaContent = {
       price: "Rp 7.500.000",
       subLabel: "LIKUIDASI & PUBLIKASI RESMI",
       buttonText: "Pilih Pembubaran CV",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembubaran CV."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembubaran CV.", "ingin-konsultasi-mengenai-pembubaran-cv"),
       groups: [
         {
           title: "DOKUMEN & KORAN",
@@ -112,7 +112,7 @@ export const dataPembubaran: BadanUsahaContent = {
       badgeText: "TERLARIS",
       subLabel: "LIKUIDATOR & RUAS HUKUM LENGKAP",
       buttonText: "Pilih Pembubaran PT",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembubaran PT."),
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembubaran PT.", "ingin-konsultasi-mengenai-pembubaran-pt"),
       groups: [
         {
           title: "PROSES HUKUM LENGKAP",
