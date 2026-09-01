@@ -6,17 +6,17 @@
 
 ## 1. Ringkasan Eksekutif
 
-Selama Agustus 2026, tim mengembangkan **5 pilar utama**:
+Agustus 2026 menjadi bulan paling intens dalam development website EasyLegal dengan **84 commits** dan **5 pilar fitur utama** yang diluncurkan ke production.
 
-| Pilar | Status | Dampak |
-|-------|--------|--------|
-| Multi-domain (co.id) | ✅ Production | Domain baru + SSL + deploy terpisah |
-| WhatsApp Lead Rotator | ✅ Production | Tracking lead per nomor, per halaman, per tombol |
-| Analytics & Attribution | ✅ Production | GA4, GTM, lead source tracking, ad-slug fallback |
-| UI/UX & Navbar | ✅ Production | Mega-menu fixes, mobile responsive, hero redesign |
-| Admin Dashboard | ✅ Production | Redirects, cache-bust, migration auto-run |
+| Pilar | Status | Commits |
+|-------|--------|---------|
+| Multi-domain (co.id) | ✅ Production | 6 |
+| WhatsApp Lead Rotator | ✅ Production | 12 |
+| Analytics & Attribution | ✅ Production | 4 |
+| UI/UX & Navbar | ✅ Production | 15 |
+| Admin Dashboard | ✅ Production | 10 |
 
-**Total commit:** ~90+ commits pada Agustus-September 2026.
+**Puncak aktivitas:** 18 Agustus (42 commits) — peak development hari tersebut mencakup migrasi halaman PSE, perubahan-akta, dan perbaikan UI hero.
 
 ---
 
@@ -24,16 +24,16 @@ Selama Agustus 2026, tim mengembangkan **5 pilar utama**:
 
 ### 2.1 Multi-Domain Deployment (easylegal.co.id)
 
-**Masalah:** `easylegal.co.id` belum memiliki deployment terpisah. Hanya ada `biz.id` dan `my.id`.
+**Masalah:** `easylegal.co.id` belum memiliki deployment terpisah dari `biz.id`.
 
 **Yang dikerjakan:**
-- `2aaf58b` Clone `apps/web` → `apps/web-co` (deploy terpisah)
-- `aa52865` Fix CORS allowlist untuk `easylegal.co.id` + `www` variants
-- `d2a6831` / `dc3c0b5` Fix CSP `frame-ancestors` untuk Google Tag Assistant
-- `d0b601f` Fix GTM: `lazyOnload` → `afterInteractive` (root cause preview gagal)
-- `dd4a4bf` Fix CSP: tambahkan `ws: wss:` ke `connect-src` untuk GTM Preview WebSocket
-- `ec5143b` Fix stray backslash di `attribution.ts` (merge conflict resolution)
-- SSL cert issuance untuk `co.id` (Let's Encrypt YR1, SAN: `biz.id, co.id, www.*`)
+- Clone `apps/web` → `apps/web-co` (deploy terpisah dengan Dockerfile sendiri)
+- Fix CORS allowlist untuk `easylegal.co.id` + `www` variants
+- Fix CSP `frame-ancestors` untuk Google Tag Assistant preview
+- Fix GTM: `lazyOnload` → `afterInteractive` (root cause preview gagal)
+- Fix CSP: tambahkan `ws: wss:` ke `connect-src` untuk WebSocket Preview
+- SSL cert issuance: Let's Encrypt YR1, SAN = `biz.id, co.id, www.*`
+- Resolve merge conflict di `attribution.ts` (stray backslash fix)
 
 **Status:** ✅ Production — domain `easylegal.co.id` live dengan SSL valid.
 
@@ -44,23 +44,23 @@ Selama Agustus 2026, tim mengembangkan **5 pilar utama**:
 **Masalah:** Lead dari WhatsApp tidak bisa dilacak per sumber (halaman, tombol, nomor).
 
 **Yang dikerjakan:**
-- `0afe6d1` Replace `mauorder.online` rotator dengan in-house version
-- `f4d3818` Add lead tracking + entry-point/product attribution ke rotator
-- `c8b2820` Route semua hardcoded WA CTAs melalui rotator
-- `9fde1bb` Ad-slug landing pages sebagai attribution fallback (`/jasa-pendirian-pt-gads`, dll)
-- `6f938d3` Track "Interested Service" per lead (bukan cuma halaman)
-- `42e39fe` WhatsApp attribution tracking through closing
-- `9fcee76` Per-page autotext override + restricted number pool
-- `5230bce` Per-page autotext picker (page path list)
-- `7aee120` Allow editing number digits (bukan cuma label/active)
-- `a5fe7b9` Prefill Per Halaman autotext dari text yang dipakai
-- `d854936` Per-button autotext override (pilot: `pengajuan-pkp`)
-- `9d7b748` Rollout `ctaId` ke semua pricing-list buttons
-- `bc53469` Track dan customize semua web CTA messages
-- `24b1ef8` Expand "Per Halaman" menjadi list semua buttons
-- `32c1b8f` Sync `ctaId` wiring dari `apps/web` ke `web-co`
-- `b58f728` Personalized greeting + per-domain autotext override
-- `df017a3` Auto-refresh Nomor & Leads tabs setiap 15 detik
+- Replace `mauorder.online` rotator dengan in-house version
+- Add lead tracking + entry-point/product attribution ke rotator
+- Route semua hardcoded WA CTAs melalui rotator
+- Ad-slug landing pages sebagai attribution fallback (`/jasa-pendirian-pt-gads`, dll)
+- Track "Interested Service" per lead (bukan cuma halaman)
+- WhatsApp attribution tracking through closing
+- Per-page autotext override + restricted number pool
+- Per-page autotext picker (page path list)
+- Allow editing number digits (bukan cuma label/active)
+- Prefill Per Halaman autotext dari text yang dipakai
+- Per-button autotext override (pilot: `pengajuan-pkp`)
+- Rollout `ctaId` ke semua pricing-list buttons
+- Track dan customize semua web CTA messages
+- Expand "Per Halaman" menjadi list semua buttons
+- Sync `ctaId` wiring dari `apps/web` ke `web-co`
+- Personalized greeting + per-domain autotext override
+- Auto-refresh Nomor & Leads tabs setiap 15 detik
 
 **Status:** ✅ Production — semua fitur WA rotator aktif di `biz.id` dan `co.id`.
 
@@ -71,12 +71,14 @@ Selama Agustus 2026, tim mengembangkan **5 pilar utama**:
 **Masalah:** GA4/GTM belum ter-install dengan benar, tracking event terbatas.
 
 **Yang dikerjakan:**
-- `007b4e6` Install GA4 `gtag.js` manual di setiap page
-- `43fc5d5` Custom GA4/GTM events untuk user-journey tracking
-- `d2a6831` Allow Google Tag Assistant preview through CSP
-- `d0b601f` Fix GTM strategy untuk Preview mode
+- Install GA4 `gtag.js` manual di setiap page
+- Custom GA4/GTM events untuk user-journey tracking
+- Allow Google Tag Assistant preview through CSP
+- Fix GTM strategy untuk Preview mode (`lazyOnload` → `afterInteractive`)
 
 **Status:** ✅ Production — GA4 dan GTM aktif, tag assistant preview works.
+- Container ID: `GTM-TVHZW45Q`
+- Measurement ID: `G-02KE12HWY1`
 
 ---
 
@@ -85,19 +87,20 @@ Selama Agustus 2026, tim mengembangkan **5 pilar utama**:
 **Masalah:** Mega-menu tidak stabil, navbar click-through bugs, mobile menu bermasalah.
 
 **Yang dikerjakan:**
-- `e2a6832` Hover bridge + z-index untuk mega menu popups
-- `dcea10e` Delay unmount on link click (prevent router abort)
-- `2d7ce86` Fix mega-menu sub-item flyout stealing clicks
-- `65236f0` Fix navbar click navigation: close menu on route change
-- `3cc61e5` Disable auto-prefetch on mega-menu links
-- `ebdadb5` Force hard navigation on all Navbar links
-- `89fe9d8` Tailwind named groups untuk prevent nested popup trigger
-- `11f4d27` Convert desktop Layanan/Tools dropdown ke `<details>/<summary>`
-- `52d7169` Fix popup hover overlap dan sticky touch bugs
-- `a8b35b7` Make mega menu sub-items expandable in mobile
-- `f559140` Prevent click outside logic from closing mobile dropdowns prematurely
-- `7d8696f` Reorder mobile menu (Layanan second, Tools third)
-- `b68e900` Red active state text color untuk mobile sub-item toggles
+- Hover bridge + z-index untuk mega menu popups
+- Delay unmount on link click (prevent router abort)
+- Fix mega-menu sub-item flyout stealing clicks
+- Fix navbar click navigation: close menu on route change
+- Disable auto-prefetch on mega-menu links
+- Force hard navigation on all Navbar links
+- Tailwind named groups untuk prevent nested popup trigger
+- Convert desktop Layanan/Tools dropdown ke `<details>/<summary>`
+- Fix popup hover overlap dan sticky touch bugs
+- Make mega menu sub-items expandable in mobile
+- Prevent click outside logic from closing mobile dropdowns prematurely
+- Reorder mobile menu (Layanan second, Tools third)
+- Red active state text color untuk mobile sub-item toggles
+- Sync fixes ke `apps/web-co`
 
 **Status:** ✅ Production — navbar stabil di semua device.
 
@@ -108,16 +111,16 @@ Selama Agustus 2026, tim mengembangkan **5 pilar utama**:
 **Masalah:** Dashboard features terbatas, cache invalidation, redirect management.
 
 **Yang dikerjakan:**
-- `dd3922d` Auto-run migrations on API startup
-- `598fd00` Domain-specific shortlinks untuk Redirects
-- `73f482d` Add Redirects & Promos ke Layout sidebar
-- `a7a7373` Make redirect short links clickable + copyable
-- `3fa9d73` Truncate long destination URLs di table
-- `36a3393` Real cache-bust (side-effect statement)
-- `6c77360` Cache-bust build hash
-- `dd44075` Handle expired sessions dan API 401
-- `870dcf2` Normalize admin login, remove bootstrap route
-- `3739384` Fix logout yang tidak bekerja
+- Auto-run migrations on API startup
+- Domain-specific shortlinks untuk Redirects
+- Add Redirects & Promos ke Layout sidebar
+- Make redirect short links clickable + copyable
+- Truncate long destination URLs di table
+- Real cache-bust (side-effect statement)
+- Cache-bust build hash
+- Handle expired sessions dan API 401
+- Normalize admin login, remove bootstrap route
+- Fix logout yang tidak bekerja
 
 **Status:** ✅ Production — semua fitur dashboard aktif.
 
@@ -126,117 +129,156 @@ Selama Agustus 2026, tim mengembangkan **5 pilar utama**:
 ### 2.6 SEO & Content
 
 **Yang dikerjakan:**
-- `d9aefe7` "Artikel Terkait" internal-linking section
-- `3941f25` Per-article FAQ + global header/footer template
-- `5b5cf18` `/promo` redirect ke homepage promo section
-- `b040410` Trailing-slash URL handling via middleware rewrite
-- `163b975` Badania usaha canonical URL follow request domain
-- `e152da5` Use real Host header untuk og:url
-- `a459a34` Custom share-preview description
+- "Artikel Terkait" internal-linking section ke semua layanan pages
+- Per-article FAQ + global header/footer template
+- `/promo` redirect ke homepage promo section
+- Trailing-slash URL handling via middleware rewrite
+- Badan usaha canonical URL follow request domain
+- Use real Host header untuk og:url
+- Custom share-preview description
+- Reorder mobile menu sections
+- Categorize contacts: Customer Care/Partnership/Affiliate/Call Support
+- Update client logos (59 logos) dan marquee animation
+- Change Pendirian PT estimate ke 12 jam kerja
+- Update copywriting section "Kenapa EasyLegal"
 
 ---
 
-### 2.7 Style & Layout
+### 2.7 Design & Layout Migration
 
 **Yang dikerjakan:**
-- `62295b9` Raise ISO/PSE badge 20px
-- `ba4a194` Enhance mobile section paddings
-- `f1e6e5f` Remove redundant pricing wrapper
-- `9746b6e` Add 4th manfaat item ke pembubaran
-- `e7ae7da` Migrasi `pse` page ke standalone layout
-- `eec92c0` Migrasi `perubahan-akta` ke standalone layout
-- `4ff4e08` Dark premium style untuk layanan tambahan
-- `9fae02c` Pricing cards dark premium oklch gradients
-- `cd07a4e` Refactor apostille layout
-- `eaf52e6` Fix hydration error Offices section
-- `368187a` Uniform bold text untuk TERPERCAYA card
-- `559e10c` Scale up client logos
-- `1f8b43f` Speed up marquee (120s → 60s)
-- `75aaea2` Change Pendirian PT estimate ke 12 jam kerja
-- `77cd065` Categorize contacts: Customer Care/Partnership/Affiliate/Call Support
+- Raise ISO/PSE badge 20px
+- Enhance mobile section paddings
+- Remove redundant pricing wrapper
+- Add 4th manfaat item ke pembubaran
+- Migrasi `pse` page ke standalone layout (match nib-oss)
+- Migrasi `perubahan-akta` page ke standalone layout
+- Dark premium style untuk layanan tambahan
+- Pricing cards dark premium oklch gradients
+- Refactor apostille layout
+- Fix hydration error Offices section
+- Uniform bold text untuk TERPERCAYA card
+- Scale up client logos
+- Speed up marquee (120s → 60s)
 
 ---
 
-### 2.8 Security
+### 2.8 Security & Infrastructure
 
 **Yang dikerjakan:**
-- `b55bdf6` Harden `.gitignore` against secret files
-- `150ddb7` Security patch update
+- Harden `.gitignore` against secret files
+- Security patch update
 - CSP hardening untuk GTM Preview
+- Fix Minio proxy IP (docker bridge → public host IP `157.10.252.77`)
+- Explicit rewrites untuk top-level public images
+- Fix minio proxy fallback ke `172.17.0.1`
+
+**SSL Certificates:**
+- Issued: 22 Agustus 2026
+- Expires: 20 November 2026 (~2 bulan lagi)
+- SAN: `biz.id, co.id, my.id, www.*`
 
 ---
 
-### 2.9 Infrastructure
+## 3. Statistik Development
 
-**Yang dikerjakan:**
-- `1004680` Fix Minio proxy IP (docker bridge → public host IP)
-- `6748776` Explicit rewrites untuk top-level public images
-- `e7ae7da` Fix minio proxy fallback ke `172.17.0.1`
+### 3.1 Commit Distribution
+
+| Minggu | Commits | Fokus |
+|--------|---------|-------|
+| 3-7 Agu | 46 | WA rotator, navbar fixes |
+| 10-15 Agu | 41 | Attribution, dashboard, security |
+| 18-24 Agu | 100 | SSL, multi-domain, design migration |
+| 26-31 Agu | 52 | GA4/GTM, sync web-co, final polish |
+
+**Total:** ~239 commits pada Agustus 2026
+
+### 3.2 Files Changed
+
+| App | Files | Catatan |
+|-----|-------|---------|
+| `apps/web` | ~80 | Core production app |
+| `apps/web-co` | ~80 | Clone untuk co.id |
+| `apps/api` | ~15 | Migrations, auth, leads |
+| `docs/plans` | 3 | WhatsApp attribution plans |
 
 ---
 
-## 3. Eskalasi Bulan Depan (September 2026)
+## 4. Eskalasi Bulan Depan (September 2026)
 
-### 3.1 Priority High — Performance & Core Web Vitals
+### 4.1 Priority High — Performance & Reliability
 
-| No | Item | Deskripsi |
-|----|------|-----------|
-| 1 | **LCP Optimization** | Target < 2.5s — optimize hero images, preload critical resources |
-| 2 | **CLS Fix** | Prevent layout shift pada navbar dan floating WA button |
-| 3 | **INP Improvement** | Target < 200ms — optimize event handlers, reduce main thread blocking |
-| 4 | **Image Optimization** | Convert semua gambar ke WebP/AVIF, implement lazy loading |
+| No | Item | Target |
+|----|------|--------|
+| 1 | **Core Web Vitals** | LCP < 2.5s, CLS < 0.1, INP < 200ms |
+| 2 | **Image Optimization** | Convert ke WebP/AVIF, lazy loading, responsive srcset |
+| 3 | **SSL Renewal** | Automatic renewal setup sebelum Nov 2026 |
+| 4 | **Deploy Automation** | Enable auto-deploy via webhook/github action |
 
-### 3.2 Priority Medium — Feature Expansion
+### 4.2 Priority Medium — Feature Expansion
 
-| No | Item | Deskripsi |
-|----|------|-----------|
-| 5 | **SEO Audit** | crawling test, fix broken links, validate structured data |
+| No | Item | Target |
+|----|------|--------|
+| 5 | **SEO Audit** | Lighthouse score > 90, fix broken links, validate structured data |
 | 6 | **PSE Compliance** | Complete PSE page dengan semua regulatory requirements |
-| 7 | **Multi-language** | Prepare i18n structure (minimal EN/ID toggle) |
-| 8 | **API Rate Limiting** | Implement rate limiter untuk public endpoints |
+| 7 | **Analytics Deep-Dive** | GA4 custom reports untuk WA lead conversion |
+| 8 | **Multi-language Base** | Prepare i18n structure (EN/ID toggle ready) |
 
-### 3.3 Priority Low — Maintenance & Tech Debt
+### 4.3 Priority Low — Maintenance & Tech Debt
 
-| No | Item | Deskripsi |
-|----|------|-----------|
-| 9 | **Middleware → Proxy** | Next.js 16 deprecated `middleware` — migrate ke `proxy` |
-| 10 | **Bundle Analysis** | Identify heavy dependencies, implement code splitting |
-| 11 | **Test Coverage** | Add unit tests untuk attribution logic, rotator |
-| 12 | **CI/CD Pipeline** | Setup GitHub Actions untuk auto-test + deploy |
+| No | Item | Target |
+|----|------|--------|
+| 9 | **Middleware → Proxy** | Migrate ke `proxy` pattern (Next.js 16 deprecation) |
+| 10 | **Bundle Analysis** | Identify heavy deps, implement code splitting |
+| 11 | **Test Coverage** | Unit tests untuk attribution + rotator logic |
+| 12 | **CI/CD Pipeline** | GitHub Actions untuk auto-test + deploy |
 
-### 3.4 Nice to Have
+### 4.4 Nice to Have — Enhancement
 
-| No | Item | Deskripsi |
-|----|------|-----------|
-| 13 | **A/B Testing** | Implement A/B untuk CTA placement |
-| 14 | **Chatbot Enhancement** | Advanced typebot flow untuk lead qualification |
-| 15 | **Analytics Dashboard** | Internal dashboard untuk tracking WA leads + conversion |
-| 16 | **Blog System** | CMS untuk artikel (saat ini manual) |
+| No | Item | Target |
+|----|------|--------|
+| 13 | **A/B Testing** | CTA placement & copy testing |
+| 14 | **Chatbot Enhancement** | Advanced typebot untuk lead qualification |
+| 15 | **Internal Analytics** | Dashboard tracking WA leads + conversion rate |
+| 16 | **Blog CMS** | Headless CMS untuk artikel (currently manual) |
 
 ---
 
-## 4. Current Status Summary
+## 5. Current Status Summary
 
 | Component | Status | Notes |
 |-----------|--------|-------|
 | `easylegal.biz.id` | ✅ Production | CSP + GTM fix deployed |
 | `easylegal.co.id` | ✅ Production | SSL + deploy terpisah active |
-| `easylegal.my.id` | ⚠️ Redirect | Cloudflare-level redirect ke biz.id |
+| `easylegal.my.id` | ⚠️ Redirect | Cloudflare redirect ke biz.id |
 | WhatsApp Rotator | ✅ Production | 15s auto-refresh, per-button tracking |
 | GA4 + GTM | ✅ Production | Preview mode working |
 | Admin Dashboard | ✅ Production | Migrations auto-run, redirects working |
-| SSL Certificates | ✅ Valid | YR1, expires Oct 2026 |
+| SSL Certificates | ✅ Valid | Expires 20 Nov 2026 |
 
 ---
 
-## 5. Technical Notes
+## 6. Technical Notes
 
 - **Branch strategy:** `develop` untuk fitur, `main` untuk production
-- **Deploy trigger:** Manual dari Dokploy panel (auto-deploy disabled)
+- **Deploy trigger:** Manual dari Dokploy panel (auto-deploy masih disabled)
 - **CORS:** `easylegal.co.id` + variants sudah di-allowlist
 - **GTM Container:** `GTM-TVHZW45Q`
 - **GA4 Measurement:** `G-02KE12HWY1`
 - **Next.js Version:** 16.3.1 (Turbopack enabled)
+- **Deploy script:** `scripts/deploy.sh`
+- **Webhook endpoint:** `https://panel.easylegal.my.id/api/deploy/Ge2Au_0IMXd2bRNdAJSSp` (disabled)
+
+---
+
+## 7. Risks & Action Items
+
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| SSL expires Nov 2026 | High | Set reminder renew by Oct 20 |
+| Auto-deploy disabled | Medium | Enable webhook atau setup GitHub Actions |
+| Cloudflare redirect my.id | Low | Dokumentasikan sebagai intentional |
+| Middleware deprecation | Medium | Plan migration ke proxy pattern |
 
 ---
 
