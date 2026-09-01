@@ -76,7 +76,7 @@ export function captureFirstTouch(): AttributionSnapshot {
   const legacy = readLegacySource();
   const sessionId = readCookie(SESSION_COOKIE) || crypto.randomUUID();
   writeCookie(SESSION_COOKIE, sessionId, MAX_AGE_SECONDS);
-  const snapshot: AttributionSnapshot = {\
+  const snapshot: AttributionSnapshot = {
     source: legacy?.source || classify(params, document.referrer, window.location.pathname),
     entryUrl: window.location.href.slice(0, 1000),
     entryPath: `${window.location.pathname}${window.location.search}`.slice(0, 500),
