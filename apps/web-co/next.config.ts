@@ -1,4 +1,4 @@
-]133;A\import { withSentryConfig } from "@sentry/nextjs";
+import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 // Improved CSP policy - removes unsafe-eval for better security in production
