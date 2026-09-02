@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link2, Check } from "lucide-react";
+import { getWhatsAppLink } from "@/lib/config";
 
 export default function SocialShare({ title }: { title: string }) {
   const [mounted, setMounted] = useState(false);
@@ -25,6 +26,11 @@ export default function SocialShare({ title }: { title: string }) {
   const encodedUrl = encodeURIComponent(currentUrl);
   const encodedTitle = encodeURIComponent(title);
 
+  const waShareLink = getWhatsAppLink(
+    `Halo EasyLegal, saya tertarik dengan artikel "${title}" — ${currentUrl}`,
+    "article-share-wa"
+  );
+
   return (
     <div className="bg-[#FAFAFA] border border-gray-100 rounded-[20px] p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div className="text-[16px] text-gray-500">
@@ -33,7 +39,7 @@ export default function SocialShare({ title }: { title: string }) {
       <div className="flex items-center gap-2">
         {/* WhatsApp */}
         <a
-          href={`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`}
+          href={waShareLink}
           target="_blank"
           rel="noopener noreferrer"
           className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-[#990202] hover:bg-[#990202] hover:text-white hover:border-[#990202] transition-colors shadow-sm"
