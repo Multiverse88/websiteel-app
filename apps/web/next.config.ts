@@ -1,4 +1,4 @@
-import { withSentryConfig } from "@sentry/nextjs";
+]133;A\import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 // Improved CSP policy - removes unsafe-eval for better security in production
@@ -12,7 +12,7 @@ const ContentSecurityPolicy = isProd
   style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id https://typebot.easylegal.biz.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://api.easylegal.my.id ws: wss: https://www.googletagmanager.com https://www.google-analytics.com https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cloudflareinsights.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app;
+  connect-src 'self' https://api.easylegal.my.id ws: wss: https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cloudflareinsights.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app;
   frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://www.facebook.com;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com blob: data:;
   object-src 'none';
@@ -28,7 +28,7 @@ const ContentSecurityPolicy = isProd
   style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id https://typebot.easylegal.biz.id;
   img-src 'self' https: blob: data:;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://api.easylegal.my.id ws: wss: https://www.googletagmanager.com https://www.google-analytics.com https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cloudflareinsights.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app;
+  connect-src 'self' https://api.easylegal.my.id ws: wss: https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://sentry.io https://*.ingest.sentry.io https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cloudflareinsights.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app;
   frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com blob: data:;
   object-src 'none';
