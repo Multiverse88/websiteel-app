@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
 import { requireAuth } from "../middleware/auth";
+import { getAIReview } from "../modules/articles/ai-review-service";
+import { checkDeduplication } from "../modules/articles/deduplication-service";
+import { generateEmbedding } from "../modules/articles/embedding-service";
 
 const router = Router();
 
@@ -240,6 +243,51 @@ router.delete("/:id", requireAuth, async (req, res) => {
   } catch (error) {
     console.error("Error deleting article:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// POST /api/v1/articles/ai-review — SEO scoring & suggestions via ArticleAI
+router.post("/ai-review", requireAuth, async (req, res) => {
+  try {
+    const { title, excerpt, content, site, keyword, existingSlug } = req.body;
+    if (!title || !content) {
+      return res.status(400).json({ error: "title and content are required" });
+    }
+    const result = await getAIReview({ title, excerpt: excerpt || "", content, site: site || "easylegal.biz.id", keyword, existingSlug });
+    res.json({ data: result });
+  } catch (error: any) {
+    console.error("AI review error:", error);
+    res.status(500).json({ error: error.message || "AI review failed" });
+  }
+});
+
+// POST /api/v1/articles/dedup-check — detect duplicate articles by keyword overlap
+router.post("/dedup-check", requireAuth, async (req, res) => {
+  try {
+    const { title, excerpt, content, site, existingSlug } = req.body;
+    if (!title || !content) {
+      return res.status(400).json({ error: "title and content are required" });
+    }
+    const result = await checkDeduplication({ title, excerpt: excerpt || "", content, site: site || "easylegal.biz.id", existingSlug });
+    res.json({ data: result });
+  } catch (error: any) {
+    console.error("Dedup check error:", error);
+    res.status(500).json({ error: error.message || "Dedup check failed" });
+  }
+});
+
+// POST /api/v1/articles/embed — generate local embedding for an article
+router.post("/embed", requireAuth, async (req, res) => {
+  try {
+    const { title, excerpt, content, site } = req.body;
+    if (!title || !content) {
+      return res.status(400).json({ error: "title and content are required" });
+    }
+    const result = await generateEmbedding([title, excerpt, content].filter(Boolean).join(" "));
+    res.json({ data: result });
+  } catch (error: any) {
+    console.error("Embed error:", error);
+    res.status(500).json({ error: error.message || "Embedding failed" });
   }
 });
 
