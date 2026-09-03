@@ -1,8 +1,5 @@
 "use client";
 
-import * as Sentry from "@sentry/nextjs";
-import { useEffect } from "react";
-
 export default function GlobalError({
   error,
   reset,
@@ -10,10 +7,6 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    Sentry.captureException(error);
-  }, [error]);
-
   return (
     <html lang="id">
       <body className="min-h-screen flex items-center justify-center bg-white">
@@ -27,7 +20,7 @@ export default function GlobalError({
             Terjadi Kesalahan
           </h1>
           <p className="text-gray-500 mb-8 leading-relaxed">
-            Maaf, terjadi kesalahan yang tidak terduga. Tim teknis kami sudah mendapat notifikasi dan akan segera memperbaikinya.
+            Maaf, terjadi kesalahan yang tidak terduga.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
