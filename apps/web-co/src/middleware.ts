@@ -48,8 +48,24 @@ function previewHtml({
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Redirect check — only GET/HEAD
-  if (request.method === "GET" || request.method === "HEAD") {
+  // Canonical domain: 301-redirect www → apex (e.g. www.easylegal.co.id →
+  // easylegal.co.id). Google treats www and apex as separate hosts —
+  // without this redirect both serve identical content with 200, splitting
+  // crawl budget and indexation across duplicate URLs.
+  const hostHeader = request.headers.get("host") || "";
+  const hostname = hostHeader.split(":")[0];
+  if (hostname.startsWith("www.")) {
+    // Build the URL explicitly instead of cloning nextUrl — behind Traefik
+    // the internal port would leak into the redirect target otherwise.
+    const url = new URL(`https://${hostname.slice(4)}${pathname}`);
+    url.search = request.nextUrl.search;
+    return NextResponse.redirect(url, 301);
+  }
+
+  // Redirect check — only GET/HEAD, and skip well-known SEO files so they
+  // don't trigger an API lookup (the www→apex 301 above already ran).
+  const isSeoFile = pathname === "/robots.txt" || pathname === "/sitemap.xml";
+  if (!isSeoFile && (request.method === "GET" || request.method === "HEAD")) {
     const slug = pathname.slice(1).replace(/\/$/, ""); // "/daftar-klien/" → "daftar-klien"
 
     if (slug) {
@@ -114,6 +130,9 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|api).*)",
+    // robots.txt and sitemap.xml are NOT excluded: the www→apex 301 above
+    // must also apply to them, so bots requesting www/robots.txt get
+    // redirected to the canonical host instead of seeing a second copy.
+    "/((?!_next/static|_next/image|favicon.ico|api).*)",
   ],
 };
