@@ -43,7 +43,7 @@ model Tag {
 
 model Article {
   id          String    @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
-  slug        String    @unique
+  slug        String
   title       String
   excerpt     String
   content     String
@@ -61,14 +61,31 @@ model Article {
   seoTitle    String?
   status      String    @default("draft")
   faq         Json?
+  site        String    @default("easylegal.biz.id")
   author      User?     @relation(fields: [authorId], references: [id])
   categoryRel Category? @relation(fields: [categoryId], references: [id])
   tags        Tag[]     @relation("ArticleToTag")
+  embeddings  ArticleEmbedding[]
 
+  @@unique([site, slug])
+  @@index([site, status])
   @@index([categoryId])
-  @@index([status])
   @@index([createdAt])
   @@index([authorId])
+}
+
+model ArticleEmbedding {
+  id          String   @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
+  articleId   String
+  site        String
+  embedding   String   // JSON array of 1536 floats, stored as text for pgvector
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+
+  article     Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@index([site, publishedAt])
+  @@index([articleId])
 }
 
 model NewsletterSubscriber {
