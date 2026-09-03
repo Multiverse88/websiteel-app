@@ -6,7 +6,7 @@ export const config = {
   defaultWhatsAppMessage: "Halo EasyLegal, saya ingin konsultasi gratis mengenai legalitas bisnis saya.",
   
   // Website URL
-  baseUrl: process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.co.id",
+  baseUrl: process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.id",
   
   // Company info
   company: {
@@ -38,15 +38,11 @@ export function slugify(text: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-// This app instance only ever serves easylegal.co.id — tag every WA lead
-// message with the site of origin so sales can tell biz.id from co.id leads
-// without cross-referencing ctaId/domain in the dashboard.
-const SITE_TAG = "(via easylegal.co.id)";
+const SITE_DOMAIN = "easylegal.id";
 
 export function getWhatsAppLink(message?: string, ctaId?: string): string {
-  const baseMessage = message || config.defaultWhatsAppMessage;
-  const encodedMessage = encodeURIComponent(`${baseMessage} ${SITE_TAG}`);
+  const encodedMessage = encodeURIComponent(message || config.defaultWhatsAppMessage);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://api.easylegal.my.id";
   const ctaParam = ctaId ? `&cta_id=${encodeURIComponent(ctaId)}` : "";
-  return `${apiUrl}/api/v1/wa/redirect?text=${encodedMessage}${ctaParam}`;
+  return `${apiUrl}/api/v1/wa/redirect?text=${encodedMessage}&domain=${SITE_DOMAIN}${ctaParam}`;
 }

@@ -8,6 +8,7 @@ import {
   getLeadTemperature,
   isValidStage,
   isValidStageTransition,
+  normalizeLeadDomain,
   normalizeSourceCode,
   sourceCodeToChannel,
 } from "../modules/leads/lead-domain";
@@ -40,17 +41,14 @@ router.get("/redirect", async (req, res) => {
     const product = queryText(req.query.product, 300);
     const ctaId = queryText(req.query.cta_id, 100);
 
-    // Best-effort domain attribution — this is a top-level navigation, so
-    // Referer is same-origin-policy-safe to read, but referrer-policy
-    // (strict-origin-when-cross-origin) means only the origin survives
-    // cross-origin, not the full path. That's all we need here. Computed
-    // before the override lookup below since domain is now also part of the
-    // override's match key (easylegal.biz.id and easylegal.co.id serve the
-    // same relative paths, so path alone can't tell them apart).
-    let domain: string | null = null;
-    const referer = req.headers.referer;
-    if (referer) {
-      try { domain = new URL(referer).hostname; } catch { /* ignore malformed referer */ }
+    // Frontends send domain explicitly because Referrer-Policy may omit the
+    // Referer header. Only known public domains are accepted; Referer remains
+    // a fallback for old links already deployed.
+    let domain = normalizeLeadDomain(req.query.domain);
+    if (!domain && req.headers.referer) {
+      try {
+        domain = normalizeLeadDomain(new URL(req.headers.referer).hostname);
+      } catch { /* ignore malformed Referer */ }
     }
 
     // Per-page/per-button/per-domain override (admin-editable, see /pages

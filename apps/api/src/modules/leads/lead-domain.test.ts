@@ -5,6 +5,7 @@ import {
   classifyAttribution,
   getLeadTemperature,
   isValidStageTransition,
+  normalizeLeadDomain,
 } from "./lead-domain";
 
 test("Google Ads click id is classified as gads", () => {
@@ -26,11 +27,24 @@ test("untrusted source query cannot invent a source code", () => {
   assert.equal(classifyAttribution({ source: "<script>" }, null).sourceCode, "direct");
 });
 
-test("WhatsApp message carries the public Lead Code and canonical source", () => {
+test("WhatsApp message carries source domain and lead code once", () => {
   assert.equal(
-    buildWhatsAppMessage("Halo, saya ingin konsultasi PT.", "EL-A7K9Q2", "gads"),
-    "Halo, saya ingin konsultasi PT.\n\n[Ref: EL-A7K9Q2 | Source: gads]",
+    buildWhatsAppMessage(
+      "Halo EasyLegal, saya ingin konsultasi PT.",
+      "EL-A7K9Q2",
+      "gads",
+      "easylegal.biz.id",
+      "Naufal",
+    ),
+    "Hallo Kak Naufal saya ingin konsultasi PT. (Google Ads; easylegal.biz.id | Ref: EL-A7K9Q2)",
   );
+});
+
+test("lead domains are normalized against the public-site allowlist", () => {
+  assert.equal(normalizeLeadDomain("easylegal.biz.id"), "easylegal.biz.id");
+  assert.equal(normalizeLeadDomain("www.easylegal.co.id"), "easylegal.co.id");
+  assert.equal(normalizeLeadDomain("easylegal.id"), "easylegal.id");
+  assert.equal(normalizeLeadDomain("evil.example"), null);
 });
 
 test("temperature is derived from stage", () => {

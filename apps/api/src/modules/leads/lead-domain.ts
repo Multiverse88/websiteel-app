@@ -33,6 +33,18 @@ export interface AttributionResult {
   referralCode: string | null;
 }
 
+const LEAD_DOMAINS = new Set([
+  "easylegal.biz.id",
+  "easylegal.co.id",
+  "easylegal.id",
+]);
+
+export function normalizeLeadDomain(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const domain = value.trim().toLowerCase().replace(/^www\./, "");
+  return LEAD_DOMAINS.has(domain) ? domain : null;
+}
+
 const PAID_MEDIA = new Set(["cpc", "ppc", "paid", "paid_social", "display"]);
 
 // Mirrors apps/web/src/lib/attribution.ts's slug fallback — ad-campaign
