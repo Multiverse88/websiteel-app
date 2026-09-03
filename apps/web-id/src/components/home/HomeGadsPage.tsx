@@ -1,0 +1,1142 @@
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+
+
+const InformasiHukumSection = dynamic(() => import("@/components/home/InformasiHukumSection"), {
+  ssr: true,
+  loading: () => <div className="h-[600px] w-full animate-pulse bg-gray-50/50" />
+});
+import LayananKami from "@/components/home/LayananKami";
+import Hero from "@/components/home/Hero";
+const Testimonials = dynamic(() => import("@/components/home/Testimonials"), { ssr: true });
+const BottomPromoSection = dynamic(() => import("@/components/home/BottomPromoSection"), { ssr: true });
+import MediaCoverage from "@/components/MediaCoverage";
+import {
+  quickTools,
+  partnerLogos,
+} from "./data";
+import { ArticleItem } from "./InformasiHukumSection";
+
+
+import {
+  ArrowRight,
+  Check,
+  Building2,
+  MessageCircle,
+  ShieldCheck,
+  Zap,
+  Sparkles,
+  FileText,
+  Award,
+  Lock,
+  Phone,
+  MapPin,
+  Truck,
+  Download,
+} from "lucide-react";
+
+/* ─── DATA ─── */
+
+function VideoEmbedSection() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setRevealed(true); obs.unobserve(el); }
+    }, { rootMargin: "-50px" });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={`animate-scroll-reveal ${revealed ? "revealed" : ""}`}>
+      <div className="group relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.08)] shadow-sm border border-black/[0.02] hover:shadow-[0_25px_70px_rgba(0,0,0,0.12)] transition-all duration-500">
+        <div className="relative aspect-video w-full bg-black overflow-hidden">
+          {isPlaying ? (
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/PHyO3XoAGEU?autoplay=1&rel=0&modestbranding=1"
+              title="EasyLegal — Client Story: Menguatkan Pebisnis Awam Lewat Taka Lab"
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+              style={{ border: 0 }}
+            />
+          ) : (
+            <>
+              {/* Static YouTube cover image placeholder - deprioritized for LCP */}
+              <Image
+                src="https://img.youtube.com/vi/PHyO3XoAGEU/hqdefault.jpg"
+                alt="EasyLegal Video Cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="object-cover opacity-90 group-hover:scale-[1.01] transition-transform duration-700"
+                fetchPriority="low"
+                placeholder="empty"
+              />
+              <div className="absolute inset-0 bg-black/20" />
+              {/* Click-to-play button */}
+              <button
+                onClick={() => setIsPlaying(true)}
+                className="absolute inset-0 w-full h-full cursor-pointer z-10 focus:outline-none focus-visible:ring-4 focus-visible:ring-red-500/50 flex items-center justify-center"
+                aria-label="Putar video"
+              >
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#B91C1C] flex items-center justify-center shadow-[0_8px_30px_rgba(185,28,28,0.4)] group-hover:scale-110 group-hover:shadow-[0_12px_40px_rgba(185,28,28,0.5)] transition-all duration-300 active:scale-95" aria-hidden="true">
+                  <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CaraKerjaSection() {
+  const [activeStep, setActiveStep] = useState(0);
+
+  const steps = [
+    {
+      num: "01",
+      title: "Pilih Layanan",
+      description: "Dapatkan 30+ jenis layanan legal sesuai kebutuhan bisnis Anda.",
+      features: [
+        "Transparansi harga sejak awal",
+        "Biaya sudah termasuk pendaftaran dan PNBP",
+        "Gratis konsultasi tanpa syarat apapun.",
+      ],
+    },
+    {
+      num: "02",
+      title: "Konsultasi Gratis",
+      description: "Hubungi tim legal kami langsung untuk membahas kebutuhan spesifik bisnis Anda.",
+      features: [
+        "Respons cepat dalam 5 menit melalui WhatsApp atau telepon.",
+        "Analisis KBLI dan kesesuaian merek gratis oleh tim expert.",
+        "Rekomendasi badan usaha yang paling efisien untuk modal Anda.",
+      ],
+    },
+    {
+      num: "03",
+      title: "Kirim Dokumen Online",
+      description: "Upload data dan dokumen pendukung dengan aman melalui partner portal kami.",
+      features: [
+        "Formulir digital terpadu — pengisian tidak sampai 10 menit.",
+        "Enkripsi data standar perbankan menjamin kerahasiaan Anda.",
+        "Notifikasi otomatis saat dokumen diverifikasi oleh tim legal.",
+      ],
+    },
+    {
+      num: "04",
+      title: "Terima Hasil Digital",
+      description: "Unduh seluruh dokumen resmi yang sudah selesai langsung dari dashboard Anda.",
+      features: [
+        "Dokumen digital ber-TTE resmi dan terdaftar di database kementerian.",
+        "Pengiriman salinan fisik/hardcopy langsung ke alamat kantor Anda.",
+        "Akses seumur hidup ke arsip dokumen legal Anda tanpa biaya tambahan.",
+      ],
+    },
+  ];
+
+  return (
+    <section className="py-12 sm:py-20 bg-white overflow-hidden relative">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
+          
+          {/* LEFT: Step-by-Step Accordion Flow */}
+          <div className="lg:col-span-5 flex flex-col justify-start">
+            <span className="text-[16px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3">
+              Cara Kerja
+            </span>
+            <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.12] tracking-[-0.02em]">
+              Empat Langkah Semua<br /> Beres Tanpa Pusing.
+            </h2>
+            <p className="mt-2 sm:mt-4 text-[16px] sm:text-[16px] text-[#6B7280] leading-relaxed max-w-[460px]">
+              Proses transparan dari konsultasi sampai dokumen di tangan Anda — semua bisa dipantau dari satu dashboard.
+            </p>
+
+            {/* Steps List Accordion */}
+            <div className="mt-8 space-y-0">
+              {steps.map((step, idx) => {
+                const isActive = activeStep === idx;
+                return (
+                  <div 
+                    key={idx} 
+                    className="border-b border-gray-100 py-5 transition-all duration-300"
+                  >
+                    {isActive ? (
+              <div className="flex flex-col text-left animate-fade-in w-full">
+                <button 
+                  onClick={() => setActiveStep(idx)}
+                  className="flex items-center gap-3 text-left group active:scale-[0.98] w-full min-h-[44px]"
+                >
+                          <span className="text-[#B91C1C] text-[16px] font-extrabold transition-transform duration-200 group-hover:translate-x-1">
+                            →
+                          </span>
+                          <span className="text-[16px] font-black text-[#111827]">
+                            {step.title}
+                          </span>
+                        </button>
+                        
+                        <div 
+                          className="mt-3 pl-7 overflow-hidden animate-fade-in-up"
+                          style={{ animationDelay: "0.1s" }}
+                        >
+                          <p className="text-[16px] text-[#6B7280] font-medium leading-relaxed mb-4">
+                            {step.description}
+                          </p>
+                          <ul className="space-y-3">
+                            {step.features.map((feat, fidx) => (
+                              <li 
+                                key={fidx} 
+                                className="flex items-start gap-3 text-[16px] text-gray-700 leading-snug animate-fade-in-up"
+                                style={{ animationDelay: `${0.15 + fidx * 0.08}s` }}
+                              >
+                                <div className="w-5 h-5 rounded-full bg-[#DCFCE7] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm border border-emerald-100">
+                                  <Check className="w-3.5 h-3.5 text-[#16A34A]" strokeWidth={3} />
+                                </div>
+                                <span className="font-medium text-gray-600">{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ) : (
+                      /* Inactive Item Row */
+              <button
+                onClick={() => setActiveStep(idx)}
+                className="flex items-center gap-4 w-full text-left py-2 hover:text-gray-900 group active:scale-[0.98] min-h-[44px]"
+              >
+                        <span className="text-[#9CA3AF] text-[16px] font-extrabold tracking-wider w-6">
+                          {step.num}
+                        </span>
+                        <span className="text-[16px] font-semibold text-gray-500 group-hover:text-gray-700 transition-colors duration-150">
+                          {step.title}
+                        </span>
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* RIGHT: Overlapping layered dashboard composition */}
+          <div className="lg:col-span-7 relative w-full h-[520px] hidden lg:flex items-center justify-center scale-90 sm:scale-100 origin-center transition-all duration-500">
+            
+            {/* Step 1 Visual Container */}
+            {activeStep === 0 && (
+              <div key="step-0" className="absolute inset-0 w-full h-full animate-step-in">
+                
+                {/* Main Photo of Smiling Professional Man */}
+                <div className="absolute top-8 left-[12%] w-[76%] h-[80%] rounded-[2rem] overflow-hidden drop-shadow-xl transition-all duration-500 bg-slate-50">
+                  <Image 
+                    src="/images/home/cara-kerja-step1.png"
+                    alt="Pilih Layanan" 
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700"
+                  />
+                </div>
+
+                {/* Floating "Akta selesai" Badge */}
+                <div className="absolute top-[12%] right-[2%] bg-white rounded-full px-3.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
+                  <div className="w-5 h-5 rounded-full bg-[#E8F5E9] flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3.5 h-3.5 text-[#2E7D32]" strokeWidth={4} />
+                  </div>
+                  <div className="flex items-baseline gap-1.5 leading-none pr-1">
+                    <span className="text-[16px] font-black text-gray-800">Akta selesai</span>
+                    <span className="text-[16px] text-gray-500 font-bold">2 menit lalu</span>
+                  </div>
+                </div>
+
+                {/* Floating "Google 4.9 Rating" Badge */}
+                <div className="absolute top-[40%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex flex-col gap-3 z-40 w-[200px] animate-float-medium">
+                  <div className="flex items-center justify-between">
+                    <span className="text-amber-500 font-extrabold text-[16px] flex items-center gap-1">★ 4.9</span>
+                    <span className="text-[16px] text-gray-400 font-black tracking-wider">GOOGLE</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex -space-x-2.5 overflow-hidden">
+                      <Image className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="User 1" width={28} height={28} />
+                      <Image className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" alt="User 2" width={28} height={28} />
+                      <Image className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" alt="User 3" width={28} height={28} />
+                    </div>
+                    <div className="leading-tight">
+                      <div className="text-[16px] font-black text-gray-800">13.000+</div>
+                      <div className="text-[16px] font-bold text-gray-500 mt-0.5">bisnis terbantu</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Gold Shield */}
+                <div className="absolute bottom-[20%] right-[0%] z-35 animate-float-slow">
+                  <div className="w-[100px] h-[100px] drop-shadow-[0_15px_20px_rgba(217,119,6,0.25)]">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="shield-gold" x1="20" y1="10" x2="80" y2="90" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#FDE047" />
+                          <stop offset="50%" stopColor="#EAB308" />
+                          <stop offset="100%" stopColor="#854D0E" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M50 5 L90 20 L90 45 C90 70 72 90 50 98 C28 90 10 70 10 45 L10 20 Z" fill="url(#shield-gold)" />
+                      <path d="M50 12 L84 25 L84 45 C84 66 68 84 50 91 C32 84 16 66 16 45 L16 25 Z" fill="none" stroke="#FEF08A" strokeWidth="2" />
+                      <path d="M35 50 L45 60 L65 35" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Main FLOATING card "01 Pilih Layanan" */}
+                <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[70%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                  {/* Card Header */}
+                  <div className="flex items-center gap-3 mb-3.5">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[16px] shadow-lg shadow-red-500/30">
+                      01
+                    </div>
+                    <div>
+                      <div className="text-[16px] font-black text-[#111827] leading-tight">Pilih Layanan</div>
+                      <div className="text-[16px] text-[#6B7280] font-semibold mt-0.5">Tentukan jasa legal yang Anda butuhkan</div>
+                    </div>
+                  </div>
+
+                  {/* 2x2 Options Grid */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* Active Option Box: Pendirian PT */}
+                    <div className="border-[1.5px] border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2.5 flex items-center gap-2 text-left shadow-sm">
+                      <div className="w-7 h-7 rounded-[8px] bg-[#B91C1C] flex items-center justify-center flex-shrink-0 shadow-md">
+                        <Building2 className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-black text-[#B91C1C] leading-tight truncate">Pendirian PT</div>
+                        <div className="text-[16px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">12 jam kerja</div>
+                      </div>
+                    </div>
+
+                    {/* Option Box: Daftar Merek */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
+                        <ShieldCheck className="w-3.5 h-3.5 text-gray-400" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-700 leading-tight truncate">Daftar Merek</div>
+                        <div className="text-[16px] font-semibold text-gray-400 mt-0.5 leading-none">1 hari</div>
+                      </div>
+                    </div>
+
+                    </div>
+                </div>
+
+                              </div>
+            )}
+
+            {/* Step 2 Visual Container */}
+            {activeStep === 1 && (
+              <div key="step-1" className="absolute inset-0 w-full h-full animate-step-in">
+                
+                {/* Main Photo of Lawyer/Consultant */}
+                <div className="absolute top-8 left-[12%] w-[76%] h-[80%] rounded-[2rem] overflow-hidden drop-shadow-xl transition-all duration-500 bg-slate-50">
+                  <Image
+                    src="/images/home/promo-bule2.png"
+                    alt="Konsultasi Gratis"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700"
+                  />
+                </div>
+
+
+
+                {/* "Konsultasi Aktif — Online" Badge */}
+                <div className="absolute top-[12%] right-[2%] bg-white rounded-full px-3.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
+                  <div className="w-5 h-5 rounded-full bg-[#E8F5E9] flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3.5 h-3.5 text-[#2E7D32]" strokeWidth={4} />
+                  </div>
+                  <div className="flex items-baseline gap-1.5 pr-1">
+                    <span className="text-[16px] font-black text-gray-800">Konsultasi Aktif</span>
+                    <span className="text-[16px] text-green-600 font-bold">Online</span>
+                  </div>
+                </div>
+
+                {/* "Jadwal Terkonfirmasi" Badge */}
+                <div className="absolute top-[40%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-3 z-40 w-[200px] animate-float-medium">
+                  <div className="w-10 h-10 rounded-full border-[2px] border-emerald-500 flex items-center justify-center text-[16px] font-black text-emerald-600 flex-shrink-0 bg-emerald-50">
+                    OK
+                  </div>
+                  <div className="leading-tight min-w-0">
+                    <div className="text-[16px] font-black text-gray-800 truncate">Jadwal Fix</div>
+                    <div className="text-[16px] text-gray-500 font-bold mt-1 truncate">Hari Ini · 14.00 WIB</div>
+                  </div>
+                </div>
+
+                {/* 5.0 Rating Badge */}
+                <div className="absolute bottom-[20%] right-[0%] bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex flex-col gap-2 z-40 w-[180px] animate-float-slow">
+                  <div className="flex items-center justify-between">
+                    <span className="text-amber-500 font-extrabold text-[16px] flex items-center gap-1">★ 5.0</span>
+                    <span className="text-[16px] text-gray-400 font-black tracking-wider">RATING</span>
+                  </div>
+                  <div className="leading-tight">
+                    <div className="text-[16px] font-black text-gray-800">Paham Hukum</div>
+                    <div className="text-[16px] text-gray-500 font-bold mt-1">100% Solutif</div>
+                  </div>
+                </div>
+
+                {/* "02 Hubungi Ahli" Card */}
+                <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[70%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                  {/* Card Header */}
+                  <div className="flex items-center gap-3 mb-3.5">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[16px] shadow-lg shadow-red-500/30">
+                      02
+                    </div>
+                    <div>
+                      <div className="text-[16px] font-black text-[#111827] leading-tight">Hubungi Ahli</div>
+                      <div className="text-[16px] text-[#6B7280] font-semibold mt-0.5">Konsultasi hukum & bisnis gratis</div>
+                    </div>
+                  </div>
+
+                  {/* 2x2 Options Grid */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* WhatsApp */}
+                    <div className="border-[1.5px] border-green-500 bg-green-50/50 rounded-xl p-2.5 flex items-center gap-2 text-left shadow-sm">
+                      <div className="w-7 h-7 rounded-[8px] bg-green-500 flex items-center justify-center flex-shrink-0 shadow-md">
+                        <MessageCircle className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-black text-gray-800 leading-tight truncate">WhatsApp</div>
+                        <div className="text-[16px] font-extrabold text-green-600 mt-0.5 leading-none">Online 24/7</div>
+                      </div>
+                    </div>
+
+                    {/* Zoom Call */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-blue-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-700 leading-tight truncate">Zoom Call</div>
+                        <div className="text-[16px] font-semibold text-gray-400 mt-0.5 leading-none">Jadwalkan</div>
+                      </div>
+                    </div>
+
+                    {/* Telepon */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-amber-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <Phone className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-700 leading-tight truncate">Telepon</div>
+                        <div className="text-[16px] font-semibold text-gray-400 mt-0.5 leading-none">Tanya Ahli</div>
+                      </div>
+                    </div>
+
+                    {/* Kantor Kami */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-purple-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <MapPin className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-700 leading-tight truncate">Kantor Kami</div>
+                        <div className="text-[16px] font-semibold text-gray-400 mt-0.5 leading-none">Kunjungan</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 3 Visual Container */}
+            {activeStep === 2 && (
+              <div key="step-2" className="absolute inset-0 w-full h-full animate-step-in">
+                
+                {/* Main Photo */}
+                <div className="absolute top-8 left-[12%] w-[76%] h-[80%] rounded-[2rem] overflow-hidden drop-shadow-xl transition-all duration-500 bg-slate-50">
+                  <Image
+                    src="/images/home/promo-bule3.png"
+                    alt="Kirim Dokumen Online"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700"
+                  />
+                </div>
+
+                {/* "Draft Akta Selesai!" — left side */}
+                <div className="absolute top-[20%] -left-[2%] bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.04] flex items-center gap-3 z-40 animate-float-slow">
+                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center flex-shrink-0 border border-red-100">
+                    <FileText className="w-5 h-5 text-[#B91C1C]" />
+                  </div>
+                  <div className="leading-tight pr-2">
+                    <div className="text-[16px] font-black text-gray-800">Draft Akta Selesai!</div>
+                    <div className="text-[16px] font-bold text-gray-500 mt-1">Siap Ditinjau</div>
+                  </div>
+                </div>
+
+                {/* "Secure Vault SSL" — right side, top */}
+                <div className="absolute top-[35%] right-[0%] bg-white rounded-full px-4 py-2.5 shadow-[0_12px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
+                  <Lock className="w-4 h-4 text-[#B91C1C]" />
+                  <span className="text-[16px] font-black text-gray-800">Secure Vault SSL</span>
+                </div>
+
+                {/* "92% Verifikasi Berkas" — right side, middle */}
+                <div className="absolute top-[55%] -right-[5%] bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.08)] border border-black/[0.04] flex items-center gap-3 z-30 w-[190px] animate-float-medium">
+                  <div className="w-10 h-10 rounded-full border-2 border-[#B91C1C] flex items-center justify-center text-[16px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50/50">
+                    92%
+                  </div>
+                  <div className="leading-tight min-w-0">
+                    <div className="text-[16px] font-black text-gray-800 truncate">Verifikasi Berkas</div>
+                    <div className="text-[16px] font-bold text-gray-500 mt-1 truncate">Oleh Tim Ahli Legal</div>
+                  </div>
+                </div>
+
+                {/* "03 Upload Dokumen" Card — bottom */}
+                <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[70%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                  {/* Card Header */}
+                  <div className="flex items-center gap-3 mb-3.5">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[16px] shadow-lg shadow-red-500/30">
+                      03
+                    </div>
+                    <div>
+                      <div className="text-[16px] font-black text-[#111827] leading-tight">Upload Dokumen</div>
+                      <div className="text-[16px] text-[#6B7280] font-semibold mt-0.5">Kirim berkas dengan mudah & aman</div>
+                    </div>
+                  </div>
+
+                  {/* 2x2 Options Grid */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* KTP & NPWP */}
+                    <div className="border-[1.5px] border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2.5 flex items-center gap-2 text-left shadow-sm">
+                      <div className="w-7 h-7 rounded-[8px] bg-[#B91C1C] flex items-center justify-center flex-shrink-0 shadow-md">
+                        <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-black text-[#B91C1C] leading-tight truncate">KTP & NPWP</div>
+                        <div className="text-[16px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Verified</div>
+                      </div>
+                    </div>
+
+                    {/* KK & Akta */}
+                    <div className="shadow-sm border border-gray-100 bg-[#FFF7ED] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
+                        <div className="text-[16px] font-bold text-orange-600 mt-0.5 leading-none">Verified</div>
+                      </div>
+                    </div>
+
+                    {/* Nama PT */}
+                    <div className="shadow-sm border border-gray-100 bg-[#F0FDF4] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-green-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-800 leading-tight truncate">Nama PT</div>
+                        <div className="text-[16px] font-bold text-green-600 mt-0.5 leading-none">Verified</div>
+                      </div>
+                    </div>
+
+                    {/* Modal Usaha */}
+                    <div className="shadow-sm border border-gray-100 bg-white rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-blue-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
+                        <div className="text-[16px] font-bold text-blue-500 mt-0.5 leading-none">Ready</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 4 Visual Container */}
+            {/* Step 4 Visual Container */}
+            {activeStep === 3 && (
+              <div key="step-3" className="absolute inset-0 w-full h-full animate-step-in">
+                
+                {/* Main Photo */}
+                <div className="absolute top-8 left-[12%] w-[76%] h-[80%] rounded-[2rem] overflow-hidden drop-shadow-xl transition-all duration-500 bg-slate-50">
+                  <Image
+                    src="/images/home/promo-bule4.png"
+                    alt="Terima Hasil Digital"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700"
+                  />
+                </div>
+
+                {/* "Draft Akta Selesai!" — left side top */}
+                <div className="absolute top-[15%] -left-[2%] bg-white rounded-2xl p-3 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.04] flex items-center gap-3 z-40 animate-float-slow">
+                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center flex-shrink-0 border border-red-100">
+                    <FileText className="w-5 h-5 text-[#B91C1C]" />
+                  </div>
+                  <div className="leading-tight pr-2">
+                    <div className="text-[16px] font-black text-gray-800">Draft Akta Selesai!</div>
+                    <div className="text-[16px] font-bold text-gray-500 mt-1">Siap Ditinjau</div>
+                  </div>
+                </div>
+
+                {/* "New Message" Notification — left side below */}
+                <div className="absolute top-[32%] -left-[5%] bg-white/95 backdrop-blur-sm rounded-[16px] p-3 shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 flex items-start gap-3 z-40 w-[240px] animate-float-medium">
+                   <div className="w-9 h-9 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[16px] font-bold flex-shrink-0">EL</div>
+                   <div className="leading-tight min-w-0 pt-0.5 w-full">
+                     <div className="flex justify-between items-center mb-1">
+                       <span className="text-[16px] font-black text-gray-800">EasyLegal</span>
+                       <span className="text-[16px] font-bold text-gray-400">10:24 AM</span>
+                     </div>
+                     <p className="text-[16px] text-gray-600 leading-snug">Your document has been completed...</p>
+                   </div>
+                </div>
+
+                {/* "Hardcopy Terkirim" — right side, top */}
+                <div className="absolute top-[25%] right-[2%] bg-white rounded-full px-4 py-2.5 shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-2.5 z-40 animate-bounce-slow">
+                  <div className="w-6 h-6 rounded-full bg-red-50 flex items-center justify-center">
+                    <Truck className="w-3.5 h-3.5 text-[#B91C1C]" />
+                  </div>
+                  <span className="text-[16px] font-black text-gray-800">Hardcopy Terkirim</span>
+                </div>
+
+                {/* "100% Selesai & Legal" — right side, middle */}
+                <div className="absolute top-[50%] -right-2 bg-white rounded-2xl p-4 shadow-[0_15px_30px_rgba(0,0,0,0.1)] border border-black/[0.03] flex items-center gap-3 z-40 w-[200px] animate-float-medium">
+                  <div className="w-10 h-10 rounded-full border-[2px] border-[#B91C1C] flex items-center justify-center text-[16px] font-black text-[#B91C1C] flex-shrink-0 bg-red-50 shadow-sm">
+                    100%
+                  </div>
+                  <div className="leading-tight min-w-0">
+                    <div className="text-[16px] font-black text-gray-800 truncate">Selesai & Legal</div>
+                    <div className="text-[16px] font-bold text-gray-500 mt-1 truncate">Bisnis Siap Jalan!</div>
+                  </div>
+                </div>
+
+                {/* "04 Terima Hasil" Card — bottom */}
+                <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[70%] bg-white/95 backdrop-blur-sm rounded-[24px] p-4 shadow-[0_25px_60px_rgba(0,0,0,0.12)] z-40 border border-white">
+                  {/* Card Header */}
+                  <div className="flex items-center gap-3 mb-3.5">
+                    <div className="w-9 h-9 rounded-[10px] bg-[#B91C1C] flex items-center justify-center text-white font-black text-[16px] shadow-lg shadow-red-500/30">
+                      04
+                    </div>
+                    <div>
+                      <div className="text-[16px] font-black text-[#111827] leading-tight">Terima Hasil</div>
+                      <div className="text-[16px] text-[#6B7280] font-semibold mt-0.5">Unduh berkas legalitas resmi Anda</div>
+                    </div>
+                  </div>
+
+                  {/* 2x2 Options Grid */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* Akta PT */}
+                    <div className="border-[1.5px] border-[#B91C1C] bg-[#FEF2F2] rounded-xl p-2.5 flex items-center gap-2 text-left shadow-sm">
+                      <div className="w-7 h-7 rounded-[8px] bg-[#B91C1C] flex items-center justify-center flex-shrink-0 shadow-md">
+                        <Download className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-black text-[#B91C1C] leading-tight truncate">Akta PT</div>
+                        <div className="text-[16px] font-extrabold text-[#B91C1C]/80 mt-0.5 leading-none">Unduh PDF</div>
+                      </div>
+                    </div>
+
+                    {/* KK & Akta */}
+                    <div className="shadow-sm border border-gray-100 bg-[#FFF7ED] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <Download className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-800 leading-tight truncate">KK & Akta</div>
+                        <div className="text-[16px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
+                      </div>
+                    </div>
+
+                    {/* NIB & OSS */}
+                    <div className="shadow-sm border border-gray-100 bg-[#FFF7ED] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <Download className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-800 leading-tight truncate">NIB & OSS</div>
+                        <div className="text-[16px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
+                      </div>
+                    </div>
+
+                    {/* Modal Usaha */}
+                    <div className="shadow-sm border border-gray-100 bg-[#FFF7ED] rounded-xl p-2.5 flex items-center gap-2 text-left">
+                      <div className="w-7 h-7 rounded-[8px] bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                        <Download className="w-3.5 h-3.5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[16px] font-bold text-gray-800 leading-tight truncate">Modal Usaha</div>
+                        <div className="text-[16px] font-bold text-orange-600 mt-0.5 leading-none">Unduh PDF</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── COMPONENT ─── */
+
+export default function HomeGadsPage({ articles }: { articles: ArticleItem[] }) {
+  const whyChooseRef = useRef<HTMLElement>(null);
+  const quickToolsRef = useRef<HTMLDivElement>(null);
+  const partnersRef = useRef<HTMLElement>(null);
+  const whyChooseHeaderRef = useRef<HTMLDivElement>(null);
+  const videoProfilHeaderRef = useRef<HTMLDivElement>(null);
+  const trackingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Quick Tools Observer
+    const quickToolsEl = quickToolsRef.current;
+    let quickToolsObs: IntersectionObserver | null = null;
+    if (quickToolsEl) {
+      quickToolsObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          quickToolsEl.classList.add("revealed");
+          quickToolsObs?.unobserve(quickToolsEl);
+        }
+      }, { rootMargin: "0px 0px -30% 0px" });
+      quickToolsObs.observe(quickToolsEl);
+    }
+
+    // Partners Observer
+    const partnersEl = partnersRef.current;
+    let partnersObs: IntersectionObserver | null = null;
+    if (partnersEl) {
+      partnersObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          partnersEl.classList.add("revealed");
+          partnersObs?.unobserve(partnersEl);
+        }
+      });
+      partnersObs.observe(partnersEl);
+    }
+
+    // Why Choose Section Observer (Bento revealed)
+    const whyChooseEl = whyChooseRef.current;
+    let whyChooseObs: IntersectionObserver | null = null;
+    if (whyChooseEl) {
+      whyChooseObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          whyChooseEl.classList.add("bento-revealed");
+          whyChooseObs?.unobserve(whyChooseEl);
+        }
+      }, { rootMargin: "0px 0px -15% 0px" });
+      whyChooseObs.observe(whyChooseEl);
+    }
+
+    // Tracking Section Observer
+    const trackingEl = trackingRef.current;
+    let trackingObs: IntersectionObserver | null = null;
+    if (trackingEl) {
+      trackingObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          trackingEl.classList.add("revealed");
+          trackingObs?.unobserve(trackingEl);
+        }
+      }, { rootMargin: "0px 0px -20% 0px" });
+      trackingObs.observe(trackingEl);
+    }
+
+    // Why Choose Header Observer
+    const whyChooseHeaderEl = whyChooseHeaderRef.current;
+    let whyChooseHeaderObs: IntersectionObserver | null = null;
+    if (whyChooseHeaderEl) {
+      whyChooseHeaderObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          whyChooseHeaderEl.classList.add("revealed");
+          whyChooseHeaderObs?.unobserve(whyChooseHeaderEl);
+        }
+      }, { rootMargin: "0px 0px -50px 0px" });
+      whyChooseHeaderObs.observe(whyChooseHeaderEl);
+    }
+
+    // Video Profil Header Observer
+    const videoProfilHeaderEl = videoProfilHeaderRef.current;
+    let videoProfilHeaderObs: IntersectionObserver | null = null;
+    if (videoProfilHeaderEl) {
+      videoProfilHeaderObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          videoProfilHeaderEl.classList.add("revealed");
+          videoProfilHeaderObs?.unobserve(videoProfilHeaderEl);
+        }
+      }, { rootMargin: "-50px" });
+      videoProfilHeaderObs.observe(videoProfilHeaderEl);
+    }
+
+    return () => {
+      quickToolsObs?.disconnect();
+      partnersObs?.disconnect();
+      whyChooseObs?.disconnect();
+      whyChooseHeaderObs?.disconnect();
+      videoProfilHeaderObs?.disconnect();
+      trackingObs?.disconnect();
+    };
+  }, []);
+
+  return (
+    <div className="flex flex-col min-h-screen">
+
+      {/* ═══════════════════════════════════════════
+          HERO SECTION
+          ═══════════════════════════════════════════ */}
+      <Hero
+        gsapClasses={{
+          tag: "hero-animate-tag",
+          heading: "hero-animate-heading",
+          desc: "hero-animate-desc",
+          cta: "hero-animate-cta",
+          badges: "hero-animate-badges",
+          float: "hero-animate-float",
+        }}
+      />
+
+      {/* ═══════════════════════════════════════════
+          QUICK TOOLS & STATS
+          ═══════════════════════════════════════════ */}
+      <section className="bg-transparent relative z-20">
+
+
+        {/* Premium Statistics Redesign */}
+        <div className="relative z-20 -mt-6 sm:-mt-10 max-w-[1240px] mx-auto px-5 sm:px-8 mb-10">
+          <div className="bg-gradient-to-br from-[#9B1C1C] to-[#6A0D0D] rounded-[16px] sm:rounded-[20px] p-0.5 sm:p-1 shadow-[0_12px_30px_rgba(155,28,28,0.12)] relative overflow-hidden group">
+            {/* Ambient Background Flares */}
+            <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-white/10 rounded-full blur-[80px] pointer-events-none transition-transform duration-1000 group-hover:translate-x-10" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[300px] h-[300px] bg-black/20 rounded-[60px] blur-[60px] pointer-events-none" />
+            
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[14px] sm:rounded-[18px] py-5 sm:py-8 px-5 sm:px-10 relative z-10">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 sm:gap-y-8 lg:gap-y-0 gap-x-4 sm:gap-x-8 lg:gap-x-0 lg:divide-x lg:divide-white/15">
+                {[
+                  { value: "13.000+", label: "Bisnis Terlayani" },
+                  { value: "30+", label: "Jenis Layanan Legal" },
+                  { value: "4.9", label: "Rating Google (700+ Ulasan)" },
+                  { value: "3", label: "Kantor Cabang" }
+                ].map((stat, idx) => (
+                  <div key={idx} className="flex flex-col items-center justify-center text-center px-3 md:px-5 cursor-default">
+                    <div className="text-[28px] sm:text-[36px] lg:text-[42px] font-black text-white tracking-tighter leading-none mb-2 sm:mb-3 hover:scale-105 transition-transform duration-500 ease-out origin-center">
+                      {stat.value}
+                    </div>
+                    <div className="text-[11px] sm:text-[12px] font-bold text-red-100/70 tracking-[0.1em] uppercase hover:text-white transition-colors duration-300">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          QUICK TOOLS — floating strip overlapping hero
+          ═══════════════════════════════════════════ */}
+      {/* ═══════════════════════════════════════════
+          TAGLINE CARDS
+          ═══════════════════════════════════════════ */}
+      <div
+        className="relative z-20 mb-6 sm:mb-8 animate-scroll-reveal"
+        ref={quickToolsRef}
+      >
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="mb-10 sm:mb-16 text-center flex flex-col items-center animate-scroll-reveal" ref={whyChooseHeaderRef}>
+            <span className="text-[14px] sm:text-[16px] font-extrabold text-[#9B1C1C] tracking-[0.2em] uppercase mb-2 sm:mb-3 inline-block">
+              KENAPA EASYLEGAL
+            </span>
+            <h2 className="text-[28px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.15] tracking-tight max-w-2xl mb-4">
+              Fondasi legalitas bisnis
+            </h2>
+            <p className="text-[15px] sm:text-[16px] text-gray-500 max-w-3xl leading-relaxed">
+              Bukan sekadar urus dokumen. EasyLegal jadi mitra legalitas bisnis yang mendampingi lewat Personal Legal Assistant bergelar Sarjana Hukum dari awal hingga tuntas, dengan biaya transparan dan respons cepat kapan saja dibutuhkan.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            
+            {/* Card 1: MUDAH */}
+            <div className="bg-white rounded-[24px] p-8 lg:p-10 border border-[#F0F0F0] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[180px]">
+              <div className="w-14 h-14 rounded-[16px] bg-red-50 flex items-center justify-center mb-5">
+                <Sparkles className="w-[26px] h-[26px] text-[#9B1C1C]" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-[24px] font-black text-gray-900 tracking-tight uppercase">
+                MUDAH
+              </h3>
+            </div>
+
+            {/* Card 2: CEPAT */}
+            <div className="bg-[#4A0404] rounded-[24px] p-8 lg:p-10 shadow-[0_20px_40px_-15px_rgba(74,4,4,0.4)] transition-transform duration-300 hover:-translate-y-1 flex flex-col items-center justify-center text-center min-h-[180px]">
+              <div className="w-14 h-14 rounded-[16px] bg-white/10 flex items-center justify-center mb-5">
+                <Zap className="w-[26px] h-[26px] text-white" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-[24px] font-black text-white tracking-tight uppercase">
+                CEPAT
+              </h3>
+            </div>
+
+            {/* Card 3: TERPERCAYA */}
+            <div className="bg-white rounded-[24px] p-8 lg:p-10 border border-[#F0F0F0] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[180px]">
+              <div className="w-14 h-14 rounded-[16px] bg-red-50 flex items-center justify-center mb-5">
+                <ShieldCheck className="w-[26px] h-[26px] text-[#9B1C1C]" strokeWidth={2.5} />
+              </div>
+              <h3 className="text-[24px] font-black text-gray-900 tracking-tight uppercase flex items-center justify-center">
+                TERPERCAYA
+              </h3>
+            </div>
+
+            </div>
+          </div>
+        </div>
+
+      {/* ═══════════════════════════════════════════
+          WHY CHOOSE EL PARTNERS
+          ═══════════════════════════════════════════ */}
+      <section
+        className="pt-16 sm:pt-20 pb-16 sm:pb-24 bg-[#FAF9F6]"
+        ref={whyChooseRef}
+      >
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
+
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            
+            {/* Card 1: Proses cepat & terlacak */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
+              <div>
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses Cepat & Terlacak</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Mulai dari 12 jam kerja untuk layanan tercepat, dengan progres yang dipantau secara real-time. (Estimasi waktu bervariasi tergantung jenis layanan)</p>
+              </div>
+            </div>
+
+            {/* Card 2: Personal Legal Assistant (PLA) */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
+              <div>
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Personal Legal Assistant (PLA)</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Didampingi PLA & Legal Officer bergelar Sarjana Hukum yang responsif dan berpengalaman, dari konsultasi awal hingga seluruh proses legalitas selesai.</p>
+              </div>
+            </div>
+
+            {/* Card 3: Legalitas & sertifikasi resmi */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
+              <div>
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Legalitas & Sertifikasi Resmi</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Terdaftar PSE Kominfo, tersertifikasi ISO 9001 untuk standar manajemen mutu dan ISO 27001 untuk keamanan data dan informasi klien.</p>
+              </div>
+            </div>
+
+            {/* Card 4: Harga transparan, tanpa kejutan */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
+              <div>
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Biaya All-In, Tanpa Biaya Tersembunyi</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Semua biaya tertera jelas di awal sebelum proses dimulai, tanpa ada biaya tambahan yang muncul di kemudian hari.</p>
+              </div>
+            </div>
+
+            {/* Card 5: Kualitas & Garansi Terjamin */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
+              <div>
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Kualitas & Garansi Terjamin</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Bekerja sama dengan notaris berpengalaman untuk memastikan dokumen sah secara hukum. Garansi uang kembali jika dokumen legalitas tidak selesai. (Syarat & ketentuan berlaku)</p>
+              </div>
+            </div>
+
+            {/* Card 6: Proses fleksibel, Offline atau 100% Online */}
+            <div className="bg-white rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group flex flex-col justify-start min-h-[170px] sm:min-h-[220px]">
+              <div>
+                <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center border border-black/[0.02] shadow-sm mb-3 sm:mb-6 flex-shrink-0">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                </div>
+                <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight mb-1 sm:mb-2">Proses Fleksibel, Offline Atau 100% Online</h3>
+                <p className="text-gray-400 sm:text-gray-500 text-[15px] sm:text-[15px] leading-relaxed">Proses legalitas bisa dilakukan secara tatap muka langsung di kantor EasyLegal, atau sepenuhnya secara online dari mana saja sesuai kebutuhan.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          PROMO & MARKETPLACE
+          ═══════════════════════════════════════════ */}
+      <BottomPromoSection />
+
+      {/* ═══════════════════════════════════════════
+          LAYANAN KAMI
+          ═══════════════════════════════════════════ */}
+      <LayananKami />
+
+      {/* ═══════════════════════════════════════════
+          CARA KERJA
+          ═══════════════════════════════════════════ */}
+      <CaraKerjaSection />
+
+      {/* ═══════════════════════════════════════════
+          TRACKING REAL-TIME SECTION
+          ═══════════════════════════════════════════ */}
+      <section className="py-16 sm:py-24 bg-[#FAF9F6] animate-scroll-reveal" ref={trackingRef}>
+        <div className="max-w-[800px] mx-auto px-5 sm:px-8">
+          <div className="mb-6 sm:mb-10 text-center">
+            <span className="text-[14px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-2 sm:mb-3 inline-block">
+              TRANSPARANSI PENUH
+            </span>
+            <h2 className="text-[28px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.15] tracking-tight mb-4">
+              Pantau progress legalitas<br className="hidden sm:inline" /> dari HP Anda.
+            </h2>
+          </div>
+          
+          <div>
+            {/* Row 2, Col 4 (Span vertical / Full on mobile): Tracking real-time mockup card */}
+            <div className="bg-[#FAF9F6]/30 rounded-2xl lg:rounded-3xl p-4 sm:p-8 shadow-sm border border-black/[0.02] shadow-[0_4px_20px_rgba(0,0,0,0.015)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 group w-full flex flex-col justify-between">
+              <div>
+                {/* Mockup Header on Mobile */}
+                <div className="flex items-center gap-2 sm:gap-3 mb-4">
+                  <div className="w-9 h-9 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm border border-black/[0.02] shadow-sm flex-shrink-0">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#B91C1C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012-2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-[16px] sm:text-[16px] font-bold text-gray-900 leading-tight">Tracking real-time</h3>
+                    <p className="text-[16px] sm:text-[16px] text-gray-400 sm:text-gray-500 leading-none mt-0.5">Pantau setiap tahap pengurusan dari dashboard.</p>
+                  </div>
+                </div>
+
+                {/* Mockup Tracking */}
+                <div className="space-y-2 sm:space-y-3 mb-2 sm:mb-8">
+                  {/* Step 1 */}
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-sm border border-black/[0.02] flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#10B981] flex items-center justify-center">
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-[16px] sm:text-[16px] font-semibold text-gray-800">Konsultasi</span>
+                    </div>
+                    <span className="text-[16px] sm:text-[16px] font-bold text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Done</span>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-sm border border-black/[0.02] flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#10B981] flex items-center justify-center">
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-[16px] sm:text-[16px] font-semibold text-gray-800">Cek Nama PT</span>
+                    </div>
+                    <span className="text-[16px] sm:text-[16px] font-bold text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Done</span>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-red-100 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#B91C1C] flex items-center justify-center text-white text-[16px] sm:text-[16px] font-bold">
+                        3
+                      </div>
+                      <span className="text-[16px] sm:text-[16px] font-semibold text-gray-800 font-bold">Akta Notaris</span>
+                    </div>
+                    <span className="text-[16px] sm:text-[16px] font-bold text-[#B91C1C] bg-[#B91C1C]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">Jalan</span>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-sm border border-black/[0.02] flex items-center justify-between opacity-50">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 text-[16px] sm:text-[16px] font-bold">
+                        4
+                      </div>
+                      <span className="text-[16px] sm:text-[16px] font-semibold text-gray-400">Pengesahan AHU</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* ═══════════════════════════════════════════
+          VIDEO PROFILE
+          ═══════════════════════════════════════════ */}
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="max-w-[1000px] mx-auto px-5 sm:px-8">
+          <div 
+            className="text-left sm:text-center mb-6 sm:mb-16 animate-scroll-reveal"
+            ref={videoProfilHeaderRef}
+          >
+            <span className="text-[16px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em] mb-1.5 sm:mb-3 inline-block">
+              Video Profil
+            </span>
+            <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] leading-[1.25] sm:leading-[1.12] tracking-[-0.02em]">
+              Lihat Bagaimana EasyLegal<br className="hidden sm:inline" /> Membantu Anda.
+            </h2>
+          </div>
+          <VideoEmbedSection />
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          LIPUTAN MEDIA
+          ═══════════════════════════════════════════ */}
+      <MediaCoverage />
+
+      {/* ═══════════════════════════════════════════
+          TESTIMONIALS
+          ═══════════════════════════════════════════ */}
+      <Testimonials />
+
+      {/* ═══════════════════════════════════════════
+          INFORMASI HUKUM TERBARU
+          ═══════════════════════════════════════════ */}
+      <InformasiHukumSection articles={articles} />
+
+
+
+
+    </div>
+  );
+}

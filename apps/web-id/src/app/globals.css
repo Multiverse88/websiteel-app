@@ -1,0 +1,446 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #990202;
+  --color-primary-light: #FEF2F2;
+  --color-primary-hover: #7A0101;
+  --color-crimson: #990202;
+  --color-crimson-light: #FEF2F2;
+  --color-crimson-accent: #FCDCDC;
+  --color-dark: #111827;
+  --color-dark-light: #1F2937;
+  --color-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --color-bg-light: #F9FAFB;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #1EA760;
+
+  --font-sans: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
+  --breakpoint-xs: 375px;
+}
+
+.dashboard-shell {
+  /* Colors */
+  --color-primary: #990202;
+  --color-primary-hover: #7A0101;
+  --color-primary-light: #FEF2F2;
+  --color-secondary: #B91C1C;
+  --color-tertiary: #FECACA;
+  --color-background: #F9FAFB;
+  --color-surface: #FFFFFF;
+  --color-success: #059669;
+  --color-warning: #D97706;
+  --color-error: #DC2626;
+  --color-info: #990202;
+  --color-text-main: #0F172A;
+  --color-text-muted: #475569;
+  --color-text-disabled: #94A3B8;
+  --color-border: #E5E7EB;
+  --color-border-focus: #CBD5E1;
+
+  /* Rounded */
+  --radius-card: 12px;
+  --radius-button: 8px;
+  --radius-input: 8px;
+  --radius-badge: 6px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-modal: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling and better font rendering */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism card */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* MediCare+ Elevaton Shadows */
+.shadow-subtle {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-medium {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-large {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-overlay {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Dashboard card shadows */
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+.shadow-card-hover {
+  box-shadow: var(--shadow-card-hover);
+}
+.shadow-modal {
+  box-shadow: var(--shadow-modal);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D62828;
+}
+
+/* Noise overlay helper */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Ambient radial gradients for depth */
+.ambient-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% -20%, rgba(214, 40, 40, 0.03), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@keyframes scrollReveal {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-scroll-reveal { opacity: 0; }
+.animate-scroll-reveal.revealed {
+  animation: scrollReveal 0.6s cubic-bezier(0.16, 1, 0.36, 1) forwards;
+}
+
+@keyframes stepIn {
+  from { opacity: 0; transform: scale(0.96) translateX(30px); }
+  to { opacity: 1; transform: scale(1) translateX(0); }
+}
+
+.animate-step-in {
+  animation: stepIn 0.45s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Accordion grid */
+.accordion-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.accordion-grid.open { grid-template-rows: 1fr; }
+.accordion-grid > div { overflow: hidden; }
+
+/* Page entry animation */
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-page-enter {
+  animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hero section animations */
+@keyframes fadeInUpHero {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUpHeading {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-animate-tag { animation: fadeInUpHero 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.hero-animate-heading { animation: fadeInUpHeading 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards; opacity: 0; }
+.hero-animate-desc { animation: fadeInUpHero 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+.hero-animate-cta { animation: fadeInUpHero 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards; opacity: 0; }
+.hero-animate-badges { animation: fadeInUpHero 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; opacity: 0; }
+
+@media (min-width: 768px) {
+  .bento-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .bento-revealed .bento-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .bento-revealed .bento-card:nth-child(1) { transition-delay: 0s; }
+  .bento-revealed .bento-card:nth-child(2) { transition-delay: 0.1s; }
+  .bento-revealed .bento-card:nth-child(3) { transition-delay: 0.2s; }
+  .bento-revealed .bento-card:nth-child(4) { transition-delay: 0.3s; }
+  .bento-revealed .bento-card:nth-child(5) { transition-delay: 0.4s; }
+  .bento-revealed .bento-card:nth-child(6) { transition-delay: 0.5s; }
+  .bento-revealed .bento-card:nth-child(7) { transition-delay: 0.6s; }
+  .bento-revealed .bento-card:nth-child(8) { transition-delay: 0.7s; }
+
+  .layanan-card {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .layanan-revealed .layanan-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .layanan-revealed .layanan-card:nth-child(1) { transition-delay: 0s; }
+  .layanan-revealed .layanan-card:nth-child(2) { transition-delay: 0.06s; }
+  .layanan-revealed .layanan-card:nth-child(3) { transition-delay: 0.12s; }
+  .layanan-revealed .layanan-card:nth-child(4) { transition-delay: 0.18s; }
+  .layanan-revealed .layanan-card:nth-child(5) { transition-delay: 0.24s; }
+  .layanan-revealed .layanan-card:nth-child(6) { transition-delay: 0.3s; }
+  .layanan-revealed .layanan-card:nth-child(7) { transition-delay: 0.36s; }
+  .layanan-revealed .layanan-card:nth-child(8) { transition-delay: 0.42s; }
+  .layanan-revealed .layanan-card:nth-child(9) { transition-delay: 0.48s; }
+}
+
+/* Hide CTA on blog pages */
+body:has(.blog-page-container) #footer-cta,
+body:has(.blog-detail-container) #footer-cta,
+body:has(.has-service-cta) #footer-cta {
+  display: none !important;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-slide-down,
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-scroll-reveal,
+  .animate-step-in,
+  .animate-page-enter {
+    animation: none !important;
+  }
+}
+
+/* Editor image overlay */
+.prose-editor img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 0;
+  display: block;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.prose-editor .img-wrapper {
+  position: relative;
+  margin: 16px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.prose-editor .img-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: 12px;
+  z-index: 10;
+}
+.prose-editor .img-wrapper:hover .img-overlay { opacity: 1; }
+.prose-editor .img-btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+.prose-editor .img-btn-edit { background: white; color: #374151; }
+.prose-editor .img-btn-edit:hover { background: #f3f4f6; }
+.prose-editor .img-btn-delete { background: #dc2626; color: white; }
+.prose-editor .img-btn-delete:hover { background: #b91c1c; }
+
+/* Marquee keyframes for desktop */
+@keyframes marquee-left {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marquee-right {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+.animate-marquee-left {
+  animation: marquee-left 120s linear infinite;
+  will-change: transform;
+}
+/* Faster variant for the shorter "Supported By" bank-logo row (8 logos) —
+   the shared 120s duration is tuned for the 59-logo client row and crawls
+   too slowly for a much shorter list. */
+.animate-marquee-left-fast {
+  animation: marquee-left 60s linear infinite;
+  will-change: transform;
+}
+.animate-marquee-right {
+  animation: marquee-right 120s linear infinite;
+  will-change: transform;
+}
+
+/* Floating & Bouncing Animations (GPU accelerated via translate3d) */
+@keyframes floatSlow {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes floatMedium {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -6px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes bounceSlow {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+  will-change: transform;
+}
+.animate-float-medium {
+  animation: floatMedium 4s ease-in-out infinite;
+  will-change: transform;
+}
+.animate-bounce-slow {
+  animation: bounceSlow 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Mobile performance overrides */
+@media (max-width: 768px) {
+  .marquee-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Disable active float / bounce animations */
+  .animate-float-slow,
+  .animate-float-medium,
+  .animate-bounce-slow,
+  [class*="animate-float"],
+  [class*="animate-bounce"] {
+    animation: none !important;
+  }
+  
+  /* Instantly show scroll reveal elements to avoid CPU layout calc on scroll */
+  .animate-scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  /* Disable delayed transitions on bento/layanan cards */
+  .bento-card,
+  .layanan-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Override Next.js Image inline width:auto;height:auto on logos */
+.navbar-logo img {
+  height: 52px !important;
+  width: auto !important;
+}
+.footer-logo-lg img {
+  height: 100px !important;
+  width: auto !important;
+}
+.footer-logo-sm img {
+  height: 60px !important;
+  width: auto !important;
+}
+
+/* ── Dashboard Shell ─────────────────────────────────────── */
+/* Hide root layout's Navbar, Footer, TypebotWidget          */
+/* when inside the dashboard or login pages.                 */
+body:has(.dashboard-shell) {
+  padding-top: 0 !important;
+}
+body:has(.dashboard-shell) nav,
+body:has(.dashboard-shell) footer,
+body:has(.dashboard-shell) typebot-standard,
+body:has(.dashboard-shell) typebot-bubble,
+body:has(.dashboard-shell) #typebot-bubble {
+  display: none !important;
+}

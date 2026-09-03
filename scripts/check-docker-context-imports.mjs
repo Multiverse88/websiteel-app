@@ -1,7 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
-const appRoots = ["apps/web", "apps/web-co"];
+const appRoots = ["apps/web", "apps/web-co", "apps/web-id"];
 const violations = [];
 
 async function walk(appRoot, directory) {
