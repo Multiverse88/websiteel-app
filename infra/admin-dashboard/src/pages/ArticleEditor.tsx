@@ -32,6 +32,28 @@ const IMAGE_PRESETS = [
 
 type CoverMode = "upload" | "url";
 
+type GuidanceTarget = "title" | "excerpt" | "content" | "keyword";
+
+function inferGuidanceTarget(declaredField: unknown, message: string): GuidanceTarget {
+  const normalized = message.toLowerCase();
+  const fieldTerms: Array<{ field: GuidanceTarget; terms: string[] }> = [
+    { field: "title", terms: ["judul", "headline", "title"] },
+    { field: "excerpt", terms: ["kutipan", "meta description", "meta deskripsi", "deskripsi meta", "excerpt"] },
+    { field: "keyword", terms: ["kata kunci", "keyword", "frasa kunci"] },
+    { field: "content", terms: ["isi artikel", "struktur artikel", "kerangka", "subjudul", "paragraf", "konten", "pembahasan"] },
+  ];
+
+  const detected = fieldTerms
+    .flatMap(({ field, terms }) => terms.map((term) => ({ field, index: normalized.indexOf(term) })))
+    .filter(({ index }) => index >= 0)
+    .sort((a, b) => a.index - b.index)[0]?.field;
+
+  if (detected) return detected;
+  return ["title", "excerpt", "content", "keyword"].includes(String(declaredField))
+    ? declaredField as GuidanceTarget
+    : "content";
+}
+
 function wrapExistingImages(container: HTMLElement) {
   container.querySelectorAll("img").forEach(img => {
     if (img.closest(".img-wrapper")) return;
@@ -221,13 +243,16 @@ export default function ArticleEditor() {
 
     if (Array.isArray(aiReview.guidance) && aiReview.guidance.length > 0) {
       return aiReview.guidance
-        .filter((item: any) => item && targetMap[item.field as keyof typeof targetMap] && item.message)
+        .filter((item: any) => item && typeof item.message === "string" && item.message.trim())
         .slice(0, 5)
-        .map((item: any) => ({
-          ...targetMap[item.field as keyof typeof targetMap],
-          message: item.message,
-          severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
-        }));
+        .map((item: any) => {
+          const target = inferGuidanceTarget(item.field, item.message);
+          return {
+            ...targetMap[target],
+            message: item.message,
+            severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
+          };
+        });
     }
 
     const fallback: AICompanionGuidance[] = [];

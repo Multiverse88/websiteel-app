@@ -32,6 +32,26 @@ function getAIClient(): OpenAI {
 const guidanceFields = ["title", "excerpt", "content", "keyword"] as const;
 const guidanceSeverities = ["suggestion", "warning"] as const;
 
+type GuidanceField = typeof guidanceFields[number];
+
+export function inferGuidanceField(declaredField: unknown, message: string): GuidanceField {
+  const normalized = message.toLowerCase();
+  const fieldTerms: Array<{ field: GuidanceField; terms: string[] }> = [
+    { field: "title", terms: ["judul", "headline", "title"] },
+    { field: "excerpt", terms: ["kutipan", "meta description", "meta deskripsi", "deskripsi meta", "excerpt"] },
+    { field: "keyword", terms: ["kata kunci", "keyword", "frasa kunci"] },
+    { field: "content", terms: ["isi artikel", "struktur artikel", "kerangka", "subjudul", "paragraf", "konten", "pembahasan"] },
+  ];
+
+  const detected = fieldTerms
+    .flatMap(({ field, terms }) => terms.map((term) => ({ field, index: normalized.indexOf(term) })))
+    .filter(({ index }) => index >= 0)
+    .sort((a, b) => a.index - b.index)[0]?.field;
+
+  if (detected) return detected;
+  return guidanceFields.includes(declaredField as GuidanceField) ? declaredField as GuidanceField : "content";
+}
+
 function fallbackReview(): AIReviewResult {
   return {
     guidance: [],
@@ -70,7 +90,7 @@ export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
         .filter((item: any) => item && guidanceFields.includes(item.field) && typeof item.message === "string" && item.message.trim())
         .slice(0, 5)
         .map((item: any) => ({
-          field: item.field,
+          field: inferGuidanceField(item.field, item.message),
           severity: guidanceSeverities.includes(item.severity) ? item.severity : "suggestion",
           message: item.message.trim(),
         }))
@@ -137,7 +157,13 @@ Return ONLY valid JSON (no markdown fences):
   "recommendedOutline": ["<4-7 contoh subjudul artikel tanpa tanda ###>"],
   "exampleParagraph": "<contoh pengembangan isi 2-4 kalimat yang sesuai dengan draft>",
   "targetKeyword": "<detected keyword>"
-}`;
+}
+
+Guidance rules:
+- One guidance item may discuss ONLY one field.
+- Never combine title, excerpt, keyword, and content advice in one message.
+- The field value must exactly match the subject of its message.
+- Prefer separate short guidance items with a ready-to-use example.`;
 
   const client = getAIClient();
   const model = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";

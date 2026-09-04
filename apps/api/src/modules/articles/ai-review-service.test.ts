@@ -26,3 +26,17 @@ test("menolak respons JSON yang terpotong agar caller dapat mencoba ulang", asyn
     /complete JSON object/,
   );
 });
+
+test("mengarahkan saran judul ke field judul meskipun model salah memberi label content", async () => {
+  const raw = JSON.stringify({
+    ...validReview,
+    guidance: [{
+      field: "content",
+      severity: "suggestion",
+      message: "Buat judul lebih spesifik dengan menambahkan manfaat utama.",
+    }],
+  });
+
+  const result = await parseAIResponse(raw);
+  assert.equal(result.guidance[0]?.field, "title");
+});
