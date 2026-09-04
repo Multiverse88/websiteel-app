@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { prisma } from "../../lib/prisma";
+import { checkDeduplication, type DedupResult } from "./deduplication-service";
 
 export interface AIReviewResult {
   guidance: Array<{
@@ -13,6 +13,11 @@ export interface AIReviewResult {
   recommendedOutline: string[];
   exampleParagraph: string;
   targetKeyword: string;
+  duplicateCheck: {
+    risk: "low" | "medium" | "high";
+    blocked: boolean;
+    results: DedupResult[];
+  };
 }
 
 function getAIClient(): OpenAI {
@@ -61,6 +66,7 @@ function fallbackReview(): AIReviewResult {
     recommendedOutline: [],
     exampleParagraph: "",
     targetKeyword: "",
+    duplicateCheck: { risk: "low", blocked: false, results: [] },
   };
 }
 
@@ -105,6 +111,7 @@ export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
       : [],
     exampleParagraph: typeof parsed.exampleParagraph === "string" ? parsed.exampleParagraph.trim() : "",
     targetKeyword: typeof parsed.targetKeyword === "string" ? parsed.targetKeyword.trim() : "",
+    duplicateCheck: { risk: "low", blocked: false, results: [] },
   };
 }
 
@@ -119,19 +126,22 @@ export async function getAIReview(params: {
   const { title, excerpt, content, site, keyword, existingSlug } = params;
   const fullText = [title, excerpt, content].filter(Boolean).join(" ").slice(0, 3000);
 
-  let similarArticles: Array<{ title: string; slug: string }> = [];
+  let duplicateCheck: Awaited<ReturnType<typeof checkDeduplication>> = { risk: "low", results: [] };
   try {
-    similarArticles = await prisma.article.findMany({
-      where: { site, status: "published", ...(existingSlug ? { slug: { not: existingSlug } } : {}) },
-      select: { title: true, slug: true },
-      take: 5,
-      orderBy: { publishedAt: "desc" },
+    duplicateCheck = await checkDeduplication({
+      title,
+      excerpt,
+      content,
+      site,
+      existingSlug,
     });
   } catch { /* non-fatal */ }
 
-  const similarContext = similarArticles.length > 0
-    ? `\nExisting articles on this site:\n${similarArticles.map((a, i) => `${i + 1}. "${a.title}" (${a.slug})`).join("\n")}`
-    : "";
+  const duplicateContext = duplicateCheck.results.length > 0
+    ? `\nDATABASE COMPARISON — these existing articles are similar to the draft:\n${duplicateCheck.results.slice(0, 5).map((article, index) =>
+      `${index + 1}. "${article.matchedTitle}" — overall ${Math.round(article.similarity * 100)}%, title ${Math.round(article.titleSimilarity * 100)}%, excerpt ${Math.round(article.excerptSimilarity * 100)}%, content ${Math.round(article.contentSimilarity * 100)}%`
+    ).join("\n")}\nDuplicate risk: ${duplicateCheck.risk}. Every recommendation must use a clearly different title and editorial angle.`
+    : "\nDATABASE COMPARISON — no materially similar existing article was found.";
 
   const prompt = `You are a proactive Indonesian writing companion for legal-business articles. Read the draft and return ONLY concrete, ready-to-use writing suggestions. Do not give scores, grades, diagnoses, criticism, or general opinions. Show the writer exactly what a better title, meta description, keyword, article structure, and example paragraph could look like. All text MUST use natural Indonesian and must remain legally cautious—do not invent regulations, prices, deadlines, or guarantees.
 
@@ -140,7 +150,7 @@ Title: "${title}"
 Excerpt: "${excerpt}"
 Content preview: ${fullText.slice(0, 1500)}
 Target keyword: ${keyword || "auto-detect"}
-Site: ${site}${similarContext}
+Site: ${site}${duplicateContext}
 
 Return ONLY valid JSON (no markdown fences):
 {
@@ -167,6 +177,14 @@ Guidance rules:
 
   const client = getAIClient();
   const model = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";
+  const attachDuplicateCheck = (review: AIReviewResult): AIReviewResult => ({
+    ...review,
+    duplicateCheck: {
+      risk: duplicateCheck.risk,
+      blocked: duplicateCheck.risk === "high",
+      results: duplicateCheck.results,
+    },
+  });
 
   const resp = await client.chat.completions.create({
     model,
@@ -177,7 +195,7 @@ Guidance rules:
 
   const raw = resp.choices[0]?.message?.content || "{}";
   try {
-    return await parseAIResponse(raw);
+    return attachDuplicateCheck(await parseAIResponse(raw));
   } catch (firstError) {
     console.warn("AI review returned invalid JSON; retrying once", {
       finishReason: resp.choices[0]?.finish_reason,
@@ -197,14 +215,14 @@ Guidance rules:
     const retryRaw = retry.choices[0]?.message?.content || "{}";
 
     try {
-      return await parseAIResponse(retryRaw);
+      return attachDuplicateCheck(await parseAIResponse(retryRaw));
     } catch (retryError) {
       console.error("AI review JSON retry failed", {
         finishReason: retry.choices[0]?.finish_reason,
         responseLength: retryRaw.length,
         reason: retryError instanceof Error ? retryError.message : "unknown parse error",
       });
-      return fallbackReview();
+      return attachDuplicateCheck(fallbackReview());
     }
   }
 }

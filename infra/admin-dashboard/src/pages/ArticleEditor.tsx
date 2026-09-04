@@ -72,6 +72,7 @@ function wrapExistingImages(container: HTMLElement) {
 
 export default function ArticleEditor() {
   const [articleId, setArticleId] = useState<string | null>(null);
+  const [originalSlug, setOriginalSlug] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [isCompressing, setIsCompressing] = useState(false);
@@ -241,8 +242,17 @@ export default function ArticleEditor() {
       keyword: { targetId: "focusKeyword", label: "Kata kunci utama" },
     } as const;
 
+    const closestDuplicate = aiReview.duplicateCheck?.results?.[0];
+    const duplicateGuidance: AICompanionGuidance[] = closestDuplicate && aiReview.duplicateCheck?.risk !== "low"
+      ? [{
+          ...(closestDuplicate.contentSimilarity > closestDuplicate.titleSimilarity ? targetMap.content : targetMap.title),
+          message: `Gunakan sudut pembahasan yang berbeda dari “${closestDuplicate.matchedTitle}” (${Math.round(closestDuplicate.similarity * 100)}% mirip).`,
+          severity: aiReview.duplicateCheck.risk === "high" ? "critical" : "warning",
+        }]
+      : [];
+
     if (Array.isArray(aiReview.guidance) && aiReview.guidance.length > 0) {
-      return aiReview.guidance
+      const mappedGuidance = aiReview.guidance
         .filter((item: any) => item && typeof item.message === "string" && item.message.trim())
         .slice(0, 5)
         .map((item: any) => {
@@ -253,6 +263,7 @@ export default function ArticleEditor() {
             severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
           };
         });
+      return [...duplicateGuidance, ...mappedGuidance].slice(0, 5);
     }
 
     const fallback: AICompanionGuidance[] = [];
@@ -273,7 +284,7 @@ export default function ArticleEditor() {
         fallback.push({ ...targetMap.content, message: suggestion, severity: "suggestion" });
       });
     }
-    return fallback.slice(0, 5);
+    return [...duplicateGuidance, ...fallback].slice(0, 5);
   })();
 
   // AI Companion membaca perubahan secara otomatis. Debounce mencegah request
@@ -299,6 +310,7 @@ export default function ArticleEditor() {
           excerpt,
           content,
           keyword: focusKeyword || undefined,
+          existingSlug: originalSlug || undefined,
         });
 
         if (aiReviewRequestRef.current === requestId) {
@@ -316,7 +328,7 @@ export default function ArticleEditor() {
     }, 1800);
 
     return () => window.clearTimeout(timeoutId);
-  }, [title, excerpt, content, focusKeyword]);
+  }, [title, excerpt, content, focusKeyword, originalSlug]);
 
   useEffect(() => {
     const match = window.location.hash.match(/\?id=([^&]+)/);
@@ -326,6 +338,7 @@ export default function ArticleEditor() {
       api.getArticle(id).then(article => {
         if (article) {
           setTitle(article.title || "");
+          setOriginalSlug(article.slug || null);
           setCategory(article.category || "Legalitas PT");
           setReadTime(article.readTime || "5 min read");
           setExcerpt(article.excerpt || "");
@@ -662,6 +675,19 @@ export default function ArticleEditor() {
 
     startTransition(async () => {
       try {
+        const duplicateResult = await api.dedupCheck({
+          title,
+          excerpt,
+          content,
+          existingSlug: originalSlug || undefined,
+        });
+        if (duplicateResult.risk === "high") {
+          const closestMatch = duplicateResult.results?.[0];
+          throw new Error(closestMatch
+            ? `Artikel tidak dapat diterbitkan karena terlalu mirip dengan “${closestMatch.matchedTitle}” (${Math.round(closestMatch.similarity * 100)}%). Ubah judul atau sudut pembahasannya.`
+            : "Artikel tidak dapat diterbitkan karena terlalu mirip dengan artikel yang sudah ada.");
+        }
+
         let finalCoverUrl = coverUrl;
         
         // Upload image if in upload mode and a file is selected
@@ -1103,6 +1129,31 @@ export default function ArticleEditor() {
 
                   {aiReview && (
                     <div className="space-y-3">
+                      {aiReview.duplicateCheck && (
+                        <div className={`rounded-xl border p-3.5 ${aiReview.duplicateCheck.risk === "high" ? "bg-red-50 border-red-200" : aiReview.duplicateCheck.risk === "medium" ? "bg-amber-50 border-amber-200" : "bg-emerald-50 border-emerald-200"}`}>
+                          <div className="flex items-center gap-2">
+                            {aiReview.duplicateCheck.risk === "low" ? <CheckCircle size={16} className="text-emerald-600" /> : <AlertTriangle size={16} className={aiReview.duplicateCheck.risk === "high" ? "text-red-600" : "text-amber-600"} />}
+                            <span className="text-[12px] font-black uppercase tracking-wider text-gray-800">Komparasi database artikel</span>
+                          </div>
+                          <p className="mt-1.5 text-[13px] leading-relaxed text-gray-700">
+                            {aiReview.duplicateCheck.risk === "low"
+                              ? "Tidak ditemukan artikel lama yang mirip secara material."
+                              : aiReview.duplicateCheck.risk === "high"
+                                ? "Artikel terlalu mirip dan harus dibedakan sebelum diterbitkan."
+                                : "Ada artikel dengan topik serupa. Gunakan sudut pembahasan yang berbeda."}
+                          </p>
+                          {aiReview.duplicateCheck.results?.length > 0 && (
+                            <ul className="mt-2 space-y-1.5 text-[12px] text-gray-700">
+                              {aiReview.duplicateCheck.results.slice(0, 3).map((match: any) => (
+                                <li key={match.matchedSlug} className="flex items-start justify-between gap-3">
+                                  <span className="line-clamp-1">{match.matchedTitle}</span>
+                                  <strong className="flex-shrink-0 text-[#990202]">{Math.round(match.similarity * 100)}% mirip</strong>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
                       {aiReview.recommendedTitle && (
                         <div className="bg-white border border-red-100 rounded-xl p-3.5">
                           <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh judul</span>
@@ -1536,7 +1587,9 @@ export default function ArticleEditor() {
 
                 {/* Submit */}
                 <div className="pt-4 border-t border-gray-100">
-                  <button type="submit" disabled={isPending} className="w-full py-4 text-[16px] font-extrabold rounded-xl bg-[#990202] text-white hover:bg-[#7a0101] disabled:opacity-50">{isPending ? "Menyimpan Artikel..." : "Terbitkan Artikel Baru"}</button>
+                  <button type="submit" disabled={isPending || aiReview?.duplicateCheck?.blocked} className="w-full py-4 text-[16px] font-extrabold rounded-xl bg-[#990202] text-white hover:bg-[#7a0101] disabled:opacity-50">
+                    {isPending ? "Memeriksa & Menyimpan..." : aiReview?.duplicateCheck?.blocked ? "Artikel Terlalu Mirip — Perlu Diubah" : "Terbitkan Artikel Baru"}
+                  </button>
                 </div>
 
               </form>
