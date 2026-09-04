@@ -5,11 +5,23 @@
 import OpenAI from "openai";
 import { prisma } from "../../lib/prisma";
 
-const AI_BASE_URL = process.env.AI_ROUTER_BASE_URL!;
-const AI_API_KEY = process.env.AI_ROUTER_API_KEY!;
 const AI_MODEL = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";
 
-const client = new OpenAI({ baseURL: AI_BASE_URL, apiKey: AI_API_KEY });
+// Lazy: only touches env/instantiates on first real call, so the server
+// still boots (and every non-AI route still works) when AI_ROUTER_* isn't
+// configured yet.
+let _client: OpenAI | null = null;
+function getClient(): OpenAI {
+  if (!_client) {
+    const baseURL = process.env.AI_ROUTER_BASE_URL;
+    const apiKey = process.env.AI_ROUTER_API_KEY;
+    if (!baseURL || !apiKey) {
+      throw new Error("AI_ROUTER_BASE_URL / AI_ROUTER_API_KEY not configured");
+    }
+    _client = new OpenAI({ baseURL, apiKey });
+  }
+  return _client;
+}
 
 export interface AIReviewResult {
   seoScore: number;
@@ -101,7 +113,7 @@ Return ONLY valid JSON (no markdown fences):
   "targetKeyword": "<detected keyword>"
 }`;
 
-  const resp = await client.chat.completions.create({
+  const resp = await getClient().chat.completions.create({
     model: AI_MODEL,
     messages: [{ role: "user", content: prompt }],
     temperature: 0.2,
