@@ -52,6 +52,10 @@ services:
       - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
       - MINIO_BUCKET=images
       - SENTRY_DSN=${SENTRY_DSN}
+      - AI_ROUTER_MODEL_REVIEW=${AI_ROUTER_MODEL_REVIEW}
+      - AI_ROUTER_API_KEY=${AI_ROUTER_API_KEY}
+      - AI_ROUTER_BASE_URL=${AI_ROUTER_BASE_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:

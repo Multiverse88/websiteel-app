@@ -1,15 +1,5 @@
-/**
- * AI Review Service — SEO scoring via ArticleAI (9router)
- * Single call to ArticleAI returns structured JSON review.
- */
 import OpenAI from "openai";
 import { prisma } from "../../lib/prisma";
-
-const AI_BASE_URL = process.env.AI_ROUTER_BASE_URL!;
-const AI_API_KEY = process.env.AI_ROUTER_API_KEY!;
-const AI_MODEL = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";
-
-const client = new OpenAI({ baseURL: AI_BASE_URL, apiKey: AI_API_KEY });
 
 export interface AIReviewResult {
   seoScore: number;
@@ -26,6 +16,20 @@ export interface AIReviewResult {
   recommendedTitle?: string;
   recommendedMetaDescription?: string;
   targetKeyword?: string;
+}
+
+function getAIClient(): OpenAI {
+  const apiKey = process.env.AI_ROUTER_API_KEY;
+  const baseURL = process.env.AI_ROUTER_BASE_URL;
+
+  if (!apiKey) {
+    throw new Error("AI_ROUTER_API_KEY is required");
+  }
+
+  return new OpenAI({
+    apiKey,
+    ...(baseURL ? { baseURL } : {}),
+  });
 }
 
 async function parseAIResponse(raw: string): Promise<AIReviewResult> {
@@ -101,8 +105,11 @@ Return ONLY valid JSON (no markdown fences):
   "targetKeyword": "<detected keyword>"
 }`;
 
+  const client = getAIClient();
+  const model = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";
+
   const resp = await client.chat.completions.create({
-    model: AI_MODEL,
+    model,
     messages: [{ role: "user", content: prompt }],
     temperature: 0.2,
     max_tokens: 800,
