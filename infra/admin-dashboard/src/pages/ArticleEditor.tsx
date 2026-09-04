@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useTransition, useEffect } from "react";
 import { api } from "../lib/api";
+import AICompanionGuide, { type AICompanionGuidance } from "../components/AICompanionGuide";
 
 import { Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2, ExternalLink, Cloud, Activity, CheckCircle, AlertTriangle, XCircle, Table as TableIcon } from "lucide-react";
 
@@ -207,6 +208,46 @@ export default function ArticleEditor() {
   };
 
   const seoData = analyzeSEO();
+
+  const companionGuidance: AICompanionGuidance[] = (() => {
+    if (!aiReview) return [];
+
+    const targetMap = {
+      title: { targetId: "title", label: "Judul artikel" },
+      excerpt: { targetId: "excerpt", label: "Kutipan singkat" },
+      content: { targetId: "article-content-editor", label: "Isi artikel" },
+      keyword: { targetId: "focusKeyword", label: "Kata kunci utama" },
+    } as const;
+
+    if (Array.isArray(aiReview.guidance) && aiReview.guidance.length > 0) {
+      return aiReview.guidance
+        .filter((item: any) => item && targetMap[item.field as keyof typeof targetMap] && item.message)
+        .slice(0, 5)
+        .map((item: any) => ({
+          ...targetMap[item.field as keyof typeof targetMap],
+          message: item.message,
+          severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
+        }));
+    }
+
+    const fallback: AICompanionGuidance[] = [];
+    if (!["excellent", "good"].includes(aiReview.titleScore)) {
+      fallback.push({ ...targetMap.title, message: aiReview.titleReason, severity: "warning" });
+    }
+    if (!["excellent", "good"].includes(aiReview.metaScore)) {
+      fallback.push({ ...targetMap.excerpt, message: aiReview.metaReason, severity: "warning" });
+    }
+    if (!["excellent", "good"].includes(aiReview.contentScore)) {
+      fallback.push({ ...targetMap.content, message: aiReview.contentReason, severity: "warning" });
+    }
+    if (!focusKeyword.trim() && aiReview.targetKeyword) {
+      fallback.push({ ...targetMap.keyword, message: `Pertimbangkan memakai “${aiReview.targetKeyword}” sebagai kata kunci utama.`, severity: "suggestion" });
+    }
+    if (fallback.length === 0 && aiReview.suggestions?.[0]) {
+      fallback.push({ ...targetMap.content, message: aiReview.suggestions[0], severity: "suggestion" });
+    }
+    return fallback;
+  })();
 
   // AI Companion membaca perubahan secara otomatis. Debounce mencegah request
   // dikirim pada setiap ketikan, sementara request ID mencegah respons lama
@@ -1203,6 +1244,7 @@ export default function ArticleEditor() {
                   {/* WYSIWYG Content Editor */}
                   <div className="relative shadow-sm border border-gray-200 rounded-xl overflow-hidden shadow-inner">
                     <div
+                      id="article-content-editor"
                       ref={editorRef}
                       contentEditable={true}
                       onInput={handleEditorInput}
@@ -1655,6 +1697,8 @@ export default function ArticleEditor() {
 
         </div>
       </section>
+
+      <AICompanionGuide items={companionGuidance} isThinking={aiReviewLoading} />
 
     </div>
   );

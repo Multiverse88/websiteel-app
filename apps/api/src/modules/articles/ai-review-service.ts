@@ -3,6 +3,11 @@ import { prisma } from "../../lib/prisma";
 
 export interface AIReviewResult {
   opinion: string;
+  guidance: Array<{
+    field: "title" | "excerpt" | "content" | "keyword";
+    severity: "suggestion" | "warning" | "critical";
+    message: string;
+  }>;
   seoScore: number;
   titleScore: "excellent" | "good" | "needs-improvement" | "poor";
   titleReason: string;
@@ -40,6 +45,7 @@ async function parseAIResponse(raw: string): Promise<AIReviewResult> {
   } catch {
     return {
       opinion: "Saya belum dapat membaca hasil analisis dengan sempurna. Tetap periksa kembali kejelasan, struktur, dan fokus tulisan ini.",
+      guidance: [],
       seoScore: 50,
       titleScore: "needs-improvement",
       titleReason: "Could not parse AI response",
@@ -92,6 +98,13 @@ Site: ${site}${similarContext}
 Return ONLY valid JSON (no markdown fences):
 {
   "opinion": "<pendapat utama yang langsung, suportif, dan spesifik dalam 1-2 kalimat bahasa Indonesia>",
+  "guidance": [
+    {
+      "field": "title|excerpt|content|keyword",
+      "severity": "suggestion|warning|critical",
+      "message": "<saran spesifik dalam bahasa Indonesia yang menjelaskan apa yang perlu diperbaiki pada field tersebut>"
+    }
+  ],
   "seoScore": <0-100>,
   "titleScore": "excellent|good|needs-improvement|poor",
   "titleReason": "<brief reason>",
