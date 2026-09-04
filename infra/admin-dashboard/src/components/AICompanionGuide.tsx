@@ -101,20 +101,7 @@ export default function AICompanionGuide({
     selection?.addRange(range);
   }, []);
 
-  const walkToTarget = useCallback((targetId?: string, scrollIntoView = false, targetText?: string) => {
-    clearTargetHighlight();
-
-    if (!targetId) {
-      setPosition(dockPosition());
-      return;
-    }
-
-    const target = document.getElementById(targetId);
-    if (!target) {
-      setPosition(dockPosition());
-      return;
-    }
-
+  const highlightAndPosition = useCallback((target: HTMLElement, targetText?: string, scrollIntoView = false) => {
     if (scrollIntoView) {
       target.scrollIntoView({ behavior: "smooth", block: "center" });
     }
@@ -142,16 +129,72 @@ export default function AICompanionGuide({
       walkTimerRef.current = window.setTimeout(() => setIsWalking(false), 950);
     };
 
-    window.setTimeout(placeCompanion, scrollIntoView ? 520 : 20);
-  }, [clearTargetHighlight, selectExactTargetText]);
+    // Wait for scroll to settle before positioning companion
+    window.setTimeout(placeCompanion, scrollIntoView ? 600 : 20);
+  }, [selectExactTargetText]);
+
+  const walkToTarget = useCallback((targetId?: string, scrollIntoView = false, targetText?: string, retryCount = 0) => {
+    clearTargetHighlight();
+
+    if (!targetId) {
+      setPosition(dockPosition());
+      return;
+    }
+
+    const target = document.getElementById(targetId);
+
+    // If element not found yet and we haven't retried too many times, wait and retry
+    if (!target && retryCount < 8) {
+      window.setTimeout(() => {
+        walkToTarget(targetId, scrollIntoView, targetText, retryCount + 1);
+      }, 150);
+      return;
+    }
+
+    if (!target) {
+      // Final fallback: just scroll to the form area
+      if (scrollIntoView) {
+        const formArea = document.querySelector("form");
+        if (formArea) formArea.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      setPosition(dockPosition());
+      return;
+    }
+
+    highlightAndPosition(target, targetText, scrollIntoView);
+  }, [clearTargetHighlight, highlightAndPosition]);
 
   useEffect(() => {
     setActiveIndex(0);
   }, [itemsKey]);
 
+  // Auto-scroll to target when active item changes
   useEffect(() => {
-    walkToTarget(activeItem?.targetId, true, activeItem?.targetText);
-  }, [activeIndex, activeItem?.targetId, itemsKey, walkToTarget]);
+    if (!activeItem?.targetId) return;
+
+    // Direct scroll (immediate, no retry) — ensures the element is at least visible
+    const directScroll = () => {
+      const el = document.getElementById(activeItem.targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.classList.add("ai-companion-target");
+        // Remove highlight from other elements
+        document.querySelectorAll(".ai-companion-target").forEach((node) => {
+          if (node !== el) node.classList.remove("ai-companion-target");
+        });
+      }
+    };
+
+    // Fire immediately for instant feedback
+    directScroll();
+    // Fire again after a short delay in case the first scroll hasn't settled
+    const backupTimer = window.setTimeout(directScroll, 300);
+
+    // Also do the full walk (highlight + companion positioning)
+    walkToTarget(activeItem.targetId, true, activeItem.targetText);
+
+    return () => window.clearTimeout(backupTimer);
+  }, [activeIndex, activeItem?.targetId, activeItem?.targetText, itemsKey, walkToTarget]);
 
   useEffect(() => {
     const handleResize = () => walkToTarget(activeItem?.targetId);
@@ -166,7 +209,21 @@ export default function AICompanionGuide({
 
   const changeItem = (direction: number) => {
     if (items.length < 2) return;
-    setActiveIndex((current) => (current + direction + items.length) % items.length);
+    setActiveIndex((current) => {
+      const next = (current + direction + items.length) % items.length;
+      // Immediately walk to the next target (don't wait for re-render)
+      const nextItem = items[next];
+      if (nextItem?.targetId) {
+        const el = document.getElementById(nextItem.targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          document.querySelectorAll(".ai-companion-target").forEach((n) => n.classList.remove("ai-companion-target"));
+          el.classList.add("ai-companion-target");
+        }
+        walkToTarget(nextItem.targetId, true, nextItem.targetText);
+      }
+      return next;
+    });
   };
 
   const message = isThinking
