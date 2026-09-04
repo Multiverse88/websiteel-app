@@ -18,6 +18,25 @@ export interface AIReviewResult {
   recommendedOutline: string[];
   exampleParagraph: string;
   targetKeyword: string;
+  editOperations: Array<{
+    id: string;
+    field: "title" | "excerpt" | "content" | "keyword";
+    operation: "replace" | "insert_after" | "delete";
+    targetText: string;
+    replacementText: string;
+    reason: string;
+  }>;
+  contentGaps: Array<{
+    topic: string;
+    location: string;
+    whyNeeded: string;
+    suggestedContent: string;
+  }>;
+  verificationNeeded: Array<{
+    claim: string;
+    location: string;
+    requiredSource: string;
+  }>;
   seoSupport: {
     searchIntent: string;
     recommendedSlug: string;
@@ -61,6 +80,27 @@ function getAIClient(): OpenAI {
 
 const guidanceFields = ["title", "excerpt", "content", "keyword"] as const;
 const guidanceSeverities = ["suggestion", "warning"] as const;
+const reviewModes = ["complete", "seo", "legal", "readability", "conversion"] as const;
+
+export type AIReviewMode = typeof reviewModes[number];
+type AIEditOperation = AIReviewResult["editOperations"][number];
+
+export function filterSafeEditOperations(
+  edits: AIEditOperation[],
+  sources: Record<"title" | "excerpt" | "content" | "keyword", string>,
+): AIEditOperation[] {
+  return edits
+    .filter((edit) => {
+      const source = sources[edit.field];
+      const firstMatch = source.indexOf(edit.targetText);
+      const isUniqueExactTarget = firstMatch >= 0 && source.indexOf(edit.targetText, firstMatch + edit.targetText.length) < 0;
+      const hasValidReplacement = edit.operation === "delete"
+        ? edit.replacementText === ""
+        : edit.replacementText.length > 0 && edit.replacementText !== edit.targetText;
+      return isUniqueExactTarget && hasValidReplacement;
+    })
+    .map((edit, index) => ({ ...edit, id: `edit-${index + 1}` }));
+}
 
 type GuidanceField = typeof guidanceFields[number];
 
@@ -91,6 +131,9 @@ function fallbackReview(): AIReviewResult {
     recommendedOutline: [],
     exampleParagraph: "",
     targetKeyword: "",
+    editOperations: [],
+    contentGaps: [],
+    verificationNeeded: [],
     seoSupport: {
       searchIntent: "",
       recommendedSlug: "",
@@ -154,6 +197,40 @@ export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
       : [],
     exampleParagraph: typeof parsed.exampleParagraph === "string" ? parsed.exampleParagraph.trim() : "",
     targetKeyword: typeof parsed.targetKeyword === "string" ? parsed.targetKeyword.trim() : "",
+    editOperations: Array.isArray(parsed.editOperations)
+      ? parsed.editOperations
+        .filter((item: any) => item && guidanceFields.includes(item.field) && ["replace", "insert_after", "delete"].includes(item.operation) && typeof item.targetText === "string" && item.targetText.trim())
+        .slice(0, 5)
+        .map((item: any, index: number) => ({
+          id: typeof item.id === "string" && item.id.trim() ? item.id.trim() : `edit-${index + 1}`,
+          field: item.field,
+          operation: item.operation,
+          targetText: item.targetText.trim(),
+          replacementText: typeof item.replacementText === "string" ? item.replacementText.trim() : "",
+          reason: typeof item.reason === "string" ? item.reason.trim() : "",
+        }))
+      : [],
+    contentGaps: Array.isArray(parsed.contentGaps)
+      ? parsed.contentGaps
+        .filter((item: any) => item && typeof item.topic === "string" && item.topic.trim() && typeof item.suggestedContent === "string" && item.suggestedContent.trim())
+        .slice(0, 5)
+        .map((item: any) => ({
+          topic: item.topic.trim(),
+          location: typeof item.location === "string" ? item.location.trim() : "Isi artikel",
+          whyNeeded: typeof item.whyNeeded === "string" ? item.whyNeeded.trim() : "",
+          suggestedContent: item.suggestedContent.trim(),
+        }))
+      : [],
+    verificationNeeded: Array.isArray(parsed.verificationNeeded)
+      ? parsed.verificationNeeded
+        .filter((item: any) => item && typeof item.claim === "string" && item.claim.trim())
+        .slice(0, 5)
+        .map((item: any) => ({
+          claim: item.claim.trim(),
+          location: typeof item.location === "string" ? item.location.trim() : "Isi artikel",
+          requiredSource: typeof item.requiredSource === "string" ? item.requiredSource.trim() : "Sumber resmi pemerintah atau regulasi yang berlaku",
+        }))
+      : [],
     seoSupport: {
       searchIntent: typeof parsed.seoSupport?.searchIntent === "string" ? parsed.seoSupport.searchIntent.trim() : "",
       recommendedSlug: typeof parsed.seoSupport?.recommendedSlug === "string"
@@ -210,9 +287,28 @@ export async function getAIReview(params: {
   site: string;
   keyword?: string;
   existingSlug?: string;
+  reviewMode?: AIReviewMode;
 }): Promise<AIReviewResult> {
   const { title, excerpt, content, site, keyword, existingSlug } = params;
-  const fullText = [title, excerpt, content].filter(Boolean).join(" ").slice(0, 3000);
+  const reviewMode = reviewModes.includes(params.reviewMode as AIReviewMode) ? params.reviewMode as AIReviewMode : "complete";
+
+  // Sebagian besar artikel dapat dikirim penuh. Untuk draft yang sangat panjang,
+  // tetap sertakan awal, tengah, dan akhir agar AI tidak hanya menilai pembuka.
+  const MAX_CONTENT_CHARS = 60_000;
+  const contentForReview = content.length <= MAX_CONTENT_CHARS
+    ? content
+    : [
+        content.slice(0, 24_000),
+        "\n\n[... bagian panjang diringkas oleh sistem ...]\n\n",
+        content.slice(Math.floor(content.length / 2) - 6_000, Math.floor(content.length / 2) + 6_000),
+        "\n\n[... menuju bagian akhir ...]\n\n",
+        content.slice(-24_000),
+      ].join("");
+  const numberedContent = contentForReview
+    .split(/\n{2,}/)
+    .map((block, index) => `[B${index + 1}] ${block.trim()}`)
+    .filter((block) => !/^\[B\d+\]\s*$/.test(block))
+    .join("\n\n");
 
   let duplicateCheck: Awaited<ReturnType<typeof checkDeduplication>> = { risk: "low", results: [], candidates: [] };
   try {
@@ -236,14 +332,26 @@ export async function getAIReview(params: {
     ).join("\n")}`
     : "\nINTERNAL LINK CANDIDATES — none available; return an empty internalLinks array.";
 
+  const modeInstructions: Record<AIReviewMode, string> = {
+    complete: "Review SEO, legal caution, readability, structure, and conversion in balanced priority order.",
+    seo: "Prioritize search intent, title/meta, keyword placement, headings, content coverage, and internal linking.",
+    legal: "Prioritize unsupported legal, tax, price, deadline, eligibility, and regulatory claims. Do not declare a claim true without a provided source.",
+    readability: "Prioritize clarity, paragraph length, logical flow, repetition, terminology, and reader comprehension.",
+    conversion: "Prioritize usefulness, trust, service relevance, CTA clarity, and the reader's next step without making guarantees.",
+  };
+
   const prompt = `You are a proactive Indonesian writing companion for legal-business articles. Read the actual draft carefully and return ONLY concrete, ready-to-use writing suggestions. Do not give scores, grades, vague criticism, or generic advice. Every recommendation must clearly explain: the exact location, what is currently wrong or missing, what must be changed, how to change it step by step, a ready-to-use example, and why that change helps. Quote a short phrase from the draft when useful so the writer can find the exact passage. All text MUST use natural Indonesian and must remain legally cautious—do not invent regulations, prices, deadlines, or guarantees.
+
+REVIEW MODE: ${reviewMode}
+MODE PRIORITY: ${modeInstructions[reviewMode]}
 
 ARTICLE:
 Title: "${title}"
 Excerpt: "${excerpt}"
-Content preview: ${fullText.slice(0, 1500)}
 Target keyword: ${keyword || "auto-detect"}
-Site: ${site}${duplicateContext}${internalLinkContext}
+Site: ${site}
+Full content (paragraph markers [B#] are location aids only and are not part of the article):
+${numberedContent}${duplicateContext}${internalLinkContext}
 
 Return ONLY valid JSON (no markdown fences):
 {
@@ -265,6 +373,31 @@ Return ONLY valid JSON (no markdown fences):
   "recommendedOutline": ["<4-7 contoh subjudul artikel tanpa tanda ###>"],
   "exampleParagraph": "<contoh pengembangan isi 2-4 kalimat yang sesuai dengan draft>",
   "targetKeyword": "<detected keyword>",
+  "editOperations": [
+    {
+      "id": "edit-1",
+      "field": "title|excerpt|content|keyword",
+      "operation": "replace|insert_after|delete",
+      "targetText": "<salinan teks target PERSIS dari draft, tanpa marker [B#]>",
+      "replacementText": "<hasil pengganti atau teks tambahan siap pakai; kosong hanya untuk delete>",
+      "reason": "<alasan spesifik perubahan>"
+    }
+  ],
+  "contentGaps": [
+    {
+      "topic": "<pembahasan penting yang belum ada>",
+      "location": "<setelah heading/paragraf mana sebaiknya ditambahkan>",
+      "whyNeeded": "<alasan pembaca membutuhkan bagian ini>",
+      "suggestedContent": "<contoh isi siap pakai; gunakan placeholder jika fakta belum tersedia>"
+    }
+  ],
+  "verificationNeeded": [
+    {
+      "claim": "<salinan klaim hukum/pajak/biaya/tenggat yang perlu diverifikasi>",
+      "location": "<marker paragraf dan kata pembukanya>",
+      "requiredSource": "<jenis sumber resmi yang harus diperiksa>"
+    }
+  ],
   "seoSupport": {
     "searchIntent": "<informational|commercial|transactional serta kebutuhan spesifik pengguna>",
     "recommendedSlug": "<slug pendek, deskriptif, huruf kecil, memakai tanda hubung>",
@@ -301,6 +434,11 @@ Guidance rules:
 - Never say only “buat lebih spesifik”, “tambahkan keyword”, “perbaiki struktur”, or similar. State the exact words/section to change and provide the resulting text.
 - The example must be directly usable and consistent with the facts already present in the draft. If facts are missing, use a clearly marked placeholder such as [masukkan biaya resmi terbaru], never fabricate it.
 - For content guidance, identify the paragraph or heading using its opening words, then say whether to replace, add after, move, or delete it.
+- editOperations are the only changes the UI may apply automatically. targetText MUST be copied character-for-character from the supplied title, excerpt, keyword, or article content. Never include [B#] markers. Prefer a unique target of 20-300 characters.
+- For replace, replacementText is the complete text that replaces targetText. For insert_after, targetText is the exact anchor and replacementText is only the new content. For delete, replacementText must be empty.
+- Return no more than 5 safe editOperations. Do not return an operation if you cannot quote an exact target from the draft.
+- contentGaps must be specific to this draft, not a generic article checklist. Return at most 4.
+- Put claims requiring current official confirmation in verificationNeeded. Do not provide invented citations or URLs. Return an empty array when there is no such claim.
 - Optimize for people-first, unique, crawlable content: descriptive unique title, useful meta description, natural keyword placement, semantic headings, descriptive internal-link anchors, and questions that the visible article actually answers.
 - Never keyword-stuff and never promise that Google will index or rank the page.
 - Internal links must use exact titles and slugs from INTERNAL LINK CANDIDATES. Never invent a URL.`;
@@ -309,8 +447,17 @@ Guidance rules:
   const model = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";
   const attachDuplicateCheck = (review: AIReviewResult): AIReviewResult => {
     const allowedLinks = new Map(duplicateCheck.candidates.map((article) => [article.matchedSlug, article.matchedTitle]));
+    const sourceByField: Record<"title" | "excerpt" | "content" | "keyword", string> = {
+      title,
+      excerpt,
+      content,
+      keyword: keyword || "",
+    };
+    const safeEditOperations = filterSafeEditOperations(review.editOperations, sourceByField);
+
     return {
       ...review,
+      editOperations: safeEditOperations,
       seoSupport: {
         ...review.seoSupport,
         internalLinks: review.seoSupport.internalLinks.filter((link) =>

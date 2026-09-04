@@ -59,6 +59,7 @@ model Article {
   publishedAt DateTime?
   seoDesc     String?
   seoTitle    String?
+  focusKeyword String?
   status      String    @default("draft")
   faq         Json?
   site        String    @default("easylegal.biz.id")

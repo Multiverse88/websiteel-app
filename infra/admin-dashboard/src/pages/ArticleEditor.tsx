@@ -33,6 +33,22 @@ const IMAGE_PRESETS = [
 type CoverMode = "upload" | "url";
 
 type GuidanceTarget = "title" | "excerpt" | "content" | "keyword";
+type ReviewMode = "complete" | "seo" | "legal" | "readability" | "conversion";
+type VerificationNotice = "checking" | "done" | null;
+
+type EditorSnapshot = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  focusKeyword: string;
+};
+
+const slugifyArticleTitle = (value: string) => value
+  .toLowerCase()
+  .trim()
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-+|-+$/g, "");
 
 function inferGuidanceTarget(declaredField: unknown, message: string): GuidanceTarget {
   const normalized = message.toLowerCase();
@@ -89,6 +105,8 @@ export default function ArticleEditor() {
 
   // Form states for Live Preview
   const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
   const [category, setCategory] = useState("Legalitas PT");
   const [readTime, setReadTime] = useState("5 menit baca");
   const [excerpt, setExcerpt] = useState("");
@@ -97,7 +115,12 @@ export default function ArticleEditor() {
   const [aiReview, setAiReview] = useState<any>(null);
   const [aiReviewLoading, setAiReviewLoading] = useState(false);
   const [aiReviewError, setAiReviewError] = useState<string | null>(null);
+  const [reviewMode, setReviewMode] = useState<ReviewMode>("complete");
+  const [dismissedEditKeys, setDismissedEditKeys] = useState<string[]>([]);
+  const [lastEditorSnapshot, setLastEditorSnapshot] = useState<EditorSnapshot | null>(null);
+  const [verificationNotice, setVerificationNotice] = useState<VerificationNotice>(null);
   const aiReviewRequestRef = useRef(0);
+  const verificationPendingRef = useRef(false);
 
   // FAQ shown at the end of the article on the public site (reuses the
   // same <FAQ> component as the /layanan pages). Per-article, unlike the
@@ -231,6 +254,9 @@ export default function ArticleEditor() {
   };
 
   const seoData = analyzeSEO();
+  const visibleEditOperations = (aiReview?.editOperations || []).filter(
+    (edit: any) => !dismissedEditKeys.includes([edit.field, edit.operation, edit.targetText, edit.replacementText].join("::")),
+  );
 
   const companionGuidance: AICompanionGuidance[] = (() => {
     if (!aiReview) return [];
@@ -255,6 +281,22 @@ export default function ArticleEditor() {
         }]
       : [];
 
+    const editGuidance: AICompanionGuidance[] = visibleEditOperations.slice(0, 3).map((edit: any) => ({
+      ...targetMap[edit.field as GuidanceTarget],
+      message: edit.reason || "Ada perubahan siap diterapkan pada bagian ini.",
+      severity: "suggestion",
+      location: targetMap[edit.field as GuidanceTarget].label,
+      problem: `Teks saat ini: “${edit.targetText}”`,
+      action: edit.operation === "insert_after"
+        ? "Tambahkan teks rekomendasi tepat setelah bagian yang ditunjuk."
+        : edit.operation === "delete"
+          ? "Hapus teks yang ditunjuk karena tidak lagi diperlukan."
+          : "Ganti teks yang ditunjuk dengan versi rekomendasi.",
+      example: edit.replacementText,
+      reason: edit.reason,
+      targetText: edit.targetText,
+    }));
+
     if (Array.isArray(aiReview.guidance) && aiReview.guidance.length > 0) {
       const mappedGuidance = aiReview.guidance
         .filter((item: any) => item && typeof item.message === "string" && item.message.trim())
@@ -272,7 +314,7 @@ export default function ArticleEditor() {
             reason: item.reason,
           };
         });
-      return [...duplicateGuidance, ...mappedGuidance].slice(0, 5);
+      return [...duplicateGuidance, ...editGuidance, ...mappedGuidance].slice(0, 5);
     }
 
     const fallback: AICompanionGuidance[] = [];
@@ -293,8 +335,18 @@ export default function ArticleEditor() {
         fallback.push({ ...targetMap.content, message: suggestion, severity: "suggestion" });
       });
     }
-    return [...duplicateGuidance, ...fallback].slice(0, 5);
+    return [...duplicateGuidance, ...editGuidance, ...fallback].slice(0, 5);
   })();
+
+  useEffect(() => {
+    if (!articleId && !slugManuallyEdited) setSlug(slugifyArticleTitle(title));
+  }, [title, articleId, slugManuallyEdited]);
+
+  useEffect(() => {
+    if (verificationNotice !== "done") return;
+    const timer = window.setTimeout(() => setVerificationNotice(null), 4000);
+    return () => window.clearTimeout(timer);
+  }, [verificationNotice]);
 
   // AI Companion membaca perubahan secara otomatis. Debounce mencegah request
   // dikirim pada setiap ketikan, sementara request ID mencegah respons lama
@@ -320,14 +372,23 @@ export default function ArticleEditor() {
           content,
           keyword: focusKeyword || undefined,
           existingSlug: originalSlug || undefined,
+          reviewMode,
         });
 
         if (aiReviewRequestRef.current === requestId) {
           setAiReview(result);
+          if (verificationPendingRef.current) {
+            verificationPendingRef.current = false;
+            setVerificationNotice("done");
+          }
         }
       } catch (err: any) {
         if (aiReviewRequestRef.current === requestId) {
           setAiReviewError(err.message || "AI Companion belum bisa memberi pendapat. Ubah tulisan untuk mencoba lagi.");
+          if (verificationPendingRef.current) {
+            verificationPendingRef.current = false;
+            setVerificationNotice(null);
+          }
         }
       } finally {
         if (aiReviewRequestRef.current === requestId) {
@@ -337,7 +398,7 @@ export default function ArticleEditor() {
     }, 1800);
 
     return () => window.clearTimeout(timeoutId);
-  }, [title, excerpt, content, focusKeyword, originalSlug]);
+  }, [title, excerpt, content, focusKeyword, originalSlug, reviewMode]);
 
   useEffect(() => {
     const match = window.location.hash.match(/\?id=([^&]+)/);
@@ -347,10 +408,12 @@ export default function ArticleEditor() {
       api.getArticle(id).then(article => {
         if (article) {
           setTitle(article.title || "");
+          setSlug(article.slug || slugifyArticleTitle(article.title || ""));
           setOriginalSlug(article.slug || null);
           setCategory(article.category || "Legalitas PT");
           setReadTime(article.readTime || "5 min read");
           setExcerpt(article.excerpt || "");
+          setFocusKeyword(article.focusKeyword || "");
           setContent(article.content || "");
           setCoverUrl(article.coverImage || IMAGE_PRESETS[0].url);
           setCoverMode("url");
@@ -376,13 +439,68 @@ export default function ArticleEditor() {
     setContent(md);
   };
 
-  const appendToArticle = (markdown: string) => {
-    const nextContent = [content.trim(), markdown.trim()].filter(Boolean).join("\n\n");
+  const syncEditorContent = (nextContent: string) => {
     setContent(nextContent);
     if (editorRef.current) {
       editorRef.current.innerHTML = markdownToHtml(nextContent);
       wrapExistingImages(editorRef.current);
     }
+  };
+
+  const appendToArticle = (markdown: string) => {
+    const nextContent = [content.trim(), markdown.trim()].filter(Boolean).join("\n\n");
+    syncEditorContent(nextContent);
+  };
+
+  const editOperationKey = (edit: any) => [edit.field, edit.operation, edit.targetText, edit.replacementText].join("::");
+
+  const applyAIEdit = (edit: any) => {
+    const targetText = typeof edit.targetText === "string" ? edit.targetText : "";
+    const replacementText = typeof edit.replacementText === "string" ? edit.replacementText : "";
+    const sourceByField: Record<GuidanceTarget, string> = { title, excerpt, content, keyword: focusKeyword };
+    const source = sourceByField[edit.field as GuidanceTarget];
+
+    if (!source || !targetText || !source.includes(targetText)) {
+      setAiReviewError("Teks target sudah berubah. AI sedang memperbarui saran agar sesuai dengan versi artikel terbaru.");
+      return;
+    }
+
+    const snapshot: EditorSnapshot = { title, slug, excerpt, content, focusKeyword };
+    let nextValue = source;
+    if (edit.operation === "insert_after") nextValue = source.replace(targetText, `${targetText}\n\n${replacementText}`);
+    else nextValue = source.replace(targetText, edit.operation === "delete" ? "" : replacementText);
+
+    if (edit.field === "title") setTitle(nextValue.trim());
+    else if (edit.field === "excerpt") setExcerpt(nextValue.trim());
+    else if (edit.field === "keyword") setFocusKeyword(nextValue.trim());
+    else syncEditorContent(nextValue.trim());
+
+    setLastEditorSnapshot(snapshot);
+    setDismissedEditKeys((current) => [...new Set([...current, editOperationKey(edit)])]);
+    verificationPendingRef.current = true;
+    setVerificationNotice("checking");
+    setAiReviewError(null);
+  };
+
+  const undoLastAIEdit = () => {
+    if (!lastEditorSnapshot) return;
+    setTitle(lastEditorSnapshot.title);
+    setSlug(lastEditorSnapshot.slug);
+    setExcerpt(lastEditorSnapshot.excerpt);
+    setFocusKeyword(lastEditorSnapshot.focusKeyword);
+    syncEditorContent(lastEditorSnapshot.content);
+    setLastEditorSnapshot(null);
+    verificationPendingRef.current = true;
+    setVerificationNotice("checking");
+  };
+
+  const applyContentGap = (gap: any) => {
+    const suggestedContent = typeof gap?.suggestedContent === "string" ? gap.suggestedContent.trim() : "";
+    if (!suggestedContent) return;
+    setLastEditorSnapshot({ title, slug, excerpt, content, focusKeyword });
+    appendToArticle(suggestedContent);
+    verificationPendingRef.current = true;
+    setVerificationNotice("checking");
   };
 
   const addSuggestedFaqs = (suggestions: Array<{ question: string; answer: string }>) => {
@@ -732,7 +850,7 @@ export default function ArticleEditor() {
 
         const articleData = {
           title,
-          slug: title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+          slug: slug.trim() || slugifyArticleTitle(title),
           category,
           readTime,
           excerpt,
@@ -740,6 +858,7 @@ export default function ArticleEditor() {
           coverImage: finalCoverUrl,
           seoTitle: title,
           seoDesc: excerpt,
+          focusKeyword: focusKeyword.trim() || null,
           status: "published", // You can modify this if you add a status dropdown
           faq: faqItems.filter(f => f.q.trim() && f.a.trim()),
         };
@@ -807,6 +926,27 @@ export default function ArticleEditor() {
                     placeholder="Contoh: Panduan Lengkap Cara Mengurus NIB di OSS RBA 2026"
                     className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="articleSlug" className="text-[16px] font-extrabold text-gray-900">Slug Artikel</label>
+                  <div className="flex items-center rounded-xl border border-gray-200 bg-white px-4 focus-within:border-[#990202] focus-within:ring-4 focus-within:ring-red-100 transition-all">
+                    <span className="text-[14px] font-semibold text-gray-400">/artikel/</span>
+                    <input
+                      id="articleSlug"
+                      type="text"
+                      value={slug}
+                      onChange={(e) => {
+                        setSlug(slugifyArticleTitle(e.target.value));
+                        setSlugManuallyEdited(true);
+                      }}
+                      placeholder="panduan-mengurus-nib"
+                      className="min-w-0 flex-1 bg-transparent py-3 text-[15px] font-medium text-gray-900 outline-none"
+                    />
+                  </div>
+                  {originalSlug && slug && slug !== originalSlug && (
+                    <p className="text-[12px] font-medium text-amber-700">Slug lama berubah. Pastikan redirect dari /artikel/{originalSlug} dibuat setelah artikel disimpan.</p>
+                  )}
                 </div>
 
                 {/* Category & Read Time */}
@@ -1153,6 +1293,33 @@ export default function ArticleEditor() {
                     </span>
                   </div>
 
+                  <div className="flex flex-wrap items-center gap-2 rounded-xl border border-red-100 bg-white p-2.5">
+                    <span className="text-[11px] font-extrabold text-gray-500">Fokus analisis:</span>
+                    <select
+                      value={reviewMode}
+                      onChange={(e) => setReviewMode(e.target.value as ReviewMode)}
+                      className="min-w-[170px] flex-1 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-[12px] font-bold text-gray-800 outline-none focus:border-[#990202]"
+                    >
+                      <option value="complete">Pemeriksaan lengkap</option>
+                      <option value="seo">SEO & search intent</option>
+                      <option value="legal">Akurasi legal</option>
+                      <option value="readability">Keterbacaan</option>
+                      <option value="conversion">Konversi & CTA</option>
+                    </select>
+                  </div>
+
+                  {verificationNotice && (
+                    <div className={`flex items-center justify-between gap-3 rounded-xl border px-3 py-2.5 text-[12px] font-semibold ${verificationNotice === "checking" ? "border-blue-100 bg-blue-50 text-blue-800" : "border-emerald-100 bg-emerald-50 text-emerald-800"}`}>
+                      <span className="flex items-center gap-2">
+                        {verificationNotice === "checking" ? <Loader2 size={14} className="animate-spin" /> : <CheckCircle size={14} />}
+                        {verificationNotice === "checking" ? "Perubahan diterapkan. AI sedang memeriksa ulang hasilnya…" : "Pemeriksaan ulang selesai. Saran sudah diperbarui untuk versi terbaru."}
+                      </span>
+                      {lastEditorSnapshot && (
+                        <button type="button" onClick={undoLastAIEdit} className="flex-shrink-0 font-extrabold underline">Batalkan perubahan</button>
+                      )}
+                    </div>
+                  )}
+
                   {aiReviewError && (
                     <p className="text-[14px] text-red-600 flex items-center gap-1.5"><XCircle size={16} /> {aiReviewError}</p>
                   )}
@@ -1185,6 +1352,44 @@ export default function ArticleEditor() {
                         </div>
                       )}
 
+                      {visibleEditOperations.length > 0 && (
+                        <div className="rounded-xl border border-emerald-200 bg-emerald-50/40 p-3.5 space-y-3">
+                          <div>
+                            <span className="text-[12px] font-black uppercase tracking-wider text-emerald-900">Preview perubahan aman</span>
+                            <p className="mt-1 text-[11px] text-gray-500">AI hanya dapat menerapkan perubahan jika teks target masih sama persis dengan draft Anda.</p>
+                          </div>
+                          <div className="space-y-3">
+                            {visibleEditOperations.map((edit: any) => (
+                              <div key={editOperationKey(edit)} className="rounded-xl border border-emerald-100 bg-white p-3 text-[12px]">
+                                <div className="flex flex-wrap items-center justify-between gap-2">
+                                  <strong className="text-gray-900">{edit.field === "title" ? "Judul" : edit.field === "excerpt" ? "Kutipan" : edit.field === "keyword" ? "Kata kunci" : "Isi artikel"}</strong>
+                                  <span className="rounded-full bg-gray-100 px-2 py-1 text-[10px] font-extrabold uppercase text-gray-600">
+                                    {edit.operation === "insert_after" ? "Tambah setelah teks" : edit.operation === "delete" ? "Hapus teks" : "Ganti teks"}
+                                  </span>
+                                </div>
+                                <p className="mt-2 leading-relaxed text-gray-600">{edit.reason}</p>
+                                <div className="mt-2 grid gap-2">
+                                  <div className="rounded-lg border border-red-100 bg-red-50/60 p-2.5">
+                                    <strong className="block text-[10px] uppercase tracking-wide text-red-700">{edit.operation === "insert_after" ? "Posisi setelah" : "Sebelum"}</strong>
+                                    <p className="mt-1 whitespace-pre-wrap text-gray-700">{edit.targetText}</p>
+                                  </div>
+                                  {edit.operation !== "delete" && (
+                                    <div className="rounded-lg border border-emerald-100 bg-emerald-50/70 p-2.5">
+                                      <strong className="block text-[10px] uppercase tracking-wide text-emerald-700">{edit.operation === "insert_after" ? "Teks yang ditambahkan" : "Sesudah"}</strong>
+                                      <p className="mt-1 whitespace-pre-wrap font-semibold text-gray-800">{edit.replacementText}</p>
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="mt-3 flex gap-3">
+                                  <button type="button" onClick={() => applyAIEdit(edit)} className="rounded-lg bg-emerald-700 px-3 py-2 font-extrabold text-white hover:bg-emerald-800">Terapkan perubahan</button>
+                                  <button type="button" onClick={() => setDismissedEditKeys((current) => [...new Set([...current, editOperationKey(edit)])])} className="px-2 py-2 font-extrabold text-gray-500 hover:text-gray-800">Abaikan</button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {aiReview.guidance?.length > 0 && (
                         <div className="rounded-xl border border-violet-100 bg-violet-50/40 p-3.5 space-y-3">
                           <div>
@@ -1207,7 +1412,7 @@ export default function ArticleEditor() {
                                   </div>
                                 )}
                                 {item.reason && <p className="mt-2 text-gray-500"><strong>Tujuan:</strong> {item.reason}</p>}
-                                {item.example && (
+                                {item.example && visibleEditOperations.length === 0 && (
                                   <button type="button" onClick={() => applyGuidanceExample(item)} className="mt-2 font-extrabold text-violet-700 hover:underline">
                                     {inferGuidanceTarget(item.field, item.message || "") === "content" ? "Tambahkan contoh ke artikel" : "Gunakan contoh ini"}
                                   </button>
@@ -1228,6 +1433,18 @@ export default function ArticleEditor() {
                               <code className="max-w-[45%] truncate rounded-md bg-white px-2 py-1 text-[10px] font-bold text-blue-700 border border-blue-100">/{aiReview.seoSupport.recommendedSlug}</code>
                             )}
                           </div>
+                          {aiReview.seoSupport.recommendedSlug && aiReview.seoSupport.recommendedSlug !== slug && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSlug(aiReview.seoSupport.recommendedSlug);
+                                setSlugManuallyEdited(true);
+                              }}
+                              className="text-[11px] font-extrabold text-blue-700 hover:underline"
+                            >
+                              Gunakan slug rekomendasi
+                            </button>
+                          )}
 
                           {aiReview.seoSupport.searchIntent && (
                             <p className="text-[13px] leading-relaxed text-gray-700">
@@ -1279,6 +1496,44 @@ export default function ArticleEditor() {
                           )}
 
                           <p className="text-[10px] leading-relaxed text-gray-500">Saran ini membantu keterbacaan dan pemahaman mesin pencari, tetapi tidak menjamin halaman pasti terindeks atau mendapat peringkat tertentu.</p>
+                        </div>
+                      )}
+
+                      {aiReview.contentGaps?.length > 0 && (
+                        <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3.5 space-y-3">
+                          <div>
+                            <span className="text-[12px] font-black uppercase tracking-wider text-amber-900">Pembahasan yang masih kurang</span>
+                            <p className="mt-1 text-[11px] text-gray-500">Bagian berikut belum dijawab dengan cukup jelas dalam draft.</p>
+                          </div>
+                          {aiReview.contentGaps.map((gap: any, index: number) => (
+                            <div key={`${gap.topic}-${index}`} className="rounded-xl border border-amber-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
+                              <strong className="text-[13px] text-gray-900">{gap.topic}</strong>
+                              <p className="mt-1"><strong>Letakkan:</strong> {gap.location}</p>
+                              {gap.whyNeeded && <p className="mt-1 text-gray-500"><strong>Mengapa perlu:</strong> {gap.whyNeeded}</p>}
+                              <div className="mt-2 rounded-lg bg-amber-50 px-3 py-2">
+                                <strong className="block text-[10px] uppercase tracking-wide text-amber-700">Contoh isi</strong>
+                                <p className="mt-1 whitespace-pre-wrap font-medium">{gap.suggestedContent}</p>
+                              </div>
+                              <button type="button" onClick={() => applyContentGap(gap)} className="mt-2 font-extrabold text-amber-800 hover:underline">Tambahkan sebagai draft di akhir</button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {aiReview.verificationNeeded?.length > 0 && (
+                        <div className="rounded-xl border border-red-200 bg-red-50/60 p-3.5 space-y-3">
+                          <div className="flex items-center gap-2">
+                            <AlertTriangle size={16} className="text-red-600" />
+                            <span className="text-[12px] font-black uppercase tracking-wider text-red-900">Klaim yang wajib diverifikasi</span>
+                          </div>
+                          <p className="text-[11px] text-gray-600">AI tidak menganggap klaim hukum, biaya, atau tenggat sebagai fakta tanpa sumber resmi terbaru.</p>
+                          {aiReview.verificationNeeded.map((item: any, index: number) => (
+                            <div key={`${item.claim}-${index}`} className="rounded-lg border border-red-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
+                              <p><strong>Klaim:</strong> “{item.claim}”</p>
+                              <p className="mt-1"><strong>Lokasi:</strong> {item.location}</p>
+                              <p className="mt-1 text-red-700"><strong>Periksa menggunakan:</strong> {item.requiredSource}</p>
+                            </div>
+                          ))}
                         </div>
                       )}
                       {aiReview.recommendedTitle && (

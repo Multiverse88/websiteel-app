@@ -166,7 +166,7 @@ router.post("/:slug/revalidate", requireAuth, async (req, res) => {
 // POST /api/v1/articles
 router.post("/", requireAuth, async (req, res) => {
   try {
-    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq } = req.body;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword } = req.body;
 
     if (!slug || !title || !excerpt || !content || !category) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -183,6 +183,9 @@ router.post("/", requireAuth, async (req, res) => {
         readTime: readTime || "5 min read",
         authorId: authorId || null,
         faq: Array.isArray(faq) && faq.length > 0 ? faq : undefined,
+        seoTitle: seoTitle || title,
+        seoDesc: seoDesc || excerpt,
+        focusKeyword: focusKeyword || null,
       },
     });
 
@@ -200,7 +203,7 @@ router.post("/", requireAuth, async (req, res) => {
 router.put("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
-    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq } = req.body;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword } = req.body;
 
     const existing = await prisma.article.findUnique({ where: { id } });
     if (!existing) {
@@ -219,6 +222,9 @@ router.put("/:id", requireAuth, async (req, res) => {
         readTime: readTime || existing.readTime,
         authorId: authorId || existing.authorId,
         faq: faq !== undefined ? (Array.isArray(faq) && faq.length > 0 ? faq : null) : existing.faq as any,
+        seoTitle: seoTitle !== undefined ? seoTitle : existing.seoTitle,
+        seoDesc: seoDesc !== undefined ? seoDesc : existing.seoDesc,
+        focusKeyword: focusKeyword !== undefined ? focusKeyword : existing.focusKeyword,
       },
     });
 
@@ -253,11 +259,11 @@ router.delete("/:id", requireAuth, async (req, res) => {
 // POST /api/v1/articles/ai-review — SEO scoring & suggestions via ArticleAI
 router.post("/ai-review", requireAuth, async (req, res) => {
   try {
-    const { title, excerpt, content, site, keyword, existingSlug } = req.body;
+    const { title, excerpt, content, site, keyword, existingSlug, reviewMode } = req.body;
     if (!title || !content) {
       return res.status(400).json({ error: "title and content are required" });
     }
-    const result = await getAIReview({ title, excerpt: excerpt || "", content, site: site || "easylegal.biz.id", keyword, existingSlug });
+    const result = await getAIReview({ title, excerpt: excerpt || "", content, site: site || "easylegal.biz.id", keyword, existingSlug, reviewMode });
     res.json({ data: result });
   } catch (error: any) {
     console.error("AI review error:", error);

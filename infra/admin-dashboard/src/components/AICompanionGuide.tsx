@@ -11,6 +11,7 @@ export type AICompanionGuidance = {
   action?: string;
   example?: string;
   reason?: string;
+  targetText?: string;
 };
 
 type Position = { left: number; top: number };
@@ -47,7 +48,60 @@ export default function AICompanionGuide({
     });
   }, []);
 
-  const walkToTarget = useCallback((targetId?: string, scrollIntoView = false) => {
+  const selectExactTargetText = useCallback((target: HTMLElement, targetText?: string) => {
+    if (!targetText) return;
+
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+      const start = target.value.indexOf(targetText);
+      if (start >= 0) {
+        target.focus({ preventScroll: true });
+        target.setSelectionRange(start, start + targetText.length);
+      }
+      return;
+    }
+
+    const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
+    const nodes: Text[] = [];
+    let combined = "";
+    let current = walker.nextNode();
+    while (current) {
+      nodes.push(current as Text);
+      combined += current.textContent || "";
+      current = walker.nextNode();
+    }
+    const start = combined.indexOf(targetText);
+    if (start < 0) return;
+
+    let offset = 0;
+    let startNode: Text | null = null;
+    let endNode: Text | null = null;
+    let startOffset = 0;
+    let endOffset = 0;
+    const end = start + targetText.length;
+    for (const node of nodes) {
+      const length = node.textContent?.length || 0;
+      if (!startNode && start >= offset && start <= offset + length) {
+        startNode = node;
+        startOffset = start - offset;
+      }
+      if (endNode === null && end >= offset && end <= offset + length) {
+        endNode = node;
+        endOffset = end - offset;
+        break;
+      }
+      offset += length;
+    }
+    if (!startNode || !endNode) return;
+
+    const range = document.createRange();
+    range.setStart(startNode, startOffset);
+    range.setEnd(endNode, endOffset);
+    const selection = window.getSelection();
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+  }, []);
+
+  const walkToTarget = useCallback((targetId?: string, scrollIntoView = false, targetText?: string) => {
     clearTargetHighlight();
 
     if (!targetId) {
@@ -82,13 +136,14 @@ export default function AICompanionGuide({
         top: Math.min(Math.max(72, rect.top - 80), maxTop),
       });
       target.classList.add("ai-companion-target");
+      if (scrollIntoView) selectExactTargetText(target, targetText);
 
       if (walkTimerRef.current) window.clearTimeout(walkTimerRef.current);
       walkTimerRef.current = window.setTimeout(() => setIsWalking(false), 950);
     };
 
     window.setTimeout(placeCompanion, scrollIntoView ? 520 : 20);
-  }, [clearTargetHighlight]);
+  }, [clearTargetHighlight, selectExactTargetText]);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -210,7 +265,7 @@ export default function AICompanionGuide({
             )}
 
             {activeItem && !isThinking && (
-              <button type="button" onClick={() => walkToTarget(activeItem.targetId, true)} className="ml-[46px] mt-3 w-[calc(100%-46px)] rounded-full border border-[#C80B14] px-3 py-2 text-[12px] font-extrabold text-[#B2070F] hover:bg-red-50 active:scale-[0.98] transition">
+              <button type="button" onClick={() => walkToTarget(activeItem.targetId, true, activeItem.targetText)} className="ml-[46px] mt-3 w-[calc(100%-46px)] rounded-full border border-[#C80B14] px-3 py-2 text-[12px] font-extrabold text-[#B2070F] hover:bg-red-50 active:scale-[0.98] transition">
                 Tunjukkan letak perbaikannya
               </button>
             )}
@@ -222,7 +277,7 @@ export default function AICompanionGuide({
                 <MessageCircle size={15} />
                 <span className="truncate">AI memantau tulisan Anda...</span>
               </div>
-              <button type="button" onClick={() => activeItem && walkToTarget(activeItem.targetId, true)} disabled={!activeItem || isThinking} className="w-10 h-10 rounded-full bg-[#C70712] text-white flex items-center justify-center hover:bg-[#990202] disabled:opacity-40" aria-label="Tunjukkan saran aktif">
+              <button type="button" onClick={() => activeItem && walkToTarget(activeItem.targetId, true, activeItem.targetText)} disabled={!activeItem || isThinking} className="w-10 h-10 rounded-full bg-[#C70712] text-white flex items-center justify-center hover:bg-[#990202] disabled:opacity-40" aria-label="Tunjukkan saran aktif">
                 {isThinking ? <span className="w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin" /> : <Send size={16} />}
               </button>
             </div>
