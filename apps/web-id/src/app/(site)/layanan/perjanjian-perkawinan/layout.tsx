@@ -1,13 +1,21 @@
+import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { getBreadcrumbJsonLd } from "@/lib/structured-data";
+import { getDomainConfig } from "@/lib/domains";
 
-export const metadata = {
-  title: "Perjanjian Perkawinan — Kontrak Prenupial Notaris Resmi",
-  description:
-    "Pembuatan perjanjian perkawinan (prenupial) dengan akta notaris. Lindungi aset bisnis & pribadi sebelum menikah.",
-  alternates: {
-    canonical: "https://easylegal.biz.id/layanan/perjanjian-perkawinan",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const host = (await headers()).get("host");
+  const { baseUrl } = getDomainConfig(host);
+
+  return {
+    title: "Perjanjian Perkawinan — Kontrak Prenupial Notaris Resmi",
+    description:
+      "Pembuatan perjanjian perkawinan (prenupial) dengan akta notaris. Lindungi aset bisnis & pribadi sebelum menikah.",
+    alternates: {
+      canonical: `${baseUrl}/layanan/perjanjian-perkawinan`,
+    },
+  };
+}
 
 const breadcrumbs = [
   { name: "Beranda", url: "/" },

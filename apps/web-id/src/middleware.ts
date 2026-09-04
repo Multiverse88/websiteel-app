@@ -70,7 +70,7 @@ export async function middleware(request: NextRequest) {
 
     if (slug) {
       try {
-        const host = request.headers.get("host") || "easylegal.my.id";
+        const host = request.headers.get("host") || "easylegal.id";
         const domain = host.split(":")[0]; // remove port if any
         const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/redirects/${slug}?domain=${domain}`;
         const res = await fetch(apiUrl);

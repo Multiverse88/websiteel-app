@@ -1,13 +1,21 @@
+import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { getBreadcrumbJsonLd } from "@/lib/structured-data";
+import { getDomainConfig } from "@/lib/domains";
 
-export const metadata = {
-  title: "Pengajuan PKP — Daftar Wajib Pajak PKP Online",
-  description:
-    "Pengurusan pengukuhan Pengusaha Kena Pajak (PKP) untuk UMKM & korporasi. Proses cepat 3-5 hari kerja.",
-  alternates: {
-    canonical: "https://easylegal.biz.id/layanan/pengajuan-pkp",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const host = (await headers()).get("host");
+  const { baseUrl } = getDomainConfig(host);
+
+  return {
+    title: "Pengajuan PKP — Daftar Wajib Pajak PKP Online",
+    description:
+      "Pengurusan pengukuhan Pengusaha Kena Pajak (PKP) untuk UMKM & korporasi. Proses cepat 3-5 hari kerja.",
+    alternates: {
+      canonical: `${baseUrl}/layanan/pengajuan-pkp`,
+    },
+  };
+}
 
 const breadcrumbs = [
   { name: "Beranda", url: "/" },

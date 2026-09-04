@@ -1,13 +1,21 @@
+import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { getBreadcrumbJsonLd } from "@/lib/structured-data";
+import { getDomainConfig } from "@/lib/domains";
 
-export const metadata = {
-  title: "Pelaporan LKPM — Compliance BKPM untuk PMA & PMDN",
-  description:
-    "Pengurusan laporan LKPM wajib tahunan untuk badan usaha PMA & PMDN. Konsultasi gratis, proses 3-7 hari kerja.",
-  alternates: {
-    canonical: "https://easylegal.biz.id/layanan/pelaporan-lkpm",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const host = (await headers()).get("host");
+  const { baseUrl } = getDomainConfig(host);
+
+  return {
+    title: "Pelaporan LKPM — Compliance BKPM untuk PMA & PMDN",
+    description:
+      "Pengurusan laporan LKPM wajib tahunan untuk badan usaha PMA & PMDN. Konsultasi gratis, proses 3-7 hari kerja.",
+    alternates: {
+      canonical: `${baseUrl}/layanan/pelaporan-lkpm`,
+    },
+  };
+}
 
 const breadcrumbs = [
   { name: "Beranda", url: "/" },
