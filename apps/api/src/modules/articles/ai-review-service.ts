@@ -38,27 +38,80 @@ function getAIClient(): OpenAI {
   });
 }
 
-async function parseAIResponse(raw: string): Promise<AIReviewResult> {
-  try {
-    const cleaned = raw.trim().replace(/```json\s*/g, "").replace(/```/g, "").trim();
-    return JSON.parse(cleaned) as AIReviewResult;
-  } catch {
-    return {
-      opinion: "Saya belum dapat membaca hasil analisis dengan sempurna. Tetap periksa kembali kejelasan, struktur, dan fokus tulisan ini.",
-      guidance: [],
-      seoScore: 50,
-      titleScore: "needs-improvement",
-      titleReason: "Could not parse AI response",
-      metaScore: "needs-improvement",
-      metaReason: "Could not parse AI response",
-      contentScore: "needs-improvement",
-      contentReason: "Could not parse AI response",
-      readabilityScore: 50,
-      duplicateRisk: "medium",
-      similarArticles: [],
-      suggestions: ["Review the article manually for SEO improvements"],
-    };
+const scoreLabels = ["excellent", "good", "needs-improvement", "poor"] as const;
+const guidanceFields = ["title", "excerpt", "content", "keyword"] as const;
+const guidanceSeverities = ["suggestion", "warning", "critical"] as const;
+
+function fallbackReview(): AIReviewResult {
+  return {
+    opinion: "Saya belum bisa menyelesaikan analisis AI saat ini. Sambil menunggu pembaruan berikutnya, periksa kembali kejelasan judul, kutipan, dan struktur isi artikel.",
+    guidance: [],
+    seoScore: 50,
+    titleScore: "needs-improvement",
+    titleReason: "Judul perlu diperiksa kembali agar lebih jelas dan spesifik.",
+    metaScore: "needs-improvement",
+    metaReason: "Kutipan perlu diperiksa kembali agar merangkum manfaat utama artikel.",
+    contentScore: "needs-improvement",
+    contentReason: "Isi artikel perlu diperiksa kembali dari sisi struktur dan keterbacaan.",
+    readabilityScore: 50,
+    duplicateRisk: "medium",
+    similarArticles: [],
+    suggestions: ["Periksa kembali judul, kutipan, dan struktur isi artikel."],
+  };
+}
+
+export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
+  const withoutFences = raw
+    .trim()
+    .replace(/```(?:json)?\s*/gi, "")
+    .replace(/```/g, "")
+    .trim();
+  const firstBrace = withoutFences.indexOf("{");
+  const lastBrace = withoutFences.lastIndexOf("}");
+
+  if (firstBrace < 0 || lastBrace <= firstBrace) {
+    throw new Error("AI review response does not contain a complete JSON object");
   }
+
+  const parsed = JSON.parse(withoutFences.slice(firstBrace, lastBrace + 1)) as Record<string, any>;
+  if (typeof parsed.seoScore !== "number") {
+    throw new Error("AI review response is missing seoScore");
+  }
+
+  const fallback = fallbackReview();
+  const normalizeScore = (value: unknown) => scoreLabels.includes(value as any)
+    ? value as AIReviewResult["titleScore"]
+    : "needs-improvement";
+
+  return {
+    opinion: typeof parsed.opinion === "string" && parsed.opinion.trim() ? parsed.opinion.trim() : fallback.opinion,
+    guidance: Array.isArray(parsed.guidance)
+      ? parsed.guidance
+        .filter((item: any) => item && guidanceFields.includes(item.field) && typeof item.message === "string" && item.message.trim())
+        .slice(0, 5)
+        .map((item: any) => ({
+          field: item.field,
+          severity: guidanceSeverities.includes(item.severity) ? item.severity : "suggestion",
+          message: item.message.trim(),
+        }))
+      : [],
+    seoScore: Math.max(0, Math.min(100, Math.round(parsed.seoScore))),
+    titleScore: normalizeScore(parsed.titleScore),
+    titleReason: typeof parsed.titleReason === "string" && parsed.titleReason.trim() ? parsed.titleReason.trim() : fallback.titleReason,
+    metaScore: normalizeScore(parsed.metaScore),
+    metaReason: typeof parsed.metaReason === "string" && parsed.metaReason.trim() ? parsed.metaReason.trim() : fallback.metaReason,
+    contentScore: normalizeScore(parsed.contentScore),
+    contentReason: typeof parsed.contentReason === "string" && parsed.contentReason.trim() ? parsed.contentReason.trim() : fallback.contentReason,
+    readabilityScore: typeof parsed.readabilityScore === "number" ? Math.max(0, Math.min(100, Math.round(parsed.readabilityScore))) : fallback.readabilityScore,
+    duplicateRisk: ["low", "medium", "high"].includes(parsed.duplicateRisk) ? parsed.duplicateRisk : fallback.duplicateRisk,
+    similarArticles: Array.isArray(parsed.similarArticles) ? parsed.similarArticles : [],
+    suggestions: Array.isArray(parsed.suggestions)
+      ? parsed.suggestions.filter((item: unknown) => typeof item === "string" && item.trim()).slice(0, 5)
+      : fallback.suggestions,
+    recommendedTitle: typeof parsed.recommendedTitle === "string" ? parsed.recommendedTitle.trim() : undefined,
+    recommendedMetaDescription: typeof parsed.recommendedMetaDescription === "string" ? parsed.recommendedMetaDescription.trim() : undefined,
+    targetKeyword: typeof parsed.targetKeyword === "string" ? parsed.targetKeyword.trim() : undefined,
+  };
 }
 
 export async function getAIReview(params: {
@@ -128,9 +181,39 @@ Return ONLY valid JSON (no markdown fences):
     model,
     messages: [{ role: "user", content: prompt }],
     temperature: 0.2,
-    max_tokens: 800,
+    max_tokens: 1400,
   });
 
   const raw = resp.choices[0]?.message?.content || "{}";
-  return parseAIResponse(raw);
+  try {
+    return await parseAIResponse(raw);
+  } catch (firstError) {
+    console.warn("AI review returned invalid JSON; retrying once", {
+      finishReason: resp.choices[0]?.finish_reason,
+      responseLength: raw.length,
+      reason: firstError instanceof Error ? firstError.message : "unknown parse error",
+    });
+
+    const retry = await client.chat.completions.create({
+      model,
+      messages: [{
+        role: "user",
+        content: `${prompt}\n\nIMPORTANT: The previous attempt was incomplete or invalid. Return one COMPLETE JSON object only. Keep every explanation concise so the response is not truncated.`,
+      }],
+      temperature: 0.1,
+      max_tokens: 1600,
+    });
+    const retryRaw = retry.choices[0]?.message?.content || "{}";
+
+    try {
+      return await parseAIResponse(retryRaw);
+    } catch (retryError) {
+      console.error("AI review JSON retry failed", {
+        finishReason: retry.choices[0]?.finish_reason,
+        responseLength: retryRaw.length,
+        reason: retryError instanceof Error ? retryError.message : "unknown parse error",
+      });
+      return fallbackReview();
+    }
+  }
 }
