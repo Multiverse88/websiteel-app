@@ -1,44 +1,63 @@
-/**
- * Local text embedding via @xenova/transformers
- * Model: paraphrase-multilingual-MiniLM-L12-v2 (384 dims)
- * Downloaded automatically from HuggingFace on first run, cached locally.
- */
-import { pipeline } from "@xenova/transformers";
-
-const MODEL_ID = "Xenova/paraphrase-multilingual-MiniLM-L12-v2";
-const CACHE_DIR = process.env.XENOVA_CACHE_DIR || "./node_modules/.cache/xenova";
-
-let _model: any = null;
-let _initPromise: Promise<any> | null = null;
-
-async function getModel(): Promise<any> {
-  if (_model) return _model;
-  if (!_initPromise) {
-    _initPromise = pipeline("feature-extraction", MODEL_ID, {
-      cacheDir: CACHE_DIR,
-    }).then((p: any) => {
-      _model = p;
-      return p;
-    });
-  }
-  return _initPromise;
-}
+const EMBEDDING_DIMENSIONS = 512
+const OPENAI_EMBEDDINGS_URL = "https://api.openai.com/v1/embeddings"
 
 export interface EmbeddingResult {
-  vector: number[];
-  dims: number;
+  vector: number[]
+  dims: number
 }
 
 export async function generateEmbedding(text: string): Promise<EmbeddingResult> {
-  const model = await getModel();
-  const trimmed = text.trim().slice(0, 2000);
-  if (!trimmed) return { vector: new Array(384).fill(0), dims: 384 };
+  const apiKey = process.env.OPENAI_API_KEY
+  if (!apiKey) throw new Error("OPENAI_API_KEY missing")
 
-  const output = await model(trimmed, { pooling: "mean", normalize: true }) as any;
-  const vector = Array.from(output.data as Float32Array);
-  return { vector, dims: vector.length };
+  const input = text.trim()
+  if (!input) throw new Error("embedding input required")
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 15_000)
+
+  try {
+    const response = await fetch(OPENAI_EMBEDDINGS_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "text-embedding-3-small",
+        input: input.slice(0, 8000),
+        dimensions: EMBEDDING_DIMENSIONS,
+        encoding_format: "float",
+      }),
+      signal: controller.signal,
+    })
+
+    if (!response.ok) {
+      throw new Error(`OpenAI embedding failed: ${response.status}`)
+    }
+
+    const data = await response.json() as {
+      data?: Array<{ embedding?: number[] }>
+    }
+
+    const vector = data.data?.[0]?.embedding
+
+    if (
+      !Array.isArray(vector) ||
+      vector.length !== EMBEDDING_DIMENSIONS ||
+      !vector.every(Number.isFinite)
+    ) {
+      throw new Error("Invalid OpenAI embedding response")
+    }
+
+    return { vector, dims: vector.length }
+  } finally {
+    clearTimeout(timeout)
+  }
 }
 
-export async function generateBatchEmbeddings(texts: string[]): Promise<EmbeddingResult[]> {
-  return Promise.all(texts.map((t) => generateEmbedding(t)));
+export async function generateBatchEmbeddings(
+  texts: string[],
+): Promise<EmbeddingResult[]> {
+  return Promise.all(texts.map(generateEmbedding))
 }
