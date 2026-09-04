@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useAuth } from '../lib/auth'
 
 const navItems = [
@@ -18,11 +19,12 @@ const navItems = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth()
   const hash = window.location.hash || '#/dashboard'
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   return (
     <div className="flex h-screen w-full bg-background overflow-hidden relative">
       {/* SideNavBar from Stitch */}
-      <nav className="fixed left-0 top-0 h-full w-[260px] bg-surface dark:bg-inverse-surface border-r border-border-base dark:border-secondary-fixed-variant flex flex-col py-6 z-50">
+      <nav className={`fixed left-0 top-0 h-full w-[260px] bg-surface dark:bg-inverse-surface border-r border-border-base dark:border-secondary-fixed-variant flex flex-col py-6 z-50 transition-transform duration-200 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="px-6 mb-8 flex flex-col gap-2">
           <h1 className="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">EasyLegal</h1>
           <p className="text-label-caps font-label-caps text-secondary uppercase tracking-widest">Admin Dashboard</p>
@@ -58,7 +60,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </nav>
 
       {/* Main Content Area */}
-      <div className="flex-1 ml-[260px] flex flex-col h-full relative w-full overflow-hidden">
+      <div className={`flex-1 flex flex-col h-full relative w-full overflow-hidden transition-[margin] duration-200 ${sidebarOpen ? 'ml-[260px]' : 'ml-0'}`}>
         {/* We let the children handle the TopNavBar if it's the PageBuilder, 
             or we can render a generic TopNavBar for other pages here.
             Since PageBuilder renders its own TopNavBar, we check if it's the builder. */}
@@ -68,6 +70,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <>
             <header className="h-16 bg-canvas-white/88 dark:bg-inverse-surface/88 backdrop-blur-md border-b border-border-base flex justify-between items-center px-gutter shrink-0">
               <div className="flex items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setSidebarOpen((prev) => !prev)}
+                  className="text-secondary hover:text-primary transition-colors p-1 rounded-md hover:bg-surface-container"
+                  aria-label={sidebarOpen ? 'Sembunyikan sidebar' : 'Tampilkan sidebar'}
+                  title={sidebarOpen ? 'Sembunyikan sidebar' : 'Tampilkan sidebar'}
+                >
+                  <span className="material-symbols-outlined">{sidebarOpen ? 'left_panel_close' : 'left_panel_open'}</span>
+                </button>
                 <span className="text-primary font-bold text-headline-md font-headline-md">Admin Workspace</span>
               </div>
               <div className="flex items-center gap-4 text-secondary">
