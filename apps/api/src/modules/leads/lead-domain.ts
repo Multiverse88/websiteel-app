@@ -13,6 +13,10 @@ export type LeadSourceCode =
   | "gads"
   | "metaads"
   | "googleseo"
+  | "chatgpt"
+  | "claude"
+  | "perplexity"
+  | "googleai"
   | "referral"
   | "direct"
   | "other"
@@ -22,6 +26,7 @@ export type AttributionChannel =
   | "GOOGLE_ADS"
   | "META_ADS"
   | "ORGANIC_SEARCH"
+  | "AI_REFERRAL"
   | "REFERRAL"
   | "DIRECT"
   | "OTHER"
@@ -104,7 +109,8 @@ export function normalizeSourceCode(value: unknown): LeadSourceCode | null {
   const normalized = clean(value, 20)?.toLowerCase();
   if (!normalized) return null;
   if (normalized === "seo") return "googleseo";
-  return (["gads", "metaads", "googleseo", "referral", "direct", "other", "unknown"] as const)
+  if (normalized === "google_ai") return "googleai";
+  return (["gads", "metaads", "googleseo", "chatgpt", "claude", "perplexity", "googleai", "referral", "direct", "other", "unknown"] as const)
     .find((source) => source === normalized) ?? null;
 }
 
@@ -113,6 +119,10 @@ export function sourceCodeToChannel(source: LeadSourceCode): AttributionChannel 
     gads: "GOOGLE_ADS",
     metaads: "META_ADS",
     googleseo: "ORGANIC_SEARCH",
+    chatgpt: "AI_REFERRAL",
+    claude: "AI_REFERRAL",
+    perplexity: "AI_REFERRAL",
+    googleai: "AI_REFERRAL",
     referral: "REFERRAL",
     direct: "DIRECT",
     other: "OTHER",
@@ -126,6 +136,10 @@ export const SOURCE_LABELS: Record<LeadSourceCode, string> = {
   gads: "Google Ads",
   metaads: "Meta Ads",
   googleseo: "Google SEO",
+  chatgpt: "ChatGPT",
+  claude: "Claude",
+  perplexity: "Perplexity",
+  googleai: "Google AI",
   referral: "Referral",
   direct: "Langsung",
   other: "Lainnya",

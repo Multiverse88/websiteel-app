@@ -190,6 +190,7 @@ enum AttributionChannel {
   DIRECT
   OTHER
   UNKNOWN
+  AI_REFERRAL
 }
 
 enum LeadEventType {

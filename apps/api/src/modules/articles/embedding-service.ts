@@ -15,7 +15,7 @@ async function getModel(): Promise<any> {
   if (_model) return _model;
   if (!_initPromise) {
     _initPromise = pipeline("feature-extraction", MODEL_ID, {
-      cacheDir: CACHE_DIR,
+      cache_dir: CACHE_DIR,
     }).then((p: any) => {
       _model = p;
       return p;

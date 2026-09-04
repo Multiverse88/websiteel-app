@@ -100,7 +100,7 @@ router.get("/sitemap/all", async (req, res) => {
 router.get("/:slug", async (req, res) => {
   try {
     const { slug } = req.params as { slug: string };
-    const article = await prisma.article.findUnique({
+    const article = await prisma.article.findFirst({
       where: { slug },
     });
 
@@ -119,7 +119,7 @@ router.get("/:slug", async (req, res) => {
 router.post("/:slug/view", async (req, res) => {
   try {
     const { slug } = req.params as { slug: string };
-    await prisma.article.update({
+    await prisma.article.updateMany({
       where: { slug },
       data: { viewCount: { increment: 1 } },
     });

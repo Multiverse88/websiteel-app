@@ -1,0 +1,1 @@
+ALTER TYPE "AttributionChannel" ADD VALUE IF NOT EXISTS 'AI_REFERRAL';
