@@ -10,6 +10,13 @@ const validReview = {
   recommendedOutline: ["Apa Itu NIB?", "Dokumen yang Perlu Disiapkan"],
   exampleParagraph: "NIB menjadi identitas bagi pelaku usaha dalam menjalankan kegiatan bisnisnya.",
   targetKeyword: "cara mengurus NIB",
+  seoSupport: {
+    searchIntent: "Informasional: pengguna ingin memahami tahapan mengurus NIB.",
+    recommendedSlug: "cara-mengurus-nib-umkm",
+    indexingSuggestions: ["Letakkan kata kunci secara alami pada judul dan subjudul utama."],
+    internalLinks: [],
+    faqSuggestions: [{ question: "Apa itu NIB?", answer: "NIB adalah identitas pelaku usaha yang diterbitkan melalui sistem OSS." }],
+  },
 };
 
 test("mengambil JSON valid ketika model menambahkan kalimat pembuka", async () => {
@@ -18,6 +25,8 @@ test("mengambil JSON valid ketika model menambahkan kalimat pembuka", async () =
 
   assert.equal(result.recommendedTitle, validReview.recommendedTitle);
   assert.deepEqual(result.recommendedOutline, validReview.recommendedOutline);
+  assert.equal(result.seoSupport.recommendedSlug, validReview.seoSupport.recommendedSlug);
+  assert.equal(result.seoSupport.faqSuggestions[0]?.question, "Apa itu NIB?");
 });
 
 test("menolak respons JSON yang terpotong agar caller dapat mencoba ulang", async () => {

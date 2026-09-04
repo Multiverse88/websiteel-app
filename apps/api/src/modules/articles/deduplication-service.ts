@@ -29,14 +29,14 @@ export async function checkDeduplication(params: {
   site: string;
   existingSlug?: string;
   threshold?: number;
-}): Promise<{ risk: "low" | "medium" | "high"; results: DedupResult[] }> {
+}): Promise<{ risk: "low" | "medium" | "high"; results: DedupResult[]; candidates: DedupResult[] }> {
   const { title, excerpt = "", content = "", site, existingSlug, threshold = 0.4 } = params;
   const cleanTitle = (title || "").trim();
   const cleanExcerpt = excerpt.trim().slice(0, 2000);
   const cleanContent = content.trim().slice(0, 6000);
 
   if (!cleanTitle) {
-    return { risk: "low", results: [] };
+    return { risk: "low", results: [], candidates: [] };
   }
 
   const rows = await prisma.$queryRaw<Array<{
@@ -72,12 +72,11 @@ export async function checkDeduplication(params: {
       content_score,
       GREATEST(title_score, excerpt_score, content_score)::float AS score
     FROM similarity_scores
-    WHERE GREATEST(title_score, excerpt_score, content_score) >= ${threshold}
     ORDER BY score DESC
     LIMIT 10
   `;
 
-  const results: DedupResult[] = rows.map((row) => ({
+  const candidates: DedupResult[] = rows.map((row) => ({
     similarity: Math.round(row.score * 100) / 100,
     titleSimilarity: Math.round(row.title_score * 100) / 100,
     excerptSimilarity: Math.round(row.excerpt_score * 100) / 100,
@@ -85,6 +84,7 @@ export async function checkDeduplication(params: {
     matchedSlug: row.slug,
     matchedTitle: row.title,
   }));
+  const results = candidates.filter((result) => result.similarity >= threshold);
 
-  return { risk: classifyDuplicateRisk(results), results };
+  return { risk: classifyDuplicateRisk(results), results, candidates };
 }

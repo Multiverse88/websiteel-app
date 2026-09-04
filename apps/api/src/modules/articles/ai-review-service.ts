@@ -13,6 +13,20 @@ export interface AIReviewResult {
   recommendedOutline: string[];
   exampleParagraph: string;
   targetKeyword: string;
+  seoSupport: {
+    searchIntent: string;
+    recommendedSlug: string;
+    indexingSuggestions: string[];
+    internalLinks: Array<{
+      anchorText: string;
+      targetTitle: string;
+      targetSlug: string;
+    }>;
+    faqSuggestions: Array<{
+      question: string;
+      answer: string;
+    }>;
+  };
   duplicateCheck: {
     risk: "low" | "medium" | "high";
     blocked: boolean;
@@ -66,6 +80,13 @@ function fallbackReview(): AIReviewResult {
     recommendedOutline: [],
     exampleParagraph: "",
     targetKeyword: "",
+    seoSupport: {
+      searchIntent: "",
+      recommendedSlug: "",
+      indexingSuggestions: ["Gunakan judul dan kutipan yang unik, struktur heading yang jelas, serta isi yang benar-benar menjawab kebutuhan pembaca."],
+      internalLinks: [],
+      faqSuggestions: [],
+    },
     duplicateCheck: { risk: "low", blocked: false, results: [] },
   };
 }
@@ -111,6 +132,31 @@ export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
       : [],
     exampleParagraph: typeof parsed.exampleParagraph === "string" ? parsed.exampleParagraph.trim() : "",
     targetKeyword: typeof parsed.targetKeyword === "string" ? parsed.targetKeyword.trim() : "",
+    seoSupport: {
+      searchIntent: typeof parsed.seoSupport?.searchIntent === "string" ? parsed.seoSupport.searchIntent.trim() : "",
+      recommendedSlug: typeof parsed.seoSupport?.recommendedSlug === "string"
+        ? parsed.seoSupport.recommendedSlug.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
+        : "",
+      indexingSuggestions: Array.isArray(parsed.seoSupport?.indexingSuggestions)
+        ? parsed.seoSupport.indexingSuggestions.filter((item: unknown) => typeof item === "string" && item.trim()).slice(0, 5)
+        : fallback.seoSupport.indexingSuggestions,
+      internalLinks: Array.isArray(parsed.seoSupport?.internalLinks)
+        ? parsed.seoSupport.internalLinks
+          .filter((item: any) => item && typeof item.anchorText === "string" && typeof item.targetTitle === "string" && typeof item.targetSlug === "string")
+          .slice(0, 3)
+          .map((item: any) => ({
+            anchorText: item.anchorText.trim(),
+            targetTitle: item.targetTitle.trim(),
+            targetSlug: item.targetSlug.trim(),
+          }))
+        : [],
+      faqSuggestions: Array.isArray(parsed.seoSupport?.faqSuggestions)
+        ? parsed.seoSupport.faqSuggestions
+          .filter((item: any) => item && typeof item.question === "string" && item.question.trim() && typeof item.answer === "string" && item.answer.trim())
+          .slice(0, 4)
+          .map((item: any) => ({ question: item.question.trim(), answer: item.answer.trim() }))
+        : [],
+    },
     duplicateCheck: { risk: "low", blocked: false, results: [] },
   };
 }
@@ -126,7 +172,7 @@ export async function getAIReview(params: {
   const { title, excerpt, content, site, keyword, existingSlug } = params;
   const fullText = [title, excerpt, content].filter(Boolean).join(" ").slice(0, 3000);
 
-  let duplicateCheck: Awaited<ReturnType<typeof checkDeduplication>> = { risk: "low", results: [] };
+  let duplicateCheck: Awaited<ReturnType<typeof checkDeduplication>> = { risk: "low", results: [], candidates: [] };
   try {
     duplicateCheck = await checkDeduplication({
       title,
@@ -142,6 +188,11 @@ export async function getAIReview(params: {
       `${index + 1}. "${article.matchedTitle}" — overall ${Math.round(article.similarity * 100)}%, title ${Math.round(article.titleSimilarity * 100)}%, excerpt ${Math.round(article.excerptSimilarity * 100)}%, content ${Math.round(article.contentSimilarity * 100)}%`
     ).join("\n")}\nDuplicate risk: ${duplicateCheck.risk}. Every recommendation must use a clearly different title and editorial angle.`
     : "\nDATABASE COMPARISON — no materially similar existing article was found.";
+  const internalLinkContext = duplicateCheck.candidates.length > 0
+    ? `\nINTERNAL LINK CANDIDATES — only recommend links from this exact list:\n${duplicateCheck.candidates.slice(0, 8).map((article) =>
+      `- "${article.matchedTitle}" → /artikel/${article.matchedSlug}`
+    ).join("\n")}`
+    : "\nINTERNAL LINK CANDIDATES — none available; return an empty internalLinks array.";
 
   const prompt = `You are a proactive Indonesian writing companion for legal-business articles. Read the draft and return ONLY concrete, ready-to-use writing suggestions. Do not give scores, grades, diagnoses, criticism, or general opinions. Show the writer exactly what a better title, meta description, keyword, article structure, and example paragraph could look like. All text MUST use natural Indonesian and must remain legally cautious—do not invent regulations, prices, deadlines, or guarantees.
 
@@ -150,7 +201,7 @@ Title: "${title}"
 Excerpt: "${excerpt}"
 Content preview: ${fullText.slice(0, 1500)}
 Target keyword: ${keyword || "auto-detect"}
-Site: ${site}${duplicateContext}
+Site: ${site}${duplicateContext}${internalLinkContext}
 
 Return ONLY valid JSON (no markdown fences):
 {
@@ -166,25 +217,55 @@ Return ONLY valid JSON (no markdown fences):
   "recommendedMetaDescription": "<satu contoh kutipan siap pakai, idealnya 120-160 karakter>",
   "recommendedOutline": ["<4-7 contoh subjudul artikel tanpa tanda ###>"],
   "exampleParagraph": "<contoh pengembangan isi 2-4 kalimat yang sesuai dengan draft>",
-  "targetKeyword": "<detected keyword>"
+  "targetKeyword": "<detected keyword>",
+  "seoSupport": {
+    "searchIntent": "<informational|commercial|transactional serta kebutuhan spesifik pengguna>",
+    "recommendedSlug": "<slug pendek, deskriptif, huruf kecil, memakai tanda hubung>",
+    "indexingSuggestions": ["<3-5 saran SEO on-page yang konkret untuk draft ini>"],
+    "internalLinks": [
+      {
+        "anchorText": "<anchor deskriptif yang alami>",
+        "targetTitle": "<judul persis dari INTERNAL LINK CANDIDATES>",
+        "targetSlug": "<slug persis dari INTERNAL LINK CANDIDATES>"
+      }
+    ],
+    "faqSuggestions": [
+      {
+        "question": "<pertanyaan nyata yang relevan dengan search intent>",
+        "answer": "<jawaban ringkas, akurat, dan dapat tampil langsung di artikel>"
+      }
+    ]
+  }
 }
 
 Guidance rules:
 - One guidance item may discuss ONLY one field.
 - Never combine title, excerpt, keyword, and content advice in one message.
 - The field value must exactly match the subject of its message.
-- Prefer separate short guidance items with a ready-to-use example.`;
+- Prefer separate short guidance items with a ready-to-use example.
+- Optimize for people-first, unique, crawlable content: descriptive unique title, useful meta description, natural keyword placement, semantic headings, descriptive internal-link anchors, and questions that the visible article actually answers.
+- Never keyword-stuff and never promise that Google will index or rank the page.
+- Internal links must use exact titles and slugs from INTERNAL LINK CANDIDATES. Never invent a URL.`;
 
   const client = getAIClient();
   const model = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";
-  const attachDuplicateCheck = (review: AIReviewResult): AIReviewResult => ({
-    ...review,
-    duplicateCheck: {
-      risk: duplicateCheck.risk,
-      blocked: duplicateCheck.risk === "high",
-      results: duplicateCheck.results,
-    },
-  });
+  const attachDuplicateCheck = (review: AIReviewResult): AIReviewResult => {
+    const allowedLinks = new Map(duplicateCheck.candidates.map((article) => [article.matchedSlug, article.matchedTitle]));
+    return {
+      ...review,
+      seoSupport: {
+        ...review.seoSupport,
+        internalLinks: review.seoSupport.internalLinks.filter((link) =>
+          allowedLinks.get(link.targetSlug) === link.targetTitle
+        ),
+      },
+      duplicateCheck: {
+        risk: duplicateCheck.risk,
+        blocked: duplicateCheck.risk === "high",
+        results: duplicateCheck.results,
+      },
+    };
+  };
 
   const resp = await client.chat.completions.create({
     model,

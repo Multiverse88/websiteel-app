@@ -376,6 +376,16 @@ export default function ArticleEditor() {
     }
   };
 
+  const addSuggestedFaqs = (suggestions: Array<{ question: string; answer: string }>) => {
+    setFaqItems((current) => {
+      const existingQuestions = new Set(current.map((item) => item.q.trim().toLowerCase()));
+      const additions = suggestions
+        .filter((item) => item.question?.trim() && item.answer?.trim() && !existingQuestions.has(item.question.trim().toLowerCase()))
+        .map((item) => ({ q: item.question.trim(), a: item.answer.trim() }));
+      return [...current, ...additions];
+    });
+  };
+
   const handleFormat = (command: string, value: string = "") => {
     if (typeof document !== "undefined") {
       document.execCommand(command, false, value);
@@ -1152,6 +1162,61 @@ export default function ArticleEditor() {
                               ))}
                             </ul>
                           )}
+                        </div>
+                      )}
+
+                      {aiReview.seoSupport && (
+                        <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-3.5 space-y-3">
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="flex items-center gap-2 text-[12px] font-black uppercase tracking-wider text-blue-900">
+                              <Activity size={16} className="text-blue-600" /> SEO & dukungan indexing
+                            </span>
+                            {aiReview.seoSupport.recommendedSlug && (
+                              <code className="max-w-[45%] truncate rounded-md bg-white px-2 py-1 text-[10px] font-bold text-blue-700 border border-blue-100">/{aiReview.seoSupport.recommendedSlug}</code>
+                            )}
+                          </div>
+
+                          {aiReview.seoSupport.searchIntent && (
+                            <p className="text-[13px] leading-relaxed text-gray-700">
+                              <strong className="text-gray-900">Search intent:</strong> {aiReview.seoSupport.searchIntent}
+                            </p>
+                          )}
+
+                          {aiReview.seoSupport.indexingSuggestions?.length > 0 && (
+                            <ul className="space-y-1.5 text-[12px] leading-relaxed text-gray-700">
+                              {aiReview.seoSupport.indexingSuggestions.map((suggestion: string, index: number) => (
+                                <li key={index} className="flex gap-2"><CheckCircle size={14} className="mt-0.5 flex-shrink-0 text-blue-600" /><span>{suggestion}</span></li>
+                              ))}
+                            </ul>
+                          )}
+
+                          {aiReview.seoSupport.internalLinks?.length > 0 && (
+                            <div className="border-t border-blue-100 pt-2.5">
+                              <span className="text-[11px] font-black uppercase tracking-wider text-blue-900">Internal link yang relevan</span>
+                              <div className="mt-2 space-y-2">
+                                {aiReview.seoSupport.internalLinks.map((link: any) => (
+                                  <div key={link.targetSlug} className="flex items-start justify-between gap-3 text-[12px]">
+                                    <span className="min-w-0 text-gray-700"><strong>{link.anchorText}</strong> → <span className="line-clamp-1">{link.targetTitle}</span></span>
+                                    <button type="button" onClick={() => appendToArticle(`[${link.anchorText}](/artikel/${link.targetSlug})`)} className="flex-shrink-0 font-extrabold text-blue-700 hover:underline">Tambahkan</button>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {aiReview.seoSupport.faqSuggestions?.length > 0 && (
+                            <div className="border-t border-blue-100 pt-2.5">
+                              <div className="flex items-center justify-between gap-3">
+                                <span className="text-[11px] font-black uppercase tracking-wider text-blue-900">FAQ sesuai pencarian pengguna</span>
+                                <button type="button" onClick={() => addSuggestedFaqs(aiReview.seoSupport.faqSuggestions)} className="text-[11px] font-extrabold text-blue-700 hover:underline">Tambahkan FAQ</button>
+                              </div>
+                              <ul className="mt-2 space-y-1 text-[12px] text-gray-700 list-disc pl-4">
+                                {aiReview.seoSupport.faqSuggestions.map((faq: any, index: number) => <li key={index}>{faq.question}</li>)}
+                              </ul>
+                            </div>
+                          )}
+
+                          <p className="text-[10px] leading-relaxed text-gray-500">Saran ini membantu keterbacaan dan pemahaman mesin pencari, tetapi tidak menjamin halaman pasti terindeks atau mendapat peringkat tertentu.</p>
                         </div>
                       )}
                       {aiReview.recommendedTitle && (

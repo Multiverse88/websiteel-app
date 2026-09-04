@@ -109,13 +109,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.biz.id";
+  const metadataTitle = article.seoTitle?.trim() || article.title;
+  const metadataDescription = article.seoDesc?.trim() || article.excerpt;
 
   return {
-    title: `${article.title} — EasyLegal`,
-    description: article.excerpt,
+    title: metadataTitle,
+    description: metadataDescription,
     openGraph: {
-      title: article.title,
-      description: article.excerpt,
+      title: metadataTitle,
+      description: metadataDescription,
       url: `${appUrl}/artikel/${article.slug}`,
       siteName: "EasyLegal",
       images: [
@@ -133,8 +135,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: article.title,
-      description: article.excerpt,
+      title: metadataTitle,
+      description: metadataDescription,
       images: [article.coverImage],
     },
     alternates: {
