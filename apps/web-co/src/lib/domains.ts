@@ -34,3 +34,14 @@ export function getDomainConfig(hostname?: string | null): DomainConfig {
   if (hostname && DOMAINS[hostname]) return DOMAINS[hostname];
   return DEFAULT_DOMAIN_CONFIG;
 }
+
+/**
+ * Map a hostname (from request headers) to the Article `site` field value.
+ * Used by public pages to filter articles per domain.
+ */
+export function getSiteFromHostname(hostname?: string | null): string {
+  if (!hostname) return "easylegal.biz.id";
+  const host = hostname.split(":")[0];
+  if (host === "easylegal.co.id" || host === "www.easylegal.co.id") return "easylegal.co.id";
+  return "easylegal.biz.id";
+}
