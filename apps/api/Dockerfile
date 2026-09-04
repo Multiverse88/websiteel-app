@@ -9,9 +9,9 @@ RUN npm install
 # Copy source
 COPY . .
 
-# Generate Prisma client and build TypeScript
+# Generate Prisma client and build TypeScript (fails the build on type errors)
 RUN npx prisma generate
-RUN npx tsc > /dev/null 2>&1 || true
+RUN npx tsc
 
 EXPOSE 4000
 
