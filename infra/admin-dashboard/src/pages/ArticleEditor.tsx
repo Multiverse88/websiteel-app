@@ -1467,6 +1467,34 @@ export default function ArticleEditor() {
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
               </div>
 
+              {/* SEO Analysis Card */}
+              <div className={`bg-white rounded-xl shadow-md border p-5 shadow-[0_12px_30px_rgba(0,0,0,0.03)] space-y-4 transition-colors ${seoData.bgCardColor}`}>
+                <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <Activity className={`w-5 h-5 ${seoData.statusColor}`} />
+                    <span className="text-[16px] font-extrabold text-gray-900">
+                      Analisis SEO (Yoast Style)
+                    </span>
+                  </div>
+                  <div className={`px-2.5 py-1 rounded-lg text-[14px] font-black uppercase tracking-wide border ${seoData.bgIconColor} border-current/20`}>
+                    {seoData.status} ({seoData.percentage}%)
+                  </div>
+                </div>
+
+                <div className="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
+                  {seoData.checks.map((check, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-[15px] font-medium leading-snug text-gray-700">
+                      <div className="mt-0.5 flex-shrink-0">
+                        {check.type === "success" && <CheckCircle className="w-4.5 h-4.5 text-emerald-500" />}
+                        {check.type === "warning" && <AlertTriangle className="w-4.5 h-4.5 text-amber-500" />}
+                        {check.type === "error" && <XCircle className="w-4.5 h-4.5 text-red-500" />}
+                      </div>
+                      <span>{check.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.03)] flex flex-col group transition-all duration-300">
                 <div className="relative aspect-[1.6] w-full overflow-hidden bg-gray-50 border-b border-gray-100">
                   <img
@@ -1513,34 +1541,6 @@ export default function ArticleEditor() {
                   <span>Tips Menulis Artikel Populer</span>
                 </div>
                 Gunakan judul yang memancing rasa ingin tahu, lengkapi dengan kutipan pendek yang persuasif, dan tulislah sub-bab menggunakan format heading <code className="bg-amber-100/60 px-1.5 py-0.5 rounded font-black text-amber-950">###</code> agar artikel tersusun secara rapi dan mudah dibaca oleh klien.
-              </div>
-
-              {/* SEO Analysis Card */}
-              <div className={`bg-white rounded-xl shadow-md border p-5 shadow-[0_12px_30px_rgba(0,0,0,0.03)] space-y-4 transition-colors ${seoData.bgCardColor}`}>
-                <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                  <div className="flex items-center gap-2">
-                    <Activity className={`w-5 h-5 ${seoData.statusColor}`} />
-                    <span className="text-[16px] font-extrabold text-gray-900">
-                      Analisis SEO (Yoast Style)
-                    </span>
-                  </div>
-                  <div className={`px-2.5 py-1 rounded-lg text-[14px] font-black uppercase tracking-wide border ${seoData.bgIconColor} border-current/20`}>
-                    {seoData.status} ({seoData.percentage}%)
-                  </div>
-                </div>
-
-                <div className="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
-                  {seoData.checks.map((check, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-[15px] font-medium leading-snug text-gray-700">
-                      <div className="mt-0.5 flex-shrink-0">
-                        {check.type === "success" && <CheckCircle className="w-4.5 h-4.5 text-emerald-500" />}
-                        {check.type === "warning" && <AlertTriangle className="w-4.5 h-4.5 text-amber-500" />}
-                        {check.type === "error" && <XCircle className="w-4.5 h-4.5 text-red-500" />}
-                      </div>
-                      <span>{check.text}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
 
               {/* Format Cheat Sheet Card */}
