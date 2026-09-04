@@ -70,6 +70,9 @@ export default function ArticleEditor() {
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
   const [focusKeyword, setFocusKeyword] = useState("");
+  const [aiReview, setAiReview] = useState<any>(null);
+  const [aiReviewLoading, setAiReviewLoading] = useState(false);
+  const [aiReviewError, setAiReviewError] = useState<string | null>(null);
 
   // FAQ shown at the end of the article on the public site (reuses the
   // same <FAQ> component as the /layanan pages). Per-article, unlike the
@@ -203,6 +206,28 @@ export default function ArticleEditor() {
   };
 
   const seoData = analyzeSEO();
+
+  const runAiReview = async () => {
+    if (!title.trim() || !content.trim()) {
+      setAiReviewError("Isi judul dan konten dulu sebelum AI Review.");
+      return;
+    }
+    setAiReviewLoading(true);
+    setAiReviewError(null);
+    try {
+      const result = await api.aiReview({
+        title,
+        excerpt,
+        content,
+        keyword: focusKeyword || undefined,
+      });
+      setAiReview(result);
+    } catch (err: any) {
+      setAiReviewError(err.message || "AI Review gagal, coba lagi.");
+    } finally {
+      setAiReviewLoading(false);
+    }
+  };
 
   useEffect(() => {
     const match = window.location.hash.match(/\?id=([^&]+)/);
@@ -952,6 +977,95 @@ export default function ArticleEditor() {
                   <p className="text-[14px] text-gray-500 font-medium mt-1">
                     Masukkan kata kunci utama yang ingin dioptimalkan (tidak disimpan ke database, hanya untuk panduan penulisan).
                   </p>
+                </div>
+
+                {/* AI Review */}
+                <div className="space-y-3 p-4 bg-gradient-to-br from-red-50/60 to-white border border-red-100 rounded-xl">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                      <Sparkles size={18} className="text-[#990202]" /> AI Review
+                    </span>
+                    <button
+                      type="button"
+                      onClick={runAiReview}
+                      disabled={aiReviewLoading}
+                      className="px-4 py-2 bg-[#990202] text-white text-[14px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-50 flex items-center gap-2"
+                    >
+                      {aiReviewLoading ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}
+                      {aiReviewLoading ? "Menganalisis..." : aiReview ? "Analisis Ulang" : "Jalankan AI Review"}
+                    </button>
+                  </div>
+
+                  {aiReviewError && (
+                    <p className="text-[14px] text-red-600 flex items-center gap-1.5"><XCircle size={16} /> {aiReviewError}</p>
+                  )}
+
+                  {aiReview && (
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <span className={`text-[24px] font-extrabold ${aiReview.seoScore >= 70 ? "text-green-600" : aiReview.seoScore >= 40 ? "text-yellow-600" : "text-red-600"}`}>
+                          {aiReview.seoScore}/100
+                        </span>
+                        <span className="text-[13px] text-gray-500 font-medium">SEO Score</span>
+                        {aiReview.duplicateRisk && aiReview.duplicateRisk !== "low" && (
+                          <span className="ml-auto flex items-center gap-1 text-[13px] font-bold text-yellow-700 bg-yellow-50 border border-yellow-200 px-2.5 py-1 rounded-lg">
+                            <AlertTriangle size={14} /> Risiko duplikat: {aiReview.duplicateRisk}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2 text-[13px]">
+                        {[
+                          { label: "Judul", score: aiReview.titleScore, reason: aiReview.titleReason },
+                          { label: "Meta", score: aiReview.metaScore, reason: aiReview.metaReason },
+                          { label: "Konten", score: aiReview.contentScore, reason: aiReview.contentReason },
+                        ].map((item) => (
+                          <div key={item.label} className="bg-white border border-gray-200 rounded-lg p-2.5">
+                            <div className="flex items-center gap-1 font-bold text-gray-900">
+                              {item.score === "excellent" || item.score === "good" ? (
+                                <CheckCircle size={14} className="text-green-600" />
+                              ) : (
+                                <AlertTriangle size={14} className="text-yellow-600" />
+                              )}
+                              {item.label}
+                            </div>
+                            <p className="text-gray-500 mt-1 leading-snug">{item.reason}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {aiReview.similarArticles?.length > 0 && (
+                        <div className="text-[13px] text-gray-600">
+                          <span className="font-bold">Artikel serupa:</span> {aiReview.similarArticles.join("; ")}
+                        </div>
+                      )}
+
+                      {aiReview.suggestions?.length > 0 && (
+                        <ul className="space-y-1 text-[13px] text-gray-700 list-disc pl-5">
+                          {aiReview.suggestions.map((s: string, i: number) => <li key={i}>{s}</li>)}
+                        </ul>
+                      )}
+
+                      {aiReview.recommendedTitle && (
+                        <button
+                          type="button"
+                          onClick={() => setTitle(aiReview.recommendedTitle)}
+                          className="text-[13px] font-bold text-[#990202] hover:underline"
+                        >
+                          Pakai judul rekomendasi: "{aiReview.recommendedTitle}"
+                        </button>
+                      )}
+                      {aiReview.recommendedMetaDescription && (
+                        <button
+                          type="button"
+                          onClick={() => setExcerpt(aiReview.recommendedMetaDescription)}
+                          className="block text-[13px] font-bold text-[#990202] hover:underline"
+                        >
+                          Pakai excerpt rekomendasi
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}

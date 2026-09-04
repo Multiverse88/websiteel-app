@@ -102,6 +102,16 @@ export const api = {
   },
   updateArticle: (id: string, data: any) => request(`/Article?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
   deleteArticle: (id: string) => request(`/Article?id=eq.${id}`, { method: 'DELETE' }),
+  aiReview: async (data: { title: string; excerpt: string; content: string; site?: string; keyword?: string; existingSlug?: string }) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/articles/ai-review`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    const body = await res.json().catch(() => ({}))
+    if (!res.ok) throw new Error(body.error || 'AI review gagal')
+    return body.data
+  },
 
   // Contacts
   getContacts: () => request('/ContactSubmission?select=*'),
