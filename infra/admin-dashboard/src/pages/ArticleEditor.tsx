@@ -248,6 +248,10 @@ export default function ArticleEditor() {
           ...(closestDuplicate.contentSimilarity > closestDuplicate.titleSimilarity ? targetMap.content : targetMap.title),
           message: `Gunakan sudut pembahasan yang berbeda dari “${closestDuplicate.matchedTitle}” (${Math.round(closestDuplicate.similarity * 100)}% mirip).`,
           severity: aiReview.duplicateCheck.risk === "high" ? "critical" : "warning",
+          location: closestDuplicate.contentSimilarity > closestDuplicate.titleSimilarity ? "Isi artikel" : "Judul artikel",
+          problem: `Draft memiliki kemiripan ${Math.round(closestDuplicate.similarity * 100)}% dengan artikel “${closestDuplicate.matchedTitle}”.`,
+          action: "Ubah fokus utama, urutan pembahasan, dan contoh agar artikel menjawab kebutuhan pembaca dari sudut yang berbeda.",
+          reason: "Mencegah dua artikel bersaing untuk topik yang sama dan mengurangi risiko konten duplikat.",
         }]
       : [];
 
@@ -261,6 +265,11 @@ export default function ArticleEditor() {
             ...targetMap[target],
             message: item.message,
             severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
+            location: item.location,
+            problem: item.problem,
+            action: item.action,
+            example: item.example,
+            reason: item.reason,
           };
         });
       return [...duplicateGuidance, ...mappedGuidance].slice(0, 5);
@@ -384,6 +393,17 @@ export default function ArticleEditor() {
         .map((item) => ({ q: item.question.trim(), a: item.answer.trim() }));
       return [...current, ...additions];
     });
+  };
+
+  const applyGuidanceExample = (guidance: any) => {
+    const example = typeof guidance?.example === "string" ? guidance.example.trim() : "";
+    if (!example) return;
+
+    const target = inferGuidanceTarget(guidance.field, guidance.message || guidance.action || "");
+    if (target === "title") setTitle(example);
+    else if (target === "excerpt") setExcerpt(example);
+    else if (target === "keyword") setFocusKeyword(example);
+    else appendToArticle(example);
   };
 
   const handleFormat = (command: string, value: string = "") => {
@@ -1165,6 +1185,39 @@ export default function ArticleEditor() {
                         </div>
                       )}
 
+                      {aiReview.guidance?.length > 0 && (
+                        <div className="rounded-xl border border-violet-100 bg-violet-50/40 p-3.5 space-y-3">
+                          <div>
+                            <span className="text-[12px] font-black uppercase tracking-wider text-violet-900">Rincian perbaikan prioritas</span>
+                            <p className="mt-1 text-[11px] text-gray-500">Setiap saran menunjukkan bagian, perubahan, cara menerapkan, dan contoh hasilnya.</p>
+                          </div>
+                          <div className="space-y-3">
+                            {aiReview.guidance.map((item: any, index: number) => (
+                              <div key={`${item.field}-${index}`} className="rounded-xl border border-violet-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
+                                <div className="flex flex-wrap items-center justify-between gap-2">
+                                  <strong className="text-[13px] text-gray-900">{index + 1}. {item.message}</strong>
+                                  <span className="rounded-full bg-violet-50 px-2 py-1 text-[10px] font-extrabold text-violet-700">{item.location || item.field}</span>
+                                </div>
+                                {item.problem && <p className="mt-2"><strong>Kondisi sekarang:</strong> {item.problem}</p>}
+                                {item.action && <p className="mt-1"><strong>Yang harus diubah:</strong> {item.action}</p>}
+                                {item.example && (
+                                  <div className="mt-2 rounded-lg bg-emerald-50 px-3 py-2 text-emerald-950">
+                                    <strong className="block text-[10px] uppercase tracking-wide text-emerald-700">Contoh hasil</strong>
+                                    <p className="mt-1 font-semibold">{item.example}</p>
+                                  </div>
+                                )}
+                                {item.reason && <p className="mt-2 text-gray-500"><strong>Tujuan:</strong> {item.reason}</p>}
+                                {item.example && (
+                                  <button type="button" onClick={() => applyGuidanceExample(item)} className="mt-2 font-extrabold text-violet-700 hover:underline">
+                                    {inferGuidanceTarget(item.field, item.message || "") === "content" ? "Tambahkan contoh ke artikel" : "Gunakan contoh ini"}
+                                  </button>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {aiReview.seoSupport && (
                         <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-3.5 space-y-3">
                           <div className="flex items-center justify-between gap-3">
@@ -1183,11 +1236,20 @@ export default function ArticleEditor() {
                           )}
 
                           {aiReview.seoSupport.indexingSuggestions?.length > 0 && (
-                            <ul className="space-y-1.5 text-[12px] leading-relaxed text-gray-700">
-                              {aiReview.seoSupport.indexingSuggestions.map((suggestion: string, index: number) => (
-                                <li key={index} className="flex gap-2"><CheckCircle size={14} className="mt-0.5 flex-shrink-0 text-blue-600" /><span>{suggestion}</span></li>
+                            <div className="space-y-2">
+                              {aiReview.seoSupport.indexingSuggestions.map((suggestion: any, index: number) => (
+                                <div key={index} className="rounded-lg border border-blue-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
+                                  <div className="flex items-center gap-2">
+                                    <CheckCircle size={14} className="flex-shrink-0 text-blue-600" />
+                                    <strong className="text-blue-900">{suggestion.area || "SEO on-page"}</strong>
+                                  </div>
+                                  {suggestion.currentIssue && <p className="mt-2"><strong>Kondisi sekarang:</strong> {suggestion.currentIssue}</p>}
+                                  <p className="mt-1"><strong>Yang diubah:</strong> {suggestion.action || suggestion}</p>
+                                  {suggestion.implementation && <p className="mt-1"><strong>Cara mengubah:</strong> {suggestion.implementation}</p>}
+                                  {suggestion.expectedResult && <p className="mt-1 text-gray-500"><strong>Tujuan:</strong> {suggestion.expectedResult}</p>}
+                                </div>
                               ))}
-                            </ul>
+                            </div>
                           )}
 
                           {aiReview.seoSupport.internalLinks?.length > 0 && (

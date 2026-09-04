@@ -6,6 +6,11 @@ export interface AIReviewResult {
     field: "title" | "excerpt" | "content" | "keyword";
     severity: "suggestion" | "warning";
     message: string;
+    location: string;
+    problem: string;
+    action: string;
+    example: string;
+    reason: string;
   }>;
   suggestions: string[];
   recommendedTitle: string;
@@ -16,7 +21,13 @@ export interface AIReviewResult {
   seoSupport: {
     searchIntent: string;
     recommendedSlug: string;
-    indexingSuggestions: string[];
+    indexingSuggestions: Array<{
+      area: string;
+      currentIssue: string;
+      action: string;
+      implementation: string;
+      expectedResult: string;
+    }>;
     internalLinks: Array<{
       anchorText: string;
       targetTitle: string;
@@ -83,7 +94,13 @@ function fallbackReview(): AIReviewResult {
     seoSupport: {
       searchIntent: "",
       recommendedSlug: "",
-      indexingSuggestions: ["Gunakan judul dan kutipan yang unik, struktur heading yang jelas, serta isi yang benar-benar menjawab kebutuhan pembaca."],
+      indexingSuggestions: [{
+        area: "Struktur artikel",
+        currentIssue: "Draft belum cukup lengkap untuk dinilai secara spesifik.",
+        action: "Lengkapi judul, kutipan, dan isi utama artikel.",
+        implementation: "Gunakan judul yang unik, susun isi dengan subjudul yang jelas, lalu jawab kebutuhan pembaca secara langsung.",
+        expectedResult: "AI dapat memberikan rekomendasi SEO yang lebih tepat untuk setiap bagian artikel.",
+      }],
       internalLinks: [],
       faqSuggestions: [],
     },
@@ -120,6 +137,11 @@ export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
           field: inferGuidanceField(item.field, item.message),
           severity: guidanceSeverities.includes(item.severity) ? item.severity : "suggestion",
           message: item.message.trim(),
+          location: typeof item.location === "string" ? item.location.trim() : "",
+          problem: typeof item.problem === "string" ? item.problem.trim() : "",
+          action: typeof item.action === "string" ? item.action.trim() : item.message.trim(),
+          example: typeof item.example === "string" ? item.example.trim() : "",
+          reason: typeof item.reason === "string" ? item.reason.trim() : "",
         }))
       : [],
     suggestions: Array.isArray(parsed.suggestions)
@@ -138,7 +160,27 @@ export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
         ? parsed.seoSupport.recommendedSlug.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
         : "",
       indexingSuggestions: Array.isArray(parsed.seoSupport?.indexingSuggestions)
-        ? parsed.seoSupport.indexingSuggestions.filter((item: unknown) => typeof item === "string" && item.trim()).slice(0, 5)
+        ? parsed.seoSupport.indexingSuggestions
+          .filter((item: unknown) =>
+            (typeof item === "string" && item.trim())
+            || (item && typeof item === "object" && typeof (item as any).action === "string" && (item as any).action.trim())
+          )
+          .slice(0, 5)
+          .map((item: any) => typeof item === "string"
+            ? {
+                area: "SEO on-page",
+                currentIssue: "",
+                action: item.trim(),
+                implementation: item.trim(),
+                expectedResult: "Membantu mesin pencari memahami topik dan struktur halaman.",
+              }
+            : {
+                area: typeof item.area === "string" ? item.area.trim() : "SEO on-page",
+                currentIssue: typeof item.currentIssue === "string" ? item.currentIssue.trim() : "",
+                action: item.action.trim(),
+                implementation: typeof item.implementation === "string" ? item.implementation.trim() : item.action.trim(),
+                expectedResult: typeof item.expectedResult === "string" ? item.expectedResult.trim() : "",
+              })
         : fallback.seoSupport.indexingSuggestions,
       internalLinks: Array.isArray(parsed.seoSupport?.internalLinks)
         ? parsed.seoSupport.internalLinks
@@ -194,7 +236,7 @@ export async function getAIReview(params: {
     ).join("\n")}`
     : "\nINTERNAL LINK CANDIDATES — none available; return an empty internalLinks array.";
 
-  const prompt = `You are a proactive Indonesian writing companion for legal-business articles. Read the draft and return ONLY concrete, ready-to-use writing suggestions. Do not give scores, grades, diagnoses, criticism, or general opinions. Show the writer exactly what a better title, meta description, keyword, article structure, and example paragraph could look like. All text MUST use natural Indonesian and must remain legally cautious—do not invent regulations, prices, deadlines, or guarantees.
+  const prompt = `You are a proactive Indonesian writing companion for legal-business articles. Read the actual draft carefully and return ONLY concrete, ready-to-use writing suggestions. Do not give scores, grades, vague criticism, or generic advice. Every recommendation must clearly explain: the exact location, what is currently wrong or missing, what must be changed, how to change it step by step, a ready-to-use example, and why that change helps. Quote a short phrase from the draft when useful so the writer can find the exact passage. All text MUST use natural Indonesian and must remain legally cautious—do not invent regulations, prices, deadlines, or guarantees.
 
 ARTICLE:
 Title: "${title}"
@@ -209,7 +251,12 @@ Return ONLY valid JSON (no markdown fences):
     {
       "field": "title|excerpt|content|keyword",
       "severity": "suggestion|warning",
-      "message": "<saran siap pakai; sertakan contoh pengganti yang konkret, bukan sekadar menjelaskan kekurangan>"
+      "message": "<ringkasan perubahan yang paling penting dalam satu kalimat>",
+      "location": "<lokasi spesifik, misalnya Judul artikel atau Paragraf pembuka yang diawali ...>",
+      "problem": "<jelaskan kondisi draft saat ini dan mengapa belum efektif>",
+      "action": "<perintah perubahan yang spesifik; sebutkan teks mana yang diganti, ditambah, dipindah, atau dihapus>",
+      "example": "<teks pengganti atau tambahan yang siap ditempel>",
+      "reason": "<dampak perubahan bagi pembaca atau SEO dalam satu kalimat>"
     }
   ],
   "suggestions": ["<3 saran praktis dan spesifik>"],
@@ -221,7 +268,15 @@ Return ONLY valid JSON (no markdown fences):
   "seoSupport": {
     "searchIntent": "<informational|commercial|transactional serta kebutuhan spesifik pengguna>",
     "recommendedSlug": "<slug pendek, deskriptif, huruf kecil, memakai tanda hubung>",
-    "indexingSuggestions": ["<3-5 saran SEO on-page yang konkret untuk draft ini>"],
+    "indexingSuggestions": [
+      {
+        "area": "<contoh: Judul dan keyword|Meta description|Heading|Isi|Internal link>",
+        "currentIssue": "<kondisi spesifik yang ditemukan pada draft>",
+        "action": "<apa yang harus diubah>",
+        "implementation": "<cara mengubahnya secara spesifik, termasuk posisi dan contoh bila perlu>",
+        "expectedResult": "<hasil yang diharapkan tanpa menjanjikan ranking atau indexing>"
+      }
+    ],
     "internalLinks": [
       {
         "anchorText": "<anchor deskriptif yang alami>",
@@ -242,7 +297,10 @@ Guidance rules:
 - One guidance item may discuss ONLY one field.
 - Never combine title, excerpt, keyword, and content advice in one message.
 - The field value must exactly match the subject of its message.
-- Prefer separate short guidance items with a ready-to-use example.
+- Return 3-5 guidance items, ordered from the most important change.
+- Never say only “buat lebih spesifik”, “tambahkan keyword”, “perbaiki struktur”, or similar. State the exact words/section to change and provide the resulting text.
+- The example must be directly usable and consistent with the facts already present in the draft. If facts are missing, use a clearly marked placeholder such as [masukkan biaya resmi terbaru], never fabricate it.
+- For content guidance, identify the paragraph or heading using its opening words, then say whether to replace, add after, move, or delete it.
 - Optimize for people-first, unique, crawlable content: descriptive unique title, useful meta description, natural keyword placement, semantic headings, descriptive internal-link anchors, and questions that the visible article actually answers.
 - Never keyword-stuff and never promise that Google will index or rank the page.
 - Internal links must use exact titles and slugs from INTERNAL LINK CANDIDATES. Never invent a URL.`;
@@ -271,7 +329,7 @@ Guidance rules:
     model,
     messages: [{ role: "user", content: prompt }],
     temperature: 0.2,
-    max_tokens: 1200,
+    max_tokens: 1800,
   });
 
   const raw = resp.choices[0]?.message?.content || "{}";
@@ -291,7 +349,7 @@ Guidance rules:
         content: `${prompt}\n\nIMPORTANT: The previous attempt was incomplete or invalid. Return one COMPLETE JSON object only. Keep every explanation concise so the response is not truncated.`,
       }],
       temperature: 0.1,
-      max_tokens: 1400,
+      max_tokens: 2200,
     });
     const retryRaw = retry.choices[0]?.message?.content || "{}";
 

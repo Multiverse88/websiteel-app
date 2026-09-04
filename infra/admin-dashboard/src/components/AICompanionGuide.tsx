@@ -6,6 +6,11 @@ export type AICompanionGuidance = {
   label: string;
   message: string;
   severity: "suggestion" | "warning" | "critical";
+  location?: string;
+  problem?: string;
+  action?: string;
+  example?: string;
+  reason?: string;
 };
 
 type Position = { left: number; top: number };
@@ -17,7 +22,7 @@ function dockPosition(): Position {
   if (typeof window === "undefined") return { left: 24, top: 100 };
   return {
     left: Math.max(12, window.innerWidth - DOCK_WIDTH - 24),
-    top: Math.max(72, window.innerHeight - 405),
+    top: Math.max(72, window.innerHeight - 540),
   };
 }
 
@@ -70,7 +75,7 @@ export default function AICompanionGuide({
       }
 
       const maxLeft = Math.max(12, window.innerWidth - DOCK_WIDTH - 12);
-      const maxTop = Math.max(72, window.innerHeight - 400);
+      const maxTop = Math.max(72, window.innerHeight - 540);
       setIsWalking(true);
       setPosition({
         left: Math.min(Math.max(12, rect.right + 14), maxLeft),
@@ -154,7 +159,7 @@ export default function AICompanionGuide({
             </button>
           </header>
 
-          <div className="px-3.5 py-4 bg-[#FCFCFD] min-h-[170px] max-h-[240px] overflow-y-auto">
+          <div className="px-3.5 py-4 bg-[#FCFCFD] min-h-[170px] max-h-[360px] overflow-y-auto">
             <div className="flex items-start gap-2.5">
               <span className="w-9 h-9 rounded-full bg-white border border-gray-200 overflow-hidden flex items-center justify-center flex-shrink-0">
                 <img src={COMPANION_IMAGE} alt="" className="w-11 h-11 object-contain object-top scale-[1.55] translate-y-1.5" />
@@ -164,12 +169,45 @@ export default function AICompanionGuide({
                   {message}
                 </div>
                 {activeItem && !isThinking && (
-                  <span className={`inline-flex mt-2 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wide ${activeItem.severity === "critical" ? "bg-red-100 text-red-700" : activeItem.severity === "warning" ? "bg-amber-100 text-amber-700" : "bg-blue-50 text-blue-700"}`}>
-                    {activeItem.label}
-                  </span>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wide ${activeItem.severity === "critical" ? "bg-red-100 text-red-700" : activeItem.severity === "warning" ? "bg-amber-100 text-amber-700" : "bg-blue-50 text-blue-700"}`}>
+                      {activeItem.label}
+                    </span>
+                    {activeItem.location && (
+                      <span className="inline-flex px-2.5 py-1 rounded-full bg-gray-100 text-[10px] font-bold text-gray-600">
+                        Lokasi: {activeItem.location}
+                      </span>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
+
+            {activeItem && !isThinking && (activeItem.problem || activeItem.action || activeItem.example || activeItem.reason) && (
+              <div className="ml-[46px] mt-3 space-y-2 text-[12px] leading-relaxed">
+                {activeItem.problem && (
+                  <div className="rounded-xl border border-amber-100 bg-amber-50/70 px-3 py-2.5">
+                    <strong className="block text-[10px] uppercase tracking-wide text-amber-800">Apa yang perlu diubah</strong>
+                    <p className="mt-1 text-gray-700">{activeItem.problem}</p>
+                  </div>
+                )}
+                {activeItem.action && (
+                  <div className="rounded-xl border border-blue-100 bg-blue-50/70 px-3 py-2.5">
+                    <strong className="block text-[10px] uppercase tracking-wide text-blue-800">Cara mengubahnya</strong>
+                    <p className="mt-1 text-gray-700">{activeItem.action}</p>
+                  </div>
+                )}
+                {activeItem.example && (
+                  <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 px-3 py-2.5">
+                    <strong className="block text-[10px] uppercase tracking-wide text-emerald-800">Contoh siap digunakan</strong>
+                    <p className="mt-1 font-semibold text-gray-800">“{activeItem.example}”</p>
+                  </div>
+                )}
+                {activeItem.reason && (
+                  <p className="px-1 text-[11px] text-gray-500"><strong>Tujuannya:</strong> {activeItem.reason}</p>
+                )}
+              </div>
+            )}
 
             {activeItem && !isThinking && (
               <button type="button" onClick={() => walkToTarget(activeItem.targetId, true)} className="ml-[46px] mt-3 w-[calc(100%-46px)] rounded-full border border-[#C80B14] px-3 py-2 text-[12px] font-extrabold text-[#B2070F] hover:bg-red-50 active:scale-[0.98] transition">
