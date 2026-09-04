@@ -1,0 +1,82 @@
+# easylegal.id public site — deployed as a SEPARATE Dokploy application
+# from docker-compose.dokploy.yml (biz.id/co.id) and
+# docker-compose.infra.dokploy.yml (admin-api, dashboard, etc).
+#
+# Reason: Dokploy treats one compose file as one deploy unit, so pushing
+# an unrelated change here won't trigger a redeployment of the main
+# easylegal.biz.id site, and vice versa.
+#
+# Setup on the VPS (one-time):
+#   docker network create easylegal   (if not already created)
+#
+# In Dokploy: create a third "Docker Compose" application pointing at
+# this file (same repo/branch, different compose file path).
+#
+# Temporary domain: easylegal-id.easylegal.my.id
+# When easylegal.id DNS propagates, update:
+#   1. NEXT_PUBLIC_APP_URL below → https://easylegal.id
+#   2. Traefik Host rule → Host(`easylegal.id`) || Host(`www.easylegal.id`)
+services:
+  app-id:                             # easylegal.id (temporary: easylegal-id.easylegal.my.id)
+    build:
+      context: ./apps/web-id
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_TYPEBOT_BOT_ID=easylegal-assistant
+        - NEXT_PUBLIC_API_URL=https://api.easylegal.my.id
+    restart: unless-stopped
+    environment:
+      - HOSTNAME=0.0.0.0
+      - DATABASE_URL=${DATABASE_URL}
+      - DIRECT_URL=${DIRECT_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - CRON_SECRET=${CRON_SECRET}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - SMTP_FROM=${SMTP_FROM}
+      # Temporary domain — swap to https://easylegal.id when DNS is ready
+      - NEXT_PUBLIC_APP_URL=https://easylegal-id.easylegal.my.id
+      - MINIO_ENDPOINT=http://host.docker.internal:9000
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+      - MINIO_BUCKET=images
+      - MINIO_PUBLIC_URL=https://easylegal-id.easylegal.my.id/images
+      - NEXT_PUBLIC_API_URL=https://api.easylegal.my.id
+      - REVALIDATION_SECRET=${REVALIDATION_SECRET}
+      - SENTRY_DSN=${SENTRY_DSN}
+      - NEXT_PUBLIC_TYPEBOT_BOT_ID=easylegal-assistant
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - uploads-id:/app/public/uploads
+    networks:
+      - dokploy-network
+      - easylegal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    labels:
+      - "traefik.enable=true"
+      # Temporary domain — update Host rule when easylegal.id DNS propagates:
+      #   Host(`easylegal.id`) || Host(`www.easylegal.id`)
+      - "traefik.http.routers.app-id.rule=Host(`easylegal-id.easylegal.my.id`)"
+      - "traefik.http.routers.app-id.entrypoints=websecure"
+      - "traefik.http.routers.app-id.tls.certResolver=letsencrypt"
+      - "traefik.http.services.app-id.loadbalancer.server.port=3000"
+
+volumes:
+  uploads-id:
+
+networks:
+  dokploy-network:
+    external: true
+  # Shared with other compose stacks so app-id can reach postgres,
+  # admin-api, minio etc. by hostname. Create once on the VPS:
+  #   docker network create easylegal
+  easylegal:
+    external: true

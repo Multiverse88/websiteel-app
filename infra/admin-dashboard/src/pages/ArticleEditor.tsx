@@ -116,6 +116,7 @@ export default function ArticleEditor() {
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
   const [focusKeyword, setFocusKeyword] = useState("");
+  const [site, setSite] = useState("easylegal.biz.id");
   const [aiReview, setAiReview] = useState<any>(null);
   const [aiReviewLoading, setAiReviewLoading] = useState(false);
   const [aiReviewError, setAiReviewError] = useState<string | null>(null);
@@ -441,6 +442,7 @@ export default function ArticleEditor() {
           title,
           excerpt,
           content,
+          site,
           keyword: focusKeyword || undefined,
           existingSlug: originalSlug || undefined,
           reviewMode,
@@ -927,6 +929,7 @@ export default function ArticleEditor() {
           title,
           excerpt,
           content,
+          site,
           existingSlug: originalSlug || undefined,
           focusKeyword: focusKeyword.trim() || undefined,
         });
@@ -960,6 +963,7 @@ export default function ArticleEditor() {
           seoTitle: title,
           seoDesc: excerpt,
           focusKeyword: focusKeyword.trim() || null,
+          site,
           status: "published", // You can modify this if you add a status dropdown
           faq: faqItems.filter(f => f.q.trim() && f.a.trim()),
         };
@@ -1098,6 +1102,25 @@ export default function ArticleEditor() {
                       className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                     />
                   </div>
+                </div>
+
+                {/* Domain / Site Selector */}
+                <div className="space-y-2">
+                  <label htmlFor="site" className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                    Domain Publikasi <span className="text-[#990202]">*</span>
+                  </label>
+                  <select
+                    id="site"
+                    name="site"
+                    value={site}
+                    onChange={(e) => setSite(e.target.value)}
+                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-semibold text-gray-800"
+                  >
+                    <option value="easylegal.biz.id">easylegal.biz.id</option>
+                    <option value="easylegal.co.id">easylegal.co.id</option>
+                    <option value="easylegal.id">easylegal.id</option>
+                  </select>
+                  <p className="text-[13px] text-gray-400 font-medium">Artikel hanya akan tampil di domain yang dipilih.</p>
                 </div>
 
                 {/* Cover Image - Tab Mode */}

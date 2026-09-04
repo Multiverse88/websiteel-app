@@ -21,14 +21,33 @@ const CO_ID: DomainConfig = {
   baseUrl: "https://easylegal.co.id",
 };
 
+const ID: DomainConfig = {
+  baseUrl: "https://easylegal.id",
+};
+
 export const DOMAINS: Record<string, DomainConfig> = {
   "easylegal.biz.id": BIZ_ID,
   "www.easylegal.biz.id": BIZ_ID,
   "easylegal.co.id": CO_ID,
   "www.easylegal.co.id": CO_ID,
+  "easylegal.id": ID,
+  "www.easylegal.id": ID,
 };
 
 export const DEFAULT_DOMAIN_CONFIG: DomainConfig = BIZ_ID;
+
+/**
+ * Map a hostname (from request headers) to the Article `site` field value.
+ * Used by public pages to filter articles per domain.
+ * Returns the default site ("easylegal.biz.id") when hostname is unknown.
+ */
+export function getSiteFromHostname(hostname?: string | null): string {
+  if (!hostname) return "easylegal.biz.id";
+  const host = hostname.split(":")[0]; // strip port
+  if (host === "easylegal.co.id" || host === "www.easylegal.co.id") return "easylegal.co.id";
+  if (host === "easylegal.id" || host === "www.easylegal.id") return "easylegal.id";
+  return "easylegal.biz.id";
+}
 
 export function getDomainConfig(hostname?: string | null): DomainConfig {
   if (hostname && DOMAINS[hostname]) return DOMAINS[hostname];

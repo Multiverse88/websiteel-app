@@ -23,12 +23,16 @@ router.get("/", async (req, res) => {
   try {
     const q = req.query.q as string || "";
     const activeCategory = req.query.category as string || "All";
+    const site = (req.query.site as string) || "easylegal.biz.id";
     const limit = parseInt(req.query.limit as string) || 500;
     const includeCounts = req.query.includeCounts === "true";
 
     // Build where clause
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const whereClause: any = {};
+
+    // Filter by site (domain)
+    whereClause.site = site;
 
     if (q) {
       whereClause.OR = [
@@ -82,7 +86,9 @@ router.get("/", async (req, res) => {
 // GET /api/v1/articles/sitemap/all
 router.get("/sitemap/all", async (req, res) => {
   try {
+    const site = (req.query.site as string) || "easylegal.biz.id";
     const articles = await prisma.article.findMany({
+      where: { site },
       select: {
         slug: true,
         updatedAt: true,
@@ -166,7 +172,7 @@ router.post("/:slug/revalidate", requireAuth, async (req, res) => {
 // POST /api/v1/articles
 router.post("/", requireAuth, async (req, res) => {
   try {
-    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword } = req.body;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword, site } = req.body;
 
     if (!slug || !title || !excerpt || !content || !category) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -186,6 +192,7 @@ router.post("/", requireAuth, async (req, res) => {
         seoTitle: seoTitle || title,
         seoDesc: seoDesc || excerpt,
         focusKeyword: focusKeyword || null,
+        site: site || "easylegal.biz.id",
       },
     });
 
@@ -203,7 +210,7 @@ router.post("/", requireAuth, async (req, res) => {
 router.put("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
-    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword } = req.body;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword, site } = req.body;
 
     const existing = await prisma.article.findUnique({ where: { id } });
     if (!existing) {
@@ -225,6 +232,7 @@ router.put("/:id", requireAuth, async (req, res) => {
         seoTitle: seoTitle !== undefined ? seoTitle : existing.seoTitle,
         seoDesc: seoDesc !== undefined ? seoDesc : existing.seoDesc,
         focusKeyword: focusKeyword !== undefined ? focusKeyword : existing.focusKeyword,
+        site: site || existing.site,
       },
     });
 

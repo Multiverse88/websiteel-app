@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { unstable_cache } from "next/cache";
+import { headers } from "next/headers";
 import { Calendar, Clock, Home, Tag } from "lucide-react";
 import SocialShare from "@/components/SocialShare";
 import NewsletterWidget from "@/components/NewsletterWidget";
@@ -10,6 +10,7 @@ import FAQ from "@/components/FAQ";
 import ViewTracker from "./view-tracker";
 import TableOfContents from "./table-of-contents";
 import { getWhatsAppLink } from "@/lib/config";
+import { getSiteFromHostname } from "@/lib/domains";
 import { getArticleJsonLd, getFAQJsonLd } from "@/lib/structured-data";
 import type { Metadata } from "next";
 
@@ -41,15 +42,15 @@ const ChatIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-async function fetchArticleFromApi(slug: string) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/${slug}`;
-  const res = await fetch(apiUrl, { next: { revalidate: 60, tags: [`article-${slug}`] } });
+async function fetchArticleFromApi(slug: string, site: string) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/${slug}?site=${encodeURIComponent(site)}`;
+  const res = await fetch(apiUrl, { next: { revalidate: 60, tags: [`article-${site}-${slug}`] } });
   if (!res.ok) return null;
   const json = await res.json();
   if (!json.data) return null;
@@ -72,22 +73,9 @@ async function fetchArticleTemplateSetting(key: "article_header" | "article_foot
   }
 }
 
-const getCachedArticle = unstable_cache(
-  async (slug: string) => {
-    try {
-      return await fetchArticleFromApi(slug);
-    } catch (e) {
-      console.error("Error fetching article (cached):", e);
-      return null;
-    }
-  },
-  ["article-by-slug"],
-  { revalidate: 300, tags: ["articles"] }
-);
-
-async function getArticle(slug: string) {
+async function getArticle(slug: string, site: string) {
   try {
-    const article = await getCachedArticle(slug);
+    const article = await fetchArticleFromApi(slug, site);
     if (!article) return null;
 
     article.createdAt = new Date(article.createdAt);
@@ -102,13 +90,16 @@ async function getArticle(slug: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = await getArticle(slug);
+  const hdrs = await headers();
+  const hostname = hdrs.get("host") || "";
+  const site = getSiteFromHostname(hostname);
+  const article = await getArticle(slug, site);
 
   if (!article) {
     return { title: "Artikel Tidak Ditemukan — EasyLegal" };
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://easylegal.biz.id";
+  const appUrl = `https://${site}`;
   const metadataTitle = article.seoTitle?.trim() || article.title;
   const metadataDescription = article.seoDesc?.trim() || article.excerpt;
 
@@ -165,9 +156,9 @@ function cleanArticleUrl(url: string, articleTitle: string): string {
   }
 
   // 3. Absolute easylegal.id links converted to local relative paths
-  if (url.includes("easylegal.id") || url.includes("easylegal.biz.id")) {
+  if (url.includes("easylegal.id") || url.includes("easylegal.biz.id") || url.includes("easylegal.co.id")) {
     // Replace domain to make it relative
-    const relativePath = url.replace(/^https?:\/\/(www\.)?(easylegal\.id|easylegal\.my\.id)/, "");
+    const relativePath = url.replace(/^https?:\/\/(www\.)?(easylegal\.id|easylegal\.my\.id|easylegal\.biz\.id|easylegal\.co\.id)/, "");
     return relativePath || "/";
   }
 
@@ -603,7 +594,12 @@ function getAuthorInitials(name: string) {
 export default async function ArtikelDetailPage({ params }: Props) {
   const { slug } = await params;
 
-  const article = await getArticle(slug);
+  // Detect domain from hostname to filter articles per site
+  const hdrs = await headers();
+  const hostname = hdrs.get("host") || "";
+  const site = getSiteFromHostname(hostname);
+
+  const article = await getArticle(slug, site);
 
   if (!article) {
     notFound();
@@ -625,7 +621,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
   // Fetch candidate pool via API
   let candidatePool: any[] = [];
   try {
-    const poolUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles?limit=60`;
+    const poolUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles?limit=60&site=${encodeURIComponent(site)}`;
     const res = await fetch(poolUrl, { next: { revalidate: 60 } });
     if (res.ok) {
       const json = await res.json();
