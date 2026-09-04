@@ -36,6 +36,10 @@ export interface AIReviewResult {
     claim: string;
     location: string;
     requiredSource: string;
+    regulationName: string;
+    lastUpdated: string;
+    sourceLink: string;
+    warning: string;
   }>;
   seoSupport: {
     searchIntent: string;
@@ -229,6 +233,10 @@ export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
           claim: item.claim.trim(),
           location: typeof item.location === "string" ? item.location.trim() : "Isi artikel",
           requiredSource: typeof item.requiredSource === "string" ? item.requiredSource.trim() : "Sumber resmi pemerintah atau regulasi yang berlaku",
+          regulationName: typeof item.regulationName === "string" ? item.regulationName.trim() : "",
+          lastUpdated: typeof item.lastUpdated === "string" ? item.lastUpdated.trim() : "",
+          sourceLink: typeof item.sourceLink === "string" ? item.sourceLink.trim() : "",
+          warning: typeof item.warning === "string" ? item.warning.trim() : "Informasi ini perlu diverifikasi dengan sumber resmi terbaru.",
         }))
       : [],
     seoSupport: {
@@ -395,7 +403,11 @@ Return ONLY valid JSON (no markdown fences):
     {
       "claim": "<salinan klaim hukum/pajak/biaya/tenggat yang perlu diverifikasi>",
       "location": "<marker paragraf dan kata pembukanya>",
-      "requiredSource": "<jenis sumber resmi yang harus diperiksa>"
+      "requiredSource": "<jenis sumber resmi yang harus diperiksa>",
+      "regulationName": "<nama regulasi/UU/Perpres/Permen yang relevan jika diketahui>",
+      "lastUpdated": "<tanggal pembaruan terakhir regulasi jika diketahui, format: YYYY-MM-DD>",
+      "sourceLink": "<URL sumber resmi jika tersedia, kosongkan jika tidak yakin>",
+      "warning": "<peringatan jika informasi belum dapat diverifikasi atau mungkin sudah berubah>"
     }
   ],
   "seoSupport": {
@@ -438,7 +450,7 @@ Guidance rules:
 - For replace, replacementText is the complete text that replaces targetText. For insert_after, targetText is the exact anchor and replacementText is only the new content. For delete, replacementText must be empty.
 - Return no more than 5 safe editOperations. Do not return an operation if you cannot quote an exact target from the draft.
 - contentGaps must be specific to this draft, not a generic article checklist. Return at most 4.
-- Put claims requiring current official confirmation in verificationNeeded. Do not provide invented citations or URLs. Return an empty array when there is no such claim.
+- Put claims requiring current official confirmation in verificationNeeded with regulationName (if known), lastUpdated (if known), sourceLink (if confident), and a warning if the info may be outdated or unverifiable. Do not provide invented citations or URLs—return empty strings for unknown fields. Return an empty array when there is no such claim.
 - Optimize for people-first, unique, crawlable content: descriptive unique title, useful meta description, natural keyword placement, semantic headings, descriptive internal-link anchors, and questions that the visible article actually answers.
 - Never keyword-stuff and never promise that Google will index or rank the page.
 - Internal links must use exact titles and slugs from INTERNAL LINK CANDIDATES. Never invent a URL.`;

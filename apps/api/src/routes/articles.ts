@@ -271,14 +271,14 @@ router.post("/ai-review", requireAuth, async (req, res) => {
   }
 });
 
-// POST /api/v1/articles/dedup-check — detect duplicate articles by keyword overlap
+// POST /api/v1/articles/dedup-check — detect duplicate articles by keyword overlap and cannibalization
 router.post("/dedup-check", requireAuth, async (req, res) => {
   try {
-    const { title, excerpt, content, site, existingSlug } = req.body;
+    const { title, excerpt, content, site, existingSlug, focusKeyword } = req.body;
     if (!title || !content) {
       return res.status(400).json({ error: "title and content are required" });
     }
-    const result = await checkDeduplication({ title, excerpt: excerpt || "", content, site: site || "easylegal.biz.id", existingSlug });
+    const result = await checkDeduplication({ title, excerpt: excerpt || "", content, site: site || "easylegal.biz.id", existingSlug, focusKeyword });
     res.json({ data: result });
   } catch (error: any) {
     console.error("Dedup check error:", error);

@@ -42,6 +42,10 @@ type EditorSnapshot = {
   excerpt: string;
   content: string;
   focusKeyword: string;
+  /** What triggered this snapshot (e.g., "AI edit: ganti teks judul") */
+  description: string;
+  /** Timestamp */
+  timestamp: number;
 };
 
 const slugifyArticleTitle = (value: string) => value
@@ -116,9 +120,12 @@ export default function ArticleEditor() {
   const [aiReviewLoading, setAiReviewLoading] = useState(false);
   const [aiReviewError, setAiReviewError] = useState<string | null>(null);
   const [reviewMode, setReviewMode] = useState<ReviewMode>("complete");
-  const [dismissedEditKeys, setDismissedEditKeys] = useState<string[]>([]);
-  const [lastEditorSnapshot, setLastEditorSnapshot] = useState<EditorSnapshot | null>(null);
+  const [dismissedEditKeys, setDismissedEditKeys] = useState<string[]>(() => {
+    try { return JSON.parse(localStorage.getItem("ai-dismissed-edits") || "[]"); } catch { return []; }
+  });
+  const [editorHistory, setEditorHistory] = useState<EditorSnapshot[]>([]);
   const [verificationNotice, setVerificationNotice] = useState<VerificationNotice>(null);
+  const [showHistoryPanel, setShowHistoryPanel] = useState(false);
   const aiReviewRequestRef = useRef(0);
   const verificationPendingRef = useRef(false);
 
@@ -348,6 +355,11 @@ export default function ArticleEditor() {
     return () => window.clearTimeout(timer);
   }, [verificationNotice]);
 
+  // Persist dismissed edit keys to localStorage so rejected suggestions don't reappear
+  useEffect(() => {
+    try { localStorage.setItem("ai-dismissed-edits", JSON.stringify(dismissedEditKeys)); } catch { /* quota exceeded */ }
+  }, [dismissedEditKeys]);
+
   // AI Companion membaca perubahan secara otomatis. Debounce mencegah request
   // dikirim pada setiap ketikan, sementara request ID mencegah respons lama
   // menimpa pendapat untuk versi tulisan yang lebih baru.
@@ -454,6 +466,15 @@ export default function ArticleEditor() {
 
   const editOperationKey = (edit: any) => [edit.field, edit.operation, edit.targetText, edit.replacementText].join("::");
 
+  const pushHistorySnapshot = (description: string) => {
+    const snapshot: EditorSnapshot = {
+      title, slug, excerpt, content, focusKeyword,
+      description,
+      timestamp: Date.now(),
+    };
+    setEditorHistory((prev) => [...prev.slice(-19), snapshot]); // keep last 20
+  };
+
   const applyAIEdit = (edit: any) => {
     const targetText = typeof edit.targetText === "string" ? edit.targetText : "";
     const replacementText = typeof edit.replacementText === "string" ? edit.replacementText : "";
@@ -465,7 +486,10 @@ export default function ArticleEditor() {
       return;
     }
 
-    const snapshot: EditorSnapshot = { title, slug, excerpt, content, focusKeyword };
+    const fieldLabel = edit.field === "title" ? "judul" : edit.field === "excerpt" ? "kutipan" : edit.field === "keyword" ? "kata kunci" : "isi artikel";
+    const opLabel = edit.operation === "insert_after" ? "Tambah teks" : edit.operation === "delete" ? "Hapus teks" : "Ganti teks";
+    pushHistorySnapshot(`${opLabel} pada ${fieldLabel}: "${targetText.slice(0, 50)}${targetText.length > 50 ? "..." : ""}"`);
+
     let nextValue = source;
     if (edit.operation === "insert_after") nextValue = source.replace(targetText, `${targetText}\n\n${replacementText}`);
     else nextValue = source.replace(targetText, edit.operation === "delete" ? "" : replacementText);
@@ -475,7 +499,6 @@ export default function ArticleEditor() {
     else if (edit.field === "keyword") setFocusKeyword(nextValue.trim());
     else syncEditorContent(nextValue.trim());
 
-    setLastEditorSnapshot(snapshot);
     setDismissedEditKeys((current) => [...new Set([...current, editOperationKey(edit)])]);
     verificationPendingRef.current = true;
     setVerificationNotice("checking");
@@ -483,21 +506,36 @@ export default function ArticleEditor() {
   };
 
   const undoLastAIEdit = () => {
-    if (!lastEditorSnapshot) return;
-    setTitle(lastEditorSnapshot.title);
-    setSlug(lastEditorSnapshot.slug);
-    setExcerpt(lastEditorSnapshot.excerpt);
-    setFocusKeyword(lastEditorSnapshot.focusKeyword);
-    syncEditorContent(lastEditorSnapshot.content);
-    setLastEditorSnapshot(null);
+    if (editorHistory.length === 0) return;
+    const lastSnapshot = editorHistory[editorHistory.length - 1];
+    setTitle(lastSnapshot.title);
+    setSlug(lastSnapshot.slug);
+    setExcerpt(lastSnapshot.excerpt);
+    setFocusKeyword(lastSnapshot.focusKeyword);
+    syncEditorContent(lastSnapshot.content);
+    setEditorHistory((prev) => prev.slice(0, -1));
     verificationPendingRef.current = true;
     setVerificationNotice("checking");
+  };
+
+  const undoToSnapshot = (index: number) => {
+    if (index < 0 || index >= editorHistory.length) return;
+    const snapshot = editorHistory[index];
+    setTitle(snapshot.title);
+    setSlug(snapshot.slug);
+    setExcerpt(snapshot.excerpt);
+    setFocusKeyword(snapshot.focusKeyword);
+    syncEditorContent(snapshot.content);
+    setEditorHistory((prev) => prev.slice(0, index));
+    verificationPendingRef.current = true;
+    setVerificationNotice("checking");
+    setShowHistoryPanel(false);
   };
 
   const applyContentGap = (gap: any) => {
     const suggestedContent = typeof gap?.suggestedContent === "string" ? gap.suggestedContent.trim() : "";
     if (!suggestedContent) return;
-    setLastEditorSnapshot({ title, slug, excerpt, content, focusKeyword });
+    pushHistorySnapshot(`Tambah content gap: "${gap.topic?.slice(0, 50) || "topik baru"}"`);
     appendToArticle(suggestedContent);
     verificationPendingRef.current = true;
     setVerificationNotice("checking");
@@ -518,6 +556,9 @@ export default function ArticleEditor() {
     if (!example) return;
 
     const target = inferGuidanceTarget(guidance.field, guidance.message || guidance.action || "");
+    const fieldLabel = target === "title" ? "judul" : target === "excerpt" ? "kutipan" : target === "keyword" ? "kata kunci" : "isi artikel";
+    pushHistorySnapshot(`Terapkan contoh pada ${fieldLabel}`);
+
     if (target === "title") setTitle(example);
     else if (target === "excerpt") setExcerpt(example);
     else if (target === "keyword") setFocusKeyword(example);
@@ -828,6 +869,7 @@ export default function ArticleEditor() {
           excerpt,
           content,
           existingSlug: originalSlug || undefined,
+          focusKeyword: focusKeyword.trim() || undefined,
         });
         if (duplicateResult.risk === "high") {
           const closestMatch = duplicateResult.results?.[0];
@@ -1269,7 +1311,7 @@ export default function ArticleEditor() {
                     className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                   />
                   <p className="text-[14px] text-gray-500 font-medium mt-1">
-                    Masukkan kata kunci utama yang ingin dioptimalkan (tidak disimpan ke database, hanya untuk panduan penulisan).
+                    Kata kunci utama yang ingin dioptimalkan. Disimpan ke database dan digunakan untuk memeriksa potensi keyword cannibalization dengan artikel lain.
                   </p>
                 </div>
 
@@ -1314,9 +1356,42 @@ export default function ArticleEditor() {
                         {verificationNotice === "checking" ? <Loader2 size={14} className="animate-spin" /> : <CheckCircle size={14} />}
                         {verificationNotice === "checking" ? "Perubahan diterapkan. AI sedang memeriksa ulang hasilnya…" : "Pemeriksaan ulang selesai. Saran sudah diperbarui untuk versi terbaru."}
                       </span>
-                      {lastEditorSnapshot && (
-                        <button type="button" onClick={undoLastAIEdit} className="flex-shrink-0 font-extrabold underline">Batalkan perubahan</button>
-                      )}
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        {editorHistory.length > 0 && (
+                          <button type="button" onClick={() => setShowHistoryPanel(!showHistoryPanel)} className="font-extrabold underline">
+                            Riwayat ({editorHistory.length})
+                          </button>
+                        )}
+                        {editorHistory.length > 0 && (
+                          <button type="button" onClick={undoLastAIEdit} className="font-extrabold underline">Batalkan</button>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {showHistoryPanel && editorHistory.length > 0 && (
+                    <div className="rounded-xl border border-gray-200 bg-white p-3.5 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[12px] font-black uppercase tracking-wider text-gray-700">Riwayat Perubahan AI</span>
+                        <button type="button" onClick={() => setShowHistoryPanel(false)} className="text-[11px] font-bold text-gray-500 hover:text-gray-800">Tutup</button>
+                      </div>
+                      <p className="text-[11px] text-gray-500">Klik "Kembalikan" untuk mengembalikan ke状态 sebelum perubahan tersebut.</p>
+                      <div className="max-h-[200px] overflow-y-auto space-y-1.5">
+                        {[...editorHistory].reverse().map((snapshot, reverseIdx) => {
+                          const realIdx = editorHistory.length - 1 - reverseIdx;
+                          return (
+                            <div key={snapshot.timestamp} className="flex items-center justify-between gap-2 rounded-lg border border-gray-100 bg-gray-50 px-3 py-2 text-[11px]">
+                              <div className="min-w-0 flex-1">
+                                <span className="font-bold text-gray-800">{snapshot.description}</span>
+                                <span className="ml-2 text-gray-400">{new Date(snapshot.timestamp).toLocaleTimeString("id-ID")}</span>
+                              </div>
+                              <button type="button" onClick={() => undoToSnapshot(realIdx)} className="flex-shrink-0 px-2 py-1 rounded bg-amber-50 text-amber-700 font-extrabold hover:bg-amber-100">
+                                Kembalikan
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
 
@@ -1344,10 +1419,22 @@ export default function ArticleEditor() {
                               {aiReview.duplicateCheck.results.slice(0, 3).map((match: any) => (
                                 <li key={match.matchedSlug} className="flex items-start justify-between gap-3">
                                   <span className="line-clamp-1">{match.matchedTitle}</span>
-                                  <strong className="flex-shrink-0 text-[#990202]">{Math.round(match.similarity * 100)}% mirip</strong>
+                                  <div className="flex items-center gap-2 flex-shrink-0">
+                                    {match.keywordCannibalization && (
+                                      <span className="px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 text-[10px] font-extrabold uppercase">
+                                        Keyword sama: {match.matchedFocusKeyword}
+                                      </span>
+                                    )}
+                                    <strong className="text-[#990202]">{Math.round(match.similarity * 100)}% mirip</strong>
+                                  </div>
                                 </li>
                               ))}
                             </ul>
+                          )}
+                          {aiReview.duplicateCheck.results?.some((m: any) => m.keywordCannibalization) && (
+                            <div className="mt-2.5 rounded-lg bg-orange-50 border border-orange-200 p-2.5 text-[12px] text-orange-800">
+                              <strong>Keyword Cannibalization terdeteksi:</strong> Beberapa artikel menargetkan kata kunci yang sama. Ini dapat memecah otoritas SEO. Pertimbangkan untuk menggabungkan artikel atau membedakan target keyword masing-masing.
+                            </div>
                           )}
                         </div>
                       )}
@@ -1527,11 +1614,30 @@ export default function ArticleEditor() {
                             <span className="text-[12px] font-black uppercase tracking-wider text-red-900">Klaim yang wajib diverifikasi</span>
                           </div>
                           <p className="text-[11px] text-gray-600">AI tidak menganggap klaim hukum, biaya, atau tenggat sebagai fakta tanpa sumber resmi terbaru.</p>
-                          {aiReview.verificationNeeded.map((item: any, index: number) => (
+                      {aiReview.verificationNeeded.map((item: any, index: number) => (
                             <div key={`${item.claim}-${index}`} className="rounded-lg border border-red-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
-                              <p><strong>Klaim:</strong> “{item.claim}”</p>
+                              <p><strong>Klaim:</strong> "{item.claim}"</p>
                               <p className="mt-1"><strong>Lokasi:</strong> {item.location}</p>
                               <p className="mt-1 text-red-700"><strong>Periksa menggunakan:</strong> {item.requiredSource}</p>
+                              {item.regulationName && (
+                                <p className="mt-1"><strong>Regulasi:</strong> {item.regulationName}</p>
+                              )}
+                              {item.lastUpdated && (
+                                <p className="mt-1"><strong>Tanggal pembaruan:</strong> {item.lastUpdated}</p>
+                              )}
+                              {item.sourceLink && (
+                                <p className="mt-1">
+                                  <strong>Sumber:</strong>{" "}
+                                  <a href={item.sourceLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                    {item.sourceLink}
+                                  </a>
+                                </p>
+                              )}
+                              {item.warning && (
+                                <div className="mt-2 rounded bg-amber-50 border border-amber-200 px-2.5 py-1.5 text-[11px] text-amber-800">
+                                  <strong>Peringatan:</strong> {item.warning}
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>

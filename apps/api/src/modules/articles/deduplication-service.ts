@@ -1,6 +1,8 @@
 /**
- * Deduplication Service — compares title, excerpt, and article body against
- * every stored article on the same site using Postgres pg_trgm.
+ * Deduplication Service — compares title, excerpt, article body, and
+ * focus keyword against every stored article on the same site.
+ * Uses Postgres pg_trgm for text similarity and keyword matching
+ * to detect both duplicate content and keyword cannibalization.
  */
 import { prisma } from "../../lib/prisma";
 
@@ -11,6 +13,10 @@ export interface DedupResult {
   contentSimilarity: number;
   matchedSlug: string;
   matchedTitle: string;
+  /** true when both articles target the same or very similar focus keyword */
+  keywordCannibalization: boolean;
+  /** the matched article's focus keyword (if any) */
+  matchedFocusKeyword: string;
 }
 
 export function classifyDuplicateRisk(results: DedupResult[]): "low" | "medium" | "high" {
@@ -22,6 +28,26 @@ export function classifyDuplicateRisk(results: DedupResult[]): "low" | "medium" 
   return results.length > 0 ? "medium" : "low";
 }
 
+/** Normalize a keyword for comparison: lowercase, trim, remove extra spaces */
+function normalizeKeyword(kw: string): string {
+  return kw.toLowerCase().trim().replace(/\s+/g, " ");
+}
+
+/** Check if two keywords indicate cannibalization (exact match or one contains the other) */
+function keywordsCannibalize(a: string, b: string): boolean {
+  if (!a || !b) return false;
+  const na = normalizeKeyword(a);
+  const nb = normalizeKeyword(b);
+  if (na === nb) return true;
+  if (na.includes(nb) || nb.includes(na)) return true;
+  // Check word overlap: if >70% of words overlap, treat as cannibalization
+  const wordsA = na.split(" ");
+  const wordsB = nb.split(" ");
+  const overlap = wordsA.filter((w) => wordsB.includes(w)).length;
+  const minLen = Math.min(wordsA.length, wordsB.length);
+  return minLen >= 2 && overlap / minLen >= 0.7;
+}
+
 export async function checkDeduplication(params: {
   title: string;
   excerpt?: string;
@@ -29,8 +55,9 @@ export async function checkDeduplication(params: {
   site: string;
   existingSlug?: string;
   threshold?: number;
+  focusKeyword?: string;
 }): Promise<{ risk: "low" | "medium" | "high"; results: DedupResult[]; candidates: DedupResult[] }> {
-  const { title, excerpt = "", content = "", site, existingSlug, threshold = 0.4 } = params;
+  const { title, excerpt = "", content = "", site, existingSlug, threshold = 0.4, focusKeyword } = params;
   const cleanTitle = (title || "").trim();
   const cleanExcerpt = excerpt.trim().slice(0, 2000);
   const cleanContent = content.trim().slice(0, 6000);
@@ -42,6 +69,7 @@ export async function checkDeduplication(params: {
   const rows = await prisma.$queryRaw<Array<{
     slug: string;
     title: string;
+    focus_keyword: string | null;
     score: number;
     title_score: number;
     excerpt_score: number;
@@ -51,6 +79,7 @@ export async function checkDeduplication(params: {
       SELECT
         slug,
         title,
+        "focusKeyword" AS focus_keyword,
         similarity(LOWER(title), LOWER(${cleanTitle}))::float AS title_score,
         CASE
           WHEN ${cleanExcerpt} = '' THEN 0
@@ -67,6 +96,7 @@ export async function checkDeduplication(params: {
     SELECT
       slug,
       title,
+      focus_keyword,
       title_score,
       excerpt_score,
       content_score,
@@ -83,8 +113,16 @@ export async function checkDeduplication(params: {
     contentSimilarity: Math.round(row.content_score * 100) / 100,
     matchedSlug: row.slug,
     matchedTitle: row.title,
+    keywordCannibalization: keywordsCannibalize(focusKeyword || "", row.focus_keyword || ""),
+    matchedFocusKeyword: row.focus_keyword || "",
   }));
   const results = candidates.filter((result) => result.similarity >= threshold);
 
-  return { risk: classifyDuplicateRisk(results), results, candidates };
+  // Upgrade risk if keyword cannibalization is detected among close matches
+  let risk = classifyDuplicateRisk(results);
+  if (risk === "low" && results.some((r) => r.keywordCannibalization && r.similarity >= 0.25)) {
+    risk = "medium";
+  }
+
+  return { risk, results, candidates };
 }

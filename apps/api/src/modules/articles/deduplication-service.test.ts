@@ -9,6 +9,8 @@ const match = (overrides: Partial<DedupResult>): DedupResult => ({
   contentSimilarity: 0.2,
   matchedSlug: "artikel-lama",
   matchedTitle: "Artikel Lama",
+  keywordCannibalization: false,
+  matchedFocusKeyword: "",
   ...overrides,
 });
 
