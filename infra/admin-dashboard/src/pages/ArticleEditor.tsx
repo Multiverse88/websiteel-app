@@ -274,75 +274,134 @@ export default function ArticleEditor() {
       content: { targetId: "article-content-editor", label: "Isi artikel" },
       keyword: { targetId: "focusKeyword", label: "Kata kunci utama" },
     } as const;
+    type FieldKey = keyof typeof targetMap;
 
+    // Priority order: critical > warning > suggestion
+    const severityRank: Record<string, number> = { critical: 3, warning: 2, suggestion: 1 };
+
+    // Collect all candidates, then pick best per field
+    const allCandidates: Array<AICompanionGuidance & { fieldKey: FieldKey; rank: number }> = [];
+
+    const addCandidate = (item: AICompanionGuidance, fieldKey: FieldKey) => {
+      allCandidates.push({ ...item, fieldKey, rank: severityRank[item.severity] || 1 });
+    };
+
+    // 1. Empty field detection — always show if field is empty
+    const emptyFields: FieldKey[] = [];
+    if (!title.trim()) emptyFields.push("title");
+    if (!excerpt.trim()) emptyFields.push("excerpt");
+    if (!content.trim()) emptyFields.push("content");
+    if (!focusKeyword.trim()) emptyFields.push("keyword");
+
+    emptyFields.forEach((fieldKey) => {
+      const emptyMessages: Record<FieldKey, string> = {
+        title: "Judul artikel belum diisi. Tulis judul yang jelas, memuat kata kunci utama, dan menarik perhatian pembaca.",
+        excerpt: "Kutipan singkat (meta deskripsi) belum diisi. Tulis rangkuman 120-160 karakter yang menjelaskan manfaat artikel.",
+        content: "Isi artikel belum ditulis. Mulai dengan paragraf pembuka yang menjelaskan topik, lalu kembangkan dengan subjudul.",
+        keyword: "Kata kunci utama belum ditentukan. Masukkan frasa yang ingin dioptimasi agar AI bisa memberikan saran SEO yang tepat.",
+      };
+      addCandidate({
+        ...targetMap[fieldKey],
+        message: emptyMessages[fieldKey],
+        severity: fieldKey === "content" ? "critical" : "warning",
+        location: targetMap[fieldKey].label,
+        problem: `${targetMap[fieldKey].label} masih kosong.`,
+        action: `Isi bagian ${targetMap[fieldKey].label.toLowerCase()} sebelum menerbitkan artikel.`,
+      }, fieldKey);
+    });
+
+    // 2. Duplicate / cannibalization warnings
     const closestDuplicate = aiReview.duplicateCheck?.results?.[0];
-    const duplicateGuidance: AICompanionGuidance[] = closestDuplicate && aiReview.duplicateCheck?.risk !== "low"
-      ? [{
-          ...(closestDuplicate.contentSimilarity > closestDuplicate.titleSimilarity ? targetMap.content : targetMap.title),
-          message: `Gunakan sudut pembahasan yang berbeda dari “${closestDuplicate.matchedTitle}” (${Math.round(closestDuplicate.similarity * 100)}% mirip).`,
-          severity: aiReview.duplicateCheck.risk === "high" ? "critical" : "warning",
-          location: closestDuplicate.contentSimilarity > closestDuplicate.titleSimilarity ? "Isi artikel" : "Judul artikel",
-          problem: `Draft memiliki kemiripan ${Math.round(closestDuplicate.similarity * 100)}% dengan artikel “${closestDuplicate.matchedTitle}”.`,
-          action: "Ubah fokus utama, urutan pembahasan, dan contoh agar artikel menjawab kebutuhan pembaca dari sudut yang berbeda.",
-          reason: "Mencegah dua artikel bersaing untuk topik yang sama dan mengurangi risiko konten duplikat.",
-        }]
-      : [];
+    if (closestDuplicate && aiReview.duplicateCheck?.risk !== "low") {
+      const dupField: FieldKey = closestDuplicate.contentSimilarity > closestDuplicate.titleSimilarity ? "content" : "title";
+      addCandidate({
+        ...targetMap[dupField],
+        message: closestDuplicate.keywordCannibalization
+          ? `Artikel "${closestDuplicate.matchedTitle}" menargetkan keyword yang sama. Hapus salah satu atau bedakan target keyword.`
+          : `Gunakan sudut pembahasan yang berbeda dari "${closestDuplicate.matchedTitle}" (${Math.round(closestDuplicate.similarity * 100)}% mirip).`,
+        severity: aiReview.duplicateCheck.risk === "high" ? "critical" : "warning",
+        location: targetMap[dupField].label,
+        problem: closestDuplicate.keywordCannibalization
+          ? `Keyword "${closestDuplicate.matchedFocusKeyword}" digunakan di dua artikel — ini keyword cannibalization.`
+          : `Draft memiliki kemiripan ${Math.round(closestDuplicate.similarity * 100)}% dengan artikel "${closestDuplicate.matchedTitle}".`,
+        action: "Ubah fokus utama, urutan pembahasan, dan contoh agar artikel menjawab kebutuhan pembaca dari sudut yang berbeda.",
+        reason: "Mencegah dua artikel bersaing untuk topik yang sama dan mengurangi risiko konten duplikat.",
+      }, dupField);
+    }
 
-    const editGuidance: AICompanionGuidance[] = visibleEditOperations.slice(0, 3).map((edit: any) => ({
-      ...targetMap[edit.field as GuidanceTarget],
-      message: edit.reason || "Ada perubahan siap diterapkan pada bagian ini.",
-      severity: "suggestion",
-      location: targetMap[edit.field as GuidanceTarget].label,
-      problem: `Teks saat ini: “${edit.targetText}”`,
-      action: edit.operation === "insert_after"
-        ? "Tambahkan teks rekomendasi tepat setelah bagian yang ditunjuk."
-        : edit.operation === "delete"
-          ? "Hapus teks yang ditunjuk karena tidak lagi diperlukan."
-          : "Ganti teks yang ditunjuk dengan versi rekomendasi.",
-      example: edit.replacementText,
-      reason: edit.reason,
-      targetText: edit.targetText,
-    }));
+    // 3. Edit operations (safe auto-apply candidates)
+    visibleEditOperations.slice(0, 3).forEach((edit: any) => {
+      const fk = edit.field as FieldKey;
+      if (targetMap[fk]) {
+        addCandidate({
+          ...targetMap[fk],
+          message: edit.reason || "Ada perubahan siap diterapkan pada bagian ini.",
+          severity: "suggestion",
+          location: targetMap[fk].label,
+          problem: `Teks saat ini: "${edit.targetText}"`,
+          action: edit.operation === "insert_after"
+            ? "Tambahkan teks rekomendasi tepat setelah bagian yang ditunjuk."
+            : edit.operation === "delete"
+              ? "Hapus teks yang ditunjuk karena tidak lagi diperlukan."
+              : "Ganti teks yang ditunjuk dengan versi rekomendasi.",
+          example: edit.replacementText,
+          reason: edit.reason,
+          targetText: edit.targetText,
+        }, fk);
+      }
+    });
 
+    // 4. AI guidance items
     if (Array.isArray(aiReview.guidance) && aiReview.guidance.length > 0) {
-      const mappedGuidance = aiReview.guidance
+      aiReview.guidance
         .filter((item: any) => item && typeof item.message === "string" && item.message.trim())
         .slice(0, 5)
-        .map((item: any) => {
-          const target = inferGuidanceTarget(item.field, item.message);
-          return {
-            ...targetMap[target],
-            message: item.message,
-            severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
-            location: item.location,
-            problem: item.problem,
-            action: item.action,
-            example: item.example,
-            reason: item.reason,
-          };
+        .forEach((item: any) => {
+          const target = inferGuidanceTarget(item.field, item.message) as FieldKey;
+          if (targetMap[target]) {
+            addCandidate({
+              ...targetMap[target],
+              message: item.message,
+              severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
+              location: item.location,
+              problem: item.problem,
+              action: item.action,
+              example: item.example,
+              reason: item.reason,
+            }, target);
+          }
         });
-      return [...duplicateGuidance, ...editGuidance, ...mappedGuidance].slice(0, 5);
     }
 
-    const fallback: AICompanionGuidance[] = [];
-    if (aiReview.recommendedTitle) {
-      fallback.push({ ...targetMap.title, message: `Contoh judul yang bisa langsung dipakai: “${aiReview.recommendedTitle}”`, severity: "suggestion" });
+    // 5. Fallback: recommended title, meta, outline, keyword (only if field has no candidate yet)
+    const fieldsWithCandidates = new Set(allCandidates.map((c) => c.fieldKey));
+    if (!fieldsWithCandidates.has("title") && aiReview.recommendedTitle) {
+      addCandidate({ ...targetMap.title, message: `Contoh judul yang bisa langsung dipakai: "${aiReview.recommendedTitle}"`, severity: "suggestion" }, "title");
     }
-    if (aiReview.recommendedMetaDescription) {
-      fallback.push({ ...targetMap.excerpt, message: `Contoh kutipan: “${aiReview.recommendedMetaDescription}”`, severity: "suggestion" });
+    if (!fieldsWithCandidates.has("excerpt") && aiReview.recommendedMetaDescription) {
+      addCandidate({ ...targetMap.excerpt, message: `Contoh kutipan: "${aiReview.recommendedMetaDescription}"`, severity: "suggestion" }, "excerpt");
     }
-    if (Array.isArray(aiReview.recommendedOutline) && aiReview.recommendedOutline.length > 0) {
-      fallback.push({ ...targetMap.content, message: `Contoh struktur artikel: ${aiReview.recommendedOutline.join(" → ")}`, severity: "suggestion" });
+    if (!fieldsWithCandidates.has("keyword") && aiReview.targetKeyword) {
+      addCandidate({ ...targetMap.keyword, message: `Contoh kata kunci utama: "${aiReview.targetKeyword}"`, severity: "suggestion" }, "keyword");
     }
-    if (aiReview.targetKeyword) {
-      fallback.push({ ...targetMap.keyword, message: `Contoh kata kunci utama: “${aiReview.targetKeyword}”`, severity: "suggestion" });
+    if (!fieldsWithCandidates.has("content") && Array.isArray(aiReview.recommendedOutline) && aiReview.recommendedOutline.length > 0) {
+      addCandidate({ ...targetMap.content, message: `Contoh struktur artikel: ${aiReview.recommendedOutline.join(" → ")}`, severity: "suggestion" }, "content");
     }
-    if (fallback.length < 5 && Array.isArray(aiReview.suggestions)) {
-      aiReview.suggestions.slice(0, 5 - fallback.length).forEach((suggestion: string) => {
-        fallback.push({ ...targetMap.content, message: suggestion, severity: "suggestion" });
-      });
+
+    // PICK BEST per field: highest severity wins, first occurrence breaks ties
+    const bestPerField = new Map<FieldKey, AICompanionGuidance>();
+    for (const candidate of allCandidates) {
+      const existing = bestPerField.get(candidate.fieldKey);
+      if (!existing || candidate.rank > (severityRank[(existing as any).severity] || 1)) {
+        bestPerField.set(candidate.fieldKey, candidate);
+      }
     }
-    return [...duplicateGuidance, ...editGuidance, ...fallback].slice(0, 5);
+
+    // Return in fixed order: title → excerpt → content → keyword (skip empty candidates)
+    const fieldOrder: FieldKey[] = ["title", "excerpt", "content", "keyword"];
+    return fieldOrder
+      .map((fk) => bestPerField.get(fk))
+      .filter((item): item is AICompanionGuidance => Boolean(item));
   })();
 
   useEffect(() => {
