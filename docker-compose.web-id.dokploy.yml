@@ -60,14 +60,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-    labels:
-      - "traefik.enable=true"
-      # Temporary domain — update Host rule when easylegal.id DNS propagates:
-      #   Host(`easylegal.id`) || Host(`www.easylegal.id`)
-      - "traefik.http.routers.app-id.rule=Host(`easylegal-id.easylegal.my.id`)"
-      - "traefik.http.routers.app-id.entrypoints=websecure"
-      - "traefik.http.routers.app-id.tls.certResolver=letsencrypt"
-      - "traefik.http.services.app-id.loadbalancer.server.port=3000"
+    # Dokploy handles Traefik routing automatically via the UI domain config.
+    # Do NOT add custom traefik labels here — they override Dokploy and break the URL.
 
 volumes:
   uploads-id:
