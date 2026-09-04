@@ -73,6 +73,7 @@ export default function ArticleEditor() {
   const [aiReview, setAiReview] = useState<any>(null);
   const [aiReviewLoading, setAiReviewLoading] = useState(false);
   const [aiReviewError, setAiReviewError] = useState<string | null>(null);
+  const aiReviewRequestRef = useRef(0);
 
   // FAQ shown at the end of the article on the public site (reuses the
   // same <FAQ> component as the /layanan pages). Per-article, unlike the
@@ -207,27 +208,47 @@ export default function ArticleEditor() {
 
   const seoData = analyzeSEO();
 
-  const runAiReview = async () => {
+  // AI Companion membaca perubahan secara otomatis. Debounce mencegah request
+  // dikirim pada setiap ketikan, sementara request ID mencegah respons lama
+  // menimpa pendapat untuk versi tulisan yang lebih baru.
+  useEffect(() => {
+    const requestId = ++aiReviewRequestRef.current;
+
     if (!title.trim() || !content.trim()) {
-      setAiReviewError("Isi judul dan konten dulu sebelum AI Review.");
+      setAiReview(null);
+      setAiReviewError(null);
+      setAiReviewLoading(false);
       return;
     }
+
     setAiReviewLoading(true);
     setAiReviewError(null);
-    try {
-      const result = await api.aiReview({
-        title,
-        excerpt,
-        content,
-        keyword: focusKeyword || undefined,
-      });
-      setAiReview(result);
-    } catch (err: any) {
-      setAiReviewError(err.message || "AI Review gagal, coba lagi.");
-    } finally {
-      setAiReviewLoading(false);
-    }
-  };
+
+    const timeoutId = window.setTimeout(async () => {
+      try {
+        const result = await api.aiReview({
+          title,
+          excerpt,
+          content,
+          keyword: focusKeyword || undefined,
+        });
+
+        if (aiReviewRequestRef.current === requestId) {
+          setAiReview(result);
+        }
+      } catch (err: any) {
+        if (aiReviewRequestRef.current === requestId) {
+          setAiReviewError(err.message || "AI Companion belum bisa memberi pendapat. Ubah tulisan untuk mencoba lagi.");
+        }
+      } finally {
+        if (aiReviewRequestRef.current === requestId) {
+          setAiReviewLoading(false);
+        }
+      }
+    }, 1800);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [title, excerpt, content, focusKeyword]);
 
   useEffect(() => {
     const match = window.location.hash.match(/\?id=([^&]+)/);
@@ -979,21 +1000,24 @@ export default function ArticleEditor() {
                   </p>
                 </div>
 
-                {/* AI Review */}
+                {/* AI Companion */}
                 <div className="space-y-3 p-4 bg-gradient-to-br from-red-50/60 to-white border border-red-100 rounded-xl">
                   <div className="flex items-center justify-between">
-                    <span className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
-                      <Sparkles size={18} className="text-[#990202]" /> AI Review
+                    <div>
+                      <span className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                        <Sparkles size={18} className="text-[#990202]" /> AI Companion
+                      </span>
+                      <p className="text-[13px] text-gray-500 mt-1">Aktif otomatis selama Anda menulis.</p>
+                    </div>
+                    <span className={`px-3 py-1.5 text-[13px] font-bold rounded-full flex items-center gap-2 ${aiReviewLoading ? "bg-amber-50 text-amber-700" : aiReview ? "bg-emerald-50 text-emerald-700" : "bg-gray-100 text-gray-500"}`}>
+                      {aiReviewLoading ? (
+                        <><Loader2 size={14} className="animate-spin" /> Membaca perubahan...</>
+                      ) : aiReview ? (
+                        <><span className="w-2 h-2 rounded-full bg-emerald-500" /> Memantau otomatis</>
+                      ) : (
+                        <><span className="w-2 h-2 rounded-full bg-gray-400" /> Mulai menulis</>
+                      )}
                     </span>
-                    <button
-                      type="button"
-                      onClick={runAiReview}
-                      disabled={aiReviewLoading}
-                      className="px-4 py-2 bg-[#990202] text-white text-[14px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-50 flex items-center gap-2"
-                    >
-                      {aiReviewLoading ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}
-                      {aiReviewLoading ? "Menganalisis..." : aiReview ? "Analisis Ulang" : "Jalankan AI Review"}
-                    </button>
                   </div>
 
                   {aiReviewError && (
@@ -1002,6 +1026,12 @@ export default function ArticleEditor() {
 
                   {aiReview && (
                     <div className="space-y-3">
+                      {aiReview.opinion && (
+                        <div className="bg-white border border-red-100 rounded-xl px-4 py-3 text-[14px] leading-relaxed text-gray-700">
+                          <span className="font-extrabold text-[#990202]">Pendapat saya: </span>
+                          {aiReview.opinion}
+                        </div>
+                      )}
                       <div className="flex items-center gap-3">
                         <span className={`text-[24px] font-extrabold ${aiReview.seoScore >= 70 ? "text-green-600" : aiReview.seoScore >= 40 ? "text-yellow-600" : "text-red-600"}`}>
                           {aiReview.seoScore}/100
@@ -1926,4 +1956,3 @@ function htmlToMarkdown(html: string): string {
   
   return markdownBlocks.join("\n\n");
 }
-

@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { prisma } from "../../lib/prisma";
 
 export interface AIReviewResult {
+  opinion: string;
   seoScore: number;
   titleScore: "excellent" | "good" | "needs-improvement" | "poor";
   titleReason: string;
@@ -38,6 +39,7 @@ async function parseAIResponse(raw: string): Promise<AIReviewResult> {
     return JSON.parse(cleaned) as AIReviewResult;
   } catch {
     return {
+      opinion: "Saya belum dapat membaca hasil analisis dengan sempurna. Tetap periksa kembali kejelasan, struktur, dan fokus tulisan ini.",
       seoScore: 50,
       titleScore: "needs-improvement",
       titleReason: "Could not parse AI response",
@@ -78,7 +80,7 @@ export async function getAIReview(params: {
     ? `\nExisting articles on this site:\n${similarArticles.map((a, i) => `${i + 1}. "${a.title}" (${a.slug})`).join("\n")}`
     : "";
 
-  const prompt = `You are an expert SEO and legal-content analyst. Score the article draft below.
+  const prompt = `You are a proactive AI writing companion and an expert SEO and legal-content analyst. Read the draft as a thoughtful editor: give an honest, direct, and helpful opinion without waiting to be asked. All explanatory text MUST be written in natural Indonesian. Score the article draft below.
 
 ARTICLE:
 Title: "${title}"
@@ -89,6 +91,7 @@ Site: ${site}${similarContext}
 
 Return ONLY valid JSON (no markdown fences):
 {
+  "opinion": "<pendapat utama yang langsung, suportif, dan spesifik dalam 1-2 kalimat bahasa Indonesia>",
   "seoScore": <0-100>,
   "titleScore": "excellent|good|needs-improvement|poor",
   "titleReason": "<brief reason>",
