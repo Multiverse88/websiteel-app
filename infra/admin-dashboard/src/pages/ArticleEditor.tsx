@@ -231,22 +231,24 @@ export default function ArticleEditor() {
     }
 
     const fallback: AICompanionGuidance[] = [];
-    if (!["excellent", "good"].includes(aiReview.titleScore)) {
-      fallback.push({ ...targetMap.title, message: aiReview.titleReason, severity: "warning" });
+    if (aiReview.recommendedTitle) {
+      fallback.push({ ...targetMap.title, message: `Contoh judul yang bisa langsung dipakai: “${aiReview.recommendedTitle}”`, severity: "suggestion" });
     }
-    if (!["excellent", "good"].includes(aiReview.metaScore)) {
-      fallback.push({ ...targetMap.excerpt, message: aiReview.metaReason, severity: "warning" });
+    if (aiReview.recommendedMetaDescription) {
+      fallback.push({ ...targetMap.excerpt, message: `Contoh kutipan: “${aiReview.recommendedMetaDescription}”`, severity: "suggestion" });
     }
-    if (!["excellent", "good"].includes(aiReview.contentScore)) {
-      fallback.push({ ...targetMap.content, message: aiReview.contentReason, severity: "warning" });
+    if (Array.isArray(aiReview.recommendedOutline) && aiReview.recommendedOutline.length > 0) {
+      fallback.push({ ...targetMap.content, message: `Contoh struktur artikel: ${aiReview.recommendedOutline.join(" → ")}`, severity: "suggestion" });
     }
-    if (!focusKeyword.trim() && aiReview.targetKeyword) {
-      fallback.push({ ...targetMap.keyword, message: `Pertimbangkan memakai “${aiReview.targetKeyword}” sebagai kata kunci utama.`, severity: "suggestion" });
+    if (aiReview.targetKeyword) {
+      fallback.push({ ...targetMap.keyword, message: `Contoh kata kunci utama: “${aiReview.targetKeyword}”`, severity: "suggestion" });
     }
-    if (fallback.length === 0 && aiReview.suggestions?.[0]) {
-      fallback.push({ ...targetMap.content, message: aiReview.suggestions[0], severity: "suggestion" });
+    if (fallback.length < 5 && Array.isArray(aiReview.suggestions)) {
+      aiReview.suggestions.slice(0, 5 - fallback.length).forEach((suggestion: string) => {
+        fallback.push({ ...targetMap.content, message: suggestion, severity: "suggestion" });
+      });
     }
-    return fallback;
+    return fallback.slice(0, 5);
   })();
 
   // AI Companion membaca perubahan secara otomatis. Debounce mencegah request
@@ -325,6 +327,15 @@ export default function ArticleEditor() {
     const html = editorRef.current?.innerHTML || "";
     const md = htmlToMarkdown(html);
     setContent(md);
+  };
+
+  const appendToArticle = (markdown: string) => {
+    const nextContent = [content.trim(), markdown.trim()].filter(Boolean).join("\n\n");
+    setContent(nextContent);
+    if (editorRef.current) {
+      editorRef.current.innerHTML = markdownToHtml(nextContent);
+      wrapExistingImages(editorRef.current);
+    }
   };
 
   const handleFormat = (command: string, value: string = "") => {
@@ -1067,73 +1078,51 @@ export default function ArticleEditor() {
 
                   {aiReview && (
                     <div className="space-y-3">
-                      {aiReview.opinion && (
-                        <div className="bg-white border border-red-100 rounded-xl px-4 py-3 text-[14px] leading-relaxed text-gray-700">
-                          <span className="font-extrabold text-[#990202]">Pendapat saya: </span>
-                          {aiReview.opinion}
+                      {aiReview.recommendedTitle && (
+                        <div className="bg-white border border-red-100 rounded-xl p-3.5">
+                          <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh judul</span>
+                          <p className="mt-1.5 text-[14px] font-bold leading-relaxed text-gray-800">{aiReview.recommendedTitle}</p>
+                          <button type="button" onClick={() => setTitle(aiReview.recommendedTitle)} className="mt-2 text-[12px] font-extrabold text-[#990202] hover:underline">Gunakan judul ini</button>
                         </div>
                       )}
-                      <div className="flex items-center gap-3">
-                        <span className={`text-[24px] font-extrabold ${aiReview.seoScore >= 70 ? "text-green-600" : aiReview.seoScore >= 40 ? "text-yellow-600" : "text-red-600"}`}>
-                          {aiReview.seoScore}/100
-                        </span>
-                        <span className="text-[13px] text-gray-500 font-medium">SEO Score</span>
-                        {aiReview.duplicateRisk && aiReview.duplicateRisk !== "low" && (
-                          <span className="ml-auto flex items-center gap-1 text-[13px] font-bold text-yellow-700 bg-yellow-50 border border-yellow-200 px-2.5 py-1 rounded-lg">
-                            <AlertTriangle size={14} /> Risiko duplikat: {aiReview.duplicateRisk}
-                          </span>
-                        )}
-                      </div>
 
-                      <div className="grid grid-cols-3 gap-2 text-[13px]">
-                        {[
-                          { label: "Judul", score: aiReview.titleScore, reason: aiReview.titleReason },
-                          { label: "Meta", score: aiReview.metaScore, reason: aiReview.metaReason },
-                          { label: "Konten", score: aiReview.contentScore, reason: aiReview.contentReason },
-                        ].map((item) => (
-                          <div key={item.label} className="bg-white border border-gray-200 rounded-lg p-2.5">
-                            <div className="flex items-center gap-1 font-bold text-gray-900">
-                              {item.score === "excellent" || item.score === "good" ? (
-                                <CheckCircle size={14} className="text-green-600" />
-                              ) : (
-                                <AlertTriangle size={14} className="text-yellow-600" />
-                              )}
-                              {item.label}
-                            </div>
-                            <p className="text-gray-500 mt-1 leading-snug">{item.reason}</p>
-                          </div>
-                        ))}
-                      </div>
+                      {aiReview.recommendedMetaDescription && (
+                        <div className="bg-white border border-red-100 rounded-xl p-3.5">
+                          <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh kutipan</span>
+                          <p className="mt-1.5 text-[14px] leading-relaxed text-gray-700">{aiReview.recommendedMetaDescription}</p>
+                          <button type="button" onClick={() => setExcerpt(aiReview.recommendedMetaDescription)} className="mt-2 text-[12px] font-extrabold text-[#990202] hover:underline">Gunakan kutipan ini</button>
+                        </div>
+                      )}
 
-                      {aiReview.similarArticles?.length > 0 && (
-                        <div className="text-[13px] text-gray-600">
-                          <span className="font-bold">Artikel serupa:</span> {aiReview.similarArticles.join("; ")}
+                      {aiReview.recommendedOutline?.length > 0 && (
+                        <div className="bg-white border border-red-100 rounded-xl p-3.5">
+                          <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh struktur artikel</span>
+                          <ol className="mt-2 space-y-1.5 text-[13px] text-gray-700">
+                            {aiReview.recommendedOutline.map((heading: string, index: number) => (
+                              <li key={`${heading}-${index}`} className="flex gap-2"><span className="font-black text-[#990202]">{index + 1}.</span><span>{heading}</span></li>
+                            ))}
+                          </ol>
+                          <button type="button" onClick={() => appendToArticle(aiReview.recommendedOutline.map((heading: string) => `### ${heading.replace(/^#+\s*/, "")}`).join("\n\n"))} className="mt-2 text-[12px] font-extrabold text-[#990202] hover:underline">Tambahkan kerangka ke artikel</button>
+                        </div>
+                      )}
+
+                      {aiReview.exampleParagraph && (
+                        <div className="bg-white border border-red-100 rounded-xl p-3.5">
+                          <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh pengembangan isi</span>
+                          <p className="mt-1.5 text-[14px] leading-relaxed text-gray-700">{aiReview.exampleParagraph}</p>
+                          <button type="button" onClick={() => appendToArticle(aiReview.exampleParagraph)} className="mt-2 text-[12px] font-extrabold text-[#990202] hover:underline">Tambahkan contoh ke artikel</button>
                         </div>
                       )}
 
                       {aiReview.suggestions?.length > 0 && (
-                        <ul className="space-y-1 text-[13px] text-gray-700 list-disc pl-5">
-                          {aiReview.suggestions.map((s: string, i: number) => <li key={i}>{s}</li>)}
-                        </ul>
-                      )}
-
-                      {aiReview.recommendedTitle && (
-                        <button
-                          type="button"
-                          onClick={() => setTitle(aiReview.recommendedTitle)}
-                          className="text-[13px] font-bold text-[#990202] hover:underline"
-                        >
-                          Pakai judul rekomendasi: "{aiReview.recommendedTitle}"
-                        </button>
-                      )}
-                      {aiReview.recommendedMetaDescription && (
-                        <button
-                          type="button"
-                          onClick={() => setExcerpt(aiReview.recommendedMetaDescription)}
-                          className="block text-[13px] font-bold text-[#990202] hover:underline"
-                        >
-                          Pakai excerpt rekomendasi
-                        </button>
+                        <div className="pt-1">
+                          <span className="text-[11px] font-black uppercase tracking-wider text-gray-500">Saran tambahan</span>
+                          <ul className="mt-2 space-y-2 text-[13px] leading-relaxed text-gray-700">
+                            {aiReview.suggestions.map((suggestion: string, index: number) => (
+                              <li key={index} className="flex gap-2"><CheckCircle size={15} className="mt-0.5 flex-shrink-0 text-emerald-600" /><span>{suggestion}</span></li>
+                            ))}
+                          </ul>
+                        </div>
                       )}
                     </div>
                   )}

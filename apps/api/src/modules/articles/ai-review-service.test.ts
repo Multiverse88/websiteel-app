@@ -3,33 +3,26 @@ import { test } from "node:test";
 import { parseAIResponse } from "./ai-review-service";
 
 const validReview = {
-  opinion: "Tulisan ini sudah fokus, tetapi judulnya masih bisa dibuat lebih spesifik.",
-  guidance: [{ field: "title", severity: "warning", message: "Tambahkan manfaat utama pada judul." }],
-  seoScore: 72,
-  titleScore: "needs-improvement",
-  titleReason: "Judul belum menyebutkan manfaat utama.",
-  metaScore: "good",
-  metaReason: "Meta deskripsi cukup jelas.",
-  contentScore: "good",
-  contentReason: "Isi artikel terstruktur.",
-  readabilityScore: 78,
-  duplicateRisk: "low",
-  similarArticles: [],
-  suggestions: ["Perjelas manfaat pada judul."],
+  guidance: [{ field: "title", severity: "warning", message: "Gunakan judul: Panduan Praktis Mengurus NIB untuk UMKM." }],
+  suggestions: ["Gunakan subjudul untuk setiap tahapan."],
+  recommendedTitle: "Panduan Praktis Mengurus NIB untuk UMKM",
+  recommendedMetaDescription: "Pelajari tahapan mengurus NIB untuk UMKM secara runtut, mulai dari persiapan data hingga pengecekan dokumen usaha.",
+  recommendedOutline: ["Apa Itu NIB?", "Dokumen yang Perlu Disiapkan"],
+  exampleParagraph: "NIB menjadi identitas bagi pelaku usaha dalam menjalankan kegiatan bisnisnya.",
+  targetKeyword: "cara mengurus NIB",
 };
 
 test("mengambil JSON valid ketika model menambahkan kalimat pembuka", async () => {
   const raw = `Berikut analisis saya:\n\`\`\`json\n${JSON.stringify(validReview)}\n\`\`\``;
   const result = await parseAIResponse(raw);
 
-  assert.equal(result.opinion, validReview.opinion);
-  assert.equal(result.titleReason, validReview.titleReason);
-  assert.notEqual(result.titleReason, "Could not parse AI response");
+  assert.equal(result.recommendedTitle, validReview.recommendedTitle);
+  assert.deepEqual(result.recommendedOutline, validReview.recommendedOutline);
 });
 
 test("menolak respons JSON yang terpotong agar caller dapat mencoba ulang", async () => {
   await assert.rejects(
-    () => parseAIResponse('{"seoScore":72,"opinion":"Tulisan ini'),
+    () => parseAIResponse('{"recommendedTitle":"Panduan Mengurus NIB'),
     /complete JSON object/,
   );
 });
