@@ -114,11 +114,11 @@ export default function AICompanionGuide({
   return (
     <>
       <aside
-        className={`ai-companion-guide fixed z-[45] hidden md:flex items-end gap-2 pointer-events-none ${isWalking ? "is-walking" : ""}`}
+        className={`ai-companion-guide fixed z-[45] flex items-end gap-2 pointer-events-none ${isWalking ? "is-walking" : ""}`}
         style={{ left: position.left, top: position.top }}
         aria-live="polite"
       >
-        <div className="ai-companion-bubble pointer-events-auto w-[250px] bg-white border border-red-100 rounded-2xl rounded-br-md shadow-[0_18px_45px_rgba(80,0,0,0.16)] overflow-hidden">
+        <div className="ai-companion-bubble pointer-events-auto flex-1 min-w-0 bg-white border border-red-100 rounded-2xl rounded-br-md shadow-[0_18px_45px_rgba(80,0,0,0.16)] overflow-hidden">
           <div className="flex items-center justify-between gap-2 px-3.5 py-2.5 bg-red-50/70 border-b border-red-100">
             <span className="flex items-center gap-1.5 text-[12px] font-extrabold uppercase tracking-[0.08em] text-[#990202]">
               <Sparkles size={13} /> AI Companion
@@ -167,7 +167,7 @@ export default function AICompanionGuide({
 
       <style>{`
         .ai-companion-guide {
-          width: ${DOCK_WIDTH}px;
+          width: min(${DOCK_WIDTH}px, calc(100vw - 24px));
           transition: left 900ms cubic-bezier(.22,.9,.26,1), top 900ms cubic-bezier(.22,.9,.26,1);
         }
         .ai-companion-guide.is-walking .ai-head { animation: ai-head-bob 280ms ease-in-out infinite alternate; }
