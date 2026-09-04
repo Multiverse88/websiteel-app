@@ -268,10 +268,10 @@ router.delete("/:id", requireAuth, async (req, res) => {
 router.post("/ai-review", requireAuth, async (req, res) => {
   try {
     const { title, excerpt, content, site, keyword, existingSlug, reviewMode } = req.body;
-    if (!title || !content) {
-      return res.status(400).json({ error: "title and content are required" });
+    if (!title) {
+      return res.status(400).json({ error: "title is required" });
     }
-    const result = await getAIReview({ title, excerpt: excerpt || "", content, site: site || "easylegal.biz.id", keyword, existingSlug, reviewMode });
+    const result = await getAIReview({ title, excerpt: excerpt || "", content: content || "", site: site || "easylegal.biz.id", keyword, existingSlug, reviewMode });
     res.json({ data: result });
   } catch (error: any) {
     console.error("AI review error:", error);

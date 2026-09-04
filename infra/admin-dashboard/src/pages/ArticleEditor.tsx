@@ -330,6 +330,42 @@ export default function ArticleEditor() {
       }, dupField);
     }
 
+    // 2b. Copywriting similarity check
+    if (aiReview.copywritingCheck && aiReview.copywritingCheck.risk !== "low") {
+      const copyField: FieldKey = "content";
+      addCandidate({
+        ...targetMap[copyField],
+        message: aiReview.copywritingCheck.message || `Terdeteksi penggunaan frasa template yang terlalu umum (${aiReview.copywritingCheck.risk === "high" ? "tinggi" : "sedang"}).`,
+        severity: aiReview.copywritingCheck.risk === "high" ? "warning" : "suggestion",
+        location: "Copywriting",
+        problem: aiReview.copywritingCheck.matches?.length > 0
+          ? `Frasa yang terlalu mirip: "${aiReview.copywritingCheck.matches[0].matchedText}" (sumber: ${aiReview.copywritingCheck.matches[0].originalSource})`
+          : "Artikel menggunakan terlalu banyak frasa template umum.",
+        action: aiReview.copywritingCheck.matches?.length > 0
+          ? aiReview.copywritingCheck.matches[0].suggestion
+          : "Ganti frasa template dengan bahasa yang lebih spesifik dan unik.",
+        reason: "Konten yang unik lebih menarik pembaca dan mesin pencari.",
+      }, copyField);
+    }
+
+    // 2c. Tone consistency check
+    if (aiReview.toneCheck && aiReview.toneCheck.overall !== "consistent") {
+      const toneField: FieldKey = "content";
+      addCandidate({
+        ...targetMap[toneField],
+        message: aiReview.toneCheck.message || `Konsistensi tone artikel perlu diperbaiki (${aiReview.toneCheck.overall === "inconsistent" ? "banyak perubahan" : "ada beberapa bagian"}).`,
+        severity: aiReview.toneCheck.overall === "inconsistent" ? "warning" : "suggestion",
+        location: "Tone & Gaya Penulisan",
+        problem: aiReview.toneCheck.issues?.length > 0
+          ? `Bagian "${aiReview.toneCheck.issues[0].location}": ${aiReview.toneCheck.issues[0].problem}`
+          : "Tone artikel tidak konsisten di beberapa bagian.",
+        action: aiReview.toneCheck.issues?.length > 0
+          ? aiReview.toneCheck.issues[0].suggestion
+          : "Gunakan tone formal-profesional yang konsisten di seluruh artikel.",
+        reason: "Tone yang konsisten membangun kepercayaan pembaca terhadap profesionalisme EasyLegal.",
+      }, toneField);
+    }
+
     // 3. Edit operations (safe auto-apply candidates)
     visibleEditOperations.slice(0, 3).forEach((edit: any) => {
       const fk = edit.field as FieldKey;
@@ -426,7 +462,8 @@ export default function ArticleEditor() {
   useEffect(() => {
     const requestId = ++aiReviewRequestRef.current;
 
-    if (!title.trim() || !content.trim()) {
+    // Trigger AI review when at least title is filled (even without content)
+    if (!title.trim()) {
       setAiReview(null);
       setAiReviewError(null);
       setAiReviewLoading(false);
@@ -1517,6 +1554,57 @@ export default function ArticleEditor() {
                             <div className="mt-2.5 rounded-lg bg-orange-50 border border-orange-200 p-2.5 text-[12px] text-orange-800">
                               <strong>Keyword Cannibalization terdeteksi:</strong> Beberapa artikel menargetkan kata kunci yang sama. Ini dapat memecah otoritas SEO. Pertimbangkan untuk menggabungkan artikel atau membedakan target keyword masing-masing.
                             </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Copywriting Similarity Check */}
+                      {aiReview.copywritingCheck && aiReview.copywritingCheck.risk !== "low" && (
+                        <div className={`rounded-xl border p-3.5 ${aiReview.copywritingCheck.risk === "high" ? "bg-orange-50 border-orange-200" : "bg-amber-50 border-amber-200"}`}>
+                          <div className="flex items-center gap-2">
+                            {aiReview.copywritingCheck.risk === "high" ? <AlertTriangle size={16} className="text-orange-600" /> : <AlertTriangle size={16} className="text-amber-600" />}
+                            <strong className={`text-[12px] font-extrabold uppercase tracking-wider ${aiReview.copywritingCheck.risk === "high" ? "text-orange-900" : "text-amber-900"}`}>
+                              Copywriting Terlalu Umum
+                            </strong>
+                          </div>
+                          <p className="mt-1.5 text-[13px] text-gray-700">{aiReview.copywritingCheck.message}</p>
+                          {aiReview.copywritingCheck.matches?.length > 0 && (
+                            <ul className="mt-2 space-y-1.5 text-[12px] text-gray-700">
+                              {aiReview.copywritingCheck.matches.slice(0, 3).map((match: any, i: number) => (
+                                <li key={i} className="rounded-lg bg-white border border-orange-100 p-2.5">
+                                  <div className="flex items-start justify-between gap-2">
+                                    <span className="line-clamp-1 font-medium">"{match.matchedText}"</span>
+                                    <strong className="text-orange-600 flex-shrink-0">{Math.round(match.similarity * 100)}%</strong>
+                                  </div>
+                                  <p className="mt-1 text-[11px] text-gray-500">Sumber: {match.originalSource}</p>
+                                  {match.suggestion && <p className="mt-1 text-[11px] font-semibold text-orange-700">Saran: {match.suggestion}</p>}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Tone Consistency Check */}
+                      {aiReview.toneCheck && aiReview.toneCheck.overall !== "consistent" && (
+                        <div className={`rounded-xl border p-3.5 ${aiReview.toneCheck.overall === "inconsistent" ? "bg-red-50 border-red-200" : "bg-amber-50 border-amber-200"}`}>
+                          <div className="flex items-center gap-2">
+                            <AlertTriangle size={16} className={aiReview.toneCheck.overall === "inconsistent" ? "text-red-600" : "text-amber-600"} />
+                            <strong className={`text-[12px] font-extrabold uppercase tracking-wider ${aiReview.toneCheck.overall === "inconsistent" ? "text-red-900" : "text-amber-900"}`}>
+                              Tone Tidak Konsisten
+                            </strong>
+                          </div>
+                          <p className="mt-1.5 text-[13px] text-gray-700">{aiReview.toneCheck.message}</p>
+                          {aiReview.toneCheck.issues?.length > 0 && (
+                            <ul className="mt-2 space-y-1.5 text-[12px]">
+                              {aiReview.toneCheck.issues.slice(0, 3).map((issue: any, i: number) => (
+                                <li key={i} className="rounded-lg bg-white border border-amber-100 p-2.5">
+                                  <strong className="text-gray-900">{issue.location}</strong>
+                                  <p className="mt-1 text-gray-600">{issue.problem}</p>
+                                  {issue.suggestion && <p className="mt-1 font-semibold text-amber-700">Saran: {issue.suggestion}</p>}
+                                </li>
+                              ))}
+                            </ul>
                           )}
                         </div>
                       )}

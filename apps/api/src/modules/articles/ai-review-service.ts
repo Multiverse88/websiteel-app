@@ -4,7 +4,7 @@ import { checkDeduplication, type DedupResult } from "./deduplication-service";
 export interface AIReviewResult {
   guidance: Array<{
     field: "title" | "excerpt" | "content" | "keyword";
-    severity: "suggestion" | "warning";
+    severity: "suggestion" | "warning" | "critical";
     message: string;
     location: string;
     problem: string;
@@ -65,6 +65,25 @@ export interface AIReviewResult {
     risk: "low" | "medium" | "high";
     blocked: boolean;
     results: DedupResult[];
+  };
+  copywritingCheck: {
+    risk: "low" | "medium" | "high";
+    message: string;
+    matches: Array<{
+      originalSource: string;
+      matchedText: string;
+      similarity: number;
+      suggestion: string;
+    }>;
+  };
+  toneCheck: {
+    overall: "consistent" | "minor_issues" | "inconsistent";
+    message: string;
+    issues: Array<{
+      location: string;
+      problem: string;
+      suggestion: string;
+    }>;
   };
 }
 
@@ -152,6 +171,8 @@ function fallbackReview(): AIReviewResult {
       faqSuggestions: [],
     },
     duplicateCheck: { risk: "low", blocked: false, results: [] },
+    copywritingCheck: { risk: "low", message: "", matches: [] },
+    toneCheck: { overall: "consistent", message: "", issues: [] },
   };
 }
 
@@ -285,6 +306,35 @@ export async function parseAIResponse(raw: string): Promise<AIReviewResult> {
         : [],
     },
     duplicateCheck: { risk: "low", blocked: false, results: [] },
+    copywritingCheck: {
+      risk: parsed.copywritingCheck?.risk === "high" || parsed.copywritingCheck?.risk === "medium" ? parsed.copywritingCheck.risk : "low",
+      message: typeof parsed.copywritingCheck?.message === "string" ? parsed.copywritingCheck.message.trim() : "",
+      matches: Array.isArray(parsed.copywritingCheck?.matches)
+        ? parsed.copywritingCheck.matches
+          .filter((item: any) => item && typeof item.originalSource === "string" && typeof item.matchedText === "string")
+          .slice(0, 5)
+          .map((item: any) => ({
+            originalSource: item.originalSource.trim(),
+            matchedText: item.matchedText.trim(),
+            similarity: typeof item.similarity === "number" ? item.similarity : 0,
+            suggestion: typeof item.suggestion === "string" ? item.suggestion.trim() : "",
+          }))
+        : [],
+    },
+    toneCheck: {
+      overall: parsed.toneCheck?.overall === "inconsistent" || parsed.toneCheck?.overall === "minor_issues" ? parsed.toneCheck.overall : "consistent",
+      message: typeof parsed.toneCheck?.message === "string" ? parsed.toneCheck.message.trim() : "",
+      issues: Array.isArray(parsed.toneCheck?.issues)
+        ? parsed.toneCheck.issues
+          .filter((item: any) => item && typeof item.location === "string" && typeof item.problem === "string")
+          .slice(0, 5)
+          .map((item: any) => ({
+            location: item.location.trim(),
+            problem: item.problem.trim(),
+            suggestion: typeof item.suggestion === "string" ? item.suggestion.trim() : "",
+          }))
+        : [],
+    },
   };
 }
 
@@ -299,6 +349,14 @@ export async function getAIReview(params: {
 }): Promise<AIReviewResult> {
   const { title, excerpt, content, site, keyword, existingSlug } = params;
   const reviewMode = reviewModes.includes(params.reviewMode as AIReviewMode) ? params.reviewMode as AIReviewMode : "complete";
+
+  // Determine review stage based on content completeness
+  const hasTitle = title.trim().length > 0;
+  const hasContent = content.trim().length > 50;
+  const hasExcerpt = excerpt.trim().length > 0;
+  const contentLength = content.trim().length;
+  const isPartialDraft = !hasContent || contentLength < 500;
+  const reviewStage = !hasTitle ? "empty" : isPartialDraft ? "early" : "full";
 
   // Sebagian besar artikel dapat dikirim penuh. Untuk draft yang sangat panjang,
   // tetap sertakan awal, tengah, dan akhir agar AI tidak hanya menilai pembuka.
@@ -352,6 +410,15 @@ export async function getAIReview(params: {
 
 REVIEW MODE: ${reviewMode}
 MODE PRIORITY: ${modeInstructions[reviewMode]}
+REVIEW STAGE: ${reviewStage} (${reviewStage === "empty" ? "no title or content yet — focus on encouraging the writer to start" : reviewStage === "early" ? "partial draft with less than 500 characters — focus on title quality, structure planning, tone early detection, and duplicate prevention" : "full draft — comprehensive review"})
+
+${reviewStage === "early" ? `EARLY DRAFT GUIDANCE — this draft is very short (${contentLength} chars). Focus your feedback on:
+1. Title quality: is it specific, does it include the target keyword, is it the right length (30-60 chars)?
+2. Structure planning: suggest a clear outline with 4-7 subheadings before the writer continues
+3. Tone consistency: even from a short draft, detect if the tone matches a professional legal-business article (formal but accessible Indonesian, no slang, no hype words like "TERBAIK" or "MURAH")
+4. Copywriting similarity: check if the title or any content phrases are too similar to common templates or existing articles
+5. Early duplicate prevention: flag if the title/topic overlaps with existing articles on the same site
+Do NOT ask for "more content" — instead, give actionable next-step suggestions for what to write next.` : ""}
 
 ARTICLE:
 Title: "${title}"
@@ -366,7 +433,7 @@ Return ONLY valid JSON (no markdown fences):
   "guidance": [
     {
       "field": "title|excerpt|content|keyword",
-      "severity": "suggestion|warning",
+      "severity": "suggestion|warning|critical",
       "message": "<ringkasan perubahan yang paling penting dalam satu kalimat>",
       "location": "<lokasi spesifik, misalnya Judul artikel atau Paragraf pembuka yang diawali ...>",
       "problem": "<jelaskan kondisi draft saat ini dan mengapa belum efektif>",
@@ -435,6 +502,29 @@ Return ONLY valid JSON (no markdown fences):
         "answer": "<jawaban ringkas, akurat, dan dapat tampil langsung di artikel>"
       }
     ]
+  },
+  "copywritingCheck": {
+    "risk": "low|medium|high",
+    "message": "<ringkasan apakah copywriting terlalu mirip dengan template umum atau artikel lain>",
+    "matches": [
+      {
+        "originalSource": "<sumber asli yang mirip, misalnya 'artikel X di database' atau 'template umum'",
+        "matchedText": "<teks spesifik yang terlalu mirip>",
+        "similarity": 0.75,
+        "suggestion": "<cara mengubah agar lebih unik>"
+      }
+    ]
+  },
+  "toneCheck": {
+    "overall": "consistent|minor_issues|inconsistent",
+    "message": "<ringkasan konsistensi tone artikel>",
+    "issues": [
+      {
+        "location": "<paragraf atau kalimat bermasalah>",
+        "problem": "<apa yang salah dengan tone di bagian ini>",
+        "suggestion": "<contoh perbaikan tone>"
+      }
+    ]
   }
 }
 
@@ -443,7 +533,7 @@ Guidance rules:
 - Never combine title, excerpt, keyword, and content advice in one message.
 - The field value must exactly match the subject of its message.
 - Return 3-5 guidance items, ordered from the most important change.
-- Never say only “buat lebih spesifik”, “tambahkan keyword”, “perbaiki struktur”, or similar. State the exact words/section to change and provide the resulting text.
+- Never say only "buat lebih spesifik", "tambahkan keyword", "perbaiki struktur", or similar. State the exact words/section to change and provide the resulting text.
 - The example must be directly usable and consistent with the facts already present in the draft. If facts are missing, use a clearly marked placeholder such as [masukkan biaya resmi terbaru], never fabricate it.
 - For content guidance, identify the paragraph or heading using its opening words, then say whether to replace, add after, move, or delete it.
 - editOperations are the only changes the UI may apply automatically. targetText MUST be copied character-for-character from the supplied title, excerpt, keyword, or article content. Never include [B#] markers. Prefer a unique target of 20-300 characters.
@@ -453,7 +543,20 @@ Guidance rules:
 - Put claims requiring current official confirmation in verificationNeeded with regulationName (if known), lastUpdated (if known), sourceLink (if confident), and a warning if the info may be outdated or unverifiable. Do not provide invented citations or URLs—return empty strings for unknown fields. Return an empty array when there is no such claim.
 - Optimize for people-first, unique, crawlable content: descriptive unique title, useful meta description, natural keyword placement, semantic headings, descriptive internal-link anchors, and questions that the visible article actually answers.
 - Never keyword-stuff and never promise that Google will index or rank the page.
-- Internal links must use exact titles and slugs from INTERNAL LINK CANDIDATES. Never invent a URL.`;
+- Internal links must use exact titles and slugs from INTERNAL LINK CANDIDATES. Never invent a URL.
+
+COPYWRITING CHECK rules:
+- Detect if the title or content uses generic/template phrases common in Indonesian legal articles (e.g., "Panduan Lengkap", "Cara Mudah", "Tips dan Trik", "Semua yang Perlu Anda Ketahui").
+- Detect if sentences are copied or heavily paraphrased from common article templates.
+- Flag specific text passages that sound too similar to generic copywriting.
+- Return risk "high" if >30% of content uses template phrases, "medium" if 15-30%, "low" if <15%.
+- For each match, provide the original generic source, the matched text, similarity score, and a concrete rewrite suggestion.
+
+TONE CHECK rules:
+- The expected tone for EasyLegal articles is: formal but accessible Indonesian, professional legal-business language, no slang, no excessive exclamation marks, no hype words (TERBAIK, PALING MURAH, PROMO BESAR), no all-caps sentences.
+- Detect tone shifts within the article (e.g., starts formal then becomes casual).
+- Detect if the tone matches the target audience (business owners seeking legal services).
+- Return "inconsistent" if tone shifts dramatically, "minor_issues" if a few sentences are off, "consistent" if tone is uniform.`;
 
   const client = getAIClient();
   const model = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";
