@@ -31,8 +31,10 @@ router.get("/", async (req, res) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const whereClause: any = {};
 
-    // Filter by site (domain)
-    whereClause.site = site;
+    // Filter by site (domain) — skip if site=all to return all articles
+    if (site && site !== "all") {
+      whereClause.site = site;
+    }
 
     if (q) {
       whereClause.OR = [
@@ -87,8 +89,16 @@ router.get("/", async (req, res) => {
 router.get("/sitemap/all", async (req, res) => {
   try {
     const site = (req.query.site as string) || "easylegal.biz.id";
+
+    // Build where clause — skip site filter if site=all
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const whereClause: any = {};
+    if (site && site !== "all") {
+      whereClause.site = site;
+    }
+
     const articles = await prisma.article.findMany({
-      where: { site },
+      where: whereClause,
       select: {
         slug: true,
         updatedAt: true,
@@ -108,8 +118,15 @@ router.get("/:slug", async (req, res) => {
     const { slug } = req.params as { slug: string };
     const site = (req.query.site as string) || "easylegal.biz.id";
 
+    // Build where clause — skip site filter if site=all
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const whereClause: any = { slug };
+    if (site && site !== "all") {
+      whereClause.site = site;
+    }
+
     const article = await prisma.article.findFirst({
-      where: { slug, site },
+      where: whereClause,
     });
 
     if (!article) {

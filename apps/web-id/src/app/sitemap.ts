@@ -132,11 +132,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: slug.startsWith("pendirian-badan-usaha/") ? 0.75 : 0.8,
   }));
 
-  // Article pages from API — filtered by site for multi-domain isolation
+  // Article pages from API — show all articles from database
   const site = getSiteFromHostname(host);
   let articlePages: MetadataRoute.Sitemap = [];
   try {
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/sitemap/all?site=${encodeURIComponent(site)}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/sitemap/all?site=all`;
     const res = await fetch(apiUrl, { next: { revalidate: 3600 } });
     
     if (res.ok) {

@@ -49,9 +49,9 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-async function fetchArticleFromApi(slug: string, site: string) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/${slug}?site=${encodeURIComponent(site)}`;
-  const res = await fetch(apiUrl, { next: { revalidate: 60, tags: [`article-${site}-${slug}`] } });
+async function fetchArticleFromApi(slug: string, _site: string) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/${slug}?site=all`;
+  const res = await fetch(apiUrl, { next: { revalidate: 60, tags: [`article-all-${slug}`] } });
   if (!res.ok) return null;
   const json = await res.json();
   if (!json.data) return null;
@@ -620,7 +620,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
   // Fetch candidate pool via API
   let candidatePool: any[] = [];
   try {
-    const poolUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles?limit=60&site=${encodeURIComponent(site)}`;
+    const poolUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles?limit=60&site=all`;
     const res = await fetch(poolUrl, { next: { revalidate: 60 } });
     if (res.ok) {
       const json = await res.json();
