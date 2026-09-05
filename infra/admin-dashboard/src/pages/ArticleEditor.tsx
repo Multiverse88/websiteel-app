@@ -1637,11 +1637,18 @@ export default function ArticleEditor() {
 
                   {aiReview && (
                     <div className="space-y-3">
-                      {aiReview.duplicateCheck && (
+                      {aiReview.duplicateCheck && !resolvedGuidanceKeys.has("duplicate-check::") && (
                         <div className={`rounded-xl border p-3.5 ${aiReview.duplicateCheck.risk === "high" ? "bg-red-50 border-red-200" : aiReview.duplicateCheck.risk === "medium" ? "bg-amber-50 border-amber-200" : "bg-emerald-50 border-emerald-200"}`}>
-                          <div className="flex items-center gap-2">
-                            {aiReview.duplicateCheck.risk === "low" ? <CheckCircle size={16} className="text-emerald-600" /> : <AlertTriangle size={16} className={aiReview.duplicateCheck.risk === "high" ? "text-red-600" : "text-amber-600"} />}
-                            <span className="text-[12px] font-black uppercase tracking-wider text-gray-800">Komparasi database artikel</span>
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              {aiReview.duplicateCheck.risk === "low" ? <CheckCircle size={16} className="text-emerald-600" /> : <AlertTriangle size={16} className={aiReview.duplicateCheck.risk === "high" ? "text-red-600" : "text-amber-600"} />}
+                              <span className="text-[12px] font-black uppercase tracking-wider text-gray-800">Komparasi database artikel</span>
+                            </div>
+                            {aiReview.duplicateCheck.risk !== "low" && (
+                              <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "duplicate-check::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                                Selesai
+                              </button>
+                            )}
                           </div>
                           <p className="mt-1.5 text-[13px] leading-relaxed text-gray-700">
                             {aiReview.duplicateCheck.risk === "low"
@@ -1676,13 +1683,18 @@ export default function ArticleEditor() {
                       )}
 
                       {/* Copywriting Similarity Check */}
-                      {aiReview.copywritingCheck && aiReview.copywritingCheck.risk !== "low" && (
+                      {aiReview.copywritingCheck && aiReview.copywritingCheck.risk !== "low" && !resolvedGuidanceKeys.has("copywriting-check::") && (
                         <div className={`rounded-xl border p-3.5 ${aiReview.copywritingCheck.risk === "high" ? "bg-orange-50 border-orange-200" : "bg-amber-50 border-amber-200"}`}>
-                          <div className="flex items-center gap-2">
-                            {aiReview.copywritingCheck.risk === "high" ? <AlertTriangle size={16} className="text-orange-600" /> : <AlertTriangle size={16} className="text-amber-600" />}
-                            <strong className={`text-[12px] font-extrabold uppercase tracking-wider ${aiReview.copywritingCheck.risk === "high" ? "text-orange-900" : "text-amber-900"}`}>
-                              Copywriting Terlalu Umum
-                            </strong>
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              {aiReview.copywritingCheck.risk === "high" ? <AlertTriangle size={16} className="text-orange-600" /> : <AlertTriangle size={16} className="text-amber-600" />}
+                              <strong className={`text-[12px] font-extrabold uppercase tracking-wider ${aiReview.copywritingCheck.risk === "high" ? "text-orange-900" : "text-amber-900"}`}>
+                                Copywriting Terlalu Umum
+                              </strong>
+                            </div>
+                            <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "copywriting-check::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                              Selesai
+                            </button>
                           </div>
                           <p className="mt-1.5 text-[13px] text-gray-700">{aiReview.copywritingCheck.message}</p>
                           {aiReview.copywritingCheck.matches?.length > 0 && (
@@ -1703,13 +1715,18 @@ export default function ArticleEditor() {
                       )}
 
                       {/* Tone Consistency Check */}
-                      {aiReview.toneCheck && aiReview.toneCheck.overall !== "consistent" && (
+                      {aiReview.toneCheck && aiReview.toneCheck.overall !== "consistent" && !resolvedGuidanceKeys.has("tone-check::") && (
                         <div className={`rounded-xl border p-3.5 ${aiReview.toneCheck.overall === "inconsistent" ? "bg-red-50 border-red-200" : "bg-amber-50 border-amber-200"}`}>
-                          <div className="flex items-center gap-2">
-                            <AlertTriangle size={16} className={aiReview.toneCheck.overall === "inconsistent" ? "text-red-600" : "text-amber-600"} />
-                            <strong className={`text-[12px] font-extrabold uppercase tracking-wider ${aiReview.toneCheck.overall === "inconsistent" ? "text-red-900" : "text-amber-900"}`}>
-                              Tone Tidak Konsisten
-                            </strong>
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              <AlertTriangle size={16} className={aiReview.toneCheck.overall === "inconsistent" ? "text-red-600" : "text-amber-600"} />
+                              <strong className={`text-[12px] font-extrabold uppercase tracking-wider ${aiReview.toneCheck.overall === "inconsistent" ? "text-red-900" : "text-amber-900"}`}>
+                                Tone Tidak Konsisten
+                              </strong>
+                            </div>
+                            <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "tone-check::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                              Selesai
+                            </button>
                           </div>
                           <p className="mt-1.5 text-[13px] text-gray-700">{aiReview.toneCheck.message}</p>
                           {aiReview.toneCheck.issues?.length > 0 && (
@@ -1771,11 +1788,18 @@ export default function ArticleEditor() {
                             <p className="mt-1 text-[11px] text-gray-500">Setiap saran menunjukkan bagian, perubahan, cara menerapkan, dan contoh hasilnya.</p>
                           </div>
                           <div className="space-y-3">
-                            {aiReview.guidance.map((item: any, index: number) => (
+                            {aiReview.guidance
+                              .filter((item: any) => !resolvedGuidanceKeys.has(`guidance::${item.field}::${item.message}`))
+                              .map((item: any, index: number) => (
                               <div key={`${item.field}-${index}`} className="rounded-xl border border-violet-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
                                 <div className="flex flex-wrap items-center justify-between gap-2">
                                   <strong className="text-[13px] text-gray-900">{index + 1}. {item.message}</strong>
-                                  <span className="rounded-full bg-violet-50 px-2 py-1 text-[10px] font-extrabold text-violet-700">{item.location || item.field}</span>
+                                  <div className="flex items-center gap-2">
+                                    <span className="rounded-full bg-violet-50 px-2 py-1 text-[10px] font-extrabold text-violet-700">{item.location || item.field}</span>
+                                    <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, `guidance::${item.field}::${item.message}`]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                                      Selesai
+                                    </button>
+                                  </div>
                                 </div>
                                 {item.problem && <p className="mt-2"><strong>Kondisi sekarang:</strong> {item.problem}</p>}
                                 {item.action && <p className="mt-1"><strong>Yang harus diubah:</strong> {item.action}</p>}
@@ -1797,15 +1821,20 @@ export default function ArticleEditor() {
                         </div>
                       )}
 
-                      {aiReview.seoSupport && (
+                      {aiReview.seoSupport && !resolvedGuidanceKeys.has("seo-support::") && (
                         <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-3.5 space-y-3">
                           <div className="flex items-center justify-between gap-3">
                             <span className="flex items-center gap-2 text-[12px] font-black uppercase tracking-wider text-blue-900">
                               <Activity size={16} className="text-blue-600" /> SEO & dukungan indexing
                             </span>
-                            {aiReview.seoSupport.recommendedSlug && (
-                              <code className="max-w-[45%] truncate rounded-md bg-white px-2 py-1 text-[10px] font-bold text-blue-700 border border-blue-100">/{aiReview.seoSupport.recommendedSlug}</code>
-                            )}
+                            <div className="flex items-center gap-2">
+                              {aiReview.seoSupport.recommendedSlug && (
+                                <code className="max-w-[45%] truncate rounded-md bg-white px-2 py-1 text-[10px] font-bold text-blue-700 border border-blue-100">/{aiReview.seoSupport.recommendedSlug}</code>
+                              )}
+                              <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "seo-support::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                                Selesai
+                              </button>
+                            </div>
                           </div>
                           {aiReview.seoSupport.recommendedSlug && aiReview.seoSupport.recommendedSlug !== slug && (
                             <button
@@ -1873,11 +1902,16 @@ export default function ArticleEditor() {
                         </div>
                       )}
 
-                      {aiReview.contentGaps?.length > 0 && (
+                      {aiReview.contentGaps?.length > 0 && !resolvedGuidanceKeys.has("content-gaps::") && (
                         <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3.5 space-y-3">
-                          <div>
-                            <span className="text-[12px] font-black uppercase tracking-wider text-amber-900">Pembahasan yang masih kurang</span>
-                            <p className="mt-1 text-[11px] text-gray-500">Bagian berikut belum dijawab dengan cukup jelas dalam draft.</p>
+                          <div className="flex items-center justify-between gap-2">
+                            <div>
+                              <span className="text-[12px] font-black uppercase tracking-wider text-amber-900">Pembahasan yang masih kurang</span>
+                              <p className="mt-1 text-[11px] text-gray-500">Bagian berikut belum dijawab dengan cukup jelas dalam draft.</p>
+                            </div>
+                            <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "content-gaps::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                              Selesai
+                            </button>
                           </div>
                           {aiReview.contentGaps.map((gap: any, index: number) => (
                             <div key={`${gap.topic}-${index}`} className="rounded-xl border border-amber-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
@@ -1894,11 +1928,16 @@ export default function ArticleEditor() {
                         </div>
                       )}
 
-                      {aiReview.verificationNeeded?.length > 0 && (
+                      {aiReview.verificationNeeded?.length > 0 && !resolvedGuidanceKeys.has("verification-needed::") && (
                         <div className="rounded-xl border border-red-200 bg-red-50/60 p-3.5 space-y-3">
-                          <div className="flex items-center gap-2">
-                            <AlertTriangle size={16} className="text-red-600" />
-                            <span className="text-[12px] font-black uppercase tracking-wider text-red-900">Klaim yang wajib diverifikasi</span>
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              <AlertTriangle size={16} className="text-red-600" />
+                              <span className="text-[12px] font-black uppercase tracking-wider text-red-900">Klaim yang wajib diverifikasi</span>
+                            </div>
+                            <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "verification-needed::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                              Selesai
+                            </button>
                           </div>
                           <p className="text-[11px] text-gray-600">AI tidak menganggap klaim hukum, biaya, atau tenggat sebagai fakta tanpa sumber resmi terbaru.</p>
                       {aiReview.verificationNeeded.map((item: any, index: number) => (
@@ -1929,25 +1968,40 @@ export default function ArticleEditor() {
                           ))}
                         </div>
                       )}
-                      {aiReview.recommendedTitle && (
+                      {aiReview.recommendedTitle && !resolvedGuidanceKeys.has("recommended-title::") && (
                         <div className="bg-white border border-red-100 rounded-xl p-3.5">
-                          <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh judul</span>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh judul</span>
+                            <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "recommended-title::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                              Selesai
+                            </button>
+                          </div>
                           <p className="mt-1.5 text-[14px] font-bold leading-relaxed text-gray-800">{aiReview.recommendedTitle}</p>
                           <button type="button" onClick={() => setTitle(aiReview.recommendedTitle)} className="mt-2 text-[12px] font-extrabold text-[#990202] hover:underline">Gunakan judul ini</button>
                         </div>
                       )}
 
-                      {aiReview.recommendedMetaDescription && (
+                      {aiReview.recommendedMetaDescription && !resolvedGuidanceKeys.has("recommended-meta::") && (
                         <div className="bg-white border border-red-100 rounded-xl p-3.5">
-                          <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh kutipan</span>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh kutipan</span>
+                            <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "recommended-meta::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                              Selesai
+                            </button>
+                          </div>
                           <p className="mt-1.5 text-[14px] leading-relaxed text-gray-700">{aiReview.recommendedMetaDescription}</p>
                           <button type="button" onClick={() => setExcerpt(aiReview.recommendedMetaDescription)} className="mt-2 text-[12px] font-extrabold text-[#990202] hover:underline">Gunakan kutipan ini</button>
                         </div>
                       )}
 
-                      {aiReview.recommendedOutline?.length > 0 && (
+                      {aiReview.recommendedOutline?.length > 0 && !resolvedGuidanceKeys.has("recommended-outline::") && (
                         <div className="bg-white border border-red-100 rounded-xl p-3.5">
-                          <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh struktur artikel</span>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh struktur artikel</span>
+                            <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "recommended-outline::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                              Selesai
+                            </button>
+                          </div>
                           <ol className="mt-2 space-y-1.5 text-[13px] text-gray-700">
                             {aiReview.recommendedOutline.map((heading: string, index: number) => (
                               <li key={`${heading}-${index}`} className="flex gap-2"><span className="font-black text-[#990202]">{index + 1}.</span><span>{heading}</span></li>
@@ -1957,9 +2011,14 @@ export default function ArticleEditor() {
                         </div>
                       )}
 
-                      {aiReview.exampleParagraph && (
+                      {aiReview.exampleParagraph && !resolvedGuidanceKeys.has("example-paragraph::") && (
                         <div className="bg-white border border-red-100 rounded-xl p-3.5">
-                          <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh pengembangan isi</span>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider text-[#990202]">Contoh pengembangan isi</span>
+                            <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, "example-paragraph::"]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
+                              Selesai
+                            </button>
+                          </div>
                           <p className="mt-1.5 text-[14px] leading-relaxed text-gray-700">{aiReview.exampleParagraph}</p>
                           <button type="button" onClick={() => appendToArticle(aiReview.exampleParagraph)} className="mt-2 text-[12px] font-extrabold text-[#990202] hover:underline">Tambahkan contoh ke artikel</button>
                         </div>
