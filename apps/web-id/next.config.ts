@@ -315,6 +315,104 @@ const nextConfig: NextConfig = {
         destination: "/#promo",
         permanent: false,
       },
+
+      // === LP SEO — Redirect dari Excel "New URL" ke App URL ===
+      // Excel pakai /layanan/jasa-*, app pakai /layanan/pendirian-badan-usaha/* atau /layanan/merek-haki etc.
+      { source: "/layanan/jasa-pendirian-pt", destination: "/layanan/pendirian-badan-usaha/pt", permanent: true },
+      { source: "/layanan/jasa-pendirian-pt-pma", destination: "/layanan/pendirian-badan-usaha/pt-pma", permanent: true },
+      { source: "/layanan/jasa-pendirian-pt-perorangan", destination: "/layanan/pendirian-badan-usaha/pt-perorangan", permanent: true },
+      { source: "/layanan/jasa-pendirian-cv", destination: "/layanan/pendirian-badan-usaha/cv", permanent: true },
+      { source: "/layanan/jasa-pendirian-yayasan", destination: "/layanan/pendirian-badan-usaha/yayasan", permanent: true },
+      { source: "/layanan/jasa-pendirian-perkumpulan", destination: "/layanan/pendirian-badan-usaha/perkumpulan", permanent: true },
+      { source: "/layanan/jasa-pendirian-firma", destination: "/layanan/pendirian-badan-usaha/firma", permanent: true },
+      { source: "/layanan/jasa-pendirian-koperasi", destination: "/layanan/pendirian-badan-usaha/koperasi", permanent: true },
+      { source: "/layanan/jasa-pembubaran-perusahaan", destination: "/layanan/pembubaran-perusahaan", permanent: true },
+      { source: "/layanan/jasa-pendaftaran-merek", destination: "/layanan/merek-haki", permanent: true },
+      { source: "/layanan/jasa-sertifikasi-iso", destination: "/layanan/sertifikasi-iso", permanent: true },
+      { source: "/layanan/jasa-sertifikasi-iso-ias-society", destination: "/layanan/sertifikasi-iso", permanent: true },
+      { source: "/layanan/jasa-sertifikasi-iso-egac", destination: "/layanan/sertifikasi-iso", permanent: true },
+      { source: "/layanan/jasa-sertifikasi-iso-ias-service", destination: "/layanan/sertifikasi-iso", permanent: true },
+      { source: "/layanan/jasa-sertifikasi-iso-kan", destination: "/layanan/sertifikasi-iso", permanent: true },
+      { source: "/layanan/jasa-sertifikasi-iso-uaf", destination: "/layanan/sertifikasi-iso", permanent: true },
+      { source: "/layanan/jasa-pengurusan-nib-oss", destination: "/layanan/nib-oss", permanent: true },
+      { source: "/layanan/jasa-pengurusan-izin-pse", destination: "/layanan/pengurusan-pse", permanent: true },
+      { source: "/layanan/jasa-perubahan-akta", destination: "/layanan/perubahan-akta", permanent: true },
+      { source: "/layanan/jasa-pengurusan-pkp", destination: "/layanan/pengajuan-pkp", permanent: true },
+      { source: "/layanan/jasa-press-release-media-online", destination: "/layanan/press-release", permanent: true },
+
+      // === Local SEO — Catch-all redirect per service type ===
+      // Excel pakai /layanan/jasa-pendirian-pt/:kota, app pakai /layanan/pendirian-badan-usaha/pt/:kota
+      // 9 patterns menangkap 1.150 halaman lokal
+      {
+        source: "/layanan/jasa-pendirian-pt/:kota",
+        destination: "/layanan/pendirian-badan-usaha/pt/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pendirian-pt-pma/:kota",
+        destination: "/layanan/pendirian-badan-usaha/pt-pma/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pendirian-pt-perorangan/:kota",
+        destination: "/layanan/pendirian-badan-usaha/pt-perorangan/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pendirian-cv/:kota",
+        destination: "/layanan/pendirian-badan-usaha/cv/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pendirian-yayasan/:kota",
+        destination: "/layanan/pendirian-badan-usaha/yayasan/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pendirian-perkumpulan/:kota",
+        destination: "/layanan/pendirian-badan-usaha/perkumpulan/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pendirian-firma/:kota",
+        destination: "/layanan/pendirian-badan-usaha/firma/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pendirian-koperasi/:kota",
+        destination: "/layanan/pendirian-badan-usaha/koperasi/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pendaftaran-merek/:kota",
+        destination: "/layanan/merek-haki/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pengurusan-pkp/:kota",
+        destination: "/layanan/pengajuan-pkp/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pengurusan-nib-oss/:kota",
+        destination: "/layanan/nib-oss/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pengurusan-izin-pse/:kota",
+        destination: "/layanan/pengurusan-pse/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-perubahan-akta/:kota",
+        destination: "/layanan/perubahan-akta/:kota",
+        permanent: true,
+      },
+      {
+        source: "/layanan/jasa-pembubaran-perusahaan/:kota",
+        destination: "/layanan/pembubaran-perusahaan/:kota",
+        permanent: true,
+      },
     ];
   },
   images: {
