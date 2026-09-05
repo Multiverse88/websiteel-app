@@ -30,7 +30,7 @@ async function fetchGlossary(slug: string, site: string): Promise<Glossary | nul
   const postgrestUrl = process.env.NEXT_PUBLIC_POSTGREST_URL || "https://admin.easylegal.my.id/db";
   try {
     const res = await fetch(
-      `${postgrestUrl}/glossaries?slug=eq.${encodeURIComponent(slug)}&site=eq.${site}&status=eq.published&select=*`,
+      `${postgrestUrl}/Glossary?slug=eq.${encodeURIComponent(slug)}&site=eq.${site}&status=eq.published&select=*`,
       { next: { revalidate: 60 } }
     );
     if (!res.ok) return null;
@@ -50,7 +50,7 @@ async function fetchAdjacentGlossaries(currentSlug: string, site: string) {
   try {
     // Get all glossaries sorted by title for prev/next
     const res = await fetch(
-      `${postgrestUrl}/glossaries?site=eq.${site}&status=eq.published&order=title.asc&select=slug,title`,
+      `${postgrestUrl}/Glossary?site=eq.${site}&status=eq.published&order=title.asc&select=slug,title`,
       { next: { revalidate: 300 } }
     );
     if (!res.ok) return { prev: null, next: null };

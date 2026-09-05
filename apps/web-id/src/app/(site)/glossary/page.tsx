@@ -54,7 +54,7 @@ export default async function GlossaryPage({ searchParams }: PageProps) {
     const countHeaders = new Headers();
     countHeaders.set("Prefer", "count=exact");
     
-    const countRes = await fetch(`${postgrestUrl}/glossaries?${params.toString()}`, {
+    const countRes = await fetch(`${postgrestUrl}/Glossary?${params.toString()}`, {
       headers: { "Prefer": "count=exact" },
       next: { revalidate: 60 },
     });
@@ -65,7 +65,7 @@ export default async function GlossaryPage({ searchParams }: PageProps) {
       if (match) totalCount = parseInt(match[1], 10);
     }
 
-    const res = await fetch(`${postgrestUrl}/glossaries?${params.toString()}`, {
+    const res = await fetch(`${postgrestUrl}/Glossary?${params.toString()}`, {
       next: { revalidate: 60 },
     });
 
