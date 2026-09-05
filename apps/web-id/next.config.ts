@@ -238,7 +238,59 @@ const nextConfig: NextConfig = {
       { source: "/lp-produk-iso", destination: "/layanan/sertifikasi-iso" },
       { source: "/firma", destination: "/layanan/pendirian-badan-usaha/firma" },
       { source: "/jasa-pendaftaran-pt-pma-terpercaya", destination: "/layanan/pendirian-badan-usaha/pt-pma" },
-      { source: "/jasa-pembuatan-pendirian-pt-indonesia", destination: "/layanan/pendirian-badan-usaha/pt" }
+      { source: "/jasa-pembuatan-pendirian-pt-indonesia", destination: "/layanan/pendirian-badan-usaha/pt" },
+
+      // === Google Ads EL.id — URL Pendek ===
+      { source: "/gads-rekomendasi-nama-pt", destination: "/layanan/pendirian-badan-usaha" },
+      { source: "/gads-pendirian-pt-pma", destination: "/layanan/pendirian-badan-usaha/pt-pma" },
+      { source: "/gads-pendirian-pt-perorangan", destination: "/layanan/pendirian-badan-usaha/pt-perorangan" },
+      { source: "/gads-pendirian-cv", destination: "/layanan/pendirian-badan-usaha/cv" },
+      { source: "/gads-pendirian-yayasan", destination: "/layanan/pendirian-badan-usaha/yayasan" },
+      { source: "/gads-pendirian-perkumpulan", destination: "/layanan/pendirian-badan-usaha/perkumpulan" },
+      { source: "/gads-pendirian-firma", destination: "/layanan/pendirian-badan-usaha/firma" },
+      { source: "/gads-pendirian-koperasi", destination: "/layanan/pendirian-badan-usaha/koperasi" },
+      { source: "/gads-merek-haki", destination: "/layanan/merek-haki" },
+      { source: "/gads-iso", destination: "/layanan/sertifikasi-iso" },
+      { source: "/gads-nib-oss", destination: "/layanan/nib-oss" },
+      { source: "/gads-pembubaran-perusahaan", destination: "/layanan/pembubaran-perusahaan" },
+      { source: "/gads-pse", destination: "/layanan/pengurusan-pse" },
+      { source: "/gads-perubahan-akta", destination: "/layanan/perubahan-akta" },
+      { source: "/gads-pkp", destination: "/layanan/pengajuan-pkp" },
+      { source: "/gads-press-release", destination: "/layanan/press-release" },
+      { source: "/gads-pkkpr", destination: "/layanan/pkkpr" },
+      { source: "/gads-virtual-office", destination: "/layanan/virtual-office" },
+      { source: "/gads-pelaporan-rups", destination: "/layanan/pelaporan-rups" },
+      { source: "/gads-pelaporan-lkpm", destination: "/layanan/pelaporan-lkpm" },
+      { source: "/gads-apostille", destination: "/layanan/apostille" },
+      { source: "/gads-visa-kitas", destination: "/layanan/visa-kitas" },
+      { source: "/gads-perjanjian-perkawinan", destination: "/layanan/perjanjian-perkawinan" },
+      { source: "/gads-kontrak-bisnis", destination: "/layanan/kontrak-bisnis" },
+
+      // === Google Ads EL.id — Display Ads (DADS) ===
+      { source: "/dads-pendirian-pt", destination: "/layanan/pendirian-badan-usaha/pt" },
+      { source: "/dads-pendirian-cv", destination: "/layanan/pendirian-badan-usaha/cv" },
+      { source: "/dads-merek", destination: "/layanan/merek-haki" },
+      { source: "/dads-iso", destination: "/layanan/sertifikasi-iso" },
+      { source: "/dads-layanan", destination: "/layanan/virtual-office" },
+
+      // === Google Ads EL.id — YouTube Ads (YTADS) ===
+      { source: "/ytads-pendirian-pt", destination: "/layanan/pendirian-badan-usaha/pt" },
+      { source: "/ytads-merek", destination: "/layanan/merek-haki" },
+
+      // === Google Ads EL.id — Performance Max (PMAX) ===
+      { source: "/pmax-pendirian-pt", destination: "/layanan/pendirian-badan-usaha/pt" },
+
+      // === Meta Ads EL.id ===
+      { source: "/meta-ads-pendirian-pt", destination: "/layanan/pendirian-badan-usaha/pt" },
+      { source: "/meta-ads-pendirian-cv", destination: "/layanan/pendirian-badan-usaha/cv" },
+      { source: "/meta-ads-iso", destination: "/layanan/sertifikasi-iso" },
+      { source: "/meta-ads-nib", destination: "/layanan/nib-oss" },
+      { source: "/meta-ads-pse", destination: "/layanan/pengurusan-pse" },
+      { source: "/meta-ads-pkp", destination: "/layanan/pengajuan-pkp" },
+      { source: "/meta-ads-perubahan-akta", destination: "/layanan/perubahan-akta" },
+      { source: "/meta-ads-press-release", destination: "/layanan/press-release" },
+      { source: "/meta-ads-pembubaran", destination: "/layanan/pembubaran-perusahaan" },
+      { source: "/meta-ads-virtual-office", destination: "/layanan/virtual-office" }
     ];
   },
   async redirects() {
