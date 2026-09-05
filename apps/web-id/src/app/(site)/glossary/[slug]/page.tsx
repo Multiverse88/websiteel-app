@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { Calendar, Home, BookOpen, ArrowLeft, ArrowRight } from "lucide-react";
 import { getSiteFromHostname } from "@/lib/domains";
 import { getWhatsAppLink } from "@/lib/config";
+import { getGlossaryCanonicalUrl } from "@/lib/glossary-canonical-mapping";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -81,7 +82,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${glossary.title} — EasyLegal`,
     description: glossary.excerpt || `Pengertian ${glossary.title} lengkap di EasyLegal`,
     alternates: {
-      canonical: `${appUrl}/glossary/${glossary.slug}`,
+      canonical: getGlossaryCanonicalUrl(glossary.slug) || `${appUrl}/glossary/${glossary.slug}`,
     },
   };
 }
