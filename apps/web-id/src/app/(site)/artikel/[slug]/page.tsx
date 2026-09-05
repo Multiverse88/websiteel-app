@@ -12,6 +12,7 @@ import TableOfContents from "./table-of-contents";
 import { getWhatsAppLink } from "@/lib/config";
 import { getSiteFromHostname } from "@/lib/domains";
 import { getArticleJsonLd, getFAQJsonLd } from "@/lib/structured-data";
+import { getCanonicalUrl } from "@/lib/canonical-mapping";
 import type { Metadata } from "next";
 
 const IgIcon = ({ className }: { className?: string }) => (
@@ -129,7 +130,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [article.coverImage],
     },
     alternates: {
-      canonical: `${appUrl}/artikel/${article.slug}`,
+      canonical: getCanonicalUrl(article.slug) || `${appUrl}/artikel/${article.slug}`,
     },
   };
 }
