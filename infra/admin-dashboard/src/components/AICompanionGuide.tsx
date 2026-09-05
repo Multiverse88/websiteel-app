@@ -30,9 +30,11 @@ function dockPosition(): Position {
 export default function AICompanionGuide({
   items,
   isThinking,
+  onDismiss,
 }: {
   items: AICompanionGuidance[];
   isThinking: boolean;
+  onDismiss?: (item: AICompanionGuidance) => void;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState<Position>(dockPosition);
@@ -322,9 +324,16 @@ export default function AICompanionGuide({
             )}
 
             {activeItem && !isThinking && (
-              <button type="button" onClick={() => walkToTarget(activeItem.targetId, true, activeItem.targetText)} className="ml-[52px] mt-3 w-[calc(100%-52px)] rounded-full border border-[#C80B14] px-3.5 py-2.5 text-[13px] font-extrabold text-[#B2070F] hover:bg-red-50 active:scale-[0.98] transition">
-                Tunjukkan letak perbaikannya
-              </button>
+              <div className="ml-[52px] mt-3 flex gap-2">
+                <button type="button" onClick={() => walkToTarget(activeItem.targetId, true, activeItem.targetText)} className="flex-1 rounded-full border border-[#C80B14] px-3.5 py-2.5 text-[13px] font-extrabold text-[#B2070F] hover:bg-red-50 active:scale-[0.98] transition">
+                  Tunjukkan letak
+                </button>
+                {onDismiss && (
+                  <button type="button" onClick={() => onDismiss(activeItem)} className="rounded-full border border-gray-200 px-3.5 py-2.5 text-[12px] font-bold text-gray-500 hover:bg-gray-50 hover:text-gray-700 active:scale-[0.98] transition">
+                    Sudah diterapkan
+                  </button>
+                )}
+              </div>
             )}
           </div>
 

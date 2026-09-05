@@ -124,6 +124,10 @@ export default function ArticleEditor() {
   const [dismissedEditKeys, setDismissedEditKeys] = useState<string[]>(() => {
     try { return JSON.parse(localStorage.getItem("ai-dismissed-edits") || "[]"); } catch { return []; }
   });
+  // Track which guidance items have been applied/resolved — persisted per article
+  const [resolvedGuidanceKeys, setResolvedGuidanceKeys] = useState<Set<string>>(() => {
+    try { return new Set(JSON.parse(localStorage.getItem("ai-resolved-guidance") || "[]")); } catch { return new Set(); }
+  });
   const [editorHistory, setEditorHistory] = useState<EditorSnapshot[]>([]);
   const [verificationNotice, setVerificationNotice] = useState<VerificationNotice>(null);
   const [showHistoryPanel, setShowHistoryPanel] = useState(false);
@@ -438,7 +442,12 @@ export default function ArticleEditor() {
     const fieldOrder: FieldKey[] = ["title", "excerpt", "content", "keyword"];
     return fieldOrder
       .map((fk) => bestPerField.get(fk))
-      .filter((item): item is AICompanionGuidance => Boolean(item));
+      .filter((item): item is AICompanionGuidance => Boolean(item))
+      // Filter out resolved guidance — applied suggestions won't reappear
+      .filter((item) => {
+        const key = `${item.targetId}::${item.message?.slice(0, 80) || ""}`;
+        return !resolvedGuidanceKeys.has(key);
+      });
   })();
 
   useEffect(() => {
@@ -456,6 +465,11 @@ export default function ArticleEditor() {
     try { localStorage.setItem("ai-dismissed-edits", JSON.stringify(dismissedEditKeys)); } catch { /* quota exceeded */ }
   }, [dismissedEditKeys]);
 
+  // Persist resolved guidance keys — applied suggestions won't reappear
+  useEffect(() => {
+    try { localStorage.setItem("ai-resolved-guidance", JSON.stringify([...resolvedGuidanceKeys])); } catch { /* quota exceeded */ }
+  }, [resolvedGuidanceKeys]);
+
   // AI Companion membaca perubahan secara otomatis. Debounce mencegah request
   // dikirim pada setiap ketikan, sementara request ID mencegah respons lama
   // menimpa pendapat untuk versi tulisan yang lebih baru.
@@ -468,6 +482,21 @@ export default function ArticleEditor() {
       setAiReviewError(null);
       setAiReviewLoading(false);
       return;
+    }
+
+    // If all 4 fields (title, excerpt, content, keyword) are resolved, skip API call
+    const allResolved = ["title", "excerpt", "content", "keyword"].every(
+      (f) => resolvedGuidanceKeys.has(`${f}::`) || resolvedGuidanceKeys.size > 0
+    );
+    // Only skip if there's an existing review AND all guidance was resolved
+    if (allResolved && aiReview && aiReview.guidance?.length > 0) {
+      const allGuidanceResolved = aiReview.guidance.every((g: any) =>
+        resolvedGuidanceKeys.has(`${g.field}::${g.message?.slice(0, 80) || ""}`)
+      );
+      if (allGuidanceResolved) {
+        setAiReviewLoading(false);
+        return;
+      }
     }
 
     setAiReviewLoading(true);
@@ -483,6 +512,7 @@ export default function ArticleEditor() {
           keyword: focusKeyword || undefined,
           existingSlug: originalSlug || undefined,
           reviewMode,
+          resolvedSuggestions: [...resolvedGuidanceKeys],
         });
 
         if (aiReviewRequestRef.current === requestId) {
@@ -598,6 +628,12 @@ export default function ArticleEditor() {
     else syncEditorContent(nextValue.trim());
 
     setDismissedEditKeys((current) => [...new Set([...current, editOperationKey(edit)])]);
+    // Mark this guidance field as resolved — won't reappear in companion
+    setResolvedGuidanceKeys((current) => {
+      const next = new Set(current);
+      next.add(`${edit.field}::${edit.targetText?.slice(0, 80) || ""}`);
+      return next;
+    });
     verificationPendingRef.current = true;
     setVerificationNotice("checking");
     setAiReviewError(null);
@@ -661,6 +697,13 @@ export default function ArticleEditor() {
     else if (target === "excerpt") setExcerpt(example);
     else if (target === "keyword") setFocusKeyword(example);
     else appendToArticle(example);
+
+    // Mark this guidance as resolved — won't reappear
+    setResolvedGuidanceKeys((current) => {
+      const next = new Set(current);
+      next.add(`${target}::${guidance.message?.slice(0, 80) || example.slice(0, 80)}`);
+      return next;
+    });
   };
 
   const handleFormat = (command: string, value: string = "") => {
@@ -2423,7 +2466,17 @@ export default function ArticleEditor() {
         </div>
       </section>
 
-      <AICompanionGuide items={companionGuidance} isThinking={aiReviewLoading} />
+      <AICompanionGuide
+        items={companionGuidance}
+        isThinking={aiReviewLoading}
+        onDismiss={(item) => {
+          setResolvedGuidanceKeys((prev) => {
+            const next = new Set(prev);
+            next.add(`${item.targetId}::${item.message?.slice(0, 80) || ""}`);
+            return next;
+          });
+        }}
+      />
 
     </div>
   );

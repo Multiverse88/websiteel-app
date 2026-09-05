@@ -267,11 +267,11 @@ router.delete("/:id", requireAuth, async (req, res) => {
 // POST /api/v1/articles/ai-review — SEO scoring & suggestions via ArticleAI
 router.post("/ai-review", requireAuth, async (req, res) => {
   try {
-    const { title, excerpt, content, site, keyword, existingSlug, reviewMode } = req.body;
+    const { title, excerpt, content, site, keyword, existingSlug, reviewMode, resolvedSuggestions } = req.body;
     if (!title) {
       return res.status(400).json({ error: "title is required" });
     }
-    const result = await getAIReview({ title, excerpt: excerpt || "", content: content || "", site: site || "easylegal.biz.id", keyword, existingSlug, reviewMode });
+    const result = await getAIReview({ title, excerpt: excerpt || "", content: content || "", site: site || "easylegal.biz.id", keyword, existingSlug, reviewMode, resolvedSuggestions });
     res.json({ data: result });
   } catch (error: any) {
     console.error("AI review error:", error);

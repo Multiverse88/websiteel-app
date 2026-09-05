@@ -346,8 +346,9 @@ export async function getAIReview(params: {
   keyword?: string;
   existingSlug?: string;
   reviewMode?: AIReviewMode;
+  resolvedSuggestions?: string[];
 }): Promise<AIReviewResult> {
-  const { title, excerpt, content, site, keyword, existingSlug } = params;
+  const { title, excerpt, content, site, keyword, existingSlug, resolvedSuggestions } = params;
   const reviewMode = reviewModes.includes(params.reviewMode as AIReviewMode) ? params.reviewMode as AIReviewMode : "complete";
 
   // Determine review stage based on content completeness
@@ -398,6 +399,10 @@ export async function getAIReview(params: {
     ).join("\n")}`
     : "\nINTERNAL LINK CANDIDATES — none available; return an empty internalLinks array.";
 
+  const resolvedContext = resolvedSuggestions && resolvedSuggestions.length > 0
+    ? `\nPREVIOUSLY RESOLVED — the writer has already addressed these issues. Do NOT re-suggest them:\n${resolvedSuggestions.map((s) => `- ${s}`).join("\n")}`
+    : "";
+
   const modeInstructions: Record<AIReviewMode, string> = {
     complete: "Review SEO, legal caution, readability, structure, and conversion in balanced priority order.",
     seo: "Prioritize search intent, title/meta, keyword placement, headings, content coverage, and internal linking.",
@@ -426,7 +431,7 @@ Excerpt: "${excerpt}"
 Target keyword: ${keyword || "auto-detect"}
 Site: ${site}
 Full content (paragraph markers [B#] are location aids only and are not part of the article):
-${numberedContent}${duplicateContext}${internalLinkContext}
+${numberedContent}${duplicateContext}${internalLinkContext}${resolvedContext}
 
 Return ONLY valid JSON (no markdown fences):
 {
