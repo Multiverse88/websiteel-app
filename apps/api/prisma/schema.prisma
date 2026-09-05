@@ -463,3 +463,23 @@ model TrackingProject {
 
   @@index([trackingCode])
 }
+
+model Glossary {
+  id          String    @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
+  slug        String
+  title       String
+  content     String    // Definition / explanation content (markdown)
+  excerpt     String?   // Short description for meta tags
+  coverImage  String?
+  site        String    @default("easylegal.id")
+  seoTitle    String?
+  seoDesc     String?
+  status      String    @default("published") // draft | published
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+
+  @@unique([site, slug])
+  @@index([site, status])
+  @@index([site, slug])
+  @@index([createdAt])
+}
