@@ -52,6 +52,26 @@ const FIELD_TARGET_MAP: Record<GuidanceTarget, { targetId: string; label: string
 const guidanceResolvedKey = (targetId: string, message: string) =>
   `${targetId}::${(message || "").slice(0, 80)}`;
 
+// Autosaved draft for a NEW article (not used in edit mode — an existing
+// article's data always comes from the server, never from this slot).
+// Refreshing mid-write would otherwise lose everything typed so far.
+const NEW_ARTICLE_DRAFT_KEY = "el-article-draft-new";
+
+type NewArticleDraft = {
+  title: string;
+  slug: string;
+  slugManuallyEdited: boolean;
+  category: string;
+  readTime: string;
+  excerpt: string;
+  content: string;
+  focusKeyword: string;
+  site: string;
+  coverMode: CoverMode;
+  coverUrl: string;
+  faqItems: { q: string; a: string }[];
+};
+
 type EditorSnapshot = {
   title: string;
   slug: string;
@@ -574,12 +594,49 @@ export default function ArticleEditor() {
         }
       }).catch(console.error);
     } else {
+      // New article — restore an autosaved draft if one exists, so a
+      // refresh (or an accidental tab close) doesn't lose what was typed.
+      let restoredContent = content;
+      try {
+        const raw = localStorage.getItem(NEW_ARTICLE_DRAFT_KEY);
+        const draft: Partial<NewArticleDraft> | null = raw ? JSON.parse(raw) : null;
+        if (draft) {
+          if (typeof draft.title === "string") setTitle(draft.title);
+          if (typeof draft.slug === "string") setSlug(draft.slug);
+          if (typeof draft.slugManuallyEdited === "boolean") setSlugManuallyEdited(draft.slugManuallyEdited);
+          if (typeof draft.category === "string") setCategory(draft.category);
+          if (typeof draft.readTime === "string") setReadTime(draft.readTime);
+          if (typeof draft.excerpt === "string") setExcerpt(draft.excerpt);
+          if (typeof draft.focusKeyword === "string") setFocusKeyword(draft.focusKeyword);
+          if (typeof draft.site === "string") setSite(draft.site);
+          if (draft.coverMode === "upload" || draft.coverMode === "url") setCoverMode(draft.coverMode);
+          if (typeof draft.coverUrl === "string") setCoverUrl(draft.coverUrl);
+          if (Array.isArray(draft.faqItems)) setFaqItems(draft.faqItems);
+          if (typeof draft.content === "string") {
+            restoredContent = draft.content;
+            setContent(draft.content);
+          }
+        }
+      } catch { /* corrupt draft — ignore, start blank */ }
+
       if (editorRef.current && !editorRef.current.innerHTML) {
-        editorRef.current.innerHTML = markdownToHtml(content || "");
+        editorRef.current.innerHTML = markdownToHtml(restoredContent || "");
         wrapExistingImages(editorRef.current);
       }
     }
   }, []);
+
+  // Autosave the in-progress draft for a NEW article only — an existing
+  // article being edited is never written here, so this slot can't leak
+  // stale/wrong content into the next "create article" session.
+  useEffect(() => {
+    if (articleId) return;
+    const draft: NewArticleDraft = {
+      title, slug, slugManuallyEdited, category, readTime, excerpt, content,
+      focusKeyword, site, coverMode, coverUrl, faqItems,
+    };
+    try { localStorage.setItem(NEW_ARTICLE_DRAFT_KEY, JSON.stringify(draft)); } catch { /* quota exceeded */ }
+  }, [articleId, title, slug, slugManuallyEdited, category, readTime, excerpt, content, focusKeyword, site, coverMode, coverUrl, faqItems]);
 
   const handleEditorInput = () => {
     const html = editorRef.current?.innerHTML || "";
@@ -1072,6 +1129,9 @@ export default function ArticleEditor() {
         // so this browser-executed code never has to hold REVALIDATION_SECRET.
         await api.revalidateArticle(articleData.slug);
 
+        // Article is saved now — the autosaved draft would otherwise
+        // resurrect as a stale draft the next time "Tulis Artikel Baru" opens.
+        try { localStorage.removeItem(NEW_ARTICLE_DRAFT_KEY); } catch { /* ignore */ }
 
         window.location.hash = "#/articles";
       } catch (err: any) {
