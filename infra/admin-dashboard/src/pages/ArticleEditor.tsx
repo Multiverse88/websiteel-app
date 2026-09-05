@@ -36,6 +36,22 @@ type GuidanceTarget = "title" | "excerpt" | "content" | "keyword";
 type ReviewMode = "complete" | "seo" | "legal" | "readability" | "conversion";
 type VerificationNotice = "checking" | "done" | null;
 
+// Single source of truth for field -> companion targetId/label, shared by the
+// companionGuidance builder and by every "mark as resolved" call site. Using
+// one map everywhere prevents the resolved-key format from drifting out of
+// sync with the filter (e.g. "content" vs "article-content-editor").
+const FIELD_TARGET_MAP: Record<GuidanceTarget, { targetId: string; label: string }> = {
+  title: { targetId: "title", label: "Judul artikel" },
+  excerpt: { targetId: "excerpt", label: "Kutipan singkat" },
+  content: { targetId: "article-content-editor", label: "Isi artikel" },
+  keyword: { targetId: "focusKeyword", label: "Kata kunci utama" },
+};
+
+// Same key format used everywhere a guidance item is checked or marked
+// resolved — must stay identical or "sudah diterapkan" silently stops working.
+const guidanceResolvedKey = (targetId: string, message: string) =>
+  `${targetId}::${(message || "").slice(0, 80)}`;
+
 type EditorSnapshot = {
   title: string;
   slug: string;
@@ -273,12 +289,7 @@ export default function ArticleEditor() {
   const companionGuidance: AICompanionGuidance[] = (() => {
     if (!aiReview) return [];
 
-    const targetMap = {
-      title: { targetId: "title", label: "Judul artikel" },
-      excerpt: { targetId: "excerpt", label: "Kutipan singkat" },
-      content: { targetId: "article-content-editor", label: "Isi artikel" },
-      keyword: { targetId: "focusKeyword", label: "Kata kunci utama" },
-    } as const;
+    const targetMap = FIELD_TARGET_MAP;
     type FieldKey = keyof typeof targetMap;
 
     // Priority order: critical > warning > suggestion
@@ -444,10 +455,7 @@ export default function ArticleEditor() {
       .map((fk) => bestPerField.get(fk))
       .filter((item): item is AICompanionGuidance => Boolean(item))
       // Filter out resolved guidance — applied suggestions won't reappear
-      .filter((item) => {
-        const key = `${item.targetId}::${item.message?.slice(0, 80) || ""}`;
-        return !resolvedGuidanceKeys.has(key);
-      });
+      .filter((item) => !resolvedGuidanceKeys.has(guidanceResolvedKey(item.targetId, item.message)));
   })();
 
   useEffect(() => {
@@ -484,15 +492,15 @@ export default function ArticleEditor() {
       return;
     }
 
-    // If all 4 fields (title, excerpt, content, keyword) are resolved, skip API call
-    const allResolved = ["title", "excerpt", "content", "keyword"].every(
-      (f) => resolvedGuidanceKeys.has(`${f}::`) || resolvedGuidanceKeys.size > 0
-    );
-    // Only skip if there's an existing review AND all guidance was resolved
-    if (allResolved && aiReview && aiReview.guidance?.length > 0) {
-      const allGuidanceResolved = aiReview.guidance.every((g: any) =>
-        resolvedGuidanceKeys.has(`${g.field}::${g.message?.slice(0, 80) || ""}`)
-      );
+    // Skip re-scanning if every guidance item from the last scan has already
+    // been resolved (applied/used-example/dismissed) — avoids re-reviewing a
+    // section that was just fixed. Key must use targetId (via FIELD_TARGET_MAP),
+    // matching what applyAIEdit/applyGuidanceExample/onDismiss actually store.
+    if (aiReview && aiReview.guidance?.length > 0) {
+      const allGuidanceResolved = aiReview.guidance.every((g: any) => {
+        const targetId = FIELD_TARGET_MAP[g.field as GuidanceTarget]?.targetId || g.field;
+        return resolvedGuidanceKeys.has(guidanceResolvedKey(targetId, g.message || ""));
+      });
       if (allGuidanceResolved) {
         setAiReviewLoading(false);
         return;
@@ -628,10 +636,14 @@ export default function ArticleEditor() {
     else syncEditorContent(nextValue.trim());
 
     setDismissedEditKeys((current) => [...new Set([...current, editOperationKey(edit)])]);
-    // Mark this guidance field as resolved — won't reappear in companion
+    // Mark this field's currently-shown companion guidance as resolved so it
+    // won't reappear — must key off the same targetId/message the filter
+    // uses (targetId differs from the raw field name for content/keyword).
     setResolvedGuidanceKeys((current) => {
       const next = new Set(current);
-      next.add(`${edit.field}::${edit.targetText?.slice(0, 80) || ""}`);
+      const targetId = FIELD_TARGET_MAP[edit.field as GuidanceTarget]?.targetId || edit.field;
+      const activeItem = companionGuidance.find((item) => item.targetId === targetId);
+      next.add(guidanceResolvedKey(targetId, activeItem?.message || ""));
       return next;
     });
     verificationPendingRef.current = true;
@@ -698,10 +710,12 @@ export default function ArticleEditor() {
     else if (target === "keyword") setFocusKeyword(example);
     else appendToArticle(example);
 
-    // Mark this guidance as resolved — won't reappear
+    // Mark this guidance as resolved — won't reappear. Key must match the
+    // companionGuidance filter's targetId (not the raw field name).
     setResolvedGuidanceKeys((current) => {
       const next = new Set(current);
-      next.add(`${target}::${guidance.message?.slice(0, 80) || example.slice(0, 80)}`);
+      const targetId = FIELD_TARGET_MAP[target]?.targetId || target;
+      next.add(guidanceResolvedKey(targetId, guidance.message || ""));
       return next;
     });
   };
@@ -2472,7 +2486,7 @@ export default function ArticleEditor() {
         onDismiss={(item) => {
           setResolvedGuidanceKeys((prev) => {
             const next = new Set(prev);
-            next.add(`${item.targetId}::${item.message?.slice(0, 80) || ""}`);
+            next.add(guidanceResolvedKey(item.targetId, item.message));
             return next;
           });
         }}
