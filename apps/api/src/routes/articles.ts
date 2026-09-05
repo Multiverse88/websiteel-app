@@ -7,6 +7,23 @@ import { generateEmbedding } from "../modules/articles/embedding-service";
 
 const router = Router();
 
+// easylegal.id shows its own new articles (site: "easylegal.id", selected
+// explicitly via the admin dashboard's per-article Site dropdown) PLUS the
+// 190 legacy articles that pre-date the multi-site split (all seeded with
+// site: "easylegal.biz.id") — so old URLs keep working there. biz.id and
+// co.id stay strictly their own site only. `site=all` (used internally by
+// nothing anymore, kept for back-compat/debugging) still means "no filter
+// at all", unrelated to this legacy-inclusion behavior.
+function buildSiteFilter(site: string | undefined) {
+  if (site === "easylegal.id") {
+    return { site: { in: ["easylegal.id", "easylegal.biz.id"] } };
+  }
+  if (site && site !== "all") {
+    return { site };
+  }
+  return {};
+}
+
 // Display Category -> DB Categories list (from Next.js logic)
 const DB_CATEGORIES_MAP: Record<string, string[]> = {
   "Pendirian Usaha": ["Pendirian PT", "Legalitas PT", "CV", "PT Perorangan", "PT PMA", "Firma", "Perkumpulan", "Yayasan", "Koperasi", "UMKM"],
@@ -29,12 +46,7 @@ router.get("/", async (req, res) => {
 
     // Build where clause
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const whereClause: any = {};
-
-    // Filter by site (domain) — skip if site=all to return all articles
-    if (site && site !== "all") {
-      whereClause.site = site;
-    }
+    const whereClause: any = { ...buildSiteFilter(site) };
 
     if (q) {
       whereClause.OR = [
@@ -90,12 +102,8 @@ router.get("/sitemap/all", async (req, res) => {
   try {
     const site = (req.query.site as string) || "easylegal.biz.id";
 
-    // Build where clause — skip site filter if site=all
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const whereClause: any = {};
-    if (site && site !== "all") {
-      whereClause.site = site;
-    }
+    const whereClause: any = { ...buildSiteFilter(site) };
 
     const articles = await prisma.article.findMany({
       where: whereClause,
@@ -118,12 +126,8 @@ router.get("/:slug", async (req, res) => {
     const { slug } = req.params as { slug: string };
     const site = (req.query.site as string) || "easylegal.biz.id";
 
-    // Build where clause — skip site filter if site=all
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const whereClause: any = { slug };
-    if (site && site !== "all") {
-      whereClause.site = site;
-    }
+    const whereClause: any = { slug, ...buildSiteFilter(site) };
 
     const article = await prisma.article.findFirst({
       where: whereClause,

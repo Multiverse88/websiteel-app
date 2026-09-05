@@ -132,11 +132,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: slug.startsWith("pendirian-badan-usaha/") ? 0.75 : 0.8,
   }));
 
-  // Article pages from API — show all articles from database
+  // Article pages from API — includes this domain's own articles plus
+  // legacy biz.id-seeded ones (backend buildSiteFilter() handles the
+  // easylegal.id special case), so old URLs stay in the sitemap.
   const site = getSiteFromHostname(host);
   let articlePages: MetadataRoute.Sitemap = [];
   try {
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/sitemap/all?site=all`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/sitemap/all?site=${encodeURIComponent(site)}`;
     const res = await fetch(apiUrl, { next: { revalidate: 3600 } });
     
     if (res.ok) {

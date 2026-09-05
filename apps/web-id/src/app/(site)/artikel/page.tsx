@@ -207,7 +207,12 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
   const apiUrl = new URL(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles`);
   if (q) apiUrl.searchParams.set("q", q);
   if (activeCategory !== "All") apiUrl.searchParams.set("category", activeCategory);
-  apiUrl.searchParams.set("site", "all"); // Show all articles from database
+  // easylegal.id: backend automatically includes legacy biz.id-seeded
+  // articles alongside this domain's own site="easylegal.id" articles (see
+  // buildSiteFilter() in apps/api/src/routes/articles.ts) — so old URLs
+  // keep working while new posts use the admin dashboard's per-domain
+  // Site selector to target this domain specifically.
+  apiUrl.searchParams.set("site", site);
   apiUrl.searchParams.set("limit", limit.toString());
   apiUrl.searchParams.set("includeCounts", "true");
 
