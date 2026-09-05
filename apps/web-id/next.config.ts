@@ -280,12 +280,34 @@ const nextConfig: NextConfig = {
       // === Google Ads EL.id — Performance Max (PMAX) ===
       { source: "/pmax-pendirian-pt", destination: "/layanan/pendirian-badan-usaha/pt" },
 
+      // === SEO easylegal.id — Halaman Menu ===
+      { source: "/kontak-kami", destination: "/kontak" },
+      { source: "/testimoni-klien", destination: "/testimoni" },
+
+      // === Google Ads EL.id — Halaman Tambahan dari Spreadsheet ===
+      { source: "/jasa-kontak-kami-gads", destination: "/kontak" },
+      { source: "/jasa-pelaporan-rups-gads", destination: "/layanan/pelaporan-rups" },
+      { source: "/jasa-pembuatan-nib-oss-rba-ahu-perizinan-usaha-gads", destination: "/layanan/nib-oss" },
+      { source: "/jasa-apostille-gads", destination: "/layanan/apostille" },
+      { source: "/perjanjian-pisah-harta-perkawinan", destination: "/layanan/perjanjian-perkawinan" },
+      { source: "/jasa-sertifikasi-halal", destination: "/layanan/sertifikasi-iso" },
+
       // === Meta Ads EL.id ===
       { source: "/meta-ads-pendirian-pt", destination: "/layanan/pendirian-badan-usaha/pt" },
       { source: "/meta-ads-pendirian-cv", destination: "/layanan/pendirian-badan-usaha/cv" },
+      { source: "/meta-ads-pendirian-pt-cv", destination: "/layanan/pendirian-badan-usaha" },
       { source: "/meta-ads-iso", destination: "/layanan/sertifikasi-iso" },
       { source: "/meta-ads-nib", destination: "/layanan/nib-oss" },
       { source: "/meta-ads-pse", destination: "/layanan/pengurusan-pse" },
+      // === Meta Ads EL.id — Halaman Tambahan dari Spreadsheet ===
+      { source: "/jasa-pelaporan-rups-metaads", destination: "/layanan/pelaporan-rups" },
+      { source: "/thankyoupage-konsultasi-pelaporan-rups-metaads", destination: "/testimoni" },
+      { source: "/jasa-penyesuaian-kbli-1-metaads", destination: "/layanan/nib-oss" },
+      { source: "/jasa-penyesuaian-kbli-2-metaads", destination: "/layanan/nib-oss" },
+      { source: "/jasa-penyesuaian-kbli-3-metaads", destination: "/layanan/nib-oss" },
+      { source: "/thankyoupage-konsultasi-penyesuaian-kbli-metaads", destination: "/testimoni" },
+      { source: "/layanan-easylegal-metaads", destination: "/tentang-kami" },
+      { source: "/thankyoupage-layanan-easylegal-metaads", destination: "/testimoni" },
       { source: "/meta-ads-pkp", destination: "/layanan/pengajuan-pkp" },
       { source: "/meta-ads-perubahan-akta", destination: "/layanan/perubahan-akta" },
       { source: "/meta-ads-press-release", destination: "/layanan/press-release" },
