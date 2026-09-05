@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Clock } from "lucide-react";
 import { useEffect, useState } from "react";
+import { getSiteFromHostname } from "@/lib/domains";
 
 interface Article {
   id: string;
@@ -51,10 +52,16 @@ export default function ArtikelTerkait({
     let mounted = true;
     const fetchArticles = async () => {
       try {
-        const params = new URLSearchParams({ limit: "4" });
+        // Client component — resolve site from the browser's own hostname
+        // (no next/headers here). Without this, the admin-api falls back to
+        // its own default ("easylegal.biz.id") — harmless on biz.id itself,
+        // but this component is shared code, so fix it for symmetry with
+        // the co.id/id copies where the same gap is an actual bug.
+        const site = getSiteFromHostname(typeof window !== "undefined" ? window.location.hostname : undefined);
+        const params = new URLSearchParams({ limit: "4", site });
         if (category) params.set("category", category);
         if (query) params.set("q", query);
-        
+
         // Use relative URL so it doesn't cross-origin block if on same domain
         const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:4000"}/api/v1/articles?${params.toString()}`;
         const res = await fetch(apiUrl);

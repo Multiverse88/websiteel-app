@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { headers } from "next/headers";
 import { Clock, BookOpen, Home, Search, X, ChevronDown } from "lucide-react";
+import { getSiteFromHostname } from "@/lib/domains";
 
 interface Article {
   id: string;
@@ -196,10 +198,18 @@ export default async function ArtikelPage({ searchParams }: PageProps) {
   const activeCategory = resolvedSearchParams.category || "All";
   const limit = resolvedSearchParams.limit ? parseInt(resolvedSearchParams.limit, 10) : 7;
 
+  // Detect domain from hostname to filter articles per site — without this,
+  // the admin-api falls back to its own default ("easylegal.biz.id"), so
+  // co.id would silently mirror biz.id's articles instead of its own.
+  const hdrs = await headers();
+  const hostname = hdrs.get("host") || "";
+  const site = getSiteFromHostname(hostname);
+
   // Fetch articles from our new Express API
   const apiUrl = new URL(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles`);
   if (q) apiUrl.searchParams.set("q", q);
   if (activeCategory !== "All") apiUrl.searchParams.set("category", activeCategory);
+  apiUrl.searchParams.set("site", site);
   apiUrl.searchParams.set("limit", limit.toString());
   apiUrl.searchParams.set("includeCounts", "true");
 
