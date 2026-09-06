@@ -280,10 +280,6 @@ const nextConfig: NextConfig = {
       // === Google Ads EL.id — Performance Max (PMAX) ===
       { source: "/pmax-pendirian-pt", destination: "/layanan/pendirian-badan-usaha/pt" },
 
-      // === SEO easylegal.id — Halaman Menu ===
-      { source: "/kontak-kami", destination: "/kontak" },
-      { source: "/testimoni-klien", destination: "/testimoni" },
-
       // === Google Ads EL.id — Halaman Tambahan dari Spreadsheet ===
       { source: "/jasa-kontak-kami-gads", destination: "/kontak" },
       { source: "/jasa-pelaporan-rups-gads", destination: "/layanan/pelaporan-rups" },
@@ -356,6 +352,18 @@ const nextConfig: NextConfig = {
       { source: "/layanan/jasa-sertifikasi-iso-ias-service", destination: "/layanan/sertifikasi-iso", permanent: true },
       { source: "/layanan/jasa-sertifikasi-iso-kan", destination: "/layanan/sertifikasi-iso", permanent: true },
       { source: "/layanan/jasa-sertifikasi-iso-uaf", destination: "/layanan/sertifikasi-iso", permanent: true },
+
+      // === LP SEO organic menu URLs — real 301s, not silent rewrites ===
+      // (2026-09-06) These used to live in rewrites() as a 200 (URL stays
+      // visible, no redirect) — fine for -gads ad-campaign URLs that need
+      // to keep matching an ad platform's tracked URL, wrong for these:
+      // they're plain organic SEO menu links with no ad campaign attached,
+      // so a real 301 avoids duplicate-content risk (two live URLs serving
+      // the same content) with no tracking downside.
+      { source: "/kontak-kami", destination: "/kontak", permanent: true },
+      { source: "/testimoni-klien", destination: "/testimoni", permanent: true },
+      // /kamus-legal/ had no rule at all — pure menu rename to /glossary.
+      { source: "/kamus-legal", destination: "/glossary", permanent: true },
       { source: "/layanan/jasa-pengurusan-nib-oss", destination: "/layanan/nib-oss", permanent: true },
       { source: "/layanan/jasa-pengurusan-izin-pse", destination: "/layanan/pengurusan-pse", permanent: true },
       { source: "/layanan/jasa-perubahan-akta", destination: "/layanan/perubahan-akta", permanent: true },
