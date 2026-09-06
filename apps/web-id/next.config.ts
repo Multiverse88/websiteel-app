@@ -362,79 +362,23 @@ const nextConfig: NextConfig = {
       { source: "/layanan/jasa-pengurusan-pkp", destination: "/layanan/pengajuan-pkp", permanent: true },
       { source: "/layanan/jasa-press-release-media-online", destination: "/layanan/press-release", permanent: true },
 
-      // === Local SEO — Catch-all redirect per service type ===
-      // Excel pakai /layanan/jasa-pendirian-pt/:kota, app pakai /layanan/pendirian-badan-usaha/pt/:kota
-      // 9 patterns menangkap 1.150 halaman lokal
-      {
-        source: "/layanan/jasa-pendirian-pt/:kota",
-        destination: "/layanan/pendirian-badan-usaha/pt/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pendirian-pt-pma/:kota",
-        destination: "/layanan/pendirian-badan-usaha/pt-pma/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pendirian-pt-perorangan/:kota",
-        destination: "/layanan/pendirian-badan-usaha/pt-perorangan/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pendirian-cv/:kota",
-        destination: "/layanan/pendirian-badan-usaha/cv/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pendirian-yayasan/:kota",
-        destination: "/layanan/pendirian-badan-usaha/yayasan/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pendirian-perkumpulan/:kota",
-        destination: "/layanan/pendirian-badan-usaha/perkumpulan/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pendirian-firma/:kota",
-        destination: "/layanan/pendirian-badan-usaha/firma/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pendirian-koperasi/:kota",
-        destination: "/layanan/pendirian-badan-usaha/koperasi/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pendaftaran-merek/:kota",
-        destination: "/layanan/merek-haki/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pengurusan-pkp/:kota",
-        destination: "/layanan/pengajuan-pkp/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pengurusan-nib-oss/:kota",
-        destination: "/layanan/nib-oss/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pengurusan-izin-pse/:kota",
-        destination: "/layanan/pengurusan-pse/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-perubahan-akta/:kota",
-        destination: "/layanan/perubahan-akta/:kota",
-        permanent: true,
-      },
-      {
-        source: "/layanan/jasa-pembubaran-perusahaan/:kota",
-        destination: "/layanan/pembubaran-perusahaan/:kota",
-        permanent: true,
-      },
+      // === Local SEO redirects — moved to the DB-driven Redirect table ===
+      // (2026-09-06) This used to be a 14-pattern hardcoded catch-all here
+      // claiming to handle "1.150 halaman lokal" via
+      // /layanan/jasa-pendirian-pt/:kota → /layanan/pendirian-badan-usaha/pt/:kota.
+      // It never actually matched anything: the real old WordPress URLs are
+      // flat at the domain root (e.g. /jasa-pendirian-pt-jakarta/,
+      // /lp-seo-lokal-jasa-pendirian-cv-ambon/), not nested under /layanan/,
+      // so ~1116 old local-SEO pages were silently 404ing instead of
+      // redirecting. See AUDIT - URL Redirect Coverage (2026-09-06).md.
+      //
+      // Fixed by importing all 1116 URLs into the Redirect table (domain:
+      // "easylegal.id") via apps/api/seed-local-seo-redirects.ts, resolved
+      // at request time by middleware.ts (GET/HEAD → admin-api
+      // /api/v1/redirects/:slug?domain=... lookup). Each redirects to its
+      // service's existing generic page (city-specific landing pages don't
+      // exist yet — a future project); old URLs are also still listed in
+      // sitemap.ts so Google discovers and processes the 301s.
     ];
   },
   images: {

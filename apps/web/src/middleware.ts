@@ -87,7 +87,7 @@ export async function middleware(request: NextRequest) {
               });
             }
 
-            return NextResponse.redirect(data.destination);
+            return NextResponse.redirect(data.destination, 301); // permanent: preserve SEO link equity, not the 307 Next.js defaults to
           }
         }
       } catch {

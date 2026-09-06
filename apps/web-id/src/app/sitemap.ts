@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { getDomainConfig, getSiteFromHostname } from "@/lib/domains";
 import { contentMap } from "@/data/layanan-badan-usaha";
 import { layananLainnyaData } from "@/data/layanan-lainnya";
+import localSeoRedirects from "@/data/local-seo-redirects.json";
 
 export const revalidate = 3600;
 
@@ -208,5 +209,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.warn("Failed to fetch glossaries for sitemap", error);
   }
 
-  return [...staticPages, ...servicePages, ...articlePages, ...landingPages, ...glossaryPages];
+  // Old WordPress "Local SEO" URLs (jasa-pendirian-{layanan}-{kota} and
+  // lp-seo-lokal-*/lokal-* variants) — these now 301 to their service's
+  // generic page via the DB-driven Redirect table (see
+  // apps/api/seed-local-seo-redirects.ts and AUDIT - URL Redirect Coverage
+  // (2026-09-06).md). Deliberately listed here as the OLD url (not the
+  // redirect target) so Google discovers and processes each 301 rather
+  // than never re-crawling a URL it already thinks is gone/410.
+  const localSeoRedirectPages: MetadataRoute.Sitemap = localSeoRedirects.map((r) => ({
+    url: `${BASE_URL}/${r.slug}`,
+    lastModified: generatedAt,
+    changeFrequency: "yearly" as const,
+    priority: 0.2,
+  }));
+
+  return [...staticPages, ...servicePages, ...articlePages, ...landingPages, ...glossaryPages, ...localSeoRedirectPages];
 }
