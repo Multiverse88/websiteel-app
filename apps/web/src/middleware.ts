@@ -87,11 +87,15 @@ export async function middleware(request: NextRequest) {
               });
             }
 
-            return NextResponse.redirect(data.destination, 301); // permanent: preserve SEO link equity, not the 307 Next.js defaults to
+            return NextResponse.redirect(new URL(data.destination, request.url), 301); // permanent (301): preserve SEO link equity, not the 307 Next.js defaults to. Wrapped in new URL(..., request.url) because data.destination can be a relative path (e.g. "/layanan/...") — NextResponse.redirect() throws on a bare relative string with no base, which the catch{} below was silently swallowing.
           }
         }
-      } catch {
-        // API error or network issue — fall through, site keeps working
+      } catch (err) {
+        // API error, network issue, or an invalid destination URL — log so
+        // this doesn't silently swallow real bugs (it did once: a relative
+        // destination path used to throw here unnoticed), then fall
+        // through so the site keeps working either way.
+        console.error("[middleware] redirect lookup failed for", slug, err);
       }
     }
   }
