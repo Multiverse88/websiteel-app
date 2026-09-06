@@ -38,7 +38,7 @@ function queryText(value: unknown, maxLength = 500): string | null {
 // a fetch, so no CORS setup is needed here.
 router.get("/redirect", async (req, res) => {
   try {
-    const product = queryText(req.query.product, 300);
+    let product = queryText(req.query.product, 300);
     const ctaId = queryText(req.query.cta_id, 100);
 
     // Frontends send domain explicitly because Referrer-Policy may omit the
@@ -48,6 +48,17 @@ router.get("/redirect", async (req, res) => {
     if (!domain && req.headers.referer) {
       try {
         domain = normalizeLeadDomain(new URL(req.headers.referer).hostname);
+      } catch { /* ignore malformed Referer */ }
+    }
+
+    // Server-side fallback: extract page path from Referer header if product
+    // is missing. This catches clicks that happen before client-side JS
+    // hydrates (e.g., FloatingWhatsApp clicked immediately on page load).
+    // Referrer-Policy: strict-origin-when-cross-origin sends full path.
+    if (!product && req.headers.referer) {
+      try {
+        const refUrl = new URL(req.headers.referer);
+        product = refUrl.pathname.slice(0, 300) || null;
       } catch { /* ignore malformed Referer */ }
     }
 

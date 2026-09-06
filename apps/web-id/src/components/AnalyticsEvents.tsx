@@ -43,12 +43,19 @@ export default function AnalyticsEvents() {
         link_text: link.textContent?.trim().slice(0, 100) || "",
       });
 
+      // Prevent default navigation and open with fully-constructed URL
+      // to eliminate hydration race condition (user clicks before JS hydrates).
+      e.preventDefault();
+      e.stopPropagation();
+
       const attribution = readAttribution() || captureFirstTouch();
       const url = new URL(link.href);
       appendAttribution(url, attribution);
       if (!url.searchParams.has("product")) url.searchParams.set("product", window.location.pathname);
       if (!url.searchParams.has("cta_label")) url.searchParams.set("cta_label", link.textContent?.trim().slice(0, 200) || "WhatsApp CTA");
-      link.href = url.toString();
+
+      // Open in new tab (same as target="_blank" behavior)
+      window.open(url.toString(), "_blank", "noopener,noreferrer");
     };
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
