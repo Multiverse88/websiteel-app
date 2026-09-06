@@ -20,6 +20,25 @@ interface Article {
   status?: string
   seoTitle?: string
   seoDesc?: string
+  site?: string
+}
+
+// Mirrors buildSiteFilter() in apps/api/src/routes/articles.ts: legacy
+// articles (site: "easylegal.biz.id", the ~200 pre-multi-site-split seed
+// articles) are shown on ALL THREE domains, since biz.id/co.id/easylegal.id
+// all fold "easylegal.biz.id" into their read filter so old URLs never
+// break. Anything explicitly posted to co.id or easylegal.id via the Site
+// dropdown shows ONLY on that one domain.
+const DOMAIN_LABELS: Record<string, string> = {
+  'easylegal.biz.id': 'biz.id',
+  'easylegal.co.id': 'co.id',
+  'easylegal.id': '.id',
+}
+function getDisplayDomains(site?: string): string[] {
+  if (!site || site === 'easylegal.biz.id') {
+    return ['easylegal.biz.id', 'easylegal.co.id', 'easylegal.id']
+  }
+  return [site]
 }
 
 const slugify = (text: string) => {
@@ -275,6 +294,7 @@ export default function Articles() {
             <thead className="bg-[#f8f9fa] text-[12px] font-bold text-gray-500 uppercase border-b border-gray-200 tracking-wider">
               <tr>
                 <th className="py-3.5 px-6 font-medium">Judul Artikel</th>
+                <th className="py-3.5 px-6 font-medium">Domain</th>
                 <th className="py-3.5 px-6 font-medium">Kategori</th>
                 <th className="py-3.5 px-6 font-medium">Status</th>
                 <th className="py-3.5 px-6 font-medium">SEO Score</th>
@@ -286,14 +306,14 @@ export default function Articles() {
             <tbody className="divide-y divide-gray-200 text-[14px]">
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-gray-400">
+                  <td colSpan={8} className="py-12 text-center text-gray-400">
                     <span className="material-symbols-outlined animate-spin text-2xl">progress_activity</span>
                     <p className="mt-2 text-sm">Memuat artikel...</p>
                   </td>
                 </tr>
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-gray-400">
+                  <td colSpan={8} className="py-12 text-center text-gray-400">
                     <span className="material-symbols-outlined text-4xl mb-2 opacity-40">description</span>
                     <p>Tidak ada artikel yang ditemukan.</p>
                   </td>
@@ -306,6 +326,19 @@ export default function Articles() {
                         {item.title}
                       </span>
                       <span className="text-xs text-gray-400">{item.slug}</span>
+                    </td>
+                    <td className="py-3 px-6 whitespace-nowrap">
+                      <div className="flex flex-wrap gap-1 max-w-[140px]">
+                        {getDisplayDomains(item.site).map((d) => (
+                          <span
+                            key={d}
+                            title={d}
+                            className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-blue-50 text-blue-700 border border-blue-200"
+                          >
+                            {DOMAIN_LABELS[d] || d}
+                          </span>
+                        ))}
+                      </div>
                     </td>
                     <td className="py-3 px-6 text-gray-500 whitespace-nowrap">
                       {item.category || '-'}
