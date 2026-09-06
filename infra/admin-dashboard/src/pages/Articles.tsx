@@ -95,6 +95,7 @@ export default function Articles() {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedStatus, setSelectedStatus] = useState('')
+  const [selectedDomain, setSelectedDomain] = useState('')
   const [sortView, setSortView] = useState('newest')
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Article | null>(null)
@@ -138,7 +139,8 @@ export default function Articles() {
       a.slug?.toLowerCase().includes(search.toLowerCase())
     const matchesCategory = selectedCategory ? a.category === selectedCategory : true
     const matchesStatus = selectedStatus ? (a.status || 'published') === selectedStatus : true
-    return matchesSearch && matchesCategory && matchesStatus
+    const matchesDomain = selectedDomain ? getDisplayDomains(a.site, a.legacy).includes(selectedDomain) : true
+    return matchesSearch && matchesCategory && matchesStatus && matchesDomain
   })
 
   filtered = filtered.sort((a, b) => {
@@ -260,8 +262,21 @@ export default function Articles() {
               </select>
               <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
             </div>
+            <div className="relative w-full md:w-40">
+              <select
+                value={selectedDomain}
+                onChange={(e) => setSelectedDomain(e.target.value)}
+                className="w-full pl-4 pr-10 py-2 border border-gray-200 rounded-lg bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] text-[14px] text-gray-700 cursor-pointer"
+              >
+                <option value="">Semua Domain</option>
+                <option value="easylegal.biz.id">biz.id</option>
+                <option value="easylegal.co.id">co.id</option>
+                <option value="easylegal.id">.id</option>
+              </select>
+              <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
+            </div>
             <div className="relative w-full md:w-36">
-              <select 
+              <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
                 className="w-full pl-4 pr-10 py-2 border border-gray-200 rounded-lg bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#6f0000]/20 focus:border-[#6f0000] text-[14px] text-gray-700 cursor-pointer"
