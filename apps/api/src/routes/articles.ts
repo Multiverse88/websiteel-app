@@ -7,21 +7,18 @@ import { generateEmbedding } from "../modules/articles/embedding-service";
 
 const router = Router();
 
-// easylegal.id shows its own new articles (site: "easylegal.id", selected
-// explicitly via the admin dashboard's per-article Site dropdown) PLUS the
-// 190 legacy articles that pre-date the multi-site split (all seeded with
-// site: "easylegal.biz.id") — so old URLs keep working there. biz.id and
-// co.id stay strictly their own site only. `site=all` (used internally by
-// nothing anymore, kept for back-compat/debugging) still means "no filter
-// at all", unrelated to this legacy-inclusion behavior.
+// Every domain shows its own new articles (site: "<domain>", selected
+// explicitly via the admin dashboard's per-article Site dropdown going
+// forward) PLUS the 190 legacy articles that pre-date the multi-site split
+// (all seeded with site: "easylegal.biz.id") — so old URLs keep working
+// everywhere, on co.id and easylegal.id too, not just biz.id itself.
+// biz.id doesn't need the OR since "easylegal.biz.id" already *is* the
+// legacy value. `site=all` (kept for back-compat/debugging) still means
+// "no filter at all".
 function buildSiteFilter(site: string | undefined) {
-  if (site === "easylegal.id") {
-    return { site: { in: ["easylegal.id", "easylegal.biz.id"] } };
-  }
-  if (site && site !== "all") {
-    return { site };
-  }
-  return {};
+  if (!site || site === "all") return {};
+  if (site === "easylegal.biz.id") return { site };
+  return { site: { in: [site, "easylegal.biz.id"] } };
 }
 
 // Display Category -> DB Categories list (from Next.js logic)
