@@ -21,24 +21,26 @@ interface Article {
   seoTitle?: string
   seoDesc?: string
   site?: string
+  legacy?: boolean
 }
 
-// Mirrors buildSiteFilter() in apps/api/src/routes/articles.ts: legacy
-// articles (site: "easylegal.biz.id", the ~200 pre-multi-site-split seed
-// articles) are shown on ALL THREE domains, since biz.id/co.id/easylegal.id
-// all fold "easylegal.biz.id" into their read filter so old URLs never
-// break. Anything explicitly posted to co.id or easylegal.id via the Site
-// dropdown shows ONLY on that one domain.
+// Mirrors buildSiteFilter() in apps/api/src/routes/articles.ts: only
+// articles with legacy=true (the ~200 pre-multi-site-split seed articles,
+// all site: "easylegal.biz.id") are shown on ALL THREE domains, since every
+// domain's read filter folds legacy biz.id articles in so old URLs never
+// break. A NEW article posted via the Site dropdown — even one explicitly
+// targeted at "easylegal.biz.id" — has legacy=false and stays confined to
+// that one domain only, same as co.id/easylegal.id choices.
 const DOMAIN_LABELS: Record<string, string> = {
   'easylegal.biz.id': 'biz.id',
   'easylegal.co.id': 'co.id',
   'easylegal.id': '.id',
 }
-function getDisplayDomains(site?: string): string[] {
-  if (!site || site === 'easylegal.biz.id') {
+function getDisplayDomains(site?: string, legacy?: boolean): string[] {
+  if (legacy && (!site || site === 'easylegal.biz.id')) {
     return ['easylegal.biz.id', 'easylegal.co.id', 'easylegal.id']
   }
-  return [site]
+  return [site || 'easylegal.biz.id']
 }
 
 const slugify = (text: string) => {
@@ -329,7 +331,7 @@ export default function Articles() {
                     </td>
                     <td className="py-3 px-6 whitespace-nowrap">
                       <div className="flex flex-wrap gap-1 max-w-[140px]">
-                        {getDisplayDomains(item.site).map((d) => (
+                        {getDisplayDomains(item.site, item.legacy).map((d) => (
                           <span
                             key={d}
                             title={d}

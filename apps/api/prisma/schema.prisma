@@ -63,6 +63,13 @@ model Article {
   status      String    @default("draft")
   faq         Json?
   site        String    @default("easylegal.biz.id")
+  // Distinguishes the ~200 pre-multi-site-split seed articles (legacy=true,
+  // shown on ALL domains so old URLs never break) from articles created
+  // from now on via the dashboard's Site selector (legacy=false, confined
+  // to their chosen site only — even when that choice is
+  // "easylegal.biz.id" itself). See buildSiteFilter() in
+  // apps/api/src/routes/articles.ts.
+  legacy      Boolean   @default(false)
   author      User?     @relation(fields: [authorId], references: [id])
   categoryRel Category? @relation(fields: [categoryId], references: [id])
   tags        Tag[]     @relation("ArticleToTag")
