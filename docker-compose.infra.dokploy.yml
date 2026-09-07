@@ -160,10 +160,12 @@ services:
       - "traefik.http.routers.minio-api.rule=Host(`cdn.easylegal.my.id`)"
       - "traefik.http.routers.minio-api.entrypoints=websecure"
       - "traefik.http.routers.minio-api.tls.certResolver=letsencrypt"
+      - "traefik.http.routers.minio-api.service=minio-api"
       - "traefik.http.services.minio-api.loadbalancer.server.port=9000"
       - "traefik.http.routers.minio-console.rule=Host(`cdn-console.easylegal.my.id`)"
       - "traefik.http.routers.minio-console.entrypoints=websecure"
       - "traefik.http.routers.minio-console.tls.certResolver=letsencrypt"
+      - "traefik.http.routers.minio-console.service=minio-console"
       - "traefik.http.services.minio-console.loadbalancer.server.port=9001"
 
   cdn-init:
