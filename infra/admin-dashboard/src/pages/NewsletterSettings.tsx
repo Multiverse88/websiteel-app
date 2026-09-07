@@ -71,7 +71,7 @@ export default function NewsletterSettings() {
     try {
       const finalSubject = defaultSubject.replace(/{{title}}/g, sampleArticleTitle)
       const messageHtml = renderMessagePreview()
-      const bodyHtml = `<div style="font-family: sans-serif; line-height: 1.6; color: #374151;">${messageHtml}</div><br/><a href="https://easylegal.my.id" style="display: inline-block; padding: 10px 20px; background-color: #990202; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">Baca Selengkapnya</a>`
+      const bodyHtml = `<div style="font-family: sans-serif; line-height: 1.6; color: #374151;">${messageHtml}</div><br/><a href="https://easylegal.biz.id" style="display: inline-block; padding: 10px 20px; background-color: #990202; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">Baca Selengkapnya</a>`
       
       await api.testSendEmail({
         subject: finalSubject,

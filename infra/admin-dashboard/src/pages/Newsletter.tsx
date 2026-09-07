@@ -66,7 +66,8 @@ export default function Newsletter() {
         finalMessage = finalMessage.replace(/{{coverImage}}/g, imgTag)
       }
       
-      const bodyHtml = `<div style="font-family: sans-serif; line-height: 1.6; color: #374151;">${finalMessage.replace(/\\n/g, '<br/>')}</div><br/><a href="https://easylegal.my.id/artikel/${article.slug || ''}" style="display: inline-block; padding: 10px 20px; background-color: #990202; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">Baca Selengkapnya</a>`
+      const articleUrl = `https://${article.site || 'easylegal.biz.id'}/artikel/${article.slug || ''}`
+      const bodyHtml = `<div style="font-family: sans-serif; line-height: 1.6; color: #374151;">${finalMessage.replace(/\\n/g, '<br/>')}</div><br/><a href="${articleUrl}" style="display: inline-block; padding: 10px 20px; background-color: #990202; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">Baca Selengkapnya</a>`
 
       // Create broadcast record
       await api.sendNewsletterBroadcast({

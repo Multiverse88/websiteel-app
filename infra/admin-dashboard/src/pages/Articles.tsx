@@ -384,8 +384,8 @@ export default function Articles() {
                     </td>
                     <td className="py-3 px-6 text-right whitespace-nowrap">
                       <div className="flex items-center justify-end gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                        <a 
-                          href={`https://easylegal.my.id/artikel/${item.slug}`}
+                        <a
+                          href={`https://${item.site || 'easylegal.biz.id'}/artikel/${item.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-1.5 text-gray-500 hover:text-blue-600 rounded hover:bg-blue-50 transition-colors" 
