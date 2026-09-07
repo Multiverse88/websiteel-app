@@ -868,29 +868,50 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               </div>
             </div>
 
-            {statsLoading && <p className="text-[13px] text-gray-400 py-4 text-center">Memuat rincian...</p>}
-            {!statsLoading && statsData.length === 0 && (
-              <p className="text-[13px] text-gray-400 py-4 text-center">Belum ada data untuk rincian ini.</p>
-            )}
-            {!statsLoading && statsData.length > 0 && (() => {
-              const max = Math.max(...statsData.map((d) => d.count), 1)
+            {(() => {
+              const columnLabel = statsGroupBy === 'number' ? 'Nomor'
+                : statsGroupBy === 'source' ? 'Sumber'
+                : statsGroupBy === 'service' ? 'Layanan'
+                : 'Periode'
               // day/week/month come back newest-first from the API (ORDER BY
-              // bucket DESC) — flip to chronological for a left-to-right
+              // bucket DESC) — flip to chronological for a top-to-bottom
               // reading trend; number/source/service stay sorted by count.
               const rows = ['day', 'week', 'month'].includes(statsGroupBy) ? [...statsData].reverse() : statsData
+              const totalCount = statsData.reduce((sum, r) => sum + r.count, 0)
               return (
-                <div className="flex flex-col gap-2 max-h-[420px] overflow-y-auto pr-1">
-                  {rows.map((row) => (
-                    <div key={row.key} className="flex items-center gap-3">
-                      <span className="text-[13px] text-gray-600 w-[160px] shrink-0 truncate" title={formatStatKey(statsGroupBy, row.label)}>
-                        {formatStatKey(statsGroupBy, row.label)}
-                      </span>
-                      <div className="flex-1 h-5 rounded-md bg-gray-100 overflow-hidden">
-                        <div className="h-full rounded-md bg-[#990202]" style={{ width: `${Math.max((row.count / max) * 100, 2)}%` }} />
-                      </div>
-                      <span className="text-[13px] font-bold text-gray-900 w-10 text-right shrink-0">{row.count}</span>
-                    </div>
-                  ))}
+                <div className="border border-gray-100 rounded-lg overflow-hidden overflow-x-auto max-h-[420px] overflow-y-auto">
+                  <table className="w-full text-[14px]">
+                    <thead className="sticky top-0">
+                      <tr className="bg-gray-50 text-left text-gray-500 text-[12px] uppercase tracking-wider">
+                        <th className="px-4 py-2.5">{columnLabel}</th>
+                        <th className="px-4 py-2.5 text-right">Jumlah Lead</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {statsLoading && (
+                        <tr><td colSpan={2} className="px-4 py-6 text-center text-gray-400">Memuat rincian...</td></tr>
+                      )}
+                      {!statsLoading && rows.length === 0 && (
+                        <tr><td colSpan={2} className="px-4 py-6 text-center text-gray-400">Belum ada data untuk rincian ini.</td></tr>
+                      )}
+                      {!statsLoading && rows.map((row) => (
+                        <tr key={row.key} className="border-t border-gray-100">
+                          <td className="px-4 py-2.5 text-gray-700" title={statsGroupBy === 'service' ? row.label : undefined}>
+                            {statsGroupBy === 'service' ? (row.label.length > 80 ? row.label.slice(0, 80) + '…' : row.label) : formatStatKey(statsGroupBy, row.label)}
+                          </td>
+                          <td className="px-4 py-2.5 text-right font-bold text-gray-900">{row.count}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                    {!statsLoading && rows.length > 0 && (
+                      <tfoot>
+                        <tr className="border-t-2 border-gray-200 bg-gray-50">
+                          <td className="px-4 py-2.5 font-bold text-gray-700">Total</td>
+                          <td className="px-4 py-2.5 text-right font-bold text-gray-900">{totalCount}</td>
+                        </tr>
+                      </tfoot>
+                    )}
+                  </table>
                 </div>
               )
             })()}
