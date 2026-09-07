@@ -1,5 +1,11 @@
 import { useCallback, useState, useEffect } from 'react'
+import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { api } from '../lib/api'
+
+// Crimson-first palette for chart segments (source donut, etc.) — #990202
+// first since it's the brand color, rest picked for contrast against it and
+// against each other on a white background.
+const CHART_COLORS = ['#990202', '#f59e0b', '#0ea5e9', '#10b981', '#8b5cf6', '#ec4899', '#6b7280']
 
 interface WaNumber {
   id: string
@@ -987,16 +993,60 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
             </div>
 
             {(() => {
+              const isTrend = ['day', 'week', 'month'].includes(statsGroupBy)
               const columnLabel = statsGroupBy === 'number' ? 'Nomor'
                 : statsGroupBy === 'source' ? 'Sumber'
                 : statsGroupBy === 'service' ? 'Layanan'
                 : 'Periode'
               // day/week/month come back newest-first from the API (ORDER BY
-              // bucket DESC) — flip to chronological for a top-to-bottom
+              // bucket DESC) — flip to chronological for a left-to-right
               // reading trend; number/source/service stay sorted by count.
-              const rows = ['day', 'week', 'month'].includes(statsGroupBy) ? [...statsData].reverse() : statsData
+              const rows = isTrend ? [...statsData].reverse() : statsData
               const totalCount = statsData.reduce((sum, r) => sum + r.count, 0)
+              const chartData = rows.map((r) => ({
+                name: statsGroupBy === 'service' ? (r.label.length > 40 ? r.label.slice(0, 40) + '…' : r.label) : formatStatKey(statsGroupBy, r.label),
+                value: r.count,
+              }))
               return (
+                <>
+                  {!statsLoading && rows.length > 0 && (
+                    <div className="mb-5" style={{ width: '100%', height: statsGroupBy === 'source' ? 260 : isTrend ? 260 : Math.max(rows.length * 34, 120) }}>
+                      <ResponsiveContainer>
+                        {isTrend ? (
+                          <AreaChart data={chartData} margin={{ top: 8, right: 16, left: -16, bottom: 0 }}>
+                            <defs>
+                              <linearGradient id="leadsTrendFill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#990202" stopOpacity={0.35} />
+                                <stop offset="95%" stopColor="#990202" stopOpacity={0.02} />
+                              </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f1f1" />
+                            <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#6b7280' }} axisLine={{ stroke: '#e5e7eb' }} tickLine={false} />
+                            <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#6b7280' }} axisLine={false} tickLine={false} />
+                            <Tooltip contentStyle={{ fontSize: 13, borderRadius: 8, border: '1px solid #e5e7eb' }} />
+                            <Area type="monotone" dataKey="value" name="Lead" stroke="#990202" strokeWidth={2} fill="url(#leadsTrendFill)" />
+                          </AreaChart>
+                        ) : statsGroupBy === 'source' ? (
+                          <PieChart>
+                            <Pie data={chartData} dataKey="value" nameKey="name" innerRadius={55} outerRadius={90} paddingAngle={2}>
+                              {chartData.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}
+                            </Pie>
+                            <Tooltip contentStyle={{ fontSize: 13, borderRadius: 8, border: '1px solid #e5e7eb' }} />
+                            <Legend wrapperStyle={{ fontSize: 13 }} formatter={(v) => SOURCE_LABELS[v] || v} />
+                          </PieChart>
+                        ) : (
+                          <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 24, left: 8, bottom: 0 }}>
+                            <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f1f1" />
+                            <XAxis type="number" allowDecimals={false} tick={{ fontSize: 12, fill: '#6b7280' }} axisLine={{ stroke: '#e5e7eb' }} tickLine={false} />
+                            <YAxis type="category" dataKey="name" width={140} tick={{ fontSize: 12, fill: '#374151' }} axisLine={false} tickLine={false} />
+                            <Tooltip contentStyle={{ fontSize: 13, borderRadius: 8, border: '1px solid #e5e7eb' }} />
+                            <Bar dataKey="value" name="Lead" fill="#990202" radius={[0, 4, 4, 0]} maxBarSize={22} />
+                          </BarChart>
+                        )}
+                      </ResponsiveContainer>
+                    </div>
+                  )}
+
                 <div className="border border-gray-100 rounded-lg overflow-hidden overflow-x-auto max-h-[420px] overflow-y-auto">
                   <table className="w-full text-[14px]">
                     <thead className="sticky top-0">
@@ -1030,7 +1080,8 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                       </tfoot>
                     )}
                   </table>
-                </div>
+                  </div>
+                </>
               )
             })()}
           </div>
