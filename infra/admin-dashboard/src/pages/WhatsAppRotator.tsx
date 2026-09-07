@@ -30,6 +30,8 @@ const DOMAINS: { value: string; label: string }[] = [
   { value: 'easylegal.co.id', label: 'easylegal.co.id' },
 ]
 
+type DatePreset = 'all' | 'today' | '7d' | '30d' | 'month' | 'lastmonth' | 'custom'
+
 interface WaKnownButton {
   ctaId: string
   sample: string | null
@@ -94,6 +96,38 @@ const STATS_GROUP_LABELS: Record<'day' | 'week' | 'month' | 'number' | 'source' 
   number: 'Per Nomor',
   source: 'Per Sumber',
   service: 'Per Layanan',
+}
+
+const DATE_PRESETS: { value: DatePreset; label: string }[] = [
+  { value: 'all', label: 'Semua Waktu' },
+  { value: 'today', label: 'Hari Ini' },
+  { value: '7d', label: '7 Hari Terakhir' },
+  { value: '30d', label: '30 Hari Terakhir' },
+  { value: 'month', label: 'Bulan Ini' },
+  { value: 'lastmonth', label: 'Bulan Lalu' },
+  { value: 'custom', label: 'Custom' },
+]
+
+function ymd(d: Date): string {
+  return d.toISOString().slice(0, 10)
+}
+
+// Turns a preset (or explicit custom from/to) into concrete "YYYY-MM-DD"
+// bounds for the API. `to` is inclusive of the whole day server-side.
+function computeDateRange(preset: DatePreset, customFrom: string, customTo: string): { from?: string; to?: string } {
+  const now = new Date()
+  if (preset === 'all') return {}
+  if (preset === 'today') return { from: ymd(now), to: ymd(now) }
+  if (preset === '7d') { const d = new Date(now); d.setDate(d.getDate() - 6); return { from: ymd(d), to: ymd(now) } }
+  if (preset === '30d') { const d = new Date(now); d.setDate(d.getDate() - 29); return { from: ymd(d), to: ymd(now) } }
+  if (preset === 'month') { const d = new Date(now.getFullYear(), now.getMonth(), 1); return { from: ymd(d), to: ymd(now) } }
+  if (preset === 'lastmonth') {
+    const start = new Date(now.getFullYear(), now.getMonth() - 1, 1)
+    const end = new Date(now.getFullYear(), now.getMonth(), 0)
+    return { from: ymd(start), to: ymd(end) }
+  }
+  // custom
+  return { from: customFrom || undefined, to: customTo || undefined }
 }
 
 // day/week/month buckets come back as ISO timestamps (date_trunc); number/
@@ -161,6 +195,20 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [leadsLoading, setLeadsLoading] = useState(false)
   const [statusFilter, setStatusFilter] = useState('')
   const [sourceFilter, setSourceFilter] = useState('')
+  const [domainFilter, setDomainFilter] = useState('')
+  const [numberFilter, setNumberFilter] = useState('')
+  const [searchInput, setSearchInput] = useState('') // raw input, debounced into searchFilter below
+  const [searchFilter, setSearchFilter] = useState('')
+  const [datePreset, setDatePreset] = useState<DatePreset>('all')
+  const [customFrom, setCustomFrom] = useState('')
+  const [customTo, setCustomTo] = useState('')
+
+  // Debounce the lead-code search box — fires a request per keystroke
+  // otherwise, and the leads table is the one thing here with free-text input.
+  useEffect(() => {
+    const id = setTimeout(() => setSearchFilter(searchInput.trim()), 400)
+    return () => clearTimeout(id)
+  }, [searchInput])
 
   // Detail views: same status/source filters as the leads table above, but
   // aggregated server-side (leads/list is paginated so a client-side
@@ -185,7 +233,8 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const loadLeads = useCallback(async () => {
     try {
       setLeadsLoading(true)
-      const res = await api.getWaLeads({ status: statusFilter, source: sourceFilter })
+      const { from, to } = computeDateRange(datePreset, customFrom, customTo)
+      const res = await api.getWaLeads({ status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, search: searchFilter, from, to })
       setLeads(res.data || [])
       setFunnel(res.meta?.funnel || {})
       setBySource(res.meta?.bySource || {})
@@ -194,19 +243,20 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     } finally {
       setLeadsLoading(false)
     }
-  }, [sourceFilter, statusFilter])
+  }, [sourceFilter, statusFilter, domainFilter, numberFilter, searchFilter, datePreset, customFrom, customTo])
 
   const loadStats = useCallback(async () => {
     try {
       setStatsLoading(true)
-      const res = await api.getWaLeadsStats(statsGroupBy, { status: statusFilter, source: sourceFilter })
+      const { from, to } = computeDateRange(datePreset, customFrom, customTo)
+      const res = await api.getWaLeadsStats(statsGroupBy, { status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, from, to })
       setStatsData(res.data || [])
     } catch (e: any) {
       setError(e.message)
     } finally {
       setStatsLoading(false)
     }
-  }, [statsGroupBy, statusFilter, sourceFilter])
+  }, [statsGroupBy, statusFilter, sourceFilter, domainFilter, numberFilter, datePreset, customFrom, customTo])
 
   const loadPages = useCallback(async () => {
     try {
@@ -795,6 +845,98 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
 
       {tab === 'leads' && (
         <>
+          {/* Filters — semua di sini mempengaruhi funnel, sumber, rincian, DAN
+              tabel leads di bawah sekaligus (bukan cuma tabel). */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 flex flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {DATE_PRESETS.map((p) => (
+                <button
+                  key={p.value}
+                  type="button"
+                  onClick={() => setDatePreset(p.value)}
+                  className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold transition-colors ${datePreset === p.value ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                >
+                  {p.label}
+                </button>
+              ))}
+              {datePreset === 'custom' && (
+                <span className="flex items-center gap-1.5 ml-1">
+                  <input
+                    type="date"
+                    value={customFrom}
+                    onChange={(e) => setCustomFrom(e.target.value)}
+                    className="px-2.5 py-1.5 border border-gray-200 rounded-lg text-[13px]"
+                  />
+                  <span className="text-gray-400 text-[13px]">–</span>
+                  <input
+                    type="date"
+                    value={customTo}
+                    onChange={(e) => setCustomTo(e.target.value)}
+                    className="px-2.5 py-1.5 border border-gray-200 rounded-lg text-[13px]"
+                  />
+                </span>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white"
+              >
+                <option value="">Semua status</option>
+                {Object.entries(STATUS_LABELS).map(([val, label]) => (
+                  <option key={val} value={val}>{label}</option>
+                ))}
+              </select>
+              <select
+                value={sourceFilter}
+                onChange={(e) => setSourceFilter(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white"
+              >
+                <option value="">Semua sumber</option>
+                {Object.entries(SOURCE_LABELS).map(([val, label]) => (
+                  <option key={val} value={val}>{label}</option>
+                ))}
+              </select>
+              <select
+                value={domainFilter}
+                onChange={(e) => setDomainFilter(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white"
+              >
+                {DOMAINS.map((d) => (
+                  <option key={d.value} value={d.value}>{d.label}</option>
+                ))}
+              </select>
+              <select
+                value={numberFilter}
+                onChange={(e) => setNumberFilter(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white"
+              >
+                <option value="">Semua Nomor</option>
+                {numbers.map((n) => (
+                  <option key={n.id} value={n.id}>{n.label || n.number}</option>
+                ))}
+              </select>
+              <input
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Cari kode lead (EL-XXXXXX)"
+                className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white font-mono w-[200px]"
+              />
+              {(statusFilter || sourceFilter || domainFilter || numberFilter || searchInput || datePreset !== 'all') && (
+                <button
+                  type="button"
+                  onClick={() => { setStatusFilter(''); setSourceFilter(''); setDomainFilter(''); setNumberFilter(''); setSearchInput(''); setDatePreset('all') }}
+                  className="px-3 py-2 text-[13px] font-bold text-gray-500 hover:text-red-600 transition-colors"
+                >
+                  Reset Filter
+                </button>
+              )}
+            </div>
+          </div>
+
           {/* Funnel + conversion summary */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {(['NEW', 'CONTACTED', 'QUALIFIED', 'PROPOSAL', 'WON', 'LOST'] as const).map((s) => (
@@ -823,30 +965,6 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               </div>
             </div>
           )}
-
-          {/* Filters */}
-          <div className="flex flex-wrap gap-3">
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white"
-            >
-              <option value="">Semua status</option>
-              {Object.entries(STATUS_LABELS).map(([val, label]) => (
-                <option key={val} value={val}>{label}</option>
-              ))}
-            </select>
-            <select
-              value={sourceFilter}
-              onChange={(e) => setSourceFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white"
-            >
-              <option value="">Semua sumber</option>
-              {Object.entries(SOURCE_LABELS).map(([val, label]) => (
-                <option key={val} value={val}>{label}</option>
-              ))}
-            </select>
-          </div>
 
           {/* Rincian leads: perhari/perminggu/perbulan/per nomor/per sumber/per layanan.
               Ikut filter status & sumber di atas. Dihitung server-side karena

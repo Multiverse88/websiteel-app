@@ -28,6 +28,27 @@ function queryText(value: unknown, maxLength = 500): string | null {
   return normalized || null;
 }
 
+// Leads dashboard date-range filter (from/to as "YYYY-MM-DD"). `to` is
+// treated as inclusive of the whole day (23:59:59.999), matching how a date
+// picker's "sampai tanggal X" reads to a non-technical user. Returns
+// undefined (not applied) if both are missing/invalid so callers can just do
+// `if (range) where.createdAt = range`.
+function buildDateRangeFilter(from?: string, to?: string): { gte?: Date; lte?: Date } | undefined {
+  const range: { gte?: Date; lte?: Date } = {};
+  if (from) {
+    const d = new Date(from);
+    if (!Number.isNaN(d.getTime())) range.gte = d;
+  }
+  if (to) {
+    const d = new Date(to);
+    if (!Number.isNaN(d.getTime())) {
+      d.setHours(23, 59, 59, 999);
+      range.lte = d;
+    }
+  }
+  return range.gte || range.lte ? range : undefined;
+}
+
 // GET /api/v1/wa/redirect?text=...&source=...&product=...
 // Public — real site visitors land here when they click any WhatsApp CTA
 // (see apps/web/src/lib/config.ts getWhatsAppLink() and
@@ -442,7 +463,7 @@ router.delete("/pages/:id", requireAuth, async (req, res) => {
 // filterable by status/number/domain, plus an overall funnel summary.
 router.get("/leads", requireAuth, async (req, res) => {
   try {
-    const { status, numberId, domain, source, product, search } = req.query as Record<string, string>;
+    const { status, numberId, domain, source, product, search, from, to } = req.query as Record<string, string>;
     const where: any = {};
     if (status) {
       if (!isValidStage(status)) return res.status(400).json({ error: "Status Lead tidak valid" });
@@ -453,6 +474,8 @@ router.get("/leads", requireAuth, async (req, res) => {
     if (source) where.source = source;
     if (product) where.product = product;
     if (search) where.leadCode = { contains: search.toUpperCase(), mode: "insensitive" };
+    const dateRange = buildDateRangeFilter(from, to);
+    if (dateRange) where.createdAt = dateRange;
     const page = Math.max(1, Number(req.query.page) || 1);
     const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
 
@@ -499,7 +522,7 @@ router.get("/leads", requireAuth, async (req, res) => {
 // as a lead id.
 router.get("/leads/stats", requireAuth, async (req, res) => {
   try {
-    const { status, numberId, domain, source, groupBy } = req.query as Record<string, string>;
+    const { status, numberId, domain, source, groupBy, from, to } = req.query as Record<string, string>;
     if (!["day", "week", "month", "number", "source", "service"].includes(groupBy)) {
       return res.status(400).json({ error: "groupBy tidak valid — pakai day, week, month, number, source, atau service" });
     }
@@ -510,6 +533,8 @@ router.get("/leads/stats", requireAuth, async (req, res) => {
     if (numberId) where.numberId = numberId;
     if (domain) where.domain = domain;
     if (source) where.source = source;
+    const dateRange = buildDateRangeFilter(from, to);
+    if (dateRange) where.createdAt = dateRange;
 
     if (groupBy === "number") {
       const rows = await prisma.whatsAppClick.groupBy({ by: ["numberId"], where, _count: { numberId: true } });
@@ -554,6 +579,8 @@ router.get("/leads/stats", requireAuth, async (req, res) => {
     if (where.numberId) { params.push(where.numberId); conditions.push(`"numberId" = $${params.length}`); }
     if (where.domain) { params.push(where.domain); conditions.push(`"domain" = $${params.length}`); }
     if (where.source) { params.push(where.source); conditions.push(`"source" = $${params.length}`); }
+    if (dateRange?.gte) { params.push(dateRange.gte); conditions.push(`"createdAt" >= $${params.length}`); }
+    if (dateRange?.lte) { params.push(dateRange.lte); conditions.push(`"createdAt" <= $${params.length}`); }
     const whereSql = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
     const rows = await prisma.$queryRawUnsafe<{ bucket: Date; count: bigint }[]>(
       `SELECT date_trunc('${groupBy}', "createdAt") AS bucket, COUNT(*)::bigint AS count

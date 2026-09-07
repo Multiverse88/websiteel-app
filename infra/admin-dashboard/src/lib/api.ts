@@ -294,13 +294,13 @@ export const api = {
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/${id}`, { method: 'DELETE' })
     if (!res.ok && res.status !== 204) throw new Error('Gagal menghapus konfigurasi halaman')
   },
-  getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string } = {}) => {
+  getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string; search?: string; from?: string; to?: string } = {}) => {
     const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString()
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads${qs ? `?${qs}` : ''}`)
     if (!res.ok) throw new Error('Gagal memuat leads')
     return await res.json()
   },
-  getWaLeadsStats: async (groupBy: 'day' | 'week' | 'month' | 'number' | 'source' | 'service', filters: { status?: string; numberId?: string; domain?: string; source?: string } = {}) => {
+  getWaLeadsStats: async (groupBy: 'day' | 'week' | 'month' | 'number' | 'source' | 'service', filters: { status?: string; numberId?: string; domain?: string; source?: string; from?: string; to?: string } = {}) => {
     const qs = new URLSearchParams({ groupBy, ...Object.fromEntries(Object.entries(filters).filter(([, v]) => v)) } as Record<string, string>).toString()
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads/stats?${qs}`)
     if (!res.ok) throw new Error('Gagal memuat rincian leads')
