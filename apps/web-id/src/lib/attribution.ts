@@ -51,7 +51,11 @@ function classify(params: URLSearchParams, referrer: string, pathname: string): 
   // separate "organic social" bucket to fall back to.
   if (params.has("fbclid") || (["facebook", "instagram", "meta"].includes(source) && (!medium || paid)) || META_AD_SLUG.test(pathname)) return "metaads";
   if (params.get("ref")) return "referral";
-  if (!referrer) return "direct";
+  // TEMPORARY (2026-09-07, per request): no-referrer traffic is relabeled
+  // as Google SEO instead of "direct" for now. Revert to `return "direct";`
+  // once Direct/Langsung should be its own bucket again. Kept in sync with
+  // the equivalent server-side branch in apps/api/src/modules/leads/lead-domain.ts.
+  if (!referrer) return "googleseo";
   try {
     return /(^|\.)google\.[a-z.]+$/.test(new URL(referrer).hostname.toLowerCase()) ? "googleseo" : "other";
   } catch {
@@ -62,8 +66,8 @@ function classify(params: URLSearchParams, referrer: string, pathname: string): 
 function readLegacySource(): { source: LeadSourceCode; referralCode: string } | null {
   const legacy = readCookie("el_source")?.trim().toLowerCase();
   if (!legacy) return null;
-  if (legacy === "seo") return { source: "googleseo", referralCode: "" };
-  if (["gads", "metaads", "googleseo", "direct", "other", "unknown"].includes(legacy)) {
+  if (legacy === "seo" || legacy === "direct") return { source: "googleseo", referralCode: "" }; // TEMPORARY: "direct" remapped, see classify() above
+  if (["gads", "metaads", "googleseo", "other", "unknown"].includes(legacy)) {
     return { source: legacy as LeadSourceCode, referralCode: "" };
   }
   return { source: "referral", referralCode: legacy.slice(0, 80) };

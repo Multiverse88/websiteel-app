@@ -86,7 +86,11 @@ export function classifyAttribution(
     return { channel: "REFERRAL", sourceCode: "referral", referralCode };
   }
   if (!referrer) {
-    return { channel: "DIRECT", sourceCode: "direct", referralCode: null };
+    // TEMPORARY (2026-09-07, per request): don't show any "Direct/Langsung"
+    // leads for now — relabel them as Google SEO instead. Revert this block
+    // to `return { channel: "DIRECT", sourceCode: "direct", referralCode: null };`
+    // once no-referrer traffic should be reported as its own bucket again.
+    return { channel: "ORGANIC_SEARCH", sourceCode: "googleseo", referralCode: null };
   }
 
   try {
