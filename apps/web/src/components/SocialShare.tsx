@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { Link2, Check } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { getWhatsAppLink } from "@/lib/config";
 
 export default function SocialShare({ title }: { title: string }) {
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -28,7 +30,8 @@ export default function SocialShare({ title }: { title: string }) {
 
   const waShareLink = getWhatsAppLink(
     `Halo EasyLegal, saya tertarik dengan artikel "${title}" — ${currentUrl}`,
-    "article-share-wa"
+    "article-share-wa",
+    pathname ?? undefined
   );
 
   return (

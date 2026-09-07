@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -54,34 +57,35 @@ interface ContactGroup {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
   const contactGroups: ContactGroup[] = [
     {
       title: "Customer Care",
       items: [
         { type: "phone", label: "022 3209 3292", href: "tel:02232093292" },
-        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.", "customer-care-saya-ingin-berkonsultasi") },
-        { type: "wa", label: "0817 321 162", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.", "customer-care-saya-ingin-berkonsultasi-2") },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.", "customer-care-saya-ingin-berkonsultasi", pathname ?? undefined) },
+        { type: "wa", label: "0817 321 162", href: getWhatsAppLink("Halo EasyLegal Customer Care, saya ingin berkonsultasi.", "customer-care-saya-ingin-berkonsultasi-2", pathname ?? undefined) },
         { type: "email", label: "care@easylegal.id", href: "mailto:care@easylegal.id" },
       ],
     },
     {
       title: "Partnership",
       items: [
-        { type: "wa", label: "0818 818 090", href: getWhatsAppLink("Halo EasyLegal, saya ingin membahas partnership.", "ingin-membahas-partnership") },
+        { type: "wa", label: "0818 818 090", href: getWhatsAppLink("Halo EasyLegal, saya ingin membahas partnership.", "ingin-membahas-partnership", pathname ?? undefined) },
         { type: "email", label: "ceo@easylegal.id", href: "mailto:ceo@easylegal.id" },
       ],
     },
     {
       title: "Affiliate Program",
       items: [
-        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya ingin bertanya tentang Affiliate Program.", "ingin-bertanya-tentang-affiliate-program") },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya ingin bertanya tentang Affiliate Program.", "ingin-bertanya-tentang-affiliate-program", pathname ?? undefined) },
         { type: "email", label: "care@easylegal.id", href: "mailto:care@easylegal.id" },
       ],
     },
     {
       title: "Call Support",
       items: [
-        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya membutuhkan bantuan Call Support.", "membutuhkan-bantuan-call-support") },
+        { type: "wa", label: "0817 770 048", href: getWhatsAppLink("Halo EasyLegal, saya membutuhkan bantuan Call Support.", "membutuhkan-bantuan-call-support", pathname ?? undefined) },
       ],
     },
   ];

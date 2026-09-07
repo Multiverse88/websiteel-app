@@ -19,10 +19,19 @@ declare global {
  * (apps/api/src/routes/whatsapp.ts):
  * 1. Captures first-touch entry-point attribution (Google Ads / Meta Ads /
  *    SEO / direct) into a cookie on landing.
- * 2. Appends that source + the current page path (as "product") onto every
- *    WhatsApp CTA link right before navigating, so every rotator click/lead
- *    carries both — without having to touch the 28+ getWhatsAppLink() call
- *    sites individually.
+ * 2. Appends that source (and "product"/page-path, as a redundant safety
+ *    net) onto every WhatsApp CTA link right before navigating.
+ *
+ * NOTE (2026-09-07): "product" (page path) used to rely ENTIRELY on this
+ * listener, which raced against React hydration — if a visitor clicked
+ * before this effect ran, nothing was ever sent (measured ~94% of
+ * WhatsAppClick rows with product=NULL in production). The real fix is now
+ * upstream: every getWhatsAppLink(path) call site across all 3 apps bakes
+ * the page path into the href at render time, so the link is correct from
+ * the very first HTML byte regardless of whether this listener has attached
+ * yet. `preventDefault` here does NOT "eliminate" the hydration race for
+ * `product` — a click before this effect runs never reaches this handler at
+ * all, this only prevents a double-append for clicks that arrive after.
  *
  * One delegated document-level click listener catches every WhatsApp CTA
  * site-wide (all resolve to /api/v1/wa/redirect) — cheaper and harder to

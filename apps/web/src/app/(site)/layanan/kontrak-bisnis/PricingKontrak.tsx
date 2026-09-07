@@ -204,7 +204,7 @@ export default function PricingKontrak() {
                     </div>
 
                     <a
-                      href={getWhatsAppLink(pkg.whatsappMsg, slugify(pkg.title))}
+                      href={getWhatsAppLink(pkg.whatsappMsg, slugify(pkg.title), "/layanan/kontrak-bisnis")}
                       target="_blank" rel="noopener noreferrer"
                       className={`w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center transition-transform hover:scale-[1.02] ${
                         isPopular

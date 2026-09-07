@@ -51,16 +51,22 @@ router.get("/redirect", async (req, res) => {
       } catch { /* ignore malformed Referer */ }
     }
 
-    // Server-side fallback: extract page path from Referer header if product
-    // is missing. This catches clicks that happen before client-side JS
-    // hydrates (e.g., FloatingWhatsApp clicked immediately on page load).
-    // Referrer-Policy: strict-origin-when-cross-origin sends full path.
-    if (!product && req.headers.referer) {
-      try {
-        const refUrl = new URL(req.headers.referer);
-        product = refUrl.pathname.slice(0, 300) || null;
-      } catch { /* ignore malformed Referer */ }
-    }
+    // NOTE: there used to be a Referer-header fallback here for when `product`
+    // arrives empty. It was removed (2026-09-07) because it was based on an
+    // incorrect assumption: this endpoint is always a CROSS-ORIGIN request
+    // (pageview app on easylegal.{id,biz.id,co.id} -> this api on
+    // api.easylegal.my.id), and `Referrer-Policy: strict-origin-when-cross-origin`
+    // withholds the path for cross-origin requests — the browser only ever
+    // sends the origin (e.g. "https://easylegal.id"), never the real page
+    // path. `new URL(referer).pathname` on an origin-only Referer resolves to
+    // "/", so this "fallback" was silently mislabeling every affected click as
+    // coming from the homepage instead of leaving it honestly unknown.
+    //
+    // The real fix for missing `product` lives upstream, in
+    // apps/web*/src/lib/config.ts getWhatsAppLink(path) — the page path is now
+    // baked into the href at render time (server or client render, before any
+    // click/hydration JS runs), so the link is correct from the very first
+    // HTML byte and doesn't depend on a click listener attaching in time.
 
     // Per-page/per-button/per-domain override (admin-editable, see /pages
     // routes below) — keyed by (path, ctaId, domain), each axis "" meaning

@@ -183,7 +183,7 @@ export default async function GlossaryDetailPage({ params }: Props) {
             Tim legal kami siap membantu menjelaskan istilah hukum dan membantu pengurusan legalitas bisnis Anda.
           </p>
           <a
-            href={getWhatsAppLink("Halo EasyLegal, saya ingin bertanya tentang istilah hukum.", "glossary-cta")}
+            href={getWhatsAppLink("Halo EasyLegal, saya ingin bertanya tentang istilah hukum.", "glossary-cta", `/glossary/${slug}`)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white font-semibold px-6 py-3 rounded-xl transition-colors"

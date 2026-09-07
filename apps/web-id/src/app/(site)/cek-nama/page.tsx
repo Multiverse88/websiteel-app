@@ -56,7 +56,7 @@ export default function CekNama() {
                 `- WhatsApp: ${formData.whatsapp || "-"}`;
     }
 
-    const waUrl = getWhatsAppLink(message, "form-submit");
+    const waUrl = getWhatsAppLink(message, "form-submit", "/cek-nama");
     window.open(waUrl, "_blank");
   };
 

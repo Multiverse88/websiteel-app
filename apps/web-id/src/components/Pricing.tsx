@@ -3,7 +3,9 @@
 import React, { useRef, MouseEvent, useCallback } from "react";
 import { Check, X } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import FadeIn from "@/components/FadeIn";
+import { withPagePath } from "@/lib/config";
 import PricingFooter from "@/components/PricingFooter";
 
 function useDraggableScroll<T extends HTMLElement = HTMLDivElement>() {
@@ -100,6 +102,7 @@ export default function Pricing({
   hideFooter = false,
   headerBottomContent,
 }: PricingProps) {
+  const pathname = usePathname();
   const isSlider = packages.length > 3;
   const scrollHandlers = useDraggableScroll<HTMLDivElement>();
 
@@ -199,7 +202,7 @@ export default function Pricing({
 
                     {/* Button */}
                     <a
-                      href={pkg.buttonLink}
+                      href={withPagePath(pkg.buttonLink, pathname ?? undefined)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`w-full p-[12px] rounded-[10px] border-none text-[16px] font-[700] cursor-pointer block text-center transition-transform hover:scale-[1.02] ${

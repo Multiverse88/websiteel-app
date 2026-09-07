@@ -154,7 +154,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 type InlineRelated = { title: string; slug: string; category: string; coverImage: string; readTime: string } | null;
 
 // Helper to dynamically clean and redirect hardcoded/outdated links in articles
-function cleanArticleUrl(url: string, articleTitle: string): string {
+function cleanArticleUrl(url: string, articleTitle: string, articlePath: string = ""): string {
   // Block javascript: URLs to prevent Stored XSS
   if (url.trim().toLowerCase().startsWith("javascript:")) {
     return "#";
@@ -162,7 +162,7 @@ function cleanArticleUrl(url: string, articleTitle: string): string {
 
   // 1. WhatsApp link router (mauorder.online, wa.me, api.whatsapp.com)
   if (url.includes("mauorder.online") || url.includes("wa.me") || url.includes("api.whatsapp.com")) {
-    return getWhatsAppLink(`Halo EasyLegal, saya membaca artikel "${articleTitle || 'Legalitas'}" dan ingin berkonsultasi.`, "article-consult");
+    return getWhatsAppLink(`Halo EasyLegal, saya membaca artikel "${articleTitle || 'Legalitas'}" dan ingin berkonsultasi.`, "article-consult", articlePath || undefined);
   }
 
   // 2. Old product pages redirect to new router structure
@@ -188,7 +188,7 @@ interface Block {
 }
 
 // Simple custom markdown renderer to ensure clean semantic HTML with premium styling
-function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, articleTitle: string = "") {
+function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, articleTitle: string = "", articlePath: string = "") {
   // 1. Normalize carriage returns
   let cleanedText = text.replace(/\r\n/g, "\n");
 
@@ -356,7 +356,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
         return (
           <ul key={idx} className="space-y-3.5 my-6 pl-1 list-none">
             {block.items!.map((item, itemIdx) => {
-              const parsedItem = parseBoldText(item, articleTitle);
+              const parsedItem = parseBoldText(item, articleTitle, articlePath);
               return (
                 <li key={itemIdx} className="text-[16px] leading-relaxed text-gray-600 relative pl-7 flex items-start">
                   <span className="absolute left-0 top-[9px] w-2 h-2 rounded-full bg-[#990202]/70" />
@@ -371,7 +371,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
         return (
           <ol key={idx} className="space-y-4 my-6 pl-1 list-none">
             {block.items!.map((item, itemIdx) => {
-              const parsedItem = parseBoldText(item, articleTitle);
+              const parsedItem = parseBoldText(item, articleTitle, articlePath);
               return (
                 <li key={itemIdx} className="text-[16px] leading-relaxed text-gray-600 flex items-start">
                   <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-red-50 text-[#990202] text-[16px] font-black mr-3.5 flex-shrink-0 mt-0.5 border border-red-100/40">
@@ -392,7 +392,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
                 <tr>
                   {block.rows![0]?.map((cell, cellIdx) => (
                     <th key={cellIdx} className="py-3 px-4 font-bold text-[15px] text-gray-700 whitespace-nowrap border-r border-gray-100 last:border-0">
-                      {parseBoldText(cell, articleTitle)}
+                      {parseBoldText(cell, articleTitle, articlePath)}
                     </th>
                   ))}
                 </tr>
@@ -402,7 +402,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
                   <tr key={rowIdx} className="hover:bg-gray-50/50 transition-colors">
                     {row.map((cell, cellIdx) => (
                       <td key={cellIdx} className="py-3 px-4 text-[15px] text-gray-600 border-r border-gray-50 last:border-0">
-                        {parseBoldText(cell, articleTitle)}
+                        {parseBoldText(cell, articleTitle, articlePath)}
                       </td>
                     ))}
                   </tr>
@@ -416,7 +416,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
       default:
         return (
           <p key={idx} className="text-[16px] sm:text-[16px] leading-[1.85] text-gray-600 font-normal my-5">
-            {parseBoldText(block.content ?? "", articleTitle)}
+            {parseBoldText(block.content ?? "", articleTitle, articlePath)}
           </p>
         );
     }
@@ -467,7 +467,7 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
 }
 
 // Utility to parse **bold** text, [link](url), and ![alt](url) to JSX elements
-function parseBoldText(text: string, articleTitle: string = ""): React.ReactNode[] {
+function parseBoldText(text: string, articleTitle: string = "", articlePath: string = ""): React.ReactNode[] {
   // Regex to match links and images:
   // Group 1: Optional image marker "!"
   // Group 2: Alt/Text inside brackets
@@ -503,7 +503,7 @@ function parseBoldText(text: string, articleTitle: string = ""): React.ReactNode
         />
       );
     } else {
-      const cleanedUrl = cleanArticleUrl(rawUrl, articleTitle);
+      const cleanedUrl = cleanArticleUrl(rawUrl, articleTitle, articlePath);
       const isExternal = cleanedUrl.startsWith("http") || cleanedUrl.startsWith("https") || cleanedUrl.startsWith("//");
       
       // Determine if the entire link text is bolded, e.g. **Link Text**
@@ -810,7 +810,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
             <div className="lg:col-span-8">
               {/* ─── ARTICLE BODY ─── */}
               <div className="prose-article mb-12">
-                {renderMarkdownContent(article.content, displayRelated[1] ?? displayRelated[0] ?? null, article.title)}
+                {renderMarkdownContent(article.content, displayRelated[1] ?? displayRelated[0] ?? null, article.title, `/artikel/${slug}`)}
               </div>
 
               {/* ─── TAGS ─── */}
@@ -852,7 +852,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                       : "Konsultasi gratis dengan tim legal EasyLegal. Proses cepat, aman, dan harga transparan."}
                   </p>
                   <a
-                    href={getWhatsAppLink(`Halo EasyLegal, saya tertarik konsultasi layanan ${article.category}.`, "article-category-consult")}
+                    href={getWhatsAppLink(`Halo EasyLegal, saya tertarik konsultasi layanan ${article.category}.`, "article-category-consult", `/artikel/${slug}`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center bg-white text-gray-950 font-bold text-[16px] px-5 py-3 rounded-xl hover:bg-gray-100 transition-colors shadow-sm"
@@ -921,7 +921,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
 
               {/* Ad Card (Card Iklan) */}
               <a
-                href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan promo Diskon 50% Layanan Pendirian PT & CV.", "tertarik-dengan-promo-diskon-50-layanan-pendirian-pt-cv")}
+                href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan promo Diskon 50% Layanan Pendirian PT & CV.", "tertarik-dengan-promo-diskon-50-layanan-pendirian-pt-cv", `/artikel/${slug}`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block group relative overflow-hidden rounded-[24px] bg-[#990202] p-6 text-white hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 border border-[#800000] shadow-md"

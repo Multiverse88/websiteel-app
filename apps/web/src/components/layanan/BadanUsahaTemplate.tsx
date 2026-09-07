@@ -38,6 +38,7 @@ import BottomPromoSection from "@/components/home/BottomPromoSection";
 import Benefits from "@/components/Benefits";
 import Offices from "@/components/Offices";
 import ArtikelTerkait from "@/components/ArtikelTerkait";
+import { usePathname } from "next/navigation";
 import { getWhatsAppLink } from "@/lib/config";
 import { getFAQJsonLd, getServiceJsonLd } from "@/lib/structured-data";
 import type { BadanUsahaContent } from "@/data/layanan-badan-usaha";
@@ -53,6 +54,7 @@ interface Props {
 }
 
 export default function BadanUsahaTemplate({ content }: Props) {
+  const pathname = usePathname();
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [isDown, setIsDown] = React.useState(false);
   const [startX, setStartX] = React.useState(0);
@@ -159,7 +161,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
 
               <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
                 <a
-                  href={getWhatsAppLink(`Halo EasyLegal, saya ingin konsultasi mengenai ${c.nama.toLowerCase()}.`, "hero-consult")}
+                  href={getWhatsAppLink(`Halo EasyLegal, saya ingin konsultasi mengenai ${c.nama.toLowerCase()}.`, "hero-consult", pathname ?? undefined)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-7 py-4 bg-[#990202] text-white font-bold text-[16px] rounded-xl hover:bg-[#800000] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-center cursor-pointer group"
@@ -458,7 +460,7 @@ export default function BadanUsahaTemplate({ content }: Props) {
 
           <div className="w-full lg:w-auto flex flex-col gap-3 min-w-[340px] sm:min-w-[360px]">
             <a
-              href={getWhatsAppLink(c.ctaWhatsAppMessage, "bottom-consult")}
+              href={getWhatsAppLink(c.ctaWhatsAppMessage, "bottom-consult", pathname ?? undefined)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-[#990202] hover:bg-[#800000] text-white font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"

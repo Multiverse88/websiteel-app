@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { getWhatsAppLink } from "@/lib/config";
 
 interface CTAProps {
@@ -27,6 +28,7 @@ export default function CTA({
   contactText = "Hubungi Tim Kami",
   slaText = "Respons dalam 5 menit · Senin–Sabtu 08.00–20.00",
 }: CTAProps) {
+  const pathname = usePathname();
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -38,7 +40,7 @@ export default function CTA({
     return () => obs.disconnect();
   }, []);
 
-  const waLink = whatsappLink || getWhatsAppLink(undefined, "footer-cta");
+  const waLink = whatsappLink || getWhatsAppLink(undefined, "footer-cta", pathname ?? undefined);
 
   return (
     <section id="footer-cta" className="py-8 sm:py-20 bg-white border-t border-gray-100 overflow-hidden relative">

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowRight, MessageCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { getWhatsAppLink, slugify } from "@/lib/config";
 
 // whatsappLink used to be a raw wa.me number per promo (hardcoded here, and
@@ -43,6 +44,7 @@ const FALLBACK_PROMOS = [
 ];
 
 export default function BottomPromoSection() {
+  const pathname = usePathname();
   const [promos, setPromos] = useState<any[]>([]);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -169,7 +171,7 @@ export default function BottomPromoSection() {
                     <a href={promo.link} className="flex-1 bg-[#D62828] hover:bg-[#B91C1C] text-white text-center font-extrabold text-[14px] sm:text-[15px] py-3 rounded-full transition-colors flex items-center justify-center gap-2">
                       Selengkapnya <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
                     </a>
-                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promo.title}".`, `promo-${slugify(promo.title)}`)} className="w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 bg-[#D62828] hover:bg-[#B91C1C] text-white rounded-full flex items-center justify-center transition-colors shadow-sm">
+                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promo.title}".`, `promo-${slugify(promo.title)}`, pathname ?? undefined)} className="w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 bg-[#D62828] hover:bg-[#B91C1C] text-white rounded-full flex items-center justify-center transition-colors shadow-sm">
                       <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
                     </a>
                   </div>
