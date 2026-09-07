@@ -53,7 +53,27 @@ function extractWpPaths(text: string | null): string[] {
   return out;
 }
 
+// LOCAL_DIR: pre-downloaded files, used as a fallback/primary source when the
+// old host can't be reached directly from wherever this script runs. Added
+// after discovering the old Hostinger host 404s specifically for requests
+// originating from this VPS's own IP (confirmed: identical URL 200s from an
+// outside network, 404s from inside the admin-api container on the same VPS
+// at the same moment) — so the images were fetched from elsewhere and
+// transferred in instead. Set via LOCAL_WP_IMAGES_DIR env var, e.g.
+// `LOCAL_WP_IMAGES_DIR=/app/wp_images_local npx tsx migrate-legacy-wp-images.ts`
+const LOCAL_DIR = process.env.LOCAL_WP_IMAGES_DIR;
+
 async function downloadFromOldHost(uploadPath: string): Promise<Buffer | null> {
+  if (LOCAL_DIR) {
+    try {
+      const fs = await import("node:fs/promises");
+      const path = await import("node:path");
+      return await fs.readFile(path.join(LOCAL_DIR, uploadPath));
+    } catch (e) {
+      console.warn(`  [skip] local file missing: ${LOCAL_DIR}/${uploadPath} (${(e as Error).message})`);
+      return null;
+    }
+  }
   const url = `http://${OLD_WP_IP}/wp-content/uploads/${uploadPath}`;
   try {
     const res = await fetch(url, { headers: { Host: "easylegal.id" } });
