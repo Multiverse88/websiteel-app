@@ -87,6 +87,31 @@ const TEMPERATURE_COLORS: Record<string, string> = {
   HOT: 'bg-red-50 text-red-700',
 }
 
+const STATS_GROUP_LABELS: Record<'day' | 'week' | 'month' | 'number' | 'source' | 'service', string> = {
+  day: 'Per Hari',
+  week: 'Per Minggu',
+  month: 'Per Bulan',
+  number: 'Per Nomor',
+  source: 'Per Sumber',
+  service: 'Per Layanan',
+}
+
+// day/week/month buckets come back as ISO timestamps (date_trunc); number/
+// source/service buckets already have a human label from the API.
+function formatStatKey(groupBy: string, key: string): string {
+  if (groupBy === 'source') return SOURCE_LABELS[key] || key
+  if (groupBy !== 'day' && groupBy !== 'week' && groupBy !== 'month') return key
+  const d = new Date(key)
+  if (Number.isNaN(d.getTime())) return key
+  if (groupBy === 'day') return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+  if (groupBy === 'month') return d.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })
+  // week: date_trunc('week', ...) returns the Monday of that ISO week — show as a range.
+  const end = new Date(d)
+  end.setDate(end.getDate() + 6)
+  const fmt = (x: Date) => x.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' })
+  return `${fmt(d)} – ${fmt(end)}`
+}
+
 const NEXT_STAGES: Record<string, string[]> = {
   NEW: ['NEW', 'CONTACTED', 'LOST'],
   CONTACTED: ['CONTACTED', 'QUALIFIED', 'LOST'],
@@ -137,6 +162,13 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [statusFilter, setStatusFilter] = useState('')
   const [sourceFilter, setSourceFilter] = useState('')
 
+  // Detail views: same status/source filters as the leads table above, but
+  // aggregated server-side (leads/list is paginated so a client-side
+  // breakdown would only ever reflect whichever page happens to be loaded).
+  const [statsGroupBy, setStatsGroupBy] = useState<'day' | 'week' | 'month' | 'number' | 'source' | 'service'>('day')
+  const [statsData, setStatsData] = useState<{ key: string; label: string; count: number }[]>([])
+  const [statsLoading, setStatsLoading] = useState(false)
+
   const load = useCallback(async () => {
     try {
       setLoading(true)
@@ -164,6 +196,18 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     }
   }, [sourceFilter, statusFilter])
 
+  const loadStats = useCallback(async () => {
+    try {
+      setStatsLoading(true)
+      const res = await api.getWaLeadsStats(statsGroupBy, { status: statusFilter, source: sourceFilter })
+      setStatsData(res.data || [])
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setStatsLoading(false)
+    }
+  }, [statsGroupBy, statusFilter, sourceFilter])
+
   const loadPages = useCallback(async () => {
     try {
       setPagesLoading(true)
@@ -179,6 +223,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
 
   useEffect(() => { load() }, [load])
   useEffect(() => { if (tab === 'leads') loadLeads() }, [loadLeads, tab])
+  useEffect(() => { if (tab === 'leads') loadStats() }, [loadStats, tab])
   useEffect(() => { if (tab === 'pages') loadPages() }, [loadPages, tab])
 
   // Auto-refresh the two live-data tabs every 15s while they're active.
@@ -801,6 +846,54 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 <option key={val} value={val}>{label}</option>
               ))}
             </select>
+          </div>
+
+          {/* Rincian leads: perhari/perminggu/perbulan/per nomor/per sumber/per layanan.
+              Ikut filter status & sumber di atas. Dihitung server-side karena
+              tabel leads di bawah cuma nampilin 1 halaman (paginated). */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+              <h3 className="font-bold text-gray-900 text-[16px]">Rincian Leads</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {(Object.keys(STATS_GROUP_LABELS) as (keyof typeof STATS_GROUP_LABELS)[]).map((g) => (
+                  <button
+                    key={g}
+                    type="button"
+                    onClick={() => setStatsGroupBy(g)}
+                    className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold transition-colors ${statsGroupBy === g ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                  >
+                    {STATS_GROUP_LABELS[g]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {statsLoading && <p className="text-[13px] text-gray-400 py-4 text-center">Memuat rincian...</p>}
+            {!statsLoading && statsData.length === 0 && (
+              <p className="text-[13px] text-gray-400 py-4 text-center">Belum ada data untuk rincian ini.</p>
+            )}
+            {!statsLoading && statsData.length > 0 && (() => {
+              const max = Math.max(...statsData.map((d) => d.count), 1)
+              // day/week/month come back newest-first from the API (ORDER BY
+              // bucket DESC) — flip to chronological for a left-to-right
+              // reading trend; number/source/service stay sorted by count.
+              const rows = ['day', 'week', 'month'].includes(statsGroupBy) ? [...statsData].reverse() : statsData
+              return (
+                <div className="flex flex-col gap-2 max-h-[420px] overflow-y-auto pr-1">
+                  {rows.map((row) => (
+                    <div key={row.key} className="flex items-center gap-3">
+                      <span className="text-[13px] text-gray-600 w-[160px] shrink-0 truncate" title={formatStatKey(statsGroupBy, row.label)}>
+                        {formatStatKey(statsGroupBy, row.label)}
+                      </span>
+                      <div className="flex-1 h-5 rounded-md bg-gray-100 overflow-hidden">
+                        <div className="h-full rounded-md bg-[#990202]" style={{ width: `${Math.max((row.count / max) * 100, 2)}%` }} />
+                      </div>
+                      <span className="text-[13px] font-bold text-gray-900 w-10 text-right shrink-0">{row.count}</span>
+                    </div>
+                  ))}
+                </div>
+              )
+            })()}
           </div>
 
           {/* Leads table */}

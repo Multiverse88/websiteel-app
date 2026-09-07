@@ -489,6 +489,89 @@ router.get("/leads", requireAuth, async (req, res) => {
   }
 });
 
+// GET /api/v1/wa/leads/stats — admin: bucketed counts for the Leads
+// dashboard's detail views (per hari/minggu/bulan, per nomor, per sumber,
+// per layanan). Same filters as /leads (status/domain/source/numberId), but
+// aggregated server-side — /leads itself is paginated (max 100/page) so with
+// thousands of leads the breakdown can't be computed correctly from just
+// whatever page happens to be loaded client-side.
+// IMPORTANT: registered before /leads/:id so Express doesn't treat "stats"
+// as a lead id.
+router.get("/leads/stats", requireAuth, async (req, res) => {
+  try {
+    const { status, numberId, domain, source, groupBy } = req.query as Record<string, string>;
+    if (!["day", "week", "month", "number", "source", "service"].includes(groupBy)) {
+      return res.status(400).json({ error: "groupBy tidak valid — pakai day, week, month, number, source, atau service" });
+    }
+    if (status && !isValidStage(status)) return res.status(400).json({ error: "Status Lead tidak valid" });
+
+    const where: any = {};
+    if (status) where.status = status;
+    if (numberId) where.numberId = numberId;
+    if (domain) where.domain = domain;
+    if (source) where.source = source;
+
+    if (groupBy === "number") {
+      const rows = await prisma.whatsAppClick.groupBy({ by: ["numberId"], where, _count: { numberId: true } });
+      const numbers = await prisma.whatsAppNumber.findMany({
+        where: { id: { in: rows.map((r) => r.numberId) } },
+        select: { id: true, number: true, label: true },
+      });
+      const data = rows
+        .map((r) => {
+          const n = numbers.find((x) => x.id === r.numberId);
+          return { key: r.numberId, label: n?.label || n?.number || r.numberId, count: r._count.numberId };
+        })
+        .sort((a, b) => b.count - a.count);
+      return res.json({ data });
+    }
+
+    if (groupBy === "source") {
+      const rows = await prisma.whatsAppClick.groupBy({ by: ["sourceCode"], where, _count: { sourceCode: true } });
+      const data = rows
+        .map((r) => ({ key: r.sourceCode, label: r.sourceCode || "unknown", count: r._count.sourceCode }))
+        .sort((a, b) => b.count - a.count);
+      return res.json({ data });
+    }
+
+    if (groupBy === "service") {
+      const rows = await prisma.whatsAppClick.groupBy({ by: ["service"], where, _count: { service: true } });
+      const data = rows
+        .map((r) => ({ key: r.service || "(tidak diketahui)", label: r.service || "(tidak diketahui)", count: r._count.service }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 30); // service is free text (WA message), can have huge cardinality — top 30 only
+      return res.json({ data });
+    }
+
+    // day / week / month — needs date_trunc, which Prisma's groupBy can't do,
+    // so raw SQL. groupBy is whitelisted above (day/week/month only) before
+    // reaching here, so it's safe to interpolate directly (not user input
+    // reaching the query unescaped — still parameterize the actual filter
+    // values via $queryRawUnsafe's positional args).
+    const conditions: string[] = [];
+    const params: unknown[] = [];
+    if (where.status) { params.push(where.status); conditions.push(`"status" = $${params.length}`); }
+    if (where.numberId) { params.push(where.numberId); conditions.push(`"numberId" = $${params.length}`); }
+    if (where.domain) { params.push(where.domain); conditions.push(`"domain" = $${params.length}`); }
+    if (where.source) { params.push(where.source); conditions.push(`"source" = $${params.length}`); }
+    const whereSql = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
+    const rows = await prisma.$queryRawUnsafe<{ bucket: Date; count: bigint }[]>(
+      `SELECT date_trunc('${groupBy}', "createdAt") AS bucket, COUNT(*)::bigint AS count
+       FROM "WhatsAppClick"
+       ${whereSql}
+       GROUP BY bucket
+       ORDER BY bucket DESC
+       LIMIT 60`,
+      ...params,
+    );
+    const data = rows.map((r) => ({ key: r.bucket.toISOString(), label: r.bucket.toISOString(), count: Number(r.count) }));
+    res.json({ data });
+  } catch (error) {
+    console.error("Error fetching WA lead stats:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 router.get("/leads/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };

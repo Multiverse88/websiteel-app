@@ -300,6 +300,12 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memuat leads')
     return await res.json()
   },
+  getWaLeadsStats: async (groupBy: 'day' | 'week' | 'month' | 'number' | 'source' | 'service', filters: { status?: string; numberId?: string; domain?: string; source?: string } = {}) => {
+    const qs = new URLSearchParams({ groupBy, ...Object.fromEntries(Object.entries(filters).filter(([, v]) => v)) } as Record<string, string>).toString()
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads/stats?${qs}`)
+    if (!res.ok) throw new Error('Gagal memuat rincian leads')
+    return await res.json()
+  },
   updateWaLead: async (id: string, data: { status?: string; notes?: string; lostReason?: string; orderValue?: number }) => {
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads/${id}`, {
       method: 'PUT',
