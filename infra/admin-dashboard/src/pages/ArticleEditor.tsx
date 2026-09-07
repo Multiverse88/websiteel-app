@@ -306,177 +306,8 @@ export default function ArticleEditor() {
     (edit: any) => !dismissedEditKeys.includes([edit.field, edit.operation, edit.targetText, edit.replacementText].join("::")),
   );
 
-  const companionGuidance: AICompanionGuidance[] = (() => {
-    if (!aiReview) return [];
+  // companionGuidance is defined below applyAIEdit & applyGuidanceExample for full action synchronization
 
-    const targetMap = FIELD_TARGET_MAP;
-    type FieldKey = keyof typeof targetMap;
-
-    // Priority order: critical > warning > suggestion
-    const severityRank: Record<string, number> = { critical: 3, warning: 2, suggestion: 1 };
-
-    // Collect all candidates, then pick best per field
-    const allCandidates: Array<AICompanionGuidance & { fieldKey: FieldKey; rank: number }> = [];
-
-    const addCandidate = (item: AICompanionGuidance, fieldKey: FieldKey) => {
-      allCandidates.push({ ...item, fieldKey, rank: severityRank[item.severity] || 1 });
-    };
-
-    // 1. Empty field detection — always show if field is empty
-    const emptyFields: FieldKey[] = [];
-    if (!title.trim()) emptyFields.push("title");
-    if (!excerpt.trim()) emptyFields.push("excerpt");
-    if (!content.trim()) emptyFields.push("content");
-    if (!focusKeyword.trim()) emptyFields.push("keyword");
-
-    emptyFields.forEach((fieldKey) => {
-      const emptyMessages: Record<FieldKey, string> = {
-        title: "Judul artikel belum diisi. Tulis judul yang jelas, memuat kata kunci utama, dan menarik perhatian pembaca.",
-        excerpt: "Kutipan singkat (meta deskripsi) belum diisi. Tulis rangkuman 120-160 karakter yang menjelaskan manfaat artikel.",
-        content: "Isi artikel belum ditulis. Mulai dengan paragraf pembuka yang menjelaskan topik, lalu kembangkan dengan subjudul.",
-        keyword: "Kata kunci utama belum ditentukan. Masukkan frasa yang ingin dioptimasi agar AI bisa memberikan saran SEO yang tepat.",
-      };
-      addCandidate({
-        ...targetMap[fieldKey],
-        message: emptyMessages[fieldKey],
-        severity: fieldKey === "content" ? "critical" : "warning",
-        location: targetMap[fieldKey].label,
-        problem: `${targetMap[fieldKey].label} masih kosong.`,
-        action: `Isi bagian ${targetMap[fieldKey].label.toLowerCase()} sebelum menerbitkan artikel.`,
-      }, fieldKey);
-    });
-
-    // 2. Duplicate / cannibalization warnings
-    const closestDuplicate = aiReview.duplicateCheck?.results?.[0];
-    if (closestDuplicate && aiReview.duplicateCheck?.risk !== "low") {
-      const dupField: FieldKey = closestDuplicate.contentSimilarity > closestDuplicate.titleSimilarity ? "content" : "title";
-      addCandidate({
-        ...targetMap[dupField],
-        message: closestDuplicate.keywordCannibalization
-          ? `Artikel "${closestDuplicate.matchedTitle}" menargetkan keyword yang sama. Hapus salah satu atau bedakan target keyword.`
-          : `Gunakan sudut pembahasan yang berbeda dari "${closestDuplicate.matchedTitle}" (${Math.round(closestDuplicate.similarity * 100)}% mirip).`,
-        severity: aiReview.duplicateCheck.risk === "high" ? "critical" : "warning",
-        location: targetMap[dupField].label,
-        problem: closestDuplicate.keywordCannibalization
-          ? `Keyword "${closestDuplicate.matchedFocusKeyword}" digunakan di dua artikel — ini keyword cannibalization.`
-          : `Draft memiliki kemiripan ${Math.round(closestDuplicate.similarity * 100)}% dengan artikel "${closestDuplicate.matchedTitle}".`,
-        action: "Ubah fokus utama, urutan pembahasan, dan contoh agar artikel menjawab kebutuhan pembaca dari sudut yang berbeda.",
-        reason: "Mencegah dua artikel bersaing untuk topik yang sama dan mengurangi risiko konten duplikat.",
-      }, dupField);
-    }
-
-    // 2b. Copywriting similarity check
-    if (aiReview.copywritingCheck && aiReview.copywritingCheck.risk !== "low") {
-      const copyField: FieldKey = "content";
-      addCandidate({
-        ...targetMap[copyField],
-        message: aiReview.copywritingCheck.message || `Terdeteksi penggunaan frasa template yang terlalu umum (${aiReview.copywritingCheck.risk === "high" ? "tinggi" : "sedang"}).`,
-        severity: aiReview.copywritingCheck.risk === "high" ? "warning" : "suggestion",
-        location: "Copywriting",
-        problem: aiReview.copywritingCheck.matches?.length > 0
-          ? `Frasa yang terlalu mirip: "${aiReview.copywritingCheck.matches[0].matchedText}" (sumber: ${aiReview.copywritingCheck.matches[0].originalSource})`
-          : "Artikel menggunakan terlalu banyak frasa template umum.",
-        action: aiReview.copywritingCheck.matches?.length > 0
-          ? aiReview.copywritingCheck.matches[0].suggestion
-          : "Ganti frasa template dengan bahasa yang lebih spesifik dan unik.",
-        reason: "Konten yang unik lebih menarik pembaca dan mesin pencari.",
-      }, copyField);
-    }
-
-    // 2c. Tone consistency check
-    if (aiReview.toneCheck && aiReview.toneCheck.overall !== "consistent") {
-      const toneField: FieldKey = "content";
-      addCandidate({
-        ...targetMap[toneField],
-        message: aiReview.toneCheck.message || `Konsistensi tone artikel perlu diperbaiki (${aiReview.toneCheck.overall === "inconsistent" ? "banyak perubahan" : "ada beberapa bagian"}).`,
-        severity: aiReview.toneCheck.overall === "inconsistent" ? "warning" : "suggestion",
-        location: "Tone & Gaya Penulisan",
-        problem: aiReview.toneCheck.issues?.length > 0
-          ? `Bagian "${aiReview.toneCheck.issues[0].location}": ${aiReview.toneCheck.issues[0].problem}`
-          : "Tone artikel tidak konsisten di beberapa bagian.",
-        action: aiReview.toneCheck.issues?.length > 0
-          ? aiReview.toneCheck.issues[0].suggestion
-          : "Gunakan tone formal-profesional yang konsisten di seluruh artikel.",
-        reason: "Tone yang konsisten membangun kepercayaan pembaca terhadap profesionalisme EasyLegal.",
-      }, toneField);
-    }
-
-    // 3. Edit operations (safe auto-apply candidates)
-    visibleEditOperations.slice(0, 3).forEach((edit: any) => {
-      const fk = edit.field as FieldKey;
-      if (targetMap[fk]) {
-        addCandidate({
-          ...targetMap[fk],
-          message: edit.reason || "Ada perubahan siap diterapkan pada bagian ini.",
-          severity: "suggestion",
-          location: targetMap[fk].label,
-          problem: `Teks saat ini: "${edit.targetText}"`,
-          action: edit.operation === "insert_after"
-            ? "Tambahkan teks rekomendasi tepat setelah bagian yang ditunjuk."
-            : edit.operation === "delete"
-              ? "Hapus teks yang ditunjuk karena tidak lagi diperlukan."
-              : "Ganti teks yang ditunjuk dengan versi rekomendasi.",
-          example: edit.replacementText,
-          reason: edit.reason,
-          targetText: edit.targetText,
-        }, fk);
-      }
-    });
-
-    // 4. AI guidance items
-    if (Array.isArray(aiReview.guidance) && aiReview.guidance.length > 0) {
-      aiReview.guidance
-        .filter((item: any) => item && typeof item.message === "string" && item.message.trim())
-        .slice(0, 5)
-        .forEach((item: any) => {
-          const target = inferGuidanceTarget(item.field, item.message) as FieldKey;
-          if (targetMap[target]) {
-            addCandidate({
-              ...targetMap[target],
-              message: item.message,
-              severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
-              location: item.location,
-              problem: item.problem,
-              action: item.action,
-              example: item.example,
-              reason: item.reason,
-            }, target);
-          }
-        });
-    }
-
-    // 5. Fallback: recommended title, meta, outline, keyword (only if field has no candidate yet)
-    const fieldsWithCandidates = new Set(allCandidates.map((c) => c.fieldKey));
-    if (!fieldsWithCandidates.has("title") && aiReview.recommendedTitle) {
-      addCandidate({ ...targetMap.title, message: `Contoh judul yang bisa langsung dipakai: "${aiReview.recommendedTitle}"`, severity: "suggestion" }, "title");
-    }
-    if (!fieldsWithCandidates.has("excerpt") && aiReview.recommendedMetaDescription) {
-      addCandidate({ ...targetMap.excerpt, message: `Contoh kutipan: "${aiReview.recommendedMetaDescription}"`, severity: "suggestion" }, "excerpt");
-    }
-    if (!fieldsWithCandidates.has("keyword") && aiReview.targetKeyword) {
-      addCandidate({ ...targetMap.keyword, message: `Contoh kata kunci utama: "${aiReview.targetKeyword}"`, severity: "suggestion" }, "keyword");
-    }
-    if (!fieldsWithCandidates.has("content") && Array.isArray(aiReview.recommendedOutline) && aiReview.recommendedOutline.length > 0) {
-      addCandidate({ ...targetMap.content, message: `Contoh struktur artikel: ${aiReview.recommendedOutline.join(" → ")}`, severity: "suggestion" }, "content");
-    }
-
-    // PICK BEST per field: highest severity wins, first occurrence breaks ties
-    const bestPerField = new Map<FieldKey, AICompanionGuidance>();
-    for (const candidate of allCandidates) {
-      const existing = bestPerField.get(candidate.fieldKey);
-      if (!existing || candidate.rank > (severityRank[(existing as any).severity] || 1)) {
-        bestPerField.set(candidate.fieldKey, candidate);
-      }
-    }
-
-    // Return in fixed order: title → excerpt → content → keyword (skip empty candidates)
-    const fieldOrder: FieldKey[] = ["title", "excerpt", "content", "keyword"];
-    return fieldOrder
-      .map((fk) => bestPerField.get(fk))
-      .filter((item): item is AICompanionGuidance => Boolean(item))
-      // Filter out resolved guidance — applied suggestions won't reappear
-      .filter((item) => !resolvedGuidanceKeys.has(guidanceResolvedKey(item.targetId, item.message)));
-  })();
 
   useEffect(() => {
     if (!articleId && !slugManuallyEdited) setSlug(slugifyArticleTitle(title));
@@ -693,14 +524,11 @@ export default function ArticleEditor() {
     else syncEditorContent(nextValue.trim());
 
     setDismissedEditKeys((current) => [...new Set([...current, editOperationKey(edit)])]);
-    // Mark this field's currently-shown companion guidance as resolved so it
-    // won't reappear — must key off the same targetId/message the filter
-    // uses (targetId differs from the raw field name for content/keyword).
     setResolvedGuidanceKeys((current) => {
       const next = new Set(current);
       const targetId = FIELD_TARGET_MAP[edit.field as GuidanceTarget]?.targetId || edit.field;
-      const activeItem = companionGuidance.find((item) => item.targetId === targetId);
-      next.add(guidanceResolvedKey(targetId, activeItem?.message || ""));
+      next.add(guidanceResolvedKey(targetId, edit.reason || ""));
+      next.add(editOperationKey(edit));
       return next;
     });
     verificationPendingRef.current = true;
@@ -772,10 +600,336 @@ export default function ArticleEditor() {
     setResolvedGuidanceKeys((current) => {
       const next = new Set(current);
       const targetId = FIELD_TARGET_MAP[target]?.targetId || target;
+      next.add(`guidance::${guidance.field || target}::${guidance.message || ""}`);
       next.add(guidanceResolvedKey(targetId, guidance.message || ""));
       return next;
     });
   };
+
+  const companionGuidance: AICompanionGuidance[] = (() => {
+    const targetMap = FIELD_TARGET_MAP;
+    type FieldKey = keyof typeof targetMap;
+
+    const emptyFields: FieldKey[] = [];
+    if (!title.trim()) emptyFields.push("title");
+    if (!excerpt.trim()) emptyFields.push("excerpt");
+    if (!content.trim()) emptyFields.push("content");
+    if (!focusKeyword.trim()) emptyFields.push("keyword");
+
+    const emptyMessages: Record<FieldKey, string> = {
+      title: "Judul artikel belum diisi. Tulis judul yang jelas, memuat kata kunci utama, dan menarik perhatian pembaca.",
+      excerpt: "Kutipan singkat (meta deskripsi) belum diisi. Tulis rangkuman 120-160 karakter yang menjelaskan manfaat artikel.",
+      content: "Isi artikel belum ditulis. Mulai dengan paragraf pembuka yang menjelaskan topik, lalu kembangkan dengan subjudul.",
+      keyword: "Kata kunci utama belum ditentukan. Masukkan frasa yang ingin dioptimasi agar AI bisa memberikan saran SEO yang tepat.",
+    };
+
+    if (!aiReview) {
+      return emptyFields.map((fieldKey) => ({
+        ...targetMap[fieldKey],
+        message: emptyMessages[fieldKey],
+        severity: (fieldKey === "content" || fieldKey === "title") ? ("critical" as const) : ("warning" as const),
+        location: targetMap[fieldKey].label,
+        problem: `${targetMap[fieldKey].label} masih kosong.`,
+        action: `Isi bagian ${targetMap[fieldKey].label.toLowerCase()} sebelum menerbitkan artikel.`,
+      }));
+    }
+
+    // Priority order: critical (4) > warning (3) > suggestion (2)
+    const severityRank: Record<string, number> = { critical: 4, warning: 3, suggestion: 2 };
+    const allCandidates: Array<AICompanionGuidance & { fieldKey: FieldKey; rank: number }> = [];
+
+    const addCandidate = (item: AICompanionGuidance, fieldKey: FieldKey, rankBonus = 0) => {
+      allCandidates.push({
+        ...item,
+        fieldKey,
+        rank: (severityRank[item.severity] || 2) + rankBonus,
+      });
+    };
+
+    // 1. Empty field detection
+    emptyFields.forEach((fieldKey) => {
+      addCandidate(
+        {
+          ...targetMap[fieldKey],
+          message: emptyMessages[fieldKey],
+          severity: fieldKey === "content" || fieldKey === "title" ? "critical" : "warning",
+          location: targetMap[fieldKey].label,
+          problem: `${targetMap[fieldKey].label} masih kosong.`,
+          action: `Isi bagian ${targetMap[fieldKey].label.toLowerCase()} sebelum menerbitkan artikel.`,
+          key: `empty::${fieldKey}`,
+        },
+        fieldKey,
+        2
+      );
+    });
+
+    // 2a. Duplicate / cannibalization warnings
+    const closestDuplicate = aiReview.duplicateCheck?.results?.[0];
+    if (closestDuplicate && aiReview.duplicateCheck?.risk !== "low" && !resolvedGuidanceKeys.has("duplicate-check::")) {
+      const dupField: FieldKey = closestDuplicate.contentSimilarity > closestDuplicate.titleSimilarity ? "content" : "title";
+      addCandidate(
+        {
+          ...targetMap[dupField],
+          message: closestDuplicate.keywordCannibalization
+            ? `Artikel "${closestDuplicate.matchedTitle}" menargetkan keyword yang sama. Hapus salah satu atau bedakan target keyword.`
+            : `Gunakan sudut pembahasan yang berbeda dari "${closestDuplicate.matchedTitle}" (${Math.round(closestDuplicate.similarity * 100)}% mirip).`,
+          severity: aiReview.duplicateCheck.risk === "high" ? "critical" : "warning",
+          location: targetMap[dupField].label,
+          problem: closestDuplicate.keywordCannibalization
+            ? `Keyword "${closestDuplicate.matchedFocusKeyword}" digunakan di dua artikel — ini keyword cannibalization.`
+            : `Draft memiliki kemiripan ${Math.round(closestDuplicate.similarity * 100)}% dengan artikel "${closestDuplicate.matchedTitle}".`,
+          action: "Ubah fokus utama, urutan pembahasan, dan contoh agar artikel menjawab kebutuhan pembaca dari sudut yang berbeda.",
+          reason: "Mencegah dua artikel bersaing untuk topik yang sama dan mengurangi risiko konten duplikat.",
+          key: "duplicate-check::",
+          dismissLabel: "Selesai",
+        },
+        dupField,
+        3
+      );
+    }
+
+    // 2b. Copywriting similarity check
+    if (aiReview.copywritingCheck && aiReview.copywritingCheck.risk !== "low" && !resolvedGuidanceKeys.has("copywriting-check::")) {
+      const copyField: FieldKey = "content";
+      addCandidate(
+        {
+          ...targetMap[copyField],
+          message: aiReview.copywritingCheck.message || `Terdeteksi penggunaan frasa template yang terlalu umum (${aiReview.copywritingCheck.risk === "high" ? "tinggi" : "sedang"}).`,
+          severity: aiReview.copywritingCheck.risk === "high" ? "warning" : "suggestion",
+          location: "Copywriting",
+          problem: aiReview.copywritingCheck.matches?.length > 0
+            ? `Frasa yang terlalu mirip: "${aiReview.copywritingCheck.matches[0].matchedText}" (sumber: ${aiReview.copywritingCheck.matches[0].originalSource})`
+            : "Artikel menggunakan terlalu banyak frasa template umum.",
+          action: aiReview.copywritingCheck.matches?.length > 0
+            ? aiReview.copywritingCheck.matches[0].suggestion
+            : "Ganti frasa template dengan bahasa yang lebih spesifik dan unik.",
+          reason: "Konten yang unik lebih menarik pembaca dan mesin pencari.",
+          targetText: aiReview.copywritingCheck.matches?.[0]?.matchedText,
+          key: "copywriting-check::",
+          dismissLabel: "Selesai",
+        },
+        copyField,
+        2
+      );
+    }
+
+    // 2c. Tone consistency check
+    if (aiReview.toneCheck && aiReview.toneCheck.overall !== "consistent" && !resolvedGuidanceKeys.has("tone-check::")) {
+      const toneField: FieldKey = "content";
+      addCandidate(
+        {
+          ...targetMap[toneField],
+          message: aiReview.toneCheck.message || `Konsistensi tone artikel perlu diperbaiki (${aiReview.toneCheck.overall === "inconsistent" ? "banyak perubahan" : "ada beberapa bagian"}).`,
+          severity: aiReview.toneCheck.overall === "inconsistent" ? "warning" : "suggestion",
+          location: "Tone & Gaya Penulisan",
+          problem: aiReview.toneCheck.issues?.length > 0
+            ? `Bagian "${aiReview.toneCheck.issues[0].location}": ${aiReview.toneCheck.issues[0].problem}`
+            : "Tone artikel tidak konsisten di beberapa bagian.",
+          action: aiReview.toneCheck.issues?.length > 0
+            ? aiReview.toneCheck.issues[0].suggestion
+            : "Gunakan tone formal-profesional yang konsisten di seluruh artikel.",
+          reason: "Tone yang konsisten membangun kepercayaan pembaca terhadap profesionalisme EasyLegal.",
+          key: "tone-check::",
+          dismissLabel: "Selesai",
+        },
+        toneField,
+        1
+      );
+    }
+
+    // 3. Edit operations (safe auto-apply candidates)
+    visibleEditOperations.forEach((edit: any) => {
+      const fk = edit.field as FieldKey;
+      if (targetMap[fk]) {
+        const opKey = editOperationKey(edit);
+        addCandidate(
+          {
+            ...targetMap[fk],
+            message: edit.reason || "Ada perubahan siap diterapkan pada bagian ini.",
+            severity: "suggestion",
+            location: targetMap[fk].label,
+            problem: `Teks saat ini: "${edit.targetText}"`,
+            action: edit.operation === "insert_after"
+              ? "Tambahkan teks rekomendasi tepat setelah bagian yang ditunjuk."
+              : edit.operation === "delete"
+                ? "Hapus teks yang ditunjuk karena tidak lagi diperlukan."
+                : "Ganti teks yang ditunjuk dengan versi rekomendasi.",
+            example: edit.replacementText,
+            reason: edit.reason,
+            targetText: edit.targetText,
+            key: opKey,
+            onApply: () => applyAIEdit(edit),
+            applyLabel: "Terapkan perubahan",
+            dismissLabel: "Abaikan",
+          },
+          fk,
+          3 // High priority because directly actionable
+        );
+      }
+    });
+
+    // 4. AI guidance items
+    if (Array.isArray(aiReview.guidance) && aiReview.guidance.length > 0) {
+      aiReview.guidance
+        .filter((item: any) => item && typeof item.message === "string" && item.message.trim())
+        .forEach((item: any) => {
+          const target = inferGuidanceTarget(item.field, item.message) as FieldKey;
+          if (targetMap[target]) {
+            const targetId = targetMap[target].targetId;
+            const gKey1 = `guidance::${item.field}::${item.message}`;
+            const gKey2 = guidanceResolvedKey(targetId, item.message);
+            if (!resolvedGuidanceKeys.has(gKey1) && !resolvedGuidanceKeys.has(gKey2)) {
+              const hasExample = Boolean(item.example && item.example.trim());
+              addCandidate(
+                {
+                  ...targetMap[target],
+                  message: item.message,
+                  severity: ["suggestion", "warning", "critical"].includes(item.severity) ? item.severity : "suggestion",
+                  location: item.location || targetMap[target].label,
+                  problem: item.problem,
+                  action: item.action,
+                  example: item.example,
+                  reason: item.reason,
+                  key: gKey1,
+                  onApply: hasExample ? () => applyGuidanceExample(item) : undefined,
+                  applyLabel: hasExample ? (target === "content" ? "Tambahkan ke artikel" : "Gunakan contoh") : undefined,
+                  dismissLabel: "Selesai",
+                },
+                target,
+                hasExample ? 1 : 0
+              );
+            }
+          }
+        });
+    }
+
+    // 5. SEO recommended slug guidance
+    if (aiReview.seoSupport?.recommendedSlug && aiReview.seoSupport.recommendedSlug !== slug && !resolvedGuidanceKeys.has("seo-support::")) {
+      addCandidate(
+        {
+          targetId: "article-slug",
+          label: "Slug URL",
+          message: `Rekomendasi slug SEO: /${aiReview.seoSupport.recommendedSlug}`,
+          severity: "suggestion",
+          location: "Slug URL",
+          problem: `Slug saat ini: /${slug || "-"}`,
+          action: "Gunakan slug yang lebih optimal untuk SEO.",
+          example: aiReview.seoSupport.recommendedSlug,
+          key: "seo-support::",
+          onApply: () => {
+            setSlug(aiReview.seoSupport.recommendedSlug);
+            setSlugManuallyEdited(true);
+            setResolvedGuidanceKeys((prev) => new Set([...prev, "seo-support::"]));
+          },
+          applyLabel: "Gunakan slug ini",
+          dismissLabel: "Selesai",
+        },
+        "title",
+        1
+      );
+    }
+
+    // 6. Fallback recommendations (only if field has no candidates)
+    const fieldsWithCandidates = new Set(allCandidates.map((c) => c.fieldKey));
+    if (!fieldsWithCandidates.has("title") && aiReview.recommendedTitle && !resolvedGuidanceKeys.has("fallback::title")) {
+      addCandidate(
+        {
+          ...targetMap.title,
+          message: `Contoh judul yang bisa langsung dipakai: "${aiReview.recommendedTitle}"`,
+          severity: "suggestion",
+          example: aiReview.recommendedTitle,
+          key: "fallback::title",
+          onApply: () => {
+            setTitle(aiReview.recommendedTitle);
+            setResolvedGuidanceKeys((prev) => new Set([...prev, "fallback::title"]));
+          },
+          applyLabel: "Gunakan judul ini",
+          dismissLabel: "Selesai",
+        },
+        "title"
+      );
+    }
+    if (!fieldsWithCandidates.has("excerpt") && aiReview.recommendedMetaDescription && !resolvedGuidanceKeys.has("fallback::excerpt")) {
+      addCandidate(
+        {
+          ...targetMap.excerpt,
+          message: `Contoh kutipan: "${aiReview.recommendedMetaDescription}"`,
+          severity: "suggestion",
+          example: aiReview.recommendedMetaDescription,
+          key: "fallback::excerpt",
+          onApply: () => {
+            setExcerpt(aiReview.recommendedMetaDescription);
+            setResolvedGuidanceKeys((prev) => new Set([...prev, "fallback::excerpt"]));
+          },
+          applyLabel: "Gunakan kutipan ini",
+          dismissLabel: "Selesai",
+        },
+        "excerpt"
+      );
+    }
+    if (!fieldsWithCandidates.has("keyword") && aiReview.targetKeyword && !resolvedGuidanceKeys.has("fallback::keyword")) {
+      addCandidate(
+        {
+          ...targetMap.keyword,
+          message: `Contoh kata kunci utama: "${aiReview.targetKeyword}"`,
+          severity: "suggestion",
+          example: aiReview.targetKeyword,
+          key: "fallback::keyword",
+          onApply: () => {
+            setFocusKeyword(aiReview.targetKeyword);
+            setResolvedGuidanceKeys((prev) => new Set([...prev, "fallback::keyword"]));
+          },
+          applyLabel: "Gunakan kata kunci ini",
+          dismissLabel: "Selesai",
+        },
+        "keyword"
+      );
+    }
+    if (!fieldsWithCandidates.has("content") && Array.isArray(aiReview.recommendedOutline) && aiReview.recommendedOutline.length > 0 && !resolvedGuidanceKeys.has("fallback::content")) {
+      const outlineText = aiReview.recommendedOutline.join(" → ");
+      addCandidate(
+        {
+          ...targetMap.content,
+          message: `Contoh struktur artikel: ${outlineText}`,
+          severity: "suggestion",
+          example: aiReview.recommendedOutline.map((h: string) => `## ${h}\n\n`).join("\n"),
+          key: "fallback::content",
+          onApply: () => {
+            appendToArticle(aiReview.recommendedOutline.map((h: string) => `\n\n## ${h}\n\n`).join(""));
+            setResolvedGuidanceKeys((prev) => new Set([...prev, "fallback::content"]));
+          },
+          applyLabel: "Tambahkan struktur ke artikel",
+          dismissLabel: "Selesai",
+        },
+        "content"
+      );
+    }
+
+    // Deduplicate candidates with identical targetId + message
+    const seenCandidates = new Set<string>();
+    const uniqueCandidates = allCandidates.filter((item) => {
+      const sig = `${item.targetId}:::${item.message}`;
+      if (seenCandidates.has(sig)) return false;
+      seenCandidates.add(sig);
+      return true;
+    });
+
+    // Filter out resolved items and sort by priority
+    return uniqueCandidates
+      .filter((item) => {
+        const rKey = guidanceResolvedKey(item.targetId, item.message);
+        if (resolvedGuidanceKeys.has(rKey)) return false;
+        if (item.key && resolvedGuidanceKeys.has(item.key)) return false;
+        if (item.key && dismissedEditKeys.includes(item.key)) return false;
+        return true;
+      })
+      .sort((a, b) => {
+        if (b.rank !== a.rank) return b.rank - a.rank;
+        const aAction = a.onApply ? 1 : 0;
+        const bAction = b.onApply ? 1 : 0;
+        return bAction - aAction;
+      });
+  })();
 
   const handleFormat = (command: string, value: string = "") => {
     if (typeof document !== "undefined") {
@@ -1789,34 +1943,49 @@ export default function ArticleEditor() {
                           </div>
                           <div className="space-y-3">
                             {aiReview.guidance
-                              .filter((item: any) => !resolvedGuidanceKeys.has(`guidance::${item.field}::${item.message}`))
-                              .map((item: any, index: number) => (
-                              <div key={`${item.field}-${index}`} className="rounded-xl border border-violet-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
-                                <div className="flex flex-wrap items-center justify-between gap-2">
-                                  <strong className="text-[13px] text-gray-900">{index + 1}. {item.message}</strong>
-                                  <div className="flex items-center gap-2">
-                                    <span className="rounded-full bg-violet-50 px-2 py-1 text-[10px] font-extrabold text-violet-700">{item.location || item.field}</span>
-                                    <button type="button" onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, `guidance::${item.field}::${item.message}`]))} className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors">
-                                      Selesai
-                                    </button>
+                              .filter((item: any) => {
+                                const target = inferGuidanceTarget(item.field, item.message || "") as keyof typeof FIELD_TARGET_MAP;
+                                const targetId = FIELD_TARGET_MAP[target]?.targetId || item.field;
+                                return (
+                                  !resolvedGuidanceKeys.has(`guidance::${item.field}::${item.message}`) &&
+                                  !resolvedGuidanceKeys.has(guidanceResolvedKey(targetId, item.message))
+                                );
+                              })
+                              .map((item: any, index: number) => {
+                                const target = inferGuidanceTarget(item.field, item.message || "") as keyof typeof FIELD_TARGET_MAP;
+                                const targetId = FIELD_TARGET_MAP[target]?.targetId || item.field;
+                                return (
+                                  <div key={`${item.field}-${index}`} className="rounded-xl border border-violet-100 bg-white p-3 text-[12px] leading-relaxed text-gray-700">
+                                    <div className="flex flex-wrap items-center justify-between gap-2">
+                                      <strong className="text-[13px] text-gray-900">{index + 1}. {item.message}</strong>
+                                      <div className="flex items-center gap-2">
+                                        <span className="rounded-full bg-violet-50 px-2 py-1 text-[10px] font-extrabold text-violet-700">{item.location || item.field}</span>
+                                        <button
+                                          type="button"
+                                          onClick={() => setResolvedGuidanceKeys((prev) => new Set([...prev, `guidance::${item.field}::${item.message}`, guidanceResolvedKey(targetId, item.message)]))}
+                                          className="text-[11px] font-bold text-gray-400 hover:text-gray-600 hover:underline transition-colors"
+                                        >
+                                          Selesai
+                                        </button>
+                                      </div>
+                                    </div>
+                                    {item.problem && <p className="mt-2"><strong>Kondisi sekarang:</strong> {item.problem}</p>}
+                                    {item.action && <p className="mt-1"><strong>Yang harus diubah:</strong> {item.action}</p>}
+                                    {item.example && (
+                                      <div className="mt-2 rounded-lg bg-emerald-50 px-3 py-2 text-emerald-950">
+                                        <strong className="block text-[10px] uppercase tracking-wide text-emerald-700">Contoh hasil</strong>
+                                        <p className="mt-1 font-semibold">{item.example}</p>
+                                      </div>
+                                    )}
+                                    {item.reason && <p className="mt-2 text-gray-500"><strong>Tujuan:</strong> {item.reason}</p>}
+                                    {item.example && visibleEditOperations.length === 0 && (
+                                      <button type="button" onClick={() => applyGuidanceExample(item)} className="mt-2 font-extrabold text-violet-700 hover:underline">
+                                        {inferGuidanceTarget(item.field, item.message || "") === "content" ? "Tambahkan contoh ke artikel" : "Gunakan contoh ini"}
+                                      </button>
+                                    )}
                                   </div>
-                                </div>
-                                {item.problem && <p className="mt-2"><strong>Kondisi sekarang:</strong> {item.problem}</p>}
-                                {item.action && <p className="mt-1"><strong>Yang harus diubah:</strong> {item.action}</p>}
-                                {item.example && (
-                                  <div className="mt-2 rounded-lg bg-emerald-50 px-3 py-2 text-emerald-950">
-                                    <strong className="block text-[10px] uppercase tracking-wide text-emerald-700">Contoh hasil</strong>
-                                    <p className="mt-1 font-semibold">{item.example}</p>
-                                  </div>
-                                )}
-                                {item.reason && <p className="mt-2 text-gray-500"><strong>Tujuan:</strong> {item.reason}</p>}
-                                {item.example && visibleEditOperations.length === 0 && (
-                                  <button type="button" onClick={() => applyGuidanceExample(item)} className="mt-2 font-extrabold text-violet-700 hover:underline">
-                                    {inferGuidanceTarget(item.field, item.message || "") === "content" ? "Tambahkan contoh ke artikel" : "Gunakan contoh ini"}
-                                  </button>
-                                )}
-                              </div>
-                            ))}
+                                );
+                              })}
                           </div>
                         </div>
                       )}
@@ -2603,11 +2772,30 @@ export default function ArticleEditor() {
         items={companionGuidance}
         isThinking={aiReviewLoading}
         onDismiss={(item) => {
+          if (item.key) {
+            if (
+              item.key.startsWith("duplicate-check::") ||
+              item.key.startsWith("copywriting-check::") ||
+              item.key.startsWith("tone-check::") ||
+              item.key.startsWith("guidance::") ||
+              item.key.startsWith("seo-support::") ||
+              item.key.startsWith("fallback::")
+            ) {
+              setResolvedGuidanceKeys((prev) => new Set([...prev, item.key!]));
+            } else {
+              setDismissedEditKeys((current) => [...new Set([...current, item.key!])]);
+            }
+          }
           setResolvedGuidanceKeys((prev) => {
             const next = new Set(prev);
             next.add(guidanceResolvedKey(item.targetId, item.message));
             return next;
           });
+        }}
+        onApply={(item) => {
+          if (item.onApply) {
+            item.onApply();
+          }
         }}
       />
 

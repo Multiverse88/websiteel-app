@@ -12,6 +12,10 @@ export type AICompanionGuidance = {
   example?: string;
   reason?: string;
   targetText?: string;
+  key?: string;
+  onApply?: () => void;
+  applyLabel?: string;
+  dismissLabel?: string;
 };
 
 type Position = { left: number; top: number };
@@ -31,18 +35,21 @@ export default function AICompanionGuide({
   items,
   isThinking,
   onDismiss,
+  onApply,
 }: {
   items: AICompanionGuidance[];
   isThinking: boolean;
   onDismiss?: (item: AICompanionGuidance) => void;
+  onApply?: (item: AICompanionGuidance) => void;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState<Position>(dockPosition);
   const [isWalking, setIsWalking] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const walkTimerRef = useRef<number | null>(null);
-  const activeItem = items[activeIndex] || null;
-  const itemsKey = useMemo(() => items.map((item) => `${item.targetId}:${item.message}`).join("|"), [items]);
+  const safeIndex = items.length > 0 ? Math.min(activeIndex, items.length - 1) : 0;
+  const activeItem = items[safeIndex] || null;
+  const itemsKey = useMemo(() => items.map((item) => `${item.targetId}:${item.message}:${item.key || ""}`).join("|"), [items]);
 
   const clearTargetHighlight = useCallback(() => {
     document.querySelectorAll(".ai-companion-target").forEach((element) => {
@@ -324,13 +331,36 @@ export default function AICompanionGuide({
             )}
 
             {activeItem && !isThinking && (
-              <div className="ml-[52px] mt-3 flex gap-2">
-                <button type="button" onClick={() => walkToTarget(activeItem.targetId, true, activeItem.targetText)} className="flex-1 rounded-full border border-[#C80B14] px-3.5 py-2.5 text-[13px] font-extrabold text-[#B2070F] hover:bg-red-50 active:scale-[0.98] transition">
+              <div className="ml-[52px] mt-3 flex flex-wrap gap-2">
+                {(activeItem.onApply || onApply) && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (activeItem.onApply) {
+                        activeItem.onApply();
+                      } else if (onApply) {
+                        onApply(activeItem);
+                      }
+                    }}
+                    className="rounded-full bg-emerald-700 px-4 py-2 text-[12px] font-extrabold text-white hover:bg-emerald-800 active:scale-[0.98] transition shadow-sm"
+                  >
+                    {activeItem.applyLabel || "Terapkan perubahan"}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => walkToTarget(activeItem.targetId, true, activeItem.targetText)}
+                  className="flex-1 min-w-[110px] rounded-full border border-[#C80B14] px-3.5 py-2 text-[12px] font-extrabold text-[#B2070F] hover:bg-red-50 active:scale-[0.98] transition"
+                >
                   Tunjukkan letak
                 </button>
                 {onDismiss && (
-                  <button type="button" onClick={() => onDismiss(activeItem)} className="rounded-full border border-gray-200 px-3.5 py-2.5 text-[12px] font-bold text-gray-500 hover:bg-gray-50 hover:text-gray-700 active:scale-[0.98] transition">
-                    Sudah diterapkan
+                  <button
+                    type="button"
+                    onClick={() => onDismiss(activeItem)}
+                    className="rounded-full border border-gray-200 px-3.5 py-2 text-[12px] font-bold text-gray-500 hover:bg-gray-50 hover:text-gray-700 active:scale-[0.98] transition"
+                  >
+                    {activeItem.dismissLabel || "Sudah diterapkan"}
                   </button>
                 )}
               </div>
@@ -350,7 +380,7 @@ export default function AICompanionGuide({
             {activeItem && !isThinking && (
               <div className="mt-2.5 flex items-center justify-center gap-2.5">
                 <button type="button" onClick={() => changeItem(-1)} className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#990202]" aria-label="Saran sebelumnya"><ChevronLeft size={16} /></button>
-                <span className="text-[12px] font-bold text-gray-400">Saran {activeIndex + 1} dari {items.length}</span>
+                <span className="text-[12px] font-bold text-gray-400">Saran {safeIndex + 1} dari {items.length}</span>
                 <button type="button" onClick={() => changeItem(1)} className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#990202]" aria-label="Saran berikutnya"><ChevronRight size={16} /></button>
               </div>
             )}
