@@ -197,9 +197,12 @@ export const api = {
   deleteLandingPage: (id: string) => request(`/LandingPage?id=eq.${id}`, { method: 'DELETE' }),
 
   // Redirects
-  getRedirects: () => request('/Redirect?select=*'),
-  createRedirect: (data: any) => request('/Redirect', { method: 'POST', body: JSON.stringify(data) }),
-  updateRedirect: (id: string, data: any) => request(`/Redirect?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  getRedirects: () => request('/Redirect?select=*&order=createdAt.desc'),
+  createRedirect: (data: any) => {
+    const id = data.id || 'c' + Math.random().toString(36).slice(2, 11) + Math.random().toString(36).slice(2, 11)
+    return request('/Redirect', { method: 'POST', body: JSON.stringify({ id, updatedAt: new Date().toISOString(), ...data }) })
+  },
+  updateRedirect: (id: string, data: any) => request(`/Redirect?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ ...data, updatedAt: new Date().toISOString() }) }),
   deleteRedirect: (id: string) => request(`/Redirect?id=eq.${id}`, { method: 'DELETE' }),
 
   // Email Blast Contacts

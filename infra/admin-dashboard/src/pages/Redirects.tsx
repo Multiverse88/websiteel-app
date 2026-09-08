@@ -7,7 +7,7 @@ import Modal from '../components/Modal'
 // asset filename from a prior deploy race doesn't get reused. Actual side
 // effect (not just a comment) since comments are stripped by the minifier
 // and don't change the output hash.
-console.debug('[build] redirects-ui rev 2026-08-20-02')
+console.debug('[build] redirects-ui rev 2026-09-08-01')
 
 interface Redirect {
   id: string
@@ -19,10 +19,11 @@ interface Redirect {
   createdAt: string
 }
 
-const emptyForm = { domain: 'easylegal.my.id', slug: '', destination: '', description: '' }
+const emptyForm = { domain: 'easylegal.id', slug: '', destination: '', description: '' }
 
 function shortLinkUrl(redirect: Redirect) {
-  return `https://${redirect.domain}/${redirect.slug.replace(/^\/+/, '')}`
+  const domain = redirect.domain || 'easylegal.id'
+  return `https://${domain}/${redirect.slug.replace(/^\/+/, '')}`
 }
 
 function ShortLinkCell({ redirect }: { redirect: Redirect }) {
@@ -75,6 +76,8 @@ export default function Redirects() {
   const [form, setForm] = useState(emptyForm)
   const [saving, setSaving] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState<Redirect | null>(null)
+  const [selectedDomain, setSelectedDomain] = useState('')
+  const [search, setSearch] = useState('')
 
   const load = async () => {
     setLoading(true)
@@ -91,12 +94,24 @@ export default function Redirects() {
   useEffect(() => { load() }, [])
 
   const handleSave = async () => {
+    if (!form.slug.trim() || !form.destination.trim()) {
+      alert('Slug dan destination wajib diisi')
+      return
+    }
+
     setSaving(true)
     try {
+      const payload = {
+        ...form,
+        slug: form.slug.trim().replace(/^\/+/, '').replace(/\/+$/, ''),
+        destination: form.destination.trim(),
+        description: form.description ? form.description.trim() : null,
+      }
+
       if (editing) {
-        await api.updateRedirect(editing.id, form)
+        await api.updateRedirect(editing.id, payload)
       } else {
-        await api.createRedirect(form)
+        await api.createRedirect(payload)
       }
       setModalOpen(false)
       setEditing(null)
@@ -129,13 +144,24 @@ export default function Redirects() {
   const openEdit = (redirect: Redirect) => {
     setEditing(redirect)
     setForm({
-      domain: redirect.domain || 'easylegal.my.id',
+      domain: redirect.domain || 'easylegal.id',
       slug: redirect.slug,
       destination: redirect.destination,
       description: redirect.description || '',
     })
     setModalOpen(true)
   }
+
+  const filteredRedirects = redirects.filter((r) => {
+    const rDomain = r.domain || 'easylegal.id'
+    const matchesDomain = !selectedDomain || rDomain === selectedDomain
+    const matchesSearch =
+      !search ||
+      (r.slug && r.slug.toLowerCase().includes(search.toLowerCase())) ||
+      (r.destination && r.destination.toLowerCase().includes(search.toLowerCase())) ||
+      (r.description && r.description.toLowerCase().includes(search.toLowerCase()))
+    return matchesDomain && matchesSearch
+  })
 
   const columns = [
     {
@@ -163,15 +189,36 @@ export default function Redirects() {
 
   return (
     <div className="page">
-      <div className="page-header">
-        <div />
+      <div className="page-header" style={{ display: 'flex', gap: '12px', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', flex: 1 }}>
+          <input
+            type="text"
+            className="form-input"
+            style={{ maxWidth: '300px' }}
+            placeholder="Cari slug atau destination..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <select
+            className="form-input"
+            style={{ width: 'auto', minWidth: '180px' }}
+            value={selectedDomain}
+            onChange={(e) => setSelectedDomain(e.target.value)}
+          >
+            <option value="">Semua Domain ({redirects.length})</option>
+            <option value="easylegal.id">easylegal.id</option>
+            <option value="easylegal.biz.id">easylegal.biz.id</option>
+            <option value="easylegal.co.id">easylegal.co.id</option>
+            <option value="easylegal.my.id">easylegal.my.id</option>
+          </select>
+        </div>
         <button className="btn btn--primary" onClick={openCreate}>
           + New Redirect
         </button>
       </div>
       <DataTable
         columns={columns}
-        data={redirects}
+        data={filteredRedirects}
         loading={loading}
         emptyMessage="No redirects found"
         onEdit={openEdit}
@@ -182,18 +229,19 @@ export default function Redirects() {
         <div className="form-group">
           <label className="form-label">Domain</label>
           <select className="form-input" value={form.domain} onChange={(e) => setForm({ ...form, domain: e.target.value })}>
-            <option value="easylegal.my.id">easylegal.my.id</option>
+            <option value="easylegal.id">easylegal.id</option>
             <option value="easylegal.biz.id">easylegal.biz.id</option>
-            
+            <option value="easylegal.co.id">easylegal.co.id</option>
+            <option value="easylegal.my.id">easylegal.my.id</option>
           </select>
         </div>
         <div className="form-group">
           <label className="form-label">Slug / From Path</label>
-          <input className="form-input" placeholder="/old-path" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+          <input className="form-input" placeholder="path-tanpa-slash (contoh: promo-pt)" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
         </div>
         <div className="form-group">
           <label className="form-label">Destination / To URL</label>
-          <input className="form-input" placeholder="/new-path or https://..." value={form.destination} onChange={(e) => setForm({ ...form, destination: e.target.value })} />
+          <input className="form-input" placeholder="/layanan/... atau https://..." value={form.destination} onChange={(e) => setForm({ ...form, destination: e.target.value })} />
         </div>
         <div className="form-group">
           <label className="form-label">Share Preview Description</label>
