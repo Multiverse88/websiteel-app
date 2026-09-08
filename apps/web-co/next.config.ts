@@ -1,38 +1,18 @@
 import type { NextConfig } from "next";
 
-// Improved CSP policy - removes unsafe-eval for better security in production
-const isProd = process.env.NODE_ENV === "production";
-
-const ContentSecurityPolicy = isProd
-  ? `
+const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline';
-  script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com https://connect.facebook.net https://googleads.g.doubleclick.net https://tgtag.io;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googletagmanager.com https://tagassistant.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.google.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://www.googleadservices.com https://*.googleadservices.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com https://connect.facebook.net https://tgtag.io;
+  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googletagmanager.com https://tagassistant.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.google.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://www.googleadservices.com https://*.googleadservices.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com https://connect.facebook.net https://tgtag.io;
   style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id https://typebot.easylegal.biz.id;
-  img-src 'self' https: blob: data:;
+  img-src 'self' https: blob: data: https://www.googletagmanager.com https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.googleadservices.com https://*.doubleclick.net;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://api.easylegal.my.id ws: wss: https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cloudflareinsights.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app https://tgtag.io;
-  frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://www.facebook.com;
+  connect-src 'self' https://api.easylegal.my.id ws: wss: https://www.googletagmanager.com https://*.googletagmanager.com https://tagassistant.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.google.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://www.googleadservices.com https://*.googleadservices.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cloudflareinsights.com https://ad.doubleclick.net https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app https://tgtag.io;
+  frame-src 'self' https://www.googletagmanager.com https://*.googletagmanager.com https://tagassistant.google.com https://*.google.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://www.facebook.com;
   media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com blob: data:;
   object-src 'none';
   base-uri 'self';
   form-action 'self' https://www.facebook.com;
-  frame-ancestors 'self' https://tagassistant.google.com;
-  worker-src 'self' blob:;
-`
-  : `
-  default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval';
-  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com https://connect.facebook.net https://googleads.g.doubleclick.net https://tgtag.io;
-  style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id https://typebot.easylegal.biz.id;
-  img-src 'self' https: blob: data:;
-  font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://api.easylegal.my.id ws: wss: https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cloudflareinsights.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app https://tgtag.io;
-  frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id;
-  media-src 'self' https://www.youtube.com https://www.youtube-nocookie.com blob: data:;
-  object-src 'none';
-  base-uri 'self';
-  form-action 'self';
   frame-ancestors 'self' https://tagassistant.google.com;
   worker-src 'self' blob:;
 `;
