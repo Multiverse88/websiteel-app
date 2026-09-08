@@ -53,33 +53,21 @@ export default function PengajuanPkp() {
 
   const faqs = [
     {
-      q: "Kapan saya harus daftar PKP?",
-      a: "Wajib daftar PKP jika omset bruto bisnis Anda <strong class=\"font-extrabold text-gray-900\">melebihi Rp 4,8 miliar dalam 1 tahun pajak</strong>. Pendaftaran harus dilakukan paling lambat <strong class=\"font-extrabold text-gray-900\">30 hari</strong> setelah lewat batas tersebut. Jika tidak, Anda bisa kena sanksi administratif & denda. Untuk omset di bawah Rp 4,8 miliar, daftar bersifat <strong class=\"font-extrabold text-gray-900\">sukarela</strong> — bisa Anda pilih kalau memang menguntungkan (misal karena banyak transaksi B2B)."
+      q: "Apa itu Pengusaha Kena Pajak (PKP) dan siapa yang wajib mengajukannya?",
+      a: "PKP adalah pengusaha yang telah dikukuhkan oleh DJP untuk memungut, menyetor, dan melaporkan PPN sesuai ketentuan yang berlaku.",
     },
     {
-      q: "Berapa lama proses pendaftaran PKP?",
-      a: "Proses verifikasi berkisar antara <strong class=\"font-extrabold text-gray-950\">3 hingga 7 hari kerja</strong> setelah seluruh berkas persyaratan perpajakan diserahkan secara lengkap ke Kantor Pelayanan Pajak (KPP) terkait."
+      q: "Apa saja keuntungan dan manfaat jika perusahaan saya menjadi PKP?",
+      a: "Menjadi PKP dapat meningkatkan kredibilitas bisnis, memudahkan kerja sama dengan perusahaan lain, serta memungkinkan pengkreditan Pajak Masukan sesuai ketentuan perpajakan.",
     },
     {
-      q: "Apa beda PKP vs Non-PKP?",
-      a: "Perbedaan utama adalah pada <strong class=\"font-extrabold text-gray-950\">pemungutan PPN</strong>. Perusahaan PKP wajib memungut PPN dari pembeli dan menerbitkan e-Faktur, serta dapat mengkreditkan PPN masukan dari supplier. Sedangkan Non-PKP tidak boleh memungut PPN dan tidak bisa menerbitkan e-Faktur."
+      q: "Apa saja syarat utama untuk mengajukan Pengukuhan PKP?",
+      a: "Umumnya diperlukan NIB, NPWP Badan, dokumen identitas pengurus, alamat usaha, serta dokumen pendukung lainnya sesuai ketentuan DJP.",
     },
     {
-      q: "Apa itu survei PKP & kenapa harus dilakukan?",
-      a: "Survei PKP adalah verifikasi lapangan oleh petugas pajak (KPP) ke alamat domisili usaha. Tujuannya untuk memastikan <strong class=\"font-extrabold text-gray-950\">kebenaran keberadaan usaha</strong> dan melihat apakah alamat serta aktivitas usaha sesuai dengan dokumen yang diajukan sebelum aktivasi e-Faktur disetujui."
+      q: "Berapa lama proses pengurusan PKP hingga Sertifikat PKP terbit?",
+      a: "Proses pengukuhan PKP umumnya dapat selesai sekitar 7–14 hari kerja, tergantung kelengkapan dokumen dan proses verifikasi oleh DJP.",
     },
-    {
-      q: "Apakah usaha online (e-commerce) bisa daftar PKP?",
-      a: "Sangat bisa. Selama Anda memiliki badan usaha (PT/CV) atau terdaftar sebagai WP perorangan dengan domisili usaha yang jelas, Anda berhak mengajukan PKP untuk dapat menerbitkan faktur pajak kepada pelanggan korporat Anda."
-    },
-    {
-      q: "Setelah jadi PKP, apa kewajiban saya?",
-      a: "Setelah berstatus PKP, perusahaan wajib menerbitkan Faktur Pajak resmi (e-Faktur) atas penyerahan barang/jasa kena pajak, memungut PPN dari pembeli, dan wajib melaporkan SPT Masa PPN secara bulanan paling lambat akhir bulan berikutnya."
-    },
-    {
-      q: "Apakah pengajuan saya pasti disetujui DJP?",
-      a: "Persetujuan sepenuhnya merupakan kewenangan KPP setempat berdasarkan kelengkapan berkas fisik dan hasil survei lapangan. Namun, dengan layanan EasyLegal, kami memastikan seluruh <strong class=\"font-extrabold text-gray-950\">dokumen dan persyaratan valid</strong> sebelum diajukan, sehingga persentase keberhasilan sangat tinggi."
-    }
   ];
 
   const easyLegalPkpBenefits = [
@@ -418,7 +406,7 @@ export default function PengajuanPkp() {
                 KEUNGGULAN KAMI
               </p>
               <h2 className="font-heading text-[32px] sm:text-[46px] font-extrabold text-gray-950 leading-[1.15]">
-                Mengapa Pilih EasyLegal untuk Urus PKP?
+                Apa saja yang akan Anda dapat dari <span className="text-[#D62828]">JASA PENGURUSAN PKP</span> EasyLegal?
               </h2>
               <p className="text-[16px] sm:text-[16px] text-gray-500 font-medium leading-relaxed max-w-lg">
                 Jangan ambil risiko dalam pengajuan PKP. Pengajuan yang ditolak akan memperlambat operasional bisnis Anda. Kami memastikan proses lancar 100% dengan transparan.
@@ -777,7 +765,14 @@ export default function PengajuanPkp() {
 
       {/* ─── 8. TESTIMONIALS SECTION ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PENGURUSAN PKP</strong> kami.
+          </>
+        }
+      />
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran PKP." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />

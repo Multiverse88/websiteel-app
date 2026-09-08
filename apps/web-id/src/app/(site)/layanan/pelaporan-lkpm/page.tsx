@@ -113,37 +113,17 @@ const steps = [
 
 const faqs = [
   {
-    q: "Apakah perusahaan saya wajib lapor LKPM?",
-    a: "Wajib, jika perusahaan Anda memiliki NIB & izin berusaha — termasuk PMA, PMDN, UMK, sampai perusahaan besar. Mulai dari tahap konstruksi sampai operasional, perusahaan harus lapor LKPM. Pengecualian: usaha mikro dengan modal < Rp 1 miliar sesuai PP 7/2021 boleh tidak melapor (cek konsultasi untuk konfirmasi status Anda)."
+    q: "Apa itu LKPM dan siapa yang wajib melaporkannya?",
+    a: "LKPM (Laporan Kegiatan Penanaman Modal) adalah laporan perkembangan realisasi investasi yang wajib disampaikan oleh pelaku usaha sesuai ketentuan OSS Berbasis Risiko.",
   },
   {
-    q: "Berapa kali setahun harus lapor?",
-    a: "Frekuensi pelaporan tergantung skala usaha. Skala UMK wajib melapor 2 kali setahun (Semesteran). Skala Menengah dan Besar wajib melapor 4 kali setahun (Kuartalan/Triwulan)."
+    q: "Siapa yang dikecualikan dari kewajiban pelaporan LKPM?",
+    a: "Pelaku usaha mikro dengan tingkat risiko rendah umumnya dikecualikan dari kewajiban pelaporan LKPM, sesuai ketentuan yang berlaku.",
   },
   {
-    q: "Apa yang terjadi kalau saya telat lapor LKPM?",
-    a: "BKPM akan mengenakan sanksi bertahap mulai dari Peringatan Tertulis (3 kali), Penghentian Sementara kegiatan usaha, Pembekuan NIB, hingga Pencabutan Izin Usaha secara permanen. Selain itu, compliance rating perusahaan akan turun yang menyulitkan perpanjangan izin atau tender."
+    q: "Mengapa sebaiknya menggunakan jasa profesional untuk pelaporan LKPM?",
+    a: "Jasa profesional membantu memastikan pelaporan dilakukan tepat waktu, data sesuai ketentuan, dan meminimalkan risiko kesalahan administrasi.",
   },
-  {
-    q: "Bagaimana kalau usaha belum mulai operasi / belum ada realisasi?",
-    a: "Tetap wajib melapor. Anda harus melaporkan LKPM dengan nilai realisasi investasi nihil (Rp 0) atau mencantumkan kendala/tahapan konstruksi yang sedang berjalan. Tidak melapor dengan alasan belum beroperasi tetap dianggap pelanggaran kepatuhan."
-  },
-  {
-    q: "Data apa saja yang harus dilaporkan?",
-    a: "Realisasi modal tetap (tanah, bangunan, mesin), realisasi modal kerja, jumlah tenaga kerja (WNI & WNA), volume/nilai produksi barang/jasa, perolehan perizinan berusaha di daerah, dan hambatan atau kendala yang dihadapi dalam pelaksanaan investasi."
-  },
-  {
-    q: "Apakah bisa lapor sendiri tanpa pakai jasa?",
-    a: "Bisa, pelaporan dilakukan secara mandiri melalui portal OSS RBA. Namun, banyak perusahaan mengalami kesulitan teknis dalam memetakan realisasi investasi, menghitung rasio modal kerja, atau memperbaiki data yang ditolak/diberi catatan oleh BKPM. Menggunakan jasa EasyLegal memastikan pelaporan akurat & bebas salah input."
-  },
-  {
-    q: "Apa beda PMA & PMDN dalam LKPM?",
-    a: "PMA (Penanaman Modal Asing) dan PMDN (Penanaman Modal Dalam Negeri) pada umumnya memiliki kewajiban pelaporan yang sama. Namun PMA hampir selalu masuk kategori Menengah-Besar karena batasan modal minimumnya (> Rp 10 miliar), sehingga PMA wajib melapor setiap Kuartal (4 kali setahun) sejak NIB terbit."
-  },
-  {
-    q: "Bagaimana sistem reminder dari EasyLegal?",
-    a: "Kami memiliki sistem pemantauan berkala yang akan mengirimkan reminder otomatis melalui WhatsApp dan Email kepada Anda 30 hari, 14 hari, dan 7 hari sebelum batas akhir pelaporan LKPM setiap periode agar Anda terhindar dari sanksi BKPM."
-  }
 ];
 
 
@@ -293,12 +273,13 @@ export default function PelaporanLKPM() {
                   {/* Pill Badge */}
                   <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100/50 shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                    <span className="text-[16px] font-extrabold text-[#990202] tracking-wider uppercase">BKPM - OSS RBA</span>
+                    <span className="text-[16px] font-extrabold text-[#990202] tracking-wider uppercase">Laporan Investasi · BKPM / OSS</span>
                   </div>
 
                   {/* Headline */}
                   <h1 className="font-heading text-[28px] sm:text-[42px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
-                    Lapor LKPM tepat waktu <span className="text-[#990202]">hindari sanksi BKPM</span>
+                    Pelaporan LKPM tepat waktu<br />
+                    <span className="text-[#990202]">bebas sanksi</span>
                   </h1>
 
                   {/* Description */}
@@ -808,7 +789,14 @@ export default function PelaporanLKPM() {
           {/* ─── 10. TESTIMONIALS SECTION ─── */}
           <FadeIn delay={0.2}>
             <MediaCoverage />
-            <Testimonials />
+            <Testimonials
+              title={
+                <>
+                  Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+                  <strong className="font-extrabold text-[#D62828]">JASA PELAPORAN LKPM</strong> kami.
+                </>
+              }
+            />
           </FadeIn>
 
           {/* ─── 11. FAQ SECTION ─── */}

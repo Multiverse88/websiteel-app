@@ -337,7 +337,14 @@ export default function BadanUsahaTemplate({ content }: Props) {
 
       {/* ─── 7. TESTIMONIALS ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={c.testimonialTitle || (
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN {c.nama.toUpperCase()}</strong> kami.
+          </>
+        )}
+      />
 
       {/* ─── 2. PENGERTIAN ─── */}
       <section className="bg-white py-20 border-b border-gray-200/40">
@@ -471,13 +478,13 @@ export default function BadanUsahaTemplate({ content }: Props) {
               <span>Konsultasi via WhatsApp</span>
             </a>
 
-            <a
+            <Link
               href="/kontak"
               className="inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-gray-50 text-gray-800 shadow-md border border-black/[0.04] hover:border-gray-300 font-extrabold text-[16px] rounded-xl shadow-sm hover:shadow transition-all duration-200"
             >
               <span>Hubungi Tim Kami</span>
               <span className="text-[16px] font-normal">→</span>
-            </a>
+            </Link>
 
             <div className="flex items-center gap-1.5 text-[16px] text-gray-500 font-medium pt-1 px-1">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">

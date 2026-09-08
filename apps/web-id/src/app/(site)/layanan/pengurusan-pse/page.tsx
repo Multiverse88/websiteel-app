@@ -90,13 +90,13 @@ export default function PsePage() {
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100/60 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[16px] font-bold text-[#990202] tracking-wide">Kominfo · Pendaftaran PSE</span>
+                <span className="text-[16px] font-bold text-[#990202] tracking-wide">Legalitas Digital · Kominfo / Komdigi</span>
               </div>
 
               {/* Headline */}
               <h1 className="font-heading text-[32px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
-                Jasa Pengurusan PSE<br />
-                <span className="text-[#990202]">Kominfo Resmi.</span>
+                Daftar PSE Kominfo resmi<br />
+                <span className="text-[#990202]">cepat & anti blokir</span>
               </h1>
 
               {/* Description */}
@@ -359,7 +359,14 @@ export default function PsePage() {
 
       {/* ─── 7. TESTIMONIALS ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PENGURUSAN PSE</strong> kami.
+          </>
+        }
+      />
 
       {/* ─── 8. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar PSE." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />

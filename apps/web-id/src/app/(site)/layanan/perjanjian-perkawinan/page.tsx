@@ -760,7 +760,14 @@ export default function PerjanjianPerkawinan() {
 
       {/* ─── 8. TESTIMONIALS SECTION ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PERJANJIAN PISAH HARTA</strong> kami.
+          </>
+        }
+      />
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ items={faqs} />

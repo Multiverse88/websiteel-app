@@ -8,15 +8,15 @@ export const dataPembubaran: BadanUsahaContent = {
   namaFormal: "Likuidasi Perusahaan",
 
   heroBreadcrumbText: "Pembubaran Perusahaan",
-  heroBadge: "Jasa Likuidasi",
+  heroBadge: "Pembubaran Perusahaan",
   heroTitle: [
-    { text: "Pembubaran PT & CV secara " },
-    { text: "Resmi", highlight: true },
-    { text: " & " },
-    { text: "Tuntas.", highlight: true }
+    { text: "Bubarkan bisnis Anda yang tidak terurus " },
+    { break: true },
+    { text: "melalui " },
+    { text: "Jasa Pembubaran Perusahaan", highlight: true },
   ],
   heroDescription:
-    "Urus proses likuidasi, pencabutan status badan hukum Kemenkumham, pengumuman koran, hingga penutupan NPWP perusahaan secara sah dan berkekuatan hukum.",
+    "Bila bisnis tidak berjalan lancar dan Anda berpikir untuk selesai, penting untuk melakukan pembubaran perusahaan agar terhindar dari hal yang tidak diinginkan seperti pajak yang tetap berjalan.",
   heroImage: "/cerita-kami-team.webp",
   heroImageAlt: "Proses pembubaran perusahaan resmi",
   heroStats: [
@@ -253,7 +253,7 @@ export const dataPembubaran: BadanUsahaContent = {
   ],
 
   stepsTag: "ALUR KERJA",
-  stepsTitle: <>Proses mudah dan transparan<br/>dari awal hingga akhir</>,
+  stepsTitle: "Kami akan mengawal seluruh proses pembubaran perusahaan Anda hingga beres.",
   stepsSubtitle: "Kami mengurus seluruh tahapan pembubaran (likuidasi) secara tertib, mulai dari RUPS, pengumuman koran, hingga pencabutan status di Kemenkumham dan penutupan NPWP.",
   steps: [
     {
@@ -293,16 +293,31 @@ export const dataPembubaran: BadanUsahaContent = {
     }
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PEMBUBARAN PERUSAHAAN</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan Seputar Pembubaran",
   faqs: [
     {
-      q: "Berapa lama proses pembubaran PT?",
-      a: "Proses likuidasi dan pembubaran PT memerlukan waktu sekitar 4 hingga 6 bulan karena adanya kewajiban masa tunggu klaim kreditur (minimal 60 hari) setelah pengumuman koran."
+      q: "Mengapa perusahaan yang sudah tidak aktif harus dibubarkan secara resmi?",
+      a: "Pembubaran resmi memastikan status perusahaan ditutup sesuai ketentuan, sehingga mengurangi risiko munculnya kewajiban administrasi di kemudian hari.",
     },
     {
-      q: "Apakah utang piutang langsung hilang saat dibubarkan?",
-      a: "Tidak. Seluruh utang piutang dan kewajiban perusahaan harus dibereskan terlebih dahulu oleh Likuidator menggunakan aset perseroan sebelum status badan hukum resmi dihapus."
-    }
+      q: "Siapa yang bertugas melakukan proses pembubaran perusahaan?",
+      a: "Proses pembubaran dilakukan oleh pengurus atau pihak yang berwenang sesuai bentuk badan usaha, dengan didampingi notaris apabila diperlukan.",
+    },
+    {
+      q: "Tahapan dan dokumen apa saja yang diproses dalam pembubaran perusahaan?",
+      a: "Umumnya meliputi keputusan pembubaran, penyusunan akta pembubaran, pengurusan administrasi ke instansi terkait, serta dokumen pendukung sesuai bentuk badan usaha.",
+    },
+    {
+      q: "Berapa lama proses pembubaran perusahaan (PT/CV) hingga tuntas?",
+      a: "Proses pembubaran PT atau CV umumnya memerlukan sekitar 30–90 hari kerja, tergantung jenis badan usaha dan tahapan administrasi yang harus diselesaikan.",
+    },
   ],
 
   ctaTitle: "Butuh Konsultasi Pembubaran Usaha?",

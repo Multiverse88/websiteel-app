@@ -44,13 +44,17 @@ const aktaBenefits = [
 
 const faqs = [
   {
-    q: "Berapa lama proses pembuatan akta perubahan selesai?",
-    a: "Proses penyusunan draft hingga akta notaris ditandatangani dan mendapat persetujuan Kemenkumham rata-rata membutuhkan waktu 3 hingga 5 hari kerja."
+    q: "Dokumen dan syarat apa saja yang perlu disiapkan untuk pengurusan perubahan akta?",
+    a: "Umumnya diperlukan akta perusahaan terakhir, data perubahan yang akan dilakukan, identitas pengurus atau pemegang saham, serta dokumen pendukung sesuai jenis perubahan.",
   },
   {
-    q: "Apakah seluruh pemegang saham harus hadir saat tanda tangan?",
-    a: "Tanda tangan dapat diwakilkan menggunakan Surat Kuasa resmi dari pemegang saham yang tidak dapat hadir, atau melalui sirkuler RUPS."
-  }
+    q: "Hal-hal apa saja yang bisa dan sering diubah dalam Akta Perusahaan?",
+    a: "Perubahan akta dapat mencakup nama perusahaan, alamat, bidang usaha (KBLI), modal, susunan pengurus atau pemegang saham, hingga perubahan ketentuan Anggaran Dasar.",
+  },
+  {
+    q: "Mengapa dan kapan perusahaan (PT/CV) harus melakukan perubahan akta?",
+    a: "Perubahan akta perlu dilakukan ketika terjadi perubahan data penting perusahaan agar informasi yang tercatat tetap sesuai dengan kondisi usaha dan memiliki kepastian hukum.",
+  },
 ];
 
 export default function PerubahanAktaPage() {
@@ -93,13 +97,13 @@ export default function PerubahanAktaPage() {
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100/60 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[16px] font-bold text-[#990202] tracking-wide">Biro Jasa Akta · Perubahan Data PT</span>
+                <span className="text-[16px] font-bold text-[#990202] tracking-wide">Akta Notaris · AHU Kemenkumham</span>
               </div>
 
               {/* Headline */}
               <h1 className="font-heading text-[32px] sm:text-[50px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
-                Urus Perubahan Akta<br />
-                <span className="text-[#990202]">PT & CV Kilat.</span>
+                Perubahan Akta PT & CV<br />
+                <span className="text-[#990202]">resmi & tuntas</span>
               </h1>
 
               {/* Description */}
@@ -686,7 +690,14 @@ export default function PerubahanAktaPage() {
 
       {/* ─── 7. TESTIMONIALS ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PERUBAHAN AKTA PERUSAHAAN</strong> kami.
+          </>
+        }
+      />
 
       {/* ─── 8. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar Perubahan Akta." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />

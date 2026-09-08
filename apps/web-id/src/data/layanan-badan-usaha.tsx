@@ -67,6 +67,9 @@ export interface BadanUsahaContent {
     points: string[];
   }[];
 
+  // Testimonial
+  testimonialTitle?: React.ReactNode;
+
   // FAQ
   faqTitle: string;
   faqs: { q: string; a: string }[];
@@ -86,15 +89,15 @@ export const dataPT: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian PT",
   heroBadge: "Pendirian PT",
   heroTitle: [
-    { text: "Buat bisnis Anda lebih " },
+    { text: "Buat PT supaya bisnis lebih " },
     { break: true },
-    { text: "profesional dan " },
-    { text: "terpercaya", highlight: true },
+    { text: "profesional " },
+    { text: "secara mudah", highlight: true },
     { break: true },
-    { text: "dengan PT" },
+    { text: "lewat jasa pendirian PT" },
   ],
   heroDescription:
-    "Dirikan PT tanpa ribet antre di notaris. 100% online hingga akta di tangan Anda.",
+    "Pendirian PT secara mudah, aman, terpercaya. Didampingi oleh Personal Legal Assistance yang siap membantu dari awal proses hingga selesai.",
   heroImage:
     "/images/layanan/pt-1.jpg",
   heroImageAlt: "Penandatanganan akta pendirian badan usaha",
@@ -408,7 +411,7 @@ export const dataPT: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN PT",
-  stepsTitle: <>6 langkah pembuatan PT<br />semua kami pandu.</>,
+  stepsTitle: <>Seluruh langkah pembuatan PT akan kami pandu,<br />dari pendaftaran hingga pengesahan.</>,
   stepsSubtitle:
     "Dari konsultasi awal sampai dokumen lengkap di tangan Anda — estimasi 6–12 hari kerja.",
   steps: [
@@ -420,15 +423,22 @@ export const dataPT: BadanUsahaContent = {
     { no: "06", title: "NIB & Akun OSS RBA", duration: "", desc: "Aktivasi izin berusaha berbasis risiko (RBA) di sistem OSS — PT siap beroperasi penuh!", points: [] },
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN PT</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan seputar pendirian PT.",
   faqs: [
+    { q: "Apa saja syarat utama mendirikan PT?", a: "Syarat utama meliputi data pendiri dan pengurus, nama PT, alamat domisili, KBLI sesuai bidang usaha, serta dokumen pendukung lainnya sesuai ketentuan yang berlaku." },
+    { q: "Berapa lama proses pembuatan PT hingga selesai disahkan?", a: "Proses pendirian PT umumnya dapat selesai sekitar 6–12 hari kerja, tergantung kelengkapan dokumen dan proses administrasi." },
+    { q: "Apa pendirian PT bisa menggunakan alamat rumah atau virtual office?", a: "Bisa. PT dapat menggunakan alamat rumah atau Virtual Office, selama sesuai dengan ketentuan domisili usaha yang berlaku di wilayah terkait." },
     { q: "Mana yang lebih cocok: PT, CV, atau PT Perorangan?", a: "Tergantung skala bisnis. PT Perorangan cocok untuk solopreneur/UMKM mikro (1 pendiri, modal kecil). CV cocok untuk usaha kecil-menengah dengan 2 sekutu, tanpa modal minimum. PT cocok kalau bisnis Anda serius, butuh kredibilitas tinggi, atau ingin ikut tender — modal min. Rp25jt disetor, liability terpisah dari pribadi." },
-    { q: "Berapa lama proses pendirian PT?", a: "Proses lengkap pendirian PT all-in berkisar antara 6 hingga 12 hari kerja. Hal ini bergantung pada kecepatan penandatanganan akta oleh notaris partner dan tidak adanya kendala teknis pada sistem AHU Kemenkumham." },
     { q: "Apakah harga sudah termasuk biaya notaris & pemerintah?", a: "Ya, semua paket harga EasyLegal bersifat all-in. Sudah mencakup jasa notaris partner, biaya resmi PNBP/AHU Kemenkumham, pendaftaran NPWP perusahaan, dan seluruh proses pendaftaran izin di sistem OSS RBA hingga dokumen terbit." },
-    { q: "Bisa pakai alamat rumah sebagai domisili PT?", a: "Berdasarkan regulasi zonasi daerah (terutama di kota besar seperti Jakarta), alamat rumah tinggal umumnya tidak diperkenankan untuk domisili PT biasa. Namun, Anda dapat menggunakan layanan Virtual Office kami sebagai solusi alamat kantor legal yang sah dan hemat biaya." },
     { q: "Apakah saya harus datang ke notaris secara fisik?", a: "Tidak wajib. Penandatanganan akta pendirian dapat dilakukan secara tatap muka dengan notaris partner kami atau dilakukan secara elektronik (e-Notary) dengan verifikasi aman, sehingga Anda dapat menyelesaikan proses ini dari mana saja secara online." },
     { q: "Bagaimana kalau nama PT yang saya inginkan sudah dipakai?", a: "Sebelum melakukan pemesanan nama resmi di sistem AHU Kemenkumham, tim EasyLegal akan melakukan pengecekan ketersediaan nama secara gratis. Jika nama yang Anda inginkan sudah dipakai atau terlalu mirip dengan PT lain, kami akan menyarankan alternatif nama terbaik." },
-    { q: "Kalau pendiri saya WNA, bisa pakai PT biasa?", a: "Jika salah satu pendiri atau pemegang saham adalah Warga Negara Asing (WNA) atau perusahaan asing, maka jenis badan usahanya wajib berbentuk PT PMA (Penanaman Modal Asing) yang tunduk pada aturan modal dasar minimal Rp10 Miliar." },
   ],
 
   ctaTitle: "Siap dirikan",
@@ -445,15 +455,14 @@ const dataCV: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian CV",
   heroBadge: "Pendirian CV",
   heroTitle: [
-    { text: "Pengurusan CV, " },
+    { text: "Jasa Pendirian CV ", highlight: true },
     { break: true },
-    { text: "badan usaha yang " },
-    { text: "fleksibel", highlight: true },
+    { text: "bagi Anda yang mencari kemudahan " },
     { break: true },
-    { text: "untuk bisnis Anda" },
+    { text: "mendirikan badan usaha" },
   ],
   heroDescription:
-    "CV adalah pilihan tepat untuk usaha kecil-menengah yang ingin struktur jelas tanpa kompleksitas PT. Proses cepat, biaya terjangkau, dan cocok untuk bisnis keluarga.",
+    "Ingin usaha terlihat lebih profesional? Mulai pendirian CV yang terpercaya dengan jaminan kemudahan pada prosesnya.",
   heroImage:
     "/images/layanan/cv-1.jpg",
   heroImageAlt: "Tim kecil mendirikan CV",
@@ -744,7 +753,7 @@ const dataCV: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN CV",
-  stepsTitle: "4 langkah mudah pendirian CV.",
+  stepsTitle: "Pembuatan CV yang tidak membingungkan dan dibantu oleh tim kami yang profesional.",
   stepsSubtitle:
     "Dari konsultasi sampai dokumen resmi di tangan — estimasi 6–12 hari kerja.",
   steps: [
@@ -754,13 +763,21 @@ const dataCV: BadanUsahaContent = {
     { no: "04", title: "NIB & Perizinan OSS", duration: "", desc: "Penerbitan NIB dan akses OSS RBA untuk perizinan berusaha.", points: [] },
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN CV</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan seputar pendirian CV.",
   faqs: [
+    { q: "Apa itu CV dan siapa saja yang dibutuhkan untuk mendirikannya?", a: "CV (Commanditaire Vennootschap) adalah bentuk badan usaha yang didirikan oleh minimal dua orang, yaitu sekutu aktif dan sekutu pasif." },
+    { q: "Apa perbedaan utama antara CV dan PT?", a: "Perbedaan utamanya terletak pada status badan hukum, struktur kepemilikan, dan tanggung jawab para pendirinya. PT merupakan badan hukum, sedangkan CV bukan badan hukum." },
+    { q: "Berapa lama proses pembuatan CV hingga selesai?", a: "Proses pendirian CV umumnya dapat selesai sekitar 3–7 hari kerja, tergantung kelengkapan dokumen dan proses administrasi." },
+    { q: "Bisakah mendirikan CV menggunakan Virtual Office atau alamat rumah?", a: "Bisa. CV dapat menggunakan Virtual Office atau alamat rumah, selama sesuai dengan ketentuan domisili usaha yang berlaku di wilayah terkait." },
     { q: "Apa perbedaan Sekutu Aktif dan Sekutu Pasif di CV?", a: "Sekutu Aktif adalah pihak yang menjalankan & mengelola perusahaan serta bertanggung jawab penuh (tak terbatas). Sekutu Pasif/Komanditer hanya menyetor modal dan bertanggung jawab sebatas modal yang disetorkan — tidak terlibat dalam pengelolaan sehari-hari." },
-    { q: "Apakah CV berstatus badan hukum?", a: "Tidak. CV bukan badan hukum seperti PT. CV adalah badan usaha yang didaftarkan ke Pengadilan Negeri. Meskipun bukan badan hukum, CV tetap memiliki legalitas resmi untuk berbagai keperluan bisnis, termasuk pembukaan rekening bank atas nama CV." },
     { q: "Berapa modal minimum untuk mendirikan CV?", a: "Tidak ada ketentuan modal minimum untuk CV. Modal ditentukan berdasarkan kesepakatan para pendiri dan disesuaikan dengan kebutuhan usaha. Ini yang membuat CV sangat fleksibel untuk UKM." },
-    { q: "Berapa jumlah pendiri minimal CV?", a: "CV minimal didirikan oleh 2 orang — satu sebagai Sekutu Aktif dan satu sebagai Sekutu Pasif. Jika hanya ada 1 orang, disarankan memilih PT Perorangan." },
-    { q: "Apakah CV bisa diubah menjadi PT?", a: "Ya, CV dapat diubah menjadi PT melalui proses perubahan badan hukum. Kami dapat membantu Anda melakukan perubahan bentuk badan usaha sesuai perkembangan bisnis." },
   ],
 
   ctaTitle: "Siap dirikan",
@@ -778,15 +795,12 @@ const dataPMA: BadanUsahaContent = {
   heroBadge: "Pendirian PT PMA",
   titleClassName: "lg:text-[42px] xl:text-[46px]",
   heroTitle: [
-    { text: "Ekspansi bisnis Anda " },
+    { text: "Tarik investor luar negeri untuk bisnis Anda lewat " },
     { break: true },
-    { text: "ke Indonesia dengan " },
-    { text: "PT\u00A0PMA", highlight: true },
-    { break: true },
-    { text: "yang sesuai regulasi" },
+    { text: "JASA PENDIRIAN PT PMA", highlight: true },
   ],
   heroDescription:
-    "PT PMA adalah badan hukum untuk perusahaan dengan pemodal asing. Kami pandu seluruh proses — dari perizinan BKPM sampai akta pendirian — sesuai aturan investasi Indonesia.",
+    "Buat bisnis lebih berkembang dan naik ke kancah internasional dengan pendirian PT PMA yang sesuai regulasi tanpa banyak drama.",
   heroImage:
     "/images/layanan/pt-pma-1.jpg",
   heroImageAlt: "Rapat bisnis investasi asing",
@@ -1008,9 +1022,9 @@ const dataPMA: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN PT PMA",
-  stepsTitle: "6 langkah pendirian PT PMA.",
+  stepsTitle: "Kami akan bimbing seluruh proses pembuatan PT PMA sejak awal.",
   stepsSubtitle:
-    "Dari konsultasi BKPM sampai dokumen lengkap — estimasi 4–8 minggu, semua kami urus.",
+    "Dari konsultasi BKPM sampai dokumen lengkap — estimasi 7–14 hari kerja, semua kami urus.",
   steps: [
     { no: "01", title: "Konsultasi & Perencanaan", duration: "", desc: "Mengidentifikasi kebutuhan dasar bersama tim kami supaya sesuai visi bisnis Anda.", points: [] },
     { no: "02", title: "Siapkan Dokumen Pendirian", duration: "", desc: "Tim kami membantu menyiapkan dokumen yang dibutuhkan untuk pendirian PT PMA.", points: [] },
@@ -1020,13 +1034,20 @@ const dataPMA: BadanUsahaContent = {
     { no: "06", title: "IMTA & KITAS", duration: "", desc: "Pengurusan izin kerja bagi tenaga kerja asing (TKA) jika diperlukan.", points: [] },
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN PT PMA</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan seputar pendirian PT PMA.",
   faqs: [
+    { q: "Apa syarat utama mendirikan PT PMA di Indonesia?", a: "Umumnya diperlukan minimal dua pemegang saham, nama perusahaan, alamat usaha, bidang usaha (KBLI), serta dokumen identitas para pendiri sesuai ketentuan yang berlaku." },
+    { q: "Apakah warga negara asing (WNA) bisa memiliki 100% saham di PT PMA?", a: "Bisa, selama bidang usaha yang dipilih memperbolehkan kepemilikan asing sesuai ketentuan investasi yang berlaku di Indonesia." },
+    { q: "Berapa lama proses pendirian PT PMA hingga legalitas terbit?", a: "Proses pendirian PT PMA umumnya dapat selesai sekitar 7–14 hari kerja, tergantung kelengkapan dokumen dan proses administrasi." },
+    { q: "Apakah direktur asing di PT PMA otomatis mendapatkan KITAS Kerja?", a: "Tidak otomatis. Direktur asing tetap perlu mengajukan KITAS Kerja melalui prosedur keimigrasian dan ketenagakerjaan yang berlaku setelah persyaratannya terpenuhi." },
     { q: "Berapa modal minimal PT PMA?", a: "Modal dasar minimal PT PMA adalah Rp10 Miliar dengan modal ditempatkan dan disetor minimal Rp2,5 Miliar. Ketentuan ini diatur dalam Peraturan BKPM." },
-    { q: "Apakah semua bidang usaha bisa didirikan PT PMA?", a: "Tidak. Beberapa bidang usaha tertutup untuk PMA (sebagaimana diatur dalam DNI). Beberapa lainnya terbuka dengan persyaratan tertentu. Tim kami akan melakukan pengecekan kesesuaian bidang usaha Anda sebelum proses." },
-    { q: "Berapa lama proses pendirian PT PMA?", a: "Proses lengkap pendirian PT PMA berkisar antara 4–8 minggu, tergantung kompleksitas bidang usaha dan kelengkapan dokumen investor asing." },
-    { q: "Apakah WNA bisa menjadi Direksi atau Komisaris?", a: "Ya, WNA dapat menjabat sebagai Direksi atau Komisaris PT PMA. Namun, untuk Direksi wajib memiliki IMTA dan KITAS yang masih berlaku." },
-    { q: "Apa perbedaan PT PMA dengan PT biasa?", a: "PT PMA diperuntukkan bagi perusahaan dengan kepemilikan asing, memiliki modal minimal lebih besar (Rp10 Miliar), harus mendapatkan Izin Prinsip BKPM, dan tunduk pada peraturan investasi asing yang lebih ketat." },
   ],
 
   ctaTitle: "Siap dirikan",
@@ -1043,15 +1064,12 @@ const dataPTPerorangan: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian PT Perorangan",
   heroBadge: "Pendirian PT Perorangan",
   heroTitle: [
-    { text: "Bisnis sendiri namun " },
+    { text: "UMKM lebih profesional dan naik kelas lewat " },
     { break: true },
-    { text: "ingin profesional? " },
-    { text: "PT Perorangan", highlight: true },
-    { break: true },
-    { text: "solusinya" },
+    { text: "Jasa Pendirian PT Perorangan", highlight: true },
   ],
   heroDescription:
-    "PT Perorangan adalah badan hukum untuk 1 pendiri — proses mudah, modal kecil, dan legalitas penuh. Cocok untuk solopreneur & UMKM yang ingin naik kelas.",
+    "Anda pemilik UMKM yang butuh legalitas usaha untuk menggaet mitra baru? Pendirian PT perorangan solusinya, tanpa banyak persyaratan.",
   heroImage:
     "/images/layanan/pt-perorangan-1.jpg",
   heroImageAlt: "Pengusaha individu mengembangkan bisnis",
@@ -1325,9 +1343,9 @@ const dataPTPerorangan: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN PT PERORANGAN",
-  stepsTitle: "6 langkah mudah PT Perorangan.",
+  stepsTitle: "Kebingungan? Kami siap bantu proses pendirian PT Perorangan demi Anda.",
   stepsSubtitle:
-    "Daftar online, tanpa notaris, tanpa ribet — estimasi 3–7 hari kerja.",
+    "Daftar online, tanpa notaris, tanpa ribet — estimasi 1–3 hari kerja.",
   steps: [
     { no: "01", title: "Mencantumkan Identitas Diri", duration: "", desc: "Mengirimkan foto KTP dan NPWP.", points: [] },
     { no: "02", title: "Pengecekan Kelengkapan Dokumen", duration: "", desc: "Tim kami memeriksa kelengkapan dokumen pendirian Anda.", points: [] },
@@ -1337,13 +1355,21 @@ const dataPTPerorangan: BadanUsahaContent = {
     { no: "06", title: "NPWP & NIB", duration: "", desc: "Pendaftaran NPWP badan dan penerbitan NIB melalui OSS RBA.", points: [] },
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN PT PERORANGAN</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan seputar PT Perorangan.",
   faqs: [
+    { q: "Apa itu PT Perorangan dan siapa yang bisa mendirikannya?", a: "PT Perorangan adalah badan hukum yang dapat didirikan oleh satu orang untuk memenuhi kriteria usaha mikro atau kecil sesuai ketentuan yang berlaku." },
+    { q: "Apa bedanya PT Perorangan dengan PT Biasa (PT Persekutuan Modal)?", a: "Perbedaan utamanya terletak pada jumlah pendiri, persyaratan administrasi, dan mekanisme pengelolaannya. PT Perorangan didirikan oleh satu orang, sedangkan PT Biasa minimal didirikan oleh dua pihak." },
+    { q: "Berapa lama proses pembuatan PT Perorangan?", a: "Proses pendirian PT Perorangan umumnya dapat selesai sekitar 1–3 hari kerja, selama data dan dokumen yang dibutuhkan sudah lengkap." },
+    { q: "Apakah PT Perorangan bisa dipakai untuk buka rekening bank atas nama perusahaan?", a: "Bisa. Setelah legalitas PT Perorangan terbit dan persyaratan bank terpenuhi, perusahaan dapat membuka rekening atas nama badan usaha." },
     { q: "Apa beda PT Perorangan dengan PT biasa?", a: "PT Perorangan didirikan oleh 1 orang (tanpa notaris, via online), tidak punya modal minimum, dan khusus untuk UMKM. PT biasa memerlukan minimal 2 pendiri, akta notaris, dan modal minimum Rp50 juta." },
     { q: "Apakah PT Perorangan bisa punya karyawan?", a: "Ya, PT Perorangan tetap bisa mempekerjakan karyawan. Status badan hukumnya memungkinkan untuk mendaftarkan BPJS Ketenagakerjaan & Kesehatan bagi karyawan." },
-    { q: "Berapa modal untuk PT Perorangan?", a: "Tidak ada ketentuan modal minimum untuk PT Perorangan. Modal disesuaikan dengan kemampuan dan kebutuhan usaha Anda." },
-    { q: "Apakah PT Perorangan bisa diubah jadi PT biasa?", a: "Ya, jika usaha Anda berkembang, PT Perorangan dapat ditingkatkan menjadi PT biasa dengan akta notaris dan tambahan pemegang saham." },
-    { q: "Siapa yang bisa mendirikan PT Perorangan?", a: "Warga Negara Indonesia (WNI) yang memenuhi kriteria usaha mikro atau kecil sesuai UU Cipta Kerja." },
   ],
 
   ctaTitle: "Siap dirikan",
@@ -1360,15 +1386,12 @@ const dataFirma: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian Firma",
   heroBadge: "Pendirian Firma",
   heroTitle: [
-    { text: "Bisnis bersama rekan? " },
+    { text: "Bangun legalitas hukum yang kuat dan mudah melalui " },
     { break: true },
-    { text: "Pilih " },
-    { text: "Firma sebagai", highlight: true },
-    { break: true },
-    { text: "badan usaha resmi" },
+    { text: "Jasa Pendirian Firma kami", highlight: true },
   ],
   heroDescription:
-    "Firma adalah badan usaha yang didirikan oleh 2 orang atau lebih dengan tanggung jawab penuh bersama. Cocok untuk bisnis profesional & jasa yang mengutamakan kepercayaan.",
+    "Anda ingin membangun bisnis bersama tanpa ribet namun terjamin legalitasnya? Pendirian firma adalah pilihan yang tepat agar mendapatkan beragam manfaat lainnya.",
   heroImage:
     "/images/layanan/firma-1.jpg",
   heroImageAlt: "Rekan bisnis mendirikan Firma",
@@ -1624,9 +1647,9 @@ const dataFirma: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN FIRMA",
-  stepsTitle: "4 langkah pendirian Firma.",
+  stepsTitle: "Tata cara pembuatan firma yang akan kami bantu selesaikan",
   stepsSubtitle:
-    "Dari konsultasi sampai dokumen resmi — estimasi 6–12 hari kerja.",
+    "Dari konsultasi sampai dokumen resmi — estimasi 3–7 hari kerja.",
   steps: [
     { no: "01", title: "Konsultasi & Perjanjian Sekutu", duration: "", desc: "Diskusi dengan tim legal untuk menyusun perjanjian antar sekutu dan menentukan struktur Firma.", points: [] },
     { no: "02", title: "Pembuatan Akta Notaris", duration: "", desc: "Notaris menyusun akta pendirian Firma yang memuat anggaran dasar & kesepakatan para sekutu.", points: [] },
@@ -1634,12 +1657,21 @@ const dataFirma: BadanUsahaContent = {
     { no: "04", title: "NIB & Perizinan OSS", duration: "", desc: "Penerbitan NIB dan akses OSS RBA untuk perizinan berusaha.", points: [] },
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN FIRMA</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan seputar pendirian Firma.",
   faqs: [
-    { q: "Apa perbedaan Firma dan CV?", a: "Di Firma, semua sekutu bertanggung jawab penuh (solidar). Di CV, ada Sekutu Aktif (tanggung jawab penuh) dan Sekutu Pasif (tanggung jawab terbatas sebatas modal). Firma lebih cocok untuk bisnis profesional berbasis kepercayaan." },
+    { q: "Apa itu Firma dan siapa yang bisa mendirikannya?", a: "Firma adalah bentuk badan usaha yang didirikan oleh minimal dua orang untuk menjalankan usaha bersama, di mana seluruh sekutu bertanggung jawab atas pengelolaan dan kewajiban firma." },
+    { q: "Apa bedanya Firma dengan CV dan PT?", a: "Perbedaan utamanya terletak pada tanggung jawab para sekutu dan status badan usahanya. Dalam Firma seluruh sekutu bertanggung jawab penuh, sedangkan CV memiliki sekutu aktif dan pasif, sementara PT merupakan badan hukum dengan tanggung jawab terbatas." },
+    { q: "Berapa modal minimal untuk mendirikan Firma?", a: "Tidak ada ketentuan modal minimal yang wajib dipenuhi untuk mendirikan Firma sesuai peraturan yang berlaku." },
+    { q: "Berapa lama proses pendaftaran Firma hingga legalitas terbit?", a: "Proses pendirian Firma umumnya dapat selesai sekitar 3–7 hari kerja, tergantung kelengkapan dokumen dan proses administrasi." },
+    { q: "Apakah Warga Negara Asing (WNA) bisa menjadi anggota Firma?", a: "Pada umumnya, Firma didirikan oleh Warga Negara Indonesia (WNI), sehingga WNA tidak dapat menjadi sekutu dalam pendirian Firma sesuai ketentuan yang berlaku." },
     { q: "Apakah Firma bisa punya lebih dari 2 pendiri?", a: "Ya, Firma bisa didirikan oleh 2 orang atau lebih. Semakin banyak sekutu, semakin besar modal dan kapasitas usaha." },
-    { q: "Berapa modal untuk mendirikan Firma?", a: "Tidak ada ketentuan modal minimum untuk Firma. Modal ditentukan berdasarkan kesepakatan para sekutu dan kebutuhan usaha." },
-    { q: "Apakah Firma berstatus badan hukum?", a: "Tidak. Firma bukan badan hukum, melainkan badan usaha yang terdaftar di Pengadilan Negeri. Namun tetap memiliki kekuatan hukum untuk menjalankan kegiatan usaha." },
   ],
 
   ctaTitle: "Siap dirikan",
@@ -1656,15 +1688,12 @@ const dataYayasan: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian Yayasan",
   heroBadge: "Pendirian Yayasan",
   heroTitle: [
-    { text: "Yayasan untuk Anda " },
+    { text: "Semakin terpercaya di lingkup isu sosial dengan " },
     { break: true },
-    { text: "yang akan segera " },
-    { text: "menjalankan", highlight: true },
-    { break: true },
-    { text: "misi sosial" },
+    { text: "Jasa Pendirian Yayasan", highlight: true },
   ],
   heroDescription:
-    "Yayasan adalah badan hukum nirlaba untuk bidang sosial, keagamaan, dan kemanusiaan. Kami pandu pendiriannya dari akta notaris sampai SK Kemenkumham.",
+    "Angkat kepedulian sosial supaya lebih dipercaya masyarakat bersama kami yang siap membantu sesama lebih banyak.",
   heroImage:
     "/images/layanan/yayasan-1.jpg",
   heroImageAlt: "Kegiatan sosial yayasan",
@@ -1831,9 +1860,9 @@ const dataYayasan: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN YAYASAN",
-  stepsTitle: "6 langkah pendirian Yayasan.",
+  stepsTitle: "Langkah-langkah pembuatan yayasan yang akan kami dampingi sampai selesai.",
   stepsSubtitle:
-    "Dari konsultasi sampai dokumen resmi di tangan — estimasi 14–30 hari kerja (syarat berlaku).",
+    "Dari konsultasi sampai dokumen resmi di tangan — estimasi 7–14 hari kerja (syarat berlaku).",
   steps: [
     { no: "01", title: "Konsultasi & Persiapan", duration: "", desc: "Konsultasi gratis untuk menentukan tujuan yayasan, struktur organ, dan program kerja.", points: [] },
     { no: "02", title: "Pemesanan Nama ke AHU", duration: "", desc: "Waktu persetujuan nama bergantung pada AHU.", points: [] },
@@ -1843,12 +1872,21 @@ const dataYayasan: BadanUsahaContent = {
     { no: "06", title: "Penyerahan Dokumen", duration: "", desc: "Penyerahan semua dokumen resmi yayasan ke alamat Anda.", points: [] },
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN YAYASAN</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan seputar pendirian Yayasan.",
   faqs: [
+    { q: "Apa itu Yayasan dan apa syarat utama mendirikannya?", a: "Yayasan adalah badan hukum nirlaba yang didirikan untuk tujuan sosial, keagamaan, atau kemanusiaan. Syarat utamanya meliputi minimal satu orang pendiri, nama yayasan, alamat domisili, kekayaan awal yang dipisahkan, serta susunan organ yayasan sesuai ketentuan." },
+    { q: "Berapa modal awal atau kekayaan terpisah yang harus disiapkan untuk Yayasan?", a: "Yayasan wajib memiliki kekayaan awal yang dipisahkan dari harta pribadi pendiri, dengan syarat pendirian sesuai ketentuan yang berlaku." },
+    { q: "Berapa lama proses pendirian Yayasan hingga SK Kemenkumham terbit?", a: "Proses pendirian Yayasan umumnya dapat selesai sekitar 7–14 hari kerja, tergantung kelengkapan dokumen dan proses administrasi." },
+    { q: "Apakah Yayasan boleh menjalankan kegiatan usaha?", a: "Boleh. Yayasan dapat memiliki atau mendirikan badan usaha komersial yang sejalan dengan tujuannya, selama pengelolaannya dilakukan sesuai regulasi yang berlaku." },
     { q: "Apa perbedaan Yayasan dengan PT?", a: "Yayasan adalah badan hukum nirlaba untuk tujuan sosial/keagamaan/kemanusiaan — tidak mencari untung. PT adalah badan hukum komersial untuk mencari keuntungan bagi pemegang saham." },
     { q: "Siapa saja organ Yayasan?", a: "Yayasan memiliki 3 organ wajib: Pembina (menetapkan kebijakan), Pengurus (menjalankan yayasan), dan Pengawas (mengawasi pengurus)." },
-    { q: "Apakah Yayasan bisa melakukan kegiatan komersial?", a: "Yayasan dapat melakukan kegiatan komersial sepanjang hasilnya digunakan untuk mencapai tujuan sosial yayasan, bukan dibagi kepada Pembina/Pengurus." },
-    { q: "Berapa minimal pendiri Yayasan?", a: "Yayasan minimal didirikan oleh 1 orang sebagai Pembina, ditambah 1 Pengurus dan 1 Pengawas. Total minimal 3 orang untuk struktur lengkap." },
   ],
 
   ctaTitle: "Siap dirikan",
@@ -1865,15 +1903,14 @@ const dataPerkumpulan: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian Perkumpulan",
   heroBadge: "Pendirian Perkumpulan",
   heroTitle: [
-    { text: "Wadah komunitas " },
+    { text: "Jasa Pendirian Perkumpulan ", highlight: true },
     { break: true },
-    { text: "dengan " },
-    { text: "badan hukum", highlight: true },
+    { text: "untuk Anda yang ingin " },
     { break: true },
-    { text: "perkumpulan resmi" },
+    { text: "membangun komunitas nirlaba" },
   ],
   heroDescription:
-    "Perkumpulan adalah badan hukum nirlaba berbasis keanggotaan untuk organisasi komunitas, profesi, dan advokasi. Proses pendirian mudah dan cepat.",
+    "Ingin komunitas Anda terdaftar secara resmi dan berbadan hukum? Segera lakukan pendirian perkumpulan agar lebih profesional.",
   heroImage:
     "/images/layanan/perkumpulan-1.jpg",
   heroImageAlt: "Komunitas perkumpulan",
@@ -2040,7 +2077,7 @@ const dataPerkumpulan: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN PERKUMPULAN",
-  stepsTitle: "6 langkah pendirian Perkumpulan.",
+  stepsTitle: "Berikut beberapa langkah yang akan kami bantu dalam pembuatan perkumpulan.",
   stepsSubtitle:
     "Dari konsultasi sampai badan hukum resmi — estimasi 14–30 hari kerja (syarat berlaku).",
   steps: [
@@ -2052,12 +2089,27 @@ const dataPerkumpulan: BadanUsahaContent = {
     { no: "06", title: "Penyerahan Dokumen", duration: "", desc: "Penyerahan semua dokumen resmi perkumpulan ke alamat Anda.", points: [] },
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN PERKUMPULAN</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan seputar pendirian Perkumpulan.",
   faqs: [
-    { q: "Apa perbedaan Perkumpulan dengan Yayasan?", a: "Perkumpulan berbasis keanggotaan dengan Rapat Anggota sebagai organ tertinggi. Yayasan berbasis kekayaan dengan Pembina sebagai organ tertinggi. Perkumpulan lebih demokratis, yayasan lebih hierarkis." },
-    { q: "Siapa yang bisa mendirikan Perkumpulan?", a: "Perkumpulan dapat didirikan oleh minimal 3 orang WNI yang memiliki kesamaan profesi, hobi, atau tujuan sosial." },
-    { q: "Apakah Perkumpulan bisa melakukan kegiatan komersial?", a: "Perkumpulan boleh melakukan kegiatan yang menghasilkan uang, namun hasilnya harus digunakan untuk tujuan organisasi, bukan dibagi ke anggota." },
-    { q: "Apakah Perkumpulan wajib berbadan hukum?", a: "Tidak wajib. Perkumpulan dapat beroperasi tanpa badan hukum, namun status badan hukum memberikan kredibilitas dan kemudahan administrasi." },
+    {
+      q: "Apa itu Perkumpulan dan apa perbedaannya dengan Yayasan?",
+      a: "Perkumpulan adalah badan hukum berbasis keanggotaan yang dibentuk atas dasar kesamaan minat, profesi, atau tujuan bersama, sedangkan Yayasan berbasis pada harta kekayaan yang dipisahkan untuk tujuan sosial tertentu.",
+    },
+    {
+      q: "Berapa jumlah minimal pendiri untuk membentuk perkumpulan berbadan hukum?",
+      a: "Pembentukan perkumpulan berbadan hukum umumnya membutuhkan minimal 3 (tiga) orang atau lebih sesuai AD/ART yang disepakati.",
+    },
+    {
+      q: "Dokumen apa saja yang diperlukan untuk pendaftaran perkumpulan ke Kemenkumham?",
+      a: "Berita acara rapat pendirian, susunan kepengurusan, AD/ART perkumpulan, identitas pendiri, dan surat keterangan domisili.",
+    },
   ],
 
   ctaTitle: "Siap dirikan",
@@ -2074,15 +2126,13 @@ const dataKoperasi: BadanUsahaContent = {
   heroBreadcrumbText: "Pendirian Koperasi",
   heroBadge: "Pendirian Koperasi",
   heroTitle: [
-    { text: "Bangun ekonomi bersama " },
+    { text: "Berdayakan rekan bisnis Anda " },
     { break: true },
-    { text: "dengan " },
-    { text: "koperasi yang", highlight: true },
-    { break: true },
-    { text: "sehat & legal" },
+    { text: "melalui " },
+    { text: "Jasa Pendirian Koperasi", highlight: true },
   ],
   heroDescription:
-    "Koperasi adalah badan hukum yang mengutamakan kesejahteraan anggota berdasarkan prinsip gotong royong. Kami bantu pendiriannya dari akta sampai pengesahan.",
+    "Maju dan berdayakan pekerja Anda melalui pendirian koperasi yang dapat meningkatkan kesejahteraan mereka semua.",
   heroImage:
     "/images/layanan/koperasi-1.jpg",
   heroImageAlt: "Rapat anggota koperasi",
@@ -2249,7 +2299,7 @@ const dataKoperasi: BadanUsahaContent = {
   ],
 
   stepsTag: "PROSES PEMBUATAN KOPERASI",
-  stepsTitle: "5 langkah pendirian Koperasi.",
+  stepsTitle: "Berikut langkah untuk pembuatan koperasi secara rinci.",
   stepsSubtitle:
     "Estimasi 14–30 hari kerja bila tidak ada kendala kekurangan persyaratan.",
   steps: [
@@ -2260,12 +2310,31 @@ const dataKoperasi: BadanUsahaContent = {
     { no: "05", title: "Penyerahan Dokumen", duration: "", desc: "Dokumen diserahkan kepada pengurus koperasi.", points: [] },
   ],
 
+  testimonialTitle: (
+    <>
+      Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+      <strong className="font-extrabold text-[#D62828]">JASA PENDIRIAN KOPERASI</strong> kami.
+    </>
+  ),
+
   faqTitle: "Pertanyaan seputar pendirian Koperasi.",
   faqs: [
-    { q: "Berapa minimal jumlah anggota untuk mendirikan Koperasi?", a: "Minimal 20 orang WNI untuk koperasi primer, atau minimal 3 badan hukum untuk koperasi sekunder." },
-    { q: "Apa perbedaan Koperasi dengan PT?", a: "Koperasi berorientasi pada kesejahteraan anggota (nirlaba), satu anggota satu suara, dan SHU dibagi berdasarkan jasa usaha. PT berorientasi profit, voting berdasarkan jumlah saham." },
-    { q: "Apakah koperasi bisa mendapatkan pinjaman dari bank?", a: "Ya, koperasi yang sudah berbadan hukum dan memiliki laporan keuangan yang baik dapat mengajukan pinjaman ke bank atau lembaga keuangan lainnya." },
-    { q: "Apa jenis-jenis Koperasi yang ada?", a: "Ada berbagai jenis koperasi: Koperasi Simpan Pinjam (KSP), Koperasi Konsumen, Koperasi Produsen, Koperasi Jasa, Koperasi Pemasaran, dan Koperasi Serba Usaha (KSU)." },
+    {
+      q: "Apa saja syarat utama untuk mendirikan Koperasi?",
+      a: "Syarat utamanya meliputi jumlah pendiri sesuai jenis koperasi, akta pendirian yang memuat Anggaran Dasar, berita acara rapat pembentukan, dan bukti setoran modal awal sesuai regulasi Kementerian Koperasi dan UKM.",
+    },
+    {
+      q: "Berapa jumlah minimal anggota pendiri Koperasi Primer saat ini?",
+      a: "Berdasarkan ketentuan UU Cipta Kerja terbaru, pembentukan Koperasi Primer cukup didirikan oleh minimal 9 (sembilan) orang WNI.",
+    },
+    {
+      q: "Apa saja jenis-jenis koperasi yang bisa didirikan?",
+      a: "Koperasi Konsumen, Koperasi Produsen, Koperasi Jasa, Koperasi Simpan Pinjam, dan Koperasi Pemasaran.",
+    },
+    {
+      q: "Berapa lama waktu yang dibutuhkan hingga SK Kemenkumham Koperasi terbit?",
+      a: "Estimasi waktu pengurusan koperasi berkisar antara 14–30 hari kerja setelah rapat penyuluhan dan penandatanganan akta notaris NPAK.",
+    },
   ],
 
   ctaTitle: "Siap dirikan",

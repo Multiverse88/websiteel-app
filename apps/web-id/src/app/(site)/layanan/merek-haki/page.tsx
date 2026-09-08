@@ -832,35 +832,27 @@ const pricingFootnotes = [
 ];
 
 const faqs = [
-    {
-      q: "Berapa lama sertifikat merek keluar?",
-      a: "Total <strong class=\"font-extrabold text-gray-950\">12–18 bulan</strong> dari submit sampai sertifikat fisik terbit. Tapi <strong class=\"font-extrabold text-gray-950\">tanda terima resmi</strong> dari DJKI keluar dalam 1–2 minggu — sejak tanda terima ini Anda sudah punya hak prioritas pemakaian merek dan bisa pakai logo <sup>™</sup>.",
-    },
-    {
-      q: "Apa beda merek terdaftar vs tidak terdaftar?",
-      a: "Merek terdaftar mendapatkan <strong class=\"font-extrabold text-gray-950\">perlindungan hukum eksklusif</strong> selama 10 tahun dan dapat diperpanjang, serta berhak menggunakan simbol ®. Merek tidak terdaftar hanya memiliki perlindungan berbasis pembuktian pemakai pertama yang sangat lemah di pengadilan dan berisiko diserobot pihak lain.",
-    },
-    {
-      q: "Apa itu kelas merek dan kenapa penting?",
-      a: "Kelas merek (Nice Classification) adalah pengelompokan jenis barang atau jasa (Kelas 1–45). Memilih kelas yang tepat sangat penting karena perlindungan hukum merek <strong class=\"font-extrabold text-gray-950\">hanya berlaku</strong> pada kelas yang didaftarkan saja.",
-    },
-    {
-      q: "Berapa biaya per kelas tambahan?",
-      a: "Biaya per kelas tambahan dihitung akumulatif sesuai tarif resmi PNBP DJKI. Untuk jalur UMKM sebesar Rp 500.000 per kelas, sedangkan jalur Umum sebesar Rp 1.800.000 per kelas, ditambah biaya jasa pendampingan yang transparan.",
-    },
-    {
-      q: "Bagaimana kalau pendaftaran saya ditolak DJKI?",
-      a: "Jika ditolak sementara (Provisional Refusal), Anda dapat mengajukan bantahan tertulis atau tanggapan dalam waktu 30 hari. Tim ahli EasyLegal siap membantu menyusun argumentasi hukum yang kuat untuk memaksimalkan peluang persetujuan.",
-    },
-    {
-      q: "Bisa daftar merek untuk usaha online (e-commerce)?",
-      a: "Ya, sangat bisa dan sangat direkomendasikan. Perlindungan merek akan melindungi nama toko online, produk, atau jasa Anda di berbagai marketplace nasional dan internasional agar tidak diduplikasi oleh kompetitor.",
-    },
-    {
-      q: "Apakah perlu logo, atau cukup nama saja?",
-      a: "Anda bisa mendaftarkan kata (nama merek saja), logo (visual saja), atau kombinasi keduanya. Mendaftarkan keduanya sekaligus dalam satu aplikasi memberikan perlindungan paling menyeluruh dan efisien.",
-    },
-  ];
+  {
+    q: "Mengapa saya harus mendaftarkan Merek & HAKI usaha saya secara resmi?",
+    a: "Pendaftaran Merek dan HAKI membantu melindungi identitas bisnis dari penggunaan oleh pihak lain serta memberikan kepastian hukum atas karya atau merek yang dimiliki.",
+  },
+  {
+    q: "Apa bedanya Merek, Hak Cipta, dan Paten?",
+    a: "Merek melindungi identitas usaha seperti nama dan logo, Hak Cipta melindungi karya cipta, sedangkan Paten melindungi invensi atau teknologi yang memiliki unsur kebaruan.",
+  },
+  {
+    q: "Dokumen dan syarat apa saja yang perlu disiapkan untuk mendaftar Merek?",
+    a: "Umumnya diperlukan identitas pemohon, contoh merek atau logo, daftar barang atau jasa sesuai kelas merek, serta dokumen pendukung lainnya sesuai ketentuan.",
+  },
+  {
+    q: "Berapa lama proses pendaftaran Merek hingga Sertifikat terbit?",
+    a: "Proses pendaftaran Merek ditargetkan selesai sekitar 5 bulan untuk permohonan yang memenuhi ketentuan dan diproses sesuai target layanan DJKI.",
+  },
+  {
+    q: "Bagaimana jika pendaftaran Merek saya mengalami sanggahan atau usulan penolakan?",
+    a: "Jika terjadi sanggahan atau usulan penolakan, pemohon masih dapat menempuh proses tanggapan atau upaya lanjutan sesuai mekanisme yang berlaku, dan pendampingan profesional dapat membantu menyusun respons yang tepat.",
+  },
+];
 
 export default function MerekHaki() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -913,13 +905,13 @@ export default function MerekHaki() {
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-full border border-red-100 shadow-sm animate-pulse-subtle">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Merek & HAKI</span>
+                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Perlindungan Brand · DJKI Kemenkumham</span>
               </div>
 
               {/* Headline */}
               <h1 className="font-heading text-[40px] sm:text-[48px] lg:text-[56px] font-extrabold text-gray-950 leading-[1.12] tracking-tight">
-                Daftar merek sekali, <br />
-                brand <span className="text-[#990202]">aman 10 tahun</span>
+                Pendaftaran Merek Resmi<br />
+                <span className="text-[#990202]">Lindungi Brand Anda</span>
               </h1>
 
               {/* Description */}
@@ -1458,7 +1450,14 @@ export default function MerekHaki() {
 
       {/* ─── 8. TESTIMONIALS ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PENDAFTARAN MEREK</strong> kami.
+          </>
+        }
+      />
 
       {/* ─── 9. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar pendaftaran merek." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />

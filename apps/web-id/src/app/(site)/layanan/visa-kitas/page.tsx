@@ -255,18 +255,18 @@ export default function VisaKitas() {
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Imigrasi - WNA</span>
+                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Layanan Imigrasi · Investor & Kerja</span>
               </div>
 
               {/* Headline */}
               <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[58px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
-                Visa Bisnis &amp; <span className="text-[#990202]">KITAS</span> <br />
-                resmi untuk WNA di <br className="hidden sm:block" /> Indonesia
+                Pengurusan <span className="text-[#990202]">Visa & KITAS</span><br />
+                Resmi Bagi Investor WNA
               </h1>
 
               {/* Description */}
               <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-semibold">
-                Bantuan pengurusan visa bisnis, KITAS investor &amp; KITAS Tenaga Kerja Asing — proses cepat, dokumentasi lengkap, &amp; sesuai regulasi Direktorat Jenderal Imigrasi.
+                Kembangkan bisnis Anda melalui investor dari WNA melalui Jasa Pengurusan Visa &amp; KITAS secara cepat, lengkap, dan sesuai regulasi pemerintah.
               </p>
 
               {/* Action Buttons */}
@@ -555,7 +555,14 @@ export default function VisaKitas() {
 
       {/* ─── 6. TESTIMONIALS ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PENGURUSAN VISA & KITAS</strong> kami.
+          </>
+        }
+      />
 
       {/* ─── 7. FAQ SECTION ─── */}
       <FAQ title="Pertanyaan seputar Visa &amp; KITAS." subtitle="Belum yakin? Mungkin jawabannya ada di sini." items={faqs} />

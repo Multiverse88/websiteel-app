@@ -117,29 +117,21 @@ const steps = [
 
 const faqs = [
   {
-    q: "Apakah perbedaan KKKPR dan PKKPR?",
-    a: "KKKPR diterbitkan otomatis oleh sistem OSS apabila lokasi usaha sudah tercantum dalam RDTR (Rencana Detail Tata Ruang) digital yang terintegrasi. Prosesnya lebih cepat dan tidak perlu kajian tambahan. PKKPR diterbitkan jika RDTR digital belum tersedia, atau lokasi memerlukan kajian tata ruang lebih lanjut oleh pemerintah daerah. Prosesnya lebih panjang dan melalui rapat koordinasi instansi."
+    q: "Apa itu PKKPR dan mengapa penting untuk bisnis saya?",
+    a: "PKKPR (Persetujuan Kesesuaian Kegiatan Pemanfaatan Ruang) adalah persetujuan yang memastikan lokasi usaha sesuai dengan rencana tata ruang sebelum kegiatan usaha dijalankan.",
   },
   {
-    q: "Berapa lama proses PKKPR selesai?",
-    a: "Proses PKKPR di EasyLegal selama 3-5 hari kerja setelah melengkapi dan memenuhi persyaratan yang dibutuhkan."
+    q: "Apa perbedaan antara PKKPR Otomatis, Konfirmasi (KKPR), dan Persetujuan (PKKPR)?",
+    a: "PKKPR Otomatis terbit langsung melalui OSS, KKPR berupa konfirmasi kesesuaian tata ruang dari data yang tersedia, sedangkan PKKPR memerlukan proses persetujuan dari instansi terkait sesuai kondisi lokasi dan kegiatan usaha.",
   },
   {
-    q: "Apakah PKKPR berlaku untuk lebih dari satu lokasi sekaligus?",
-    a: "Tidak. PKKPR diterbitkan per KBLI per lokasi. Jika Anda memiliki dua lokasi usaha berbeda, atau dua jenis usaha berbeda di lokasi yang sama, masing-masing memerlukan PKKPR tersendiri. Harga paket EasyLegal dihitung berdasarkan satuan ini."
+    q: "Dokumen dan persyaratan apa saja yang perlu disiapkan?",
+    a: "Umumnya diperlukan NIB, data pelaku usaha, lokasi usaha, titik koordinat atau peta lokasi, serta dokumen pendukung sesuai ketentuan OSS.",
   },
   {
-    q: "Usaha saya sudah berjalan tanpa PKKPR, apakah masih bisa diurus?",
-    a: "Ya, sangat bisa dan justru sangat disarankan segera. Mengurus PKKPR retrospektif akan melegalkan operasional Anda yang sudah berjalan dan mencegah sanksi di masa mendatang. Tim EasyLegal berpengalaman menangani kasus seperti ini dan akan membantu prosesnya tanpa hambatan."
+    q: "Berapa lama proses pengurusan PKKPR hingga terbit?",
+    a: "Proses penerbitan PKKPR umumnya berkisar 3–20 hari kerja, tergantung jenis PKKPR dan proses verifikasi oleh instansi terkait.",
   },
-  {
-    q: "Apakah PKKPR bisa dicabut setelah terbit?",
-    a: "PKKPR dapat dicabut jika terjadi perubahan RTRW/RDTR yang membuat lokasi tidak lagi sesuai peruntukannya, atau jika pemohon terbukti memberikan data palsu. Pastikan seluruh informasi yang Anda ajukan akurat sesuai kondisi nyata di lapangan."
-  },
-  {
-    q: "Apakah ada jaminan PKKPR pasti terbit?",
-    a: "EasyLegal berkomitmen memproses PKKPR secara profesional sesuai ketentuan berlaku. Namun keputusan akhir penerbitan berada di tangan instansi pemerintah. Jika ada kendala dalam proses, tim kami akan segera berkomunikasi dan mencari solusi terbaik bersama Anda termasuk opsi revisi permohonan."
-  }
 ];
 
 
@@ -365,17 +357,18 @@ export default function PKKPRPage() {
                   {/* Pill Badge */}
                   <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100/50 shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                    <span className="text-[16px] font-extrabold text-[#990202] tracking-wider uppercase">BKPM - OSS RBA</span>
+                    <span className="text-[16px] font-extrabold text-[#990202] tracking-wider uppercase">Kesesuaian Tata Ruang · OSS RBA</span>
                   </div>
 
                   {/* Headline */}
                   <h1 className="font-heading text-[28px] sm:text-[42px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.1] tracking-tight">
-                    Urus PKKPR bisnis Anda <span className="text-[#990202]">tanpa ribet</span>
+                    Izin PKKPR resmi<br />
+                    <span className="text-[#990202]">cepat & bergaransi</span>
                   </h1>
 
                   {/* Description */}
                   <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
-                    Jasa pengurusan PKKPR (Persetujuan Kesesuaian Kegiatan Pemanfaatan Ruang) profesional untuk pelaku usaha, UMKM, dan perusahaan. Proses cepat, aman, dan sesuai regulasi tata ruang yang berlaku di Indonesia.
+                    Urus Persetujuan Kesesuaian Kegiatan Pemanfaatan Ruang (PKKPR) darat dan laut untuk izin lokasi usaha Anda. Proses 100% online dan legal.
                   </p>
 
                   {/* Action Buttons */}
@@ -469,7 +462,7 @@ export default function PKKPRPage() {
           <FadeIn delay={0.2}>
             <Pricing
               sectionTitleTag="PENAWARAN SPESIAL"
-              sectionTitle="Pilih Paket PKKPR Anda"
+              sectionTitle="Paket pengurusan PKKPR yang dapat Anda pilih."
               sectionSubtitle={
                 <>
                   Harga sudah termasuk konsultasi, pengurusan dokumen, dan pendampingan hingga PKKPR terbit. Tanpa biaya tersembunyi.
@@ -492,7 +485,14 @@ export default function PKKPRPage() {
           {/* ─── 6. TESTIMONIALS SECTION ─── */}
           <FadeIn delay={0.2}>
             <MediaCoverage />
-            <Testimonials />
+            <Testimonials
+              title={
+                <>
+                  Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+                  <strong className="font-extrabold text-[#D62828]">JASA PENGURUSAN PKKPR</strong> kami.
+                </>
+              }
+            />
           </FadeIn>
 
           {/* ─── 7. PENGERTIAN PKKPR ─── */}

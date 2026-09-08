@@ -174,25 +174,25 @@ export default function KontrakBisnis() {
 
   const faqs = [
     {
-      q: "Apakah Konsultasi awal benar-benar gratis?",
-      a: "Ya, konsultasi awal 100% gratis tanpa biaya apapun. Anda dapat menghubungi kami via WhatsApp untuk berdiskusi tentang kebutuhan dokumen hukum Anda. Kami akan memberikan saran profesional dan penawaran harga yang transparan sebelum Anda memutuskan."
+      q: "Mengapa bisnis saya membutuhkan kontrak atau perjanjian yang dibuat secara profesional?",
+      a: "Kontrak yang dibuat secara profesional membantu memperjelas hak dan kewajiban para pihak, mengurangi risiko sengketa, serta memberikan kepastian hukum dalam kerja sama bisnis.",
     },
     {
-      q: "Berapa lama waktu penyelesaian dokumen?",
-      a: "Untuk dokumen standar seperti NDA atau surat kuasa, biasanya 3-5 hari kerja. Untuk dokumen yang lebih kompleks seperti Shareholder Agreement atau Franchise Agreement, memerlukan waktu 7-14 hari kerja. Tersedia juga layanan Express (2 hari) dan Super Express (1 hari) dengan biaya tambahan."
+      q: "Jenis kontrak dan perjanjian apa saja yang bisa dibuat?",
+      a: "Berbagai jenis kontrak dapat dibuat, seperti perjanjian kerja sama, jual beli, jasa, sewa, kemitraan, kerahasiaan (NDA), hingga kontrak yang disesuaikan dengan kebutuhan bisnis.",
     },
     {
-      q: "Apa dokumen yang dibuat sah secara hukum?",
-      a: "Ya, semua dokumen disusun sesuai peraturan perundang-undangan yang berlaku di Indonesia dan sah secara hukum. Dokumen dibuat oleh tim ahli hukum berpengalaman dan dapat dijadikan alat bukti yang kuat di pengadilan jika diperlukan."
+      q: "Apakah kontrak yang dibuat tanpa Notaris tetap sah secara hukum?",
+      a: "Ya, kontrak tanpa Notaris tetap sah selama memenuhi syarat sah perjanjian sesuai ketentuan hukum yang berlaku.",
     },
     {
-      q: "Apakah bisa request revisi?",
-      a: "Tentu. Setiap paket sudah termasuk 2x revisi gratis. Revisi tambahan setelah kuota gratis dikenakan biaya Rp 249.000 per revisi. Revisi major yang mengubah substansi perjanjian dikenakan biaya tambahan sesuai tingkat kompleksitas."
+      q: "Data dan informasi apa saja yang perlu disiapkan sebelum pembuatan kontrak?",
+      a: "Umumnya diperlukan identitas para pihak, tujuan kerja sama, hak dan kewajiban masing-masing, jangka waktu, serta ketentuan lain yang ingin disepakati.",
     },
     {
-      q: "Bagaimana jika saya tidak yakin jenis kontrak yang dibutuhkan?",
-      a: "Tidak perlu khawatir. Silakan hubungi kami untuk konsultasi gratis. Cukup ceritakan situasi dan kebutuhan bisnis Anda, tim ahli hukum kami akan membantu menentukan jenis kontrak yang paling sesuai."
-    }
+      q: "Berapa lama proses pengerjaan pembuatan atau review kontrak?",
+      a: "Proses pembuatan atau review kontrak umumnya dapat selesai sekitar 1–5 hari kerja, tergantung jenis kontrak dan tingkat kompleksitasnya.",
+    },
   ];
 
 
@@ -227,17 +227,18 @@ export default function KontrakBisnis() {
               {/* Pill Badge */}
               <div className="inline-flex items-center space-x-2 bg-[#FFF5F5] py-1.5 px-4 rounded-full border border-red-100 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#990202]" />
-                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Kontrak Bisnis</span>
+                <span className="text-[16px] sm:text-[16px] sm:text-[16px] font-bold text-[#990202] tracking-wide">Legal Drafting · Review Kontrak</span>
               </div>
 
               {/* Headline */}
               <h1 className="font-heading text-[42px] sm:text-[50px] lg:text-[54px] font-extrabold text-gray-950 leading-[1.15] tracking-tight">
-                Lindungi setiap kerja sama bisnis dengan <span className="text-[#990202]">kontrak yang kuat</span>
+                Pembuatan & Review<br />
+                <span className="text-[#990202]">Kontrak Bisnis Profesional</span>
               </h1>
 
               {/* Description */}
               <p className="text-[16px] sm:text-[16px] text-gray-500 leading-relaxed max-w-2xl font-normal">
-                Jasa pembuatan kontrak & perjanjian profesional untuk bisnis, UMKM, dan individu. Disusun oleh ahli hukum berpengalaman, sah secara hukum, dan sesuai regulasi yang berlaku di Indonesia.
+                Lindungi bisnis Anda dari risiko sengketa. Drafting dan review kontrak oleh praktisi hukum berpengalaman — NDA, MoU, PKS, SPK, dan perjanjian komersial lainnya.
               </p>
 
               {/* Action Buttons */}
@@ -518,7 +519,14 @@ export default function KontrakBisnis() {
 
             {/* ─── 8. TESTIMONIALS SECTION ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PEMBUATAN KONTRAK & PERJANJIAN</strong> kami.
+          </>
+        }
+      />
 
 
       {/* ─── 9. FAQ SECTION ─── */}

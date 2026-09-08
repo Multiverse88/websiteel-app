@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { getWhatsAppLink, slugify } from "@/lib/config";
@@ -144,9 +145,9 @@ export default function BottomPromoSection() {
               <button onClick={() => scrollTo(Math.min(totalPages - 1, activeIndex + 1))} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors bg-white">
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
               </button>
-              <a href="/promo" className="inline-flex items-center justify-center gap-2 bg-[#D62828] hover:bg-[#B91C1C] text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-extrabold text-[14px] sm:text-[16px] transition-colors shrink-0 w-fit group ml-auto sm:ml-0">
+              <Link href="/promo" className="inline-flex items-center justify-center gap-2 bg-[#D62828] hover:bg-[#B91C1C] text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-extrabold text-[14px] sm:text-[16px] transition-colors shrink-0 w-fit group ml-auto sm:ml-0">
                 Lihat Semua Promo <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
-              </a>
+              </Link>
             </div>
           </div>
 

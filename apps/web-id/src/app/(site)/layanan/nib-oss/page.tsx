@@ -59,35 +59,27 @@ const nibBenefits = [
   ];
 
 const faqs = [
-    {
-      q: "Apa beda NIB Perorangan, NIB PT Perorangan, & NIB Badan?",
-      a: "NIB Perorangan — untuk usaha perseorangan tanpa badan hukum (warung, freelancer, dst). NIB PT Perorangan — khusus untuk UMKM Mikro yang sudah didirikan sebagai PT Perorangan. NIB Badan — untuk badan usaha resmi: PT, PT PMA, CV, Firma, Yayasan, Perkumpulan, atau Koperasi. Tim kami bantu pilih yang sesuai status usaha Anda."
-    },
-    {
-      q: "Berapa lama proses penerbitan NIB?",
-      a: "Proses standard berkisar antara <strong class=\"font-extrabold text-gray-950\">1 hingga 3 hari kerja</strong> setelah seluruh kelengkapan data administrasi kami terima dengan lengkap dan tidak ada gangguan pada sistem OSS BKPM."
-    },
-    {
-      q: "Apa itu KBLI dan bagaimana cara memilihnya?",
-      a: "KBLI (Klasifikasi Baku Lapangan Usaha Indonesia) adalah kode kategori resmi dari BPS untuk mengelompokkan jenis aktivitas ekonomi usaha. Tim EasyLegal akan menganalisis model bisnis Anda secara mendalam untuk menentukan kode KBLI yang paling akurat, guna menghindari penolakan izin atau sanksi di kemudian hari."
-    },
-    {
-      q: "Apakah NIB bisa diperbarui (cabut/tambah KBLI)?",
-      a: "Sangat bisa. Jika usaha Anda mengalami ekspansi atau perubahan lini bisnis, NIB lama Anda dapat dimutakhirkan dengan menambah atau mencabut kode KBLI melalui sistem OSS RBA. Kami siap memandu proses perubahan data legalitas ini secara kilat."
-    },
-    {
-      q: "Bagaimana kalau perlu ubah data lain selain KBLI?",
-      a: "Semua perubahan data (seperti nama penanggung jawab, perubahan modal disetor, kepemilikan saham, atau alamat kantor) dapat diajukan perubahan datanya secara resmi. Tim kami akan mengurus integrasi perubahan data tersebut agar NIB Anda selalu valid dan sinkron."
-    },
-    {
-      q: "Apakah harga sudah include biaya pemerintah?",
-      a: "Ya, seluruh biaya yang tertera pada paket kami bersifat <strong class=\"font-extrabold text-gray-950\">all-in</strong>. Sudah termasuk biaya jasa profesional kami, pembuatan akun, verifikasi data, hingga seluruh biaya PNBP atau biaya administrasi resmi pemerintah (jika ada)."
-    },
-    {
-      q: "Apa yang bisa dilakukan setelah NIB terbit?",
-      a: "Setelah NIB terbit secara resmi, Anda dapat langsung menggunakannya untuk membuka rekening bank bisnis atas nama perusahaan, mendaftar sertifikasi Halal, mengurus pendaftaran merek brand di DJKI, hingga mengajukan permohonan PKP guna ekspansi transaksi dengan klien."
-    }
-  ];
+  {
+    q: "Apa itu NIB? dan mengapa setiap pelaku usaha wajib memilikinya?",
+    a: "NIB (Nomor Induk Berusaha) adalah identitas resmi pelaku usaha yang menjadi dasar untuk mengurus perizinan usaha melalui sistem OSS.",
+  },
+  {
+    q: "Apa yang dimaksud dengan Sistem OSS Berbasis Risiko (OSS RBA)?",
+    a: "OSS Berbasis Risiko (OSS RBA) adalah sistem perizinan berusaha yang menyesuaikan jenis perizinan berdasarkan tingkat risiko kegiatan usaha.",
+  },
+  {
+    q: "Apa itu kode KBLI dan bagaimana cara memilih KBLI yang tepat?",
+    a: "KBLI adalah kode yang mengklasifikasikan bidang usaha. Pemilihannya harus disesuaikan dengan kegiatan usaha yang benar-benar dijalankan agar perizinan sesuai ketentuan.",
+  },
+  {
+    q: "Dokumen dan data apa saja yang perlu disiapkan untuk pengurusan NIB?",
+    a: "Umumnya diperlukan data identitas pelaku usaha, alamat usaha, bidang usaha sesuai KBLI, serta dokumen pendukung lain sesuai bentuk usaha yang didaftarkan.",
+  },
+  {
+    q: "Berapa lama proses penerbitan NIB hingga siap digunakan?",
+    a: "Umumnya membutuhkan waktu 1-3 hari kerja, tergantung kelengkapan dokumen yang dimiliki.",
+  },
+];
 
 export default function NibOss() {
   const [activeSubTab, setActiveSubTab] = useState<"perorangan" | "badan" | "oss-rba" | "pt-perorangan">("perorangan");
@@ -276,7 +268,7 @@ export default function NibOss() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
             <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PEMBUATAN & PENCABUTAN NIB</p>
+              <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA JASA PENGURUSAN NIB</p>
               <h2 className="font-heading text-[16px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
                 4 paket sesuai jenis usaha Anda.
               </h2>
@@ -1050,7 +1042,14 @@ export default function NibOss() {
 
       {/* ─── 7. TESTIMONIALS ─── */}
       <MediaCoverage />
-      <Testimonials />
+      <Testimonials
+        title={
+          <>
+            Pengalaman mereka yang menggunakan<br className="hidden sm:inline" />{" "}
+            <strong className="font-extrabold text-[#D62828]">JASA PENGURUSAN NIB & OSS</strong> kami.
+          </>
+        }
+      />
 
       {/* ─── 8. FAQ SECTION ─── */}
 

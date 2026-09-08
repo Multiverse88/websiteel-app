@@ -71,7 +71,13 @@ function AutoScrollRow({ items, direction }: { items: typeof row1Reviews; direct
   );
 }
 
-export default function Testimonials() {
+export default function Testimonials({
+  title,
+  subtitle,
+}: {
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+} = {}) {
   const headerRef = useRef<HTMLDivElement>(null);
   const rowsRef = useRef<HTMLDivElement>(null);
 
@@ -87,10 +93,14 @@ export default function Testimonials() {
               TESTIMONI
             </span>
             <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] mt-1.5 sm:mt-3 tracking-[-0.02em] leading-[1.25] sm:leading-tight">
-              Pengalaman dari mereka yang<br className="hidden sm:inline" /> sudah kami layani.
+              {title || (
+                <>
+                  Pengalaman dari mereka yang<br className="hidden sm:inline" /> sudah kami layani.
+                </>
+              )}
             </h2>
             <p className="text-[16px] sm:text-[16px] text-[#6B7280] mt-2 sm:mt-4 max-w-[620px] sm:mx-auto leading-relaxed">
-              Dari UMKM kuliner sampai startup teknologi — semua percayakan urusan legalnya ke EasyLegal.
+              {subtitle || "Dari UMKM kuliner sampai startup teknologi — semua percayakan urusan legalnya ke EasyLegal."}
             </p>
           </div>
         </div>
