@@ -11,6 +11,9 @@ export function FloatingWhatsApp() {
 
   return (
     <a
+      id="floating-whatsapp"
+      data-gtm="floating-whatsapp"
+      data-cta="floating-whatsapp"
       href={getWhatsAppLink(undefined, "floating-whatsapp", pathname ?? undefined)}
       target="_blank"
       rel="noopener noreferrer"
