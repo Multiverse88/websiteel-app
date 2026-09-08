@@ -1,6 +1,6 @@
 import React from "react";
 
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-TNP8WR8V";
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-THBW6RTF";
 
 export function GtmHead() {
   return (
