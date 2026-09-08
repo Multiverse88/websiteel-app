@@ -163,7 +163,7 @@ export const dataPT: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN PT",
   pricingTitle: "Pilih paket sesuai kebutuhan bisnis Anda.",
   pricingSubtitle:
-    "Harga sudah termasuk semua biaya — notaris, AHU Kemenkumham, NPWP, dan jasa kami. Tidak ada tambahan biaya apapun di tengah proses.",
+    "Harga all-in sudah termasuk notaris, AHU Kemenkumham, NPWP, dan NIB OSS. (Catatan: Modal dasar s.d Rp 1 Milyar. Modal dasar > 1M–5M +Rp 1jt, > 5M +Rp 8jt).",
   pricingPackages: [
     {
       title: "PAKET BASIC",
@@ -283,6 +283,103 @@ export const dataPT: BadanUsahaContent = {
           { text: "K3L/SPUMKTTR & SPPL", checked: true },
           { text: "Sertifikat Standar", checked: true, footnoteIndex: 3 },
           { text: "Angka Pengenal Impor", checked: true, footnoteIndex: 4 },
+        ]},
+        { title: "BONUS", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+          { text: "Gratis Ongkir <strong>Seluruh Indonesia</strong>", checked: true },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET OFFICE",
+      price: "Rp 6.649.000",
+      strikePrice: "Rp 13.300.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Office",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Office Pembuatan PT. Mohon info lengkap biaya dan prosesnya.", "paket-office-pembuatan-pt"),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Dokumen Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan & Pemesanan Nama PT", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Akta Notaris", checked: true },
+          { text: "SK Kemenkumham", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "SKT Pajak & NPWP Badan", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "K3L/SPUMKTTR & SPPL", checked: true },
+          { text: "Sertifikat Standar", checked: true, footnoteIndex: 3 },
+          { text: "Angka Pengenal Impor", checked: true, footnoteIndex: 4 },
+        ]},
+        { title: "VIRTUAL OFFICE", isBoxed: true, items: [
+          { text: "Virtual Office 1 Tahun", boldText: "1 Tahun", checked: true },
+          { text: "Meeting Room 6 Jam/Bulan (3 Kota: Jkt, Bekasi, Bdg)", checked: true },
+          { text: "Fasilitas Kantor Siap PKP", checked: true },
+        ]},
+        { title: "BONUS", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+          { text: "Gratis Ongkir <strong>Seluruh Indonesia</strong>", checked: true },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET PRESTIGE",
+      price: "Rp 4.999.000",
+      strikePrice: "Rp 10.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pembuatan PT. Mohon info lengkap biaya dan prosesnya.", "paket-prestige-pembuatan-pt"),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Dokumen Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan & Pemesanan Nama PT", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Akta Notaris", checked: true },
+          { text: "SK Kemenkumham", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "SKT Pajak & NPWP Badan", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "K3L/SPUMKTTR & SPPL", checked: true },
+          { text: "Sertifikat Standar", checked: true, footnoteIndex: 3 },
+          { text: "Angka Pengenal Impor", checked: true, footnoteIndex: 4 },
+        ]},
+        { title: "BRANDING IDENTITY", isBoxed: true, items: [
+          { text: "Company Profile Digital 8 Halaman", checked: true },
+          { text: "Desain Logo (3x Revisi)", checked: true },
+          { text: "Desain Kartu Nama & Kop Surat", checked: true },
+          { text: "Desain Amplop & Map Bisnis", checked: true },
         ]},
         { title: "BONUS", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
@@ -431,16 +528,16 @@ const dataCV: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pembuatan CV. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pembuatan-cv"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Akta Pendirian <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Akta Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
           { text: "NPWP & SKT <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "FASILITAS", items: [
-          { text: "Pengecekan Nama CV", checked: true },
-          { text: "Penyusunan Anggaran Dasar", checked: true },
+          { text: "Pengecekan & Pemesanan Nama CV", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris", checked: true },
-          { text: "Surat Keterangan Terdaftar Pengadilan Negeri", checked: true },
+          { text: "SK Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "SKT Pajak & NPWP Badan", checked: true },
@@ -449,8 +546,12 @@ const dataCV: BadanUsahaContent = {
         ]},
         { title: "BONUS", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: false, footnoteIndex: "*" },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
           { text: "Voucher EasyLegal <strong>Rp 50.000</strong>", checked: true },
-          { text: "Gratis Ongkir Pulau Jawa", checked: false },
         ]},
       ],
     },
@@ -464,26 +565,35 @@ const dataCV: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pembuatan CV. Mohon info lengkap biaya dan prosesnya.", "paket-complete-pembuatan-cv"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Akta Pendirian <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Dokumen Lainnya <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Akta Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "FASILITAS", items: [
-          { text: "Pengecekan Nama CV", checked: true },
-          { text: "Penyusunan Anggaran Dasar", checked: true },
+          { text: "Pengecekan & Pemesanan Nama CV", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris", checked: true },
-          { text: "Surat Keterangan Terdaftar Pengadilan Negeri", checked: true },
+          { text: "SK Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "SKT Pajak & NPWP Badan", checked: true },
           { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "K3L/SPUMKTTR & SPPL", checked: true },
           { text: "Sertifikat Standar", checked: true },
         ]},
         { title: "BONUS", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 100.000</strong>", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
           { text: "Gratis Ongkir Pulau Jawa", checked: true },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan 1 Warna", checked: true },
         ]},
       ],
     },
@@ -502,26 +612,127 @@ const dataCV: BadanUsahaContent = {
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Dokumen Lainnya <strong>3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Dokumen Lainnya <strong>4 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "FASILITAS", items: [
-          { text: "Pengecekan Nama CV", checked: true },
-          { text: "Penyusunan Anggaran Dasar", checked: true },
+          { text: "Pengecekan & Pemesanan Nama CV", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
-
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris", checked: true },
-          { text: "Surat Keterangan Terdaftar Pengadilan Negeri", checked: true },
+          { text: "SK Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "SKT Pajak & NPWP Badan", checked: true },
           { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "K3L/SPUMKTTR & SPPL", checked: true },
           { text: "Sertifikat Standar", checked: true },
         ]},
         { title: "BONUS", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 200.000</strong>", checked: true },
-          { text: "Gratis Ongkir Seluruh Indonesia", checked: true },
+          { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+          { text: "Gratis Ongkir <strong>Seluruh Indonesia</strong>", checked: true },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET OFFICE",
+      price: "Rp 5.649.000",
+      strikePrice: "Rp 11.300.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Office",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Office Pembuatan CV. Mohon info lengkap biaya dan prosesnya.", "paket-office-pembuatan-cv"),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Akta Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan & Pemesanan Nama CV", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Akta Notaris", checked: true },
+          { text: "SK Kemenkumham", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "SKT Pajak & NPWP Badan", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "K3L/SPUMKTTR & SPPL", checked: true },
+          { text: "Sertifikat Standar", checked: true },
+        ]},
+        { title: "VIRTUAL OFFICE", isBoxed: true, items: [
+          { text: "Virtual Office 1 Tahun", boldText: "1 Tahun", checked: true },
+          { text: "Meeting Room 6 Jam/Bulan (3 Kota: Jkt, Bekasi, Bdg)", checked: true },
+          { text: "Fasilitas Kantor Siap PKP", checked: true },
+        ]},
+        { title: "BONUS", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+          { text: "Gratis Ongkir <strong>Seluruh Indonesia</strong>", checked: true },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET PRESTIGE",
+      price: "Rp 3.999.000",
+      strikePrice: "Rp 8.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pembuatan CV. Mohon info lengkap biaya dan prosesnya.", "paket-prestige-pembuatan-cv"),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Akta Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan & Pemesanan Nama CV", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Akta Notaris", checked: true },
+          { text: "SK Kemenkumham", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "SKT Pajak & NPWP Badan", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "K3L/SPUMKTTR & SPPL", checked: true },
+          { text: "Sertifikat Standar", checked: true },
+        ]},
+        { title: "BRANDING IDENTITY", isBoxed: true, items: [
+          { text: "Company Profile Digital 8 Halaman", checked: true },
+          { text: "Desain Logo (3x Revisi)", checked: true },
+          { text: "Desain Kartu Nama & Kop Surat", checked: true },
+          { text: "Desain Amplop & Map Bisnis", checked: true },
+        ]},
+        { title: "BONUS", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+          { text: "Gratis Ongkir <strong>Seluruh Indonesia</strong>", checked: true },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
         ]},
       ],
     },
@@ -581,7 +792,7 @@ const dataPMA: BadanUsahaContent = {
   heroImageAlt: "Rapat bisnis investasi asing",
   heroStats: [
     { icon: "Clock", value: "3–6 minggu", label: "SLA kerja" },
-    { icon: "DollarSign", value: "Mulai Rp6,99jt", label: "Harga transparan" },
+    { icon: "DollarSign", value: "Mulai IDR 8,99jt", label: "Harga transparan" },
     { icon: "Globe", value: "Investasi Asing", label: "BKPM approved" },
   ],
   floatingBadges: [
@@ -643,105 +854,148 @@ const dataPMA: BadanUsahaContent = {
   pricingPackages: [
     {
       title: "PAKET BASIC",
-      price: "Rp 7.999.000",
-      strikePrice: "Rp 15.000.000",
+      price: "IDR 8.999.000",
+      strikePrice: "IDR 18.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pendirian-pt-pma"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Izin Prinsip BKPM <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Akta & SK Kemenkumham <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
-          { text: "NPWP, NIB & Perizinan <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 3 },
+          { text: "Akta Notaris & SK Kemenkumham <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "NPWP Badan & SKT <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "FASILITAS", items: [
-          { text: "Konsultasi Kesesuaian Bidang Usaha (DNI)", checked: true },
-          { text: "Penyusunan Rencana Investasi", checked: true },
+          { text: "Pengecekan & Pemesanan Nama PT PMA", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
-          { text: "Akta Notaris & SK Kemenkumham", checked: true },
-          { text: "Izin Prinsip BKPM", checked: true },
+          { text: "Akta Notaris Pendirian", checked: true },
+          { text: "SK Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Badan & SKT Pajak", checked: true },
-          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: false },
           { text: "Sertifikat Standar & SPPL", checked: false },
-          { text: "IMTA & KITAS (Izin Kerja Asing)", checked: false, footnoteIndex: 4 },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>IDR 50.000</strong>", checked: true },
         ]},
       ],
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 11.999.000",
-      strikePrice: "Rp 24.000.000",
+      price: "IDR 12.999.000",
+      strikePrice: "IDR 26.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya.", "paket-complete-pendirian-pt-pma"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Izin Prinsip BKPM <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Akta & SK Kemenkumham <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
-          { text: "NPWP, NIB & Perizinan <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 3 },
+          { text: "Akta & SK Kemenkumham <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "NIB & Perizinan Berusaha <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "FASILITAS", items: [
-          { text: "Konsultasi Kesesuaian Bidang Usaha (DNI)", checked: true },
-          { text: "Penyusunan Rencana Investasi", checked: true },
+          { text: "Pengecekan & Pemesanan Nama PT PMA", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
-          { text: "Akta Notaris & SK Kemenkumham", checked: true },
-          { text: "Izin Prinsip BKPM", checked: true },
+          { text: "Akta Notaris Pendirian", checked: true },
+          { text: "SK Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Badan & SKT Pajak", checked: true },
           { text: "NIB & Akun OSS RBA", checked: true },
           { text: "Sertifikat Standar & SPPL", checked: true },
-          { text: "IMTA & KITAS (Izin Kerja Asing)", checked: true, footnoteIndex: 4 },
+          { text: "Angka Pengenal Impor (API)", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Konsultasi Perpajakan Bulanan", checked: true },
-          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>IDR 250.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan 1 Warna", checked: true },
         ]},
       ],
     },
     {
-      title: "PAKET EXPRESS",
-      price: "Rp 15.999.000",
-      strikePrice: "Rp 30.000.000",
+      title: "PAKET OFFICE",
+      price: "IDR 16.999.000",
+      strikePrice: "IDR 34.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya.", "paket-express-pendirian-pt-pma"),
-      customHeaderOverlay: (
-        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
-          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
-        </div>
-      ),
+      buttonText: "Pilih Paket Office",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Office Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya.", "paket-office-pendirian-pt-pma"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Izin Prinsip BKPM <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Akta & SK Kemenkumham <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
-          { text: "NPWP, NIB & Perizinan <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 3 },
+          { text: "Akta & SK Kemenkumham <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "NIB & Perizinan Berusaha <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "FASILITAS", items: [
-          { text: "Konsultasi Kesesuaian Bidang Usaha (DNI)", checked: true },
-          { text: "Penyusunan Rencana Investasi", checked: true },
+          { text: "Pengecekan & Pemesanan Nama PT PMA", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
-          { text: "Akta Notaris & SK Kemenkumham", checked: true },
-          { text: "Izin Prinsip BKPM", checked: true },
+          { text: "Akta Notaris Pendirian", checked: true },
+          { text: "SK Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Badan & SKT Pajak", checked: true },
           { text: "NIB & Akun OSS RBA", checked: true },
           { text: "Sertifikat Standar & SPPL", checked: true },
-          { text: "IMTA & KITAS (Izin Kerja Asing)", checked: true, footnoteIndex: 4 },
+          { text: "Angka Pengenal Impor (API)", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
-          { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Konsultasi Perpajakan Bulanan", checked: true },
-          { text: "Dokumen SOP Perusahaan", checked: true },
-          { text: "Konsultasi Notaris Prioritas", checked: true },
+        { title: "VIRTUAL OFFICE", isBoxed: true, items: [
+          { text: "Virtual Office 1 Tahun", boldText: "1 Tahun", checked: true },
+          { text: "Meeting Room 6 Jam/Bulan (3 Kota: Jkt, Bekasi, Bdg)", checked: true },
+          { text: "Fasilitas Kantor Siap PKP", checked: true },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>IDR 500.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan 1-3 Warna", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET PRESTIGE",
+      price: "IDR 14.999.000",
+      strikePrice: "IDR 30.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian PT PMA. Mohon info lengkap biaya dan prosesnya.", "paket-prestige-pendirian-pt-pma"),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Akta & SK Kemenkumham <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "NIB & Perizinan Berusaha <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan & Pemesanan Nama PT PMA", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Akta Notaris Pendirian", checked: true },
+          { text: "SK Kemenkumham", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "NPWP Badan & SKT Pajak", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "Sertifikat Standar & SPPL", checked: true },
+          { text: "Angka Pengenal Impor (API)", checked: true },
+        ]},
+        { title: "BRANDING IDENTITY", isBoxed: true, items: [
+          { text: "Company Profile Digital 8 Halaman", checked: true },
+          { text: "Desain Logo (3x Revisi)", checked: true },
+          { text: "Desain Kartu Nama & Kop Surat", checked: true },
+          { text: "Desain Amplop & Map Bisnis", checked: true },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>IDR 500.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan 1-3 Warna", checked: true },
         ]},
       ],
     },
@@ -803,7 +1057,7 @@ const dataPTPerorangan: BadanUsahaContent = {
   heroImageAlt: "Pengusaha individu mengembangkan bisnis",
   heroStats: [
     { icon: "Clock", value: "3–7 hari", label: "SLA kerja" },
-    { icon: "DollarSign", value: "Mulai Rp1,49jt", label: "Harga transparan" },
+    { icon: "DollarSign", value: "Mulai Rp799rb", label: "Harga terjangkau" },
     { icon: "UserCheck", value: "1 Pendiri", label: "Tanpa rekanan" },
   ],
   floatingBadges: [
@@ -861,54 +1115,62 @@ const dataPTPerorangan: BadanUsahaContent = {
   pricingTag: "BIAYA JASA PEMBUATAN PT PERORANGAN",
   pricingTitle: "Pilih paket pendirian PT Perorangan.",
   pricingSubtitle:
-    "Harga sudah termasuk pembuatan pernyataan pendirian, SK Kemenkumham, NPWP, dan NIB.",
+    "Harga sudah termasuk pembuatan pernyataan pendirian, SK Kemenkumham, NPWP, dan NIB. (Opsional: Akta Penegasan Notaris + Rp 1.499.000).",
   pricingPackages: [
     {
       title: "PAKET BASIC",
-      price: "Rp 1.499.000",
-      strikePrice: "Rp 3.000.000",
-      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      price: "Rp 799.000",
+      strikePrice: "Rp 1.600.000",
+      subLabel: "AKTA PENEGASAN + Rp 1.499.000 (OPSIONAL)",
       buttonText: "Pilih Paket Basic",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pendirian-pt-perorangan"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Pendirian Online <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "NPWP & NIB <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Pernyataan Elektronik <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "NPWP Badan <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "FASILITAS", items: [
           { text: "Pengecekan Ketersediaan Nama", checked: true },
-          { text: "Penyusunan Data Pendiri", checked: true },
+          { text: "<strong>10 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Surat Pernyataan Pendirian Elektronik (SABH)", checked: true },
-          { text: "SK Pengesahan Badan Hukum Kemenkumham", checked: true },
+          { text: "Sertifikat Pendaftaran Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Badan & SKT Pajak", checked: true },
-          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: false },
+          { text: "SPPL & Sertifikat Standar", checked: false },
+        ]},
+        { title: "BONUS", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 50.000</strong>", checked: true },
         ]},
       ],
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 2.499.000",
-      strikePrice: "Rp 5.000.000",
-      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      price: "Rp 999.000",
+      strikePrice: "Rp 2.000.000",
+      subLabel: "AKTA PENEGASAN + Rp 1.499.000 (OPSIONAL)",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya.", "paket-complete-pendirian-pt-perorangan"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Pendirian Online <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "NPWP & NIB <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Dokumen Lengkap <strong>1–3 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
         ]},
         { title: "FASILITAS", items: [
           { text: "Pengecekan Ketersediaan Nama", checked: true },
-          { text: "Penyusunan Data Pendiri", checked: true },
+          { text: "<strong>10 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Surat Pernyataan Pendirian Elektronik (SABH)", checked: true },
-          { text: "SK Pengesahan Badan Hukum Kemenkumham", checked: true },
+          { text: "Sertifikat Pendaftaran Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Badan & SKT Pajak", checked: true },
@@ -917,15 +1179,22 @@ const dataPTPerorangan: BadanUsahaContent = {
         ]},
         { title: "BONUS", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 50.000</strong>", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true },
         ]},
       ],
     },
-{
-      title: "PAKET COMPLETE",
-      price: "Rp 3.499.000",
-      strikePrice: "Rp 7.000.000",
-      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+    {
+      title: "PAKET EXPRESS",
+      price: "Rp 1.299.000",
+      strikePrice: "Rp 2.600.000",
+      subLabel: "AKTA PENEGASAN + Rp 1.499.000 (OPSIONAL)",
       buttonText: "Pilih Paket Express",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya.", "paket-express-pendirian-pt-perorangan"),
       customHeaderOverlay: (
@@ -935,16 +1204,15 @@ const dataPTPerorangan: BadanUsahaContent = {
       ),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Pendirian Online <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "NPWP & NIB <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Proses Kilat <strong>12 Jam Kerja</strong>", checked: true, footnoteIndex: 1 },
         ]},
         { title: "FASILITAS", items: [
           { text: "Pengecekan Ketersediaan Nama", checked: true },
-          { text: "Penyusunan Data Pendiri", checked: true },
+          { text: "<strong>10 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Surat Pernyataan Pendirian Elektronik (SABH)", checked: true },
-          { text: "SK Pengesahan Badan Hukum Kemenkumham", checked: true },
+          { text: "Sertifikat Pendaftaran Kemenkumham", checked: true },
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Badan & SKT Pajak", checked: true },
@@ -953,8 +1221,100 @@ const dataPTPerorangan: BadanUsahaContent = {
         ]},
         { title: "BONUS", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 100.000</strong>", checked: true },
-          { text: "Prioritas Proses", checked: true },
+          { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET OFFICE",
+      price: "Rp 3.649.000",
+      strikePrice: "Rp 7.300.000",
+      subLabel: "AKTA PENEGASAN + Rp 1.499.000 (OPSIONAL)",
+      buttonText: "Pilih Paket Office",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Office Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya.", "paket-office-pendirian-pt-perorangan"),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Dokumen Lengkap <strong>1–3 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan Ketersediaan Nama", checked: true },
+          { text: "<strong>10 KBLI</strong> Bidang Usaha", checked: true },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Surat Pernyataan Pendirian Elektronik (SABH)", checked: true },
+          { text: "Sertifikat Pendaftaran Kemenkumham", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "NPWP Badan & SKT Pajak", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "SPPL & Sertifikat Standar", checked: true },
+        ]},
+        { title: "VIRTUAL OFFICE", isBoxed: true, items: [
+          { text: "Virtual Office 1 Tahun", boldText: "1 Tahun", checked: true },
+          { text: "Meeting Room 6 Jam/Bulan (3 Kota: Jkt, Bekasi, Bdg)", checked: true },
+          { text: "Fasilitas Kantor Siap PKP", checked: true },
+        ]},
+        { title: "BONUS", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET PRESTIGE",
+      price: "Rp 1.999.000",
+      strikePrice: "Rp 4.000.000",
+      subLabel: "AKTA PENEGASAN + Rp 1.499.000 (OPSIONAL)",
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian PT Perorangan. Mohon info lengkap biaya dan prosesnya.", "paket-prestige-pendirian-pt-perorangan"),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Dokumen Lengkap <strong>1–3 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan Ketersediaan Nama", checked: true },
+          { text: "<strong>10 KBLI</strong> Bidang Usaha", checked: true },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Surat Pernyataan Pendirian Elektronik (SABH)", checked: true },
+          { text: "Sertifikat Pendaftaran Kemenkumham", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "NPWP Badan & SKT Pajak", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "SPPL & Sertifikat Standar", checked: true },
+        ]},
+        { title: "BRANDING IDENTITY", isBoxed: true, items: [
+          { text: "Company Profile Digital 8 Halaman", checked: true },
+          { text: "Desain Logo (3x Revisi)", checked: true },
+          { text: "Desain Kartu Nama & Kop Surat", checked: true },
+          { text: "Desain Amplop & Map Bisnis", checked: true },
+        ]},
+        { title: "BONUS", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Undian iPhone", boldText: "2 Kupon", checked: true },
+          { text: "Pembukaan Rekening Bank", checked: true, footnoteIndex: "*" },
+        ]},
+        { title: "EXTRA BONUS", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
         ]},
       ],
     },
@@ -1084,8 +1444,12 @@ const dataFirma: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Firma. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pendirian-firma"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Akta Pendirian <strong>1–2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Pendaftaran PN & NPWP <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Akta Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Pendaftaran PN & NPWP <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan Nama Firma", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris Pendirian Firma", checked: true },
@@ -1093,10 +1457,12 @@ const dataFirma: BadanUsahaContent = {
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Badan & SKT Pajak", checked: true },
-          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: false },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 50.000</strong>", checked: true },
         ]},
       ],
     },
@@ -1110,8 +1476,12 @@ const dataFirma: BadanUsahaContent = {
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Complete Pendirian Firma. Mohon info lengkap biaya dan prosesnya.", "paket-complete-pendirian-firma"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Pendaftaran PN & Perizinan <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Akta Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan Nama Firma", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris Pendirian Firma", checked: true },
@@ -1122,23 +1492,69 @@ const dataFirma: BadanUsahaContent = {
           { text: "NIB & Akun OSS RBA", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 100.000</strong>", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan 1 Warna", checked: true },
+        ]},
+      ],
+    },
+    {
+      title: "PAKET EXPRESS",
+      price: "Rp 4.499.000",
+      strikePrice: "Rp 9.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Paket Express",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Firma. Mohon info lengkap biaya dan prosesnya.", "paket-express-pendirian-firma"),
+      customHeaderOverlay: (
+        <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
+          <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
+        </div>
+      ),
+      groups: [
+        { title: "LAMA PROSES", items: [
+          { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>4 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan Nama Firma", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
+        ]},
+        { title: "DOKUMEN PENDIRIAN", items: [
+          { text: "Akta Notaris Pendirian Firma", checked: true },
+          { text: "Pendaftaran ke Pengadilan Negeri", checked: true },
+        ]},
+        { title: "DOKUMEN LAINNYA", items: [
+          { text: "NPWP Badan & SKT Pajak", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "SPPL & Sertifikat Standar", checked: true },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
         ]},
       ],
     },
     {
       title: "PAKET OFFICE",
-      price: "Rp 4.499.000",
-      strikePrice: "Rp 9.000.000",
+      price: "Rp 5.649.000",
+      strikePrice: "Rp 11.300.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Office",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Office Pendirian Firma. Mohon info lengkap biaya dan prosesnya.", "paket-office-pendirian-firma"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Pendaftaran PN & Perizinan <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Akta Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan Nama Firma", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris Pendirian Firma", checked: true },
@@ -1149,24 +1565,34 @@ const dataFirma: BadanUsahaContent = {
           { text: "NIB & Akun OSS RBA", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
-          { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 200.000</strong>", checked: true },
-          { text: "Gratis Ongkir Seluruh Indonesia", checked: true },
+        { title: "VIRTUAL OFFICE", isBoxed: true, items: [
+          { text: "Virtual Office 1 Tahun", boldText: "1 Tahun", checked: true },
+          { text: "Meeting Room 6 Jam/Bulan (3 Kota: Jkt, Bekasi, Bdg)", checked: true },
+          { text: "Fasilitas Siap PKP", checked: true },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
         ]},
       ],
     },
     {
       title: "PAKET PRESTIGE",
-      price: "Rp 5.649.000",
-      strikePrice: "Rp 11.300.000",
+      price: "Rp 3.999.000",
+      strikePrice: "Rp 8.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Prestige",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Firma. Mohon info lengkap biaya dan prosesnya.", "paket-prestige-pendirian-firma"),
       groups: [
         { title: "LAMA PROSES", items: [
-          { text: "Akta Pendirian <strong>1 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "Pendaftaran PN & Perizinan <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "Akta Pendirian <strong>2 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
+          { text: "Dokumen Lainnya <strong>5–10 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+        ]},
+        { title: "FASILITAS", items: [
+          { text: "Pengecekan Nama Firma", checked: true },
+          { text: "<strong>20 KBLI</strong> Bidang Usaha", checked: true },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris Pendirian Firma", checked: true },
@@ -1177,10 +1603,17 @@ const dataFirma: BadanUsahaContent = {
           { text: "NIB & Akun OSS RBA", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
-          { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 200.000</strong>", checked: true },
-          { text: "Gratis Ongkir Seluruh Indonesia", checked: true },
+        { title: "BRANDING IDENTITY", isBoxed: true, items: [
+          { text: "Company Profile Digital 8 Halaman", checked: true },
+          { text: "Desain Logo (3x Revisi)", checked: true },
+          { text: "Desain Kartu Nama & Kop Surat", checked: true },
+          { text: "Desain Amplop & Map Bisnis", checked: true },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
+          { text: "Dokumen SOP & Kontrak Bisnis", checked: true },
+          { text: "Stempel Perusahaan <strong>1-3 Warna</strong>", checked: true },
         ]},
       ],
     },
@@ -1299,15 +1732,15 @@ const dataYayasan: BadanUsahaContent = {
   pricingPackages: [
     {
       title: "PAKET BASIC",
-      price: "Rp 2.999.000",
-      strikePrice: "Rp 6.000.000",
+      price: "Rp 3.449.000",
+      strikePrice: "Rp 7.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pendirian-yayasan"),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & SK Kemenkumham <strong>2–5 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "NPWP & NIB <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "NPWP & SKT Pajak <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris Pendirian Yayasan", checked: true },
@@ -1315,18 +1748,19 @@ const dataYayasan: BadanUsahaContent = {
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Yayasan & SKT Pajak", checked: true },
-          { text: "NIB & Akun OSS RBA", checked: true },
+          { text: "NIB & Akun OSS RBA", checked: false },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
           { text: "Voucher EasyLegal <strong>Rp 50.000</strong>", checked: true },
         ]},
       ],
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 4.999.000",
-      strikePrice: "Rp 10.000.000",
+      price: "Rp 5.499.000",
+      strikePrice: "Rp 11.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
@@ -1345,17 +1779,18 @@ const dataYayasan: BadanUsahaContent = {
           { text: "NIB & Akun OSS RBA", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 100.000</strong>", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
           { text: "Draft Anggaran Dasar & ART", checked: true },
         ]},
       ],
     },
     {
       title: "PAKET PRESTIGE",
-      price: "Rp 5.999.000",
-      strikePrice: "Rp 12.000.000",
+      price: "Rp 6.499.000",
+      strikePrice: "Rp 13.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Prestige",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Yayasan. Mohon info lengkap biaya dan prosesnya.", "paket-prestige-pendirian-yayasan"),
@@ -1378,11 +1813,14 @@ const dataYayasan: BadanUsahaContent = {
           { text: "NIB & Akun OSS RBA", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
-          { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
-          { text: "Draft Anggaran Dasar & ART", checked: true },
-          { text: "Konsultasi Perpajakan Nirlaba", checked: true },
+        { title: "BRANDING & DOKUMEN", isBoxed: true, items: [
+          { text: "Company Profile Yayasan Digital", checked: true },
+          { text: "Desain Logo & Identitas Organisasi", checked: true },
+          { text: "Draft Lengkap AD/ART & Program Kerja", checked: true },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
         ]},
       ],
     },
@@ -1441,7 +1879,7 @@ const dataPerkumpulan: BadanUsahaContent = {
   heroImageAlt: "Komunitas perkumpulan",
   heroStats: [
     { icon: "Clock", value: "14–30 hari", label: "SLA kerja" },
-    { icon: "DollarSign", value: "Mulai Rp2,49jt", label: "Harga transparan" },
+    { icon: "DollarSign", value: "Mulai Rp3,99jt", label: "Harga transparan" },
     { icon: "Users", value: "Berbasis Anggota", label: "Komunitas" },
   ],
   floatingBadges: [
@@ -1503,15 +1941,15 @@ const dataPerkumpulan: BadanUsahaContent = {
   pricingPackages: [
     {
       title: "PAKET BASIC",
-      price: "Rp 2.499.000",
-      strikePrice: "Rp 5.000.000",
+      price: "Rp 3.499.000",
+      strikePrice: "Rp 7.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Perkumpulan. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pendirian-perkumpulan"),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & Pengesahan <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "NPWP & NIB <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "NPWP & SKT Pajak <strong>2–3 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris Pendirian Perkumpulan", checked: true },
@@ -1519,14 +1957,19 @@ const dataPerkumpulan: BadanUsahaContent = {
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Perkumpulan & SKT Pajak", checked: true },
-          { text: "NIB & Akun OSS", checked: true },
+          { text: "NIB & Akun OSS", checked: false },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 50.000</strong>", checked: true },
         ]},
       ],
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 3.999.000",
-      strikePrice: "Rp 7.000.000",
+      price: "Rp 5.499.000",
+      strikePrice: "Rp 11.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
       buttonText: "Pilih Paket Complete",
@@ -1545,20 +1988,21 @@ const dataPerkumpulan: BadanUsahaContent = {
           { text: "NIB & Akun OSS", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
           { text: "Draft AD/ART Lengkap", checked: true },
         ]},
       ],
     },
     {
-      title: "PAKET EXPRESS",
-      price: "Rp 5.999.000",
-      strikePrice: "Rp 10.000.000",
-
+      title: "PAKET PRESTIGE",
+      price: "Rp 6.499.000",
+      strikePrice: "Rp 13.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Perkumpulan. Mohon info lengkap biaya dan prosesnya.", "paket-express-pendirian-perkumpulan"),
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Perkumpulan. Mohon info lengkap biaya dan prosesnya.", "paket-prestige-pendirian-perkumpulan"),
       customHeaderOverlay: (
         <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
@@ -1578,10 +2022,14 @@ const dataPerkumpulan: BadanUsahaContent = {
           { text: "NIB & Akun OSS", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
-          { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Draft AD/ART Lengkap", checked: true },
-          { text: "Konsultasi Organisasi 1 Bulan", checked: true },
+        { title: "BRANDING & DOKUMEN", isBoxed: true, items: [
+          { text: "Profil Digital Komunitas / Organisasi", checked: true },
+          { text: "Desain Logo & Identitas Organisasi", checked: true },
+          { text: "Draft Lengkap AD/ART & Program Kerja", checked: true },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
         ]},
       ],
     },
@@ -1640,7 +2088,7 @@ const dataKoperasi: BadanUsahaContent = {
   heroImageAlt: "Rapat anggota koperasi",
   heroStats: [
     { icon: "Clock", value: "14–30 hari", label: "SLA kerja" },
-    { icon: "DollarSign", value: "Mulai Rp3,49jt", label: "Harga transparan" },
+    { icon: "DollarSign", value: "Mulai Rp3,99jt", label: "Harga transparan" },
     { icon: "Users", value: "20+ Anggota", label: "Minimal pendiri" },
   ],
   floatingBadges: [
@@ -1702,15 +2150,15 @@ const dataKoperasi: BadanUsahaContent = {
   pricingPackages: [
     {
       title: "PAKET BASIC",
-      price: "Rp 3.499.000",
-      strikePrice: "Rp 7.000.000",
+      price: "Rp 3.999.000",
+      strikePrice: "Rp 8.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Paket Basic",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendirian Koperasi. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pendirian-koperasi"),
       groups: [
         { title: "LAMA PROSES", items: [
           { text: "Akta & SK Kemenkumham <strong>5–7 Hari Kerja</strong>", checked: true, footnoteIndex: 1 },
-          { text: "NPWP & NIB <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
+          { text: "NPWP & SKT Pajak <strong>3–5 Hari Kerja</strong>", checked: true, footnoteIndex: 2 },
         ]},
         { title: "DOKUMEN PENDIRIAN", items: [
           { text: "Akta Notaris Pendirian Koperasi", checked: true },
@@ -1718,13 +2166,18 @@ const dataKoperasi: BadanUsahaContent = {
         ]},
         { title: "DOKUMEN LAINNYA", items: [
           { text: "NPWP Koperasi & SKT Pajak", checked: true },
-          { text: "NIB & Akun OSS", checked: true },
+          { text: "NIB & Akun OSS", checked: false },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 50.000</strong>", checked: true },
         ]},
       ],
     },
     {
       title: "PAKET COMPLETE",
-      price: "Rp 5.499.000",
+      price: "Rp 4.999.000",
       strikePrice: "Rp 10.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       isPopular: true,
@@ -1744,19 +2197,21 @@ const dataKoperasi: BadanUsahaContent = {
           { text: "NIB & Akun OSS", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
           { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "Logam Mulia Emas 24K", boldText: "1 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 250.000</strong>", checked: true },
           { text: "Draft AD/ART & Rencana Kerja", checked: true },
         ]},
       ],
     },
     {
-      title: "PAKET EXPRESS",
-      price: "Rp 7.999.000",
-      strikePrice: "Rp 14.000.000",
+      title: "PAKET PRESTIGE",
+      price: "Rp 5.999.000",
+      strikePrice: "Rp 12.000.000",
       subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      buttonText: "Pilih Paket Express",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Express Pendirian Koperasi. Mohon info lengkap biaya dan prosesnya.", "paket-express-pendirian-koperasi"),
+      buttonText: "Pilih Paket Prestige",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Prestige Pendirian Koperasi. Mohon info lengkap biaya dan prosesnya.", "paket-prestige-pendirian-koperasi"),
       customHeaderOverlay: (
         <div className="absolute -right-3 -top-8 w-20 h-20 sm:w-[100px] sm:h-[100px] transition-transform hover:scale-105 duration-300 pointer-events-none z-20">
           <img src="/Fast Track.png" alt="Fast Track" className="w-full h-full object-contain drop-shadow-lg" />
@@ -1776,10 +2231,14 @@ const dataKoperasi: BadanUsahaContent = {
           { text: "NIB & Akun OSS", checked: true },
           { text: "SPPL & Sertifikat Standar", checked: true },
         ]},
-        { title: "BONUS", isBoxed: true, items: [
-          { text: "Layanan Personal Legal Assistant", checked: true },
-          { text: "Draft AD/ART & Rencana Kerja", checked: true },
-          { text: "Konsultasi Perpajakan Koperasi 1 Bulan", checked: true },
+        { title: "BRANDING & DOKUMEN", isBoxed: true, items: [
+          { text: "Company Profile Digital Koperasi", checked: true },
+          { text: "Desain Logo & Identitas Usaha", checked: true },
+          { text: "Draft Lengkap AD/ART & Rencana Strategis", checked: true },
+        ]},
+        { title: "BONUS & EXTRA", isBoxed: true, items: [
+          { text: "Logam Mulia Emas 24K", boldText: "2 Buah", checked: true },
+          { text: "Voucher EasyLegal <strong>Rp 500.000</strong>", checked: true },
         ]},
       ],
     },

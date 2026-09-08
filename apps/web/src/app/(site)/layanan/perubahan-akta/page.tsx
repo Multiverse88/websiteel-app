@@ -253,13 +253,13 @@ export default function PerubahanAktaPage() {
               <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
                 
                 <div className="text-center mb-[18px]">
-                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PERUBAHAN DATA PT</div>
-                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PERUBAHAN PENGURUS / SAHAM</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PERUBAHAN AKTA SAJA</div>
+                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PENGURUS / MODAL / SAHAM / DOMISILI</div>
                 </div>
                 
                 <div className="text-center mb-[20px]">
-                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 6.000.000</div>
-                  <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 3.999.000</div>
+                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 9.000.000</div>
+                  <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 4.499.000</div>
                   <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
 
@@ -296,13 +296,13 @@ export default function PerubahanAktaPage() {
               <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)]">
                 
                 <div className="text-center mb-[18px]">
-                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PERUBAHAN AD PT</div>
-                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">PERUBAHAN MODAL / NAMA / DOMISILI</div>
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PERUBAHAN AKTA & NIB</div>
+                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">MIGRASI KBLI & IZIN BERUSAHA OSS</div>
                 </div>
                 
                 <div className="text-center mb-[20px]">
-                  <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 8.000.000</div>
-                  <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 5.499.000</div>
+                  <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 12.000.000</div>
+                  <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 5.999.000</div>
                   <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
 

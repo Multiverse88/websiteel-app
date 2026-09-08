@@ -78,50 +78,50 @@ export default function VisaKitas() {
     ],
     investor: [
       {
-        title: "KITAS INVESTOR 1 TAHUN (C313)",
-        subtitle: "Untuk penanam modal asing jangka pendek",
-        originalPrice: "IDR 20.000.000",
-        price: "12.500.000",
+        title: "KITAS INVESTOR 1 TAHUN",
+        subtitle: "Termasuk PNBP KITAS & MERP Rp 7.000.000",
+        originalPrice: "IDR 28.000.000",
+        price: "13.999.000",
         isPopular: true,
         labelBtn: "Pilih KITAS 1 Tahun",
-        lamaProses: "14-21 hari kerja",
-        yangDiperoleh: "E-KITAS Investor 1 Tahun & Izin Kerja Terkait",
+        lamaProses: "7-10 hari kerja",
+        yangDiperoleh: "Izin Tinggal Terbatas (KITAS) & MERP 1 Tahun, Visa Elektronik Investor, Termasuk PNBP KITAS & MERP Rp 7.000.000",
         waText: "Halo EasyLegal, saya ingin memesan Paket KITAS Investor 1 Tahun."
       },
       {
-        title: "KITAS INVESTOR 2 TAHUN (C314)",
-        subtitle: "Masa tinggal terpanjang untuk penanam modal",
-        originalPrice: "IDR 30.000.000",
-        price: "15.500.000",
+        title: "KITAS INVESTOR 2 TAHUN",
+        subtitle: "Termasuk PNBP KITAS & MERP Rp 9.500.000",
+        originalPrice: "IDR 34.000.000",
+        price: "17.999.000",
         isPopular: false,
         labelBtn: "Pilih KITAS 2 Tahun",
-        lamaProses: "14-21 hari kerja",
-        yangDiperoleh: "E-KITAS Investor 2 Tahun & Izin Kerja Terkait",
+        lamaProses: "7-10 hari kerja",
+        yangDiperoleh: "Izin Tinggal Terbatas (KITAS) & MERP 2 Tahun, Visa Elektronik Investor, Termasuk PNBP KITAS & MERP Rp 9.500.000",
         waText: "Halo EasyLegal, saya ingin memesan Paket KITAS Investor 2 Tahun."
       }
     ],
     tka: [
       {
-        title: "KITAS TKA 6 BULAN (C312)",
-        subtitle: "Untuk pekerja asing jangka pendek",
-        originalPrice: "IDR 18.000.000",
-        price: "11.500.000",
+        title: "KITAS TKA 12 BULAN (BARU)",
+        subtitle: "Termasuk DPKK USD 1.200 & PNBP KITAS",
+        originalPrice: "IDR 84.300.000",
+        price: "42.149.000",
         isPopular: true,
-        labelBtn: "Pilih KITAS TKA 6 Bulan",
-        lamaProses: "14-21 hari kerja",
-        yangDiperoleh: "RPTKA, Notifikasi, E-Visa & E-KITAS 6 Bulan",
-        waText: "Halo EasyLegal, saya ingin memesan Paket KITAS TKA 6 Bulan."
+        labelBtn: "Pilih KITAS TKA Baru",
+        lamaProses: "3-6 hari kerja",
+        yangDiperoleh: "RPTKA, Notifikasi IMTA, E-Visa, KITAS & MERP 1 Tahun, Domisili & TKKOA, Include DPKK Kemenaker USD 1.200 & PNBP",
+        waText: "Halo EasyLegal, saya ingin memesan Paket KITAS TKA Baru 1 Tahun."
       },
       {
-        title: "KITAS TKA 12 BULAN (C312)",
-        subtitle: "Untuk pekerja ahli jangka panjang",
-        originalPrice: "IDR 24.000.000",
-        price: "14.500.000",
+        title: "KITAS TKA 12 BULAN (PERPANJANGAN)",
+        subtitle: "Perpanjangan KITAS TKA (Include DPKK & PNBP)",
+        originalPrice: "IDR 78.000.000",
+        price: "38.999.000",
         isPopular: false,
-        labelBtn: "Pilih KITAS TKA 12 Bulan",
-        lamaProses: "14-21 hari kerja",
-        yangDiperoleh: "RPTKA, Notifikasi, E-Visa & E-KITAS 12 Bulan",
-        waText: "Halo EasyLegal, saya ingin memesan Paket KITAS TKA 12 Bulan."
+        labelBtn: "Pilih Perpanjangan TKA",
+        lamaProses: "3-6 hari kerja",
+        yangDiperoleh: "Perpanjangan RPTKA, Notifikasi IMTA, KITAS & MERP 1 Tahun, Include DPKK USD 1.200 & PNBP",
+        waText: "Halo EasyLegal, saya ingin memesan Paket Perpanjangan KITAS TKA 1 Tahun."
       }
     ]
   };

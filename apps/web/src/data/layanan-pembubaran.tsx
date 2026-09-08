@@ -86,41 +86,163 @@ export const dataPembubaran: BadanUsahaContent = {
 
   pricingTag: "PAKET LIKUIDASI",
   pricingTitle: <>Pilih paket pembubaran perusahaan<br />sesuai kebutuhan.</>,
-  pricingSubtitle: "Pilihan paket pengurusan likuidasi PT & CV all-in.",
+  pricingSubtitle: "Pilihan paket pengurusan likuidasi PT, PT PMA, CV, dan PT Perorangan all-in.",
   pricingPackages: [
     {
+      title: "PT PERORANGAN",
+      price: "Rp 999.000",
+      strikePrice: "Rp 2.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Pembubaran PT Perorangan",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembubaran PT Perorangan.", "pembubaran-pt-perorangan"),
+      groups: [
+        {
+          title: "YANG DIPEROLEH",
+          items: [
+            { text: "Surat Pernyataan Pembubaran Perseroan", checked: true },
+            { text: "Sertifikat Pembubaran Perseroan", checked: true },
+            { text: "Pencabutan Izin Usaha & Nonaktif NPWP", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Layanan Personal Legal Assistance", checked: true },
+            { text: "1 Kupon Undian iPhone", checked: true },
+            { text: "Gratis Ongkir Pulau Jawa", checked: true }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          isBoxed: true,
+          items: [
+            { text: "1 Buah Logam Mulia Emas 24K", checked: true },
+            { text: "Voucher EasyLegal Rp 250.000", checked: true },
+            { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+            { text: "Dokumen Kontrak Bisnis", checked: true },
+            { text: "Cek Merek senilai Rp 299.000", checked: true }
+          ]
+        }
+      ]
+    },
+    {
       title: "PEMBUBARAN CV",
-      price: "Rp 7.500.000",
-      subLabel: "LIKUIDASI & PUBLIKASI RESMI",
+      price: "Rp 5.999.000",
+      strikePrice: "Rp 12.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Pembubaran CV",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembubaran CV.", "ingin-konsultasi-mengenai-pembubaran-cv"),
       groups: [
         {
-          title: "DOKUMEN & KORAN",
+          title: "YANG DIPEROLEH",
           items: [
-            { text: "Akta Pembubaran & Kesepakatan Sekutu", checked: true },
-            { text: "Pengumuman Koran Resmi (1x Publikasi)", checked: true },
-            { text: "Pemberitahuan Pencabutan ke Kemenkumham", checked: true }
+            { text: "Draft Sirkuler RUPS Pembubaran", checked: true },
+            { text: "Akta Pembubaran Notaris", checked: true },
+            { text: "SK Menteri Pembubaran Kemenkumham", checked: true },
+            { text: "Pencabutan Izin Usaha & Nonaktif NPWP", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Layanan Personal Legal Assistance", checked: true },
+            { text: "1 Kupon Undian iPhone", checked: true },
+            { text: "Gratis Ongkir Pulau Jawa", checked: true }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          isBoxed: true,
+          items: [
+            { text: "1 Buah Logam Mulia Emas 24K", checked: true },
+            { text: "Voucher EasyLegal Rp 250.000", checked: true },
+            { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+            { text: "Dokumen Kontrak Bisnis", checked: true },
+            { text: "Cek Merek senilai Rp 299.000", checked: true }
           ]
         }
       ]
     },
     {
       title: "PEMBUBARAN PT",
-      price: "Rp 15.000.000",
+      price: "Rp 9.999.000",
+      strikePrice: "Rp 20.000.000",
       isPopular: true,
       badgeText: "TERLARIS",
-      subLabel: "LIKUIDATOR & RUAS HUKUM LENGKAP",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
       buttonText: "Pilih Pembubaran PT",
       buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembubaran PT.", "ingin-konsultasi-mengenai-pembubaran-pt"),
       groups: [
         {
-          title: "PROSES HUKUM LENGKAP",
+          title: "YANG DIPEROLEH",
           items: [
-            { text: "Akta RUPS Pembubaran & Penunjukan Likuidator", checked: true },
-            { text: "Pengumuman Koran Pertama & Kedua", checked: true },
-            { text: "SK Kemenkumham Pencabutan Status Badan Hukum", checked: true },
-            { text: "Pendampingan Penutupan NPWP Pajak", checked: true }
+            { text: "Draft Sirkuler RUPS Pembubaran", checked: true },
+            { text: "Akta Pembubaran Notaris", checked: true },
+            { text: "SK Menteri Pembubaran Kemenkumham", checked: true },
+            { text: "Pencabutan Izin Usaha & Nonaktif NPWP", checked: true },
+            { text: "Pengumuman di Surat Kabar", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Layanan Personal Legal Assistance", checked: true },
+            { text: "1 Kupon Undian iPhone", checked: true },
+            { text: "Gratis Ongkir Pulau Jawa", checked: true }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          isBoxed: true,
+          items: [
+            { text: "1 Buah Logam Mulia Emas 24K", checked: true },
+            { text: "Voucher EasyLegal Rp 250.000", checked: true },
+            { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+            { text: "Dokumen Kontrak Bisnis", checked: true },
+            { text: "Cek Merek senilai Rp 299.000", checked: true }
+          ]
+        }
+      ]
+    },
+    {
+      title: "PEMBUBARAN PT PMA",
+      price: "Rp 10.999.000",
+      strikePrice: "Rp 22.000.000",
+      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+      buttonText: "Pilih Pembubaran PT PMA",
+      buttonLink: getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai pembubaran PT PMA.", "pembubaran-pt-pma"),
+      groups: [
+        {
+          title: "YANG DIPEROLEH",
+          items: [
+            { text: "Draft Sirkuler RUPS Pembubaran", checked: true },
+            { text: "Akta Pembubaran Notaris", checked: true },
+            { text: "SK Menteri Pembubaran Kemenkumham", checked: true },
+            { text: "Pencabutan Izin Usaha & Nonaktif NPWP", checked: true },
+            { text: "Pengumuman di Surat Kabar", checked: true }
+          ]
+        },
+        {
+          title: "BONUS",
+          isBoxed: true,
+          items: [
+            { text: "Layanan Personal Legal Assistance", checked: true },
+            { text: "1 Kupon Undian iPhone", checked: true },
+            { text: "Gratis Ongkir Pulau Jawa", checked: true }
+          ]
+        },
+        {
+          title: "EXTRA BONUS",
+          isBoxed: true,
+          items: [
+            { text: "1 Buah Logam Mulia Emas 24K", checked: true },
+            { text: "Voucher EasyLegal Rp 250.000", checked: true },
+            { text: "Dokumen SOP Karyawan & Perusahaan", checked: true },
+            { text: "Dokumen Kontrak Bisnis", checked: true },
+            { text: "Cek Merek senilai Rp 299.000", checked: true }
           ]
         }
       ]

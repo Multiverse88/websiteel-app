@@ -60,9 +60,9 @@ const faqs = [
 const pricingPackages: PricingPackage[] = [
   {
     title: "PAKET APOSTILLE EASYLEGAL",
-    price: "Rp 1.300.000",
-    strikePrice: "Rp 1.800.000",
-    subLabel: "PER DOKUMEN · TERMASUK PNBP",
+    price: "Rp 1.400.000",
+    strikePrice: "Rp 2.800.000",
+    subLabel: "PER DOKUMEN · TANPA BIAYA TAMBAHAN",
     isPopular: true,
     badgeText: "POPULER",
     buttonText: "Pesan Sekarang",
@@ -71,9 +71,10 @@ const pricingPackages: PricingPackage[] = [
       {
         title: "BIAYA & PROSES",
         items: [
-          { text: "PNBP Resmi Kemenkumham (Rp 150.000)", checked: true },
-          { text: "Proses Cepat (Maks. 3 Hari Kerja)", checked: true },
-          { text: "Gratis Konsultasi dengan Tim PLA", checked: true }
+          { text: "Pengurusan Apostille melalui sistem AHU", checked: true },
+          { text: "Proses Cepat (Verifikasi 3 Hari Kerja)", checked: true },
+          { text: "Pendampingan pengisian data dokumen", checked: true },
+          { text: "Sertifikat Apostille resmi untuk luar negeri", checked: true }
         ]
       },
       {
@@ -83,6 +84,16 @@ const pricingPackages: PricingPackage[] = [
           { text: "Keamanan Dokumen 100% Terjamin", checked: true },
           { text: "Pengantaran Dokumen Fisik Aman", checked: true },
           { text: "Monitoring Status AHU Online Real-time", checked: true }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistant", checked: true },
+          { text: "1 Kupon Undian iPhone", checked: true },
+          { text: "1 Buah Logam Mulia Emas 24K", checked: true },
+          { text: "Voucher EasyLegal Rp 50.000", checked: true },
         ]
       }
     ]

@@ -119,9 +119,9 @@ const rupsBenefits = [
 
 const packages = [
   {
-    name: "PAKET START",
-    originalPrice: "Rp 4.000.000",
-    price: "Rp 1.999.000",
+    name: "1-5 KBLI",
+    originalPrice: "Rp 4.700.000",
+    price: "Rp 2.349.000",
     badge: "DISKON 50% - TANPA BIAYA TAMBAHAN",
     duration: "7-10 Hari Kerja",
     obtained: [
@@ -139,14 +139,14 @@ const packages = [
       "Dokumen SOP Perusahaan",
       "Dokumen Kontrak Bisnis",
     ],
-    buttonText: "Pilih Paket Basic",
-    buttonType: "outline",
-    waText: "Halo EasyLegal, saya tertarik dengan Paket RUPS Start."
+    buttonText: "Pilih 1-5 KBLI",
+    buttonType: "solid",
+    waText: "Halo EasyLegal, saya tertarik dengan Paket Pelaporan RUPS 1-5 KBLI."
   },
   {
-    name: "PAKET 1-5 KBLI",
-    originalPrice: "Rp 4.000.000",
-    price: "Rp 1.999.000",
+    name: "6-10 KBLI",
+    originalPrice: "Rp 5.200.000",
+    price: "Rp 2.599.000",
     badge: "DISKON 50% - TANPA BIAYA TAMBAHAN",
     duration: "7-10 Hari Kerja",
     obtained: [
@@ -164,14 +164,14 @@ const packages = [
       "Dokumen SOP Perusahaan",
       "Dokumen Kontrak Bisnis",
     ],
-    buttonText: "Pilih Paket Complete",
+    buttonText: "Pilih 6-10 KBLI",
     buttonType: "solid",
-    waText: "Halo EasyLegal, saya tertarik dengan Paket RUPS 1-5 KBLI."
+    waText: "Halo EasyLegal, saya tertarik dengan Paket Pelaporan RUPS 6-10 KBLI."
   },
   {
-    name: "PAKET 6-10 KBLI",
-    originalPrice: "Rp 4.500.000",
-    price: "Rp 2.249.000",
+    name: "10-15 KBLI",
+    originalPrice: "Rp 5.700.000",
+    price: "Rp 2.849.000",
     badge: "DISKON 50% - TANPA BIAYA TAMBAHAN",
     duration: "7-10 Hari Kerja",
     obtained: [
@@ -189,14 +189,14 @@ const packages = [
       "Dokumen SOP Perusahaan",
       "Dokumen Kontrak Bisnis",
     ],
-    buttonText: "Pilih Paket Complete",
+    buttonText: "Pilih 10-15 KBLI",
     buttonType: "solid",
-    waText: "Halo EasyLegal, saya tertarik dengan Paket RUPS 6-10 KBLI."
+    waText: "Halo EasyLegal, saya tertarik dengan Paket Pelaporan RUPS 10-15 KBLI."
   },
   {
-    name: "PAKET 10-15 KBLI",
-    originalPrice: "Rp 5.000.000",
-    price: "Rp 2.499.000",
+    name: "16-20 KBLI",
+    originalPrice: "Rp 6.200.000",
+    price: "Rp 3.099.000",
     badge: "DISKON 50% - TANPA BIAYA TAMBAHAN",
     duration: "7-10 Hari Kerja",
     obtained: [
@@ -214,14 +214,14 @@ const packages = [
       "Dokumen SOP Perusahaan",
       "Dokumen Kontrak Bisnis",
     ],
-    buttonText: "Pilih Paket Complete",
+    buttonText: "Pilih 16-20 KBLI",
     buttonType: "solid",
-    waText: "Halo EasyLegal, saya tertarik dengan Paket RUPS 10-15 KBLI."
+    waText: "Halo EasyLegal, saya tertarik dengan Paket Pelaporan RUPS 16-20 KBLI."
   },
   {
-    name: "PAKET 16-20 KBLI",
-    originalPrice: "Rp 5.500.000",
-    price: "Rp 2.749.000",
+    name: ">20 KBLI",
+    originalPrice: "Rp 6.700.000",
+    price: "Rp 3.349.000",
     badge: "DISKON 50% - TANPA BIAYA TAMBAHAN",
     duration: "7-10 Hari Kerja",
     obtained: [
@@ -239,34 +239,9 @@ const packages = [
       "Dokumen SOP Perusahaan",
       "Dokumen Kontrak Bisnis",
     ],
-    buttonText: "Pilih Paket Complete",
+    buttonText: "Pilih >20 KBLI",
     buttonType: "solid",
-    waText: "Halo EasyLegal, saya tertarik dengan Paket RUPS 16-20 KBLI."
-  },
-  {
-    name: "PAKET >20 KBLI",
-    originalPrice: "Rp 6.000.000",
-    price: "Rp 2.999.000",
-    badge: "DISKON 50% - TANPA BIAYA TAMBAHAN",
-    duration: "7-10 Hari Kerja",
-    obtained: [
-      "Penyusunan Laporan Tahunan PT",
-      "Akta Penegasan RUPS Laporan Tahunan PT",
-      "Surat Pemberitahuan / Pendaftaran Kemenkumham atas Pelaporan Tahunan PT",
-    ],
-    bonus: [
-      "Layanan Personal Legal Assistant",
-      "1 Kupon Undian iPhone",
-    ],
-    extraBonus: [
-      "Voucher EasyLegal Rp 250.000",
-      "Dokumen SOP Karyawan",
-      "Dokumen SOP Perusahaan",
-      "Dokumen Kontrak Bisnis",
-    ],
-    buttonText: "Pilih Paket Complete",
-    buttonType: "solid",
-    waText: "Halo EasyLegal, saya tertarik dengan Paket RUPS >20 KBLI."
+    waText: "Halo EasyLegal, saya tertarik dengan Paket Pelaporan RUPS >20 KBLI."
   }
 ];
 
@@ -580,7 +555,7 @@ export default function PelaporanRUPS() {
                 </>
               }
               packages={pricingPackages}
-              footnotes={["(1) Setelah Tanda Tangan Draft Akta dan Payment"]}
+              footnotes={["(1) Setelah Tanda Tangan Draft Akta dan Payment.", "* Harga di atas untuk yang Non Wajib Audit. Tambahan Rp 300.000 / 5 KBLI untuk Wajib Audit."]}
               hideFooter={true}
             />
           </FadeIn>

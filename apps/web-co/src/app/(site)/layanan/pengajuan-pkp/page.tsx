@@ -142,7 +142,7 @@ export default function PengajuanPkp() {
   },
   {
     title: "PKP LUAR JAWA",
-    price: "2.499.000",
+    price: "1.999.000",
     strikePrice: "4.000.000",
     subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
     isPopular: false,

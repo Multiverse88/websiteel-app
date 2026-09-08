@@ -244,20 +244,20 @@ export default function PsePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch justify-center max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch justify-center max-w-4xl mx-auto">
             
-            {/* Paket Tunggal: PSE Domestik */}
-            <div className="relative group h-full md:col-span-2 lg:col-span-3 lg:max-w-md lg:mx-auto w-full">
+            {/* Paket 1: PSE Domestik */}
+            <div className="relative group h-full">
               <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
               <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)]">
                 
                 <div className="text-center mb-[18px]">
                   <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PSE DOMESTIK</div>
-                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">ALL-IN DOKUMEN & SERTIFIKAT</div>
+                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">PLATFORM & BADAN USAHA LOKAL</div>
                 </div>
                 
                 <div className="text-center mb-[20px]">
-                  <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 2.500.000</div>
+                  <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 3.000.000</div>
                   <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 1.499.000</div>
                   <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
                 </div>
@@ -270,17 +270,82 @@ export default function PsePage() {
                 
                 <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[24px]" />
                 
+                <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[16px] uppercase">LAMA PROSES: 3-6 HARI KERJA</div>
                 <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[16px] uppercase">YANG DIPEROLEH</div>
                 
                 <div className="flex flex-col gap-[12px] flex-1">
                   {[
-                    "Pendaftaran Akun Sistem Layanan Kominfo",
-                    "Penyusunan Formulir Keterangan Sistem",
-                    "Penerbitan Tanda Daftar PSE Resmi",
-                    "Jaminan Asistensi Teknis"
+                    "Konsultasi Lengkap Regulasi PSE",
+                    "Pembuatan Akun Layanan PSE Kominfo",
+                    "Pendaftaran Sistem PSE Resmi",
+                    "Verifikasi Kelengkapan Data Perusahaan",
+                    "Dokumen Elektronik TD PSE Resmi Kominfo"
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
                       <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[20px]" />
+                <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[10px] uppercase">BONUS & EXTRA</div>
+                <div className="flex flex-col gap-[8px]">
+                  {["Layanan Personal Legal Assistant", "1 Kupon Undian iPhone", "Voucher EasyLegal Rp 250.000", "Dokumen SOP & Kontrak Bisnis"].map((b, i) => (
+                    <div key={i} className="flex items-center gap-[8px] text-[14px] text-[oklch(0.92_0.005_90)]">
+                      <span className="text-[oklch(0.78_0.15_145)] font-bold">✓</span><span>{b}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Paket 2: PSE Asing */}
+            <div className="relative group h-full">
+              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+              <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                
+                <div className="text-center mb-[18px]">
+                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PSE ASING</div>
+                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PLATFORM & BADAN HUKUM ASING</div>
+                </div>
+                
+                <div className="text-center mb-[20px]">
+                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 4.000.000</div>
+                  <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 1.999.000</div>
+                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                </div>
+
+                <a
+                  href={getWhatsAppLink("Halo EasyLegal, saya ingin mendaftar PSE Asing. Mohon info prosesnya.", "ingin-mendaftar-pse-asing", "/layanan/pengurusan-pse")}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                >Daftar PSE Asing</a>
+                
+                <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[24px]" />
+                
+                <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[16px] uppercase">LAMA PROSES: 3-6 HARI KERJA</div>
+                <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[16px] uppercase">YANG DIPEROLEH</div>
+                
+                <div className="flex flex-col gap-[12px] flex-1">
+                  {[
+                    "Konsultasi Regulasi PSE Asing",
+                    "Pembuatan Akun Layanan PSE Kominfo",
+                    "Pendaftaran Sistem PSE Asing Resmi",
+                    "Verifikasi Kelengkapan Data Asing",
+                    "Dokumen Elektronik TD PSE Resmi Kominfo"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[20px]" />
+                <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[10px] uppercase">BONUS & EXTRA</div>
+                <div className="flex flex-col gap-[8px]">
+                  {["Layanan Personal Legal Assistant", "1 Kupon Undian iPhone", "Voucher EasyLegal Rp 250.000", "Dokumen SOP & Kontrak Bisnis"].map((b, i) => (
+                    <div key={i} className="flex items-center gap-[8px] text-[14px] text-[oklch(0.92_0.005_90)]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-bold">✓</span><span>{b}</span>
                     </div>
                   ))}
                 </div>
