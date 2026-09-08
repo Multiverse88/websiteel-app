@@ -209,7 +209,6 @@ export default function Redirects() {
             <option value="easylegal.id">easylegal.id</option>
             <option value="easylegal.biz.id">easylegal.biz.id</option>
             <option value="easylegal.co.id">easylegal.co.id</option>
-            <option value="easylegal.my.id">easylegal.my.id</option>
           </select>
         </div>
         <button className="btn btn--primary" onClick={openCreate}>
@@ -232,7 +231,6 @@ export default function Redirects() {
             <option value="easylegal.id">easylegal.id</option>
             <option value="easylegal.biz.id">easylegal.biz.id</option>
             <option value="easylegal.co.id">easylegal.co.id</option>
-            <option value="easylegal.my.id">easylegal.my.id</option>
           </select>
         </div>
         <div className="form-group">
