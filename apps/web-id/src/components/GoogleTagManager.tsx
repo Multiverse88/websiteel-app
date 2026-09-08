@@ -1,19 +1,11 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import Script from "next/script";
+import React from "react";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-TVHZW45Q";
-const EXCLUDED_PREFIXES = ["/login", "/dashboard"];
 
 export function GtmHead() {
-  const pathname = usePathname();
-  if (EXCLUDED_PREFIXES.some((p) => pathname.startsWith(p))) return null;
-
   return (
-    <Script
+    <script
       id="gtm-script"
-      strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -26,9 +18,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 export function GtmNoscript() {
-  const pathname = usePathname();
-  if (EXCLUDED_PREFIXES.some((p) => pathname.startsWith(p))) return null;
-
   return (
     <noscript>
       <iframe
