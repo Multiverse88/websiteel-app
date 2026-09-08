@@ -63,12 +63,12 @@ export const layananLainnyaData: Record<string, LayananContent> = {
       }
     ],
     pricingTitle: "Paket Jasa Pendaftaran PSE",
-    pricingSubtitle: "Biaya all-in pendaftaran PSE Kominfo Domestik",
+    pricingSubtitle: "Biaya all-in pendaftaran PSE Kominfo Domestik & Asing",
     pricingPackages: [
       {
         title: "PSE DOMESTIK",
         price: "Rp 1.499.000",
-        strikePrice: "Rp 2.500.000",
+        strikePrice: "Rp 3.000.000",
         subLabel: "ALL-IN DOKUMEN & SERTIFIKAT",
         buttonText: "Daftar PSE Domestik",
         buttonLink: "Halo EasyLegal, saya ingin mendaftar PSE Domestik.",
@@ -80,6 +80,25 @@ export const layananLainnyaData: Record<string, LayananContent> = {
               { text: "Penyusunan Formulir Keterangan Sistem", checked: true },
               { text: "Penerbitan Tanda Daftar PSE Resmi", checked: true },
               { text: "Jaminan Asistensi Teknis", checked: true }
+            ]
+          }
+        ]
+      },
+      {
+        title: "PSE ASING",
+        price: "Rp 1.999.000",
+        strikePrice: "Rp 4.000.000",
+        subLabel: "ALL-IN PERUSAHAAN GLOBAL / ASING",
+        buttonText: "Daftar PSE Asing",
+        buttonLink: "Halo EasyLegal, saya ingin mendaftar PSE Asing.",
+        groups: [
+          {
+            title: "FITUR UTAMA",
+            items: [
+              { text: "Pendaftaran Akun PSE Asing Kominfo", checked: true },
+              { text: "Verifikasi Dokumen Legalitas Luar Negeri", checked: true },
+              { text: "Penerbitan Tanda Daftar PSE Asing Resmi", checked: true },
+              { text: "Asistensi Kepatuhan Regulasi Indonesia", checked: true }
             ]
           }
         ]
@@ -135,39 +154,40 @@ export const layananLainnyaData: Record<string, LayananContent> = {
     pricingSubtitle: "Biaya jasa Notaris & Kemenkumham all-in",
     pricingPackages: [
       {
-        title: "PERUBAHAN DATA PT",
-        price: "Rp 3.999.000",
-        strikePrice: "Rp 6.000.000",
-        subLabel: "PERUBAHAN PENGURUS / SAHAM",
-        buttonText: "Pilih Perubahan Data",
-        buttonLink: "Halo EasyLegal, saya ingin melakukan Perubahan Data PT.",
+        title: "PERUBAHAN AKTA SAJA",
+        price: "Rp 4.499.000",
+        strikePrice: "Rp 9.000.000",
+        subLabel: "PERUBAHAN ANGGARAN DASAR / DATA",
+        buttonText: "Pilih Perubahan Akta",
+        buttonLink: "Halo EasyLegal, saya ingin melakukan Perubahan Akta Saja.",
         groups: [
           {
             title: "YANG DIPEROLEH",
             items: [
-              { text: "Drafting Risalah RUPS / Keputusan Pemegang Saham", checked: true },
+              { text: "Drafting Risalah RUPS / Sirkuler Pemegang Saham", checked: true },
               { text: "Akta Notaris Perubahan Resmi", checked: true },
-              { text: "Penerimaan Laporan SK Kemenkumham (AHU)", checked: true }
+              { text: "SK Persetujuan / Penerimaan Laporan Kemenkumham (AHU)", checked: true }
             ]
           }
         ]
       },
       {
-        title: "PERUBAHAN ANGGARAN DASAR PT",
-        price: "Rp 5.499.000",
-        strikePrice: "Rp 8.000.000",
+        title: "PERUBAHAN AKTA & NIB",
+        price: "Rp 5.999.000",
+        strikePrice: "Rp 12.000.000",
         isPopular: true,
         badgeText: "TERLARIS",
-        subLabel: "PERUBAHAN MODAL / NAMA / DOMISILI",
-        buttonText: "Pilih Perubahan AD",
-        buttonLink: "Halo EasyLegal, saya ingin melakukan Perubahan Anggaran Dasar PT.",
+        subLabel: "MIGRASI KBLI & UPDATE OSS",
+        buttonText: "Pilih Akta & NIB",
+        buttonLink: "Halo EasyLegal, saya ingin melakukan Perubahan Akta & NIB (Migrasi KBLI).",
         groups: [
           {
             title: "DOKUMEN INTEGRAL",
             items: [
-              { text: "Akta Notaris Perubahan Anggaran Dasar", checked: true },
-              { text: "SK Persetujuan Kemenkumham (Bukan sekadar lapor)", checked: true },
-              { text: "Sinkronisasi perubahan data ke sistem OSS RBA", checked: true }
+              { text: "Akta Notaris Perubahan Resmi", checked: true },
+              { text: "SK Kemenkumham (AHU)", checked: true },
+              { text: "Perubahan NIB & Izin Usaha di OSS RBA", checked: true },
+              { text: "Migrasi KBLI Baru Sesuai Bidang Usaha", checked: true }
             ]
           }
         ]
@@ -220,15 +240,72 @@ export const layananLainnyaData: Record<string, LayananContent> = {
       }
     ],
     pricingTitle: "Paket Pengurusan PKKPR",
-    pricingSubtitle: "Asistensi analisis koordinat & submit KKPR OSS",
+    pricingSubtitle: "Asistensi analisis koordinat & submit KKPR OSS RBA",
     pricingPackages: [
       {
-        title: "PENGURUSAN PKKPR NON-UMK",
-        price: "Rp 3.499.000",
-        strikePrice: "Rp 5.500.000",
+        title: "LUAS LAHAN 0 - 3,9 HA",
+        price: "Rp 2.999.000",
+        strikePrice: "Rp 6.000.000",
         subLabel: "ANALOGI PETA & KORDINAT SHP",
         buttonText: "Daftar PKKPR",
-        buttonLink: "Halo EasyLegal, saya ingin mengurus PKKPR.",
+        buttonLink: "Halo EasyLegal, saya ingin mengurus PKKPR Luas 0-3.9 Ha.",
+        groups: [
+          {
+            title: "LAYANAN INTEGRAL",
+            items: [
+              { text: "Pengecekan kesesuaian koordinat dengan RDTR", checked: true },
+              { text: "Pembuatan file poligon koordinat (Format SHP)", checked: true },
+              { text: "Pengajuan resmi melalui portal OSS RBA", checked: true },
+              { text: "Monitoring s.d. SPS & PKKPR disetujui Kemen-ATR", checked: true }
+            ]
+          }
+        ]
+      },
+      {
+        title: "LUAS LAHAN 4 - 4,9 HA",
+        price: "Rp 3.999.000",
+        strikePrice: "Rp 8.000.000",
+        subLabel: "ANALOGI PETA & KORDINAT SHP",
+        buttonText: "Daftar PKKPR",
+        buttonLink: "Halo EasyLegal, saya ingin mengurus PKKPR Luas 4-4.9 Ha.",
+        groups: [
+          {
+            title: "LAYANAN INTEGRAL",
+            items: [
+              { text: "Pengecekan kesesuaian koordinat dengan RDTR", checked: true },
+              { text: "Pembuatan file poligon koordinat (Format SHP)", checked: true },
+              { text: "Pengajuan resmi melalui portal OSS RBA", checked: true },
+              { text: "Monitoring s.d. SPS & PKKPR disetujui Kemen-ATR", checked: true }
+            ]
+          }
+        ]
+      },
+      {
+        title: "LUAS LAHAN 5 - 9,9 HA",
+        price: "Rp 7.999.000",
+        strikePrice: "Rp 16.000.000",
+        subLabel: "ANALOGI PETA & KORDINAT SHP",
+        buttonText: "Daftar PKKPR",
+        buttonLink: "Halo EasyLegal, saya ingin mengurus PKKPR Luas 5-9.9 Ha.",
+        groups: [
+          {
+            title: "LAYANAN INTEGRAL",
+            items: [
+              { text: "Pengecekan kesesuaian koordinat dengan RDTR", checked: true },
+              { text: "Pembuatan file poligon koordinat (Format SHP)", checked: true },
+              { text: "Pengajuan resmi melalui portal OSS RBA", checked: true },
+              { text: "Monitoring s.d. SPS & PKKPR disetujui Kemen-ATR", checked: true }
+            ]
+          }
+        ]
+      },
+      {
+        title: "LUAS LAHAN 10 - 20 HA",
+        price: "Rp 9.999.000",
+        strikePrice: "Rp 20.000.000",
+        subLabel: "ANALOGI PETA & KORDINAT SHP",
+        buttonText: "Daftar PKKPR",
+        buttonLink: "Halo EasyLegal, saya ingin mengurus PKKPR Luas 10-20 Ha.",
         groups: [
           {
             title: "LAYANAN INTEGRAL",

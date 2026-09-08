@@ -46,6 +46,7 @@ import ArtikelTerkait from "@/components/ArtikelTerkait";
 
   interface AdditionalServiceGroup {
     title: string;
+    isBoxed?: boolean;
     items: AdditionalServiceItem[];
   }
 
@@ -158,56 +159,88 @@ const additionalTabs: AdditionalServiceTab[] = [
       id: "perpanjangan",
       label: "Perpanjangan",
       icon: <RotateCw className="w-4 h-4" />,
-      footnote: "<strong class=\"font-extrabold text-gray-800\">Keterangan: (1)</strong> Jika tidak ada kendala atau gangguan pada sistem DJKI.",
+      footnote: "<strong class=\"font-extrabold text-gray-800\">Keterangan: (1)</strong> Setelah persyaratan lengkap & tidak ada kendala atau gangguan pada sistem DJKI.",
       cards: [
         {
-          title: "PERPANJANGAN UMKM",
-          price: "Rp 2.499.000",
-          strikePrice: "Rp 3.500.000",
+          title: "SEBELUM EXPIRED",
+          price: "Rp 4.999.000",
+          strikePrice: "Rp 6.250.000",
           subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-          buttonText: "Pilih Perpanjangan UMKM",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek UMKM. Mohon info biaya dan prosesnya.", "layanan-perpanjangan-merek-umkm", "/layanan/merek-haki"),
+          buttonText: "Pilih Sebelum Expired",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek Sebelum Expired. Mohon info biaya dan prosesnya.", "perpanjangan-merek-sebelum-expired", "/layanan/merek-haki"),
           groups: [
             {
               title: "LAMA PROSES",
               items: [
-                { text: "1-2 Hari Kerja", checked: true, footnoteIndex: 1 }
+                { text: "7 Hari Kerja", checked: true, footnoteIndex: 1 }
               ]
             },
             {
               title: "YANG DIPEROLEH",
               items: [
-                { text: "Pengurusan Perpanjangan Resmi ke DJKI", checked: true },
-                { text: "Monitoring Penerbitan Surat Persetujuan Perpanjangan", checked: true },
-                { text: "Termasuk PNBP DJKI UMKM Rp 1.000.000", checked: true },
-                { text: "Gratis Konsultasi Legalitas Merek", checked: true }
+                { text: "Tanda Terima Perpanjangan Merek", checked: true },
+                { text: "Sertifikat Perpanjangan Merek", checked: true }
+              ]
+            },
+            {
+              title: "BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Layanan Personal Legal Assistance", checked: true },
+                { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+              ]
+            },
+            {
+              title: "EXTRA BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+                { text: "Dokumen SOP Karyawan", checked: true },
+                { text: "Dokumen SOP Perusahaan", checked: true },
+                { text: "Dokumen Kontrak Bisnis", checked: true }
               ]
             }
           ]
         },
         {
-          title: "PERPANJANGAN UMUM",
-          price: "Rp 3.999.000",
-          strikePrice: "Rp 5.500.000",
+          title: "SETELAH EXPIRED",
+          price: "Rp 8.999.000",
+          strikePrice: "Rp 11.250.000",
           subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
           isPopular: true,
-          badgeText: "REKOMENDASI",
-          buttonText: "Pilih Perpanjangan Umum",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek Umum. Mohon info biaya dan prosesnya.", "layanan-perpanjangan-merek-umum", "/layanan/merek-haki"),
+          badgeText: "MASA TENGGANG",
+          buttonText: "Pilih Setelah Expired",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Perpanjangan Merek Setelah Expired (Masa Tenggang). Mohon info biaya dan prosesnya.", "perpanjangan-merek-setelah-expired", "/layanan/merek-haki"),
           groups: [
             {
               title: "LAMA PROSES",
               items: [
-                { text: "1-2 Hari Kerja", checked: true, footnoteIndex: 1 }
+                { text: "7 Hari Kerja", checked: true, footnoteIndex: 1 }
               ]
             },
             {
               title: "YANG DIPEROLEH",
               items: [
-                { text: "Pengurusan Perpanjangan Resmi ke DJKI", checked: true },
-                { text: "Monitoring Penerbitan Surat Persetujuan Perpanjangan", checked: true },
-                { text: "Termasuk PNBP DJKI Umum Rp 2.200.000", checked: true },
-                { text: "Gratis Konsultasi Legalitas Merek", checked: true }
+                { text: "Tanda Terima Perpanjangan Merek", checked: true },
+                { text: "Sertifikat Perpanjangan Merek", checked: true }
+              ]
+            },
+            {
+              title: "BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Layanan Personal Legal Assistance", checked: true },
+                { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+              ]
+            },
+            {
+              title: "EXTRA BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+                { text: "Dokumen SOP Karyawan", checked: true },
+                { text: "Dokumen SOP Perusahaan", checked: true },
+                { text: "Dokumen Kontrak Bisnis", checked: true }
               ]
             }
           ]
@@ -218,31 +251,90 @@ const additionalTabs: AdditionalServiceTab[] = [
       id: "pengalihan",
       label: "Pengalihan",
       icon: <RefreshCw className="w-4 h-4" />,
-      footnote: "<strong class=\"font-extrabold text-gray-800\">Keterangan: (1)</strong> Jika tidak ada kendala atau gangguan pada sistem DJKI.",
+      footnote: "<strong class=\"font-extrabold text-gray-800\">Keterangan: (1)</strong> Setelah Draft Pengalihan Merek disetujui.",
       cards: [
         {
-          title: "PENGALIHAN HAK MEREK",
-          price: "Rp 1.999.000",
-          strikePrice: "Rp 3.000.000",
+          title: "PAKET BASIC",
+          price: "Rp 3.499.000",
+          strikePrice: "Rp 4.375.000",
           subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-          isPopular: true,
-          badgeText: "REKOMENDASI",
-          buttonText: "Pilih Pengalihan Hak",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pengalihan Hak Merek. Mohon info biaya dan prosesnya.", "layanan-pengalihan-hak-merek", "/layanan/merek-haki"),
+          buttonText: "Pilih Basic",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pengalihan Merek Paket Basic.", "pengalihan-merek-basic", "/layanan/merek-haki"),
           groups: [
             {
               title: "LAMA PROSES",
               items: [
-                { text: "1-3 Hari Kerja", checked: true, footnoteIndex: 1 }
+                { text: "3-5 Hari Kerja", checked: true, footnoteIndex: 1 }
               ]
             },
             {
               title: "YANG DIPEROLEH",
               items: [
-                { text: "Drafting Perjanjian Pengalihan Hak (Deed of Transfer)", checked: true },
-                { text: "Submit Pengajuan Pengalihan ke DJKI Online", checked: true },
-                { text: "Termasuk PNBP Resmi Pengalihan Hak DJKI", checked: true },
-                { text: "Monitoring s.d. Surat Pencatatan Resmi Terbit", checked: true }
+                { text: "Akta Notaris Pengalihan Hak Merek", checked: true },
+                { text: "PNBP Pengalihan Hak Merek", checked: false },
+                { text: "Bukti Pencatatan Pengalihan Hak Merek", checked: false }
+              ]
+            },
+            {
+              title: "BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Layanan Personal Legal Assistance", checked: true },
+                { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+              ]
+            },
+            {
+              title: "EXTRA BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+                { text: "Dokumen SOP Karyawan", checked: true },
+                { text: "Dokumen SOP Perusahaan", checked: true },
+                { text: "Dokumen Kontrak Bisnis", checked: true }
+              ]
+            }
+          ]
+        },
+        {
+          title: "PAKET COMPLETE",
+          price: "Rp 3.999.000",
+          strikePrice: "Rp 5.000.000",
+          subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+          isPopular: true,
+          badgeText: "REKOMENDASI",
+          buttonText: "Pilih Complete",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Pengalihan Merek Paket Complete.", "pengalihan-merek-complete", "/layanan/merek-haki"),
+          groups: [
+            {
+              title: "LAMA PROSES",
+              items: [
+                { text: "7 Hari Kerja", checked: true, footnoteIndex: 1 }
+              ]
+            },
+            {
+              title: "YANG DIPEROLEH",
+              items: [
+                { text: "Akta Notaris Pengalihan Hak Merek", checked: true },
+                { text: "PNBP Pengalihan Hak Merek", checked: true },
+                { text: "Bukti Pencatatan Pengalihan Hak Merek", checked: true }
+              ]
+            },
+            {
+              title: "BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Layanan Personal Legal Assistance", checked: true },
+                { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+              ]
+            },
+            {
+              title: "EXTRA BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+                { text: "Dokumen SOP Karyawan", checked: true },
+                { text: "Dokumen SOP Perusahaan", checked: true },
+                { text: "Dokumen Kontrak Bisnis", checked: true }
               ]
             }
           ]
@@ -253,31 +345,91 @@ const additionalTabs: AdditionalServiceTab[] = [
       id: "penolakan",
       label: "Tanggapan Penolakan",
       icon: <ShieldAlert className="w-4 h-4" />,
-      footnote: "<strong class=\"font-extrabold text-gray-800\">Keterangan: (1)</strong> Jika tidak ada kendala atau gangguan pada sistem DJKI.",
+      footnote: "<strong class=\"font-extrabold text-gray-800\">Keterangan: (1)</strong> Setelah Draft Tanggapan Penolakan Merek disetujui.",
       cards: [
         {
-          title: "TANGGAPAN PENOLAKAN DJKI",
-          price: "Rp 2.499.000",
-          strikePrice: "Rp 4.000.000",
-          subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+          title: "KLIEN EASYLEGAL",
+          price: "Rp 6.999.000",
+          strikePrice: "Rp 8.750.000",
+          subLabel: "PENDAFTAR PERTAMA DI EASYLEGAL",
           isPopular: true,
           badgeText: "REKOMENDASI",
-          buttonText: "Pilih Tanggapan Penolakan",
-          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Tanggapan Penolakan DJKI. Mohon info biaya dan prosesnya.", "layanan-tanggapan-penolakan-djki", "/layanan/merek-haki"),
+          buttonText: "Pilih Layanan",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Tanggapan Penolakan Merek untuk Klien EasyLegal.", "tanggapan-penolakan-klien-easylegal", "/layanan/merek-haki"),
           groups: [
             {
               title: "LAMA PROSES",
               items: [
-                { text: "2-3 Hari Kerja", checked: true, footnoteIndex: 1 }
+                { text: "5-7 Hari Kerja", checked: true, footnoteIndex: 1 }
               ]
             },
             {
               title: "YANG DIPEROLEH",
               items: [
-                { text: "Analisis Surat Usulan Penolakan Substantif DJKI", checked: true },
-                { text: "Penyusunan Argumentasi Hukum & Kontra-Memori Bantahan", checked: true },
-                { text: "Submit Bantahan Resmi ke Portal DJKI sebelum 30 hari", checked: true },
-                { text: "Monitoring s.d. Keputusan Akhir Pemeriksa Terbit", checked: true }
+                { text: "Draft Sanggahan Surat Keberatan", checked: true },
+                { text: "Submit Sanggahan", checked: true },
+                { text: "Bukti Permohonan Surat Tanggapan Usulan Penolakan DJKI", checked: true }
+              ]
+            },
+            {
+              title: "BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Layanan Personal Legal Assistance", checked: true },
+                { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+              ]
+            },
+            {
+              title: "EXTRA BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+                { text: "Dokumen SOP Karyawan", checked: true },
+                { text: "Dokumen SOP Perusahaan", checked: true },
+                { text: "Dokumen Kontrak Bisnis", checked: true }
+              ]
+            }
+          ]
+        },
+        {
+          title: "NON-EASYLEGAL",
+          price: "Rp 7.999.000",
+          strikePrice: "Rp 10.000.000",
+          subLabel: "PENDAFTAR DILUAR EASYLEGAL",
+          buttonText: "Pilih Layanan",
+          buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Tanggapan Penolakan Merek untuk Pendaftar Non-EasyLegal.", "tanggapan-penolakan-non-easylegal", "/layanan/merek-haki"),
+          groups: [
+            {
+              title: "LAMA PROSES",
+              items: [
+                { text: "7 Hari Kerja", checked: true, footnoteIndex: 1 }
+              ]
+            },
+            {
+              title: "YANG DIPEROLEH",
+              items: [
+                { text: "Diagnosis Alasan Keberatan", checked: true },
+                { text: "Draft Tanggapan Usulan Penolakan", checked: true },
+                { text: "Submit Tanggapan Usulan Penolakan", checked: true },
+                { text: "Bukti Permohonan Tanggapan Usulan Penolakan DJKI", checked: true }
+              ]
+            },
+            {
+              title: "BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Layanan Personal Legal Assistance", checked: true },
+                { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+              ]
+            },
+            {
+              title: "EXTRA BONUS",
+              isBoxed: true,
+              items: [
+                { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+                { text: "Dokumen SOP Karyawan", checked: true },
+                { text: "Dokumen SOP Perusahaan", checked: true },
+                { text: "Dokumen Kontrak Bisnis", checked: true }
               ]
             }
           ]
@@ -286,204 +438,398 @@ const additionalTabs: AdditionalServiceTab[] = [
     }
   ];
 
-const pricingPackages: PricingPackage[] = [
-    {
-      title: "PAKET BASIC",
-      price: "Rp 2.799.000",
-      strikePrice: "Rp 3.500.000",
-      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      buttonText: "Pilih Basic",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya.", "paket-basic-pendaftaran-merek", "/layanan/merek-haki"),
-      groups: [
-        {
-          title: "LAMA PROSES",
-          items: [
-            { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
-          ]
-        },
-        {
-          title: "YANG DIPEROLEH",
-          items: [
-            { text: "Konsultasi HAKI Merek", checked: true },
-            { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
-            { text: "Monitoring perubahan Status Merek", checked: true },
-            { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
-            { text: "5× Pemeriksaan Merek Manual", checked: true },
-            { text: "1× Pemeriksaan Merek dengan AI", checked: false },
-            { text: "Tanggapan/Keberatan Penolakan", checked: false },
-            { text: "Garansi Uang Kembali", checked: false, footnoteIndex: 3 }
-          ]
-        },
-        {
-          title: "BONUS",
-          isBoxed: true,
-          items: [
-            { text: "Layanan Personal Legal Assistance", checked: true },
-            { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
-          ]
-        },
-        {
-          title: "EXTRA BONUS",
-          isBoxed: true,
-          items: [
-            { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
-            { text: "Dokumen SOP Karyawan", checked: true },
-            { text: "Dokumen SOP Perusahaan", checked: true },
-            { text: "Dokumen Kontrak Bisnis", checked: true }
-          ]
-        }
-      ]
-    },
-    {
-      title: "BASIC + AI",
-      price: "Rp 3.199.000",
-      strikePrice: "Rp 4.000.000",
-      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      buttonText: "Pilih Basic + AI",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic plus AI Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya.", "paket-basic-plus-ai-pendaftaran-merek", "/layanan/merek-haki"),
-      groups: [
-        {
-          title: "LAMA PROSES",
-          items: [
-            { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
-          ]
-        },
-        {
-          title: "YANG DIPEROLEH",
-          items: [
-            { text: "Konsultasi HAKI Merek", checked: true },
-            { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
-            { text: "Monitoring perubahan Status Merek", checked: true },
-            { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
-            { text: "5× Pemeriksaan Merek Manual", checked: true },
-            { text: "1× Pemeriksaan Merek dengan AI", checked: true },
-            { text: "Tanggapan/Keberatan Penolakan", checked: false },
-            { text: "Garansi Uang Kembali", checked: false, footnoteIndex: 3 }
-          ]
-        },
-        {
-          title: "BONUS",
-          isBoxed: true,
-          items: [
-            { text: "Layanan Personal Legal Assistance", checked: true },
-            { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
-          ]
-        },
-        {
-          title: "EXTRA BONUS",
-          isBoxed: true,
-          items: [
-            { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
-            { text: "Dokumen SOP Karyawan", checked: true },
-            { text: "Dokumen SOP Perusahaan", checked: true },
-            { text: "Dokumen Kontrak Bisnis", checked: true }
-          ]
-        }
-      ]
-    },
-    {
-      title: "PREMIUM",
-      price: "Rp 3.599.000",
-      strikePrice: "Rp 4.500.000",
-      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      isPopular: true,
-      badgeText: "PALING POPULER",
-      buttonText: "Pilih Premium",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Premium Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya.", "paket-premium-pendaftaran-merek", "/layanan/merek-haki"),
-      groups: [
-        {
-          title: "LAMA PROSES",
-          items: [
-            { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
-          ]
-        },
-        {
-          title: "YANG DIPEROLEH",
-          items: [
-            { text: "Konsultasi HAKI Merek", checked: true },
-            { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
-            { text: "Monitoring perubahan Status Merek", checked: true },
-            { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
-            { text: "5× Pemeriksaan Merek Manual", checked: true },
-            { text: "1× Pemeriksaan Merek dengan AI", checked: true },
-            { text: "Tanggapan/Keberatan Penolakan", checked: true },
-            { text: "Garansi Uang Kembali", checked: false, footnoteIndex: 3 }
-          ]
-        },
-        {
-          title: "BONUS",
-          isBoxed: true,
-          items: [
-            { text: "Layanan Personal Legal Assistance", checked: true },
-            { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
-          ]
-        },
-        {
-          title: "EXTRA BONUS",
-          isBoxed: true,
-          items: [
-            { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
-            { text: "Dokumen SOP Karyawan", checked: true },
-            { text: "Dokumen SOP Perusahaan", checked: true },
-            { text: "Dokumen Kontrak Bisnis", checked: true }
-          ]
-        }
-      ]
-    },
-    {
-      title: "ULTIMATE",
-      price: "Rp 4.399.000",
-      strikePrice: "Rp 5.500.000",
-      subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
-      buttonText: "Pilih Ultimate",
-      buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Ultimate Pendaftaran Merek. Mohon info lengkap biaya dan prosesnya.", "paket-ultimate-pendaftaran-merek", "/layanan/merek-haki"),
-      groups: [
-        {
-          title: "LAMA PROSES",
-          items: [
-            { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
-          ]
-        },
-        {
-          title: "YANG DIPEROLEH",
-          items: [
-            { text: "Konsultasi HAKI Merek", checked: true },
-            { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
-            { text: "Monitoring perubahan Status Merek", checked: true },
-            { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
-            { text: "5× Pemeriksaan Merek Manual", checked: true },
-            { text: "1× Pemeriksaan Merek dengan AI", checked: true },
-            { text: "Tanggapan/Keberatan Penolakan", checked: true },
-            { text: "Garansi Uang Kembali", checked: true, footnoteIndex: 3 }
-          ]
-        },
-        {
-          title: "BONUS",
-          isBoxed: true,
-          items: [
-            { text: "Layanan Personal Legal Assistance", checked: true },
-            { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
-          ]
-        },
-        {
-          title: "EXTRA BONUS",
-          isBoxed: true,
-          items: [
-            { text: "Voucher EasyLegal", boldText: "Rp 500.000", checked: true },
-            { text: "Dokumen SOP Karyawan", checked: true },
-            { text: "Dokumen SOP Perusahaan", checked: true },
-            { text: "Dokumen Kontrak Bisnis", checked: true }
-          ]
-        }
-      ]
-    }
-  ];
+const pricingPackagesUMK: PricingPackage[] = [
+  {
+    title: "PAKET BASIC",
+    price: "Rp 1.499.000*",
+    strikePrice: "Rp 1.875.000",
+    subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+    buttonText: "Pilih Basic UMK",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendaftaran Merek UMK. Mohon info lengkap biaya dan prosesnya.", "paket-basic-merek-umk", "/layanan/merek-haki"),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [
+          { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
+        ]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [
+          { text: "Konsultasi HAKI Merek", checked: true },
+          { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
+          { text: "Monitoring perubahan Status Merek", checked: true },
+          { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
+          { text: "5× Pemeriksaan Merek Manual", checked: true },
+          { text: "1× Pemeriksaan Merek dengan AI", checked: false },
+          { text: "Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek", checked: false },
+          { text: "Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak", checked: false, footnoteIndex: 3 }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Voucher EasyLegal", boldText: "Rp 50.000", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  },
+  {
+    title: "PAKET BASIC + AI",
+    price: "Rp 1.899.000*",
+    strikePrice: "Rp 2.375.000",
+    subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+    buttonText: "Pilih Basic + AI UMK",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic plus AI Pendaftaran Merek UMK. Mohon info lengkap biaya dan prosesnya.", "paket-basic-plus-ai-merek-umk", "/layanan/merek-haki"),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [
+          { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
+        ]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [
+          { text: "Konsultasi HAKI Merek", checked: true },
+          { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
+          { text: "Monitoring perubahan Status Merek", checked: true },
+          { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
+          { text: "5× Pemeriksaan Merek Manual", checked: true },
+          { text: "1× Pemeriksaan Merek dengan AI", checked: true },
+          { text: "Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek", checked: false },
+          { text: "Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak", checked: false, footnoteIndex: 3 }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Voucher EasyLegal", boldText: "Rp 50.000", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  },
+  {
+    title: "PAKET PREMIUM",
+    price: "Rp 2.399.000*",
+    strikePrice: "Rp 3.000.000",
+    subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+    isPopular: true,
+    badgeText: "PALING POPULER",
+    buttonText: "Pilih Premium UMK",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Premium Pendaftaran Merek UMK. Mohon info lengkap biaya dan prosesnya.", "paket-premium-merek-umk", "/layanan/merek-haki"),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [
+          { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
+        ]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [
+          { text: "Konsultasi HAKI Merek", checked: true },
+          { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
+          { text: "Monitoring perubahan Status Merek", checked: true },
+          { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
+          { text: "5× Pemeriksaan Merek Manual", checked: true },
+          { text: "1× Pemeriksaan Merek dengan AI", checked: true },
+          { text: "Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek", checked: true },
+          { text: "Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak", checked: false, footnoteIndex: 3 }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Voucher EasyLegal", boldText: "Rp 50.000", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  },
+  {
+    title: "PAKET ULTIMATE",
+    price: "Rp 3.199.000*",
+    strikePrice: "Rp 4.000.000",
+    subLabel: "GARANSI UANG KEMBALI 2.3JT",
+    buttonText: "Pilih Ultimate UMK",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Ultimate Pendaftaran Merek UMK. Mohon info lengkap biaya dan prosesnya.", "paket-ultimate-merek-umk", "/layanan/merek-haki"),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [
+          { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
+        ]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [
+          { text: "Konsultasi HAKI Merek", checked: true },
+          { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
+          { text: "Monitoring perubahan Status Merek", checked: true },
+          { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
+          { text: "5× Pemeriksaan Merek Manual", checked: true },
+          { text: "1× Pemeriksaan Merek dengan AI", checked: true },
+          { text: "Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek", checked: true },
+          { text: "Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak", checked: true, footnoteIndex: 3 }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Voucher EasyLegal", boldText: "Rp 50.000", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  }
+];
+
+const pricingPackagesReguler: PricingPackage[] = [
+  {
+    title: "PAKET BASIC",
+    price: "Rp 3.799.000*",
+    strikePrice: "Rp 4.750.000",
+    subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+    buttonText: "Pilih Basic Reguler",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic Pendaftaran Merek Reguler. Mohon info lengkap biaya dan prosesnya.", "paket-basic-merek-reguler", "/layanan/merek-haki"),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [
+          { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
+        ]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [
+          { text: "Konsultasi HAKI Merek", checked: true },
+          { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
+          { text: "Monitoring perubahan Status Merek", checked: true },
+          { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
+          { text: "5× Pemeriksaan Merek Manual", checked: true },
+          { text: "1× Pemeriksaan Merek dengan AI", checked: false },
+          { text: "Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek", checked: false },
+          { text: "Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak", checked: false, footnoteIndex: 3 }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  },
+  {
+    title: "PAKET BASIC + AI",
+    price: "Rp 4.199.000*",
+    strikePrice: "Rp 5.250.000",
+    subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+    buttonText: "Pilih Basic + AI Reguler",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Basic plus AI Pendaftaran Merek Reguler. Mohon info lengkap biaya dan prosesnya.", "paket-basic-plus-ai-merek-reguler", "/layanan/merek-haki"),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [
+          { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
+        ]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [
+          { text: "Konsultasi HAKI Merek", checked: true },
+          { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
+          { text: "Monitoring perubahan Status Merek", checked: true },
+          { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
+          { text: "5× Pemeriksaan Merek Manual", checked: true },
+          { text: "1× Pemeriksaan Merek dengan AI", checked: true },
+          { text: "Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek", checked: false },
+          { text: "Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak", checked: false, footnoteIndex: 3 }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  },
+  {
+    title: "PAKET PREMIUM",
+    price: "Rp 4.699.000*",
+    strikePrice: "Rp 5.875.000",
+    subLabel: "TANPA TAMBAHAN BIAYA APAPUN",
+    isPopular: true,
+    badgeText: "PALING POPULER",
+    buttonText: "Pilih Premium Reguler",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Premium Pendaftaran Merek Reguler. Mohon info lengkap biaya dan prosesnya.", "paket-premium-merek-reguler", "/layanan/merek-haki"),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [
+          { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
+        ]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [
+          { text: "Konsultasi HAKI Merek", checked: true },
+          { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
+          { text: "Monitoring perubahan Status Merek", checked: true },
+          { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
+          { text: "5× Pemeriksaan Merek Manual", checked: true },
+          { text: "1× Pemeriksaan Merek dengan AI", checked: true },
+          { text: "Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek", checked: true },
+          { text: "Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak", checked: false, footnoteIndex: 3 }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Voucher EasyLegal", boldText: "Rp 250.000", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  },
+  {
+    title: "PAKET ULTIMATE",
+    price: "Rp 5.499.000*",
+    strikePrice: "Rp 6.875.000",
+    subLabel: "GARANSI UANG KEMBALI 2.3JT",
+    buttonText: "Pilih Ultimate Reguler",
+    buttonLink: getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Paket Ultimate Pendaftaran Merek Reguler. Mohon info lengkap biaya dan prosesnya.", "paket-ultimate-merek-reguler", "/layanan/merek-haki"),
+    groups: [
+      {
+        title: "LAMA PROSES",
+        items: [
+          { text: "1 Hari Kerja", checked: true, footnoteIndex: 1 }
+        ]
+      },
+      {
+        title: "YANG DIPEROLEH",
+        items: [
+          { text: "Konsultasi HAKI Merek", checked: true },
+          { text: "Rekomendasi pemilihan Kelas Merek", checked: true },
+          { text: "Monitoring perubahan Status Merek", checked: true },
+          { text: "E-Sertifikat Merek", checked: true, footnoteIndex: 2 },
+          { text: "5× Pemeriksaan Merek Manual", checked: true },
+          { text: "1× Pemeriksaan Merek dengan AI", checked: true },
+          { text: "Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek", checked: true },
+          { text: "Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak", checked: true, footnoteIndex: 3 }
+        ]
+      },
+      {
+        title: "BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Layanan Personal Legal Assistance", checked: true },
+          { text: "Undian iPhone", boldText: "1 Kupon", checked: true }
+        ]
+      },
+      {
+        title: "EXTRA BONUS",
+        isBoxed: true,
+        items: [
+          { text: "Voucher EasyLegal", boldText: "Rp 500.000", checked: true },
+          { text: "Dokumen SOP Karyawan", checked: true },
+          { text: "Dokumen SOP Perusahaan", checked: true },
+          { text: "Dokumen Kontrak Bisnis", checked: true }
+        ]
+      }
+    ]
+  }
+];
 
 const pricingFootnotes = [
-    "Setelah Draft Pendaftaran Merek disetujui.",
-    "Sertifikat merek diterbitkan setelah merek dinyatakan berhasil pada masa pengumuman, berlangsung sekitar &plusmn;6 hingga 18 bulan.",
-    "Apabila permohonan pendaftaran merek ditolak secara resmi oleh DJKI, Kami memberikan garansi uang kembali jasa EasyLegal sebesar <strong class=\"font-extrabold text-gray-950\">Rp 2.300.000</strong>."
-  ];
+  "(1) Setelah Draft Pendaftaran Merek disetujui.",
+  "(2) Sertifikat merek diterbitkan setelah merek dinyatakan berhasil pada masa pengumuman, berlangsung sekitar &plusmn;6 hingga 18 bulan.",
+  "(3) Apabila permohonan pendaftaran merek ditolak secara resmi oleh DJKI, Kami memberikan garansi uang kembali jasa EasyLegal sebesar <strong class=\"font-extrabold text-gray-950\">Rp 2.300.000</strong>.",
+  "(*) Harga berlaku untuk pendaftaran 1 kelas merek. Paket UMK khusus untuk pelaku usaha mikro & kecil yang memenuhi persyaratan DJKI."
+];
 
 const faqs = [
     {
@@ -528,6 +874,7 @@ export default function MerekHaki() {
   
 
   const [activeTab, setActiveTab] = useState<"pengecekan" | "perpanjangan" | "pengalihan" | "penolakan">("pengecekan");
+  const [merekCategory, setMerekCategory] = useState<"umk" | "reguler">("umk");
 
   
 
@@ -628,7 +975,7 @@ export default function MerekHaki() {
                     <span className="text-[16px] font-extrabold text-[#990202]">$</span>
                   </div>
                   <div>
-                    <div className="text-[16px] sm:text-[16px] font-extrabold text-gray-950 leading-tight">Mulai Rp2,79jt</div>
+                    <div className="text-[16px] sm:text-[16px] font-extrabold text-gray-950 leading-tight">Mulai Rp1,49jt</div>
                     <div className="text-[16px] text-gray-500 mt-0.5">harga transparan</div>
                   </div>
                 </div>
@@ -702,7 +1049,35 @@ export default function MerekHaki() {
         sectionTitleTag="BIAYA JASA PENDAFTARAN MEREK"
         sectionTitle={<span className="whitespace-nowrap">4 paket pendaftaran merek di DJKI.</span>}
         sectionSubtitle="Harga sudah include biaya resmi DJKI & jasa kami — tidak ada tambahan di tengah proses."
-        packages={pricingPackages}
+        headerBottomContent={
+          <div className="flex justify-center sm:justify-start">
+            <div className="inline-flex p-1.5 bg-gray-200/70 rounded-2xl border border-gray-300/50 shadow-inner">
+              <button
+                type="button"
+                onClick={() => setMerekCategory("umk")}
+                className={`px-5 py-2.5 rounded-xl text-[15px] font-extrabold transition-all cursor-pointer ${
+                  merekCategory === "umk"
+                    ? "bg-[#990202] text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Usaha Mikro &amp; Kecil (UMK)
+              </button>
+              <button
+                type="button"
+                onClick={() => setMerekCategory("reguler")}
+                className={`px-5 py-2.5 rounded-xl text-[15px] font-extrabold transition-all cursor-pointer ${
+                  merekCategory === "reguler"
+                    ? "bg-[#990202] text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Perusahaan / Reguler
+              </button>
+            </div>
+          </div>
+        }
+        packages={merekCategory === "umk" ? pricingPackagesUMK : pricingPackagesReguler}
         footnotes={pricingFootnotes}
         promoBadgeSrc="/images/badges/promo-20.png"
       />
