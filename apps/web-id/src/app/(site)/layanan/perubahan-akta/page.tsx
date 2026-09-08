@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   Award,
@@ -54,6 +54,8 @@ const faqs = [
 ];
 
 export default function PerubahanAktaPage() {
+  const [activeTab, setActiveTab] = useState<"perubahan-akta" | "jual-beli-saham" | "akuisisi">("perubahan-akta");
+
   const scrollToPricing = (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById("paket-harga");
@@ -224,14 +226,28 @@ export default function PerubahanAktaPage() {
       {/* ─── 4. PRICING SECTION ─── */}
       <section id="paket-harga" className="bg-[#FAF9F9] py-8 sm:py-20 border-b border-gray-200/40 scroll-mt-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
+          <div className="mb-8 sm:mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-10">
             <div className="max-w-2xl space-y-2 sm:space-y-3 text-left">
-              <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">BIAYA PERUBAHAN AKTA</p>
+              <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-[0.2em]">
+                {activeTab === "perubahan-akta"
+                  ? "BIAYA PERUBAHAN AKTA"
+                  : activeTab === "jual-beli-saham"
+                  ? "BIAYA JUAL BELI SAHAM"
+                  : "BIAYA PENGURUSAN AKUISISI"}
+              </p>
               <h2 className="font-heading text-[28px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
-                Paket Perubahan Akta Perusahaan
+                {activeTab === "perubahan-akta"
+                  ? "Paket Perubahan Akta Perusahaan"
+                  : activeTab === "jual-beli-saham"
+                  ? "Paket Jual Beli Saham Perusahaan"
+                  : "Paket Akuisisi Perusahaan"}
               </h2>
               <p className="text-[16px] text-gray-500 font-medium">
-                Biaya jasa Notaris & Kemenkumham all-in, transparan tanpa ada biaya tersembunyi.
+                {activeTab === "perubahan-akta"
+                  ? "Biaya jasa Notaris & Kemenkumham all-in, transparan tanpa ada biaya tersembunyi."
+                  : activeTab === "jual-beli-saham"
+                  ? "Proses legalitas pemindahan hak atas saham perseroan secara aman, sah di mata hukum, dan transparan."
+                  : "Pengambilalihan kepemilikan saham perusahaan secara menyeluruh dengan kepatuhan corporate action terlengkap."}
               </p>
             </div>
             <div className="flex-shrink-0 flex justify-start md:justify-end">
@@ -245,92 +261,424 @@ export default function PerubahanAktaPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch justify-center max-w-4xl mx-auto">
-            
-            {/* Paket 1: Perubahan Data PT */}
-            <div className="relative group h-full">
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
-                
-                <div className="text-center mb-[18px]">
-                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PERUBAHAN AKTA SAJA</div>
-                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PENGURUS / MODAL / SAHAM / DOMISILI</div>
-                </div>
-                
-                <div className="text-center mb-[20px]">
-                  <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 9.000.000</div>
-                  <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 4.499.000</div>
-                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
-                </div>
+          {/* Subtabs Selector */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-10 sm:mb-14">
+            <button
+              type="button"
+              onClick={() => setActiveTab("perubahan-akta")}
+              className={`flex items-center gap-2 px-5 py-2.5 sm:py-3 rounded-full text-[15px] sm:text-[16px] font-extrabold transition-all duration-200 cursor-pointer ${
+                activeTab === "perubahan-akta"
+                  ? "bg-[#990202] text-white shadow-md"
+                  : "bg-white text-gray-700 shadow-sm border border-black/[0.04] hover:border-gray-300"
+              }`}
+            >
+              <FileText className="w-4 h-4" />
+              <span>Perubahan Akta &amp; NIB</span>
+            </button>
 
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin melakukan Perubahan Data PT. Mohon info prosesnya.", "ingin-melakukan-perubahan-data-pt", "/layanan/perubahan-akta")}
-                  target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
-                >Pilih Perubahan Data</a>
-                
-                <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[24px]" />
-                
-                <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[16px] uppercase">YANG DIPEROLEH</div>
-                
-                <div className="flex flex-col gap-[12px] flex-1">
-                  {[
-                    "Drafting Risalah RUPS / Keputusan Pemegang Saham",
-                    "Akta Notaris Perubahan Resmi",
-                    "Penerimaan Laporan SK Kemenkumham (AHU)"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
-                      <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <button
+              type="button"
+              onClick={() => setActiveTab("jual-beli-saham")}
+              className={`flex items-center gap-2 px-5 py-2.5 sm:py-3 rounded-full text-[15px] sm:text-[16px] font-extrabold transition-all duration-200 cursor-pointer ${
+                activeTab === "jual-beli-saham"
+                  ? "bg-[#990202] text-white shadow-md"
+                  : "bg-white text-gray-700 shadow-sm border border-black/[0.04] hover:border-gray-300"
+              }`}
+            >
+              <TrendingUp className="w-4 h-4" />
+              <span>Jual Beli Saham</span>
+            </button>
 
-            {/* Paket 2: Perubahan Anggaran Dasar PT */}
-            <div className="relative group h-full md:-translate-y-2">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[14px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
-                TERLARIS
-              </div>
-              <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
-              <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)]">
-                
-                <div className="text-center mb-[18px]">
-                  <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PERUBAHAN AKTA & NIB</div>
-                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">MIGRASI KBLI & IZIN BERUSAHA OSS</div>
-                </div>
-                
-                <div className="text-center mb-[20px]">
-                  <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 12.000.000</div>
-                  <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 5.999.000</div>
-                  <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
-                </div>
-
-                <a
-                  href={getWhatsAppLink("Halo EasyLegal, saya ingin melakukan Perubahan Anggaran Dasar PT. Mohon info prosesnya.", "ingin-melakukan-perubahan-anggaran-dasar-pt", "/layanan/perubahan-akta")}
-                  target="_blank" rel="noopener noreferrer"
-                  className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
-                >Pilih Perubahan AD</a>
-                
-                <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[24px]" />
-                
-                <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[16px] uppercase">DOKUMEN INTEGRAL</div>
-                
-                <div className="flex flex-col gap-[12px] flex-1">
-                  {[
-                    "Akta Notaris Perubahan Anggaran Dasar",
-                    "SK Persetujuan Kemenkumham (Bukan sekadar lapor)",
-                    "Sinkronisasi perubahan data ke sistem OSS RBA"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
-                      <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
+            <button
+              type="button"
+              onClick={() => setActiveTab("akuisisi")}
+              className={`flex items-center gap-2 px-5 py-2.5 sm:py-3 rounded-full text-[15px] sm:text-[16px] font-extrabold transition-all duration-200 cursor-pointer ${
+                activeTab === "akuisisi"
+                  ? "bg-[#990202] text-white shadow-md"
+                  : "bg-white text-gray-700 shadow-sm border border-black/[0.04] hover:border-gray-300"
+              }`}
+            >
+              <Award className="w-4 h-4" />
+              <span>Akuisisi Perusahaan</span>
+            </button>
           </div>
+
+          {/* TAB 1: PERUBAHAN AKTA & NIB */}
+          {activeTab === "perubahan-akta" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch justify-center max-w-4xl mx-auto animate-fade-in">
+              {/* Paket 1: Perubahan Data PT */}
+              <div className="relative group h-full">
+                <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                  
+                  <div className="text-center mb-[18px]">
+                    <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PERUBAHAN AKTA SAJA</div>
+                    <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">PENGURUS / MODAL / SAHAM / DOMISILI</div>
+                  </div>
+                  
+                  <div className="text-center mb-[20px]">
+                    <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 9.000.000</div>
+                    <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 4.499.000</div>
+                    <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  </div>
+
+                  <a
+                    href={getWhatsAppLink("Halo EasyLegal, saya ingin melakukan Perubahan Data PT. Mohon info prosesnya.", "ingin-melakukan-perubahan-data-pt", "/layanan/perubahan-akta")}
+                    target="_blank" rel="noopener noreferrer"
+                    className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform"
+                  >Pilih Perubahan Data</a>
+                  
+                  <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[24px]" />
+                  
+                  <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[16px] uppercase">YANG DIPEROLEH</div>
+                  
+                  <div className="flex flex-col gap-[12px] flex-1">
+                    {[
+                      "Drafting Risalah RUPS / Keputusan Pemegang Saham",
+                      "Akta Notaris Perubahan Resmi",
+                      "Penerimaan Laporan SK Kemenkumham (AHU)"
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                        <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Paket 2: Perubahan Anggaran Dasar PT */}
+              <div className="relative group h-full md:-translate-y-2">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[14px] font-[800] tracking-[0.06em] px-[18px] py-[8px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
+                  TERLARIS
+                </div>
+                <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)]">
+                  
+                  <div className="text-center mb-[18px]">
+                    <div className="text-[16px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PERUBAHAN AKTA & NIB</div>
+                    <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">MIGRASI KBLI & IZIN BERUSAHA OSS</div>
+                  </div>
+                  
+                  <div className="text-center mb-[20px]">
+                    <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 12.000.000</div>
+                    <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 5.999.000</div>
+                    <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                  </div>
+
+                  <a
+                    href={getWhatsAppLink("Halo EasyLegal, saya ingin melakukan Perubahan Anggaran Dasar PT. Mohon info prosesnya.", "ingin-melakukan-perubahan-anggaran-dasar-pt", "/layanan/perubahan-akta")}
+                    target="_blank" rel="noopener noreferrer"
+                    className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg"
+                  >Pilih Perubahan AD</a>
+                  
+                  <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[24px]" />
+                  
+                  <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[16px] uppercase">DOKUMEN INTEGRAL</div>
+                  
+                  <div className="flex flex-col gap-[12px] flex-1">
+                    {[
+                      "Akta Notaris Perubahan Anggaran Dasar",
+                      "SK Persetujuan Kemenkumham (Bukan sekadar lapor)",
+                      "Sinkronisasi perubahan data ke sistem OSS RBA"
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-[10px] text-[16px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                        <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: JUAL BELI SAHAM */}
+          {activeTab === "jual-beli-saham" && (
+            <div className="space-y-8 animate-fade-in max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch justify-center">
+                {/* PT */}
+                <div className="relative group h-full">
+                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                  <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                    <div className="text-center mb-[18px]">
+                      <div className="text-[18px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PT</div>
+                      <div className="text-[13px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">JUAL BELI SAHAM PT LOKAL</div>
+                    </div>
+                    
+                    <div className="text-center mb-[20px]">
+                      <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 3.000.000</div>
+                      <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 1.499.000</div>
+                      <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                    </div>
+
+                    <a
+                      href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Jual Beli Saham PT (Rp 1.499.000). Mohon info lengkapnya.", "jual-beli-saham-pt", "/layanan/perubahan-akta")}
+                      target="_blank" rel="noopener noreferrer"
+                      className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform cursor-pointer"
+                    >Pilih Jual Beli Saham PT</a>
+                    
+                    <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[22px]" />
+                    
+                    <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                    <div className="flex items-center gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] mb-[20px]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
+                      <span>3-6 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
+                    </div>
+
+                    <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                    <div className="flex flex-col gap-[10px] flex-1">
+                      <div className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                        <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                        <span>Akta Jual Beli Saham untuk 1 Orang</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-[20px] text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
+                    <div className="flex flex-col gap-[10px]">
+                      {["Layanan Personal Legal Assistance", "1 Kupon Undian iPhone", "Gratis Ongkir Pulau Jawa"].map((item, i) => (
+                        <div key={i} className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                          <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-[20px] text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
+                    <div className="flex flex-col gap-[10px]">
+                      {[
+                        <span key="emas"><strong className="font-[800] text-[oklch(0.98_0.003_90)]">1 Buah</strong> Logam Mulia Emas 24K</span>,
+                        <span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 250.000</strong></span>,
+                        "Dokumen SOP Karyawan",
+                        "Dokumen SOP Perusahaan",
+                        "Dokumen Kontrak Bisnis",
+                        <span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                          <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* PT PMA */}
+                <div className="relative group h-full md:-translate-y-2">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[14px] font-[800] tracking-[0.06em] px-[18px] py-[7px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
+                    PENANAMAN MODAL ASING
+                  </div>
+                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                  <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)]">
+                    <div className="text-center mb-[18px]">
+                      <div className="text-[18px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PT PMA</div>
+                      <div className="text-[13px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">JUAL BELI SAHAM ASING / PMA</div>
+                    </div>
+                    
+                    <div className="text-center mb-[20px]">
+                      <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 6.000.000</div>
+                      <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 2.999.000</div>
+                      <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                    </div>
+
+                    <a
+                      href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Jual Beli Saham PT PMA (Rp 2.999.000). Mohon info lengkapnya.", "jual-beli-saham-pt-pma", "/layanan/perubahan-akta")}
+                      target="_blank" rel="noopener noreferrer"
+                      className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg cursor-pointer"
+                    >Pilih Jual Beli Saham PMA</a>
+                    
+                    <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[22px]" />
+                    
+                    <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">LAMA PROSES</div>
+                    <div className="flex items-center gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] mb-[20px]">
+                      <span className="text-[oklch(0.78_0.15_145)] font-[700]">✓</span>
+                      <span>3-6 Hari Kerja <sup className="text-[oklch(0.85_0.1_70)]">(1)</sup></span>
+                    </div>
+
+                    <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                    <div className="flex flex-col gap-[10px] flex-1">
+                      <div className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                        <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                        <span>Akta Jual Beli Saham untuk 1 Orang</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-[20px] text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
+                    <div className="flex flex-col gap-[10px]">
+                      {["Layanan Personal Legal Assistance", "1 Kupon Undian iPhone", "Gratis Ongkir Pulau Jawa"].map((item, i) => (
+                        <div key={i} className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                          <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-[20px] text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
+                    <div className="flex flex-col gap-[10px]">
+                      {[
+                        <span key="emas"><strong className="font-[800] text-[oklch(0.98_0.003_90)]">1 Buah</strong> Logam Mulia Emas 24K</span>,
+                        <span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 250.000</strong></span>,
+                        "Dokumen SOP Karyawan",
+                        "Dokumen SOP Perusahaan",
+                        "Dokumen Kontrak Bisnis",
+                        <span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                          <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footnote */}
+              <div className="bg-white shadow-sm border border-black/[0.04] rounded-2xl p-5 text-[15px] text-gray-500 leading-relaxed font-medium text-left">
+                <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
+                <span>(1) Setelah penandatanganan Minuta Akta Notaris.</span>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: AKUISISI PERUSAHAAN */}
+          {activeTab === "akuisisi" && (
+            <div className="space-y-8 animate-fade-in max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch justify-center">
+                {/* PT */}
+                <div className="relative group h-full">
+                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                  <div className="rounded-[20px] p-[28px_26px_30px] h-full flex flex-col bg-[oklch(0.2_0.01_90)] shadow-[0_8px_20px_oklch(0.2_0.02_90/0.12)]">
+                    <div className="text-center mb-[18px]">
+                      <div className="text-[18px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PT</div>
+                      <div className="text-[13px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] uppercase mt-1">AKUISISI PERUSAHAAN PT LOKAL</div>
+                    </div>
+                    
+                    <div className="text-center mb-[20px]">
+                      <div className="text-[16px] text-[oklch(0.62_0.01_90)] line-through mb-[2px]">Rp 10.000.000</div>
+                      <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 4.999.000</div>
+                      <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.62_0.15_25)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                    </div>
+
+                    <a
+                      href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Akuisisi Perusahaan PT (Rp 4.999.000). Mohon info lengkapnya.", "akuisisi-perusahaan-pt", "/layanan/perubahan-akta")}
+                      target="_blank" rel="noopener noreferrer"
+                      className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.98_0.003_90)] text-[oklch(0.2_0.01_90)] hover:scale-[1.02] transition-transform cursor-pointer"
+                    >Pilih Akuisisi PT</a>
+                    
+                    <div className="h-[1px] bg-[oklch(0.35_0.01_90)] my-[22px]" />
+                    
+                    <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">LAMA PROSES</div>
+                    <div className="flex items-center gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] mb-[20px]">
+                      <span className="text-[oklch(0.7_0.15_145)] font-[700]">✓</span>
+                      <span>3-6 Hari Kerja <sup className="text-[oklch(0.62_0.15_25)]">(1)</sup></span>
+                    </div>
+
+                    <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.62_0.01_90)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                    <div className="flex flex-col gap-[10px] flex-1">
+                      <div className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                        <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                        <span>Akta Akuisisi Saham Perusahaan</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-[20px] text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
+                    <div className="flex flex-col gap-[10px]">
+                      {["Layanan Personal Legal Assistance", "1 Kupon Undian iPhone", "Gratis Ongkir Pulau Jawa"].map((item, i) => (
+                        <div key={i} className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                          <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-[20px] text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
+                    <div className="flex flex-col gap-[10px]">
+                      {[
+                        <span key="emas"><strong className="font-[800] text-[oklch(0.98_0.003_90)]">1 Buah</strong> Logam Mulia Emas 24K</span>,
+                        <span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 250.000</strong></span>,
+                        "Dokumen SOP Karyawan",
+                        "Dokumen SOP Perusahaan",
+                        "Dokumen Kontrak Bisnis",
+                        <span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                          <span className="text-[oklch(0.7_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* PT PMA */}
+                <div className="relative group h-full md:-translate-y-2">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] text-[14px] font-[800] tracking-[0.06em] px-[18px] py-[7px] rounded-full whitespace-nowrap shadow-[0_4px_12px_oklch(0.3_0.1_70/0.35)] uppercase">
+                    AKUISISI ASING / PMA
+                  </div>
+                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/[0.12] rounded-[24px] blur-[28px] transition-all duration-500 -z-10 pointer-events-none scale-[0.97] group-hover:scale-[1.04]" />
+                  <div className="rounded-[20px] p-[34px_26px_30px] h-full flex flex-col bg-gradient-to-b from-[oklch(0.32_0.15_25)] to-[oklch(0.26_0.13_25)] shadow-[0_20px_40px_oklch(0.3_0.15_25/0.35),0_0_0_1px_oklch(0.4_0.16_25/0.4)]">
+                    <div className="text-center mb-[18px]">
+                      <div className="text-[18px] font-[800] tracking-[0.04em] text-[oklch(0.98_0.003_90)] uppercase">PT PMA</div>
+                      <div className="text-[13px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] uppercase mt-1">AKUISISI ASING / PMA</div>
+                    </div>
+                    
+                    <div className="text-center mb-[20px]">
+                      <div className="text-[16px] text-[oklch(0.8_0.03_25)] line-through mb-[2px]">Rp 20.000.000</div>
+                      <div className="text-[32px] font-[800] text-[oklch(0.98_0.003_90)] leading-[1.2]">Rp 9.999.000</div>
+                      <div className="text-[14px] font-[700] tracking-[0.03em] text-[oklch(0.85_0.1_70)] mt-[6px]">TANPA TAMBAHAN BIAYA APAPUN</div>
+                    </div>
+
+                    <a
+                      href={getWhatsAppLink("Halo EasyLegal, saya tertarik dengan Layanan Akuisisi Perusahaan PT PMA (Rp 9.999.000). Mohon info lengkapnya.", "akuisisi-perusahaan-pt-pma", "/layanan/perubahan-akta")}
+                      target="_blank" rel="noopener noreferrer"
+                      className="w-full py-[14px] rounded-[10px] text-[16px] font-[700] block text-center bg-[oklch(0.72_0.19_70)] text-[oklch(0.2_0.02_70)] hover:scale-[1.02] transition-transform shadow-lg cursor-pointer"
+                    >Pilih Akuisisi PMA</a>
+                    
+                    <div className="h-[1px] bg-[oklch(0.45_0.1_25/0.5)] my-[22px]" />
+                    
+                    <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">LAMA PROSES</div>
+                    <div className="flex items-center gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] mb-[20px]">
+                      <span className="text-[oklch(0.78_0.15_145)] font-[700]">✓</span>
+                      <span>3-6 Hari Kerja <sup className="text-[oklch(0.85_0.1_70)]">(1)</sup></span>
+                    </div>
+
+                    <div className="text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">YANG DIPEROLEH</div>
+                    <div className="flex flex-col gap-[10px] flex-1">
+                      <div className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                        <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span>
+                        <span>Akta Akuisisi Saham Perusahaan</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-[20px] text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">BONUS</div>
+                    <div className="flex flex-col gap-[10px]">
+                      {["Layanan Personal Legal Assistance", "1 Kupon Undian iPhone", "Gratis Ongkir Pulau Jawa"].map((item, i) => (
+                        <div key={i} className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                          <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-[20px] text-[14px] font-[800] tracking-[0.06em] text-[oklch(0.8_0.03_25)] mb-[12px] uppercase">EXTRA BONUS</div>
+                    <div className="flex flex-col gap-[10px]">
+                      {[
+                        <span key="emas"><strong className="font-[800] text-[oklch(0.98_0.003_90)]">1 Buah</strong> Logam Mulia Emas 24K</span>,
+                        <span key="v">Voucher EasyLegal <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 250.000</strong></span>,
+                        "Dokumen SOP Karyawan",
+                        "Dokumen SOP Perusahaan",
+                        "Dokumen Kontrak Bisnis",
+                        <span key="m">Cek Merek senilai <strong className="font-[800] text-[oklch(0.98_0.003_90)]">Rp 299.000</strong></span>
+                      ].map((item, i) => (
+                        <div key={i} className="flex items-start gap-[8px] text-[15px] text-[oklch(0.92_0.005_90)] leading-[1.4]">
+                          <span className="text-[oklch(0.78_0.15_145)] font-[700] flex-shrink-0">✓</span><span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footnote */}
+              <div className="bg-white shadow-sm border border-black/[0.04] rounded-2xl p-5 text-[15px] text-gray-500 leading-relaxed font-medium text-left">
+                <strong className="font-extrabold text-gray-800 mr-1.5">Keterangan:</strong>
+                <span>(1) Setelah penandatanganan Minuta Akta Notaris.</span>
+              </div>
+            </div>
+          )}
+
         </div>
       </section>
 
