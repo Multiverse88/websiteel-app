@@ -403,8 +403,8 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     }
 
     const finalSource = isCustomSource
-      ? customSourceInput.trim().toLowerCase().replace(/[^a-z0-9-_]/g, '-').replace(/-+/g, '-')
-      : formSource.trim().toLowerCase()
+      ? customSourceInput.trim()
+      : formSource.trim()
 
     if (!finalSource) {
       setSlugModalError('Sumber statis (source) wajib diisi.')
@@ -1169,7 +1169,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                           </td>
                           <td className="px-4 py-3.5 whitespace-nowrap">
                             <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold border ${
-                              !SOURCE_LABELS[s.source] ? 'bg-purple-50 text-purple-700 border-purple-200 font-mono' :
+                              !SOURCE_LABELS[s.source] ? 'bg-purple-50 text-purple-700 border-purple-200' :
                               s.source === 'metaads' ? 'bg-blue-50 text-blue-700 border-blue-200' :
                               s.source === 'gads' ? 'bg-amber-50 text-amber-700 border-amber-200' :
                               s.source === 'tiktok' ? 'bg-neutral-900 text-white border-neutral-900' :
@@ -1352,21 +1352,20 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                       <input
                         type="text"
                         required
-                        placeholder="contoh: influencer-sarah, billboard-dago, radio-elshinta"
+                        placeholder="contoh: Email Marketing, Billboard Dago, Brosur Event"
                         value={customSourceInput}
                         onChange={(e) => {
-                          const clean = e.target.value.toLowerCase().replace(/[^a-z0-9-_]/g, '-')
-                          setCustomSourceInput(clean)
-                          setFormSource(clean)
+                          setCustomSourceInput(e.target.value)
+                          setFormSource(e.target.value)
                         }}
-                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[13px] font-mono bg-white focus:outline-none focus:border-[#990202]"
+                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
                       />
                     </div>
                   )}
                   <p className="text-[11px] text-gray-400">
                     {!isCustomSource
-                      ? 'Pilih sumber yang tersedia atau klik "+ Tambah Sendiri" untuk memasukkan sumber Anda.'
-                      : 'Ketik nama unik sumber (contoh: event-startup, flyer-jaksel). Nilai ini otomatis tercatat sebagai source lead.'}
+                      ? 'Pilih sumber yang tersedia atau klik "+ Ketik Sumber Kustom Baru..." untuk memasukkan sumber Anda.'
+                      : 'Bebas ketik nama sumber Anda (bisa menggunakan huruf besar/kapital dan spasi). Nilai ini otomatis tercatat sebagai source lead.'}
                   </p>
                 </div>
 

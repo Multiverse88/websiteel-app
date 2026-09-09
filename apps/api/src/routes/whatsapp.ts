@@ -427,7 +427,7 @@ router.post("/slugs", requireAuth, async (req, res) => {
     }
 
     const domain = queryText(req.body.domain, 200) || "";
-    const source = (queryText(req.body.source, 50) || "direct").toLowerCase();
+    const source = queryText(req.body.source, 50) || "direct";
     const message = queryText(req.body.message, 1000);
     const numberIds = cleanNumberIds(req.body.numberIds);
     const description = queryText(req.body.description, 300);
@@ -482,7 +482,7 @@ router.put("/slugs/:id", requireAuth, async (req, res) => {
       dataToUpdate.domain = queryText(req.body.domain, 200) || "";
     }
     if (req.body.source !== undefined) {
-      dataToUpdate.source = (queryText(req.body.source, 50) || "direct").toLowerCase();
+      dataToUpdate.source = queryText(req.body.source, 50) || "direct";
     }
     if (req.body.message !== undefined) {
       dataToUpdate.message = queryText(req.body.message, 1000);
