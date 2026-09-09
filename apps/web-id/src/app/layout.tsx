@@ -97,6 +97,7 @@ export default function RootLayout({
       className={`${dmSans.variable} h-full antialiased scroll-smooth`}
     >
       <head>
+        <link rel="alternate" hrefLang="id" href="https://easylegal.id/" />
         <GtmHead />
         <GoogleAnalytics />
       </head>
