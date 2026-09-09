@@ -1,6 +1,7 @@
 import { useCallback, useState, useEffect } from 'react'
 import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { api } from '../lib/api'
+import Modal from '../components/Modal'
 
 // Crimson-first palette for chart segments (source donut, etc.) — #990202
 // first since it's the brand color, rest picked for contrast against it and
@@ -27,13 +28,25 @@ interface WaPageConfig {
   updatedAt: string
 }
 
-// The site only has these two public domains today (see CLAUDE.md) — kept
-// as a short fixed list rather than derived from click data, since "which
-// domains exist" is a deploy-time fact, not something that grows on its own.
+interface WaSlug {
+  id: string
+  slug: string
+  domain: string
+  source: string
+  message: string | null
+  numberIds: string[]
+  description: string | null
+  clicks: number
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
 const DOMAINS: { value: string; label: string }[] = [
   { value: '', label: 'Semua Domain' },
-  { value: 'easylegal.biz.id', label: 'easylegal.biz.id' },
+  { value: 'easylegal.id', label: 'easylegal.id' },
   { value: 'easylegal.co.id', label: 'easylegal.co.id' },
+  { value: 'easylegal.biz.id', label: 'easylegal.biz.id' },
 ]
 
 type DatePreset = 'all' | 'today' | '7d' | '30d' | 'month' | 'lastmonth' | 'custom'
@@ -64,6 +77,9 @@ interface WaLead {
 const SOURCE_LABELS: Record<string, string> = {
   gads: 'Google Ads',
   metaads: 'Meta Ads',
+  tiktok: 'TikTok Ads',
+  instagram: 'Instagram',
+  offline: 'Offline / Brosur',
   googleseo: 'Google SEO/Organik',
   referral: 'Referral',
   direct: 'Langsung',
@@ -166,8 +182,29 @@ const NEXT_STAGES: Record<string, string[]> = {
 // click site-wide always goes to whichever active number has the fewest
 // clicks so far. Two tabs: fairness per number, and every click as a
 // trackable lead (source/product/status) up to closing.
-export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab?: 'numbers' | 'pages' | 'leads' }) {
-  const [tab, setTab] = useState<'numbers' | 'pages' | 'leads'>(initialTab)
+export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab?: 'numbers' | 'pages' | 'slugs' | 'leads' }) {
+  const [tab, setTab] = useState<'numbers' | 'pages' | 'slugs' | 'leads'>(initialTab)
+
+  // Slugs tab state
+  const [slugs, setSlugs] = useState<WaSlug[]>([])
+  const [slugsLoading, setSlugsLoading] = useState(false)
+  const [slugFilterDomain, setSlugFilterDomain] = useState('')
+  const [slugFilterSource, setSlugFilterSource] = useState('')
+  const [slugSearchInput, setSlugSearchInput] = useState('')
+  const [slugSearch, setSlugSearch] = useState('')
+  const [slugModalOpen, setSlugModalOpen] = useState(false)
+  const [editingSlug, setEditingSlug] = useState<WaSlug | null>(null)
+  const [formSlug, setFormSlug] = useState('')
+  const [formDomain, setFormDomain] = useState('easylegal.id')
+  const [formSource, setFormSource] = useState('metaads')
+  const [formMessage, setFormMessage] = useState('')
+  const [formNumberIds, setFormNumberIds] = useState<string[]>([])
+  const [formDescription, setFormDescription] = useState('')
+  const [formIsActive, setFormIsActive] = useState(true)
+  const [savingSlug, setSavingSlug] = useState(false)
+  const [slugModalError, setSlugModalError] = useState('')
+  const [copiedSlugId, setCopiedSlugId] = useState<string | null>(null)
+  const [deleteSlugConfirm, setDeleteSlugConfirm] = useState<WaSlug | null>(null)
 
   const [pages, setPages] = useState<WaPageConfig[]>([])
   const [pagesLoading, setPagesLoading] = useState(false)
@@ -277,10 +314,124 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     }
   }, [])
 
+  // Debounce slug search input
+  useEffect(() => {
+    const id = setTimeout(() => setSlugSearch(slugSearchInput.trim()), 400)
+    return () => clearTimeout(id)
+  }, [slugSearchInput])
+
+  const loadSlugs = useCallback(async () => {
+    try {
+      setSlugsLoading(true)
+      const res = await api.getWaSlugs({
+        domain: slugFilterDomain,
+        source: slugFilterSource,
+        search: slugSearch,
+      })
+      setSlugs(res.data || [])
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setSlugsLoading(false)
+    }
+  }, [slugFilterDomain, slugFilterSource, slugSearch])
+
   useEffect(() => { load() }, [load])
   useEffect(() => { if (tab === 'leads') loadLeads() }, [loadLeads, tab])
   useEffect(() => { if (tab === 'leads') loadStats() }, [loadStats, tab])
   useEffect(() => { if (tab === 'pages') loadPages() }, [loadPages, tab])
+  useEffect(() => { if (tab === 'slugs') loadSlugs() }, [loadSlugs, tab])
+
+  const openCreateSlug = () => {
+    setEditingSlug(null)
+    setFormSlug('')
+    setFormDomain('easylegal.id')
+    setFormSource('metaads')
+    setFormMessage('')
+    setFormNumberIds([])
+    setFormDescription('')
+    setFormIsActive(true)
+    setSlugModalError('')
+    setSlugModalOpen(true)
+  }
+
+  const openEditSlug = (s: WaSlug) => {
+    setEditingSlug(s)
+    setFormSlug(s.slug)
+    setFormDomain(s.domain || '')
+    setFormSource(s.source || 'direct')
+    setFormMessage(s.message || '')
+    setFormNumberIds(s.numberIds || [])
+    setFormDescription(s.description || '')
+    setFormIsActive(s.isActive)
+    setSlugModalError('')
+    setSlugModalOpen(true)
+  }
+
+  const handleSaveSlug = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSlugModalError('')
+    const cleaned = formSlug.trim().toLowerCase().replace(/^\/+|\/+$/g, '').replace(/[^a-z0-9-_]/g, '-').replace(/-+/g, '-')
+    if (!cleaned) {
+      setSlugModalError('Slug wajib diisi (hanya huruf, angka, tanda hubung).')
+      return
+    }
+    setSavingSlug(true)
+    try {
+      const payload = {
+        slug: cleaned,
+        domain: formDomain,
+        source: formSource || 'direct',
+        message: formMessage.trim() || undefined,
+        numberIds: formNumberIds,
+        description: formDescription.trim() || undefined,
+        isActive: formIsActive,
+      }
+      if (editingSlug) {
+        await api.updateWaSlug(editingSlug.id, payload)
+      } else {
+        await api.createWaSlug(payload)
+      }
+      setSlugModalOpen(false)
+      await loadSlugs()
+    } catch (err: any) {
+      setSlugModalError(err.message || 'Gagal menyimpan slug')
+    } finally {
+      setSavingSlug(false)
+    }
+  }
+
+  const handleDeleteSlug = async () => {
+    if (!deleteSlugConfirm) return
+    try {
+      await api.deleteWaSlug(deleteSlugConfirm.id)
+      setDeleteSlugConfirm(null)
+      await loadSlugs()
+    } catch (err: any) {
+      alert(err.message || 'Gagal menghapus slug')
+    }
+  }
+
+  const handleToggleSlugActive = async (s: WaSlug) => {
+    try {
+      await api.updateWaSlug(s.id, { isActive: !s.isActive })
+      await loadSlugs()
+    } catch (err: any) {
+      alert(err.message || 'Gagal mengubah status slug')
+    }
+  }
+
+  const copySlugUrl = async (s: WaSlug) => {
+    const domain = s.domain || 'easylegal.id'
+    const url = `https://${domain}/wa/${s.slug}`
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopiedSlugId(s.id)
+      setTimeout(() => setCopiedSlugId(null), 1500)
+    } catch {
+      // fallback
+    }
+  }
 
   // Auto-refresh the two live-data tabs every 15s while they're active.
   useEffect(() => {
@@ -512,6 +663,12 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           className={`px-4 py-2.5 text-[14px] font-bold border-b-2 transition-colors ${tab === 'pages' ? 'border-[#990202] text-[#990202]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
         >
           Per Halaman
+        </button>
+        <button
+          onClick={() => setTab('slugs')}
+          className={`px-4 py-2.5 text-[14px] font-bold border-b-2 transition-colors ${tab === 'slugs' ? 'border-[#990202] text-[#990202]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+        >
+          Link / Slug
         </button>
         <button
           onClick={() => setTab('leads')}
@@ -846,6 +1003,398 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               </tbody>
             </table>
           </div>
+        </>
+      )}
+
+      {tab === 'slugs' && (
+        <>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2 flex-1">
+              <input
+                type="text"
+                placeholder="Cari slug, deskripsi, atau pesan..."
+                value={slugSearchInput}
+                onChange={(e) => setSlugSearchInput(e.target.value)}
+                className="px-3.5 py-2 border border-gray-200 rounded-lg text-[13px] bg-white w-full sm:w-64 focus:outline-none focus:border-[#990202]"
+              />
+              <select
+                value={slugFilterDomain}
+                onChange={(e) => setSlugFilterDomain(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
+              >
+                {DOMAINS.map((d) => (
+                  <option key={d.value} value={d.value}>{d.label}</option>
+                ))}
+              </select>
+              <select
+                value={slugFilterSource}
+                onChange={(e) => setSlugFilterSource(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
+              >
+                <option value="">Semua Sumber</option>
+                <option value="metaads">Meta Ads</option>
+                <option value="gads">Google Ads</option>
+                <option value="tiktok">TikTok Ads</option>
+                <option value="instagram">Instagram</option>
+                <option value="offline">Offline / Brosur</option>
+                <option value="googleseo">Google SEO</option>
+                <option value="referral">Referral</option>
+                <option value="direct">Langsung</option>
+                <option value="other">Lainnya</option>
+              </select>
+            </div>
+            <button
+              type="button"
+              onClick={openCreateSlug}
+              className="px-4 py-2 bg-[#990202] hover:bg-[#7a0202] text-white rounded-lg text-[13px] font-bold transition-colors shadow-sm flex items-center justify-center gap-1.5 whitespace-nowrap"
+            >
+              + Tambah Link Slug
+            </button>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            {slugsLoading ? (
+              <div className="p-8 text-center text-gray-500 text-[14px]">Memuat link slug...</div>
+            ) : slugs.length === 0 ? (
+              <div className="p-12 text-center">
+                <div className="text-[16px] font-bold text-gray-800">Belum ada link slug</div>
+                <p className="text-[13px] text-gray-500 mt-1 max-w-md mx-auto">
+                  Buat link WhatsApp berbasis slug untuk kampanye marketing. Anda bisa menetapkan domain, sumber statis (Google Ads, Meta Ads, TikTok), dan pesan otomatis per link.
+                </p>
+                <button
+                  type="button"
+                  onClick={openCreateSlug}
+                  className="mt-4 px-4 py-2 bg-[#990202] text-white rounded-lg text-[13px] font-bold"
+                >
+                  Buat Link Pertama
+                </button>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-[13px] text-left border-collapse">
+                  <thead className="bg-gray-50 text-gray-600 font-semibold border-b border-gray-200">
+                    <tr>
+                      <th className="px-6 py-3.5">Slug & Link URL</th>
+                      <th className="px-4 py-3.5">Domain</th>
+                      <th className="px-4 py-3.5">Sumber Statis</th>
+                      <th className="px-4 py-3.5">Pesan WhatsApp</th>
+                      <th className="px-4 py-3.5">CS Pool</th>
+                      <th className="px-4 py-3.5 text-center">Klik</th>
+                      <th className="px-4 py-3.5 text-center">Status</th>
+                      <th className="px-6 py-3.5 text-right">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {slugs.map((s) => {
+                      const displayDomain = s.domain || 'easylegal.id'
+                      const fullUrl = `https://${displayDomain}/wa/${s.slug}`
+                      const isCopied = copiedSlugId === s.id
+                      return (
+                        <tr key={s.id} className="hover:bg-gray-50/75 transition-colors">
+                          <td className="px-6 py-3.5">
+                            <div className="flex items-center gap-2">
+                              <span className="font-mono font-bold text-gray-900 text-[14px]">/{s.slug}</span>
+                              <button
+                                type="button"
+                                onClick={() => copySlugUrl(s)}
+                                className={`px-2 py-0.5 text-[11px] font-bold rounded transition-colors ${isCopied ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                title="Salin link lengkap"
+                              >
+                                {isCopied ? 'Tersalin!' : 'Salin'}
+                              </button>
+                            </div>
+                            <div className="mt-0.5">
+                              <a
+                                href={fullUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-[12px] text-[#990202] hover:underline font-mono truncate max-w-[240px] inline-block"
+                              >
+                                {fullUrl}
+                              </a>
+                            </div>
+                            {s.description && (
+                              <div className="text-[11px] text-gray-400 mt-0.5">{s.description}</div>
+                            )}
+                          </td>
+                          <td className="px-4 py-3.5 whitespace-nowrap">
+                            <span className={`inline-flex px-2 py-0.5 rounded text-[11px] font-semibold ${s.domain ? 'bg-zinc-100 text-zinc-800' : 'bg-gray-100 text-gray-600'}`}>
+                              {s.domain || 'Semua Domain'}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3.5 whitespace-nowrap">
+                            <span className={`inline-flex px-2.5 py-1 rounded-md text-[11px] font-bold border ${
+                              s.source === 'metaads' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                              s.source === 'gads' ? 'bg-amber-50 text-amber-700 border-amber-200' :
+                              s.source === 'tiktok' ? 'bg-neutral-900 text-white border-neutral-900' :
+                              s.source === 'instagram' ? 'bg-pink-50 text-pink-700 border-pink-200' :
+                              s.source === 'offline' ? 'bg-purple-50 text-purple-700 border-purple-200' :
+                              s.source === 'googleseo' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                              'bg-gray-50 text-gray-700 border-gray-200'
+                            }`}>
+                              {SOURCE_LABELS[s.source] || s.source}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3.5 max-w-[260px]">
+                            {s.message ? (
+                              <div className="text-gray-700 text-[12px] line-clamp-2" title={s.message}>
+                                {s.message}
+                              </div>
+                            ) : (
+                              <span className="text-gray-400 italic text-[12px]">(Bawaan umum)</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3.5 text-gray-600 whitespace-nowrap">
+                            {s.numberIds.length === 0 ? (
+                              <span className="text-emerald-700 font-semibold text-[11px]">Semua CS Aktif</span>
+                            ) : (
+                              <span className="text-gray-700 text-[11px]">
+                                {s.numberIds.length} CS terpilih
+                              </span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3.5 text-center whitespace-nowrap">
+                            <span className="inline-flex px-2 py-0.5 bg-gray-100 text-gray-800 rounded font-bold text-[12px]">
+                              {s.clicks}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3.5 text-center whitespace-nowrap">
+                            <button
+                              type="button"
+                              onClick={() => handleToggleSlugActive(s)}
+                              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${s.isActive ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
+                            >
+                              {s.isActive ? 'Aktif' : 'Nonaktif'}
+                            </button>
+                          </td>
+                          <td className="px-6 py-3.5 text-right whitespace-nowrap">
+                            <button
+                              type="button"
+                              onClick={() => openEditSlug(s)}
+                              className="text-[13px] font-bold text-gray-600 hover:text-[#990202] transition-colors mr-3"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setDeleteSlugConfirm(s)}
+                              className="text-[13px] font-bold text-gray-500 hover:text-red-600 transition-colors"
+                            >
+                              Hapus
+                            </button>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          {/* Modal Tambah / Edit Slug */}
+          <Modal
+            isOpen={slugModalOpen}
+            onClose={() => setSlugModalOpen(false)}
+            title={editingSlug ? 'Edit Link Slug WhatsApp' : 'Tambah Link Slug WhatsApp'}
+          >
+            <form onSubmit={handleSaveSlug} className="space-y-4">
+              {slugModalError && (
+                <div className="p-3 bg-red-50 text-red-700 rounded-lg text-[13px] font-semibold border border-red-100">
+                  {slugModalError}
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="flex flex-col gap-1">
+                  <label className="text-[13px] font-bold text-gray-700">
+                    Slug <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="contoh: promo-pt, gads-merek"
+                    value={formSlug}
+                    onChange={(e) => setFormSlug(e.target.value)}
+                    className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] font-mono bg-white focus:outline-none focus:border-[#990202]"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <label className="text-[13px] font-bold text-gray-700">Domain Terkait</label>
+                  <select
+                    value={formDomain}
+                    onChange={(e) => setFormDomain(e.target.value)}
+                    className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
+                  >
+                    {DOMAINS.map((d) => (
+                      <option key={d.value} value={d.value}>{d.label}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Preview Link URL */}
+              <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 text-[12px]">
+                <span className="text-gray-500 font-medium">Preview Link Publik: </span>
+                <span className="font-mono font-bold text-[#990202]">
+                  https://{formDomain || 'easylegal.id'}/wa/{formSlug ? formSlug.trim().toLowerCase().replace(/[^a-z0-9-_]/g, '-') : 'slug-anda'}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="flex flex-col gap-1">
+                  <label className="text-[13px] font-bold text-gray-700">
+                    Sumber Statis (Static Source) <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={formSource}
+                    onChange={(e) => setFormSource(e.target.value)}
+                    className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
+                  >
+                    <option value="metaads">Meta Ads (Facebook & Instagram Ads)</option>
+                    <option value="gads">Google Ads (Search & Display)</option>
+                    <option value="tiktok">TikTok Ads</option>
+                    <option value="instagram">Instagram Organik (Bio/DM/Story)</option>
+                    <option value="offline">Offline / Brosur / Event / Banner</option>
+                    <option value="googleseo">Google SEO / Organik</option>
+                    <option value="referral">Referral / Mitra Bisnis</option>
+                    <option value="direct">Langsung / Direct</option>
+                    <option value="other">Lainnya / Other</option>
+                  </select>
+                  <p className="text-[11px] text-gray-400">
+                    Sumber lead ini akan otomatis tercatat secara statis di database lead WhatsApp saat link dibuka.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <label className="text-[13px] font-bold text-gray-700">Nama Kampanye / Catatan (Opsional)</label>
+                  <input
+                    type="text"
+                    placeholder="misal: Campaign IG Story Q1 2026"
+                    value={formDescription}
+                    onChange={(e) => setFormDescription(e.target.value)}
+                    className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
+                  />
+                  <p className="text-[11px] text-gray-400">
+                    Catatan internal untuk memudahkan monitoring tim marketing.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-[13px] font-bold text-gray-700">Teks Pesan WhatsApp</label>
+                <textarea
+                  rows={3}
+                  placeholder="Halo EasyLegal, saya tertarik konsultasi promo paket pendirian PT..."
+                  value={formMessage}
+                  onChange={(e) => setFormMessage(e.target.value)}
+                  className="w-full px-3.5 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
+                />
+                <p className="text-[11px] text-gray-400">
+                  Pesan yang otomatis muncul di aplikasi WhatsApp visitor. Sistem akan otomatis menyematkan sapaan CS dan kode lead unik <code className="font-mono bg-gray-100 px-1 py-0.5 rounded">[Ref: EL-XXXXXX]</code> di akhir pesan.
+                </p>
+              </div>
+
+              {/* Pool Pembatasan Nomor CS */}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <label className="text-[13px] font-bold text-gray-700">Rotasi Nomor CS (Opsional)</label>
+                  <span className="text-[11px] text-gray-400">
+                    {formNumberIds.length === 0 ? 'Semua nomor aktif (Default)' : `${formNumberIds.length} nomor terpilih`}
+                  </span>
+                </div>
+                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 max-h-36 overflow-y-auto space-y-1.5">
+                  {numbers.filter((n) => n.isActive).map((n) => {
+                    const checked = formNumberIds.includes(n.id)
+                    return (
+                      <label key={n.id} className="flex items-center gap-2 text-[13px] cursor-pointer hover:text-[#990202]">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setFormNumberIds([...formNumberIds, n.id])
+                            } else {
+                              setFormNumberIds(formNumberIds.filter((id) => id !== n.id))
+                            }
+                          }}
+                          className="rounded border-gray-300 text-[#990202] focus:ring-[#990202]"
+                        />
+                        <span className="font-bold">{n.label || 'Tanpa Label'}</span>
+                        <span className="font-mono text-gray-500 text-[12px]">{n.number}</span>
+                      </label>
+                    )
+                  })}
+                </div>
+                <p className="text-[11px] text-gray-400">
+                  Biarkan kosong jika ingin link ini merotasikan semua CS aktif. Centang nama CS tertentu jika ingin link khusus ke CS pilihan.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 pt-1">
+                <input
+                  type="checkbox"
+                  id="formIsActive"
+                  checked={formIsActive}
+                  onChange={(e) => setFormIsActive(e.target.checked)}
+                  className="rounded border-gray-300 text-[#990202] focus:ring-[#990202]"
+                />
+                <label htmlFor="formIsActive" className="text-[13px] font-semibold text-gray-700 cursor-pointer">
+                  Aktifkan link ini (bisa diakses publik)
+                </label>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-3 border-t border-gray-100">
+                <button
+                  type="button"
+                  onClick={() => setSlugModalOpen(false)}
+                  className="px-4 py-2 border border-gray-200 text-gray-600 rounded-lg text-[13px] font-semibold hover:bg-gray-50 transition-colors"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  disabled={savingSlug}
+                  className="px-5 py-2 bg-[#990202] hover:bg-[#7a0202] text-white rounded-lg text-[13px] font-bold transition-colors disabled:opacity-50"
+                >
+                  {savingSlug ? 'Menyimpan...' : editingSlug ? 'Perbarui Link' : 'Buat Link'}
+                </button>
+              </div>
+            </form>
+          </Modal>
+
+          {/* Modal Konfirmasi Hapus Slug */}
+          <Modal
+            isOpen={Boolean(deleteSlugConfirm)}
+            onClose={() => setDeleteSlugConfirm(null)}
+            title="Hapus Link Slug WhatsApp"
+          >
+            <div className="space-y-4">
+              <p className="text-[14px] text-gray-600">
+                Apakah Anda yakin ingin menghapus link slug <span className="font-mono font-bold text-gray-900">/{deleteSlugConfirm?.slug}</span>?
+              </p>
+              <p className="text-[12px] text-gray-400">
+                Setelah dihapus, link ini tidak akan lagi mengarahkan ke WhatsApp rotator. Riwayat lead yang sudah masuk sebelumnya tetap aman.
+              </p>
+              <div className="flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setDeleteSlugConfirm(null)}
+                  className="px-4 py-2 border border-gray-200 text-gray-600 rounded-lg text-[13px] font-semibold hover:bg-gray-50"
+                >
+                  Batal
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDeleteSlug}
+                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-[13px] font-bold"
+                >
+                  Hapus Permanen
+                </button>
+              </div>
+            </div>
+          </Modal>
         </>
       )}
 

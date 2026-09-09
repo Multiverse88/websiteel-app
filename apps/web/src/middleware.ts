@@ -48,6 +48,19 @@ function previewHtml({
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // WhatsApp Rotator short link: /wa/:slug (e.g. /wa/promo-pt)
+  if (pathname.startsWith("/wa/")) {
+    const waSlug = pathname.slice(4).replace(/\/$/, "");
+    if (waSlug) {
+      const host = request.headers.get("host") || "easylegal.biz.id";
+      const domain = host.split(":")[0];
+      const search = request.nextUrl.search || "";
+      const queryGlue = search ? (search.includes("?") ? "&" : "?") : "?";
+      const targetApiUrl = `${process.env.NEXT_PUBLIC_API_URL || "https://api.easylegal.my.id"}/api/v1/wa/s/${encodeURIComponent(waSlug)}${search}${queryGlue}domain=${encodeURIComponent(domain)}`;
+      return NextResponse.redirect(new URL(targetApiUrl), 302);
+    }
+  }
+
   // Redirect check — only GET/HEAD
   if (request.method === "GET" || request.method === "HEAD") {
     const slug = pathname.slice(1).replace(/\/$/, ""); // "/daftar-klien/" → "daftar-klien"

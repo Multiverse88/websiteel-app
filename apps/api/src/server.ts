@@ -34,6 +34,8 @@ const allowedOrigins = process.env.CORS_ORIGINS
       // and break page interactivity, including the navbar.
       'https://easylegal.co.id',
       'https://www.easylegal.co.id',
+      'https://easylegal.id',
+      'https://www.easylegal.id',
       'http://localhost:3000',
       'http://localhost:5173',
       'http://127.0.0.1:3000',

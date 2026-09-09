@@ -62,6 +62,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
+  // WhatsApp Rotator short link: /wa/:slug (e.g. /wa/promo-pt)
+  if (pathname.startsWith("/wa/")) {
+    const waSlug = pathname.slice(4).replace(/\/$/, "");
+    if (waSlug) {
+      const host = request.headers.get("host") || "easylegal.id";
+      const domain = host.split(":")[0];
+      const search = request.nextUrl.search || "";
+      const queryGlue = search ? (search.includes("?") ? "&" : "?") : "?";
+      const targetApiUrl = `${process.env.NEXT_PUBLIC_API_URL || "https://api.easylegal.my.id"}/api/v1/wa/s/${encodeURIComponent(waSlug)}${search}${queryGlue}domain=${encodeURIComponent(domain)}`;
+      return NextResponse.redirect(new URL(targetApiUrl), 302);
+    }
+  }
+
   // Redirect check — only GET/HEAD, and skip well-known SEO files so they
   // don't trigger an API lookup (the www→apex 301 above already ran).
   const isSeoFile = pathname === "/robots.txt" || pathname === "/sitemap.xml";

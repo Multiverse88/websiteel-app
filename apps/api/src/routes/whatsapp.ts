@@ -28,6 +28,16 @@ function queryText(value: unknown, maxLength = 500): string | null {
   return normalized || null;
 }
 
+function cleanSlug(value: unknown): string {
+  if (typeof value !== "string") return "";
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/^\/+|\/+$/g, "")
+    .replace(/[^a-z0-9-_]/g, "-")
+    .replace(/-+/g, "-");
+}
+
 // Leads dashboard date-range filter (from/to as "YYYY-MM-DD"). `to` is
 // treated as inclusive of the whole day (23:59:59.999), matching how a date
 // picker's "sampai tanggal X" reads to a non-technical user. Returns
@@ -220,6 +230,300 @@ router.get("/redirect", async (req, res) => {
     console.error("[WA_TRACKING] Redirect failed; using default number:", error);
     const text = queryText(req.query.text, 1000) || "";
     res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(text)}`);
+  }
+});
+
+// GET /api/v1/wa/s/:slug (and /api/v1/wa/slug/:slug) — Public
+// Custom slug-based WhatsApp rotator link (e.g. /wa/promo-pt):
+// - Connects slug to domain (or "" for all domains)
+// - Statically enforces attribution source (e.g. "metaads", "gads", "tiktok", "offline")
+// - Uses configured message template
+// - Rotates fairly among active numbers (or a restricted pool)
+// - Creates a trackable lead with leadCode and 302s to wa.me
+const handleSlugRedirect = async (req: any, res: any) => {
+  const rawSlug = req.params.slug;
+  const slug = cleanSlug(rawSlug);
+  if (!slug) {
+    return res.status(400).json({ error: "Slug tidak valid" });
+  }
+
+  // Detect domain (explicit query param -> referer header -> host header)
+  let domain = normalizeLeadDomain(req.query.domain);
+  if (!domain && req.headers.referer) {
+    try {
+      domain = normalizeLeadDomain(new URL(req.headers.referer).hostname);
+    } catch { /* ignore */ }
+  }
+  if (!domain && req.headers.host) {
+    try {
+      domain = normalizeLeadDomain(req.headers.host.split(":")[0]);
+    } catch { /* ignore */ }
+  }
+
+  try {
+    const wantedDomains = Array.from(new Set([domain || "", ""]));
+    const candidates = await prisma.whatsAppSlug.findMany({
+      where: {
+        slug,
+        domain: { in: wantedDomains },
+        isActive: true,
+      },
+    });
+
+    // Score specificity: exact domain match (2) > all-domain "" (1)
+    const sorted = candidates.sort((a, b) => {
+      const scoreA = domain && a.domain === domain ? 2 : 1;
+      const scoreB = domain && b.domain === domain ? 2 : 1;
+      return scoreB - scoreA;
+    });
+
+    const slugConfig = sorted[0];
+
+    if (!slugConfig) {
+      console.warn(`[WA_SLUG] Slug not found or inactive: "${slug}" for domain "${domain || "all"}"`);
+      const fallbackText = queryText(req.query.text, 1000) || "";
+      return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(fallbackText)}`);
+    }
+
+    // Fire-and-forget increment click counter on the slug
+    prisma.whatsAppSlug
+      .update({
+        where: { id: slugConfig.id },
+        data: { clicks: { increment: 1 } },
+      })
+      .catch((err) => console.error("[WA_SLUG] Failed to increment slug clicks:", err));
+
+    // Statically configured source attribution
+    const staticSource = slugConfig.source || "direct";
+    const normalizedSource = normalizeSourceCode(staticSource) || "other";
+    const channel = sourceCodeToChannel(normalizedSource);
+
+    // Message template
+    const rawText = slugConfig.message || queryText(req.query.text, 1000) || "";
+    const product = `/wa/${slug}`;
+    const service = rawText ? rawText.slice(0, 200) : `Rotator: ${slug}`;
+    const ctaLabel = slugConfig.description || `Slug: ${slug}`;
+
+    // Number selection from restricted pool or all active numbers
+    const numberWhere: { isActive: boolean; id?: { in: string[] } } = { isActive: true };
+    if (slugConfig.numberIds && slugConfig.numberIds.length > 0) {
+      numberWhere.id = { in: slugConfig.numberIds };
+    }
+
+    const next = await prisma.whatsAppNumber.findFirst({
+      where: numberWhere,
+      orderBy: [{ clickCount: "asc" }, { createdAt: "asc" }],
+    });
+
+    if (!next) {
+      console.error("[WA_SLUG] No active WhatsApp number available in pool");
+      return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(rawText)}`);
+    }
+
+    // Generate unique leadCode & log lead
+    let leadCode = generateLeadCode();
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const exists = await prisma.whatsAppClick.findUnique({ where: { leadCode } });
+      if (!exists) break;
+      leadCode = generateLeadCode();
+    }
+
+    const created = await prisma.$transaction(async (tx) => {
+      await tx.whatsAppNumber.update({
+        where: { id: next.id },
+        data: { clickCount: { increment: 1 } },
+      });
+      return tx.whatsAppClick.create({
+        data: {
+          numberId: next.id,
+          domain: domain || (slugConfig.domain ? slugConfig.domain : null),
+          leadCode,
+          source: staticSource,
+          sourceCode: staticSource,
+          channel,
+          referralCode: queryText(req.query.ref, 80),
+          utmSource: queryText(req.query.utm_source, 120),
+          utmMedium: queryText(req.query.utm_medium, 120),
+          utmCampaign: queryText(req.query.utm_campaign, 200),
+          utmContent: queryText(req.query.utm_content, 200),
+          utmTerm: queryText(req.query.utm_term, 200),
+          gclid: queryText(req.query.gclid, 300),
+          fbclid: queryText(req.query.fbclid, 300),
+          entryUrl: queryText(req.query.entry_url, 1000) || `${req.protocol}://${req.get("host")}${req.originalUrl}`,
+          entryPath: product,
+          referrerUrl: queryText(req.query.referrer, 1000) || req.headers.referer || null,
+          product,
+          service,
+          ctaId: `slug:${slug}`,
+          ctaLabel,
+          events: {
+            create: {
+              type: "WHATSAPP_CTA_CLICKED",
+              metadata: { slug, staticSource, domain },
+            },
+          },
+        },
+      });
+    });
+
+    await prisma.leadEvent.create({
+      data: { leadId: created.id, type: "WHATSAPP_REDIRECTED", metadata: { slug } },
+    });
+
+    const textWithRef = buildWhatsAppMessage(
+      rawText,
+      leadCode,
+      normalizedSource,
+      domain || slugConfig.domain || null,
+      next.label,
+    );
+
+    return res.redirect(`https://wa.me/${next.number}?text=${encodeURIComponent(textWithRef)}`);
+  } catch (error) {
+    console.error("[WA_SLUG] Redirect failed with error:", error);
+    const text = queryText(req.query.text, 1000) || "";
+    return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(text)}`);
+  }
+};
+
+router.get("/s/:slug", handleSlugRedirect);
+router.get("/slug/:slug", handleSlugRedirect);
+
+// GET /api/v1/wa/slugs — admin: list all WhatsApp slugs
+router.get("/slugs", requireAuth, async (req, res) => {
+  try {
+    const { domain, source, search } = req.query as Record<string, string>;
+    const where: any = {};
+    if (domain !== undefined && domain !== "") {
+      where.domain = domain;
+    }
+    if (source) {
+      where.source = source;
+    }
+    if (search) {
+      where.OR = [
+        { slug: { contains: search.toLowerCase(), mode: "insensitive" } },
+        { description: { contains: search, mode: "insensitive" } },
+        { message: { contains: search, mode: "insensitive" } },
+      ];
+    }
+    const slugs = await prisma.whatsAppSlug.findMany({
+      where,
+      orderBy: [{ createdAt: "desc" }],
+    });
+    res.json({ data: slugs });
+  } catch (error) {
+    console.error("Error fetching WA slugs:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// POST /api/v1/wa/slugs — admin: create a new slug config
+router.post("/slugs", requireAuth, async (req, res) => {
+  try {
+    const slug = cleanSlug(req.body.slug);
+    if (!slug) {
+      return res.status(400).json({ error: "Slug wajib diisi dan hanya boleh mengandung huruf, angka, tanda hubung" });
+    }
+
+    const domain = queryText(req.body.domain, 200) || "";
+    const source = (queryText(req.body.source, 50) || "direct").toLowerCase();
+    const message = queryText(req.body.message, 1000);
+    const numberIds = cleanNumberIds(req.body.numberIds);
+    const description = queryText(req.body.description, 300);
+    const isActive = req.body.isActive !== false;
+
+    // Check unique constraint (domain, slug)
+    const existing = await prisma.whatsAppSlug.findUnique({
+      where: { domain_slug: { domain, slug } },
+    });
+    if (existing) {
+      return res.status(409).json({ error: `Slug "${slug}" sudah digunakan untuk domain "${domain || "Semua Domain"}"` });
+    }
+
+    const created = await prisma.whatsAppSlug.create({
+      data: {
+        slug,
+        domain,
+        source,
+        message,
+        numberIds,
+        description,
+        isActive,
+      },
+    });
+
+    res.status(201).json({ data: created });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return res.status(409).json({ error: "Slug sudah digunakan untuk domain ini" });
+    }
+    console.error("Error creating WA slug:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// PUT /api/v1/wa/slugs/:id — admin: update an existing slug config
+router.put("/slugs/:id", requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params as { id: string };
+    const existing = await prisma.whatsAppSlug.findUnique({ where: { id } });
+    if (!existing) {
+      return res.status(404).json({ error: "Slug tidak ditemukan" });
+    }
+
+    const dataToUpdate: any = {};
+    if (req.body.slug !== undefined) {
+      const cleaned = cleanSlug(req.body.slug);
+      if (!cleaned) return res.status(400).json({ error: "Slug tidak valid" });
+      dataToUpdate.slug = cleaned;
+    }
+    if (req.body.domain !== undefined) {
+      dataToUpdate.domain = queryText(req.body.domain, 200) || "";
+    }
+    if (req.body.source !== undefined) {
+      dataToUpdate.source = (queryText(req.body.source, 50) || "direct").toLowerCase();
+    }
+    if (req.body.message !== undefined) {
+      dataToUpdate.message = queryText(req.body.message, 1000);
+    }
+    if (req.body.numberIds !== undefined) {
+      dataToUpdate.numberIds = cleanNumberIds(req.body.numberIds);
+    }
+    if (req.body.description !== undefined) {
+      dataToUpdate.description = queryText(req.body.description, 300);
+    }
+    if (req.body.isActive !== undefined) {
+      dataToUpdate.isActive = Boolean(req.body.isActive);
+    }
+
+    const updated = await prisma.whatsAppSlug.update({
+      where: { id },
+      data: dataToUpdate,
+    });
+
+    res.json({ data: updated });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return res.status(409).json({ error: "Kombinasi Domain dan Slug sudah digunakan" });
+    }
+    console.error("Error updating WA slug:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// DELETE /api/v1/wa/slugs/:id — admin: delete a slug config
+router.delete("/slugs/:id", requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params as { id: string };
+    await prisma.whatsAppSlug.delete({ where: { id } });
+    res.json({ success: true, message: "Slug WhatsApp berhasil dihapus" });
+  } catch (error: any) {
+    if (error.code === "P2025") {
+      return res.status(404).json({ error: "Slug tidak ditemukan" });
+    }
+    console.error("Error deleting WA slug:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

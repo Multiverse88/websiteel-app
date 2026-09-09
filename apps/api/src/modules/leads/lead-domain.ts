@@ -13,6 +13,9 @@ export type LeadSourceCode =
   | "gads"
   | "metaads"
   | "googleseo"
+  | "tiktok"
+  | "instagram"
+  | "offline"
   | "referral"
   | "direct"
   | "other"
@@ -108,7 +111,10 @@ export function normalizeSourceCode(value: unknown): LeadSourceCode | null {
   const normalized = clean(value, 20)?.toLowerCase();
   if (!normalized) return null;
   if (normalized === "seo") return "googleseo";
-  return (["gads", "metaads", "googleseo", "referral", "direct", "other", "unknown"] as const)
+  if (normalized === "ig") return "instagram";
+  if (normalized === "tt") return "tiktok";
+  if (normalized === "fb") return "metaads";
+  return (["gads", "metaads", "googleseo", "tiktok", "instagram", "offline", "referral", "direct", "other", "unknown"] as const)
     .find((source) => source === normalized) ?? null;
 }
 
@@ -117,6 +123,9 @@ export function sourceCodeToChannel(source: LeadSourceCode): AttributionChannel 
     gads: "GOOGLE_ADS",
     metaads: "META_ADS",
     googleseo: "ORGANIC_SEARCH",
+    tiktok: "OTHER",
+    instagram: "META_ADS",
+    offline: "OTHER",
     referral: "REFERRAL",
     direct: "DIRECT",
     other: "OTHER",
@@ -129,6 +138,9 @@ export function sourceCodeToChannel(source: LeadSourceCode): AttributionChannel 
 export const SOURCE_LABELS: Record<LeadSourceCode, string> = {
   gads: "Google Ads",
   metaads: "Meta Ads",
+  tiktok: "TikTok Ads",
+  instagram: "Instagram",
+  offline: "Offline/Brosur",
   googleseo: "Google SEO",
   referral: "Referral",
   direct: "Langsung",

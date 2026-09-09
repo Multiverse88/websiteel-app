@@ -181,6 +181,29 @@ model WhatsAppPageConfig {
   @@unique([path, ctaId, domain])
 }
 
+// Standalone slug-based WhatsApp Rotator link (e.g. /wa/:slug or /wa/promo-pt):
+// connects a marketing slug to a specific domain (or "" for all domains),
+// allows a fully custom prefilled WhatsApp message, establishes a static
+// lead attribution source (e.g. "metaads", "gads", "tiktok", "offline"),
+// and optionally restricts the rotation to a chosen subset of WhatsApp numbers.
+model WhatsAppSlug {
+  id          String   @id @default(cuid())
+  slug        String
+  domain      String   @default("") // "" = applies to all domains, or specific domain e.g. "easylegal.id"
+  source      String   @default("direct") // static source code, e.g. "metaads", "gads", "tiktok", "instagram", "offline", "referral", "direct"
+  message     String?  // custom prefilled WA message template
+  numberIds   String[] @default([]) // subset of WhatsAppNumber.id; empty = all active numbers
+  description String?  // marketing campaign label / internal note
+  clicks      Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([domain, slug])
+  @@index([domain, slug])
+  @@index([slug])
+}
+
 enum LeadStatus {
   NEW
   CONTACTED

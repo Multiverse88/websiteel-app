@@ -297,6 +297,64 @@ export const api = {
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/pages/${id}`, { method: 'DELETE' })
     if (!res.ok && res.status !== 204) throw new Error('Gagal menghapus konfigurasi halaman')
   },
+  // WhatsApp Rotator Slugs (standalone custom short link by slug & domain with static source)
+  getWaSlugs: async (filters: { domain?: string; source?: string; search?: string } = {}) => {
+    const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v !== undefined && v !== '') as [string, string][]).toString()
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/slugs${qs ? `?${qs}` : ''}`)
+    if (!res.ok) throw new Error('Gagal memuat daftar slug WA')
+    return await res.json()
+  },
+  createWaSlug: async (data: {
+    slug: string
+    domain?: string
+    source?: string
+    message?: string
+    numberIds?: string[]
+    description?: string
+    isActive?: boolean
+  }) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/slugs`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Gagal membuat slug WA' }))
+      throw new Error(err.error || 'Gagal membuat slug WA')
+    }
+    return await res.json()
+  },
+  updateWaSlug: async (
+    id: string,
+    data: {
+      slug?: string
+      domain?: string
+      source?: string
+      message?: string
+      numberIds?: string[]
+      description?: string
+      isActive?: boolean
+    }
+  ) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/slugs/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Gagal memperbarui slug WA' }))
+      throw new Error(err.error || 'Gagal memperbarui slug WA')
+    }
+    return await res.json()
+  },
+  deleteWaSlug: async (id: string) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/wa/slugs/${id}`, { method: 'DELETE' })
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Gagal menghapus slug WA' }))
+      throw new Error(err.error || 'Gagal menghapus slug WA')
+    }
+    return await res.json()
+  },
   getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string; search?: string; from?: string; to?: string } = {}) => {
     const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString()
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads${qs ? `?${qs}` : ''}`)
