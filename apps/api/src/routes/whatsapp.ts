@@ -373,7 +373,7 @@ const handleSlugRedirect = async (req: any, res: any) => {
     const textWithRef = buildWhatsAppMessage(
       rawText,
       leadCode,
-      normalizedSource,
+      staticSource,
       domain || slugConfig.domain || null,
       next.label,
     );

@@ -87,6 +87,18 @@ const SOURCE_LABELS: Record<string, string> = {
   unknown: 'Tidak diketahui',
 }
 
+const STANDARD_SOURCES: { value: string; label: string }[] = [
+  { value: 'metaads', label: 'Meta Ads (Facebook & Instagram)' },
+  { value: 'gads', label: 'Google Ads (Search & Display)' },
+  { value: 'tiktok', label: 'TikTok Ads' },
+  { value: 'instagram', label: 'Instagram Organik (Bio/DM/Story)' },
+  { value: 'offline', label: 'Offline / Brosur / Event' },
+  { value: 'googleseo', label: 'Google SEO / Organik' },
+  { value: 'referral', label: 'Referral / Mitra Bisnis' },
+  { value: 'direct', label: 'Langsung / Direct' },
+  { value: 'other', label: 'Lainnya / Other' },
+]
+
 const STATUS_LABELS: Record<string, string> = {
   NEW: 'Baru',
   CONTACTED: 'Dihubungi',
@@ -205,6 +217,8 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [slugModalError, setSlugModalError] = useState('')
   const [copiedSlugId, setCopiedSlugId] = useState<string | null>(null)
   const [deleteSlugConfirm, setDeleteSlugConfirm] = useState<WaSlug | null>(null)
+  const [isCustomSource, setIsCustomSource] = useState(false)
+  const [customSourceInput, setCustomSourceInput] = useState('')
 
   const [pages, setPages] = useState<WaPageConfig[]>([])
   const [pagesLoading, setPagesLoading] = useState(false)
@@ -347,6 +361,8 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     setFormSlug('')
     setFormDomain('easylegal.id')
     setFormSource('metaads')
+    setIsCustomSource(false)
+    setCustomSourceInput('')
     setFormMessage('')
     setFormNumberIds([])
     setFormDescription('')
@@ -359,7 +375,16 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     setEditingSlug(s)
     setFormSlug(s.slug)
     setFormDomain(s.domain || '')
-    setFormSource(s.source || 'direct')
+    const isStandard = STANDARD_SOURCES.some((std) => std.value === s.source)
+    if (isStandard) {
+      setFormSource(s.source || 'direct')
+      setIsCustomSource(false)
+      setCustomSourceInput('')
+    } else {
+      setFormSource(s.source || '')
+      setIsCustomSource(true)
+      setCustomSourceInput(s.source || '')
+    }
     setFormMessage(s.message || '')
     setFormNumberIds(s.numberIds || [])
     setFormDescription(s.description || '')
@@ -376,12 +401,22 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
       setSlugModalError('Slug wajib diisi (hanya huruf, angka, tanda hubung).')
       return
     }
+
+    const finalSource = isCustomSource
+      ? customSourceInput.trim().toLowerCase().replace(/[^a-z0-9-_]/g, '-').replace(/-+/g, '-')
+      : formSource.trim().toLowerCase()
+
+    if (!finalSource) {
+      setSlugModalError('Sumber statis (source) wajib diisi.')
+      return
+    }
+
     setSavingSlug(true)
     try {
       const payload = {
         slug: cleaned,
         domain: formDomain,
-        source: formSource || 'direct',
+        source: finalSource,
         message: formMessage.trim() || undefined,
         numberIds: formNumberIds,
         description: formDescription.trim() || undefined,
@@ -637,6 +672,13 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const totalLeads = Object.values(funnel).reduce((a, b) => a + b, 0)
   const closedWon = funnel.WON || 0
   const conversionRate = totalLeads > 0 ? Math.round((closedWon / totalLeads) * 1000) / 10 : 0
+  const existingCustomSources = Array.from(
+    new Set(
+      slugs
+        .map((s) => s.source)
+        .filter((src) => src && !STANDARD_SOURCES.some((std) => std.value === src))
+    )
+  ).sort()
 
   if (loading) {
     return <div className="max-w-6xl mx-auto py-12 text-center text-gray-500">Memuat data rotator...</div>
@@ -1032,15 +1074,18 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
               >
                 <option value="">Semua Sumber</option>
-                <option value="metaads">Meta Ads</option>
-                <option value="gads">Google Ads</option>
-                <option value="tiktok">TikTok Ads</option>
-                <option value="instagram">Instagram</option>
-                <option value="offline">Offline / Brosur</option>
-                <option value="googleseo">Google SEO</option>
-                <option value="referral">Referral</option>
-                <option value="direct">Langsung</option>
-                <option value="other">Lainnya</option>
+                <optgroup label="Sumber Standar">
+                  {STANDARD_SOURCES.map((s) => (
+                    <option key={s.value} value={s.value}>{s.label.split(' (')[0]}</option>
+                  ))}
+                </optgroup>
+                {existingCustomSources.length > 0 && (
+                  <optgroup label="Sumber Kustom">
+                    {existingCustomSources.map((cs) => (
+                      <option key={cs} value={cs}>{cs}</option>
+                    ))}
+                  </optgroup>
+                )}
               </select>
             </div>
             <button
@@ -1123,15 +1168,17 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                             </span>
                           </td>
                           <td className="px-4 py-3.5 whitespace-nowrap">
-                            <span className={`inline-flex px-2.5 py-1 rounded-md text-[11px] font-bold border ${
+                            <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-bold border ${
+                              !SOURCE_LABELS[s.source] ? 'bg-purple-50 text-purple-700 border-purple-200 font-mono' :
                               s.source === 'metaads' ? 'bg-blue-50 text-blue-700 border-blue-200' :
                               s.source === 'gads' ? 'bg-amber-50 text-amber-700 border-amber-200' :
                               s.source === 'tiktok' ? 'bg-neutral-900 text-white border-neutral-900' :
                               s.source === 'instagram' ? 'bg-pink-50 text-pink-700 border-pink-200' :
-                              s.source === 'offline' ? 'bg-purple-50 text-purple-700 border-purple-200' :
+                              s.source === 'offline' ? 'bg-orange-50 text-orange-700 border-orange-200' :
                               s.source === 'googleseo' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
                               'bg-gray-50 text-gray-700 border-gray-200'
                             }`}>
+                              {!SOURCE_LABELS[s.source] && <span>🏷️</span>}
                               {SOURCE_LABELS[s.source] || s.source}
                             </span>
                           </td>
@@ -1244,26 +1291,82 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1">
-                  <label className="text-[13px] font-bold text-gray-700">
-                    Sumber Statis (Static Source) <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    value={formSource}
-                    onChange={(e) => setFormSource(e.target.value)}
-                    className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
-                  >
-                    <option value="metaads">Meta Ads (Facebook & Instagram Ads)</option>
-                    <option value="gads">Google Ads (Search & Display)</option>
-                    <option value="tiktok">TikTok Ads</option>
-                    <option value="instagram">Instagram Organik (Bio/DM/Story)</option>
-                    <option value="offline">Offline / Brosur / Event / Banner</option>
-                    <option value="googleseo">Google SEO / Organik</option>
-                    <option value="referral">Referral / Mitra Bisnis</option>
-                    <option value="direct">Langsung / Direct</option>
-                    <option value="other">Lainnya / Other</option>
-                  </select>
+                  <div className="flex items-center justify-between">
+                    <label className="text-[13px] font-bold text-gray-700">
+                      Sumber Statis (Static Source) <span className="text-red-500">*</span>
+                    </label>
+                    {!isCustomSource ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsCustomSource(true)
+                          setCustomSourceInput('')
+                        }}
+                        className="text-[11px] text-[#990202] hover:underline font-semibold"
+                      >
+                        + Tambah Sendiri
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsCustomSource(false)
+                          setFormSource('metaads')
+                        }}
+                        className="text-[11px] text-gray-500 hover:underline font-medium"
+                      >
+                        ← Pilih dari Daftar
+                      </button>
+                    )}
+                  </div>
+
+                  {!isCustomSource ? (
+                    <select
+                      value={formSource}
+                      onChange={(e) => {
+                        if (e.target.value === '__custom__') {
+                          setIsCustomSource(true)
+                          setCustomSourceInput('')
+                        } else {
+                          setFormSource(e.target.value)
+                        }
+                      }}
+                      className="px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
+                    >
+                      <optgroup label="Sumber Standar">
+                        {STANDARD_SOURCES.map((std) => (
+                          <option key={std.value} value={std.value}>{std.label}</option>
+                        ))}
+                      </optgroup>
+                      {existingCustomSources.length > 0 && (
+                        <optgroup label="Sumber Kustom Anda">
+                          {existingCustomSources.map((cs) => (
+                            <option key={cs} value={cs}>{cs}</option>
+                          ))}
+                        </optgroup>
+                      )}
+                      <option value="__custom__">+ Ketik Sumber Kustom Baru...</option>
+                    </select>
+                  ) : (
+                    <div>
+                      <input
+                        type="text"
+                        required
+                        placeholder="contoh: influencer-sarah, billboard-dago, radio-elshinta"
+                        value={customSourceInput}
+                        onChange={(e) => {
+                          const clean = e.target.value.toLowerCase().replace(/[^a-z0-9-_]/g, '-')
+                          setCustomSourceInput(clean)
+                          setFormSource(clean)
+                        }}
+                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[13px] font-mono bg-white focus:outline-none focus:border-[#990202]"
+                      />
+                    </div>
+                  )}
                   <p className="text-[11px] text-gray-400">
-                    Sumber lead ini akan otomatis tercatat secara statis di database lead WhatsApp saat link dibuka.
+                    {!isCustomSource
+                      ? 'Pilih sumber yang tersedia atau klik "+ Tambah Sendiri" untuk memasukkan sumber Anda.'
+                      : 'Ketik nama unik sumber (contoh: event-startup, flyer-jaksel). Nilai ini otomatis tercatat sebagai source lead.'}
                   </p>
                 </div>
 

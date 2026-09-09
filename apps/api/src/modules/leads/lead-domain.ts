@@ -164,14 +164,15 @@ const GENERIC_GREETING = /^hal(l)?o\s+[^,]+,\s*/i;
 export function buildWhatsAppMessage(
   message: string,
   leadCode: string,
-  sourceCode: LeadSourceCode,
+  sourceCode: string,
   domain?: string | null,
   numberLabel?: string | null,
 ): string {
   const cleanMessage = message.trim().slice(0, 1000);
   const body = cleanMessage.replace(GENERIC_GREETING, "").trim();
   const greeting = numberLabel ? `Hallo Kak ${numberLabel}` : "Hallo";
-  const tailParts = [SOURCE_LABELS[sourceCode] ?? sourceCode];
+  const sourceLabel = (SOURCE_LABELS as Record<string, string>)[sourceCode] ?? sourceCode;
+  const tailParts = [sourceLabel];
   if (domain) tailParts.push(domain);
   const tail = `(${tailParts.join("; ")} | Ref: ${leadCode})`;
   return body ? `${greeting} ${body} ${tail}` : `${greeting} ${tail}`;
