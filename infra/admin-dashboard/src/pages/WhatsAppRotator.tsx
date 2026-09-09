@@ -91,7 +91,7 @@ const STANDARD_SOURCES: { value: string; label: string }[] = [
   { value: 'metaads', label: 'Meta Ads (Facebook & Instagram)' },
   { value: 'gads', label: 'Google Ads (Search & Display)' },
   { value: 'tiktok', label: 'TikTok Ads' },
-  { value: 'instagram', label: 'Instagram Organik (Bio/DM/Story)' },
+  { value: 'instagram', label: 'Instagram' },
   { value: 'offline', label: 'Offline / Brosur / Event' },
   { value: 'googleseo', label: 'Google SEO / Organik' },
   { value: 'referral', label: 'Referral / Mitra Bisnis' },
