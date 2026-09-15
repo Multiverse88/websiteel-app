@@ -275,26 +275,58 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [statsLoading, setStatsLoading] = useState(false)
   const [exporting, setExporting] = useState<'leads' | 'numbers' | null>(null)
 
-  const handleExport = useCallback(async (type: 'leads' | 'numbers') => {
+  // Modal export: rentang waktu (per hari/minggu/bulan/custom) + format + opsi
+  // AI polish. Tombol "Export" di tab Leads & Nomor membuka modal ini dengan
+  // tipe preselected; default presetnya mengikuti filter tanggal aktif di
+  // dashboard supaya hasilnya prediktabel.
+  const [exportModalOpen, setExportModalOpen] = useState(false)
+  const [exportType, setExportType] = useState<'leads' | 'numbers'>('leads')
+  const [exportPreset, setExportPreset] = useState<DatePreset>('all')
+  const [exportFrom, setExportFrom] = useState('')
+  const [exportTo, setExportTo] = useState('')
+  const [exportFormat, setExportFormat] = useState<'xlsx' | 'csv'>('xlsx')
+  const [exportUseAI, setExportUseAI] = useState(true)
+
+  const openExportModal = useCallback((type: 'leads' | 'numbers') => {
+    setExportType(type)
+    setExportPreset(datePreset)
+    setExportFrom(customFrom)
+    setExportTo(customTo)
+    setExportModalOpen(true)
+  }, [datePreset, customFrom, customTo])
+
+  const handleDownload = useCallback(async () => {
     try {
-      setExporting(type)
+      setExporting(exportType)
       setError('')
-      const { from, to } = computeDateRange(datePreset, customFrom, customTo)
-      const blob = await api.exportWa({ format: 'xlsx', type, status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, search: searchFilter, from, to })
+      const { from, to } = computeDateRange(exportPreset, exportFrom, exportTo)
+      const blob = await api.exportWa({
+        format: exportFormat,
+        type: exportType,
+        ai: exportUseAI ? '1' : undefined,
+        status: exportType === 'leads' ? statusFilter : undefined,
+        source: exportType === 'leads' ? sourceFilter : undefined,
+        domain: exportType === 'leads' ? domainFilter : undefined,
+        numberId: exportType === 'leads' ? numberFilter : undefined,
+        search: exportType === 'leads' ? searchFilter : undefined,
+        from,
+        to,
+      })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = `whatsapp-${type}-${new Date().toISOString().slice(0, 10)}.xlsx`
+      a.download = `whatsapp-${exportType}-${new Date().toISOString().slice(0, 10)}${exportUseAI ? '-ai' : ''}.${exportFormat}`
       document.body.appendChild(a)
       a.click()
       a.remove()
       URL.revokeObjectURL(url)
+      setExportModalOpen(false)
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Gagal export')
     } finally {
       setExporting(null)
     }
-  }, [statusFilter, sourceFilter, domainFilter, numberFilter, searchFilter, datePreset, customFrom, customTo])
+  }, [exportType, exportPreset, exportFrom, exportTo, exportFormat, exportUseAI, statusFilter, sourceFilter, domainFilter, numberFilter, searchFilter])
 
   const load = useCallback(async () => {
     try {
@@ -786,11 +818,11 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               </div>
               <button
                 type="button"
-                onClick={() => handleExport('numbers')}
+                onClick={() => openExportModal('numbers')}
                 disabled={exporting === 'numbers'}
                 className="inline-flex items-center gap-2 px-3 py-1.5 text-[13px] font-bold rounded-lg border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-60"
               >
-                {exporting === 'numbers' ? 'Exporting…' : 'Export XLSX'}
+                {exporting === 'numbers' ? 'Memproses…' : 'Export Data Nomor'}
               </button>
             </div>
             <table className="w-full text-[14px]">
@@ -1623,11 +1655,11 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               )}
               <button
                 type="button"
-                onClick={() => handleExport('leads')}
+                onClick={() => openExportModal('leads')}
                 disabled={exporting === 'leads'}
-                className="ml-auto px-3.5 py-2 text-[13px] font-bold rounded-lg border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-60 whitespace-nowrap"
+                className="ml-auto inline-flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] font-bold text-white bg-[#990202] hover:bg-[#7a0101] disabled:opacity-60 shadow-sm transition-colors whitespace-nowrap"
               >
-                {exporting === 'leads' ? 'Exporting…' : 'Export Leads XLSX'}
+                {exporting === 'leads' ? 'Memproses...' : 'Export Data Leads'}
               </button>
             </div>
           </div>
@@ -1830,6 +1862,73 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           </p>
         </>
       )}
+
+      {/* Modal export: rentang waktu + format + AI. AI default aktif; saat
+          off, export tetap dapat styling & normalisasi layanan via
+          lead-cleaner, hanya tanpa ringkasan eksekutif OpenAI. */}
+      <Modal isOpen={exportModalOpen} onClose={() => { if (!exporting) setExportModalOpen(false) }} title={exportType === 'numbers' ? 'Export Data Nomor Rotator' : 'Export Data Leads'}>
+        <div className="space-y-5">
+          <div>
+            <div className="text-[13px] font-bold text-gray-700 mb-2">Rentang Waktu</div>
+            <div className="flex flex-wrap gap-1.5">
+              {DATE_PRESETS.map((p) => (
+                <button
+                  key={p.value}
+                  type="button"
+                  onClick={() => setExportPreset(p.value)}
+                  className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold transition-colors ${exportPreset === p.value ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+            {exportPreset === 'custom' && (
+              <div className="flex gap-3 mt-3">
+                <input type="date" value={exportFrom} onChange={(e) => setExportFrom(e.target.value)} className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white" />
+                <span className="text-gray-400 self-center">s/d</span>
+                <input type="date" value={exportTo} onChange={(e) => setExportTo(e.target.value)} className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white" />
+              </div>
+            )}
+          </div>
+          <div>
+            <div className="text-[13px] font-bold text-gray-700 mb-2">Format File</div>
+            <div className="flex gap-1.5">
+              <button type="button" onClick={() => setExportFormat('xlsx')} className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold ${exportFormat === 'xlsx' ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200'}`}>Excel (.xlsx)</button>
+              <button type="button" onClick={() => setExportFormat('csv')} className={`px-3 py-1.5 rounded-lg border text-[13px] font-semibold ${exportFormat === 'csv' ? 'bg-[#990202] text-white border-[#990202]' : 'bg-white text-gray-600 border-gray-200'}`}>CSV (.csv)</button>
+            </div>
+          </div>
+          <div>
+            <div className="text-[13px] font-bold text-gray-700 mb-2">Opsi Analisis</div>
+            <label className="flex items-start gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={exportUseAI}
+                onChange={(e) => setExportUseAI(e.target.checked)}
+                className="mt-0.5 w-4 h-4 accent-[#990202]"
+              />
+              <span className="text-[14px] text-gray-700">
+                Sertakan Analisis AI & Standarisasi Data
+                <span className="block text-[12px] text-gray-400 mt-0.5">Ringkasan eksekutif, evaluasi sumber iklan, dan saran follow-up CS otomatis di sheet terpisah (butuh waktu beberapa detik lebih lama).</span>
+              </span>
+            </label>
+          </div>
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-3 py-2 text-[13px]">{error}</div>
+          )}
+          <div className="flex justify-end gap-2 pt-1">
+            <button type="button" onClick={() => { if (!exporting) setExportModalOpen(false) }} className="px-4 py-2 rounded-lg text-[13px] font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">Batal</button>
+            <button
+              type="button"
+              onClick={handleDownload}
+              disabled={!!exporting}
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-[13px] font-bold text-white bg-[#990202] hover:bg-[#7a0101] disabled:opacity-60 shadow-sm transition-colors"
+            >
+              {exporting ? 'Memproses & Menganalisis dengan AI…' : 'Download Export'}
+            </button>
+          </div>
+        </div>
+      </Modal>
+
     </div>
   )
 }

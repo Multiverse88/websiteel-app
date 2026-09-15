@@ -42,38 +42,38 @@ model Tag {
 }
 
 model Article {
-  id          String    @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
-  slug        String
-  title       String
-  excerpt     String
-  content     String
-  coverImage  String
-  category    String
-  readTime    String
-  viewCount   Int       @default(0)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
-  authorId    String?
-  categoryId  String?
-  ogImage     String?
-  publishedAt DateTime?
-  seoDesc     String?
-  seoTitle    String?
+  id           String             @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
+  slug         String
+  title        String
+  excerpt      String
+  content      String
+  coverImage   String
+  category     String
+  readTime     String
+  viewCount    Int                @default(0)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @default(now()) @updatedAt
+  authorId     String?
+  categoryId   String?
+  ogImage      String?
+  publishedAt  DateTime?
+  seoDesc      String?
+  seoTitle     String?
   focusKeyword String?
-  status      String    @default("draft")
-  faq         Json?
-  site        String    @default("easylegal.biz.id")
+  status       String             @default("draft")
+  faq          Json?
+  site         String             @default("easylegal.biz.id")
   // Distinguishes the ~200 pre-multi-site-split seed articles (legacy=true,
   // shown on ALL domains so old URLs never break) from articles created
   // from now on via the dashboard's Site selector (legacy=false, confined
   // to their chosen site only — even when that choice is
   // "easylegal.biz.id" itself). See buildSiteFilter() in
   // apps/api/src/routes/articles.ts.
-  legacy      Boolean   @default(false)
-  author      User?     @relation(fields: [authorId], references: [id])
-  categoryRel Category? @relation(fields: [categoryId], references: [id])
-  tags        Tag[]     @relation("ArticleToTag")
-  embeddings  ArticleEmbedding[]
+  legacy       Boolean            @default(false)
+  author       User?              @relation(fields: [authorId], references: [id])
+  categoryRel  Category?          @relation(fields: [categoryId], references: [id])
+  tags         Tag[]              @relation("ArticleToTag")
+  embeddings   ArticleEmbedding[]
 
   @@unique([site, slug])
   @@index([site, status])
@@ -83,14 +83,14 @@ model Article {
 }
 
 model ArticleEmbedding {
-  id          String   @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
+  id          String    @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
   articleId   String
   site        String
-  embedding   String   // JSON array of 1536 floats, stored as text for pgvector
+  embedding   String // JSON array of 1536 floats, stored as text for pgvector
   publishedAt DateTime?
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
 
-  article     Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
   @@index([site, publishedAt])
   @@index([articleId])
@@ -191,9 +191,9 @@ model WhatsAppSlug {
   slug        String
   domain      String   @default("") // "" = applies to all domains, or specific domain e.g. "easylegal.id"
   source      String   @default("direct") // static source code, e.g. "metaads", "gads", "tiktok", "instagram", "offline", "referral", "direct"
-  message     String?  // custom prefilled WA message template
+  message     String? // custom prefilled WA message template
   numberIds   String[] @default([]) // subset of WhatsAppNumber.id; empty = all active numbers
-  description String?  // marketing campaign label / internal note
+  description String? // marketing campaign label / internal note
   clicks      Int      @default(0)
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
@@ -263,6 +263,13 @@ model WhatsAppClick {
   ctaId              String?
   ctaLabel           String?
   anonymousSessionId String?
+  // ip/userAgent ditambahkan 15 Sep 2026 setelah insiden lonjakan traffic
+  // yang tidak bisa divalidasi (lihat bot-detect.ts) — dipakai sebagai
+  // fallback dedup key ketika anonymousSessionId kosong (selalu kosong di
+  // production karena getWhatsAppLink() belum pernah mengirim `sid`), dan
+  // untuk forensik manual kalau ada lonjakan aneh lagi nanti.
+  ipAddress          String?
+  userAgent          String?
   deduplicationKey   String?
   // "CTA Location" (see CONTEXT.md) — which page the CTA was clicked from,
   // e.g. "/layanan/sertifikasi-iso". Coarse: doesn't distinguish between
@@ -495,18 +502,18 @@ model TrackingProject {
 }
 
 model Glossary {
-  id          String    @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
-  slug        String
-  title       String
-  content     String    // Definition / explanation content (markdown)
-  excerpt     String?   // Short description for meta tags
-  coverImage  String?
-  site        String    @default("easylegal.id")
-  seoTitle    String?
-  seoDesc     String?
-  status      String    @default("published") // draft | published
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
+  id         String   @id @default(dbgenerated("md5(((random())::text || (clock_timestamp())::text))"))
+  slug       String
+  title      String
+  content    String // Definition / explanation content (markdown)
+  excerpt    String? // Short description for meta tags
+  coverImage String?
+  site       String   @default("easylegal.id")
+  seoTitle   String?
+  seoDesc    String?
+  status     String   @default("published") // draft | published
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
 
   @@unique([site, slug])
   @@index([site, status])

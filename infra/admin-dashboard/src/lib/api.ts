@@ -369,7 +369,7 @@ export const api = {
   },
   // Export leads + nomor rotator (XLSX multi-sheet default; CSV per tipe).
   // Returns raw Blob so the caller can trigger the browser download.
-  exportWa: async (filters: { format?: 'xlsx' | 'csv'; type?: 'leads' | 'numbers' | 'all'; status?: string; numberId?: string; domain?: string; source?: string; product?: string; search?: string; from?: string; to?: string } = {}) => {
+  exportWa: async (filters: { format?: 'xlsx' | 'csv'; type?: 'leads' | 'numbers' | 'all'; ai?: string; status?: string; numberId?: string; domain?: string; source?: string; product?: string; search?: string; from?: string; to?: string } = {}) => {
     const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString()
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/export${qs ? `?${qs}` : ''}`)
     if (!res.ok) {

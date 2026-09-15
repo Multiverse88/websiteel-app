@@ -19,6 +19,10 @@ import whatsappRoutes from './routes/whatsapp';
 import path from 'path';
 
 const app = express();
+// Di belakang Traefik (satu reverse proxy). Tanpa ini, req.ip selalu IP
+// container Traefik, bukan IP klien asli — bikin rate limit & dedup
+// berbasis IP di rotator WhatsApp (routes/whatsapp.ts) tidak berguna.
+app.set("trust proxy", 1);
 const PORT = process.env.PORT || 4000;
 
 // Origin yang diizinkan. Daftar bawaan di-UNION dengan CORS_ORIGINS dari

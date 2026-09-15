@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { randomInt } from "node:crypto";
-import * as XLSX from "xlsx";
 import { Prisma } from "@prisma/client";
 import { prisma } from "../lib/prisma";
 import { AuthedRequest, requireAuth } from "../middleware/auth";
@@ -15,8 +14,31 @@ import {
   normalizeSourceCode,
   sourceCodeToChannel,
 } from "../modules/leads/lead-domain";
+import { buildLeadsExportWorkbook, buildLeadsCsv, buildNumbersCsv } from "../modules/leads/lead-exporter";
+import { generateExportAIInsight } from "../modules/leads/ai-export-service";
+import { isBotUserAgent } from "../modules/leads/bot-detect";
+import { isRateLimited } from "../modules/leads/click-rate-limit";
 
 const router = Router();
+
+// Tanggal lokal (Asia/Jakarta-ish via offset server) sebagai "YYYY-MM-DD" untuk
+// preset rentang export. `arg` = angka hari mundur (offset negatif) atau string
+// mode ("month-start"/"lastmonth-start"/"lastmonth-end").
+function localYmd(arg?: number | "month-start" | "lastmonth-start" | "lastmonth-end"): string {
+  const now = new Date();
+  let d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  if (arg === "month-start") {
+    d = new Date(now.getFullYear(), now.getMonth(), 1);
+  } else if (arg === "lastmonth-start") {
+    d = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  } else if (arg === "lastmonth-end") {
+    d = new Date(now.getFullYear(), now.getMonth(), 0);
+  } else if (typeof arg === "number") {
+    d.setDate(d.getDate() + arg);
+  }
+  const p = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
 
 function generateLeadCode() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O/1/I — easy to read off a phone screen
@@ -74,6 +96,8 @@ router.get("/redirect", async (req, res) => {
   try {
     let product = queryText(req.query.product, 300);
     const ctaId = queryText(req.query.cta_id, 100);
+    const clientIp = String(req.ip || req.socket.remoteAddress || "unknown");
+    const userAgent = String(req.headers["user-agent"] || "");
 
     // Frontends send domain explicitly because Referrer-Policy may omit the
     // Referer header. Only known public domains are accepted; Referer remains
@@ -134,9 +158,12 @@ router.get("/redirect", async (req, res) => {
     const service = queryText(req.query.service, 300) || (rawText ? rawText.slice(0, 200) : null);
     const sessionId = queryText(req.query.sid, 80);
     const ctaLabel = queryText(req.query.cta_label, 200);
-    const deduplicationKey = sessionId
-      ? [sessionId, product || "", ctaId || service || ""].join(":").slice(0, 500)
-      : null;
+    // sid nyaris tidak pernah ada (getWhatsAppLink() belum pernah
+    // mengirimnya) — fallback ke IP+UA supaya klik ganda dari pengunjung
+    // yang sama dalam 30 menit tetap ke-dedup, bukan bikin lead baru tiap
+    // refresh. Lihat diagnosis lonjakan traffic 14-15 Sep 2026.
+    const identityKey = sessionId || `${clientIp}:${userAgent.slice(0, 100)}`;
+    const deduplicationKey = [identityKey, product || "", ctaId || service || ""].join(":").slice(0, 500);
 
     const numberWhere: { isActive: boolean; id?: { in: string[] } } = { isActive: true };
     if (numberConfig?.numberIds?.length) numberWhere.id = { in: numberConfig.numberIds };
@@ -151,6 +178,16 @@ router.get("/redirect", async (req, res) => {
       // before this rotator existed.
       console.error("[WA_TRACKING] No active WhatsApp number");
       return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(rawText)}`);
+    }
+
+    // Bot/crawler/link-preview fetcher, atau IP yang menembak endpoint ini
+    // lebih cepat dari manusia wajar — redirect tetap jalan (CTA tidak
+    // pernah dead-end) tapi TIDAK dicatat sebagai lead/klik. Mencegah
+    // pengulangan insiden 14-15 Sep 2026 (lonjakan ratusan "lead" palsu/jam
+    // dari crawl otomatis yang tersebar ke puluhan halaman berbeda).
+    if (isBotUserAgent(userAgent) || isRateLimited(clientIp)) {
+      console.warn("[WA_BOT_BLOCKED]", { ip: clientIp, userAgent, product, ctaId });
+      return res.redirect(`https://wa.me/${next.number}?text=${encodeURIComponent(rawText)}`);
     }
 
     const duplicateSince = new Date(Date.now() - 30 * 60 * 1000);
@@ -208,6 +245,8 @@ router.get("/redirect", async (req, res) => {
             ctaId,
             ctaLabel,
             anonymousSessionId: sessionId,
+            ipAddress: clientIp,
+            userAgent: userAgent.slice(0, 500),
             deduplicationKey,
             events: {
               create: {
@@ -264,6 +303,8 @@ const handleSlugRedirect = async (req: any, res: any) => {
   }
 
   try {
+    const clientIp = String(req.ip || req.socket.remoteAddress || "unknown");
+    const userAgent = String(req.headers["user-agent"] || "");
     const wantedDomains = Array.from(new Set([domain || "", ""]));
     const candidates = await prisma.whatsAppSlug.findMany({
       where: {
@@ -287,14 +328,6 @@ const handleSlugRedirect = async (req: any, res: any) => {
       const fallbackText = queryText(req.query.text, 1000) || "";
       return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(fallbackText)}`);
     }
-
-    // Fire-and-forget increment click counter on the slug
-    prisma.whatsAppSlug
-      .update({
-        where: { id: slugConfig.id },
-        data: { clicks: { increment: 1 } },
-      })
-      .catch((err) => console.error("[WA_SLUG] Failed to increment slug clicks:", err));
 
     // Statically configured source attribution
     const staticSource = slugConfig.source || "direct";
@@ -321,6 +354,46 @@ const handleSlugRedirect = async (req: any, res: any) => {
     if (!next) {
       console.error("[WA_SLUG] No active WhatsApp number available in pool");
       return res.redirect(`https://wa.me/6281123456789?text=${encodeURIComponent(rawText)}`);
+    }
+
+    // Sama seperti /redirect: bot/crawler/link-preview fetcher atau IP yang
+    // menembak endpoint ini terlalu cepat tidak dicatat sebagai klik/lead
+    // (link slug ini yang paling rawan di-crawl karena dipakai di iklan
+    // eksternal — gads/metaads/tiktok — dan sering ikut ke-index/di-scan).
+    if (isBotUserAgent(userAgent) || isRateLimited(clientIp)) {
+      console.warn("[WA_SLUG_BOT_BLOCKED]", { ip: clientIp, userAgent, slug });
+      return res.redirect(`https://wa.me/${next.number}?text=${encodeURIComponent(rawText)}`);
+    }
+
+    // Fire-and-forget increment click counter on the slug (skip for bots,
+    // handled by the early return above).
+    prisma.whatsAppSlug
+      .update({
+        where: { id: slugConfig.id },
+        data: { clicks: { increment: 1 } },
+      })
+      .catch((err) => console.error("[WA_SLUG] Failed to increment slug clicks:", err));
+
+    // Slug links never had a `sid` concept; dedup purely on IP+UA so the
+    // same visitor reloading/double-clicking within 30 min reuses the same
+    // lead instead of minting a new one and re-incrementing clickCount.
+    const identityKey = `${clientIp}:${userAgent.slice(0, 100)}`;
+    const deduplicationKey = [identityKey, product, `slug:${slug}`].join(":").slice(0, 500);
+    const duplicateSince = new Date(Date.now() - 30 * 60 * 1000);
+    const duplicate = await prisma.whatsAppClick.findFirst({
+      where: { deduplicationKey, createdAt: { gte: duplicateSince } },
+      include: { number: true },
+      orderBy: { createdAt: "desc" },
+    });
+    if (duplicate) {
+      const textWithRef = buildWhatsAppMessage(
+        rawText,
+        duplicate.leadCode,
+        staticSource,
+        domain || slugConfig.domain || null,
+        duplicate.number.label,
+      );
+      return res.redirect(`https://wa.me/${duplicate.number.number}?text=${encodeURIComponent(textWithRef)}`);
     }
 
     // Generate unique leadCode & log lead
@@ -359,6 +432,9 @@ const handleSlugRedirect = async (req: any, res: any) => {
           service,
           ctaId: `slug:${slug}`,
           ctaLabel,
+          ipAddress: clientIp,
+          userAgent: userAgent.slice(0, 500),
+          deduplicationKey,
           events: {
             create: {
               type: "WHATSAPP_CTA_CLICKED",
@@ -906,19 +982,40 @@ router.get("/leads/stats", requireAuth, async (req, res) => {
   }
 });
 // GET /api/v1/wa/export — admin: export leads + nomor rotator ke XLSX (multi-sheet) atau CSV.
-// Query: format=xlsx|csv, type=leads|numbers|all + filter sama seperti /leads
-// (status/numberId/domain/source/product/search/from/to). XLSX selalu berisi
-// 3 sheet (Leads, Nomor Rotator, Ringkasan Funnel); CSV satu tipe per request
-// (type=numbers -> CSV nomor, selain itu CSV leads) karena CSV tak punya sheet.
+// Query: format=xlsx|csv, type=leads|numbers|all, ai=1 (AI polish & insight),
+// period=today|7d|30d|month|lastmonth|all|custom + filter sama seperti /leads
+// (status/numberId/domain/source/product/search/from/to).
+// - XLSX: sheet "Ringkasan & Insight" (KPI + funnel + AI executive summary bila
+//   ai=1), sheet "Leads" (layanan dirapikan + kolom Saran Follow-Up CS bila
+//   ai=1), sheet "Nomor Rotator". ExcelJS dipakai untuk styling header crimson,
+//   freeze panes, autofilter, dan number format.
+// - CSV: satu tipe per request (type=numbers -> nomor, selain itu leads) karena
+//   CSV tak punya sheet; kolom Saran Follow-Up tetap disertakan bila ai=1.
 router.get("/export", requireAuth, async (req, res) => {
   try {
     const query = req.query as Record<string, string>;
     const format = query.format === "csv" ? "csv" : "xlsx";
     const rawType = query.type;
     const type = rawType === "numbers" ? "numbers" : rawType === "leads" ? "leads" : "all";
+    const withAI = query.ai === "1" || query.ai === "true";
     const rawStatus = query.status || "";
     if (rawStatus && !isValidStage(rawStatus)) return res.status(400).json({ error: "Status Lead tidak valid" });
     const status: LeadStage | undefined = rawStatus ? (rawStatus as LeadStage) : undefined;
+
+    // Rentang waktu: preset server-side (today/7d/30d/month/lastmonth) atau
+    // from/to eksplisit (custom). `period` dipakai buat label ringkasan.
+    const periodPresets: Record<string, { from?: string; to?: string; label: string }> = {
+      today: { from: localYmd(), to: localYmd(), label: "Hari Ini" },
+      "7d": { from: localYmd(-6), to: localYmd(), label: "7 Hari Terakhir" },
+      "30d": { from: localYmd(-29), to: localYmd(), label: "30 Hari Terakhir" },
+      month: { from: localYmd("month-start"), to: localYmd(), label: "Bulan Ini" },
+      lastmonth: { from: localYmd("lastmonth-start"), to: localYmd("lastmonth-end"), label: "Bulan Lalu" },
+    };
+    const preset = query.period && periodPresets[query.period] ? periodPresets[query.period] : undefined;
+    const from = preset?.from ?? (query.from || undefined);
+    const to = preset?.to ?? (query.to || undefined);
+    const periodLabel = preset?.label ?? (from || to ? `${from || "awal"} s/d ${to || "sekarang"}` : "Semua Waktu");
+
     const where: Prisma.WhatsAppClickWhereInput = {
       ...(status ? { status } : {}),
       ...(query.numberId ? { numberId: query.numberId } : {}),
@@ -926,13 +1023,7 @@ router.get("/export", requireAuth, async (req, res) => {
       ...(query.source ? { source: query.source } : {}),
       ...(query.product ? { product: query.product } : {}),
       ...(query.search ? { leadCode: { contains: query.search.toUpperCase(), mode: "insensitive" } } : {}),
-      ...(buildDateRangeFilter(query.from, query.to) ? { createdAt: buildDateRangeFilter(query.from, query.to)! } : {}),
-    };
-    const fmtDate = (d: Date | string | null | undefined) => (d ? new Date(d).toLocaleString("id-ID") : "");
-    const escapeCsv = (v: unknown) => {
-      if (v === null || v === undefined) return "";
-      const s = String(v);
-      return /["\n\r,;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+      ...(buildDateRangeFilter(from, to) ? { createdAt: buildDateRangeFilter(from, to)! } : {}),
     };
     const stamp = new Date().toISOString().slice(0, 10);
     const [leads, numbers] = await Promise.all([
@@ -943,62 +1034,45 @@ router.get("/export", requireAuth, async (req, res) => {
       }),
       prisma.whatsAppNumber.findMany({ orderBy: { createdAt: "asc" } }),
     ]);
-    const totalClicks = numbers.reduce((sum, n) => sum + n.clickCount, 0);
-    const leadRows = leads.map((l) => ({
-      "Kode Lead": l.leadCode,
-      Status: l.status,
-      Temperature: getLeadTemperature(l.status),
-      "Layanan/Pesan": l.service || "",
-      Halaman: l.product || "",
-      Sumber: l.sourceCode || l.source || "",
-      Channel: l.channel || "",
-      Domain: l.domain || "",
-      "Nomor Tujuan": l.number?.number || "",
-      "Label CS": l.number?.label || "",
-      "Nilai Order (IDR)": l.orderValue ?? "",
-      Catatan: l.notes || "",
-      "Alasan Batal": l.lostReason || "",
-      "Tanggal Masuk": fmtDate(l.createdAt),
-      "Tanggal Update": fmtDate(l.updatedAt),
-      "Tanggal Closing": fmtDate(l.wonAt),
-      "Tanggal Batal": fmtDate(l.lostAt),
-    }));
-    const numberRows = numbers.map((n) => ({
-      Nomor: n.number,
-      "Label CS": n.label || "",
-      "Jumlah Klik": n.clickCount,
-      "Share (%)": totalClicks > 0 ? Math.round((n.clickCount / totalClicks) * 1000) / 10 : 0,
-      Status: n.isActive ? "Aktif" : "Nonaktif",
-      "Tanggal Dibuat": fmtDate(n.createdAt),
-    }));
-    const renderCsv = (rows: Record<string, unknown>[]) => {
-      const headers = rows.length > 0 ? Object.keys(rows[0]) : [];
-      const lines = [headers.map(escapeCsv).join(","), ...rows.map((r) => headers.map((h) => escapeCsv(r[h])).join(","))];
-      return "﻿" + lines.join("\n");
-    };
+
+    // Metrics untuk sheet ringkasan & prompt AI
+    const funnel: Record<string, number> = {};
+    const bySource: Record<string, number> = {};
+    const byDomain: Record<string, number> = {};
+    let totalWonValue = 0;
+    for (const l of leads) {
+      funnel[l.status] = (funnel[l.status] || 0) + 1;
+      if (l.status === "WON" && l.orderValue) totalWonValue += l.orderValue;
+      bySource[l.sourceCode] = (bySource[l.sourceCode] || 0) + 1;
+      byDomain[l.domain || "Tidak diketahui"] = (byDomain[l.domain || "Tidak diketahui"] || 0) + 1;
+    }
+
     if (format === "csv") {
-      const rows = type === "numbers" ? numberRows : leadRows;
-      const csv = renderCsv(rows);
-      const filename = type === "numbers" ? `whatsapp-nomor-${stamp}.csv` : `whatsapp-leads-${stamp}.csv`;
+      const csv = type === "numbers" ? buildNumbersCsv(numbers) : buildLeadsCsv(leads, withAI);
+      const filename = type === "numbers" ? `whatsapp-nomor-${stamp}.csv` : `whatsapp-leads-${stamp}${withAI ? "-ai" : ""}.csv`;
       res.setHeader("Content-Type", "text/csv; charset=utf-8");
       res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
       return res.send(csv);
     }
-    const funnel: Record<string, number> = {};
-    for (const l of leads) funnel[l.status] = (funnel[l.status] || 0) + 1;
-    const total = leads.length;
-    const funnelRows = Object.entries(funnel).map(([s, count]) => ({
-      Status: s,
-      "Jumlah Lead": count,
-      "Persentase (%)": total > 0 ? Math.round((count / total) * 1000) / 10 : 0,
-    }));
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(leadRows), "Leads");
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(numberRows), "Nomor Rotator");
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(funnelRows), "Ringkasan Funnel");
-    const buffer: Buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
+
+    // AI insight (fallback deterministik bila key kosong / layanan mati)
+    const aiInsight = withAI ? await generateExportAIInsight({ totalLeads: leads.length, funnel, sourceBreakdown: bySource, domainBreakdown: byDomain, totalWonValue, periodLabel }) : null;
+
+    const wb = await buildLeadsExportWorkbook({
+      leads: leads.map((l) => ({
+        ...l,
+        number: l.number ?? null,
+      })),
+      numbers,
+      type,
+      periodLabel,
+      withAI,
+      aiInsight,
+    });
+    const rawBuffer = await wb.xlsx.writeBuffer();
+    const buffer = Buffer.from(rawBuffer);
     res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-    res.setHeader("Content-Disposition", `attachment; filename="whatsapp-rotator-leads-${stamp}.xlsx"`);
+    res.setHeader("Content-Disposition", `attachment; filename="whatsapp-rotator-leads-${stamp}${withAI ? "-ai" : ""}.xlsx"`);
     return res.send(buffer);
   } catch (error) {
     console.error("Error exporting WA data:", error);
