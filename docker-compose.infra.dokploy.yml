@@ -175,6 +175,11 @@ services:
   cdn-init:
     # 2026-09-15: sama alasan dengan cdn-storage, gunakan image dari Quay.io
     image: quay.io/minio/mc:RELEASE.2025-04-16T18-13-26Z
+    environment:
+      # cdn-storage pakai root credential dari .env; init harus pakai yang
+      # sama, tidak bisa jatuh ke default `minioadmin` (alias akan ditolak).
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-minioadmin}
     depends_on:
       - cdn-storage
     networks:
