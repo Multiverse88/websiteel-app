@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "EasyLegal — Production Infrastructure Map",
+    "subtitle": "Dokploy + Traefik, 3 split compose deployments, 1 shared database",
+    "output": "docs/diagrams/infrastructure-mapping.html",
+    "visual_preset": "blueprint",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "viewBox": [1300, 980],
+    "views": [
+      {
+        "id": "public-request",
+        "label": "Public visitor request",
+        "focus": ["users", "cloudflare", "traefik", "public_sites"],
+        "note": "Cloudflare terminates DNS/CDN, Traefik routes by Host() to the Next.js public sites."
+      },
+      {
+        "id": "admin-and-data-tools",
+        "label": "Admin & data tooling",
+        "focus": ["traefik", "admin_dashboard", "admin_api", "postgrest", "adminer", "instatic"],
+        "note": "All internal tools are on a separate Dokploy compose deployment, routed by subdomain/path."
+      },
+      {
+        "id": "shared-state",
+        "label": "Shared state & external services",
+        "focus": ["admin_api", "public_sites", "postgres", "minio", "external_services"],
+        "note": "Postgres is a Dokploy-managed resource outside any compose file; MinIO backs uploads/images."
+      }
+    ]
+  },
+  "components": [
+    { "id": "users", "type": "external", "label": "Visitors / Clients", "sublabel": "web browsers", "pos": [40, 460], "size": [130, 64] },
+    { "id": "cloudflare", "type": "cloud", "label": "Cloudflare", "sublabel": "DNS + CDN + real-IP", "pos": [210, 460], "size": [130, 64] },
+    { "id": "traefik", "type": "security", "label": "Traefik", "sublabel": "Dokploy proxy · TLS", "pos": [380, 460], "size": [130, 64] },
+
+    { "id": "public_sites", "type": "frontend", "label": "Public Sites (Next.js)", "sublabel": "biz.id · my.id · co.id · id", "pos": [600, 60], "size": [170, 70] },
+    { "id": "admin_api", "type": "backend", "label": "Admin API", "sublabel": "Express · api.easylegal.my.id", "pos": [600, 210], "size": [170, 70] },
+    { "id": "admin_dashboard", "type": "frontend", "label": "Admin Dashboard", "sublabel": "Vite · admin.my.id/dashboard", "pos": [600, 360], "size": [170, 70] },
+    { "id": "postgrest", "type": "backend", "label": "PostgREST", "sublabel": "admin.my.id/db", "pos": [600, 510], "size": [170, 70] },
+    { "id": "adminer", "type": "backend", "label": "Adminer", "sublabel": "db.easylegal.my.id", "pos": [600, 660], "size": [170, 70] },
+    { "id": "instatic", "type": "backend", "label": "Instatic CMS", "sublabel": "instatic.easylegal.my.id", "pos": [600, 810], "size": [170, 70] },
+
+    { "id": "minio", "type": "database", "label": "MinIO", "sublabel": "cdn.my.id", "pos": [900, 210], "size": [140, 70] },
+    { "id": "postgres", "type": "database", "label": "PostgreSQL", "sublabel": "Dokploy-managed", "pos": [900, 435], "size": [140, 70] },
+
+    { "id": "external_services", "type": "external", "label": "SMTP · Sentry · AI", "sublabel": "Hostinger, Sentry, OpenAI", "pos": [1120, 60], "size": [150, 70] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Dokploy app: public sites", "wraps": ["public_sites"], "pad": 20 },
+    { "kind": "region", "label": "Dokploy app: internal infra", "wraps": ["admin_dashboard", "admin_api", "postgrest", "adminer", "instatic", "minio"], "pad": 20 },
+    { "kind": "security-group", "label": "Dokploy-managed database resource", "wraps": ["postgres"], "pad": 18 }
+  ],
+  "connections": [
+    { "from": "users", "to": "cloudflare", "label": "HTTPS", "variant": "emphasis" },
+    { "from": "cloudflare", "to": "traefik", "label": "proxied", "variant": "security" },
+
+    { "from": "traefik", "to": "public_sites", "variant": "emphasis" },
+    { "from": "traefik", "to": "admin_api" },
+    { "from": "traefik", "to": "admin_dashboard" },
+    { "from": "traefik", "to": "postgrest" },
+    { "from": "traefik", "to": "adminer" },
+    { "from": "traefik", "to": "instatic" },
+
+    { "from": "public_sites", "to": "admin_api", "variant": "dashed" },
+
+    { "from": "admin_api", "to": "minio" },
+    { "from": "admin_api", "to": "postgres", "label": "DATABASE_URL" },
+    { "from": "admin_api", "to": "external_services", "variant": "dashed" },
+
+    { "from": "postgrest", "to": "postgres", "label": "PGRST_DB_URI" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Three Split Deployments", "items": ["Public sites and internal infra are separate Dokploy compose apps so one push doesn't redeploy the other", "easylegal.id (app-id) is a third, temporary-domain compose deployment", "All three share one external `easylegal` Docker network"] },
+    { "dot": "amber", "title": "Shared Database, Not In Compose", "items": ["Postgres is a Dokploy-managed \"Database\" resource, reached via dokploy-network by container name", "admin-api, PostgREST, Adminer, and both Next.js apps all read/write the same instance", "No compose file defines its own postgres: service"] },
+    { "dot": "rose", "title": "Edge & Access Notes (not all drawn as lines)", "items": ["Cloudflare sits in front of Traefik for DNS/CDN and forwards real client IPs", "Adminer also holds its own direct DATABASE_URL to Postgres behind Traefik basic auth — full read/write, treat as high-risk", "Both Next.js apps (public_sites) also carry their own DATABASE_URL and MINIO_* env vars, not only via admin-api", "MinIO is additionally exposed straight through Traefik at cdn.my.id / cdn-console.my.id, not only via admin-api", "easylegal.my.id has a Cloudflare-level redirect to biz.id that must stay in sync with Traefik rules"] }
+  ]
+}

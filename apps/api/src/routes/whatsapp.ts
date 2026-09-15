@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { randomInt } from "node:crypto";
+import * as XLSX from "xlsx";
+import { Prisma } from "@prisma/client";
 import { prisma } from "../lib/prisma";
 import { AuthedRequest, requireAuth } from "../middleware/auth";
 import {
@@ -8,6 +10,7 @@ import {
   getLeadTemperature,
   isValidStage,
   isValidStageTransition,
+  type LeadStage,
   normalizeLeadDomain,
   normalizeSourceCode,
   sourceCodeToChannel,
@@ -902,6 +905,107 @@ router.get("/leads/stats", requireAuth, async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+// GET /api/v1/wa/export — admin: export leads + nomor rotator ke XLSX (multi-sheet) atau CSV.
+// Query: format=xlsx|csv, type=leads|numbers|all + filter sama seperti /leads
+// (status/numberId/domain/source/product/search/from/to). XLSX selalu berisi
+// 3 sheet (Leads, Nomor Rotator, Ringkasan Funnel); CSV satu tipe per request
+// (type=numbers -> CSV nomor, selain itu CSV leads) karena CSV tak punya sheet.
+router.get("/export", requireAuth, async (req, res) => {
+  try {
+    const query = req.query as Record<string, string>;
+    const format = query.format === "csv" ? "csv" : "xlsx";
+    const rawType = query.type;
+    const type = rawType === "numbers" ? "numbers" : rawType === "leads" ? "leads" : "all";
+    const rawStatus = query.status || "";
+    if (rawStatus && !isValidStage(rawStatus)) return res.status(400).json({ error: "Status Lead tidak valid" });
+    const status: LeadStage | undefined = rawStatus ? (rawStatus as LeadStage) : undefined;
+    const where: Prisma.WhatsAppClickWhereInput = {
+      ...(status ? { status } : {}),
+      ...(query.numberId ? { numberId: query.numberId } : {}),
+      ...(query.domain ? { domain: query.domain } : {}),
+      ...(query.source ? { source: query.source } : {}),
+      ...(query.product ? { product: query.product } : {}),
+      ...(query.search ? { leadCode: { contains: query.search.toUpperCase(), mode: "insensitive" } } : {}),
+      ...(buildDateRangeFilter(query.from, query.to) ? { createdAt: buildDateRangeFilter(query.from, query.to)! } : {}),
+    };
+    const fmtDate = (d: Date | string | null | undefined) => (d ? new Date(d).toLocaleString("id-ID") : "");
+    const escapeCsv = (v: unknown) => {
+      if (v === null || v === undefined) return "";
+      const s = String(v);
+      return /["\n\r,;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+    const stamp = new Date().toISOString().slice(0, 10);
+    const [leads, numbers] = await Promise.all([
+      prisma.whatsAppClick.findMany({
+        where,
+        include: { number: { select: { number: true, label: true } } },
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.whatsAppNumber.findMany({ orderBy: { createdAt: "asc" } }),
+    ]);
+    const totalClicks = numbers.reduce((sum, n) => sum + n.clickCount, 0);
+    const leadRows = leads.map((l) => ({
+      "Kode Lead": l.leadCode,
+      Status: l.status,
+      Temperature: getLeadTemperature(l.status),
+      "Layanan/Pesan": l.service || "",
+      Halaman: l.product || "",
+      Sumber: l.sourceCode || l.source || "",
+      Channel: l.channel || "",
+      Domain: l.domain || "",
+      "Nomor Tujuan": l.number?.number || "",
+      "Label CS": l.number?.label || "",
+      "Nilai Order (IDR)": l.orderValue ?? "",
+      Catatan: l.notes || "",
+      "Alasan Batal": l.lostReason || "",
+      "Tanggal Masuk": fmtDate(l.createdAt),
+      "Tanggal Update": fmtDate(l.updatedAt),
+      "Tanggal Closing": fmtDate(l.wonAt),
+      "Tanggal Batal": fmtDate(l.lostAt),
+    }));
+    const numberRows = numbers.map((n) => ({
+      Nomor: n.number,
+      "Label CS": n.label || "",
+      "Jumlah Klik": n.clickCount,
+      "Share (%)": totalClicks > 0 ? Math.round((n.clickCount / totalClicks) * 1000) / 10 : 0,
+      Status: n.isActive ? "Aktif" : "Nonaktif",
+      "Tanggal Dibuat": fmtDate(n.createdAt),
+    }));
+    const renderCsv = (rows: Record<string, unknown>[]) => {
+      const headers = rows.length > 0 ? Object.keys(rows[0]) : [];
+      const lines = [headers.map(escapeCsv).join(","), ...rows.map((r) => headers.map((h) => escapeCsv(r[h])).join(","))];
+      return "﻿" + lines.join("\n");
+    };
+    if (format === "csv") {
+      const rows = type === "numbers" ? numberRows : leadRows;
+      const csv = renderCsv(rows);
+      const filename = type === "numbers" ? `whatsapp-nomor-${stamp}.csv` : `whatsapp-leads-${stamp}.csv`;
+      res.setHeader("Content-Type", "text/csv; charset=utf-8");
+      res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+      return res.send(csv);
+    }
+    const funnel: Record<string, number> = {};
+    for (const l of leads) funnel[l.status] = (funnel[l.status] || 0) + 1;
+    const total = leads.length;
+    const funnelRows = Object.entries(funnel).map(([s, count]) => ({
+      Status: s,
+      "Jumlah Lead": count,
+      "Persentase (%)": total > 0 ? Math.round((count / total) * 1000) / 10 : 0,
+    }));
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(leadRows), "Leads");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(numberRows), "Nomor Rotator");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(funnelRows), "Ringkasan Funnel");
+    const buffer: Buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
+    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    res.setHeader("Content-Disposition", `attachment; filename="whatsapp-rotator-leads-${stamp}.xlsx"`);
+    return res.send(buffer);
+  } catch (error) {
+    console.error("Error exporting WA data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 router.get("/leads/:id", requireAuth, async (req, res) => {
   try {

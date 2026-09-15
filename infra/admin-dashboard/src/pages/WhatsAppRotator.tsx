@@ -273,6 +273,28 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [statsGroupBy, setStatsGroupBy] = useState<'day' | 'week' | 'month' | 'number' | 'source' | 'service'>('day')
   const [statsData, setStatsData] = useState<{ key: string; label: string; count: number }[]>([])
   const [statsLoading, setStatsLoading] = useState(false)
+  const [exporting, setExporting] = useState<'leads' | 'numbers' | null>(null)
+
+  const handleExport = useCallback(async (type: 'leads' | 'numbers') => {
+    try {
+      setExporting(type)
+      setError('')
+      const { from, to } = computeDateRange(datePreset, customFrom, customTo)
+      const blob = await api.exportWa({ format: 'xlsx', type, status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, search: searchFilter, from, to })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `whatsapp-${type}-${new Date().toISOString().slice(0, 10)}.xlsx`
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Gagal export')
+    } finally {
+      setExporting(null)
+    }
+  }, [statusFilter, sourceFilter, domainFilter, numberFilter, searchFilter, datePreset, customFrom, customTo])
 
   const load = useCallback(async () => {
     try {
@@ -762,6 +784,14 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 <h3 className="font-bold text-gray-900 text-[16px]">Traffic per Nomor</h3>
                 <p className="text-[14px] text-gray-500 mt-1">Total {totalClicks} klik tercatat · target adil per nomor aktif: ~{fairSharePercent}%</p>
               </div>
+              <button
+                type="button"
+                onClick={() => handleExport('numbers')}
+                disabled={exporting === 'numbers'}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-[13px] font-bold rounded-lg border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-60"
+              >
+                {exporting === 'numbers' ? 'Exporting…' : 'Export XLSX'}
+              </button>
             </div>
             <table className="w-full text-[14px]">
               <thead>
@@ -1591,6 +1621,14 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                   Reset Filter
                 </button>
               )}
+              <button
+                type="button"
+                onClick={() => handleExport('leads')}
+                disabled={exporting === 'leads'}
+                className="ml-auto px-3.5 py-2 text-[13px] font-bold rounded-lg border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-60 whitespace-nowrap"
+              >
+                {exporting === 'leads' ? 'Exporting…' : 'Export Leads XLSX'}
+              </button>
             </div>
           </div>
 
