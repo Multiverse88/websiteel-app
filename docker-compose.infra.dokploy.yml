@@ -144,7 +144,11 @@ services:
   # MinIO CDN Storage
   # ============================================
   cdn-storage:
-    image: minio/minio:latest
+    # 2026-09-15: MinIO menghapus image dari Docker Hub (lihat error deploy
+    # "pull access denied for minio/mc"). Image resmi sekarang cuma ada di
+    # Quay.io, dan tag `latest` ikut di-freeze di sana juga, jadi pakai tag
+    # RELEASE tetap. Upgrade manual: cek https://quay.io/repository/minio/minio
+    image: quay.io/minio/minio:RELEASE.2025-04-22T22-12-26Z
     restart: unless-stopped
     command: server /data --console-address ":9001"
     environment:
@@ -169,7 +173,8 @@ services:
       - "traefik.http.services.minio-console.loadbalancer.server.port=9001"
 
   cdn-init:
-    image: minio/mc
+    # 2026-09-15: sama alasan dengan cdn-storage, gunakan image dari Quay.io
+    image: quay.io/minio/mc:RELEASE.2025-04-16T18-13-26Z
     depends_on:
       - cdn-storage
     networks:

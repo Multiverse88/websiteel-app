@@ -592,11 +592,17 @@ TONE CHECK rules:
     };
   };
 
+  // max_tokens 1800/2200 bikin respons JSON kepotong (finishReason=max_tokens).
+  // Naikkan ke 4096 + paksa response_format=json_object bila router dukung.
+  const supportsJsonFormat =
+    !!process.env.AI_ROUTER_BASE_URL?.includes("openai") ||
+    !!process.env.AI_ROUTER_MODEL_REVIEW?.toLowerCase().includes("gpt");
   const resp = await client.chat.completions.create({
     model,
     messages: [{ role: "user", content: prompt }],
     temperature: 0.2,
-    max_tokens: 1800,
+    max_tokens: 4096,
+    ...(supportsJsonFormat ? { response_format: { type: "json_object" } } : {}),
   });
 
   const raw = resp.choices[0]?.message?.content || "{}";
@@ -616,7 +622,8 @@ TONE CHECK rules:
         content: `${prompt}\n\nIMPORTANT: The previous attempt was incomplete or invalid. Return one COMPLETE JSON object only. Keep every explanation concise so the response is not truncated.`,
       }],
       temperature: 0.1,
-      max_tokens: 2200,
+      max_tokens: 4096,
+      ...(supportsJsonFormat ? { response_format: { type: "json_object" } } : {}),
     });
     const retryRaw = retry.choices[0]?.message?.content || "{}";
 

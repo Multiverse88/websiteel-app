@@ -21,33 +21,48 @@ import path from 'path';
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-const allowedOrigins = process.env.CORS_ORIGINS
-  ? process.env.CORS_ORIGINS.split(',').map(o => o.trim())
-  : [
-      'https://easylegal.my.id',
-      'https://admin.easylegal.my.id',
-      'https://easylegal.biz.id',
-      'https://www.easylegal.biz.id',
-      // Multi-tenant public site also serves easylegal.co.id (see
-      // apps/web/src/lib/domains.ts) — missing here caused client-side
-      // fetches from that origin (e.g. BottomPromoSection) to fail CORS
-      // and break page interactivity, including the navbar.
-      'https://easylegal.co.id',
-      'https://www.easylegal.co.id',
-      'https://easylegal.id',
-      'https://www.easylegal.id',
-      'http://localhost:3000',
-      'http://localhost:5173',
-      'http://127.0.0.1:3000',
-      'http://127.0.0.1:5173',
-    ];
+// Origin yang diizinkan. Daftar bawaan di-UNION dengan CORS_ORIGINS dari
+// env — bukan diganti — supaya satu domain yang ketinggalan di env tidak
+// membuat seluruh origin bawaan ikut terblokir (penyebab "Not allowed by
+// CORS" 2026-09-13/14). Varian www wajib ikut karena Traefik app publik juga
+// serve Host(`www.easylegal.*`) (lihat docker-compose.dokploy.yml).
+const baseOrigins = [
+  'https://easylegal.my.id',
+  'https://www.easylegal.my.id',
+  'https://admin.easylegal.my.id',
+  'https://easylegal.biz.id',
+  'https://www.easylegal.biz.id',
+  // Multi-tenant public site also serves easylegal.co.id (see
+  // apps/web/src/lib/domains.ts) — missing here caused client-side
+  // fetches from that origin (e.g. BottomPromoSection) to fail CORS
+  // and break page interactivity, including the navbar.
+  'https://easylegal.co.id',
+  'https://www.easylegal.co.id',
+  'https://easylegal.id',
+  'https://www.easylegal.id',
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:5173',
+];
+
+const allowedOrigins: string[] = [
+  ...baseOrigins,
+  ...(process.env.CORS_ORIGINS?.split(',') ?? [])
+]
+  .map((o) => o.trim().replace(/\/+$/, ''))
+  .filter((o): o is string => Boolean(o));
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    const normalized = origin ? origin.replace(/\/+$/, '') : '';
+    if (!origin || allowedOrigins.includes(normalized)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      // Tolak sunyi: browser tetap diblokir (tanpa header CORS), tapi Express
+      // tidak menumpuk stack trace Error ke log container.
+      console.warn(`[cors] origin ditolak: ${origin}`);
+      callback(null, false);
     }
   },
   credentials: true
