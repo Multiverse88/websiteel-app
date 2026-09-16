@@ -657,15 +657,40 @@ router.put("/numbers/:id", requireAuth, async (req, res) => {
       cleanedNumber = String(number).replace(/\D/g, "");
       if (!cleanedNumber) return res.status(400).json({ error: "Nomor tidak valid" });
     }
+
+    // Kalau nomor ini diaktifkan KEMBALI (misal CS-nya libur kemarin lalu
+    // masuk lagi hari ini), samakan dulu clickCount-nya dengan rata-rata
+    // nomor aktif lain SEBELUM update. Tanpa ini, makin lama dia
+    // nonaktif makin jauh gap clickCount-nya vs nomor lain — dan karena
+    // rotator selalu memilih clickCount PALING KECIL, begitu diaktifkan
+    // dia akan menyedot hampir semua lead baru buat "mengejar
+    // ketertinggalan" (bukan dibagi rata, malah CS yang baru masuk kerja
+    // kebanjiran lead). Menyamakan ke rata-rata bikin pembagian lead
+    // langsung rata lagi mulai hari itu.
+    let rebalancedClickCount: number | undefined;
+    if (isActive === true) {
+      const current = await prisma.whatsAppNumber.findUnique({ where: { id } });
+      if (current && !current.isActive) {
+        const others = await prisma.whatsAppNumber.findMany({
+          where: { isActive: true, id: { not: id } },
+          select: { clickCount: true },
+        });
+        if (others.length > 0) {
+          rebalancedClickCount = Math.round(others.reduce((sum, o) => sum + o.clickCount, 0) / others.length);
+        }
+      }
+    }
+
     const updated = await prisma.whatsAppNumber.update({
       where: { id },
       data: {
         ...(cleanedNumber !== undefined && { number: cleanedNumber }),
         ...(label !== undefined && { label }),
         ...(isActive !== undefined && { isActive }),
+        ...(rebalancedClickCount !== undefined && { clickCount: rebalancedClickCount }),
       },
     });
-    res.json({ data: updated });
+    res.json({ data: updated, rebalanced: rebalancedClickCount !== undefined });
   } catch (error: any) {
     if (error.code === "P2002") return res.status(409).json({ error: "Nomor ini sudah dipakai nomor lain" });
     if (error.code === "P2025") return res.status(404).json({ error: "Nomor tidak ditemukan" });

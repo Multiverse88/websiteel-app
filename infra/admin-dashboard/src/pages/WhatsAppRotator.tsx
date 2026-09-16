@@ -550,8 +550,18 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   }
 
   const toggleActive = async (n: WaNumber) => {
-    await api.updateWaNumber(n.id, { isActive: !n.isActive })
+    const wasReactivating = !n.isActive
+    const res = await api.updateWaNumber(n.id, { isActive: !n.isActive })
     await load()
+    // Kalau nomor tadinya nonaktif (misal CS-nya libur) dan sekarang
+    // diaktifkan lagi, backend otomatis menyamakan clickCount-nya dengan
+    // rata-rata nomor aktif lain (lihat komentar di whatsapp.ts) supaya
+    // dia tidak mendadak "menyedot" hampir semua lead baru buat mengejar
+    // ketertinggalan. Kasih tahu admin biar tidak bingung lihat
+    // clickCount-nya berubah sendiri.
+    if (wasReactivating && res?.rebalanced) {
+      alert(`"${n.label || n.number}" diaktifkan kembali. Jumlah klik disetarakan otomatis dengan CS aktif lain supaya pembagian lead langsung rata mulai sekarang (tidak dibanjiri buat "mengejar" nomor lain).`)
+    }
   }
 
   const startEditNumber = (n: WaNumber) => {
