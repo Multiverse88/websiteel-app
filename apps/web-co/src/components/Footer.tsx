@@ -186,6 +186,9 @@ export default function Footer() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <span className="text-[16px] text-white/80">EasyOffice</span>
+                </li>
               </ul>
             </div>
 
