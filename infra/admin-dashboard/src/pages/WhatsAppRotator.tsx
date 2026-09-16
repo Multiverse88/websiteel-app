@@ -193,8 +193,8 @@ const NEXT_STAGES: Record<string, string[]> = {
 // Manage the in-house WhatsApp CTA rotator (apps/api/src/routes/whatsapp.ts,
 // getWhatsAppLink() in apps/web) — replaces mauorder.online. Every WA CTA
 // click site-wide always goes to whichever active number has the fewest
-// clicks so far. Two tabs: fairness per number, and every click as a
-// trackable lead (source/product/status) up to closing.
+// clicks in the current WIB calendar day. Tabs cover per-number history,
+// page/slug configuration, and trackable leads through closing.
 export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab?: 'numbers' | 'pages' | 'slugs' | 'leads' }) {
   const [tab, setTab] = useState<'numbers' | 'pages' | 'slugs' | 'leads'>(initialTab)
 
@@ -559,18 +559,8 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   }
 
   const toggleActive = async (n: WaNumber) => {
-    const wasReactivating = !n.isActive
-    const res = await api.updateWaNumber(n.id, { isActive: !n.isActive })
+    await api.updateWaNumber(n.id, { isActive: !n.isActive })
     await load()
-    // Kalau nomor tadinya nonaktif (misal CS-nya libur) dan sekarang
-    // diaktifkan lagi, backend otomatis menyamakan clickCount-nya dengan
-    // rata-rata nomor aktif lain (lihat komentar di whatsapp.ts) supaya
-    // dia tidak mendadak "menyedot" hampir semua lead baru buat mengejar
-    // ketertinggalan. Kasih tahu admin biar tidak bingung lihat
-    // clickCount-nya berubah sendiri.
-    if (wasReactivating && res?.rebalanced) {
-      alert(`"${n.label || n.number}" diaktifkan kembali. Jumlah klik disetarakan otomatis dengan CS aktif lain supaya pembagian lead langsung rata mulai sekarang (tidak dibanjiri buat "mengejar" nomor lain).`)
-    }
   }
 
   const startEditNumber = (n: WaNumber) => {
@@ -740,8 +730,6 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     }
   }
 
-  const activeCount = numbers.filter(n => n.isActive).length
-  const fairSharePercent = activeCount > 0 ? Math.round((100 / activeCount) * 10) / 10 : 0
   const totalLeads = Object.values(funnel).reduce((a, b) => a + b, 0)
   const closedWon = funnel.WON || 0
   const conversionRate = totalLeads > 0 ? Math.round((closedWon / totalLeads) * 1000) / 10 : 0
@@ -762,7 +750,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
       <div>
         <h1 className="text-[24px] leading-[32px] font-semibold tracking-[-0.01em] font-sans text-gray-900">{tab === 'leads' ? 'Leads WhatsApp' : 'Rotator WhatsApp'}</h1>
         <p className="text-[14px] leading-[22px] font-sans text-gray-500 mt-1">
-          Setiap tombol WA di website (semua domain) selalu diarahkan ke nomor aktif dengan klik paling sedikit — otomatis merata. Tiap klik juga tercatat sebagai lead yang bisa dilacak sampai closing.
+          Setiap tombol WA di website (semua domain) diarahkan ke nomor aktif dengan klik paling sedikit hari ini (WIB). Tiap klik juga tercatat sebagai lead yang bisa dilacak sampai closing.
         </p>
       </div>
 
@@ -832,8 +820,8 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-gray-900 text-[16px]">Traffic per Nomor</h3>
-                <p className="text-[14px] text-gray-500 mt-1">Total {totalClicks} klik tercatat · target adil per nomor aktif: ~{fairSharePercent}%</p>
+                <h3 className="font-bold text-gray-900 text-[16px]">Traffic Historis per Nomor</h3>
+                <p className="text-[14px] text-gray-500 mt-1">Total {totalClicks} klik tercatat · rotasi harian dihitung terpisah mulai pukul 00.00 WIB</p>
               </div>
               <button
                 type="button"
@@ -849,9 +837,9 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 <tr className="bg-gray-50 text-left text-gray-500 text-[12px] uppercase tracking-wider">
                   <th className="px-6 py-3">Nomor</th>
                   <th className="px-6 py-3">Label</th>
-                  <th className="px-6 py-3">Klik</th>
-                  <th className="px-6 py-3">Share</th>
-                  <th className="px-6 py-3">Distribusi</th>
+                  <th className="px-6 py-3">Klik Total</th>
+                  <th className="px-6 py-3">Share Historis</th>
+                  <th className="px-6 py-3">Distribusi Historis</th>
                   <th className="px-6 py-3">Status</th>
                   <th className="px-6 py-3"></th>
                 </tr>
@@ -861,7 +849,6 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                   <tr><td colSpan={7} className="px-6 py-8 text-center text-gray-400">Belum ada nomor. Tambahkan minimal 1 nomor di atas.</td></tr>
                 )}
                 {numbers.map((n) => {
-                  const isUnfair = n.isActive && activeCount > 1 && Math.abs(n.sharePercent - fairSharePercent) > fairSharePercent * 0.25
                   const isEditing = editingNumberId === n.id
                   if (isEditing) {
                     return (
@@ -904,13 +891,13 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                       <td className="px-6 py-3.5 font-mono font-semibold text-gray-900">{n.number}</td>
                       <td className="px-6 py-3.5 text-gray-600">{n.label || '—'}</td>
                       <td className="px-6 py-3.5 font-bold text-gray-900">{n.clickCount}</td>
-                      <td className={`px-6 py-3.5 font-bold ${isUnfair ? 'text-amber-600' : 'text-gray-700'}`}>
-                        {n.sharePercent}%{isUnfair && <span className="ml-1 text-[11px] font-normal">⚠ tidak rata</span>}
+                      <td className="px-6 py-3.5 font-bold text-gray-700">
+                        {n.sharePercent}%
                       </td>
                       <td className="px-6 py-3.5 w-40">
                         <div className="h-2 rounded-full bg-gray-100 overflow-hidden">
                           <div
-                            className={`h-full rounded-full ${isUnfair ? 'bg-amber-500' : 'bg-[#990202]'}`}
+                            className="h-full rounded-full bg-[#990202]"
                             style={{ width: `${Math.min(n.sharePercent, 100)}%` }}
                           />
                         </div>

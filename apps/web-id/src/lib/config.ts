@@ -17,10 +17,10 @@ export const config = {
 
 // In-house WhatsApp CTA rotator (replaces the external mauorder.online
 // service — see apps/api/src/routes/whatsapp.ts). This is a real link, not
-// a fetch: clicking it does a full navigation to our API, which picks
-// whichever active number has the fewest clicks so far, logs the click,
-// and 302s to wa.me — same instant UX as before, but the traffic per
-// number is now visible in the admin dashboard.
+// a fetch: clicking it does a full navigation to our API, which picks the
+// active number with the fewest clicks today (WIB), logs the click, and 302s
+// to wa.me — same instant UX as before, while lifetime traffic remains
+// visible in the admin dashboard.
 // ctaId: a stable, hand-assigned id for this specific button (e.g.
 // "pkp-pulau-jawa") — lets admin dashboard target an autotext override at
 // just this button instead of the whole page. Deliberately NOT derived from

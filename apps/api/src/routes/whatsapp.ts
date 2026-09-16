@@ -18,8 +18,30 @@ import { buildLeadsExportWorkbook, buildLeadsCsv, buildNumbersCsv } from "../mod
 import { generateExportAIInsight } from "../modules/leads/ai-export-service";
 import { isBotUserAgent } from "../modules/leads/bot-detect";
 import { isRateLimited } from "../modules/leads/click-rate-limit";
+import { chooseDailyFairNumber, getWibDayRange } from "../modules/leads/daily-rotator-fairness";
 
 const router = Router();
+
+async function findNextWhatsAppNumber(where: Prisma.WhatsAppNumberWhereInput) {
+  const numbers = await prisma.whatsAppNumber.findMany({ where });
+  if (numbers.length === 0) return null;
+
+  const { start, end } = getWibDayRange();
+  const counts = await prisma.whatsAppClick.groupBy({
+    by: ["numberId"],
+    where: {
+      numberId: { in: numbers.map((number) => number.id) },
+      createdAt: { gte: start, lt: end },
+      isSuspectedBot: false,
+    },
+    _count: { _all: true },
+  });
+
+  return chooseDailyFairNumber(
+    numbers,
+    counts.map((row) => ({ numberId: row.numberId, count: row._count._all })),
+  );
+}
 
 // Tanggal lokal (Asia/Jakarta-ish via offset server) sebagai "YYYY-MM-DD" untuk
 // preset rentang export. `arg` = angka hari mundur (offset negatif) atau string
@@ -88,10 +110,9 @@ function buildDateRangeFilter(from?: string, to?: string): { gte?: Date; lte?: D
 // Public — real site visitors land here when they click any WhatsApp CTA
 // (see apps/web/src/lib/config.ts getWhatsAppLink() and
 // AnalyticsEvents.tsx, which appends source/product before navigating).
-// Picks whichever active number has the fewest clicks so far (self-balancing
-// fairness — no separate "last used" pointer to keep in sync), logs the
-// click, and 302s to wa.me. This is a full browser navigation (new tab), not
-// a fetch, so no CORS setup is needed here.
+// Picks whichever active number has the fewest clicks in the current WIB
+// calendar day, logs the click, and 302s to wa.me. This is a full browser
+// navigation (new tab), not a fetch, so no CORS setup is needed here.
 router.get("/redirect", async (req, res) => {
   try {
     let product = queryText(req.query.product, 300);
@@ -165,12 +186,9 @@ router.get("/redirect", async (req, res) => {
     const identityKey = sessionId || `${clientIp}:${userAgent.slice(0, 100)}`;
     const deduplicationKey = [identityKey, product || "", ctaId || service || ""].join(":").slice(0, 500);
 
-    const numberWhere: { isActive: boolean; id?: { in: string[] } } = { isActive: true };
+    const numberWhere: Prisma.WhatsAppNumberWhereInput = { isActive: true };
     if (numberConfig?.numberIds?.length) numberWhere.id = { in: numberConfig.numberIds };
-    const next = await prisma.whatsAppNumber.findFirst({
-      where: numberWhere,
-      orderBy: [{ clickCount: "asc" }, { createdAt: "asc" }],
-    });
+    const next = await findNextWhatsAppNumber(numberWhere);
 
     if (!next) {
       // No numbers configured — fail open to a plain wa.me link so the
@@ -340,16 +358,14 @@ const handleSlugRedirect = async (req: any, res: any) => {
     const service = rawText ? rawText.slice(0, 200) : `Rotator: ${slug}`;
     const ctaLabel = slugConfig.description || `Slug: ${slug}`;
 
-    // Number selection from restricted pool or all active numbers
-    const numberWhere: { isActive: boolean; id?: { in: string[] } } = { isActive: true };
+    // Number selection from restricted pool or all active numbers.
+    // Fairness hanya memakai klik pada hari kalender WIB saat ini.
+    const numberWhere: Prisma.WhatsAppNumberWhereInput = { isActive: true };
     if (slugConfig.numberIds && slugConfig.numberIds.length > 0) {
       numberWhere.id = { in: slugConfig.numberIds };
     }
 
-    const next = await prisma.whatsAppNumber.findFirst({
-      where: numberWhere,
-      orderBy: [{ clickCount: "asc" }, { createdAt: "asc" }],
-    });
+    const next = await findNextWhatsAppNumber(numberWhere);
 
     if (!next) {
       console.error("[WA_SLUG] No active WhatsApp number available in pool");
@@ -646,8 +662,7 @@ router.post("/numbers", requireAuth, async (req, res) => {
 });
 
 // PUT /api/v1/wa/numbers/:id — admin: edit number / label / toggle active
-// Deliberately no DELETE — deactivating keeps click history intact for
-// fairness reporting instead of orphaning/cascading logged clicks.
+// Deliberately no DELETE — deactivating keeps click history intact.
 router.put("/numbers/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
@@ -658,28 +673,6 @@ router.put("/numbers/:id", requireAuth, async (req, res) => {
       if (!cleanedNumber) return res.status(400).json({ error: "Nomor tidak valid" });
     }
 
-    // Kalau nomor ini diaktifkan KEMBALI (misal CS-nya libur kemarin lalu
-    // masuk lagi hari ini), samakan dulu clickCount-nya dengan rata-rata
-    // nomor aktif lain SEBELUM update. Tanpa ini, makin lama dia
-    // nonaktif makin jauh gap clickCount-nya vs nomor lain — dan karena
-    // rotator selalu memilih clickCount PALING KECIL, begitu diaktifkan
-    // dia akan menyedot hampir semua lead baru buat "mengejar
-    // ketertinggalan" (bukan dibagi rata, malah CS yang baru masuk kerja
-    // kebanjiran lead). Menyamakan ke rata-rata bikin pembagian lead
-    // langsung rata lagi mulai hari itu.
-    let rebalancedClickCount: number | undefined;
-    if (isActive === true) {
-      const current = await prisma.whatsAppNumber.findUnique({ where: { id } });
-      if (current && !current.isActive) {
-        const others = await prisma.whatsAppNumber.findMany({
-          where: { isActive: true, id: { not: id } },
-          select: { clickCount: true },
-        });
-        if (others.length > 0) {
-          rebalancedClickCount = Math.round(others.reduce((sum, o) => sum + o.clickCount, 0) / others.length);
-        }
-      }
-    }
 
     const updated = await prisma.whatsAppNumber.update({
       where: { id },
@@ -687,10 +680,9 @@ router.put("/numbers/:id", requireAuth, async (req, res) => {
         ...(cleanedNumber !== undefined && { number: cleanedNumber }),
         ...(label !== undefined && { label }),
         ...(isActive !== undefined && { isActive }),
-        ...(rebalancedClickCount !== undefined && { clickCount: rebalancedClickCount }),
       },
     });
-    res.json({ data: updated, rebalanced: rebalancedClickCount !== undefined });
+    res.json({ data: updated });
   } catch (error: any) {
     if (error.code === "P2002") return res.status(409).json({ error: "Nomor ini sudah dipakai nomor lain" });
     if (error.code === "P2025") return res.status(404).json({ error: "Nomor tidak ditemukan" });

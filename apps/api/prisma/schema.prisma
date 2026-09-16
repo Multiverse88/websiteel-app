@@ -141,8 +141,8 @@ model SystemSetting {
 }
 
 // In-house WhatsApp CTA rotator, replacing the external mauorder.online
-// service — lets us see per-number traffic and enforce fairness (always
-// route to whichever active number has the fewest clicks so far).
+// service — stores lifetime traffic while routing each click to the active
+// number with the fewest clicks in the current WIB calendar day.
 model WhatsAppNumber {
   id         String          @id @default(cuid())
   number     String          @unique // digits only, ready for wa.me/<number>
