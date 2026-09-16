@@ -71,6 +71,7 @@ interface WaLead {
   lostReason: string | null
   orderValue: number | null
   createdAt: string
+  isSuspectedBot?: boolean
   number: { number: string; label: string | null }
 }
 
@@ -249,6 +250,12 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [leads, setLeads] = useState<WaLead[]>([])
   const [funnel, setFunnel] = useState<Record<string, number>>({})
   const [bySource, setBySource] = useState<Record<string, number>>({})
+  // Filter leads yang ditandai retroaktif sebagai bot/crawl (lihat
+  // WhatsAppClick.isSuspectedBot) — default TAMPIL semua supaya data
+  // historis tidak "hilang" tanpa admin sadar; botCount kasih tahu berapa
+  // yang tersembunyi terlepas dari checkbox ini dicentang atau tidak.
+  const [hideBot, setHideBot] = useState(false)
+  const [botCount, setBotCount] = useState(0)
   const [leadsLoading, setLeadsLoading] = useState(false)
   const [statusFilter, setStatusFilter] = useState('')
   const [sourceFilter, setSourceFilter] = useState('')
@@ -309,6 +316,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
         domain: exportType === 'leads' ? domainFilter : undefined,
         numberId: exportType === 'leads' ? numberFilter : undefined,
         search: exportType === 'leads' ? searchFilter : undefined,
+        excludeBot: exportType === 'leads' && hideBot ? '1' : undefined,
         from,
         to,
       })
@@ -326,7 +334,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     } finally {
       setExporting(null)
     }
-  }, [exportType, exportPreset, exportFrom, exportTo, exportFormat, exportUseAI, statusFilter, sourceFilter, domainFilter, numberFilter, searchFilter])
+  }, [exportType, exportPreset, exportFrom, exportTo, exportFormat, exportUseAI, statusFilter, sourceFilter, domainFilter, numberFilter, searchFilter, hideBot])
 
   const load = useCallback(async () => {
     try {
@@ -345,29 +353,30 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     try {
       setLeadsLoading(true)
       const { from, to } = computeDateRange(datePreset, customFrom, customTo)
-      const res = await api.getWaLeads({ status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, search: searchFilter, from, to })
+      const res = await api.getWaLeads({ status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, search: searchFilter, from, to, excludeBot: hideBot ? '1' : undefined })
       setLeads(res.data || [])
       setFunnel(res.meta?.funnel || {})
       setBySource(res.meta?.bySource || {})
+      setBotCount(res.meta?.botCount || 0)
     } catch (e: any) {
       setError(e.message)
     } finally {
       setLeadsLoading(false)
     }
-  }, [sourceFilter, statusFilter, domainFilter, numberFilter, searchFilter, datePreset, customFrom, customTo])
+  }, [sourceFilter, statusFilter, domainFilter, numberFilter, searchFilter, datePreset, customFrom, customTo, hideBot])
 
   const loadStats = useCallback(async () => {
     try {
       setStatsLoading(true)
       const { from, to } = computeDateRange(datePreset, customFrom, customTo)
-      const res = await api.getWaLeadsStats(statsGroupBy, { status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, from, to })
+      const res = await api.getWaLeadsStats(statsGroupBy, { status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, from, to, excludeBot: hideBot ? '1' : undefined })
       setStatsData(res.data || [])
     } catch (e: any) {
       setError(e.message)
     } finally {
       setStatsLoading(false)
     }
-  }, [statsGroupBy, statusFilter, sourceFilter, domainFilter, numberFilter, datePreset, customFrom, customTo])
+  }, [statsGroupBy, statusFilter, sourceFilter, domainFilter, numberFilter, datePreset, customFrom, customTo, hideBot])
 
   const loadPages = useCallback(async () => {
     try {
@@ -1654,6 +1663,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 placeholder="Cari kode lead (EL-XXXXXX)"
                 className="px-3 py-2 border border-gray-200 rounded-lg text-[14px] bg-white font-mono w-[200px]"
               />
+              <label className="flex items-center gap-1.5 px-3 py-2 text-[13px] text-gray-600 cursor-pointer select-none whitespace-nowrap" title="Sembunyikan lead yang ditandai retroaktif sebagai crawl/bot (misal sapuan penuh halaman glossary)">
+                <input type="checkbox" checked={hideBot} onChange={(e) => setHideBot(e.target.checked)} className="w-4 h-4 accent-[#990202]" />
+                Sembunyikan Bot{botCount > 0 ? ` (${botCount})` : ''}
+              </label>
               {(statusFilter || sourceFilter || domainFilter || numberFilter || searchInput || datePreset !== 'all') && (
                 <button
                   type="button"
@@ -1841,7 +1854,12 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 )}
                 {!leadsLoading && leads.map((lead) => (
                   <tr key={lead.id} className="border-t border-gray-100">
-                    <td className="px-6 py-3.5 font-mono font-bold text-gray-900">{lead.leadCode}</td>
+                    <td className="px-6 py-3.5 font-mono font-bold text-gray-900">
+                      {lead.leadCode}
+                      {lead.isSuspectedBot && (
+                        <span className="ml-1.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-500 align-middle" title="Ditandai retroaktif sebagai crawl/bot (bukan lead asli)">BOT</span>
+                      )}
+                    </td>
                     <td className="px-6 py-3.5 text-gray-800 max-w-[260px] truncate font-medium" title={lead.service || ''}>{lead.service || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-500 max-w-[180px] truncate" title={lead.product || ''}>{lead.product || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-600">{SOURCE_LABELS[lead.sourceCode || lead.source || 'unknown'] || lead.sourceCode || lead.source || '—'}</td>

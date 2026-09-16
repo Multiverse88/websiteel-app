@@ -22,6 +22,7 @@ type LeadForExport = {
   notes: string | null;
   lostReason: string | null;
   createdAt: Date;
+  isSuspectedBot: boolean;
   updatedAt: Date;
   wonAt: Date | null;
   lostAt: Date | null;
@@ -283,6 +284,7 @@ export async function buildLeadsExportWorkbook(params: {
       "Tanggal Update",
       "Tanggal Closing",
       "Tanggal Batal",
+      "Terindikasi Bot",
     ];
     const headerRow = ws.addRow(headers);
     styleHeaderRow(headerRow);
@@ -310,6 +312,7 @@ export async function buildLeadsExportWorkbook(params: {
         fmtDate(l.updatedAt),
         fmtDate(l.wonAt),
         fmtDate(l.lostAt),
+        l.isSuspectedBot ? "Ya (crawl/bot terdeteksi retroaktif)" : "",
       ]);
       row.eachCell((cell, colNumber) => {
         styleDataCell(cell, idx % 2 === 0);
@@ -362,6 +365,7 @@ export async function buildLeadsExportWorkbook(params: {
       { width: 18 },
       { width: 18 },
       { width: 18 },
+      { width: 26 },
     ];
   }
 
@@ -415,6 +419,7 @@ export function buildLeadsCsv(
     ...(withAI ? ["Saran Follow-Up CS"] : []),
     "Tanggal Masuk",
     "Tanggal Update",
+    "Terindikasi Bot",
   ];
   const rows = leads.map((l) => {
     const serviceName = prettifyServiceName(l.service, l.product);
@@ -434,6 +439,7 @@ export function buildLeadsCsv(
       "Alasan Batal": l.lostReason || "",
       "Tanggal Masuk": fmtDate(l.createdAt),
       "Tanggal Update": fmtDate(l.updatedAt),
+      "Terindikasi Bot": l.isSuspectedBot ? "Ya (crawl/bot terdeteksi retroaktif)" : "",
     };
     if (withAI) (base as Record<string, unknown>)["Saran Follow-Up CS"] = getDefaultFollowUpAdvice(l.status, serviceName, l.lostReason);
     return base;

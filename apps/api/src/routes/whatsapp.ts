@@ -882,12 +882,17 @@ router.get("/leads", requireAuth, async (req, res) => {
     if (source) where.source = source;
     if (product) where.product = product;
     if (search) where.leadCode = { contains: search.toUpperCase(), mode: "insensitive" };
+    // Opsional: sembunyikan lead yang ditandai retroaktif sebagai bot/crawl
+    // (lihat schema.prisma WhatsAppClick.isSuspectedBot) — default TETAP
+    // tampil semua supaya data historis tidak "hilang" tanpa admin sadar.
+    if (req.query.excludeBot === "1") where.isSuspectedBot = false;
     const dateRange = buildDateRangeFilter(from, to);
     if (dateRange) where.createdAt = dateRange;
     const page = Math.max(1, Number(req.query.page) || 1);
     const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
 
-    const [leads, statusCounts, sourceCounts] = await Promise.all([
+    const { isSuspectedBot: _excludeBotFlag, ...whereWithoutBotFilter } = where;
+    const [leads, statusCounts, sourceCounts, botCount] = await Promise.all([
       prisma.whatsAppClick.findMany({
         where,
         include: { number: { select: { number: true, label: true } } },
@@ -905,6 +910,10 @@ router.get("/leads", requireAuth, async (req, res) => {
         where,
         _count: { source: true },
       }),
+      // Berapa banyak lead yang cocok filter LAIN (status/domain/dst) tapi
+      // ditandai bot — supaya admin tahu ada yang disembunyikan walau
+      // excludeBot tidak dipakai di request ini.
+      prisma.whatsAppClick.count({ where: { ...whereWithoutBotFilter, isSuspectedBot: true } }),
     ]);
 
     const total = statusCounts.reduce((sum, row) => sum + row._count.status, 0);
@@ -912,7 +921,7 @@ router.get("/leads", requireAuth, async (req, res) => {
     const bySource = Object.fromEntries(sourceCounts.map((s) => [s.source || "unknown", s._count.source]));
     res.json({
       data: leads.map((lead) => ({ ...lead, temperature: getLeadTemperature(lead.status) })),
-      meta: { funnel, bySource, total, page, pageSize, totalPages: Math.ceil(total / pageSize) },
+      meta: { funnel, bySource, total, page, pageSize, totalPages: Math.ceil(total / pageSize), botCount },
     });
   } catch (error) {
     console.error("Error fetching WA leads:", error);
@@ -941,8 +950,8 @@ router.get("/leads/stats", requireAuth, async (req, res) => {
     if (numberId) where.numberId = numberId;
     if (domain) where.domain = domain;
     if (source) where.source = source;
+    if (req.query.excludeBot === "1") where.isSuspectedBot = false;
     const dateRange = buildDateRangeFilter(from, to);
-    if (dateRange) where.createdAt = dateRange;
 
     if (groupBy === "number") {
       const rows = await prisma.whatsAppClick.groupBy({ by: ["numberId"], where, _count: { numberId: true } });
@@ -987,6 +996,7 @@ router.get("/leads/stats", requireAuth, async (req, res) => {
     if (where.numberId) { params.push(where.numberId); conditions.push(`"numberId" = $${params.length}`); }
     if (where.domain) { params.push(where.domain); conditions.push(`"domain" = $${params.length}`); }
     if (where.source) { params.push(where.source); conditions.push(`"source" = $${params.length}`); }
+    if (where.isSuspectedBot === false) { conditions.push(`"isSuspectedBot" = false`); }
     if (dateRange?.gte) { params.push(dateRange.gte); conditions.push(`"createdAt" >= $${params.length}`); }
     if (dateRange?.lte) { params.push(dateRange.lte); conditions.push(`"createdAt" <= $${params.length}`); }
     const whereSql = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
@@ -1048,6 +1058,7 @@ router.get("/export", requireAuth, async (req, res) => {
       ...(query.source ? { source: query.source } : {}),
       ...(query.product ? { product: query.product } : {}),
       ...(query.search ? { leadCode: { contains: query.search.toUpperCase(), mode: "insensitive" } } : {}),
+      ...(query.excludeBot === "1" ? { isSuspectedBot: false } : {}),
       ...(buildDateRangeFilter(from, to) ? { createdAt: buildDateRangeFilter(from, to)! } : {}),
     };
     const stamp = new Date().toISOString().slice(0, 10);

@@ -290,6 +290,15 @@ model WhatsAppClick {
   wonAt              DateTime?
   lostAt             DateTime?
   createdAt          DateTime           @default(now())
+  // Ditambahkan 16 Sep 2026 untuk penandaan retroaktif lead yang
+  // terbukti berasal dari crawl/bot (bukan penghapusan — data historis
+  // tetap utuh, cuma dikecualikan dari laporan/export kalau difilter).
+  // Kriteria HARUS bukti kuat & independen dari status (lihat botReason
+  // per kasus) — bukan sekadar "belum pernah di-follow-up", karena tim
+  // CS memang tidak pernah memakai fitur update status sama sekali
+  // (semua 44rb+ lead historis berstatus NEW, LeadStageHistory kosong).
+  isSuspectedBot     Boolean            @default(false)
+  botReason          String?
   updatedAt          DateTime           @updatedAt
   events             LeadEvent[]
   stageHistory       LeadStageHistory[]
@@ -302,6 +311,7 @@ model WhatsAppClick {
   @@index([referralCode, createdAt])
   @@index([deduplicationKey, createdAt])
   @@index([product])
+  @@index([isSuspectedBot])
 }
 
 model LeadEvent {
