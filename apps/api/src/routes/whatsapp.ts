@@ -622,18 +622,37 @@ router.delete("/slugs/:id", requireAuth, async (req, res) => {
   }
 });
 
-// GET /api/v1/wa/numbers — admin: list numbers with click share
+// GET /api/v1/wa/numbers — admin: list numbers with today's (WIB) click
+// share — the fairness rotator only balances within the current WIB day
+// (see daily-rotator-fairness.ts), so lifetime clickCount alone doesn't
+// reflect whether "today" is actually fair; clicksToday/shareTodayPercent
+// do. clickCount/sharePercent (lifetime) are kept on each row for export.
 router.get("/numbers", requireAuth, async (req, res) => {
   try {
     const numbers = await prisma.whatsAppNumber.findMany({
       orderBy: { createdAt: "asc" },
     });
     const total = numbers.reduce((sum, n) => sum + n.clickCount, 0);
-    const data = numbers.map((n) => ({
-      ...n,
-      sharePercent: total > 0 ? Math.round((n.clickCount / total) * 1000) / 10 : 0,
-    }));
-    res.json({ data, meta: { totalClicks: total } });
+
+    const { start, end } = getWibDayRange();
+    const todayCounts = await prisma.whatsAppClick.groupBy({
+      by: ["numberId"],
+      where: { numberId: { in: numbers.map((n) => n.id) }, createdAt: { gte: start, lt: end }, isSuspectedBot: false },
+      _count: { _all: true },
+    });
+    const clicksTodayByNumber = new Map(todayCounts.map((row) => [row.numberId, row._count._all]));
+    const totalClicksToday = todayCounts.reduce((sum, row) => sum + row._count._all, 0);
+
+    const data = numbers.map((n) => {
+      const clicksToday = clicksTodayByNumber.get(n.id) ?? 0;
+      return {
+        ...n,
+        sharePercent: total > 0 ? Math.round((n.clickCount / total) * 1000) / 10 : 0,
+        clicksToday,
+        shareTodayPercent: totalClicksToday > 0 ? Math.round((clicksToday / totalClicksToday) * 1000) / 10 : 0,
+      };
+    });
+    res.json({ data, meta: { totalClicks: total, totalClicksToday } });
   } catch (error) {
     console.error("Error fetching WA numbers:", error);
     res.status(500).json({ error: "Internal Server Error" });

@@ -355,7 +355,7 @@ export const api = {
     }
     return await res.json()
   },
-  getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string; search?: string; from?: string; to?: string; excludeBot?: string } = {}) => {
+  getWaLeads: async (filters: { status?: string; numberId?: string; domain?: string; source?: string; product?: string; search?: string; from?: string; to?: string; excludeBot?: string; page?: string; pageSize?: string } = {}) => {
     const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][]).toString()
     const res = await authenticatedFetch(`${API_BASE_URL}/wa/leads${qs ? `?${qs}` : ''}`)
     if (!res.ok) throw new Error('Gagal memuat leads')

@@ -15,6 +15,8 @@ interface WaNumber {
   isActive: boolean
   clickCount: number
   sharePercent: number
+  clicksToday: number
+  shareTodayPercent: number
   createdAt: string
 }
 
@@ -236,7 +238,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [savingRow, setSavingRow] = useState(false)
 
   const [numbers, setNumbers] = useState<WaNumber[]>([])
-  const [totalClicks, setTotalClicks] = useState(0)
+  const [totalClicksToday, setTotalClicksToday] = useState(0)
   const [loading, setLoading] = useState(true)
   const [newNumber, setNewNumber] = useState('')
   const [newLabel, setNewLabel] = useState('')
@@ -263,9 +265,13 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [numberFilter, setNumberFilter] = useState('')
   const [searchInput, setSearchInput] = useState('') // raw input, debounced into searchFilter below
   const [searchFilter, setSearchFilter] = useState('')
-  const [datePreset, setDatePreset] = useState<DatePreset>('all')
+  const [datePreset, setDatePreset] = useState<DatePreset>('today')
   const [customFrom, setCustomFrom] = useState('')
   const [customTo, setCustomTo] = useState('')
+  const [leadsPage, setLeadsPage] = useState(1)
+  const [leadsTotal, setLeadsTotal] = useState(0)
+  const [leadsTotalPages, setLeadsTotalPages] = useState(1)
+  const LEADS_PAGE_SIZE = 25
 
   // Debounce the lead-code search box — fires a request per keystroke
   // otherwise, and the leads table is the one thing here with free-text input.
@@ -341,7 +347,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
       setLoading(true)
       const res = await api.getWaNumbers()
       setNumbers(res.data || [])
-      setTotalClicks(res.meta?.totalClicks || 0)
+      setTotalClicksToday(res.meta?.totalClicksToday || 0)
     } catch (e: any) {
       setError(e.message)
     } finally {
@@ -353,16 +359,24 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     try {
       setLeadsLoading(true)
       const { from, to } = computeDateRange(datePreset, customFrom, customTo)
-      const res = await api.getWaLeads({ status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, search: searchFilter, from, to, excludeBot: hideBot ? '1' : undefined })
+      const res = await api.getWaLeads({ status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, search: searchFilter, from, to, excludeBot: hideBot ? '1' : undefined, page: String(leadsPage), pageSize: String(LEADS_PAGE_SIZE) })
       setLeads(res.data || [])
       setFunnel(res.meta?.funnel || {})
       setBySource(res.meta?.bySource || {})
       setBotCount(res.meta?.botCount || 0)
+      setLeadsTotal(res.meta?.total || 0)
+      setLeadsTotalPages(res.meta?.totalPages || 1)
     } catch (e: any) {
       setError(e.message)
     } finally {
       setLeadsLoading(false)
     }
+  }, [sourceFilter, statusFilter, domainFilter, numberFilter, searchFilter, datePreset, customFrom, customTo, hideBot, leadsPage])
+
+  // Any filter change invalidates the current page — jump back to page 1
+  // instead of silently requesting an out-of-range page for the new filter.
+  useEffect(() => {
+    setLeadsPage(1)
   }, [sourceFilter, statusFilter, domainFilter, numberFilter, searchFilter, datePreset, customFrom, customTo, hideBot])
 
   const loadStats = useCallback(async () => {
@@ -820,8 +834,8 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-gray-900 text-[16px]">Traffic Historis per Nomor</h3>
-                <p className="text-[14px] text-gray-500 mt-1">Total {totalClicks} klik tercatat · rotasi harian dihitung terpisah mulai pukul 00.00 WIB</p>
+                <h3 className="font-bold text-gray-900 text-[16px]">Traffic Hari Ini per Nomor</h3>
+                <p className="text-[14px] text-gray-500 mt-1">Total {totalClicksToday} klik hari ini · rotasi direset otomatis mulai pukul 00.00 WIB</p>
               </div>
               <button
                 type="button"
@@ -837,9 +851,9 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 <tr className="bg-gray-50 text-left text-gray-500 text-[12px] uppercase tracking-wider">
                   <th className="px-6 py-3">Nomor</th>
                   <th className="px-6 py-3">Label</th>
-                  <th className="px-6 py-3">Klik Total</th>
-                  <th className="px-6 py-3">Share Historis</th>
-                  <th className="px-6 py-3">Distribusi Historis</th>
+                  <th className="px-6 py-3">Klik Hari Ini</th>
+                  <th className="px-6 py-3">Share Hari Ini</th>
+                  <th className="px-6 py-3">Distribusi Hari Ini</th>
                   <th className="px-6 py-3">Status</th>
                   <th className="px-6 py-3"></th>
                 </tr>
@@ -890,15 +904,15 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                     <tr key={n.id} className="border-t border-gray-100">
                       <td className="px-6 py-3.5 font-mono font-semibold text-gray-900">{n.number}</td>
                       <td className="px-6 py-3.5 text-gray-600">{n.label || '—'}</td>
-                      <td className="px-6 py-3.5 font-bold text-gray-900">{n.clickCount}</td>
+                      <td className="px-6 py-3.5 font-bold text-gray-900">{n.clicksToday}</td>
                       <td className="px-6 py-3.5 font-bold text-gray-700">
-                        {n.sharePercent}%
+                        {n.shareTodayPercent}%
                       </td>
                       <td className="px-6 py-3.5 w-40">
                         <div className="h-2 rounded-full bg-gray-100 overflow-hidden">
                           <div
                             className="h-full rounded-full bg-[#990202]"
-                            style={{ width: `${Math.min(n.sharePercent, 100)}%` }}
+                            style={{ width: `${Math.min(n.shareTodayPercent, 100)}%` }}
                           />
                         </div>
                       </td>
@@ -1654,10 +1668,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 <input type="checkbox" checked={hideBot} onChange={(e) => setHideBot(e.target.checked)} className="w-4 h-4 accent-[#990202]" />
                 Sembunyikan Bot{botCount > 0 ? ` (${botCount})` : ''}
               </label>
-              {(statusFilter || sourceFilter || domainFilter || numberFilter || searchInput || datePreset !== 'all') && (
+              {(statusFilter || sourceFilter || domainFilter || numberFilter || searchInput || datePreset !== 'today') && (
                 <button
                   type="button"
-                  onClick={() => { setStatusFilter(''); setSourceFilter(''); setDomainFilter(''); setNumberFilter(''); setSearchInput(''); setDatePreset('all') }}
+                  onClick={() => { setStatusFilter(''); setSourceFilter(''); setDomainFilter(''); setNumberFilter(''); setSearchInput(''); setDatePreset('today') }}
                   className="px-3 py-2 text-[13px] font-bold text-gray-500 hover:text-red-600 transition-colors"
                 >
                   Reset Filter
@@ -1825,6 +1839,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                   <th className="px-6 py-3">Kode</th>
                   <th className="px-6 py-3">Layanan/Paket</th>
                   <th className="px-6 py-3">Halaman</th>
+                  <th className="px-6 py-3">Domain</th>
                   <th className="px-6 py-3">Sumber</th>
                   <th className="px-6 py-3">Nomor Tujuan</th>
                   <th className="px-6 py-3">Tanggal</th>
@@ -1834,10 +1849,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               </thead>
               <tbody>
                 {leadsLoading && (
-                  <tr><td colSpan={8} className="px-6 py-8 text-center text-gray-400">Memuat leads...</td></tr>
+                  <tr><td colSpan={9} className="px-6 py-8 text-center text-gray-400">Memuat leads...</td></tr>
                 )}
                 {!leadsLoading && leads.length === 0 && (
-                  <tr><td colSpan={8} className="px-6 py-8 text-center text-gray-400">Belum ada lead yang cocok dengan filter.</td></tr>
+                  <tr><td colSpan={9} className="px-6 py-8 text-center text-gray-400">Belum ada lead yang cocok dengan filter.</td></tr>
                 )}
                 {!leadsLoading && leads.map((lead) => (
                   <tr key={lead.id} className="border-t border-gray-100">
@@ -1849,6 +1864,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                     </td>
                     <td className="px-6 py-3.5 text-gray-800 max-w-[260px] truncate font-medium" title={lead.service || ''}>{lead.service || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-500 max-w-[180px] truncate" title={lead.product || ''}>{lead.product || '—'}</td>
+                    <td className="px-6 py-3.5 text-gray-600">{lead.domain || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-600">{SOURCE_LABELS[lead.sourceCode || lead.source || 'unknown'] || lead.sourceCode || lead.source || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-600">{lead.number?.label || lead.number?.number || '—'}</td>
                     <td className="px-6 py-3.5 text-gray-500 whitespace-nowrap">{new Date(lead.createdAt).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</td>
@@ -1871,6 +1887,33 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
               </tbody>
             </table>
           </div>
+
+          {leadsTotal > 0 && (
+            <div className="flex items-center justify-between flex-wrap gap-3">
+              <p className="text-[13px] text-gray-500">
+                Menampilkan {(leadsPage - 1) * LEADS_PAGE_SIZE + 1}–{Math.min(leadsPage * LEADS_PAGE_SIZE, leadsTotal)} dari {leadsTotal} lead
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setLeadsPage((p) => Math.max(1, p - 1))}
+                  disabled={leadsPage <= 1 || leadsLoading}
+                  className="px-3 py-1.5 rounded-lg border border-gray-200 text-[13px] font-semibold text-gray-600 bg-white hover:border-gray-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  ← Sebelumnya
+                </button>
+                <span className="text-[13px] text-gray-500 font-semibold">Halaman {leadsPage} / {leadsTotalPages}</span>
+                <button
+                  type="button"
+                  onClick={() => setLeadsPage((p) => Math.min(leadsTotalPages, p + 1))}
+                  disabled={leadsPage >= leadsTotalPages || leadsLoading}
+                  className="px-3 py-1.5 rounded-lg border border-gray-200 text-[13px] font-semibold text-gray-600 bg-white hover:border-gray-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Berikutnya →
+                </button>
+              </div>
+            </div>
+          )}
 
           <p className="text-[13px] text-gray-400">
             Cocokkan "Kode" dan source dengan <code className="font-mono">[Ref: EL-XXXXXX | Source: gads]</code> pada pesan WhatsApp, lalu update status sesuai progres.
