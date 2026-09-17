@@ -145,8 +145,12 @@ const DATE_PRESETS: { value: DatePreset; label: string }[] = [
   { value: 'custom', label: 'Custom' },
 ]
 
+// WIB calendar date of `d`, as "YYYY-MM-DD" — NOT the browser/UTC date.
+// Matches how the backend interprets from/to (see buildDateRangeFilter in
+// whatsapp.ts): without this offset, "Hari Ini" sent between UTC 17:00 and
+// 24:00 (WIB 00:00–07:00) would ask the API for the wrong day.
 function ymd(d: Date): string {
-  return d.toISOString().slice(0, 10)
+  return new Date(d.getTime() + 7 * 60 * 60 * 1000).toISOString().slice(0, 10)
 }
 
 // Turns a preset (or explicit custom from/to) into concrete "YYYY-MM-DD"

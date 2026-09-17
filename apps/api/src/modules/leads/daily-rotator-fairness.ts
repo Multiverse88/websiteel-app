@@ -1,4 +1,4 @@
-const WIB_OFFSET_MS = 7 * 60 * 60 * 1000;
+export const WIB_OFFSET_MS = 7 * 60 * 60 * 1000;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 export type DailyClickCount = {
@@ -18,6 +18,15 @@ export function getWibDayRange(now = new Date()): { start: Date; end: Date } {
     Date.UTC(wibNow.getUTCFullYear(), wibNow.getUTCMonth(), wibNow.getUTCDate()) - WIB_OFFSET_MS,
   );
   return { start, end: new Date(start.getTime() + DAY_MS) };
+}
+
+/** Awal (00:00 WIB, sebagai timestamp UTC) dari tanggal kalender WIB "YYYY-MM-DD". null kalau formatnya tidak valid. */
+export function wibDateStart(dateStr: string): Date | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+  if (!match) return null;
+  const [, y, m, d] = match;
+  const start = new Date(Date.UTC(Number(y), Number(m) - 1, Number(d)) - WIB_OFFSET_MS);
+  return Number.isNaN(start.getTime()) ? null : start;
 }
 
 /** Pilih nomor dengan klik hari ini paling sedikit; usia lalu id memecah seri secara deterministik. */

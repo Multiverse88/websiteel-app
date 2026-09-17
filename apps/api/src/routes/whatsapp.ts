@@ -18,7 +18,7 @@ import { buildLeadsExportWorkbook, buildLeadsCsv, buildNumbersCsv } from "../mod
 import { generateExportAIInsight } from "../modules/leads/ai-export-service";
 import { isBotUserAgent } from "../modules/leads/bot-detect";
 import { isRateLimited } from "../modules/leads/click-rate-limit";
-import { chooseDailyFairNumber, getWibDayRange } from "../modules/leads/daily-rotator-fairness";
+import { chooseDailyFairNumber, getWibDayRange, wibDateStart } from "../modules/leads/daily-rotator-fairness";
 
 const router = Router();
 
@@ -85,25 +85,27 @@ function cleanSlug(value: unknown): string {
     .replace(/-+/g, "-");
 }
 
-// Leads dashboard date-range filter (from/to as "YYYY-MM-DD"). `to` is
-// treated as inclusive of the whole day (23:59:59.999), matching how a date
-// picker's "sampai tanggal X" reads to a non-technical user. Returns
-// undefined (not applied) if both are missing/invalid so callers can just do
-// `if (range) where.createdAt = range`.
-function buildDateRangeFilter(from?: string, to?: string): { gte?: Date; lte?: Date } | undefined {
-  const range: { gte?: Date; lte?: Date } = {};
+// Leads dashboard date-range filter (from/to as "YYYY-MM-DD"). Interpreted
+// as WIB calendar dates (matching the WIB day boundaries the fairness
+// rotator uses, see daily-rotator-fairness.ts) — NOT the server's UTC
+// calendar day. Previously this used `new Date(from)`/`setHours()`, which
+// silently anchored "today" to the server's UTC day instead of WIB: any
+// click between WIB 00:00–07:00 fell into the wrong day, undercounting
+// "Hari Ini" on the Leads tab relative to the rotator's own daily click
+// counts on the Nomor & Fairness tab. `to` is inclusive of that whole WIB
+// day. Returns undefined (not applied) if both are missing/invalid so
+// callers can just do `if (range) where.createdAt = range`.
+function buildDateRangeFilter(from?: string, to?: string): { gte?: Date; lt?: Date } | undefined {
+  const range: { gte?: Date; lt?: Date } = {};
   if (from) {
-    const d = new Date(from);
-    if (!Number.isNaN(d.getTime())) range.gte = d;
+    const start = wibDateStart(from);
+    if (start) range.gte = start;
   }
   if (to) {
-    const d = new Date(to);
-    if (!Number.isNaN(d.getTime())) {
-      d.setHours(23, 59, 59, 999);
-      range.lte = d;
-    }
+    const end = wibDateStart(to);
+    if (end) range.lt = new Date(end.getTime() + 24 * 60 * 60 * 1000);
   }
-  return range.gte || range.lte ? range : undefined;
+  return range.gte || range.lt ? range : undefined;
 }
 
 // GET /api/v1/wa/redirect?text=...&source=...&product=...
@@ -1009,7 +1011,7 @@ router.get("/leads/stats", requireAuth, async (req, res) => {
     if (where.source) { params.push(where.source); conditions.push(`"source" = $${params.length}`); }
     if (where.isSuspectedBot === false) { conditions.push(`"isSuspectedBot" = false`); }
     if (dateRange?.gte) { params.push(dateRange.gte); conditions.push(`"createdAt" >= $${params.length}`); }
-    if (dateRange?.lte) { params.push(dateRange.lte); conditions.push(`"createdAt" <= $${params.length}`); }
+    if (dateRange?.lt) { params.push(dateRange.lt); conditions.push(`"createdAt" < $${params.length}`); }
     const whereSql = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
     const rows = await prisma.$queryRawUnsafe<{ bucket: Date; count: bigint }[]>(
       `SELECT date_trunc('${groupBy}', "createdAt") AS bucket, COUNT(*)::bigint AS count
