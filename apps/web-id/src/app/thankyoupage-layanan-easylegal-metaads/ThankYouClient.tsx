@@ -38,8 +38,8 @@ export default function ThankYouClient() {
   }, []);
 
   return (
-
-      <div className="ty-metaads-scope ty-page">
+    <div className="ty-metaads-scope">
+      <div className="ty-page">
         <div className="card">
           <div className="check-wrap">
             <svg width="32" height="32" viewBox="0 0 52 52" fill="none">
@@ -72,6 +72,6 @@ export default function ThankYouClient() {
           </div>
         </div>
       </div>
-
+    </div>
   );
 }
