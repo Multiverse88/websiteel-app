@@ -4,7 +4,7 @@ import Script from "next/script";
 // own "Install manually" instructions (gtag.js), separate from the GTM
 // container in GoogleTagManager.tsx — this is its own direct tag, not
 // something configured inside GTM.
-const GA_MEASUREMENT_ID = "G-02KE12HWY1";
+const GA_MEASUREMENT_ID = "G-4Z2G11Y09E";
 
 export function GoogleAnalytics() {
   return (
