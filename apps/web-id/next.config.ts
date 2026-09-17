@@ -4,7 +4,7 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googletagmanager.com https://tagassistant.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.google.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://www.googleadservices.com https://*.googleadservices.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com https://connect.facebook.net https://tgtag.io;
   script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googletagmanager.com https://tagassistant.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.google.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://www.googleadservices.com https://*.googleadservices.com https://www.youtube.com https://www.youtube-nocookie.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com https://connect.facebook.net https://tgtag.io;
-  style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id https://typebot.easylegal.biz.id;
+  style-src 'self' 'unsafe-inline' https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://fonts.googleapis.com;
   img-src 'self' https: blob: data: https://www.googletagmanager.com https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.googleadservices.com https://*.doubleclick.net;
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' https://api.easylegal.my.id ws: wss: https://www.googletagmanager.com https://*.googletagmanager.com https://tagassistant.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.google.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://www.googleadservices.com https://*.googleadservices.com https://typebot.easylegal.my.id https://typebot.easylegal.biz.id https://cloudflareinsights.com https://ad.doubleclick.net https://connect.facebook.net https://graph.facebook.com https://www.facebook.com https://*.ecs.us-east-1.on.aws https://*.us-central1.run.app https://tgtag.io;
@@ -282,8 +282,6 @@ const nextConfig: NextConfig = {
       { source: "/jasa-penyesuaian-kbli-2-metaads", destination: "/layanan/nib-oss" },
       { source: "/jasa-penyesuaian-kbli-3-metaads", destination: "/layanan/nib-oss" },
       { source: "/thankyoupage-konsultasi-penyesuaian-kbli-metaads", destination: "/testimoni" },
-      { source: "/layanan-easylegal-metaads", destination: "/tentang-kami" },
-      { source: "/thankyoupage-layanan-easylegal-metaads", destination: "/testimoni" },
       { source: "/meta-ads-pkp", destination: "/layanan/pengajuan-pkp" },
       { source: "/meta-ads-perubahan-akta", destination: "/layanan/perubahan-akta" },
       { source: "/meta-ads-press-release", destination: "/layanan/press-release" },

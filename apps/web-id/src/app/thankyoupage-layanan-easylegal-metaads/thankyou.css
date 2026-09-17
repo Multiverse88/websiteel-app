@@ -1,0 +1,197 @@
+
+.ty-metaads-scope {
+  margin: 0;
+  padding: 0;
+}
+
+.ty-metaads-scope .ty-page {
+  min-height: 100vh;
+  background: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  font-family: 'Plus Jakarta Sans', Segoe UI, system-ui, -apple-system, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+.ty-metaads-scope .card {
+  background: #1f2937;
+  border-radius: 20px;
+  max-width: 420px;
+  width: 100%;
+  padding: 36px 28px 28px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* --- Check icon --- */
+.ty-metaads-scope .check-wrap {
+  width: 60px;
+  height: 60px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.ty-metaads-scope .checkmark {
+  stroke: #16a34a;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: tyMetaadsDraw 0.5s ease 0.2s forwards;
+}
+
+@keyframes tyMetaadsDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* --- Heading --- */
+.ty-metaads-scope h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #f9fafb;
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+
+.ty-metaads-scope .sub {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+/* --- Timer --- */
+.ty-metaads-scope .timer-wrap {
+  margin-bottom: 20px;
+}
+
+.ty-metaads-scope .timer-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.ty-metaads-scope .timer-bar {
+  height: 5px;
+  background: #374151;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ty-metaads-scope .timer-fill {
+  height: 100%;
+  background: #16a34a;
+  border-radius: 10px;
+  width: 100%;
+  animation: tyMetaadsShrink 3s linear forwards;
+}
+
+@keyframes tyMetaadsShrink {
+  0% { width: 100%; }
+  100% { width: 0%; }
+}
+
+.ty-metaads-scope .timer-count {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fcd34d;
+  margin: 10px 0 0;
+  line-height: 1;
+}
+
+.ty-metaads-scope .timer-note {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 4px 0 0;
+}
+
+/* --- CTA Button --- */
+.ty-metaads-scope .btn-wa {
+  display: block;
+  background: #16a34a;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.ty-metaads-scope .btn-wa:hover {
+  background: #15803d;
+  transform: translateY(-1px);
+}
+
+.ty-metaads-scope .btn-wa:active {
+  transform: translateY(0);
+}
+
+.ty-metaads-scope .note {
+  font-size: 11px;
+  color: #6b7280;
+  margin: 0 0 20px;
+}
+
+/* --- Divider --- */
+.ty-metaads-scope .divider {
+  height: 1px;
+  background: #374151;
+  margin: 0 0 18px;
+}
+
+/* --- Trust grid (unified, inside card) --- */
+.ty-metaads-scope .trust-grid {
+  display: flex;
+  justify-content: center;
+  gap: 6px 10px;
+  flex-wrap: wrap;
+}
+
+.ty-metaads-scope .ti {
+  font-size: 10px;
+  color: #9ca3af;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* --- Mobile --- */
+@media (max-width: 460px) {
+  .ty-metaads-scope .card {
+    padding: 28px 20px 22px;
+    border-radius: 16px;
+  }
+  .ty-metaads-scope h1 {
+    font-size: 19px;
+  }
+  .ty-metaads-scope .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .ty-metaads-scope .ti {
+    text-align: center;
+    white-space: normal;
+  }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .ty-metaads-scope .checkmark {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .ty-metaads-scope .timer-fill {
+    animation: none;
+    width: 0%;
+  }
+}

@@ -16,6 +16,7 @@ import mediaRoutes from './routes/media';
 import domainRoutes from './routes/domains';
 import settingsRoutes from './routes/settings';
 import whatsappRoutes from './routes/whatsapp';
+import campaignLeadRoutes from './routes/campaign-leads';
 import path from 'path';
 
 const app = express();
@@ -97,6 +98,7 @@ app.use('/api/v1/media', mediaRoutes);
 app.use('/api/v1/domains', domainRoutes);
 app.use('/api/v1/settings', settingsRoutes);
 app.use('/api/v1/wa', whatsappRoutes);
+app.use('/api/v1/campaign-leads', campaignLeadRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
