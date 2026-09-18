@@ -26,11 +26,12 @@ const router = Router();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function buildSiteFilter(site: string | undefined): any | null {
   if (!site || site === "all") return null;
-  // 2026-09-18: artikel lama (seed pre-split) kini KUNCI tampil di
-  // easylegal.co.id. Domain lain hanya artikel site-nya sendiri.
+  // 2026-09-18 (strict): artikel lama (legacy) KUNCI tampil di
+  // easylegal.co.id. Domain lain (biz.id, easylegal.id) bahkan menyembunyikan
+  // artikel legacy milik site-nya sendiri → URL lama di biz.id 404 (putusan owner).
   if (site === "easylegal.co.id")
     return { OR: [{ site }, { site: "easylegal.biz.id", legacy: true }] };
-  return { site };
+  return { site, legacy: false };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

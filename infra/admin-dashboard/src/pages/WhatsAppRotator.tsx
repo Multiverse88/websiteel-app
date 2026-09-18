@@ -51,7 +51,7 @@ const DOMAINS: { value: string; label: string }[] = [
   { value: 'easylegal.biz.id', label: 'easylegal.biz.id' },
 ]
 
-type DatePreset = 'all' | 'today' | '7d' | '30d' | 'month' | 'lastmonth' | 'custom'
+type DatePreset = 'all' | 'today' | 'yesterday' | '7d' | '30d' | 'month' | 'lastmonth' | 'custom'
 
 interface WaKnownButton {
   ctaId: string
@@ -138,6 +138,7 @@ const STATS_GROUP_LABELS: Record<'day' | 'week' | 'month' | 'number' | 'source' 
 const DATE_PRESETS: { value: DatePreset; label: string }[] = [
   { value: 'all', label: 'Semua Waktu' },
   { value: 'today', label: 'Hari Ini' },
+  { value: 'yesterday', label: 'Kemarin' },
   { value: '7d', label: '7 Hari Terakhir' },
   { value: '30d', label: '30 Hari Terakhir' },
   { value: 'month', label: 'Bulan Ini' },
@@ -159,6 +160,7 @@ function computeDateRange(preset: DatePreset, customFrom: string, customTo: stri
   const now = new Date()
   if (preset === 'all') return {}
   if (preset === 'today') return { from: ymd(now), to: ymd(now) }
+  if (preset === 'yesterday') { const d = new Date(now); d.setDate(d.getDate() - 1); return { from: ymd(d), to: ymd(d) } }
   if (preset === '7d') { const d = new Date(now); d.setDate(d.getDate() - 6); return { from: ymd(d), to: ymd(now) } }
   if (preset === '30d') { const d = new Date(now); d.setDate(d.getDate() - 29); return { from: ymd(d), to: ymd(now) } }
   if (preset === 'month') { const d = new Date(now.getFullYear(), now.getMonth(), 1); return { from: ymd(d), to: ymd(now) } }
