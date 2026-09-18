@@ -8,26 +8,29 @@ import { generateEmbedding } from "../modules/articles/embedding-service";
 const router = Router();
 
 // Every domain shows its own articles (site: "<domain>", selected via the
-// admin dashboard's per-article Site dropdown) PLUS the legacy articles
+// admin dashboard's per-article Site dropdown). PLUS the legacy articles
 // that pre-date the multi-site split (site: "easylegal.biz.id" AND
 // legacy: true — see prisma/migrations/20260906040000_article_legacy_flag)
-// — so old URLs keep working everywhere. The `legacy` flag (not just the
-// site value) is what matters here: a BRAND NEW article a dashboard user
-// deliberately targets at "easylegal.biz.id" has legacy=false by default,
-// so it stays confined to biz.id only, same as any other domain choice —
-// only the ~200 pre-existing seed articles broadcast everywhere.
-// `site=all` (kept for back-compat/debugging) still means "no filter".
+// — 2026-09-18: sekarang KONFIRMASI hanya dibroadcast ke easylegal.co.id
+// (domain pemilik artikel lama), bukan ke semua domain. biz.id dan
+// easylegal.id hanya menampilkan artikel milik mereka sendiri; artikel
+// lama tetap bisa diakses via URL lamanya di co.id.
+// `site=all` (kept for back-compat/debugging) masih berarti "tanpa filter".
 //
 // Returns a Prisma where-fragment or null (no constraint). Callers must
 // combine this via an `AND` array rather than spreading it directly into
-// whereClause, since the non-biz.id branch uses `OR` internally and a
-// second top-level `OR` (e.g. from a text search `q` param) would silently
-// clobber it if both were assigned to the same `whereClause.OR` key.
+// whereClause, since the legacy-inclusion branch uses `OR` internally and
+// a second top-level `OR` (e.g. dari text search `q` param) akan
+// menyamaratinya kalau keduanya di-assign ke key `whereClause.OR`
+// yang sama.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function buildSiteFilter(site: string | undefined): any | null {
   if (!site || site === "all") return null;
-  if (site === "easylegal.biz.id") return { site };
-  return { OR: [{ site }, { site: "easylegal.biz.id", legacy: true }] };
+  // 2026-09-18: artikel lama (seed pre-split) kini KUNCI tampil di
+  // easylegal.co.id. Domain lain hanya artikel site-nya sendiri.
+  if (site === "easylegal.co.id")
+    return { OR: [{ site }, { site: "easylegal.biz.id", legacy: true }] };
+  return { site };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
