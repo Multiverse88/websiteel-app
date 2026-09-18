@@ -549,15 +549,22 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     }
   }
 
-  // Auto-refresh the two live-data tabs every 15s while they're active.
+  // Nomor & Fairness selalu di-refresh tiap 15 detik terlepas dari tab mana
+  // yang aktif — sebelumnya cuma refresh saat tab 'numbers' aktif, jadi kalau
+  // admin diam di tab Leads melewati pergantian hari WIB, angka "Klik Hari
+  // Ini" di tab Nomor & Fairness beku di angka hari sebelumnya (Leads tetap
+  // update karena dia punya polling sendiri saat aktif), bikin dua tab
+  // kelihatan tidak sinkron padahal cuma salah satu yang basi.
   useEffect(() => {
-    if (tab !== 'numbers' && tab !== 'leads') return
-    const id = setInterval(() => {
-      if (tab === 'numbers') load()
-      else loadLeads()
-    }, 15000)
+    const id = setInterval(() => { load() }, 15000)
     return () => clearInterval(id)
-  }, [tab, load, loadLeads])
+  }, [load])
+
+  useEffect(() => {
+    if (tab !== 'leads') return
+    const id = setInterval(() => { loadLeads() }, 15000)
+    return () => clearInterval(id)
+  }, [tab, loadLeads])
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
