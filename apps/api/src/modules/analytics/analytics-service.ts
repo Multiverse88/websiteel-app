@@ -14,8 +14,9 @@ export interface AnalyticsFunnel {
   botFiltered: number;
   contacted: number;
   won: number;
-  totalRevenue: number;
   closingRate: number;
+  organicSeoLeads: number;
+  organicSeoPercent: number;
 }
 
 export interface AnalyticsTimelineItem {
@@ -37,8 +38,8 @@ export interface AnalyticsTopPageItem {
   path: string;
   domain: string;
   totalLeads: number;
+  contactedCount: number;
   wonCount: number;
-  revenue: number;
   closingRate: number;
 }
 
@@ -112,7 +113,7 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
       COUNT(*) FILTER (WHERE "isSuspectedBot")::bigint as bot_filtered,
       COUNT(*) FILTER (WHERE NOT "isSuspectedBot" AND "status" != 'NEW')::bigint as contacted,
       COUNT(*) FILTER (WHERE NOT "isSuspectedBot" AND "status" = 'WON')::bigint as won,
-      COALESCE(SUM("orderValue") FILTER (WHERE NOT "isSuspectedBot" AND "status" = 'WON'), 0)::bigint as total_revenue
+      COUNT(*) FILTER (WHERE NOT "isSuspectedBot" AND "channel" = 'ORGANIC_SEARCH')::bigint as organic_seo_leads
      FROM "WhatsAppClick"
      ${baseWhereSql}`,
     ...params,
@@ -123,8 +124,9 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
   const botFiltered = Number(funnelRaw?.bot_filtered || 0);
   const contacted = Number(funnelRaw?.contacted || 0);
   const won = Number(funnelRaw?.won || 0);
-  const totalRevenue = Number(funnelRaw?.total_revenue || 0);
+  const organicSeoLeads = Number(funnelRaw?.organic_seo_leads || 0);
   const closingRate = calculateClosingRate(won, organicLeads);
+  const organicSeoPercent = organicLeads > 0 ? Math.round((organicSeoLeads / organicLeads) * 1000) / 10 : 0;
 
   const funnel: AnalyticsFunnel = {
     totalClicks,
@@ -132,8 +134,9 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
     botFiltered,
     contacted,
     won,
-    totalRevenue,
     closingRate,
+    organicSeoLeads,
+    organicSeoPercent,
   };
 
   // Add excludeBot filter to subsequent breakdowns if requested
@@ -198,8 +201,8 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
       COALESCE(NULLIF("product", ''), '/ (Beranda)') as path,
       COALESCE(NULLIF("domain", ''), 'easylegal.id') as domain,
       COUNT(*)::bigint as total_leads,
-      COUNT(*) FILTER (WHERE "status" = 'WON')::bigint as won_count,
-      COALESCE(SUM("orderValue") FILTER (WHERE "status" = 'WON'), 0)::bigint as revenue
+      COUNT(*) FILTER (WHERE "status" != 'NEW')::bigint as contacted_count,
+      COUNT(*) FILTER (WHERE "status" = 'WON')::bigint as won_count
      FROM "WhatsAppClick"
      ${breakdownWhereSql}
      GROUP BY path, domain
@@ -210,14 +213,14 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
 
   const topPages: AnalyticsTopPageItem[] = pageRows.map((r) => {
     const totalLeads = Number(r.total_leads || 0);
+    const contactedCount = Number(r.contacted_count || 0);
     const wonCount = Number(r.won_count || 0);
-    const revenue = Number(r.revenue || 0);
     return {
       path: r.path,
       domain: r.domain,
       totalLeads,
+      contactedCount,
       wonCount,
-      revenue,
       closingRate: calculateClosingRate(wonCount, totalLeads),
     };
   });

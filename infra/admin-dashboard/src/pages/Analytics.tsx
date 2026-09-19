@@ -15,7 +15,7 @@ import {
 import {
   Users,
   CheckCircle2,
-  DollarSign,
+  Search,
   TrendingUp,
   ExternalLink,
   Bot,
@@ -68,13 +68,6 @@ function computeDateRange(preset: DatePreset, customFrom: string, customTo: stri
   return { from: customFrom || undefined, to: customTo || undefined }
 }
 
-function formatRupiah(value: number): string {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    maximumFractionDigits: 0,
-  }).format(value)
-}
 
 export default function Analytics() {
   const [domain, setDomain] = useState<string>('all')
@@ -122,8 +115,9 @@ export default function Analytics() {
     botFiltered: 0,
     contacted: 0,
     won: 0,
-    totalRevenue: 0,
     closingRate: 0,
+    organicSeoLeads: 0,
+    organicSeoPercent: 0,
   }
 
   const timeline = data?.timeline || []
@@ -143,7 +137,7 @@ export default function Analytics() {
             Analytics & Leads Intelligence
           </h1>
           <p className="text-sm text-gray-500 mt-1">
-            Pemantauan performa trafik multi-domain, funnel konversi CRM, dan omset closing
+            Pemantauan performa trafik multi-domain, funnel konversi CRM, dan efektivitas halaman
           </p>
         </div>
 
@@ -296,20 +290,20 @@ export default function Analytics() {
           </div>
         </div>
 
-        {/* Card 4: Total Revenue / Omset */}
+        {/* Card 4: Trafik Organik Google SEO */}
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 text-sm font-medium">
-            <span>Total Nilai Omset</span>
+            <span>Trafik Google SEO</span>
             <span className="p-2 bg-purple-50 text-purple-600 rounded-xl">
-              <DollarSign className="w-5 h-5" />
+              <Search className="w-5 h-5" />
             </span>
           </div>
           <div className="mt-4">
-            <div className="text-2xl lg:text-3xl font-extrabold text-gray-900 font-mono truncate" title={formatRupiah(funnel.totalRevenue)}>
-              {formatRupiah(funnel.totalRevenue)}
+            <div className="text-3xl font-extrabold text-gray-900 font-mono">
+              {funnel.organicSeoLeads.toLocaleString('id-ID')}
             </div>
             <div className="text-xs text-gray-400 mt-1">
-              Dari {funnel.won} transaksi deal tercatat
+              Kontribusi: <b className="text-purple-600 font-mono font-bold">{funnel.organicSeoPercent}%</b> dari total lead
             </div>
           </div>
         </div>
@@ -439,9 +433,9 @@ export default function Analytics() {
                 <th className="py-3 px-4">URL Halaman</th>
                 <th className="py-3 px-4">Domain</th>
                 <th className="py-3 px-4 text-center">Total Lead</th>
+                <th className="py-3 px-4 text-center">Di-follow Up</th>
                 <th className="py-3 px-4 text-center">Closing (Won)</th>
                 <th className="py-3 px-4 text-center">Closing Rate</th>
-                <th className="py-3 px-4 text-right">Nilai Omset</th>
                 <th className="py-3 px-4 text-center">Aksi</th>
               </tr>
             </thead>
@@ -457,6 +451,9 @@ export default function Analytics() {
                   <td className="py-3 px-4 text-center font-mono font-bold text-gray-800">
                     {page.totalLeads}
                   </td>
+                  <td className="py-3 px-4 text-center font-mono font-medium text-amber-600">
+                    {page.contactedCount || 0}
+                  </td>
                   <td className="py-3 px-4 text-center font-mono font-semibold text-emerald-600">
                     {page.wonCount}
                   </td>
@@ -464,9 +461,6 @@ export default function Analytics() {
                     <span className="inline-block px-2 py-0.5 rounded-full text-xs font-mono font-semibold bg-emerald-50 text-emerald-700">
                       {page.closingRate}%
                     </span>
-                  </td>
-                  <td className="py-3 px-4 text-right font-mono font-semibold text-gray-900">
-                    {formatRupiah(page.revenue)}
                   </td>
                   <td className="py-3 px-4 text-center">
                     <button
