@@ -484,6 +484,7 @@ export async function getAnalyticsDetail(query: AnalyticsDetailQuery = {}): Prom
      GROUP BY service_name
      ORDER BY leads DESC
      LIMIT 25`,
+    ...breakdownParams,
   );
   const totalServiceLeads = serviceRows.reduce((acc, r) => acc + Number(r.leads || 0), 0);
   const services: AnalyticsDetailServiceItem[] = serviceRows.map((r) => {
