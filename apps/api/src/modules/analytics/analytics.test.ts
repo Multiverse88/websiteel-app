@@ -1,21 +1,21 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { calculateClosingRate } from "./analytics-service";
+import { calculateSharePercent } from "./analytics-service";
 
-test("calculateClosingRate returns 0 when total is zero or negative", () => {
-  assert.equal(calculateClosingRate(0, 0), 0);
-  assert.equal(calculateClosingRate(5, 0), 0);
-  assert.equal(calculateClosingRate(5, -10), 0);
+test("calculateSharePercent returns 0 when total is zero or negative", () => {
+  assert.equal(calculateSharePercent(0, 0), 0);
+  assert.equal(calculateSharePercent(5, 0), 0);
+  assert.equal(calculateSharePercent(5, -10), 0);
 });
 
-test("calculateClosingRate computes accurate percentage rounded to 1 decimal", () => {
-  assert.equal(calculateClosingRate(10, 100), 10);
-  assert.equal(calculateClosingRate(1, 3), 33.3);
-  assert.equal(calculateClosingRate(2, 3), 66.7);
-  assert.equal(calculateClosingRate(142, 1420), 10);
-  assert.equal(calculateClosingRate(15, 90), 16.7);
+test("calculateSharePercent computes accurate percentage rounded to 1 decimal", () => {
+  assert.equal(calculateSharePercent(10, 100), 10);
+  assert.equal(calculateSharePercent(1, 3), 33.3);
+  assert.equal(calculateSharePercent(2, 3), 66.7);
+  assert.equal(calculateSharePercent(142, 1420), 10);
+  assert.equal(calculateSharePercent(197, 25830), 0.8);
 });
 
-test("calculateClosingRate handles 100% conversion", () => {
-  assert.equal(calculateClosingRate(50, 50), 100);
+test("calculateSharePercent handles 100% share", () => {
+  assert.equal(calculateSharePercent(50, 50), 100);
 });

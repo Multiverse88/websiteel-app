@@ -14,7 +14,8 @@ import {
 } from 'recharts'
 import {
   Users,
-  CheckCircle2,
+  Zap,
+  Flame,
   Search,
   TrendingUp,
   ExternalLink,
@@ -113,11 +114,10 @@ export default function Analytics() {
     totalClicks: 0,
     organicLeads: 0,
     botFiltered: 0,
-    contacted: 0,
-    won: 0,
-    closingRate: 0,
+    todayLeads: 0,
     organicSeoLeads: 0,
     organicSeoPercent: 0,
+    topPageName: '-',
   }
 
   const timeline = data?.timeline || []
@@ -251,50 +251,29 @@ export default function Analytics() {
           </div>
         </div>
 
-        {/* Card 2: Contacted CS */}
+        {/* Card 2: Trafik Hari Ini */}
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 text-sm font-medium">
-            <span>Di-follow Up (CS)</span>
-            <span className="p-2 bg-amber-50 text-amber-600 rounded-xl">
-              <TrendingUp className="w-5 h-5" />
-            </span>
-          </div>
-          <div className="mt-4">
-            <div className="text-3xl font-extrabold text-gray-900 font-mono">
-              {funnel.contacted.toLocaleString('id-ID')}
-            </div>
-            <div className="text-xs text-gray-400 mt-1">
-              Rasio follow-up: {funnel.organicLeads > 0 ? Math.round((funnel.contacted / funnel.organicLeads) * 100) : 0}% dari lead
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3: Deals Won / Closing */}
-        <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-          <div className="flex items-center justify-between text-gray-500 text-sm font-medium">
-            <span>Closing / Deal (Won)</span>
+            <span>Trafik Hari Ini</span>
             <span className="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
-              <CheckCircle2 className="w-5 h-5" />
+              <Zap className="w-5 h-5" />
             </span>
           </div>
           <div className="mt-4">
             <div className="text-3xl font-extrabold text-emerald-600 font-mono">
-              {funnel.won.toLocaleString('id-ID')}
+              {funnel.todayLeads > 0 ? `+${funnel.todayLeads.toLocaleString('id-ID')}` : funnel.todayLeads}
             </div>
-            <div className="text-xs text-emerald-700 mt-1 font-medium flex items-center gap-1">
-              <span>Closing Rate:</span>
-              <span className="bg-emerald-50 px-2 py-0.5 rounded-full font-mono font-bold">
-                {funnel.closingRate}%
-              </span>
+            <div className="text-xs text-gray-400 mt-1">
+              Lead baru masuk hari ini (WIB)
             </div>
           </div>
         </div>
 
-        {/* Card 4: Trafik Organik Google SEO */}
+        {/* Card 3: Trafik Organik Google SEO */}
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 text-sm font-medium">
             <span>Trafik Google SEO</span>
-            <span className="p-2 bg-purple-50 text-purple-600 rounded-xl">
+            <span className="p-2 bg-blue-50 text-blue-600 rounded-xl">
               <Search className="w-5 h-5" />
             </span>
           </div>
@@ -302,8 +281,26 @@ export default function Analytics() {
             <div className="text-3xl font-extrabold text-gray-900 font-mono">
               {funnel.organicSeoLeads.toLocaleString('id-ID')}
             </div>
+            <div className="text-xs text-blue-600 mt-1 font-medium">
+              Pangsa: <b className="font-mono font-bold">{funnel.organicSeoPercent}%</b> dari total lead
+            </div>
+          </div>
+        </div>
+
+        {/* Card 4: Top Service Halaman #1 */}
+        <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-gray-500 text-sm font-medium">
+            <span>Halaman Teratas (#1)</span>
+            <span className="p-2 bg-rose-50 text-rose-600 rounded-xl">
+              <Flame className="w-5 h-5" />
+            </span>
+          </div>
+          <div className="mt-4">
+            <div className="text-lg lg:text-xl font-bold text-gray-900 font-mono truncate" title={funnel.topPageName}>
+              {funnel.topPageName}
+            </div>
             <div className="text-xs text-gray-400 mt-1">
-              Kontribusi: <b className="text-purple-600 font-mono font-bold">{funnel.organicSeoPercent}%</b> dari total lead
+              Penyumbang interaksi terbanyak
             </div>
           </div>
         </div>
@@ -433,9 +430,9 @@ export default function Analytics() {
                 <th className="py-3 px-4">URL Halaman</th>
                 <th className="py-3 px-4">Domain</th>
                 <th className="py-3 px-4 text-center">Total Lead</th>
-                <th className="py-3 px-4 text-center">Di-follow Up</th>
-                <th className="py-3 px-4 text-center">Closing (Won)</th>
-                <th className="py-3 px-4 text-center">Closing Rate</th>
+                <th className="py-3 px-4 text-center">Pangsa Trafik (%)</th>
+                <th className="py-3 px-4 text-center">Sumber Utama</th>
+                <th className="py-3 px-4 text-center">Hari Ini</th>
                 <th className="py-3 px-4 text-center">Aksi</th>
               </tr>
             </thead>
@@ -451,16 +448,40 @@ export default function Analytics() {
                   <td className="py-3 px-4 text-center font-mono font-bold text-gray-800">
                     {page.totalLeads}
                   </td>
-                  <td className="py-3 px-4 text-center font-mono font-medium text-amber-600">
-                    {page.contactedCount || 0}
-                  </td>
-                  <td className="py-3 px-4 text-center font-mono font-semibold text-emerald-600">
-                    {page.wonCount}
+                  <td className="py-3 px-4 text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-16 bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                        <div
+                          className="bg-blue-600 h-1.5 rounded-full"
+                          style={{ width: `${Math.min((page.sharePercent || 0) * 3, 100)}%` }}
+                        />
+                      </div>
+                      <span className="text-xs font-mono font-semibold text-gray-700">
+                        {page.sharePercent || 0}%
+                      </span>
+                    </div>
                   </td>
                   <td className="py-3 px-4 text-center">
-                    <span className="inline-block px-2 py-0.5 rounded-full text-xs font-mono font-semibold bg-emerald-50 text-emerald-700">
-                      {page.closingRate}%
+                    <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                      (page.topSource || '').includes('SEO')
+                        ? 'bg-blue-50 text-blue-700'
+                        : (page.topSource || '').includes('Ads')
+                        ? 'bg-emerald-50 text-emerald-700'
+                        : (page.topSource || '').includes('Instagram')
+                        ? 'bg-pink-50 text-pink-700'
+                        : 'bg-gray-100 text-gray-700'
+                    }`}>
+                      {page.topSource || 'Organik'}
                     </span>
+                  </td>
+                  <td className="py-3 px-4 text-center font-mono font-semibold text-gray-800">
+                    {page.todayLeads > 0 ? (
+                      <span className="text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">
+                        +{page.todayLeads}
+                      </span>
+                    ) : (
+                      <span className="text-gray-300">0</span>
+                    )}
                   </td>
                   <td className="py-3 px-4 text-center">
                     <button

@@ -12,11 +12,10 @@ export interface AnalyticsFunnel {
   totalClicks: number;
   organicLeads: number;
   botFiltered: number;
-  contacted: number;
-  won: number;
-  closingRate: number;
+  todayLeads: number;
   organicSeoLeads: number;
   organicSeoPercent: number;
+  topPageName: string;
 }
 
 export interface AnalyticsTimelineItem {
@@ -38,9 +37,9 @@ export interface AnalyticsTopPageItem {
   path: string;
   domain: string;
   totalLeads: number;
-  contactedCount: number;
-  wonCount: number;
-  closingRate: number;
+  sharePercent: number;
+  topSource: string;
+  todayLeads: number;
 }
 
 export interface AnalyticsTopArticleItem {
@@ -68,10 +67,20 @@ const CHANNEL_LABELS: Record<string, string> = {
   OTHER: "Lainnya",
   UNKNOWN: "Tidak Teridentifikasi",
 };
+const SOURCE_CODE_LABELS: Record<string, string> = {
+  googleseo: "Google SEO",
+  gads: "Google Ads",
+  metaads: "Meta Ads",
+  instagram: "Instagram",
+  tiktok: "TikTok",
+  direct: "Direct",
+  referral: "Referral",
+  unknown: "Organik",
+};
 
-export function calculateClosingRate(won: number, total: number): number {
+export function calculateSharePercent(value: number, total: number): number {
   if (total <= 0) return 0;
-  return Math.round((won / total) * 1000) / 10;
+  return Math.round((value / total) * 1000) / 10;
 }
 
 export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<AnalyticsOverview> {
@@ -111,8 +120,7 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
       COUNT(*)::bigint as total_clicks,
       COUNT(*) FILTER (WHERE NOT "isSuspectedBot")::bigint as organic_leads,
       COUNT(*) FILTER (WHERE "isSuspectedBot")::bigint as bot_filtered,
-      COUNT(*) FILTER (WHERE NOT "isSuspectedBot" AND "status" != 'NEW')::bigint as contacted,
-      COUNT(*) FILTER (WHERE NOT "isSuspectedBot" AND "status" = 'WON')::bigint as won,
+      COUNT(*) FILTER (WHERE NOT "isSuspectedBot" AND "createdAt" + interval '7 hours' >= CURRENT_DATE)::bigint as today_leads,
       COUNT(*) FILTER (WHERE NOT "isSuspectedBot" AND "channel" = 'ORGANIC_SEARCH')::bigint as organic_seo_leads
      FROM "WhatsAppClick"
      ${baseWhereSql}`,
@@ -122,22 +130,9 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
   const totalClicks = Number(funnelRaw?.total_clicks || 0);
   const organicLeads = Number(funnelRaw?.organic_leads || 0);
   const botFiltered = Number(funnelRaw?.bot_filtered || 0);
-  const contacted = Number(funnelRaw?.contacted || 0);
-  const won = Number(funnelRaw?.won || 0);
+  const todayLeads = Number(funnelRaw?.today_leads || 0);
   const organicSeoLeads = Number(funnelRaw?.organic_seo_leads || 0);
-  const closingRate = calculateClosingRate(won, organicLeads);
-  const organicSeoPercent = organicLeads > 0 ? Math.round((organicSeoLeads / organicLeads) * 1000) / 10 : 0;
-
-  const funnel: AnalyticsFunnel = {
-    totalClicks,
-    organicLeads,
-    botFiltered,
-    contacted,
-    won,
-    closingRate,
-    organicSeoLeads,
-    organicSeoPercent,
-  };
+  const organicSeoPercent = calculateSharePercent(organicSeoLeads, organicLeads);
 
   // Add excludeBot filter to subsequent breakdowns if requested
   const breakdownConditions = [...conditions];
@@ -201,8 +196,8 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
       COALESCE(NULLIF("product", ''), '/ (Beranda)') as path,
       COALESCE(NULLIF("domain", ''), 'easylegal.id') as domain,
       COUNT(*)::bigint as total_leads,
-      COUNT(*) FILTER (WHERE "status" != 'NEW')::bigint as contacted_count,
-      COUNT(*) FILTER (WHERE "status" = 'WON')::bigint as won_count
+      MODE() WITHIN GROUP (ORDER BY "sourceCode") as top_source_code,
+      COUNT(*) FILTER (WHERE "createdAt" + interval '7 hours' >= CURRENT_DATE)::bigint as today_leads
      FROM "WhatsAppClick"
      ${breakdownWhereSql}
      GROUP BY path, domain
@@ -213,17 +208,30 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
 
   const topPages: AnalyticsTopPageItem[] = pageRows.map((r) => {
     const totalLeads = Number(r.total_leads || 0);
-    const contactedCount = Number(r.contacted_count || 0);
-    const wonCount = Number(r.won_count || 0);
+    const sourceCode = String(r.top_source_code || "unknown").toLowerCase();
+    const topSource = SOURCE_CODE_LABELS[sourceCode] || sourceCode;
+    const todayLeads = Number(r.today_leads || 0);
     return {
       path: r.path,
       domain: r.domain,
       totalLeads,
-      contactedCount,
-      wonCount,
-      closingRate: calculateClosingRate(wonCount, totalLeads),
+      sharePercent: calculateSharePercent(totalLeads, organicLeads),
+      topSource,
+      todayLeads,
     };
   });
+
+  const topPageName = topPages[0]?.path || "-";
+
+  const funnel: AnalyticsFunnel = {
+    totalClicks,
+    organicLeads,
+    botFiltered,
+    todayLeads,
+    organicSeoLeads,
+    organicSeoPercent,
+    topPageName,
+  };
 
   // 5. Top Articles
   const articleSiteFilter = domain && domain !== "all" ? { site: domain } : {};
