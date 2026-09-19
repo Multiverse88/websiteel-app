@@ -5,6 +5,7 @@ export interface AnalyticsQuery {
   domain?: string;
   from?: string;
   to?: string;
+  groupBy?: "day" | "week" | "month";
   excludeBot?: boolean;
 }
 
@@ -130,11 +131,12 @@ export function calculateSharePercent(value: number, total: number): number {
   if (total <= 0) return 0;
   return Math.round((value / total) * 1000) / 10;
 }
-
 export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<AnalyticsOverview> {
-  const { domain, from, to, excludeBot = true } = query;
+  const { domain, from, to, groupBy = "day", excludeBot = true } = query;
 
-  // Build WHERE conditions for raw queries
+  const validGroupBy = ["day", "week", "month"].includes(groupBy) ? groupBy : "day";
+  const formatPattern = validGroupBy === "month" ? "YYYY-MM" : "YYYY-MM-DD";
+  // Build WHERE conditions
   const conditions: string[] = [];
   const params: unknown[] = [];
 
@@ -190,10 +192,10 @@ export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<
   }
   const breakdownWhereSql = breakdownConditions.length ? `WHERE ${breakdownConditions.join(" AND ")}` : "";
 
-  // 2. Timeline (bucketed per WIB calendar day)
+  // 2. Timeline (bucketed per WIB calendar day / week / month)
   const timelineRows = await prisma.$queryRawUnsafe<any[]>(
     `SELECT
-      TO_CHAR("createdAt" + interval '7 hours', 'YYYY-MM-DD') as day,
+      TO_CHAR(date_trunc('${validGroupBy}', "createdAt" + interval '7 hours'), '${formatPattern}') as day,
       COUNT(*)::bigint as total,
       COUNT(*) FILTER (WHERE "domain" = 'easylegal.id')::bigint as count_id,
       COUNT(*) FILTER (WHERE "domain" = 'easylegal.biz.id')::bigint as count_biz,

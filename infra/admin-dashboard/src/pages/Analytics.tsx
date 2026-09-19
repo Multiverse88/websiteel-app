@@ -82,6 +82,29 @@ function computeDateRange(preset: DatePreset, customFrom: string, customTo: stri
   }
   return { from: customFrom || undefined, to: customTo || undefined }
 }
+function formatBucketLabel(bucket: string, grouping: string): string {
+  if (!bucket) return ''
+  if (grouping === 'month') {
+    const parts = bucket.split('-')
+    const m = parseInt(parts[1], 10)
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+    return `${months[m - 1] || bucket} ${parts[0]}`
+  }
+  if (grouping === 'week') {
+    const d = new Date(bucket)
+    if (!isNaN(d.getTime())) {
+      const dEnd = new Date(d.getTime() + 6 * 24 * 60 * 60 * 1000)
+      const mNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+      return `${d.getDate()} ${mNames[d.getMonth()]} - ${dEnd.getDate()} ${mNames[dEnd.getMonth()]}`
+    }
+    return bucket
+  }
+  const d = new Date(bucket)
+  if (!isNaN(d.getTime())) {
+    return `${d.getDate()}/${d.getMonth() + 1}`
+  }
+  return bucket
+}
 
 export default function Analytics() {
   const [activeTab, setActiveTab] = useState<'overview' | 'detail'>('overview')
@@ -91,7 +114,7 @@ export default function Analytics() {
   const [customTo, setCustomTo] = useState<string>('')
   const [excludeBot, setExcludeBot] = useState<boolean>(true)
   const [groupBy, setGroupBy] = useState<TimeGrouping>('day')
-
+  const [overviewGroupBy, setOverviewGroupBy] = useState<'day' | 'week'>('day')
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const [overviewData, setOverviewData] = useState<any | null>(null)
@@ -132,6 +155,7 @@ export default function Analytics() {
         domain,
         from,
         to,
+        groupBy: overviewGroupBy,
         excludeBot,
       })
       setOverviewData(res.data)
@@ -141,7 +165,7 @@ export default function Analytics() {
     } finally {
       setLoading(false)
     }
-  }, [domain, preset, customFrom, customTo, excludeBot])
+  }, [domain, preset, customFrom, customTo, overviewGroupBy, excludeBot])
 
   // Load Detail Data
   const loadDetail = useCallback(async () => {
@@ -496,10 +520,33 @@ export default function Analytics() {
           {/* Charts: Tren & Channels */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div>
-                  <h2 className="text-base font-bold text-gray-900">Tren Lead Harian per Domain</h2>
-                  <p className="text-xs text-gray-500">Volume lead per hari (WIB) yang masuk ke masing-masing domain</p>
+                  <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-red-600" />
+                    Tren Lead {overviewGroupBy === 'week' ? 'Mingguan' : 'Harian'} per Domain
+                  </h2>
+                  <p className="text-xs text-gray-500">
+                    Volume lead {overviewGroupBy === 'week' ? 'dikelompokkan per minggu (Senin - Minggu)' : 'per hari (WIB)'} yang masuk ke masing-masing domain
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-xl text-xs font-semibold self-start sm:self-auto">
+                  <button
+                    onClick={() => setOverviewGroupBy('day')}
+                    className={`px-3 py-1 rounded-lg transition-all ${
+                      overviewGroupBy === 'day' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    Per Hari
+                  </button>
+                  <button
+                    onClick={() => setOverviewGroupBy('week')}
+                    className={`px-3 py-1 rounded-lg transition-all ${
+                      overviewGroupBy === 'week' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    Per Minggu
+                  </button>
                 </div>
               </div>
               <div className="h-72 w-full">
@@ -520,7 +567,7 @@ export default function Analytics() {
                           <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <XAxis dataKey="date" tick={{ fontSize: 11 }} />
+                      <XAxis dataKey="date" tick={{ fontSize: 11 }} tickFormatter={(val) => formatBucketLabel(val, overviewGroupBy)} />
                       <YAxis tick={{ fontSize: 11 }} />
                       <Tooltip
                         contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '12px', color: '#fff', fontSize: '12px' }}
@@ -871,7 +918,7 @@ export default function Analytics() {
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="bucket" tick={{ fontSize: 11 }} />
+                      <XAxis dataKey="bucket" tick={{ fontSize: 10 }} tickFormatter={(val) => formatBucketLabel(val, groupBy)} />
                       <YAxis tick={{ fontSize: 11 }} />
                       <Tooltip
                         contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '12px', color: '#fff', fontSize: '12px' }}
@@ -907,7 +954,7 @@ export default function Analytics() {
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={trend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="bucket" tick={{ fontSize: 10 }} />
+                      <XAxis dataKey="bucket" tick={{ fontSize: 10 }} tickFormatter={(val) => formatBucketLabel(val, groupBy)} />
                       <YAxis tick={{ fontSize: 10 }} />
                       <Tooltip
                         contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '12px', color: '#fff', fontSize: '12px' }}

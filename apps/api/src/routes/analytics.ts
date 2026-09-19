@@ -7,12 +7,13 @@ const router = Router();
 // GET /api/v1/analytics/overview — admin only: full-funnel multi-domain analytics
 router.get("/overview", requireAuth, async (req, res) => {
   try {
-    const { domain, from, to, excludeBot } = req.query as Record<string, string>;
+    const { domain, from, to, groupBy, excludeBot } = req.query as Record<string, string>;
 
     const data = await getAnalyticsOverview({
       domain: domain || "all",
       from,
       to,
+      groupBy: (groupBy as "day" | "week" | "month") || "day",
       excludeBot: excludeBot !== "0", // default true unless explicitly passed '0'
     });
 
