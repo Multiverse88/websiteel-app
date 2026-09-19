@@ -437,26 +437,44 @@ export async function getAnalyticsDetail(query: AnalyticsDetailQuery = {}): Prom
   const serviceRows = await prisma.$queryRawUnsafe<any[]>(
     `SELECT
       CASE
+        -- 1. Badan Usaha & Korporasi
         WHEN product ILIKE '%pt-pma%' THEN 'PT PMA'
         WHEN product ILIKE '%pt-perorangan%' THEN 'PT Perorangan'
-        WHEN product ILIKE '%/pt%' OR product ILIKE '%perseroan-terbatas%' THEN 'Pendirian PT'
-        WHEN product ILIKE '%/cv%' THEN 'Pendirian CV'
-        WHEN product ILIKE '%merek%' OR product ILIKE '%haki%' THEN 'Merek & HAKI'
-        WHEN product ILIKE '%nib%' OR product ILIKE '%oss%' THEN 'NIB & OSS'
-        WHEN product ILIKE '%iso%' THEN 'Sertifikasi ISO'
-        WHEN product ILIKE '%pkp%' THEN 'Pengajuan PKP'
-        WHEN product ILIKE '%rups%' THEN 'Pelaporan RUPS'
-        WHEN product ILIKE '%akta%' THEN 'Perubahan Akta'
-        WHEN product ILIKE '%pse%' THEN 'Pendaftaran PSE'
-        WHEN product ILIKE '%pkkpr%' THEN 'Kesesuaian PKKPR'
-        WHEN product ILIKE '%virtual-office%' THEN 'Virtual Office'
+        WHEN product ILIKE '%-pt%' OR product ILIKE '%/pt%' OR product ILIKE '%perseroan-terbatas%' OR product ILIKE '%pendirian-pt%' THEN 'Pendirian PT'
+        WHEN product ILIKE '%-cv%' OR product ILIKE '%/cv%' OR product ILIKE '%pendirian-cv%' THEN 'Pendirian CV'
         WHEN product ILIKE '%yayasan%' THEN 'Yayasan'
         WHEN product ILIKE '%koperasi%' THEN 'Koperasi'
         WHEN product ILIKE '%firma%' THEN 'Firma'
         WHEN product ILIKE '%perkumpulan%' THEN 'Perkumpulan'
-        WHEN product ILIKE '%press-release%' THEN 'Press Release'
+        WHEN product ILIKE '%pendirian-badan-usaha%' THEN 'Pendirian Badan Usaha'
+
+        -- 2. Izin Operasional & Legalitas
+        WHEN product ILIKE '%nib%' OR product ILIKE '%oss%' THEN 'NIB & OSS'
+        WHEN product ILIKE '%merek%' OR product ILIKE '%haki%' THEN 'Merek & HAKI'
+        WHEN product ILIKE '%iso%' THEN 'Sertifikasi ISO'
+        WHEN product ILIKE '%pkp%' THEN 'Pengajuan PKP'
+        WHEN product ILIKE '%pse%' THEN 'Pendaftaran PSE'
+        WHEN product ILIKE '%pkkpr%' THEN 'Kesesuaian PKKPR'
+        WHEN product ILIKE '%kbli%' THEN 'Penyesuaian KBLI'
+
+        -- 3. Layanan Khusus & Kepatuhan
+        WHEN product ILIKE '%pembubaran%' THEN 'Pembubaran Perusahaan'
+        WHEN product ILIKE '%apostille%' THEN 'Legalisasi Apostille'
+        WHEN product ILIKE '%lkpm%' THEN 'Pelaporan LKPM'
+        WHEN product ILIKE '%perkawinan%' OR product ILIKE '%prenup%' THEN 'Perjanjian Perkawinan'
+        WHEN product ILIKE '%visa%' OR product ILIKE '%kitas%' THEN 'Visa & KITAS'
+        WHEN product ILIKE '%rups%' THEN 'Pelaporan RUPS'
+        WHEN product ILIKE '%akta%' THEN 'Perubahan Akta'
+        WHEN product ILIKE '%virtual-office%' THEN 'Virtual Office'
+        WHEN product ILIKE '%press-release%' OR product ILIKE '%pr-media%' THEN 'Press Release Media'
         WHEN product ILIKE '%kontrak%' THEN 'Kontrak Bisnis'
-        WHEN product = '' OR product = '/' OR product ILIKE '%beranda%' THEN 'Beranda (Home)'
+
+        -- 4. Kampanye Iklan, Sosmed & Tools
+        WHEN product ILIKE '%konsultasi-ig%' OR product ILIKE '%threads%' OR product ILIKE '%tiktok%' THEN 'Link Bio & Media Sosial'
+        WHEN product ILIKE '%metaads%' OR product ILIKE '%-gads%' OR product ILIKE '%home-gads%' THEN 'Landing Page Iklan'
+        WHEN product ILIKE '%cek-nama%' OR product ILIKE '%cek-kbli%' THEN 'Fitur Cek Nama & KBLI'
+        WHEN product ILIKE '%kontak%' OR product ILIKE '%tentang-kami%' OR product ILIKE '%testimoni%' OR product ILIKE '%kerjasama%' OR product ILIKE '%referral%' THEN 'Profil & Kemitraan'
+        WHEN product = '' OR product = '/' OR product ILIKE '%beranda%' OR product ILIKE '%home%' THEN 'Beranda (Home)'
         WHEN product ILIKE '%artikel%' THEN 'Artikel Edukasi'
         ELSE 'Layanan Lainnya'
       END as service_name,
@@ -465,8 +483,7 @@ export async function getAnalyticsDetail(query: AnalyticsDetailQuery = {}): Prom
      ${breakdownWhereSql}
      GROUP BY service_name
      ORDER BY leads DESC
-     LIMIT 15`,
-    ...breakdownParams,
+     LIMIT 25`,
   );
   const totalServiceLeads = serviceRows.reduce((acc, r) => acc + Number(r.leads || 0), 0);
   const services: AnalyticsDetailServiceItem[] = serviceRows.map((r) => {
