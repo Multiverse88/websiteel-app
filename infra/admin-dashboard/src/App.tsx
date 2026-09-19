@@ -82,6 +82,7 @@ function Router() {
   const pages: Record<string, ReactNode> = {
     '/dashboard': <Dashboard />,
     '/analytics': <Analytics />,
+    '/analytics/detail': <Analytics />,
     '/articles': <Articles />,
     '/articles/tambah': <ArticleEditor />,
     '/contacts': <Contacts />,

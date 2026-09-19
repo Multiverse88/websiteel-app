@@ -523,4 +523,17 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memuat data analytics');
     return await res.json();
   },
+  // Analytics deep-dive & detailed multi-dimension charts
+  getAnalyticsDetail: async (params: { domain?: string; from?: string; to?: string; groupBy?: 'day' | 'week' | 'month'; excludeBot?: boolean } = {}) => {
+    const query = new URLSearchParams();
+    if (params.domain && params.domain !== 'all') query.set('domain', params.domain);
+    if (params.from) query.set('from', params.from);
+    if (params.to) query.set('to', params.to);
+    if (params.groupBy) query.set('groupBy', params.groupBy);
+    if (params.excludeBot !== undefined) query.set('excludeBot', params.excludeBot ? '1' : '0');
+    const queryString = query.toString() ? `?${query.toString()}` : '';
+    const res = await authenticatedFetch(`${API_BASE_URL}/analytics/detail${queryString}`);
+    if (!res.ok) throw new Error('Gagal memuat detail analytics');
+    return await res.json();
+  },
 }
