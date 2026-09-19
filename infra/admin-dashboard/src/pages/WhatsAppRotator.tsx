@@ -285,6 +285,17 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     const id = setTimeout(() => setSearchFilter(searchInput.trim()), 400)
     return () => clearTimeout(id)
   }, [searchInput])
+  // Pick up pre-filtered product navigation from Analytics dashboard
+  useEffect(() => {
+    const prefProduct = sessionStorage.getItem('preferred_lead_product');
+    if (prefProduct) {
+      sessionStorage.removeItem('preferred_lead_product');
+      setTab('leads');
+      setSearchInput(prefProduct);
+      setDatePreset('all');
+    }
+  }, []);
+
 
   // Detail views: same status/source filters as the leads table above, but
   // aggregated server-side (leads/list is paginated so a client-side

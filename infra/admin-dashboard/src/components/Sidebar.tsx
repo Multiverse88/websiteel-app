@@ -2,6 +2,7 @@ import { useAuth } from '../lib/auth'
 
 const navItems = [
   { label: 'Dashboard', icon: '📊', hash: '#/dashboard' },
+  { label: 'Analytics', icon: '📈', hash: '#/analytics' },
   { label: 'Tracking Project', icon: '📍', hash: '#/tracking' },
   { label: 'Articles', icon: '📝', hash: '#/articles' },
   { label: 'Contacts', icon: '✉️', hash: '#/contacts' },

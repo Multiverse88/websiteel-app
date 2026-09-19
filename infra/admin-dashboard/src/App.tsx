@@ -17,6 +17,7 @@ import Promos from './pages/Promos'
 import Settings from './pages/Settings'
 import WhatsAppRotator from './pages/WhatsAppRotator'
 import WhatsAppLeads from './pages/WhatsAppLeads'
+import Analytics from './pages/Analytics'
 
 function normalizePathToHash() {
   const { pathname, hash } = window.location
@@ -80,6 +81,7 @@ function Router() {
 
   const pages: Record<string, ReactNode> = {
     '/dashboard': <Dashboard />,
+    '/analytics': <Analytics />,
     '/articles': <Articles />,
     '/articles/tambah': <ArticleEditor />,
     '/contacts': <Contacts />,
@@ -93,6 +95,7 @@ function Router() {
     '/promos': <Promos />,
     '/settings': <Settings />,
     '/whatsapp-rotator': <WhatsAppRotator />,
+    '/wa-rotator': <WhatsAppRotator />,
     '/whatsapp-leads': <WhatsAppLeads />,
   }
 
