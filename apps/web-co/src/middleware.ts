@@ -44,6 +44,36 @@ function previewHtml({
 <p>Mengalihkan ke <a href="${dest}">${dest}</a>&hellip;</p>
 </body></html>`;
 }
+function render410Html(title: string, message: string) {
+  return `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>410 Gone — Halaman Tidak Lagi Tersedia | EasyLegal</title>
+  <meta name="robots" content="noindex, nofollow, gone">
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #0f172a; color: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 1rem; box-sizing: border-box; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 2.5rem; max-width: 32rem; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
+    .badge { display: inline-block; padding: 0.25rem 0.75rem; background: rgba(239, 68, 68, 0.2); color: #f87171; border-radius: 9999px; font-weight: 700; font-size: 0.875rem; margin-bottom: 1rem; }
+    h1 { font-size: 2.5rem; margin: 0 0 0.5rem; color: #ef4444; font-weight: 800; }
+    h2 { font-size: 1.25rem; margin: 0 0 1rem; color: #f1f5f9; font-weight: 600; }
+    p { color: #94a3b8; line-height: 1.6; margin: 0 0 1.5rem; font-size: 0.95rem; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #dc2626; color: #ffffff; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: background 0.2s; }
+    .btn:hover { background: #b91c1c; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">HTTP 410 GONE</div>
+    <h1>410</h1>
+    <h2>${escapeHtml(title)}</h2>
+    <p>${escapeHtml(message)}</p>
+    <a href="/" class="btn">Kembali ke Beranda</a>
+  </div>
+</body>
+</html>`;
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -72,6 +102,61 @@ export async function middleware(request: NextRequest) {
       const queryGlue = search ? (search.includes("?") ? "&" : "?") : "?";
       const targetApiUrl = `${process.env.NEXT_PUBLIC_API_URL || "https://api.easylegal.my.id"}/api/v1/wa/s/${encodeURIComponent(waSlug)}${search}${queryGlue}domain=${encodeURIComponent(domain)}`;
       return NextResponse.redirect(new URL(targetApiUrl), 302);
+    }
+  }
+  // HTTP 410: Glossary / Kamus Legal telah dihapus permanen
+  if (
+    pathname === "/glossary" ||
+    pathname.startsWith("/glossary/") ||
+    pathname === "/kamus-legal" ||
+    pathname.startsWith("/kamus-legal/")
+  ) {
+    return new NextResponse(
+      render410Html(
+        "Kamus Legal / Glossary Dihapus Permanen",
+        "Halaman kamus legal / glossary ini telah dihapus secara permanen dari EasyLegal dan tidak lagi tersedia.",
+      ),
+      {
+        status: 410,
+        statusText: "Gone",
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "X-Robots-Tag": "noindex, nofollow, gone",
+          "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
+        },
+      }
+    );
+  }
+
+  // HTTP 410: Artikel yang berstatus 410
+  if (pathname.startsWith("/artikel/")) {
+    const articleSlug = pathname.replace(/^\/artikel\//, "").replace(/\/$/, "");
+    if (articleSlug && (request.method === "GET" || request.method === "HEAD")) {
+      try {
+        const host = request.headers.get("host") || "easylegal.co.id";
+        const domain = host.split(":")[0];
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000'}/api/v1/articles/${encodeURIComponent(articleSlug)}?site=${encodeURIComponent(domain)}`;
+        const res = await fetch(apiUrl);
+        if (res.status === 410) {
+          return new NextResponse(
+            render410Html(
+              "Artikel Dihapus Permanen",
+              "Artikel ini telah dihapus secara permanen dan tidak lagi tersedia.",
+            ),
+            {
+              status: 410,
+              statusText: "Gone",
+              headers: {
+                "Content-Type": "text/html; charset=utf-8",
+                "X-Robots-Tag": "noindex, nofollow, gone",
+                "Cache-Control": "public, max-age=86400",
+              },
+            }
+          );
+        }
+      } catch (err) {
+        // Fallback to Next.js page rendering on API fetch error
+      }
     }
   }
 

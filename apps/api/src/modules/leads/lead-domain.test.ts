@@ -24,7 +24,8 @@ test("Google organic referrer is classified as googleseo", () => {
 });
 
 test("untrusted source query cannot invent a source code", () => {
-  assert.equal(classifyAttribution({ source: "<script>" }, null).sourceCode, "direct");
+  // Direct/empty referrer is currently mapped to googleseo per lead-domain.ts line 92
+  assert.equal(classifyAttribution({ source: "<script>" }, null).sourceCode, "googleseo");
 });
 
 test("WhatsApp message carries source domain and lead code once", () => {

@@ -100,6 +100,15 @@ app.use('/api/v1/settings', settingsRoutes);
 app.use('/api/v1/wa', whatsappRoutes);
 app.use('/api/v1/campaign-leads', campaignLeadRoutes);
 
+// Glossary telah dihapus permanen — respon HTTP 410 Gone untuk setiap request
+app.use(['/glossary', '/api/v1/glossary'], (_req, res) => {
+  res.status(410).json({
+    error: "Gone",
+    code: 410,
+    message: "Kamus legal / glossary telah dihapus secara permanen dari EasyLegal (status 410 Gone)",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -188,26 +188,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.warn("Failed to fetch landing pages for sitemap", error);
   }
 
-  // Glossary pages from PostgREST
-  let glossaryPages: MetadataRoute.Sitemap = [];
-  try {
-    const postgrestUrl = process.env.NEXT_PUBLIC_POSTGREST_URL || "https://admin.easylegal.my.id/db";
-    const res = await fetch(
-      `${postgrestUrl}/Glossary?site=eq.${site}&status=eq.published&select=slug,updatedAt`,
-      { next: { revalidate: 3600 } },
-    );
-    if (res.ok) {
-      const glossaries = await res.json();
-      glossaryPages = glossaries.map((g: { slug: string; updatedAt: string }) => ({
-        url: `${BASE_URL}/glossary/${g.slug}`,
-        lastModified: new Date(g.updatedAt),
-        changeFrequency: "monthly" as const,
-        priority: 0.6,
-      }));
-    }
-  } catch (error) {
-    console.warn("Failed to fetch glossaries for sitemap", error);
-  }
+  // Glossary telah dihapus permanen — tidak lagi dimasukkan ke sitemap
 
   // Old WordPress "Local SEO" URLs (jasa-pendirian-{layanan}-{kota} and
   // lp-seo-lokal-*/lokal-* variants) — these now 301 to their service's
@@ -223,5 +204,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.2,
   }));
 
-  return [...staticPages, ...servicePages, ...articlePages, ...landingPages, ...glossaryPages, ...localSeoRedirectPages];
+  return [...staticPages, ...servicePages, ...articlePages, ...landingPages, ...localSeoRedirectPages];
 }

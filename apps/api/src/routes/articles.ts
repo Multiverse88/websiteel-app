@@ -26,9 +26,10 @@ const router = Router();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function buildSiteFilter(site: string | undefined): any | null {
   if (!site || site === "all") return null;
-  // 2026-09-18 (strict): artikel lama (legacy) KUNCI tampil di
-  // easylegal.co.id. Domain lain (biz.id, easylegal.id) bahkan menyembunyikan
-  // artikel legacy milik site-nya sendiri → URL lama di biz.id 404 (putusan owner).
+  // 2026-09-18/19 (strict): artikel lama (legacy) KUNCI tampil di
+  // easylegal.co.id. Domain lain (biz.id, easylegal.id) menyembunyikan
+  // artikel legacy milik site-nya sendiri → URL lama di domain tersebut
+  // menghasilkan HTTP status 410 Gone (bukan 404).
   if (site === "easylegal.co.id")
     return { OR: [{ site }, { site: "easylegal.biz.id", legacy: true }] };
   return { site, legacy: false };
@@ -65,7 +66,12 @@ router.get("/", async (req, res) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const whereClause: any = {};
     withAnd(whereClause, buildSiteFilter(site));
-
+    // Sembunyikan artikel dengan status "410" secara default dari listing publik
+    if (req.query.status) {
+      whereClause.status = req.query.status;
+    } else {
+      whereClause.status = { not: "410" };
+    }
     if (q) {
       withAnd(whereClause, {
         OR: [
@@ -123,9 +129,8 @@ router.get("/sitemap/all", async (req, res) => {
     const site = (req.query.site as string) || "easylegal.biz.id";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const whereClause: any = {};
+    const whereClause: any = { status: "published" };
     withAnd(whereClause, buildSiteFilter(site));
-
     const articles = await prisma.article.findMany({
       where: whereClause,
       select: {
@@ -156,7 +161,50 @@ router.get("/:slug", async (req, res) => {
     });
 
     if (!article) {
+      // Cek apakah artikel ini ada di database sebagai artikel legacy atau berstatus 410
+      // (artikel legacy dipindahkan eksklusif ke easylegal.co.id per 18 Sep 2026).
+      // Jika diakses dari domain lain (easylegal.id, easylegal.biz.id), kembalikan HTTP 410 Gone.
+      if (site !== "easylegal.co.id") {
+        const legacyOr410 = await prisma.article.findFirst({
+          where: {
+            slug,
+            OR: [
+              { legacy: true },
+              { status: "410" },
+            ],
+          },
+          select: { id: true, slug: true, status: true },
+        });
+        if (legacyOr410) {
+          return res.status(410).json({
+            error: "Gone",
+            code: 410,
+            message: "Artikel ini telah dihilangkan dari domain ini (status 410 Gone)",
+          });
+        }
+      }
+
+      const any410 = await prisma.article.findFirst({
+        where: { slug, status: "410" },
+        select: { id: true },
+      });
+      if (any410) {
+        return res.status(410).json({
+          error: "Gone",
+          code: 410,
+          message: "Artikel ini telah dihapus permanen (status 410 Gone)",
+        });
+      }
+
       return res.status(404).json({ error: "Article not found" });
+    }
+
+    if (article.status === "410") {
+      return res.status(410).json({
+        error: "Gone",
+        code: 410,
+        message: "Artikel ini telah dihapus permanen (status 410 Gone)",
+      });
     }
 
     res.json({ data: article });

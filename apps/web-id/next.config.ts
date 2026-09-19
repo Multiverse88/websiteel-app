@@ -340,8 +340,7 @@ const nextConfig: NextConfig = {
       // the same content) with no tracking downside.
       { source: "/kontak-kami", destination: "/kontak", permanent: true },
       { source: "/testimoni-klien", destination: "/testimoni", permanent: true },
-      // /kamus-legal/ had no rule at all — pure menu rename to /glossary.
-      { source: "/kamus-legal", destination: "/glossary", permanent: true },
+      // /kamus-legal/ dan /glossary/ kini di-intercept langsung oleh middleware dan menghasilkan HTTP 410 Gone.
       { source: "/layanan/jasa-pengurusan-nib-oss", destination: "/layanan/nib-oss", permanent: true },
       { source: "/layanan/jasa-pengurusan-izin-pse", destination: "/layanan/pengurusan-pse", permanent: true },
       { source: "/layanan/jasa-perubahan-akta", destination: "/layanan/perubahan-akta", permanent: true },
