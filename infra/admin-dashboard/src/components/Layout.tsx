@@ -3,6 +3,7 @@ import { useAuth } from '../lib/auth'
 
 const navItems = [
   { icon: 'dashboard', label: 'Dashboard', path: '#/dashboard' },
+  { icon: 'trending_up', label: 'Analytics', path: '#/analytics' },
   { icon: 'description', label: 'Artikel', path: '#/articles' },
   { icon: 'mail_outline', label: 'Newsletter', path: '#/newsletter' },
   { icon: 'campaign', label: 'Email Blasting', path: '#/email-blast' },
