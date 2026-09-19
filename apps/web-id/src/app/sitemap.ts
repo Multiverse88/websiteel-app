@@ -64,6 +64,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/terdaftar-pse`,
+      lastModified: generatedAt,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/tracking`,
+      lastModified: generatedAt,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/layanan-easylegal-metaads`,
+      lastModified: generatedAt,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
       url: `${BASE_URL}/referral-reseller`,
       lastModified: generatedAt,
       changeFrequency: "monthly",
@@ -111,6 +129,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "pelaporan-rups",
     "kontrak-bisnis",
     "pkkpr",
+    "pembubaran-perusahaan",
+    "pengurusan-pse",
+    "perubahan-akta",
   ];
 
   // Template-driven service routes are sourced from the same data maps used

@@ -28,10 +28,11 @@ export const DOMAINS: Record<string, DomainConfig> = {
   "www.easylegal.co.id": CO_ID,
 };
 
-export const DEFAULT_DOMAIN_CONFIG: DomainConfig = BIZ_ID;
+export const DEFAULT_DOMAIN_CONFIG: DomainConfig = CO_ID;
 
 export function getDomainConfig(hostname?: string | null): DomainConfig {
-  if (hostname && DOMAINS[hostname]) return DOMAINS[hostname];
+  const host = hostname?.split(":")[0] || null;
+  if (host && DOMAINS[host]) return DOMAINS[host];
   return DEFAULT_DOMAIN_CONFIG;
 }
 
@@ -40,8 +41,8 @@ export function getDomainConfig(hostname?: string | null): DomainConfig {
  * Used by public pages to filter articles per domain.
  */
 export function getSiteFromHostname(hostname?: string | null): string {
-  if (!hostname) return "easylegal.biz.id";
+  if (!hostname) return "easylegal.co.id";
   const host = hostname.split(":")[0];
-  if (host === "easylegal.co.id" || host === "www.easylegal.co.id") return "easylegal.co.id";
-  return "easylegal.biz.id";
+  if (host === "easylegal.biz.id" || host === "www.easylegal.biz.id") return "easylegal.biz.id";
+  return "easylegal.co.id";
 }

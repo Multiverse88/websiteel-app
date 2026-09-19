@@ -50,6 +50,7 @@ export function getSiteFromHostname(hostname?: string | null): string {
 }
 
 export function getDomainConfig(hostname?: string | null): DomainConfig {
-  if (hostname && DOMAINS[hostname]) return DOMAINS[hostname];
+  const host = hostname?.split(":")[0] || null;
+  if (host && DOMAINS[host]) return DOMAINS[host];
   return DEFAULT_DOMAIN_CONFIG;
 }
