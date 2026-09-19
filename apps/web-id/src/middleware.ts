@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { LOCAL_SEO_REDIRECTS } from "@/data/local-seo-redirects-map";
 
 // Link-preview crawlers that render Open Graph tags when a URL is shared
 // (WhatsApp, Facebook Messenger, Twitter/X, Slack, Telegram, Discord, etc.).
@@ -167,6 +168,12 @@ export async function middleware(request: NextRequest) {
     const slug = pathname.slice(1).replace(/\/$/, ""); // "/daftar-klien/" → "daftar-klien"
 
     if (slug) {
+      // Migrasi Local SEO WordPress lama — redirect 301 permanen langsung dari memory tanpa DB
+      const localSeoDest = LOCAL_SEO_REDIRECTS[slug];
+      if (localSeoDest) {
+        return NextResponse.redirect(new URL(localSeoDest, request.url), 301);
+      }
+
       try {
         const host = request.headers.get("host") || "easylegal.id";
         const domain = host.split(":")[0]; // remove port if any
