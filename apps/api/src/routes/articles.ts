@@ -72,6 +72,12 @@ router.get("/", async (req, res) => {
     } else {
       whereClause.status = { not: "410" };
     }
+    // Category tabs cover every public article for this site, regardless of
+    // the current search/category filter.
+    const categoryCountWhereClause = {
+      ...whereClause,
+      AND: whereClause.AND?.slice(),
+    };
     if (q) {
       withAnd(whereClause, {
         OR: [
@@ -106,6 +112,7 @@ router.get("/", async (req, res) => {
     let allCategories = undefined;
     if (includeCounts) {
       allCategories = await prisma.article.findMany({
+        where: categoryCountWhereClause,
         select: { category: true },
       });
     }
