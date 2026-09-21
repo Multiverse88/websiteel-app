@@ -1643,10 +1643,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 )}
 
                 <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 max-h-36 overflow-y-auto space-y-1.5">
-                  {numbers.filter((n) => n.isActive).length === 0 && (
-                    <p className="text-[12px] text-gray-400">Belum ada nomor CS aktif.</p>
+                  {numbers.length === 0 && (
+                    <p className="text-[12px] text-gray-400">Belum ada nomor CS.</p>
                   )}
-                  {numbers.filter((n) => n.isActive).map((n) => {
+                  {numbers.map((n) => {
                     const checked = formNumberIds.includes(n.id)
                     return (
                       <label key={n.id} className="flex items-center gap-2 text-[13px] cursor-pointer hover:text-[#990202]">
@@ -1664,12 +1664,15 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                         />
                         <span className="font-bold">{n.label || 'Tanpa Label'}</span>
                         <span className="font-mono text-gray-500 text-[12px]">{n.number}</span>
+                        {!n.isActive && (
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-gray-200 text-gray-500">Nonaktif global</span>
+                        )}
                       </label>
                     )
                   })}
                 </div>
                 <p className="text-[11px] text-gray-400">
-                  Biarkan kosong jika ingin link ini merotasikan semua CS aktif. Centang nama CS tertentu jika ingin link khusus ke CS pilihan.
+                  Biarkan kosong jika ingin link ini merotasikan semua CS aktif. Centang nama CS tertentu jika ingin link khusus ke CS pilihan — nomor yang berlabel "Nonaktif global" tetap bisa dipakai khusus di sini walau tidak ikut rotasi umum.
                 </p>
               </div>
 

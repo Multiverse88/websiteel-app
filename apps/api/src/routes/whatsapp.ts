@@ -188,8 +188,14 @@ router.get("/redirect", async (req, res) => {
     const identityKey = sessionId || `${clientIp}:${userAgent.slice(0, 100)}`;
     const deduplicationKey = [identityKey, product || "", ctaId || service || ""].join(":").slice(0, 500);
 
-    const numberWhere: Prisma.WhatsAppNumberWhereInput = { isActive: true };
-    if (numberConfig?.numberIds?.length) numberWhere.id = { in: numberConfig.numberIds };
+    // Pool eksplisit (numberIds) adalah pilihan sadar admin untuk link/tombol
+    // ini — jangan disaring ulang oleh isActive global, supaya nomor yang
+    // sengaja dinonaktifkan dari rotasi "semua nomor aktif" tetap bisa
+    // dipakai khusus di sini. Hanya pool default (tanpa restriksi) yang
+    // wajib isActive.
+    const numberWhere: Prisma.WhatsAppNumberWhereInput = numberConfig?.numberIds?.length
+      ? { id: { in: numberConfig.numberIds } }
+      : { isActive: true };
     const next = await findNextWhatsAppNumber(numberWhere);
 
     if (!next) {
@@ -362,10 +368,11 @@ const handleSlugRedirect = async (req: any, res: any) => {
 
     // Number selection from restricted pool or all active numbers.
     // Fairness hanya memakai klik pada hari kalender WIB saat ini.
-    const numberWhere: Prisma.WhatsAppNumberWhereInput = { isActive: true };
-    if (slugConfig.numberIds && slugConfig.numberIds.length > 0) {
-      numberWhere.id = { in: slugConfig.numberIds };
-    }
+    // Sama seperti di /go/:slug di atas — pool eksplisit tidak disaring ulang
+    // oleh isActive global.
+    const numberWhere: Prisma.WhatsAppNumberWhereInput = slugConfig.numberIds && slugConfig.numberIds.length > 0
+      ? { id: { in: slugConfig.numberIds } }
+      : { isActive: true };
 
     const next = await findNextWhatsAppNumber(numberWhere);
 
@@ -663,9 +670,9 @@ router.get("/numbers", requireAuth, async (req, res) => {
 
 // POST /api/v1/wa/numbers — admin: add a number
 router.post("/numbers", requireAuth, async (req, res) => {
+  const { number, label } = req.body;
+  const cleaned = String(number || "").replace(/\D/g, "");
   try {
-    const { number, label } = req.body;
-    const cleaned = String(number || "").replace(/\D/g, "");
     if (!cleaned) {
       return res.status(400).json({ error: "Nomor tidak valid" });
     }
@@ -675,6 +682,16 @@ router.post("/numbers", requireAuth, async (req, res) => {
     res.status(201).json({ data: created });
   } catch (error: any) {
     if (error.code === "P2002") {
+      // Nomor ini sudah ada di database — kemungkinan besar sedang
+      // dinonaktifkan secara global (lihat bug report: nomor CS lama yang
+      // ditarik dari rotasi "semua aktif" masih perlu bisa dipilih khusus
+      // untuk satu link/slug). Kembalikan record yang ada, bukan gagal
+      // keras, supaya alur "Tambah & Pilih" di modal slug tetap bisa
+      // memilihnya.
+      const existing = await prisma.whatsAppNumber.findUnique({ where: { number: cleaned } });
+      if (existing) {
+        return res.status(200).json({ data: existing, existed: true });
+      }
       return res.status(409).json({ error: "Nomor ini sudah ada" });
     }
     console.error("Error creating WA number:", error);
