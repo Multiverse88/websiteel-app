@@ -228,6 +228,11 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
   const [deleteSlugConfirm, setDeleteSlugConfirm] = useState<WaSlug | null>(null)
   const [isCustomSource, setIsCustomSource] = useState(false)
   const [customSourceInput, setCustomSourceInput] = useState('')
+  const [showSlugNumberForm, setShowSlugNumberForm] = useState(false)
+  const [slugNumberLabel, setSlugNumberLabel] = useState('')
+  const [slugNumberValue, setSlugNumberValue] = useState('')
+  const [addingSlugNumber, setAddingSlugNumber] = useState(false)
+  const [slugNumberError, setSlugNumberError] = useState('')
 
   const [pages, setPages] = useState<WaPageConfig[]>([])
   const [pagesLoading, setPagesLoading] = useState(false)
@@ -462,6 +467,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     setFormDescription('')
     setFormIsActive(true)
     setSlugModalError('')
+    setShowSlugNumberForm(false)
+    setSlugNumberLabel('')
+    setSlugNumberValue('')
+    setSlugNumberError('')
     setSlugModalOpen(true)
   }
 
@@ -484,6 +493,10 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     setFormDescription(s.description || '')
     setFormIsActive(s.isActive)
     setSlugModalError('')
+    setShowSlugNumberForm(false)
+    setSlugNumberLabel('')
+    setSlugNumberValue('')
+    setSlugNumberError('')
     setSlugModalOpen(true)
   }
 
@@ -527,6 +540,57 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
       setSlugModalError(err.message || 'Gagal menyimpan slug')
     } finally {
       setSavingSlug(false)
+    }
+  }
+
+  const handleAddSlugNumber = async () => {
+    setSlugNumberError('')
+
+    const label = slugNumberLabel.trim()
+    const digits = slugNumberValue.replace(/\D/g, '')
+    const number = digits.startsWith('0')
+      ? `62${digits.slice(1)}`
+      : digits.startsWith('8')
+        ? `62${digits}`
+        : digits
+
+    if (!label) {
+      setSlugNumberError('Nama CS wajib diisi.')
+      return
+    }
+    if (!number.startsWith('62') || number.length < 10 || number.length > 15) {
+      setSlugNumberError('Masukkan nomor WhatsApp Indonesia yang valid, misalnya 081234567890.')
+      return
+    }
+
+    setAddingSlugNumber(true)
+    try {
+      const response = await api.createWaNumber({ number, label })
+      const created = response.data
+      if (!created?.id) throw new Error('Nomor berhasil dibuat tetapi respons server tidak lengkap.')
+
+      const newNumber: WaNumber = {
+        ...created,
+        label: created.label ?? label,
+        isActive: created.isActive ?? true,
+        clickCount: created.clickCount ?? 0,
+        sharePercent: 0,
+        clicksToday: 0,
+        shareTodayPercent: 0,
+      }
+      setNumbers((current) => current.some((item) => item.id === newNumber.id)
+        ? current
+        : [...current, newNumber])
+      setFormNumberIds((current) => current.includes(newNumber.id)
+        ? current
+        : [...current, newNumber.id])
+      setSlugNumberLabel('')
+      setSlugNumberValue('')
+      setShowSlugNumberForm(false)
+    } catch (err: any) {
+      setSlugNumberError(err.message || 'Gagal menambahkan nomor CS.')
+    } finally {
+      setAddingSlugNumber(false)
     }
   }
 
@@ -1506,13 +1570,82 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
 
               {/* Pool Pembatasan Nomor CS */}
               <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <label className="text-[13px] font-bold text-gray-700">Rotasi Nomor CS (Opsional)</label>
-                  <span className="text-[11px] text-gray-400">
-                    {formNumberIds.length === 0 ? 'Semua nomor aktif (Default)' : `${formNumberIds.length} nomor terpilih`}
-                  </span>
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <label className="text-[13px] font-bold text-gray-700">Rotasi Nomor CS (Opsional)</label>
+                    <div className="text-[11px] text-gray-400 mt-0.5">
+                      {formNumberIds.length === 0 ? 'Semua nomor aktif (Default)' : `${formNumberIds.length} nomor terpilih`}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowSlugNumberForm((visible) => !visible)
+                      setSlugNumberError('')
+                    }}
+                    aria-expanded={showSlugNumberForm}
+                    className="shrink-0 px-2.5 py-1.5 border border-[#990202]/20 bg-red-50 text-[#990202] rounded-lg text-[11px] font-bold hover:bg-red-100 active:scale-[0.98] transition"
+                  >
+                    {showSlugNumberForm ? 'Tutup' : '+ Tambah Nomor CS'}
+                  </button>
                 </div>
+
+                {showSlugNumberForm && (
+                  <div className="p-3 rounded-lg border border-[#990202]/20 bg-red-50/50 space-y-2.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div>
+                        <label htmlFor="slugNumberLabel" className="block text-[11px] font-bold text-gray-600 mb-1">Nama CS</label>
+                        <input
+                          id="slugNumberLabel"
+                          type="text"
+                          value={slugNumberLabel}
+                          onChange={(e) => setSlugNumberLabel(e.target.value)}
+                          placeholder="Contoh: Sinta"
+                          autoComplete="off"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-white focus:outline-none focus:border-[#990202]"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="slugNumberValue" className="block text-[11px] font-bold text-gray-600 mb-1">Nomor WhatsApp</label>
+                        <input
+                          id="slugNumberValue"
+                          type="tel"
+                          inputMode="numeric"
+                          value={slugNumberValue}
+                          onChange={(e) => setSlugNumberValue(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault()
+                              void handleAddSlugNumber()
+                            }
+                          }}
+                          placeholder="081234567890"
+                          autoComplete="tel"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-[13px] font-mono bg-white focus:outline-none focus:border-[#990202]"
+                        />
+                      </div>
+                    </div>
+                    {slugNumberError && (
+                      <p role="alert" className="text-[11px] font-semibold text-red-700">{slugNumberError}</p>
+                    )}
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-[10px] leading-relaxed text-gray-500">Nomor disimpan sebagai CS global aktif dan langsung dipilih untuk link ini.</p>
+                      <button
+                        type="button"
+                        onClick={handleAddSlugNumber}
+                        disabled={addingSlugNumber}
+                        className="shrink-0 px-3 py-1.5 bg-[#990202] text-white rounded-lg text-[11px] font-bold hover:bg-[#7a0202] active:scale-[0.98] disabled:opacity-50 transition"
+                      >
+                        {addingSlugNumber ? 'Menambahkan...' : 'Tambah & Pilih'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 max-h-36 overflow-y-auto space-y-1.5">
+                  {numbers.filter((n) => n.isActive).length === 0 && (
+                    <p className="text-[12px] text-gray-400">Belum ada nomor CS aktif.</p>
+                  )}
                   {numbers.filter((n) => n.isActive).map((n) => {
                     const checked = formNumberIds.includes(n.id)
                     return (
