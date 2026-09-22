@@ -29,7 +29,13 @@ function buildVCard(person: KartuPerson): string {
   return lines.join("\r\n");
 }
 
-export default function KartuClient({ person }: { person: KartuPerson }) {
+export default function KartuClient({
+  person,
+  shareUrl,
+}: {
+  person: KartuPerson;
+  shareUrl: string;
+}) {
   const wa = useMemo(() => toWaNumber(person.phone), [person.phone]);
   const displayPhone = useMemo(() => formatPhone(person.phone), [person.phone]);
 
@@ -45,15 +51,12 @@ export default function KartuClient({ person }: { person: KartuPerson }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
 
-  // QR dibuat di klien lewat layanan gambar publik supaya tidak perlu
-  // dependensi tambahan. Isinya tautan halaman ini sendiri, diambil dari
-  // window saat komponen di-mount (bukan effect + setState, yang memicu
-  // render berantai dan dilarang oleh aturan lint proyek ini).
-  const [qrSrc] = useState(() => {
-    if (typeof window === "undefined") return "";
-    const target = encodeURIComponent(window.location.href);
-    return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=${target}`;
-  });
+  // QR berisi tautan halaman ini, dibangun dari prop `shareUrl` yang dihitung
+  // di server. Sengaja BUKAN dari window.location di dalam useState/useEffect:
+  // nilai awal yang berbeda antara server dan klien memicu hydration mismatch,
+  // dan setState di dalam effect dilarang oleh aturan lint proyek ini.
+  // Digambar lewat layanan gambar publik supaya tidak perlu dependensi baru.
+  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=${encodeURIComponent(shareUrl)}`;
 
   // Tilt 3D mengikuti kursor; berhenti otomatis kalau perangkat tidak
   // mendukung hover atau pengguna minta animasi dikurangi.
@@ -202,12 +205,8 @@ export default function KartuClient({ person }: { person: KartuPerson }) {
           </div>
 
           <div className="kartu-qr">
-            {qrSrc ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={qrSrc} alt="Kode QR kartu nama" width={74} height={74} loading="lazy" />
-            ) : (
-              <span aria-hidden="true" style={{ width: 74, height: 74, display: "block" }} />
-            )}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={qrSrc} alt="Kode QR kartu nama" width={74} height={74} loading="lazy" />
             <span className="kartu-qr-txt">
               <b>Bagikan kartu ini</b>
               Pindai kode QR untuk membuka halaman kartu nama digital.

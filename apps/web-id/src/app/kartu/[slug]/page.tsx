@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { KARTU_PEOPLE, getKartuPerson } from "@/data/kartu";
+import { getDomainConfig } from "@/lib/domains";
 import KartuClient from "./KartuClient";
 
 // Halaman kartu nama digital: /kartu/<slug>. Statis penuh — semua orang
@@ -9,17 +11,32 @@ export function generateStaticParams() {
   return KARTU_PEOPLE.map((p) => ({ slug: p.slug }));
 }
 
+// URL absolut (untuk QR + canonical) diambil dari Host, sama seperti
+// root layout — app ini melayani lebih dari satu domain.
+async function getBaseUrl(): Promise<string> {
+  const host = (await headers()).get("host");
+  return getDomainConfig(host).baseUrl;
+}
+
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<Metadata> {
   const { slug } = await params;
   const person = getKartuPerson(slug);
-  if (!person) return { title: "Kartu tidak ditemukan — EasyLegal" };
+  if (!person) return { title: "Kartu tidak ditemukan" };
+
+  const baseUrl = await getBaseUrl();
+  const url = `${baseUrl}/kartu/${person.slug}`;
 
   return {
-    title: `${person.name} — ${person.title} EasyLegal`,
+    title: `${person.name} — ${person.title}`,
     description: `Kartu nama digital ${person.name}, ${person.title} di EasyLegal. Hubungi via WhatsApp ${person.phone} untuk konsultasi legalitas bisnis.`,
+    // Root layout menetapkan canonical ke homepage; halaman ini harus
+    // menunjuk ke URL-nya sendiri.
+    alternates: { canonical: url },
     openGraph: {
+      type: "profile",
+      url,
       title: `${person.name} — ${person.title} EasyLegal`,
       description: `Kartu nama digital EasyLegal. Hubungi via WhatsApp untuk konsultasi legalitas bisnis.`,
       images: [{ url: person.photo, width: 2482, height: 3190, alt: `Foto ${person.name}` }],
@@ -35,5 +52,7 @@ export default async function KartuPage({
   const { slug } = await params;
   const person = getKartuPerson(slug);
   if (!person) notFound();
-  return <KartuClient person={person} />;
+
+  const baseUrl = await getBaseUrl();
+  return <KartuClient person={person} shareUrl={`${baseUrl}/kartu/${person.slug}`} />;
 }
