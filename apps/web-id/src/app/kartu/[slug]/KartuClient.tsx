@@ -113,7 +113,7 @@ export default function KartuClient({
               />
             </div>
             <div className="kartu-logo-badge">
-              <Image src="/images/logo-mark.svg" alt="EasyLegal" width={144} height={80} />
+              <Image src="/images/logo.svg" alt="EasyLegal" width={4452} height={3755} />
             </div>
           </div>
 
