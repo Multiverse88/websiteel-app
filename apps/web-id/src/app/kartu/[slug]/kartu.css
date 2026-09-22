@@ -171,12 +171,13 @@
   line-height: 1;
 }
 
-/* Kartu hitam: logo emboss, menumpuk miring di depan */
+/* Kartu hitam: logo emboss, menumpuk di kanan-bawah sehingga kartu putih
+   (identitas + kontak) tetap terbaca di kiri-atas. */
 .kartu-card-back {
-  top: -10px;
-  left: 26px;
-  right: -26px;
-  bottom: 18px;
+  top: 16%;
+  left: 34%;
+  right: -7%;
+  bottom: -9%;
   background: linear-gradient(150deg, #1d1c22 0%, #0c0b0f 100%);
   display: grid;
   place-items: center;
