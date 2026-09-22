@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -53,7 +53,6 @@ export default function KartuClient({
   const waHref = `https://wa.me/${wa}?text=${encodeURIComponent(waText)}`;
   const telHref = `tel:+${wa}`;
 
-  const cardRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
 
   // QR berisi tautan halaman ini, dibangun dari prop `shareUrl` yang dihitung
@@ -62,44 +61,6 @@ export default function KartuClient({
   // dan setState di dalam effect dilarang oleh aturan lint proyek ini.
   // Digambar lewat layanan gambar publik supaya tidak perlu dependensi baru.
   const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=${encodeURIComponent(shareUrl)}`;
-
-  // Tilt 3D mengikuti kursor; berhenti otomatis kalau perangkat tidak
-  // mendukung hover atau pengguna minta animasi dikurangi.
-  useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!window.matchMedia("(hover: hover)").matches) return;
-
-    let frame = 0;
-
-    const onMove = (e: PointerEvent) => {
-      card.classList.add("is-live");
-      const rect = card.getBoundingClientRect();
-      const px = (e.clientX - rect.left) / rect.width - 0.5;
-      const py = (e.clientY - rect.top) / rect.height - 0.5;
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        card.style.setProperty("--ry", `${px * 11}deg`);
-        card.style.setProperty("--rx", `${-py * 8}deg`);
-      });
-    };
-
-    const onLeave = () => {
-      cancelAnimationFrame(frame);
-      card.classList.remove("is-live");
-      card.style.setProperty("--ry", "-7deg");
-      card.style.setProperty("--rx", "4deg");
-    };
-
-    card.addEventListener("pointermove", onMove);
-    card.addEventListener("pointerleave", onLeave);
-    return () => {
-      cancelAnimationFrame(frame);
-      card.removeEventListener("pointermove", onMove);
-      card.removeEventListener("pointerleave", onLeave);
-    };
-  }, []);
 
   const handleSaveContact = useCallback(() => {
     const blob = new Blob([buildVCard(person)], { type: "text/vcard;charset=utf-8" });
@@ -127,7 +88,19 @@ export default function KartuClient({
   return (
     <div className="kartu-scope">
       <div className="kartu-stage">
-        <div className="kartu-card" ref={cardRef}>
+        <div className="kartu-card">
+          {/* Banner lebar dengan foto profil menumpuk di tepi bawahnya. */}
+          <div className="kartu-banner">
+            <Image
+              src="/hero-tentang-kami.webp"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 420px) 100vw, 420px"
+            />
+          </div>
+
+          {/* Foto profil bulat menumpuk di tepi bawah banner */}
           <div className="kartu-head">
             <div className="kartu-photo">
               <Image
@@ -139,102 +112,101 @@ export default function KartuClient({
                 sizes="104px"
               />
             </div>
-            <div className="kartu-id">
-              <h1 className="kartu-name">{person.name}</h1>
-              <p className="kartu-role">{person.title}</p>
-              <span className="kartu-brand">
-                <i aria-hidden="true" />
-                EasyLegal · Legalitas Bisnis
-              </span>
-            </div>
+            <Image
+              className="kartu-brand"
+              src="/images/logo.svg"
+              alt="EasyLegal"
+              width={72}
+              height={61}
+            />
           </div>
 
-          <div className="kartu-rule" />
+          <h1 className="kartu-name">{person.name}</h1>
+          <p className="kartu-role">{person.title}</p>
 
-          {/* Baris kontak + QR berdampingan supaya kartu tidak memanjang
-              ke bawah (QR sebelumnya menumpuk dan membuat kartu terlalu tinggi). */}
-          <div className="kartu-body">
-            <div className="kartu-rows">
-              <a className="kartu-row" href={waHref} target="_blank" rel="noopener noreferrer">
-                <span className="kartu-row-ic is-wa">
-                  <MessageCircle size={16} strokeWidth={2.4} />
-                </span>
-                <span className="kartu-row-txt">
-                  <span className="kartu-row-label">WhatsApp</span>
-                  <span className="kartu-row-value">{displayPhone}</span>
-                </span>
-              </a>
-              <a className="kartu-row" href={telHref}>
-                <span className="kartu-row-ic">
-                  <Phone size={15} strokeWidth={2.4} />
-                </span>
-                <span className="kartu-row-txt">
-                  <span className="kartu-row-label">Telepon</span>
-                  <span className="kartu-row-value">{person.phone}</span>
-                </span>
-              </a>
-              {person.email && (
-                <a className="kartu-row" href={`mailto:${person.email}`}>
-                  <span className="kartu-row-ic">
-                    <Mail size={15} strokeWidth={2.4} />
-                  </span>
-                  <span className="kartu-row-txt">
-                    <span className="kartu-row-label">Email</span>
-                    <span className="kartu-row-value">{person.email}</span>
-                  </span>
-                </a>
-              )}
-              {person.office && (
-                <div className="kartu-row">
-                  <span className="kartu-row-ic">
-                    <Building2 size={15} strokeWidth={2.4} />
-                  </span>
-                  <span className="kartu-row-txt">
-                    <span className="kartu-row-label">Kantor</span>
-                    <span className="kartu-row-value">{person.office}</span>
-                  </span>
-                </div>
-              )}
-            </div>
-
-            <div className="kartu-qr">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={qrSrc} alt="Kode QR kartu nama" width={84} height={84} loading="lazy" />
-              <span className="kartu-qr-txt">
-                <b>Bagikan</b>
-                Pindai QR
+          {/* Kontak vertikal: ikon lingkaran + teks, satu baris per kanal */}
+          <div className="kartu-rows">
+            <a className="kartu-row" href={waHref} target="_blank" rel="noopener noreferrer">
+              <span className="kartu-row-ic is-wa">
+                <MessageCircle size={16} strokeWidth={2.4} />
               </span>
-            </div>
-          </div>
-
-          <div className="kartu-actions">
-            <a className="kartu-btn is-primary" href={waHref} target="_blank" rel="noopener noreferrer">
-              <MessageCircle size={17} strokeWidth={2.6} />
-              Chat WhatsApp
+              <span className="kartu-row-txt">
+                <span className="kartu-row-label">WhatsApp</span>
+                <span className="kartu-row-value">{displayPhone}</span>
+              </span>
             </a>
-            <button className="kartu-btn is-ghost" type="button" onClick={handleSaveContact}>
-              <Download size={16} strokeWidth={2.4} />
+            <a className="kartu-row" href={telHref}>
+              <span className="kartu-row-ic">
+                <Phone size={15} strokeWidth={2.4} />
+              </span>
+              <span className="kartu-row-txt">
+                <span className="kartu-row-label">Telepon</span>
+                <span className="kartu-row-value">{person.phone}</span>
+              </span>
+            </a>
+            {person.email && (
+              <a className="kartu-row" href={`mailto:${person.email}`}>
+                <span className="kartu-row-ic">
+                  <Mail size={15} strokeWidth={2.4} />
+                </span>
+                <span className="kartu-row-txt">
+                  <span className="kartu-row-label">Email</span>
+                  <span className="kartu-row-value">{person.email}</span>
+                </span>
+              </a>
+            )}
+            {person.office && (
+              <div className="kartu-row">
+                <span className="kartu-row-ic">
+                  <Building2 size={15} strokeWidth={2.4} />
+                </span>
+                <span className="kartu-row-txt">
+                  <span className="kartu-row-label">Kantor</span>
+                  <span className="kartu-row-value">{person.office}</span>
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Simpan Kontak paling menonjol — aksi utama di kartu nama */}
+          <div className="kartu-actions">
+            <button className="kartu-btn is-primary" type="button" onClick={handleSaveContact}>
+              <Download size={17} strokeWidth={2.4} />
               Simpan Kontak
             </button>
+            <a className="kartu-btn is-ghost" href={waHref} target="_blank" rel="noopener noreferrer">
+              <MessageCircle size={16} strokeWidth={2.4} />
+              Chat WhatsApp
+            </a>
             <button className="kartu-btn is-ghost" type="button" onClick={handleCopy}>
               {copied ? <Check size={16} strokeWidth={2.6} /> : <Copy size={15} strokeWidth={2.4} />}
               {copied ? "Tersalin" : "Salin Info"}
             </button>
           </div>
+
+          {/* Footer bagikan: QR kecil di kiri, teks di kanan */}
+          <div className="kartu-share">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={qrSrc} alt="Kode QR kartu nama" width={72} height={72} loading="lazy" />
+            <span>
+              Pindai QR untuk membagikan
+              <br />
+              kartu nama ini
+            </span>
+          </div>
         </div>
       </div>
 
       <div className="kartu-below">
-        <p>
-          Kartu nama digital {person.name} — {person.title} EasyLegal.
-        </p>
         <Link className="kartu-home" href="/">
           <ArrowLeft size={14} strokeWidth={2.4} />
           Kembali ke easylegal.id
         </Link>
       </div>
 
-      {copied && <div className="kartu-toast">Info kontak tersalin</div>}
+      <div className="kartu-status" role="status" aria-live="polite">
+        {copied && <div className="kartu-toast">Info kontak tersalin</div>}
+      </div>
     </div>
   );
 }
