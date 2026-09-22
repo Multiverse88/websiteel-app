@@ -151,17 +151,33 @@ export default function KartuClient({
                 </span>
               </a>
             )}
-            {person.office && (
-              <div className="kartu-row">
-                <span className="kartu-row-ic">
-                  <Building2 size={15} strokeWidth={2.4} />
-                </span>
-                <span className="kartu-row-txt">
-                  <span className="kartu-row-label">Kantor</span>
-                  <span className="kartu-row-value">{person.office}</span>
-                </span>
-              </div>
-            )}
+            {person.office &&
+              (person.mapsUrl ? (
+                <a
+                  className="kartu-row"
+                  href={person.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="kartu-row-ic">
+                    <Building2 size={15} strokeWidth={2.4} />
+                  </span>
+                  <span className="kartu-row-txt">
+                    <span className="kartu-row-label">Kantor</span>
+                    <span className="kartu-row-value">{person.office}</span>
+                  </span>
+                </a>
+              ) : (
+                <div className="kartu-row">
+                  <span className="kartu-row-ic">
+                    <Building2 size={15} strokeWidth={2.4} />
+                  </span>
+                  <span className="kartu-row-txt">
+                    <span className="kartu-row-label">Kantor</span>
+                    <span className="kartu-row-value">{person.office}</span>
+                  </span>
+                </div>
+              ))}
           </div>
 
           {/* Simpan Kontak paling menonjol — aksi utama di kartu nama */}

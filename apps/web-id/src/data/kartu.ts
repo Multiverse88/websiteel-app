@@ -12,6 +12,7 @@ export type KartuPerson = {
   phone: string;
   email?: string;
   office?: string;
+  mapsUrl?: string;
 };
 
 export const KARTU_PEOPLE: KartuPerson[] = [
@@ -21,7 +22,9 @@ export const KARTU_PEOPLE: KartuPerson[] = [
     title: "Personal Legal Assistant",
     photo: "/teamplalo/naufal-nandi-pinto.jpg",
     phone: "087785303765",
-    office: "EasyLegal",
+    email: "pla@easylegal.id",
+    office: "EasyLegal — Kantor Pusat, Bandung",
+    mapsUrl: "https://maps.app.goo.gl/pGWtnZAvSV6aLsEm7",
   },
 ];
 
