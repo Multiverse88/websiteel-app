@@ -377,9 +377,9 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     }
   }, [])
 
-  const loadLeads = useCallback(async () => {
+  const loadLeads = useCallback(async (background = false) => {
     try {
-      setLeadsLoading(true)
+      if (!background) setLeadsLoading(true)
       const { from, to } = computeDateRange(datePreset, customFrom, customTo)
       const res = await api.getWaLeads({ status: statusFilter, source: sourceFilter, domain: domainFilter, numberId: numberFilter, search: searchFilter, from, to, excludeBot: hideBot ? '1' : undefined, page: String(leadsPage), pageSize: String(LEADS_PAGE_SIZE) })
       setLeads(res.data || [])
@@ -391,7 +391,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
     } catch (e: any) {
       setError(e.message)
     } finally {
-      setLeadsLoading(false)
+      if (!background) setLeadsLoading(false)
     }
   }, [sourceFilter, statusFilter, domainFilter, numberFilter, searchFilter, datePreset, customFrom, customTo, hideBot, leadsPage])
 
@@ -581,9 +581,6 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
       setNumbers((current) => current.some((item) => item.id === newNumber.id)
         ? current
         : [...current, newNumber])
-      setFormNumberIds((current) => current.includes(newNumber.id)
-        ? current
-        : [...current, newNumber.id])
       setSlugNumberLabel('')
       setSlugNumberValue('')
       setShowSlugNumberForm(false)
@@ -639,7 +636,7 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
 
   useEffect(() => {
     if (tab !== 'leads') return
-    const id = setInterval(() => { loadLeads() }, 15000)
+    const id = setInterval(() => { loadLeads(true) }, 15000)
     return () => clearInterval(id)
   }, [tab, loadLeads])
 
@@ -1568,14 +1565,11 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                 </p>
               </div>
 
-              {/* Pool Pembatasan Nomor CS */}
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <label className="text-[13px] font-bold text-gray-700">Rotasi Nomor CS (Opsional)</label>
-                    <div className="text-[11px] text-gray-400 mt-0.5">
-                      {formNumberIds.length === 0 ? 'Semua nomor aktif (Default)' : `${formNumberIds.length} nomor terpilih`}
-                    </div>
+                    <label className="text-[13px] font-bold text-gray-700">Tambah Nomor CS</label>
+                    <p className="text-[11px] text-gray-400 mt-0.5">Simpan nomor baru ke daftar CS global.</p>
                   </div>
                   <button
                     type="button"
@@ -1629,18 +1623,27 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                       <p role="alert" className="text-[11px] font-semibold text-red-700">{slugNumberError}</p>
                     )}
                     <div className="flex items-center justify-between gap-3">
-                      <p className="text-[10px] leading-relaxed text-gray-500">Nomor disimpan sebagai CS global aktif dan langsung dipilih untuk link ini.</p>
+                      <p className="text-[10px] leading-relaxed text-gray-500">Nomor disimpan sebagai CS global. Pilih terpisah di rotator bila link ini perlu memakai nomor tersebut.</p>
                       <button
                         type="button"
                         onClick={handleAddSlugNumber}
                         disabled={addingSlugNumber}
                         className="shrink-0 px-3 py-1.5 bg-[#990202] text-white rounded-lg text-[11px] font-bold hover:bg-[#7a0202] active:scale-[0.98] disabled:opacity-50 transition"
                       >
-                        {addingSlugNumber ? 'Menambahkan...' : 'Tambah & Pilih'}
+                        {addingSlugNumber ? 'Menambahkan...' : 'Tambah Nomor'}
                       </button>
                     </div>
                   </div>
                 )}
+              </div>
+
+              <div className="flex flex-col gap-2 pt-2 border-t border-gray-100">
+                <div>
+                  <label className="text-[13px] font-bold text-gray-700">Rotasi Nomor CS (Opsional)</label>
+                  <div className="text-[11px] text-gray-400 mt-0.5">
+                    {formNumberIds.length === 0 ? 'Semua nomor aktif (Default)' : `${formNumberIds.length} nomor terpilih`}
+                  </div>
+                </div>
 
                 <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 max-h-36 overflow-y-auto space-y-1.5">
                   {numbers.length === 0 && (
@@ -2007,14 +2010,14 @@ export default function WhatsAppRotator({ initialTab = 'numbers' }: { initialTab
                   <th className="px-6 py-3">Status</th>
                 </tr>
               </thead>
-              <tbody>
-                {leadsLoading && (
-                  <tr><td colSpan={9} className="px-6 py-8 text-center text-gray-400">Memuat leads...</td></tr>
-                )}
-                {!leadsLoading && leads.length === 0 && (
-                  <tr><td colSpan={9} className="px-6 py-8 text-center text-gray-400">Belum ada lead yang cocok dengan filter.</td></tr>
-                )}
-                {!leadsLoading && leads.map((lead) => (
+                <tbody>
+                  {leadsLoading && leads.length === 0 && (
+                    <tr><td colSpan={9} className="px-6 py-8 text-center text-gray-400">Memuat leads...</td></tr>
+                  )}
+                  {!leadsLoading && leads.length === 0 && (
+                    <tr><td colSpan={9} className="px-6 py-8 text-center text-gray-400">Belum ada lead yang cocok dengan filter.</td></tr>
+                  )}
+                  {leads.map((lead) => (
                   <tr key={lead.id} className="border-t border-gray-100">
                     <td className="px-6 py-3.5 font-mono font-bold text-gray-900">
                       {lead.leadCode}
