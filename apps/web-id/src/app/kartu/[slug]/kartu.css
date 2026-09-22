@@ -1,0 +1,427 @@
+/* Kartu nama digital 3D — semua selector di-scope ke .kartu-scope supaya
+   tidak bocor ke halaman lain. Token warna ikut EasyLegal (merah #990202). */
+
+.kartu-scope {
+  --k-primary: #990202;
+  --k-primary-dark: #6f0101;
+  --k-ink: #17161b;
+  --k-muted: #6b7280;
+  --k-wa: #25d366;
+  --k-wa-hover: #1ea760;
+
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 18px 40px;
+  background:
+    radial-gradient(1000px 620px at 50% -10%, #3a2020 0%, rgba(23, 22, 27, 0) 60%),
+    linear-gradient(160deg, #1b1a20 0%, #100f14 55%, #1b1a20 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.kartu-scope::before,
+.kartu-scope::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.kartu-scope::before {
+  width: 420px;
+  height: 420px;
+  top: -140px;
+  left: -120px;
+  background: rgba(153, 2, 2, 0.42);
+}
+
+.kartu-scope::after {
+  width: 360px;
+  height: 360px;
+  bottom: -150px;
+  right: -110px;
+  background: rgba(153, 2, 2, 0.22);
+}
+
+/* ---------- Panggung 3D ---------- */
+.kartu-stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  perspective: 1100px;
+}
+
+.kartu-card {
+  position: relative;
+  border-radius: 26px;
+  padding: 22px 22px 20px;
+  background: linear-gradient(158deg, #ffffff 0%, #f6f4f6 46%, #ece8ec 100%);
+  color: var(--k-ink);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.06) inset,
+    0 34px 60px -22px rgba(0, 0, 0, 0.85),
+    0 10px 24px -12px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 8deg)) rotateY(var(--ry, -13deg));
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+.kartu-card::after {
+  /* Lapisan tipis agar kartu terasa punya ketebalan. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 38%);
+  pointer-events: none;
+}
+
+.kartu-card.is-live {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.08s linear;
+}
+
+/* ---------- Sisi atas: foto + nama ---------- */
+.kartu-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.kartu-photo {
+  position: relative;
+  flex: 0 0 auto;
+  width: 104px;
+  height: 104px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #e2e2e2;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 14px 24px -12px rgba(0, 0, 0, 0.55),
+    0 0 0 3px rgba(255, 255, 255, 0.85);
+  transform: translateZ(46px);
+}
+
+.kartu-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+  display: block;
+}
+
+.kartu-id {
+  min-width: 0;
+  transform: translateZ(30px);
+}
+
+.kartu-name {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #14131a;
+}
+
+.kartu-role {
+  margin: 7px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--k-primary);
+}
+
+.kartu-brand {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--k-muted);
+}
+
+.kartu-brand i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--k-wa);
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.18);
+}
+
+.kartu-rule {
+  height: 1px;
+  margin: 18px 0 14px;
+  background: linear-gradient(90deg, rgba(153, 2, 2, 0.35), rgba(0, 0, 0, 0.06) 60%, rgba(0, 0, 0, 0));
+  transform: translateZ(16px);
+}
+
+/* ---------- Baris kontak ---------- */
+.kartu-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transform: translateZ(22px);
+}
+
+.kartu-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 11px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  color: inherit;
+}
+
+a.kartu-row:hover {
+  background: #fff;
+  border-color: rgba(153, 2, 2, 0.28);
+}
+
+.kartu-row-ic {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: var(--k-primary);
+  color: #fff;
+}
+
+.kartu-row-ic.is-wa {
+  background: var(--k-wa);
+}
+
+.kartu-row-txt {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.kartu-row-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--k-muted);
+}
+
+.kartu-row-value {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #14131a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Tombol aksi ---------- */
+.kartu-actions {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  transform: translateZ(34px);
+}
+
+.kartu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 14px;
+  border-radius: 13px;
+  border: 0;
+  font-size: 13.5px;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.kartu-btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.kartu-btn.is-primary {
+  grid-column: 1 / -1;
+  background: linear-gradient(180deg, var(--k-wa) 0%, var(--k-wa-hover) 100%);
+  color: #fff;
+  box-shadow: 0 12px 22px -12px rgba(37, 211, 102, 0.95);
+}
+
+.kartu-btn.is-ghost {
+  background: #fff;
+  color: var(--k-ink);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 18px -14px rgba(0, 0, 0, 0.6);
+}
+
+.kartu-btn.is-ghost:hover {
+  border-color: rgba(153, 2, 2, 0.35);
+  color: var(--k-primary);
+}
+
+/* ---------- QR ---------- */
+.kartu-qr {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(23, 22, 27, 0.04);
+  border: 1px dashed rgba(0, 0, 0, 0.14);
+  transform: translateZ(18px);
+}
+
+.kartu-qr img {
+  width: 74px;
+  height: 74px;
+  border-radius: 8px;
+  background: #fff;
+  padding: 4px;
+  display: block;
+}
+
+.kartu-qr-txt {
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--k-muted);
+}
+
+.kartu-qr-txt b {
+  display: block;
+  font-size: 12.5px;
+  color: #14131a;
+  margin-bottom: 2px;
+}
+
+/* ---------- Hal di luar kartu ---------- */
+.kartu-below {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin-top: 26px;
+  text-align: center;
+  transform: translateZ(0);
+}
+
+.kartu-below p {
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.kartu-below a.kartu-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.kartu-below a.kartu-home:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.kartu-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: #14131a;
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+  box-shadow: 0 18px 34px -16px rgba(0, 0, 0, 0.9);
+}
+
+/* ---------- Layar kecil ---------- */
+@media (max-width: 400px) {
+  .kartu-scope {
+    padding: 22px 14px 30px;
+  }
+
+  .kartu-card {
+    padding: 18px 16px 16px;
+    border-radius: 22px;
+  }
+
+  .kartu-photo {
+    width: 88px;
+    height: 88px;
+    border-radius: 17px;
+  }
+
+  .kartu-name {
+    font-size: 17px;
+  }
+
+  .kartu-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .kartu-btn.is-primary {
+    grid-column: auto;
+  }
+}
+
+/* ---------- Hormati preferensi mengurangi animasi ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .kartu-card,
+  .kartu-card.is-live {
+    transition: none;
+    transform: none;
+  }
+
+  .kartu-btn {
+    transition: none;
+  }
+}
+
+@media print {
+  .kartu-scope {
+    background: #fff;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .kartu-card {
+    transform: none;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .kartu-below {
+    display: none;
+  }
+}
