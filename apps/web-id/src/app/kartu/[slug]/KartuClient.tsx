@@ -100,7 +100,7 @@ export default function KartuClient({
             />
           </div>
 
-          {/* Foto profil bulat menumpuk di tepi bawah banner */}
+          {/* Foto profil bulat + badge logo bulat, sama-sama menumpuk di tepi bawah banner */}
           <div className="kartu-head">
             <div className="kartu-photo">
               <Image
@@ -112,13 +112,9 @@ export default function KartuClient({
                 sizes="104px"
               />
             </div>
-            <Image
-              className="kartu-brand"
-              src="/images/logo.svg"
-              alt="EasyLegal"
-              width={72}
-              height={61}
-            />
+            <div className="kartu-logo-badge">
+              <Image src="/images/logo-mark.svg" alt="EasyLegal" width={144} height={80} />
+            </div>
           </div>
 
           <h1 className="kartu-name">{person.name}</h1>
