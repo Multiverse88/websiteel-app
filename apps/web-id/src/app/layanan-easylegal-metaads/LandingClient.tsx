@@ -275,8 +275,9 @@ export default function LandingClient() {
                 <option value="Pendirian PT/CV">Pendirian PT/CV</option>
                 <option value="Daftar Merek">Daftar Merek</option>
                 <option value="Jasa NIB">Jasa NIB</option>
-                <option value="PT PMA">PT PMA</option>
-                <option value="Layanan Lainnya">Layanan Lainnya</option>
+            <option value="PT PMA">PT PMA</option>
+            <option value="KITAS">KITAS</option>
+            <option value="Layanan Lainnya">Layanan Lainnya</option>
                 <option value="Belum yakin, mau konsultasi dulu">Belum yakin, mau konsultasi dulu</option>
               </select>
             </div>
@@ -394,6 +395,7 @@ export default function LandingClient() {
           <button className="ptab" data-tab="merek">Daftar Merek</button>
           <button className="ptab" data-tab="ptcv">Pendirian PT/CV</button>
           <button className="ptab" data-tab="pma">PT PMA</button>
+          <button className="ptab" data-tab="kitas">KITAS</button>
           <button className="ptab" data-tab="lainnya">Semua Layanan</button>
         </div>
 
@@ -404,13 +406,97 @@ export default function LandingClient() {
           <div className="left" style={{ gridColumn: '1/-1' }}>
             <div className="subtab-group">
               <div className="sub-tabs" role="tablist" aria-label="Pilihan paket PT Perorangan">
-                <button className="sub-tab-btn active" data-sub="pero-basic">Basic</button>
+                <button className="sub-tab-btn active" data-sub="pero-spesial">Spesial</button>
+                <button className="sub-tab-btn " data-sub="pero-basic">Basic</button>
     <button className="sub-tab-btn " data-sub="pero-complete">Complete</button>
     <button className="sub-tab-btn " data-sub="pero-express">Express (Fast Track)</button>
     <button className="sub-tab-btn " data-sub="pero-office">Office (Best Value)</button>
     <button className="sub-tab-btn " data-sub="pero-prestige">Prestige (Recommended)</button>
               </div>
-              <div className="sub-panel active" id="sub-pero-basic"><div className="pkg-card" id="card-pero-basic">
+              <div className="sub-panel active" id="sub-pero-spesial"><div className="pkg-card" id="card-pero-spesial">
+        <div className="pkg-head">
+          <span className="pkg-name">Paket Spesial GRATIS VO</span>
+        </div>
+        <p className="price-old">Rp2.000.000</p>
+        <p className="price-new">Rp999.000</p>
+        <p className="price-note">Akta Penegasan + Rp1.499.000 (opsional)</p>
+        <ul className="hi-list">
+          <li>Estimasi proses: Semua dokumen selesai dalam 1-3 hari kerja</li>
+    <li>Fokus dokumen legalitas inti</li>
+        </ul>
+        <button className="detail-toggle" type="button">Lihat Detail Lengkap <span className="dt-icon">▾</span></button>
+        <div className="pkg-detail-full">
+          <div className="detail-group">
+          <h5>Fasilitas</h5>
+          <ul className="detail-list">
+            <li className="inc"><span className="dot">✓</span> Pengecekan &amp; Pemesanan Nama PT</li>
+    <li className="inc"><span className="dot">✓</span> 10 KBLI Bidang Usaha</li>
+          </ul>
+        </div><div className="detail-group">
+          <h5>Dokumen Pendirian</h5>
+          <ul className="detail-list">
+            <li className="inc"><span className="dot">✓</span> Surat Pernyataan Pendirian PT</li>
+    <li className="inc"><span className="dot">✓</span> Sertifikat Pendirian Kemenkumham</li>
+          </ul>
+        </div><div className="detail-group">
+          <h5>Dokumen Lainnya</h5>
+          <ul className="detail-list">
+            <li className="inc"><span className="dot">✓</span> SKT Pajak &amp; NPWP Badan</li>
+    <li className="inc"><span className="dot">✓</span> Akun AHU</li>
+    <li className="inc"><span className="dot">✓</span> NIB &amp; Akun OSS RBA</li>
+    <li className="inc"><span className="dot">✓</span> K3L/SPUMKTTR &amp; SPPL</li>
+    <li className="inc"><span className="dot">✓</span> Sertifikat Standar</li>
+    <li className="inc"><span className="dot">✓</span> Surat Pernyataan Mandiri</li>
+    <li className="inc"><span className="dot">✓</span> Angka Pengenal Impor</li>
+          </ul>
+        </div><div className="detail-group">
+          <h5>Virtual Office (VO)</h5>
+          <ul className="detail-list">
+            <li className="inc"><span className="dot">✓</span> Layanan Virtual Office 1 Tahun</li>
+    <li className="inc"><span className="dot">✓</span> Alamat Bisnis Komersial &amp; Bergengsi</li>
+    <li className="inc"><span className="dot">✓</span> Surat Perjanjian Sewa &amp; Domisili</li>
+    <li className="inc"><span className="dot">✓</span> Resepsionis Profesional</li>
+    <li className="inc"><span className="dot">✓</span> Mail Handling &amp; Notifikasi Real-Time</li>
+    <li className="exc"><span className="dot">–</span> High Speed Internet</li>
+    <li className="exc"><span className="dot">–</span> Smart TV/Proyektor &amp; Whiteboard</li>
+    <li className="exc"><span className="dot">–</span> Gratis Air Mineral, Kopi &amp; Teh</li>
+    <li className="exc"><span className="dot">–</span> Penggunaan Ruang Meeting 6 Jam/Bulan</li>
+    <li className="exc"><span className="dot">–</span> Akses Meeting Room di 3 Kota</li>
+    <li className="exc"><span className="dot">–</span> Penggunaan Virtual Office untuk PKP</li>
+          </ul>
+        </div><div className="detail-group">
+          <h5>Branding Identitas</h5>
+          <ul className="detail-list">
+            <li className="exc"><span className="dot">–</span> Company Profile 8 Halaman</li>
+    <li className="exc"><span className="dot">–</span> Desain Kartu Nama</li>
+    <li className="exc"><span className="dot">–</span> Desain Kop Surat</li>
+    <li className="exc"><span className="dot">–</span> Desain Map</li>
+    <li className="exc"><span className="dot">–</span> 3 Kali Revisi Desain Logo</li>
+          </ul>
+        </div><div className="detail-group">
+          <h5>Bonus</h5>
+          <ul className="detail-list">
+            <li className="inc"><span className="dot">✓</span> Layanan Personal Legal Assistant</li>
+    <li className="inc"><span className="dot">✓</span> 1 Kupon Undian iPhone</li>
+    <li className="inc"><span className="dot">✓</span> Pembukaan Rekening Bank (*)</li>
+    <li className="inc"><span className="dot">✓</span> Gratis Desain Logo Perusahaan</li>
+    <li className="inc"><span className="dot">✓</span> Gratis Ongkir Pulau Jawa</li>
+          </ul>
+        </div><div className="detail-group">
+          <h5>Extra Bonus</h5>
+          <ul className="detail-list">
+            <li className="exc"><span className="dot">–</span> 1 Buah Logam Mulia Emas 24K</li>
+    <li className="inc"><span className="dot">✓</span> Voucher EasyLegal Rp250.000</li>
+    <li className="inc"><span className="dot">✓</span> Dokumen SOP Karyawan</li>
+    <li className="inc"><span className="dot">✓</span> Dokumen SOP Perusahaan</li>
+    <li className="inc"><span className="dot">✓</span> Dokumen Kontrak Bisnis</li>
+    <li className="inc"><span className="dot">✓</span> Stempel Perusahaan 1 Warna</li>
+          </ul>
+        </div>
+        </div>
+        <a href="#form" className="btn btn-red btn-sm" data-service="PT Perorangan">Konsultasi Paket Ini →</a>
+      </div></div>
+              <div className="sub-panel " id="sub-pero-basic"><div className="pkg-card" id="card-pero-basic">
         <div className="pkg-head">
           <span className="pkg-name">Paket Basic</span>
         </div>
@@ -1684,12 +1770,56 @@ export default function LandingClient() {
           <div className="left" style={{ gridColumn: '1/-1' }}>
             <div className="subtab-group">
               <div className="sub-tabs" role="tablist" aria-label="Pilihan paket Pendaftaran Merek">
-                <button className="sub-tab-btn active" data-sub="merek-basic">Basic</button>
+                <button className="sub-tab-btn active" data-sub="merek-spesial">Spesial</button>
+                <button className="sub-tab-btn " data-sub="merek-basic">Basic</button>
     <button className="sub-tab-btn " data-sub="merek-basicai">Basic + AI</button>
     <button className="sub-tab-btn " data-sub="merek-premium">Premium</button>
     <button className="sub-tab-btn " data-sub="merek-ultimate">Ultimate</button>
               </div>
-              <div className="sub-panel active" id="sub-merek-basic"><div className="pkg-card" id="card-merek-basic">
+              <div className="sub-panel active" id="sub-merek-spesial"><div className="pkg-card" id="card-merek-spesial">
+        <div className="pkg-head">
+          <span className="pkg-name">Paket Spesial GRATIS NIB</span>
+        </div>
+        <p className="price-old">Rp1.875.000</p>
+        <p className="price-new">Rp1.499.000</p>
+        <p className="price-note">Tanpa tambahan biaya apapun*</p>
+        <ul className="hi-list">
+          <li>Estimasi proses: 1 hari kerja setelah draf pendaftaran merek disetujui</li><li>Berlaku untuk pendaftaran 1 kelas merek</li>
+        </ul>
+        <button className="detail-toggle" type="button">Lihat Detail Lengkap <span className="dt-icon">▾</span></button>
+        <div className="pkg-detail-full">
+          <div className="detail-group">
+          <h5>Yang Diperoleh</h5>
+          <ul className="detail-list">
+            <li className="inc"><span className="dot">✓</span> Konsultasi HAKI Merek</li>
+    <li className="inc"><span className="dot">✓</span> Rekomendasi pemilihan Kelas Merek</li>
+    <li className="inc"><span className="dot">✓</span> Monitoring perubahan Status Merek</li>
+    <li className="inc"><span className="dot">✓</span> E-Sertifikat Merek</li>
+    <li className="inc"><span className="dot">✓</span> 5x Pemeriksaan Merek Manual</li>
+    <li className="inc"><span className="dot">✓</span> NIB &amp; Akun OSS RBA</li>
+    <li className="exc"><span className="dot">–</span> 1x Pemeriksaan Merek dengan AI</li>
+    <li className="exc"><span className="dot">–</span> Pengajuan Tanggapan atau Keberatan bila terjadi Usulan Penolakan Merek</li>
+    <li className="exc"><span className="dot">–</span> Garansi Uang Kembali Jasa Pendaftaran Merek Apabila Merek Ditolak</li>
+          </ul>
+        </div><div className="detail-group">
+          <h5>Bonus</h5>
+          <ul className="detail-list">
+            <li className="inc"><span className="dot">✓</span> Layanan Personal Legal Assistant</li>
+    <li className="inc"><span className="dot">✓</span> 1 Kupon Undian iPhone</li>
+          </ul>
+        </div><div className="detail-group">
+          <h5>Extra Bonus</h5>
+          <ul className="detail-list">
+            <li className="inc"><span className="dot">✓</span> Voucher EasyLegal Rp50.000</li>
+    <li className="inc"><span className="dot">✓</span> Dokumen SOP Karyawan</li>
+    <li className="inc"><span className="dot">✓</span> Dokumen SOP Perusahaan</li>
+    <li className="inc"><span className="dot">✓</span> Dokumen Kontrak Bisnis</li>
+          </ul>
+        </div>
+        </div>
+        <a href="#form" className="btn btn-red btn-sm" data-service="Daftar Merek">Konsultasi Paket Ini →</a>
+      </div></div>
+              <div className="sub-panel " id="sub-merek-basic"><div className="pkg-card" id="card-merek-basic">
         <div className="pkg-head">
           <span className="pkg-name">Paket Basic</span>
         </div>
@@ -2304,12 +2434,98 @@ export default function LandingClient() {
         <a href="#form" className="btn btn-red btn-sm" data-service="PT PMA">Konsultasi Paket Ini →</a>
       </div></div>
             </div>
-            <div className="foot-notes">(1) Setelah penandatanganan Minuta Akta & tidak terdapat kendala pada sistem AHU.<br />(2) Jika tidak terdapat kendala pada sistem Coretax, Amdalnet & OSS.<br />(3) Apabila seluruh pengurus Direktur & Komisaris merupakan Warga Negara Asing, Direktur atau Kuasa Internal Perusahaan wajib hadir ke KPP setempat.<br />(4) Berlaku untuk usaha dengan risiko menengah rendah.<br />(5) Bersifat opsional.<br />(6) Persetujuan & pengesahan PKP sepenuhnya berada di bawah kewenangan KPP setempat.<br /></div>
-          </div>
-        </div>
+             <div className="foot-notes">(1) Setelah penandatanganan Minuta Akta & tidak terdapat kendala pada sistem AHU.<br />(2) Jika tidak terdapat kendala pada sistem Coretax, Amdalnet & OSS.<br />(3) Apabila seluruh pengurus Direktur & Komisaris merupakan Warga Negara Asing, Direktur atau Kuasa Internal Perusahaan wajib hadir ke KPP setempat.<br />(4) Berlaku untuk usaha dengan risiko menengah rendah.<br />(5) Bersifat opsional.<br />(6) Persetujuan & pengesahan PKP sepenuhnya berada di bawah kewenangan KPP setempat.<br /></div>
+           </div>
+         </div>
 
-        {/* SEMUA LAYANAN — urutan paling akhir */}
-        <div className="ppanel" id="panel-lainnya">
+         {/* KITAS */}
+         <div className="ppanel" id="panel-kitas">
+           <div className="left" style={{ gridColumn: '1/-1' }}>
+             <div className="entity-toggle">
+               <button className="entity-btn active" data-entity="tka">Kitas TKA</button>
+               <button className="entity-btn" data-entity="investor">Kitas Investor</button>
+             </div>
+
+             <div className="entity-panel active" id="entity-tka">
+               <div className="subtab-group">
+                 <div className="sub-tabs" role="tablist" aria-label="Pilihan paket KITAS TKA">
+                   <button className="sub-tab-btn active" data-sub="tka-baru">Baru (New)</button>
+                   <button className="sub-tab-btn" data-sub="tka-extend">Perpanjangan (Extend)</button>
+                 </div>
+                 <div className="sub-panel active" id="sub-tka-baru"><div className="pkg-card" id="card-tka-baru">
+                   <div className="pkg-head"><span className="pkg-name">Paket Baru (New)</span></div>
+                   <p className="price-old">Rp84.300.000</p>
+                   <p className="price-new">Rp42.149.000</p>
+                   <p className="price-note">Tanpa tambahan biaya apapun</p>
+                   <ul className="hi-list"><li>Estimasi proses: 3-6 hari kerja</li><li>Pengurusan Visa &amp; KITAS TKA</li></ul>
+                   <button className="detail-toggle" type="button">Lihat Detail Lengkap <span className="dt-icon">▾</span></button>
+                   <div className="pkg-detail-full">
+                     <div className="detail-group"><h5>Yang Diperoleh</h5><ul className="detail-list">
+                       <li className="inc"><span className="dot">✓</span> Persetujuan Pemeriksaan BAP Hasil Penilaian Kelayakan</li>
+                       <li className="inc"><span className="dot">✓</span> Persetujuan RPTKA</li>
+                       <li className="inc"><span className="dot">✓</span> Persetujuan Notifikasi TKA / IMTA</li>
+                       <li className="inc"><span className="dot">✓</span> Visa Elektronik TKA (e-Visa)</li>
+                       <li className="inc"><span className="dot">✓</span> KITAS &amp; MERP TKA 1 Tahun</li>
+                       <li className="inc"><span className="dot">✓</span> Surat Keterangan Tempat Tinggal</li>
+                       <li className="inc"><span className="dot">✓</span> Surat TKKOA</li>
+                       <li className="inc"><span className="dot">✓</span> DPKK Kemenaker USD 1.200/orang</li>
+                       <li className="inc"><span className="dot">✓</span> PNBP KITAS &amp; MERP TKA 1 Tahun</li>
+                     </ul></div>
+                     <div className="detail-group"><h5>Bonus</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> Layanan Personal Legal Assistant</li><li className="inc"><span className="dot">✓</span> 1 Kupon Undian iPhone</li></ul></div>
+                     <div className="detail-group"><h5>Extra Bonus</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> Voucher EasyLegal Rp500.000</li><li className="inc"><span className="dot">✓</span> Dokumen SOP Karyawan</li><li className="inc"><span className="dot">✓</span> Dokumen SOP Perusahaan</li><li className="inc"><span className="dot">✓</span> Dokumen Kontrak Bisnis</li></ul></div>
+                   </div>
+                   <a href="#form" className="btn btn-red btn-sm" data-service="KITAS">Konsultasi Paket Ini →</a>
+                 </div></div>
+                 <div className="sub-panel" id="sub-tka-extend"><div className="pkg-card" id="card-tka-extend">
+                   <div className="pkg-head"><span className="pkg-name">Paket Perpanjangan (Extend)</span></div>
+                   <p className="price-old">Rp78.000.000</p>
+                   <p className="price-new">Rp38.999.000</p>
+                   <p className="price-note">Tanpa tambahan biaya apapun</p>
+                   <ul className="hi-list"><li>Estimasi proses: 3-6 hari kerja</li><li>Perpanjangan Visa &amp; KITAS TKA</li></ul>
+                   <button className="detail-toggle" type="button">Lihat Detail Lengkap <span className="dt-icon">▾</span></button>
+                   <div className="pkg-detail-full">
+                     <div className="detail-group"><h5>Yang Diperoleh</h5><ul className="detail-list">
+                       <li className="inc"><span className="dot">✓</span> Persetujuan Pemeriksaan BAP Hasil Penilaian Kelayakan</li><li className="inc"><span className="dot">✓</span> Persetujuan RPTKA</li><li className="inc"><span className="dot">✓</span> Persetujuan Notifikasi TKA / IMTA</li><li className="inc"><span className="dot">✓</span> Visa Elektronik TKA (e-Visa)</li><li className="inc"><span className="dot">✓</span> Perpanjangan KITAS &amp; MERP TKA 1 Tahun</li><li className="inc"><span className="dot">✓</span> Surat Keterangan Tempat Tinggal</li><li className="inc"><span className="dot">✓</span> DPKK Kemenaker USD 1.200/orang</li><li className="inc"><span className="dot">✓</span> PNBP KITAS &amp; MERP TKA 1 Tahun</li>
+                     </ul></div>
+                     <div className="detail-group"><h5>Bonus</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> Layanan Personal Legal Assistant</li><li className="inc"><span className="dot">✓</span> 1 Kupon Undian iPhone</li></ul></div>
+                     <div className="detail-group"><h5>Extra Bonus</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> Voucher EasyLegal Rp250.000</li><li className="inc"><span className="dot">✓</span> Dokumen SOP Karyawan</li><li className="inc"><span className="dot">✓</span> Dokumen SOP Perusahaan</li><li className="inc"><span className="dot">✓</span> Dokumen Kontrak Bisnis</li></ul></div>
+                   </div>
+                   <a href="#form" className="btn btn-red btn-sm" data-service="KITAS">Konsultasi Paket Ini →</a>
+                 </div></div>
+               </div>
+             </div>
+
+             <div className="entity-panel" id="entity-investor">
+               <div className="subtab-group">
+                 <div className="sub-tabs" role="tablist" aria-label="Pilihan paket KITAS Investor">
+                   <button className="sub-tab-btn active" data-sub="inv-1th">1 Tahun</button>
+                   <button className="sub-tab-btn" data-sub="inv-2th">2 Tahun</button>
+                 </div>
+                 <div className="sub-panel active" id="sub-inv-1th"><div className="pkg-card" id="card-inv-1th">
+                   <div className="pkg-head"><span className="pkg-name">Paket Investor 1 Tahun</span></div>
+                   <p className="price-old">Rp28.000.000</p><p className="price-new">Rp13.999.000</p><p className="price-note">Tanpa tambahan biaya apapun</p>
+                   <ul className="hi-list"><li>Estimasi proses: 7-10 hari kerja</li><li>Pengurusan Visa &amp; KITAS Investor 1 Tahun</li></ul>
+                   <button className="detail-toggle" type="button">Lihat Detail Lengkap <span className="dt-icon">▾</span></button>
+                   <div className="pkg-detail-full"><div className="detail-group"><h5>Yang Diperoleh</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> KITAS &amp; MERP Investor 1 Tahun</li><li className="inc"><span className="dot">✓</span> Visa Elektronik Investor (e-Visa)</li><li className="inc"><span className="dot">✓</span> PNBP KITAS &amp; MERP Investor Rp7.000.000</li></ul></div><div className="detail-group"><h5>Bonus</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> Layanan Personal Legal Assistant</li><li className="inc"><span className="dot">✓</span> 1 Kupon Undian iPhone</li></ul></div><div className="detail-group"><h5>Extra Bonus</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> Voucher EasyLegal Rp250.000</li><li className="inc"><span className="dot">✓</span> Dokumen SOP Karyawan</li><li className="inc"><span className="dot">✓</span> Dokumen SOP Perusahaan</li><li className="inc"><span className="dot">✓</span> Dokumen Kontrak Bisnis</li></ul></div></div>
+                   <a href="#form" className="btn btn-red btn-sm" data-service="KITAS">Konsultasi Paket Ini →</a>
+                 </div></div>
+                 <div className="sub-panel" id="sub-inv-2th"><div className="pkg-card" id="card-inv-2th">
+                   <div className="pkg-head"><span className="pkg-name">Paket Investor 2 Tahun</span></div>
+                   <p className="price-old">Rp34.000.000</p><p className="price-new">Rp17.999.000</p><p className="price-note">Tanpa tambahan biaya apapun</p>
+                   <ul className="hi-list"><li>Estimasi proses: 7-10 hari kerja</li><li>Pengurusan Visa &amp; KITAS Investor 2 Tahun</li></ul>
+                   <button className="detail-toggle" type="button">Lihat Detail Lengkap <span className="dt-icon">▾</span></button>
+                   <div className="pkg-detail-full"><div className="detail-group"><h5>Yang Diperoleh</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> KITAS &amp; MERP Investor 2 Tahun</li><li className="inc"><span className="dot">✓</span> Visa Elektronik Investor (e-Visa)</li><li className="inc"><span className="dot">✓</span> PNBP KITAS &amp; MERP Investor Rp9.500.000</li></ul></div><div className="detail-group"><h5>Bonus</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> Layanan Personal Legal Assistant</li><li className="inc"><span className="dot">✓</span> 1 Kupon Undian iPhone</li></ul></div><div className="detail-group"><h5>Extra Bonus</h5><ul className="detail-list"><li className="inc"><span className="dot">✓</span> Voucher EasyLegal Rp250.000</li><li className="inc"><span className="dot">✓</span> Dokumen SOP Karyawan</li><li className="inc"><span className="dot">✓</span> Dokumen SOP Perusahaan</li><li className="inc"><span className="dot">✓</span> Dokumen Kontrak Bisnis</li></ul></div></div>
+                   <a href="#form" className="btn btn-red btn-sm" data-service="KITAS">Konsultasi Paket Ini →</a>
+                 </div></div>
+               </div>
+             </div>
+
+             <div className="foot-notes">(1) Harga sudah termasuk biaya negara (PNBP) sebagaimana tercantum pada detail paket.<br />(2) Estimasi proses dapat berubah sesuai kelengkapan dokumen dan kebijakan instansi terkait.</div>
+           </div>
+         </div>
+
+         {/* SEMUA LAYANAN — urutan paling akhir */}
+         <div className="ppanel" id="panel-lainnya">
           <div className="left">
             <span className="price-badge">Belum Yakin Butuh Layanan yang Mana?</span>
             <p className="price-new">Chat For Price</p>
