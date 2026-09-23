@@ -66,7 +66,7 @@ router.post("/:slug", async (req, res) => {
   if (fonnteToken) {
     try {
       const fonnteBody = new URLSearchParams({
-        target: String(whatsapp),
+        target: normalizePhone(String(whatsapp)),
         message: campaign.buildFonnteMessage(String(nama), String(layanan)),
         delay: "2",
       });
@@ -76,9 +76,14 @@ router.post("/:slug", async (req, res) => {
         body: fonnteBody,
       });
       results.fonnte = fonnteRes.ok;
+      if (!fonnteRes.ok) {
+        console.error("[campaign-leads] Fonnte HTTP %s: %s", fonnteRes.status, await fonnteRes.text());
+      }
     } catch (err) {
       console.error("[campaign-leads] Fonnte send failed:", err);
     }
+  } else {
+    console.warn("[campaign-leads] CAMPAIGN_FONNTE_TOKEN belum diset — autochat Fonnte dilewati");
   }
 
   const fbPixelId = process.env.CAMPAIGN_FB_PIXEL_ID;
