@@ -27,17 +27,20 @@ export async function generateMetadata(
 
   const baseUrl = await getBaseUrl();
   const url = `${baseUrl}/kartu/${person.slug}`;
+  const titleSuffix = person.title ? ` — ${person.title}` : "";
 
   return {
-    title: `${person.name} — ${person.title}`,
-    description: `Kartu nama digital ${person.name}, ${person.title} di EasyLegal. Hubungi via WhatsApp ${person.phone} untuk konsultasi legalitas bisnis.`,
+    title: `${person.name}${titleSuffix}`,
+    description: person.title
+      ? `Kartu nama digital ${person.name}, ${person.title} di EasyLegal. Hubungi via WhatsApp ${person.phone} untuk konsultasi legalitas bisnis.`
+      : `Kartu nama digital ${person.name} di EasyLegal. Hubungi via WhatsApp ${person.phone} untuk konsultasi legalitas bisnis.`,
     // Root layout menetapkan canonical ke homepage; halaman ini harus
     // menunjuk ke URL-nya sendiri.
     alternates: { canonical: url },
     openGraph: {
       type: "profile",
       url,
-      title: `${person.name} — ${person.title} EasyLegal`,
+      title: `${person.name}${titleSuffix} EasyLegal`,
       description: `Kartu nama digital EasyLegal. Hubungi via WhatsApp untuk konsultasi legalitas bisnis.`,
       images: [{ url: person.photo, width: 2482, height: 3190, alt: `Foto ${person.name}` }],
     },

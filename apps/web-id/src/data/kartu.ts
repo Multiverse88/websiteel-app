@@ -6,13 +6,14 @@
 export type KartuPerson = {
   slug: string;
   name: string;
-  title: string;
+  title?: string;
   nip?: string;
   photo: string;
   phone: string;
   email?: string;
   office?: string;
   mapsUrl?: string;
+  instagram?: string;
 };
 
 export const KARTU_PEOPLE: KartuPerson[] = [
@@ -24,7 +25,61 @@ export const KARTU_PEOPLE: KartuPerson[] = [
     phone: "087785303765",
     email: "pla@easylegal.id",
     office: "EasyLegal — Kantor Pusat, Bandung",
-    mapsUrl: "https://maps.app.goo.gl/pGWtnZAvSV6aLsEm7",
+    mapsUrl: "https://maps.app.goo.gl/r3rdFHrC3EeKazuj7",
+    instagram: "https://www.instagram.com/id.easylegal/",
+  },
+  {
+    slug: "mayang-cahyati",
+    name: "Mayang Cahyati, S.H.",
+    title: "Personal Legal Assistant",
+    photo: "/teamplalo/mayang-cahyati.jpg",
+    phone: "087785303767",
+    email: "pla@easylegal.id",
+    office: "EasyLegal — Kantor Pusat, Bandung",
+    mapsUrl: "https://maps.app.goo.gl/r3rdFHrC3EeKazuj7",
+    instagram: "https://www.instagram.com/id.easylegal/",
+  },
+  {
+    slug: "indiana-oscar",
+    name: "Indiana Oscar, S.H.",
+    title: "Personal Legal Assistant",
+    photo: "/teamplalo/indiana-oscar.jpg",
+    phone: "087785303769",
+    email: "pla@easylegal.id",
+    office: "EasyLegal — Kantor Jakarta",
+    mapsUrl: "https://maps.app.goo.gl/yJYBZEWNLeXbve2d6",
+    instagram: "https://www.instagram.com/id.easylegal/",
+  },
+  {
+    slug: "ela-yuniar",
+    name: "Ela Yuniar, S.H.",
+    title: "Personal Legal Assistant",
+    photo: "/teamplalo/ela-yuniar.jpg",
+    phone: "0817770245",
+    email: "pla@easylegal.id",
+    office: "EasyLegal — Kantor Pusat, Bandung",
+    mapsUrl: "https://maps.app.goo.gl/r3rdFHrC3EeKazuj7",
+    instagram: "https://www.instagram.com/id.easylegal/",
+  },
+  {
+    slug: "aditya-nugraha",
+    name: "Aditya Nugraha",
+    title: "Business Development",
+    photo: "/teamplalo/aditya-nugraha.jpg",
+    phone: "081703806985",
+    email: "aditya.nugraha@easycorp.id",
+    office: "EasyLegal — Kantor Pusat, Bandung",
+    mapsUrl: "https://maps.app.goo.gl/r3rdFHrC3EeKazuj7",
+    instagram: "https://www.instagram.com/id.easylegal/",
+  },
+  {
+    slug: "ai-yulianti",
+    name: "Ai Yulianti (Ayu)",
+    photo: "/teamplalo/ai-yulianti.jpg",
+    phone: "0818881425",
+    office: "EasyLegal — Kantor Jakarta",
+    mapsUrl: "https://maps.app.goo.gl/yJYBZEWNLeXbve2d6",
+    instagram: "https://www.instagram.com/id.easylegal/",
   },
 ];
 

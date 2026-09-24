@@ -26,7 +26,7 @@ function buildVCard(person: KartuPerson): string {
     `N:${person.name};;;;`,
     `FN:${person.name}`,
     `ORG:${person.office || "EasyLegal"}`,
-    `TITLE:${person.title}`,
+    ...(person.title ? [`TITLE:${person.title}`] : []),
     `TEL;TYPE=CELL,VOICE:+${wa}`,
   ];
   if (person.email) lines.push(`EMAIL;TYPE=WORK:${person.email}`);
@@ -65,7 +65,9 @@ export default function KartuClient({
   }, [person]);
 
   const handleCopy = useCallback(async () => {
-    const text = `${person.name}\n${person.title} — EasyLegal\n${displayPhone}`;
+    const text = [person.name, [person.title, "EasyLegal"].filter(Boolean).join(" — "), displayPhone]
+      .filter(Boolean)
+      .join("\n");
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
@@ -170,6 +172,38 @@ export default function KartuClient({
                     </span>
                   </div>
                 ))}
+
+              {person.instagram && (
+                <a
+                  className="kartu-detail"
+                  href={person.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="kartu-detail-icon">
+                    <svg
+                      width={18}
+                      height={18}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.1}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <rect x="2" y="2" width="20" height="20" rx="5" />
+                      <circle cx="12" cy="12" r="4" />
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                  </span>
+                  <span className="kartu-detail-copy">
+                    <span className="kartu-detail-label">Instagram kantor</span>
+                    <span className="kartu-detail-value">@id.easylegal</span>
+                  </span>
+                  <ChevronRight size={18} strokeWidth={1.9} aria-hidden="true" />
+                </a>
+              )}
 
               <button className="kartu-detail" type="button" onClick={handleCopy}>
                 <span className="kartu-detail-icon">
