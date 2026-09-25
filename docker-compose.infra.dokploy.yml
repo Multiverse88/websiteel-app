@@ -176,29 +176,12 @@ services:
       - "traefik.http.routers.minio-console.service=minio-console"
       - "traefik.http.services.minio-console.loadbalancer.server.port=9001"
 
-  cdn-init:
-    # 2026-09-15: sama alasan dengan cdn-storage, gunakan image dari Quay.io
-    image: quay.io/minio/mc:RELEASE.2025-04-16T18-13-26Z
-    environment:
-      # cdn-storage pakai root credential dari .env; init harus pakai yang
-      # sama, tidak bisa jatuh ke default `minioadmin` (alias akan ditolak).
-      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-minioadmin}
-      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-minioadmin}
-    depends_on:
-      - cdn-storage
-    networks:
-      - easylegal
-    volumes:
-      - ./public/images:/public-images
-    entrypoint: >
-      /bin/sh -c "
-      sleep 5;
-      mc alias set myminio http://cdn-storage:9000 $${MINIO_ACCESS_KEY:-minioadmin} $${MINIO_SECRET_KEY:-minioadmin};
-      mc mb myminio/images || true;
-      mc anonymous set public myminio/images;
-      mc cp -r /public-images/ myminio/images/ || true;
-      exit 0;
-      "
+  # cdn-init (the mc-based bucket seeder) was removed 2026-09-25: quay.io
+  # locked down the entire minio/mc image (all tags, even anonymous pull)
+  # behind auth, which blocked every infra deploy at this step even though
+  # cdn-storage itself was healthy and already serving assets. The bucket
+  # is already created/public/seeded from prior runs; re-seed manually with
+  # `mc cp -r public/images/ myminio/images/` if new assets need syncing.
 
 volumes:
   minio-data:
