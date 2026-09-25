@@ -54,15 +54,27 @@ export default function QrCodeModal({ isOpen, onClose, url, fileName }: QrCodeMo
           const boxSize = canvas.width * LOGO_RATIO
           const boxX = (canvas.width - boxSize) / 2
           const boxY = (canvas.height - boxSize) / 2
+          const radius = boxSize * 0.18
 
-          // Plain sharp-edged fill, sized close to the logo itself — no
-          // rounded corners and minimal padding so it reads as the logo
-          // sitting on the QR, not a separate bordered card floating on it.
+          const roundedRectPath = () => {
+            ctx.beginPath()
+            ctx.moveTo(boxX + radius, boxY)
+            ctx.arcTo(boxX + boxSize, boxY, boxX + boxSize, boxY + boxSize, radius)
+            ctx.arcTo(boxX + boxSize, boxY + boxSize, boxX, boxY + boxSize, radius)
+            ctx.arcTo(boxX, boxY + boxSize, boxX, boxY, radius)
+            ctx.arcTo(boxX, boxY, boxX + boxSize, boxY, radius)
+            ctx.closePath()
+          }
+
+          roundedRectPath()
           ctx.fillStyle = '#ffffff'
-          ctx.fillRect(boxX, boxY, boxSize, boxSize)
+          ctx.fill()
 
           // Contain-fit the logo inside the box, preserving its native
-          // aspect ratio instead of stretching it to a square.
+          // aspect ratio instead of stretching it to a square. The logo
+          // asset itself has an opaque white background, so its own square
+          // corners would poke past the rounded backing at this padding —
+          // clip to the same rounded path to crop it cleanly.
           const padding = boxSize * 0.04
           const innerSize = boxSize - padding * 2
           const scale = Math.min(innerSize / logo.width, innerSize / logo.height)
@@ -70,7 +82,12 @@ export default function QrCodeModal({ isOpen, onClose, url, fileName }: QrCodeMo
           const drawHeight = logo.height * scale
           const drawX = boxX + (boxSize - drawWidth) / 2
           const drawY = boxY + (boxSize - drawHeight) / 2
+
+          ctx.save()
+          roundedRectPath()
+          ctx.clip()
           ctx.drawImage(logo, drawX, drawY, drawWidth, drawHeight)
+          ctx.restore()
         }
         logo.onerror = () => setError('Gagal memuat logo EasyLegal.')
         logo.src = LOGO_SRC
