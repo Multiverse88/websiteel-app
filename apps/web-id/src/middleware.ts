@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { LOCAL_SEO_REDIRECTS } from "@/data/local-seo-redirects-map";
+import { paymentVerificationSlugSet } from "@/data/payment-verification";
 
 // Link-preview crawlers that render Open Graph tags when a URL is shared
 // (WhatsApp, Facebook Messenger, Twitter/X, Slack, Telegram, Discord, etc.).
@@ -164,8 +165,14 @@ export async function middleware(request: NextRequest) {
   // Redirect check — only GET/HEAD, and skip well-known SEO files so they
   // don't trigger an API lookup (the www→apex 301 above already ran).
   const isSeoFile = pathname === "/robots.txt" || pathname === "/sitemap.xml";
-  if (!isSeoFile && (request.method === "GET" || request.method === "HEAD")) {
-    const slug = pathname.slice(1).replace(/\/$/, ""); // "/daftar-klien/" → "daftar-klien"
+  const slug = pathname.slice(1).replace(/\/$/, ""); // "/daftar-klien/" → "daftar-klien"
+  const isReservedPaymentVerificationPath =
+    !slug.includes("/") && paymentVerificationSlugSet.has(slug);
+  if (
+    !isSeoFile &&
+    !isReservedPaymentVerificationPath &&
+    (request.method === "GET" || request.method === "HEAD")
+  ) {
 
     if (slug) {
       // Migrasi Local SEO WordPress lama — redirect 301 permanen langsung dari memory tanpa DB
