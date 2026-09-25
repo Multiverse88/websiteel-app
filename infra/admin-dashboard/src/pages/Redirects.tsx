@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import { QrCode } from 'lucide-react'
 import { api } from '../lib/api'
 import DataTable from '../components/DataTable'
 import Modal from '../components/Modal'
+import QrCodeModal from '../components/QrCodeModal'
 
 // cache-bust: forces a new Vite content hash so Cloudflare's stale-404-cached
 // asset filename from a prior deploy race doesn't get reused. Actual side
@@ -26,7 +28,7 @@ function shortLinkUrl(redirect: Redirect) {
   return `https://${domain}/${redirect.slug.replace(/^\/+/, '')}`
 }
 
-function ShortLinkCell({ redirect }: { redirect: Redirect }) {
+function ShortLinkCell({ redirect, onShowQr }: { redirect: Redirect; onShowQr: (redirect: Redirect) => void }) {
   const [copied, setCopied] = useState(false)
   const url = shortLinkUrl(redirect)
 
@@ -59,6 +61,15 @@ function ShortLinkCell({ redirect }: { redirect: Redirect }) {
       >
         {copied ? 'Copied!' : 'Copy'}
       </button>
+      <button
+        type="button"
+        className="short-link__copy"
+        onClick={() => onShowQr(redirect)}
+        title="Buat QR Code"
+        aria-label="Buat QR Code"
+      >
+        <QrCode size={14} strokeWidth={2.2} />
+      </button>
       {redirect.description && (
         <span className="short-link__preview-badge" title={`Preview: ${redirect.description}`}>
           📝 Preview
@@ -78,6 +89,7 @@ export default function Redirects() {
   const [deleteConfirm, setDeleteConfirm] = useState<Redirect | null>(null)
   const [selectedDomain, setSelectedDomain] = useState('')
   const [search, setSearch] = useState('')
+  const [qrRedirect, setQrRedirect] = useState<Redirect | null>(null)
 
   const load = async () => {
     setLoading(true)
@@ -167,7 +179,7 @@ export default function Redirects() {
     {
       key: 'link',
       label: 'Short Link',
-      render: (_val: unknown, row: Redirect) => <ShortLinkCell redirect={row} />,
+      render: (_val: unknown, row: Redirect) => <ShortLinkCell redirect={row} onShowQr={setQrRedirect} />,
     },
     {
       key: 'destination',
@@ -266,6 +278,13 @@ export default function Redirects() {
           <button className="btn btn--danger" onClick={handleDelete}>Delete</button>
         </div>
       </Modal>
+
+      <QrCodeModal
+        isOpen={!!qrRedirect}
+        onClose={() => setQrRedirect(null)}
+        url={qrRedirect ? shortLinkUrl(qrRedirect) : ''}
+        fileName={qrRedirect ? `qr-${qrRedirect.domain || 'easylegal.id'}-${qrRedirect.slug}` : 'qr-redirect'}
+      />
     </div>
   )
 }
