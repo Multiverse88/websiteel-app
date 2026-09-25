@@ -13,10 +13,6 @@ export default function PaymentVerificationPage({
 }: {
   entity: PaymentVerificationEntity;
 }) {
-  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=0&data=${encodeURIComponent(
-    entity.ahuUrl,
-  )}`;
-
   return (
     <main className={styles.page}>
       <header className={styles.hero}>
@@ -86,13 +82,11 @@ export default function PaymentVerificationPage({
             </p>
 
             <div className={styles.qrWrap}>
-              {/* eslint-disable-next-line @next/next/no-img-element -- external QR generator, not an optimizable local/whitelisted domain */}
-              <img
-                src={qrSrc}
-                alt={`Kode QR verifikasi AHU untuk ${entity.legalName}, membuka ${entity.ahuUrl}`}
-                width={160}
-                height={160}
-                loading="lazy"
+              <Image
+                src={entity.qrImagePath}
+                alt={`Kode QR resmi AHU untuk ${entity.legalName}, membuka ${entity.ahuUrl}`}
+                width={407}
+                height={407}
                 className={styles.qrImage}
               />
               <p className={styles.qrFallback}>

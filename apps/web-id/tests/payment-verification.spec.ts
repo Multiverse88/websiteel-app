@@ -15,6 +15,7 @@ const ROUTES = [
     ahuNumber: "AHU-0087109-AH.01.14 Tahun 2025",
     ahuUrl:
       "https://sab.ahu.go.id/cv/pendaftaran/info/no/AHU-0087109-AH.01.14+Tahun+2025/id/2640649",
+    qrImagePath: "/images/payment-verification/qr-legal-jadi-mudah.png",
   },
   {
     path: "/mudah-urus-legalitas",
@@ -23,6 +24,7 @@ const ROUTES = [
     ahuNumber: "AHU-0087742-AH.01.14 Tahun 2025",
     ahuUrl:
       "https://sab.ahu.go.id/cv/pendaftaran/info/no/AHU-0087742-AH.01.14+Tahun+2025/id/2642249",
+    qrImagePath: "/images/payment-verification/qr-mudah-urus-legalitas.png",
   },
   {
     path: "/legalitas-mudah-indonesia",
@@ -31,6 +33,7 @@ const ROUTES = [
     ahuNumber: "AHU-0061760-AH.01.14 Tahun 2024",
     ahuUrl:
       "https://sab.ahu.go.id/cv/pendaftaran/info/no/AHU-0061760-AH.01.14+Tahun+2024/id/1904084",
+    qrImagePath: "/images/payment-verification/qr-legalitas-mudah-indonesia.png",
   },
   {
     path: "/easylegal-bantu-pengusaha",
@@ -39,6 +42,7 @@ const ROUTES = [
     ahuNumber: "AHU-0040513-AH.01.14 Tahun 2024",
     ahuUrl:
       "https://sab.ahu.go.id/cv/pendaftaran/info/no/AHU-0040513-AH.01.14+Tahun+2024/id/1768633",
+    qrImagePath: "/images/payment-verification/qr-easylegal-bantu-pengusaha.png",
   },
 ];
 
@@ -89,8 +93,9 @@ test.describe("Payment verification pages — per-route data fidelity", () => {
       await expect(ahuLink).toHaveAttribute("target", "_blank");
       await expect(ahuLink).toHaveAttribute("rel", /noopener/);
 
-      const qrImage = page.locator("img[alt*='Kode QR verifikasi AHU']");
-      await expect(qrImage).toHaveAttribute("src", new RegExp(encodeURIComponent(route.ahuUrl)));
+      const qrFileName = route.qrImagePath.split("/").pop()!;
+      const qrImage = page.locator("img[alt*='Kode QR resmi AHU']");
+      await expect(qrImage).toHaveAttribute("src", new RegExp(encodeURIComponent(qrFileName)));
 
       const waLinks = page.getByRole("link", { name: "Hubungi Finance via WhatsApp" });
       await expect(waLinks).toHaveAttribute("href", FINANCE_WA_URL);

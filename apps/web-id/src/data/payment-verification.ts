@@ -7,7 +7,6 @@ export const paymentVerificationSlugs = [
 
 export type PaymentVerificationSlug =
   (typeof paymentVerificationSlugs)[number];
-
 export type PaymentVerificationEntity = {
   readonly slug: PaymentVerificationSlug;
   readonly legalName: string;
@@ -16,6 +15,8 @@ export type PaymentVerificationEntity = {
   readonly accountHolder: string;
   readonly ahuNumber: string;
   readonly ahuUrl: string;
+  /** Official AHU-branded QR artwork for this entity, served from /public. */
+  readonly qrImagePath: string;
 };
 
 export type PaymentVerificationOffice = {
@@ -34,6 +35,7 @@ export const paymentVerificationEntities = {
     ahuNumber: "AHU-0087109-AH.01.14 Tahun 2025",
     ahuUrl:
       "https://sab.ahu.go.id/cv/pendaftaran/info/no/AHU-0087109-AH.01.14+Tahun+2025/id/2640649",
+    qrImagePath: "/images/payment-verification/qr-legal-jadi-mudah.png",
   },
   "mudah-urus-legalitas": {
     slug: "mudah-urus-legalitas",
@@ -44,6 +46,7 @@ export const paymentVerificationEntities = {
     ahuNumber: "AHU-0087742-AH.01.14 Tahun 2025",
     ahuUrl:
       "https://sab.ahu.go.id/cv/pendaftaran/info/no/AHU-0087742-AH.01.14+Tahun+2025/id/2642249",
+    qrImagePath: "/images/payment-verification/qr-mudah-urus-legalitas.png",
   },
   "legalitas-mudah-indonesia": {
     slug: "legalitas-mudah-indonesia",
@@ -54,6 +57,7 @@ export const paymentVerificationEntities = {
     ahuNumber: "AHU-0061760-AH.01.14 Tahun 2024",
     ahuUrl:
       "https://sab.ahu.go.id/cv/pendaftaran/info/no/AHU-0061760-AH.01.14+Tahun+2024/id/1904084",
+    qrImagePath: "/images/payment-verification/qr-legalitas-mudah-indonesia.png",
   },
   "easylegal-bantu-pengusaha": {
     slug: "easylegal-bantu-pengusaha",
@@ -64,6 +68,7 @@ export const paymentVerificationEntities = {
     ahuNumber: "AHU-0040513-AH.01.14 Tahun 2024",
     ahuUrl:
       "https://sab.ahu.go.id/cv/pendaftaran/info/no/AHU-0040513-AH.01.14+Tahun+2024/id/1768633",
+    qrImagePath: "/images/payment-verification/qr-easylegal-bantu-pengusaha.png",
   },
 } as const satisfies Readonly<
   Record<PaymentVerificationSlug, PaymentVerificationEntity>
