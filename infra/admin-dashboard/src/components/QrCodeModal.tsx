@@ -13,8 +13,9 @@ const LOGO_SRC = `${import.meta.env.BASE_URL}images/logo-el.png`
 const QR_SIZE = 480
 // Fraction of the QR's width the logo box occupies. Error-correction level
 // 'H' below tolerates up to ~30% of the QR being obscured; this footprint's
-// area is (0.24)^2 ≈ 5.8%, comfortably inside that budget.
-const LOGO_RATIO = 0.24
+// area is (0.32)^2 ≈ 10.2%, still comfortably inside that budget. Sized to
+// match the reference logo-in-QR examples (a clearly visible center mark).
+const LOGO_RATIO = 0.32
 
 interface QrCodeModalProps {
   isOpen: boolean
