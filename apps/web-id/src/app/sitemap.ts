@@ -4,6 +4,7 @@ import { getDomainConfig, getSiteFromHostname } from "@/lib/domains";
 import { contentMap } from "@/data/layanan-badan-usaha";
 import { layananLainnyaData } from "@/data/layanan-lainnya";
 import localSeoRedirects from "@/data/local-seo-redirects.json";
+import { paymentVerificationSlugs } from "@/data/payment-verification";
 
 export const revalidate = 3600;
 
@@ -112,6 +113,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
   ];
+
+  // Standalone payment verification pages — one static route per legal
+  // entity, kept out of the CMS landing-page pool. See
+  // .omo/plans/payment-verification-landing-pages.md.
+  const paymentVerificationPages: MetadataRoute.Sitemap = paymentVerificationSlugs.map(
+    (slug) => ({
+      url: `${BASE_URL}/${slug}`,
+      lastModified: generatedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    }),
+  );
 
   // Service pages
   const standaloneServiceSlugs = [
@@ -225,5 +238,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.2,
   }));
 
-  return [...staticPages, ...servicePages, ...articlePages, ...landingPages, ...localSeoRedirectPages];
+  return [...staticPages, ...servicePages, ...paymentVerificationPages, ...articlePages, ...landingPages, ...localSeoRedirectPages];
 }
