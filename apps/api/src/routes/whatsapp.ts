@@ -1050,12 +1050,15 @@ router.get("/leads/stats", requireAuth, async (req, res) => {
 // Query: format=xlsx|csv, type=leads|numbers|all, ai=1 (AI polish & insight),
 // period=today|7d|30d|month|lastmonth|all|custom + filter sama seperti /leads
 // (status/numberId/domain/source/product/search/from/to).
-// - XLSX: sheet "Ringkasan & Insight" (KPI + funnel + AI executive summary bila
-//   ai=1), sheet "Leads" (layanan dirapikan + kolom Saran Follow-Up CS bila
-//   ai=1), sheet "Nomor Rotator". ExcelJS dipakai untuk styling header crimson,
+// - XLSX: sheet "Ringkasan & Insight" (KPI + funnel + rincian leads per nomor
+//   CS + AI executive summary bila ai=1), sheet "Leads" (layanan dirapikan +
+//   kolom Saran Follow-Up CS bila ai=1), sheet "Nomor Rotator" (klik + leads/
+//   closing periode per nomor). ExcelJS dipakai untuk styling header crimson,
 //   freeze panes, autofilter, dan number format.
 // - CSV: satu tipe per request (type=numbers -> nomor, selain itu leads) karena
 //   CSV tak punya sheet; kolom Saran Follow-Up tetap disertakan bila ai=1.
+//   Blok "Rincian per Nomor CS" ditempel setelah baris leads (leads) atau
+//   sebagai kolom Leads/Share/Closing (numbers).
 router.get("/export", requireAuth, async (req, res) => {
   try {
     const query = req.query as Record<string, string>;
@@ -1114,7 +1117,7 @@ router.get("/export", requireAuth, async (req, res) => {
     }
 
     if (format === "csv") {
-      const csv = type === "numbers" ? buildNumbersCsv(numbers) : buildLeadsCsv(leads, withAI);
+      const csv = type === "numbers" ? buildNumbersCsv(numbers, leads) : buildLeadsCsv(leads, numbers, withAI);
       const filename = type === "numbers" ? `whatsapp-nomor-${stamp}.csv` : `whatsapp-leads-${stamp}${withAI ? "-ai" : ""}.csv`;
       res.setHeader("Content-Type", "text/csv; charset=utf-8");
       res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);

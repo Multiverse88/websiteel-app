@@ -36,6 +36,73 @@ type NumberForExport = {
   createdAt: Date;
 };
 
+export type NumberLeadBreakdown = {
+  number: string;
+  label: string | null;
+  leadCount: number;
+  wonCount: number;
+  wonValue: number;
+  sharePct: number;
+  // Angka dari tabel WhatsAppNumber; entri yang cuma ada di leads (nomor sudah
+  // dihapus dari rotator) tetap dianggap aktif supaya tidak salah ditandai.
+  isActive: boolean;
+};
+
+/**
+ * Groups leads by destination WhatsApp number so exports can answer "nomor ini
+ * kebagian berapa leads". `numbers` keeps rows for CS numbers with zero leads
+ * so gaps stay visible; leads pointing at a number missing from `numbers`
+ * (deleted rotation entry) stay under their own key so no lead is dropped.
+ */
+export function summarizeLeadsByNumber(
+  leads: LeadForExport[],
+  numbers: NumberForExport[],
+): NumberLeadBreakdown[] {
+  type Acc = {
+    number: string;
+    label: string | null;
+    leadCount: number;
+    wonCount: number;
+    wonValue: number;
+    isActive: boolean;
+  };
+  const byKey: Record<string, Acc> = {};
+  const order: string[] = [];
+
+  const ensure = (number: string, label: string | null, isActive = true): Acc => {
+    const key = number || "(tanpa nomor)";
+    let entry = byKey[key];
+    if (!entry) {
+      entry = { number: key, label, leadCount: 0, wonCount: 0, wonValue: 0, isActive };
+      byKey[key] = entry;
+      order.push(key);
+    } else {
+      if (!entry.label && label) entry.label = label;
+      if (!isActive) entry.isActive = false;
+    }
+    return entry;
+  };
+
+  for (const n of numbers) ensure(n.number, n.label, n.isActive);
+  for (const l of leads) {
+    const target = ensure(l.number?.number || "", l.number?.label || null);
+    target.leadCount += 1;
+    if (l.status === "WON") {
+      target.wonCount += 1;
+      if (l.orderValue) target.wonValue += l.orderValue;
+    }
+  }
+
+  const total = leads.length;
+  return order
+    .map((key) => byKey[key])
+    .sort((a, b) => b.leadCount - a.leadCount || a.number.localeCompare(b.number))
+    .map((e) => ({
+      ...e,
+      sharePct: total > 0 ? Number(((e.leadCount / total) * 100).toFixed(1)) : 0,
+    }));
+}
+
 function fmtDate(d: Date | string | null | undefined): string {
   if (!d) return "";
   return new Date(d).toLocaleString("id-ID", {
@@ -132,6 +199,8 @@ export async function buildLeadsExportWorkbook(params: {
     { header: "", key: "b", width: 22 },
     { header: "", key: "c", width: 22 },
     { header: "", key: "d", width: 18 },
+    // Kolom E khusus blok "Rincian per Nomor CS" (nilai order WON).
+    { header: "", key: "e", width: 24 },
   ];
 
   // Title
@@ -210,6 +279,33 @@ export async function buildLeadsExportWorkbook(params: {
         r.eachCell((c) => styleDataCell(c, idx % 2 === 0));
         wsSummary.mergeCells(`C${r.number}:D${r.number}`);
       });
+    wsSummary.addRow([]);
+  }
+
+  // Rincian per nomor CS: berapa leads (dan closing) yang jatuh ke tiap nomor
+  // dalam periode export. Nomor tanpa lead di periode tetap tampil (angka 0)
+  // supaya jatah rotator yang kosong kelihatan.
+  if (type === "leads" || type === "all") {
+    const breakdowns = summarizeLeadsByNumber(leads, numbers);
+    const t = wsSummary.addRow(["Rincian per Nomor CS"]);
+    t.font = { bold: true, color: { argb: CRIMSON }, size: 11 };
+    const h = wsSummary.addRow(["Nomor CS", "Leads", "Share (%)", "Closing (WON)", "Nilai Order WON (IDR)"]);
+    styleHeaderRow(h);
+    breakdowns.forEach((d, idx) => {
+      const displayName = d.label ? `${d.label} (${d.number})` : d.number;
+      const r = wsSummary.addRow([
+        d.isActive ? displayName : `${displayName} — nonaktif`,
+        d.leadCount,
+        d.sharePct,
+        d.wonCount,
+        d.wonValue,
+      ]);
+      r.eachCell((c, col) => {
+        styleDataCell(c, idx % 2 === 0);
+        if (col >= 2) (c as ExcelJS.Cell).numFmt = "#,##0";
+        if (col === 3) (c as ExcelJS.Cell).numFmt = "0.0";
+      });
+    });
     wsSummary.addRow([]);
   }
 
@@ -372,22 +468,35 @@ export async function buildLeadsExportWorkbook(params: {
   // ========== Sheet 3: Nomor Rotator ==========
   if (type === "numbers" || type === "all") {
     const ws = wb.addWorksheet("Nomor Rotator", { properties: { tabColor: { argb: "FF0EA5E9" } } });
-    const headers = ["Nomor", "Label CS", "Jumlah Klik", "Share (%)", "Status", "Tanggal Dibuat"];
+    const headers = ["Nomor", "Label CS", "Jumlah Klik", "Share Klik (%)", "Leads (Periode)", "Share Leads (%)", "Closing (WON)", "Status", "Tanggal Dibuat"];
     const hr = ws.addRow(headers);
     styleHeaderRow(hr);
     ws.views = [{ state: "frozen", ySplit: 1 }];
     ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: headers.length } };
+    const leadsByNumber: Record<string, NumberLeadBreakdown> = {};
+    for (const b of summarizeLeadsByNumber(leads, numbers)) leadsByNumber[b.number] = b;
     numbers.forEach((n, idx) => {
-      const share = totalClicks > 0 ? (n.clickCount / totalClicks) * 100 : 0;
-      const row = ws.addRow([n.number, n.label || "", n.clickCount, Number(share.toFixed(1)), n.isActive ? "Aktif" : "Nonaktif", fmtDate(n.createdAt)]);
+      const clickShare = totalClicks > 0 ? (n.clickCount / totalClicks) * 100 : 0;
+      const b = leadsByNumber[n.number];
+      const row = ws.addRow([
+        n.number,
+        n.label || "",
+        n.clickCount,
+        Number(clickShare.toFixed(1)),
+        b?.leadCount ?? 0,
+        b?.sharePct ?? 0,
+        b?.wonCount ?? 0,
+        n.isActive ? "Aktif" : "Nonaktif",
+        fmtDate(n.createdAt),
+      ]);
       row.eachCell((cell, col) => {
         styleDataCell(cell, idx % 2 === 0);
-        if (col === 3) (cell as ExcelJS.Cell).numFmt = "#,##0";
-        if (col === 4) (cell as ExcelJS.Cell).numFmt = "0.0";
+        if (col === 3 || col === 5 || col === 7) (cell as ExcelJS.Cell).numFmt = "#,##0";
+        if (col === 4 || col === 6) (cell as ExcelJS.Cell).numFmt = "0.0";
       });
       row.height = 18;
     });
-    ws.columns = [{ width: 18 }, { width: 22 }, { width: 14 }, { width: 12 }, { width: 12 }, { width: 20 }];
+    ws.columns = [{ width: 18 }, { width: 22 }, { width: 14 }, { width: 14 }, { width: 16 }, { width: 16 }, { width: 14 }, { width: 12 }, { width: 20 }];
   }
 
   return wb;
@@ -395,6 +504,7 @@ export async function buildLeadsExportWorkbook(params: {
 
 export function buildLeadsCsv(
   leads: LeadForExport[],
+  numbers: NumberForExport[],
   withAI: boolean,
 ): string {
   const escape = (v: unknown) => {
@@ -445,25 +555,46 @@ export function buildLeadsCsv(
     return base;
   });
   const lines = [headers.map(escape).join(","), ...rows.map((r) => headers.map((h) => escape(r[h])).join(","))];
-  return "﻿" + lines.join("\n");
+
+  // ponytail: CSV cuma satu tabel; blok rincian per nomor ditempel setelah
+  // baris leads sebagai tabel kedua. Naik ke XLSX multi-sheet kalau konsumen
+  // CSV mulai protes soal dua tabel dalam satu file.
+  const summaryHeaders = ["Nomor CS", "Leads", "Share (%)", "Closing (WON)", "Nilai Order WON (IDR)"];
+  const summaryLines = [
+    "",
+    "Rincian per Nomor CS",
+    summaryHeaders.map(escape).join(","),
+    ...summarizeLeadsByNumber(leads, numbers).map((d) =>
+      [d.label ? `${d.label} (${d.number})` : d.number, d.leadCount, d.sharePct, d.wonCount, d.wonValue].map(escape).join(","),
+    ),
+  ];
+  return "\uFEFF" + [...lines, ...summaryLines].join("\n");
 }
 
-export function buildNumbersCsv(numbers: NumberForExport[]): string {
+export function buildNumbersCsv(numbers: NumberForExport[], leads: LeadForExport[]): string {
   const escape = (v: unknown) => {
     if (v === null || v === undefined) return "";
     const s = String(v);
     return /["\n\r,;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
   };
   const totalClicks = numbers.reduce((s, n) => s + n.clickCount, 0);
-  const headers = ["Nomor", "Label CS", "Jumlah Klik", "Share (%)", "Status", "Tanggal Dibuat"];
-  const rows: Record<string, unknown>[] = numbers.map((n) => ({
-    Nomor: n.number,
-    "Label CS": n.label || "",
-    "Jumlah Klik": n.clickCount,
-    "Share (%)": totalClicks > 0 ? Number(((n.clickCount / totalClicks) * 100).toFixed(1)) : 0,
-    Status: n.isActive ? "Aktif" : "Nonaktif",
-    "Tanggal Dibuat": fmtDate(n.createdAt),
-  }));
+  const leadsByNumber: Record<string, NumberLeadBreakdown> = {};
+  for (const b of summarizeLeadsByNumber(leads, numbers)) leadsByNumber[b.number] = b;
+  const headers = ["Nomor", "Label CS", "Jumlah Klik", "Share Klik (%)", "Leads (Periode)", "Share Leads (%)", "Closing (WON)", "Status", "Tanggal Dibuat"];
+  const rows: Record<string, unknown>[] = numbers.map((n) => {
+    const b = leadsByNumber[n.number];
+    return {
+      Nomor: n.number,
+      "Label CS": n.label || "",
+      "Jumlah Klik": n.clickCount,
+      "Share Klik (%)": totalClicks > 0 ? Number(((n.clickCount / totalClicks) * 100).toFixed(1)) : 0,
+      "Leads (Periode)": b?.leadCount ?? 0,
+      "Share Leads (%)": b?.sharePct ?? 0,
+      "Closing (WON)": b?.wonCount ?? 0,
+      Status: n.isActive ? "Aktif" : "Nonaktif",
+      "Tanggal Dibuat": fmtDate(n.createdAt),
+    };
+  });
   const lines = [headers.map(escape).join(","), ...rows.map((r) => headers.map((h) => escape(r[h])).join(","))];
-  return "﻿" + lines.join("\n");
+  return "\uFEFF" + lines.join("\n");
 }
