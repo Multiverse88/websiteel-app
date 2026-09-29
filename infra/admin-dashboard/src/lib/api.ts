@@ -537,4 +537,17 @@ export const api = {
     if (!res.ok) throw new Error('Gagal memuat detail analytics');
     return await res.json();
   },
+  exportAnalyticsPageTraffic: async (params: { year: number; month: number; domain: string }) => {
+    const query = new URLSearchParams({
+      year: String(params.year),
+      month: String(params.month),
+      domain: params.domain,
+    });
+    const res = await authenticatedFetch(`${API_BASE_URL}/analytics/page-traffic/export?${query}`);
+    if (!res.ok) {
+      const error = await res.json().catch(() => ({ error: 'Gagal export traffic halaman' }));
+      throw new Error(error.error || 'Gagal export traffic halaman');
+    }
+    return await res.blob();
+  },
 }

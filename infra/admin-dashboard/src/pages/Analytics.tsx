@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import { api } from '../lib/api'
+import Modal from '../components/Modal'
 import {
   ResponsiveContainer,
   AreaChart,
@@ -38,6 +39,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
+  Download,
 } from 'lucide-react'
 
 export type DatePreset = 'all' | 'today' | 'yesterday' | '7d' | '30d' | 'month' | 'lastmonth' | 'custom'
@@ -124,6 +126,13 @@ export default function Analytics() {
   const [pageSearch, setPageSearch] = useState<string>('')
   const [tablePage, setTablePage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(25)
+  const now = new Date()
+  const [exportModalOpen, setExportModalOpen] = useState(false)
+  const [exportMonth, setExportMonth] = useState(now.getMonth() + 1)
+  const [exportYear, setExportYear] = useState(now.getFullYear())
+  const [exportDomain, setExportDomain] = useState(domain)
+  const [exportingTraffic, setExportingTraffic] = useState(false)
+  const [exportError, setExportError] = useState<string | null>(null)
 
   // Sync tab with URL hash
   useEffect(() => {
@@ -200,6 +209,36 @@ export default function Analytics() {
   const handleJumpToCrm = (productPath: string) => {
     sessionStorage.setItem('preferred_lead_product', productPath)
     window.location.hash = '#/wa-rotator'
+  }
+  const openTrafficExport = () => {
+    setExportDomain(domain)
+    setExportError(null)
+    setExportModalOpen(true)
+  }
+
+  const downloadTrafficExport = async () => {
+    try {
+      setExportingTraffic(true)
+      setExportError(null)
+      const blob = await api.exportAnalyticsPageTraffic({
+        year: exportYear,
+        month: exportMonth,
+        domain: exportDomain,
+      })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `traffic-halaman-${exportYear}-${String(exportMonth).padStart(2, '0')}-${exportDomain}.xlsx`
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      URL.revokeObjectURL(url)
+      setExportModalOpen(false)
+    } catch (err) {
+      setExportError(err instanceof Error ? err.message : 'Gagal export traffic halaman')
+    } finally {
+      setExportingTraffic(false)
+    }
   }
 
   // Filtered pages for the detail table
@@ -327,6 +366,15 @@ export default function Analytics() {
                 Filter Bot
               </span>
             </label>
+
+            <button
+              type="button"
+              onClick={openTrafficExport}
+              className="inline-flex items-center gap-2 px-3 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-semibold transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Export Traffic
+            </button>
 
             {/* Refresh button */}
             <button
@@ -1224,6 +1272,80 @@ export default function Analytics() {
           </div>
         </div>
       )}
+      <Modal
+        isOpen={exportModalOpen}
+        onClose={() => { if (!exportingTraffic) setExportModalOpen(false) }}
+        title="Export Traffic Halaman"
+      >
+        <div className="space-y-5">
+          <p className="text-sm text-gray-500">
+            Data akses halaman dari GA4. Excel membagi views per minggu kalender Senin-Minggu dalam bulan terpilih.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label className="space-y-1.5">
+              <span className="block text-[13px] font-bold text-gray-700">Bulan</span>
+              <select
+                value={exportMonth}
+                onChange={(event) => setExportMonth(Number(event.target.value))}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+              >
+                {['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'].map((label, index) => (
+                  <option key={label} value={index + 1}>{label}</option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1.5">
+              <span className="block text-[13px] font-bold text-gray-700">Tahun</span>
+              <select
+                value={exportYear}
+                onChange={(event) => setExportYear(Number(event.target.value))}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+              >
+                {Array.from({ length: now.getFullYear() - 2019 }, (_, index) => now.getFullYear() - index).map((year) => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1.5">
+              <span className="block text-[13px] font-bold text-gray-700">Domain</span>
+              <select
+                value={exportDomain}
+                onChange={(event) => setExportDomain(event.target.value)}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+              >
+                {DOMAINS.map((item) => (
+                  <option key={item.value} value={item.value}>{item.label}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+          {exportError && (
+            <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-3 py-2 text-[13px]">
+              {exportError}
+            </div>
+          )}
+          <div className="flex justify-end gap-2 pt-1">
+            <button
+              type="button"
+              onClick={() => setExportModalOpen(false)}
+              disabled={exportingTraffic}
+              className="px-4 py-2 rounded-lg text-[13px] font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 disabled:opacity-60"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              onClick={downloadTrafficExport}
+              disabled={exportingTraffic}
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-[13px] font-bold text-white bg-[#990202] hover:bg-[#7a0101] disabled:opacity-60 shadow-sm transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              {exportingTraffic ? 'Mengambil data GA4...' : 'Download Excel'}
+            </button>
+          </div>
+        </div>
+      </Modal>
+
     </div>
   )
 }

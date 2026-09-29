@@ -1,6 +1,11 @@
 import { Router } from "express";
 import { requireAuth } from "../middleware/auth";
-import { getAnalyticsOverview, getAnalyticsDetail } from "../modules/analytics/analytics-service";
+import {
+  buildPageTrafficWorkbook,
+  getAnalyticsOverview,
+  getAnalyticsDetail,
+  parsePageTrafficQuery,
+} from "../modules/analytics/analytics-service";
 
 const router = Router();
 
@@ -41,6 +46,23 @@ router.get("/detail", requireAuth, async (req, res) => {
   } catch (error: any) {
     console.error("Error generating analytics detail:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/page-traffic/export", requireAuth, async (req, res) => {
+  try {
+    const query = parsePageTrafficQuery(req.query as Record<string, string | undefined>);
+    const workbook = await buildPageTrafficWorkbook(query);
+    const rawBuffer = await workbook.xlsx.writeBuffer();
+    const filename = `traffic-halaman-${query.year}-${String(query.month).padStart(2, "0")}-${query.domain}.xlsx`;
+    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+    res.send(Buffer.from(rawBuffer));
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Gagal export traffic halaman";
+    const invalidQuery = /^(Bulan|Tahun|Domain)/.test(message);
+    console.error("Error exporting GA4 page traffic:", message);
+    res.status(invalidQuery ? 400 : 500).json({ error: message });
   }
 });
 

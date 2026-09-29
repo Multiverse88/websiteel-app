@@ -1,3 +1,5 @@
+import crypto from "node:crypto";
+import ExcelJS from "exceljs";
 import { prisma } from "../../lib/prisma";
 import { wibDateStart } from "../leads/daily-rotator-fairness";
 
@@ -130,6 +132,282 @@ const SOURCE_CODE_LABELS: Record<string, string> = {
 export function calculateSharePercent(value: number, total: number): number {
   if (total <= 0) return 0;
   return Math.round((value / total) * 1000) / 10;
+}
+
+export const PAGE_TRAFFIC_DOMAINS = ["all", "easylegal.id", "easylegal.biz.id", "easylegal.co.id"] as const;
+export type PageTrafficDomain = (typeof PAGE_TRAFFIC_DOMAINS)[number];
+
+export interface PageTrafficQuery {
+  year: number;
+  month: number;
+  domain: PageTrafficDomain;
+}
+
+export interface PageTrafficRawRow {
+  hostname: string;
+  path: string;
+  title: string;
+  date: string;
+  views: number;
+  users: number;
+  sessions: number;
+  engagedSessions: number;
+  engagementDuration: number;
+}
+
+export interface PageTrafficWeekRange {
+  start: string;
+  end: string;
+  label: string;
+}
+
+export interface PageTrafficRow {
+  domain: string;
+  path: string;
+  title: string;
+  weeklyViews: number[];
+  totalViews: number;
+  users: number;
+  sessions: number;
+  viewsPerUser: number;
+  engagementRate: number;
+  averageEngagementSeconds: number;
+}
+
+const PROPERTY_DOMAINS: Record<string, string[]> = {
+  easylegal_id: ["easylegal.id"],
+  shared: ["easylegal.co.id", "easylegal.biz.id"],
+};
+
+const round = (value: number, digits = 2) => Number(value.toFixed(digits));
+const ymd = (date: Date) => date.toISOString().slice(0, 10);
+
+export function parsePageTrafficQuery(query: Record<string, string | undefined>): PageTrafficQuery {
+  const year = Number(query.year);
+  const month = Number(query.month);
+  const domain = query.domain || "all";
+  if (!Number.isInteger(month) || month < 1 || month > 12) throw new Error("Bulan harus bernilai 1-12");
+  if (!Number.isInteger(year) || year < 2020 || year > 2100) throw new Error("Tahun tidak valid");
+  if (!PAGE_TRAFFIC_DOMAINS.includes(domain as PageTrafficDomain)) throw new Error("Domain tidak didukung");
+  return { year, month, domain: domain as PageTrafficDomain };
+}
+
+export function monthWeekRanges(year: number, month: number): PageTrafficWeekRange[] {
+  const monthIndex = month - 1;
+  const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  const ranges: PageTrafficWeekRange[] = [];
+  let startDay = 1;
+  while (startDay <= lastDay) {
+    const start = new Date(Date.UTC(year, monthIndex, startDay));
+    const daysUntilSunday = (7 - start.getUTCDay()) % 7;
+    const endDay = Math.min(lastDay, startDay + daysUntilSunday);
+    const end = new Date(Date.UTC(year, monthIndex, endDay));
+    ranges.push({
+      start: ymd(start),
+      end: ymd(end),
+      label: `${startDay}-${endDay} ${start.toLocaleString("id-ID", { month: "short", timeZone: "UTC" })}`,
+    });
+    startDay = endDay + 1;
+  }
+  return ranges;
+}
+
+function canonicalHostname(hostname: string): string {
+  return hostname.trim().toLowerCase().replace(/^www\./, "");
+}
+
+export function aggregatePageTrafficRows(rawRows: PageTrafficRawRow[], ranges: PageTrafficWeekRange[]): PageTrafficRow[] {
+  const grouped = new Map<string, PageTrafficRow & { engagementDuration: number }>();
+  for (const row of rawRows) {
+    const domain = canonicalHostname(row.hostname);
+    const path = row.path || "/";
+    const key = `${domain}\n${path}`;
+    const current = grouped.get(key) || {
+      domain,
+      path,
+      title: row.title || "(tanpa judul)",
+      weeklyViews: ranges.map(() => 0),
+      totalViews: 0,
+      users: 0,
+      sessions: 0,
+      viewsPerUser: 0,
+      engagementRate: 0,
+      averageEngagementSeconds: 0,
+      engagementDuration: 0,
+    };
+    const date = `${row.date.slice(0, 4)}-${row.date.slice(4, 6)}-${row.date.slice(6, 8)}`;
+    const weekIndex = ranges.findIndex((range) => date >= range.start && date <= range.end);
+    if (weekIndex >= 0) current.weeklyViews[weekIndex] += row.views;
+    current.totalViews += row.views;
+    current.users += row.users;
+    current.sessions += row.sessions;
+    current.engagementDuration += row.engagementDuration;
+    current.engagementRate += row.engagedSessions;
+    grouped.set(key, current);
+  }
+  return [...grouped.values()]
+    .map(({ engagementDuration, ...row }) => ({
+      ...row,
+      viewsPerUser: row.users ? round(row.totalViews / row.users) : 0,
+      engagementRate: row.sessions ? round((row.engagementRate / row.sessions) * 100) : 0,
+      averageEngagementSeconds: row.users ? round(engagementDuration / row.users) : 0,
+    }))
+    .sort((a, b) => b.totalViews - a.totalViews || a.domain.localeCompare(b.domain) || a.path.localeCompare(b.path));
+}
+
+function googleServiceAccount(): { client_email?: string; private_key?: string } {
+  const raw = process.env.GA4_SERVICE_ACCOUNT_JSON;
+  if (!raw) return { client_email: process.env.GA4_CLIENT_EMAIL, private_key: process.env.GA4_PRIVATE_KEY };
+  try {
+    return JSON.parse(Buffer.from(raw, raw.trim().startsWith("{") ? "utf8" : "base64").toString("utf8"));
+  } catch {
+    throw new Error("GA4 service account tidak valid");
+  }
+}
+
+function googlePrivateKey(privateKey?: string): string {
+  const raw = privateKey || "";
+  return raw.replace(/\\n/g, "\n");
+}
+
+async function getGoogleAccessToken(): Promise<string> {
+  const serviceAccount = googleServiceAccount();
+  const email = serviceAccount.client_email;
+  const privateKey = googlePrivateKey(serviceAccount.private_key);
+  if (!email || !privateKey) throw new Error("GA4 service account belum dikonfigurasi");
+  const now = Math.floor(Date.now() / 1000);
+  const encode = (value: unknown) => Buffer.from(JSON.stringify(value)).toString("base64url");
+  const unsigned = `${encode({ alg: "RS256", typ: "JWT" })}.${encode({
+    iss: email,
+    scope: "https://www.googleapis.com/auth/analytics.readonly",
+    aud: "https://oauth2.googleapis.com/token",
+    iat: now,
+    exp: now + 3600,
+  })}`;
+  const signature = crypto.sign("RSA-SHA256", Buffer.from(unsigned), privateKey).toString("base64url");
+  const response = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: `${unsigned}.${signature}`,
+    }),
+  });
+  const data = await response.json() as { access_token?: string; error_description?: string };
+  if (!response.ok || !data.access_token) throw new Error(data.error_description || "Autentikasi GA4 gagal");
+  return data.access_token;
+}
+
+async function fetchPropertyTraffic(propertyId: string, domains: string[], query: PageTrafficQuery, token: string): Promise<PageTrafficRawRow[]> {
+  const ranges = monthWeekRanges(query.year, query.month);
+  const allowedDomains = query.domain === "all" ? domains : domains.filter((domain) => domain === query.domain);
+  if (!allowedDomains.length) return [];
+  const hostnameFilters = allowedDomains.flatMap((domain) => [domain, `www.${domain}`]).map((value) => ({ filter: { fieldName: "hostName", stringFilter: { matchType: "EXACT", value } } }));
+  const runReport = async (dimensions: string[], metrics: string[]) => {
+    const response = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        dateRanges: [{ startDate: ranges[0].start, endDate: ranges[ranges.length - 1].end }],
+        dimensions: dimensions.map((name) => ({ name })),
+        metrics: metrics.map((name) => ({ name })),
+        dimensionFilter: { orGroup: { expressions: hostnameFilters } },
+        limit: 100000,
+      }),
+    });
+    const data = await response.json() as {
+      rows?: Array<{ dimensionValues?: Array<{ value?: string }>; metricValues?: Array<{ value?: string }> }>;
+      error?: { message?: string };
+    };
+    if (!response.ok) throw new Error(data.error?.message || "GA4 Data API gagal");
+    return data.rows || [];
+  };
+
+  const [viewRows, metricRows] = await Promise.all([
+    runReport(["hostName", "pagePath", "pageTitle", "date"], ["screenPageViews"]),
+    runReport(["hostName", "pagePath", "pageTitle"], ["totalUsers", "sessions", "engagedSessions", "userEngagementDuration"]),
+  ]);
+  const mapRow = (row: { dimensionValues?: Array<{ value?: string }>; metricValues?: Array<{ value?: string }> }, date: string, metrics: number[]): PageTrafficRawRow => {
+    const dimensions = row.dimensionValues || [];
+    return {
+      hostname: dimensions[0]?.value || "",
+      path: dimensions[1]?.value || "/",
+      title: dimensions[2]?.value || "",
+      date,
+      views: metrics[0] || 0,
+      users: metrics[1] || 0,
+      sessions: metrics[2] || 0,
+      engagedSessions: metrics[3] || 0,
+      engagementDuration: metrics[4] || 0,
+    };
+  };
+  return [
+    ...viewRows.map((row) => mapRow(row, row.dimensionValues?.[3]?.value || "", [Number(row.metricValues?.[0]?.value || 0)])),
+    ...metricRows.map((row) => mapRow(row, "", [0, ...((row.metricValues || []).map((metric) => Number(metric.value || 0)))])),
+  ];
+}
+
+function styleTrafficSheet(sheet: ExcelJS.Worksheet) {
+  sheet.views = [{ state: "frozen", ySplit: 1 }];
+  sheet.autoFilter = { from: "A1", to: sheet.getCell(1, sheet.columnCount).address };
+  sheet.getRow(1).eachCell((cell) => {
+    cell.font = { bold: true, color: { argb: "FFFFFFFF" } };
+    cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF990202" } };
+    cell.alignment = { vertical: "middle", horizontal: "center" };
+  });
+  sheet.getRow(1).height = 28;
+}
+
+export async function buildPageTrafficWorkbook(query: PageTrafficQuery): Promise<ExcelJS.Workbook> {
+  const propertyId = process.env.GA4_PROPERTY_ID_EASYLEGAL_ID;
+  const sharedPropertyId = process.env.GA4_PROPERTY_ID_SHARED;
+  if (!propertyId || !sharedPropertyId) throw new Error("GA4 property ID belum dikonfigurasi");
+  const token = await getGoogleAccessToken();
+  const propertySpecs = [
+    { id: propertyId, domains: PROPERTY_DOMAINS.easylegal_id },
+    { id: sharedPropertyId, domains: PROPERTY_DOMAINS.shared },
+  ];
+  const rawRows = (await Promise.all(propertySpecs.map((spec) => fetchPropertyTraffic(spec.id, spec.domains, query, token)))).flat();
+  const ranges = monthWeekRanges(query.year, query.month);
+  const rows = aggregatePageTrafficRows(rawRows, ranges);
+  const workbook = new ExcelJS.Workbook();
+  workbook.creator = "EasyLegal";
+  workbook.created = new Date();
+
+  const detail = workbook.addWorksheet("Performa Halaman");
+  detail.columns = [
+    { header: "Domain", key: "domain", width: 24 },
+    { header: "Path", key: "path", width: 48 },
+    { header: "Judul Halaman", key: "title", width: 42 },
+    ...ranges.map((range, index) => ({ header: `Views ${range.label}`, key: `week${index}`, width: 17 })),
+    { header: "Total Views", key: "totalViews", width: 15 },
+    { header: "Users", key: "users", width: 12 },
+    { header: "Sessions", key: "sessions", width: 12 },
+    { header: "Views / User", key: "viewsPerUser", width: 15 },
+    { header: "Engagement Rate (%)", key: "engagementRate", width: 21 },
+    { header: "Avg Engagement (detik)", key: "averageEngagementSeconds", width: 23 },
+  ];
+  rows.forEach((row) => detail.addRow({
+    ...row,
+    ...Object.fromEntries(row.weeklyViews.map((value, index) => [`week${index}`, value])),
+  }));
+  styleTrafficSheet(detail);
+
+  const summary = workbook.addWorksheet("Ringkasan");
+  summary.columns = [{ header: "Metrik", key: "metric", width: 30 }, { header: "Nilai", key: "value", width: 28 }];
+  const totalViews = rows.reduce((sum, row) => sum + row.totalViews, 0);
+  const totalUsers = rows.reduce((sum, row) => sum + row.users, 0);
+  const totalSessions = rows.reduce((sum, row) => sum + row.sessions, 0);
+  summary.addRows([
+    { metric: "Periode", value: `${ranges[0].start} s/d ${ranges[ranges.length - 1].end}` },
+    { metric: "Domain", value: query.domain === "all" ? "Semua Domain" : query.domain },
+    { metric: "Jumlah Halaman", value: rows.length },
+    { metric: "Total Views", value: totalViews },
+    { metric: "Total Users (agregat per halaman)", value: totalUsers },
+    { metric: "Total Sessions (agregat per halaman)", value: totalSessions },
+  ]);
+  styleTrafficSheet(summary);
+  return workbook;
 }
 export async function getAnalyticsOverview(query: AnalyticsQuery = {}): Promise<AnalyticsOverview> {
   const { domain, from, to, groupBy = "day", excludeBot = true } = query;
