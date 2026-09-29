@@ -169,6 +169,7 @@ __pycache__/
 # Local standalone design files, docs, and txt files (not for deployment)
 /*.png
 /*.html
+docs/diagrams/*.html
 /*.xlsx
 /*.txt
 EASYLEGAL-DASHBOARD-DESIGN-BRIEF.md

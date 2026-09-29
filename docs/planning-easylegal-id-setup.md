@@ -156,7 +156,7 @@ Semua halaman Google Ads EL.id sudah di-map via **rewrite rules** di `apps/web-i
 | Domain | App | GTM ID |
 |--------|-----|--------|
 | `easylegal.biz.id` | `web` | `GTM-NF5B4ZRG` |
-| `easylegal.co.id` | `web-co` | `GTM-THBW6RTF` |
+| `easylegal.co.id` | `web` | `GTM-NF5B4ZRG` |
 | `easylegal.id` | `web-id` | `GTM-TVHZW45Q` ✅ |
 
 > **Penting:** Setup GTM tags harus dilakukan di container `GTM-TVHZW45Q` (easylegal.id), bukan di container lain.

@@ -231,8 +231,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // (2026-09-06).md). Deliberately listed here as the OLD url (not the
   // redirect target) so Google discovers and processes each 301 rather
   // than never re-crawling a URL it already thinks is gone/410.
-  const localSeoRedirectPages: MetadataRoute.Sitemap = localSeoRedirects.map((r) => ({
-    url: `${BASE_URL}/${r.slug}`,
+  const localSeoRedirectPages: MetadataRoute.Sitemap = Object.keys(localSeoRedirects).map((slug) => ({
+    url: `${BASE_URL}/${slug}`,
     lastModified: generatedAt,
     changeFrequency: "yearly" as const,
     priority: 0.2,

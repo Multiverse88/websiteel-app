@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { LOCAL_SEO_REDIRECTS } from "@/data/local-seo-redirects-map";
+import localSeoRedirects from "@/data/local-seo-redirects.json";
 import { paymentVerificationSlugSet } from "@/data/payment-verification";
+const LOCAL_SEO_REDIRECTS: Record<string, string> = localSeoRedirects;
 
 // Link-preview crawlers that render Open Graph tags when a URL is shared
 // (WhatsApp, Facebook Messenger, Twitter/X, Slack, Telegram, Discord, etc.).

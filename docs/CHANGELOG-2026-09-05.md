@@ -1,5 +1,13 @@
 # Changelog — Sesi 5 September 2026
 
+## Pembaruan 29 September 2026
+
+- Hapus salinan `apps/web-co`; deployment aktif memang melayani `easylegal.co.id` dari `apps/web`.
+- Hapus skill vendor lama, starter Astro, laporan hasil generate, serta skrip QA/perbaikan sekali pakai.
+- Jadikan `apps/web/public` sumber media bersama; hapus dua salinan aset yang identik dari `web-id` dan dashboard tanpa mengubah URL MinIO.
+- Satukan data redirect SEO lokal `web-id` menjadi satu objek JSON statis dan hapus map TypeScript duplikat.
+- Hapus dependency API yang tidak dipakai: `xlsx`, `ts-node`, dan `@types/pg`.
+
 ## Ringkasan Pekerjaan Malam Ini
 
 ### 1. Web-ID (easylegal.id) — Deploy & Bug Fix
