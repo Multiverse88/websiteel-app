@@ -14,11 +14,14 @@ type CampaignConfig = {
   buildFonnteMessage: (nama: string, layanan: string) => string;
 };
 
+export function buildCampaignFonnteMessage(nama: string, layanan: string) {
+  return `Halo ${nama}!\n\nTerima kasih sudah mengisi formulir dari meta ads. Perkenalkan, saya Viani yang akan segera membantu proses konsultasi layanan ${layanan} 😊🙏\n\nJika ada hal yang ingin ditanyakan terlebih dahulu, silakan balas pesan ini, ya!`;
+}
+
 const CAMPAIGNS: Record<string, CampaignConfig> = {
   "layanan-easylegal-metaads": {
     sheetWebhookUrl: process.env.CAMPAIGN_LEAD_SHEET_URL || "",
-    buildFonnteMessage: (nama, layanan) =>
-      `Halo ${nama}!\nTerima kasih telah menghubungi EasyLegal.\n\n Kami telah menerima permintaan konsultasi Anda untuk layanan ${layanan}.\nPersonal Legal Assistant (PLA) kami akan segera meninjau data Anda dan membalas chat ini dalam waktu singkat.`,
+    buildFonnteMessage: buildCampaignFonnteMessage,
   },
 };
 
