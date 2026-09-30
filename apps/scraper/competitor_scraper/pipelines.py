@@ -45,10 +45,11 @@ class PostgresWriterPipeline:
 
             conn_url, self.schema = clean_db_url(self.db_url)
             self.conn = psycopg.connect(conn_url, autocommit=True)
-            if self.schema:
-                with self.conn.cursor() as cur:
-                    cur.execute(f"SET search_path TO {self.schema}, public;")
-            logger.info("Connected to PostgreSQL for crawl %s", getattr(spider, "crawl_id", "unknown"))
+            targets = [self.schema, "easylegal", "public"] if self.schema else ["easylegal", "public"]
+            valid = [s for s in targets if s]
+            with self.conn.cursor() as cur:
+                cur.execute(f"SET search_path TO {', '.join(valid)};")
+            logger.info("Connected to PostgreSQL (search_path=%s) for crawl %s", ', '.join(valid), getattr(spider, "crawl_id", "unknown"))
         except Exception as e:
             logger.error("Failed to connect to PostgreSQL: %s", e)
             self.conn = None
@@ -147,6 +148,8 @@ class PostgresWriterPipeline:
                 )
                 cur.execute(sql_update_crawl, (crawl_id,))
         except Exception as e:
-            logger.error("Failed to insert snapshot for %s: %s", url, e)
-
+            logger.error("PIPELINE_ERROR: Failed to insert snapshot for %s: %s", url, e)
+            import sys
+            sys.stderr.write(f"PIPELINE_ERROR: Failed to insert snapshot for {url}: {e}\n")
+            sys.stderr.flush()
         return item

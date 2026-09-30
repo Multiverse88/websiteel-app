@@ -48,17 +48,25 @@ def clean_db_url(raw_url: str) -> tuple[str, str | None]:
     return cleaned_url, schema
 
 
+def setup_search_path(conn, schema: str | None = None) -> None:
+    """Ensure both custom schema, 'easylegal', and 'public' are in search_path."""
+    targets = [schema, "easylegal", "public"] if schema else ["easylegal", "public"]
+    valid = []
+    for s in targets:
+        if s and s not in valid:
+            valid.append(s)
+    with conn.cursor() as cur:
+        cur.execute(f"SET search_path TO {', '.join(valid)};")
+
+
 def get_connection(db_url: str):
-    """Open a new PostgreSQL connection with autocommit."""
+    """Open a new PostgreSQL connection with autocommit and set search_path."""
     import psycopg
 
     cleaned_url, schema = clean_db_url(db_url)
     conn = psycopg.connect(cleaned_url, autocommit=True)
-    if schema:
-        with conn.cursor() as cur:
-            cur.execute(f"SET search_path TO {schema}, public;")
+    setup_search_path(conn, schema)
     return conn
-
 
 def recover_stale_crawls(conn) -> int:
     """Mark RUNNING crawls older than 30 minutes as FAILED."""
@@ -238,20 +246,27 @@ def run_worker():
                 cmd,
                 cwd=os.path.dirname(os.path.abspath(__file__)),
                 stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
                 text=True,
+                bufsize=1,
             )
 
+            output_lines = []
             try:
-                stdout, stderr = proc.communicate(timeout=1250)
+                if proc.stdout:
+                    for line in proc.stdout:
+                        output_lines.append(line)
+                        sys.stdout.write(f"[SCRAPY] {line}")
+                        sys.stdout.flush()
+                proc.wait(timeout=1250)
+                full_output = "".join(output_lines)
                 duration = time.time() - start_time
                 logger.info("Scrapy process finished in %.1f seconds with exit code %d", duration, proc.returncode)
-                finalize_crawl(conn, crawl_id, proc.returncode, stderr)
+                finalize_crawl(conn, crawl_id, proc.returncode, full_output)
             except subprocess.TimeoutExpired:
                 proc.kill()
                 logger.error("Scrapy process timed out after 1250 seconds. Terminating.")
                 finalize_crawl(conn, crawl_id, -1, "Crawl timed out after 20 minutes")
-
         except Exception as e:
             logger.error("Worker error encountered in main loop: %s", e)
             time.sleep(5)

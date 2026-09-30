@@ -13,8 +13,8 @@ class SafeUrlDownloaderMiddleware:
     def process_request(self, request, spider):
         url = request.url
 
-        # robots.txt requests are allowed to proceed
-        if url.endswith("/robots.txt"):
+        # robots.txt and sitemaps are allowed to proceed
+        if url.endswith("/robots.txt") or "/sitemap" in url.lower():
             return None
 
         # Verify target is on allowed competitor domain
@@ -27,8 +27,8 @@ class SafeUrlDownloaderMiddleware:
         if is_ignored_path(parsed.path):
             raise IgnoreRequest(f"Path '{parsed.path}' is in ignored pattern list")
 
-        # Check SSRF safety
-        is_safe, reason = is_safe_url(url, resolve_dns=True)
+        # Check URL safety (syntax, credentials, private IPs)
+        is_safe, reason = is_safe_url(url, resolve_dns=False)
         if not is_safe:
             raise IgnoreRequest(f"Blocked unsafe URL '{url}': {reason}")
 

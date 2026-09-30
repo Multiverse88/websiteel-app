@@ -6,6 +6,7 @@ and extracting structured SEO and service snapshots.
 from __future__ import annotations
 
 import logging
+import re
 from urllib.parse import urljoin, urlparse
 try:
     import scrapy
@@ -30,6 +31,7 @@ logger = logging.getLogger(__name__)
 
 class CompetitorSpider(scrapy.Spider):
     name = "competitor"
+    handle_httpstatus_list = [400, 401, 403, 404, 500, 502, 503]
 
     def __init__(
         self,
@@ -81,7 +83,11 @@ class CompetitorSpider(scrapy.Spider):
             # Not an XML sitemap, ignore silently
             return
 
-        locs = response.xpath('//*[local-name()="loc"]/text()').getall()
+        # Extract <loc> URLs via regex (namespace-agnostic) with xpath fallback
+        locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", response.text, re.IGNORECASE)
+        if not locs:
+            locs = response.xpath('//*[local-name()="loc"]/text()').getall()
+
         for raw_loc in locs:
             loc = raw_loc.strip()
             if not loc:
