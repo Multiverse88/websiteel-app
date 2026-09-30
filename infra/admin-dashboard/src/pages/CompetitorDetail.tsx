@@ -57,6 +57,7 @@ interface PageSnapshot {
   title: string | null
   metaDescription: string | null
   h1: string | null
+  keywords?: string | null
   headings: { level: number; text: string }[]
   priceTexts: string[]
   ctas: { label: string; url: string }[]
@@ -531,6 +532,7 @@ export default function CompetitorDetail({ competitorId }: CompetitorDetailProps
                   <thead className="bg-gray-50/80 border-b border-gray-200 text-gray-500 uppercase tracking-wider font-semibold">
                     <tr>
                       <th className="py-3 px-4">Halaman & Title</th>
+                      <th className="py-3 px-4">Header H1 & Keywords</th>
                       <th className="py-3 px-4">Klasifikasi</th>
                       <th className="py-3 px-4">Harga Terdeteksi</th>
                       <th className="py-3 px-4">CTA / Kontak</th>
@@ -554,6 +556,24 @@ export default function CompetitorDetail({ competitorId }: CompetitorDetailProps
                               {p.path} <ExternalLink className="w-2.5 h-2.5" />
                             </a>
                           </div>
+                        </td>
+                        <td className="py-3.5 px-4 max-w-sm">
+                          <div className="font-medium text-gray-800 text-xs truncate" title={p.h1 || '-'}>
+                            {p.h1 ? (
+                              <span className="flex items-center gap-1.5">
+                                <span className="text-[10px] uppercase font-bold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded shrink-0">H1</span>
+                                <span className="truncate">{p.h1}</span>
+                              </span>
+                            ) : (
+                              <span className="text-gray-300">-</span>
+                            )}
+                          </div>
+                          {p.keywords && (
+                            <div className="text-[11px] text-gray-500 truncate mt-1 flex items-center gap-1" title={p.keywords}>
+                              <span className="text-[10px] font-semibold text-primary bg-primary/10 px-1 py-0.2 rounded shrink-0">KW</span>
+                              <span className="truncate">{p.keywords}</span>
+                            </div>
+                          )}
                         </td>
                         <td className="py-3.5 px-4">{renderClassificationBadge(p.classification)}</td>
                         <td className="py-3.5 px-4 max-w-xs">

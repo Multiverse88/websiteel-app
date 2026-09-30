@@ -4,6 +4,7 @@ export interface SnapshotSummary {
   title: string | null;
   metaDescription: string | null;
   h1: string | null;
+  keywords?: string | null;
   headings: unknown;
   mainText: string | null;
   priceTexts: unknown;
@@ -104,6 +105,11 @@ export function computeCrawlDiff(
     if (curr.h1 !== prev.h1) {
       if (!changeTypes.includes("SEO_CHANGED")) changeTypes.push("SEO_CHANGED");
       details.push({ field: "h1", before: prev.h1, after: curr.h1 });
+    }
+
+    if (curr.keywords !== prev.keywords) {
+      if (!changeTypes.includes("SEO_CHANGED")) changeTypes.push("SEO_CHANGED");
+      details.push({ field: "keywords", before: prev.keywords, after: curr.keywords });
     }
 
     const currPrices = Array.isArray(curr.priceTexts) ? curr.priceTexts : [];

@@ -78,6 +78,7 @@ class PostgresWriterPipeline:
         title = item.get("title") or ""
         meta_description = item.get("meta_description")
         h1 = item.get("h1")
+        keywords = item.get("keywords")
         headings = json.dumps(item.get("headings") or [], ensure_ascii=False)
         main_text = item.get("main_text") or ""
         price_texts = json.dumps(item.get("price_texts") or [], ensure_ascii=False)
@@ -90,12 +91,12 @@ class PostgresWriterPipeline:
             INSERT INTO "CompetitorPageSnapshot" (
                 "id", "crawlId", "competitorId", "url", "path", "statusCode",
                 "contentType", "canonicalUrl", "title", "metaDescription", "h1",
-                "headings", "mainText", "priceTexts", "ctas", "contentHash",
+                "keywords", "headings", "mainText", "priceTexts", "ctas", "contentHash",
                 "classification", "scrapedAt"
             ) VALUES (
                 %s, %s, %s, %s, %s, %s,
                 %s, %s, %s, %s, %s,
-                %s::jsonb, %s, %s::jsonb, %s::jsonb, %s,
+                %s, %s::jsonb, %s, %s::jsonb, %s::jsonb, %s,
                 %s::"PageClassification", %s
             )
             ON CONFLICT ("crawlId", "url") DO UPDATE SET
@@ -105,6 +106,7 @@ class PostgresWriterPipeline:
                 "title" = EXCLUDED."title",
                 "metaDescription" = EXCLUDED."metaDescription",
                 "h1" = EXCLUDED."h1",
+                "keywords" = EXCLUDED."keywords",
                 "headings" = EXCLUDED."headings",
                 "mainText" = EXCLUDED."mainText",
                 "priceTexts" = EXCLUDED."priceTexts",
@@ -137,6 +139,7 @@ class PostgresWriterPipeline:
                         title,
                         meta_description,
                         h1,
+                        keywords,
                         headings,
                         main_text,
                         price_texts,

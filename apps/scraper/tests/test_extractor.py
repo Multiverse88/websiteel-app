@@ -45,6 +45,7 @@ def test_extract_page_data_service():
     assert "wa.me" in data["ctas"][0]["url"]
     assert data["classification"] == "SERVICE"
     assert len(data["contentHash"]) == 64
+    assert "Pendirian PT" in data["keywords"]
 
 
 def test_classify_page_unsupported_dynamic():
@@ -80,3 +81,19 @@ def test_compute_content_hash_deterministic():
     }
     payload2 = dict(payload1)
     assert compute_content_hash(payload1) == compute_content_hash(payload2)
+
+def test_extract_keywords_meta():
+    html = """
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Layanan Usaha</title>
+        <meta name="keywords" content="pendirian pt, izin oss, nib usaha, virtual office">
+      </head>
+      <body>
+        <h1>Layanan Kami</h1>
+      </body>
+    </html>
+    """
+    data = extract_page_data(html, "https://legalin.id/layanan")
+    assert data["keywords"] == "pendirian pt, izin oss, nib usaha, virtual office"

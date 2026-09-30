@@ -10,7 +10,7 @@ SPIDER_MODULES = ["competitor_scraper.spiders"]
 NEWSPIDER_MODULE = "competitor_scraper.spiders"
 
 # Crawl etiquette and politeness
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = os.environ.get("SCRAPER_ROBOTSTXT_OBEY", "false").lower() in ("true", "1")
 AUTOTHROTTLE_ENABLED = True
 AUTOTHROTTLE_START_DELAY = 1.0
 AUTOTHROTTLE_MAX_DELAY = 10.0

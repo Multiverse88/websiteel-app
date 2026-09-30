@@ -16,6 +16,7 @@ try:
         title = scrapy.Field()
         meta_description = scrapy.Field()
         h1 = scrapy.Field()
+        keywords = scrapy.Field()
         headings = scrapy.Field()
         main_text = scrapy.Field()
         price_texts = scrapy.Field()

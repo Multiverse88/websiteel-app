@@ -73,6 +73,7 @@ class _TextExtractor(HTMLParser):
         self._current_heading_chunks: list[str] = []
         self.canonical: str | None = None
         self.meta_description: str | None = None
+        self.meta_keywords: str | None = None
         self.ctas: list[dict[str, str]] = []
         self._current_anchor_href: str | None = None
         self._current_anchor_chunks: list[str] = []
@@ -104,6 +105,8 @@ class _TextExtractor(HTMLParser):
             prop = attr_dict.get("property", "").lower()
             if (name == "description" or prop == "og:description") and not self.meta_description:
                 self.meta_description = attr_dict.get("content")
+            elif (name in ("keywords", "news_keywords") or prop == "keywords") and not self.meta_keywords:
+                self.meta_keywords = attr_dict.get("content")
         elif tag_lower == "a":
             href = attr_dict.get("href")
             if href and not href.startswith(("#", "javascript:", "mailto:", "tel:")):
@@ -184,6 +187,44 @@ class _TextExtractor(HTMLParser):
         return normalized[:100_000]
 
 
+def extract_keywords(
+    meta_keywords: str | None,
+    title: str,
+    h1: str | None,
+) -> str | None:
+    """Extract or derive clean keyword list from meta tags, headings, and title."""
+    if meta_keywords and meta_keywords.strip():
+        parts = [k.strip() for k in re.split(r"[,;]+", meta_keywords) if k.strip()]
+        if parts:
+            return ", ".join(parts[:15])
+
+    text_source = f"{h1 or ''} {title}".strip()
+    if not text_source:
+        return None
+
+    common_terms = [
+        "Pendirian PT", "Pembuatan PT", "PT Perorangan", "Pendirian CV", "Pembuatan CV",
+        "Izin Usaha", "NIB", "OSS", "HAKI", "Merek", "Amdal", "BPOM", "ISO",
+        "Perizinan", "Yayasan", "Koperasi", "Virtual Office", "PMA", "Legalitas",
+    ]
+    candidates: list[str] = []
+    seen = set()
+    for term in common_terms:
+        if term.lower() in text_source.lower() and term.lower() not in seen:
+            seen.add(term.lower())
+            candidates.append(term)
+
+    if candidates:
+        return ", ".join(candidates[:10])
+
+    if h1 and len(h1) < 80:
+        return h1
+    if title and len(title) < 80:
+        return title
+
+    return None
+
+
 def extract_page_data(html: str, base_url: str) -> dict[str, Any]:
     """
     Parse HTML and extract SEO fields, main text, price strings, and CTAs.
@@ -195,6 +236,7 @@ def extract_page_data(html: str, base_url: str) -> dict[str, Any]:
             "metaDescription": None,
             "canonicalUrl": None,
             "h1": None,
+            "keywords": None,
             "headings": [],
             "mainText": "",
             "priceTexts": [],
@@ -212,7 +254,10 @@ def extract_page_data(html: str, base_url: str) -> dict[str, Any]:
     title = parser.get_title()
     meta_description = unescape(parser.meta_description.strip()) if parser.meta_description else None
     canonical_url = parser.canonical.strip() if parser.canonical else None
-    h1 = parser.get_h1() or None
+    raw_h1 = parser.get_h1()
+    h1 = " ".join(raw_h1.split()) if raw_h1 else None
+    meta_keywords = unescape(parser.meta_keywords.strip()) if parser.meta_keywords else None
+    keywords = extract_keywords(meta_keywords, title, h1)
     headings = parser.headings
     main_text = parser.get_main_text()
 
@@ -237,6 +282,7 @@ def extract_page_data(html: str, base_url: str) -> dict[str, Any]:
         "metaDescription": meta_description,
         "canonicalUrl": canonical_url,
         "h1": h1,
+        "keywords": keywords,
         "headings": headings,
         "mainText": main_text,
         "priceTexts": prices,
@@ -320,6 +366,7 @@ def compute_content_hash(fields: dict[str, Any]) -> str:
         "title": fields.get("title") or "",
         "metaDescription": fields.get("metaDescription") or "",
         "h1": fields.get("h1") or "",
+        "keywords": fields.get("keywords") or "",
         "headings": fields.get("headings") or [],
         "mainText": fields.get("mainText") or "",
         "priceTexts": sorted(fields.get("priceTexts") or []),

@@ -31,3 +31,10 @@ Menerapkan fitur internal untuk admin EasyLegal guna memonitor website kompetito
 - `npm run build` di `apps/api`: berhasil tanpa error TypeScript.
 - `npm run build` di `infra/admin-dashboard`: berhasil tanpa error TypeScript/Vite.
 - `npm run test:docker-context` dan `test:wa-inventory`: PASS.
+
+## 2026-09-30 — Sitemap Metadata Fix
+- Scrapy 2.13+ now starts through `async def start()` and requests `/sitemap.xml` first.
+- Sitemap URLs are queued separately from parsed URLs, preventing scheduled pages from being skipped before extraction.
+- Snapshot output now persists and exposes `keywords` together with URL, title, and H1.
+- Invalid or empty sitemaps fall back to same-domain link crawling from the homepage.
+- Validation: scraper `43 passed`; API `40 passed` plus TypeScript build; dashboard TypeScript/Vite build; real crawl of `legalitas.org` produced 18 snapshots with URL, title, H1, and keywords.

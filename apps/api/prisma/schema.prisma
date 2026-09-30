@@ -595,6 +595,7 @@ model CompetitorPageSnapshot {
   title           String?
   metaDescription String?
   h1              String?
+  keywords        String?
   headings        Json               @default("[]")
   mainText        String?
   priceTexts      Json               @default("[]")

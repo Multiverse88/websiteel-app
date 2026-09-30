@@ -43,6 +43,105 @@ class SpiderTestCase(unittest.TestCase):
         self.assertIn("competitor.com", spider.allowed_domains)
         self.assertIn("www.competitor.com", spider.allowed_domains)
 
+    def test_spider_start_yields_sitemap(self):
+        import asyncio
+
+        spider = CompetitorSpider(
+            crawl_id="c_1",
+            competitor_id="comp_1",
+            allowed_hostname="competitor.com",
+            start_url="https://competitor.com",
+        )
+
+        async def collect():
+            return [r async for r in spider.start()]
+
+        requests = asyncio.run(collect())
+        self.assertEqual(len(requests), 1)
+        self.assertEqual(requests[0].url, "https://competitor.com/sitemap.xml")
+
+    def test_spider_parse_sitemap_extracts_locs_and_homepage(self):
+        spider = CompetitorSpider(
+            crawl_id="c_1",
+            competitor_id="comp_1",
+            allowed_hostname="competitor.com",
+            start_url="https://competitor.com",
+        )
+        xml = """<?xml version="1.0" encoding="UTF-8"?>
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            <url><loc>https://competitor.com/layanan/pt</loc></url>
+            <url><loc>https://competitor.com/layanan/cv</loc></url>
+        </urlset>"""
+        response = MockResponse(
+            "https://competitor.com/sitemap.xml",
+            xml,
+            headers={b"Content-Type": b"application/xml"},
+        )
+        requests = list(spider.parse_sitemap(response))
+        urls = {r.url for r in requests}
+        self.assertIn("https://competitor.com/layanan/pt", urls)
+        self.assertIn("https://competitor.com/layanan/cv", urls)
+        self.assertIn("https://competitor.com/", urls)
+        self.assertTrue(spider.sitemap_found)
+
+    def test_sitemap_page_request_produces_snapshot(self):
+        spider = CompetitorSpider(
+            crawl_id="c_1",
+            competitor_id="comp_1",
+            allowed_hostname="competitor.com",
+            start_url="https://competitor.com",
+        )
+        sitemap = MockResponse(
+            "https://competitor.com/sitemap.xml",
+            """<?xml version="1.0"?>
+            <urlset><url><loc>https://competitor.com/layanan/pt</loc></url></urlset>""",
+            headers={b"Content-Type": b"application/xml"},
+        )
+        request = next(r for r in spider.parse_sitemap(sitemap) if r.url.endswith("/layanan/pt"))
+        page = MockResponse(
+            request.url,
+            """<html><head>
+            <title>Jasa Pendirian PT</title>
+            <meta name="keywords" content="pendirian pt, izin usaha">
+            </head><body><h1>Pendirian PT Lengkap</h1></body></html>""",
+        )
+
+        items = list(request.callback(page))
+
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["url"], "https://competitor.com/layanan/pt")
+        self.assertEqual(items[0]["title"], "Jasa Pendirian PT")
+        self.assertEqual(items[0]["h1"], "Pendirian PT Lengkap")
+        self.assertEqual(items[0]["keywords"], "pendirian pt, izin usaha")
+
+    def test_spider_parse_sitemap_fallback_on_non_xml(self):
+        spider = CompetitorSpider(
+            crawl_id="c_1",
+            competitor_id="comp_1",
+            allowed_hostname="competitor.com",
+            start_url="https://competitor.com",
+        )
+        response = MockResponse(
+            "https://competitor.com/sitemap.xml",
+            "<html>404 Not Found</html>",
+            status=404,
+            headers={b"Content-Type": b"text/html"},
+        )
+        requests = list(spider.parse_sitemap(response))
+        self.assertEqual(len(requests), 1)
+        self.assertEqual(requests[0].url, "https://competitor.com/")
+        self.assertFalse(spider.sitemap_found)
+    def test_spider_start_without_args_yields_nothing(self):
+        import asyncio
+
+        spider = CompetitorSpider()
+
+        async def collect():
+            return [r async for r in spider.start()]
+
+        requests = asyncio.run(collect())
+        self.assertEqual(requests, [])
+
     def test_spider_parse_page(self):
         spider = CompetitorSpider(
             crawl_id="c_1",
