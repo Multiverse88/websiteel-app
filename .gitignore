@@ -163,9 +163,12 @@ prisma/seed.js
 dist-seed/
 
 # Local utility scripts (not for deployment)
-*.py
+/*.py
+.venv/
+*.pyc
 __pycache__/
-
+apps/scraper/**/__pycache__/
+apps/scraper/**/*.pyc
 # Local standalone design files, docs, and txt files (not for deployment)
 /*.png
 /*.html

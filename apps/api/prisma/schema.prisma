@@ -530,3 +530,81 @@ model Glossary {
   @@index([site, slug])
   @@index([createdAt])
 }
+
+enum CrawlStatus {
+  PENDING
+  RUNNING
+  SUCCEEDED
+  PARTIAL
+  FAILED
+  CANCELLED
+}
+
+enum PageClassification {
+  CONTENT
+  SERVICE
+  ARTICLE
+  OTHER
+  UNSUPPORTED_DYNAMIC
+}
+
+model CompetitorSite {
+  id        String            @id @default(cuid())
+  name      String
+  baseUrl   String
+  hostname  String            @unique
+  isActive  Boolean           @default(true)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  crawls    CompetitorCrawl[]
+
+  @@index([hostname])
+  @@index([isActive])
+}
+
+model CompetitorCrawl {
+  id                String                   @id @default(cuid())
+  competitorId      String
+  status            CrawlStatus              @default(PENDING)
+  requestedByUserId String?
+  startedAt         DateTime?
+  finishedAt        DateTime?
+  pagesDiscovered   Int                      @default(0)
+  pagesScraped      Int                      @default(0)
+  pagesFailed       Int                      @default(0)
+  errorMessage      String?
+  stats             Json?
+  createdAt         DateTime                 @default(now())
+  updatedAt         DateTime                 @default(now()) @updatedAt
+  competitor        CompetitorSite           @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  snapshots         CompetitorPageSnapshot[]
+
+  @@index([competitorId, createdAt])
+  @@index([status, createdAt])
+}
+
+model CompetitorPageSnapshot {
+  id              String             @id @default(cuid())
+  crawlId         String
+  competitorId    String
+  url             String
+  path            String
+  statusCode      Int
+  contentType     String?
+  canonicalUrl    String?
+  title           String?
+  metaDescription String?
+  h1              String?
+  headings        Json               @default("[]")
+  mainText        String?
+  priceTexts      Json               @default("[]")
+  ctas            Json               @default("[]")
+  contentHash     String
+  classification  PageClassification @default(CONTENT)
+  scrapedAt       DateTime           @default(now())
+  crawl           CompetitorCrawl    @relation(fields: [crawlId], references: [id], onDelete: Cascade)
+
+  @@unique([crawlId, url])
+  @@index([competitorId, url])
+  @@index([crawlId, classification])
+}

@@ -18,6 +18,8 @@ import Settings from './pages/Settings'
 import WhatsAppRotator from './pages/WhatsAppRotator'
 import WhatsAppLeads from './pages/WhatsAppLeads'
 import Analytics from './pages/Analytics'
+import Competitors from './pages/Competitors'
+import CompetitorDetail from './pages/CompetitorDetail'
 
 function normalizePathToHash() {
   const { pathname, hash } = window.location
@@ -79,6 +81,11 @@ function Router() {
   const routeWithQuery = hash.replace('#', '') || '/dashboard'
   const route = routeWithQuery.split('?')[0]
 
+  if (route.startsWith('/competitors/') && route.length > '/competitors/'.length) {
+    const competitorId = route.replace('/competitors/', '').split('/')[0]
+    return <Layout><CompetitorDetail competitorId={competitorId} /></Layout>
+  }
+
   const pages: Record<string, ReactNode> = {
     '/dashboard': <Dashboard />,
     '/analytics': <Analytics />,
@@ -98,6 +105,7 @@ function Router() {
     '/whatsapp-rotator': <WhatsAppRotator />,
     '/wa-rotator': <WhatsAppRotator />,
     '/whatsapp-leads': <WhatsAppLeads />,
+    '/competitors': <Competitors />,
   }
 
   return <Layout>{pages[route] || <Dashboard />}</Layout>

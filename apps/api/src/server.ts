@@ -18,6 +18,8 @@ import settingsRoutes from './routes/settings';
 import whatsappRoutes from './routes/whatsapp';
 import campaignLeadRoutes from './routes/campaign-leads';
 import analyticsRoutes from './routes/analytics';
+import competitorRoutes from './routes/competitors';
+import competitorCrawlRoutes from './routes/competitor-crawls';
 import path from 'path';
 
 const app = express();
@@ -101,6 +103,8 @@ app.use('/api/v1/settings', settingsRoutes);
 app.use('/api/v1/wa', whatsappRoutes);
 app.use('/api/v1/campaign-leads', campaignLeadRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
+app.use('/api/v1/competitors', competitorRoutes);
+app.use('/api/v1/competitor-crawls', competitorCrawlRoutes);
 
 // Glossary telah dihapus permanen — respon HTTP 410 Gone untuk setiap request
 app.use(['/glossary', '/api/v1/glossary'], (_req, res) => {

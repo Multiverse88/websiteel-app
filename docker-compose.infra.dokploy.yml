@@ -186,6 +186,21 @@ services:
   # is already created/public/seeded from prior runs; re-seed manually with
   # `mc cp -r public/images/ myminio/images/` if new assets need syncing.
 
+  # ============================================
+  # Competitor Scraper Worker (Scrapy + PostgreSQL)
+  # ============================================
+  competitor-scraper:
+    build:
+      context: ./apps/scraper
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - SCRAPER_LOG_LEVEL=INFO
+    networks:
+      - dokploy-network
+      - easylegal
+
 volumes:
   minio-data:
 

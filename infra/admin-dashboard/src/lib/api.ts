@@ -550,4 +550,77 @@ export const api = {
     }
     return await res.blob();
   },
+  // Competitor Scraper
+  getCompetitors: async () => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitors`);
+    if (!res.ok) throw new Error('Gagal memuat daftar kompetitor');
+    const json = await res.json();
+    return json.data;
+  },
+  createCompetitor: async (data: { name: string; baseUrl: string }) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitors`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || 'Gagal menambahkan kompetitor');
+    return json.data;
+  },
+  getCompetitor: async (id: string) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitors/${id}`);
+    if (!res.ok) throw new Error('Gagal memuat detail kompetitor');
+    const json = await res.json();
+    return json.data;
+  },
+  updateCompetitor: async (id: string, data: { name?: string; isActive?: boolean }) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitors/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || 'Gagal memperbarui kompetitor');
+    return json.data;
+  },
+  deleteCompetitor: async (id: string) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitors/${id}`, {
+      method: 'DELETE',
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || 'Gagal menghapus kompetitor');
+    return json;
+  },
+  triggerCompetitorCrawl: async (id: string) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitors/${id}/crawls`, {
+      method: 'POST',
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || 'Gagal menjadwalkan crawl');
+    return json.data;
+  },
+  getCompetitorCrawl: async (crawlId: string) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitor-crawls/${crawlId}`);
+    if (!res.ok) throw new Error('Gagal memuat status crawl');
+    const json = await res.json();
+    return json.data;
+  },
+  getCompetitorCrawlPages: async (crawlId: string, params: { page?: number; limit?: number; search?: string; classification?: string } = {}) => {
+    const query = new URLSearchParams();
+    if (params.page) query.set('page', String(params.page));
+    if (params.limit) query.set('limit', String(params.limit));
+    if (params.search) query.set('search', params.search);
+    if (params.classification) query.set('classification', params.classification);
+    const queryString = query.toString() ? `?${query.toString()}` : '';
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitor-crawls/${crawlId}/pages${queryString}`);
+    if (!res.ok) throw new Error('Gagal memuat halaman snapshot crawl');
+    return await res.json();
+  },
+  getCompetitorCrawlChanges: async (crawlId: string, compareWith?: string) => {
+    const query = compareWith ? `?compareWith=${encodeURIComponent(compareWith)}` : '';
+    const res = await authenticatedFetch(`${API_BASE_URL}/competitor-crawls/${crawlId}/changes${query}`);
+    if (!res.ok) throw new Error('Gagal memuat perbandingan perubahan');
+    const json = await res.json();
+    return json.data;
+  },
 }
