@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { api } from '../lib/api'
+import Modal from '../components/Modal'
 import {
   ArrowLeft,
   Play,
@@ -109,6 +110,7 @@ export default function CompetitorDetail({ competitorId }: CompetitorDetailProps
   const [totalPages, setTotalPages] = useState(1)
   const [search, setSearch] = useState('')
   const [classificationFilter, setClassificationFilter] = useState('')
+  const [selectedPage, setSelectedPage] = useState<PageSnapshot | null>(null)
 
   // Changes tab state
   const [diffData, setDiffData] = useState<DiffData | null>(null)
@@ -543,9 +545,14 @@ export default function CompetitorDetail({ competitorId }: CompetitorDetailProps
                     {pages.map((p) => (
                       <tr key={p.id} className="hover:bg-gray-50/50 transition">
                         <td className="py-3.5 px-4 max-w-sm">
-                          <div className="font-semibold text-gray-900 truncate" title={p.title || p.path}>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedPage(p)}
+                            className="font-semibold text-left text-gray-900 hover:text-primary hover:underline transition truncate block max-w-full"
+                            title={`Lihat detail: ${p.title || p.path}`}
+                          >
                             {p.title || p.path}
-                          </div>
+                          </button>
                           <div className="text-[11px] text-gray-400 font-mono truncate mt-0.5">
                             <a
                               href={p.url}
@@ -815,6 +822,137 @@ export default function CompetitorDetail({ competitorId }: CompetitorDetailProps
           </table>
         </div>
       )}
+      <Modal
+        isOpen={!!selectedPage}
+        onClose={() => setSelectedPage(null)}
+        title="Detail Snapshot Halaman"
+      >
+        {selectedPage && (
+          <div className="space-y-5 text-sm">
+            <a
+              href={selectedPage.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3 font-mono text-xs text-primary hover:underline break-all"
+            >
+              <Globe className="mt-0.5 h-4 w-4 shrink-0" />
+              <span>{selectedPage.url}</span>
+              <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+            </a>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-lg bg-gray-50 p-3">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Klasifikasi</div>
+                <div className="mt-1">{renderClassificationBadge(selectedPage.classification)}</div>
+              </div>
+              <div className="rounded-lg bg-gray-50 p-3">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">HTTP Status</div>
+                <div className={`mt-1 font-mono font-bold ${selectedPage.statusCode >= 200 && selectedPage.statusCode < 300 ? 'text-emerald-700' : 'text-red-700'}`}>
+                  {selectedPage.statusCode}
+                </div>
+              </div>
+              <div className="rounded-lg bg-gray-50 p-3">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Content Type</div>
+                <div className="mt-1 break-all text-xs text-gray-700">{selectedPage.contentType || '-'}</div>
+              </div>
+              <div className="rounded-lg bg-gray-50 p-3">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Waktu Scrape</div>
+                <div className="mt-1 text-xs text-gray-700">{formatDate(selectedPage.scrapedAt)}</div>
+              </div>
+            </div>
+
+            <div>
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">Title</div>
+              <div className="rounded-lg border border-gray-200 p-3 font-semibold text-gray-900">{selectedPage.title || '-'}</div>
+            </div>
+
+            <div>
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">Meta Description</div>
+              <div className="min-h-12 rounded-lg border border-gray-200 bg-amber-50/40 p-3 leading-relaxed text-gray-700">
+                {selectedPage.metaDescription || <span className="italic text-gray-400">Meta description tidak tersedia.</span>}
+              </div>
+            </div>
+
+            <div>
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">H1</div>
+              <div className="rounded-lg border border-gray-200 p-3 text-gray-800">{selectedPage.h1 || '-'}</div>
+            </div>
+
+            <div>
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">Keywords</div>
+              <div className="rounded-lg border border-gray-200 p-3 text-gray-700">{selectedPage.keywords || '-'}</div>
+            </div>
+
+            <div>
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">Canonical URL</div>
+              {selectedPage.canonicalUrl ? (
+                <a
+                  href={selectedPage.canonicalUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="block rounded-lg border border-gray-200 p-3 font-mono text-xs text-primary hover:underline break-all"
+                >
+                  {selectedPage.canonicalUrl}
+                </a>
+              ) : (
+                <div className="rounded-lg border border-gray-200 p-3 text-gray-400">-</div>
+              )}
+            </div>
+
+            <div>
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">Headings</div>
+              {selectedPage.headings?.length ? (
+                <div className="space-y-1.5 rounded-lg border border-gray-200 p-3">
+                  {selectedPage.headings.map((heading, index) => (
+                    <div key={`${heading.level}-${index}`} className="flex items-start gap-2 text-xs text-gray-700">
+                      <span className="rounded bg-gray-100 px-1.5 py-0.5 font-mono font-bold text-gray-500">H{heading.level}</span>
+                      <span className="pt-0.5">{heading.text}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-lg border border-gray-200 p-3 text-gray-400">-</div>
+              )}
+            </div>
+
+            <div>
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">Harga Terdeteksi</div>
+              {selectedPage.priceTexts?.length ? (
+                <div className="flex flex-wrap gap-1.5">
+                  {selectedPage.priceTexts.map((price, index) => (
+                    <span key={index} className="rounded bg-emerald-50 px-2 py-1 text-xs font-semibold text-emerald-700">{price}</span>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-gray-400">-</div>
+              )}
+            </div>
+
+            <div>
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-gray-400">CTA / Kontak</div>
+              {selectedPage.ctas?.length ? (
+                <div className="space-y-1.5">
+                  {selectedPage.ctas.map((cta, index) => (
+                    <a
+                      key={index}
+                      href={cta.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="flex items-center justify-between gap-3 rounded-lg border border-gray-200 p-2.5 text-xs text-gray-700 hover:border-primary/30 hover:text-primary"
+                    >
+                      <span>{cta.label || 'Buka CTA'}</span>
+                      <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-gray-400">-</div>
+              )}
+            </div>
+          </div>
+        )}
+      </Modal>
+
     </div>
   )
 }
