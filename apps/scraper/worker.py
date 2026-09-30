@@ -12,6 +12,7 @@ import signal
 import subprocess
 import sys
 import time
+import threading
 from datetime import datetime, timezone
 from urllib.parse import parse_qs, urlparse
 
@@ -174,6 +175,43 @@ def finalize_crawl(conn, crawl_id: str, return_code: int, error_output: str = ""
 
     logger.info("Crawl %s finalized with status %s (%d pages scraped)", crawl_id, status, scraped_count)
 
+def run_process_with_output(
+    cmd: list[str],
+    cwd: str | None = None,
+    timeout_seconds: float = 1250,
+) -> tuple[int, str, bool]:
+    """Run a process, stream combined output, and enforce a wall-clock timeout."""
+    proc = subprocess.Popen(
+        cmd,
+        cwd=cwd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1,
+    )
+    output_lines: list[str] = []
+
+    def stream_output() -> None:
+        if not proc.stdout:
+            return
+        for line in proc.stdout:
+            output_lines.append(line)
+            sys.stdout.write(f"[SCRAPY] {line}")
+            sys.stdout.flush()
+
+    reader = threading.Thread(target=stream_output, daemon=True)
+    reader.start()
+    timed_out = False
+    try:
+        proc.wait(timeout=timeout_seconds)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        proc.kill()
+        proc.wait()
+    reader.join(timeout=5)
+    return proc.returncode, "".join(output_lines), timed_out
+
+
 
 def run_worker():
     db_url = os.environ.get("DATABASE_URL")
@@ -242,31 +280,17 @@ def run_worker():
 
             logger.info("Executing Scrapy: %s", " ".join(cmd))
             start_time = time.time()
-            proc = subprocess.Popen(
+            return_code, full_output, timed_out = run_process_with_output(
                 cmd,
                 cwd=os.path.dirname(os.path.abspath(__file__)),
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-                bufsize=1,
             )
-
-            output_lines = []
-            try:
-                if proc.stdout:
-                    for line in proc.stdout:
-                        output_lines.append(line)
-                        sys.stdout.write(f"[SCRAPY] {line}")
-                        sys.stdout.flush()
-                proc.wait(timeout=1250)
-                full_output = "".join(output_lines)
-                duration = time.time() - start_time
-                logger.info("Scrapy process finished in %.1f seconds with exit code %d", duration, proc.returncode)
-                finalize_crawl(conn, crawl_id, proc.returncode, full_output)
-            except subprocess.TimeoutExpired:
-                proc.kill()
+            duration = time.time() - start_time
+            if timed_out:
                 logger.error("Scrapy process timed out after 1250 seconds. Terminating.")
                 finalize_crawl(conn, crawl_id, -1, "Crawl timed out after 20 minutes")
+            else:
+                logger.info("Scrapy process finished in %.1f seconds with exit code %d", duration, return_code)
+                finalize_crawl(conn, crawl_id, return_code, full_output)
         except Exception as e:
             logger.error("Worker error encountered in main loop: %s", e)
             time.sleep(5)

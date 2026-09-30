@@ -37,4 +37,5 @@ Menerapkan fitur internal untuk admin EasyLegal guna memonitor website kompetito
 - Sitemap URLs are queued separately from parsed URLs, preventing scheduled pages from being skipped before extraction.
 - Snapshot output now persists and exposes `keywords` together with URL, title, and H1.
 - Invalid or empty sitemaps fall back to same-domain link crawling from the homepage.
-- Validation: scraper `43 passed`; API `40 passed` plus TypeScript build; dashboard TypeScript/Vite build; real crawl of `legalitas.org` produced 18 snapshots with URL, title, H1, and keywords.
+- Validation: scraper `44 passed`; API `40 passed` plus TypeScript build; dashboard TypeScript/Vite build; real production crawl of `legalitas.org` persisted 75 snapshots with URL, title, H1, and keywords.
+  The worker subprocess now enforces its 20-minute wall-clock timeout while continuing to stream Scrapy logs.
