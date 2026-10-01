@@ -18,9 +18,12 @@ export function buildCampaignFonnteMessage(nama: string, layanan: string) {
   return `Halo ${nama}!\n\nTerima kasih sudah mengisi formulir dari meta ads. Perkenalkan, saya Viani yang akan segera membantu proses konsultasi layanan ${layanan} 😊🙏\n\nJika ada hal yang ingin ditanyakan terlebih dahulu, silakan balas pesan ini, ya!`;
 }
 
+const DEFAULT_SHEET_WEBHOOK = "https://hook.us2.make.com/dbgj6ov1tuhlj322ar2jtye1gf02mxlc";
+const DEFAULT_FONNTE_TOKEN = "QD8UjSFjKqqsRm5Sbx69";
+
 const CAMPAIGNS: Record<string, CampaignConfig> = {
   "layanan-easylegal-metaads": {
-    sheetWebhookUrl: process.env.CAMPAIGN_LEAD_SHEET_URL || "",
+    sheetWebhookUrl: process.env.CAMPAIGN_LEAD_SHEET_URL || DEFAULT_SHEET_WEBHOOK,
     buildFonnteMessage: buildCampaignFonnteMessage,
   },
 };
@@ -52,20 +55,31 @@ router.post("/:slug", async (req, res) => {
 
   const results = { sheet: false, fonnte: false, fbCapi: false };
 
-  if (campaign.sheetWebhookUrl) {
+  const sheetWebhookUrl = process.env.CAMPAIGN_LEAD_SHEET_URL || campaign.sheetWebhookUrl;
+  if (sheetWebhookUrl) {
     try {
-      await fetch(campaign.sheetWebhookUrl, {
+      const payload = {
+        nama,
+        whatsapp,
+        layanan,
+        Nama: nama,
+        WhatsApp: whatsapp,
+        Layanan: layanan,
+        nama_sheet_asal: slug,
+        waktu_masuk: new Date().toISOString(),
+      };
+      const sheetRes = await fetch(sheetWebhookUrl, {
         method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({ nama, whatsapp, layanan }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-      results.sheet = true;
+      results.sheet = sheetRes.ok;
     } catch (err) {
       console.error("[campaign-leads] Google Sheets forward failed:", err);
     }
   }
 
-  const fonnteToken = process.env.CAMPAIGN_FONNTE_TOKEN;
+  const fonnteToken = process.env.CAMPAIGN_FONNTE_TOKEN || DEFAULT_FONNTE_TOKEN;
   if (fonnteToken) {
     try {
       const fonnteBody = new URLSearchParams({
