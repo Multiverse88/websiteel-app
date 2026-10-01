@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 interface FAQItem {
   q: string;
@@ -18,27 +18,6 @@ export default function FAQ({
   items,
 }: FAQProps) {
   const [expandedIdx, setExpandedIdx] = useState<number | null>(0);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
-  const [headerVisible, setHeaderVisible] = useState(false);
-  const [listVisible, setListVisible] = useState(false);
-
-  useEffect(() => {
-    const els = [headerRef.current, listRef.current];
-    const observers: IntersectionObserver[] = [];
-    els.forEach((el, i) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) {
-          i === 0 ? setHeaderVisible(true) : setListVisible(true);
-          obs.unobserve(el);
-        }
-      }, { rootMargin: "-50px" });
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
 
   const toggleFaq = (idx: number) => {
     setExpandedIdx((prev) => (prev === idx ? null : idx));
@@ -47,10 +26,7 @@ export default function FAQ({
   return (
     <section className="bg-white py-8 sm:py-24">
       <div className="max-w-[850px] mx-auto px-4 sm:px-8">
-        <div
-          ref={headerRef}
-          className={`text-center mb-8 sm:mb-16 space-y-2 sm:space-y-3 transition-all duration-500 ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
-        >
+        <div className="text-center mb-8 sm:mb-16 space-y-2 sm:space-y-3">
           <p className="text-[16px] sm:text-[16px] font-black text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
           <h2 className="font-heading text-[16px] sm:text-[38px] font-bold text-gray-950 leading-tight tracking-tight">
             {title}
@@ -60,10 +36,7 @@ export default function FAQ({
           </p>
         </div>
 
-        <div
-          ref={listRef}
-          className={`transition-all duration-500 delay-200 ${listVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
-        >
+        <div>
           {items.map((faq, idx) => {
             const isExpanded = expandedIdx === idx;
             return (

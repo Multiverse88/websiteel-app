@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import FadeIn from "@/components/FadeIn";
 
 export default function MediaCoverage() {
   const BANKS = [
@@ -110,8 +109,7 @@ export default function MediaCoverage() {
   ];
 
   return (
-    <FadeIn delay={0.2}>
-      <section className="bg-white border-t border-gray-100/60 py-16 sm:py-24">
+    <section className="bg-white border-t border-gray-100/60 py-16 sm:py-24">
         
         {/* Unified Header */}
         <div className="max-w-[1200px] mx-auto px-5 sm:px-8 flex flex-col items-center justify-center text-center mb-16 sm:mb-20">
@@ -212,6 +210,5 @@ export default function MediaCoverage() {
 
         </div>
       </section>
-    </FadeIn>
   );
 }
