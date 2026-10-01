@@ -13,8 +13,15 @@ import {
   Clock,
   Sparkles,
   Award,
+  Zap,
+  Scale,
+  Globe,
+  FileCheck,
+  Files,
+  Star,
+  Users,
+  Shield,
   HelpCircle,
-  ExternalLink,
 } from "lucide-react";
 import MediaCoverage from "@/components/MediaCoverage";
 import TrustStatsBar from "@/components/TrustStatsBar";
@@ -69,18 +76,97 @@ export default function LayananSptPajakGadsPage() {
     "Gratis 1x revisi SPT Tahunan PPh dalam 1 tahun",
   ];
 
-  const otherServices = [
-    { title: "Pengurusan NPWP Badan Usaha", badge: "Kartu NPWP Elektronik", price: "Rp 499.000" },
-    { title: "Pengurusan NPWP Orang Pribadi", badge: "Kartu NPWP Elektronik", price: "Rp 349.000" },
-    { title: "Pendaftaran & Pengukuhan PKP", badge: "SK PKP & Sertifikat Elektronik", price: "Rp 1.499.000 - Rp 2.249.000" },
-    { title: "Jasa Pengurusan EFIN Badan", badge: "Aktivasi Cepat", price: "Rp 250.000" },
-    { title: "Laporan Keuangan dari KAP", badge: "Kantor Akuntan Publik", price: "Hubungi Kami" },
-    { title: "Laporan Keuangan Kompilasi", badge: "Lengkap & Siap Audit", price: "Hubungi Kami" },
-    { title: "Tax Opinion Investor Asing", badge: "Penanaman Modal Asing", price: "Hubungi Kami" },
-    { title: "Transfer Pricing Documentation", badge: "TP Doc Regulasi DJP", price: "Hubungi Kami" },
-    { title: "Keberatan ke Kanwil DJP", badge: "Mitigasi Sengketa Pajak", price: "Hubungi Kami" },
-    { title: "Banding & Gugatan ke Pengadilan Pajak", badge: "Pendampingan Hukum Pajak", price: "Hubungi Kami" },
-    { title: "Peninjauan Kembali (PK) Mahkamah Agung", badge: "Tingkat Kasasi / PK", price: "Hubungi Kami" },
+  const individualServices = [
+    {
+      name: "Pengurusan NPWP Badan Usaha",
+      desc: "Pembuatan NPWP elektronik resmi untuk PT, CV, Yayasan, dan Koperasi.",
+      price: "Rp 499.000",
+      badge: "Wajib Pajak Baru",
+      icon: Building2,
+      circleBg: "#B91C1C",
+      cardTint: "#FEF2F2",
+    },
+    {
+      name: "Pengurusan NPWP Orang Pribadi",
+      desc: "Pendaftaran NPWP pribadi untuk karyawan, komisaris, dan pemilik bisnis.",
+      price: "Rp 349.000",
+      badge: "Individu & Direksi",
+      icon: FileText,
+      circleBg: "#059669",
+      cardTint: "#ECFDF5",
+    },
+    {
+      name: "Pendaftaran & Pengukuhan PKP",
+      desc: "Pengukuhan Pengusaha Kena Pajak, aktivasi e-Faktur, dan sertifikat elektronik.",
+      price: "Rp 1.499.000 - Rp 2.249.000",
+      badge: "Faktur Pajak & SK PKP",
+      icon: ShieldCheck,
+      circleBg: "#2563EB",
+      cardTint: "#EFF6FF",
+    },
+    {
+      name: "Jasa Pengurusan EFIN Badan",
+      desc: "Aktivasi nomor identitas digital resmi DJP untuk lapor pajak online.",
+      price: "Rp 250.000",
+      badge: "DJP Online Cepat",
+      icon: Zap,
+      circleBg: "#D97706",
+      cardTint: "#FFFBEB",
+    },
+    {
+      name: "Laporan Keuangan dari KAP",
+      desc: "Audit laporan keuangan independen oleh Kantor Akuntan Publik terdaftar.",
+      price: "Hubungi Kami",
+      badge: "Audit Resmi KAP",
+      icon: Award,
+      circleBg: "#7C3AED",
+      cardTint: "#F5F3FF",
+    },
+    {
+      name: "Laporan Keuangan Kompilasi",
+      desc: "Penyusunan pembukuan neraca dan laba rugi bulanan maupun tahunan siap saji.",
+      price: "Hubungi Kami",
+      badge: "Kompilasi Standar PSAK",
+      icon: FileCheck,
+      circleBg: "#0891B2",
+      cardTint: "#ECFEFF",
+    },
+    {
+      name: "Tax Opinion Investor Asing",
+      desc: "Kajian kepatuhan pajak komprehensif bagi perusahaan PMA dan penanaman modal.",
+      price: "Hubungi Kami",
+      badge: "PMA & Lintas Negara",
+      icon: Globe,
+      circleBg: "#1E3A5F",
+      cardTint: "#F0F4FF",
+    },
+    {
+      name: "Transfer Pricing Documentation",
+      desc: "Penyusunan Master File dan Local File sesuai regulasi transfer pricing DJP.",
+      price: "Hubungi Kami",
+      badge: "Regulasi TP DJP",
+      icon: Scale,
+      circleBg: "#DC2626",
+      cardTint: "#FEF2F2",
+    },
+  ];
+
+  const litigationServices = [
+    {
+      title: "Keberatan ke Kanwil DJP",
+      desc: "Pendampingan formal penolakan Surat Ketetapan Pajak (SKP) atau SP2DK dengan argumentasi yuridis kuat.",
+      tag: "Tahap Kanwil",
+    },
+    {
+      title: "Banding & Gugatan Pengadilan Pajak",
+      desc: "Penyusunan surat banding resmi dan pendampingan sidang oleh kuasa hukum pajak berlisensi.",
+      tag: "Pengadilan Pajak",
+    },
+    {
+      title: "Peninjauan Kembali (PK) Mahkamah Agung",
+      desc: "Upaya hukum luar biasa ke Mahkamah Agung atas putusan Pengadilan Pajak yang berkekuatan hukum tetap.",
+      tag: "Tingkat Kasasi / PK",
+    },
   ];
 
   const faqItems = [
@@ -113,7 +199,7 @@ export default function LayananSptPajakGadsPage() {
   return (
     <div className="bg-white text-gray-900 font-sans selection:bg-red-100 selection:text-[#990202]">
       {/* ── BREADCRUMB ── */}
-      <div className="bg-gray-50 border-b border-gray-100 py-3">
+      <div className="bg-gray-50 border-b border-gray-150 py-3">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8 text-xs sm:text-sm text-gray-500 flex items-center gap-2">
           <Link href="/" className="hover:text-[#990202] transition-colors">
             Beranda
@@ -127,35 +213,38 @@ export default function LayananSptPajakGadsPage() {
         </div>
       </div>
 
-      {/* ── HERO SECTION (Matching Home .id visual language) ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] border-b border-[#FAF0E6]/60 pt-10 pb-16 sm:py-16 lg:py-20">
-        <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Left Content */}
+      {/* ── HERO SECTION (Identik dengan arsitektur Hero.tsx di home .id) ── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] border-b border-[#FAF0E6]/80 min-h-[580px] lg:min-h-[640px] flex items-center">
+        <div className="w-full max-w-[1240px] mx-auto px-5 sm:px-8 py-10 sm:py-16 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            
+            {/* Left Content (Split Hero ala home .id) */}
             <div className="lg:col-span-7 flex flex-col justify-center">
+              
               {/* Badge Tag */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-red-100 bg-white text-[#990202] text-xs sm:text-sm font-bold tracking-wide w-fit mb-4 sm:mb-6 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#990202] animate-pulse" />
-                <span>Pajak Perusahaan &middot; SPT Tahunan</span>
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-red-100 bg-white text-[#D62828] text-xs sm:text-sm font-bold tracking-wide w-fit mb-4 sm:mb-6 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#D62828] animate-pulse" />
+                <span>LAYANAN PERPAJAKAN &middot; SPT TAHUNAN</span>
               </div>
 
-              {/* Title */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 tracking-tight leading-[1.15] mb-5">
-                Jasa Laporan SPT Pajak Tahunan{" "}
-                <span className="text-[#990202]">Badan Usaha & Pribadi</span>
+              {/* Headline (Display stack ala home .id: 3 baris terarah) */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-950 tracking-tighter leading-[1.08] mb-5">
+                <span className="block">LAPOR SPT TAHUNAN</span>
+                <span className="block">TEPAT WAKTU &</span>
+                <span className="block text-[#990202]">SESUAI REGULASI.</span>
               </h1>
 
-              {/* Lead Paragraph */}
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-8 max-w-[620px]">
-                EasyTax bersama EasyLegal membantu penyusunan laporan keuangan, perhitungan, dan pelaporan SPT tepat waktu sesuai ketentuan resmi DJP. Mulai <strong>Rp499.000</strong>, proses 100% online ke seluruh Indonesia.
+              {/* Subtext: Ringkas, tajam, maksimal 20 kata */}
+              <p className="text-base sm:text-lg text-gray-600 font-medium leading-relaxed mb-8 max-w-[560px]">
+                EasyTax bersama EasyLegal menyusun neraca laba rugi, draft SPT, hingga terbit BPE resmi DJP. Mulai <strong>Rp499.000</strong>.
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-3.5 mb-10">
+              <div className="flex flex-wrap items-center gap-3.5 mb-8">
                 <a
                   href="https://wa.me/628175706273?text=Halo%20EasyTax%2C%20saya%20ingin%20konsultasi%20mengenai%20layanan%20Lapor%20SPT%20Tahunan."
                   data-cta="hero-consult"
-                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-[#990202] hover:bg-[#7A0101] shadow-lg shadow-red-950/15 active:scale-[0.98] transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-[#990202] hover:bg-[#7A0101] shadow-lg shadow-red-950/20 active:scale-[0.98] transition-all"
                 >
                   <MessageCircle className="w-5 h-5 text-white" />
                   <span>Konsultasi Gratis</span>
@@ -171,75 +260,76 @@ export default function LayananSptPajakGadsPage() {
                 </a>
               </div>
 
-              {/* Trust Stats Bar */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200/60 max-w-[540px]">
-                <div className="border-l-4 border-[#990202] pl-3.5">
-                  <div className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">Rp499rb</div>
-                  <div className="text-xs text-gray-500 font-medium leading-snug">Biaya mulai dari</div>
+              {/* Trust Badges Bar (Checklist hijau ala home .id) */}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 border-t border-[#FAF0E6] text-xs sm:text-sm font-semibold text-gray-700">
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-4 h-4 text-[#D62828] stroke-[3]" />
+                  <span>Biaya Mulai Rp499rb</span>
                 </div>
-                <div className="border-l-4 border-[#990202] pl-3.5">
-                  <div className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">1x</div>
-                  <div className="text-xs text-gray-500 font-medium leading-snug">Revisi gratis setahun</div>
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-4 h-4 text-[#D62828] stroke-[3]" />
+                  <span>1x Revisi Gratis Setahun</span>
                 </div>
-                <div className="border-l-4 border-[#990202] pl-3.5">
-                  <div className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">Online</div>
-                  <div className="text-xs text-gray-500 font-medium leading-snug">Seluruh Indonesia</div>
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-4 h-4 text-[#D62828] stroke-[3]" />
+                  <span>100% Online Seluruh Indonesia</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Visual (Recycled Brand Asset + Document Illustration) */}
+            {/* Right Visual (Aset daur ulang resmi + Glassmorphism card stack) */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-200/80 bg-white">
-                <div className="relative aspect-[4/3] w-full bg-slate-900 overflow-hidden">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-black/[0.04] bg-white group">
+                <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full bg-slate-900 overflow-hidden">
                   <Image
                     src="/images/hero/hero-badan-usaha-v2.jpg"
                     alt="Konsultan Pajak EasyTax EasyLegal"
                     fill
-                    sizes="(max-width: 768px) 100vw, 500px"
-                    className="object-cover opacity-85"
+                    sizes="(max-width: 768px) 100vw, 550px"
+                    className="object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
                   
-                  {/* Floating Document Card */}
-                  <div className="absolute inset-x-6 bottom-6 bg-white/95 backdrop-blur-md rounded-2xl p-5 shadow-xl border border-white/20">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[11px] font-bold tracking-wider uppercase text-[#990202] bg-red-50 px-2.5 py-1 rounded-md">
+                  {/* Floating Document Banner Inside Card */}
+                  <div className="absolute inset-x-5 bottom-5 bg-white/95 backdrop-blur-md rounded-2xl p-5 shadow-xl border border-white/20">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[11px] font-bold tracking-wider uppercase text-[#990202] bg-red-50 px-2.5 py-0.5 rounded-md">
                         SPT TAHUNAN RESMI
                       </span>
                       <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
                         <Check className="w-3 h-3 stroke-[3]" /> Terverifikasi DJP
                       </span>
                     </div>
-                    <div className="font-bold text-gray-900 text-sm sm:text-base leading-snug mb-1">
+                    <div className="font-extrabold text-gray-900 text-sm sm:text-base leading-snug mb-1">
                       PPh Badan Usaha & Orang Pribadi
                     </div>
                     <p className="text-xs text-gray-500 leading-normal">
-                      Penyusunan laporan keuangan terintegrasi, kode billing, dan bukti penerimaan elektronik.
+                      Penyusunan neraca laba rugi, kode billing, dan penerbitan BPE resmi.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Floating Pill Badges */}
-              <div className="hidden sm:flex absolute -bottom-5 -left-4 bg-white rounded-xl shadow-lg border border-gray-150 px-4 py-2.5 items-center gap-2.5 z-20">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-                  <ShieldCheck className="w-5 h-5" />
+              {/* Floating Pill: Rating Google */}
+              <div className="hidden sm:flex absolute -top-4 -right-3 bg-white rounded-2xl shadow-xl border border-gray-150 px-4 py-2.5 items-center gap-3 z-20">
+                <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center font-black">
+                  <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-gray-900">Garansi Kepatuhan</div>
-                  <div className="text-[11px] text-gray-500">Sesuai Regulasi Pajak</div>
+                  <div className="text-xs font-black text-gray-950">4.9 / 5.0 Rating</div>
+                  <div className="text-[11px] text-gray-500 font-medium">700+ Ulasan Klien Google</div>
                 </div>
               </div>
 
-              <div className="hidden sm:flex absolute -top-4 -right-4 bg-white rounded-xl shadow-lg border border-gray-150 px-4 py-2.5 items-center gap-2.5 z-20">
-                <div className="w-8 h-8 rounded-lg bg-red-50 text-[#990202] flex items-center justify-center font-bold">
-                  <Clock className="w-5 h-5" />
+              {/* Floating Pill: Garansi Kepatuhan */}
+              <div className="hidden sm:flex absolute -bottom-5 -left-3 bg-white rounded-2xl shadow-xl border border-gray-150 px-4 py-2.5 items-center gap-3 z-20">
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black">
+                  <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-gray-900">Pengerjaan Cepat</div>
-                  <div className="text-[11px] text-gray-500">Bebas Denda Keterlambatan</div>
+                  <div className="text-xs font-black text-gray-950">Garansi Kepatuhan</div>
+                  <div className="text-[11px] text-gray-500 font-medium">Bebas Denda Administrasi</div>
                 </div>
               </div>
             </div>
@@ -254,11 +344,11 @@ export default function LayananSptPajakGadsPage() {
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-100 bg-[#FEF2F2] text-[#990202] text-xs font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-red-100 bg-[#FEF2F2] text-[#990202] text-xs font-bold uppercase tracking-wider mb-3">
               Kepatuhan Perpajakan
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-950 tracking-tight mb-4">
-              Urus Kewajiban Pajak Tanpa Keluar Rumah
+              Urus Kewajiban Pajak Tanpa Antre
             </h2>
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
               Dengan layanan EasyTax bersama EasyLegal bagian dari EasyCorp, Anda dapat menuntaskan seluruh kewajiban pajak tahunan tanpa repot mengantre di kantor pajak.
@@ -314,7 +404,7 @@ export default function LayananSptPajakGadsPage() {
         </div>
       </section>
 
-      {/* ── BANNER NASIONAL (Recycled Hero Asset) ── */}
+      {/* ── BANNER NASIONAL (Recycled Asset) ── */}
       <section className="py-12 bg-gray-50 border-y border-gray-100">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0F1B3D] via-[#17205F] to-[#1E293B] text-white p-8 sm:p-12 shadow-xl">
@@ -353,7 +443,7 @@ export default function LayananSptPajakGadsPage() {
       <section id="biaya-spt" className="py-16 sm:py-24 bg-white scroll-mt-20">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-100 bg-[#FEF2F2] text-[#990202] text-xs font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-red-100 bg-[#FEF2F2] text-[#990202] text-xs font-bold uppercase tracking-wider mb-3">
               Biaya Layanan Transparan
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-950 tracking-tight mb-4">
@@ -445,45 +535,126 @@ export default function LayananSptPajakGadsPage() {
         </div>
       </section>
 
-      {/* ── LAYANAN PERPAJAKAN LAINNYA ── */}
-      <section className="py-16 sm:py-20 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
-          <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-100 bg-[#FEF2F2] text-[#990202] text-xs font-bold uppercase tracking-wider mb-3">
-              Katalog Lengkap
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-950 tracking-tight mb-4">
-              Layanan Perpajakan Lainnya
+      {/* ── KATALOG LENGKAP LAYANAN PERPAJAKAN (Redesign ala LayananKami.tsx di home .id) ── */}
+      <section className="py-16 sm:py-24 bg-[#FAF9F6] relative border-t border-gray-150" id="katalog-layanan">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 relative z-10">
+          
+          {/* Header Section */}
+          <div className="max-w-3xl mb-8 sm:mb-12">
+            <span className="text-xs sm:text-sm font-bold text-[#990202] uppercase tracking-[0.15em] block mb-2">
+              SOLUSI PERPAJAKAN LENGKAP
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-950 tracking-tight leading-[1.2]">
+              Katalog Layanan Perpajakan EasyTax untuk Bisnis Anda.
             </h2>
-            <p className="text-sm sm:text-base text-gray-600">
-              Selain laporan SPT Tahunan, EasyTax mendampingi seluruh kebutuhan izin pajak dan kepatuhan akuntansi bisnis Anda.
+            <p className="text-sm sm:text-base text-gray-500 mt-2 max-w-2xl leading-relaxed">
+              Solusi komprehensif mulai dari administrasi pajak dasar, audit keuangan, hingga pendampingan sengketa hukum pajak.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {otherServices.map((svc, idx) => (
-              <a
-                key={idx}
-                href={`https://wa.me/628175706273?text=${encodeURIComponent(`Halo EasyTax, saya ingin konsultasi layanan ${svc.title}.`)}`}
-                data-cta={`svc-${idx}`}
-                className="group bg-white rounded-2xl border border-gray-200/90 p-5 shadow-sm hover:shadow-md hover:border-red-200 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="inline-block text-[11px] font-bold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md mb-3">
-                    {svc.badge}
-                  </div>
-                  <h3 className="font-bold text-gray-900 text-sm sm:text-base group-hover:text-[#990202] transition-colors leading-snug mb-3">
-                    {svc.title}
-                  </h3>
+          {/* Two-Column Layout ala Home .id */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 sm:gap-8 items-start">
+            
+            {/* LEFT: Grid 8 Layanan Perpajakan Utama */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {individualServices.map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={idx}
+                    href={`https://wa.me/628175706273?text=${encodeURIComponent(`Halo EasyTax, saya ingin konsultasi mengenai layanan ${item.name}.`)}`}
+                    data-cta={`katalog-${idx}`}
+                    className="group rounded-2xl p-5 hover:shadow-md shadow-sm border border-black/[0.04] transition-all duration-200 flex flex-col justify-between min-h-[170px] text-left hover:border-red-200 active:scale-[0.99]"
+                    style={{
+                      background: `linear-gradient(to bottom right, #ffffff 40%, ${item.cardTint} 130%)`,
+                    }}
+                  >
+                    <div>
+                      {/* Top Bar with Icon & Badge */}
+                      <div className="flex items-center justify-between mb-3.5">
+                        <div
+                          className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-white shadow-sm"
+                          style={{ backgroundColor: item.circleBg }}
+                        >
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <span className="text-[11px] font-bold text-gray-500 bg-white/90 border border-gray-100 px-2.5 py-0.5 rounded-full">
+                          {item.badge}
+                        </span>
+                      </div>
+
+                      {/* Title & Desc */}
+                      <h3 className="text-base font-bold text-gray-900 group-hover:text-[#990202] transition-colors leading-snug mb-1.5">
+                        {item.name}
+                      </h3>
+                      <p className="text-xs text-gray-500 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+
+                    {/* Bottom Price Tag */}
+                    <div className="pt-3 mt-3 border-t border-gray-100/80 flex items-center justify-between">
+                      <span className="text-xs font-black text-[#17205F]">{item.price}</span>
+                      <span className="text-xs font-bold text-[#990202] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        Konsultasi <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* RIGHT: Featured Navy Card — Litigasi & Sengketa Pajak */}
+            <div className="bg-[#17205F] rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+              
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-5">
+                  <Shield className="w-3.5 h-3.5 text-amber-300" />
+                  <span>Pendampingan Khusus</span>
                 </div>
-                <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#17205F]">{svc.price}</span>
-                  <span className="text-xs font-semibold text-[#990202] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                    Tanya CS <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
+
+                <h3 className="text-xl sm:text-2xl font-black tracking-tight mb-2 text-white">
+                  Litigasi & Sengketa Pajak
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-6">
+                  Didampingi langsung oleh Kuasa Hukum Pengadilan Pajak dan Konsultan Pajak Berizin resmi dari Kemenkeu RI.
+                </p>
+
+                {/* List of litigation services */}
+                <div className="space-y-3.5 mb-8">
+                  {litigationServices.map((lit, i) => (
+                    <div key={i} className="p-3.5 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15 transition-colors">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-black text-amber-300 uppercase tracking-wider">
+                          {lit.tag}
+                        </span>
+                        <ArrowRight className="w-3 h-3 text-gray-400" />
+                      </div>
+                      <div className="font-bold text-sm text-white leading-snug mb-1">
+                        {lit.title}
+                      </div>
+                      <p className="text-[11px] text-gray-300 leading-relaxed">
+                        {lit.desc}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              </a>
-            ))}
+              </div>
+
+              {/* Bottom Card CTA */}
+              <div className="pt-4 border-t border-white/10">
+                <a
+                  href="https://wa.me/628175706273?text=Halo%20EasyTax%2C%20saya%20butuh%20pendampingan%20litigasi%20atau%20sengketa%20pajak."
+                  data-cta="litigasi-consult"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-bold text-sm text-[#17205F] bg-amber-400 hover:bg-amber-300 active:scale-[0.98] transition-all shadow-md"
+                >
+                  <MessageCircle className="w-4 h-4 text-[#17205F]" />
+                  <span>Konsultasi Litigasi Pajak</span>
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
