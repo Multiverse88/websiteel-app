@@ -15,12 +15,27 @@ interface Promo {
   variants?: PromoVariant[];
 }
 
+// Mirrors the FALLBACK_PROMOS baked into apps/web-id & apps/web's
+// BottomPromoSection.tsx — shown here the first time this page loads (the
+// PROMOS setting hasn't been saved yet) so the admin sees what's actually
+// live today instead of an empty list, ready to edit/upload real images
+// and hit Save (which writes PROMOS and takes over from the hardcoded
+// component fallback from then on).
+const DEFAULT_PROMOS: Promo[] = [
+  { id: 1, title: 'Super Hot Deal - Promo Terbatas', image: '/promo/super-hot-deal.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
+  { id: 2, title: 'Hot Deal - Jangan Sampai Terlewat', image: '/promo/hot-deal.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
+  { id: 3, title: 'Menangkan iPhone & Hadiah Rp12.000.000', image: '/promo/iphone.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
+  { id: 4, title: 'Promo Semarak Kemerdekaan', image: '/promo/promo-kemerdekaan.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
+  { id: 5, title: 'Melayani Seluruh Indonesia', image: '/promo/melayani-seluruh-indonesia.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
+]
+
 export default function Promos() {
   const [promos, setPromos] = useState<Promo[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [uploadingImageId, setUploadingImageId] = useState<number | string | null>(null)
 
   useEffect(() => {
     fetchPromos()
@@ -33,12 +48,27 @@ export default function Promos() {
       if (json?.data && Array.isArray(json.data)) {
         setPromos(json.data)
       } else {
-        setPromos([])
+        setPromos(DEFAULT_PROMOS)
       }
     } catch (err: any) {
       setError(err.message)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleImageUpload = async (promoId: number | string, file: File) => {
+    setUploadingImageId(promoId)
+    try {
+      const res = await api.uploadMedia(file)
+      if (res?.data?.url) {
+        updatePromo(promoId, 'image', res.data.url)
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Error'
+      alert('Gagal mengunggah gambar: ' + message)
+    } finally {
+      setUploadingImageId(null)
     }
   }
 
@@ -174,15 +204,43 @@ export default function Promos() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 uppercase mb-1">URL Gambar</label>
-                  <input 
-                    type="text" 
-                    value={promo.image}
-                    onChange={(e) => updatePromo(promo.id, 'image', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary focus:border-primary outline-none"
-                    placeholder="/promo/gambar.jpg"
-                  />
-                  <p className="text-[11px] text-gray-400 mt-1">Upload gambar via CMS / gunakan URL</p>
+                  <label className="block text-xs font-semibold text-gray-600 uppercase mb-1">Gambar</label>
+                  <div className="flex gap-2">
+                    <input 
+                      type="text" 
+                      value={promo.image}
+                      onChange={(e) => updatePromo(promo.id, 'image', e.target.value)}
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary focus:border-primary outline-none"
+                      placeholder="/promo/gambar.jpg"
+                    />
+                    <label className="shrink-0 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 cursor-pointer flex items-center gap-1 whitespace-nowrap">
+                      <span className={`material-symbols-outlined text-[16px] ${uploadingImageId === promo.id ? 'animate-spin' : ''}`}>
+                        {uploadingImageId === promo.id ? 'progress_activity' : 'upload'}
+                      </span>
+                      Upload
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        disabled={uploadingImageId === promo.id}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0]
+                          if (file) handleImageUpload(promo.id, file)
+                          e.target.value = ''
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {promo.image && (
+                    <img
+                      src={promo.image}
+                      alt=""
+                      className="mt-2 h-16 w-16 object-cover rounded-md border border-gray-200"
+                      onError={(e) => { e.currentTarget.style.display = 'none' }}
+                      onLoad={(e) => { e.currentTarget.style.display = 'block' }}
+                    />
+                  )}
+                  <p className="text-[11px] text-gray-400 mt-1">Upload otomatis dikompres &amp; disimpan ke CDN, atau isi URL manual</p>
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 uppercase mb-1">Link Selengkapnya (URL tujuan)</label>
