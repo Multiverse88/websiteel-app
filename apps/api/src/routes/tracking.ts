@@ -2,6 +2,19 @@ import { Router } from "express";
 import { prisma } from "../lib/prisma";
 
 const router = Router();
+const ALLOWED_HOSTS = ['easylegal.id', 'easylegal.my.id', 'easylegal.biz.id', 'easylegal.co.id', 'localhost'];
+
+function isSafeRedirectUrl(targetUrl: string): boolean {
+  try {
+    const parsed = new URL(targetUrl);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+      return false;
+    }
+    return ALLOWED_HOSTS.some(h => parsed.hostname === h || parsed.hostname.endsWith('.' + h));
+  } catch {
+    return false;
+  }
+}
 
 // GET /api/v1/tracking/open/:id
 router.get("/open/:id", async (req, res) => {
@@ -48,6 +61,10 @@ router.get("/click/:id", async (req, res) => {
 
   if (!targetUrl) {
     return res.status(400).send("Missing url parameter");
+  }
+
+  if (!isSafeRedirectUrl(targetUrl)) {
+    return res.status(400).send("Invalid or untrusted redirect URL");
   }
 
   try {

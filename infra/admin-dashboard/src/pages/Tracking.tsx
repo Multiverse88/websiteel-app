@@ -65,9 +65,9 @@ export default function Tracking() {
       setIsCompleted(project.isCompleted);
     } else {
       setFormId(null);
-      // Generate a random tracking code
-      const rand = Math.floor(1000 + Math.random() * 9000);
-      setTrackingCode(`EL-${new Date().getFullYear()}-${rand}`);
+      // Generate a cryptographically unguessable tracking code
+      const randStr = crypto.randomUUID().slice(0, 8).toUpperCase();
+      setTrackingCode(`EL-${new Date().getFullYear()}-${randStr}`);
       setClientName('');
       setServiceType(TRACKING_SERVICES[0]);
       setTimelineData(getTrackingTemplate(TRACKING_SERVICES[0]));

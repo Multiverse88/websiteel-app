@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { prisma } from '../lib/prisma';
@@ -54,8 +55,9 @@ router.post('/plugin-token', requireAuth, (req: AuthedRequest, res) => {
   if (!req.userId) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
-  // Generate a non-expiring token for the plugin
-  const token = jwt.sign({ userId: req.userId, isPlugin: true }, JWT_SECRET as string);
+  // Generate a bounded token for the plugin with a unique identifier and expiration
+  const jti = crypto.randomUUID();
+  const token = jwt.sign({ userId: req.userId, isPlugin: true, jti }, JWT_SECRET as string, { expiresIn: '30d' });
   res.json({ message: 'Plugin token generated successfully', token });
 });
 

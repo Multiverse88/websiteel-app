@@ -192,29 +192,41 @@ router.post("/:id/crawls", requireAuth, async (req: AuthedRequest, res: Response
       return res.status(400).json({ error: "Kompetitor sedang dinonaktifkan" });
     }
 
-    // Ensure no other crawl is currently pending or running for this site
-    const activeCrawl = await prisma.competitorCrawl.findFirst({
-      where: {
-        competitorId: siteId,
-        status: { in: ["PENDING", "RUNNING"] },
-      },
+    // Ensure no other crawl is currently pending or running for this site (atomic transaction)
+    const result = await prisma.$transaction(async (tx) => {
+      const activeCrawl = await tx.competitorCrawl.findFirst({
+        where: {
+          competitorId: siteId,
+          status: { in: ["PENDING", "RUNNING"] },
+        },
+      });
+
+      if (activeCrawl) {
+        return { activeCrawl };
+      }
+
+      const newCrawl = await tx.competitorCrawl.create({
+        data: {
+          competitorId: siteId,
+          status: "PENDING",
+          requestedByUserId: req.userId || null,
+        },
+      });
+
+      return { newCrawl };
+    }, {
+      isolationLevel: 'Serializable',
     });
 
-    if (activeCrawl) {
+    if (result.activeCrawl) {
       return res.status(409).json({
         error: "Crawl sedang berjalan untuk kompetitor ini",
-        crawlId: activeCrawl.id,
-        status: activeCrawl.status,
+        crawlId: result.activeCrawl.id,
+        status: result.activeCrawl.status,
       });
     }
 
-    const newCrawl = await prisma.competitorCrawl.create({
-      data: {
-        competitorId: siteId,
-        status: "PENDING",
-        requestedByUserId: req.userId || null,
-      },
-    });
+    const newCrawl = result.newCrawl;
 
     res.status(202).json({
       message: "Crawl telah dijadwalkan ke antrean worker",

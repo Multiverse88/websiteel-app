@@ -2,6 +2,19 @@ import { NextResponse } from "next/server";
 
 import { headers } from "next/headers";
 
+const ALLOWED_HOSTS = ['easylegal.id', 'easylegal.my.id', 'easylegal.biz.id', 'easylegal.co.id', 'localhost'];
+
+function isSafeRedirectUrl(targetUrl: string): boolean {
+  try {
+    const parsed = new URL(targetUrl);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+      return false;
+    }
+    return ALLOWED_HOSTS.some(h => parsed.hostname === h || parsed.hostname.endsWith('.' + h));
+  } catch {
+    return false;
+  }
+}
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -12,6 +25,10 @@ export async function GET(
 
   if (!targetUrl) {
     return new NextResponse("Missing url parameter", { status: 400 });
+  }
+
+  if (!isSafeRedirectUrl(targetUrl)) {
+    return new NextResponse("Invalid or untrusted redirect URL", { status: 400 });
   }
 
   try {

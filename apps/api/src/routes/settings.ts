@@ -4,8 +4,17 @@ import { requireAuth } from '../middleware/auth';
 
 const router = Router();
 
-// Get a setting by key
-router.get('/:key', async (req: Request, res: Response) => {
+// Whitelisted keys accessible without authentication
+const PUBLIC_SETTINGS_KEYS = new Set(['article_header', 'article_footer', 'PROMOS']);
+
+// Get a setting by key (public keys are open, all other keys require admin authentication)
+router.get('/:key', (req: Request, res: Response, next) => {
+  const { key } = req.params as { key: string };
+  if (PUBLIC_SETTINGS_KEYS.has(key)) {
+    return next();
+  }
+  return requireAuth(req, res, next);
+}, async (req: Request, res: Response) => {
   try {
     const { key } = req.params as { key: string };
     const setting = await prisma.systemSetting.findUnique({
