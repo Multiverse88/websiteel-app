@@ -18,7 +18,7 @@ export function buildCampaignFonnteMessage(nama: string, layanan: string) {
   return `Halo ${nama}!\n\nTerima kasih sudah mengisi formulir dari meta ads. Perkenalkan, saya Viani yang akan segera membantu proses konsultasi layanan ${layanan} 😊🙏\n\nJika ada hal yang ingin ditanyakan terlebih dahulu, silakan balas pesan ini, ya!`;
 }
 
-const DEFAULT_SHEET_WEBHOOK = "https://hook.us2.make.com/dbgj6ov1tuhlj322ar2jtye1gf02mxlc";
+const DEFAULT_SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbwJyCl6JdBbWcYcYcQS8K2Y2u9TXIjiIC3AbQRaiGG5Pt4N8b7sfIWusrGyP4qWK4Xu/exec";
 const DEFAULT_FONNTE_TOKEN = "QD8UjSFjKqqsRm5Sbx69";
 
 const CAMPAIGNS: Record<string, CampaignConfig> = {
