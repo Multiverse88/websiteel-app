@@ -129,7 +129,7 @@ const megaMenuData = {
         brandSuffix: "Tax",
         title: "Layanan Perpajakan",
         description: "Laporan SPT Tahunan Badan, Konsultasi Pajak, Kode Billing Pajak",
-        href: "#",
+        href: "/layanan/spt-pajak-gads",
       },
       {
         brandPrefix: "Easy",
@@ -162,6 +162,7 @@ export default function Navbar() {
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isEasyTaxPage = pathname === "/layanan/spt-pajak-gads";
   // These are now <details> elements (native open/close, JS-independent) —
   // .open is a real DOM property, not a React-state mirror.
   const dropdownRef = React.useRef<HTMLDetailsElement>(null);
@@ -258,19 +259,46 @@ export default function Navbar() {
           <Link
             href="/home-gads"
             onClick={hardNavigate("/home-gads")}
-                        className="flex items-center group flex-shrink-0"
+            className="flex items-center group flex-shrink-0"
           >
-            <div className="navbar-logo">
-              <Image 
-                src="/Logo EL.png" 
-                alt="EasyLegal Logo" 
-                width={150}
-                height={52}
-                className="w-auto h-[52px] object-contain"
-                style={{ width: "auto", height: "52px" }}
-                priority
-              />
-            </div>
+            {isEasyTaxPage ? (
+              <div className="flex items-center gap-1.5">
+                <Image
+                  src="/logo-easylegal-cobrand.png"
+                  alt="EasyLegal"
+                  width={52}
+                  height={44}
+                  className="h-6 w-auto object-contain sm:h-7"
+                  priority
+                />
+                <span
+                  aria-hidden="true"
+                  className="text-lg font-semibold leading-none text-slate-300"
+                >
+                  ×
+                </span>
+                <Image
+                  src="/logo-easytax.png"
+                  alt="EasyTax"
+                  width={52}
+                  height={50}
+                  className="h-6 w-auto object-contain sm:h-7"
+                  priority
+                />
+              </div>
+            ) : (
+              <div className="navbar-logo">
+                <Image
+                  src="/Logo EL.png"
+                  alt="EasyLegal Logo"
+                  width={150}
+                  height={52}
+                  className="h-[52px] w-auto object-contain"
+                  style={{ width: "auto", height: "52px" }}
+                  priority
+                />
+              </div>
+            )}
           </Link>
 
           {/* Desktop Navigation - Center */}

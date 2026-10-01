@@ -198,24 +198,24 @@ export default function LayananSptPajakGadsPage() {
 
   return (
     <div className="bg-white text-gray-900 font-sans selection:bg-red-100 selection:text-[#990202]">
-      {/* ── BREADCRUMB ── */}
-      <div className="bg-gray-50 border-b border-gray-150 py-3">
-        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 text-xs sm:text-sm text-gray-500 flex items-center gap-2">
-          <Link href="/" className="hover:text-[#990202] transition-colors">
-            Beranda
-          </Link>
-          <span className="text-gray-300">/</span>
-          <Link href="/layanan" className="hover:text-[#990202] transition-colors">
-            Layanan
-          </Link>
-          <span className="text-gray-300">/</span>
-          <span className="font-semibold text-gray-800">Lapor SPT Tahunan</span>
-        </div>
-      </div>
 
       {/* ── HERO SECTION (Identik dengan arsitektur Hero.tsx di home .id) ── */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] border-b border-[#FAF0E6]/80 min-h-[580px] lg:min-h-[640px] flex items-center">
         <div className="w-full max-w-[1240px] mx-auto px-5 sm:px-8 py-10 sm:py-16 lg:py-20">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-8 flex items-center gap-2 text-xs text-gray-500 sm:mb-10 sm:text-sm"
+          >
+            <Link href="/" className="transition-colors hover:text-[#990202]">
+              Beranda
+            </Link>
+            <span className="text-gray-300">/</span>
+            <Link href="/layanan" className="transition-colors hover:text-[#990202]">
+              Layanan
+            </Link>
+            <span className="text-gray-300">/</span>
+            <span className="font-semibold text-gray-800">Lapor SPT Tahunan</span>
+          </nav>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
             {/* Left Content (Split Hero ala home .id) */}
@@ -278,58 +278,60 @@ export default function LayananSptPajakGadsPage() {
             </div>
 
             {/* Right Visual (Aset daur ulang resmi + Glassmorphism card stack) */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-black/[0.04] bg-white group">
-                <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full bg-slate-900 overflow-hidden">
-                  <Image
-                    src="/images/hero/hero-badan-usaha-v2.jpg"
-                    alt="Konsultan Pajak EasyTax EasyLegal"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 550px"
-                    className="object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
-                  
-                  {/* Floating Document Banner Inside Card */}
-                  <div className="absolute inset-x-5 bottom-5 bg-white/95 backdrop-blur-md rounded-2xl p-5 shadow-xl border border-white/20">
-                    <div className="flex items-center justify-between mb-2.5">
-                      <span className="text-[11px] font-bold tracking-wider uppercase text-[#990202] bg-red-50 px-2.5 py-0.5 rounded-md">
-                        SPT TAHUNAN RESMI
-                      </span>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                        <Check className="w-3 h-3 stroke-[3]" /> Terverifikasi DJP
-                      </span>
-                    </div>
-                    <div className="font-extrabold text-gray-900 text-sm sm:text-base leading-snug mb-1">
-                      PPh Badan Usaha & Orang Pribadi
-                    </div>
-                    <p className="text-xs text-gray-500 leading-normal">
-                      Penyusunan neraca laba rugi, kode billing, dan penerbitan BPE resmi.
-                    </p>
+            <div className="lg:col-span-5">
+              {/* Document card above the photo */}
+              <div className="mb-5 rounded-2xl border border-gray-100 bg-white p-5 shadow-xl">
+                <div className="mb-2.5 flex items-center justify-between">
+                  <span className="rounded-md bg-red-50 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#990202]">
+                    SPT TAHUNAN RESMI
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
+                    <Check className="h-3 w-3 stroke-[3]" /> Terverifikasi DJP
+                  </span>
+                </div>
+                <div className="mb-1 text-sm font-extrabold leading-snug text-gray-900 sm:text-base">
+                  PPh Badan Usaha & Orang Pribadi
+                </div>
+                <p className="text-xs leading-normal text-gray-500">
+                  Penyusunan neraca laba rugi, kode billing, dan penerbitan BPE resmi.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="group relative overflow-hidden rounded-3xl border border-black/[0.04] bg-white shadow-2xl">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-900 sm:aspect-[16/11]">
+                    <Image
+                      src="/images/hero/hero-badan-usaha-v2.jpg"
+                      alt="Konsultan Pajak EasyTax EasyLegal"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 550px"
+                      className="object-cover opacity-85 transition-transform duration-700 group-hover:scale-105"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
                   </div>
                 </div>
-              </div>
 
-              {/* Floating Pill: Rating Google */}
-              <div className="hidden sm:flex absolute -top-4 -right-3 bg-white rounded-2xl shadow-xl border border-gray-150 px-4 py-2.5 items-center gap-3 z-20">
-                <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center font-black">
-                  <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
+                {/* Floating Pill: Rating Google */}
+                <div className="absolute -right-3 -top-4 z-20 hidden items-center gap-3 rounded-2xl border border-gray-150 bg-white px-4 py-2.5 shadow-xl sm:flex">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 font-black text-amber-500">
+                    <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black text-gray-950">4.9 / 5.0 Rating</div>
+                    <div className="text-[11px] font-medium text-gray-500">700+ Ulasan Klien Google</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-xs font-black text-gray-950">4.9 / 5.0 Rating</div>
-                  <div className="text-[11px] text-gray-500 font-medium">700+ Ulasan Klien Google</div>
-                </div>
-              </div>
 
-              {/* Floating Pill: Garansi Kepatuhan */}
-              <div className="hidden sm:flex absolute -bottom-5 -left-3 bg-white rounded-2xl shadow-xl border border-gray-150 px-4 py-2.5 items-center gap-3 z-20">
-                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs font-black text-gray-950">Garansi Kepatuhan</div>
-                  <div className="text-[11px] text-gray-500 font-medium">Bebas Denda Administrasi</div>
+                {/* Floating Pill: Garansi Kepatuhan */}
+                <div className="absolute -bottom-5 -left-3 z-20 hidden items-center gap-3 rounded-2xl border border-gray-150 bg-white px-4 py-2.5 shadow-xl sm:flex">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 font-black text-emerald-600">
+                    <ShieldCheck className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black text-gray-950">Garansi Kepatuhan</div>
+                    <div className="text-[11px] font-medium text-gray-500">Bebas Denda Administrasi</div>
+                  </div>
                 </div>
               </div>
             </div>
