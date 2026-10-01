@@ -40,7 +40,7 @@ export default function LayananSptPajakGadsPage() {
       w.dataLayer.push({
         event: "wa_click",
         cta_id: a.getAttribute("data-cta"),
-        product: "/layanan-spt-pajak-gads",
+        product: "/layanan/spt-pajak-gads",
         cs: "easytax",
       });
     };

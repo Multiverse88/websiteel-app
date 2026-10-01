@@ -311,6 +311,14 @@ const nextConfig: NextConfig = {
         destination: "/#promo",
         permanent: false,
       },
+      {
+        // Entry point lama /layanan-spt-pajak-gads dipindah ke bawah /layanan/
+        // agar konsisten dengan layanan lainnya. 308 permanent menjaga URL
+        // iklan Google Ads & backlink lama tetap sampai ke halaman baru.
+        source: "/layanan-spt-pajak-gads",
+        destination: "/layanan/spt-pajak-gads",
+        permanent: true,
+      },
 
       // === LP SEO — Redirect dari Excel "New URL" ke App URL ===
       // Excel pakai /layanan/jasa-*, app pakai /layanan/pendirian-badan-usaha/* atau /layanan/merek-haki etc.

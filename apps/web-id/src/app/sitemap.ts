@@ -83,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
     },
     {
-      url: `${BASE_URL}/layanan-spt-pajak-gads`,
+      url: `${BASE_URL}/layanan/spt-pajak-gads`,
       lastModified: generatedAt,
       changeFrequency: "weekly",
       priority: 0.85,

@@ -12,13 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       "Jasa lapor SPT Tahunan Badan Usaha & Pribadi oleh EasyTax, layanan perpajakan grup EasyCorp yang bekerja sama dengan EasyLegal. Biaya mulai Rp499.000, seluruh Indonesia.",
     alternates: {
-      canonical: `${baseUrl}/layanan-spt-pajak-gads`,
+      canonical: `${baseUrl}/layanan/spt-pajak-gads`,
     },
     openGraph: {
       title: "Jasa Laporan SPT Pajak Tahunan Badan Usaha & Pribadi | EasyTax",
       description:
         "Jasa lapor SPT Tahunan Badan Usaha & Pribadi oleh EasyTax, layanan perpajakan grup EasyCorp yang bekerja sama dengan EasyLegal. Biaya mulai Rp499.000, seluruh Indonesia.",
-      url: `${baseUrl}/layanan-spt-pajak-gads`,
+      url: `${baseUrl}/layanan/spt-pajak-gads`,
       type: "website",
     },
     robots: {
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const breadcrumbs = [
   { name: "Beranda", url: "/" },
   { name: "Layanan", url: "/layanan" },
-  { name: "Lapor SPT Tahunan", url: "/layanan-spt-pajak-gads" },
+  { name: "Lapor SPT Tahunan", url: "/layanan/spt-pajak-gads" },
 ];
 
 export default function LayananSptPajakGadsLayout({
