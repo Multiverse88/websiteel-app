@@ -4,12 +4,25 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { getWhatsAppLink, slugify } from "@/lib/config";
+import { getWhatsAppLink } from "@/lib/config";
 
 // whatsappLink used to be a raw wa.me number per promo (hardcoded here, and
 // separately in the admin Promos editor) — bypassed the rotator entirely.
 // Dropped: the CTA now always builds its link from the promo title via
 // getWhatsAppLink() at render time, same as every other WA CTA site-wide.
+interface PromoVariant {
+  text: string;
+  weight?: number;
+}
+
+interface Promo {
+  id: number | string;
+  title: string;
+  image: string;
+  link: string;
+  variants?: PromoVariant[];
+}
+
 const FALLBACK_PROMOS = [
   {
     id: 1,
@@ -41,11 +54,11 @@ const FALLBACK_PROMOS = [
     image: "/promo/melayani-seluruh-indonesia.jpg",
     link: "/layanan/pendirian-badan-usaha",
   },
-];
+] satisfies Promo[];
 
 export default function BottomPromoSection() {
   const pathname = usePathname();
-  const [promos, setPromos] = useState<any[]>([]);
+  const [promos, setPromos] = useState<Promo[]>([]);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -77,6 +90,57 @@ export default function BottomPromoSection() {
   }, []);
 
   const displayPromos = promos.length > 0 ? promos : FALLBACK_PROMOS;
+
+  const [variantOverrides, setVariantOverrides] = useState<Record<string, number>>({});
+
+  // Admin-authored PROMOS setting; low-stakes site content, not treated as
+  // fully untrusted — a malformed `variants` entry is simply skipped below
+  // rather than schema-validated end to end.
+  const getPromoVariants = (promo: Promo): PromoVariant[] =>
+    Array.isArray(promo.variants)
+      ? promo.variants.filter((v) => typeof v?.text === "string" && v.text.trim().length > 0)
+      : [];
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const next: Record<string, number> = {};
+    for (const promo of displayPromos) {
+      const variants = getPromoVariants(promo);
+      if (variants.length <= 1) continue;
+      const storageKey = `promo_variant_${promo.id}`;
+      let idx = Number(window.localStorage.getItem(storageKey));
+      if (!Number.isInteger(idx) || idx < 0 || idx >= variants.length) {
+        const weights = variants.map((v) => (typeof v.weight === "number" && v.weight > 0 ? v.weight : 1));
+        const total = weights.reduce((a, b) => a + b, 0);
+        let r = Math.random() * total;
+        idx = weights.length - 1;
+        for (let i = 0; i < weights.length; i++) {
+          if (r < weights[i]) { idx = i; break; }
+          r -= weights[i];
+        }
+        window.localStorage.setItem(storageKey, String(idx));
+      }
+      next[String(promo.id)] = idx;
+    }
+    setVariantOverrides(next);
+  }, [displayPromos]);
+
+  // Resolves the copy variant to show for a promo: >=2 `variants` entries
+  // rotate per-visitor (sticky via localStorage, see effect above); 0 or 1
+  // variants falls back to the plain `title` field, unchanged behavior.
+  // ctaId is keyed off the stable promo.id (+ variant index) instead of the
+  // displayed text, so rotating copy never fragments WA click attribution —
+  // each variant lands as its own row in WhatsAppClick (ctaId/service),
+  // already surfaced today via admin Leads WhatsApp > "Per Layanan".
+  const getPromoVariant = (promo: Promo): { text: string; ctaId: string } => {
+    const variants = getPromoVariants(promo);
+    if (variants.length === 0) {
+      return { text: promo.title, ctaId: `promo-${promo.id}` };
+    }
+    const idx = variantOverrides[String(promo.id)] ?? 0;
+    const variant = variants[idx] ?? variants[0];
+    return { text: variant.text, ctaId: `promo-${promo.id}-v${idx}` };
+  };
 
   const updatePagination = () => {
     if (!scrollContainerRef.current) return;
@@ -160,24 +224,27 @@ export default function BottomPromoSection() {
               div::-webkit-scrollbar { display: none; }
             `}</style>
             
-            {displayPromos.map((promo: any) => (
+            {displayPromos.map((promo: Promo) => {
+              const { text: promoText, ctaId: promoCtaId } = getPromoVariant(promo);
+              return (
               <div key={promo.id} className="w-[85vw] sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.5rem)] shrink-0 snap-start bg-white rounded-3xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.015)] border border-gray-100 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col group p-3 sm:p-4">
                 <div className="relative aspect-square w-full bg-gray-50 rounded-2xl overflow-hidden mb-5 sm:mb-6">
-                  <Image src={promo.image} alt={promo.title} fill sizes="(max-width: 640px) 85vw, (max-width: 768px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                  <Image src={promo.image} alt={promoText} fill sizes="(max-width: 640px) 85vw, (max-width: 768px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                 </div>
                 <div className="px-2 pb-2 flex flex-col flex-1">
-                  <h3 className="text-[18px] sm:text-[20px] font-black text-gray-900 leading-snug mb-5">{promo.title}</h3>
+                  <h3 className="text-[18px] sm:text-[20px] font-black text-gray-900 leading-snug mb-5">{promoText}</h3>
                   <div className="mt-auto flex gap-3">
                     <a href={promo.link} className="flex-1 bg-[#D62828] hover:bg-[#B91C1C] text-white text-center font-extrabold text-[14px] sm:text-[15px] py-3 rounded-full transition-colors flex items-center justify-center gap-2">
                       Selengkapnya <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
                     </a>
-                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promo.title}".`, `promo-${slugify(promo.title)}`, pathname ?? undefined)} className="w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 bg-[#D62828] hover:bg-[#B91C1C] text-white rounded-full flex items-center justify-center transition-colors shadow-sm">
+                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promoText}".`, promoCtaId, pathname ?? undefined)} className="w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 bg-[#D62828] hover:bg-[#B91C1C] text-white rounded-full flex items-center justify-center transition-colors shadow-sm">
                       <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
                     </a>
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
           
           {/* Dots Indicator */}

@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react'
 import { api } from '../lib/api'
 
+interface PromoVariant {
+  text: string;
+  weight?: number;
+}
+
 interface Promo {
   id: number | string;
   title: string;
   image: string;
   link: string;
   whatsappLink: string;
+  variants?: PromoVariant[];
 }
 
 export default function Promos() {
@@ -72,6 +78,26 @@ export default function Promos() {
 
   const updatePromo = (id: number | string, field: keyof Promo, value: string) => {
     setPromos(promos.map(p => p.id === id ? { ...p, [field]: value } : p))
+  }
+
+  const addVariant = (promoId: number | string) => {
+    setPromos(promos.map(p => p.id === promoId ? { ...p, variants: [...(p.variants || []), { text: '', weight: 1 }] } : p))
+  }
+
+  const removeVariant = (promoId: number | string, variantIndex: number) => {
+    setPromos(promos.map(p => p.id === promoId ? { ...p, variants: (p.variants || []).filter((_, i) => i !== variantIndex) } : p))
+  }
+
+  const updateVariant = (promoId: number | string, variantIndex: number, field: keyof PromoVariant, value: string) => {
+    setPromos(promos.map(p => {
+      if (p.id !== promoId) return p
+      const variants = [...(p.variants || [])]
+      const current = variants[variantIndex] || { text: '' }
+      variants[variantIndex] = field === 'weight'
+        ? { ...current, weight: Number(value) || 1 }
+        : { ...current, text: value }
+      return { ...p, variants }
+    }))
   }
 
   const moveUp = (index: number) => {
@@ -177,6 +203,54 @@ export default function Promos() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary focus:border-primary outline-none"
                     placeholder="https://wa.me/628..."
                   />
+                </div>
+                <div className="col-span-1 md:col-span-2 border-t border-gray-100 pt-4 mt-1">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-xs font-semibold text-gray-600 uppercase">
+                      Varian Copywriting (opsional — rotasi per pengunjung)
+                    </label>
+                    <button
+                      onClick={() => addVariant(promo.id)}
+                      className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">add</span>
+                      Tambah Varian
+                    </button>
+                  </div>
+                  {(!promo.variants || promo.variants.length === 0) ? (
+                    <p className="text-[11px] text-gray-400">
+                      Tanpa varian, "Judul Promo" di atas selalu dipakai. Tambah 2+ varian untuk rotasi copy antar pengunjung — tiap varian otomatis terhitung terpisah di Leads WhatsApp &rarr; Per Layanan.
+                    </p>
+                  ) : (
+                    <div className="space-y-2">
+                      {promo.variants.map((variant, vIdx) => (
+                        <div key={vIdx} className="flex gap-2 items-center">
+                          <input
+                            type="text"
+                            value={variant.text}
+                            onChange={(e) => updateVariant(promo.id, vIdx, 'text', e.target.value)}
+                            className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary focus:border-primary outline-none"
+                            placeholder={`Varian ${vIdx + 1}`}
+                          />
+                          <input
+                            type="number"
+                            min={1}
+                            value={variant.weight ?? 1}
+                            onChange={(e) => updateVariant(promo.id, vIdx, 'weight', e.target.value)}
+                            className="w-20 px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary focus:border-primary outline-none"
+                            title="Bobot rotasi (default 1)"
+                          />
+                          <button
+                            onClick={() => removeVariant(promo.id, vIdx)}
+                            className="text-red-400 hover:text-red-600 p-1"
+                            title="Hapus varian"
+                          >
+                            <span className="material-symbols-outlined text-[18px]">close</span>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
 
