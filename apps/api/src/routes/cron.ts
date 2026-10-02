@@ -2,24 +2,13 @@ import { Router } from "express";
 import { prisma } from "../lib/prisma";
 import nodemailer from "nodemailer";
 import { Prisma } from "@prisma/client";
-import { Client as MinioClient } from "minio";
+import { minioClient } from "../lib/minio";
 import { requireCronSecret } from "../middleware/auth";
 
 const router = Router();
 
-// Configure MinIO Client
-const s3Client = process.env.MINIO_ENDPOINT
-  ? new MinioClient({
-      endPoint: process.env.MINIO_ENDPOINT || "localhost",
-      port: parseInt(process.env.MINIO_PORT || "9000"),
-      useSSL: process.env.MINIO_USE_SSL === "true",
-      accessKey: process.env.MINIO_ACCESS_KEY || "minioadmin",
-      secretKey: process.env.MINIO_SECRET_KEY || "minioadmin",
-    })
-  : null;
-
 async function deleteFromMinio(fileUrl: string) {
-  if (!s3Client) return;
+  if (!process.env.MINIO_ENDPOINT) return;
   try {
     const urlObj = new URL(fileUrl);
     // Path looks like /images/uploads/..., bucket is 'images'
@@ -27,7 +16,7 @@ async function deleteFromMinio(fileUrl: string) {
     if (parts.length < 2) return;
     const bucketName = parts[0];
     const objectName = parts.slice(1).join('/');
-    await s3Client.removeObject(bucketName, objectName);
+    await minioClient.removeObject(bucketName, objectName);
   } catch (error) {
     console.error("Failed to delete from MinIO:", error);
   }

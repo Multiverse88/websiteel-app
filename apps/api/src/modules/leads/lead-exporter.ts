@@ -8,6 +8,12 @@ const CRIMSON_LIGHT = "FFFEEAEA";
 const GRAY_DARK = "FF374151";
 const GRAY_LIGHT = "FFF3F4F6";
 
+function csvEscape(v: unknown): string {
+  if (v === null || v === undefined) return "";
+  const s = String(v);
+  return /["\n\r,;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
 type LeadForExport = {
   leadCode: string;
   status: string;
@@ -507,11 +513,6 @@ export function buildLeadsCsv(
   numbers: NumberForExport[],
   withAI: boolean,
 ): string {
-  const escape = (v: unknown) => {
-    if (v === null || v === undefined) return "";
-    const s = String(v);
-    return /["\n\r,;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-  };
   const headers = [
     "Kode Lead",
     "Status",
@@ -554,7 +555,7 @@ export function buildLeadsCsv(
     if (withAI) (base as Record<string, unknown>)["Saran Follow-Up CS"] = getDefaultFollowUpAdvice(l.status, serviceName, l.lostReason);
     return base;
   });
-  const lines = [headers.map(escape).join(","), ...rows.map((r) => headers.map((h) => escape(r[h])).join(","))];
+  const lines = [headers.map(csvEscape).join(","), ...rows.map((r) => headers.map((h) => csvEscape(r[h])).join(","))];
 
   // ponytail: CSV cuma satu tabel; blok rincian per nomor ditempel setelah
   // baris leads sebagai tabel kedua. Naik ke XLSX multi-sheet kalau konsumen
@@ -563,20 +564,15 @@ export function buildLeadsCsv(
   const summaryLines = [
     "",
     "Rincian per Nomor CS",
-    summaryHeaders.map(escape).join(","),
+    summaryHeaders.map(csvEscape).join(","),
     ...summarizeLeadsByNumber(leads, numbers).map((d) =>
-      [d.label ? `${d.label} (${d.number})` : d.number, d.leadCount, d.sharePct, d.wonCount, d.wonValue].map(escape).join(","),
+      [d.label ? `${d.label} (${d.number})` : d.number, d.leadCount, d.sharePct, d.wonCount, d.wonValue].map(csvEscape).join(","),
     ),
   ];
   return "\uFEFF" + [...lines, ...summaryLines].join("\n");
 }
 
 export function buildNumbersCsv(numbers: NumberForExport[], leads: LeadForExport[]): string {
-  const escape = (v: unknown) => {
-    if (v === null || v === undefined) return "";
-    const s = String(v);
-    return /["\n\r,;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-  };
   const totalClicks = numbers.reduce((s, n) => s + n.clickCount, 0);
   const leadsByNumber: Record<string, NumberLeadBreakdown> = {};
   for (const b of summarizeLeadsByNumber(leads, numbers)) leadsByNumber[b.number] = b;
@@ -595,6 +591,6 @@ export function buildNumbersCsv(numbers: NumberForExport[], leads: LeadForExport
       "Tanggal Dibuat": fmtDate(n.createdAt),
     };
   });
-  const lines = [headers.map(escape).join(","), ...rows.map((r) => headers.map((h) => escape(r[h])).join(","))];
+  const lines = [headers.map(csvEscape).join(","), ...rows.map((r) => headers.map((h) => csvEscape(r[h])).join(","))];
   return "\uFEFF" + lines.join("\n");
 }

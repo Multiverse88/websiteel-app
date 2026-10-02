@@ -1,20 +1,10 @@
-import OpenAI from "openai";
+import { getAIClient, supportsJsonFormat } from "../../lib/ai-client";
 
 export interface ExportAIInsight {
   executiveSummary: string;
   keyFindings: string[];
   conversionAdvice: string[];
   closingTactics: string[];
-}
-
-function getAIClient(): OpenAI | null {
-  const apiKey = process.env.AI_ROUTER_API_KEY || process.env.OPENAI_API_KEY;
-  if (!apiKey) return null;
-  const baseURL = process.env.AI_ROUTER_BASE_URL;
-  return new OpenAI({
-    apiKey,
-    ...(baseURL ? { baseURL } : {}),
-  });
 }
 
 export async function generateExportAIInsight(params: {
@@ -78,16 +68,14 @@ Kembalikan respon dalam format JSON valid PERSIS dengan struktur:
 HANYA kembalikan objek JSON valid tanpa markdown backticks atau teks tambahan.`;
 
   try {
-    const supportsJsonFormat =
-      !!process.env.AI_ROUTER_BASE_URL?.includes("openai") ||
-      !!process.env.AI_ROUTER_MODEL_REVIEW?.toLowerCase().includes("gpt");
+    const jsonFormatSupported = supportsJsonFormat();
 
     const response = await client.chat.completions.create({
       model,
       messages: [{ role: "user", content: prompt }],
       temperature: 0.3,
       max_tokens: 1500,
-      ...(supportsJsonFormat ? { response_format: { type: "json_object" } } : {}),
+      ...(jsonFormatSupported ? { response_format: { type: "json_object" } } : {}),
     });
 
     const raw = response.choices[0]?.message?.content?.trim() || "{}";

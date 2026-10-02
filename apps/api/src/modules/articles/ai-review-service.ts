@@ -1,5 +1,5 @@
-import OpenAI from "openai";
 import { checkDeduplication, type DedupResult } from "./deduplication-service";
+import { getAIClient, supportsJsonFormat } from "../../lib/ai-client";
 
 export interface AIReviewResult {
   guidance: Array<{
@@ -85,20 +85,6 @@ export interface AIReviewResult {
       suggestion: string;
     }>;
   };
-}
-
-function getAIClient(): OpenAI {
-  const apiKey = process.env.AI_ROUTER_API_KEY;
-  const baseURL = process.env.AI_ROUTER_BASE_URL;
-
-  if (!apiKey) {
-    throw new Error("AI_ROUTER_API_KEY is required");
-  }
-
-  return new OpenAI({
-    apiKey,
-    ...(baseURL ? { baseURL } : {}),
-  });
 }
 
 const guidanceFields = ["title", "excerpt", "content", "keyword"] as const;
@@ -564,6 +550,7 @@ TONE CHECK rules:
 - Return "inconsistent" if tone shifts dramatically, "minor_issues" if a few sentences are off, "consistent" if tone is uniform.`;
 
   const client = getAIClient();
+  if (!client) throw new Error("AI_ROUTER_API_KEY is required");
   const model = process.env.AI_ROUTER_MODEL_REVIEW || "ArticleAI";
   const attachDuplicateCheck = (review: AIReviewResult): AIReviewResult => {
     const allowedLinks = new Map(duplicateCheck.candidates.map((article) => [article.matchedSlug, article.matchedTitle]));
@@ -594,15 +581,13 @@ TONE CHECK rules:
 
   // max_tokens 1800/2200 bikin respons JSON kepotong (finishReason=max_tokens).
   // Naikkan ke 4096 + paksa response_format=json_object bila router dukung.
-  const supportsJsonFormat =
-    !!process.env.AI_ROUTER_BASE_URL?.includes("openai") ||
-    !!process.env.AI_ROUTER_MODEL_REVIEW?.toLowerCase().includes("gpt");
+  const jsonFormatSupported = supportsJsonFormat();
   const resp = await client.chat.completions.create({
     model,
     messages: [{ role: "user", content: prompt }],
     temperature: 0.2,
     max_tokens: 4096,
-    ...(supportsJsonFormat ? { response_format: { type: "json_object" } } : {}),
+    ...(jsonFormatSupported ? { response_format: { type: "json_object" } } : {}),
   });
 
   const raw = resp.choices[0]?.message?.content || "{}";
@@ -623,7 +608,7 @@ TONE CHECK rules:
       }],
       temperature: 0.1,
       max_tokens: 4096,
-      ...(supportsJsonFormat ? { response_format: { type: "json_object" } } : {}),
+      ...(jsonFormatSupported ? { response_format: { type: "json_object" } } : {}),
     });
     const retryRaw = retry.choices[0]?.message?.content || "{}";
 
