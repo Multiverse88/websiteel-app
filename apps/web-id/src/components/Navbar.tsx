@@ -545,7 +545,7 @@ export default function Navbar() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.", "ingin-konsultasi-mengenai-legalitas-bisnis", pathname ?? undefined)}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 bg-primary rounded-full text-[16px] font-bold text-white hover:bg-primary-hover shadow-sm hover:shadow transition-all duration-200"
+              className={`px-5 py-2.5 rounded-full text-[16px] font-bold text-white shadow-sm hover:shadow transition-all duration-200 focus-visible:outline-none focus-visible:ring-offset-2 ${isEasyTaxPage ? "bg-[#152269] hover:bg-[#0F1B3D] ring-1 ring-[#F4C922]/50 focus-visible:ring-2 focus-visible:ring-[#F4C922]" : "bg-primary hover:bg-primary-hover"}`}
             >
               Konsultasi Gratis
             </a>
@@ -555,7 +555,7 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center">
             <button
               onClick={toggleMenu}
-              className="text-muted hover:text-dark p-2 focus:outline-none"
+              className={`p-2 focus:outline-none ${isEasyTaxPage ? "text-[#152269] hover:text-[#0F1B3D]" : "text-muted hover:text-dark"}`}
               aria-label="Toggle Menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -754,7 +754,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleLinkClick}
-                                className="w-full text-center py-2.5 bg-primary rounded-full text-[16px] font-bold text-white hover:bg-primary-hover transition-colors duration-200"
+                                className={`w-full text-center py-2.5 rounded-full text-[16px] font-bold text-white transition-colors duration-200 ${isEasyTaxPage ? "bg-[#152269] hover:bg-[#0F1B3D] ring-1 ring-[#F4C922]/50" : "bg-primary hover:bg-primary-hover"}`}
               >
                 Konsultasi Gratis
               </a>

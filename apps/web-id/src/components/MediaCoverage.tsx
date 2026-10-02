@@ -1,7 +1,11 @@
 "use client";
 import React from "react";
+interface MediaCoverageProps {
+  theme?: "easylegal" | "easytax";
+}
 
-export default function MediaCoverage() {
+
+export default function MediaCoverage({ theme = "easylegal" }: MediaCoverageProps) {
   const BANKS = [
     { id: 1, name: "BCA", src: "/images/banks/bca.png" },
     { id: 2, name: "BSI", src: "/images/banks/bsi.png" },
@@ -67,7 +71,7 @@ export default function MediaCoverage() {
           <p className="text-gray-500 text-[14px] sm:text-[16px] max-w-2xl mb-8 leading-relaxed">
             Lebih dari 13.000 pengusaha mempercayakan pendirian usaha, perizinan, hingga perlindungan merek mereka kepada kami.
           </p>
-          <div className="bg-[#FEF2F2] text-[#D62828] text-[10px] sm:text-[12px] font-bold uppercase tracking-widest px-6 py-2 rounded-full">
+          <div className={`text-[10px] sm:text-[12px] font-bold uppercase tracking-widest px-6 py-2 rounded-full border ${theme === "easytax" ? "bg-[#FFF8D9] text-[#152269] border-[#F4C922]/50" : "bg-[#FEF2F2] text-[#D62828] border-transparent"}`}>
             SUPPORTED BY &bull; OUR CLIENTS
           </div>
         </div>
@@ -143,7 +147,7 @@ export default function MediaCoverage() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center flex-shrink-1 sm:flex-shrink-0 w-24 sm:w-36 relative transition-transform duration-300 hover:scale-110 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-lg"
+                  className={`flex items-center justify-center flex-shrink-1 sm:flex-shrink-0 w-24 sm:w-36 relative transition-transform duration-300 hover:scale-110 cursor-pointer outline-none focus-visible:ring-2 rounded-lg ${theme === "easytax" ? "focus-visible:ring-[#F4C922]" : "focus-visible:ring-red-500"}`}
                 >
                   <img
                     src={`/logo-berita/logo${item.id}.png`}

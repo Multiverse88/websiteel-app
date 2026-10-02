@@ -90,8 +90,8 @@ export default function LayananSptPajakGadsPage() {
       price: "Rp 499.000",
       badge: "Wajib Pajak Baru",
       icon: Building2,
-      circleBg: "#B91C1C",
-      cardTint: "#FEF2F2",
+      circleBg: "#152269",
+      cardTint: "#EEF2FF",
     },
     {
       name: "Pengurusan NPWP Orang Pribadi",
@@ -153,8 +153,8 @@ export default function LayananSptPajakGadsPage() {
       price: "Hubungi Kami",
       badge: "Regulasi TP DJP",
       icon: Scale,
-      circleBg: "#DC2626",
-      cardTint: "#FEF2F2",
+      circleBg: "#152269",
+      cardTint: "#EEF2FF",
     },
   ];
 
@@ -204,20 +204,20 @@ export default function LayananSptPajakGadsPage() {
   ];
 
   return (
-    <div className="bg-white text-gray-900 font-sans selection:bg-red-100 selection:text-[#990202]">
+    <div className="bg-white text-gray-900 font-sans selection:bg-[#F4C922]/35 selection:text-[#152269]">
 
       {/* ── HERO SECTION (Identik dengan arsitektur Hero.tsx di home .id) ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#FEFAF6] via-[#FAF3EC] to-[#FEFAF6] border-b border-[#FAF0E6]/80 min-h-[580px] lg:min-h-[640px] flex items-center">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#F7F9FF] via-[#FFFCF1] to-[#F2F5FF] border-b border-[#E5EAF8] min-h-[580px] lg:min-h-[640px] flex items-center">
         <div className="w-full max-w-[1240px] mx-auto px-5 sm:px-8 py-10 sm:py-16 lg:py-20">
           <nav
             aria-label="Breadcrumb"
             className="mb-8 flex items-center gap-2 text-xs text-gray-500 sm:mb-10 sm:text-sm"
           >
-            <Link href="/" className="transition-colors hover:text-[#990202]">
+            <Link href="/" className="transition-colors hover:text-[#152269]">
               Beranda
             </Link>
             <span className="text-gray-300">/</span>
-            <Link href="/layanan" className="transition-colors hover:text-[#990202]">
+            <Link href="/layanan" className="transition-colors hover:text-[#152269]">
               Layanan
             </Link>
             <span className="text-gray-300">/</span>
@@ -229,8 +229,8 @@ export default function LayananSptPajakGadsPage() {
             <div className="lg:col-span-7 flex flex-col justify-center">
               
               {/* Badge Tag */}
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-red-100 bg-white text-[#D62828] text-xs sm:text-sm font-bold tracking-wide w-fit mb-4 sm:mb-6 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#D62828] animate-pulse" />
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-[#F4C922]/50 bg-[#FFF8D9] text-[#152269] text-xs sm:text-sm font-bold tracking-wide w-fit mb-4 sm:mb-6 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#F4C922] animate-pulse" />
                 <span>LAYANAN PERPAJAKAN &middot; SPT TAHUNAN</span>
               </div>
 
@@ -238,7 +238,7 @@ export default function LayananSptPajakGadsPage() {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-950 tracking-tighter leading-[1.08] mb-5">
                 <span className="block">LAPOR SPT TAHUNAN</span>
                 <span className="block">TEPAT WAKTU &</span>
-                <span className="block text-[#990202]">SESUAI REGULASI.</span>
+                <span className="block text-[#152269]">SESUAI REGULASI.</span>
               </h1>
 
               {/* Subtext: Ringkas, tajam, maksimal 20 kata */}
@@ -251,7 +251,7 @@ export default function LayananSptPajakGadsPage() {
                 <a
                   href="https://wa.me/628175706273?text=Halo%20EasyTax%2C%20saya%20ingin%20konsultasi%20mengenai%20layanan%20Lapor%20SPT%20Tahunan."
                   data-cta="hero-consult"
-                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-[#990202] hover:bg-[#7A0101] shadow-lg shadow-red-950/20 active:scale-[0.98] transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-[#152269] hover:bg-[#0F1B3D] shadow-lg shadow-blue-950/20 active:scale-[0.98] transition-all"
                 >
                   <MessageCircle className="w-5 h-5 text-white" />
                   <span>Konsultasi Gratis</span>
@@ -268,17 +268,17 @@ export default function LayananSptPajakGadsPage() {
               </div>
 
               {/* Trust Badges Bar (Checklist hijau ala home .id) */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 border-t border-[#FAF0E6] text-xs sm:text-sm font-semibold text-gray-700">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 border-t border-[#DCE3F5] text-xs sm:text-sm font-semibold text-gray-700">
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-[#D62828] stroke-[3]" />
+                  <Check className="w-4 h-4 text-[#152269] stroke-[3]" />
                   <span>Biaya Mulai Rp499rb</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-[#D62828] stroke-[3]" />
+                  <Check className="w-4 h-4 text-[#152269] stroke-[3]" />
                   <span>1x Revisi Gratis Setahun</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-[#D62828] stroke-[3]" />
+                  <Check className="w-4 h-4 text-[#152269] stroke-[3]" />
                   <span>100% Online Seluruh Indonesia</span>
                 </div>
               </div>
@@ -289,7 +289,7 @@ export default function LayananSptPajakGadsPage() {
               {/* Document card above the photo */}
               <div className="mb-5 rounded-2xl border border-gray-100 bg-white p-5 shadow-xl">
                 <div className="mb-2.5 flex items-center justify-between">
-                  <span className="rounded-md bg-red-50 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#990202]">
+                  <span className="rounded-md bg-[#FFF8D9] px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#152269]">
                     SPT TAHUNAN RESMI
                   </span>
                   <span className="inline-flex items-center gap-1 rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
@@ -353,7 +353,7 @@ export default function LayananSptPajakGadsPage() {
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-red-100 bg-[#FEF2F2] text-[#990202] text-xs font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#F4C922]/50 bg-[#FFF8D9] text-[#152269] text-xs font-bold uppercase tracking-wider mb-3">
               Kepatuhan Perpajakan
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-950 tracking-tight mb-4">
@@ -365,9 +365,9 @@ export default function LayananSptPajakGadsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-2xl border border-gray-200/90 p-7 shadow-sm hover:shadow-md hover:border-red-200 transition-all duration-300 flex flex-col justify-between">
+            <div className="bg-white rounded-2xl border border-gray-200/90 p-7 shadow-sm hover:shadow-md hover:border-[#B9C5E8] transition-all duration-300 flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center mb-5">
+                <div className="w-12 h-12 rounded-xl bg-[#EEF2FF] text-[#152269] flex items-center justify-center mb-5">
                   <Building2 className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2.5">SPT Badan Usaha</h3>
@@ -375,14 +375,14 @@ export default function LayananSptPajakGadsPage() {
                   Mencerminkan aktivitas keuangan dan kewajiban pajak perusahaan (PT, CV, Yayasan), memastikan kepatuhan dan akuntabilitas di mata hukum.
                 </p>
               </div>
-              <div className="mt-6 pt-4 border-t border-gray-100 text-xs font-semibold text-[#990202] flex items-center gap-1">
+              <div className="mt-6 pt-4 border-t border-gray-100 text-xs font-semibold text-[#152269] flex items-center gap-1">
                 Laporan Keuangan & Laba Rugi <ArrowRight className="w-3.5 h-3.5 ml-auto" />
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-gray-200/90 p-7 shadow-sm hover:shadow-md hover:border-red-200 transition-all duration-300 flex flex-col justify-between">
+            <div className="bg-white rounded-2xl border border-gray-200/90 p-7 shadow-sm hover:shadow-md hover:border-[#B9C5E8] transition-all duration-300 flex flex-col justify-between">
               <div>
-                <div className="w-12 h-12 rounded-xl bg-red-50 text-[#990202] flex items-center justify-center mb-5">
+                <div className="w-12 h-12 rounded-xl bg-[#FFF8D9] text-[#152269] flex items-center justify-center mb-5">
                   <FileText className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2.5">SPT Orang Pribadi</h3>
@@ -390,12 +390,12 @@ export default function LayananSptPajakGadsPage() {
                   Berfokus pada pelaporan penghasilan individu, pemegang saham, pemilik bisnis, dan profesional agar data harta dan pajak terdaftar rapi.
                 </p>
               </div>
-              <div className="mt-6 pt-4 border-t border-gray-100 text-xs font-semibold text-[#990202] flex items-center gap-1">
+              <div className="mt-6 pt-4 border-t border-gray-100 text-xs font-semibold text-[#152269] flex items-center gap-1">
                 Formulir 1770 / 1770 S <ArrowRight className="w-3.5 h-3.5 ml-auto" />
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-gray-200/90 p-7 shadow-sm hover:shadow-md hover:border-red-200 transition-all duration-300 flex flex-col justify-between">
+            <div className="bg-white rounded-2xl border border-gray-200/90 p-7 shadow-sm hover:shadow-md hover:border-[#B9C5E8] transition-all duration-300 flex flex-col justify-between">
               <div>
                 <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5">
                   <ShieldCheck className="w-6 h-6" />
@@ -452,7 +452,7 @@ export default function LayananSptPajakGadsPage() {
       <section id="biaya-spt" className="py-16 sm:py-24 bg-white scroll-mt-20">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-red-100 bg-[#FEF2F2] text-[#990202] text-xs font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#F4C922]/50 bg-[#FFF8D9] text-[#152269] text-xs font-bold uppercase tracking-wider mb-3">
               Biaya Layanan Transparan
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-950 tracking-tight mb-4">
@@ -489,11 +489,11 @@ export default function LayananSptPajakGadsPage() {
                   {pricingTiers.map((tier, idx) => (
                     <tr
                       key={idx}
-                      className={tier.popular ? "bg-red-50/50 font-semibold" : "hover:bg-gray-50/80 transition-colors"}
+                      className={tier.popular ? "bg-[#FFF8D9]/70 font-semibold" : "hover:bg-gray-50/80 transition-colors"}
                     >
                       <td className="py-3.5 px-4 sm:px-6 text-gray-900 font-medium flex items-center gap-2">
                         {tier.popular && (
-                          <span className="inline-block w-2 h-2 rounded-full bg-[#990202]" title="Paling Sering Dipilih" />
+                          <span className="inline-block w-2 h-2 rounded-full bg-[#F4C922]" title="Paling Sering Dipilih" />
                         )}
                         <span>{tier.omzet}</span>
                       </td>
@@ -550,7 +550,7 @@ export default function LayananSptPajakGadsPage() {
           
           {/* Header Section */}
           <div className="max-w-3xl mb-8 sm:mb-12">
-            <span className="text-xs sm:text-sm font-bold text-[#990202] uppercase tracking-[0.15em] block mb-2">
+            <span className="text-xs sm:text-sm font-bold text-[#152269] uppercase tracking-[0.15em] block mb-2">
               SOLUSI PERPAJAKAN LENGKAP
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-950 tracking-tight leading-[1.2]">
@@ -573,7 +573,7 @@ export default function LayananSptPajakGadsPage() {
                     key={idx}
                     href={`https://wa.me/628175706273?text=${encodeURIComponent(`Halo EasyTax, saya ingin konsultasi mengenai layanan ${item.name}.`)}`}
                     data-cta={`katalog-${idx}`}
-                    className="group rounded-2xl p-5 hover:shadow-md shadow-sm border border-black/[0.04] transition-all duration-200 flex flex-col justify-between min-h-[170px] text-left hover:border-red-200 active:scale-[0.99]"
+                    className="group rounded-2xl p-5 hover:shadow-md shadow-sm border border-black/[0.04] transition-all duration-200 flex flex-col justify-between min-h-[170px] text-left hover:border-[#B9C5E8] active:scale-[0.99]"
                     style={{
                       background: `linear-gradient(to bottom right, #ffffff 40%, ${item.cardTint} 130%)`,
                     }}
@@ -593,7 +593,7 @@ export default function LayananSptPajakGadsPage() {
                       </div>
 
                       {/* Title & Desc */}
-                      <h3 className="text-base font-bold text-gray-900 group-hover:text-[#990202] transition-colors leading-snug mb-1.5">
+                      <h3 className="text-base font-bold text-gray-900 group-hover:text-[#152269] transition-colors leading-snug mb-1.5">
                         {item.name}
                       </h3>
                       <p className="text-xs text-gray-500 leading-relaxed">
@@ -604,7 +604,7 @@ export default function LayananSptPajakGadsPage() {
                     {/* Bottom Price Tag */}
                     <div className="pt-3 mt-3 border-t border-gray-100/80 flex items-center justify-between">
                       <span className="text-xs font-black text-[#17205F]">{item.price}</span>
-                      <span className="text-xs font-bold text-[#990202] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      <span className="text-xs font-bold text-[#152269] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                         Konsultasi <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
@@ -669,16 +669,17 @@ export default function LayananSptPajakGadsPage() {
       </section>
 
       {/* ── MEDIA COVERAGE & KLIEN (Recycled Component) ── */}
-      <MediaCoverage />
+      <MediaCoverage theme="easytax" />
 
       {/* ── TESTIMONIALS (Recycled Component) ── */}
-      <Testimonials />
+      <Testimonials theme="easytax" />
 
       {/* ── OFFICES (Recycled Component) ── */}
       <Offices
         title="Kantor Operasional EasyLegal & EasyTax"
         subtitle="Proses Online Seluruh Indonesia"
         description="Seluruh proses dapat dikerjakan secara digital tanpa keluar rumah. Bila membutuhkan tatap muka, kantor kami siap menyambut Anda."
+        theme="easytax"
       />
 
       {/* ── FAQ (Recycled Component) ── */}
@@ -686,10 +687,11 @@ export default function LayananSptPajakGadsPage() {
         title="Pertanyaan yang Sering Diajukan Tentang Lapor SPT"
         subtitle="Informasi lengkap seputar mekanisme dan proses pelaporan SPT tahunan bersama EasyTax."
         items={faqItems}
+        theme="easytax"
       />
 
       {/* ── BOTTOM PROMO SECTION (Recycled Component) ── */}
-      <BottomPromoSection />
+      <BottomPromoSection theme="easytax" />
     </div>
   );
 }

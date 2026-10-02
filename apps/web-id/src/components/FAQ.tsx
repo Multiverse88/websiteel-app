@@ -10,12 +10,14 @@ interface FAQProps {
   title?: string;
   subtitle?: string;
   items: FAQItem[];
+  theme?: "easylegal" | "easytax";
 }
 
 export default function FAQ({
   title = "Pertanyaan yang sering ditanyakan.",
   subtitle = "Sebelum hubungi kami, mungkin jawabannya ada di sini.",
   items,
+  theme = "easylegal",
 }: FAQProps) {
   const [expandedIdx, setExpandedIdx] = useState<number | null>(0);
 
@@ -27,7 +29,7 @@ export default function FAQ({
     <section className="bg-white py-8 sm:py-24">
       <div className="max-w-[850px] mx-auto px-4 sm:px-8">
         <div className="text-center mb-8 sm:mb-16 space-y-2 sm:space-y-3">
-          <p className="text-[16px] sm:text-[16px] font-black text-[#990202] uppercase tracking-[0.2em]">FAQ</p>
+          <p className={`text-[16px] sm:text-[16px] font-black uppercase tracking-[0.2em] ${theme === "easytax" ? "text-[#152269]" : "text-[#990202]"}`}>FAQ</p>
           <h2 className="font-heading text-[16px] sm:text-[38px] font-bold text-gray-950 leading-tight tracking-tight">
             {title}
           </h2>
@@ -45,10 +47,10 @@ export default function FAQ({
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex justify-between items-center text-left focus:outline-none group cursor-pointer"
                 >
-                  <span className={`text-[16px] sm:text-[16px] font-bold leading-snug transition-colors duration-200 pr-4 sm:pr-6 ${isExpanded ? "text-[#990202]" : "text-gray-900 group-hover:text-[#990202]"}`}>
+                  <span className={`text-[16px] sm:text-[16px] font-bold leading-snug transition-colors duration-200 pr-4 sm:pr-6 ${isExpanded ? theme === "easytax" ? "text-[#152269]" : "text-[#990202]" : theme === "easytax" ? "text-gray-900 group-hover:text-[#152269]" : "text-gray-900 group-hover:text-[#990202]"}`}>
                     {faq.q}
                   </span>
-                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isExpanded ? "bg-[#990202] text-white rotate-0 shadow-sm" : "bg-[#F3F4F6] text-gray-500 group-hover:bg-[#E5E7EB] group-hover:text-gray-900"}`}>
+                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isExpanded ? theme === "easytax" ? "bg-[#F4C922] text-[#152269] rotate-0 shadow-sm" : "bg-[#990202] text-white rotate-0 shadow-sm" : "bg-[#F3F4F6] text-gray-500 group-hover:bg-[#E5E7EB] group-hover:text-gray-900"}`}>
                     {isExpanded ? (
                       <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
