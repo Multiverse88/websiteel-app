@@ -29,6 +29,13 @@ import Testimonials from "@/components/home/Testimonials";
 import Offices from "@/components/Offices";
 import FAQ from "@/components/FAQ";
 import BottomPromoSection from "@/components/home/BottomPromoSection";
+const EASYTAX_STATS = [
+  { value: "13.000+", label: "Bisnis Terlayani" },
+  { value: "900+", label: "Klien Langganan EasyTax" },
+  { value: "5.0", label: "Rating Google EasyTax" },
+  { value: "13+", label: "Jenis Layanan EasyTax" },
+] as const;
+
 
 export default function LayananSptPajakGadsPage() {
   useEffect(() => {
@@ -340,7 +347,7 @@ export default function LayananSptPajakGadsPage() {
       </section>
 
       {/* ── STATS BAR (Recycled TrustStatsBar from Home) ── */}
-      <TrustStatsBar />
+      <TrustStatsBar stats={EASYTAX_STATS} />
 
       {/* ── TENTANG SPT (3-Card Feature Grid) ── */}
       <section className="py-16 sm:py-20 bg-white">
