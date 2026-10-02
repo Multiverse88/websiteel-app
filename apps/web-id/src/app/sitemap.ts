@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { getDomainConfig, getSiteFromHostname } from "@/lib/domains";
 import { contentMap } from "@/data/layanan-badan-usaha";
 import { layananLainnyaData } from "@/data/layanan-lainnya";
-import localSeoRedirects from "@/data/local-seo-redirects.json";
 import { paymentVerificationSlugs } from "@/data/payment-verification";
 
 export const revalidate = 3600;
@@ -230,19 +229,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Glossary telah dihapus permanen — tidak lagi dimasukkan ke sitemap
 
-  // Old WordPress "Local SEO" URLs (jasa-pendirian-{layanan}-{kota} and
-  // lp-seo-lokal-*/lokal-* variants) — these now 301 to their service's
-  // generic page via the DB-driven Redirect table (see
-  // apps/api/seed-local-seo-redirects.ts and AUDIT - URL Redirect Coverage
-  // (2026-09-06).md). Deliberately listed here as the OLD url (not the
-  // redirect target) so Google discovers and processes each 301 rather
-  // than never re-crawling a URL it already thinks is gone/410.
-  const localSeoRedirectPages: MetadataRoute.Sitemap = Object.keys(localSeoRedirects).map((slug) => ({
-    url: `${BASE_URL}/${slug}`,
-    lastModified: generatedAt,
-    changeFrequency: "yearly" as const,
-    priority: 0.2,
-  }));
 
-  return [...staticPages, ...servicePages, ...paymentVerificationPages, ...articlePages, ...landingPages, ...localSeoRedirectPages];
+  return [...staticPages, ...servicePages, ...paymentVerificationPages, ...articlePages, ...landingPages];
 }

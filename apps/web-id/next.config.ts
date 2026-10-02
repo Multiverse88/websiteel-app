@@ -355,23 +355,10 @@ const nextConfig: NextConfig = {
       { source: "/layanan/jasa-pengurusan-pkp", destination: "/layanan/pengajuan-pkp", permanent: true },
       { source: "/layanan/jasa-press-release-media-online", destination: "/layanan/press-release", permanent: true },
 
-      // === Local SEO redirects — moved to the DB-driven Redirect table ===
-      // (2026-09-06) This used to be a 14-pattern hardcoded catch-all here
-      // claiming to handle "1.150 halaman lokal" via
-      // /layanan/jasa-pendirian-pt/:kota → /layanan/pendirian-badan-usaha/pt/:kota.
-      // It never actually matched anything: the real old WordPress URLs are
-      // flat at the domain root (e.g. /jasa-pendirian-pt-jakarta/,
-      // /lp-seo-lokal-jasa-pendirian-cv-ambon/), not nested under /layanan/,
-      // so ~1116 old local-SEO pages were silently 404ing instead of
-      // redirecting. See AUDIT - URL Redirect Coverage (2026-09-06).md.
-      //
-      // Fixed by importing all 1116 URLs into the Redirect table (domain:
-      // "easylegal.id") via apps/api/seed-local-seo-redirects.ts, resolved
-      // at request time by middleware.ts (GET/HEAD → admin-api
-      // /api/v1/redirects/:slug?domain=... lookup). Each redirects to its
-      // service's existing generic page (city-specific landing pages don't
-      // exist yet — a future project); old URLs are also still listed in
-      // sitemap.ts so Google discovers and processes the 301s.
+      // Legacy Local SEO and root-level article URLs were retired with
+      // HTTP 410 Gone. middleware.ts handles the exact slug allowlist
+      // before the DB-driven Redirect lookup; they are intentionally absent
+      // from sitemap.xml and from this redirect table.
     ];
   },
   images: {

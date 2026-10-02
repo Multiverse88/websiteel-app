@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import localSeoRedirects from "@/data/local-seo-redirects.json";
+import goneSeoSlugs from "@/data/gone-seo-slugs.json";
 import { paymentVerificationSlugSet } from "@/data/payment-verification";
-const LOCAL_SEO_REDIRECTS: Record<string, string> = localSeoRedirects;
+const GONE_SEO_SLUGS: Record<string, boolean> = goneSeoSlugs;
 
 // Link-preview crawlers that render Open Graph tags when a URL is shared
 // (WhatsApp, Facebook Messenger, Twitter/X, Slack, Telegram, Discord, etc.).
@@ -175,12 +175,25 @@ export async function middleware(request: NextRequest) {
     (request.method === "GET" || request.method === "HEAD")
   ) {
 
+    if (slug && GONE_SEO_SLUGS[slug]) {
+      return new NextResponse(
+        render410Html(
+          "Halaman Dihapus Permanen",
+          "Halaman SEO lama ini telah dihapus secara permanen dari EasyLegal dan tidak lagi tersedia.",
+        ),
+        {
+          status: 410,
+          statusText: "Gone",
+          headers: {
+            "Content-Type": "text/html; charset=utf-8",
+            "X-Robots-Tag": "noindex, nofollow, gone",
+            "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        },
+      );
+    }
+
     if (slug) {
-      // Migrasi Local SEO WordPress lama — redirect 301 permanen langsung dari memory tanpa DB
-      const localSeoDest = LOCAL_SEO_REDIRECTS[slug];
-      if (localSeoDest) {
-        return NextResponse.redirect(new URL(localSeoDest, request.url), 301);
-      }
 
       try {
         const host = request.headers.get("host") || "easylegal.id";
