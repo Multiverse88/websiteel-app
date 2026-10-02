@@ -14,65 +14,13 @@ export default function MediaCoverage() {
   ];
 
   const CLIENTS = [
-    { file: "1.png", scale: "" },
-    { file: "2.png", scale: "" },
-    { file: "3.png", scale: "" },
-    { file: "4.png", scale: "" },
-    { file: "5.png", scale: "" },
-    { file: "6.png", scale: "" },
-    { file: "7.png", scale: "" },
-    { file: "8.png", scale: "" },
-    { file: "9.png", scale: "" },
-    { file: "10.png", scale: "" },
-    { file: "11.png", scale: "" },
-    { file: "12.png", scale: "" },
-    { file: "13.png", scale: "" },
-    { file: "14.png", scale: "" },
-    { file: "15.png", scale: "" },
-    { file: "16.png", scale: "" },
-    { file: "17.png", scale: "" },
-    { file: "18.png", scale: "" },
-    { file: "19.png", scale: "" },
-    { file: "20.png", scale: "" },
-    { file: "21.png", scale: "" },
-    { file: "22.png", scale: "" },
-    { file: "23.png", scale: "" },
-    { file: "24.png", scale: "" },
-    { file: "25.png", scale: "" },
-    { file: "26.png", scale: "" },
-    { file: "27.png", scale: "" },
-    { file: "28.png", scale: "" },
-    { file: "29.png", scale: "" },
-    { file: "30.png", scale: "" },
-    { file: "31.png", scale: "" },
-    { file: "32.png", scale: "" },
-    { file: "33.png", scale: "" },
-    { file: "34.png", scale: "" },
-    { file: "35.png", scale: "" },
-    { file: "36.png", scale: "" },
-    { file: "37.png", scale: "" },
-    { file: "38.png", scale: "" },
-    { file: "39.png", scale: "" },
-    { file: "40.png", scale: "" },
-    { file: "41.png", scale: "" },
-    { file: "42.png", scale: "" },
-    { file: "43.png", scale: "" },
-    { file: "44.png", scale: "" },
-    { file: "45.png", scale: "" },
-    { file: "46.png", scale: "" },
-    { file: "47.png", scale: "" },
-    { file: "48.png", scale: "" },
-    { file: "49.png", scale: "" },
-    { file: "50.png", scale: "" },
-    { file: "51.png", scale: "" },
-    { file: "52.png", scale: "" },
-    { file: "53.png", scale: "" },
-    { file: "54.png", scale: "" },
-    { file: "55.png", scale: "" },
-    { file: "56.png", scale: "" },
-    { file: "57.png", scale: "" },
-    { file: "58.png", scale: "" },
-    { file: "59.png", scale: "" }
+    { file: "pt-amerta-berkah-mandiri.png", name: "PT Amerta Berkah Mandiri", scale: "" },
+    { file: "cloud-plus.png", name: "Cloud+", scale: "" },
+    { file: "pt-samudra-karsa-raya.png", name: "PT Samudra Karsa Raya", scale: "" },
+    { file: "cv-inusi-solusindo.png", name: "CV Inusi Solusindo", scale: "" },
+    { file: "cv-sinar-listrik-indonesia.png", name: "CV Sinar Listrik Indonesia", scale: "" },
+    { file: "pt-elanus-international-resources.png", name: "PT Elanus International Resources", scale: "" },
+    { file: "pan-education-training-center.png", name: "PAN Education & Training Center", scale: "" },
   ];
 
   const MEDIA = [
@@ -142,8 +90,8 @@ export default function MediaCoverage() {
                     <div key={`client-${groupIndex}-${idx}`} className="flex items-center justify-center flex-shrink-0 w-32 sm:w-48 h-16 sm:h-20 relative transition-transform duration-300 hover:scale-110 cursor-pointer overflow-hidden">
                       <img
                         src={`/images/logo-klien/${client.file}`}
-                        alt={`Client Logo ${idx + 1}`}
-                        className={`max-w-full max-h-[48px] sm:max-h-[64px] w-auto h-auto object-contain scale-[1.9] ${client.scale}`}
+                        alt={client.name}
+                        className={`max-w-full max-h-[48px] sm:max-h-[64px] w-auto h-auto object-contain ${client.scale}`}
                         loading="lazy"
                       />
                     </div>
