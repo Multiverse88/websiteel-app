@@ -8,9 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "Daftar Merek & HAKI Online — Proses Cepat & Resmi",
+    title: {
+      absolute: "Jasa Pendaftaran Merek, Paten, dan Hak Cipta - EasyLegal",
+    },
     description:
-      "Jasa pendaftaran merek dagang & HAKI di DJKI. Cek merek, perpanjangan, pengalihan, & tanggapan penolakan. Mulai dari Rp279rb.",
+      "Butuh jasa pendaftaran Merek, Paten, Desain Industri, dan Hak Cipta? EasyLegal siap bantu lindungi aset HKI & Desain Industri Anda. Konsultasi gratis sekarang!",
     alternates: {
       canonical: `${baseUrl}/layanan/merek-haki`,
     },

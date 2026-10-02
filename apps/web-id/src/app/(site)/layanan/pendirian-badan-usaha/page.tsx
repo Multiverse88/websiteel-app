@@ -10,9 +10,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "Pendirian Badan Usaha — PT, CV, Yayasan & Lainnya",
+    title: {
+      absolute: "Jasa Pendirian PT - EasyLegal",
+    },
     description:
-      "Jasa pendirian PT, CV, Firma, Yayasan, dan Koperasi dengan proses cepat, harga transparan, dan tuntas. Mulai dari Rp2,5jt.",
+      "Butuh jasa Pendirian PT? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp2 jutaan. Konsultasi gratis sekarang!",
     alternates: {
       canonical: `${baseUrl}/layanan/pendirian-badan-usaha`,
     },

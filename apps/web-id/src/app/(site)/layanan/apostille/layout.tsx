@@ -8,9 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "Apostille Dokumen — Legalisasi untuk 129+ Negara",
+    title: {
+      absolute: "Jasa Legalitas Dokumen Apostille - EasyLegal",
+    },
     description:
-      "Layanan Apostille dokumen resmi Indonesia untuk 129+ negara anggota Konvensi Hague. Proses cepat, mudah, & bisa 100% online. Mulai dari Rp1,3jt termasuk PNBP.",
+      "Butuh jasa legalitas dokumen Apostille? Dapatkan layanan Apostille murah, cepat, dan 100% online yang aman & terpercaya di EasyLegal mulai 1 jutaan. Hubungi kami untuk konsultasi!",
     alternates: {
       canonical: `${baseUrl}/layanan/apostille`,
     },

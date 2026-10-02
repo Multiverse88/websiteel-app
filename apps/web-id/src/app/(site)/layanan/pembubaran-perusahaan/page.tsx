@@ -10,8 +10,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "Pembubaran PT & CV — EasyLegal",
-    description: "Urus likuidasi dan pembubaran PT atau CV secara resmi. Proses pencabutan status badan hukum Kemenkumham dan penutupan NPWP perusahaan secara sah dan tuntas.",
+    title: {
+      absolute: "Jasa Pembubaran Perusahaan - EasyLegal",
+    },
+    description:
+      "Butuh jasa Pembubaran Perusahaan? EasyLegal siap bantu proses likuidasi dengan cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp1 jutaan. Konsultasi gratis sekarang!",
     alternates: {
       canonical: `${baseUrl}/layanan/pembubaran-perusahaan`,
     },

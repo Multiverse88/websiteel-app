@@ -9,12 +9,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      absolute: "Jasa Pengurusan Perjanjian Pra Nikah & Pisah Harta - EasyLegal",
+      absolute: "Jasa Perubahan Akta Perusahaan PT dan CV - EasyLegal",
     },
     description:
-      "Butuh jasa pengurusan perjanjian pra nikah dan pisah harta? EasyLegal siap bantu buat kesepakatan resmi, aman, dan tanpa ribet. Konsultasi gratis sekarang!",
+      "Butuh jasa perubahan akta perusahaan? EasyLegal siap bantu prosesnya sampai tuntas, resmi, dan tanpa ribet. Biaya Terjangkau mulai Rp4 jutaan. Konsultasi gratis sekarang!",
     alternates: {
-      canonical: `${baseUrl}/layanan/perjanjian-perkawinan`,
+      canonical: `${baseUrl}/layanan/perubahan-akta`,
     },
   };
 }
@@ -22,10 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 const breadcrumbs = [
   { name: "Beranda", url: "/" },
   { name: "Layanan", url: "/layanan" },
-  { name: "Perjanjian Perkawinan", url: "/layanan/perjanjian-perkawinan" },
+  { name: "Perubahan Akta Perusahaan", url: "/layanan/perubahan-akta" },
 ];
 
-export default function PerjanjianPerkawinanLayout({
+export default function PerubahanAktaLayout({
   children,
 }: {
   children: React.ReactNode;

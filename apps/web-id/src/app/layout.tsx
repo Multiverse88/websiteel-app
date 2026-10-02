@@ -30,16 +30,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(baseUrl),
     title: {
-      default: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
+      default: "Layanan Hukum & Legalitas Bisnis Terpercaya - EasyLegal",
       template: "%s | EasyLegal",
     },
-    description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
+    description:
+      "Jasa Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
     openGraph: {
       type: "website",
       locale: "id_ID",
       siteName: "EasyLegal",
-      title: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
-      description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
+      title: "Layanan Hukum & Legalitas Bisnis Terpercaya - EasyLegal",
+      description:
+        "Jasa Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
       url: baseUrl,
       images: [
         {
@@ -52,8 +54,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "EasyLegal — Layanan Hukum & Legalitas Bisnis Terpercaya",
-      description: "Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
+      title: "Layanan Hukum & Legalitas Bisnis Terpercaya - EasyLegal",
+      description:
+        "Jasa Pendirian PT, Pendaftaran Merek, NIB & OSS, dan Sertifikasi ISO dengan proses cepat, transparan, dan terpercaya.",
       images: ["/Logo EL.png"],
     },
     robots: {

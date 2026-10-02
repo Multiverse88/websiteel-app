@@ -8,9 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "NIB & OSS RBA — Perizinan Usaha Resmi BKPM",
+    title: {
+      absolute: "Jasa Pengurusan NIB & OSS - EasyLegal",
+    },
     description:
-      "Pengurusan NIB, OSS RBA, perubahan KBLI, & sertifikat standar. Proses 1-3 hari kerja. Mulai dari Rp499rb.",
+      "Butuh jasa Pengurusan NIB & OSS? EasyLegal siap bantu proses perizinan usaha Anda dengan cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai Rp400 ribuan. Konsultasi gratis sekarang!",
     alternates: {
       canonical: `${baseUrl}/layanan/nib-oss`,
     },

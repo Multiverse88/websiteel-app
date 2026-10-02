@@ -9,12 +9,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      absolute: "Jasa Pengurusan Perjanjian Pra Nikah & Pisah Harta - EasyLegal",
+      absolute: "Jasa Pengurusan Izin PSE - EasyLegal",
     },
     description:
-      "Butuh jasa pengurusan perjanjian pra nikah dan pisah harta? EasyLegal siap bantu buat kesepakatan resmi, aman, dan tanpa ribet. Konsultasi gratis sekarang!",
+      "Butuh jasa pengurusan izin PSE? EasyLegal siap bantu pendaftaran sistem elektronik Anda dengan cepat, resmi, dan anti blokir mulai Rp1 jutaan. Konsultasi gratis sekarang!",
     alternates: {
-      canonical: `${baseUrl}/layanan/perjanjian-perkawinan`,
+      canonical: `${baseUrl}/layanan/pengurusan-pse`,
     },
   };
 }
@@ -22,10 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 const breadcrumbs = [
   { name: "Beranda", url: "/" },
   { name: "Layanan", url: "/layanan" },
-  { name: "Perjanjian Perkawinan", url: "/layanan/perjanjian-perkawinan" },
+  { name: "Pengurusan Izin PSE", url: "/layanan/pengurusan-pse" },
 ];
 
-export default function PerjanjianPerkawinanLayout({
+export default function PengurusanPseLayout({
   children,
 }: {
   children: React.ReactNode;

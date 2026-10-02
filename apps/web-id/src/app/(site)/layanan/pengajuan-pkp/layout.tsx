@@ -8,9 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "Pengajuan PKP — Daftar Wajib Pajak PKP Online",
+    title: {
+      absolute: "Jasa Pengurusan PKP - EasyLegal",
+    },
     description:
-      "Pengurusan pengukuhan Pengusaha Kena Pajak (PKP) untuk UMKM & korporasi. Proses cepat 3-5 hari kerja.",
+      "Butuh jasa Pengurusan PKP? EasyLegal siap bantu prosesnya dengan cepat dan bergaransi. Biaya terjangkau mulai Rp1 jutaan. Konsultasi gratis sekarang!",
     alternates: {
       canonical: `${baseUrl}/layanan/pengajuan-pkp`,
     },

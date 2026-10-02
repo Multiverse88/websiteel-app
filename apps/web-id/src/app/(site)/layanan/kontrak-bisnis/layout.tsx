@@ -8,9 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "Jasa Kontrak Bisnis & Perjanjian — Legal Drafting Profesional",
+    title: {
+      absolute: "Jasa Pembuatan & Review Kontrak Bisnis - EasyLegal",
+    },
     description:
-      "Jasa pembuatan kontrak & perjanjian profesional untuk bisnis, UMKM, dan individu. Disusun oleh ahli hukum berpengalaman, sah secara hukum, dan sesuai regulasi di Indonesia.",
+      "Butuh jasa buat atau review kontrak bisnis? EasyLegal siap bantu drafting NDA, MoU, PKS, & SPK oleh praktisi hukum berpengalaman. Biaya terjangkau mulai dari Rp2 jutaan. Konsultasi gratis sekarang!",
     alternates: {
       canonical: `${baseUrl}/layanan/kontrak-bisnis`,
     },

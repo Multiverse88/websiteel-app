@@ -8,9 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "Visa Bisnis & KITAS — Izin Tinggal WNA di Indonesia",
+    title: {
+      absolute: "Jasa Pengurusan Visa & KITAS - EasyLegal",
+    },
     description:
-      "Pengurusan visa bisnis, KITAS investor, & KITAS tenaga kerja asing. Proses cepat, 100% resmi Ditjen Imigrasi.",
+      "Butuh jasa pengurusan Visa & KITAS? EasyLegal siap bantu prosesnya dengan cepat, lengkap, dan 100% sesuai regulasi pemerintah. Konsultasi gratis sekarang!",
     alternates: {
       canonical: `${baseUrl}/layanan/visa-kitas`,
     },

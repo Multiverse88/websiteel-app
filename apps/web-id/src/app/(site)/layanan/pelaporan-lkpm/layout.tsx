@@ -8,9 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl } = getDomainConfig(host);
 
   return {
-    title: "Pelaporan LKPM — Compliance BKPM untuk PMA & PMDN",
+    title: {
+      absolute: "Jasa Pelaporan LKPM - EasyLegal",
+    },
     description:
-      "Pengurusan laporan LKPM wajib tahunan untuk badan usaha PMA & PMDN. Konsultasi gratis, proses 3-7 hari kerja.",
+      "Butuh jasa pelaporan LKPM? EasyLegal siap bantu kelola laporan kegiatan penanaman modal Anda tepat waktu dan bebas sanksi mulai Rp1 jutaan. Konsultasi gratis sekarang!",
     alternates: {
       canonical: `${baseUrl}/layanan/pelaporan-lkpm`,
     },

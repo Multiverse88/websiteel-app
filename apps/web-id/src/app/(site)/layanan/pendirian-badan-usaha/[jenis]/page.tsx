@@ -9,6 +9,49 @@ import { getDomainConfig } from "@/lib/domains";
 export function generateStaticParams() {
   return Object.keys(contentMap).map((jenis) => ({ jenis }));
 }
+const JENIS_SEO_METADATA: Record<string, { title: string; description: string }> = {
+  pt: {
+    title: "Jasa Pendirian PT - EasyLegal",
+    description:
+      "Butuh jasa Pendirian PT? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp2 jutaan. Konsultasi gratis sekarang!",
+  },
+  "pt-pma": {
+    title: "Jasa Pendirian PT PMA - EasyLegal",
+    description:
+      "Butuh jasa Pendirian PT PMA? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp8 jutaan. Konsultasi gratis sekarang!",
+  },
+  "pt-perorangan": {
+    title: "Jasa Pendirian PT Perorangan Murah & Cepat - EasyLegal",
+    description:
+      "Butuh jasa Pendirian PT Perorangan? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, legal, dan praktis. Biaya terjangkau mulai dari Rp700 ribuan. Konsultasi gratis sekarang!",
+  },
+  cv: {
+    title: "Jasa Pendirian CV - EasyLegal",
+    description:
+      "Butuh Jasa Pendirian CV? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp1 jutaan. Konsultasi gratis sekarang!",
+  },
+  yayasan: {
+    title: "Jasa Pendirian Yayasan - EasyLegal",
+    description:
+      "Butuh jasa Pendirian Yayasan? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp3 jutaan. Konsultasi gratis sekarang!",
+  },
+  perkumpulan: {
+    title: "Jasa Pendirian Perkumpulan / Komunitas - EasyLegal",
+    description:
+      "Butuh jasa Pendirian Perkumpulan atau Komunitas? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp3 jutaan. Konsultasi gratis sekarang!",
+  },
+  firma: {
+    title: "Jasa Pendirian Firma - EasyLegal",
+    description:
+      "Butuh jasa Pendirian Firma? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp1 jutaan. Konsultasi gratis sekarang!",
+  },
+  koperasi: {
+    title: "Jasa Pendirian Koperasi - EasyLegal",
+    description:
+      "Butuh jasa Pendirian Koperasi? EasyLegal siap bantu prosesnya dengan transparan, aman, cepat, resmi, dan tanpa ribet. Biaya terjangkau mulai dari Rp3 jutaan. Konsultasi gratis sekarang!",
+  },
+};
+
 
 export async function generateMetadata({
   params,
@@ -26,9 +69,14 @@ export async function generateMetadata({
   const host = (await headers()).get("host");
   const { baseUrl } = getDomainConfig(host);
 
+  const seo = JENIS_SEO_METADATA[jenis];
   return {
-    title: `Pendirian ${content.nama} — ${content.namaFormal}`,
-    description: `Pendirian ${content.namaFormal} (${content.nama}) resmi notaris & Kemenkumham. Proses 2-3 minggu.`,
+    title: seo
+      ? { absolute: seo.title }
+      : `Pendirian ${content.nama} — ${content.namaFormal}`,
+    description:
+      seo?.description ??
+      `Pendirian ${content.namaFormal} (${content.nama}) resmi notaris & Kemenkumham. Proses 2-3 minggu.`,
     alternates: {
       canonical: `${baseUrl}/layanan/pendirian-badan-usaha/${jenis}`,
     },
