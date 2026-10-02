@@ -81,8 +81,8 @@ async function getArticle(slug: string, site: string) {
   try {
     const article = await fetchArticleFromApi(slug, site);
     if (!article) return null;
-
     article.createdAt = new Date(article.createdAt);
+    if (article.publishedAt) article.publishedAt = new Date(article.publishedAt);
     if (article.updatedAt) article.updatedAt = new Date(article.updatedAt);
 
     return article;
@@ -105,12 +105,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const appUrl = `https://${site}`;
 
+  const metadataTitle = article.seoTitle?.trim() || article.title;
+  const metadataDescription = article.seoDesc?.trim() || article.excerpt;
+  const displayDate = article.publishedAt ? new Date(article.publishedAt) : new Date(article.createdAt);
+
   return {
-    title: `${article.title} — EasyLegal`,
-    description: article.excerpt,
+    title: `${metadataTitle} — EasyLegal`,
+    description: metadataDescription,
     openGraph: {
-      title: article.title,
-      description: article.excerpt,
+      title: metadataTitle,
+      description: metadataDescription,
       url: `${appUrl}/artikel/${article.slug}`,
       siteName: "EasyLegal",
       images: [
@@ -118,18 +122,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: article.coverImage,
           width: 1200,
           height: 630,
-          alt: article.title,
+          alt: metadataTitle,
         },
       ],
       locale: "id_ID",
       type: "article",
-      publishedTime: article.createdAt.toISOString(),
+      publishedTime: displayDate.toISOString(),
       authors: [article.author?.name || "EasyLegal"],
     },
     twitter: {
       card: "summary_large_image",
-      title: article.title,
-      description: article.excerpt,
+      title: metadataTitle,
+      description: metadataDescription,
       images: [article.coverImage],
     },
     alternates: {
@@ -213,9 +217,14 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
       continue;
     }
 
-    if (trimmed.startsWith("### ")) {
+    const headingMatch = trimmed.match(/^(#{2,6})\s+(.+)$/);
+    if (headingMatch) {
       if (currentBlock) parsedBlocks.push(currentBlock);
-      parsedBlocks.push({ type: "heading", content: trimmed.replace("### ", "") });
+      parsedBlocks.push({
+        type: "heading",
+        content: headingMatch[2],
+        level: headingMatch[1].length,
+      } as any);
       currentBlock = null;
       continue;
     }
@@ -328,11 +337,56 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
           .toLowerCase()
           .replace(/[^a-z0-9\s]/g, "")
           .replace(/\s+/g, "-");
+        const level = (block as any).level || 3;
+        if (level === 2) {
+          return (
+            <h2
+              key={idx}
+              id={headingId}
+              className="font-heading text-[20px] sm:text-[22px] font-extrabold text-gray-950 mt-14 mb-5 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-3.5"
+            >
+              {headingText}
+            </h2>
+          );
+        }
+        if (level === 4) {
+          return (
+            <h4
+              key={idx}
+              id={headingId}
+              className="font-heading text-[17px] font-bold text-gray-900 mt-8 mb-3 leading-snug scroll-mt-24 pl-2"
+            >
+              {headingText}
+            </h4>
+          );
+        }
+        if (level === 5) {
+          return (
+            <h5
+              key={idx}
+              id={headingId}
+              className="font-heading text-[15px] font-bold text-gray-800 mt-6 mb-2 leading-snug scroll-mt-24"
+            >
+              {headingText}
+            </h5>
+          );
+        }
+        if (level === 6) {
+          return (
+            <h6
+              key={idx}
+              id={headingId}
+              className="font-heading text-[14px] font-semibold text-gray-700 mt-4 mb-2 uppercase tracking-wide scroll-mt-24"
+            >
+              {headingText}
+            </h6>
+          );
+        }
         return (
           <h3
             key={idx}
             id={headingId}
-            className="font-heading text-[16px] sm:text-[16px] font-extrabold text-gray-950 mt-12 mb-5 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-3.5"
+            className="font-heading text-[18px] sm:text-[19px] font-extrabold text-gray-950 mt-12 mb-5 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-3.5"
           >
             {headingText}
           </h3>
@@ -400,12 +454,23 @@ function renderMarkdownContent(text: string, inlineRelated?: InlineRelated, arti
         );
 
       case "paragraph":
-      default:
+      default: {
+        const alignMatch = block.content?.match(/^<p\s+style="text-align:\s*(center|right|left);?">(.*?)<\/p>$/i);
+        if (alignMatch) {
+          const align = alignMatch[1].toLowerCase();
+          const alignClass = align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left";
+          return (
+            <p key={idx} className={`text-[16px] sm:text-[16px] leading-[1.85] text-gray-600 font-normal my-5 ${alignClass}`}>
+              {parseBoldText(alignMatch[2], articleTitle, articlePath)}
+            </p>
+          );
+        }
         return (
           <p key={idx} className="text-[16px] sm:text-[16px] leading-[1.85] text-gray-600 font-normal my-5">
             {parseBoldText(block.content ?? "", articleTitle, articlePath)}
           </p>
         );
+      }
     }
   });
 
@@ -529,19 +594,22 @@ function parseBoldText(text: string, articleTitle: string = "", articlePath: str
 
 // Helper to parse **bold** markers in clean text segments
 function parseOnlyBold(text: string, baseKey: string): React.ReactNode[] {
-  // Regex split to locate **bold** text blocks
-  const boldRegex = /(\*\*[^*]+\*\*)/g;
-  const parts = text.split(boldRegex);
+  const tokenRegex = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  const parts = text.split(tokenRegex);
   return parts.map((part, index) => {
-    if (index % 2 === 1) {
-      const match = part.match(/^\*\*([^*]+)\*\*$/);
-      if (match) {
-        return (
-          <strong key={`${baseKey}-${index}`} className="font-extrabold text-gray-900">
-            {match[1]}
-          </strong>
-        );
-      }
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={`${baseKey}-${index}`} className="font-extrabold text-gray-900">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (part.startsWith("*") && part.endsWith("*")) {
+      return (
+        <em key={`${baseKey}-${index}`} className="italic font-medium text-gray-800">
+          {part.slice(1, -1)}
+        </em>
+      );
     }
     return part;
   });
@@ -550,16 +618,17 @@ function parseOnlyBold(text: string, baseKey: string): React.ReactNode[] {
 // Extract headings from content for Table of Contents
 function extractHeadings(text: string) {
   const blocks = text.split("\n\n");
-  const headings: { id: string; text: string }[] = [];
+  const headings: { id: string; text: string; level?: number }[] = [];
   blocks.forEach((block) => {
     const trimmed = block.trim();
-    if (trimmed.startsWith("### ")) {
-      const headingText = trimmed.replace("### ", "");
+    const headingMatch = trimmed.match(/^(#{2,6})\s+(.+)$/);
+    if (headingMatch) {
+      const headingText = headingMatch[2];
       const headingId = headingText
         .toLowerCase()
         .replace(/[^a-z0-9\s]/g, "")
         .replace(/\s+/g, "-");
-      headings.push({ id: headingId, text: headingText });
+      headings.push({ id: headingId, text: headingText, level: headingMatch[1].length });
     }
   });
   return headings;
@@ -667,7 +736,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
               title: article.title,
               description: article.excerpt,
               slug: article.slug,
-              publishedAt: article.createdAt.toISOString(),
+              publishedAt: (article.publishedAt ? new Date(article.publishedAt) : new Date(article.createdAt)).toISOString(),
               author: article.author?.name || undefined,
               image: article.coverImage || undefined,
             })
@@ -753,7 +822,7 @@ export default async function ArtikelDetailPage({ params }: Props) {
                 <div className="flex items-center space-x-1.5">
                   <Calendar className="w-4 h-4 text-[#990202] flex-shrink-0" />
                   <span>
-                    {new Date(article.createdAt).toLocaleDateString("id-ID", {
+                    {new Date(article.publishedAt || article.createdAt).toLocaleDateString("id-ID", {
                       day: "numeric",
                       month: "long",
                       year: "numeric",

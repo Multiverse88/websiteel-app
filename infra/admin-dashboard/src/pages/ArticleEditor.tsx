@@ -5,7 +5,7 @@ import { api } from "../lib/api";
 import AICompanionGuide, { type AICompanionGuidance } from "../components/AICompanionGuide";
 import LinkImageModal from "../components/LinkImageModal";
 
-import { Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2, ExternalLink, Cloud, Activity, CheckCircle, AlertTriangle, XCircle, Table as TableIcon } from "lucide-react";
+import { Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2, ExternalLink, Cloud, Activity, CheckCircle, AlertTriangle, XCircle, Table as TableIcon, AlignLeft, AlignCenter, AlignRight, Italic, Eye, Calendar, ChevronDown, Heading } from "lucide-react";
 
 
 
@@ -71,6 +71,9 @@ type NewArticleDraft = {
   coverMode: CoverMode;
   coverUrl: string;
   faqItems: { q: string; a: string }[];
+  seoTitle?: string;
+  seoDesc?: string;
+  publishedAt?: string;
 };
 
 type EditorSnapshot = {
@@ -154,6 +157,11 @@ export default function ArticleEditor() {
   const [content, setContent] = useState("");
   const [focusKeyword, setFocusKeyword] = useState("");
   const [site, setSite] = useState("easylegal.biz.id");
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoDesc, setSeoDesc] = useState("");
+  const [publishedAt, setPublishedAt] = useState("");
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [showHeadingDropdown, setShowHeadingDropdown] = useState(false);
   const [aiReview, setAiReview] = useState<any>(null);
   const [aiReviewLoading, setAiReviewLoading] = useState(false);
   const [aiReviewError, setAiReviewError] = useState<string | null>(null);
@@ -418,6 +426,9 @@ export default function ArticleEditor() {
           setCoverUrl(article.coverImage || IMAGE_PRESETS[0].url);
           setCoverMode("url");
           setFaqItems(Array.isArray(article.faq) ? article.faq : []);
+          setSeoTitle(article.seoTitle || "");
+          setSeoDesc(article.seoDesc || "");
+          setPublishedAt(article.publishedAt ? new Date(article.publishedAt).toISOString().slice(0, 16) : "");
           
           if (editorRef.current) {
             editorRef.current.innerHTML = markdownToHtml(article.content || "");
@@ -444,6 +455,9 @@ export default function ArticleEditor() {
           if (draft.coverMode === "upload" || draft.coverMode === "url") setCoverMode(draft.coverMode);
           if (typeof draft.coverUrl === "string") setCoverUrl(draft.coverUrl);
           if (Array.isArray(draft.faqItems)) setFaqItems(draft.faqItems);
+          if (typeof draft.seoTitle === "string") setSeoTitle(draft.seoTitle);
+          if (typeof draft.seoDesc === "string") setSeoDesc(draft.seoDesc);
+          if (typeof draft.publishedAt === "string") setPublishedAt(draft.publishedAt);
           if (typeof draft.content === "string") {
             restoredContent = draft.content;
             setContent(draft.content);
@@ -466,9 +480,10 @@ export default function ArticleEditor() {
     const draft: NewArticleDraft = {
       title, slug, slugManuallyEdited, category, readTime, excerpt, content,
       focusKeyword, site, coverMode, coverUrl, faqItems,
+      seoTitle, seoDesc, publishedAt,
     };
     try { localStorage.setItem(NEW_ARTICLE_DRAFT_KEY, JSON.stringify(draft)); } catch { /* quota exceeded */ }
-  }, [articleId, title, slug, slugManuallyEdited, category, readTime, excerpt, content, focusKeyword, site, coverMode, coverUrl, faqItems]);
+  }, [articleId, title, slug, slugManuallyEdited, category, readTime, excerpt, content, focusKeyword, site, coverMode, coverUrl, faqItems, seoTitle, seoDesc, publishedAt]);
 
   const handleEditorInput = () => {
     const html = editorRef.current?.innerHTML || "";
@@ -1266,8 +1281,9 @@ export default function ArticleEditor() {
           excerpt,
           content,
           coverImage: finalCoverUrl,
-          seoTitle: title,
-          seoDesc: excerpt,
+          seoTitle: seoTitle.trim() || title,
+          seoDesc: seoDesc.trim() || excerpt,
+          publishedAt: publishedAt ? new Date(publishedAt).toISOString() : (articleId ? undefined : new Date().toISOString()),
           focusKeyword: focusKeyword.trim() || null,
           site,
           status: "published", // You can modify this if you add a status dropdown
@@ -1299,12 +1315,23 @@ export default function ArticleEditor() {
     <div className="flex flex-col flex-1 -m-[32px] bg-gray-50">
 
       {/* HEADER */}
-            <div className="px-6 py-6 sm:px-8 flex items-center justify-between">
+      <div className="px-6 py-6 sm:px-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Tulis Artikel Baru</h1>
-          <p className="text-sm text-gray-500 mt-1">Buat artikel baru untuk dipublikasikan</p>
+          <h1 className="text-2xl font-bold text-gray-900">{articleId ? "Edit Artikel" : "Tulis Artikel Baru"}</h1>
+          <p className="text-sm text-gray-500 mt-1">{articleId ? "Perbarui konten artikel dan optimasi SEO" : "Buat artikel baru untuk dipublikasikan"}</p>
         </div>
-        <a href="#/articles" className="px-4 py-2 border border-gray-200 bg-white rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Kembali</a>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setShowPreviewModal(true)}
+            className="px-4 py-2 border border-gray-200 bg-white hover:border-[#990202] hover:text-[#990202] rounded-lg text-sm font-semibold text-gray-700 transition flex items-center gap-2 shadow-xs cursor-pointer"
+            title="Pratinjau tampilan artikel"
+          >
+            <Eye className="w-4 h-4 text-[#990202]" />
+            <span>Preview Artikel</span>
+          </button>
+          <a href="#/articles" className="px-4 py-2 border border-gray-200 bg-white rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Kembali</a>
+        </div>
       </div>
 
       {/* MAIN CONTENT */}
@@ -1704,6 +1731,81 @@ export default function ArticleEditor() {
                   <p className="text-[14px] text-gray-500 font-medium mt-1">
                     Kata kunci utama yang ingin dioptimalkan. Disimpan ke database dan digunakan untuk memeriksa potensi keyword cannibalization dengan artikel lain.
                   </p>
+                </div>
+                {/* SEO Snippet (Title & Meta Description) */}
+                <div className="space-y-4 p-5 bg-gradient-to-br from-gray-50/80 to-white border border-gray-200 rounded-2xl shadow-xs">
+                  <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+                    <div>
+                      <label className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                        <Sparkles size={18} className="text-[#990202]" /> SEO Title & Meta Description
+                      </label>
+                      <p className="text-[13px] text-gray-500 mt-0.5">
+                        Atur tampilan judul dan ringkasan halaman pada hasil pencarian Google (SERP).
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* SEO Title */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="seoTitle" className="text-[14px] font-extrabold text-gray-800">
+                        SEO Title
+                      </label>
+                      <span className={`text-[12px] font-bold ${seoTitle.length > 60 ? "text-amber-600" : "text-gray-400"}`}>
+                        {seoTitle.length} / 60 karakter disarankan
+                      </span>
+                    </div>
+                    <input
+                      id="seoTitle"
+                      type="text"
+                      value={seoTitle}
+                      onChange={(e) => setSeoTitle(e.target.value)}
+                      placeholder={title ? `${title} — EasyLegal` : "Contoh: Jasa Pendirian PT Murah & Resmi - EasyLegal"}
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[15px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                    />
+                    <p className="text-[12px] text-gray-400">
+                      Kosongkan untuk otomatis menggunakan Judul Artikel: <em>{title || "—"}</em>
+                    </p>
+                  </div>
+
+                  {/* Meta Description */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="seoDesc" className="text-[14px] font-extrabold text-gray-800">
+                        Meta Description
+                      </label>
+                      <span className={`text-[12px] font-bold ${seoDesc.length > 160 ? "text-amber-600" : "text-gray-400"}`}>
+                        {seoDesc.length} / 160 karakter disarankan
+                      </span>
+                    </div>
+                    <textarea
+                      id="seoDesc"
+                      rows={3}
+                      value={seoDesc}
+                      onChange={(e) => setSeoDesc(e.target.value)}
+                      placeholder={excerpt || "Tuliskan ringkasan menarik untuk hasil pencarian Google (120-160 karakter)..."}
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[15px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950 resize-none"
+                    />
+                    <p className="text-[12px] text-gray-400">
+                      Kosongkan untuk otomatis menggunakan Kutipan Singkat (Excerpt).
+                    </p>
+                  </div>
+
+                  {/* SERP Google Preview simulation */}
+                  <div className="p-4 bg-white border border-gray-200 rounded-xl shadow-xs mt-3">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-gray-400 block mb-1.5">
+                      Simulasi Tampilan di Google SERP
+                    </span>
+                    <div className="text-[12px] text-gray-500 truncate mb-1">
+                      https://{site}/artikel/{slug || "slug-artikel"}
+                    </div>
+                    <div className="text-[17px] text-[#1a0dab] font-semibold hover:underline cursor-pointer leading-snug line-clamp-1">
+                      {seoTitle.trim() || (title ? `${title} — EasyLegal` : "Judul Artikel — EasyLegal")}
+                    </div>
+                    <div className="text-[13px] text-[#4d5156] line-clamp-2 mt-1 leading-relaxed">
+                      {seoDesc.trim() || excerpt || "Deskripsi ringkas artikel yang akan muncul di bawah judul pada mesin pencari Google..."}
+                    </div>
+                  </div>
                 </div>
 
                 {/* AI Companion */}
@@ -2218,26 +2320,159 @@ export default function ArticleEditor() {
 
                   {/* Format Helper Toolbar */}
                   <div className="flex flex-wrap items-center gap-2 p-1.5 bg-gray-50 shadow-sm border border-gray-200 rounded-xl">
-                    <button
-                      type="button"
-                      onMouseDown={(e) => e.preventDefault()}
-                      onClick={() => handleFormat("formatBlock", "<h3>")}
-                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
-                      title="Ubah menjadi Sub-judul (H3)"
-                    >
-                      <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1 rounded border border-red-100/50">H3</span>
-                      <span>Sub-judul</span>
-                    </button>
+                    {/* Heading Dropdown */}
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => setShowHeadingDropdown(!showHeadingDropdown)}
+                        className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-700 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                        title="Format Heading & Paragraf"
+                      >
+                        <Heading className="w-3.5 h-3.5 text-[#990202]" />
+                        <span>Gaya Teks</span>
+                        <ChevronDown className="w-3 h-3 text-gray-400" />
+                      </button>
+
+                      {showHeadingDropdown && (
+                        <>
+                          <div
+                            className="fixed inset-0 z-20"
+                            onClick={() => setShowHeadingDropdown(false)}
+                          />
+                          <div className="absolute left-0 top-full mt-1.5 w-56 bg-white rounded-xl shadow-xl border border-gray-200 py-1.5 z-30 space-y-0.5">
+                            <button
+                              type="button"
+                              onMouseDown={(e) => e.preventDefault()}
+                              onClick={() => {
+                                handleFormat("formatBlock", "<p>");
+                                setShowHeadingDropdown(false);
+                              }}
+                              className="w-full text-left px-3.5 py-2 hover:bg-gray-50 flex items-center justify-between text-gray-700 transition-colors"
+                            >
+                              <span className="text-[14px]">Paragraf Normal</span>
+                              <span className="text-[11px] text-gray-400 font-mono">P</span>
+                            </button>
+                            <div className="h-px bg-gray-100 my-1" />
+                            <button
+                              type="button"
+                              onMouseDown={(e) => e.preventDefault()}
+                              onClick={() => {
+                                handleFormat("formatBlock", "<h2>");
+                                setShowHeadingDropdown(false);
+                              }}
+                              className="w-full text-left px-3.5 py-2 hover:bg-red-50 hover:text-[#990202] flex items-center justify-between transition-colors"
+                            >
+                              <span className="text-[15px] font-extrabold">Heading 2 (Bab Utama)</span>
+                              <span className="text-[11px] font-mono text-[#990202] bg-red-100/60 px-1 rounded">H2</span>
+                            </button>
+                            <button
+                              type="button"
+                              onMouseDown={(e) => e.preventDefault()}
+                              onClick={() => {
+                                handleFormat("formatBlock", "<h3>");
+                                setShowHeadingDropdown(false);
+                              }}
+                              className="w-full text-left px-3.5 py-2 hover:bg-red-50 hover:text-[#990202] flex items-center justify-between transition-colors"
+                            >
+                              <span className="text-[14px] font-bold">Heading 3 (Sub-bab)</span>
+                              <span className="text-[11px] font-mono text-[#990202] bg-red-100/60 px-1 rounded">H3</span>
+                            </button>
+                            <button
+                              type="button"
+                              onMouseDown={(e) => e.preventDefault()}
+                              onClick={() => {
+                                handleFormat("formatBlock", "<h4>");
+                                setShowHeadingDropdown(false);
+                              }}
+                              className="w-full text-left px-3.5 py-2 hover:bg-red-50 hover:text-[#990202] flex items-center justify-between transition-colors"
+                            >
+                              <span className="text-[13.5px] font-bold">Heading 4 (Rincian)</span>
+                              <span className="text-[11px] font-mono text-[#990202] bg-red-100/60 px-1 rounded">H4</span>
+                            </button>
+                            <button
+                              type="button"
+                              onMouseDown={(e) => e.preventDefault()}
+                              onClick={() => {
+                                handleFormat("formatBlock", "<h5>");
+                                setShowHeadingDropdown(false);
+                              }}
+                              className="w-full text-left px-3.5 py-2 hover:bg-red-50 hover:text-[#990202] flex items-center justify-between transition-colors"
+                            >
+                              <span className="text-[13px] font-bold">Heading 5</span>
+                              <span className="text-[11px] font-mono text-[#990202] bg-red-100/60 px-1 rounded">H5</span>
+                            </button>
+                            <button
+                              type="button"
+                              onMouseDown={(e) => e.preventDefault()}
+                              onClick={() => {
+                                handleFormat("formatBlock", "<h6>");
+                                setShowHeadingDropdown(false);
+                              }}
+                              className="w-full text-left px-3.5 py-2 hover:bg-red-50 hover:text-[#990202] flex items-center justify-between transition-colors"
+                            >
+                              <span className="text-[12.5px] font-bold">Heading 6</span>
+                              <span className="text-[11px] font-mono text-[#990202] bg-red-100/60 px-1 rounded">H6</span>
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Bold */}
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleFormat("bold")}
-                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-600 text-[16px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
-                      title="Jadikan Teks Tebal"
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-700 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Jadikan Teks Tebal (Ctrl+B)"
                     >
-                      <span className="font-mono text-[16px] text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">B</span>
+                      <span className="font-mono text-[14px] font-extrabold text-[#990202] bg-red-50 px-1.5 rounded border border-red-100/50">B</span>
                       <span>Tebal</span>
                     </button>
+
+                    {/* Italic */}
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => handleFormat("italic")}
+                      className="px-2.5 py-1.5 bg-white shadow-sm border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-700 text-[14px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+                      title="Jadikan Teks Miring (Ctrl+I)"
+                    >
+                      <Italic className="w-3.5 h-3.5 text-[#990202]" />
+                      <span className="italic">Miring</span>
+                    </button>
+
+                    {/* Text Alignment */}
+                    <div className="flex items-center bg-white border border-gray-200 rounded-lg shadow-sm p-0.5">
+                      <button
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => handleFormat("justifyLeft")}
+                        className="p-1.5 hover:bg-red-50 hover:text-[#990202] text-gray-600 rounded transition-colors"
+                        title="Rata Kiri (Align Left)"
+                      >
+                        <AlignLeft className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => handleFormat("justifyCenter")}
+                        className="p-1.5 hover:bg-red-50 hover:text-[#990202] text-gray-600 rounded transition-colors"
+                        title="Rata Tengah (Align Center)"
+                      >
+                        <AlignCenter className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => handleFormat("justifyRight")}
+                        className="p-1.5 hover:bg-red-50 hover:text-[#990202] text-gray-600 rounded transition-colors"
+                        title="Rata Kanan (Align Right)"
+                      >
+                        <AlignRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                     <button
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
@@ -2318,6 +2553,12 @@ export default function ArticleEditor() {
                       contentEditable={true}
                       onInput={handleEditorInput}
                       onClick={handleEditorClick}
+                      onKeyDown={(e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "i") {
+                          e.preventDefault();
+                          handleFormat("italic");
+                        }
+                      }}
                       data-placeholder="Tuliskan isi lengkap artikel Anda di sini. Klik tombol di atas untuk memformat secara langsung..."
                       className="w-full bg-white px-4 py-3.5 text-[16px] focus:outline-none transition-all font-medium text-gray-950 min-h-[350px] max-h-[600px] overflow-y-auto prose-editor"
                     />
@@ -2465,6 +2706,16 @@ export default function ArticleEditor() {
                       font-style: italic;
                       cursor: text;
                     }
+                    .prose-editor h2 {
+                      font-family: var(--font-heading), sans-serif;
+                      font-size: 20px !important;
+                      font-weight: 800 !important;
+                      color: #030712 !important;
+                      border-left: 4px solid #990202 !important;
+                      padding-left: 10px !important;
+                      margin-top: 24px !important;
+                      margin-bottom: 12px !important;
+                    }
                     .prose-editor h3 {
                       font-family: var(--font-heading), sans-serif;
                       font-size: 17px !important;
@@ -2474,6 +2725,35 @@ export default function ArticleEditor() {
                       padding-left: 10px !important;
                       margin-top: 20px !important;
                       margin-bottom: 10px !important;
+                    }
+                    .prose-editor h4 {
+                      font-family: var(--font-heading), sans-serif;
+                      font-size: 15.5px !important;
+                      font-weight: 700 !important;
+                      color: #111827 !important;
+                      margin-top: 16px !important;
+                      margin-bottom: 8px !important;
+                    }
+                    .prose-editor h5 {
+                      font-family: var(--font-heading), sans-serif;
+                      font-size: 14.5px !important;
+                      font-weight: 700 !important;
+                      color: #1f2937 !important;
+                      margin-top: 14px !important;
+                      margin-bottom: 6px !important;
+                    }
+                    .prose-editor h6 {
+                      font-family: var(--font-heading), sans-serif;
+                      font-size: 13.5px !important;
+                      font-weight: 700 !important;
+                      text-transform: uppercase !important;
+                      letter-spacing: 0.05em !important;
+                      color: #374151 !important;
+                      margin-top: 12px !important;
+                      margin-bottom: 6px !important;
+                    }
+                    .prose-editor em, .prose-editor i {
+                      font-style: italic !important;
                     }
                     .prose-editor strong {
                       font-weight: 800 !important;
@@ -2583,9 +2863,54 @@ export default function ArticleEditor() {
                 </div>
 
                 {/* Submit */}
-                <div className="pt-4 border-t border-gray-100">
-                  <button type="submit" disabled={isPending || aiReview?.duplicateCheck?.blocked} className="w-full py-4 text-[16px] font-extrabold rounded-xl bg-[#990202] text-white hover:bg-[#7a0101] disabled:opacity-50">
-                    {isPending ? "Memeriksa & Menyimpan..." : aiReview?.duplicateCheck?.blocked ? "Artikel Terlalu Mirip — Perlu Diubah" : "Terbitkan Artikel Baru"}
+                {/* Publish Date Setting */}
+                <div className="p-4.5 bg-gray-50 border border-gray-200 rounded-2xl space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <label htmlFor="publishedAt" className="text-[14px] font-extrabold text-gray-900 flex items-center gap-1.5">
+                      <Calendar className="w-4 h-4 text-[#990202]" />
+                      <span>Tanggal Publikasi (Publish Date / Freshness)</span>
+                    </label>
+                    {publishedAt && (
+                      <button
+                        type="button"
+                        onClick={() => setPublishedAt("")}
+                        className="text-[12px] font-bold text-[#990202] hover:underline cursor-pointer"
+                      >
+                        Reset ke Waktu Sekarang
+                      </button>
+                    )}
+                  </div>
+                  <input
+                    id="publishedAt"
+                    type="datetime-local"
+                    value={publishedAt}
+                    onChange={(e) => setPublishedAt(e.target.value)}
+                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] font-semibold text-gray-800 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all"
+                  />
+                  <p className="text-[12px] text-gray-500 font-medium">
+                    {publishedAt
+                      ? "Artikel akan menggunakan tanggal publikasi kustom di atas (berguna untuk sinyal freshness SEO)."
+                      : "Otomatis menggunakan waktu saat ini saat artikel disimpan/diterbitkan."}
+                  </p>
+                </div>
+
+                {/* Submit & Preview Actions */}
+                <div className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setShowPreviewModal(true)}
+                    className="sm:w-1/3 py-4 text-[16px] font-extrabold rounded-xl border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-[#990202] hover:text-[#990202] transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                    title="Lihat simulasi artikel sebelum diterbitkan"
+                  >
+                    <Eye className="w-4 h-4 text-[#990202]" />
+                    <span>Preview</span>
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isPending || aiReview?.duplicateCheck?.blocked}
+                    className="flex-1 py-4 text-[16px] font-extrabold rounded-xl bg-[#990202] text-white hover:bg-[#7a0101] disabled:opacity-50 transition shadow-sm cursor-pointer"
+                  >
+                    {isPending ? "Memeriksa & Menyimpan..." : aiReview?.duplicateCheck?.blocked ? "Artikel Terlalu Mirip — Perlu Diubah" : (articleId ? "Simpan Perubahan Artikel" : "Terbitkan Artikel Baru")}
                   </button>
                 </div>
 
@@ -2793,6 +3118,126 @@ export default function ArticleEditor() {
         }}
       />
 
+      {/* Full Page Preview Modal */}
+      {showPreviewModal && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6">
+          <div className="bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col max-h-[92vh]">
+            {/* Modal Header */}
+            <div className="px-6 py-4 bg-gray-50 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center">
+                  <Eye className="w-4 h-4 text-[#990202]" />
+                </div>
+                <div>
+                  <h3 className="text-[16px] font-extrabold text-gray-900">
+                    Pratinjau Artikel (Live Preview)
+                  </h3>
+                  <p className="text-[12px] text-gray-500">
+                    Simulasi tampilan artikel sebelum dipublikasikan ke https://{site}/artikel/{slug || "slug-artikel"}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPreviewModal(false)}
+                className="p-2 hover:bg-gray-200 text-gray-500 hover:text-gray-900 rounded-lg transition-colors cursor-pointer"
+                title="Tutup pratinjau"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body: Complete Article Layout Simulation */}
+            <div className="overflow-y-auto p-6 sm:p-10 space-y-8 bg-white flex-grow">
+              {/* Breadcrumb Simulation */}
+              <div className="flex items-center gap-2 text-[13px] text-gray-400 font-medium">
+                <span>Beranda</span>
+                <span>/</span>
+                <span>Artikel</span>
+                <span>/</span>
+                <span className="text-[#990202] font-semibold">{category}</span>
+              </div>
+
+              {/* Title & Metadata */}
+              <div className="space-y-4">
+                <span className="inline-block px-3 py-1 bg-red-50 text-[#990202] border border-red-100 rounded-lg text-[12px] font-extrabold uppercase tracking-wider">
+                  {category}
+                </span>
+                <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-950 leading-tight">
+                  {title || "Judul Artikel Anda"}
+                </h1>
+                <div className="flex flex-wrap items-center gap-3 text-[13px] font-medium text-gray-500 pt-2 border-b border-gray-100 pb-4">
+                  <span className="font-semibold text-gray-800">Oleh Tim EasyLegal</span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-3.5 h-3.5 text-[#990202]" />
+                    {publishedAt
+                      ? new Date(publishedAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })
+                      : new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
+                  </span>
+                  <span>•</span>
+                  <span>{readTime || "5 menit baca"}</span>
+                </div>
+              </div>
+
+              {/* Cover Image */}
+              {coverUrl && (
+                <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 max-h-[440px] bg-gray-50">
+                  <img
+                    src={coverUrl}
+                    alt={title || "Cover article"}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+
+              {/* Excerpt Lead */}
+              {excerpt && (
+                <div className="p-4 bg-red-50/50 border-l-4 border-[#990202] rounded-r-xl text-gray-700 text-[15px] font-medium leading-relaxed italic">
+                  {excerpt}
+                </div>
+              )}
+
+              {/* Rendered Body Content */}
+              <div
+                className="prose-editor text-gray-800 leading-relaxed text-[15.5px] space-y-4"
+                dangerouslySetInnerHTML={{
+                  __html: editorRef.current?.innerHTML || markdownToHtml(content || ""),
+                }}
+              />
+
+              {/* FAQ Preview */}
+              {faqItems.filter(f => f.q.trim() && f.a.trim()).length > 0 && (
+                <div className="pt-8 border-t border-gray-200 space-y-4">
+                  <h3 className="text-xl font-bold text-gray-900">Pertanyaan yang Sering Diajukan (FAQ)</h3>
+                  <div className="space-y-3">
+                    {faqItems.filter(f => f.q.trim() && f.a.trim()).map((faq, idx) => (
+                      <div key={idx} className="p-4 border border-gray-200 rounded-xl bg-gray-50/60">
+                        <div className="font-bold text-gray-900 text-sm">{faq.q}</div>
+                        <div className="text-gray-600 text-sm mt-1">{faq.a}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between flex-shrink-0">
+              <div className="text-[13px] text-gray-500 font-medium">
+                Domain target: <span className="font-bold text-gray-900">{site}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPreviewModal(false)}
+                className="px-5 py-2.5 bg-[#990202] text-white rounded-xl text-sm font-bold hover:bg-[#7a0101] transition-colors cursor-pointer shadow-sm"
+              >
+                Tutup & Lanjutkan Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -2811,13 +3256,59 @@ function renderMarkdownContent(text: string) {
     }
 
     // Headings
-    if (trimmed.startsWith("### ")) {
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (headingMatch) {
       headingCounter++;
-      const headingText = trimmed.replace("### ", "");
+      const level = headingMatch[1].length;
+      const headingText = headingMatch[2];
       const headingId = headingText
         .toLowerCase()
         .replace(/[^a-z0-9\s]/g, "")
         .replace(/\s+/g, "-");
+      if (level === 2) {
+        return (
+          <h2
+            key={idx}
+            id={headingId}
+            className="font-heading text-[18px] sm:text-[19px] font-extrabold text-gray-950 mt-6 mb-3 leading-tight flex items-center scroll-mt-24 border-l-4 border-[#990202] pl-2.5"
+          >
+            {headingText}
+          </h2>
+        );
+      }
+      if (level === 4) {
+        return (
+          <h4
+            key={idx}
+            id={headingId}
+            className="font-heading text-[15px] font-bold text-gray-900 mt-4 mb-2 leading-snug scroll-mt-24 pl-1.5"
+          >
+            {headingText}
+          </h4>
+        );
+      }
+      if (level === 5) {
+        return (
+          <h5
+            key={idx}
+            id={headingId}
+            className="font-heading text-[14px] font-bold text-gray-800 mt-4 mb-2 leading-snug scroll-mt-24"
+          >
+            {headingText}
+          </h5>
+        );
+      }
+      if (level === 6) {
+        return (
+          <h6
+            key={idx}
+            id={headingId}
+            className="font-heading text-[13px] font-semibold text-gray-700 mt-3 mb-1 uppercase tracking-wide scroll-mt-24"
+          >
+            {headingText}
+          </h6>
+        );
+      }
       return (
         <h3
           key={idx}
@@ -2867,7 +3358,18 @@ function renderMarkdownContent(text: string) {
       );
     }
 
-    // Default Paragraph with Bold text parser
+    // Text Alignment block or Default Paragraph with Bold/Italic parser
+    const alignMatch = trimmed.match(/^<p\s+style="text-align:\s*(center|right|left);?">(.*?)<\/p>$/i);
+    if (alignMatch) {
+      const align = alignMatch[1].toLowerCase();
+      const alignClass = align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left";
+      return (
+        <p key={idx} className={`text-[16px] leading-[1.7] text-gray-600 font-normal my-3 ${alignClass}`}>
+          {parseBoldText(alignMatch[2])}
+        </p>
+      );
+    }
+
     return (
       <p key={idx} className="text-[16px] leading-[1.7] text-gray-600 font-normal my-3">
         {parseBoldText(trimmed)}
@@ -2876,15 +3378,21 @@ function renderMarkdownContent(text: string) {
   });
 }
 
-// Utility to parse **bold** text to standard JSX strong tags
 function parseBoldText(text: string) {
-  const parts = text.split(/\*\*([^*]+)\*\*/g);
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
   return parts.map((part, index) => {
-    if (index % 2 === 1) {
+    if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={index} className="font-extrabold text-gray-900">
-          {part}
+          {part.slice(2, -2)}
         </strong>
+      );
+    }
+    if (part.startsWith("*") && part.endsWith("*")) {
+      return (
+        <em key={index} className="italic font-medium text-gray-800">
+          {part.slice(1, -1)}
+        </em>
       );
     }
     return part;
@@ -2939,10 +3447,17 @@ function markdownToHtml(markdown: string): string {
       return html;
     }
     
-    // Headings
-    if (trimmed.startsWith("### ")) {
-      const text = trimmed.substring(4);
-      return `<h3>${parseMarkdownInlineHtml(text)}</h3>`;
+    // Headings H1-H6
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      const text = headingMatch[2];
+      return `<h${level}>${parseMarkdownInlineHtml(text)}</h${level}>`;
+    }
+
+    // Alignment paragraph
+    if (/^<p\s+style="text-align:\s*(center|right|left);?">/i.test(trimmed)) {
+      return trimmed;
     }
     
     // Unordered list
@@ -2977,6 +3492,8 @@ function parseMarkdownInlineHtml(text: string): string {
   result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
   // Bold: **text** -> <strong>text</strong>
   result = result.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  // Italic: *text* -> <em>text</em>
+  result = result.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>");
   return result;
 }
 
@@ -3000,6 +3517,8 @@ function htmlToMarkdown(html: string): string {
         const nodeName = el.nodeName.toUpperCase();
         if (nodeName === "STRONG" || nodeName === "B") {
           md += `**${el.textContent || ""}**`;
+        } else if (nodeName === "EM" || nodeName === "I") {
+          md += `*${el.textContent || ""}*`;
         } else if (nodeName === "A") {
           const href = el.getAttribute("href") || "#";
           const linkText = el.textContent || "";
@@ -3030,8 +3549,18 @@ function htmlToMarkdown(html: string): string {
     } else if (node.nodeType === Node.ELEMENT_NODE) {
       const el = node as HTMLElement;
       
-      if (nodeName === "H3") {
+      if (nodeName === "H1") {
+        markdownBlocks.push(`# ${getInlineMarkdown(el)}`);
+      } else if (nodeName === "H2") {
+        markdownBlocks.push(`## ${getInlineMarkdown(el)}`);
+      } else if (nodeName === "H3") {
         markdownBlocks.push(`### ${getInlineMarkdown(el)}`);
+      } else if (nodeName === "H4") {
+        markdownBlocks.push(`#### ${getInlineMarkdown(el)}`);
+      } else if (nodeName === "H5") {
+        markdownBlocks.push(`##### ${getInlineMarkdown(el)}`);
+      } else if (nodeName === "H6") {
+        markdownBlocks.push(`###### ${getInlineMarkdown(el)}`);
       } else if (nodeName === "IMG") {
         const src = el.getAttribute("src") || "";
         const alt = el.getAttribute("alt") || "";
@@ -3076,9 +3605,14 @@ function htmlToMarkdown(html: string): string {
       } else if (nodeName === "HR") {
         markdownBlocks.push("---");
       } else if (nodeName === "P" || nodeName === "DIV") {
+        const align = el.style.textAlign || el.getAttribute("align");
         const content = getInlineMarkdown(el).trim();
         if (content) {
-          markdownBlocks.push(content);
+          if (align && ["center", "right"].includes(align.toLowerCase())) {
+            markdownBlocks.push(`<p style="text-align: ${align.toLowerCase()};">${content}</p>`);
+          } else {
+            markdownBlocks.push(content);
+          }
         }
       } else if (nodeName === "BR") {
         // Line break

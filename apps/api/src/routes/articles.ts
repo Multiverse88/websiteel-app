@@ -270,7 +270,7 @@ router.post("/:slug/revalidate", requireAuth, async (req, res) => {
 // POST /api/v1/articles
 router.post("/", requireAuth, async (req, res) => {
   try {
-    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword, site } = req.body;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword, site, publishedAt } = req.body;
 
     if (!slug || !title || !excerpt || !content || !category) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -291,6 +291,7 @@ router.post("/", requireAuth, async (req, res) => {
         seoDesc: seoDesc || excerpt,
         focusKeyword: focusKeyword || null,
         site: site || "easylegal.biz.id",
+        publishedAt: publishedAt ? new Date(publishedAt) : new Date(),
       },
     });
 
@@ -308,7 +309,7 @@ router.post("/", requireAuth, async (req, res) => {
 router.put("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params as { id: string };
-    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword, site } = req.body;
+    const { slug, title, excerpt, content, coverImage, category, readTime, authorId, faq, seoTitle, seoDesc, focusKeyword, site, publishedAt } = req.body;
 
     const existing = await prisma.article.findUnique({ where: { id } });
     if (!existing) {
@@ -331,6 +332,7 @@ router.put("/:id", requireAuth, async (req, res) => {
         seoDesc: seoDesc !== undefined ? seoDesc : existing.seoDesc,
         focusKeyword: focusKeyword !== undefined ? focusKeyword : existing.focusKeyword,
         site: site || existing.site,
+        publishedAt: publishedAt !== undefined ? (publishedAt ? new Date(publishedAt) : null) : existing.publishedAt,
       },
     });
 
