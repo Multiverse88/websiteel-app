@@ -16,7 +16,6 @@ import Tracking from './pages/Tracking'
 import Promos from './pages/Promos'
 import Settings from './pages/Settings'
 import WhatsAppRotator from './pages/WhatsAppRotator'
-import WhatsAppLeads from './pages/WhatsAppLeads'
 import Analytics from './pages/Analytics'
 import Competitors from './pages/Competitors'
 import CompetitorDetail from './pages/CompetitorDetail'
@@ -104,7 +103,7 @@ function Router() {
     '/settings': <Settings />,
     '/whatsapp-rotator': <WhatsAppRotator />,
     '/wa-rotator': <WhatsAppRotator />,
-    '/whatsapp-leads': <WhatsAppLeads />,
+    '/whatsapp-leads': <WhatsAppRotator initialTab="leads" />,
     '/competitors': <Competitors />,
   }
 
