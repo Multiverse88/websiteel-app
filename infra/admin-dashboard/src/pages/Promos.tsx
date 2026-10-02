@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { api } from '../lib/api'
+import PromoSectionPreview from '../components/PromoSectionPreview'
 
 interface PromoVariant {
   text: string;
@@ -168,6 +169,8 @@ export default function Promos() {
 
       {error && <div className="p-4 bg-red-50 text-red-600 rounded-lg text-sm">{error}</div>}
       {success && <div className="p-4 bg-green-50 text-green-600 rounded-lg text-sm">{success}</div>}
+      <PromoSectionPreview promos={promos} />
+
       
       <div className="space-y-4">
         {promos.length === 0 ? (
