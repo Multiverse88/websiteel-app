@@ -312,11 +312,14 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        // Entry point lama /layanan-spt-pajak-gads dipindah ke bawah /layanan/
-        // agar konsisten dengan layanan lainnya. 308 permanent menjaga URL
-        // iklan Google Ads & backlink lama tetap sampai ke halaman baru.
+        // SPT is owned exclusively by easylegal.biz.id.
         source: "/layanan-spt-pajak-gads",
-        destination: "/layanan/spt-pajak-gads",
+        destination: "https://easylegal.biz.id/layanan/spt-pajak-gads",
+        permanent: true,
+      },
+      {
+        source: "/layanan/spt-pajak-gads",
+        destination: "https://easylegal.biz.id/layanan/spt-pajak-gads",
         permanent: true,
       },
 

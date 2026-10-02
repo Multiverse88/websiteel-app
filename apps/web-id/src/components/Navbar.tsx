@@ -129,7 +129,7 @@ const megaMenuData = {
         brandSuffix: "Tax",
         title: "Layanan Perpajakan",
         description: "Laporan SPT Tahunan Badan, Konsultasi Pajak, Kode Billing Pajak",
-        href: "/layanan/spt-pajak-gads",
+        href: "https://easylegal.biz.id/layanan/spt-pajak-gads",
       },
       {
         brandPrefix: "Easy",
@@ -162,7 +162,6 @@ export default function Navbar() {
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isEasyTaxPage = pathname === "/layanan/spt-pajak-gads";
   // These are now <details> elements (native open/close, JS-independent) —
   // .open is a real DOM property, not a React-state mirror.
   const dropdownRef = React.useRef<HTMLDetailsElement>(null);
@@ -261,44 +260,17 @@ export default function Navbar() {
             onClick={hardNavigate("/home-gads")}
             className="flex items-center group flex-shrink-0"
           >
-            {isEasyTaxPage ? (
-              <div className="flex items-center gap-1.5">
-                <Image
-                  src="/logo-easylegal-cobrand.png"
-                  alt="EasyLegal"
-                  width={52}
-                  height={44}
-                  className="h-6 w-auto object-contain sm:h-7"
-                  priority
-                />
-                <span
-                  aria-hidden="true"
-                  className="text-lg font-semibold leading-none text-slate-300"
-                >
-                  ×
-                </span>
-                <Image
-                  src="/logo-easytax.png"
-                  alt="EasyTax"
-                  width={52}
-                  height={50}
-                  className="h-6 w-auto object-contain sm:h-7"
-                  priority
-                />
-              </div>
-            ) : (
-              <div className="navbar-logo">
-                <Image
-                  src="/Logo EL.png"
-                  alt="EasyLegal Logo"
-                  width={150}
-                  height={52}
-                  className="h-[52px] w-auto object-contain"
-                  style={{ width: "auto", height: "52px" }}
-                  priority
-                />
-              </div>
-            )}
+            <div className="navbar-logo">
+              <Image
+                src="/Logo EL.png"
+                alt="EasyLegal Logo"
+                width={150}
+                height={52}
+                className="h-[52px] w-auto object-contain"
+                style={{ width: "auto", height: "52px" }}
+                priority
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation - Center */}
@@ -545,7 +517,7 @@ export default function Navbar() {
               href={getWhatsAppLink("Halo EasyLegal, saya ingin konsultasi mengenai legalitas bisnis.", "ingin-konsultasi-mengenai-legalitas-bisnis", pathname ?? undefined)}
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-5 py-2.5 rounded-full text-[16px] font-bold text-white shadow-sm hover:shadow transition-all duration-200 focus-visible:outline-none focus-visible:ring-offset-2 ${isEasyTaxPage ? "bg-[#152269] hover:bg-[#0F1B3D] ring-1 ring-[#F4C922]/50 focus-visible:ring-2 focus-visible:ring-[#F4C922]" : "bg-primary hover:bg-primary-hover"}`}
+              className="px-5 py-2.5 bg-primary rounded-full text-[16px] font-bold text-white hover:bg-primary-hover shadow-sm hover:shadow transition-all duration-200"
             >
               Konsultasi Gratis
             </a>
@@ -555,7 +527,7 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center">
             <button
               onClick={toggleMenu}
-              className={`p-2 focus:outline-none ${isEasyTaxPage ? "text-[#152269] hover:text-[#0F1B3D]" : "text-muted hover:text-dark"}`}
+              className="text-muted hover:text-dark p-2 focus:outline-none"
               aria-label="Toggle Menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -754,7 +726,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleLinkClick}
-                                className={`w-full text-center py-2.5 rounded-full text-[16px] font-bold text-white transition-colors duration-200 ${isEasyTaxPage ? "bg-[#152269] hover:bg-[#0F1B3D] ring-1 ring-[#F4C922]/50" : "bg-primary hover:bg-primary-hover"}`}
+                                className="w-full text-center py-2.5 bg-primary rounded-full text-[16px] font-bold text-white hover:bg-primary-hover transition-colors duration-200"
               >
                 Konsultasi Gratis
               </a>

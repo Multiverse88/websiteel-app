@@ -23,6 +23,11 @@ interface Promo {
   variants?: PromoVariant[];
 }
 
+interface BottomPromoSectionProps {
+  theme?: "easylegal" | "easytax";
+  showMarketplace?: boolean;
+}
+
 const FALLBACK_PROMOS = [
   {
     id: 1,
@@ -56,7 +61,8 @@ const FALLBACK_PROMOS = [
   },
 ] satisfies Promo[];
 
-export default function BottomPromoSection() {
+export default function BottomPromoSection({ theme = "easylegal", showMarketplace = true }: BottomPromoSectionProps) {
+  const isEasyTax = theme === "easytax";
   const pathname = usePathname();
   const [promos, setPromos] = useState<Promo[]>([]);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -191,7 +197,7 @@ export default function BottomPromoSection() {
         <div className="mb-16 sm:mb-24">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
             <div className="max-w-2xl">
-              <span className="text-[14px] sm:text-[16px] font-extrabold text-[#D62828] tracking-[0.2em] uppercase mb-2 sm:mb-3 block">
+              <span className={`text-[14px] sm:text-[16px] font-extrabold tracking-[0.2em] uppercase mb-2 sm:mb-3 w-fit ${isEasyTax ? "inline-block rounded-full border border-[#F4C922]/50 bg-[#FFF8D9] px-3 py-1 text-[#152269]" : "block text-[#D62828]"}`}>
                 PROMO SPESIAL
               </span>
               <h2 className="text-[26px] sm:text-[34px] font-black text-gray-900 leading-[1.15] mb-3 sm:mb-4 tracking-tight">
@@ -208,7 +214,7 @@ export default function BottomPromoSection() {
               <button onClick={() => scrollTo(Math.min(totalPages - 1, activeIndex + 1))} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors bg-white">
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
               </button>
-              <a href="/promo" className="inline-flex items-center justify-center gap-2 bg-[#D62828] hover:bg-[#B91C1C] text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-extrabold text-[14px] sm:text-[16px] transition-colors shrink-0 w-fit group ml-auto sm:ml-0">
+              <a href="/promo" className={`inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-extrabold text-[14px] sm:text-[16px] transition-colors shrink-0 w-fit group ml-auto sm:ml-0 ${isEasyTax ? "bg-[#F4C922] text-[#152269] hover:bg-[#E4B910]" : "bg-[#D62828] text-white hover:bg-[#B91C1C]"}`}>
                 Lihat Semua Promo <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
               </a>
             </div>
@@ -234,10 +240,10 @@ export default function BottomPromoSection() {
                 <div className="px-2 pb-2 flex flex-col flex-1">
                   <h3 className="text-[18px] sm:text-[20px] font-black text-gray-900 leading-snug mb-5">{promoText}</h3>
                   <div className="mt-auto flex gap-3">
-                    <a href={promo.link} className="flex-1 bg-[#D62828] hover:bg-[#B91C1C] text-white text-center font-extrabold text-[14px] sm:text-[15px] py-3 rounded-full transition-colors flex items-center justify-center gap-2">
+                    <a href={promo.link} className={`flex-1 text-center font-extrabold text-[14px] sm:text-[15px] py-3 rounded-full transition-colors flex items-center justify-center gap-2 ${isEasyTax ? "bg-[#152269] text-white hover:bg-[#0F1B3D]" : "bg-[#D62828] text-white hover:bg-[#B91C1C]"}`}>
                       Selengkapnya <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
                     </a>
-                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promoText}".`, promoCtaId, pathname ?? undefined)} className="w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 bg-[#D62828] hover:bg-[#B91C1C] text-white rounded-full flex items-center justify-center transition-colors shadow-sm">
+                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promoText}".`, promoCtaId, pathname ?? undefined)} className={`w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 rounded-full flex items-center justify-center transition-colors shadow-sm ${isEasyTax ? "bg-[#F4C922] text-[#152269] hover:bg-[#E4B910]" : "bg-[#D62828] text-white hover:bg-[#B91C1C]"}`}>
                       <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
                     </a>
                   </div>
@@ -253,7 +259,7 @@ export default function BottomPromoSection() {
               <button 
                 key={idx}
                 onClick={() => scrollTo(idx)}
-                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-6 sm:w-8 bg-[#D62828]' : 'w-2 sm:w-2.5 bg-gray-200 hover:bg-gray-300'}`}
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${activeIndex === idx ? isEasyTax ? 'w-6 sm:w-8 bg-[#152269]' : 'w-6 sm:w-8 bg-[#D62828]' : 'w-2 sm:w-2.5 bg-gray-200 hover:bg-gray-300'}`}
                 aria-label={`Go to slide ${idx + 1}`}
               ></button>
             ))}
@@ -261,6 +267,7 @@ export default function BottomPromoSection() {
         </div>
 
         {/* Bottom Section: Shopee Marketplace */}
+        {showMarketplace && (
         <div className="mt-16 sm:mt-24 pt-12 sm:pt-16 border-t border-gray-100 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-24">
           
           {/* Image Side */}
@@ -296,6 +303,7 @@ export default function BottomPromoSection() {
           </div>
 
         </div>
+        )}
 
       </div>
     </section>

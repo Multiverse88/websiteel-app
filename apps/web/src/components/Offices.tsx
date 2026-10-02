@@ -16,6 +16,7 @@ interface OfficesProps {
   title?: string;
   subtitle?: string;
   description?: string;
+  theme?: "easylegal" | "easytax";
 }
 
 const officesData: Office[] = [
@@ -52,6 +53,7 @@ export default function Offices({
   title = "Kantor Kami",
   subtitle = "Hadir di 3 kota, melayani seluruh Indonesia",
   description = "Walaupun proses kami 100% online, kami tetap punya kantor fisik yang bisa Anda kunjungi.",
+  theme = "easylegal",
 }: OfficesProps) {
   return (
     <section className="bg-white py-20 border-b border-gray-200/40 overflow-hidden">
@@ -59,7 +61,7 @@ export default function Offices({
         
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3 hidden">
-          <p className="text-[16px] font-extrabold text-[#990202] uppercase tracking-wider">{title}</p>
+          <p className={`text-[16px] font-extrabold uppercase tracking-wider ${theme === "easytax" ? "text-[#152269]" : "text-[#990202]"}`}>{title}</p>
         </div>
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
           <h2 className="font-heading text-[36px] sm:text-[42px] font-extrabold text-gray-950 leading-tight">
@@ -96,7 +98,7 @@ export default function Offices({
                   <span
                     className={`inline-flex px-3 py-1.5 rounded-lg text-[16px] font-black uppercase tracking-wider shadow-sm border ${
                       office.tag === "Kantor Pusat"
-                        ? "bg-[#990202] text-white border-red-900/10"
+                        ? theme === "easytax" ? "bg-[#152269] text-white border-[#F4C922]/60" : "bg-[#990202] text-white border-red-900/10"
                         : "bg-white text-gray-900 border-gray-200/50"
                     }`}
                   >
@@ -110,8 +112,8 @@ export default function Offices({
                 <div>
                   {/* MapPin and City */}
                   <div className="flex items-center space-x-2">
-                    <MapPin className="w-5 h-5 text-[#990202] flex-shrink-0" strokeWidth={2.5} />
-                    <h3 className="font-heading text-[16px] sm:text-[16px] font-extrabold text-gray-950 group-hover:text-[#990202] transition-colors leading-snug">
+                    <MapPin className={`w-5 h-5 flex-shrink-0 ${theme === "easytax" ? "text-[#152269]" : "text-[#990202]"}`} strokeWidth={2.5} />
+                    <h3 className={`font-heading text-[16px] sm:text-[16px] font-extrabold text-gray-950 transition-colors leading-snug ${theme === "easytax" ? "group-hover:text-[#152269]" : "group-hover:text-[#990202]"}`}>
                       {office.city}
                     </h3>
                   </div>
@@ -125,12 +127,12 @@ export default function Offices({
                 {/* Hours and Telephone Footer */}
                 <div className="flex items-center text-[16px] text-gray-500 font-bold border-t border-gray-100 mt-5 pt-4">
                   <div className="flex items-center space-x-1.5">
-                    <Clock className="w-3.8 h-3.8 text-[#990202] flex-shrink-0" strokeWidth={2.5} />
+                    <Clock className={`w-3.8 h-3.8 flex-shrink-0 ${theme === "easytax" ? "text-[#152269]" : "text-[#990202]"}`} strokeWidth={2.5} />
                     <span>{office.hours}</span>
                   </div>
                   {office.tel && (
                     <div className="flex items-center space-x-1.5 ml-6">
-                      <Phone className="w-3.8 h-3.8 text-[#990202] flex-shrink-0" strokeWidth={2.5} />
+                      <Phone className={`w-3.8 h-3.8 flex-shrink-0 ${theme === "easytax" ? "text-[#152269]" : "text-[#990202]"}`} strokeWidth={2.5} />
                       <span>{office.tel}</span>
                     </div>
                   )}

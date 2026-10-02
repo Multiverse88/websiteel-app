@@ -71,26 +71,38 @@ function AutoScrollRow({ items, direction }: { items: typeof row1Reviews; direct
   );
 }
 
-export default function Testimonials() {
+export default function Testimonials({
+  title,
+  subtitle,
+  theme = "easylegal",
+}: {
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  theme?: "easylegal" | "easytax";
+} = {}) {
   const headerRef = useRef<HTMLDivElement>(null);
   const rowsRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
-      <section className="py-12 sm:py-24 bg-[#FAF9F6] overflow-hidden relative">
+      <section className={`py-12 sm:py-24 overflow-hidden relative ${theme === "easytax" ? "bg-[#F7F9FF]" : "bg-[#FAF9F6]"}`}>
         <div className="max-w-[1440px] mx-auto px-4 lg:px-8 text-left sm:text-center relative z-10">
           <div
             ref={headerRef}
             className="mb-6 sm:mb-14 opacity-100 translate-y-0"
           >
-            <span className="text-[16px] sm:text-[16px] font-extrabold text-[#B91C1C] uppercase tracking-[0.2em]">
+            <span className={`text-[16px] sm:text-[16px] font-extrabold uppercase tracking-[0.2em] ${theme === "easytax" ? "inline-block rounded-full border border-[#F4C922]/50 bg-[#FFF8D9] px-3 py-1 text-[#152269]" : "text-[#B91C1C]"}`}>
               TESTIMONI
             </span>
             <h2 className="text-[16px] sm:text-[38px] lg:text-[42px] font-black text-[#111827] mt-1.5 sm:mt-3 tracking-[-0.02em] leading-[1.25] sm:leading-tight">
-              Pengalaman dari mereka yang<br className="hidden sm:inline" /> sudah kami layani.
+              {title || (
+                <>
+                  Pengalaman dari mereka yang<br className="hidden sm:inline" /> sudah kami layani.
+                </>
+              )}
             </h2>
             <p className="text-[16px] sm:text-[16px] text-[#6B7280] mt-2 sm:mt-4 max-w-[620px] sm:mx-auto leading-relaxed">
-              Dari UMKM kuliner sampai startup teknologi — semua percayakan urusan legalnya ke EasyLegal.
+              {subtitle || "Dari UMKM kuliner sampai startup teknologi — semua percayakan urusan legalnya ke EasyLegal."}
             </p>
           </div>
         </div>
@@ -99,14 +111,13 @@ export default function Testimonials() {
           ref={rowsRef}
           className="relative w-full overflow-hidden flex flex-col gap-1.5 sm:gap-2 mt-2 sm:mt-4 py-4 sm:py-8 opacity-100"
         >
-          <div className="absolute inset-y-0 left-0 w-12 sm:w-28 bg-gradient-to-r from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-12 sm:w-28 bg-gradient-to-l from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
+          <div className={`absolute inset-y-0 left-0 w-12 sm:w-28 bg-gradient-to-r to-transparent z-10 pointer-events-none ${theme === "easytax" ? "from-[#F7F9FF]" : "from-[#F9FAFB]"}`} />
+          <div className={`absolute inset-y-0 right-0 w-12 sm:w-28 bg-gradient-to-l to-transparent z-10 pointer-events-none ${theme === "easytax" ? "from-[#F7F9FF]" : "from-[#F9FAFB]"}`} />
 
           <AutoScrollRow items={row1Reviews} direction="left" />
           <AutoScrollRow items={row2Reviews} direction="right" />
         </div>
       </section>
-
     </>
   );
 }

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import goneSeoSlugs from "@/data/gone-seo-slugs.json";
 const GONE_SEO_SLUGS: Record<string, boolean> = goneSeoSlugs;
+const SPT_URL = "https://easylegal.biz.id/layanan/spt-pajak-gads";
 
 
 // Link-preview crawlers that render Open Graph tags when a URL is shared
@@ -80,6 +81,11 @@ function render410Html(title: string, message: string) {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (pathname === "/layanan/spt-pajak-gads") {
+    const host = (request.headers.get("x-forwarded-host") || request.headers.get("host"))?.split(":")[0];
+    if (host !== "easylegal.biz.id") return NextResponse.redirect(SPT_URL, 308);
+  }
 
   // WhatsApp Rotator short link: /wa/:slug (e.g. /wa/promo-pt)
   if (pathname.startsWith("/wa/")) {

@@ -106,6 +106,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  if (host?.split(":")[0] === "easylegal.biz.id") {
+    staticPages.push({
+      url: "https://easylegal.biz.id/layanan/spt-pajak-gads",
+      lastModified: generatedAt,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    });
+  }
+
   // Service pages
   const standaloneServiceSlugs = [
     "pendirian-badan-usaha",

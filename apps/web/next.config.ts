@@ -263,6 +263,11 @@ const nextConfig: NextConfig = {
         destination: "/#promo",
         permanent: false,
       },
+      {
+        source: "/layanan-spt-pajak-gads",
+        destination: "https://easylegal.biz.id/layanan/spt-pajak-gads",
+        permanent: true,
+      },
     ];
   },
   images: {
