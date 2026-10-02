@@ -162,6 +162,10 @@ export default function ArticleEditor() {
   const [publishedAt, setPublishedAt] = useState("");
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [showHeadingDropdown, setShowHeadingDropdown] = useState(false);
+  const [isGeneratingSEO, setIsGeneratingSEO] = useState(false);
+  const [isGeneratingTitle, setIsGeneratingTitle] = useState(false);
+  const [isGeneratingDesc, setIsGeneratingDesc] = useState(false);
+  const [seoStrategyTip, setSeoStrategyTip] = useState<string | null>(null);
   const [aiReview, setAiReview] = useState<any>(null);
   const [aiReviewLoading, setAiReviewLoading] = useState(false);
   const [aiReviewError, setAiReviewError] = useState<string | null>(null);
@@ -1233,6 +1237,85 @@ export default function ArticleEditor() {
     if (coverMode === "upload" && coverFile) return coverPreview;
     return coverUrl || IMAGE_PRESETS[0].url;
   };
+  const handleGenerateSEOTitle = async () => {
+    if (!title.trim() && !content.trim()) {
+      alert("Tuliskan judul atau isi artikel terlebih dahulu agar AI memiliki konteks.");
+      return;
+    }
+    setIsGeneratingTitle(true);
+    try {
+      const res = await api.generateSEO({
+        title,
+        excerpt,
+        content,
+        focusKeyword,
+        site,
+      });
+      if (res?.seoTitle) {
+        setSeoTitle(res.seoTitle);
+        if (res.focusKeyword && !focusKeyword) setFocusKeyword(res.focusKeyword);
+        if (res.strategy) setSeoStrategyTip(res.strategy);
+      }
+    } catch (err: any) {
+      console.error("Gagal generate SEO title:", err);
+    } finally {
+      setIsGeneratingTitle(false);
+    }
+  };
+
+  const handleGenerateSEODesc = async () => {
+    if (!title.trim() && !content.trim()) {
+      alert("Tuliskan judul atau isi artikel terlebih dahulu agar AI memiliki konteks.");
+      return;
+    }
+    setIsGeneratingDesc(true);
+    try {
+      const res = await api.generateSEO({
+        title,
+        excerpt,
+        content,
+        focusKeyword,
+        site,
+      });
+      if (res?.seoDesc) {
+        setSeoDesc(res.seoDesc);
+        if (res.focusKeyword && !focusKeyword) setFocusKeyword(res.focusKeyword);
+        if (res.strategy) setSeoStrategyTip(res.strategy);
+      }
+    } catch (err: any) {
+      console.error("Gagal generate Meta Description:", err);
+    } finally {
+      setIsGeneratingDesc(false);
+    }
+  };
+
+  const handleGenerateBothSEO = async () => {
+    if (!title.trim() && !content.trim()) {
+      alert("Tuliskan judul atau isi artikel terlebih dahulu agar AI memiliki konteks.");
+      return;
+    }
+    setIsGeneratingSEO(true);
+    try {
+      const res = await api.generateSEO({
+        title,
+        excerpt,
+        content,
+        focusKeyword,
+        site,
+      });
+      if (res) {
+        if (res.seoTitle) setSeoTitle(res.seoTitle);
+        if (res.seoDesc) setSeoDesc(res.seoDesc);
+        if (res.focusKeyword && !focusKeyword) setFocusKeyword(res.focusKeyword);
+        if (res.strategy) setSeoStrategyTip(res.strategy);
+      }
+    } catch (err: any) {
+      console.error("Gagal generate SEO:", err);
+    } finally {
+      setIsGeneratingSEO(false);
+    }
+  };
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -1734,16 +1817,36 @@ export default function ArticleEditor() {
                 </div>
                 {/* SEO Snippet (Title & Meta Description) */}
                 <div className="space-y-4 p-5 bg-gradient-to-br from-gray-50/80 to-white border border-gray-200 rounded-2xl shadow-xs">
-                  <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-gray-100">
                     <div>
                       <label className="text-[16px] font-extrabold text-gray-900 flex items-center gap-1.5">
-                        <Sparkles size={18} className="text-[#990202]" /> SEO Title & Meta Description
+                        <Sparkles size={18} className="text-[#990202]" /> SEO Title & Meta Description (AI)
                       </label>
                       <p className="text-[13px] text-gray-500 mt-0.5">
-                        Atur tampilan judul dan ringkasan halaman pada hasil pencarian Google (SERP).
+                        Atur judul dan ringkasan halaman pada hasil pencarian Google (SERP) dengan bantuan AI.
                       </p>
                     </div>
+                    <button
+                      type="button"
+                      onClick={handleGenerateBothSEO}
+                      disabled={isGeneratingSEO}
+                      className="px-3.5 py-1.5 bg-gradient-to-r from-red-600 to-[#990202] hover:from-red-700 hover:to-[#7a0101] text-white text-[13px] font-bold rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 flex-shrink-0"
+                      title="Otomatis generate SEO Title dan Meta Description sekaligus menggunakan AI"
+                    >
+                      {isGeneratingSEO ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5 text-amber-300" />}
+                      <span>Generate Keduanya (AI)</span>
+                    </button>
                   </div>
+
+                  {/* SEO Strategy Tip */}
+                  {seoStrategyTip && (
+                    <div className="p-3 bg-emerald-50/80 border border-emerald-200 rounded-xl text-[13px] text-emerald-800 flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                      <div className="flex-1">
+                        <span className="font-extrabold">Strategi SEO:</span> {seoStrategyTip}
+                      </div>
+                    </div>
+                  )}
 
                   {/* SEO Title */}
                   <div className="space-y-2">
@@ -1751,9 +1854,21 @@ export default function ArticleEditor() {
                       <label htmlFor="seoTitle" className="text-[14px] font-extrabold text-gray-800">
                         SEO Title
                       </label>
-                      <span className={`text-[12px] font-bold ${seoTitle.length > 60 ? "text-amber-600" : "text-gray-400"}`}>
-                        {seoTitle.length} / 60 karakter disarankan
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={handleGenerateSEOTitle}
+                          disabled={isGeneratingTitle}
+                          className="px-2.5 py-1 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-700 text-[12px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-2xs disabled:opacity-50"
+                          title="Generate SEO Title optimal untuk Google SERP"
+                        >
+                          {isGeneratingTitle ? <Loader2 className="w-3 h-3 animate-spin text-[#990202]" /> : <Sparkles className="w-3 h-3 text-[#990202]" />}
+                          <span>Generate SEO title</span>
+                        </button>
+                        <span className={`text-[12px] font-bold ${seoTitle.length > 60 ? "text-amber-600" : "text-gray-400"}`}>
+                          {seoTitle.length} / 60
+                        </span>
+                      </div>
                     </div>
                     <input
                       id="seoTitle"
@@ -1763,9 +1878,18 @@ export default function ArticleEditor() {
                       placeholder={title ? `${title} — EasyLegal` : "Contoh: Jasa Pendirian PT Murah & Resmi - EasyLegal"}
                       className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[15px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
                     />
-                    <p className="text-[12px] text-gray-400">
-                      Kosongkan untuk otomatis menggunakan Judul Artikel: <em>{title || "—"}</em>
-                    </p>
+                    <div className="flex items-center justify-between text-[12px] text-gray-400">
+                      <span>Kosongkan untuk otomatis menggunakan Judul Artikel: <em>{title || "—"}</em></span>
+                      {aiReview?.recommendedTitle && aiReview.recommendedTitle !== seoTitle && (
+                        <button
+                          type="button"
+                          onClick={() => setSeoTitle(aiReview.recommendedTitle)}
+                          className="text-[#990202] hover:underline font-bold flex items-center gap-1"
+                        >
+                          <span>Pakai saran AI: "{aiReview.recommendedTitle.slice(0, 30)}..."</span>
+                        </button>
+                      )}
+                    </div>
                   </div>
 
                   {/* Meta Description */}
@@ -1774,9 +1898,21 @@ export default function ArticleEditor() {
                       <label htmlFor="seoDesc" className="text-[14px] font-extrabold text-gray-800">
                         Meta Description
                       </label>
-                      <span className={`text-[12px] font-bold ${seoDesc.length > 160 ? "text-amber-600" : "text-gray-400"}`}>
-                        {seoDesc.length} / 160 karakter disarankan
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={handleGenerateSEODesc}
+                          disabled={isGeneratingDesc}
+                          className="px-2.5 py-1 bg-white border border-gray-200 hover:border-[#990202] hover:text-[#990202] text-gray-700 text-[12px] font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow-2xs disabled:opacity-50"
+                          title="Generate Meta Description optimal untuk Google SERP"
+                        >
+                          {isGeneratingDesc ? <Loader2 className="w-3 h-3 animate-spin text-[#990202]" /> : <Sparkles className="w-3 h-3 text-[#990202]" />}
+                          <span>Generate meta description</span>
+                        </button>
+                        <span className={`text-[12px] font-bold ${seoDesc.length > 160 ? "text-amber-600" : "text-gray-400"}`}>
+                          {seoDesc.length} / 160
+                        </span>
+                      </div>
                     </div>
                     <textarea
                       id="seoDesc"
@@ -1786,9 +1922,18 @@ export default function ArticleEditor() {
                       placeholder={excerpt || "Tuliskan ringkasan menarik untuk hasil pencarian Google (120-160 karakter)..."}
                       className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[15px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950 resize-none"
                     />
-                    <p className="text-[12px] text-gray-400">
-                      Kosongkan untuk otomatis menggunakan Kutipan Singkat (Excerpt).
-                    </p>
+                    <div className="flex items-center justify-between text-[12px] text-gray-400">
+                      <span>Kosongkan untuk otomatis menggunakan Kutipan Singkat (Excerpt).</span>
+                      {aiReview?.recommendedMetaDescription && aiReview.recommendedMetaDescription !== seoDesc && (
+                        <button
+                          type="button"
+                          onClick={() => setSeoDesc(aiReview.recommendedMetaDescription)}
+                          className="text-[#990202] hover:underline font-bold flex items-center gap-1"
+                        >
+                          <span>Pakai saran AI</span>
+                        </button>
+                      )}
+                    </div>
                   </div>
 
                   {/* SERP Google Preview simulation */}

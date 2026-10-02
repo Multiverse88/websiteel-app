@@ -4,6 +4,7 @@ import { requireAuth } from "../middleware/auth";
 import { getAIReview } from "../modules/articles/ai-review-service";
 import { checkDeduplication } from "../modules/articles/deduplication-service";
 import { generateEmbedding } from "../modules/articles/embedding-service";
+import { generateSEOSnippet } from "../modules/articles/seo-generator-service";
 
 const router = Router();
 
@@ -376,6 +377,27 @@ router.post("/ai-review", requireAuth, async (req, res) => {
   } catch (error: any) {
     console.error("AI review error:", error);
     res.status(500).json({ error: error.message || "AI review failed" });
+  }
+});
+
+// POST /api/v1/articles/generate-seo — generate high-CTR SEO title and meta description
+router.post("/generate-seo", requireAuth, async (req, res) => {
+  try {
+    const { title, excerpt, content, focusKeyword, site } = req.body;
+    if (!title && !content) {
+      return res.status(400).json({ error: "title or content is required" });
+    }
+    const result = await generateSEOSnippet({
+      title: title || "",
+      excerpt: excerpt || "",
+      content: content || "",
+      focusKeyword: focusKeyword || "",
+      site: site || "easylegal.id",
+    });
+    res.json({ data: result });
+  } catch (error: any) {
+    console.error("Generate SEO error:", error);
+    res.status(500).json({ error: error.message || "Failed to generate SEO snippet" });
   }
 });
 

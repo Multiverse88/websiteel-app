@@ -112,6 +112,16 @@ export const api = {
     if (!res.ok) throw new Error(body.error || 'AI review gagal')
     return body.data
   },
+  generateSEO: async (data: { title: string; excerpt?: string; content?: string; focusKeyword?: string; site?: string }) => {
+    const res = await authenticatedFetch(`${API_BASE_URL}/articles/generate-seo`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    const body = await res.json().catch(() => ({}))
+    if (!res.ok) throw new Error(body.error || 'Generate SEO gagal')
+    return body.data as { seoTitle: string; seoDesc: string; focusKeyword: string; strategy: string }
+  },
   dedupCheck: async (data: { title: string; excerpt: string; content: string; site?: string; existingSlug?: string; focusKeyword?: string }) => {
     const res = await authenticatedFetch(`${API_BASE_URL}/articles/dedup-check`, {
       method: 'POST',
