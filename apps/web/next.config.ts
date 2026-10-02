@@ -115,6 +115,8 @@ const nextConfig: NextConfig = {
       // Proxy top-level files to MinIO
       { source: "/Logo EL.png", destination: `${minioInternal}/images/Logo EL.png` },
       { source: "/Logo%20EL.png", destination: `${minioInternal}/images/Logo EL.png` },
+      { source: "/logo-easylegal-cobrand.png", destination: `${minioInternal}/images/logo-easylegal-cobrand.png` },
+      { source: "/logo-easytax.png", destination: `${minioInternal}/images/logo-easytax.png` },
       { source: "/ISO-27001-2022.webp", destination: `${minioInternal}/images/ISO-27001-2022.webp` },
       { source: "/ISO-sertifikat-scaled.jpg", destination: `${minioInternal}/images/ISO-sertifikat-scaled.jpg` },
       { source: "/cerita-kami-team.webp", destination: `${minioInternal}/images/cerita-kami-team.webp` },
