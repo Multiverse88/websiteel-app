@@ -3,6 +3,7 @@
 import React, { useState, useRef, useTransition, useEffect } from "react";
 
 import { api } from "../lib/api";
+import LinkImageModal from "../components/LinkImageModal";
 import { Home, Sparkles, Image as ImageIcon, Upload, Link2, X, Check, FileText, Loader2, ExternalLink, Cloud, Activity, CheckCircle, AlertTriangle, XCircle, Table as TableIcon } from "lucide-react";
 
 
@@ -984,145 +985,138 @@ export default function NewsletterEditor() {
                   </div>
 
                   {/* Link Insertion Modal */}
-                  {showLinkModal && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" onMouseDown={(e) => { if (e.target === e.currentTarget) { setShowLinkModal(false); setLinkUrl(""); } }}>
-                      <div className="bg-white rounded-2xl shadow-2xl shadow-sm border border-gray-200 p-5 w-full max-w-md mx-4">
-                        <div className="flex items-center gap-2 mb-4">
-                          <ExternalLink className="w-4 h-4 text-[#990202]" />
-                          <h3 className="text-[16px] font-extrabold text-gray-900">Sisipkan Link</h3>
-                        </div>
-                        <input
-                          type="url"
-                          value={linkUrl}
-                          onChange={(e) => setLinkUrl(e.target.value)}
-                          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleApplyLink(); } }}
-                          placeholder="https://example.com"
-                          autoFocus
-                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
-                        />
-                        <div className="flex justify-end gap-2 mt-4">
-                          <button
-                            type="button"
-                            onClick={() => { setShowLinkModal(false); setLinkUrl(""); }}
-                            className="px-4 py-2 text-[16px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
-                          >
-                            Batal
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handleApplyLink}
-                            disabled={!linkUrl.trim()}
-                            className="px-4 py-2 bg-[#990202] text-white text-[16px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-                          >
-                            Pasang Link
-                          </button>
-                        </div>
-                      </div>
+                  <LinkImageModal
+                    open={showLinkModal}
+                    onClose={() => { setShowLinkModal(false); setLinkUrl(""); }}
+                    icon={<ExternalLink className="w-4 h-4 text-[#990202]" />}
+                    title="Sisipkan Link"
+                  >
+                    <input
+                      type="url"
+                      value={linkUrl}
+                      onChange={(e) => setLinkUrl(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleApplyLink(); } }}
+                      placeholder="https://example.com"
+                      autoFocus
+                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                    />
+                    <div className="flex justify-end gap-2 mt-4">
+                      <button
+                        type="button"
+                        onClick={() => { setShowLinkModal(false); setLinkUrl(""); }}
+                        className="px-4 py-2 text-[16px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
+                      >
+                        Batal
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleApplyLink}
+                        disabled={!linkUrl.trim()}
+                        className="px-4 py-2 bg-[#990202] text-white text-[16px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                      >
+                        Pasang Link
+                      </button>
                     </div>
-                  )}
+                  </LinkImageModal>
 
                   {/* Image Insertion Modal */}
-                  {showImageModal && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30" onMouseDown={(e) => { if (e.target === e.currentTarget) { setShowImageModal(false); setImageUrl(""); setImageAlt(""); } }}>
-                      <div className="bg-white rounded-2xl shadow-2xl shadow-sm border border-gray-200 p-5 w-full max-w-md mx-4">
-                        <div className="flex items-center gap-2 mb-4">
-                          <ImageIcon className="w-4 h-4 text-[#990202]" />
-                          <h3 className="text-[16px] font-extrabold text-gray-900">{isEditingImage ? "Ganti Gambar" : "Sisipkan Gambar"}</h3>
-                        </div>
-
-                        {/* Upload option */}
-                        <div className="mb-4">
-                          <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Upload File</label>
-                          <input
-                            ref={imageFileInputRef}
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageFileUpload}
-                            className="hidden"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => imageFileInputRef.current?.click()}
-                            disabled={isCompressing || isUploadingImage}
-                            className="w-full py-2.5 border-2 border-dashed border-gray-200 rounded-xl text-[16px] font-bold text-gray-500 hover:border-[#990202] hover:text-[#990202] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                          >
-                            {isUploadingImage ? (
-                              <>
-                                <Cloud className="w-4 h-4 animate-pulse" />
-                                <span>Mengunggah ke CDN...</span>
-                              </>
-                            ) : isCompressing ? (
-                              <>
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                                <span>Mengompres gambar...</span>
-                              </>
-                            ) : (
-                              <>
-                                <Upload className="w-4 h-4" />
-                                <span>Pilih Gambar dari Komputer</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-
-                        {/* URL option */}
-                        <div className="mb-4">
-                          <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Atau Input URL</label>
-                          <input
-                            type="url"
-                            value={imageUrl.startsWith("blob:") ? "" : imageUrl}
-                            onChange={(e) => setImageUrl(e.target.value)}
-                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInsertImage(); } }}
-                            placeholder="https://example.com/gambar.jpg"
-                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
-                          />
-                        </div>
-
-                        {/* Alt text */}
-                        <div className="mb-4">
-                          <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Alt Text (Opsional)</label>
-                          <input
-                            type="text"
-                            value={imageAlt}
-                            onChange={(e) => setImageAlt(e.target.value)}
-                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInsertImage(); } }}
-                            placeholder="Deskripsi singkat gambar"
-                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
-                          />
-                        </div>
-
-                        {/* Preview */}
-                        {imageUrl && (
-                          <div className="mb-4 rounded-xl overflow-hidden shadow-sm border border-black/[0.02] bg-gray-50">
-                            <img
-                              src={imageUrl}
-                              alt={imageAlt || "Preview"}
-                              className="w-full max-h-[200px] object-contain"
-                              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                            />
-                          </div>
+                  <LinkImageModal
+                    open={showImageModal}
+                    onClose={() => { setShowImageModal(false); setImageUrl(""); setImageAlt(""); }}
+                    icon={<ImageIcon className="w-4 h-4 text-[#990202]" />}
+                    title={isEditingImage ? "Ganti Gambar" : "Sisipkan Gambar"}
+                  >
+                    {/* Upload option */}
+                    <div className="mb-4">
+                      <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Upload File</label>
+                      <input
+                        ref={imageFileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageFileUpload}
+                        className="hidden"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => imageFileInputRef.current?.click()}
+                        disabled={isCompressing || isUploadingImage}
+                        className="w-full py-2.5 border-2 border-dashed border-gray-200 rounded-xl text-[16px] font-bold text-gray-500 hover:border-[#990202] hover:text-[#990202] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isUploadingImage ? (
+                          <>
+                            <Cloud className="w-4 h-4 animate-pulse" />
+                            <span>Mengunggah ke CDN...</span>
+                          </>
+                        ) : isCompressing ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <span>Mengompres gambar...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Upload className="w-4 h-4" />
+                            <span>Pilih Gambar dari Komputer</span>
+                          </>
                         )}
-
-                        <div className="flex justify-end gap-2 mt-4">
-                          <button
-                            type="button"
-                            onClick={() => { setShowImageModal(false); setImageUrl(""); setImageAlt(""); }}
-                            className="px-4 py-2 text-[16px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
-                          >
-                            Batal
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handleInsertImage}
-                            disabled={!imageUrl.trim()}
-                            className="px-4 py-2 bg-[#990202] text-white text-[16px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-                          >
-                            {isEditingImage ? "Ganti Gambar" : "Pasang Gambar"}
-                          </button>
-                        </div>
-                      </div>
+                      </button>
                     </div>
-                  )}
+
+                    {/* URL option */}
+                    <div className="mb-4">
+                      <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Atau Input URL</label>
+                      <input
+                        type="url"
+                        value={imageUrl.startsWith("blob:") ? "" : imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInsertImage(); } }}
+                        placeholder="https://example.com/gambar.jpg"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                      />
+                    </div>
+
+                    {/* Alt text */}
+                    <div className="mb-4">
+                      <label className="text-[16px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 block">Alt Text (Opsional)</label>
+                      <input
+                        type="text"
+                        value={imageAlt}
+                        onChange={(e) => setImageAlt(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleInsertImage(); } }}
+                        placeholder="Deskripsi singkat gambar"
+                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-[16px] placeholder-gray-400 focus:outline-none focus:border-[#990202] focus:ring-4 focus:ring-red-100 transition-all font-medium text-gray-950"
+                      />
+                    </div>
+
+                    {/* Preview */}
+                    {imageUrl && (
+                      <div className="mb-4 rounded-xl overflow-hidden shadow-sm border border-black/[0.02] bg-gray-50">
+                        <img
+                          src={imageUrl}
+                          alt={imageAlt || "Preview"}
+                          className="w-full max-h-[200px] object-contain"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex justify-end gap-2 mt-4">
+                      <button
+                        type="button"
+                        onClick={() => { setShowImageModal(false); setImageUrl(""); setImageAlt(""); }}
+                        className="px-4 py-2 text-[16px] font-bold text-gray-600 hover:text-gray-900 rounded-lg transition-colors"
+                      >
+                        Batal
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleInsertImage}
+                        disabled={!imageUrl.trim()}
+                        className="px-4 py-2 bg-[#990202] text-white text-[16px] font-bold rounded-lg hover:bg-[#7a0101] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                      >
+                        {isEditingImage ? "Ganti Gambar" : "Pasang Gambar"}
+                      </button>
+                    </div>
+                  </LinkImageModal>
                   
                   {/* Style for WYSIWYG editor placeholders and layout elements */}
                   <style>{`
