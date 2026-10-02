@@ -8,6 +8,7 @@ interface TrustStat {
 
 interface TrustStatsBarProps {
   stats?: readonly TrustStat[];
+  tone?: "red" | "blue";
 }
 
 const DEFAULT_STATS: readonly TrustStat[] = [
@@ -20,12 +21,12 @@ const DEFAULT_STATS: readonly TrustStat[] = [
 
 // Shared "ISO/PSE badge + stats bar" block, originally only on the homepage
 // (see Hero.tsx's old "Centered Trust Badges" + HomeGadsPage.tsx's
-export default function TrustStatsBar({ stats = DEFAULT_STATS }: TrustStatsBarProps) {
+export default function TrustStatsBar({ stats = DEFAULT_STATS, tone = "red" }: TrustStatsBarProps) {
   return (
     <section className="bg-transparent relative z-20 -mt-6 sm:-mt-10">
       {/* Stats band */}
       <div className="relative z-20 pt-8 sm:pt-10 max-w-[1240px] mx-auto px-5 sm:px-8 pb-10">
-        <div className="bg-gradient-to-br from-[#9B1C1C] to-[#6A0D0D] rounded-[16px] sm:rounded-[20px] p-0.5 sm:p-1 shadow-[0_12px_30px_rgba(155,28,28,0.12)] relative overflow-hidden">
+        <div className={`${tone === "blue" ? "bg-gradient-to-br from-[#17205F] to-[#0F1B3D] shadow-[0_12px_30px_rgba(23,32,95,0.18)]" : "bg-gradient-to-br from-[#9B1C1C] to-[#6A0D0D] shadow-[0_12px_30px_rgba(155,28,28,0.12)]"} rounded-[16px] sm:rounded-[20px] p-0.5 sm:p-1 relative overflow-hidden`}>
           <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-white/10 rounded-full blur-[80px] pointer-events-none" />
           <div className="absolute bottom-[-20%] right-[-10%] w-[300px] h-[300px] bg-black/20 rounded-[60px] blur-[60px] pointer-events-none" />
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[14px] sm:rounded-[18px] py-5 sm:py-8 px-5 sm:px-10 relative z-10">
@@ -35,7 +36,7 @@ export default function TrustStatsBar({ stats = DEFAULT_STATS }: TrustStatsBarPr
                   <div className="text-[28px] sm:text-[36px] lg:text-[42px] font-black text-white tracking-tighter leading-none mb-2 sm:mb-3">
                     {stat.value}
                   </div>
-                  <div className="text-[11px] sm:text-[12px] font-bold text-red-100/70 tracking-[0.1em] uppercase">
+                  <div className={`text-[11px] sm:text-[12px] font-bold tracking-[0.1em] uppercase ${tone === "blue" ? "text-blue-100/80" : "text-red-100/70"}`}>
                     {stat.label}
                   </div>
                 </div>

@@ -347,7 +347,7 @@ export default function LayananSptPajakGadsPage() {
       </section>
 
       {/* ── STATS BAR (Recycled TrustStatsBar from Home) ── */}
-      <TrustStatsBar stats={EASYTAX_STATS} />
+      <TrustStatsBar stats={EASYTAX_STATS} tone="blue" />
 
       {/* ── TENTANG SPT (3-Card Feature Grid) ── */}
       <section className="py-16 sm:py-20 bg-white">
