@@ -691,7 +691,7 @@ export default function LayananSptPajakGadsPage() {
       />
 
       {/* ── BOTTOM PROMO SECTION (Recycled Component) ── */}
-      <BottomPromoSection theme="easytax" />
+      <BottomPromoSection theme="easytax" showMarketplace={false} />
     </div>
   );
 }

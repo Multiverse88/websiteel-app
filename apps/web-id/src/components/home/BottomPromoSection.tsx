@@ -25,6 +25,7 @@ interface Promo {
 }
 interface BottomPromoSectionProps {
   theme?: "easylegal" | "easytax";
+  showMarketplace?: boolean;
 }
 
 
@@ -61,7 +62,7 @@ const FALLBACK_PROMOS = [
   },
 ] satisfies Promo[];
 
-export default function BottomPromoSection({ theme = "easylegal" }: BottomPromoSectionProps) {
+export default function BottomPromoSection({ theme = "easylegal", showMarketplace = true }: BottomPromoSectionProps) {
   const isEasyTax = theme === "easytax";
   const pathname = usePathname();
   const [promos, setPromos] = useState<Promo[]>([]);
@@ -267,6 +268,7 @@ export default function BottomPromoSection({ theme = "easylegal" }: BottomPromoS
         </div>
 
         {/* Bottom Section: Shopee Marketplace */}
+        {showMarketplace && (
         <div className="mt-16 sm:mt-24 pt-12 sm:pt-16 border-t border-gray-100 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-24">
           
           {/* Image Side */}
@@ -302,6 +304,7 @@ export default function BottomPromoSection({ theme = "easylegal" }: BottomPromoS
           </div>
 
         </div>
+        )}
 
       </div>
     </section>
