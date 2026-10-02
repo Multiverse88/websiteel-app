@@ -11,7 +11,6 @@ interface Promo {
   title: string;
   image: string;
   link: string;
-  whatsappLink: string;
   variants?: PromoVariant[];
 }
 
@@ -22,11 +21,11 @@ interface Promo {
 // and hit Save (which writes PROMOS and takes over from the hardcoded
 // component fallback from then on).
 const DEFAULT_PROMOS: Promo[] = [
-  { id: 1, title: 'Super Hot Deal - Promo Terbatas', image: '/promo/super-hot-deal.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
-  { id: 2, title: 'Hot Deal - Jangan Sampai Terlewat', image: '/promo/hot-deal.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
-  { id: 3, title: 'Menangkan iPhone & Hadiah Rp12.000.000', image: '/promo/iphone.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
-  { id: 4, title: 'Promo Semarak Kemerdekaan', image: '/promo/promo-kemerdekaan.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
-  { id: 5, title: 'Melayani Seluruh Indonesia', image: '/promo/melayani-seluruh-indonesia.jpg', link: '/layanan/pendirian-badan-usaha', whatsappLink: '' },
+  { id: 1, title: 'Super Hot Deal - Promo Terbatas', image: '/promo/super-hot-deal.jpg', link: '/layanan/pendirian-badan-usaha' },
+  { id: 2, title: 'Hot Deal - Jangan Sampai Terlewat', image: '/promo/hot-deal.jpg', link: '/layanan/pendirian-badan-usaha' },
+  { id: 3, title: 'Menangkan iPhone & Hadiah Rp12.000.000', image: '/promo/iphone.jpg', link: '/layanan/pendirian-badan-usaha' },
+  { id: 4, title: 'Promo Semarak Kemerdekaan', image: '/promo/promo-kemerdekaan.jpg', link: '/layanan/pendirian-badan-usaha' },
+  { id: 5, title: 'Melayani Seluruh Indonesia', image: '/promo/melayani-seluruh-indonesia.jpg', link: '/layanan/pendirian-badan-usaha' },
 ]
 
 export default function Promos() {
@@ -95,7 +94,6 @@ export default function Promos() {
       title: 'Judul Promo Baru',
       image: '/promo/placeholder.jpg',
       link: '/layanan/pendirian-badan-usaha',
-      whatsappLink: 'https://wa.me/6281234567890'
     }
     setPromos([...promos, newPromo])
   }
@@ -250,16 +248,6 @@ export default function Promos() {
                     onChange={(e) => updatePromo(promo.id, 'link', e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary focus:border-primary outline-none"
                     placeholder="/layanan/pendirian-pt"
-                  />
-                </div>
-                <div className="col-span-1 md:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-600 uppercase mb-1">Link WhatsApp</label>
-                  <input 
-                    type="text" 
-                    value={promo.whatsappLink}
-                    onChange={(e) => updatePromo(promo.id, 'whatsappLink', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary focus:border-primary outline-none"
-                    placeholder="https://wa.me/628..."
                   />
                 </div>
                 <div className="col-span-1 md:col-span-2 border-t border-gray-100 pt-4 mt-1">
