@@ -97,8 +97,8 @@ export default function RootLayout({
       className={`${dmSans.variable} h-full antialiased scroll-smooth`}
     >
       <head>
-        <GoogleAnalytics />
         <GtmHead />
+        <GoogleAnalytics />
       </head>
       <body className="min-h-full bg-white text-dark font-sans flex flex-col">
         <GtmNoscript />
