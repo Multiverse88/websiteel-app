@@ -241,10 +241,10 @@ export default function BottomPromoSection({ theme = "easylegal", showMarketplac
                 <div className="px-2 pb-2 flex flex-col flex-1">
                   <h3 className="text-[18px] sm:text-[20px] font-black text-gray-900 leading-snug mb-5">{promoText}</h3>
                   <div className="mt-auto flex gap-3">
-                    <a href={promo.link} className={`flex-1 text-center font-extrabold text-[14px] sm:text-[15px] py-3 rounded-full transition-colors flex items-center justify-center gap-2 ${isEasyTax ? "bg-[#152269] text-white hover:bg-[#0F1B3D]" : "bg-[#D62828] text-white hover:bg-[#B91C1C]"}`}>
+                    <a href={promo.link} target={promo.link.includes("http") ? "_blank" : undefined} rel={promo.link.includes("http") ? "noopener noreferrer" : undefined} className={`flex-1 text-center font-extrabold text-[14px] sm:text-[15px] py-3 rounded-full transition-colors flex items-center justify-center gap-2 ${isEasyTax ? "bg-[#152269] text-white hover:bg-[#0F1B3D]" : "bg-[#D62828] text-white hover:bg-[#B91C1C]"}`}>
                       Selengkapnya <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
                     </a>
-                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promoText}".`, promoCtaId, pathname ?? undefined)} className={`w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 rounded-full flex items-center justify-center transition-colors shadow-sm ${isEasyTax ? "bg-[#F4C922] text-[#152269] hover:bg-[#E4B910]" : "bg-[#D62828] text-white hover:bg-[#B91C1C]"}`}>
+                    <a href={getWhatsAppLink(`Halo EasyLegal, saya tertarik dengan promo "${promoText}".`, promoCtaId, pathname ?? undefined)} target="_blank" rel="noopener noreferrer" className={`w-[46px] h-[46px] sm:w-[48px] sm:h-[48px] shrink-0 rounded-full flex items-center justify-center transition-colors shadow-sm ${isEasyTax ? "bg-[#F4C922] text-[#152269] hover:bg-[#E4B910]" : "bg-[#D62828] text-white hover:bg-[#B91C1C]"}`}>
                       <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
                     </a>
                   </div>

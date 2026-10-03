@@ -42,8 +42,15 @@ export default function AnalyticsEvents() {
     captureFirstTouch();
 
     const handleClick = (e: MouseEvent) => {
-      const link = (e.target as HTMLElement).closest("a[href*='/api/v1/wa/redirect']") as HTMLAnchorElement | null;
+      const link = (e.target as HTMLElement).closest(
+        "a[href*='/api/v1/wa/redirect'], a[href*='wa.me'], a[href*='whatsapp.com'], a[href*='/wa/']"
+      ) as HTMLAnchorElement | null;
       if (!link) return;
+
+      // Always force open in a new tab with noopener noreferrer so the main tab remains
+      // on easylegal.id and Google Tag Assistant stays connected without navigating to external WhatsApp
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -53,14 +60,18 @@ export default function AnalyticsEvents() {
       });
 
       const attribution = readAttribution() || captureFirstTouch();
-      const url = new URL(link.href);
-      appendAttribution(url, attribution);
-      if (!url.searchParams.has("product")) url.searchParams.set("product", window.location.pathname);
-      if (!url.searchParams.has("cta_label")) url.searchParams.set("cta_label", link.textContent?.trim().slice(0, 200) || "WhatsApp CTA");
-      link.href = url.toString();
+      try {
+        const url = new URL(link.href, window.location.origin);
+        appendAttribution(url, attribution);
+        if (!url.searchParams.has("product")) url.searchParams.set("product", window.location.pathname);
+        if (!url.searchParams.has("cta_label")) url.searchParams.set("cta_label", link.textContent?.trim().slice(0, 200) || "WhatsApp CTA");
+        link.href = url.toString();
+      } catch {
+        // Ignore parse errors on unusual URLs
+      }
     };
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
+    document.addEventListener("click", handleClick, { capture: true });
+    return () => document.removeEventListener("click", handleClick, { capture: true });
   }, []);
 
   return null;
